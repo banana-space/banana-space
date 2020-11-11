@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ashok modhvadia",
+			"Sushant savla",
+			"Dsvyas"
+		]
+	},
+	"titleblacklist-desc": "પ્રબંધકોને  [[MediaWiki:Titleblacklist|blacklist]] અને [[MediaWiki:Titlewhitelist|whitelist]] અનુસાર નવા પૃષ્ઠ કે ખાતા રચનાને પ્રતુબંધીત કરવાનો અધિકાર આપે છે.",
+	"titleblacklist": "# આ શીર્ષક કાળી યાદી છે. સામાન્ય ઍક્સરેશનને મળતા શીર્ષકો અને સભ્યો બનાવી ન શાકાય. \n# ટિપ્પણી માટે \"#\" વાપરો.\n# આ મૂળ રીતે કેસ ઈનસેન્સીટીવ છે.",
+	"titlewhitelist": "# આ શીઋષ્હકોની ધલવ યાદી છે.  ટિપ્પણીઓ માટે  \"#\" વાપરો. \n# મૂળ ગુણધર્મ તરીકે આ કેસ ઈન સેન્સીટીવ છે.",
+	"titleblacklist-forbidden-edit": "શીર્ષક \"$2\" ની રચના પર પ્રતિબંધ મૂકાયો છે.\nતે નીચેના પ્રતિબંધીત શીર્ષકને મળતું આવે છે: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" ને \"$3\" પર ખસેડી નહીં શકાય, કેમકે \"$3\" શીર્ષક ની રચના કરવા અપ્ર પ્રતિબંધ મૂકાયો છે. \nતે નીચેની પ્રતિબંધિત શીર્ષક ને મળતી આવે છે: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "ફાઈલ નામ  \"$2\" ની રચના પર પ્રતિબંધ મૂકાયો છે.\nતે નીચેના પ્રતિબંધીત શીર્ષકને મળતું આવે છે: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "સભ્ય નામ  \"$2\" ની રચના પર પ્રતિબંધ મૂકાયો છે.\nતે નીચેના પ્રતિબંધીત નામને મળતું આવે છે: <code>$1</code>",
+	"titleblacklist-invalid": "નીચેની {{PLURAL:$1|હરોળ|હરોળ}} પ્રતિબંધિત યાદી {{PLURAL:$1|is|are}} અમાન્ય છે;\nમહેરબાની કરી {{PLURAL:$1|તેને|તેમને}} સાચવો:",
+	"titleblacklist-override": "પ્રતિબંધ સૂચી અવગણો",
+	"right-tboverride": "આ શીર્ષક કે સભ્યનામ પ્રતિબંધ સૂચિની ઉપરવટ જાવ",
+	"right-tboverride-account": "આ સભ્યનામ પ્રતિબંધસૂચિની ઉપરવટ જાવ"
+}

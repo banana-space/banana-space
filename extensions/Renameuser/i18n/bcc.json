@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mostafadaneshvar"
+		]
+	},
+	"renameuser": "کاربر نامی بدل کن",
+	"renameuser-desc": "یک کاربر نامی بدیل کن(حق ''بدل نام''لازمن)",
+	"renameuserold": "هنوکین نام کاربری:",
+	"renameusernew": "نوکین نام کاربری:",
+	"renameuserreason": "دلیل په نام بدل کتن:",
+	"renameusermove": "صفحات گپ و کاربر (و آیانی زیر صفحات) په نوکین نام جاه په جاه کن",
+	"renameuserwarnings": "هوژاریان:",
+	"renameuserconfirm": "بله، کاربر نامی عوض کن",
+	"renameusersubmit": "دیم دی",
+	"renameusererrordoesnotexist": "کاربر \"<nowiki>$1</nowiki>\" موجود نهنت.",
+	"renameusererrorexists": "کاربر \"<nowiki>$1</nowiki>\" هنو هستن.",
+	"renameusererrorinvalid": "نام کاربری \"<nowiki>$1</nowiki>\"  نامعتبر انت.",
+	"renameuser-error-request": "مشکلی گون دریافت درخواست هستت.\nلطفا برگردیت و دگه تلاش کنیت.",
+	"renameuser-error-same-user": "شما نه تونیت یک کاربر په هما پیشگین چیزی نامی بدل کنیت",
+	"renameusersuccess": "کاربر \"<nowiki>$1</nowiki>\" نامی بدل بوتت په \"<nowiki>$2</nowiki>\".",
+	"renameuser-page-exists": "صفحه $1 الان هست و اتوماتیکی اور آی نوسیگ نه بیت.",
+	"renameuser-page-moved": "صفحه $1 جاه په جاه بیت په $2.",
+	"renameuser-page-unmoved": "صفحه $1 نه تونیت په $2 جاه په جاه بیت.",
+	"log-name-renameuser": "آمار نام بدل کتن کاربر",
+	"renameuser-move-log": "اتوماتیکی صفحه جاه په جاه بیت وهدی که کاربر نام بدل بی \"[[User:$1|$1]]\" به \"[[User:$2|$2]]\"",
+	"right-renameuser": "عوض کتن نام کابران"
+}

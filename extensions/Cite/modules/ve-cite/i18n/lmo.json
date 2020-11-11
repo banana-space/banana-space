@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ninonino",
+			"Gloria sah",
+			"Mondschein"
+		]
+	},
+	"cite-ve-dialog-reference-options-group-label": "Dòpra chèl grupo ché",
+	"cite-ve-dialog-reference-options-name-label": "Tùrna a doprà chèl nòm ché",
+	"cite-ve-dialog-reference-options-section": "Upsiù",
+	"cite-ve-dialog-reference-title": "Riferimènt",
+	"cite-ve-dialog-reference-useexisting-label": "Dòpra 'n riferimènt che gh'è zamò",
+	"cite-ve-dialog-referenceslist-title": "Lìsta dei riferimèncc",
+	"cite-ve-dialogbutton-reference-tooltip": "Riferimènt",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Lìsta dei riferimèncc",
+	"cite-ve-reference-input-placeholder": "A che laùr öt fà riferimènt?",
+	"cite-ve-referenceslist-isempty": "En chèsta pàgina gh'è nisü riferimènt col grùpo \"$1\" de mèter en chèsta lìsta.",
+	"cite-ve-referenceslist-isempty-default": "Gh'è nisü riferimèncc en chèsta pàgina de mèter dét en chèsta lìsta.",
+	"cite-ve-referenceslist-missingref": "Chèsto riferimènt l'è definìt endèn mudèl o 'ndèn óter blòch generàt e per adès el pöl mìa éser mudificàt apéna 'n modalità sorgènt."
+}

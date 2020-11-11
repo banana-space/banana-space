@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"C.R."
+		]
+	},
+	"action-titleblacklistlog": "vide 'o titulo d' 'o riggistro d' 'a lista nera",
+	"log-name-titleblacklist": "Riggistro 'e titule bluccate",
+	"log-description-titleblacklist": "St'evente se pigliassero 'o cuntrollo 'e attivaziune d' 'a lista nera.",
+	"logentry-titleblacklist-hit-username": "$1, {{GENDER:$2|pe' ccausa 'e cchesta}} s'appicciaje 'a lista nera quanno se criaje nu cunto utente $3 ca currispunnesse a $4.",
+	"titleblacklist-desc": "Premmettesse l'ammenistature 'e pruteggere 'a criazione 'e paggene e cunte utente p' 'a [[MediaWiki:Titleblacklist|lista nera]] e 'a [[MediaWiki:Titlewhitelist|lista janca]]",
+	"titleblacklist": "# Chest'è na lista nera. 'E titule e l'utente ca s'azzeccassero n'espressione regolare ccà nun se ponno crià.\n# Ausate \"#\" p' 'e cummente.\n# Chest'è senzibbele a 'e maiuscole e minuscole 'e partenza",
+	"titlewhitelist": "# Chest'è na lista janca. Ausate \"#\" p' 'e cummente.\n# Chest'è senzibbele a 'e maiuscole e minuscole 'e partenza",
+	"titleblacklist-forbidden-edit": "'O titolo \"$2\" s'è cacciato pe' nun 'o putè crià.<br />\nStu titolo s'azzecca troppo 'a voce ccà, dint'a lista nera, oj cann: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" nun se pò mòvere ncopp'a \"$3\", pecché 'o titolo \"$3\" s'è luvato 'a criaziona.<br />\nÈ tropp'azzeccato 'a voce ccà, dint'a lista nera, oj cann: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "'O filename (nomme 'e file) \"$2\" s'è cacciato pe' nun 'o putè crià.<br />\nStu titolo s'azzecca troppo 'a voce ccà, dint'a lista nera, oj cann: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "'O cunto utente \"$2\" s'è cacciato pe' nun 'o putè crià.<br />\nStu titolo s'azzecca troppo 'a voce ccà, dint'a lista nera, oj cann: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|'A linea ccà abbascio|'E linee ccà abbascio}} dint'a lista nera 'e titole {{PLURAL:$1|è|songo}} invalide;\npe' piacere curriggite {{PLURAL:$1|chisto|chiste}} primm' 'e reggistrà:",
+	"titleblacklist-override": "Ignora 'a blacklist",
+	"titleblacklist-warning": "<strong>Attenziò: sta paggena se putesse cagnà surtanto 'a ll'ammenistrature o l'at'utente c' 'o deritto <code>tboverride</code> pecché currisponne 'a voce ccà d' 'a lista 'e titule bluccate, oj cann:</strong><br /><code>$1</code>",
+	"right-tboverride": "Sovrascrive 'a lista nera 'e titole o utente",
+	"right-tboverride-account": "Sovrascrive 'a lista nera 'utente",
+	"right-titleblacklistlog": "Vide 'o riggistro d' 'a lista nera",
+	"apihelp-titleblacklist-description": "Valida 'o titolo 'e narticolo, nomme 'e file, o nomme utente annanz'a l'elenco TitleBlacklist. ('a lista nera)",
+	"apihelp-titleblacklist-param-title": "'A stringa pe' validà annanz' 'a lista nira.",
+	"apihelp-titleblacklist-param-action": "L'aziona p' 'a cuntrullà.",
+	"apihelp-titleblacklist-param-nooverride": "Nun tentà 'e sovrascrivere 'a lista nera.",
+	"apihelp-titleblacklist-example-1": "Cuntrolla si [[Foo]] è miso dint'a lista nera p' 'o cagnà.",
+	"apihelp-titleblacklist-example-2": "Cuntrolla si [[Bar]] è miso dint'a lista nera p' 'o cagnà.",
+	"apihelp-createaccount-param-ignoretitleblacklist": "Lassa perdere 'e check 'e spoofing (mbruoglie) (servesse uno d' 'e diritte ccà <code>tboverride</code>, <code>tboverride-account</code>)."
+}

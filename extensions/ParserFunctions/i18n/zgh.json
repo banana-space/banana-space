@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mdb897"
+		]
+	},
+	"pfunc_expr_unrecognised_word": "ⵜⴰⵣⴳⵍⵜ ⴳ ⵜⴰⵡⵏⵏⵉⵜ: ⵜⴰⴳⵓⵔⵢ \"$1\" ⵓⵔ ⵜⵢⴰⴽⴰⵣ.",
+	"pfunc_expr_unrecognised_punctuation": "ⵜⴰⵣⴳⵍⵜ ⴳ ⵜⴰⵡⵏⵏⵉⵜ: ⵜⴰⵎⴰⵜⴰⵔⵜ ⵏ ⵓⵙⵏⵇⴹ \"$1\" ⵓⵔ ⵜⵢⴰⴽⴰⵣ."
+}

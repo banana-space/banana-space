@@ -1,0 +1,143 @@
+@import 'mediawiki.mixins';
+@import 'personalMenu';
+@import 'search';
+@import 'tabs';
+
+/* Hide, but keep accessible for screen-readers */
+#mw-navigation h2 {
+	position: absolute;
+	top: -9999px;
+}
+
+/* Head */
+#mw-page-base {
+	height: 5em;
+	background-position: bottom left;
+	background-repeat: repeat-x;
+	/* This image is only a fallback (for IE 6-9), so we do not @embed it. */
+	background-image: url( images/page-fade.png );
+	.vertical-gradient( @body-background-color, @menu-background-color, 50%, 100% );
+	background-color: @body-background-color;
+}
+
+#mw-head-base {
+	margin-top: -5em;
+	margin-left: 10em;
+	height: 5em;
+}
+
+#mw-head {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+
+	h3 {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+/* Navigation Containers */
+#left-navigation {
+	float: left;
+	margin-left: 10em;
+	margin-top: 2.5em;
+	/* When right nav would overlap left nav, it's placed below it
+	   (normal CSS floats behavior). This rule ensures that no empty space
+	   is shown between them due to right nav's margin-top. Page layout
+	   is still broken, but at least the nav overlaps only the page title
+	   instead of half the content. */
+	margin-bottom: -2.5em;
+}
+
+#right-navigation {
+	float: right;
+	margin-top: 2.5em;
+}
+
+/* Logo */
+#p-logo {
+	width: 10em;
+	height: 160px;
+
+	a {
+		display: block;
+		width: 10em;
+		height: 160px;
+		background-repeat: no-repeat;
+		background-position: center center;
+		text-decoration: none;
+	}
+}
+
+/* Panel */
+#mw-panel {
+	font-size: @menu-main-font-size;
+	position: absolute;
+	top: 0;
+	width: 10em;
+	left: 0;
+
+	.portal {
+		margin: 0 0.6em 0 0.7em;
+		padding: 0.25em 0;
+		direction: ltr;
+		background-position: top left;
+		background-repeat: no-repeat;
+
+		h3 {
+			font-size: @menu-main-heading-font-size;
+			color: @menu-main-heading-color;
+			font-weight: normal;
+			margin: 0.5em 0 0 (@menu-main-body-margin-left/@menu-main-heading-font-size);
+			padding: 0.25em 0;
+			cursor: default;
+			border: 0;
+		}
+
+		.body {
+			margin-left: @menu-main-body-margin-left;
+			padding-top: 0;
+			.background-image( 'images/portal-break.png' );
+			background-repeat: no-repeat;
+
+			ul {
+				list-style: none none;
+				margin: 0;
+				padding: @menu-main-body-padding;
+			}
+
+			li {
+				line-height: 1.125em;
+				margin: 0;
+				padding: 0.25em 0;
+				font-size: @menu-main-body-font-size;
+				word-wrap: break-word;
+
+				a {
+					color: @menu-main-body-link-color;
+
+					&:visited {
+						color: @menu-main-body-link-visited-color;
+					}
+				}
+			}
+		}
+	}
+
+	/* First sidebar portlet. Not using :first-of-type for IE<=8 support. */
+	#p-logo + .portal {
+		background-image: none;
+		margin-top: 1em;
+
+		h3 {
+			display: none;
+		}
+
+		.body {
+			background-image: none;
+			margin-left: @menu-main-body-margin-left;
+		}
+	}
+}

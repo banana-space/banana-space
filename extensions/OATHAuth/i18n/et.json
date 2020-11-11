@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Avjoska",
+			"Cumbril",
+			"Pikne"
+		]
+	},
+	"oathauth-account": "Konto nimi:",
+	"oathauth-secret": "Kaheastmelise autentimise salavõti:",
+	"oathauth-enable": "Luba kaheastmeline autentimine",
+	"oathauth-scratchtokens": "All on ühekordsete koodide nimekiri. Igat koodi saab kasutada vaid ühel korral, koodid on mõeldud hädaolukorra jaoks. Kirjuta koodid üles ja pane turvalisse kohta hoiule. Kui peaksid telefoni kaotama, on need koodid ainus võimalus oma kontot päästa. '''Allolevaid koode rohkem ei kuvata'''.",
+	"oathauth-prefs-label": "Kaheastmeline autentimine:",
+	"oathauth-step1": "Samm 1: laadi alla kaheastmelise autentimise rakendus",
+	"oathauth-step1-test": "Laadi alla kaheastmelise autentimise programm. See võib olla mobiilirakendus (näiteks Google Authenticator) või lauaarvuti rakendus.",
+	"oathauth-step2": "Samm 2: skaneeri QR-kood",
+	"oathauth-step2alt": "Või sisesta salavõti käsitsi.",
+	"oathauth-step3": "Samm 3: kirjuta üles ühekordsed koodid",
+	"oathauth-step4": "Samm 4: kinnitamine",
+	"oathauth-entertoken": "Kinnitamiseks sisesta autentimisseadmest pärit kood:",
+	"right-oathauth-enable": "Lubada kaheastmelist autentimist",
+	"action-oathauth-enable": "kaheastmelist autentimist lubada",
+	"grant-oath": "Juurdepääs enda ja teiste kaheastmelise autentimise (OATH) andmetele",
+	"right-oathauth-api-all": "Pärida ja valideerida enda ja teiste OATH-i teavet"
+}

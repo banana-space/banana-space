@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pikne",
+			"[[et:Kasutaja:M2s17]]"
+		]
+	},
+	"syntaxhighlight-desc": "Võimaldab [http://pygments.org/ Pygmentsi] (Pythoni-põhine süntaksi esiletõstja) ja sildi <code>&lt;syntaxhighlight&gt;</code> abil süntaksit esile tõsta.",
+	"syntaxhighlight-error-category": "Süntaksi esiletõstu tõrgetega leheküljed",
+	"syntaxhighlight-error-category-desc": "Leheküljel prooviti koodi esile tõsta, kuid esines tõrge.",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Kood",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Keel",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "Näita reanumbreid",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "Koodiplokk",
+	"syntaxhighlight-error-pygments-invocation-failure": "Teeki Pygments ei õnnestunud käivitada.",
+	"syntaxhighlight-error-unknown-language": "Tundmatu keel \"$1\"",
+	"syntaxhighlight-error-exceeds-size-limit": "Koodi suurus $1 {{PLURAL:$1|bait|baiti}} ületab lubatud $2 {{PLURAL:$2|baidist}} ülemmäära."
+}

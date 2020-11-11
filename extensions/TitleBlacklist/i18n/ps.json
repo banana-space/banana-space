@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ahmed-Najib-Biabani-Ibrahimkhel"
+		]
+	},
+	"titleblacklist-override": "تورليک بابېزه گڼل",
+	"titleblacklist-warning": "<strong>گواښنه: يوازې پازوالان او نور هغه کارنان چې د <code>tboverride</code> رښته لري کولی شي چې دا مخ سم کړي، دا ځکه چې همدا مخ د لانديني بنديزليک سرليک سره ورته دی:</strong><br /><code>$1</code>"
+}

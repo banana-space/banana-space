@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Babanwalia"
+		]
+	},
+	"prefs-gadgets": "ਗੈਜਟ",
+	"gadgets": "ਗੈਜਟ",
+	"gadgets-title": "ਗੈਜਟ",
+	"gadgets-uses": "ਵਰਤਦਾ ਹੈ",
+	"gadgets-default": "ਮੂਲ ਤੌਰ 'ਤੇ ਸਾਰਿਆਂ ਲਈ ਚਾਲੂ ਹੈ।",
+	"gadgets-export": "ਬਰਾਮਦ",
+	"gadgets-export-title": "ਜੁਗਤਾਂ ਦੀ ਬਰਾਮਦ",
+	"gadgets-not-found": "ਗੈਜਟ \"$1\" ਨਹੀਂ ਲੱਭਾ।",
+	"gadgets-export-download": "ਡਾਊਨਲੋਡ ਕਰੋ"
+}

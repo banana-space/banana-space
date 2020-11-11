@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Borichèt",
+			"Dragonòt"
+		]
+	},
+	"titleblacklist-desc": "A përmëtt a j'aministrador ëd vieté la creassion ëd pàgine e ëd cont për na [[MediaWiki:Titleblacklist|blacklist]] e na [[MediaWiki:Titlewhitelist|whitelist]]",
+	"titleblacklist": "# Costa sì a l'é na blacklist dij tìtoj. Tìtoj e stranòm che a corispondo a n'espression regolar sì a peulo pa esse creà.\n# Dòvra \"$\" për coment.\n# Cost sì a l'é pa case sensitive për default",
+	"titlewhitelist": "# Costa a l'é na whitelist ëd tìtoj. Dòvra \"$\" për coment.\n# Sòn sì a l'é pa case sensitive për default",
+	"titleblacklist-forbidden-edit": "Ël tìtol \"$2\" a l'é stàit vietà.\nA corispond a costa intrada dla blacklist: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" a peul pa esse tramudà a \"$3\", përchè ël tìtol \"$3\" a l'é stàit vietà.\nA corispond a costa intrada dla blacklist: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Ël nòm dël file \"$2\" a l'é stàit vietà.\nA corispond a costa intrada dla blacklist: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Lë stranòm \"$2\" a l'é stàit vietà.\nA corispond a costa intrada dla blacklist: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|La linia|Le linie}} sota ant la blacklist dij tìtoj {{PLURAL:$1|a l'é pa bon-a|a son pa bon-e}};\npër piasì {{PLURAL:$1|coregg-la|coregg-je}} prima ëd salvé:",
+	"titleblacklist-override": "Ignoré la lista nèira",
+	"right-tboverride": "Rampiassé la lista nèira dij tìtoj o djë stranòm d'utent",
+	"right-tboverride-account": "Ignoré la lista nèira djë stranòm d'utent"
+}

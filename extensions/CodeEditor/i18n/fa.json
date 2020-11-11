@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Reza1615",
+			"Rtemis",
+			"Ebraminio",
+			"Ladsgroup"
+		]
+	},
+	"codeeditor-desc": "رنگی‌کنندهٔ ساختار زبانی برای جاوااسکریپت و صفحات سی‌اس‌اس از [https://ace.c9.io/ ویرایشگر آس] استفاده می‌کند",
+	"codeeditor-toolbar-toggle": "ضامن ویرایشگر کد",
+	"codeeditor-save-with-errors": "این سند دارای اشکال‌هایی است. اطمینان دارید که می‌خواهید ذخیره‌اش کنید؟",
+	"codeeditor-gotoline": "برو به خط شماره...",
+	"codeeditor-gotoline-placeholder": "شماره[:ستون]",
+	"codeeditor-gotoline-prompt": "یک شماره خط وارد کنید",
+	"codeeditor-indent": "تورفتگی",
+	"codeeditor-error-title": "وابستگی به خطا خورد"
+}

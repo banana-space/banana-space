@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Obaid Raza",
+			"Muhammad Shuaib"
+		]
+	},
+	"skinname-timeless": "ٹائم لیس",
+	"timeless-search-placeholder": "{{NUMBEROFARTICLES}} صفحات میں تلاش کریں",
+	"timeless-loggedin": "آپ کا کھاتا",
+	"timeless-anonymous": "گمنام",
+	"timeless-loggedinas": "«$1» صارف نام سے لاگ ان ہیں",
+	"timeless-notloggedin": "آپ لاگ ان نہیں ہیں",
+	"timeless-userpage": "صفحہ {{GENDER:$1|صارف}}",
+	"timeless-talkpage": "تبادلۂ خیال {{GENDER:$1|صارف}}",
+	"timeless-pagelog": "صفحے کے نوشتہ جات",
+	"timeless-more": "مزید",
+	"timeless-sitetools": "ویکی آلات",
+	"timeless-pageactions": "آلات صفحہ",
+	"timeless-userpagetools": "آلات صفحہ صارف",
+	"timeless-pagemisc": "مزید",
+	"timeless-namespaces": "نام ہائے فضا",
+	"timeless-pagetools": "کارروائیاں",
+	"timeless-languages": "زبانیں",
+	"timeless.js": "/* یہاں درج جاوا اسکرپٹ محض ان صارفین کے لیے لوڈ ہوگی جو ٹائم لیس پوشاک استعمال کر رہے ہیں */"
+}

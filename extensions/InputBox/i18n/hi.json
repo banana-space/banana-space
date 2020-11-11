@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ansumang",
+			"Kaustubh",
+			"Siddhartha Ghai",
+			"NehalDaveND"
+		]
+	},
+	"inputbox-desc": "पहले से लिखे गये एच॰टी॰एम॰एल फ़ॉर्म प्रयोग करने की सुविधा दें",
+	"inputbox-error-no-type": "आपने बनाने हेतु इनपुट बक्से का प्रकार नहीं बताया है।",
+	"inputbox-error-bad-type": "इनपुट बक्सा प्रकार \"$1\" ज्ञात नहीं है।\nकृपया \"create\", \"comment\", \"search\", \"search2\" या \"fulltext\" में से एक चुनें।",
+	"inputbox-tryexact": "दिये हुए शब्द ही खोजें",
+	"inputbox-searchfulltext": "पूरा पाठ खोजें",
+	"inputbox-createarticle": "पृष्ठ बनाएँ",
+	"inputbox-movearticle": "नाम बदलें",
+	"inputbox-postcomment": "नवीनः विभागः",
+	"inputbox-postcommenttitle": "नवीनः विभागः",
+	"inputbox-ns-main": "मुख्य"
+}

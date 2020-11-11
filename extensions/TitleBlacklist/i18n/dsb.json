@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michawiki"
+		]
+	},
+	"titleblacklist-desc": "Zmóžnja administratoram napóranjeju bokow a wužywarskich kontow pó [[MediaWiki:Titleblacklist|cornej lisćinje]] a [[MediaWiki:Titlewhitelist|běłej lisćinje]] zajźowaś",
+	"titleblacklist": "# To jo corna lisćina titelow. Titele a wužywarje, kótarež pśitrjefiju na regularny wuraz, njedaju se napóraś.\n# Wužyj \"#\" za komentary.\n# Pó standarźe to njeźiwa na wjelikopisanje",
+	"titlewhitelist": "# To jo běła lisćina titelow. Wužyj \"#\" za komentary.\n# Pó standarźe to njeźiwa na wjelikopisanje.",
+	"titleblacklist-forbidden-edit": "Titel \"$2\" jo pśeśiwo napóranjeju blokěrowany.\nPśitrjefijo na slědujucy zapisk: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" njedajo se do \"$3\" pśesunuś, dokulaž titel \"$3\" pśeśiwo napóranjeju blokěrowany.\nPśetrjefijo na slědujucy zapisk corneje lisćiny: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Datajowe mě \"$2\" je so blokěrowało pśeśiwo napóranjeju.\nPśetrjefijo na slědujucy zapisk corneje lisćiny: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Wužywarske mě \"$2\" jo se blokěrowało pśeśiwo napóranjeju.\nPśetrjefijo na slědujucy zapisk corneje lisćiny: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Slědujuca smužka|Slědujucej smužce|slědujuce smužki|Slědujuce smužki}} w cornej lisćinje titelow {{PLURAL:$1|jo njepłaśiwa|stej njepłaśiwej|su njepłaśiwe |su njepłaśiwe}}; pšosym skorigěruj {{PLURAL:$1|ju|jej|je|je}} do składowanja:",
+	"titleblacklist-override": "Carnu lisćinu ignorěrowaś",
+	"right-tboverride": "Płaśiwosć carneje lisćiny nastawkow abo wužywarskich mjenjow wótpóraś",
+	"right-tboverride-account": "Płaśiwosć carneje lisćiny wužywarskich mjenjow wótpóraś"
+}

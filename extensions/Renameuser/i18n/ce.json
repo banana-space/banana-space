@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sasan700",
+			"Умар"
+		]
+	},
+	"renameuser": "Декъашхочун цӀе хийца",
+	"renameuser-linkoncontribs": "декъашхочун цӀе хийца",
+	"renameuser-linkoncontribs-text": "ЦӀе хийца хӀокху декъашхочун",
+	"renameuser-desc": "ТӀетуху декъашхойн цӀерш хийца  [[Special:RenameUser|аьтту]] (оьшу бакъо <code>renameuser</code>)",
+	"renameuserold": "Карара цӀе:",
+	"renameusernew": "Керла декъашхочун цӀе",
+	"renameuserreason": "Бахьана:",
+	"renameusermove": "Иштта хийца декъашхочун агӀона а, долара дийцаре а цера бухара агӀонийн а цӀерш",
+	"renameusersuppress": "Керла цӀеран тӀе дӀасахьажорг ма кхолла",
+	"renameuserreserve": "ТӀейогӀу хана лелаян кеч йе шира цӀе",
+	"renameuserwarnings": "ДӀахьедар:",
+	"renameuserconfirm": "ХӀаъ, хийца декъашхочун цӀе",
+	"renameusersubmit": "Кхочушдé",
+	"renameuser-submit-blocklog": "Гайта декъашхочун блоктохаран тептар",
+	"renameusererrordoesnotexist": "ЦӀарца «<nowiki>$1</nowiki>» дӀабазбелларш  бац.",
+	"renameusererrorexists": "ЦӀарца «<nowiki>$1</nowiki>» дӀабазбелларш  бац.",
+	"renameusererrorinvalid": "Магийна йоцу декъашхочун «<nowiki>$1</nowiki>» цӀе",
+	"renameuser-error-request": "Дехар кхочушдан цаделира. Дехар до юху гӀой кхин гӀорта.",
+	"renameuser-error-same-user": "Хьуна цало хьалха хилла цӀеран тӀе хийца.",
+	"renameusersuccess": "Декъашхочун цӀе«<nowiki>$1</nowiki>» хийцина → «<nowiki>$2</nowiki>».",
+	"renameuser-page-exists": "Агӏо $1 йолуш ю цундела и ша юху дӏаязъян йиш яц.",
+	"renameuser-page-moved": "АгӀона $1 цӀе хийцина → $2.",
+	"renameuser-page-unmoved": "АгӀона $1 цӀе → $2 хуьйцийла яц.",
+	"log-name-renameuser": "Декъашхойн цӀерш хийцар долу тептар",
+	"log-description-renameuser": "ХӀокху тептар чохь гойту дӀабазбелла декъашхойн цӀерш хийцар.",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|цӀе хийцина}} декъашхочун $4 ({{PLURAL:$6|$6 нисдар}}) → $5",
+	"logentry-renameuser-renameuser-legacier": "$1 $4 декъашхочун цӀе хийцина → $5",
+	"renameuser-move-log": "Автоматически декъашхочун цӀе хийцина дела «[[User:$1|$1]]» → «[[User:$2|$2]]»",
+	"action-renameuser": "декъашхойн цӀерш хийцар",
+	"right-renameuser": "декъашхойн цӀерш хийцар",
+	"renameuser-renamed-notice": "ХӀокху декъашхочун цӀе хийцина хилла.\nЛахахьа гӀоьналлин гойтуш ду цӀерш хийцаран тептар."
+}

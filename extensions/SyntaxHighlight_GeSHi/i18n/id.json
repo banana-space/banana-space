@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"IvanLanin"
+		]
+	},
+	"syntaxhighlight-desc": "Memberikan penyorotan sintaks <code>&lt;syntaxhighlight&gt;</code> menggunakan [http://pygments.org/ Pygments]"
+}

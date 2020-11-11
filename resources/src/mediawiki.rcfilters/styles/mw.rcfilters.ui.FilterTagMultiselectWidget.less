@@ -1,0 +1,99 @@
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+@import 'mw.rcfilters.variables';
+
+.mw-rcfilters-ui-filterTagMultiselectWidget {
+	max-width: none;
+
+	.oo-ui-tagMultiselectWidget-input input {
+		// Make sure this uses the interface direction, not the content direction
+		direction: ltr;
+		border-bottom-right-radius: 0;
+		height: 2.5em;
+	}
+
+	&.oo-ui-widget-enabled .oo-ui-tagMultiselectWidget-handle {
+		border: 1px solid @colorGray10;
+		border-bottom: 0;
+		background-color: @colorGray15;
+		border-radius: 2px 2px 0 0;
+		padding: 0.6em;
+		margin-top: 1em;
+		line-height: normal;
+	}
+
+	.oo-ui-tagMultiselectWidget.oo-ui-widget-enabled &-animate.oo-ui-tagMultiselectWidget-handle {
+		.transition( background-color 500ms ease-out );
+	}
+
+	.oo-ui-tagMultiselectWidget.oo-ui-widget-enabled &-emphasize.oo-ui-tagMultiselectWidget-handle {
+		background-color: @background-color-primary;
+	}
+
+	&-wrapper {
+		.mw-rcfilters-ui-table {
+			margin-top: 0.3em;
+		}
+
+		&-content {
+			&-title {
+				font-weight: bold;
+				color: @colorGray5;
+			}
+
+			&-savedQueryTitle {
+				color: @colorGray2;
+				font-weight: bold;
+				vertical-align: top;
+				margin-left: 1em;
+				width: ~'calc( 100% - 10em )';
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+	}
+
+	&-views {
+		&-input {
+			width: 100%;
+		}
+
+		&-select {
+			width: 1em;
+
+			&-widget.oo-ui-widget {
+				border: 1px solid @colorGray10;
+				border-left-width: 0;
+				border-radius: 0 0 @borderRadius 0;
+
+				display: block;
+				text-align: right;
+				height: 2.5em;
+				.box-sizing( border-box );
+
+				.oo-ui-buttonOptionWidget:first-child {
+					margin-left: 0;
+				}
+			}
+		}
+	}
+
+	&-emptyFilters {
+		color: @colorGray7;
+	}
+
+	&-cell-filters {
+		width: 100%;
+
+		div.oo-ui-tagMultiselectWidget-group {
+			margin-top: 0.2em;
+			display: block;
+		}
+	}
+
+	&-cell-reset {
+		text-align: right;
+		padding-left: 0.5em;
+	}
+}

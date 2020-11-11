@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meno25",
+			"OsamaK",
+			"Jdforrester",
+			"زكريا"
+		]
+	},
+	"citethispage": "استشهاد",
+	"citethispage-desc": "يضيف صفحة [[Special:CiteThisPage|استشهاد]] خاصة ووصلة صندوق أدوات",
+	"citethispage-link": "استشهد بهذه الصفحة",
+	"tooltip-citethispage": "معلومات عن كيفية الاستشهاد بالصفحة",
+	"citethispage-change-submit": "استشهاد",
+	"citethispage-change-target": "الصفحة:",
+	"citethispage-content": "__NOTOC__\n<div class=\"mw-specialCiteThisPage-bibliographic\">\n== تفاصيل عن صفحة {{FULLPAGENAME}} ==\n\n* عنوان الصفحة: {{FULLPAGENAME}}\n* المؤلف: مساهمو {{SITENAME}}\n* الناشر: {{SITENAME}} {{int:sitesubtitle}}\n* آخر تعديل: {{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}} {{CURRENTTIME}} ت ع م\n* تاريخ الاستشهاد: <citation>{{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}} {{CURRENTTIME}} ت ع م</citation>\n* وصلة دائمة: {{canonicalurl:{{FULLPAGENAME}}|oldid={{REVISIONID}}}}\n* رقم نسخة الصفحة: {{REVISIONID}}\n</div>\n<div class=\"plainlinks mw-specialCiteThisPage-styles\">\n\n== أساليب الاستشهاد بصفحة {{FULLPAGENAME}} ==\n\n=== عادي ===\n{{FULLPAGENAME}} ({{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}}). {{SITENAME}}{{int:sitesubtitle}}. الاطلاع <citation>{{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}} على {{CURRENTTIME}}</citation>. النسخة {{canonicalurl:{{FULLPAGENAME}}|oldid={{REVISIONID}}}}\n\n=== [[:w:ar:BibTeX|بب تخ]] ===\n<div dir=ltr>\n  @misc{ wiki:xxx,\n    author = \"{{SITENAME}}\",\n    title = \"{{FULLPAGENAME}} --- {{SITENAME}} {{int:sitesubtitle}}\",\n    year = \"{{CURRENTYEAR}}\",\n    url = \"{{canonicalurl:{{FULLPAGENAME}}|oldid={{REVISIONID}}}}\",\n    note = \"[من الإنترنت، الاطلاع <citation>{{CURRENTDAY}}-{{CURRENTMONTHNAME}}-{{CURRENTYEAR}}</citation>]\"\n  }\n</div>\nيفضل ما يلي عند استخدام مجموعة العناوين (<code dir=ltr>\\usepackage{url}</code>) في [[:w:ar:لاتخ|لاتخ]] لتحسين مظهر العناوين:\n<div dir=ltr>\n  @misc{ wiki:xxx,\n    author = \"{{SITENAME}}\",\n    title = \"{{FULLPAGENAME}} --- {{SITENAME}} {{int:sitesubtitle}}\",\n    year = \"{{CURRENTYEAR}}\",\n    url = \"'''\\url{'''{{canonicalurl:{{FULLPAGENAME}}|oldid={{REVISIONID}}}}'''}'''\",\n    note = \"[من الإنترنت، الاطلاع <citation>{{CURRENTDAY}}-{{CURRENTMONTHNAME}}-{{CURRENTYEAR}}</citation>]\"\n  }\n</div>\n</div> <!--closing div for \"plainlinks\"-->"
+}

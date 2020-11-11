@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dori",
+			"Olsi"
+		]
+	},
+	"inputbox-desc": "Lejoni futjen e formave të paracaktuara HTML",
+	"inputbox-error-no-type": "Ju nuk keni specifikuar llojin e kutisë për ta krijuar.",
+	"inputbox-error-bad-type": "Lloji i kutisë \"$1\" nuk njihet.\nJu lutemi specifikoni \"create\", \"comment\", \"search\", \"search2\" ose \"fulltext\".",
+	"inputbox-tryexact": "Kërko përputhje të plotë",
+	"inputbox-searchfulltext": "Kërko tekstin e plotë",
+	"inputbox-createarticle": "Krijo artikull",
+	"inputbox-ns-main": "Kryesor"
+}

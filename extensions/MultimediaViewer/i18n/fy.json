@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robin0van0der0vliet",
+			"Robin van der Vliet"
+		]
+	},
+	"multimediaviewer-multiple-authors-combine": "$1 en $2",
+	"multimediaviewer-help-mmv": "Help",
+	"multimediaviewer-geolocation": "Lokaasje: $1",
+	"multimediaviewer-embed-html": "HTML",
+	"multimediaviewer-large-embed-dimensions": "Grut $1",
+	"multimediaviewer-small-embed-dimensions": "Lyts $1",
+	"multimediaviewer-title-popup-text": "Beskriuwing"
+}

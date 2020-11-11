@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Xuacu"
+		]
+	},
+	"recaptcha-edit": "Pa protexer la wiki contra'l spam automáticu, te pidimos qu'escribas los dos palabres que ves nel cuadru siguiente:",
+	"recaptcha-addurl": "La to edición incluye enllaces esternos nuevos. Pa protexer la wiki contra'l spam automatizáu, te pidimos qu'escribas les palabres que ves nel cuadru siguiente:",
+	"recaptcha-badlogin": "Pa protexer la wiki contra'l descifráu automatizáu de contraseñes, te pidimos qu'escribas los dos palabres que ves nel cuadru siguiente:",
+	"recaptcha-createaccount": "Pa protexer la wiki contra la creación automatizada de cuentes, te pidimos qu'escribas les palabres que ves nel cuadru siguiente:",
+	"recaptcha-createaccount-fail": "Falta la rempuesta a la entruga de reCAPTCHA o ye incorreuta",
+	"recaptcha-create": "Pa protexer la wiki contra la creación automatizada de páxines, te pidimos qu'escribas les palabres que ves nel cuadru siguiente:",
+	"recaptcha-info": "Resuelve'l retu ReCaptcha y devuelve los valores de pregunta y respuesta como captchaId y captchaWord.",
+	"recaptcha-apihelp-param-recaptcha_challenge_field": "Campu del widget ReCaptcha",
+	"recaptcha-apihelp-param-recaptcha_response_field": "Campu del widget ReCaptcha",
+	"recaptcha-id-label": "Retu ReCaptcha",
+	"recaptcha-id-help": "Valor del retu ReCaptcha",
+	"recaptcha-label": "Solución del ReCaptcha",
+	"recaptcha-help": "Valor de la solución del ReCaptcha"
+}

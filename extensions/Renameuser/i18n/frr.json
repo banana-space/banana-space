@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Murma174"
+		]
+	},
+	"renameuser": "Brüker amnääm",
+	"renameuser-linkoncontribs": "Brüker amnääm",
+	"renameuser-linkoncontribs-text": "Didiar brüker amnääm",
+	"renameuser-desc": "Diar komt en [[Special:RenameUser|spezial-sidj]] tu, am en brükernööm tu feranrin",
+	"renameuserold": "Uugenblakelk brükernööm:",
+	"renameusernew": "Nei brükernööm:",
+	"renameuserreason": "Grünj:",
+	"renameusermove": "Fersküüw brükersidj an diskuschuunssidj (mä onersidjen) tu di nei brükernööm",
+	"renameusersuppress": "Nian widjerfeerangen üüb di nei brükernööm iinracht",
+	"renameuserreserve": "Di ual brükernööm spere",
+	"renameuserwarnings": "Wäärnangen:",
+	"renameuserconfirm": "Ja, di brüker amnääm",
+	"renameusersubmit": "Auerdreeg",
+	"renameuser-submit-blocklog": "Sper-logbuk för didiar brüker uunwise",
+	"renameusererrordoesnotexist": "Son brüker \"<nowiki>$1</nowiki>\" jaft at ei.",
+	"renameusererrorexists": "Son brüker \"<nowiki>$1</nowiki>\" jaft at al.",
+	"renameusererrorinvalid": "Di brükernööm \"<nowiki>$1</nowiki>\" as ferkiard.",
+	"renameuser-error-request": "Diar as wat skiaf gingen bi't aurdreegen. Ferschük det man noch ans.",
+	"renameuser-error-same-user": "Di nei an di ual brükernööm san likedenang.",
+	"renameusersuccess": "Di brüker \"<nowiki>$1</nowiki>\" as tu \"<nowiki>$2</nowiki>\" amnäämd wurden.",
+	"renameuser-page-exists": "Det sidj „$1“ as al diar an koon ei automaatisk auerskrewen wurd.",
+	"renameuser-page-moved": "Det sidj $1 as efter $2 fersköwen wurden.",
+	"renameuser-page-unmoved": "Det sidj $1 küd ei efter $2 fersköwen wurd.",
+	"log-name-renameuser": "Amnääm-logbuk",
+	"log-description-renameuser": "Det as det logbuk auer feranrangen faan brükernöömer.",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|hää}} brüker „$4“ (mä {{PLURAL:$6|ian feranrang|$6 feranrangen}}) tu „$5“ amnäämd.",
+	"logentry-renameuser-renameuser-legacier": "$1 hää brüker $4 amnäämd tu $5",
+	"renameuser-move-log": "Det sidj as bi't amnäämen faan „[[User:$1|$1]]“ tu „[[User:$2|$2]]“ automaatisk fersköwen wurden",
+	"action-renameuser": "brükern amnääm",
+	"right-renameuser": "Brükern amnääm",
+	"renameuser-renamed-notice": "Didiar brüker as amnäämd wurden. Uun't amnääm-logbuk oner stäänt muar diartu."
+}

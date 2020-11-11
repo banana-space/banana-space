@@ -1,0 +1,55 @@
+{
+	"name": "mediawiki/localisation-update",
+	"type": "mediawiki-extension",
+	"description": "MediaWiki extension to keep the localised messages as up to date as possible.",
+	"keywords": [
+		"MediaWiki",
+		"l10n",
+		"localization"
+	],
+	"homepage": "https://www.mediawiki.org/wiki/Extension:LocalisationUpdate",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Roan Kattouw",
+			"email": "roan.kattouw@gmail.com",
+			"role": "Developer"
+		},
+		{
+			"name": "Niklas Laxström",
+			"email": "niklas.laxstrom@gmail.com",
+			"role": "Developer"
+		},
+		{
+			"name": "Tom Maaswinkel",
+			"role": "Original author"
+		}
+	],
+	"support": {
+		"issues": "https://phabricator.wikimedia.org/",
+		"irc": "irc://irc.freenode.net/mediawiki",
+		"forum": "https://www.mediawiki.org/wiki/Extension_talk:LocalisationUpdate",
+		"wiki": "https://www.mediawiki.org/wiki/Extension:LocalisationUpdate"
+	},
+	"require-dev": {
+		"jakub-onderka/php-parallel-lint": "1.0.0",
+		"mediawiki/mediawiki-codesniffer": "18.0.0",
+		"jakub-onderka/php-console-highlighter": "0.3.2",
+		"mediawiki/minus-x": "0.3.1",
+		"mediawiki/mediawiki-phan-config": "0.2.0"
+	},
+	"scripts": {
+		"fix": [
+			"phpcbf",
+			"minus-x fix ."
+		],
+		"test": [
+			"parallel-lint . --exclude vendor --exclude node_modules",
+			"phpcs -p -s",
+			"minus-x check ."
+		]
+	},
+	"extra": {
+		"phan-taint-check-plugin": "1.2.0"
+	}
+}

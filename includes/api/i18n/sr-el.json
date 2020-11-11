@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Milicevic01"
+		]
+	},
+	"apihelp-block-summary": "Blokiraj korisnika.",
+	"apihelp-block-param-reason": "Razlog za blokiranje.",
+	"apihelp-delete-summary": "Obriši stranicu.",
+	"apihelp-edit-param-minor": "Manja izmena.",
+	"apihelp-feedrecentchanges-param-hidepatrolled": "Sakrij patrolirane izmene."
+}

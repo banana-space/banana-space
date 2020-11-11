@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"apihelp-query+references-description": "Retornar un representation de datos del referentias associate al paginas indicate.",
+	"apihelp-query+references-summary": "Retornar un representation de datos del referentias associate al paginas indicate.",
+	"apihelp-query+references-example-1": "Referentias associate a <kbd>Albert Einstein</kbd>.",
+	"apierror-citestoragedisabled": "Le immagazinage de referentias del extension Cite non es activate.",
+	"cite-desc": "Adde etiquettas <nowiki><ref[ name=id]></nowiki> e <nowiki><references/></nowiki>, pro citationes",
+	"cite_error": "Error de citation: $1",
+	"cite_error_ref_numeric_key": "Etiquetta <code>&lt;ref&gt;</code> invalide;\nle nomine non pote esser un numero integre. Usa un titulo descriptive",
+	"cite_error_ref_no_key": "Le etiquetta de apertura <code>&lt;ref&gt;</code> es mal formate o ha un mal nomine",
+	"cite_error_ref_too_many_keys": "Etiquetta <code>&lt;ref&gt;</code> invalide;\nnomines invalide, p.ex. troppo de nomines",
+	"cite_error_ref_no_input": "Etiquetta <code>&lt;ref&gt;</code> invalide;\nle refs sin nomine debe haber contento",
+	"cite_error_references_duplicate_key": "Etiquetta <code>&lt;ref&gt;</code> invalide; le nomine \"$1\" es definite plure vices con contento differente",
+	"cite_error_references_invalid_parameters": "Parametro invalide in etiquetta <code>&lt;references&gt;</code>",
+	"cite_error_references_no_backlink_label": "Le etiquettas de retroligamine personalisate es exhaurite.\nDefini plus in le message <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_no_link_label_group": "Exhauriva le etiquettas de ligamine personalisabile pro le gruppo \"$1\".\nDefini plus de istes in le message <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_text": "Etiquetta <code>&lt;ref&gt;</code> invalide;\nnulle texto esseva fornite pro le refs nominate <code>$1</code>",
+	"cite_error_included_ref": "Le clausura <code>&lt;/ref&gt;</code> manca pro le etiquetta <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "Il existe etiquettas <code>&lt;ref&gt;</code>  pro un gruppo con nomine \"$1\", ma nulle etiquetta <code>&lt;references group=\"$1\"/&gt;</code> correspondente ha essite trovate, o un etiquetta de termination <code>&lt;/ref&gt;</code> manca.",
+	"cite_error_references_group_mismatch": "Le etiquetta <code>&lt;ref&gt;</code> in <code>&lt;references&gt;</code> ha un attributo de gruppo \"$1\" confligente.",
+	"cite_error_references_missing_group": "Le etiquetta <code>&lt;ref&gt;</code> definite in <code>&lt;references&gt;</code> ha un attributo de gruppo \"$1\" que non appare in le texto precedente.",
+	"cite_error_references_missing_key": "Le etiquetta <code>&lt;ref&gt;</code> con nomine \"$1\" definite in <code>&lt;references&gt;</code> non es usate in le texto precedente.",
+	"cite_error_references_no_key": "Le etiquetta <code>&lt;ref&gt;</code> definite in <code>&lt;references&gt;</code> non ha un attributo de nomine.",
+	"cite_error_empty_references_define": "Le etiquetta <code>&lt;ref&gt;</code> definite in <code>&lt;references&gt;</code> con nomine \"$1\" ha nulle contento.",
+	"cite-tracking-category-cite-error": "Paginas con errores de referentias",
+	"cite-tracking-category-cite-error-desc": "Le paginas in iste categoria ha errores in le uso de etiquettas de referentias.",
+	"cite_references_link_accessibility_label": "Retornar",
+	"cite_references_link_many_accessibility_label": "Retornar a:",
+	"cite_section_preview_references": "Previsualisation de referentias",
+	"cite_warning": "Aviso de citation: $1",
+	"cite_warning_sectionpreview_no_text": "Le etiquetta <code>&lt;ref&gt;</code> con nomine <code>$1</code> non pote esser previsualisate perque illo es definite foras del section actual o non es definite del toto."
+}

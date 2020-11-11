@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cedric31"
+		]
+	},
+	"spam-blacklist": "# Los ligams extèrnes que fan partida d'aquesta lista seràn blocats al moment de lor insercion dins una pagina. # Aquesta lista concernís pas que Wikinews ; referissètz-vos tanben a la lista negra generala de Meta. # La documentacion se tròba a l’adreça seguenta : http://www.MediaWiki.org/wiki/Extension:SpamBlacklist # <!--Daissatz aquesta linha tala coma es --> <pre> # # La sintaxi es la seguenta # * Tot tèxte que seguís lo « # » es considerat coma un comentari. # * Tota linha pas voida es un fragment regex que concernís pas que los ligams ipertèxtes. #</pre> <!--Daissatz aquesta linha tala coma es -->",
+	"spam-whitelist": " #<!--Daissatz aquesta linha tala coma es --> <pre>\n# Los ligams extèrnes que fan partida d'aquesta lista seràn blocas al moment de lor insercion dins una pagina. \n# Aquesta lista concernís pas que Wikinews ; referissetz-vos tanben a la lista negra generala de Meta. \n # La documentacion se tròba a l’adreça seguenta : http://www.mediawiki.org/wiki/Extension:SpamBlacklist \n#\n# La sintaxi es la seguenta :\n# * Tot tèxte que seguís lo « # » es considerat coma un comentari.\n# * Tota linha pas voida es un fragment regex que concernís pas que los ligams ipertèxtes.\n\n #</pre> <!--Daissatz aquesta linha tala coma es -->",
+	"spam-invalid-lines": "{{PLURAL:$1|La linha seguenta |Las linhas seguentas}} de la lista dels spams {{PLURAL:$1|es redigida|son redigidas}} d'un biais incorrècte e {{PLURAL:$1|necessita|necessitan}} las correccions necessàrias abans tot salvament de la pagina :",
+	"spam-blacklist-desc": "Aisina antispam basada sus d'expressions regularas : ''[[MediaWiki:Spam-blacklist]]'' et ''[[MediaWiki:Spam-whitelist]]''"
+}

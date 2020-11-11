@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joseph",
+			"Arystanbek"
+		]
+	},
+	"pdf-desc": "PDF dosyalarını görüntü modunda görüntülemek için işleyici",
+	"pdf-file-page-warning-info": "Bu sorun hakkında daha fazla bilgi edinin.",
+	"pdf_no_metadata": "PDF'den metadata alınamıyor",
+	"pdf_page_error": "Sayfa numarası aralıkta değil",
+	"exif-pdf-producer": "Dönüştürme programı",
+	"exif-pdf-version": "PDF formatı sürüm",
+	"exif-pdf-encrypted": "Şifreli",
+	"exif-pdf-pagesize": "Sayfa boyutu"
+}

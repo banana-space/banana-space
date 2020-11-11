@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"AnakngAraw",
+			"Sky Harbor",
+			"Jojit fb",
+			"Jewel457",
+			"Amire80"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "Aklat",
+	"visualeditor-cite-tool-name-journal": "Rebista",
+	"visualeditor-cite-tool-name-news": "Balita",
+	"visualeditor-cite-tool-name-web": "Websayt",
+	"cite-ve-dialog-reference-editing-reused": "Ginagamit ang sangguniang ito nang $1 {{PLURAL:$1|beses}} sa pahinang ito.",
+	"cite-ve-dialog-reference-options-group-label": "Gamitin ang grupong ito",
+	"cite-ve-dialog-reference-options-group-placeholder": "Mga karaniwang sanggunian",
+	"cite-ve-dialog-reference-options-name-label": "Gamitin muli sa pangalang ito",
+	"cite-ve-dialog-reference-options-section": "Mga pagpipilian",
+	"cite-ve-dialog-reference-title": "Sanggunian",
+	"cite-ve-dialog-reference-useexisting-label": "Gumamit ng umiiral na sanggunian",
+	"cite-ve-dialog-reference-useexisting-tool": "Muling paggamit",
+	"cite-ve-dialog-referenceslist-title": "Talasanggunian",
+	"cite-ve-dialogbutton-reference-tooltip": "Payak",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Talasanggunian",
+	"cite-ve-reference-input-placeholder": "Maghanap sa loob ng mga kasalukuyang sanggunian",
+	"cite-ve-referenceslist-isempty": "Walang sangguniang may grupong \"$1\" sa pahinang ito ang maisasama sa talang ito.",
+	"cite-ve-referenceslist-isempty-default": "Walang sanggunian sa pahinang ito ang maisasama sa talang ito.",
+	"cite-ve-referenceslist-missingref": "Binigyan ng katuturan ang sangguniang ito sa isang padron o ibang uri ng blokeng ginawa, at sa panahong ito maaari lamang itong baguhin gamit ang paraang batayan.",
+	"cite-ve-toolbar-group-label": "Isangguni"
+}

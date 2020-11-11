@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Milicevic01",
+			"Rancher",
+			"Жељко Тодоровић",
+			"Михајло Анђелковић",
+			"Obsuser",
+			"Acamicamacaraca"
+		]
+	},
+	"skinname-vector": "Векторска",
+	"vector-skin-desc": "Модерна верзија Монобука са свежим изгледом и много корисних побољшања",
+	"vector.css": "/* CSS постављен овде ће утицати на све кориснике векторске теме */",
+	"vector.js": "/* Јаваскрипт постављен овде ће се учитати за све оне који користе векторску тему */",
+	"vector-action-addsection": "Додај тему",
+	"vector-action-delete": "Обриши",
+	"vector-action-move": "Премести",
+	"vector-action-protect": "Заштити",
+	"vector-action-undelete": "Врати",
+	"vector-action-unprotect": "Промени заштиту",
+	"vector-view-create": "Направи",
+	"vector-view-edit": "Уреди",
+	"vector-view-history": "Историја",
+	"vector-view-view": "Читај",
+	"vector-view-viewsource": "Изворни код",
+	"vector-more-actions": "Више"
+}

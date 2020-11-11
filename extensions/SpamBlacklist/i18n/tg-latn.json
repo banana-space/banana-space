@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liangent"
+		]
+	},
+	"spam-blacklist": " # Nişonihoi URL berunai ba in fehrist mutobiqatşuda vaqte, ki ba sahifae ilova meşavand, \n # basta xohand şud.\n # In fehrist faqat rūi hamin viki ta'sir mekunad; ba fehristi sijohi sarosar niz muroçiat kuned.\n # Baroi mustanadot, nigared ba https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!--  in satrro hamonguna, ki hast raho kuned --> <pre>\n#\n # Dasturot ba in şakl hastand:\n #  * Hama ciz az alomati \"#\" to pojoni satr ba unvoni tavzeh ba nazar girifta meşavad\n #  * Har satr az matn ba unvoni jak dastur regex ba nazar girifta meşavad, \n #  ki faqat bo nomi mizbon dar nişoniji internetiji URL mutobiqat doda meşavad\n\n #</pre> <!-- in satrro hamonguna, ki hast raho kuned -->",
+	"spam-whitelist": " #<!-- in satrro hamonguna, ki hast raho kuned --> <pre>\n# Nişonihoi URL berunai ba in fehrist mutobiqatbuda, basta naxohand şud, \n# hatto agar dar fehristi sijoh qaror doşta boşad.\n#\n# Dasturot ba in şakl hastand:\n#  * Hama ciz az alomati \"#\" to pojoni satr ba unvoni tavzeh ba nazar girifta meşavad\n#  * Har satr az matn ba unvoni jak dastur regex ba nazar girifta meşavad, ki faqat bo nomi mizbon dar \n# nişoniji internetiji URL mutobiqat doda meşavad\n #</pre> <!-- in satrro hamonguna, ki hast raho kuned -->",
+	"spam-invalid-lines": "{{PLURAL:$1|Satri|Satrhoi}} zerin dar fehristi sijohi harznigorī dasturoti ƣajri miçoze regular expressions  {{PLURAL:$1|ast|hastand}} va qabl az zaxira kardani sahifa ba isloh kardan nijoz {{PLURAL:$1|dorad|dorand}}:",
+	"spam-blacklist-desc": "Abzori ziddi harznigorī dar asosi Regex: [[MediaWiki:Spam-blacklist]] va [[MediaWiki:Spam-whitelist]]"
+}

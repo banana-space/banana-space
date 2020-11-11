@@ -1,0 +1,252 @@
+@import 'variables.less';
+@footerColor: #eee;
+
+// We have to render the wordmark image before the print dialog is invoked, otherwise the image
+// won't render in the printed file. Use a little hack to render the image outside the viewport
+// and bring it in the viewport in print view.
+.firstHeading {
+	// We could also use a CSS background to display the logo.
+	// The problem is that the logo won't be printed unless the user prints the background too.
+	// Note. This specification does not fully define the interaction of :before and :after with
+	// replaced elements (such as IMG in HTML). This will be defined in more detail in a future
+	// specification. See https://www.w3.org/TR/CSS2/generate.html#before-after-content
+	& when( @printLogo = 1 ) {
+		&:before {
+			content: @printLogoUrl;
+			display: block;
+			height: ~'@{printLogoHeight}px';
+			left: -9999px;
+			line-height: 0;  // line-height is needed for correctly displaying the size of the content box.
+			margin-bottom: 20px;
+			position: absolute;
+			width: ~'@{printLogoWidth}px';
+		}
+	}
+}
+
+@media print {
+
+	/* These styles retain the existing typography in screen.less
+	In future (when deploying these styles) we may want to refactor skins.vector.styles
+	to apply certain styles in print as well as screen mode. */
+	.toc,
+	body {
+		padding: 10px;
+		font-family: @font-family-serif;
+	}
+
+	.printfooter,
+	#footer,
+	// Tables, thumbs and lists are sans-serif in print mode (unlike screen mode) because these will render
+	// more legibly on print media in a smaller font sizes
+	.thumb,
+	table,
+	ol,
+	dl,
+	ul,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: @font-family-sans-serif;
+	}
+
+	// Images, such as formulas, render best in serif. Math fallback images, for example, have an
+	// inline style attribute setting their dimensions in ex (x-height) units, which is relative the
+	// font size:
+	// 	<img
+	// 		src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d03b01348b751e6f4eaff085b3effa9542e2935d"
+	// 		class="mwe-math-fallback-image-inline"
+	// 		aria-hidden="true"
+	// 		style="vertical-align: -2.171ex; width:11.418ex; height:5.676ex;"
+	// 		alt="r_{s}={\frac {2GM}{c^{2}}}">
+	img {
+		font-family: @font-family-serif;
+	}
+
+	// Normalize Blue links in the article
+	a {
+		border-bottom: 1px solid #aaa;
+	}
+
+	.firstHeading {
+		font-size: 25pt;
+		line-height: 28pt;
+		margin-bottom: 20px;
+		padding-bottom: 5px;
+
+		// Bring back the wordmark to the viewport (see above how it's rendered outside the viewport).
+		& when( @printLogo = 1 ) {
+			&:before {
+				left: auto;
+				position: relative;
+			}
+		}
+	}
+
+	// Headings
+	.firstHeading,
+	h2 {
+		// To avoid the bottom border of section headings with floated elements
+		overflow: hidden;
+		border-bottom: 2px solid @pureBlack;
+	}
+
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin: 30px 0 0;
+	}
+
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		padding: 0;
+		position: relative;
+	}
+
+	h2 {
+		font-size: 18pt;
+		line-height: 24pt;
+		margin-bottom: 0.25em;
+	}
+
+	h3 {
+		font-size: 13pt;
+		line-height: 20pt;
+	}
+
+	h4,
+	h5,
+	h6 {
+		font-size: 10pt;
+		line-height: 15pt;
+	}
+
+	p {
+		font-size: 10pt;
+		line-height: 16pt;
+		margin-top: 5px;
+		text-align: justify;
+
+		// T175008
+		// When a paragraph is surrounded by floating elements from both
+		// sides, we want to make sure that there is at least some space
+		// before showing the text. Otherwise, small lengths of text may show
+		// between the surrounding elements, making the reading experience less
+		// enjoyable. If there is not enough space the following code will push
+		// the paragraph contents until after the floating element(s).
+		@paragraphMinWidth: 120pt;
+		&:before {
+			content: '';
+			display: block;
+			overflow: hidden;
+			width: @paragraphMinWidth;
+		}
+	}
+
+	blockquote {
+		border-left: 2px solid @pureBlack;
+		padding-left: 20px;
+	}
+
+	ol,
+	ul {
+		margin: 10px 0 0 1.6em;
+		padding: 0;
+
+		li {
+			padding: 2px 0;
+			font-size: 10pt;
+
+			// T178667: Inline lists in new print styles should not
+			// have a smaller font size than surrounding content
+			table & {
+				font-size: inherit;
+			}
+		}
+	}
+
+	.toc {
+		page-break-before: avoid;
+		page-break-after: avoid;
+		background: none;
+		border: 0;
+		display: table;
+
+		a {
+			border: 0;
+			font-weight: normal;
+		}
+
+		> ul {
+
+			> li {
+				margin-bottom: 4px;
+				font-weight: bold;
+			}
+		}
+
+		ul {
+			margin: 0;
+			list-style: none;
+
+			ul {
+				padding-left: 30px;
+			}
+		}
+
+		li.toclevel-1 {
+			> a {
+				font-weight: bold;
+				font-size: 10pt;
+			}
+		}
+
+		.tocnumber {
+			display: none;
+		}
+	}
+
+	.printfooter {
+		margin-top: 10px;
+		border-top: 3px solid @pureBlack;
+		padding-top: 10px;
+		font-size: 10pt;
+		clear: both;
+	}
+
+	#footer {
+		margin-top: 12px;
+		border-top: 1px solid @footerColor;
+		padding-top: 5px;
+	}
+
+	#footer-info {
+		margin: 0;
+		padding: 0;
+
+		li {
+			color: #999;
+			list-style: none;
+			display: block;
+			padding-bottom: 10px;
+			font-size: 10pt;
+
+			a {
+				// override default black print style.
+				color: #999 !important; /* stylelint-disable-line declaration-no-important */
+			}
+		}
+	}
+
+	// Last updated as primary info.
+	#footer-info-lastmod {
+		color: @pureBlack;
+		font-size: 12pt;
+		font-weight: bold;
+	}
+}

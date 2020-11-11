@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fulup",
+			"Gwendal",
+			"Gwenn-Ael",
+			"Y-M D"
+		]
+	},
+	"titleblacklist-desc": "a ro tro d'ar verourien da verzañ krouiñ pajennoù ha kontoù implijerien hervez [[MediaWiki:Titleblacklist|listenn zu]] hag ur [[MediaWiki:Titlewhitelist|listenn wenn]]",
+	"titleblacklist": "# Roll du an titloù eo. Ne c'hell ket bezañ krouet an titloù pe implijerien hag a glot gant un dro-lavar rasional.\n# Implijit \"#\" evit an evezhiadennoù. \n# N'eo ket kizigig ar monedoù d'an distruj dre ziouer.",
+	"titlewhitelist": "# Roll gwenn an titloù eo. Implijit \"#\" evit an evezhiadennoù.\n# N'eo ket kizigig ar monedoù d'an distruj dre ziouer.",
+	"titleblacklist-forbidden-edit": "Difennet eo krouiñ an anv \"$2\".\nEr roll du e klot gant ar kasadenn da heul : <code>$1</code>",
+	"titleblacklist-forbidden-move": "Ne c'hell ket bezañ fiñvet \"$2\" davet \"$3\", peogwir eo bet nac'het.\nKlotañ a ran gant kasadenn da heul ar roll du : <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Skarzhet eo bet an anv restr \"$2\".\nKlotañ a ran gant kasadenn da heul ar roll du : <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Skarzhet eo bet an anv implijer \"$2\".\nKlotañ a ran gant kasadenn da heul ar roll du : <code>$1</code>",
+	"titleblacklist-invalid": "Direizh eo al {{PLURAL:$1|linenn|linennoù}} da-heul a gaver war roll du an titloù; \nreizhit {{PLURAL:$1|anezhi|anezho}} a-raok enrollañ :",
+	"titleblacklist-override": "Ober van eus al listenn zu",
+	"right-tboverride": "Na ober van ouzh roll du an titloù",
+	"right-tboverride-account": "Na ober van ouzh roll du an anvioù implijer"
+}

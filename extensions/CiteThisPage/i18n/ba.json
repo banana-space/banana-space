@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Assele",
+			"Haqmar",
+			"Sagan"
+		]
+	},
+	"citethispage": "Өҙөмтәләү",
+	"citethispage-desc": "[[Special:Cite|Өҙөмтә яһау]] ярҙамсы битен һәм ҡоралдарҙа һылтанма өҫтәй",
+	"citethispage-link": "Биттән өҙөмтә яһарға",
+	"tooltip-citethispage": "Был битте нисек өҙөмтәләргә кәрәклеге тураһында мәғлүмәт",
+	"citethispage-change-submit": "Өҙөмтәләргә",
+	"citethispage-change-target": "Бит:"
+}

@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bishnu Saikia",
+			"Gitartha.bordoloi",
+			"Dibya Dutta"
+		]
+	},
+	"gadgets-desc": "সদস্যসকলক তেওঁলোকৰ [[Special:Preferences#mw-prefsection-gadgets|পছন্দসমূহত]] কাষ্ট'ম [[Special:Gadgets|CSS আৰু JavaScript গেজেট]] বাছনি কৰাৰ সুযোগ দিয়ে",
+	"prefs-gadgets": "গেজেট",
+	"gadgets-prefstext": "আপুনি এই একাউণ্টত সক্ৰিয় কৰিব পৰা বিশেষ গেজেটসমূহৰ তালিকা তলত দিয়া হ'ল।\nএই গেজেটসমূহৰ বেছিভাগ জাভাস্ক্ৰিপ্ট ভিত্তিক, গতিকে সেইবোৰে কাম কৰিবলৈ আপোনাৰ ব্ৰাউজাৰৰ জাভাস্ক্ৰিপ্ট সক্ৰিয় হৈ থাকিব লাগিব।\nমন কৰক যে এই পছন্দ পৃষ্ঠাত গেজেটসমূহে কোনো প্ৰভাৱ নেপেলায়।\n\nলগতে মন কৰক যে এই বিশেষ গেজেটসমূহ মিডিয়াৱিকি ছফ্টৱেৰৰ অংশ নহয়, আৰু সাধাৰণতে এইবোৰ আপোনাৰ স্থানীয় ৱিকিত সদস্যসকলে বিকাশ আৰু চোৱাচিতা কৰে।\nস্থানীয় প্ৰশাসকসকলে উপলব্ধ গেজেটসমূহৰ [[MediaWiki:Gadgets-definition|সংজ্ঞা]] আৰু [[Special:Gadgets|বিৱৰণ]] সম্পাদনা কৰিব পাৰে।",
+	"gadgets": "গেজেটসমূহ",
+	"gadgetusage": "গেজেট ব্যৱহাৰৰ পৰিসংখ্যা",
+	"gadgetusage-gadget": "গেজেট",
+	"gadgetusage-usercount": "সদস্যৰ সংখ্যা",
+	"gadgetusage-noresults": "কোনো গেজেট বিচাৰি পোৱা নহ'ল।",
+	"gadgetusage-activeusers": "সক্ৰিয় ব্যৱহাৰকাৰী",
+	"gadgetusage-default": "পুনঃনিৰ্ধাৰিত",
+	"gadgets-title": "গেজেটসমূহ",
+	"gadgets-pagetext": "সদস্যসকলে তেওঁলোকৰ [[Special:Preferences#mw-prefsection-gadgets|পছন্দ পৃষ্ঠাত]] সক্ৰিয় কৰিব পৰা আৰু [[MediaWiki:Gadgets-definition|সংজ্ঞা থকা]] বিশেষ গেজেটসমূহৰ তালিকা তলত দিয়া হৈছে।\nএই সাৰাংশই প্ৰতিটো গেজেটৰ বিৱৰণ আৰু সংকেত থকা প্ৰণালী বাৰ্তাসমূহলৈ প্ৰৱেশাধিকাৰ দিয়ে।",
+	"gadgets-uses": "ব্যৱহাৰ",
+	"gadgets-required-rights": "তলৰ {{PLURAL:$2|অধিকাৰৰ|অধিকাৰসমূহৰ}} প্ৰয়োজন:\n$1",
+	"gadgets-required-skins": "{{PLURAL:$2|$1 আৱৰণত|এই আৱৰণসমূহত: $1}} উপলব্ধ।",
+	"gadgets-default": "ডিফল্ট অনুযায়ী সকলোৰে বাবে সক্ৰিয়।",
+	"gadgets-export": "ৰপ্তানি কৰক",
+	"gadgets-export-title": "গেজেট ৰপ্তানি",
+	"gadgets-not-found": "\"$1\" গেজেট পোৱা নগ'ল।",
+	"gadgets-export-text": "$1 গেজেটটো ৰপ্তানি কৰিবলৈ \"{{int:gadgets-export-download}}\" বুটামটোত ক্লিক কৰক, ডাউনল'ড ফাইলটো সাঁচি ৰাখক,\nগন্তব্য ৱিকিৰ Special:Importলৈ যাওক আৰু ইয়াক আপল'ড কৰক। তাৰপিছত তলৰ কথাখিনি MediaWiki:Gadgets-definition পৃষ্ঠাত যোগ দিয়ক:\n<pre>$2</pre>\nগন্তব্য ৱিকিত আপোনাৰ যথাযথ অনুমতি থাকিব লাগিব (প্ৰণালী বাৰ্তা সম্পাদনা কৰাৰ অনুমতিসহ) আৰু ফাইলা আপল'ডৰ পৰা আমদানি সক্ৰিয় থাকিব লাগিব।",
+	"gadgets-export-download": "ডাউনল’ড"
+}

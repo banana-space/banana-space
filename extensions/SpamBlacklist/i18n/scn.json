@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Santu",
+			"Pippinu",
+			"Sarvaturi"
+		]
+	},
+	"spam-blacklist": " # Li URL fora dû sito ca currispùnnunu a la lista di sècutu vènunu bluccati.\n # La lista vali sulu pi stu situ; fari rifirimentu macari a la blacklist glubbali.\n # Pâ ducumentazzioni talìa https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- nun mudificari pi nenti chista riga --> <pre>\n# La sintassi è  chista:\n#  * Tuttu chiddu ca veni doppu nu caràttiri \"#\" è nu cummentu, nzinu ca finisci la riga\n#  * Tutti li righi non vacanti sunnu frammenti di sprissioni riulari ca s'àpplicanu sulu ô nomu di l'host nti li URL\n #</pre> <!-- non mudificari nenti di sta riga -->",
+	"spam-whitelist": " #<!-- non mudificari nta nudda manera sta riga --> <pre>\n# Li URL fora ô situ ca currispùnninu a la lista ccà di sècutu *non* vèninu\n# bluccati, macari ntô casu avìssiru a currispùnniri a arcuni vuci di la blacklist\n#\n# La sintassi è chista:\n#  * Tuttu chiddu ca veni doppu un caràttiri \"#\" è nu cummentu, nzinu a la fini dâ riga\n#  * Tutti li righi non vacanti sunnu frammenti di sprissioni riulari ca s'applìcanu sulu  ô nomu di l'host ntê URL\n\n #</pre> <!-- non mudificari nta nudda manera sta riga -->",
+	"spam-invalid-lines": "{{PLURAL:$1|La riga di sècutu|Li righi di sècutu}} di la blacklist dô spam {{PLURAL:$1|nun è na sprissioni riulari boni|nun sunnu sprissioni riulari boni}}; currèggiri {{PLURAL:$1|lu sbagghiu|li sbagghi}} prima di sarvari la pàggina.",
+	"spam-blacklist-desc": "Strummentu anti-spam basatu supra ê sprissioni riulari chi cunzenti di mèttiri ntâ lista nìura l'URL nta pàggini e nnirizzi di posta elittrònica di l'utenti riggistrati"
+}

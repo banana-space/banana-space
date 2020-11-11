@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"skinname-monobook": "MonoBook",
+	"monobook-desc": "'U skin classeche de MediaUicchi da 'u 2004, nnomenate apprisse 'a fote vianghe e gnore de 'nu libbre jndr'à pàgene de sfonde",
+	"monobook.css": "/* 'U CSS ca se iacchie aqquà 'u 'ndrucane le utinde d'a masckere Monobook */",
+	"monobook.js": "/* Ogne JavaScript aqquà avène carecate pe le utinde ca ausane 'a masckere MonoBook */"
+}

@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Helix84",
+			"Teslaton",
+			"TomášPolonec"
+		]
+	},
+	"fancycaptcha-addurl": "Vaša úprava obsahuje nové URL odkazy; kvôli ochrane proti automatizovanému spamu je potrebné napísať slová zobrazené na tomto obrázku: <br />([[Special:Captcha/help|Čo je toto?]])",
+	"fancycaptcha-badlogin": "Ako ochranu proti automatizovanému lámaniu hesiel, prosím zadajte slová z nasledujúceho obrázka do poľa pre odpoveď ([[Special:Captcha/help|viac informácií]]):",
+	"fancycaptcha-captcha": "Bezpečnostná kontrola",
+	"fancycaptcha-accountcreate": "Kvôli ochrane proti automatizovanému spamu je potrebné napísať slová zobrazené na tomto obrázku, až potom bude vytvorený nový účet: <br />([[Special:Captcha/help|Čo je toto?]])",
+	"fancycaptcha-create": "Vaša úprava obsahuje nové URL odkazy; kvôli ochrane proti automatizovanému spamu je potrebné napísať slová zobrazené na tomto obrázku: <br />([[Special:Captcha/help|Čo je toto?]])",
+	"fancycaptcha-edit": "Vaša úprava obsahuje nové URL odkazy; kvôli ochrane proti automatizovanému spamu je potrebné napísať slová zobrazené na tomto obrázku: <br />([[Special:Captcha/help|Čo je toto?]])",
+	"fancycaptcha-imgcaptcha-ph": "Zadajte text, ktorý vidíte na obrázku",
+	"fancycaptcha-sendemail": "Ako ochranu proti automatizovanému spamu, prosím zadajte slová z nasledujúceho obrázka do poľa pre odpoveď ([[Special:Captcha/help|ďalšie informácie]]):",
+	"fancycaptcha-reload-text": "Vygenerovať nový kód"
+}

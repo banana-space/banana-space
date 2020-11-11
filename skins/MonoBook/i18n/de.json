@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Geitost",
+			"Metalhead64",
+			"Kghbln"
+		]
+	},
+	"skinname-monobook": "MonoBook",
+	"monobook-desc": "Stellt eine klassische Benutzeroberfläche bereit",
+	"monobook.css": "/* Das folgende CSS wird für Benutzer der Benutzeroberfläche MonoBook geladen */",
+	"monobook.js": "/* Das folgende JavaScript wird für Benutzer der Benutzeroberfläche MonoBook geladen. */"
+}

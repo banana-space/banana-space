@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Matthias",
+			"Ooswesthoesbes"
+		]
+	},
+	"fancycaptcha-addurl": "Uw bewerking bevat nieuwe externe links. Voer de woorden die\nhieronder verschijnen in het invoerveld in als bescherming tegen automatische spam ([[Special:Captcha/help|meer informatie]]):",
+	"fancycaptcha-badlogin": "Voer de woorden die hieronder verschijnen in het invoerveld in als bescherming tegen het automatisch kraken van wachtwoorden ([[Special:Captcha/help|meer informatie]]):",
+	"fancycaptcha-captcha": "Veiligheidscontrole",
+	"fancycaptcha-accountcreate": "Voer de woorden die hieronder verschijnen in het invoerveld in\nter bescherming tegen het automatisch aanmaken van gebruikers ([[Special:Captcha/help|meer informatie]]):",
+	"fancycaptcha-create": "Uw bewerking bevat nieuwe externe links. Voer de woorden die\nhieronder verschijnen in het invoerveld in als bescherming tegen automatische spam ([[Special:Captcha/help|meer informatie]]):",
+	"fancycaptcha-edit": "Uw bewerking bevat nieuwe externe links. Voer de woorden die\nhieronder verschijnen in het invoerveld in als bescherming tegen automatische spam ([[Special:Captcha/help|mie informatie]]):",
+	"fancycaptcha-imgcaptcha-ph": "Veur de teks in die se op 't plaetje zuus",
+	"fancycaptcha-sendemail": "Veur de weurd die hie onger versjienen in 't inveurvèldj in es besjerming taege geautometiseerde spam ([[Special:Captcha/help|mier info]]):",
+	"fancycaptcha-reload-text": "Vernuuj"
+}

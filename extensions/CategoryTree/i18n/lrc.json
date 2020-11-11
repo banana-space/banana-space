@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bonevarluri",
+			"Mogoeilor"
+		]
+	},
+	"categorytree": "دار دسه",
+	"categorytree-portlet": "دسه یا",
+	"categorytree-legend": "دار دسه نه نشو بیئه",
+	"categorytree-desc": "وه شلک جمشدار [[ویجه:دار دسه|ساختار دسه]] ناوجوری بک",
+	"categorytree-header": "یه گل نوم دسه سی دیئن چیا مئن وه شکل یه سازه داری وارد بکید.\nبنیسید که که یه تاوع جاوا اسکریپت پیشکرده که چی آجاکس اشناخته با میها.\nار جاگردتو فره قدیمیه،یا جاوا اسکریپت فعال نئ،وه کار نمی که.",
+	"categorytree-category": "دسه:",
+	"categorytree-go": "وه شلك دار نشون بيه",
+	"categorytree-parents": "ریشه",
+	"categorytree-mode-label": "مد:",
+	"categorytree-mode-categories": "فقط دسه یا",
+	"categorytree-mode-pages": "بلگیا وه جؤز فایلیا",
+	"categorytree-mode-all": "همه بلگيا",
+	"categorytree-collapse": "جم كردن",
+	"categorytree-expand": "گٱپ کلون کردن",
+	"categorytree-member-counts": "وه د ور گرته {{PLURAL:$1|1 زیردسه|$1 زیردسه یا}}, {{PLURAL:$2|1 بلگه|$2 بلگه}}, و {{PLURAL:$3|1 جانیا|$3 جانیایا}} ئه",
+	"categorytree-num-categories": "$1 س",
+	"categorytree-num-pages": " $1 پ",
+	"categorytree-num-files": " $1 ف",
+	"categorytree-num-empty": "حالی",
+	"categorytree-load": "سوۋار كرد",
+	"categorytree-loading": "د حالت سوار كرد",
+	"categorytree-nothing-found": "هيچی پيدا نبی",
+	"categorytree-no-subcategories": "بی زيردسه يا",
+	"categorytree-no-parent-categories": "نه دسه یا ایسنی",
+	"categorytree-no-pages": "نه بلگه ای نه زیر دسه ای",
+	"categorytree-not-found": "دسه <i>$1</i> دیاری نکرد",
+	"categorytree-error": "مشگل د سواركرد داديا",
+	"categorytree-retry": "لطفا يه دم صبر بكيد و هنی تلاش بكيد"
+}

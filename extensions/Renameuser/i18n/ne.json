@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"NehalDaveND",
+			"बिप्लब आनन्द"
+		]
+	},
+	"renameuser": "प्रयोगकर्ता पुनर्नामाकरण",
+	"renameuser-linkoncontribs": "प्रयोगकर्ता पुनर्नामाकरण",
+	"renameuser-linkoncontribs-text": "यो प्रयोगकर्ता पुनर्नामाकरण गर्ने",
+	"renameuser-desc": "प्रयोगकर्ता पुनर्नामाकरण गर्न एउटा [[Special:RenameUser|विशेष पृष्ठ]] जोड्ने (''पुनर्नामाकरण'' अधिकार हुनु जरुरी)",
+	"renameuserold": "अहिलेको प्रयोगकर्ता नाम:",
+	"renameusernew": "नयाँ प्रयोगकर्ता नाम:",
+	"renameuserreason": "कारण:",
+	"renameuserwarnings": "चेतावनीहरू:",
+	"renameusersubmit": "बुझाउने",
+	"renameuser-page-exists": "$1 पृष्ठ पहिले देखि नै रहेको छ र स्वत: अधिलेखन गर्न सकिएन ।",
+	"renameuser-page-moved": " $1 पृष्ठलाई $2 मा सारियो ।",
+	"renameuser-page-unmoved": "$1 पृष्ठलाई $2 मा सार्न सकिएन ।"
+}

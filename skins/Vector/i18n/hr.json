@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ex13",
+			"Tivek",
+			"Bugoslav"
+		]
+	},
+	"vector-skin-desc": "Osuvremenjena inačica MonoBooka s obnovljenim dizajnom i mnogim poboljšanjima u upotrebljivosti",
+	"vector-action-addsection": "Dodaj temu",
+	"vector-action-delete": "Izbriši",
+	"vector-action-move": "Premjesti",
+	"vector-action-protect": "Zaštiti",
+	"vector-action-undelete": "Vrati",
+	"vector-action-unprotect": "Promijeni zaštitu",
+	"vector-view-create": "Započni",
+	"vector-view-edit": "Uredi",
+	"vector-view-history": "Vidi povijest",
+	"vector-view-view": "Čitaj",
+	"vector-view-viewsource": "Vidi izvor",
+	"vector-more-actions": "Više"
+}

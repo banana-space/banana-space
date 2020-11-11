@@ -1,0 +1,6 @@
+{
+	"@metadata": [],
+	"spam-blacklist": " # Osı tizimge säýkes sırtqı URL jaýlar betke üstewden buğattaladı.\n # Bul tizim tek mındağı wïkïge äser etedi; tağı da ğalamdıq qara tizimdi qarap şığıñız.\n # Qujattama üşin https://www.mediawiki.org/wiki/Extension:SpamBlacklist betin qarañız\n #<!-- bul joldı bolğan jağdaýımen qaldırıñız --> <pre>\n#\n# Sïntaksïsi kelesideý:\n#  * «#» nışanınan bastap jol ayağına deýingileriniñ bükili mändeme dep sanaladı\n#  * Bos emes är jol tek URL jaýlardıñ işindegi xosttarğa säýkes jüýeli aýtılımdıñ (regex) böligi dep sanaladı\n\n #</pre> <!-- bul joldı bolğan jağdaýımen qaldırıñız -->",
+	"spam-whitelist": " #<!-- bul joldı bolğan jağdaýımen qaldırıñız --> <pre>\n# Osı tizimge säýkes sırtqı URL jaýlar *buğattalmaýdı*,\n# (qara tizimdegi jazbamen buğattalğan bolsa da).\n#\n# Sïntaksïsi kelesideý:\n#  * «#» nışanınan bastap jol ayağına deýingileriniñ bükili mändeme dep sanaladı\n#  * Bos emes är jol tek URL jaýlardıñ işindegi xosttarğa säýkes jüýeli aýtılımdıñ (regex) böligi dep sanaladı\n\n #</pre> <!-- bul joldı bolğan jağdaýımen qaldırıñız -->",
+	"spam-invalid-lines": "Spam qara tizimindegi kelesi {{PLURAL:$1|jolda|joldarda}} jaramsız jüýeli {{PLURAL:$1|aýtılım|aýtılımdar}} bar, jäne betti saqtawdıñ {{PLURAL:$1|bunı|bulardı}}  durıstaw kerek."
+}

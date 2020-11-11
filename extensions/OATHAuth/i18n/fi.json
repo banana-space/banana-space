@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mikahama",
+			"Stryn",
+			"Pxos",
+			"Nike"
+		]
+	},
+	"specialpages-group-oath": "Kaksivaiheinen tunnistautuminen",
+	"oathauth-account": "Tilin nimi:",
+	"oathauth-secret": "Kaksivaiheisen tunnistautumisen salausavain:",
+	"oathauth-enable": "Ota käyttöön kaksivaiheinen tunnistautuminen",
+	"oathauth-token": "Avain",
+	"oathauth-disable": "Poista käytöstä kaksivaiheinen tunnistautuminen",
+	"oathauth-prefs-label": "Kaksivaiheinen tunnistautuminen:",
+	"oathauth-step1": "Vaihe 1: Lataa kaksivaiheisen tunnistautumisen sovellus",
+	"oathauth-step2": "Vaihe 2: Skannaa QR-koodi",
+	"oathauth-step2alt": "Tai syötä salainen tunnus käsin:",
+	"oathauth-step4": "Vaihe 4: Vahvistus",
+	"right-oathauth-enable": "Ottaa käyttöön kaksivaiheinen tunnistautuminen",
+	"action-oathauth-enable": "ottaa käyttöön kaksivaiheista tunnistautumista",
+	"oathauth-auth-token-label": "Avain",
+	"oathauth-auth-ui": "Syötä vahvistuskoodi tunnistautumislaitteestasi",
+	"action-oathauth-api-all": "tarkistaa OATH-tilaa"
+}

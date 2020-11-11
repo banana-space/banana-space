@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mormegil",
+			"Urbanecm",
+			"Dvorapa",
+			"Martin Urbanec",
+			"Matěj Suchánek"
+		]
+	},
+	"oathauth-desc": "Poskytuje podporu pro autentizaci pomocí jednorázových hesel založených na HMAC",
+	"specialpages-group-oath": "Dvoufaktorová autentizace",
+	"oathauth-account": "Název účtu:",
+	"oathauth-secret": "Tajný klíč pro dvoufaktorovou autentizaci:",
+	"oathauth-enable": "Zapnutí dvoufaktorové autentizace",
+	"oathauth-scratchtokens": "Následující seznam obsahuje jednorázové provizorní kódy. Tyto kódy lze použít pouze jednou a slouží pro případ nouze. Opište si je a uchovávejte je na bezpečném místě. Pokud ztratíte svůj telefon, budou tyto kódy jediným způsobem, jak zachránit váš účet. '''Tyto kódy se již nikdy znovu nezobrazí'''.",
+	"oathauth-token": "Kód",
+	"oathauth-disable": "Vypnutí dvoufaktorové autentizace",
+	"oathauth-validatedoath": "Dvoufaktorové přihlášení ověřeno. Odteď bude vynucována dvoufaktorová autentizace.",
+	"oathauth-failedtovalidateoath": "Nepodařilo se ověřit dvoufaktorové přihlášení.",
+	"oathauth-disabledoath": "Dvoufaktorová autentizace vypnuta.",
+	"oathauth-prefs-label": "Dvoufaktorová autentizace:",
+	"oathauth-step1": "Krok 1: Stáhněte si program pro dvoufaktorovou autentizaci",
+	"oathauth-step1-test": "Stáhněte si program nebo mobilní aplikaci (jako je třeba Google Authenticator) pro dvoufaktorovou autentizaci",
+	"oathauth-step2": "Krok 2: Naskenujte QR kód",
+	"oathauth-step2alt": "Nebo tajemství zadejte ručně:",
+	"oathauth-step3": "Krok 3: Zapište si jednorázové kódy",
+	"oathauth-step4": "Krok 4: Ověření",
+	"oathauth-entertoken": "Pro ověření zadejte kód z vašeho autentizačního zařízení:",
+	"right-oathauth-enable": "Zapnutí dvoufaktorové autentizace",
+	"action-oathauth-enable": "zapnout dvoufaktorovou autentizaci",
+	"oathauth-auth-token-label": "Kód",
+	"oathauth-auth-token-help": "Jednorázové heslo používané jako druhý faktor dvoufaktorové autentizace.",
+	"oathauth-auth-ui": "Zadejte prosím ověřovací kód ze svého autentizačního zařízení",
+	"oathauth-throttled": "Příliš mnoho pokusů o ověření! Počkejte prosím $1.",
+	"oathauth-login-failed": "Ověření se nezdařilo.",
+	"oathauth-describe-provider": "Dvoufaktorová autentizace (OATH).",
+	"grant-group-authentication": "Provádění autentizačních akcí pro sebe či ostatní",
+	"grant-oath": "Přístup k informacím o dvoufaktorové autentizaci (OATH) u sebe a ostatních",
+	"right-oathauth-api-all": "Zjišťování a ověřování informací týkajících se OATH u sebe a ostatních"
+}

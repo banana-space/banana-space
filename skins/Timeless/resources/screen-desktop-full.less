@@ -1,0 +1,20 @@
+@import 'variables.less';
+
+#mw-site-navigation {
+	.column-left();
+}
+
+#mw-content {
+	margin-left: @column-left-size;
+	margin-right: @column-right-size;
+	overflow: auto;
+}
+
+#mw-related-navigation {
+	.column-right();
+}
+
+// Redundant content category list
+#catlinks {
+	display: none;
+}

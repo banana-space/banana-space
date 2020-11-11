@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Matthias",
+			"Ooswesthoesbes"
+		]
+	},
+	"spam-blacklist": " # Externe URL's die voldoen aan deze lijst waere geweigerd bie 't\n # toevoege aan 'n pagina. Deze lijst haet allein invloed op deze wiki.\n # Er bestaot ouk 'n globale zwarte lijst.\n # Documentatie: https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- laot deze lien --> <pre>\n#\n# De syntax is as volg:\n#  * Alles vanaaf 't karakter \"#\" tot 't einde van de regel is opmerking\n#  * Iedere niet-lege regel is 'n fragment van 'n reguliere oetdrukking die\n#    alleen van toepassing is op hosts binne URL's.\n\n #</pre> <!-- laot deze lien -->",
+	"spam-whitelist": " #<!-- laot deze lien --> <pre>\n# Externe URL's die voldoen aan deze lijst, waere *nooit* geweigerd, al\n# zoude ze geblokkeerd motte waere door regels oet de zwarte lijst.\n#\n# De syntaxis is es volg:\n#  * Alles vanaaf 't karakter \"#\" tot 't einde van de regel is opmerking\n#  * Iddere neet-lege regel is 'n fragment van 'n reguliere oetdrukking die\n#    allein van toepassing is op hosts binne URL's.\n\n #</pre> <!-- laot deze lien -->",
+	"email-blacklist": " # E-mailadresse die voldoon aan dees lies waere geblokkeerd bie 't registrere of 't versjikke van e-mails.\n # Dees lis haet allein invlood op deze wiki. d'r Besteit ouch 'n wikiwiej zwarte lies.\n # Documentatie: https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- laot dees lien wie zie is --> <pre>\n#\n# De syntax is es volg:\n#   * Alles vanaaf 't karakter \"#\" toet 't ènj vanne regel is 'n opmèrking\n#   * Edere neet-laege regel is e fragment van 'n regulier oetdrökking die\n#     allein van toepassing is op óngerbringers binne e-mailadresse.\n\n #</pre> <!-- laot dees lien wie zie is -->",
+	"email-whitelist": " #<!-- laot dees lien wie zie is --> <pre>\n# E-mailadresse die voldoon aan dees lies, waere *noeatj* geweigerd, al\n# zówwe ze geblokkeerd mótte waere door regels oete zwarte lies.\n#\n# De syntaxis is es volg:\n#   * Alles vanaaf 't karakter \"#\" toet 't ènj vanne regel is opmèrking\n#   * Edere neet-laege regel is e fragment van 'n regulier oetdrökking die\n#     allein van toepassing is op óngerbringers binne e-mailadresse.\n\n #</pre> <!-- laot dees lien wie zie is -->",
+	"spam-blacklisted-email": "E-mailadres oppe zwarte lies",
+	"spam-blacklisted-email-text": "Dien e-mailadres steit momenteel oppe zwarte lies wodoor se gein e-mails nao anger gebroekers kins versjikke.",
+	"spam-blacklisted-email-signup": "'t Opgegaeve e-mailadres steit momenteel oppe zwarte lies.",
+	"spam-invalid-lines": "De volgende {{PLURAL:$1|regel|regel}} van de zwarte lies {{PLURAL:$1|is 'n|zeen}} onzjuuste reguliere {{PLURAL:$1|oetdrukking|oetdrukkinge}}  en {{PLURAL:$1|mót|mótte}} verbaeterd waere alveures de pazjena kin waere opgeslage:",
+	"spam-blacklist-desc": "Antispamfunctionaliteit via reguliere expressies: [[MediaWiki:Spam-blacklist]] en [[MediaWiki:Spam-whitelist]]"
+}

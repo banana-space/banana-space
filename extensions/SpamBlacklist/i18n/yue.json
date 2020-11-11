@@ -1,0 +1,7 @@
+{
+	"@metadata": [],
+	"spam-blacklist": " # 同呢個表合符嘅外部 URL 當加入嗰陣會被封鎖。\n # 呢個表只係會影響到呢個wiki；請同時參閱全域黑名單。\n # 要睇註解請睇 https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- 請完全噉留番呢行 --> <pre>\n#\n# 語法好似下面噉:\n#   * 每一個由 \"#\" 字元開頭嘅行，到最尾係一個註解\n#   * 每個非空白行係一個標準表示式碎片，只係會同入面嘅URL端核對\n\n #</pre> <!-- 請完全噉留番呢行 -->",
+	"spam-whitelist": " #<!-- 請完全噉留番呢行 --> <pre>\n# 同呢個表合符嘅外部 URL ，即使響黑名單項目度封鎖，\n# 都*唔會*被封鎖。\n#\n# 語法好似下面噉:\n#   * 每一個由 \"#\" 字元開頭嘅行，到最尾係一個註解\n#   * 每個非空白行係一個標準表示式碎片，只係會同入面嘅URL端核對\n\n #</pre> <!-- 請完全噉留番呢行 -->",
+	"spam-invalid-lines": "下面響灌水黑名單嘅{{PLURAL:$1|一行|多行}}有無效嘅表示式，請響保存呢版之前先將{{PLURAL:$1|佢|佢哋}}修正:",
+	"spam-blacklist-desc": "以正規表達式為本嘅防灌水工具: [[MediaWiki:Spam-blacklist]] 同 [[MediaWiki:Spam-whitelist]]"
+}

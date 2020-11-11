@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"William Surya Permana",
+			"Ahdan"
+		]
+	},
+	"multimediaviewer-desc": "Membentangkan gambar mini dalam ukuran yang lebih desar di dalam 'kotak tipis'",
+	"multimediaviewer-pref": "Penampil Media",
+	"multimediaviewer-pref-desc": "Tingkatkan pengalaman penampilan multimedia Anda dengan alat baru ini. Penampil Media menampilkan gambar dalam ukuran yang lebih besar pada halaman yang memiliki gambar mini. Gambar ditampilkan dalam 'kotak tipis' melayang yang lebih indah, dan dapat juga ditampilkan dalam ukuran penuh.",
+	"multimediaviewer-file-page": "Pergi ke halaman berkas terkait",
+	"multimediaviewer-repository-local": "Rincian lebih lanjut",
+	"multimediaviewer-datetime-created": "Dibuat pada $1",
+	"multimediaviewer-datetime-uploaded": "Diunggah pada $1",
+	"multimediaviewer-license-cc-pd": "Domain Umum",
+	"multimediaviewer-license-default": "Lihat lisensi",
+	"multimediaviewer-about-mmv": "Tentang Penampil Media",
+	"multimediaviewer-discuss-mmv": "Tinggalkan umpan balik",
+	"multimediaviewer-reuse-link": "Bagikan atau sematkan berkas ini",
+	"multimediaviewer-download-link": "Unduh file ini",
+	"multimediaviewer-view-expanded": "Buka di Media Viewer"
+}

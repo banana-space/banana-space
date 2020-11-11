@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Siebrand",
+			"Sjoerddebruin"
+		]
+	},
+	"skinname-monobook": "Monobook",
+	"monobook-desc": "De klassieke MediaWiki-vormgeving sinds 2004, genoemd naar de zwart-witfoto van een boek op de achtergrond van de pagina",
+	"monobook.css": "/* CSS die hier wordt geplaatst heeft alleen invloed op het uiterlijk Monobook */",
+	"monobook.js": "/* JavaScript die hier wordt geplaatst heeft alleen invloed op gebruikers die het uiterlijk Monobook gebruiken */"
+}

@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mark85296341",
+			"Shinjiman",
+			"Cwlin0416",
+			"Liuxinyu970226"
+		]
+	},
+	"syntaxhighlight-desc": "使用 [http://pygments.org/ Pygments - Python syntax highlighter] 提供可強調語法顯示的 <code>&lt;syntaxhighlight&gt;</code> 標籤。",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "程式碼",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "語言",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(無)",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "顯示行號",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "程式碼區塊",
+	"syntaxhighlight-error-unknown-language": "不明語言 \"$1\"",
+	"syntaxhighlight-error-exceeds-size-limit": "程式碼大小 $1 {{PLURAL:$1|位元組}} 已超出允許的上限值 $2 {{PLURAL:$2|位元組}}"
+}

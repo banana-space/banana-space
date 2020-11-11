@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Erdemaslancan",
+			"Mirzali",
+			"Marmase"
+		]
+	},
+	"interwiki-title-norights": "Melumatê interwikiya bıvin",
+	"interwiki_prefix": "Verole",
+	"interwiki-prefix-label": "Verole:",
+	"interwiki_local": "Raver",
+	"interwiki_trans": "Temase fi",
+	"interwiki-trans-label": "Temase fi",
+	"interwiki_1": "eya",
+	"interwiki_0": "nê",
+	"interwiki_edit": "Bıvurne",
+	"interwiki_reasonfield": "Sebeb:",
+	"interwiki_delquestion": "\"$1\" besterneyêna",
+	"interwiki_addbutton": "Cı ke",
+	"log-name-interwiki": "Qeydê tabloyê interwiki",
+	"right-interwiki": "Daneyanê interwiki bıvurne"
+}

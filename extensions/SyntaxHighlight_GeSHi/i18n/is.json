@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Snævar"
+		]
+	},
+	"syntaxhighlight-error-category-desc": "Villa átti sér stað við yfirstrikun kóða sem er innifalinn á síðunni.",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Kóði",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Tungumál",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(ekkert)",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "Sýna línu númer",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "Kóða reitur",
+	"syntaxhighlight-error-pygments-invocation-failure": "Gat ekki kallað á Pygments",
+	"syntaxhighlight-error-unknown-language": "Óþekkt tungumál \"$1\"",
+	"syntaxhighlight-error-exceeds-size-limit": "Kóðinn er $1 {{PLURAL:$1|bæti}} sem er lengra en hámarslengdin, $2 {{PLURAL:$2|bæti}}, segir til um"
+}

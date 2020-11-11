@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Klutzy",
+			"Kwj2772",
+			"ToePeu",
+			"아라",
+			"Hym411",
+			"Revi",
+			"IRTC1015",
+			"Hwangjy9",
+			"Ykhwong"
+		]
+	},
+	"action-titleblacklistlog": "제목 블랙리스트 로그를 봅니다",
+	"log-name-titleblacklist": "제목 블랙리스트 기록",
+	"log-description-titleblacklist": "이 기록은 제목 블랙리스트 로그의 일치를 추적합니다.",
+	"logentry-titleblacklist-hit-username": "$1님이 제목 블랙리스트 $4 패턴과 일치하는 $3 계정을 만들려고 {{GENDER:$2|하였습니다}}.",
+	"titleblacklist-desc": "관리자가 [[MediaWiki:Titleblacklist]], [[MediaWiki:Titlewhitelist]]마다 문서와 사용자 계정을 만드는 것을 금지할 수 있습니다",
+	"titleblacklist": "# 제목 금지 목록입니다. 정규 표현식과 일치하는 제목이나 사용자 계정은 만들 수 없습니다.\n# 주석 내용에는 앞에 \"#\"을 붙여 주세요.\n# 기본적으로 규칙은 대소문자를 구별하지 않습니다",
+	"titlewhitelist": "# 제목 허용 목록입니다. 주석 내용에는 앞에 \"#\"을 붙여 주세요.\n# 기본적으로 규칙은 대소문자를 구별하지 않습니다",
+	"titleblacklist-forbidden-edit": "\"$2\" 문서는 만들기 금지 목록에 포함되어 있습니다.\n해당 만들기 금지 조건은 <code>$1</code>입니다.",
+	"titleblacklist-forbidden-move": "\"$2\" 문서를 \"$3\" 제목으로 이동할 수 없습니다. 문서 만들기 금지 조건이 걸려 있습니다.\n해당 금지 조건은 <code>$1</code>입니다.",
+	"titleblacklist-forbidden-upload": "\"$2\" 파일 이름을 만드는 것이 제한되어 있습니다.\n파일 이름이 다음의 규칙에 해당됩니다: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "\"$2\" 이름으로 계정을 만드는 것이 제한되어 있습니다.\n계정 이름이 다음의 규칙에 해당됩니다: <code>$1</code>",
+	"titleblacklist-invalid": "제목 블랙리스트의 다음 {{PLURAL:$1|줄}}에 잘못된 구문이 {{PLURAL:$1|있습니다}}.\n저장하기 전에 {{PLURAL:$1}}올바르게 수정해주세요:",
+	"titleblacklist-override": "블랙리스트를 무시",
+	"titleblacklist-warning": "<strong>경고: 이 문서는 제목 금지 목록의 다음 항목과 일치하기 때문에 관리자와 <code>tboverride</code> 권한을 가진 사용자만 편집할 수 있습니다.</strong><br /><code>$1</code>",
+	"right-tboverride": "문서 제목이나 사용자 이름 블랙리스트 무시",
+	"right-tboverride-account": "사용자 이름 블랙리스트를 무시",
+	"right-titleblacklistlog": "제목 블랙리스트 기록 보기",
+	"apihelp-titleblacklist-description": "TitleBlacklist에 대해 문서 제목, 파일 이름, 사용자 이름을 검사합니다.",
+	"apihelp-titleblacklist-summary": "TitleBlacklist에 대해 문서 제목, 파일 이름, 사용자 이름을 검사합니다.",
+	"apihelp-titleblacklist-param-title": "블랙리스트에 대해 검사할 문자열입니다.",
+	"apihelp-titleblacklist-param-action": "검사할 동작입니다.",
+	"apihelp-titleblacklist-param-nooverride": "titleblacklist의 무효화를 시도하지 않습니다.",
+	"apihelp-titleblacklist-example-1": "[[Foo]] 문서가 블랙리스트에 올라가 있는지 검사하기",
+	"apihelp-titleblacklist-example-2": "편집 시 [[Bar]] 문서가 블랙리스트에 올라가 있는지 검사하기"
+}

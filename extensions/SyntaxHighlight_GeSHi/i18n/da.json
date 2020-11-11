@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Christian List",
+			"Sarrus"
+		]
+	},
+	"syntaxhighlight-desc": "Giver syntaksfremhævning <code>&lt;syntaxhighlight&gt;</code> ved brug af [http://pygments.org/ GeSHi - Generic Syntax Highlighter]"
+}

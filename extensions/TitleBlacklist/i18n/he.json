@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"Guycn2",
+			"Rotem Liss",
+			"Rotemliss",
+			"Yona b",
+			"Danny-w"
+		]
+	},
+	"action-titleblacklistlog": "לצפות ביומן הרשימה השחורה של הכותרות",
+	"log-name-titleblacklist": "יומן הרשימה השחורה של הכותרות",
+	"log-description-titleblacklist": "האירועים האלה עוקבים אחרי התאמות לרשימה השחורה.",
+	"logentry-titleblacklist-hit-username": "$1 {{GENDER:$2|גרם|גרמה}} להתאמה ברשימה השחורה של הכותרות בעת ניסיון ליצור את החשבון $3 שמתאים לפריט הרשימה $4.",
+	"titleblacklist-desc": "אפשרות למפעילי המערכת לאסור יצירת דפים וחשבונות משתמש לפי [[MediaWiki:Titleblacklist|רשימה שחורה]] ו[[MediaWiki:Titlewhitelist|רשימה לבנה]]",
+	"titleblacklist": "# זוהי רשימת הכותרות האסורות. לא ניתן ליצור כותרות וחשבונות משתמש שמתאימים לביטוי רגולרי המופיע כאן.\n# השתמשו בסימן \"#\" להערות.\n#רשימה זו אינה תלויה ברישיות כברירת מחדל.",
+	"titlewhitelist": "# זוהי רשימת הכותרות המותרות. השתמשו בסימן \"#\" להערות.\n#רשימה זו אינה תלויה ברישיות כברירת מחדל.",
+	"titleblacklist-forbidden-edit": "הכותרת \"$2\" היא כותרת אסורה ליצירה.\nהיא מתאימה לערך הבא ברשימת הכותרות האסורות: <code>$1</code>",
+	"titleblacklist-forbidden-move": "לא ניתן להעביר את \"$2\" לשם \"$3\", כיוון שהכותרת \"$3\" אסורה ליצירה.\nהיא מתאימה לערך הבא ברשימה השחורה: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "שם הקובץ \"$2\" נאסר ליצירה.\nהוא מתאים לערך הבא ברשימה השחורה: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "שם המשתמש \"$2\" נאסר ליצירה.\nהוא מתאים לערך הבא ברשימה השחורה: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|השורה הבאה|השורות הבאות}} ברשימת הכותרות האסורות {{PLURAL:$1|אינה תקינה|אינם תקינים}};\nאנא תקנו {{PLURAL:$1|אותה|אותן}} לפני השמירה:",
+	"titleblacklist-override": "להתעלם מהרשימה השחורה",
+	"titleblacklist-override-help": "משתמשים עם הרשאות מתאימות יכולים לגרום להתעלמות של בדיקת הכותרות האסורות.",
+	"titleblacklist-warning": "<strong>לתשומת לבך:</strong> רק מפעילים ומשתמשים אחרים בעלי הרשאת <code>tboverride</code> יכולים לערוך את הדף הזה כי הוא מתאים לשורה הבאה ברשימה השחורה:<br /><code>$1</code>",
+	"right-tboverride": "עקיפת הרשימה השחורה של שמות המשתמשים והכותרות",
+	"right-tboverride-account": "עקיפת הרשימה השחורה של שמות המשתמשים",
+	"right-titleblacklistlog": "צפייה ביומן הרשימה השחורה של הכותרות",
+	"apihelp-titleblacklist-description": "בדיקת כותרת דף, שם קובץ או שם משתמש אל מול TitleBlacklist.",
+	"apihelp-titleblacklist-summary": "בדיקת תקינות של כותרת דף, שם קובץ, או שם משתמש אל מול TitleBlacklist.",
+	"apihelp-titleblacklist-param-title": "המחרוזת שצריך לבדוק אל מול הרשימה השחורה.",
+	"apihelp-titleblacklist-param-action": "הפעולה שצריך לבדוק.",
+	"apihelp-titleblacklist-param-nooverride": "לא לנסות לעקוף את הרשימה השחורה.",
+	"apihelp-titleblacklist-example-1": "לבדוק אם [[Foo]] ברשימה השחורה",
+	"apihelp-titleblacklist-example-2": "לבדוק עם [[Bar]] ברשימה השחורה לעריכה",
+	"apihelp-createaccount-param-ignoretitleblacklist": "להתעלם מבדיקות התחזות (דורש אחת מההרשאות הבאות: <code>tboverride</code>‏, <code>tboverride-account</code>)."
+}

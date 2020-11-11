@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="2 2 20 20">
+    <path id="journal" d="M19 4v17H7c-1 0-2-1-2-2V4h14zM7 18c0 1 1 1 1 1h8V6H7v12z"/>
+    <path id="text1" d="M14 9H9v2h5z"/>
+    <path id="text2" d="M14 12H9v2h5z"/>
+</svg>

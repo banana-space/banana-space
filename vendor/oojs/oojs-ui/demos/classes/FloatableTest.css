@@ -1,0 +1,22 @@
+.demo-floatableTest-floatable,
+.demo-floatableTest-container {
+	border: 1px solid #000;
+}
+
+.demo-floatableTest-floatable {
+	border: 1px solid #d33;
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	pointer-events: none;
+}
+
+.demo-floatableTest-container {
+	position: absolute;
+	text-align: center;
+}
+
+.demo-floatableTest-container .oo-ui-fieldsetLayout {
+	margin-top: 20%;
+	display: inline-block;
+}

@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ahonc",
+			"Andriykopanytsia",
+			"Base",
+			"Dim Grits",
+			"Ytsukeng Fyvaprol",
+			"Ата",
+			"Piramidion"
+		]
+	},
+	"fancycaptcha-desc": "Чудернацький CAPTCHA-генератор для підтвердження редагування",
+	"fancycaptcha-addurl": "Ваше редагування містить нові зовнішні посилання.\nІз метою захисту вікі від спаму просимо вас ввести у текстове поле слова, зображені на картинці ([[Special:Captcha/help|докладніше]]):",
+	"fancycaptcha-badlogin": "Із метою захисту вікі від автоматичного злому пароля, просимо вас ввести у текстове поле слова, зображені на картинці ([[Special:Captcha/help|докладніше]]):",
+	"fancycaptcha-captcha": "Перевірка безпеки",
+	"fancycaptcha-accountcreate": "Із метою захисту вікі від автоматичного створення облікових записів, просимо вас ввести у текстове поле слова, зображені на картинці ([[Special:Captcha/help|докладніше]]):",
+	"fancycaptcha-create": "Щоб створити сторінку, будь ласка, введіть у текстове поле слова, зображені на картинці: ([[Special:Captcha/help|докладніше]]):",
+	"fancycaptcha-edit": "Щоб редагувати цю сторінку, будь ласка, введіть у текстове поле слова, зображені на картинці: ([[Special:Captcha/help|докладніше]]):",
+	"fancycaptcha-imgcaptcha-ph": "Введіть текст, який Ви бачите на зображенні",
+	"fancycaptcha-sendemail": "Для захисту вікі від автоматичного спаму просимо вас ввести слова, які показані нижче в полі ([[Special:Captcha/help|more info]]):",
+	"fancycaptcha-reload-text": "Оновити",
+	"apihelp-fancycaptchareload-description": "Отримати нову FancyCaptcha.",
+	"apihelp-fancycaptchareload-summary": "Отримати нову FancyCaptcha.",
+	"apihelp-fancycaptchareload-example-1": "Отримати нову FancyCaptcha"
+}

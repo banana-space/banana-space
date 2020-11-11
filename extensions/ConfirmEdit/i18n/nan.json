@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Luuva"
+		]
+	},
+	"captcha-label": "CAPTCHA",
+	"captcha-createaccount": "Ūi beh ī-hông lâng iōng ke-si chū-tōng chù-chheh koh tah kóng-kò, chhiáⁿ lí kā chhut-hiān tī ang-á lāi-bīn ê jī phah 1 piàn (thang chèng-bêng lí m̄ sī ki-khì-lâng): <br />\n([[Special:Captcha/help|Che sī siáⁿ-hòe?]])",
+	"captcha-createaccount-fail": "Khak-jīn-bé chhò-gō· iah-sī làu-kau."
+}

@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"gadgets-desc": "Lasse scacchià a l'utinde le [[Special:Gadgets|gadget CSS e JavaScript]] personalizzate jndr'à le lore [[Special:Preferences#mw-prefsection-gadgets|preferenze]]",
+	"prefs-gadgets": "Gadget",
+	"gadgets-prefstext": "Sotte stè 'n'elenghe de gadget speciale ca tu abbilità sus a 'u cunde tune.\nSte riale sò assaije basate sus a JavaScript, accussì Javascript addà essere abbilitate jndr'à 'u browser tune pe le fà fatià.\nVide ca ste riale non ge tènene effette sus a sta pàgene de preferenze.\n\nPò vide pure ca ste gadget non ge sonde parte d'u softuee de MediaUicchi e sonde normalmende sviluppate e mandenute da l'utinde d'a Uicchipèdie locale tune.\nLe amministrature locale ponne cangià le gadget disponibbele ausanne le [[MediaWiki:Gadgets-definition|definiziune]] e le [[Special:Gadgets|descriziune]]. Le numere de le utinde pe ogne gadget sus a sta uicchi ste elengate sus a [[Special:GadgetUsage|Statisteche d'ause de le gadget]].",
+	"gadgets": "Gadget",
+	"gadgetusage": "Statisteche sus a l'ause d'u gadget",
+	"gadgetusage-gadget": "Gadget",
+	"gadgetusage-usercount": "Numere de utinde",
+	"gadgetusage-noresults": "Nisciuna gadget acchiate.",
+	"gadgetusage-activeusers": "Utinde attive",
+	"gadgetusage-default": "De base",
+	"gadgets-title": "Gadget",
+	"gadgets-pagetext": "Sotte stè 'n'elenghe de gadget speciale ca l'utinde ponne abbilità sus a lore [[Special:Preferences#mw-prefsection-gadgets|pàgene de le preferenze]], cumme definite da le [[MediaWiki:Gadgets-definition|definiziune]].\nStu riepileghe prevede 'nu facile facile accesse a le pàggene de le messagge d'u sisteme ca definiscene ogne descrizione e codece de le gadget.",
+	"gadgets-uses": "Ause",
+	"gadgets-required-rights": "Richiede {{PLURAL:$2|deritte|deritte}}:\n\n$1",
+	"gadgets-required-skins": "Disponibbele sus a {{PLURAL:$2|$1 'u skin|le seguende skin: $1}}.",
+	"gadgets-default": "Abbilete pe ogneune pe default.",
+	"gadgets-export": "Esporte",
+	"gadgets-export-title": "Esporte 'u gadget",
+	"gadgets-not-found": "Gadget \"$1\" none acchiate.",
+	"gadgets-export-text": "Pe esportà 'u $1 gadget, cazze sus a 'u buttone \"{{int:gadgets-export-download}}\", reggistre 'u file scarecate, veje'a pàgene Special:Import sus 'a Uicchi de destinazione e carechele. Pò aggiunge 'a seguende pàgene MediaWiki:Gadgets-definition:\n<pre>$2</pre>\nTu a ave le permesse appropriate sus 'a Uicchi de destinazione (ingludenne le deritte a cangià le messagge d'u sisteme) e 'a 'mbortazione da file carecate adda essere abbilitate.",
+	"gadgets-export-download": "Scareche",
+	"apihelp-query+gadgetcategories-description": "Tuèrne 'n'elenghe de le categorije de le accessore.",
+	"apihelp-query+gadgetcategories-summary": "Tuèrne 'n'elenghe de le categorije de le accessore.",
+	"apihelp-query+gadgetcategories-example-1": "Pigghie l'elenghe de le categorije de accessore esistende",
+	"apihelp-query+gadgetcategories-example-2": "Pigghie le 'mbormaziune sus a le categorije chiamate \"foo\" e \"bar\"",
+	"apihelp-query+gadgets-description": "Tuèrne 'n'elenghe de accessore ausate sus a sta uicchi.",
+	"apihelp-query+gadgets-summary": "Tuèrne 'n'elenghe de accessore ausate sus a sta uicchi.",
+	"action-gadgets-definition-edit": "cange 'a definizione de l'accessore"
+}

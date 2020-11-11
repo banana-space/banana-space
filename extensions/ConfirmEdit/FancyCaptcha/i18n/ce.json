@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Умар"
+		]
+	},
+	"fancycaptcha-desc": "Тамашийна CAPTCHA-генератор тадар чӀагӀдаран",
+	"fancycaptcha-addurl": "Хьан нисдар чохь керла арахьара хьажоргаш ю. Спамах лардала дехар до лахахь гура чохь гайтан дешнаш язъе ([[Special:Captcha/help|ма-дарра…]]):",
+	"fancycaptcha-badlogin": "Шашеха паролаш йохорах ларъян Ӏалашонца дехар до, лахарчу гура чохь гайтина дош язде  ([[Special:Captcha/help|мадарра…]]):",
+	"fancycaptcha-captcha": "Кхерамзалла хьажар",
+	"fancycaptcha-accountcreate": "Шашеха декъашхойн дӀаяздарш ца кхоллийта, дехар до, лахарчу гура чура дош язде ([[Special:Captcha/help|мадарра…]]):",
+	"fancycaptcha-create": "АгӀо кхолла, дехар до, лахара сурт тӀехь гуш долу элпаш язде ([[Special:Captcha/help|мадарра…]]):",
+	"fancycaptcha-edit": "АгӀо таян, дехар до, лахара сурт тӀехь гуш долу элпаш язде  ([[Special:Captcha/help|мадарра…]]):",
+	"fancycaptcha-imgcaptcha-ph": "ДӀаязде хьайна лакхахь гуш долу йоза",
+	"fancycaptcha-sendemail": "Шашеха спамах лардала Ӏалашонца дехар до, лахарчу гура чохь гайтина дош язде  ([[Special:Captcha/help|мадарра…]]):",
+	"fancycaptcha-reload-text": "Карлаяккха"
+}

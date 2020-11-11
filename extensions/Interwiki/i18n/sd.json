@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mehtab ahmed"
+		]
+	},
+	"interwiki": "انٽروڪي ڊيٽا ڏسو ۽ سنواريو",
+	"interwiki-title-norights": "انٽروڪي ڊيٽا ڏسو",
+	"interwiki-desc": "انٽروڪي جدول ڏسڻ ۽ ترميم ڪرڻ لاءِ [[Special:Interwiki|خاص صفحو]] شامل ڪري ٿو",
+	"interwiki-legend-label": "ڪنجي",
+	"interwiki_prefix": "اڳياڙي",
+	"interwiki-prefix-label": "اڳياڙي:",
+	"interwiki_local": "اڳتي",
+	"interwiki-local-label": "اڳتي:",
+	"interwiki_1": "ھا",
+	"interwiki_0": "نہ",
+	"interwiki_error": "خرابي: انٽروڪي جدول خالي آھي، يا ڪجھ غلط ٿي ويو.",
+	"interwiki_edit": "سنواريو",
+	"interwiki_reasonfield": "سبب:",
+	"interwiki_delquestion": "\"$1\" ڊاھيندي",
+	"interwiki_deleting": "توھان \"$1\" اڳياڙي ڊاھي رھيا آھيو.",
+	"interwiki_deleted": "اڳياڙي \"$1\" انٽروڪي جدول مان ھٽائي وئي.",
+	"interwiki_delfailed": "اڳياڙي \"$1\" انٽروڪي جدول مان ڊھي نہ سگھي.",
+	"interwiki-logtext": "لاگ ڏيکاريو",
+	"interwiki_addtext": "ڪا انٽروڪي يا ٻوليءَ جي اڳياڙي شامل ڪريو",
+	"interwiki-addtext-local": "ڪا مقامي انٽروڪي يا ٻوليءَ جي اڳياڙي شامل ڪريو",
+	"interwiki_addintro": "توھان ھڪ نئين انٽروڪي اڳياڙي شامل ڪري رھيا آھيو.\nياد رکو تہ اھا اسپيس ( )، ڪولن (:)، امپريسنڊس (&)، يا برابر جو نشانيون (=) نٿي رکي سگھي.",
+	"interwiki_addbutton": "شامل ڪريو",
+	"interwiki_added": "اڳياڙي \"$1\" انٽروڪي جدول ۾ وڌي وئي.",
+	"interwiki_addfailed": "اڳياڙي \"$1\" انٽروڪي جدول ۾ شامل نہ ٿي سگھي.\nممڪن آھي تہ اھا اڳ ئي انٽروڪي جدول ۾ موجود ھجي.",
+	"interwiki_edittext": "ڪا انٽروڪي اڳياڙي سنوارڻ"
+}

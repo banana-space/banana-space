@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Esbardu",
+			"Xuacu"
+		]
+	},
+	"spam-blacklist": "#<!-- dexa esta llinia exautamente como ta --> <pre>\n# Les URLs esternes que casen con esta llista bloquiaránse cuando s'amiesten a una páxina.\n# Esta llista afeuta namái a esta wiki; mira tamién la llista negra global.\n# Pa ver la documentación visita https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# La sintaxis ye ésta:\n#  * Tol testu dende un caráuter \"#\" hasta fin de llinia ye un comentariu\n#  * Toa llinia non balera ye un fragmentu regex que namái casará colos sirvidores de les URLs\n\n#</pre> <!-- dexa<pre> esta llinia exautamente como ta -->",
+	"spam-whitelist": " #<!-- dexa esta llinia exautamente como ta --> <pre>\n# Les URLs esternes d'esta llista *nun* se bloquiarán inda si quedaríen bloquiaes\n# por una entrada na llista negra.\n#\n# La sintaxis ye esta:\n#  * Tol testu dende un caráuter \"#\" hasta lo cabero la llinia ye un comentariu\n#  * Toa llinia non balera ye un fragmentu regex qu'afeuta namái a les URLs especificaes\n #</pre> <!-- dexa esta llinia exautamente como ta -->",
+	"email-blacklist": " # Los correos que casen con esta llista tendrán torgao rexistrase o unviar corréu.\n # Esta llista afeuta namái a esta wiki; mira tamién la llista negra global.\n # Pa ver la documentación visita https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- dexa esta llinia exautamente como ta --> <pre>\n#\n# La sintaxis ye esta:\n#  * Tol testu dende un caráuter \"#\" hasta lo cabero la llinia ye un comentariu\n#  * Toa llinia non balera ye un fragmentu regex qu'afeuta namái a los sirvidores de corréu\n\n #</pre> <!-- dexa esta llinia exautamente como ta -->",
+	"email-whitelist": "#<!-- Dexa esta llinia tal y como ta --> <pre>\n# Los correos que casen con esta llista *nun* se bloquiarán, incluío si\n# los hubieren bloquiao entraes de la llista negra.\n#\n #</pre> <!-- Dexa esta llinia tal y como ta -->\n# La sintaxis ye esta:\n#  * Tol testu dende un caráuter \"#\" hasta lo cabero la llinia ye un comentariu\n#  * Toa llinia non balera ye un fragmentu regex qu'afeuta namái a los sirvidores de corréu",
+	"spam-blacklisted-email": "Corréu electrónicu de la llista negra",
+	"spam-blacklisted-email-text": "El to corréu electrónicu anguaño ta na llista negra y nun pue unviar correos electrónicos a otros usuarios.",
+	"spam-blacklisted-email-signup": "La direición de corréu electrónicu que se dio tien torgáu l'usu por tar anguaño na llista negra.",
+	"spam-invalid-lines": "{{PLURAL:$1|La siguiente llinia|Les siguientes llinies}} de la llista negra de spam {{PLURAL:$1|ye una espresión regular non válida|son espresiones regulares non válides}} y {{PLURAL:$1|necesita ser correxida|necesiten ser correxíes}} enantes de guardar la páxina:",
+	"spam-blacklist-desc": "Ferramienta antispam basada n'espresiones regulares que permite a los usuarios rexistraos poner nuna llista prieta URLs de páxines y direiciones de corréu electrónicu",
+	"log-name-spamblacklist": "Rexistru de la llista prieta de spam",
+	"log-description-spamblacklist": "Estos socesos rexistren les coincidencies cola llista prieta de spam.",
+	"logentry-spamblacklist-hit": "$1 provocó una activación de la llista prieta de spam en $3 al intentar amestar $4.",
+	"right-spamblacklistlog": "Ver el rexistru de la llista prieta de spam",
+	"action-spamblacklistlog": "ver el rexistru de la llista prieta de spam",
+	"apihelp-spamblacklist-description": "Validar una o más URLs escontra SpamBlacklist.",
+	"apihelp-spamblacklist-summary": "Validar una o más URLs escontra SpamBlacklist.",
+	"apihelp-spamblacklist-param-url": "URLs a validar escontra la llista prieta.",
+	"apihelp-spamblacklist-example-1": "Comprobar dos URLs escontra la llista prieta"
+}

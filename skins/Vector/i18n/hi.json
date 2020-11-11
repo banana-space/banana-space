@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Siddhartha Ghai",
+			"आलोक",
+			"रोहित रावत",
+			"Sfic"
+		]
+	},
+	"skinname-vector": "वेक्टर",
+	"vector-skin-desc": "मोनोबूक का आधुनिक संस्करण, जो ताजा रूप में और उपयोग में सुधार के साथ है।",
+	"vector.css": "/* सीएसएस यहाँ डालने से वेक्टर त्वचा चुने लोगों को प्रभावित करेगा */",
+	"vector-action-addsection": "विषय जोड़ें",
+	"vector-action-delete": "हटाएँ",
+	"vector-action-move": "स्थानांतरण करें",
+	"vector-action-protect": "सुरक्षित करें",
+	"vector-action-undelete": "हटाना वापस लें",
+	"vector-action-unprotect": "सुरक्षा बदलें",
+	"vector-view-create": "बनाएँ",
+	"vector-view-edit": "सम्पादन",
+	"vector-view-history": "इतिहास देखें",
+	"vector-view-view": "पढ़ें",
+	"vector-view-viewsource": "स्रोत देखें",
+	"vector-more-actions": "अधिक"
+}

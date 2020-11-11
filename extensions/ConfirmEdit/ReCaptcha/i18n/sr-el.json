@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Milicevic01"
+		]
+	},
+	"recaptcha-desc": "Modul reCAPTCHA za potvrdu uređivanja",
+	"recaptcha-edit": "Da bi onemogućili automatizovano spamovanje, ljubazno Vas molimo da upišete dve reči koje vidite u kutijicu ispod:",
+	"recaptcha-addurl": "Vaša izmena sadrži nove spoljašnje veze. U cilju zaštite od automatizovanog spamovanja, ljubazno Vas molimo da upišete dve reči koje vidite u kutijicu ispod:",
+	"recaptcha-badlogin": "Da bi onemogućili automatizovano probijanje lozinki, ljubazno Vas molimo da upišete dve reči koje vidite u kutijicu ispod:",
+	"recaptcha-createaccount": "Da bi onemogućili automatizovano otvaranje naloga, ljubazno Vas molimo da upišete dve reči koje vidite u kutijicu ispod:",
+	"recaptcha-create": "Da bi onemogućili automatizovano pravljenje stranica, ljubazno Vas molimo da upišete dve reči koje vidite u kutijicu ispod:"
+}

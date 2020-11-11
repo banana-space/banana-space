@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sveinn í Felli"
+		]
+	},
+	"skinname-timeless": "Tímalaust",
+	"timeless-desc": "Tímalaust skinn sem hannað er út frá Winter-frumgerðinni eftir Brandon Harris, með ýmsum stílum frá Wikimedia Foundation.",
+	"timeless-search-placeholder": "Leita í {{NUMBEROFARTICLES}} síðum",
+	"timeless-loggedin": "Aðgangur þinn",
+	"timeless-anonymous": "Nafnlaus",
+	"timeless-loggedinas": "Skráð/ur inn sem '''$1'''",
+	"timeless-notloggedin": "Ekki innskráð/ur",
+	"timeless-userpage": "Síða {{GENDER:$1|notanda}}",
+	"timeless-talkpage": "Spjall {{GENDER:$1|notanda}}",
+	"timeless-pagelog": "Breytingaskrá síðu",
+	"timeless-more": "Meira",
+	"timeless-sitetools": "Wiki-verkfæri",
+	"timeless-pageactions": "Síðuverkfæri",
+	"timeless-userpagetools": "Verkfæri notandasíðu",
+	"timeless-pagemisc": "Meira",
+	"timeless-namespaces": "Nafnrými",
+	"timeless-pagetools": "Aðgerðir síðu",
+	"timeless-languages": "Tungumál"
+}

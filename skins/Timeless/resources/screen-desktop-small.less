@@ -1,0 +1,125 @@
+@import 'variables.less';
+
+// Redundant sidebar category list and stuff
+
+#mw-content-block {
+	padding: 0;
+}
+#mw-content {
+	border-width: 0 0 1px;
+	clear: both;
+}
+
+.categories-bottom();
+
+// Header navigation
+
+.sidebar-chunk {
+	display: inline-block;
+	position: relative;
+
+	h2 {
+		display: inline-block;
+	}
+}
+.sidebar-inner,
+#p-logo {
+	display: none !important;
+}
+
+// Have these cover the fixed header color-bar using the mw-header-nav-hack (with its own color-bar at the bottom)
+#mw-site-navigation,
+#mw-related-navigation {
+	display: inline-block;
+	position: relative;
+	z-index: 99;
+
+	h2 {
+		font-weight: normal;
+		font-family: @fonts-secondary;
+		font-size: 1.25em;
+		padding: 0.5em 0 0.2em;
+		margin: 0;
+
+		.dropdown-header();
+	}
+}
+.sidebar-chunk:hover {
+	.pokey,
+	.sidebar-inner {
+		display: block !important;
+	}
+}
+
+#mw-header-nav-hack {
+	border-top: solid 2px @grey-bright;
+	display: block;
+	position: absolute;
+	z-index: 98;
+	background: @background;
+	width: 100%;
+}
+#mw-header-nav-hack .color-bar {
+	margin-top: 2.5em; // Height of expected menu header contents
+}
+
+#mw-site-navigation {
+	float: left;
+	margin-left: 2em;
+
+	.sidebar-chunk {
+		margin: 0 1em 0 0;
+	}
+	.sidebar-inner {
+		.dropdown-menu( left );
+	}
+}
+#mw-related-navigation {
+	float: right;
+	margin-right: 2em;
+
+	.sidebar-chunk {
+		margin: 0 0 0 1em;
+	}
+	.sidebar-inner {
+		.dropdown-menu();
+		top: 2.95em !important; // to override mobile positioning
+	}
+}
+
+// Consistency
+
+#mw-header {
+	padding: 0 2em;
+}
+#p-logo-text a {
+	padding-left: 0;
+	text-align: left;
+}
+
+#mw-footer {
+	padding: 0 @content-padding;
+}
+
+// Personal menu
+
+#personal {
+	float: right;
+
+	h2 span {
+		display: none;
+	}
+	h2:after {
+		margin-left: -0.65em;
+	}
+	.dropdown {
+		right: -1em;
+	}
+}
+
+#user-tools {
+	width: 6em;
+}
+#p-search {
+	margin-right: 6em;
+}

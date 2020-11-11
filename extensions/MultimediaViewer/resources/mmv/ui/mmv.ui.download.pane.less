@@ -1,0 +1,206 @@
+@import 'mediawiki.ui/variables';
+@import '../mmv.mixins';
+
+@pane-padding: 10px;
+@attribution-color: #f8f9fa;
+@attribution-color-highlighted: #fff;
+@attribution-logo-size: 40px;
+@input-text-color: #222;
+
+.mw-mmv-download-pane {
+	padding: 0 @pane-padding;
+	position: relative;
+	height: 100%;
+
+	/* Disable link clicks */
+	a.disabledLink {
+		pointer-events: none;
+		cursor: default;
+	}
+
+	.mw-mmv-download-area {
+		padding-top: 20px;
+		padding-left: 10px;
+		padding-bottom: 60px;
+		width: 100%;
+
+		.mw-mmv-download-go-button {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+
+		/* Selection size arrow element */
+		.mw-mmv-download-select-menu {
+			.unselectable();
+			background-image: /* @embed */ url( ../img/down.svg );
+			background-position: center center;
+			background-repeat: no-repeat;
+			min-width: 10px;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+			border-left: 1px solid mix( #000, @colorProgressive, 20% );
+
+			&:hover {
+				border-bottom: 1px solid mix( #000, @colorProgressive, 20% );
+			}
+		}
+
+		.mw-mmv-download-image-size-name {
+			display: block;
+		}
+
+		.mw-mmv-download-image-size {
+			display: block;
+			font-size: small;
+			font-weight: normal;
+		}
+
+		.mw-mmv-download-preview-link {
+			display: inline-block;
+			margin-top: 12px;
+			margin-left: -6px;
+			font-size: 16px;
+			color: #54595d;
+
+			&:before {
+				display: inline-block;
+				vertical-align: middle;
+				content: ' ';
+				width: 44px;
+				height: 30px;
+				/* @embed */
+				background-image: url( img/open.svg );
+				background-size: contain;
+				background-position: right center;
+				background-repeat: no-repeat;
+			}
+		}
+
+		/* Pulldown size menu */
+		.mw-mmv-download-size {
+			text-align: start;
+			display: none;
+			margin-top: 0;
+			margin-right: 20px;
+			width: auto;
+
+			&.active {
+				display: block;
+			}
+
+			/* Changes to pulldown menu */
+			.oo-ui-dropdownWidget-handle {
+				display: none;
+			}
+
+			.oo-ui-menuOptionWidget {
+				display: block;
+			}
+
+			.oo-ui-widget-disabled {
+				display: none;
+			}
+
+			.oo-ui-labelElement-label {
+				margin-left: 20px;
+			}
+		}
+	}
+
+	.mw-mmv-download-attribution {
+		margin: 0 -@pane-padding;
+		padding: 0 @pane-padding @pane-padding;
+		background-color: @attribution-color;
+		color: #54595d;
+
+		&:hover {
+			background-color: @attribution-color-highlighted;
+			color: #222;
+		}
+
+		&-how {
+			position: relative;
+			display: block;
+			padding: 5px;
+			margin-bottom: 0;
+
+			.mw-mmv-download-attribution-close-button {
+				cursor: pointer;
+				position: absolute;
+				top: 5px;
+				right: 0;
+				width: 12px;
+				height: 12px;
+				/* @embed */
+				background-image: url( img/x_gray.svg );
+			}
+		}
+
+		&-how-header,
+		&-cta-header {
+			font-size: large;
+			font-weight: bold;
+		}
+
+		&-cta-header {
+			margin-bottom: 0;
+		}
+
+		&-cta-invite {
+			font-size: small;
+			margin: 0;
+			color: #72777d;
+		}
+
+		&-cta {
+			cursor: pointer;
+			display: none;
+			padding-left: @attribution-logo-size + 10px;
+
+			/* @embed */
+			background-image: url( img/user-ltr.svg );
+			background-repeat: no-repeat;
+			background-size: @attribution-logo-size;
+			background-position: left center;
+		}
+
+		&.mw-mmv-download-attribution-collapsed {
+			.mw-mmv-download-attribution-cta {
+				display: block;
+			}
+
+			.mw-mmv-download-attribution-how {
+				display: none;
+			}
+		}
+
+		.mw-mmv-download-attr-input {
+			// override OOUI fixed width
+			width: auto;
+
+			// margin between text widget and option switch widget
+			margin-bottom: 10px;
+
+			input[ readonly ] {
+				color: @input-text-color;
+				text-shadow: none;
+			}
+		}
+
+		.mw-mmv-dialog-copy {
+			// style rules based on .mw-mmv-share-page-link
+			float: right;
+			width: 1.5em;
+			height: 1.5em;
+
+			// position approximately to the middle - probably fragile but couldn't find a better way as
+			// the height of OOUI input widget has both em and px parts and not possible to calculate
+			// exactly
+			margin: 8px 0.5em 8px 0;
+		}
+	}
+}
+
+.mw-mmv-reuse-dialog.mw-mmv-reuse-download-active .mw-mmv-reuse-down-arrow {
+	background-color: @attribution-color;
+}

@@ -1,0 +1,97 @@
+@import 'mediawiki.ui/variables';
+@import 'mw.rcfilters.mixins';
+
+.mw-rcfilters-ui-highlightColorPickerWidget {
+	&-label {
+		display: block;
+		font-weight: bold;
+		font-size: 1.2em;
+	}
+
+	&-buttonSelect {
+		&-color {
+			// Override OOUI definition from padded popup; the definition
+			// forces the first-child to be margin-top:0; which overrides
+			// our definitions below where margin is 0.5em.
+			// We set up the margin-top as 0.5em for all circles so we get
+			// a consistent result
+			&.oo-ui-widget-enabled.oo-ui-optionWidget.oo-ui-buttonElement.oo-ui-buttonElement-frameless.oo-ui-buttonOptionWidget {
+				margin-top: 0.5em;
+			}
+
+			// Make the rule much more specific to override OOUI
+			.oo-ui-iconElement-icon.oo-ui-icon-check {
+				// Override OOUI icon dimensions
+				// The parent is 2em with 0.5em margin
+				// (see mw-rcfilters-mixin-circle below)
+				// so here we want 2em - 0.5em = 1.5em
+				width: 1.5em;
+				height: 1.5em;
+				// By eye, this is centered horizontally for the color circle
+				margin-left: -0.1em;
+			}
+
+			&-none {
+				.oo-ui-iconElement-icon.oo-ui-icon-check {
+					// By eye, this is centered horizontally for the white circle
+					margin-left: -0.2em;
+				}
+
+				.mw-rcfilters-mixin-circle( @highlight-none, 2em, 0.5em, true );
+				// Override border to dashed
+				border: 1px dashed @colorGray5;
+
+				&.oo-ui-buttonOptionWidget.oo-ui-buttonElement-active,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-pressed,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-selected {
+					background-color: @highlight-none;
+				}
+			}
+			&-c1 {
+				.mw-rcfilters-mixin-circle( @highlight-c1 );
+
+				&.oo-ui-buttonOptionWidget.oo-ui-buttonElement-active,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-pressed,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-selected {
+					background-color: @highlight-c1;
+				}
+			}
+			&-c2 {
+				.mw-rcfilters-mixin-circle( @highlight-c2 );
+
+				&.oo-ui-buttonOptionWidget.oo-ui-buttonElement-active,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-pressed,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-selected {
+					background-color: @highlight-c2;
+				}
+			}
+			&-c3 {
+				.mw-rcfilters-mixin-circle( @highlight-c3 );
+
+				&.oo-ui-buttonOptionWidget.oo-ui-buttonElement-active,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-pressed,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-selected {
+					background-color: @highlight-c3;
+				}
+			}
+			&-c4 {
+				.mw-rcfilters-mixin-circle( @highlight-c4 );
+
+				&.oo-ui-buttonOptionWidget.oo-ui-buttonElement-active,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-pressed,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-selected {
+					background-color: @highlight-c4;
+				}
+			}
+			&-c5 {
+				.mw-rcfilters-mixin-circle( @highlight-c5 );
+
+				&.oo-ui-buttonOptionWidget.oo-ui-buttonElement-active,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-pressed,
+				&.oo-ui-buttonOptionWidget.oo-ui-optionWidget-selected {
+					background-color: @highlight-c5;
+				}
+			}
+		}
+	}
+}

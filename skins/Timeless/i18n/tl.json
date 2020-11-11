@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Leeheonjin"
+		]
+	},
+	"timeless-loggedin": "Ang iyong akawnt",
+	"timeless-anonymous": "Di-nagpakilala (anonimo)",
+	"timeless-loggedinas": "Nakalagda bilang si '''$1'''",
+	"timeless-notloggedin": "Hindi nakalagda",
+	"timeless-userpage": "Pahina ng tagagamit",
+	"timeless-talkpage": "Usapang pang-tagagamit",
+	"timeless-more": "Higit pa",
+	"timeless-sitetools": "Mga kagamitang pangwiki",
+	"timeless-pageactions": "Mga kagamitang pang-pahina",
+	"timeless-userpagetools": "Mga kagamitang pang-tagagamit",
+	"timeless-languages": "Mga wika"
+}

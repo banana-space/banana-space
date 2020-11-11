@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fdcn",
+			"Gaoxuewei",
+			"Mark85296341",
+			"Shinjiman",
+			"Simon Shek",
+			"Waihorace",
+			"Cwlin0416",
+			"Liuxinyu970226",
+			"LNDDYL",
+			"Hello903hello"
+		]
+	},
+	"action-titleblacklistlog": "檢視標題封鎖清單日誌",
+	"log-name-titleblacklist": "標題封鎖清單日誌",
+	"log-description-titleblacklist": "此頁記錄了所有符合標題封鎖清單的事件。",
+	"logentry-titleblacklist-hit-username": "$1 嘗試建立帳號 $3 時{{GENDER:$2|觸發}}符合條件 $4 的標題封鎖清單事件。",
+	"titleblacklist-desc": "允許管理員可使用 [[MediaWiki:Titleblacklist|封鎖清單]] 與 [[MediaWiki:Titlewhitelist|允許清單]] 來禁止建立頁面與使用者帳號。",
+	"titleblacklist": "# 此頁為標題封鎖清單，符合此處正規表示法的標題與使用者將會被禁止使用。\n# 註解使用 \"#\"。\n# 清單預設不區分大小寫",
+	"titlewhitelist": "# 此頁為標題允許清單。 註解請使用 \"#\"。\n# 清單預設不區分大小寫",
+	"titleblacklist-forbidden-edit": "標題 \"$2\" 已被禁止使用。\n該標題符合以下封鎖清單項目：<code>$1</code>",
+	"titleblacklist-forbidden-move": "標題 \"$3\" 已被禁止使用，無法移動 \"$2\" 至 \"$3\"。\n該標題符合以下封鎖清單項目：<code>$1</code>",
+	"titleblacklist-forbidden-upload": "檔案名稱 \"$2\" 已被禁止使用。\n該名稱符合以下封鎖清單項目：<code>$1</code>",
+	"titleblacklist-forbidden-new-account": "使用者名稱 \"$2\" 已被禁止使用。\n該名稱符合以下封鎖清單項目：<code>$1</code>",
+	"titleblacklist-invalid": "標題封鎖清單中的下列{{PLURAL:$1|一行|多行}}無效；\n在儲存之前請先修正：",
+	"titleblacklist-override": "忽略封鎖清單",
+	"titleblacklist-override-help": "有足夠權限的用戶可以將其設定為略過標題黑名單檢查。",
+	"titleblacklist-warning": "<strong>警告：此頁面符合下列標題封鎖清單項目，僅可由管理員或擁有 <code>tboverride</code> 權限的使用者編輯：</strong><br /><code>$1</code>",
+	"right-tboverride": "覆蓋標題或使用者名稱黑名單",
+	"right-tboverride-account": "覆蓋使用者名稱黑名單",
+	"right-titleblacklistlog": "檢視標題封鎖清單日誌",
+	"apihelp-titleblacklist-description": "檢驗一個頁面標題、檔案名稱或使用者名稱有否抵觸標題黑名單。",
+	"apihelp-titleblacklist-param-title": "要用來檢驗封鎖清單的字串。",
+	"apihelp-titleblacklist-param-action": "要檢查的操作。",
+	"apihelp-titleblacklist-param-nooverride": "不要嘗試覆蓋標題封鎖清單。",
+	"apihelp-titleblacklist-example-1": "檢查 [[Foo]] 是否已被列入封鎖名單",
+	"apihelp-titleblacklist-example-2": "檢查 [[Bar]] 是否已被列入編輯的封鎖名單",
+	"apihelp-createaccount-param-ignoretitleblacklist": "略過欺騙檢查（需要下列權限之一：<code>tboverride</code>、<code>tboverride-account</code>）"
+}

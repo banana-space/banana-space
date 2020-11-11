@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ferhengvan",
+			"Gomada",
+			"Bikarhêner",
+			"George Animal"
+		]
+	},
+	"vector-action-addsection": "Mijarekê lê zêde bike",
+	"vector-action-delete": "Jê bibe",
+	"vector-action-move": "Nav biguherîne",
+	"vector-action-protect": "Biparêze",
+	"vector-action-undelete": "Jê nebe",
+	"vector-action-unprotect": "Parastinê biguherîne",
+	"vector-view-create": "Çêke",
+	"vector-view-edit": "Biguherîne",
+	"vector-view-history": "Dîrokê bibîne",
+	"vector-view-view": "Bixwîne",
+	"vector-view-viewsource": "Çavkaniyan bibîne",
+	"vector-more-actions": "Bêhtir"
+}

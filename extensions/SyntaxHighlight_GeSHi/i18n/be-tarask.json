@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"EugeneZelenko",
+			"Jim-by",
+			"Red Winged Duck"
+		]
+	},
+	"syntaxhighlight-desc": "Дазваляе выкарыстоўваць тэг  <code>&lt;syntaxhighlight&gt;</code> для падсьветкі сынтаксісу з дапамогай [http://pygments.org/ Pygments]",
+	"syntaxhighlight-error-category-desc": "Адбылася памылка пры спробе вылучыць код на старонцы.",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "Блёк коду"
+}

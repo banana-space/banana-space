@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Karthi.dr",
+			"Shanmugamp7",
+			"TRYPPN",
+			"மதனாஹரன்",
+			"ElangoRamanujam"
+		]
+	},
+	"nuke": "ஒட்டு மொத்த நீக்கல்",
+	"action-nuke": "பக்கங்களை மொத்தமாக நீக்கு",
+	"nuke-submit-user": "பக்கங்களைப் பட்டியலிடுக",
+	"nuke-submit-delete": "தேர்ந்தெடுத்ததை நீக்கு",
+	"right-nuke": "பக்கங்களை ஒட்டு மொத்தமாக நீக்குதல்",
+	"nuke-select": "தேர்ந்தெடுக்கவும்:$1",
+	"nuke-userorip": "பயனர் பெயர், ஐபி முகவரி அல்லது வெற்று :",
+	"nuke-maxpages": "அதிகபட்ச பக்கங்களின் எண்ணிக்கை:",
+	"nuke-deleted": "பக்கம் '''$1''' அழிக்கப்பட்டுள்ளது.",
+	"nuke-delete-more": "[[Special:Nuke|இன்னும் பக்கங்களை அழிக்கவும்]]",
+	"nuke-viewchanges": "மாற்றங்களைப் பார்"
+}

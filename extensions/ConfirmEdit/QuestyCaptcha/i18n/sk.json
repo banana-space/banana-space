@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Helix84"
+		]
+	},
+	"questycaptcha-addurl": "Vaša úprava obsahuje nové externé odkazy.\nAko opatrenie proti automatizovanému spamu musíte zodpovedať dolu uvedenú otázku\n([[Special:Captcha/help|ďalšie informácie]]):",
+	"questycaptcha-badlogin": "Ako opatrenie proti automatizovanému lámaniu hesiel musíte zodpovedať dolu uvedenú otázku\n([[Special:Captcha/help|ďalšie informácie]]):",
+	"questycaptcha-createaccount": "Ako opatrenie proti automatizovanému vytváraniu účtov musíte zodpovedať dolu uvedenú otázku\n([[Special:Captcha/help|ďalšie informácie]]):",
+	"questycaptcha-create": "Ak chcete vytvoriť stránku, musíte zodpovedať dolu uvedenú otázku\n([[Special:Captcha/help|ďalšie informácie]]):",
+	"questycaptcha-edit": "Ak chcete upraviť túto stránku, musíte zodpovedať dolu uvedenú otázku\n([[Special:Captcha/help|ďalšie informácie]]):",
+	"questycaptchahelp-text": "Webstránky, ktoré prijímajú príspevky od verejnosti ako táto wiki, sú často cieľom zneužitia spammermi, ktorí používajú automatizované nástroje na pridávanie odkazov na svoje stránku na mnohé lokality.\nHoci je možné odkazy na spam odstrániť, je to významná nepríjemnosť.\n\nNiekedy, obzvlášť pri pridávaní nových webových odkazov na stránku, vás wiki môže požiadať o zodpovedanie otázky.\nPretože takúto úlohu je ťažké zautomatizovať, umožní väčšine skutočných ľudí prispievať a zastaví vačšinu spammerov a robotických útočníkov.\n\nKontaktujte prosím [[Special:ListAdmins|správcov lokality]] ak potrebujete pomoc v prípade, že vám táto funkcia neočakávaným spôsobom bráni v právoplatných príspevkoch.\n\nSpäť na úpravu stránky sa vrátite kliknutím na tlačidlo „Späť“ vo vašom prehliadači."
+}

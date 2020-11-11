@@ -1,0 +1,245 @@
+@import 'mediawiki.mixins';
+
+/*
+ * CSS for WikiEditor Dialogs
+ */
+
+/* stylelint-disable selector-max-id */
+
+/* Replace Dialog */
+#wikieditor-toolbar-replace-search,
+#wikieditor-toolbar-replace-replace {
+	width: 100%;
+}
+
+/* Table Dialog */
+#wikieditor-toolbar-table-dialog {
+	fieldset {
+		width: 218px;
+		padding: 0;
+		float: left;
+	}
+
+	.wikieditor-toolbar-table-preview-wrapper {
+		width: 330px;
+		padding: 0;
+		float: right;
+	}
+}
+
+.wikieditor-toolbar-table-preview-content * {
+	cursor: default;
+}
+
+/* stylelint-disable declaration-no-important */
+.wikiEditor-toolbar-dialog {
+	.wikieditor-toolbar-table-preview-wrapper {
+		table {
+			width: 100% !important;
+		}
+	}
+
+	.wikieditor-toolbar-table-preview-content {
+		table {
+			td {
+				padding: 10px 4px !important;
+				height: auto !important;
+			}
+
+			th {
+				padding: 7px 3px !important;
+			}
+		}
+	}
+
+	.ui-dialog-content {
+		padding: 30px 20px 1em !important;
+	}
+
+	.ui-dialog-buttonpane {
+		border-top: 1px solid #c8ccd1 !important;
+	}
+}
+/* stylelint-enable declaration-no-important */
+
+.wikieditor-toolbar-table-dimension-fields {
+	.wikieditor-toolbar-field-wrapper {
+		float: left;
+		margin-right: 20px;
+		vertical-align: bottom;
+	}
+}
+
+.wikieditor-toolbar-dialog-wrapper {
+	width: 100%;
+}
+
+/* Insert Link Dialog */
+#wikieditor-toolbar-link-int-target-status {
+	float: right;
+}
+
+#wikieditor-toolbar-link-int-target,
+#wikieditor-toolbar-link-int-text {
+	width: 100%;
+}
+
+#wikieditor-toolbar-tool-link-int-target-label {
+	float: left;
+	line-height: 1.7em;
+}
+
+#wikieditor-toolbar-link-int-target-status-exists,
+#wikieditor-toolbar-link-int-target-status-notexists,
+#wikieditor-toolbar-link-int-target-status-invalid,
+#wikieditor-toolbar-link-int-target-status-external,
+#wikieditor-toolbar-link-int-target-status-loading,
+#wikieditor-toolbar-link-int-target-status-disambig {
+	padding-left: 30px;
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+}
+
+#wikieditor-toolbar-link-int-target-status-exists {
+	.background-image('images/dialogs/insert-link-exists.png');
+	background-position: left;
+}
+
+#wikieditor-toolbar-link-int-target-status-notexists {
+	.background-image('images/dialogs/insert-link-notexists.png');
+	background-position: left;
+}
+
+#wikieditor-toolbar-link-int-target-status-invalid {
+	.background-image('images/dialogs/insert-link-invalid.png');
+	background-position: left;
+}
+
+#wikieditor-toolbar-link-int-target-status-external {
+	.background-image('images/dialogs/insert-link-external.png');
+	background-position: left;
+}
+
+#wikieditor-toolbar-link-int-target-status-loading {
+	.background-image('images/dialogs/loading-small.gif');
+	background-position: right;
+	height: 18px;
+}
+
+#wikieditor-toolbar-link-int-target-status-disambig {
+	.background-image('images/dialogs/insert-disambiguation.png');
+	background-position: left;
+}
+
+/* File dialog */
+#wikieditor-toolbar-file-target,
+#wikieditor-toolbar-file-caption {
+	width: 100%;
+}
+
+.wikieditor-toolbar-file-options {
+	.wikieditor-toolbar-field-wrapper {
+		float: left;
+		margin: 0 20px 0 0;
+	}
+}
+
+#wikieditor-toolbar-file-dialog + .ui-dialog-buttonpane {
+	.ui-dialog-buttonset {
+		width: 100%;
+		text-align: right;
+
+		/* Upload button */
+		.ui-button:last-child {
+			float: left;
+		}
+	}
+}
+
+/* Reference Dialog */
+#wikieditor-toolbar-reference-dialog {
+	label {
+		float: left;
+		line-height: 1.7em;
+	}
+}
+
+#wikieditor-toolbar-reference-text {
+	width: 100%;
+}
+
+/* RTL Changes */
+
+body.rtl {
+	.wikiEditor-toolbar-dialog {
+		.ui-dialog-buttonpane {
+			button {
+				float: left;
+				// stylelint-disable-next-line declaration-no-important
+				margin: 0.5em 0.4em 0.5em 0 !important;
+			}
+		}
+	}
+}
+
+/* Template Editor Dialogs */
+.wikiEditor-template-dialog-fields {
+	label {
+		text-transform: capitalize;
+		float: left;
+		width: 25%;
+		line-height: 2.25em;
+	}
+
+	textarea {
+		float: right;
+		width: 70%;
+		line-height: 1.5em;
+		height: 1.5em;
+	}
+
+	.wikiEditor-template-dialog-field-wrapper {
+		padding: 0.75em 0.33em;
+		border-bottom: 1px dashed #c8ccd1;
+		clear: both;
+
+		&:first-child {
+			padding-top: 0;
+		}
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+}
+
+/* Self Clearing Floats */
+.wikieditor-toolbar-table-dimension-fields:after,
+.wikieditor-toolbar-dialog-wrapper:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: ' ';
+	clear: both;
+	height: 0;
+}
+
+/* Hides from IE-mac \*/
+* html {
+	.wikieditor-toolbar-table-dimension-fields,
+	.wikieditor-toolbar-dialog-wrapper {
+		height: 1%;
+	}
+}
+
+.wikieditor-toolbar-table-dimension-fields,
+.wikieditor-toolbar-dialog-wrapper {
+	display: inline-table;
+	display: block;
+}
+
+/* End hide from IE-mac */
+/* Edit dialog */
+.wikiEditor-dialog-editoptions {
+	margin-top: 15px;
+}

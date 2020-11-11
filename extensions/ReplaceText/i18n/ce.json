@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sasan700",
+			"Умар"
+		]
+	},
+	"replacetext": "Хийца йоза",
+	"replacetext_originaltext": "ДӀадолалун йоза:",
+	"replacetext_optionalfilters": "Тlедожийна доцу литтарш:",
+	"replacetext_cannotmove": "{{PLURAL:$1|1=ТӀехьа йогӀу агӀона цӀе хуьйцийла дац|ТӀехьа йогӀу агӀонийн цӀерш хуьйцийла дац}}:",
+	"replacetext_invertselections": "Харжаран инверт йе",
+	"replacetext_replace": "Хийца",
+	"replacetext_continue": "Кхин дӀа"
+}

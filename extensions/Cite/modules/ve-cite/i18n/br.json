@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fohanno",
+			"Fulup",
+			"Y-M D",
+			"Maoris"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "Levr",
+	"visualeditor-cite-tool-name-journal": "Kazetenn",
+	"visualeditor-cite-tool-name-news": "Keleier",
+	"visualeditor-cite-tool-name-web": "Lec'hienn",
+	"cite-ve-dialog-reference-options-group-label": "Implijout ar strollad-mañ",
+	"cite-ve-dialog-reference-options-section": "Dibarzhioù",
+	"cite-ve-dialog-reference-title": "Daveennoù",
+	"cite-ve-dialog-reference-useexisting-label": "Implijout un daveenn zo anezhi",
+	"cite-ve-dialog-reference-useexisting-tool": "Adimplijout",
+	"cite-ve-dialog-referenceslist-title": "Roll an daveennoù",
+	"cite-ve-dialogbutton-reference-full-label": "Stumm diazez",
+	"cite-ve-dialogbutton-reference-tooltip": "Diazez",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Roll an daveennoù",
+	"cite-ve-toolbar-group-label": "Menegiñ"
+}

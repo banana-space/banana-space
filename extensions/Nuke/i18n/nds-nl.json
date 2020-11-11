@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Servien"
+		]
+	},
+	"nuke": "Massaal vortdoon",
+	"nuke-desc": "Hiermee kunnen beheerders [[Special:Nuke|massaal ziejen vortdoon]]",
+	"nuke-nopages": "Gien nieje ziejen van [[Special:Contributions/$1|{{GENDER:$1|$1}}]] in de leste wiezigingen.",
+	"nuke-defaultreason": "Massaal ziejen van [[Special:Contributions/$1|{{GENDER:$1|$1}}]] vortdoon",
+	"right-nuke": "Massaal ziejen vortdoon",
+	"nuke-linkoncontribs": "massaal vortdoon"
+}

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michawiki"
+		]
+	},
+	"spam-blacklist": " # Eksterne URL, kótarež su w toś tej lisćinje, blokěruju se, gaž pśidawaju se bokoju.\n # Toś ta lisćina nastupa jano toś ten wiki; glědaj teke globalnu cornu lisćinu.\n # Za dokumentaciju glědaj https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- Wóstaj toś tu smužka rowno tak ako jo --><pre>\n#\n# Syntaksa jo ako slědujo:\n#  * Wšykno wót znamuška \"#\" až ku kóńcoju smužki jo komentar\n# Kužda smužka, kótaraž njejo prozna, jo fragment regularnego wuraza, kótaryž wótpowědujo hostam w URL\n\n #</pre> <!-- wóstaj toś tu smužku rowno ako jo -->",
+	"spam-whitelist": " #<!-- wóstaj toś tu smužka rowno tak ako jo --> <pre>\n # Eksterne URL, kótarež sw toś tej lisćinje se *nje*blokěruju, samo jolic wone by\n # se blokěrowali pśez zapiski corneje lisćiny.\n #\n # Syntaksa jo ako slědujo:\n #  * Wšykno wót znamuška \"#\" ku kóńcoju smužki jo komentar\n #  * Kužda smužka, kótaraž njejo prozna, jo fragment regularanego wuraza, kótaryž wótpowědujo jano hostam w URL\n\n #</pre> <!-- wóstaj toś tu smužku rowno tak ako jo -->",
+	"spam-blacklisted-email": "Blokěrowana e-mailowa adresa",
+	"spam-invalid-lines": "{{PLURAL:$1|Slědujuca smužka|Slědujucej smužce|Slědujuce smužki|Slědujuce smužki}} corneje lisćiny spama {{PLURAL:$1|jo njepłaśiwy regularny wuraz|stej njepłaśiwej regularnej wuraza|su njepłaśiwe regularne wuraze|su njepłaśiwe regularne wuraze}} a {{PLURAL:$1|musy|musytej|muse|muse}} se korigěrowaś, pjerwjej až składujoš bok:",
+	"spam-blacklist-desc": "Pśeśiwospamowy rěd na zakłaźe Regex, kótaryž zmóznja URL na bokach a e-mailowe adresy za zregistrěrowanych wužywarjow do carneje lisćiny stajiś"
+}

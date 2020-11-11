@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"01miki10",
+			"Pyscowicz"
+		]
+	},
+	"timeless-desc": "Ajaton ulkoasu, joka on suunniteltu Brandon Harrisin Winter-prototyypin sekä useiden Wikimedia Foundationin tyylien mukaisesti.",
+	"timeless-search-placeholder": "Hae {{NUMBEROFARTICLES}} sivua",
+	"timeless-loggedin": "Käyttäjätunnuksesi",
+	"timeless-anonymous": "Anonyymi",
+	"timeless-loggedinas": "Kirjautunut käyttäjällä '''$1'''",
+	"timeless-notloggedin": "Et ole kirjautunut",
+	"timeless-userpage": "{{GENDER:$1|Käyttäjä}}sivu",
+	"timeless-talkpage": "Keskustelu {{GENDER:$1|käyttäjästä}}",
+	"timeless-pagelog": "Sivun lokit",
+	"timeless-more": "Lisää",
+	"timeless-sitetools": "Wiki-työkalut",
+	"timeless-pageactions": "Sivutyökalut",
+	"timeless-userpagetools": "Käyttäjäsivun työkalut",
+	"timeless-pagemisc": "Lisää",
+	"timeless-namespaces": "Nimiavaruudet",
+	"timeless-pagetools": "Sivun toiminnot",
+	"timeless-languages": "Kielet"
+}

@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aushulz",
+			"Santu",
+			"C.R.",
+			"Pippinu"
+		]
+	},
+	"categorytree": "Àrvulu  di li catigurìi",
+	"categorytree-portlet": "Catigurìi",
+	"categorytree-legend": "Ammustra l'àrvulu di li catigurìi",
+	"categorytree-desc": "Accissòriu AJAX pi taliari la [[Special:CategoryTree|struttura di li catigurìi]] dû situ",
+	"categorytree-header": "Nziriri lu nomu dâ catigirìa di unni si disìa taliari lu cuntinutu sutta furma di struttura a àrvulu. La pàggina addumanna li funziunalitati avanzati di JavaScript saputi sèntiri AJAX; si veni usatu nu browser  vecchiu assai o li funzioni JavaScript sunnu disabbilitati, sta pàggina non funziona.",
+	"categorytree-category": "Catigurìa:",
+	"categorytree-go": "Càrica",
+	"categorytree-parents": "Catigurìi cchiù àuti",
+	"categorytree-mode-label": "Modu:",
+	"categorytree-mode-categories": "ammustra sulu li catigurìi",
+	"categorytree-mode-pages": "tutti li pàggini, lassannu fora li mmàggini",
+	"categorytree-mode-all": "tutti li pàggini",
+	"categorytree-collapse": "cumprimi",
+	"categorytree-expand": "spanni",
+	"categorytree-expand-bullet": "[<b>+</b>]",
+	"categorytree-empty-bullet": "[<b>×</b>]",
+	"categorytree-member-counts": "cunteni {{PLURAL:$1|1 suttacatigurìa|$1 suttacatigurìi}}, {{PLURAL:$2|1 pàggina|$2 pàggini}} e {{PLURAL:$3|1 file|$3 file}}",
+	"categorytree-num-categories": "$1 C",
+	"categorytree-num-pages": "$1 P",
+	"categorytree-num-files": "$1 F",
+	"categorytree-num-empty": "vacanti",
+	"categorytree-load": "càrica",
+	"categorytree-loading": "sta caricannu...",
+	"categorytree-nothing-found": "nuddu risurtatu",
+	"categorytree-no-subcategories": "nudda suttacatigurìa.",
+	"categorytree-no-parent-categories": "nudda catigurìa cchià àuta",
+	"categorytree-no-pages": "nudda vuci e nudda suttacatigurìa.",
+	"categorytree-not-found": "Catigurìa  ''$1'' non attruvata",
+	"categorytree-error": "Prubbrema nnô caricamentu dî dati.",
+	"categorytree-retry": "Aspittari tanticchia e appoi pruvari n'ùutra vota."
+}

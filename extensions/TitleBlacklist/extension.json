@@ -1,0 +1,109 @@
+{
+	"name": "TitleBlacklist",
+	"version": "1.5.0",
+	"author": [
+		"Victor Vasiliev",
+		"Fran Rogers"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:TitleBlacklist",
+	"descriptionmsg": "titleblacklist-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "antispam",
+	"requires": {
+		"MediaWiki": ">= 1.29.0"
+	},
+	"GroupPermissions": {
+		"sysop": {
+			"tboverride": true,
+			"titleblacklistlog": true
+		}
+	},
+	"AvailableRights": [
+		"tboverride",
+		"tboverride-account",
+		"titleblacklistlog"
+	],
+	"LogTypes": [
+		"titleblacklist"
+	],
+	"LogRestrictions": {
+		"titleblacklist": "titleblacklistlog"
+	},
+	"LogActionsHandlers": {
+		"titleblacklist/*": "LogFormatter"
+	},
+	"GrantPermissions": {
+		"viewrestrictedlogs": {
+			"titleblacklistlog": true
+		}
+	},
+	"APIModules": {
+		"titleblacklist": "ApiQueryTitleBlacklist"
+	},
+	"MessagesDirs": {
+		"TitleBlacklist": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"TitleBlacklist": "includes/TitleBlacklist.php",
+		"TitleBlacklistEntry": "includes/TitleBlacklistEntry.php",
+		"TitleBlacklistHooks": "includes/TitleBlacklistHooks.php",
+		"TitleBlacklistAuthenticationRequest": "includes/TitleBlacklistAuthenticationRequest.php",
+		"TitleBlacklistPreAuthenticationProvider": "includes/TitleBlacklistPreAuthenticationProvider.php",
+		"Scribunto_LuaTitleBlacklistLibrary": "includes/Scribunto_LuaTitleBlacklistLibrary.php",
+		"ApiQueryTitleBlacklist": "includes/api/ApiQueryTitleBlacklist.php"
+	},
+	"ResourceModules": {
+		"mediawiki.api.titleblacklist": {
+			"scripts": "mediawiki.api.titleblacklist.js",
+			"dependencies": [
+				"mediawiki.api"
+			],
+			"targets": [ "desktop", "mobile" ]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "TitleBlacklist/modules"
+	},
+	"Hooks": {
+		"getUserPermissionsErrorsExpensive": [
+			"TitleBlacklistHooks::userCan"
+		],
+		"TitleGetEditNotices": [
+			"TitleBlacklistHooks::displayBlacklistOverrideNotice"
+		],
+		"MovePageCheckPermissions": [
+			"TitleBlacklistHooks::onMovePageCheckPermissions"
+		],
+		"EditFilter": [
+			"TitleBlacklistHooks::validateBlacklist"
+		],
+		"PageContentSaveComplete": [
+			"TitleBlacklistHooks::clearBlacklist"
+		],
+		"ScribuntoExternalLibraries": [
+			"TitleBlacklistHooks::scribuntoExternalLibraries"
+		]
+	},
+	"config": {
+		"TitleBlacklistSources": [],
+		"TitleBlacklistUsernameSources": "*",
+		"TitleBlacklistLogHits": false,
+		"TitleBlacklistCaching": {
+			"warningchance": 100,
+			"expiry": 900,
+			"warningexpiry": 600
+		},
+		"TitleBlacklistBlockAutoAccountCreation": true
+	},
+	"AuthManagerAutoConfig": {
+		"preauth": {
+			"TitleBlacklistPreAuthenticationProvider": {
+				"class": "TitleBlacklistPreAuthenticationProvider"
+			}
+		}
+	},
+	"manifest_version": 1
+}

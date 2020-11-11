@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Veeven"
+		]
+	},
+	"spam-blacklist": "\n # ఓ పేజీకి చేర్చిన బయటి లింకులు గనక ఈ జాబితాతో సరిపోలితే వాటిని నిరోధిస్తాం.\n # ఈ జాబితా ఈ వికీకి మాత్రమే సంబంధించినది; మహా నిరోధపు జాబితాని కూడా చూడండి.\n # పత్రావళి కొరకు ఇక్కడ చూడండి: https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- leave this line exactly as it is --> <pre>\n#\n# Syntax is as follows:\n#  * \"#\" అన్న అక్షరం నుండి లైను చివరివరకూ ఉన్నదంతా వ్యాఖ్య\n#  * ఖాళీగా లేని ప్రతీలైనూ URLలలోని హోస్ట్ పేరుని మాత్రమే సరిపోల్చే ఒక regex తునక\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"spam-whitelist": "\n #<!-- leave this line exactly as it is --> <pre>\n# ఈ జాబితాకి సరిపోలిన బయటి లింకులని *నిరోధించము*,\n# అవి నిరోధపు జాబితాలోని పద్దులతో సరిపోలినా గానీ.\n#\n# ఛందస్సు ఇదీ:\n#  * \"#\" అక్షరం నుండి లైను చివరివరకూ ప్రతీదీ ఓ వ్యాఖ్యే\n#  * ఖాళీగా లేని ప్రతీ లైనూ URLలలో హోస్ట్ పేరుని సరిపోల్చే regex తునక\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"spam-invalid-lines": "స్పామ్ నిరోధపు జాబితాలోని క్రింద పేర్కొన్న {{PLURAL:$1|లైను|లైన్లు}} తప్పుగా {{PLURAL:$1|ఉంది|ఉన్నాయి}}, పేజీని భద్రపరిచేముందు {{PLURAL:$1|దాన్ని|వాటిని}} సరిదిద్దండి:",
+	"spam-blacklist-desc": "Regex-ఆధారిత స్పామ్ నిరోధక పనిముట్టు: [[MediaWiki:Spam-blacklist]] మరియు [[MediaWiki:Spam-whitelist]]"
+}

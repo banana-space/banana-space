@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shinjiman",
+			"Cwlin0416"
+		]
+	},
+	"poem-desc": "提供 <code>&lt;poem&gt;</code> 標籤給予詩詞格式使用"
+}

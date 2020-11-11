@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Slomox"
+		]
+	},
+	"fancycaptcha-addurl": "In dien Ännern sünd ne’e Weblenken in.\nAs Schutz gegen automaatsch Spam, geev disse Bookstavenreeg in dat Feld ünnen in ([[Special:Captcha/help|mehr Infos]]).",
+	"fancycaptcha-badlogin": "As Schutz gegen Passwoord-Knackers, geev disse Bookstavenreeg in dat Feld ünnen in ([[Special:Captcha/help|mehr Infos]]).",
+	"fancycaptcha-accountcreate": "As Schutz gegen dat automaatsch Opstellen vun ne’e Brukerkonten, geev disse Bookstavenreeg in dat Feld ünnen in ([[Special:Captcha/help|mehr Infos]]).",
+	"fancycaptcha-create": "Disse Sied nee optostellen, geev disse Bookstavenreeg in dat Feld ünnen in ([[Special:Captcha/help|mehr Infos]]).",
+	"fancycaptcha-edit": "Disse Sied to ännern, geev disse Bookstavenreeg in dat Feld ünnen in ([[Special:Captcha/help|mehr Infos]])."
+}

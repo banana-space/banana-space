@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Agony",
+			"Centerlink",
+			"Crt",
+			"Linnea",
+			"Nedergard",
+			"Nike",
+			"Stryn",
+			"Varusmies",
+			"Syreeni",
+			"Pxos",
+			"Jack Phoenix",
+			"01miki10",
+			"Alluk.",
+			"Pahkiqaz"
+		]
+	},
+	"captcha-edit": "Ratkaise alla oleva laskutoimitus muokataksesi tätä sivua ([[Special:Captcha/help|lisätietoja]]):",
+	"captcha-edit-fail": "Virheellinen tai puuttuva CAPTCHA.",
+	"captcha-desc": "Tarjoaa CAPTCHA-tekniikoita suojaamaan mainoslinkkejä ja salasana-arvailua vastaan.",
+	"captcha-label": "CAPTCHA",
+	"captcha-addurl": "Muokkauksesi sisältää uusia linkkejä muille sivuille.\nAutomatisoitujen roskamuokkausten välttämiseksi ratkaise alla oleva laskutoimitus ja kirjoita vastauksesi kenttään, jotta voisit tallentaa muokkauksesi ([[Special:Captcha/help|lisätietoa]]):",
+	"captcha-badlogin": "Automatisoidun salasanan murtamisen estämiseksi ratkaise alla oleva laskutoimitus ja kirjoita vastaus kenttään ([[Special:Captcha/help|lisätietoa]]):",
+	"captcha-createaccount": "Automaattisen käyttäjätunnusten luonnin estämiseksi ratkaise alla oleva laskutoimitus ja kirjoita se kenttään ([[Special:Captcha/help|lisätietoa]]):",
+	"captcha-createaccount-fail": "CAPTCHA on virheellinen tai puuttuu.",
+	"captcha-create": "Luodaksesi sivun, ratkaise alla oleva laskutoimitus ([[Special:Captcha/help|lisätietoa]]):",
+	"captcha-sendemail": "Suojataksemme wikiä automaattisia mainoslinkkejä vastaan, pyydämme sinua ratkaisemaan alla olevan yksinkertaisen laskutoimituksen ja kirjoittamaan vastauksen laatikkoon ([[Special:Captcha/help|lisätietoa]]):",
+	"captcha-sendemail-fail": "CAPTCHA on virheellinen tai puuttuu.",
+	"captcha-disabledinapi": "Tämä toiminto vaatii kuvavarmennusta, joten et voi suorittaa sitä API:n kautta.",
+	"captchahelp-title": "CAPTCHA-ohje",
+	"captchahelp-cookies-needed": "Tämä toiminto vaatii evästeiden hyväksymistä selaimessa.",
+	"captchahelp-text": "Kenen tahansa muokkaukselle avoimet verkkosivut joutuvat usein roskapostihyökkäysten kohteeksi, joissa roskapostittajat käyttävät ohjelmistoja jotka lisäävät automaattisesti linkkejä muille sivuille. Vaikka nämä linkit voidaan poistaa, aiheutuu niistä silti merkittävää haittaa.\n\nJoissakin tilanteissa, erityisesti lisättäessä artikkeliin poikkeavaa sisältöä sisältäviä linkkejä vieraille sivustoille, sinua pyydetään suorittamaan roskapostitarkastus. Tietokone-ohjelmiston on vaikeaa läpäistä tarkastusta, joten se estää automaattiset lisäykset sallien kuitenkin ihmisten tehdä muutoksia sivustoon.\n\nValitettavasti tämä saattaa haitata käyttäjiä, joilla on rajoittunut näkökyky tai käyttäjiä, jotka käyttävät teksti- tai puhepohjaisia selaimia. \nTällä hetkellä ei ole käytettävissä puhepohjaista vaihtoehtoa. \nOta yhteyttä [[Special:ListAdmins|sivuston ylläpitäjiin]], jos et pysty tekemään asianmukaisia muutoksia.\n\nVarmistus ei toimi, jos evästeet eivät ole selaimessa käytössä.\n\nVoit palata muokkaustilaan selaimen paluutoiminnolla.",
+	"captcha-addurl-whitelist": " #<!-- jätä tämä rivi juuri näin kuin se on --> <pre>\n# Syntaksi on seuraava:\n#  * Kaikki #-merkistä eteenpäin on kommenttia\n#  * Jokainen ei-tyhjä rivi on säännöllisen lausekkeen osa, joka suoritetaan vain linkeissä esiintyville verkkonimille.\n  #</pre> <!-- jätä tämä rivi juuri näin kuin se on -->",
+	"right-skipcaptcha": "Suorittaa ilman CAPTCHA-kysymystä toimintoja, jotka normaalisti vaatisivat tarkastusta",
+	"captcha-apihelp-param-captchaword": "Vastaus CAPTCHAan",
+	"captcha-apihelp-param-captchaid": "CAPTCHA ID edellisestä pyynnöstä",
+	"confirmedit-preview-content": "Sisältö"
+}

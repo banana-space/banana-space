@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Als-Holder"
+		]
+	},
+	"titleblacklist-desc": "Macht s Ammanne megli, s Aalege vu nit gwinschte Syten- un Benutzernäme z verhindere: [[MediaWiki:Titleblacklist]] un [[MediaWiki:Titlewhitelist]]",
+	"titleblacklist": "# Des isch e Schwarzi Lischt. Jede Syten- un Benutzername, wu die Uusdrick druf zueträffe, cha nit aagleit wäre.\n# Täxt hinter ere Raute „#“ wird as Kommentar gsähne.\n# Des isch standardmäßig nit abhängig vum Einzelfall.",
+	"titlewhitelist": "# Des isch d Usnahmelischt vu dr Schwarze Lischt vu nit gwinschte Sytenäme. Verwänd „#“ fir Kommentar.\n# Des isch nit abhängig vum Einzelfall",
+	"titleblacklist-forbidden-edit": "'''E Syte mit em Titel „$2“ cha nit aagleit wäre.'''<br />Dr Titel kollidiert mit däm gsperrte Usdruck: '''''$1'''''",
+	"titleblacklist-forbidden-move": "'''D Syte „$2“ cha nit no „$3“ verschobe wäre.'''<br />Dr Titel kollidiert mit däm gsperrte Usdruck: '''''$1'''''",
+	"titleblacklist-forbidden-upload": "'''E Datei mit em Name „$2“ cha nit uffeglade wäre.'''<br />Dr Titel kollidiert mit däm gsperrte Usdruck: '''''$1'''''",
+	"titleblacklist-forbidden-new-account": "D Regischtrierig vum Benutzername „$2“ isch nit gwinscht.\nDr Name kollidiert mit däm gsperrte Name: <code>$1</code>",
+	"titleblacklist-invalid": "Die {{PLURAL:$1|Zyylete|Zyylete}} in dr Sperrlischt {{PLURAL:$1|isch|sin}} nit giltig; bitte korrigier si vor em Spychere:",
+	"titleblacklist-override": "Schwarzi Lischt ignoriere",
+	"right-tboverride": "Di Schwarz Lischt vu nit gwinschte Syte- oder Benutzernäme usser Chraft setze",
+	"right-tboverride-account": "Di Schwarz Lischt vu nit gwinschte Benutzernäme usser Chraft setze"
+}

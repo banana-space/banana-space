@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sarrus",
+			"Joedalton"
+		]
+	},
+	"timeless-desc": "Et tidsløst tema designet efter Winterprototypen af Brando Harris, og diverse stil af Wikimedia Foundation.",
+	"timeless-search-placeholder": "Søgning i cirka {{NUMBEROFARTICLES}} sider",
+	"timeless-loggedin": "Din konto",
+	"timeless-anonymous": "Anonym",
+	"timeless-loggedinas": "Logget på »$1«",
+	"timeless-notloggedin": "Ikke logget på",
+	"timeless-userpage": "{{GENDER:$1|Brugerside}}",
+	"timeless-talkpage": "{{GENDER:$1|Brugerdiskussion}}",
+	"timeless-pagelog": "Sidelogge",
+	"timeless-more": "Mere",
+	"timeless-sitetools": "Wikiværktøjer",
+	"timeless-pageactions": "Sideværktøjer",
+	"timeless-userpagetools": "Brugersideværktøjer",
+	"timeless-pagemisc": "Mere",
+	"timeless-namespaces": "Navnerum",
+	"timeless-pagetools": "Sidehandlinger",
+	"timeless-languages": "Sprog"
+}

@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Albinus",
+			"Manik Soren",
+			"Ramjit Tudu"
+		]
+	},
+	"categorytree": "ᱫᱟᱨᱮ ᱛᱷᱚᱠ",
+	"categorytree-portlet": "ᱛᱷᱚᱠ ᱠᱚ",
+	"categorytree-legend": "ᱥᱚᱫᱚᱨᱢᱮ ᱫᱟᱨᱮ ᱛᱷᱚᱠ",
+	"categorytree-category": "ᱛᱷᱚᱠ:",
+	"categorytree-go": "Dare uduḱme",
+	"categorytree-parents": "Gogo baba",
+	"categorytree-mode-label": "ᱰᱷᱚᱝ",
+	"categorytree-mode-categories": "ᱛᱷᱚᱠ ᱠᱚ ᱥᱩᱢᱩᱝ",
+	"categorytree-mode-all": "Sanam sakamko",
+	"categorytree-collapse": "Murchạo caba",
+	"categorytree-expand": "ᱯᱷᱟᱭᱞᱟᱣ",
+	"categorytree-member-counts": "Contains {{PLURAL:$1|1 ᱥᱟᱵ ᱠᱮᱴᱟᱜᱳᱨᱤ|$1 ᱥᱟᱵ ᱠᱮᱴᱟᱜᱳᱨᱤᱥ}}, {{PLURAL:$2|1 ᱥᱟᱦᱴᱟ|$2 ᱥᱟᱦᱴᱟᱠᱩ}}, and {{PLURAL:$3|1 ᱯᱷᱟᱭᱤᱞ|$3 ᱯᱷᱟᱭᱤᱞᱥ}}",
+	"categorytree-num-categories": "$1 C",
+	"categorytree-num-pages": "$1 P",
+	"categorytree-num-files": "$1 ᱮᱯᱷ",
+	"categorytree-num-empty": "Khạligea",
+	"categorytree-load": "Rakaṕ",
+	"categorytree-loading": "Rakaṕkana",
+	"categorytree-nothing-found": "Cet́ hõ baṅ ńamlena",
+	"categorytree-not-found": "ᱛᱷᱚᱠ <i>$1</i> ᱵᱟᱭ ᱧᱟᱢᱞᱮᱱᱟ"
+}

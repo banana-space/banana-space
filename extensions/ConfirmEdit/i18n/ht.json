@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Boukman",
+			"Masterches",
+			"Tisave"
+		]
+	},
+	"captcha-edit": "Pou ou kapab modifye paj sa, nou mande w kalkile ti adisyon fasil sa epitou mete rezilta, repons ou an nan bwat ki bò kote l ([[Special:Captcha/help|konnen plis sou fonksyon sa]]):",
+	"captcha-desc": "Yon enplemantasyon captcha senp",
+	"captcha-label": "CAPTCHA",
+	"captcha-addurl": "Edisyon ou an genyen nouvo lyen pou andeyò.\nPou ede nou pwoteje sistèm an kont pouryèl, tanpri, fè ti adisyon fasil sa epi bay repons ou an nan bwat ([[Special:Captcha/help|plis èd sou fonksyon sa]]):",
+	"captcha-badlogin": "Pou ede nou lite kont òdinatè ki ap krake, pirate mopas yo, tanpri rezoud ti adisyon fasil sa epi mete repons ou an nan bwat ([[Special:Captcha/help|konnen plis sou fonksyon sa]]):",
+	"captcha-createaccount": "Pou ede nou lite kont kreyasyon kont otomatik yo, souple rezoud ti adisyon sa epi mete nan bwat an repons ou an ([[Special:Captcha/help|konnen plis sou fonksyon sa]]):"
+}

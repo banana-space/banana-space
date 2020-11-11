@@ -1,0 +1,61 @@
+{
+	"name": "Interwiki",
+	"version": "3.1 20160307",
+	"author": [
+		"Stephanie Amanda Stevens",
+		"Alexandre Emsenhuber",
+		"Robin Pepermans",
+		"Siebrand Mazeland",
+		"Platonides",
+		"Raimond Spekking",
+		"Sam Reed",
+		"Jack Phoenix",
+		"Calimonius the Estrange",
+		"..."
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Interwiki",
+	"descriptionmsg": "interwiki-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "specialpage",
+	"requires": {
+		"MediaWiki": ">= 1.26.0"
+	},
+	"ExtensionMessagesFiles": {
+		"InterwikiAlias": "Interwiki.alias.php"
+	},
+	"config": {
+		"InterwikiCentralDB": null,
+		"InterwikiViewOnly": false
+	},
+	"MessagesDirs": {
+		"Interwiki": [
+			"i18n"
+		]
+	},
+	"Hooks": {
+		"InterwikiLoadPrefix": [
+			"InterwikiHooks::onInterwikiLoadPrefix"
+		]
+	},
+	"ResourceModules": {
+		"ext.interwiki.specialpage": {
+			"styles": "Interwiki.css"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "Interwiki"
+	},
+	"SpecialPages": {
+		"Interwiki": "SpecialInterwiki"
+	},
+	"ExtensionFunctions": [
+		"InterwikiHooks::onExtensionFunctions"
+	],
+	"AutoloadClasses": {
+		"InterwikiHooks": "includes/InterwikiHooks.php",
+		"SpecialInterwiki": "includes/SpecialInterwiki.php",
+		"InterwikiLogFormatter": "includes/InterwikiLogFormatter.php"
+	},
+	"manifest_version": 1
+}

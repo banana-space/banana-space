@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sasan700",
+			"Умар"
+		]
+	},
+	"inputbox-desc": "Аьтту хуьлуьйту хьалхе билгалйина HTML-формаш лато",
+	"inputbox-error-no-type": "Ахьа язъечу меттиган тайп билгала йина яц.",
+	"inputbox-tryexact": "Леррина лахар",
+	"inputbox-searchfulltext": "Дуьззина йозанца лахар",
+	"inputbox-createarticle": "АгӀо кхолла",
+	"inputbox-movearticle": "АгӀон цӀе хийца",
+	"inputbox-postcomment": "Керла дакъа",
+	"inputbox-postcommenttitle": "Керла дакъа"
+}

@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Babanwalia",
+			"Tow"
+		]
+	},
+	"interwiki-legend-label": "ਟੀਕਾ",
+	"interwiki_1": "ਹਾਂ",
+	"interwiki_0": "ਨਹੀਂ",
+	"interwiki_edit": "ਸੋਧੋ",
+	"interwiki_reasonfield": "ਕਾਰਨ:",
+	"interwiki-logtext": "ਰੋਜ਼ਨਾਮਚਾ ਵੇਖੋ",
+	"interwiki_addtext": "ਕੋਈ ਅੰਤਰਵਿਕੀ ਜਾਂ ਭਾਸ਼ਾਈ ਅਗੇਤਰ ਜੋੜੋ",
+	"interwiki-addtext-local": "ਕੋਈ ਸਥਾਨੀ ਅੰਤਰਵਿਕੀ ਜਾਂ ਭਾਸ਼ਾਈ ਅਗੇਤਰ ਜੋੜੋ",
+	"interwiki_addbutton": "ਜੋੜੋ",
+	"interwiki-global-links": "ਸਰਬ-ਵਿਆਪੀ ਅੰਤਰਵਿਕੀ ਅਗੇਤਰ",
+	"interwiki-local-links": "ਸਥਾਨੀ ਅੰਤਰਵਿਕੀ ਅਗੇਤਰ",
+	"interwiki-links": "ਅੰਤਰਵਿਕੀ ਅਗੇਤਰ",
+	"interwiki-language-links": "ਅੰਤਰਭਾਸ਼ਾਈ ਅਗੇਤਰ"
+}

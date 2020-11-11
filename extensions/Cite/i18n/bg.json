@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Borislav",
+			"DCLXVI",
+			"Spiritia",
+			"Termininja",
+			"StanProg"
+		]
+	},
+	"cite-desc": "Добавя етикетите <nowiki><ref[ name=id]></nowiki> и <nowiki><references/></nowiki>, подходящи за цитиране",
+	"cite_error": "Грешка при цитиране: $1",
+	"cite_error_ref_numeric_key": "Грешка в етикет <code>&lt;ref&gt;</code>;\nимето не може да бъде число. Използвайте описателно име",
+	"cite_error_ref_no_key": "Отварящият таг <code>&lt;ref&gt;</code> е неправилен или съдържа некоректно име.",
+	"cite_error_ref_too_many_keys": "Грешка в етикет <code>&lt;ref&gt;</code>;\nневалидно име, например повече от едно име на етикета",
+	"cite_error_ref_no_input": "Грешка в етикет <code>&lt;ref&gt;</code>;\nетикетите без име трябва да имат съдържание",
+	"cite_error_references_invalid_parameters": "Невалиден параметър на таг <code>&lt;references&gt;</code>.",
+	"cite_error_references_no_backlink_label": "Изчерпани са специалните етикети за обратна референция.\nОще етикети могат да се дефинират в системното съобщение <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>.",
+	"cite_error_references_no_text": "Грешка в етикет <code>&lt;ref&gt;</code>;\nне е подаден текст за бележките на име <code>$1</code>",
+	"cite_error_included_ref": "Липсва затварящ етикет <code>&lt;/ref&gt;</code> след отварящия етикет <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "Тагове <code>&lt;ref&gt;</code> съществуват за група „$1“, но липсва таг <code>&lt;references group=\"$1\"/&gt;</code> или затварящ таг <code>&lt;/ref&gt;</code>",
+	"cite-tracking-category-cite-error": "Страници с грешка в източник",
+	"cite_section_preview_references": "Преглед на бележките"
+}

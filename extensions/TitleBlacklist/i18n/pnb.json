@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Khalid Mahmood",
+			"Abbas dhothar"
+		]
+	},
+	"titleblacklist-desc": "مکھیانواں نوں اجازت دیندا اے جے اوہ صفے بنن توں روکن تے ورتن کھاتے [[MediaWiki:Titleblacklist|blacklist]] تے [[MediaWiki:Titlewhitelist|whitelist]]",
+	"titleblacklist": "# ایہ اک سرخی روک لسٹ اے۔ سرناویں تے ورتن والے اکو جۓ لگن تے تے اوہ نئیں بناۓ جاسکدے.\n# کومنٹ لئی ورتو \"#\" .\n# اے کیس سینسیٹو نئیں۔",
+	"titlewhitelist": "# ایہ اک سرناواں چٹیلسٹ اے۔ \nڈیفالٹ ولوں ای ایہ کیس سینسیٹو نئیں۔",
+	"titleblacklist-forbidden-edit": "سرناواں \"$2\" بنن توں روک دتا گیا اے۔\nایہ تھلے دتی ہوئی بلیکلسٹ انٹری نال رلدا اے: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" نوں \"$3\" ول نئیں لیایا جاسکدا کیوں جے سرناواں \"$3\" بنن توں روک دتی گئی اے۔\nاے تھلے دتی گئی کالی لسٹ انٹری نال رلدی اے: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "فائل ناں \"$2\" بنن توں روک دتی گئی اے۔\nایہ تھلے دتی گئی کالی لسٹ انٹری نال رلدا اے: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "ورتن ناں \"$2\" بنن توں روک دتا گیا اے۔\nاے تھلے دتی گئی کالیلسٹ انٹری نال رلدی اے: <code>$1</code>",
+	"titleblacklist-invalid": "تھلے دتی {{PLURAL:$1|لین|لیناں }} کالیلسٹ سرناویں {{PLURAL:$1|ہے|ہیں}}چ  ناں منیا جان والا؛ مہربانی کرکے بچان توں پہلے {{PLURAL:$1|it|اوناں نون}} اینوں.",
+	"titleblacklist-override": "بلیک لسٹ بُھل جاؤ",
+	"right-tboverride": "ٹاغٹل شلیکلسٹ تے لکھو۔",
+	"right-tboverride-account": "ورتن ناں بلیکلسٹ تے لکھو۔"
+}

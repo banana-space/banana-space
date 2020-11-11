@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"ChrisPtDe"
+		]
+	},
+	"syntaxhighlight-desc": "Balye la misa en èvidence de la sintaxa per la balisa <code>&lt;syntaxhighlight&gt;</code> en utilisent [http://pygments.org/ la coloracion sintaxica GeSHi]."
+}

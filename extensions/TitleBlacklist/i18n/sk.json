@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Helix84"
+		]
+	},
+	"titleblacklist-desc": "Umožňuje zakázať tvorbu stránok a používateľských účtov s určenými názvami na základe [[MediaWiki:Titleblacklist|čiernej listiny názvov]] a [[MediaWiki:Titlewhitelist|bielej listiny názvov]]",
+	"titleblacklist": "# Toto je čierna listina názvov stránok. Názvy stránok a účtov, ktoré zodpovedajú tu uvedenému regulárnemu výrazu nebude možné vytvoriť.\n# Komentáre začínajú znakom „#“.\n# Štandardne nezáleží na veľkosti písmen",
+	"titlewhitelist": "# Toto je biela listina názvov stránok. Riadky komentárov začínajú znakom „#“\n# Štandardne nezáleží na veľkosti písmen",
+	"titleblacklist-forbidden-edit": "Vytvorenie stránky z názovom „$2“ bolo zakázané. Zodpovedá tejto položke čiernej listiny: <code>$1</code>",
+	"titleblacklist-forbidden-move": "„$2“ nie je možné presunúť na „$3“, pretože vytvorenie stránky z názovom „$3“ bolo zakázané. Zodpovedá tejto položke čiernej listiny: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Bolo zakázané vytvorenie súboru s názvom „$2“. Zodpovedá tejto položke čiernej listiny: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Bolo zakázané vytvorenie používateľského mena „$2”.\nZodpovedá nasledovnej položke čiernej listiny: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Nasledovný riadok|Nasledovné riadky}} čiernej listiny názvov stránok {{PLURAL:$1|je neplatný|sú neplatné}} a je potrebné {{PLURAL:$1|ho|ich}} opraviť pred uložením stránky:",
+	"titleblacklist-override": "Ignorovať čiernu listinu",
+	"right-tboverride": "Prekonať čiernu listinu názvov",
+	"right-tboverride-account": "Prekonať čiernu listinu používateľských mien"
+}

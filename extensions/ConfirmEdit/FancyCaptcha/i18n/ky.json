@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chorobek",
+			"Janatkg"
+		]
+	},
+	"fancycaptcha-captcha": "Коопсуздук текшерүүсү",
+	"fancycaptcha-imgcaptcha-ph": "Жогорудагы текстти териңиз",
+	"fancycaptcha-sendemail": "Автоматташтырылган спамдан коргонууга жардам катары бул сөздөрдү төмөндөгү көзөнөккө киргизиңиз ([[Special:Captcha/help|more info]]):",
+	"fancycaptcha-reload-text": "Жаңылоо"
+}

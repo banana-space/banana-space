@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334"
+		]
+	},
+	"pfunc_desc": "Izboljša razčlenjevalnik z logičnimi funkcijami",
+	"pfunc_time_error": "Napaka: neveljaven čas",
+	"pfunc_time_too_long": "Napaka: preveč klicev #time",
+	"pfunc_time_too_big": "Napaka: #time podpira samo leta do 9999",
+	"pfunc_time_too_small": "Napaka: #time podpira samo leta od 0.",
+	"pfunc_rel2abs_invalid_depth": "Napaka: Neveljavna globina poti: »$1« (poskus dostopanja do vozlišča višjega od korenskega vozlišča)",
+	"pfunc_expr_stack_exhausted": "Napaka v izrazu: Sklad je izčrpan",
+	"pfunc_expr_unexpected_number": "Napaka v izrazu: Nepričakovani število",
+	"pfunc_expr_preg_match_failure": "Napaka v izrazu: Nepričakovan neuspeh preg_match",
+	"pfunc_expr_unrecognised_word": "Napaka v izrazu: Neprepoznana beseda »$1«",
+	"pfunc_expr_unexpected_operator": "Napaka v izrazu: Nepričakovan operator $1",
+	"pfunc_expr_missing_operand": "Napaka v izrazu: Manjkajoč operand za $1",
+	"pfunc_expr_unexpected_closing_bracket": "Napaka v izrazu: Nepričakovan zaključni oklepaj",
+	"pfunc_expr_unrecognised_punctuation": "Napaka v izrazu: Nepričakovan znak za ločilo »$1«",
+	"pfunc_expr_unclosed_bracket": "Napaka v izrazu: Nezaprti oklepaj",
+	"pfunc_expr_division_by_zero": "Deljenje z ničlo",
+	"pfunc_expr_invalid_argument": "Napačen argument za $1: < -1 ali > 1",
+	"pfunc_expr_invalid_argument_ln": "Napačen argument za ln: <= 0",
+	"pfunc_expr_unknown_error": "Napaka v izrazu: Neznana napaka ($1)",
+	"pfunc_expr_not_a_number": "V $1: rezultat ni število",
+	"pfunc_string_too_long": "Napaka: Niz presega omejitev $1 {{PLURAL:$1|znaka|znakov}}"
+}

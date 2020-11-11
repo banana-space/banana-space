@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Naudefj"
+		]
+	},
+	"codeeditor-desc": "Sintaks-uitgeligde redigering vir JavaScript- en CSS-bladsye met [https://ace.c9.io/ Ace-redigeerder]",
+	"codeeditor-toolbar-toggle": "Aktiveer of deaktiveer kode-teksverwerker"
+}

@@ -1,0 +1,19 @@
+/* Farsi Cite CSS */
+
+/* Upstream bug in stylelint makes it complain aboout the case of 'mw-Ref' */
+/* stylelint-disable value-keyword-case */
+
+/* <ref>s with a group */
+.mw-ref a[ data-mw-group ]:after {
+	content: '[' attr( data-mw-group ) ' ' counter( mw-Ref, persian ) ']';
+}
+
+/* <ref>s without a group */
+.mw-ref a:after {
+	content: '[' counter( mw-Ref, persian ) ']';
+}
+
+/* Linkbacks from <references> to <ref>s */
+span[ rel='mw:referencedBy' ] a:before {
+	content: counters( mw-ref-linkback, '٫', persian );
+}

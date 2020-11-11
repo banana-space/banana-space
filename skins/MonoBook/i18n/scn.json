@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Santu",
+			"Sarvaturi",
+			"Tonyfroio",
+			"Pippinu"
+		]
+	},
+	"skinname-monobook": "MonoBook",
+	"monobook-desc": "La peddi tradizziunali di MediaWiki a pàrtiri dû 2004, chi pigghia lu nomu di na fotu n jancu e nìuru dûn libbru ca si vidi ntô sfunnu dâ pàggina",
+	"monobook.css": "/* Li stili CSS nziriti ccà s'àpplicanu a l'utenti chi usanu la skin Monobook */",
+	"monobook.js": "/* Lu còdici JavaScript nzirutu ccà veni carricatu di l'utenti c'ùsanu la skin MonoBook */"
+}

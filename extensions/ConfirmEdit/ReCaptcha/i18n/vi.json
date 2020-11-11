@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Minh Nguyen"
+		]
+	},
+	"recaptcha-desc": "Mô đun reCAPTCHA cho Confirm Edit",
+	"recaptcha-edit": "Để giúp tránh các sửa đổi spam tự động, xin vui lòng gõ hai từ mà bạn nhìn thấy vào hộp dưới đây:",
+	"recaptcha-addurl": "Sửa đổi của bạn có chứa liên kết ngoài mới. Để giúp tránh các sửa đổi spam tự động, xin vui lòng gõ hai từ mà bạn nhìn vào hộp dưới đây:",
+	"recaptcha-badlogin": "Để giúp tránh bẻ khóa mật khẩu tự động, xin vui lòng gõ hai từ mà bạn nhìn vào hộp dưới đây:",
+	"recaptcha-createaccount": "Để giúp tránh việc mở tài khoản tự động, xin vui lòng gõ hai từ mà bạn nhìn vào hộp dưới đây:",
+	"recaptcha-createaccount-fail": "Thiếu câu trả lời reCAPTCHA hoặc câu trả lời không đúng.",
+	"recaptcha-create": "Để giúp tránh việc tạo trang tự động, xin vui lòng gõ hai từ mà bạn nhìn vào hộp dưới đây:"
+}

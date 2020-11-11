@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hamilton Abreu",
+			"Fúlvio",
+			"Vitorvicentevalente"
+		]
+	},
+	"recaptcha-edit": "Para proteger esta wiki contra <i>spam</i> automatizado,  solicitamos que introduza as palavras que vê na caixa.",
+	"recaptcha-addurl": "A sua edição contém ligações externas novas. Para proteger a wiki contra <i>spam</i> automatizado, introduza as palavras que vê na caixa.",
+	"recaptcha-badlogin": "Para proteger esta wiki contra mecanismos automatizados de descoberta de palavras-passe, por favor introduza as palavras que vê na caixa.",
+	"recaptcha-createaccount": "Para proteger esta wiki contra a criação de contas automatizada, solicitamos que introduza as palavras que vê na caixa.",
+	"recaptcha-createaccount-fail": "A resposta ao reCAPTCHA está vazia ou errada.",
+	"recaptcha-create": "Para proteger esta wiki contra a criação de páginas automatizada, solicitamos que introduza as palavras que vê na caixa.",
+	"recaptcha-info": "Resolva o desafio do ReCaptcha e devolva os valores do desafio e da resposta como captchaId e captchaWord.",
+	"recaptcha-apihelp-param-recaptcha_challenge_field": "Campo do <i>widget</i> ReCaptcha",
+	"recaptcha-apihelp-param-recaptcha_response_field": "Campo do <i>widget</i> ReCaptcha",
+	"recaptcha-id-label": "Desafio do ReCaptcha",
+	"recaptcha-id-help": "Valor do desafio do ReCaptcha",
+	"recaptcha-label": "Solução do ReCaptcha",
+	"recaptcha-help": "Valor da solução do ReCaptcha"
+}

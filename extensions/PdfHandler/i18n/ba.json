@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Assele",
+			"Янмурза Баки"
+		]
+	},
+	"pdf-desc": "PDF файлдарҙы рәсемдәр рәүешендә ҡарау өсөн эшкәртеүсе ҡорал",
+	"pdf-file-page-warning-header": "Конфиденциальносте күҙ уңында тотоу.",
+	"pdf-file-page-warning-info": "Был функция тураһында тулыраҡ мәғлүмәт",
+	"pdf_no_metadata": "PDF-тан мета-мәғлүмәтте алыу мөмкин түгел",
+	"pdf_page_error": "Бит һаны биттәр һанынан ашҡан",
+	"exif-pdf-producer": "Үҙгәртеү программаһы",
+	"exif-pdf-version": "PDF формтындағы версия.",
+	"exif-pdf-encrypted": "Шифрлау.",
+	"exif-pdf-pagesize": "Бит ҙурлығы"
+}

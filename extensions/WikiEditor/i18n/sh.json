@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Conquistador",
+			"Srdjan m"
+		]
+	},
+	"wikieditor-toolbar-tool-bold": "Podebljano",
+	"wikieditor-toolbar-tool-italic": "Ukošeno",
+	"wikieditor-toolbar-tool-link-cancel": "Otkaži",
+	"wikieditor-toolbar-tool-file": "Datoteka",
+	"wikieditor-toolbar-tool-file-cancel": "Otkaži",
+	"wikieditor-toolbar-tool-reference": "Referenca",
+	"wikieditor-toolbar-tool-reference-cancel": "Otkaži",
+	"wikieditor-toolbar-section-advanced": "Napredno-Напредно",
+	"wikieditor-toolbar-tool-heading": "Naslov-Наслов",
+	"wikieditor-toolbar-tool-heading-2": "Razina/ниво 2",
+	"wikieditor-toolbar-tool-heading-3": "Razina/ниво 3",
+	"wikieditor-toolbar-tool-heading-4": "Razina/ниво 4",
+	"wikieditor-toolbar-tool-heading-5": "Razina/ниво 5",
+	"wikieditor-toolbar-group-format": "Format/облик",
+	"wikieditor-toolbar-tool-ulist": "Spisak/popis s oznakama",
+	"wikieditor-toolbar-tool-olist": "Numerirani/numerisani spisak/popis",
+	"wikieditor-toolbar-tool-nowiki": "Bez wikiformatiranja/wikioblikovanja",
+	"wikieditor-toolbar-tool-redirect": "Preusm(j)erenje",
+	"wikieditor-toolbar-tool-big": "Velika slova",
+	"wikieditor-toolbar-tool-small": "Mala slova",
+	"wikieditor-toolbar-tool-superscript": "Eksponent",
+	"wikieditor-toolbar-tool-subscript": "Indeks",
+	"wikieditor-toolbar-group-insert": "Ubaci",
+	"wikieditor-toolbar-tool-gallery": "Galerija slika",
+	"wikieditor-toolbar-tool-newline": "Novi red(ak)",
+	"wikieditor-toolbar-tool-table": "Tabela/tablica",
+	"wikieditor-toolbar-tool-table-preview": "Pregled",
+	"wikieditor-toolbar-tool-table-cancel": "Otkaži",
+	"wikieditor-toolbar-tool-replace": "Traži i zam(ij)eni",
+	"wikieditor-toolbar-section-characters": "Posebni znakovi-Посебни знакови",
+	"wikieditor-toolbar-section-help": "Pomoć-Помоћ"
+}

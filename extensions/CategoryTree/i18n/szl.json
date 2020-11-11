@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Krol111"
+		]
+	},
+	"categorytree-expand": "rozwjyń",
+	"categorytree-member-counts": "Mo {{PLURAL:$1|1 podkategoryjo|$1 podkategoryje|$1 podkategoryji}}, {{PLURAL:$2|1 zajta|$2 zajty|$2 zajt}} a {{PLURAL:$3|1 plik|$3 pliki|$3 plikůw}}",
+	"categorytree-num-categories": "$1 kat.",
+	"categorytree-num-pages": "$1 zaj.",
+	"categorytree-num-files": "$1 pl."
+}

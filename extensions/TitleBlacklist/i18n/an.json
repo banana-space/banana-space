@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Juanpabl"
+		]
+	},
+	"titleblacklist-desc": "Premite a os almenistradors de vedar a creyación de pachinas y cuentas d'usuario con aduya d'una [[MediaWiki:Titleblacklist|lista negra]] y una [[MediaWiki:Titlewhitelist|lista blanca]]",
+	"titleblacklist": "# Ista ya una lista negra de títols. Os títols que concuerden con una d'istas expresions regulars no se pueden creyar.\n# Use \"#\" ta fer comentarios.\n# Por defecto, no fa diferencia entre mayusclas y minusclas",
+	"titlewhitelist": "# Ista ye una lista blanca de títols. Faiga servir \"#\" ta escribir comentarios.\n# Por defecto, no diferencia entre mayusclas y minusclas",
+	"titleblacklist-forbidden-edit": "O títol \"$2\" ye vedato y no se puede creyar. \nConcuerda con a siguient dentrada d'a lista negra: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" no se puede tresladar ta \"$3\", porque o títol \"$3\" ye vedato y no se puede creyar. Concuerda con a siguient dentrada d'a lista negra: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "O nombre de fichero \"$2\" ye vedato y no se puede creyar. Concuerda con a siguient dentrada d'a lista negra: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "O nombre d'usuario \"$2\" ye vedato y no se puede creyar. \nConcuerda con a dentrada <code>$1</code> d'a lista negra.",
+	"titleblacklist-invalid": "{{PLURAL:$1|A siguient linia|As siguients linias}} d'a lista negra de títols {{PLURAL:$1|ye|son}} no son conformes; por favor corricha-{{PLURAL:$1|la|las}} antes d'alzar:",
+	"titleblacklist-override": "Ignorar a lista negra",
+	"right-tboverride": "Ignorar a lista negra de títols",
+	"right-tboverride-account": "Ignorar a lista negra de los nombres d'usuario"
+}

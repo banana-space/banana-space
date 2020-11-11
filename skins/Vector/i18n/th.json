@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Horus",
+			"Octahedron80",
+			"Woraponboonkerd",
+			"Ans"
+		]
+	},
+	"skinname-vector": "เวกเตอร์",
+	"vector-skin-desc": "โมโนบุ๊กยุคใหม่กับมุมมองที่มีชีวิตชีวาและมีการปรับปรุงประสิทธิภาพการใช้งานจำนวนมาก",
+	"vector.css": "/* สไตล์ชีตในหน้านี้จะส่งผลแก่ผู้ใช้ที่ใช้สกินเวกเตอร์ */",
+	"vector.js": "/* จาวาสคริปต์ใด ๆ ในหน้านี้จะถูกโหลดให้แก่ผู้ใช้ที่ใช้สกินเวกเตอร์ */",
+	"vector-action-addsection": "เพิ่มหัวข้อ",
+	"vector-action-delete": "ลบ",
+	"vector-action-move": "เปลี่ยนชื่อ",
+	"vector-action-protect": "ล็อก",
+	"vector-action-undelete": "กู้คืน",
+	"vector-action-unprotect": "เปลี่ยนการล็อก",
+	"vector-view-create": "สร้าง",
+	"vector-view-edit": "แก้ไข",
+	"vector-view-history": "ดูประวัติ",
+	"vector-view-view": "อ่าน",
+	"vector-view-viewsource": "ดูโค้ด",
+	"vector-more-actions": "เพิ่มเติม"
+}

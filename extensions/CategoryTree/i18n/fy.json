@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"SK-luuut",
+			"Snakesteuben",
+			"Robin0van0der0vliet",
+			"Ieneach fan 'e Esk",
+			"Robin van der Vliet"
+		]
+	},
+	"categorytree": "Kategorybeam",
+	"categorytree-portlet": "Kategoryen",
+	"categorytree-legend": "Lit kategorystambeam sjen",
+	"categorytree-header": "Folje in kategorynamme yn om de ynhâld yn in beamstruktuer te sjen. Tink dêrom dat dit spesjale JavaScript funksjes brûkt bekend as AJAX. At jo in tige âlde blêdzjer hawwe of jo hawwe JavaScript net oan stean, dan wurket dit net.",
+	"categorytree-category": "Kategory:",
+	"categorytree-go": "Los",
+	"categorytree-mode-categories": "allinne kategoryen",
+	"categorytree-mode-pages": "alle siden útsein ôfbylden",
+	"categorytree-mode-all": "alle siden",
+	"categorytree-collapse": "ticht",
+	"categorytree-expand": "iepen",
+	"categorytree-member-counts": "befettet {{PLURAL:$1|1 subkategory|$1 subkategoryen}}, {{PLURAL:$2|1 side|$2 siden}} en {{PLURAL:$3|1 triem|$3 triemmen}}",
+	"categorytree-num-categories": "$1 K",
+	"categorytree-num-pages": "$1 S",
+	"categorytree-num-files": "$1 T",
+	"categorytree-num-empty": "leech",
+	"categorytree-load": "ynlade",
+	"categorytree-loading": "ynlade...",
+	"categorytree-nothing-found": "neat fûn",
+	"categorytree-no-subcategories": "gjin ûnderlizzende kategoryen",
+	"categorytree-no-pages": "gjin siden of ûnderlizzende siden",
+	"categorytree-not-found": "Kategory <i>$1</i> net fûn"
+}

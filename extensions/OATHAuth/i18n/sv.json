@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"WikiPhoenix",
+			"Lokal Profil"
+		]
+	},
+	"oathauth-desc": "Ger autentiseringsstöd med HMAC-baserade engångslösenord",
+	"specialpages-group-oath": "Tvåstegsverifiering",
+	"oathauth-account": "Kontonamn:",
+	"oathauth-secret": "Tvåstegs-hemlig nyckel:",
+	"oathauth-enable": "Aktivera tvåstegsverifiering",
+	"oathauth-scratchtokens": "Följande lista är en förteckning över engångsnycklar. Dessa nycklar kan enbart användas en gång och är avsedda för användning i nödfall. Vänligen skriv ner dessa och förvara dem på en säker plats. Om du förlorar din telefon, är dessa nycklar det enda sättet att rädda ditt konto. Dessa nycklar kommer aldrig att visas igen.",
+	"oathauth-token": "Nyckel",
+	"oathauth-disable": "Inaktivera tvåstegsverifiering",
+	"oathauth-validatedoath": "Validerade tvåstegs-autentiseringsuppgifter. Tvåstegsverifiering kommer nu att verkställas.",
+	"oathauth-failedtovalidateoath": "Misslyckades med att validera tvåstegs-autentiseringsuppgifter",
+	"oathauth-disabledoath": "Inaktivera tvåstegsverifiering.",
+	"oathauth-prefs-label": "Tvåstegsverifiering:",
+	"oathauth-step1": "Steg 1: Ladda ned appen",
+	"oathauth-step2": "Steg 2: Skanna QR-koden",
+	"oathauth-step4": "Steg 4: Verifiering",
+	"oathauth-auth-token-label": "Nyckel",
+	"oathauth-auth-ui": "Ange verifieringskoden från din autentiseringsenhet",
+	"oathauth-login-failed": "Verifiering misslyckades.",
+	"grant-group-authentication": "Använd OAuth för autentisering",
+	"action-oathauth-api-all": "kolla OATH-status",
+	"apihelp-query+oath-example-1": "Skaffa information om den aktuella användaren.",
+	"apihelp-query+oath-example-2": "Hämta information om användaren <kbd>Example</kbd>",
+	"apihelp-oathvalidate-example-1": "Bekräfta en nyckel för aktuell användare",
+	"apihelp-oathvalidate-example-2": "Bekräfta en nyckel för användaren <kbd>Example</kbd>"
+}

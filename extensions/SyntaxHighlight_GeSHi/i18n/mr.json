@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kaustubh",
+			"Mahitgar",
+			"Shantanoo"
+		]
+	},
+	"syntaxhighlight-desc": "[http://pygments.org/ GeSHi हायलायटर] वापरून सिन्टॅक्स हायलाईट करा <code>&lt;syntaxhighlight&gt;</code>"
+}

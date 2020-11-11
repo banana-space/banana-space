@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"BrokenArrow",
+			"Dbc334"
+		]
+	},
+	"captcha-edit": "Če želite urejati stran, prosimo rešite spodnjo nalogo in odgovor vpišite v polje ([[Special:Captcha/help|več informacij]]):",
+	"captcha-edit-fail": "Napačen ali manjkajoč CAPTCHA",
+	"captcha-desc": "Nudi pristope CAPTCHA za zaščito proti smetju in ugibanju gesel",
+	"captcha-label": "CAPTCHA",
+	"captcha-addurl": "Vaše urejanje vključuje nove zunanje povezave.\nDa zaščitimo wiki pred samodejno navlako, vas prijazno prosimo, da rešite spodnjo nalogo in odgovor vnesete v polje, če želite shraniti svoje urejanje ([[Special:Captcha/help|več informacij]]):",
+	"captcha-badlogin": "Da zaščitimo wiki pred samodejnim ugotavljanjem gesel, vas prijazno prosimo, da rešite spodnjo nalogo in odgovor vnesete v polje ([[Special:Captcha/help|več informacij]]):",
+	"captcha-createaccount": "Da zaščitimo wiki pred samodejnim ustvarjanjem računov, vas prijazno prosimo, da rešite spodnjo nalogo in odgovor vnesete v polje ([[Special:Captcha/help|več informacij]]):",
+	"captcha-createaccount-fail": "Napačna ali manjkajoča CAPTCHA.",
+	"captcha-create": "Če želite ustvariti stran, prosimo rešite spodnjo nalogo in odgovor vpišite v polje ([[Special:Captcha/help|več informacij]]):",
+	"captcha-sendemail": "Da zaščitimo wiki pred samodejnim smetenjem, vas prijazno prosimo, da rešite spodnjo nalogo in odgovor vnesete v polje ([[Special:Captcha/help|več informacij]]):",
+	"captcha-sendemail-fail": "Napačna ali manjkajoča CAPTCHA.",
+	"captcha-disabledinapi": "To dejanje zahteva preverjanje captcha, zato ga ni mogoče izvesti preko API.",
+	"captchahelp-title": "Pomoč za captcha",
+	"captchahelp-cookies-needed": "Če želite, da to deluje, boste morali v svojem brskalniku omogočiti piškotke.",
+	"captchahelp-text": "Spletne strani, ki omogočajo objavljanje širši javnosti, kot na primer ta wiki, pogosto zlorabljajo spamerji, ki za objavo svojih povezav na mnoge strani uporabljajo avtomatizirana orodja.\nČeprav je neželene povezave mogoče odstraniti, so precejšnja nadloga.\n\nVčasih, zlasti pri dodajanju novih spletnih povezav na stran, vam bo wiki morda prikazal sliko obarvanega ali popačenega besedila in zahteval vpis prikazanih besed.\nKer je to opravilo težko avtomatizirati, bo s tem večini ljudi objavljanje dovoljeno, spamerji in drugi robotski napadalci pa bodo ustavljeni.\n\nŽal lahko to povzroči nevšečnosti uporabnikom s slabim vidom in tistim, ki uporabljajo besedilne ali govorne brskalnike.\nGlasovna možnost trenutno še ni na razpolago.\nČe vam to nepričakovano preprečuje legitimno objavo, prosimo, da se obrnete na [[Special:ListAdmins|administratorje spletišča]].\n\nZa vrnitev v urejevalnik izberite gumb »nazaj« v vašem brskalniku.",
+	"captcha-addurl-whitelist": " #<!-- pustite to vrstico takšno, kot je --> <pre>\n# Skladnja je sledeča:\n#   * Vse od znaka »#« do konca vrstice je pripomba\n#   * Vsaka neprazna vrstica je delec regularnega izraza, ki se bo ujemal samo z gostitelji v URL-jih\n #</pre> <!-- pustite to vrstico takšno, kot je -->",
+	"right-skipcaptcha": "Izvaja dejanja, ki sprožijo preverjanje captcha, brez da bi moral opraviti preverjanje",
+	"captcha-apihelp-param-captchaword": "Odgovorite na CAPTCHA",
+	"captcha-apihelp-param-captchaid": "CAPTCHA ID iz prejšnje zahteve"
+}

@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Beluga",
+			"Crt",
+			"Jaakonam",
+			"Mies",
+			"Nike",
+			"Olli",
+			"Pxos",
+			"Stryn"
+		]
+	},
+	"nuke": "Massapoisto",
+	"action-nuke": "massapoistaa sivuja",
+	"nuke-desc": "Antaa ylläpitäjille mahdollisuuden sivujen [[Special:Nuke|massapoistamiseen]]",
+	"nuke-nopages": "Ei käyttäjän [[Special:Contributions/$1|{{GENDER:$1|$1}}]] lisäämiä uusia sivuja tuoreissa muutoksissa.",
+	"nuke-list": "Käyttäjä [[Special:Contributions/$1|{{GENDER:$1|$1}}]] on äskettäin luonut seuraavat sivut.\nLisää kommentti ja poista sivut napsauttamalla painiketta.",
+	"nuke-list-multiple": "Seuraavat sivut on luotu äskettäin.\nLisää kommentti ja poista sivut napsauttamalla painiketta.",
+	"nuke-defaultreason": "Käyttäjän [[Special:Contributions/$1|{{GENDER:$1|$1}}]] lisäämien sivujen massapoistaminen",
+	"nuke-multiplepeople": "Äskettäin lisättyjen sivujen massapoistaminen",
+	"nuke-tools": "Tämä työkalu mahdollistaa äskettäin lisättyjen sivujen massapoistamisen käyttäjänimen tai IP-osoitteen perusteella.\nKirjoita käyttäjänimi tai IP-osoite, niin saat listan poistettavista sivuista, tai jätä kenttä tyhjäksi niin saat kaikkien käyttäjien tekemät sivut.",
+	"nuke-submit-user": "Siirry",
+	"nuke-toggleinvert": "Käänteisvalinta",
+	"nuke-submit-delete": "Poista valitut sivut",
+	"right-nuke": "Massapoistaa sivuja",
+	"nuke-select": "Valinta: $1",
+	"nuke-userorip": "Käyttäjänimi tai IP-osoite (voi jättää myös tyhjäksi):",
+	"nuke-maxpages": "Sivujen enimmäismäärä:",
+	"nuke-editby": "Luonut [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
+	"nuke-deleted": "Sivu '''$1''' on poistettu.",
+	"nuke-not-deleted": "Sivua [[:$1]] '''ei voitu''' poistaa.",
+	"nuke-delete-more": "[[Special:Nuke|Poista enemmän sivuja]]",
+	"nuke-pattern": "Malli sivun nimelle:",
+	"nuke-nopages-global": "[[Special:RecentChanges|Tuoreissa muutoksissa]] ei ole uusia sivuja.",
+	"nuke-viewchanges": "näytä muutokset",
+	"nuke-namespace": "Rajoita nimiavaruuteen:",
+	"nuke-linkoncontribs": "massapoisto",
+	"nuke-linkoncontribs-text": "Massapoista ne sivut, joissa tämä käyttäjä on ainoa sivuja muokannut"
+}

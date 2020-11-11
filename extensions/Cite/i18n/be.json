@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Чаховіч Уладзіслаў",
+			"Artsiom91"
+		]
+	},
+	"cite_error": "Памылка цытавання $1",
+	"cite_error_references_duplicate_key": "памылковы тэг <code>&lt;ref&gt;</code>; імя \"$1\" вызначана некалькі разоў з розным зместам",
+	"cite_error_references_missing_key": "тэг <code>&lt;ref&gt;</code> з імем \"$1\", вызначаны ў <code>&lt;references&gt;</code>, не згадваецца ў папярэднім тэксце.",
+	"cite-tracking-category-cite-error": "Старонкі з памылкамі ў зносках",
+	"cite-tracking-category-cite-error-desc": "Старонка мае памылкі ў выкарыстанні тэгаў зносак"
+}

@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Purodha"
+		]
+	},
+	"action-titleblacklistlog": "donn et Logbohch vun de „schwazze Leß“ för Övvverschreffte aanlohre",
+	"log-name-titleblacklist": "De „schwazze Leß“ för Övvverschreffte",
+	"log-description-titleblacklist": "Heh di Vörjäng verfollje de Träffer en de „schwazze Leß“ för Övverschreffte vun Sigge.",
+	"logentry-titleblacklist-hit-username": "{{GENDER:$2|Dä|Dat|Dä Metmaacher|De|Dat}} $1 wulld ene Zohjang för „$3“ aanlähje un dat wood övver dä Endraach „$4“ de „schwazze Leß“ för Övverschreffte vun Sigge ongerbonge.",
+	"titleblacklist-desc": "Määt et möjjelesch, bestemmpte neuje Sigge un neuje Metmaacher-Name övver en [[MediaWiki:Titleblacklist|„schwatze Leß“]] un en [[MediaWiki:Titlewhitelist|Leß met Ußnahme dofun]] ze verbeede.",
+	"titleblacklist": "# Dat hee eß en „schwatze Leß“ met verbodde Tittele för Sigge.\n# Dä ier Enhallt sen rejolähre Ußdrök,\n# wat do drop paß, kam_mer nit aanläje.\n# Wam_mer et nit ömschtällt, es Jruß- un Kleinschrevv_ejaal.\n# Donn „#“ aan der Aanfang fun en Reih, dann häß ene Kommentaa.",
+	"titlewhitelist": "# Dat hee eß en Leß met Ußnahme fun de „schwatze Leß“ met verbodde\n# Tittele för Sigge. Dä ier Enhallt sen rejolähre Ußdrök,\n# wat do drop paß, kam_mer aanläje.\n# Wam_mer et nit ömschtällt, es Jruß- un Kleinschrevv_ejaal.\n# Donn „#“ aan der Aanfang fun en Reih, dann häß ene Kommentaa.",
+	"titleblacklist-forbidden-edit": "En Sigg met dämm Tittel „$2“ aanzelääje es verbodde per dämm Enndraach <code>$1</code> en de „schwazze Leß.“",
+	"titleblacklist-forbidden-move": "Di Sigg met dä Övverschreff „$2“ op de Övverschreff „$3“ ömzenänne es verbodde per dämm Enndraach <code>$1</code> en de „schwazze Leß.“",
+	"titleblacklist-forbidden-upload": "En Datei met dämm Tittel „$2“ huhzelade es verbodde per dämm Enndraach <code>$1</code> en de „schwazze Leß.“",
+	"titleblacklist-forbidden-new-account": "Enne Metmaacher met dämm Name „$2“ aanzelääje es verbodde per dämm Enndraach <code>$1</code> en de „schwazze Leß.“",
+	"titleblacklist-invalid": "{{PLURAL:$1|De Reih unge stemmp nit un moß|De $1 Reije unge stimme nit un möße|Dat he sull}} för em Affschpeischere eets en Odenung jebraat wäde:",
+	"titleblacklist-override": "De schwazze Leß övverjonn",
+	"titleblacklist-warning": "<strong>Opjepaß:</strong> heh di Sigg kann blohß vun Wikki_Köhbeße un vun andere Metmaacher met däm Rääsch <code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">tboverride</code>, weil se en dä „schwazze Leß“ för Övverschreffte op heh dä Enndraach paß:<br /><code>$1</code>",
+	"right-tboverride": "De Lėß met verbodde Nahme un Övverschreffte för Sigge övverjonn",
+	"right-tboverride-account": "De Leß met verbodde Metmaacher-Name övverjonn",
+	"right-titleblacklistlog": "Donn et Logbohch vun de „schwazze Leß“ för Övvverschreffte aanlohre",
+	"apihelp-titleblacklist-description": "Donn de Övverschreffte vun Sigge, Datteije udder de Nahme vun Metmaacher jähje de „schwazze Leß“ för Övvverschreffte pröhve.",
+	"apihelp-titleblacklist-param-title": "De Zäijschekätt, öm se jähje de „schwazze Leß“ ze pröhve.",
+	"apihelp-titleblacklist-param-action": "Der Vörjang zom Pröhve.",
+	"apihelp-titleblacklist-param-nooverride": "Donn nit versöhke, de „schwazze Leß“ för Övvverschreffte ze övverjonn.",
+	"apihelp-titleblacklist-example-1": "Donn pröhfe, ov „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">[[Foo]]</code>“ en de „schwazze Leß“ es.",
+	"apihelp-titleblacklist-example-2": "Donn pröhfe, ov „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">[[Bar]]</code>“ en de „schwazze Leß“ för et Verändere es.",
+	"apihelp-createaccount-param-ignoretitleblacklist": "Övverjangk de Pröhvong op jefälschte Metmaacher (Bruch et Rääsch <code lang=\"en\" xml:lang=\"en\" dir=\"ltr\" >tboverride</code> udder <code lang=\"en\" xml:lang=\"en\" dir=\"ltr\" >tboverride-account</code>)."
+}

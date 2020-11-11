@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Borichèt",
+			"Bèrto 'd Sèra",
+			"Dragonòt"
+		]
+	},
+	"spam-blacklist": "# J'adrësse esterne ch'as treuva ant sta lista-sì a vniran blocà se cheidun a jë gionta ansima a na pàgina. # Sta lista a l'ha valor mach an sta wiki-sì; ch'a-j fasa arferiment ëdcò a la lista nèira global. # Për dla documentassion ch'a varda http://www.MediaWiki.org/wiki/Extension:SpamBlacklist #<!-- ch'a lassa sta riga-sì giusta 'me ch'a l'é --> <pre> # # La sintassi a l'é: # * Tut lòn ch'as anandia con na \"#\" fin a la fin dla riga as ten coma coment # * Qualsëssìa riga nen veuja a resta un tòch d'espression regolar ch'as paragon-a a ij nòm ëd servent andrinta a j'adrësse #</pre> <!-- ch'a lassa sta riga-sì giusta 'me ch'a l'é -->",
+	"spam-whitelist": "#<!-- ch'a lassa sta riga-sì giusta 'me ch'a l'é --> <pre> # J'adrësse esterne coma cole dë sta lista a vniran NEN blocà, ëdcò fin-a # s'a fusso da bloché conforma a le régole dla lista nèira. # # La sintassi a l'é: # * Tut lòn ch'as anandia con na \"#\" fin a la fin dla riga as ten coma coment # * Qualsëssìa riga nen veuja a resta un tòch d'espression regolar ch'as paragon-a a ij nòm ëd servent andrinta a j'adrësse #</pre> <!-- ch'a lassa sta riga-sì giusta 'me ch'a l'é -->",
+	"email-blacklist": "# J'adrësse ëd pòsta eletrònica ch'as treuva ant sta lista-sì a vniran blocà da registresse o mandé 'd mëssagi. \n# Sta lista a l'ha valor mach an sta wiki-sì; ch'a-j fasa arferiment ëdcò a la lista nèira global. \n# Për dla documentassion ch'a varda http://www.mediawiki.org/wiki/Extension:SpamBlacklist \n#<!-- ch'a lassa sta riga-sì giusta 'me ch'a l'é --> <pre> \n# \n# La sintassi a l'é: \n# * Tut lòn ch'as anandia con na \"#\" fin a la fin dla riga as ten coma coment # \n* Qualsëssìa riga nen veujda a resta un tòch d'espression regolar ch'as paragon-a ai nòm dij servent andrinta a j'adrësse \n\n#</pre> <!-- ch'a lassa sta riga-sì giusta 'me ch'a l'é -->",
+	"email-whitelist": "#<!-- ch'a lassa sta riga-sì giusta 'me ch'a l'é --> <pre> \n# J'adrësse ëd pòsta eletrònica ch'as treuvo ant sta lista-sì a saran *pa* blocà bele ch'a sarìo\n# da bloché për le vos ëd la lista nèira.\n# \n#</pre> <!-- ch'a lassa sta riga-sì giusta 'me ch'a l'é -->\n# La sintassi a l'é: \n# * Tut lòn ch'as anandia con un «#» fin a la fin dla riga as ten coma coment \n# * Qualsëssìa riga nen veujda a resta un tòch d'espression regolar ch'as paragon-a ai nòm dij servent andrinta a j'adrësse",
+	"spam-blacklisted-email": "Adrëssa ëd pòsta eletrònica an lista nèira",
+	"spam-blacklisted-email-text": "Soa adrëssa ëd pòsta eletrònica a l'é al moment an na lista nèira për mandé dij mëssagi a j'àutri utent.",
+	"spam-blacklisted-email-signup": "L'adrëssa ëd pòsta eletrònica dàita a l'é al moment an na lista nèira për l'utilisassion.",
+	"spam-invalid-lines": "{{PLURAL:$1|St'|Sti}} element dla lista nèira dla rumenta ëd reclam a {{PLURAL:$1|l'é|son}} {{PLURAL:$1|n'|dj'}}espression regolar nen {{PLURAL:$1|bon-a|bon-e}} e a l'{{PLURAL:$1|ha|han}} da manca d'esse coregiùe anans che salvé la pàgina:",
+	"spam-blacklist-desc": "Utiss contra la rumenta basà su dj'espression regolar ch'a permëtto ëd buté an sla lista nèira dj'adrësse an sl'Aragnà ant le pàgine e dj'adrësse ëd pòsta eletrònica për j'utent argistrà.",
+	"log-name-spamblacklist": "Argistr dla lista nèira dla rumenta",
+	"log-description-spamblacklist": "Costi eveniment a marco le rëspondense con la lista nèira dla rumenta.",
+	"logentry-spamblacklist-hit": "$1 a l'ha causà na rëspondensa con la lista nèira dla rumenta su $3 an sërcand ëd gionté $4.",
+	"right-spamblacklistlog": "Smon-e l'argistr dla lista nèira dla rumenta",
+	"action-spamblacklistlog": "vëdde l'argistr dla lista nèira dla rumenta"
+}

@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vrhnje",
+			"MaGa",
+			"Bugoslav"
+		]
+	},
+	"timeless-desc": "Bezvremenska tema oblikovana prema prototipu Brandona Harrisa, te različiti stilovi Zaklade Wikimedija",
+	"timeless-search-placeholder": "Pretražite približno {{NUMBEROFARTICLES}} {{PLURAL:{{NUMBEROFARTICLES}}|stranicu|stranice|stranica}}",
+	"timeless-loggedin": "Vaš račun",
+	"timeless-anonymous": "Anonimni",
+	"timeless-loggedinas": "Prijavljeni ste kao '''$1'''",
+	"timeless-notloggedin": "Niste prijavljeni",
+	"timeless-userpage": "Stranica {{GENDER:$1|suradnika|suradnice}}",
+	"timeless-talkpage": "Razgovor sa {{GENDER:$1|suradnikom|suradnicom}}",
+	"timeless-pagelog": "Evidencije stranice",
+	"timeless-more": "Više",
+	"timeless-sitetools": "Oruđe wikija",
+	"timeless-pageactions": "Oruđe stranice",
+	"timeless-userpagetools": "Alati suradničke stranice",
+	"timeless-pagemisc": "Više",
+	"timeless-namespaces": "Imenski prostori",
+	"timeless-pagetools": "Radnje na stranici",
+	"timeless-languages": "Jezici"
+}

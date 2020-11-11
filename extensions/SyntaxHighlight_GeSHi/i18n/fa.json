@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ebraminio",
+			"Huji",
+			"Reza1615"
+		]
+	},
+	"syntaxhighlight-desc": "امکان رنگین کردن دستورات <code>&lt;syntaxhighlight&gt;</code> با استفاده از [http://pygments.org/ Pygments] را فراهم می‌آورد",
+	"syntaxhighlight-error-category": "صفحه‌های دارای خطای سینتکس‌های‌لایت",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "کد",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "زبان",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "نشان‌دادن شماره خطوط"
+}

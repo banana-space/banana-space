@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mostafadaneshvar"
+		]
+	},
+	"fancycaptcha-addurl": "‎بست",
+	"fancycaptcha-badlogin": "په کمک په محافظت چه اتوماتیکی پروشگ کلمه رمز، لطفا کلماتی که ته جهلگی جعبه ظاهر انت واردش کنیت  ([[Special:Captcha/help|گیشترین اطلاعات]]):",
+	"fancycaptcha-captcha": "سکیوریتی چک",
+	"fancycaptcha-accountcreate": "په کمک په محافظت چه اتوماتیکی شرکتن حساب، لطفا کلماتی که ته جهلگی جعبه ظاهر انت واردش کنیت  ([[Special:Captcha/help|گیشترین اطلاعات]]):",
+	"fancycaptcha-create": "په شرکتن صفحه، لطفا کلماتی که ته جهلگی جعبه ظاهراند واردش کنیت ([[Special:Captcha/help|گیشتر اطلاعات]]):",
+	"fancycaptcha-edit": "په اصلاح کتن ای صفحه، لطفا کلماتی که ته جهلگی جعبه ظاهراند واردش کنیت ([[Special:Captcha/help|گیشتر اطلاعات]]):",
+	"fancycaptcha-imgcaptcha-ph": "برزین سیاهگء ادان بلک ات"
+}

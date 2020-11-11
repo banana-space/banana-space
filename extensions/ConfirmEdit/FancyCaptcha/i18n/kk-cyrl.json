@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek"
+		]
+	},
+	"fancycaptcha-addurl": "Түзетуіңізде жаңа сыртқы сілтемелер бар екен.\nАвтоматты спамға қарсы уикиді қорғау үшін,\nтөмендегі көрсетілген сөздерді енгізуіңізді сұраймыз ([[Special:Captcha/help|көбірек ақпарат]]):",
+	"fancycaptcha-badlogin": "Құпия сөзді өздікті бұздырудан қорғану үшін, төмендегі\nкөрсетілген сөздерді енгізуіңізді сұраймыз ([[Special:Captcha/help|көбірек ақпарат]]):",
+	"fancycaptcha-captcha": "Құпиялық тексеруі",
+	"fancycaptcha-accountcreate": "Жаңа тіркелгі өздікті жасалуынан қорғану үшін, төмендегі\nкөрсетілген сөздерді аумаққа енгізіңіз ([[Special:Captcha/help|көбірек ақпарат]]):",
+	"fancycaptcha-create": "Беті бастау үшін төмендегі көрсетілген сөздерді енгізіңіз ([[Special:Captcha/help|көбірек ақпарат]]):",
+	"fancycaptcha-edit": "Бұл бетті өңдеу үшін төмендегі көрсетілген сөздерді енгізіңіз ([[Special:Captcha/help|көбірек ақпарат]]):",
+	"fancycaptcha-imgcaptcha-ph": "Суреттегі мәтінді енгізіңіз",
+	"fancycaptcha-sendemail": "Уикиді автоматты спамдаудан қорғау үшін, төмендегі\nкөрсетілген сөздерді енгізуіңізді сұраймыз ([[Special:Captcha/help|көбірек ақпарат]]):",
+	"fancycaptcha-reload-text": "Жаңарту",
+	"apihelp-fancycaptchareload-description": "Жаңа FancyCaptcha алу.",
+	"apihelp-fancycaptchareload-example-1": "Жаңа FancyCaptcha алу"
+}

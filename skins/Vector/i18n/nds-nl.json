@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Servien"
+		]
+	},
+	"vector-action-addsection": "Niej onderwarp",
+	"vector-action-delete": "Vortdoon",
+	"vector-action-move": "Hernömen",
+	"vector-action-protect": "Beveiligen",
+	"vector-action-undelete": "Weerummeplaotsen",
+	"vector-action-unprotect": "Beveyliging wysigen",
+	"vector-view-create": "Anmaken",
+	"vector-view-edit": "Bewarken",
+	"vector-view-history": "Geskydenisse bekyken",
+	"vector-view-view": "Leasen",
+	"vector-view-viewsource": "Brontekste bekyken",
+	"vector-more-actions": "Meer"
+}

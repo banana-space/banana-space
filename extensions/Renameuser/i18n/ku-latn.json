@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"George Animal",
+			"Ghybu",
+			"Gomada",
+			"Bikarhêner"
+		]
+	},
+	"renameuser": "Navê bikarhêner biguherîne",
+	"renameuser-linkoncontribs": "navê bikarhêner biguherîne",
+	"renameuser-linkoncontribs-text": "Navê vî bikarhênerî biguherîne",
+	"renameuserold": "Navê niha:",
+	"renameusernew": "Navê nû:",
+	"renameuserreason": "Sedem:",
+	"renameusermove": "Rûpelên bikarhêner û gotûbêjê xwe (û binrûpelên xwe) bigerîne berve navê nû",
+	"renameuserwarnings": "Hişyarî:",
+	"renameuserconfirm": "Erê, navê vî bikarhênerî biguherîne",
+	"renameusersubmit": "Nav biguherîne",
+	"renameusererrordoesnotexist": "Bikarhêner \"<nowiki>$1</nowiki>\" tune ye.",
+	"renameusererrorexists": "Bikarhêner \"<nowiki>$1</nowiki>\" berê heye.",
+	"renameusererrorinvalid": "Navê \"<nowiki>$1</nowiki>\" ji bikarhêneran re nayê qebûlkirin.",
+	"renameusersuccess": "Navê bikarhênerê \"<nowiki>$1</nowiki>\" bû \"<nowiki>$2</nowiki>\"",
+	"renameuser-page-exists": "Rûpelê $1 berê heye û nikane otomatîk were guherandin.",
+	"renameuser-page-moved": "Navê $1 weke $2 hate guhertin.",
+	"renameuser-page-unmoved": "Rûpela $1 nikanî çûba ciha $2.",
+	"log-name-renameuser": "Guhertina navê bikarhêner",
+	"renameuser-move-log": "Otomatîk hate guherandin, ji ber ku \"[[User:$1|$1]]\" navê xwe guherand û niha bû \"[[User:$2|$2]]\"",
+	"right-renameuser": "Navê bikarhêneran biguherîne:"
+}

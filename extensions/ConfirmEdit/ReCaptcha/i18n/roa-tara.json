@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"recaptcha-edit": "Pe proteggere sta uicchi condre le cangiaminde automatece de le rummate, pe piacere scrive le parole ca 'ndruche jndr'à buatte aqquà sotte:",
+	"recaptcha-addurl": "Le cangiaminde tune ténene collegaminde de fore nuève. Pe proteggere condre le cangiaminde automatece de le rummate, pe piacere scrive le parole ca 'ndruche jndr'à buatte aqquà sotte:",
+	"recaptcha-badlogin": "Pe proteggere condre le futteminde automatece de le passuord, pe piacere scrive le parole ca 'ndruche jndr'à buatte aqquà sotte:",
+	"recaptcha-createaccount": "Pe proteggere condre le ccrejaziune automatece de le cunde, pe piacere scrive le parole ca 'ndruche jndr'à buatte aqquà sotte:",
+	"recaptcha-createaccount-fail": "Resposte reCAPTCHA ingorrette o mangande.",
+	"recaptcha-create": "Pe proteggere condre le ccrejaziune automatece de le pàggene, pe piacere scrive le parole ca 'ndruche jndr'à buatte aqquà sotte:",
+	"recaptcha-info": "Pe piacere resolve 'na sfide ReCaptcha e mitte, le valore d'a sfide e resposte cumme captchaId e captchaWord.",
+	"recaptcha-apihelp-param-recaptcha_challenge_field": "Cambe d'u uigget ReCaptcha",
+	"recaptcha-apihelp-param-recaptcha_response_field": "Cambe da 'u uigget ReCaptcha",
+	"recaptcha-id-label": "Sfide ReCaptcha",
+	"recaptcha-id-help": "Valore d'a sfide ReCaptcha",
+	"recaptcha-label": "Soluzione ReCaptcha",
+	"recaptcha-help": "Valore d'a soluzione ReCaptcha"
+}

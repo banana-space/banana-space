@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Adam78",
+			"Dani",
+			"Dj",
+			"Hunyadym",
+			"Tgr"
+		]
+	},
+	"renameuser": "Szerkesztő átnevezése",
+	"renameuser-linkoncontribs": "felhasználó átnevezése",
+	"renameuser-linkoncontribs-text": "Felhasználó átnevezése",
+	"renameuser-desc": "Lehetővé teszi egy felhasználó átnevezését (''renameuser'' jog szükséges)",
+	"renameuserold": "Jelenlegi felhasználónév:",
+	"renameusernew": "Új felhasználónév:",
+	"renameuserreason": "Ok:",
+	"renameusermove": "Felhasználói- és vitalapok (és azok allapjainak) áthelyezése az új név alá",
+	"renameusersuppress": "Ne készüljön átirányítás az új névre",
+	"renameuserreserve": "Régi név blokkolása a jövőbeli használat megakadályozására",
+	"renameuserwarnings": "Figyelmeztetések:",
+	"renameuserconfirm": "Igen, nevezd át a szerkesztőt",
+	"renameusersubmit": "Elküld",
+	"renameusererrordoesnotexist": "Nem létezik „<nowiki>$1</nowiki>” nevű felhasználó",
+	"renameusererrorexists": "Már létezik „<nowiki>$1</nowiki>” nevű felhasználó",
+	"renameusererrorinvalid": "A felhasználónév („<nowiki>$1</nowiki>”) érvénytelen",
+	"renameuser-error-request": "Hiba történt a lekérdezés küldése közben.  Menj vissza az előző oldalra és próbáld újra.",
+	"renameuser-error-same-user": "Nem nevezhetsz át egy felhasználót a meglévő nevére.",
+	"renameusersuccess": "„<nowiki>$1</nowiki>” sikeresen át lett nevezve „<nowiki>$2</nowiki>” névre.",
+	"renameuser-page-exists": "$1 már létezik, és nem lehet automatikusan felülírni.",
+	"renameuser-page-moved": "$1 át lett nevezve $2 névre",
+	"renameuser-page-unmoved": "$1-t nem sikerült $2 névre nevezi",
+	"log-name-renameuser": "Felhasználóátnevezési napló",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|átnevezte}} $4 szerkesztőt ({{PLURAL:$6|egy|$6}} szerkesztés) erre: $5",
+	"logentry-renameuser-renameuser-legacier": "$1 átnevezte $4 szerkesztőt erre: $5",
+	"renameuser-move-log": "„[[User:$1|$1]]” „[[User:$2|$2]]” névre való átnevezése közben automatikusan átnevezett oldal",
+	"action-renameuser": "felhasználó átnevezése",
+	"right-renameuser": "felhasználók átnevezése",
+	"renameuser-renamed-notice": "Ezt a szerkesztőt átnevezték.\nAlább látható a szerkesztőátnevezési napló tájékoztatásként."
+}

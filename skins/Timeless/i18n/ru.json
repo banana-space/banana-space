@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Okras",
+			"Redredsonia"
+		]
+	},
+	"timeless-desc": "Тема оформления Timeless создана после прототипа Winter Брэндона Харриса и различных стилей Фонда Викимедиа.",
+	"timeless-search-placeholder": "Поиск из {{NUMBEROFARTICLES}} страниц",
+	"timeless-loggedin": "Учётная запись",
+	"timeless-anonymous": "Аноним",
+	"timeless-loggedinas": "Вошёл как '''$1'''",
+	"timeless-notloggedin": "Вы не представились системе",
+	"timeless-userpage": "Страница {{GENDER:$1|участника|участницы}}",
+	"timeless-talkpage": "Обсуждение {{GENDER:$1|участника|участницы}}",
+	"timeless-pagelog": "Журналы страницы",
+	"timeless-more": "Ещё",
+	"timeless-sitetools": "Вики-инструменты",
+	"timeless-pageactions": "Инструменты для страниц",
+	"timeless-userpagetools": "Инструменты страницы участника",
+	"timeless-pagemisc": "Ещё",
+	"timeless-namespaces": "Пространства имён",
+	"timeless-pagetools": "Действия на странице",
+	"timeless-languages": "Языки",
+	"timeless.js": "/* Размещённый здесь код JavaScript будет загружаться пользователям, использующим тему оформления Timeless */"
+}

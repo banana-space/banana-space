@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lloffiwr"
+		]
+	},
+	"inputbox-desc": "Yn caniatau creu blychau mewnbynnu sy'n cynnwys ffurflenni HTML wedi eu gosod yn barod i'w defnyddio",
+	"inputbox-error-no-type": "Nid ydych wedi pennu'r math o flwch mewnbynnu yr ydych am ei greu.",
+	"inputbox-error-bad-type": "Nid yw'r gair \"$1\" ar y math o flwch mewnbynnu yn ddealladwy gan y meddalwedd.\nDewiswch rhwng \"create\", \"comment\", \"search\" a \"search2\" neu \"fulltext\".",
+	"inputbox-tryexact": "Chwilio am yr union gymal",
+	"inputbox-searchfulltext": "Chwilio'r testun cyfan",
+	"inputbox-createarticle": "Creu'r dudalen",
+	"inputbox-ns-main": "Prif"
+}

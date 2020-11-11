@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Demmy"
+		]
+	},
+	"renameuserold": "Orúkọ oníṣe ìsinsìnyí:",
+	"renameusernew": "Orúkọ oníṣe tuntun:",
+	"renameuserwarnings": "Àwọn ìkìlọ̀:",
+	"renameusersubmit": "Fúnsílẹ̀",
+	"renameusererrordoesnotexist": "Oníṣe \"<nowiki>$1</nowiki>\" kò sí.",
+	"renameusererrorexists": "Oníṣe \"<nowiki>$1</nowiki>\" tilẹ̀ wà tẹ́lẹ̀."
+}

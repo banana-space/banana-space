@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Derbeth",
+			"Sp5uhe",
+			"Chrumps",
+			"PiotrAntosz",
+			"Woytecr"
+		]
+	},
+	"syntaxhighlight-desc": "Zapewnia kolorowanie składni dla znacznika <code>&lt;syntaxhighlight&gt;</code> wykorzystując [http://pygments.org/ Pygments - Pythonowe kolorowanie składni]",
+	"syntaxhighlight-error-category": "Strony z błędami podświetlania składni",
+	"syntaxhighlight-error-category-desc": "Wystąpił błąd podczas próby podświetlenia kodu zawartego na stronie.",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Kod",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Język",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(Brak)",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "Pokaż numery linii",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "Blok kodu",
+	"syntaxhighlight-error-pygments-invocation-failure": "Nie udało się wywołać Pygments",
+	"syntaxhighlight-error-unknown-language": "Nierozpoznany język „$1”",
+	"syntaxhighlight-error-exceeds-size-limit": "Rozmiar kodu równy $1 {{PLURAL:$1|bajt|bajtów}} przekracza dozwolone maksimum $2 {{PLURAL:$2|bajt|bajtów}}"
+}

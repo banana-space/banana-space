@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Albinus",
+			"Samar88",
+			"Srabony90",
+			"Manik Soren",
+			"Ramjit Tudu"
+		]
+	},
+	"vector-action-addsection": "ᱥᱟᱛᱚᱢ ᱥᱮᱞᱮᱫ",
+	"vector-action-delete": "ᱜᱮᱫ ᱜᱤᱰᱤ",
+	"vector-action-move": "ᱩᱪᱟᱹᱲ",
+	"vector-action-protect": "ᱨᱩᱠᱷᱤᱭᱟᱹ",
+	"vector-action-undelete": "Bań getgiḍi",
+	"vector-action-unprotect": "Bodol rukhiyạ",
+	"vector-view-create": "ᱛᱮᱭᱟᱨ",
+	"vector-view-edit": "ᱥᱟᱯᱲᱟᱣ",
+	"vector-view-history": "ᱱᱟᱜᱟᱢ ᱧᱮᱞᱢᱮ",
+	"vector-view-view": "ᱯᱟᱲᱦᱟᱣᱢᱮ",
+	"vector-view-viewsource": "ᱯᱷᱮᱰᱟᱛ ᱧᱮᱞᱢᱮ",
+	"vector-more-actions": "ᱵᱟᱹᱲᱛᱤ"
+}

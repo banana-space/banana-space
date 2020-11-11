@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Helix84"
+		]
+	},
+	"spam-blacklist": "# Externé URLs zodpovedajúce tomuto zoznamu budú zablokované pri pokuse pridať ich na stránku.\n# Tento zoznam ovplyvňuje iba túto wiki; pozrite sa tiež na globálnu čiernu listinu.\n # Dokumentáciu nájdete na  https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#<!-- nechajte tento riadok presne ako je --> <pre>\n#\n# Syntax je nasledovná:\n#  * Všetko od znaku „#“ do konca riadka je komentár\n#  * Každý neprázdny riadok je časť regulárneho výrazu, ktorému budú zodpovedať iba domény z URL\n\n#</pre> <!-- nechajte tento riadok presne ako je -->",
+	"spam-whitelist": " #<!-- leave this line exactly as it is --> <pre> \n# Externé URL zodpovedajúce výrazom v tomto zozname *nebudú* zablokované, ani keby\n# ich zablokovali položky z čiernej listiny.\n#\n# Syntax je nasledovná:\n#   * Všetko od znaku \"#\" do konca riadka je komentár\n#   * Každý neprázdny riadok je regulárny výraz, podľa ktorého sa budú kontrolovať názvy domén\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"spam-invalid-lines": "{{PLURAL:$1|Nasledovný riadok|Nasledovné riadky}} čiernej listiny spamu {{PLURAL:$1|je neplatný regulárny výraz|sú neplatné regulárne výrazy}} a je potrebné {{PLURAL:$1|ho|ich}} opraviť pred uložením stránky:",
+	"spam-blacklist-desc": "Antispamový nástroj na základe regulárnych výrazov: [[MediaWiki:Spam-blacklist|Čierna listina]] a [[MediaWiki:Spam-whitelist|Biela listina]]"
+}

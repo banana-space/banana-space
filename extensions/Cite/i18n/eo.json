@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"AVRS",
+			"Malafaya",
+			"Yekrats",
+			"KuboF",
+			"Nemo bis"
+		]
+	},
+	"cite-desc": "Aldonas etikedojn <nowiki><ref[ name=id]></nowiki> kaj <nowiki><references/></nowiki> por citaĵoj",
+	"cite_error": "Citaĵa eraro: $1",
+	"cite_error_ref_numeric_key": "Malvalida etikedo <code>&lt;ref&gt;</code>;\nnomo ne povas esti simpla entjero. Uzu priskriban titolon.",
+	"cite_error_ref_no_key": "Malvalida etikedo <code>&lt;ref&gt;</code>;\n''ref'' kun nenia enhava nomo devas havi nomon",
+	"cite_error_ref_too_many_keys": "Malvalida etikedo <code>&lt;ref&gt;</code>;\nmalvalidaj nomoj (ekz-e: tro multaj)",
+	"cite_error_ref_no_input": "Malvalida etikedo <code>&lt;ref&gt;</code>;\nref-etikedoj sen nomo devas havi enhavojn.",
+	"cite_error_references_invalid_parameters": "Nevalida etikedo <code>&lt;references&gt;</code>; neniuj parametroj estas permesitaj, uzu <code>&lt;references /&gt;</code>",
+	"cite_error_references_no_backlink_label": "Neniom plu memfaritaj retroligaj etikedoj.\nDifinu pliajn en la mesaĝo <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>.",
+	"cite_error_no_link_label_group": "Mankas proprajn ligilajn etikedojn por grupo \"$1\".\nDifinu pliajn en la <nowiki>[[MediaWiki:$2]]</nowiki> mesaĝo.",
+	"cite_error_references_no_text": "Nevalida <code>&lt;ref&gt;</code> etikedo;\nneniu teksto estis donita por ref-oj nomataj <code>$1</code>",
+	"cite_error_included_ref": "Ferma <code>&lt;/ref&gt;</code> mankas por <code>&lt;ref&gt;</code>-etikedo",
+	"cite_error_group_refs_without_references": "Etikedoj <code>&lt;ref&gt;</code> ekzistas por la grupo nomita \"$1\", sed la koresponda etikedo <code>&lt;references group=\"$1\"/&gt;</code> ne estis trovita aŭ la ferma <code>&lt;/ref&gt;</code> mankas.",
+	"cite_error_references_group_mismatch": "<code>&lt;ref&gt;</code> etikedo en <code>&lt;references&gt;</code> havas konflikan grupatributon \"$1\".",
+	"cite_error_references_missing_group": "<code>&lt;ref&gt;</code> etikedo difinita en <code>&lt;references&gt;</code> havas grupatributon \"$1\" kiu ne aperas en antaŭa teksto.",
+	"cite_error_references_missing_key": "<code>&lt;ref&gt;</code> etikedo kun la nomo \"$1\" difinita en <code>&lt;references&gt;</code> ne estas uzata en antaŭa teksto.",
+	"cite_error_references_no_key": "<code>&lt;ref&gt;</code> etikedo difinita en <code>&lt;references&gt;</code> ne havas noman atributon.",
+	"cite_error_empty_references_define": "<code>&lt;ref&gt;</code> etikedo difinita en <code>&lt;references&gt;</code> kun nomo \"$1\" ne havas enhavon.",
+	"cite-tracking-category-cite-error": "Paĝoj kun problemoj pri referencoj",
+	"cite_references_link_accessibility_label": "Salti supren",
+	"cite_references_link_many_accessibility_label": "Salti supren al:",
+	"cite_section_preview_references": "Antaŭrigardo de  referencoj",
+	"cite_warning": "Averto pri citado:  $1",
+	"cite_warning_sectionpreview_no_text": "La marko <code>&lt;ref&gt;</code> kun la nomo <code>$1</code> ne povas esti antaŭrigardita,  ĉar ĝi estas difinita ekster la kuranta sekcio aŭ tute ne difinita."
+}

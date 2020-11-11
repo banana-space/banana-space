@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Zygimantus",
+			"Eitvys200",
+			"Tomasdd"
+		]
+	},
+	"timeless-search-placeholder": "Ieškoti tarp {{NUMBEROFARTICLES}} puslapių",
+	"timeless-loggedin": "Jūsų paskyra",
+	"timeless-anonymous": "Anonimas",
+	"timeless-loggedinas": "Prisijungęs kaip '''$1'''",
+	"timeless-notloggedin": "Neprisijungta",
+	"timeless-more": "Daugiau",
+	"timeless-pageactions": "Puslapio įrankiai",
+	"timeless-userpagetools": "Naudotojo puslapio įrankiai",
+	"timeless-pagemisc": "Daugiau",
+	"timeless-namespaces": "Vardų sritys",
+	"timeless-pagetools": "Puslapio veiksmai",
+	"timeless-languages": "Kalbos"
+}

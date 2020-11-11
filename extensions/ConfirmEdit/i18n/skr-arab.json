@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saraiki"
+		]
+	},
+	"captcha-label": "کیپچا",
+	"captcha-help": "کیپچا دا حل",
+	"captcha-info-help": "کیپچا دی وضاحت",
+	"captcha-id-label": "کیپچا آئی ڈی",
+	"captchahelp-title": "کیپچا مدد",
+	"captcha-apihelp-param-captchaword": "کیپچا دا جواب",
+	"confirmedit-preview-line": "لکیر عدد",
+	"confirmedit-preview-content": "شامل حصے",
+	"confirmedit-preview-validity": "جواز",
+	"confirmedit-preview-valid": "جائز",
+	"confirmedit-preview-invalid": "غلط"
+}

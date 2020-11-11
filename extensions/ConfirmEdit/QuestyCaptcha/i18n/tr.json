@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joseph",
+			"Vito Genovese"
+		]
+	},
+	"questycaptcha-addurl": "Değişikliğiniz yeni dış bağlantı içeriyor.\nOtomatik reklama karşı korunmaya yardımcı olmak için, lütfen ([[Special:Captcha/help|daha fazla bilgi]]) bölümünün altında yer alan soruya cevap verin:",
+	"questycaptcha-badlogin": "Otomatik şifre kırmaya karşı korunmaya yardımcı olmak için, lütfen ([[Special:Captcha/help|daha fazla bilgi]]) bölümünün altında yer alan soruya cevap verin:",
+	"questycaptcha-createaccount": "Otomatik hesap oluşturmaya karşı korunmaya yardımcı olmak için, lütfen ([[Special:Captcha/help|daha fazla bilgi]]) bölümünün altında yer alan soruya cevap verin:",
+	"questycaptcha-create": "Sayfayı oluşturmak için, lütfen ([[Special:Captcha/help|daha fazla bilgi]]) bölümünün altında yer alan soruya cevap verin:",
+	"questycaptcha-edit": "Sayfayı değiştirmek için, lütfen ([[Special:Captcha/help|daha fazla bilgi]]) bölümünün altında yer alan soruya cevap verin:",
+	"questycaptcha-sendemail": "Otomatik spamlerden korunmaya yardımcı olmak için, lütfen aşağıda görünen soruyu cevaplayın ([[Special:Captcha/help|daha fazla bilgi]]):",
+	"questycaptchahelp-text": "Bu viki gibi herkesin katkı yapmasına izin veren web siteleri, genellikle bir çok siteye verilen bağlantıları ekleyen otomatik araçlar kullanan reklam amaçlı kullanıcılar tarafından istismar edilmektedir.\nBu reklam bağlantıları kaldırılabiliyor olsa da, önemli bir sıkıntı yaratmaktadırlar.\n\nBazen, özellikle bir sayfaya yeni web bağlantıları eklenirken, viki size bir soru sorabilir.\nBu, otomatikleştirilmesi zor bir iş olduğu için, insanların katkılarını yapmasını mümkün kılarken çoğu reklam amaçlı kullanıcıyı ya da robot saldırganı durduracaktır.\n\nBu durumun sizi normal katkılarınızı yapmaktan olağandışı bir şekilde alıkoyması halinde, lütfen destek için [[Special:ListAdmins|site hizmetlileri]] ile irtibata geçin.\n\nSayfa editörüne dönmek için tarayıcınızın 'geri' düğmesine tıklayın."
+}

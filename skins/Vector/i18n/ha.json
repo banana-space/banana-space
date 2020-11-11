@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"DonCamillo"
+		]
+	},
+	"vector-action-delete": "Soke",
+	"vector-action-move": "Gusarwa",
+	"vector-action-protect": "A kare",
+	"vector-view-create": "Ƙirƙira",
+	"vector-view-edit": "Gyara",
+	"vector-view-history": "Nuna tarihin",
+	"vector-view-view": "Karanta",
+	"vector-more-actions": "Mafi"
+}

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"OC Ripper"
+		]
+	},
+	"fancycaptcha-captcha": "Sigurnosna provjera",
+	"fancycaptcha-accountcreate": "Da bi zaštitili wiki od automatiziranog pravljenja računa, ljubazno Vas molimo da unesete riječi koje će se pojaviti u kutiji ispod ([[Special:Captcha/help|više informacija]]):",
+	"fancycaptcha-imgcaptcha-ph": "Unesite tekst koji vidite iznad",
+	"fancycaptcha-reload-text": "Osvježi"
+}

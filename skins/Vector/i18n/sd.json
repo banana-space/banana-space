@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sindhu",
+			"Aursani",
+			"Mehtab ahmed"
+		]
+	},
+	"vector-action-addsection": "عنوان ڏيو",
+	"vector-action-delete": "ڊاھيو",
+	"vector-action-move": "چوريو",
+	"vector-action-protect": "تحفظيو",
+	"vector-action-undelete": "اڻ‌ڊاهيو",
+	"vector-action-unprotect": "تحفظ بدلايو",
+	"vector-view-create": "سرجيو",
+	"vector-view-edit": "سنواريو",
+	"vector-view-history": "سوانح ڏسو",
+	"vector-view-view": "پڙھو",
+	"vector-view-viewsource": "ڪوڊ ڏسو",
+	"vector-more-actions": "وڌيڪ"
+}

@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chrisportelli"
+		]
+	},
+	"cite-desc": "Iżżid it-tikketti <nowiki><ref[ name=id]></nowiki> u <nowiki><references/></nowiki> għaċ-ċitazzjonijiet",
+	"cite_error": "Żball fiċ-ċitazzjoni: $1",
+	"cite_error_ref_numeric_key": "Tikketta <code>&lt;ref&gt;</code> invalida;\nl-isem ma jistax ikun numru sħiħ sempliċi. Uża titlu deskrittiv",
+	"cite_error_ref_no_key": "Tikketta <code>&lt;ref&gt;</code> invalida;\nrefs mingħajr kontenut għandhom ikollhom isem",
+	"cite_error_ref_too_many_keys": "Tikketta <code>&lt;ref&gt;</code> invalida;\nismijiet invalidi, e.ż. numru wisq kbir",
+	"cite_error_ref_no_input": "Żball fl-użu tat-tikketta <code>&lt;ref&gt;</code>; refs mingħajr isem ma jistgħux ikunu vojta",
+	"cite_error_references_invalid_parameters": "Żball fl-użu tat-tikketta <code>&lt;references&gt;</code>; il-parametri mhumiex permessi. Uża <code>&lt;references /&gt;</code>",
+	"cite_error_references_no_text": "Tikketta <code>&lt;ref&gt;</code> invalida;\nl-ebda test ma ngħata għar-refs bl-isem <code>$1</code>",
+	"cite_error_included_ref": "<code>&lt;/ref&gt;</code> tal-għeluq hija nieqsa għat-tikketta <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "It-tikketti <code>&lt;ref&gt;</code> jeżistu għal grupp bl-isem \"$1\" imma l-ebda tikketta <code>&lt;references group=\"$1\"/&gt;</code> rispettiva ma nstabet",
+	"cite_error_references_group_mismatch": "It-tikketta <code>&lt;ref&gt;</code> f'<code>&lt;references&gt;</code> għandha l-attribut tal-grupp \"$1\" f'kunflitt.",
+	"cite_error_references_missing_group": "It-tikketta <code>&lt;ref&gt;</code> definita f'<code>&lt;references&gt;</code> għandha l-attribut tal-grupp \"$1\" li ma jidhirx fit-test preċedenti.",
+	"cite_error_references_missing_key": "It-tikketta <code>&lt;ref&gt;</code> bl-isem \"$1\" definita f'<code>&lt;references&gt;</code> mhix użata fit-test preċedenti.",
+	"cite_error_references_no_key": "It-tikketta <code>&lt;ref&gt;</code> definita f'<code>&lt;references&gt;</code> m'għandiex l-attribut tal-isem.",
+	"cite_error_empty_references_define": "It-tikketta <code>&lt;ref&gt;</code> definita f'<code>&lt;references&gt;</code> bl-isem \"$1\" m'għandha l-ebda kontenut."
+}

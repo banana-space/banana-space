@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Milicevic01",
+			"Obsuser",
+			"Zoranzoki21"
+		]
+	},
+	"timeless-desc": "Bezvremenski skin dizajniran po prototipu Winter koji je napravio Brendon Haris, te drugim stilovima Zadužbine Vikimedija",
+	"timeless-search-placeholder": "Pretraži {{NUMBEROFARTICLES}} {{PLURAL:{{NUMBEROFARTICLES}}|stranicu|stranice|stranica}}",
+	"timeless-loggedin": "Vaš nalog",
+	"timeless-anonymous": "Anonimno",
+	"timeless-loggedinas": "Prijavljeni ste kao '''$1'''",
+	"timeless-notloggedin": "Niste prijavljeni",
+	"timeless-userpage": "Stranica {{GENDER:$1|korisnika|korisnice|korisnika}}",
+	"timeless-talkpage": "Razgovor sa {{GENDER:$1|korisnikom|korisnicom|korisnikom}}",
+	"timeless-pagelog": "Dnevnici stranice",
+	"timeless-more": "Više",
+	"timeless-sitetools": "Viki alatke",
+	"timeless-pageactions": "Alatke za stranicu",
+	"timeless-userpagetools": "Alatke za korisničku stranicu",
+	"timeless-pagemisc": "Više",
+	"timeless-namespaces": "Imenski prostori",
+	"timeless-pagetools": "Radnje za stranicu",
+	"timeless-languages": "Jezici"
+}

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meursault2004",
+			"NoiX180"
+		]
+	},
+	"spam-blacklist": " # URL eksternal sing cocog karo daftar iki bakal diblokir yèn ditambahaké ing sawijining kaca.\n # Daftar iki namung nduwé pangaruh ing wiki iki; ngrujuka uga daftar ireng global.\n # Kanggo dokumentasi, delengen https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- lirwakna baris iki apa anané --> <pre>\n#\n# Sintaksisé kaya mengkéné:\n#  * Kabèh sing diawali mawa karakter \"#\" nganti tekaning akir baris iku komentar\n#  * Kabèh baris sing ora kosong iku fragmèn regex sing namung bakal dicocogaké karo jeneng host sajroning URL-URL\n\n #</pre> <!-- lirwakna baris iki apa anané -->",
+	"spam-whitelist": " #<!-- lirwakna baris iki apa anané --> <pre>\n # URL èksternal sing cocog karo daftar iki *ora* bakal diblokir senadyan\n# bakal diblokir déning èntri ing daftar ireng\n#\n# Sintaksisé kaya mengkéné:\n#  * Kabèh sing diawali mawa karakter \"#\" nganti tekaning akir baris iku komentar\n#  * Kabèh baris sing ora kosong iku fragmèn regex sing namung bakal dicocogaké karo jeneng host sajroning URL-URL\n\n #</pre> <!-- lirwakna baris iki apa anané -->",
+	"spam-blacklisted-email": "Alamat layang-èl sing mlebu pratélan ireng",
+	"spam-blacklisted-email-text": "Alamat layang èlèktronik Sampéyan saiki didaptarirengaké saka ngirim layang èlèktronik nèng panganggi liya.",
+	"spam-blacklisted-email-signup": "Alamat layang èlèktronik sing diawèhaké saiki ora dililakaké.",
+	"spam-invalid-lines": "{{PLURAL:$1|Baris|Baris-baris}} daftar ireng spam ing ngisor iki yaiku {{PLURAL:$1|èksprèsi|èksprèsi}} regulèr sing ora absah lan {{PLURAL:$1|perlu|perlu}} dikorèksi sadurungé disimpen:",
+	"spam-blacklist-desc": "Piranti anti-spam adhedhasar regex: [[MediaWiki:Spam-blacklist]] lan [[MediaWiki:Spam-whitelist]]"
+}

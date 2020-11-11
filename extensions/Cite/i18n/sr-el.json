@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michaello",
+			"Milicevic01"
+		]
+	},
+	"cite-desc": "Dodaje <nowiki><ref[ name=id]></nowiki> i <nowiki><references/></nowiki> oznake za citiranje.",
+	"cite_error": "Greška citata: $1",
+	"cite_error_ref_numeric_key": "Loša oznaka <code>&amp;lt;ref&amp;gt;</code>; ime ne može biti jednostavni intedžer. Koristi opisni naslov.",
+	"cite_error_ref_no_key": "Loša oznaka <code>&amp;lt;ref&amp;gt;</code>; ref-ovi bez sadržaja moraju imati ime.",
+	"cite_error_ref_too_many_keys": "Loša oznaka <code>&amp;lt;ref&amp;gt;</code>; loša imena, odnosno mnogo njih.",
+	"cite_error_ref_no_input": "Loša oznaka <code>&amp;lt;ref&amp;gt;</code>; ref-ovi bez imena moraju imati sadržaj.",
+	"cite_error_references_invalid_parameters": "Loša oznaka <code>&amp;lt;references&amp;gt;</code>; parametri nisu dozvoljeni. Koristi <code>&amp;lt;references /&amp;gt;</code>.",
+	"cite_error_references_no_backlink_label": "Nestale su posebne oznake za zadnje veze. Odredi ih više u poruci <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>.",
+	"cite_error_references_no_text": "Loša oznaka <code>&amp;lt;ref&amp;gt;</code>; nema teksta za ref-ove pod imenom <code>$1</code>.",
+	"cite_error_included_ref": "Zatvara <code>&lt;/ref&gt;</code> koji nedostaje <code>&lt;ref&gt;</code> tagu",
+	"cite_error_group_refs_without_references": "<code><ref></code> tagovi postoje za grupu pod imenom \"$1\", ali nije nađen odgovarajući <code><references group=\"$1\"/></code> tag",
+	"cite-tracking-category-cite-error-desc": "Stranice koje imaju greške u korišćenju oznaka referenci.",
+	"cite_reference_link_key_with_num": "$1_$2",
+	"cite_reference_link_prefix": "cite_ref-",
+	"cite_references_link_prefix": "cite_note-",
+	"cite_references_link_one": "<li id=\"$1\"><span class=\"mw-cite-backlink\">[[#$2|↑]]</span> $3</li>",
+	"cite_references_link_many": "<li id=\"$1\"><span class=\"mw-cite-backlink\">↑ $2</span> $3</li>",
+	"cite_references_link_many_format": "<sup>[[#$1|$2]]</sup>",
+	"cite_references_link_many_format_backlink_labels": "a b v g d đ e ž z i j k l lj m n nj o p r s t ć u f h c č dž š aa ab av ag ad ađ ae až az ai aj ak al alj am an anj ao ap ar as at ać au af ah ac ač adž aš ba bb bv bg bd bđ be bž bz bi bj bk bl blj bm bn bnj bo bp br bs bt bć bu bf bh bc bč bdž bš va vb vv vg vd vđ ve vž vz vi vj vk vl vlj vm vn vnj vo vp vr vs vt vć vu vf vh vc vč vdž vš ga gb gv gg gd gđ ge gž gz gi gj gk gl glj gm gn gnj go gp gr gs gt gć gu gf gh gc gč gdž gš da db dv dg dd dđ de dž dz di dj dk dl dlj dm dn dnj do dp dr ds dt dć du df dh dc dč ddž dš đa đb đv đg đd ]] đe đž đz đi đj đk đl đlj đm đn đnj đo đp đr đs đt đć đu đf đh đc đč đdž đš ea eb ev eg ed eđ ee ež ez ei ej ek el elj em en enj eo ep er es et eć eu ef eh ec eč edž eš ža žb žv žg žd žđ že žž žz ži žj žk žl žlj žm žn žnj žo žp žr žs žt žć žu žf žh žc žč ždž žš za zb zv zg zd zđ ze zž zz zi zj zk zl zlj zm zn znj zo zp zr zs zt zć zu zf zh zc zč zdž zš ia ib iv ig id iđ ie iž iz ii ij ik il ilj im in inj io ip ir is it ić iu if ih ic ič idž iš ja jb jv jg jd jđ je jž jz ji jj jk jl jlj jm jn jnj jo jp jr js jt jć ju jf jh jc jč jdž jš ka kb kv kg kd kđ ke kž kz ki kj kk kl klj km kn knj ko kp kr ks kt kć ku kf kh kc kč kdž kš la lb lv lg ld lđ le lž lz li lj lk ll llj lm ln lnj lo lp lr ls lt lć lu lf lh lc lč ldž lš lja ljb ljv ljg ljd ljđ lje ljž ljz lji ljj ljk ljl ljlj ljm ljn ljnj ljo ljp ljr ljs ljt ljć lju ljf ljh ljc ljč ljdž ljš ma mb mv mg md mđ me mž mz mi mj mk ml mlj mm mn mnj mo mp mr ms mt mć mu mf mh mc mč mdž mš na nb nv ng nd nđ ne nž nz ni nj nk nl nlj nm nn nnj no np nr ns nt nć nu nf nh nc nč ndž nš nja njb njv njg njd njđ nje njž njz nji njj njk njl njlj njm njn njnj njo njp njr njs njt njć nju njf njh njc njč njdž njš oa ob ov og od ođ oe ož oz oi oj ok ol olj om on onj oo op or os ot oć ou of oh oc oč odž oš pa pb pv pg pd pđ pe pž pz pi pj pk pl plj pm pn pnj po pp pr ps pt pć pu pf ph pc pč pdž pš ra rb rv rg rd rđ re rž rz ri rj rk rl rlj rm rn rnj ro rp rr rs rt rć ru rf rh rc rč rdž rš sa sb sv sg sd sđ se sž sz si sj sk sl slj sm sn snj so sp sr ss st sć su sf sh sc sč sdž sš ta tb tv tg td tđ te tž tz ti tj tk tl tlj tm tn tnj to tp tr ts tt tć tu tf th tc tč tdž tš ća ćb ćv ćg ćd ćđ će ćž ćz ći ćj ćk ćl ćlj ćm ćn ćnj ćo ćp ćr ćs ćt ćć ću ćf ćh ćc ćč ćdž ćš ua ub uv ug ud uđ ue už uz ui uj uk ul ulj um un unj uo up ur us ut uć uu uf uh uc uč udž uš fa fb fv fg fd fđ fe fž fz fi fj fk fl flj fm fn fnj fo fp fr fs ft fć fu ff fh fc fč fdž fš ha hb hv hg hd hđ he hž hz hi hj hk hl hlj hm hn hnj ho hp hr hs ht hć hu hf hh hc hč hdž hš ca cb cv cg cd cđ ce cž cz ci cj ck cl clj cm cn cnj co cp cr cs ct cć cu cf ch cc cč cdž cš ča čb čv čg čd čđ če čž čz či čj čk čl člj čm čn čnj čo čp čr čs čt čć ču čf čh čc čč čdž čš dža džb džv džg džd džđ dže džž džz dži džj džk džl džlj džm džn džnj džo džp džr džs džt džć džu džf džh džc džč dždž džš ša šb šv šg šd šđ še šž šz ši šj šk šl šlj šm šn šnj šo šp šr šs št šć šu šf šh šc šč šdž šš",
+	"cite_references_link_many_sep": "&#32;",
+	"cite_references_link_many_and": "&#32;"
+}

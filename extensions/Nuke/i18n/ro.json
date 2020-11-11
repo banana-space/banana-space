@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cin",
+			"Firilacroco",
+			"KlaudiuMihaila",
+			"Mihai",
+			"Minisarm",
+			"Stelistcristi",
+			"Strainu",
+			"Matrafox"
+		]
+	},
+	"nuke": "Ștergere în masă",
+	"action-nuke": "să ștergeți pagini în masă",
+	"nuke-desc": "Oferă administratorilor abilitatea de [[Special:Nuke|a șterge în masă]] pagini",
+	"nuke-nopages": "Nicio pagină nouă creată de [[Special:Contributions/$1|{{GENDER:$1|$1}}]] în schimbările recente.",
+	"nuke-list": "Aceste pagini au fost recent create de [[Special:Contributions/$1|{{GENDER:$1|$1}}]];\nadăugați un comentariu și apăsați butonul pentru a le șterge.",
+	"nuke-list-multiple": "Următoarele pagini au fost create recent;\nadăugați un comentariu și apăsați butonul pentru a le șterge.",
+	"nuke-defaultreason": "Ștergere în masă a paginilor adăugate de [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
+	"nuke-multiplepeople": "Ștergere în masă a paginilor recent adăugate",
+	"nuke-tools": "Această unealtă permite ștergerea în masă a paginilor create recent de un anumit utilizator sau o anumită adresă IP.\nIntroduceți numele utilizatorului sau adresa IP pentru a obține o listă a paginilor de șters sau nu completați nimic pentru a lua în calcul toți utilizatorii.",
+	"nuke-submit-user": "Arată paginile",
+	"nuke-submit-delete": "Șterge ce e marcat",
+	"right-nuke": "șterge pagini în masă",
+	"nuke-select": "Alegeți: $1",
+	"nuke-userorip": "Nume de utilizator, adresă IP sau necompletare:",
+	"nuke-maxpages": "Număr maxim de pagini:",
+	"nuke-editby": "Creat de [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
+	"nuke-deleted": "Pagina '''$1''' a fost ștearsă.",
+	"nuke-not-deleted": "Pagina [[:$1]] '''nu a putut''' fi ștearsă.",
+	"nuke-pattern": "Model pentru numele paginii:",
+	"nuke-nopages-global": "Nu există titluri de pagină care să corespundă căutării dvs.",
+	"nuke-viewchanges": "vizualizează modificările"
+}

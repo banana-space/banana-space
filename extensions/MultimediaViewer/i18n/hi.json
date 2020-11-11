@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kunalgrover05",
+			"Siddhartha Ghai",
+			"Vivek Rai",
+			"Wikiuser13",
+			"Smtchahal",
+			"Upendradutt93",
+			"Sfic"
+		]
+	},
+	"multimediaviewer-permission-title": "अनुमति विवरण",
+	"multimediaviewer-permission-link": "शर्तें देखें",
+	"multimediaviewer-about-mmv": "के बारे में",
+	"multimediaviewer-discuss-mmv": "वार्ता",
+	"multimediaviewer-reuse-loading-placeholder": "लोड हो रहा है…",
+	"multimediaviewer-embed-tab": "एम्बेड करें",
+	"multimediaviewer-download-link": "इस फ़ाइल को डाउनलोड करें",
+	"multimediaviewer-download-small-button-name": "छोटा आकार डाउनलोड करें",
+	"multimediaviewer-download-medium-button-name": "मध्यम आकार डाउनलोड करें",
+	"multimediaviewer-link-to-file": "मूल फ़ाइल से लिंक करें",
+	"multimediaviewer-embed-byline": "$1 द्वारा",
+	"multimediaviewer-description-page-button-text": "इस फ़ाइल की अधिक जानकारी"
+}

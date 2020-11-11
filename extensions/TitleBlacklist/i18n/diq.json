@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aspar",
+			"Erdemaslancan",
+			"Marmase"
+		]
+	},
+	"titleblacklist-desc": "serkaran re desturê vıraştışê pel u hesabê karberan dano, qey qedexekerdışi re yew [[MediaWiki:Titleblacklist|listeya risiyayan]] u [[MediaWiki:Titlewhitelist|listeya risıpiyan]] dano.",
+	"titleblacklist": "# No yew sernameyê qerelisteyo.Tiya dı ifadey timarınana sernamey u karberi nêvırazênê.\n# Qan dê vatışa \"#\" kar kerê.\n# No farazi herfa qıc u gırdi re nêhesıbneno",
+	"titlewhitelist": "# no yew sernameyê listeya risıpiyan o. qey mışorekerdışi \"#\" bışuxulnê.\n# no farazi herfa qıc u gırdi re hessas niyo",
+	"titleblacklist-forbidden-edit": "vıraştışê sernameyê \"$2\" i qedexe bı .\nmalumatê ey na listeyasiya de zepê ya: <code>$1</code>",
+	"titleblacklist-forbidden-move": "no \"$2\", \"$3\" pel re nêkırışiyeno çunke vıraştışê sernameyê \"$3\"i qedexe biyo. \nmalumatê ey na listeyasiya de zepê ya: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "vıraştışê sernameyê dosyaya\"$2\"i qedexe bı.\nmalumatê ey na listeyasiya de zêpê ya: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "vıraştışê nameyê karberê\"$2\" i qedexe bı.\nmalumatê ey na listeyasiya de zêpê ya: <code>$1</code>",
+	"titleblacklist-invalid": "Na  ğırab lista dı {{PLURAL:$1|en asatır|ené satıri}}  néravérené;\nVerdé qeyd kerdışi  timar keré:",
+	"titleblacklist-override": "Tenilisti mehesebne",
+	"right-tboverride": "Siya listeya sernuşti nêravêrde ke",
+	"right-tboverride-account": "Tenilisteya naman dê karberan mehesebnê"
+}

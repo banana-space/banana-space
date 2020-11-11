@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lloffiwr",
+			"Xxglennxx",
+			"Robin Owain"
+		]
+	},
+	"cite-desc": "Yn ychwanegu tagiau <nowiki><ref[ name=id]></nowiki> a <nowiki><references/></nowiki>, ar gyfer cyfeiriadau",
+	"cite_error": "Gwall cyfeirio: $1",
+	"cite_error_ref_numeric_key": "Tag <code>&lt;ref&gt;</code> annilys;\nni all enw fod yn rif yn unig. Defnyddiwch deitl disgrifiadol.",
+	"cite_error_ref_no_key": "Mae'r <code>&lt;ref&gt;</code> tag yn annilys neu rhoddwyd iddo enw annilys",
+	"cite_error_ref_too_many_keys": "Tag <code>&lt;ref&gt;</code> annilys;\nenwau annilys; e.e. gormod ohonynt",
+	"cite_error_ref_no_input": "Tag <code>&lt;ref&gt;</code> annilys;\nrhaid i dagiau ref heb enw iddynt gynnwys rhywbeth",
+	"cite_error_references_duplicate_key": "Tag <code>&lt;ref&gt;</code> annilys; mae'r enw \"$1\" wedi'i ddiffinio droeon gyda chynnwys gwahanol",
+	"cite_error_references_invalid_parameters": "Tag <code>&lt;references&gt;</code> annilys;\nni chaniateir paramedrau.\nDefnyddiwch <code>&lt;references /&gt;</code>",
+	"cite_error_references_no_backlink_label": "Dim rhagor o labeli ôl-gyswllt ar gael.\nDiffiniwch ragor ohonynt yn y neges <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_no_link_label_group": "Wedi rhedeg allan o labeli dolenni unigryw ar gyfer y grŵp \"$1\".\nGallwch ddiffinio rhagor ohonynt yn y neges <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_text": "Tag <code>&lt;ref&gt;</code> annilys;\nni osodwyd unrhyw destun ar gyfer y 'ref' <code>$1</code>",
+	"cite_error_included_ref": "<code>&lt;/ref&gt;</code> clo yn eisiau ar gyfer y tag <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "Mae tagiau <code>&lt;ref&gt;</code> yn bresennol ar gyfer y grwp \"$1\", ond ni chafwyd tag <code>&lt;references/&gt;</code>, ynteu roedd <code>&lt;/ref&gt;</code> terfynol yn eisiau.",
+	"cite_error_references_group_mismatch": "Mae gan y tag <code>&lt;ref&gt;</code> oddi mewn i <code>&lt;references&gt;</code> briodoledd grŵp anghyson \"$1\".",
+	"cite_error_references_missing_group": "Mae gan y tag <code>&lt;ref&gt;</code> a ddiffinir yn <code>&lt;references&gt;</code> briodoledd grŵp \"$1\" nag ydyw'n cael ei ddefnyddio yn y testun cynt.",
+	"cite_error_references_missing_key": "Ni ddefnyddir y tag <code>&lt;ref&gt;</code> o'r enw \"$1\", a ddiffinir yn <code>&lt;references&gt;</code>, yn y testun blaenorol.",
+	"cite_error_references_no_key": "Nid oes dim priodoledd o enw gan y tag <code>&lt;ref&gt;</code> a ddiffinir yn <code>&lt;references&gt;</code>",
+	"cite_error_empty_references_define": "Does dim byd yn y tag <code>&lt;ref&gt;</code> a'r enw \"$1\" arno, sydd wedi ei ddiffinio oddi mewn i dagiau <code>&lt;references&gt;</code>.",
+	"cite-tracking-category-cite-error": "Dalennau gyda gwallau yn y cyfeiriadau",
+	"cite-tracking-category-cite-error-desc": "Mae gan dalennau'r categori hwn wallau yn y modd maen nhw'n defnyddio tagiau cyfeirio.",
+	"cite_references_link_accessibility_label": "Neidio am lan",
+	"cite_references_link_many_accessibility_label": "Neidio lan i:"
+}

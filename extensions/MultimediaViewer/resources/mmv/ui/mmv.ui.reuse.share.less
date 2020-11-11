@@ -1,0 +1,49 @@
+@input-text-color: #222;
+
+.mw-mmv-share-pane {
+	.mw-mmv-share-page {
+		// override OOUI fixed width
+		width: auto;
+		// make sure this is a new block formatting context so that the float shrinks it instead of
+		// running into it and pushing the input down (there is probably a better way of doing this)
+		overflow: hidden;
+
+		// The selector has to be that deep and include [readonly] to override OOUI's definition
+		input[ readonly ] {
+			color: @input-text-color;
+			text-shadow: none;
+		}
+	}
+
+	.mw-mmv-dialog-copy {
+		// style rules based on .mw-mmv-share-page-link
+		float: right;
+		width: 2em;
+		height: 2em;
+		// position approximately to the middle - probably fragile but couldn't find a better way as
+		// the height of OOUI input widget has both em and px parts and not possible to calculate
+		// exactly
+		margin: 8px 0.5em;
+	}
+}
+
+.mw-mmv-share-page-link {
+	float: left;
+	width: 1.5em;
+	height: 1.5em;
+	// position approximately to the middle - probably fragile but couldn't find a better way as the
+	// height of OOUI input widget has both em and px parts and not possible to calculate exactly
+	margin: 8px 0;
+	padding: 0 5px 0 0;
+	/* @embed */
+	background-image: url( img/link.svg );
+	background-size: contain;
+	background-position: left center;
+	background-repeat: no-repeat;
+
+	&:hover {
+		/* @embed */
+		background-image: url( img/link-hover.svg );
+		text-decoration: none;
+	}
+}

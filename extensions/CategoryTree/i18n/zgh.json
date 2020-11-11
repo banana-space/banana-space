@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amara-Amaziɣ",
+			"YesIn",
+			"Mdb897"
+		]
+	},
+	"categorytree-expand": "ⴼⵙⵉ",
+	"categorytree-member-counts": "ⵢⵓⵎⴰ {{PLURAL:$1|1 ⴰⴷⵓⵙⵎⵉⵍ|$1 ⵉⴷⵓⵙⵎⵉⵍⵏ}}, {{PLURAL:$2|1 ⵜⴰⵙⵏⴰ|$2 ⵜⵉⵙⵏⴰⵜⵉⵏ}}, ⴷ {{PLURAL:$3|1 ⴰⵙⴷⴰⵡ|$3 ⵉⵙⴷⴰⵡⵏ}}",
+	"categorytree-num-categories": "$1 {{PLURAL:$1|ⵙⵎⵍ|ⵙⵎⵍⵏ}}",
+	"categorytree-num-pages": "$1 {{PLURAL:$1|ⵙⵏ|ⵙⵏⵡⵏ}}",
+	"categorytree-num-files": "$1 ⴼ"
+}

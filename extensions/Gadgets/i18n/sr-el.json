@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michaello",
+			"Milicevic01",
+			"Жељко Тодоровић",
+			"Сербијана",
+			"Srdjan m"
+		]
+	},
+	"gadgets-desc": "Omogućava korisnicima da izaberu prilagođene [[Special:Gadgets|CSS i javaskript spravice]] u svojim [[Special:Preferences#mw-prefsection-gadgets|podešavanjima]]",
+	"prefs-gadgets": "Spravice",
+	"gadgets-prefstext": "Ispod se nalazi spisak posebnih spravica koje možete da omogućite na svom nalogu. \nOve spravice su uglavnom zasnovane na Javaskriptu, tako da on mora biti omogućen. \nSpravice neće uticati na stranicu za podešavanje.\n\nOne nisu deo softvera Medijaviki, već se razvijaju i održavaju od strane korisnika na Vašem lokalnom vikiju.\nAdministratori mogu izmeniti [[MediaWiki:Gadgets-definition|značenja]] i [[Special:Gadgets|opise]] dostupnih spravica. Broj korisnika za svaku spravicu na ovoj vikiji je naveden u [[Special:GadgetUsage|statistici korišćenja spravica]].",
+	"gadgets": "Spravice",
+	"gadgetusage": "Statistika korišćenja spravica",
+	"gadgetusage-intro": "Tabela prikazuje broj korisnika koji su omogućili spravice na ovom vikiju. U aktivne korisnike se ubraja onaj koji je napravio izmenu u {{PLURAL:$1|poslednji dan|$1 poslednja dana|$1 poslednjih dana}}. Spisak ne uključuje statistike za spravice koje su svima podrazumevane i može uključivati spravice koje više nisu dostupne.",
+	"gadgetusage-intro-noactive": "Tabela prikazuje broj korisnika koji su omogućili spravice na ovom vikiju. Spisak ne uključuje statistike za spravice koje su svima podrazumevane i može uključivati spravice koje više nisu dostupne.",
+	"gadgetusage-activeusers": "Aktivni korisnici",
+	"gadgetusage-default": "Podrazumevano",
+	"gadgets-title": "Spravice",
+	"gadgets-pagetext": "Ispod je spisak posebnih gadžeta koje korisnici mogu da omoguće na svojoj [[Special:Preferences#mw-prefsection-gadgets|stranici za podešavanje]], kao što je navedeno u [[MediaWiki:Gadgets-definition|definicijama]].\nOvaj pregled pruža brz pristup sistemskim porukama koje definišu svaki opis i kod gadžeta.",
+	"gadgets-uses": "koristi se",
+	"gadgets-required-rights": "Zahteva {{PLURAL:$2|sledeće pravo|sledeća prava}}:\n\n$1",
+	"gadgets-required-skins": "Dostupno u {{PLURAL:$2|temi $1|sledećim temama: $1}}.",
+	"gadgets-default": "Podrazumevano uključen za svakog.",
+	"gadgets-legacy": "Gedžet nije učitan. Molimo vas prebacite ga na ResourceLoader. ([https://www.mediawiki.org/wiki/ResourceLoader/Migration_guide_(users) Saznajte više])",
+	"gadgets-export": "Izvezi",
+	"gadgets-export-title": "Izvoz spravice",
+	"gadgets-not-found": "Gadžet „$1“ nije pronađen.",
+	"gadgets-export-text": "Da biste izvezli $1 gadžet, kliknite na dugme „{{int:gadgets-export-download}}“, sačuvajte preuzetu datoteku,\npređite na ''Special:Import'' na željenoj vikiji i pošaljite gadžet. Nakon toga, dodajte sledeće na ''MediaWiki:Gadgets-definition'' stranicu:\n<pre>$2</pre>\nMorate imati određene dozvole na navedenoj vikiji (uključujući i pravo za uređivanje sistemskih poruka), dok uvoz preko datoteka mora biti omogućen.",
+	"gadgets-export-download": "Preuzmi",
+	"right-gadgets-edit": "uređivanje JavaScript i CSS stranica gedžeta",
+	"action-gadgets-edit": "uređivanje JavaScript i CSS stranica gedžeta",
+	"right-gadgets-definition-edit": "uređivanje definicija gedžeta",
+	"action-gadgets-definition-edit": "uređivanje definicija gedžeta"
+}

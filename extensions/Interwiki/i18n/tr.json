@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Homonihilis",
+			"Joseph",
+			"Karduelis",
+			"Suelnur",
+			"Vito Genovese",
+			"Violetanka"
+		]
+	},
+	"interwiki": "Vikilerarası veriyi gör ve değiştir",
+	"interwiki-title-norights": "Vikilerarası veriyi gör",
+	"interwiki-desc": "Vikilerarası tabloyu görmek ve değiştirmek için [[Special:Interwiki|özel bir sayfa]] ekler",
+	"interwiki_intro": "Bu vikilerarası tabloya genel bir bakıştır ve farklı vikiler ile diğer sitelere bağlantı sağlamak amacıyla önceden belirtilmiş kısayolları tanımlar. Tavsiye edilen kullanım için, bkz.[//www.mediawiki.org/wiki/Extension:Interwiki the manual on MediaWiki.org].",
+	"interwiki-legend-label": "Rehber",
+	"interwiki_prefix": "Önek",
+	"interwiki-prefix-label": "Önek:",
+	"interwiki_local": "Yönlendir",
+	"interwiki-local-label": "Yönlendir:",
+	"interwiki_trans": "Görüntüle",
+	"interwiki-trans-label": "Görüntüle:",
+	"interwiki_1": "evet",
+	"interwiki_0": "hayır",
+	"interwiki_error": "Hata: İnterviki tablosu boş ya da başka bir şeyde sorun çıktı.",
+	"interwiki_edit": "Düzenle",
+	"interwiki_reasonfield": "Neden:",
+	"interwiki_delquestion": "''$1\" siliniyor",
+	"interwiki-logtext": "Günlükleri görüntüleyin",
+	"interwiki_addtext": "Bir interviki ve önceden tanımlı dil ekle",
+	"interwiki_addbutton": "Ekle",
+	"right-interwiki": "İnterviki verilerini düzenler",
+	"action-interwiki": "bu interviki girdisini değiştir"
+}

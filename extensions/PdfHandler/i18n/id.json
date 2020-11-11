@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bennylin"
+		]
+	},
+	"pdf-desc": "Yang menangani tampilan berkas PDF dalam mode gambar",
+	"pdf_no_metadata": "Tidak dapat membaca metadata dari PDF",
+	"pdf_page_error": "Nomor halaman di luar batas"
+}

@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"titleblacklist-desc": "Permitte al administratores prohibir le creation de paginas e contos de usator per medio de un [[MediaWiki:Titleblacklist|lista nigre]] e de un [[MediaWiki:Titlewhitelist|lista blanc]]",
+	"titleblacklist": "# Isto es un lista nigre de titulos. Le titulos e usatores que corresponde a un\n# expression regular includite hic non pote esser create. Usa \"#\" pro commentos.\n# Per predefinition, le differentia inter majusculas e minusculas non es significante.",
+	"titlewhitelist": "# Isto es un lista blanc de titulos. Usa \"#\" pro commentos.\n# Per predefinition, le differentia inter majusculas e minusculas non es significante.",
+	"titleblacklist-forbidden-edit": "Le creation del titulo \"$2\" ha essite prohibite.\nIllo corresponde al sequente entrata del lista nigre: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" non pote esser renominate a \"$3\", proque le creation del titulo \"$3\" ha essite prohibite.\nIllo corresponde al sequente entrata del lista nigre: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Le creation del nomine de file \"$2\" ha essite prohibite.\nIllo corresponde al sequente entrata del lista nigre: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Le creation del nomine de usator \"$2\" ha essite prohibite.\nIllo corresponde al sequente entrata del lista nigre: <code>$1</code>",
+	"titleblacklist-invalid": "Le sequente {{PLURAL:$1|linea|lineas}} in le lista nigre de titulos es invalide; per favor corrige {{PLURAL:$1|lo|los}} ante de publicar:",
+	"titleblacklist-override": "Ignorar le lista nigre",
+	"right-tboverride": "Ignorar le lista nigre de titulos o nomines de usator",
+	"right-tboverride-account": "Ignorar le lista nigre de nomines de usator"
+}

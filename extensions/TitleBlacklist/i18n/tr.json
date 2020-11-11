@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joseph",
+			"Vito Genovese"
+		]
+	},
+	"log-name-titleblacklist": "Ad kara listesi günlüğü",
+	"titleblacklist-desc": "Yöneticilere, sayfaların ve kullanıcı hesaplarının oluşturulmasını yasaklamalarına bir [[MediaWiki:Titleblacklist|karaliste]] ve [[MediaWiki:Titlewhitelist|beyazliste]] ile izin verir.",
+	"titleblacklist": "# Bu bir başlık karalistesi. Buradaki düzenli ifadelerle eşleşen başlıklar ve kullanıcılar oluşturulamaz.\n# Yorumlar için \"#\" kullanın.\n# Bu varsayılan olarak büyük-küçük harf duyarsızdır",
+	"titlewhitelist": "# Bu bir başlık beyaz listesidir. Yorumlar için \"#\" kullanın.\n# Varsayılan olarak büyük-küçük harfe duyarsızdır",
+	"titleblacklist-forbidden-edit": "\"$2\" başlığının oluşturulması engellendi.\nŞu karaliste girdisiyle eşleşiyor: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\", \"$3\" sayfasına taşınamaz, çünkü \"$3\" başlığının oluşturulması yasaklanmış.\nŞu karaliste girdisiyle eşleşiyor: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "\"$2\" dosya adının oluşturulması engellendi.\nŞu karaliste girdisiyle eşleşiyor: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "\"$2\" kullanıcı adının oluşturulması engellendi.\nŞu karaliste girdisiyle eşleşiyor: <code>$1</code>",
+	"titleblacklist-invalid": "Karalistedeki şu {{PLURAL:$1|satır|satırlar}} geçersiz;\nlütfen kaydetmeden önce düzeltin:",
+	"titleblacklist-override": "Karalisteyi yoksay",
+	"right-tboverride": "Başlık karalistesini geçersiz kıl",
+	"right-tboverride-account": "Kullanıcı adı karalistesini geçersiz kıl"
+}

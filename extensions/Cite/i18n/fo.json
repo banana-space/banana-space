@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"EileenSanda"
+		]
+	},
+	"cite-desc": "Leggur afturat <nowiki><ref[ name=id]></nowiki> og <nowiki><references/></nowiki> lyklaorð, fyri ávísingar",
+	"cite_error": "Keldufeilur: $1",
+	"cite_error_group_refs_without_references": "<code>&lt;ref&gt;</code> lyklaorð (tags) eru til fyri ein bólk sum eitur \"$1\", men onki tilsvarandi <code>&lt;references group=\"$1\"/&gt;</code> lyklaorð varð funnið, ella manglar ein lukkandi <code>&lt;/ref&gt;</code>"
+}

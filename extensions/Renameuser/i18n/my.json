@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ninjastrikers"
+		]
+	},
+	"log-name-renameuser": "အသုံးပြုသူ အမည်ပြောင်းလဲခြင်း မှတ်တမ်း",
+	"logentry-renameuser-renameuser": "အသုံးပြုသူ $4 ({{PLURAL:$6|တည်းဖြတ်မှု $6 ခု|တည်းဖြတ်မှုများ $6 ခု}}) ကို {{GENDER:$7|$5}} သို့ $1 က {{GENDER:$2|အမည်ပြောင်းလဲခဲ့သည်}}",
+	"logentry-renameuser-renameuser-legacier": "$1 က အသုံးပြုသူ $4 ကို {{GENDER:$7|$5}} သို့ အမည်ပြောင်းလဲခဲ့သည်",
+	"renameuser-move-log": "{{GENDER:$2|အသုံးပြုသူ}} \"[[User:$1|$1]]\" ကို \"[[User:$2|$2]]\" သို့ အမည်ပြောင်းလဲစဉ် စာမျက်နှာအား အလိုအလျောက် ရွှေ့ပြောင်းခြင်း"
+}

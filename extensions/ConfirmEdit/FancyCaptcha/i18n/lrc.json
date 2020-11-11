@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mogoeilor"
+		]
+	},
+	"fancycaptcha-captcha": "ۋارسی ٱمنیتی",
+	"fancycaptcha-accountcreate": "سی پر و پیم کاری ویکی د ری وه ری حساو راس کنی خود انجوم، ایما وا نازاری دتو میهایم که کلیمه یایی که هان د جعوه ([[Special:رازینه کپچا/هومیاری|دونسمنیا هنی]]):ایچه بنیسیت",
+	"fancycaptcha-imgcaptcha-ph": "نیسسٱیی ناٛ کاٛ د ٱسگ مینیت ۋارد بٱکیت",
+	"fancycaptcha-reload-text": "د نؤ كردن",
+	"apihelp-fancycaptchareload-description": "یه گل FancyCaptcha نه بیئریت.",
+	"apihelp-fancycaptchareload-example-1": "یه گل رازینه کپچا نازار تازه بئیرت."
+}

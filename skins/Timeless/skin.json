@@ -1,0 +1,89 @@
+{
+	"name": "Timeless",
+	"version": "0.8.1",
+	"author": "Isarra Yos",
+	"url": "https://www.mediawiki.org/wiki/Skin:Timeless",
+	"descriptionmsg": "timeless-desc",
+	"namemsg": "skinname-timeless",
+	"license-name": "GPL-2.0-or-later",
+	"type": "skin",
+	"ValidSkinNames": {
+		"timeless": "Timeless"
+	},
+	"MessagesDirs": {
+		"Timeless": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"skins.timeless": {
+			"targets": [ "desktop", "mobile" ],
+			"class": "ResourceLoaderSkinModule",
+			"styles": {
+				"resources/libraries/normalise.css": {
+					"media": "screen"
+				},
+				"resources/forms.less": {
+					"media": "screen"
+				},
+				"resources/screen-common.less": {
+					"media": "screen"
+				},
+				"resources/screen-desktop.less": {
+					"media": "screen and (min-width: 851px)"
+				},
+				"resources/screen-desktop-full.less": {
+					"media": "screen and (min-width: 1340px)"
+				},
+				"resources/screen-desktop-mid.less": {
+					"media": "screen and (min-width: 1100px) and (max-width: 1339px)"
+				},
+				"resources/screen-desktop-small.less": {
+					"media": "screen and (min-width: 851px) and (max-width: 1099px)"
+				},
+				"resources/screen-mobile.less": {
+					"media": "screen and (max-width: 850px)"
+				},
+				"resources/print.css": {
+					"media": "print"
+				}
+			},
+			"@NOTE": "Remember to also update variables.less if you change the width cutoffs here. screen-misc.less and mobile.js may also need updating."
+		},
+		"skins.timeless.misc": {
+			"targets": [ "desktop", "mobile" ],
+			"styles": [
+				"resources/screen-misc.less"
+			]
+		},
+		"skins.timeless.js": {
+			"targets": [ "desktop", "mobile" ],
+			"scripts": [
+				"resources/main.js"
+			]
+		},
+		"skins.timeless.mobile": {
+			"targets": [ "desktop", "mobile" ],
+			"scripts": [
+				"resources/mobile.js"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "Timeless"
+	},
+	"ResourceModuleSkinStyles": {
+		"timeless": {
+			"+oojs-ui-core.styles": "resources/ooui.less",
+			"+ext.echo.styles.badge": "resources/extensions/Echo.less",
+			"+ext.visualEditor.core": "resources/extensions/VisualEditor.core.less",
+			"+ext.visualEditor.desktopArticleTarget.noscript": "resources/extensions/VisualEditor.article.less"
+		}
+	},
+	"AutoloadClasses": {
+		"SkinTimeless": "SkinTimeless.php",
+		"TimelessTemplate": "TimelessTemplate.php"
+	},
+	"manifest_version": 1
+}

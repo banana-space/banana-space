@@ -1,0 +1,10 @@
+{
+	"name": "MathCaptcha",
+	"AutoloadClasses": {
+		"MathCaptcha": "MathCaptcha.class.php"
+	},
+	"config": {
+		"CaptchaClass": "MathCaptcha"
+	},
+	"manifest_version": 1
+}

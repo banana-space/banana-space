@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Giromin Cangiaxo"
+		]
+	},
+	"pfunc_time_error": "Errô: oa non vallida.",
+	"pfunc_expr_unrecognised_word": "Errô inte l'esprescion: parolla \"$1\" non riconosciua.",
+	"pfunc_expr_unexpected_operator": "Errô inte l'esprescion: operatô $1 inatteiso.",
+	"pfunc_expr_missing_operand": "Errô inte l'esprescion: operando mancante pe $1.",
+	"pfunc_expr_unrecognised_punctuation": "Errô inte l'esprescion: carattere de puntezzatua \"$1\" non riconosciuo.",
+	"pfunc_expr_division_by_zero": "Divixon pe zero."
+}

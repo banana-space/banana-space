@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"AmaryllisGardener"
+		]
+	},
+	"fancycaptcha-captcha": "Security check",
+	"fancycaptcha-accountcreate": "Tae pertect the wiki against automatit accoont creation, we kindly ask ye tae enter the wirds that appear ablo in the box ([[Special:Captcha/help|mair info]]):",
+	"fancycaptcha-imgcaptcha-ph": "Enter the text ye see on the eemage",
+	"fancycaptcha-reload-text": "Refresh"
+}

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Borislav",
+			"DCLXVI",
+			"Turin",
+			"Лорд Бъмбъри",
+			"StanProg"
+		]
+	},
+	"syntaxhighlight-desc": "Осигурява синтактично осветяване на <code>&lt;syntaxhighlight&gt;</code> чрез [http://pygments.org/ Pygments]",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Език",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "Блок с код",
+	"syntaxhighlight-error-unknown-language": "Непознат език „$1“"
+}

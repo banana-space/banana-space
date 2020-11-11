@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg4570"
+   version="1.1"
+   viewBox="0 0 5.2916665 5.2916665"
+   height="5.2916665mm"
+   width="5.2916665mm">
+  <defs
+     id="defs4564" />
+  <metadata
+     id="metadata4567">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-108.66815,-132.58035)"
+     id="layer1">
+    <path
+       id="path4530"
+       d="m 109.19732,133.37411 h 0.79375 v 0.26458 h -0.26458 v 3.175 h 0.26458 v 0.26458 h -0.79375 z"
+       style="fill:#aaaaaa;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       id="path4532"
+       d="m 113.43065,133.37411 v 3.70416 h -0.79375 v -0.26458 h 0.26459 v -3.175 h -0.26459 v -0.26458 z"
+       style="fill:#aaaaaa;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       id="path4530-7"
+       d="m 110.25565,133.37411 h 0.79375 v 0.26458 h -0.26458 v 3.175 h 0.26458 v 0.26458 h -0.79375 z"
+       style="fill:#aaaaaa;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       id="path4532-5"
+       d="m 112.37232,133.37411 v 3.70416 h -0.79375 v -0.26458 h 0.26458 v -3.175 h -0.26458 v -0.26458 z"
+       style="fill:#aaaaaa;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gott wisst",
+			"JJohnson1701"
+		]
+	},
+	"vector-action-addsection": "Besettan mearcunge",
+	"vector-action-delete": "Forlēosan",
+	"vector-action-move": "Wegan",
+	"vector-action-protect": "Beorgan",
+	"vector-action-undelete": "Scieppan tramet eft",
+	"vector-action-unprotect": "Andwendan beorgunge",
+	"vector-view-create": "Scieppan",
+	"vector-view-edit": "Ādihtan",
+	"vector-view-history": "Stǣr",
+	"vector-view-view": "Rǣdan",
+	"vector-view-viewsource": "Sēon fruman",
+	"vector-more-actions": "Mā"
+}

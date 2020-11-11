@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="7.0555558mm"
+   width="7.0555558mm"
+   version="1.1"
+   viewBox="0 0 25.019703 25.019703"
+   id="svg4136"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="user-large-grey.svg"
+   inkscape:export-filename="/media/shintaiden/home/rahah/mediawiki/skins/Timeless/resources/images/user-large-grey.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <metadata
+     id="metadata4148">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4146" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="3840"
+     inkscape:window-height="2124"
+     id="namedview4144"
+     showgrid="true"
+     inkscape:zoom="47.71257"
+     inkscape:cx="16.028652"
+     inkscape:cy="12.392574"
+     inkscape:window-x="2880"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4136"
+     inkscape:snap-bbox="true"
+     inkscape:object-paths="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-others="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4150"
+       originx="5.8568145e-15"
+       originy="5.0039421" />
+  </sodipodi:namedview>
+  <path
+     style="fill:#aaaaaa;fill-opacity:1"
+     d="m 4.2392271,10.959893 c -2.4207341,3.271189 -2.6944436,6.84318 -1.6898315,9.21089 0.6731632,1.615477 1.6241932,2.561304 2.739249,3.136306 1.0902769,0.585953 2.4086624,0.709086 3.5787827,0.711824 l 8.7128577,0 c 1.26786,0 2.547452,-0.283886 3.648743,-0.923231 1.101289,-0.639344 2.010191,-1.641367 2.478239,-3.133628 0.674541,-2.122024 0.365242,-5.517489 -2.036946,-8.844274 -0.01044,0.01593 -0.02908,0.02492 -0.04036,0.04013 a 10.332728,10.275949 0 0 1 -8.629445,4.640239 10.332728,10.275949 0 0 1 -8.7612913,-4.83826 z"
+     id="path4140"
+     inkscape:connector-curvature="0" />
+  <path
+     sodipodi:nodetypes="sssss"
+     inkscape:connector-curvature="0"
+     id="path4142"
+     d="m 13.010245,1.0007896 c -3.0399595,0 -5.5043347,2.3923634 -5.5043347,5.3434923 0,2.9511292 2.4643752,5.3434911 5.5043347,5.3434911 3.039955,0 5.504332,-2.3923619 5.504332,-5.3434911 0,-2.9511289 -2.464377,-5.3434923 -5.504332,-5.3434923 z"
+     style="fill:#aaaaaa;fill-opacity:1;fill-rule:evenodd" />
+</svg>

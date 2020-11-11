@@ -1,0 +1,93 @@
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+@import 'mw.rcfilters.variables';
+
+.animation-delay( ... ) {
+	-webkit-animation-delay: @arguments; // Chrome 4-42, Safari 4-8, Opera 15-29, Android 2.1-4.4.4
+	-moz-animation-delay: @arguments; // Firefox 5-15
+	animation-delay: @arguments; // Chrome 43+, Firefox 16+, IE 10+, Edge 12+, Safari 9+, Opera 12.10 & 30+, iOS 9+, Android 47+
+}
+
+// This is a general mixin for a color circle
+.mw-rcfilters-mixin-circle( @color: @color-base--inverted, @diameter: 2em, @padding: 0.5em, @border: false, @borderColor: @colorGray5, @emptyBackground: false ) {
+	.box-sizing( border-box );
+	min-width: @diameter;
+	width: @diameter;
+	min-height: @diameter;
+	height: @diameter;
+	margin: @padding;
+	border-radius: 50%;
+
+	& when ( @emptyBackground = false ) {
+		background-color: @color;
+	}
+	& when ( @emptyBackground = true ) {
+		background-color: @highlight-none;
+	}
+
+	& when ( @border = true ) {
+		border: 1px solid @borderColor;
+	}
+}
+
+// This is the circle that appears next to the results
+// Its visibility is directly dependent on whether there is
+// a color class on its parent element
+.result-circle( @colorName: 'none' ) {
+	&-@{colorName} {
+		.mw-rcfilters-mixin-circle( ~'@{highlight-@{colorName}}', @result-circle-diameter, 0 );
+		display: none;
+
+		.mw-rcfilters-highlight-color-@{colorName} & {
+			display: inline-block;
+		}
+	}
+}
+
+// A mixin for changes list containers. Applies enough margin-left to fit the 5 highlight circles.
+.result-circle-margin() {
+	margin-left: ~'calc( ( @{result-circle-diameter} + @{result-circle-margin} ) * 5 + @{result-circle-general-margin} )';
+}
+
+// A mixin just for changesListWrapperWidget page, to output the scope of the widget
+// so it is before the rest of the rule; we need the li& to be in
+// between the wrapper scope and the color-cX class, which doesn't
+// work if the rules are inside the above widget LESS scope
+.highlight-changesListWrapperWidget( @bgcolor ) {
+	.mw-rcfilters-ui-changesListWrapperWidget li&,
+	.mw-rcfilters-ui-changesListWrapperWidget & tr:first-child,
+	.mw-rcfilters-ui-changesListWrapperWidget tr&.mw-rcfilters-ui-changesListWrapperWidget-enhanced-toplevel:not( .mw-rcfilters-ui-changesListWrapperWidget-enhanced-grey ) td:not( :nth-child( -n+2 ) ),
+	.mw-rcfilters-ui-changesListWrapperWidget tr&.mw-rcfilters-ui-changesListWrapperWidget-enhanced-nested:not( .mw-rcfilters-ui-changesListWrapperWidget-enhanced-grey ) td:not( :nth-child( -n+4 ) ) {
+		background-color: @bgcolor;
+	}
+}
+
+// This mixin produces color mixes for two, three and four colors
+.highlight-color-mix( @color1, @color2, @color3: false, @color4: false ) {
+	@highlight-color-class-var: ~'.mw-rcfilters-highlight-color-@{color1}.mw-rcfilters-highlight-color-@{color2}';
+
+	// The nature of these variables and them being inside
+	// a 'tint' and 'average' LESS functions is such where
+	// the parsing is failing if it is done inside those functions.
+	// Instead, we first construct their LESS variable names,
+	// and then we call them inside those functions by calling @@var
+	@c1var: ~'highlight-@{color1}';
+	@c2var: ~'highlight-@{color2}';
+
+	// Two colors
+	@{highlight-color-class-var} when ( @color3 = false ) and ( @color4 = false ) and not ( @color1 = false ), ( @color2 = false ) {
+		.highlight-changesListWrapperWidget( tint( average( @@c1var, @@c2var ), 50% ) );
+	}
+	// Three colors
+	@{highlight-color-class-var}.mw-rcfilters-highlight-color-@{color3} when ( @color4 = false ) and not ( @color3 = false ) {
+		@c3var: ~'highlight-@{color3}';
+		.highlight-changesListWrapperWidget( tint( mix( @@c1var, average( @@c2var, @@c3var ), 33% ), 30% ) );
+	}
+
+	// Four colors
+	@{highlight-color-class-var}.mw-rcfilters-highlight-color-@{color3}.mw-rcfilters-highlight-color-@{color4} when not ( @color4 = false ) {
+		@c3var: ~'highlight-@{color3}';
+		@c4var: ~'highlight-@{color4}';
+		.highlight-changesListWrapperWidget( tint( mix( @@c1var, mix( @@c2var, average( @@c3var, @@c4var ), 25% ), 25% ), 25% ) );
+	}
+}

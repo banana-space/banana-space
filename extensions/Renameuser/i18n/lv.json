@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Papuass",
+			"Xil",
+			"Silraks"
+		]
+	},
+	"renameuser": "Pārsaukt lietotāju",
+	"renameuser-linkoncontribs": "pārsaukt lietotāju",
+	"renameuser-linkoncontribs-text": "Pārsaukt šo lietotāju",
+	"renameuserold": "Pašreizējais lietotājvārds:",
+	"renameusernew": "Jaunais lietotāja vārds:",
+	"renameuserreason": "Iemesls:",
+	"renameuserreserve": "Bloķēt veco lietotājvārdu no turpmākas izmantošanas",
+	"renameuserwarnings": "Brīdinājumi:",
+	"renameuserconfirm": "Jā, pārdēvēt lietotāju",
+	"renameusersubmit": "Iesniegt",
+	"renameusererrorexists": "Lietotājs \"<nowiki>$1</nowiki>\" jau ir.",
+	"renameusersuccess": "Lietotājs \"<nowiki>$1</nowiki>\" pārdēvēts par \"<nowiki>$2</nowiki>\".",
+	"log-name-renameuser": "Dalībnieku pārdēvēšanas reģistrs",
+	"log-description-renameuser": "Lietotājvārdu maiņas reģistrs",
+	"action-renameuser": "pārsaukt lietotājus",
+	"right-renameuser": "Pārsaukt lietotājus"
+}

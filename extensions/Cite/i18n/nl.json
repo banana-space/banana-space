@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"Flightmare",
+			"Niels",
+			"Romaine",
+			"Siebrand",
+			"Dinosaur918",
+			"Mar(c)"
+		]
+	},
+	"cite-desc": "Voegt <nowiki><ref[ name=id]></nowiki>- en <nowiki><references/></nowiki>-labels toe voor citaten",
+	"cite_error": "Citefout: $1",
+	"cite_error_ref_numeric_key": "Onjuist label <code>&lt;ref&gt;</code>;\nde naam kan geen eenvoudige integer zijn.\nGebruik een beschrijvende titel",
+	"cite_error_ref_no_key": "Het openingslabel <code>&lt;ref&gt;</code> is onjuist opgemaakt of heeft een verkeerde naam.",
+	"cite_error_ref_too_many_keys": "Onjuist label <code>&lt;ref&gt;</code>;\nonjuiste namen, bijvoorbeeld te veel",
+	"cite_error_ref_no_input": "Onjuist label <code>&lt;ref&gt;</code>;\nrefs zonder naam moeten inhoud hebben",
+	"cite_error_references_duplicate_key": "Ongeldig label <code>&lt;ref&gt;</code>; de naam \"$1\" wordt meerdere keren met andere inhoud gedefinieerd.",
+	"cite_error_references_invalid_parameters": "Onjuiste <code>&lt;references&gt;</code>-tag",
+	"cite_error_references_no_backlink_label": "Het aantal beschikbare backlinklabels is opgebruikt.\nGeef meer labels op in het bericht <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_no_link_label_group": "Het aantal aangepaste koppelinglabels voor de group \"$1\" is uitgeput.\nU kunt er meer instellen in het systeembericht <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_text": "Onjuist label <code>&lt;ref&gt;</code>;\ner is geen tekst opgegeven voor referenties met de naam <code>$1</code>",
+	"cite_error_included_ref": "Na het label <code>&lt;ref&gt;</code> ontbreekt het afsluitende label <code>&lt;/ref&gt;</code>",
+	"cite_error_group_refs_without_references": "Er bestaat een label <code>&lt;ref&gt;</code> voor de groep \"$1\", maar er is geen bijbehorend label <code>&lt;references group=\"$1\"/&gt;</code>  aangetroffen of een afsluitende  <code>&lt;/ref&gt;</code> is niet aanwezig.",
+	"cite_error_references_group_mismatch": "De tag <code>&lt;ref&gt;</code> in <code>&lt;references&gt;</code> conflicteert met groepseigenschap \"$1\".",
+	"cite_error_references_missing_group": "Het label <code>&lt;ref&gt;</code> die is gedefinieerd in <code>&lt;references&gt;</code> heeft de groepseigenschap \"$1\" niet niet eerder in te tekst voorkomt.",
+	"cite_error_references_missing_key": "Het label <code>&lt;ref&gt;</code> met de naam \"$1\" gedefinieerd in <code>&lt;references&gt;</code> wordt niet eerder in de tekst gebruikt.",
+	"cite_error_references_no_key": "Het label <code>&lt;ref&gt;</code> die is gedefinieerd in <code>&lt;references&gt;</code> heeft geen eigenschapsnaam.",
+	"cite_error_empty_references_define": "Het label <code>&lt;ref&gt;</code> die is gedefinieerd in <code>&lt;references&gt;</code> met de naam \"$1\" heeft geen inhoud.",
+	"cite-tracking-category-cite-error": "Pagina's met referentiefouten",
+	"cite_references_link_accessibility_label": "Omhoog",
+	"cite_references_link_many_accessibility_label": "Omhoog naar:",
+	"cite_section_preview_references": "Voorbeeldweergave van de referenties",
+	"cite_warning": "Referentiewaarschuwing: $1",
+	"cite_warning_sectionpreview_no_text": "Van <code>&lt;ref&gt;</code> met de naam <code>$1</code> kan geen voorvertoning gegeven worden, daar deze niet in de huidige sectie of in zijn geheel niet gedefinieerd wordt."
+}

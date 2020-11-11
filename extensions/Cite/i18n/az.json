@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vago",
+			"Wertuose",
+			"Serkanland"
+		]
+	},
+	"cite_error": "Sitat səhvi: $1",
+	"cite-tracking-category-cite-error": "İstinad xətası olan səhifələr",
+	"cite_reference_link_key_with_num": "$1_$2",
+	"cite_reference_link_prefix": "sitat_istinad-",
+	"cite_references_link_prefix": "sitat_qeyd-",
+	"cite_references_link_many_format": "<sup>[[#$1|$2]]</sup>",
+	"cite_references_link_many_sep": "&#32;",
+	"cite_references_link_many_and": "&#32;",
+	"cite_section_preview_references": "İstinadların sınaq göstərişi"
+}

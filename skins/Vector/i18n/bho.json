@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ganesh",
+			"Nepaboy",
+			"SatyamMishra"
+		]
+	},
+	"vector-action-addsection": "बिसय जोड़ीं",
+	"vector-action-delete": "मिटाईं",
+	"vector-action-move": "स्थानांतरण",
+	"vector-action-protect": "संरक्षित करीं",
+	"vector-action-undelete": "मत मिटाईं",
+	"vector-action-unprotect": "सुरक्षा बदलीं",
+	"vector-view-create": "बनाईं",
+	"vector-view-edit": "संपादन",
+	"vector-view-history": "इतिहास देखीं",
+	"vector-view-view": "पढ़ीं",
+	"vector-view-viewsource": "स्रोत देखीं",
+	"vector-more-actions": "अधिका"
+}

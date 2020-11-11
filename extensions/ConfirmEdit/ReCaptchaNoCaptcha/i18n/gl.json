@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Elisardojm"
+		]
+	},
+	"renocaptcha-edit": "Para protexer a wiki contra edicións de spam automatizadas, por iso pedímoslle amablemente que resolva o seguinte CAPTCHA:",
+	"renocaptcha-addurl": "A súa edición inclúe novas ligazóns externas. Para protexer a wiki contra o spam automático, pedímoslle amablemente que resolva o seguinte CAPTCHA:",
+	"renocaptcha-badlogin": "Para protexer a wiki contra a ruptura automática de contrasinais, pedímoslle amablemente que resolva o seguinte CAPTCHA:",
+	"renocaptcha-createaccount": "Para protexer a wiki contra a creación automática de contas, pedímoslle amablemente que resolva o seguinte CAPTCHA:",
+	"renocaptcha-createaccount-fail": "Parece que non resolveu o CAPTCHA.",
+	"renocaptcha-create": "Para protexer a wiki contra a creación automática de páxinas, pedímoslle amablemente que resolva o seguinte CAPTCHA:",
+	"renocaptcha-noscript": "Desafortunadamente desactivou o JavaScript, polo que non podemos recoñecer automaticamente se vostede é unha persoa ou non. Por favor, resolva o CAPTCHA de arriba e copie o texto coa solución na seguinte área de texto:",
+	"renocaptcha-help": "Por favor, resolva o enigma ReCaptcha NoCaptcha e devolva os valores de resposta como captchaWord.",
+	"renocaptcha-apihelp-param-g-recaptcha-response": "Campo do formulario ReCaptcha."
+}

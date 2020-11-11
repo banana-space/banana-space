@@ -1,0 +1,55 @@
+{
+	"@note": "This file must be kept in sync with LocalisationUpdate.php",
+	"name": "LocalisationUpdate",
+	"namemsg": "localisationupdate-extensionname",
+	"version": "1.4.0",
+	"author": [
+		"Tom Maaswinkel",
+		"Niklas Laxström",
+		"Roan Kattouw"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:LocalisationUpdate",
+	"descriptionmsg": "localisationupdate-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"MessagesDirs": {
+		"LocalisationUpdate": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"LocalisationUpdate": "includes/LocalisationUpdate.php",
+		"LocalisationUpdate\\Updater": "includes/Updater.php",
+		"QuickArrayReader": "includes/QuickArrayReader.php",
+		"LocalisationUpdate\\Fetcher": "includes/fetcher/Fetcher.php",
+		"LocalisationUpdate\\FetcherFactory": "includes/fetcher/FetcherFactory.php",
+		"LocalisationUpdate\\FileSystemFetcher": "includes/fetcher/FileSystemFetcher.php",
+		"LocalisationUpdate\\GitHubFetcher": "includes/fetcher/GitHubFetcher.php",
+		"LocalisationUpdate\\HttpFetcher": "includes/fetcher/HttpFetcher.php",
+		"LocalisationUpdate\\Finder": "includes/finder/Finder.php",
+		"LocalisationUpdate\\JSONReader": "includes/reader/JSONReader.php",
+		"LocalisationUpdate\\PHPReader": "includes/reader/PHPReader.php",
+		"LocalisationUpdate\\Reader": "includes/reader/Reader.php",
+		"LocalisationUpdate\\ReaderFactory": "includes/reader/ReaderFactory.php"
+	},
+	"Hooks": {
+		"LocalisationCacheRecache": [
+			"LocalisationUpdate::onRecache"
+		],
+		"LocalisationCacheRecacheFallback": [
+			"LocalisationUpdate::onRecacheFallback"
+		]
+	},
+	"config": {
+		"LocalisationUpdateDirectory": false,
+		"LocalisationUpdateRepository": "github",
+		"LocalisationUpdateRepositories": {
+			"github": {
+				"mediawiki": "https://raw.github.com/wikimedia/mediawiki/master/%PATH%",
+				"extension": "https://raw.github.com/wikimedia/mediawiki-extensions-%NAME%/master/%PATH%",
+				"skin": "https://raw.github.com/wikimedia/mediawiki-skins-%NAME%/master/%PATH%"
+			}
+		}
+	},
+	"manifest_version": 1
+}

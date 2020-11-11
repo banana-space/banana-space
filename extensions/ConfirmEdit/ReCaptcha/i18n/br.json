@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fohanno",
+			"Fulup"
+		]
+	},
+	"recaptcha-edit": "Evit sikour en em wareziñ diouzh ar stroboù emgefre, merkit an daou c'her a welit er voest dindan :",
+	"recaptcha-addurl": "Liamm diavaez nevez zo bet degaset ganeoc'h. Evit sikour en em wareziñ diouzh ar stroboù, merkit an daou c'her a welit er voest dindan :",
+	"recaptcha-badlogin": "Evit sikour da wareziñ ar wiki diouzh an diskuliañ gerioù-tremen emgefre dre daolioù-esae, merkit an daou c'her a welit er voest dindan :",
+	"recaptcha-createaccount": "Evit sikour d'en em wareziñ diouzh ar c'hrouiñ kontoù emgefre, merkit an daou c'her a welit er voest dindan :",
+	"recaptcha-createaccount-fail": "Respont reCAPTHCA faziek pe ezvezant.",
+	"recaptcha-create": "Evit sikour d'en em wareziñ diouzh ar c'hrouiñ pajennoù emgefre, merkit an daou c'her a welit er voest dindan :"
+}

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"FatosMorina",
+			"Olsi"
+		]
+	},
+	"spam-blacklist": " # URL-të e jashtme që përputhen me këtë listë do të bllokohen kur shtohen tek një faqe.\n # Kjo listë ndikon vetëm në këtë wiki; referojuni gjithashtu listës së zezë globale.\n # Për dokumentacionin shiko https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- leave this line exactly as it is --> <pre>\n#\n# Sintaksa është si më poshtë:\n#  * Çdo gjë nga një karakter \"#\" në fund të rreshtit është një koment\n#  * Çdo rresht jobosh është një fragment që do të përputhë vetëm hostet brenda URL-ve\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"spam-whitelist": " #<!-- leave this line exactly as it is --> <pre>\n# URL-të e jashtme që përputhen më këtë listë *nuk* nuk do të bllokohen edhe nëse ato do të\n# kishin qenë të bllokuara nga shënimet e listës së zezë.\n#\n# Sintaksa është si më poshtë:\n#   * Çdo gjë nga një karakter \"#\" në fund të rreshtit është një koment\n#   * Çdo rresht jobosh është një fragment që vetëm do të përputhë hostet brenda URL-ve\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"spam-blacklisted-email": "E-mail adresa e vendosur në listën e zezë",
+	"spam-blacklisted-email-text": "E-mail adresa juaj është për momentin në penguar nga dërgimi i e-mailave tek përdoruesit e tjerë.",
+	"spam-blacklisted-email-signup": "E-mail adresa e dhënë për momentin është ndaluuar nga përdorimi",
+	"spam-invalid-lines": "Lista e zezë e mëposhtme spam {{PLURAL:$1|rreshti është një|rreshtat janë}} {{PLURAL:$1|shprehje|shprehje}} të rregullta të pavlefshme dhe {{PLURAL:$1|nevojitet|nevojitet}} të korrigjohen përpara ruajtjes së faqes:",
+	"spam-blacklist-desc": "Mjeti anti-spam regex i bazuar: [[MediaWiki:Spam-blacklist]] dhe [[MediaWiki:Spam-whitelist]]"
+}

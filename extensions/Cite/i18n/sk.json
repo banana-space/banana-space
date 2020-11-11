@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Helix84",
+			"Teslaton"
+		]
+	},
+	"cite-desc": "Pridáva značky <nowiki><ref[ name=id]></nowiki> a <nowiki><references/></nowiki> pre citácie",
+	"cite_error": "Chyba citácie $1",
+	"cite_error_ref_numeric_key": "Neplatné volanie; očakáva sa neceločíselný typ kľúča",
+	"cite_error_ref_no_key": "Neplatné volanie; nebol špecifikovaný kľúč",
+	"cite_error_ref_too_many_keys": "Neplatné volanie; neplatné kľúče, napr. príliš veľa alebo nesprávne špecifikovaný kľúč",
+	"cite_error_ref_no_input": "Neplatné volanie; nebol špecifikovaný vstup",
+	"cite_error_references_duplicate_key": "Neplatná značka <code>&lt;ref&gt;</code>; názov „$1“ je použitý viackrát s rôznym obsahom",
+	"cite_error_references_invalid_parameters": "Neplatné parametre; neočakávli sa žiadne",
+	"cite_error_references_no_backlink_label": "Minuli sa generované návestia spätných odkazov, definujte viac v správe <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_no_link_label_group": "Vyčerpané prispôsobené označenia odkazov pre skupinu „$1“.\nDefinujte ďalšie v správe <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_text": "Neplatná značka <code>&lt;ref&gt;</code>; nebol zadaný text pre referencie s názvom <code>$1</code>",
+	"cite_error_included_ref": "Chýba zakončenie značky <code>&lt;ref&gt;</code> (<code>&lt;/ref&gt;</code>)",
+	"cite_error_group_refs_without_references": "Značky <code>&lt;ref&gt;</code> pre skupinu „$1“ sú prítomné, ale nebola nájdená zodpovedajúca značka  <code>&lt;references group=\"$1\"/&gt;</code>",
+	"cite_error_references_group_mismatch": "Značka <code>&lt;ref&gt;</code> v <code>&lt;references&gt;</code> má konfliktný atribút skupiny „$1“.",
+	"cite_error_references_missing_group": "Značka <code>&lt;ref&gt;</code> v <code>&lt;references&gt;</code> má atribút skupiny „$1“, ktorý sa v predošlom texte nevyskytuje.",
+	"cite_error_references_missing_key": "Značka <code>&lt;ref&gt;</code> s názvom „$1“ definovaná v <code>&lt;references&gt;</code> sa v predošlom texte nevyskytuje.",
+	"cite_error_references_no_key": "Značka <code>&lt;ref&gt;</code> s definovaná v <code>&lt;references&gt;</code> nemá žiaden atribút názov.",
+	"cite_error_empty_references_define": "Značka <code>&lt;ref&gt;</code> s definovaná v <code>&lt;references&gt;</code> s názvom „$1“ nemá žiaden obsah.",
+	"cite-tracking-category-cite-error": "Stránky s chybami v referenciách",
+	"cite-tracking-category-cite-error-desc": "Stránky v tejto kategórii obsahujú chyby v použití značiek pre citačné referencie.",
+	"cite_references_link_accessibility_label": "Prejsť nahor",
+	"cite_references_link_many_accessibility_label": "Prejsť nahor k:",
+	"cite_section_preview_references": "Náhľad referencií",
+	"cite_warning": "Upozornenie k citácii: $1",
+	"cite_warning_sectionpreview_no_text": "Nemožno zobraziť náhľad značky <code>&lt;ref&gt;</code> s názvom <code>$1</code>, pretože je definovaná mimo aktuálnu sekciu alebo nie je definovaná vôbec."
+}

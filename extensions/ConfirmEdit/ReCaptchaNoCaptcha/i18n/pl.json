@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chrumps"
+		]
+	},
+	"renocaptcha-edit": "W celu ochrony przed zautomatyzowanym spamem edycyjnym, proszę wpisać poniższy tekst CAPTCHA:",
+	"renocaptcha-addurl": "Wprowadzony przez Ciebie tekst zawiera nowe linki zewnętrzne. W celu ochrony przed zautomatyzowanym spamem, proszę wpisać poniższy tekst CAPTCHA:",
+	"renocaptcha-badlogin": "W celu ochrony przed zautomatyzowanym łamaniem hasła, proszę wpisać poniższy tekst CAPTCHA:",
+	"renocaptcha-createaccount": "W celu ochrony przed zautomatyzowanym utworzeniem konta, proszę wpisać poniższy tekst CAPTCHA:",
+	"renocaptcha-createaccount-fail": "Wydaje się, że CAPTCHA nie został wpisany prawidłowo.",
+	"renocaptcha-create": "W celu ochrony przed zautomatyzowanym utworzeniem strony, proszę wpisać poniższy tekst CAPTCHA:"
+}

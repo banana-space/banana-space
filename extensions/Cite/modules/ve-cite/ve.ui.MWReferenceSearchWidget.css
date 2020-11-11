@@ -1,0 +1,18 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWReferenceSearchWidget styles.
+ *
+ * @copyright 2011-2018 VisualEditor Team's Cite sub-team and others; see AUTHORS.txt
+ * @license MIT
+ */
+
+.ve-ui-mwReferenceSearchWidget-citation {
+	float: left;
+	margin-right: 0.75em;
+}
+
+.ve-ui-mwReferenceSearchWidget-name {
+	color: #72777d;
+	float: right;
+	margin-left: 0.75em;
+	margin-bottom: 0.05em;
+}

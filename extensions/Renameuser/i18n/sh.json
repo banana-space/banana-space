@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kolega2357",
+			"OC Ripper"
+		]
+	},
+	"renameuser": "Promijeni ime korisnika",
+	"renameuser-linkoncontribs": "preimenuj korisnika",
+	"renameuser-linkoncontribs-text": "Preimenuj ovog korisnika",
+	"renameuser-desc": "Preimenuj korisnika",
+	"renameuserold": "Trenutno korisničko ime:",
+	"renameusernew": "Novo korisničko ime:",
+	"renameuserreason": "Razlog:",
+	"renameusermove": "Premjesti korisnikove stranice (glavnu, stranicu za razgovor i podstranice, ako postoje) na novo ime",
+	"renameusersuppress": "Ne pravi preusmerenja na novo korisničko ime",
+	"renameuserreserve": "Blokiraj staro korisničko ime za dalju upotrebu",
+	"renameuserwarnings": "Upozorenja:",
+	"renameuserconfirm": "Da, preimenuj korisnika",
+	"renameusersubmit": "Unesi",
+	"renameuser-submit-blocklog": "Evidencija blokiranja za korisnika",
+	"renameusererrordoesnotexist": "Korisničko ime \"<nowiki>$1</nowiki>\" ne postoji",
+	"renameusererrorexists": "Korisničko ime \"<nowiki>$1</nowiki>\" već postoji",
+	"renameusererrorinvalid": "Korisničko ime \"<nowiki>$1</nowiki>\" ne valja",
+	"renameuser-error-request": "Nastao je problem prilikom primanja zahteva.\nMolimo vas pokušajte ponovo.",
+	"renameuser-error-same-user": "Ne možete preimenovati korisnika u isto ime kao i pre.",
+	"renameusersuccess": "Korisnik \"<nowiki>$1</nowiki>\" je preimenovan u \"<nowiki>$2</nowiki>\"",
+	"renameuser-page-exists": "Stranica $1 već postoji i ne može se automatski presnimiti.",
+	"renameuser-page-moved": "Stranica $1 je premeštena na $2.",
+	"renameuser-page-unmoved": "Strana $1 se ne može premestiti na $2.",
+	"log-name-renameuser": "Evidencija preimenovanja",
+	"log-description-renameuser": "Ovo je evidencija izmjena preimenovanja korisnika.",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|preimenovao}} korisnika $4 ({{PLURAL:$6|$6 edit|$6 edits}}) na $5",
+	"logentry-renameuser-renameuser-legacier": "$1 preimenovao korisnika $4 na $5",
+	"renameuser-move-log": "Automatski premeštena stranica dok je korisnik \"[[User:$1|$1]]\" preimenovan u \"[[User:$2|$2]]\"",
+	"action-renameuser": "preimenovanje korisnika",
+	"right-renameuser": "preimenovanje korisničkih imena",
+	"renameuser-renamed-notice": "Ovom korisniku je promenjeno ime.\nEvidencija promena imena je priložena ispod, kao informacija."
+}

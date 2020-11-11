@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cgtdk",
+			"Christian List",
+			"EileenSanda",
+			"Laketown",
+			"Palnatoke",
+			"Simeondahl",
+			"Tehnix",
+			"Sarrus",
+			"McDutchie",
+			"Macofe",
+			"Ribewiki",
+			"Jorn Ari"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "Bog",
+	"visualeditor-cite-tool-name-news": "Nyheder",
+	"visualeditor-cite-tool-name-web": "Hjemmeside",
+	"cite-ve-dialog-reference-options-group-label": "Brug denne gruppe",
+	"cite-ve-dialog-reference-options-group-placeholder": "Generelle referencer",
+	"cite-ve-dialog-reference-options-name-label": "Genbrug med dette navn",
+	"cite-ve-dialog-reference-options-section": "Indstillinger",
+	"cite-ve-dialog-reference-title": "Reference",
+	"cite-ve-dialog-reference-useexisting-label": "Brug en eksisterende reference",
+	"cite-ve-dialog-referenceslist-title": "Referenceliste",
+	"cite-ve-dialogbutton-reference-tooltip": "Enkel",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Referenceliste",
+	"cite-ve-reference-input-placeholder": "Søg i de aktuelle referencer",
+	"cite-ve-referenceslist-isempty": "Der er ingen referencer med gruppen \"$1\" på denne side, som kan medtages i denne liste.",
+	"cite-ve-referenceslist-isempty-default": "Der er ingen referencer på denne side som kan medtages i denne liste.",
+	"cite-ve-referenceslist-missingref": "Denne reference er defineret i en skabelon eller en anden genereret blok, og kan foreløbig kun redigeres i wikikode tilstand.",
+	"cite-ve-referenceslist-missingreflist": "Denne referenceliste genereres af en skabelon, og kan nu kun redigeres i kildefunktion."
+}

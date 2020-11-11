@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abanima",
+			"Calak",
+			"Meno25",
+			"Mido",
+			"OsamaK",
+			"أحمد",
+			"زكريا",
+			"Khaled",
+			"علاء"
+		]
+	},
+	"skinname-vector": "فكتور",
+	"vector-skin-desc": "نسة حديثة من مونوبوك بمظهر جديد وسهولة الاستخدام",
+	"vector.css": "/* الأنماط المتراصة CSS المعروضة هنا ستؤثر على مستخدمي واجهة فكتور */",
+	"vector.js": "/* أي جافاسكريبت هنا سيتم تحميلها للمستخدمين الذين يستعملون واجهة فكتور */",
+	"vector-action-addsection": "أضف موضوعاً",
+	"vector-action-delete": "احذف",
+	"vector-action-move": "انقل",
+	"vector-action-protect": "احم",
+	"vector-action-undelete": "ألغ الحذف",
+	"vector-action-unprotect": "غير الحماية",
+	"vector-view-create": "أنشئ",
+	"vector-view-edit": "عدل",
+	"vector-view-history": "التاريخ",
+	"vector-view-view": "اقرأ",
+	"vector-view-viewsource": "اعرض المصدر",
+	"vector-more-actions": "المزيد"
+}

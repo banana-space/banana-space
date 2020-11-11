@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sahran",
+			"Uzdil"
+		]
+	},
+	"renameuserreason": "سەۋەب:",
+	"renameuserwarnings": "ئاگاھلاندۇرۇش:",
+	"renameusersubmit": "تاپشۇر",
+	"renameuser-page-exists": "$1 بەت مەۋجۇد، ئۆزلۈكىدىن قاپلىۋەتكىلى بولمايدۇ.",
+	"renameuser-page-moved": "$1 بەت $2 گە يۆتكەلدى.",
+	"renameuser-page-unmoved": "$1 بەتنى $2 گە يۆتكىيەلمىدى."
+}

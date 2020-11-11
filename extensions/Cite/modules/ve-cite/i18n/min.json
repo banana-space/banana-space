@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Iwan Novirion",
+			"Jagwar"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "Buku",
+	"visualeditor-cite-tool-name-journal": "Jurnal",
+	"visualeditor-cite-tool-name-news": "Kaba",
+	"visualeditor-cite-tool-name-web": "Situih web",
+	"cite-ve-dialog-reference-title": "Rujuakan",
+	"cite-ve-dialogbutton-reference-tooltip": "Rujuakan"
+}

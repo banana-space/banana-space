@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"AnakngAraw",
+			"Jojit fb"
+		]
+	},
+	"titleblacklist-desc": "Nagpapahintulot sa mga tagapangasiwa na magbawal ng paglikha ng mga pahina at mga account sa bawat isang [[MediaWiki:Titleblacklist|talaan ng pinagbabawal (\"itim na talaan\")]] at [[MediaWiki:Titlewhitelist|talaan ng mga pinapayagan (\"puting talaan\")]]",
+	"titleblacklist": "# Isa itong itim na talaan ng pamagat.  Hindi maaaring likhain ang mga pamagat at mga tagagamit na tumutugma sa isang pangkaraniwang pagsasaad na naririto.\n# Gamitin ang \"#\" para sa mga puna.\n# Likas na nakatakdang hindi ito maselan sa pagmamakinilya ng titik",
+	"titlewhitelist": "# Isa itong puting talaan ng pamagat.  Gamitin ang \"#\" para sa mga puna.\n# Likas na nakatakdang hindi ito maselan sa pagmamakinilya ng titik",
+	"titleblacklist-forbidden-edit": "Pinagbawalan sa paglikha ang pamagat na \"$2\".\nTumutugma ito sa sumusunod na entradang/ipinasok na nasa talaan ng mga pinagbabawal (\"itim na talaan\"): <code>$1</code>",
+	"titleblacklist-forbidden-move": "Hindi maililipat ang \"$2\" patungo sa \"$3\", dahil pinagbawal ang paglikha sa pamagat na \"$3\".\nTumutugma ito sa sumusunod na ipinasok/entradang nasa talaan ng mga pinagbabawal (\"itim na talaan\"): <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Pinagbawal ang paglikha sa pangalan ng talaksang \"$2\".\nTumutugma ito sa sumusunod na ipinasok/entradang nasa talaan ng mga pinagbabawalan (\"itim na talaan\"): <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Ipinagbawalan ang paglikha ng pangalan ng tagagamit na \"$2\".\nTumutugma ito sa sumusunod na entrada/ipinasok sa talaan ng mga pinagbabawalan (\"itim na talaan\"): <code>$1</code>",
+	"titleblacklist-invalid": "Ang sumusunod na {{PLURAL:$1|hanay|mga hanay}} (guhit) na nasa loob ng talaan ng pinagbabawal na pamagat {{PLURAL:$1|ay|ay}} hindi tanggap;\npakitama lamang {{PLURAL:$1|ito|ang mga ito}} bago sagipin:",
+	"titleblacklist-override": "Huwag pansinin ang talaang-itim",
+	"right-tboverride": "Daigin ang talaan ng ipinagbabawal na pamagat o pangalan ng tagagamit",
+	"right-tboverride-account": "Daigin ang talaang-itim ng mga pangalan ng tagagamit"
+}

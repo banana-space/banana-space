@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liuxinyu970226",
+			"LNDDYL",
+			"Cwlin0416",
+			"Wehwei",
+			"Eflyjason",
+			"Kly"
+		]
+	},
+	"timeless-desc": "Timeless 是 Brandon Harris 繼 Winter prototype 之後所設計的，其中的各種樣式來自維基媒體基金會",
+	"timeless-search-placeholder": "搜尋 {{NUMBEROFARTICLES}} 個頁面",
+	"timeless-loggedin": "您的帳號",
+	"timeless-anonymous": "匿名",
+	"timeless-loggedinas": "已登入為 '''$1'''",
+	"timeless-notloggedin": "尚未登入",
+	"timeless-userpage": "{{GENDER:$1|使用者}}頁面",
+	"timeless-talkpage": "{{GENDER:$1|使用者}}對話",
+	"timeless-pagelog": "頁面紀錄",
+	"timeless-more": "更多",
+	"timeless-sitetools": "wiki 工具",
+	"timeless-pageactions": "頁面工具",
+	"timeless-userpagetools": "使用者頁面工具",
+	"timeless-pagemisc": "更多",
+	"timeless-namespaces": "命名空間",
+	"timeless-pagetools": "頁面動作",
+	"timeless-languages": "語言",
+	"timeless.js": "/* 在使用者使用 Timeless 外觀時，任何在此的 JavaScript 都會被載入 */"
+}

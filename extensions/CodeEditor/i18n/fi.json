@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nike"
+		]
+	},
+	"codeeditor-desc": "Lisää syntaksinkorostuksen JavaScript ja CSS-sivuille käyttäen [https://ace.c9.io/ Ace-muokkainta]",
+	"codeeditor-toolbar-toggle": "Koodimuokkain",
+	"codeeditor-gotoline-placeholder": "rivi[:sarake]"
+}

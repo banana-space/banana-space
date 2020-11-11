@@ -1,0 +1,444 @@
+{
+	"name": "MultimediaViewer",
+	"author": [
+		"MarkTraceur (Mark Holmquist)",
+		"Gilles Dubuc",
+		"Gergő Tisza",
+		"Aaron Arcos",
+		"Zeljko Filipin",
+		"Pau Giner",
+		"theopolisme",
+		"MatmaRex",
+		"apsdehal",
+		"vldandrew",
+		"Ebrahim Byagowi",
+		"Dereckson",
+		"Brion VIBBER",
+		"Yuki Shira",
+		"Yaroslav Melnychuk",
+		"tonythomas01",
+		"Raimond Spekking",
+		"Kunal Mehta",
+		"Jeff Hall",
+		"Christian Aistleitner",
+		"Amir E. Aharoni"
+	],
+	"url": "https://mediawiki.org/wiki/Extension:MultimediaViewer",
+	"descriptionmsg": "multimediaviewer-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"ExtensionFunctions": [
+		"MultimediaViewerHooks::onExtensionFunctions"
+	],
+	"MessagesDirs": {
+		"MultimediaViewer": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"MultimediaViewerHooks": "includes/MultimediaViewerHooks.php"
+	},
+	"ResourceModules": {
+		"mmv": {
+			"scripts": [
+				"mmv/logging/mmv.logging.Api.js",
+				"mmv/logging/mmv.logging.AttributionLogger.js",
+				"mmv/logging/mmv.logging.DimensionLogger.js",
+				"mmv/logging/mmv.logging.ViewLogger.js",
+				"mmv/logging/mmv.logging.PerformanceLogger.js",
+				"mmv/routing/mmv.routing.js",
+				"mmv/routing/mmv.routing.Route.js",
+				"mmv/routing/mmv.routing.ThumbnailRoute.js",
+				"mmv/routing/mmv.routing.MainFileRoute.js",
+				"mmv/routing/mmv.routing.Router.js",
+				"mmv/model/mmv.model.js",
+				"mmv/model/mmv.model.IwTitle.js",
+				"mmv/model/mmv.model.License.js",
+				"mmv/model/mmv.model.Image.js",
+				"mmv/model/mmv.model.Repo.js",
+				"mmv/model/mmv.model.Thumbnail.js",
+				"mmv/model/mmv.model.TaskQueue.js",
+				"mmv/model/mmv.model.ThumbnailWidth.js",
+				"mmv/mmv.lightboximage.js",
+				"mmv/provider/mmv.provider.Api.js",
+				"mmv/provider/mmv.provider.ImageInfo.js",
+				"mmv/provider/mmv.provider.FileRepoInfo.js",
+				"mmv/provider/mmv.provider.ThumbnailInfo.js",
+				"mmv/provider/mmv.provider.GuessedThumbnailInfo.js",
+				"mmv/provider/mmv.provider.Image.js",
+				"mmv/mmv.ThumbnailWidthCalculator.js",
+				"mmv/ui/mmv.ui.js",
+				"mmv/ui/mmv.ui.dialog.js",
+				"mmv/ui/mmv.ui.reuse.dialog.js",
+				"mmv/ui/mmv.ui.download.js",
+				"mmv/ui/mmv.ui.download.dialog.js",
+				"mmv/ui/mmv.ui.description.js",
+				"mmv/ui/mmv.ui.viewingOptions.js",
+				"mmv/ui/mmv.ui.canvas.js",
+				"mmv/ui/mmv.ui.canvasButtons.js",
+				"mmv/ui/mmv.ui.permission.js",
+				"mmv/ui/mmv.ui.progressBar.js",
+				"mmv/ui/mmv.ui.stripeButtons.js",
+				"mmv/ui/mmv.ui.truncatableTextField.js",
+				"mmv/ui/mmv.ui.metadataPanel.js",
+				"mmv/ui/mmv.ui.metadataPanelScroller.js",
+				"mmv/mmv.lightboxinterface.js",
+				"mmv/mmv.js"
+			],
+			"styles": [
+				"mmv/ui/mmv.ui.dialog.less",
+				"mmv/ui/mmv.ui.reuse.dialog.less",
+				"mmv/ui/mmv.ui.download.dialog.less",
+				"mmv/ui/mmv.ui.viewingOptions.less",
+				"mmv/ui/mmv.ui.canvas.less",
+				"mmv/ui/mmv.ui.canvasButtons.less",
+				"mmv/ui/mmv.ui.permission.less",
+				"mmv/ui/mmv.ui.progressBar.less",
+				"mmv/ui/mmv.ui.stripeButtons.less",
+				"mmv/ui/mmv.ui.truncatableTextField.less",
+				"mmv/ui/mmv.ui.metadataPanel.less",
+				"mmv/ui/mmv.ui.metadataPanelScroller.less",
+				"mmv/mmv.lightboxinterface.less"
+			],
+			"dependencies": [
+				"mediawiki.api",
+				"mediawiki.Title",
+				"mediawiki.Uri",
+				"mediawiki.jqueryMsg",
+				"mediawiki.storage",
+				"oojs",
+				"jquery.fullscreen",
+				"jquery.hidpi",
+				"jquery.throttle-debounce",
+				"jquery.color",
+				"jquery.tipsy",
+				"mmv.bootstrap",
+				"mmv.head"
+			],
+			"messages": [
+				"multimediaviewer-file-page",
+				"multimediaviewer-options-learn-more",
+				"multimediaviewer-options-dialog-header",
+				"multimediaviewer-option-submit-button",
+				"multimediaviewer-option-cancel-button",
+				"multimediaviewer-options-text-header",
+				"multimediaviewer-enable-alert",
+				"multimediaviewer-options-text-body",
+				"multimediaviewer-disable-confirmation-header",
+				"multimediaviewer-disable-confirmation-text",
+				"multimediaviewer-enable-dialog-header",
+				"multimediaviewer-enable-text-header",
+				"multimediaviewer-enable-submit-button",
+				"multimediaviewer-enable-confirmation-header",
+				"multimediaviewer-enable-confirmation-text",
+				"multimediaviewer-thumbnail-error",
+				"multimediaviewer-thumbnail-error-description",
+				"multimediaviewer-thumbnail-error-retry",
+				"multimediaviewer-report-issue-url",
+				"multimediaviewer-thumbnail-error-report",
+				"multimediaviewer-errorreport-privacywarning",
+				"multimediaviewer-download-link",
+				"multimediaviewer-reuse-link",
+				"multimediaviewer-options-tooltip",
+				"multimediaviewer-close-popup-text",
+				"multimediaviewer-fullscreen-popup-text",
+				"multimediaviewer-defullscreen-popup-text",
+				"multimediaviewer-next-image-alt-text",
+				"multimediaviewer-prev-image-alt-text",
+				"multimediaviewer-commons-subtitle",
+				"multimediaviewer-credit",
+				"multimediaviewer-credit-fallback",
+				"multimediaviewer-multiple-authors",
+				"multimediaviewer-multiple-authors-combine",
+				"multimediaviewer-datetime-created",
+				"multimediaviewer-datetime-uploaded",
+				"multimediaviewer-permission-link",
+				"multimediaviewer-permission-link-hide",
+				"multimediaviewer-restriction-2257",
+				"multimediaviewer-restriction-aus-reserve",
+				"multimediaviewer-restriction-communist",
+				"multimediaviewer-restriction-costume",
+				"multimediaviewer-restriction-currency",
+				"multimediaviewer-restriction-design",
+				"multimediaviewer-restriction-fan-art",
+				"multimediaviewer-restriction-ihl",
+				"multimediaviewer-restriction-insignia",
+				"multimediaviewer-restriction-ita-mibac",
+				"multimediaviewer-restriction-nazi",
+				"multimediaviewer-restriction-personality",
+				"multimediaviewer-restriction-trademarked",
+				"multimediaviewer-restriction-default",
+				"multimediaviewer-restriction-default-and-others",
+				"multimediaviewer-reuse-warning-deletion",
+				"multimediaviewer-reuse-warning-nonfree",
+				"multimediaviewer-reuse-warning-noattribution",
+				"multimediaviewer-reuse-warning-generic",
+				"multimediaviewer-geoloc-north",
+				"multimediaviewer-geoloc-east",
+				"multimediaviewer-geoloc-south",
+				"multimediaviewer-geoloc-west",
+				"multimediaviewer-geoloc-coord",
+				"multimediaviewer-geoloc-coords",
+				"multimediaviewer-geolocation",
+				"multimediaviewer-about-mmv",
+				"multimediaviewer-discuss-mmv",
+				"multimediaviewer-help-mmv",
+				"multimediaviewer-optout-mmv",
+				"multimediaviewer-optin-mmv",
+				"multimediaviewer-optout-pending-mmv",
+				"multimediaviewer-optin-pending-mmv",
+				"multimediaviewer-optout-help",
+				"multimediaviewer-optin-help",
+				"mypreferences",
+				"multimediaviewer-metadata-error",
+				"multimediaviewer-title-popup-text",
+				"multimediaviewer-credit-popup-text",
+				"multimediaviewer-title-popup-text-more",
+				"multimediaviewer-credit-popup-text-more",
+				"multimediaviewer-permission-title",
+				"multimediaviewer-permission-viewmore",
+				"multimediaviewer-description-page-button-text",
+				"multimediaviewer-description-page-popup-text",
+				"multimediaviewer-repository-local",
+				"multimediaviewer-license-cc-by-1.0",
+				"multimediaviewer-license-cc-sa-1.0",
+				"multimediaviewer-license-cc-by-sa-1.0",
+				"multimediaviewer-license-cc-by-2.0",
+				"multimediaviewer-license-cc-by-sa-2.0",
+				"multimediaviewer-license-cc-by-2.1",
+				"multimediaviewer-license-cc-by-sa-2.1",
+				"multimediaviewer-license-cc-by-2.5",
+				"multimediaviewer-license-cc-by-sa-2.5",
+				"multimediaviewer-license-cc-by-3.0",
+				"multimediaviewer-license-cc-by-sa-3.0",
+				"multimediaviewer-license-cc-by-4.0",
+				"multimediaviewer-license-cc-by-sa-4.0",
+				"multimediaviewer-license-cc-pd",
+				"multimediaviewer-license-cc-zero",
+				"multimediaviewer-license-pd",
+				"multimediaviewer-license-default"
+			]
+		},
+		"mmv.ui.ondemandshareddependencies": {
+			"scripts": [
+				"mmv/model/mmv.model.EmbedFileInfo.js",
+				"mmv/mmv.EmbedFileFormatter.js",
+				"mmv/ui/mmv.ui.utils.js"
+			],
+			"dependencies": [
+				"mmv.head",
+				"mmv",
+				"oojs",
+				"oojs-ui"
+			],
+			"messages": [
+				"multimediaviewer-credit",
+				"multimediaviewer-text-embed-credit-text-bl",
+				"multimediaviewer-text-embed-credit-text-b",
+				"multimediaviewer-text-embed-credit-text-l",
+				"multimediaviewer-html-embed-credit-text-bl",
+				"multimediaviewer-html-embed-credit-text-b",
+				"multimediaviewer-html-embed-credit-text-l",
+				"multimediaviewer-html-embed-credit-link-text"
+			]
+		},
+		"mmv.ui.download.pane": {
+			"scripts": [
+				"mmv/ui/mmv.ui.download.pane.js"
+			],
+			"styles": [
+				"mmv/ui/mmv.ui.download.pane.less"
+			],
+			"dependencies": [
+				"mediawiki.ui",
+				"mediawiki.ui.button",
+				"mmv",
+				"mmv.ui.ondemandshareddependencies",
+				"oojs",
+				"oojs-ui"
+			],
+			"messages": [
+				"multimediaviewer-download-preview-link-title",
+				"multimediaviewer-download-original-button-name",
+				"multimediaviewer-download-small-button-name",
+				"multimediaviewer-download-medium-button-name",
+				"multimediaviewer-download-large-button-name",
+				"multimediaviewer-embed-dimensions",
+				"multimediaviewer-embed-dimensions-with-file-format",
+				"multimediaviewer-download-attribution-cta-header",
+				"multimediaviewer-download-optional-attribution-cta-header",
+				"multimediaviewer-download-attribution-cta",
+				"multimediaviewer-download-attribution-copy",
+				"multimediaviewer-attr-plain",
+				"multimediaviewer-attr-html"
+			]
+		},
+		"mmv.ui.reuse.shareembed": {
+			"scripts": [
+				"mmv/ui/mmv.ui.reuse.tab.js",
+				"mmv/ui/mmv.ui.reuse.share.js",
+				"mmv/ui/mmv.ui.reuse.embed.js"
+			],
+			"styles": [
+				"mmv/ui/mmv.ui.reuse.share.less",
+				"mmv/ui/mmv.ui.reuse.embed.less",
+				"mmv/ui/mmv.ui.reuse.shareembed.less"
+			],
+			"dependencies": [
+				"jquery.tipsy",
+				"oojs",
+				"oojs-ui",
+				"mediawiki.user",
+				"mmv.ui.ondemandshareddependencies"
+			],
+			"messages": [
+				"multimediaviewer-reuse-loading-placeholder",
+				"multimediaviewer-share-tab",
+				"multimediaviewer-share-explanation",
+				"multimediaviewer-link-to-file",
+				"multimediaviewer-link-to-page",
+				"multimediaviewer-reuse-loading-placeholder",
+				"multimediaviewer-reuse-copy-share",
+				"multimediaviewer-reuse-copy-embed",
+				"multimediaviewer-embed-tab",
+				"multimediaviewer-embed-html",
+				"multimediaviewer-embed-wt",
+				"multimediaviewer-embed-explanation",
+				"multimediaviewer-embed-byline",
+				"multimediaviewer-embed-license",
+				"multimediaviewer-embed-via",
+				"multimediaviewer-default-embed-dimensions",
+				"multimediaviewer-original-embed-dimensions",
+				"multimediaviewer-large-embed-dimensions",
+				"multimediaviewer-medium-embed-dimensions",
+				"multimediaviewer-small-embed-dimensions",
+				"multimediaviewer-embed-dimensions",
+				"multimediaviewer-embed-dimensions-separated"
+			]
+		},
+		"mmv.ui.tipsyDialog": {
+			"scripts": [
+				"mmv/ui/mmv.ui.tipsyDialog.js"
+			],
+			"styles": [
+				"mmv/ui/mmv.ui.tipsyDialog.less"
+			],
+			"dependencies": [
+				"mmv",
+				"oojs",
+				"jquery.tipsy"
+			]
+		},
+		"mmv.bootstrap": {
+			"scripts": [
+				"mmv/mmv.Config.js",
+				"mmv/mmv.HtmlUtils.js",
+				"mmv/mmv.bootstrap.js",
+				"mmv/logging/mmv.logging.Logger.js",
+				"mmv/logging/mmv.logging.ActionLogger.js",
+				"mmv/logging/mmv.logging.DurationLogger.js",
+				"jquery.hashchange/jquery.hashchange.js"
+			],
+			"styles": [
+				"mmv/mmv.bootstrap.less"
+			],
+			"dependencies": [
+				"mediawiki.api",
+				"mediawiki.api.options",
+				"mediawiki.ui.button",
+				"mediawiki.ui.icon",
+				"mediawiki.Title",
+				"mediawiki.user",
+				"mediawiki.storage",
+				"mmv.head",
+				"oojs"
+			],
+			"messages": [
+				"multimediaviewer-view-expanded",
+				"multimediaviewer-view-config",
+				"multimediaviewer-disable-info-title",
+				"multimediaviewer-disable-info"
+			]
+		},
+		"mmv.bootstrap.autostart": {
+			"scripts": [
+				"mmv/mmv.bootstrap.autostart.js"
+			],
+			"dependencies": [
+				"mmv.head",
+				"mmv.bootstrap"
+			]
+		},
+		"mmv.head": {
+			"scripts": [
+				"mmv/mmv.base.js",
+				"mmv/mmv.head.js"
+			],
+			"dependencies": [
+				"mediawiki.user",
+				"mediawiki.storage"
+			],
+			"position": "top"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "MultimediaViewer/resources"
+	},
+	"Hooks": {
+		"EventLoggingRegisterSchemas": [
+			"MultimediaViewerHooks::onEventLoggingRegisterSchemas"
+		],
+		"UserGetDefaultOptions": [
+			"MultimediaViewerHooks::onUserGetDefaultOptions"
+		],
+		"GetPreferences": [
+			"MultimediaViewerHooks::getPreferences"
+		],
+		"GetBetaFeaturePreferences": [
+			"MultimediaViewerHooks::getBetaPreferences"
+		],
+		"BeforePageDisplay": [
+			"MultimediaViewerHooks::getModulesForArticle"
+		],
+		"CategoryPageView": [
+			"MultimediaViewerHooks::getModulesForCategory"
+		],
+		"ResourceLoaderGetConfigVars": [
+			"MultimediaViewerHooks::resourceLoaderGetConfigVars"
+		],
+		"MakeGlobalVariablesScript": [
+			"MultimediaViewerHooks::makeGlobalVariablesScript"
+		],
+		"ResourceLoaderTestModules": [
+			"MultimediaViewerHooks::getTestModules"
+		],
+		"ThumbnailBeforeProduceHTML": [
+			"MultimediaViewerHooks::thumbnailBeforeProduceHTML"
+		]
+	},
+	"config": {
+		"MediaViewerExtensions": {
+			"jpg": "default",
+			"jpeg": "default",
+			"gif": "default",
+			"svg": "default",
+			"png": "default",
+			"tiff": "default",
+			"tif": "default"
+		},
+		"MediaViewerNetworkPerformanceSamplingFactor": false,
+		"MediaViewerDurationLoggingSamplingFactor": false,
+		"MediaViewerDurationLoggingLoggedinSamplingFactor": false,
+		"MediaViewerAttributionLoggingSamplingFactor": false,
+		"MediaViewerDimensionLoggingSamplingFactor": false,
+		"MediaViewerActionLoggingSamplingFactorMap": false,
+		"MediaViewerIsInBeta": false,
+		"MediaViewerUseThumbnailGuessing": false,
+		"MediaViewerEnableByDefault": true,
+		"MediaViewerEnableByDefaultForAnonymous": null,
+		"MediaViewerImageQueryParameter": false,
+		"MediaViewerRecordVirtualViewBeaconURI": false
+	},
+	"manifest_version": 1
+}

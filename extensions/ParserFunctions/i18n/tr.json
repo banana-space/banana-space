@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joseph",
+			"Vito Genovese"
+		]
+	},
+	"pfunc_desc": "Derleyiciyi mantıksal fonksiyonlarla geliştir",
+	"pfunc_time_error": "Hata: Geçersiz saat.",
+	"pfunc_time_too_long": "Hata: çok fazla #time çağrısı",
+	"pfunc_rel2abs_invalid_depth": "Hata: Yolda geçersiz derinlik: \"$1\" (kök düğümünün üstünde bir düğüme erişmeye çalıştı)",
+	"pfunc_expr_stack_exhausted": "İfade hatası: Stack bitti",
+	"pfunc_expr_unexpected_number": "İfade hatası: Beklenmeyen sayı",
+	"pfunc_expr_preg_match_failure": "İfade hatası: Beklenmedik preg_match arızası",
+	"pfunc_expr_unrecognised_word": "İfade hatası: Tanınmayan \"$1\" kelimesi",
+	"pfunc_expr_unexpected_operator": "İfade hatası: Beklenmedik $1 operatörü",
+	"pfunc_expr_missing_operand": "İfade hatası: $1 için eksik terim",
+	"pfunc_expr_unexpected_closing_bracket": "İfade hatası: Beklenmedik kapa parantez",
+	"pfunc_expr_unrecognised_punctuation": "İfade hatası: Tanınmayan noktalama karakteri \"$1\"",
+	"pfunc_expr_unclosed_bracket": "İfade hatası: Kapanmamış parantez",
+	"pfunc_expr_division_by_zero": "Sıfır ile bölme",
+	"pfunc_expr_invalid_argument": "$1 için geçersiz değişken: < -1 ya da > 1",
+	"pfunc_expr_invalid_argument_ln": "ln için geçersiz değişken: <= 0",
+	"pfunc_expr_unknown_error": "İfade hatası: Bilinmeyen hata ($1)",
+	"pfunc_expr_not_a_number": "$1'de: sonuç bir sayı değil",
+	"pfunc_string_too_long": "Hata: Dize $1 karakter sınırını geçiyor"
+}

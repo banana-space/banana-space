@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Minh Nguyen"
+		]
+	},
+	"spam-blacklist": " # Các địa chỉ URL ngoài trùng với một khoản trong danh sách này bị cấm không được thêm vào trang nào.\n # Danh sách này chỉ có hiệu lực ở wiki này; hãy xem thêm “danh sách đen toàn cầu”.\n # Có tài liệu hướng dẫn tại https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- leave this line exactly as it is --> <pre>\n#\n# Cú pháp:\n#  * Các lời ghi chú bắt đầu với ký tự “#” và tiếp tục cho đến cuối dòng.\n#  * Các dòng không để trống là một mảnh biểu thức chính quy, nó chỉ trùng với tên máy chủ trong địa chỉ URL.\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"spam-whitelist": " #<!-- leave this line exactly as it is --> <pre>\n# Các địa chỉ URL ngoài trùng với một khoản trong danh sách này *không* bị cấm, dù có nó trong danh sách đen.\n#\n# Cú pháp:\n#  * Các lời ghi chú bắt đầu với ký tự “#” và tiếp tục cho đến cuối dòng.\n#  * Các dòng không để trống là một mảnh biểu thức chính quy, nó chỉ trùng với tên máy chủ trong địa chỉ URL.\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"email-blacklist": " # Các địa chỉ thư điện tử trùng với danh sách này bị cấm không được mở tài khoản hoặc gửi thư điện tử.\n # Danh sách này chỉ có hiệu lực ở wiki này; hãy xem thêm “danh sách đen toàn cầu”.\n # Có tài liệu hướng dẫn tại https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- leave this line exactly as it is --> <pre>\n#\n# Cú pháp:\n#   * Các lời ghi chú bắt đầu với ký tự “#” và tiếp tục cho đến cuối dòng.\n#   * Các dòng không để trống là một mảnh biểu thức chính quy, nó chỉ trùng với tên máy chủ trong địa chỉ thư điện tử.\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"email-whitelist": " #<!-- leave this line exactly as it is --> <pre>\n# Các địa chỉ thư điện tử trùng với danh sách này *không* bị cấm, dù có nó trong danh sách đen.\n#\n #</pre> <!-- leave this line exactly as it is -->\n# Cú pháp:\n#   * Các lời ghi chú bắt đầu với ký tự “#” và tiếp tục cho đến cuối dòng.\n#   * Các dòng không để trống là một mảnh biểu thức chính quy, nó chỉ trùng với tên máy chủ trong địa chỉ thư điện tử.",
+	"spam-blacklisted-email": "Địa chỉ thư điện tử bị đưa vào danh sách đen",
+	"spam-blacklisted-email-text": "Địa chỉ thư điện tử của bạn đã được đưa vào danh sách đen nên bị cấm không được gửi thư điện tử cho người dùng khác.",
+	"spam-blacklisted-email-signup": "Địa chỉ thư điện tử được cung cấp đã được đưa vào danh sách đen nên bị cấm không được sử dụng.",
+	"spam-invalid-lines": "{{PLURAL:$1|Dòng|Những dòng}} sau đây trong danh sách đen về spam không hợp lệ; xin hãy sửa chữa {{PLURAL:$1|nó|chúng}} để tuân theo cú pháp biểu thức chính quy trước khi lưu trang:",
+	"spam-blacklist-desc": "Công cụ cho phép chống spam bằng cách cấm những URL trong trang và địa chỉ thư điện tử của thành viên đăng ký khớp với các biểu thức chính quy trong danh sách đen",
+	"log-name-spamblacklist": "Nhật trình chặn spam vì danh sách đen",
+	"log-description-spamblacklist": "Nhật trình này ghi các lần chặn spam vì nằm vào danh sách đen.",
+	"logentry-spamblacklist-hit": "{{GENDER:$2}}$1 bị danh sách đen chống spam ngăn không được thêm $4 vào $3.",
+	"right-spamblacklistlog": "Xem nhật trình chặn spam vì danh sách đen",
+	"action-spamblacklistlog": "xem nhật trình chặn spam vì danh sách đen"
+}

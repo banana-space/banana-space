@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sindhu",
+			"Aursani",
+			"Mehtab ahmed"
+		]
+	},
+	"codeeditor-next-annotation": "ايندڙ تشريح ڏانهن وڃو",
+	"codeeditor-invisibleChars-toggle": "نہ ڏيکارجندڙ اکرن کي ٽاگل ڪريو",
+	"codeeditor-lineWrapping-toggle": "لائين ريپڱ کي ٽاگل ڪريو",
+	"codeeditor-searchReplace-toggle": "ڳوليو ۽ مٽايو واري ڊايالاگ کي ٽاگل ڪريو",
+	"codeeditor-gotoline": "هلو سِٽَ نمبر .....",
+	"codeeditor-gotoline-placeholder": "سٽ[:ڪالم]",
+	"codeeditor-gotoline-prompt": "ڪنھن سٽ جو نمبر داخل ڪريو",
+	"codeeditor-indent": "انڊينٽ",
+	"codeeditor-outdent": "آئوٽ ڊينٽ"
+}

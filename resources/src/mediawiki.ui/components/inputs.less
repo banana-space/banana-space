@@ -1,0 +1,147 @@
+// Inputs
+
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+@import 'mediawiki.ui/mixins';
+
+// Text inputs
+//
+// Apply the mw-ui-input class to input and textarea fields.
+//
+// Styleguide 1.
+
+// mw-ui-input
+//
+// Style an input using MediaWiki UI.
+// Currently in draft status and subject to change.
+// When focused a progressive highlight appears to the left of the field.
+//
+// Markup:
+// <input class="mw-ui-input" placeholder="Enter your name">
+// <textarea class="mw-ui-input">Text here</textarea>
+//
+// Styleguide 1.1.
+.mw-ui-input {
+	background-color: #fff;
+	color: @colorGray1;
+	.box-sizing( border-box );
+	display: block;
+	width: 100%;
+	border: 1px solid @colorFieldBorder;
+	border-radius: @borderRadius;
+	padding: 0.57142857em 0.57142857em 0.5em;
+	// necessary for smooth transition
+	box-shadow: inset 0 0 0 0.1em #fff;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: 1.07142857em;
+	vertical-align: middle;
+
+	// Normalize & style placeholder text, see T139034
+	/* stylelint-disable indentation */
+	.mixin-placeholder( {
+		color: @colorGray7;
+		opacity: 1;
+	} );
+	/* stylelint-enable indentation */
+
+	// Firefox: Remove red outline when `required` attribute set and invalid content.
+	// See https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid
+	// This should come before `:focus` so latter rules take preference.
+	&:invalid {
+		box-shadow: none;
+	}
+
+	&:hover {
+		border-color: @colorGray7;
+	}
+
+	&:focus {
+		border-color: @colorProgressive;
+		box-shadow: inset 0 0 0 1px @colorProgressive;
+		outline: 0;
+	}
+
+	// `:not()` is used exclusively for `transition`s as both are not supported by IE < 9.
+	&:not( :disabled ) {
+		.transition( ~'color 100ms, border-color 100ms, box-shadow 100ms' );
+	}
+
+	&:disabled {
+		border-color: @colorGray14;
+		color: @colorGray12;
+	}
+
+	// Normalize styling for `<input type="search">`
+	&[ type='search' ] {
+		// Correct the odd appearance in Chrome and Safari 5
+		-webkit-appearance: textfield;
+
+		// Remove proprietary clear button in IE 10-11, Edge 12+
+		&::-ms-clear {
+			display: none;
+		}
+
+		// Remove the inner padding and cancel buttons in Chrome on OS X and Safari on OS X
+		&::-webkit-search-cancel-button,
+		&::-webkit-search-decoration {
+			-webkit-appearance: none;
+		}
+	}
+}
+
+textarea.mw-ui-input {
+	min-height: 8em;
+}
+
+// mw-ui-input-inline
+//
+// Use mw-ui-input-inline with mw-ui-input in cases where you want a button to line up with the input.
+//
+// Markup:
+// <input class="mw-ui-input mw-ui-input-inline">
+// <button class="mw-ui-button mw-ui-progressive">Submit</button>
+//
+// Styleguide 1.2.
+input[ type='number' ],
+.mw-ui-input-inline {
+	display: inline-block;
+	width: auto;
+	// Make sure we limit `width` to parent element because
+	// in case of text `input` fields, `width: auto;` equals `size` attribute.
+	max-width: 100%;
+}
+
+// mw-ui-input-large
+//
+// Use mw-ui-input-large with mw-ui-input in cases where there are multiple inputs on a screen and you
+// want to draw attention to one instance. For example, replying with a subject line and more text.
+// Currently in draft status and subject to change. When used on an input field, the text is styled
+// in a large font. When used alongside another mw-ui-input large they are pushed together to form one
+// contiguous block.
+//
+// Markup:
+// <input value="input" class="mw-ui-input mw-ui-input-large" value="input" placeholder="Enter subject">
+// <textarea class="mw-ui-input mw-ui-input-large" placeholder="Provide additional details"></textarea>
+//
+// Styleguide 1.3.
+.mw-ui-input-large {
+	margin-top: 0;
+	margin-bottom: 0;
+
+	// When two large inputs are together, we make them flush by hiding one of the borders
+	& + .mw-ui-input-large {
+		margin-top: -1px;
+	}
+	// When focusing, make the input relative to raise it above any attached inputs to unhide its borders
+	&:focus {
+		position: relative;
+	}
+}
+
+input.mw-ui-input-large {
+	font-size: 1.75em;
+	font-weight: bold;
+	line-height: 1.25em;
+	padding: 0.3673em 0.3265em 0.3265em;
+}

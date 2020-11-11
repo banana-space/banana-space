@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pikne"
+		]
+	},
+	"action-titleblacklistlog": "pealkirjade musta nimekirja logi vaadata",
+	"log-name-titleblacklist": "Pealkirjade musta nimekirja logi",
+	"log-description-titleblacklist": "Siin logis kajastuvad pealkirjade musta nimekirja tabamused.",
+	"logentry-titleblacklist-hit-username": "$1 {{GENDER:$2|tabas}} pealkirjade musta nimekirja kirjet $4, kui püüdis luua kontot $3.",
+	"titleblacklist-desc": "Võimaldab administraatoritel vastavalt [[MediaWiki:Titleblacklist|mustale]] ja [[MediaWiki:Titlewhitelist|valgele nimekirjale]] keelata lehekülgede ja kasutajakontode loomise.",
+	"titleblacklist": "# See on pealkirjade must nimekiri. Siinsetele regulaaravaldistele vastavaid pealkirju ega kasutajaid ei saa luua.\n# Kommentaariks kasuta märki \"#\".\n# Vaikimisi on see tõstutundetu",
+	"titlewhitelist": "# See pealkiri on valges nimekirjas. Kommentaariks kasuta märki \"#\".  \n# Vaikimisi on see tõstutundetu",
+	"titleblacklist-forbidden-edit": "Lehekülje pealkirjaga \"$2\" loomine on keelatud.\nSee vastab järgmisele musta nimekirja sissekandele: <code>$1</code>",
+	"titleblacklist-forbidden-move": "Lehekülge \"$2\" ei saa teisaldada pealkirja \"$3\" alla, sest lehekülje loomine pealkirjaga \"$3\" on keelatud.\nSee vastab järgmisele musta nimekirja sissekandele: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Faili pealkirjaga \"$2\" on keelatud üles laadida.\nSee vastab järgmisele musta nimekirja sissekandele: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Kasutajat nimega \"$2\" on keelatud luua.\nSee vastab järgmisele musta nimekirja sissekandele: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Järgmine|Järgmised}} musta nimekirja {{PLURAL:$1|rida on vigane|read on vigased}}.\nPalun paranda {{PLURAL:$1|see|need}} enne salvestamist:",
+	"titleblacklist-override": "Eira musta nimekirja",
+	"titleblacklist-warning": "<strong>Märkus: Seda lehekülge saavad redigeerida ainult administraatorid ja kasutajad õigusega <code>tboverride</code>, sest see vastab pealkirjade musta nimekirja järgmisele sissekandele:</strong><br /><code>$1</code>",
+	"right-tboverride": "Eirata pealkirjade või kasutajanimede musta nimekirja",
+	"right-tboverride-account": "Eirata kasutajanimede musta nimekirja",
+	"right-titleblacklistlog": "Vaadata pealkirjade musta nimekirja logi",
+	"apihelp-titleblacklist-description": "Lehekülje pealkirja, failinime või kasutajanime valideerimine pealkirjade musta nimekirja vastu.",
+	"apihelp-titleblacklist-param-title": "Sõne, mida musta nimekirja vastu valideerida.",
+	"apihelp-titleblacklist-param-action": "Toiming, mida kontrollida.",
+	"apihelp-titleblacklist-param-nooverride": "Ära ürita pealkirjade musta nimekirja ümber kehtestada.",
+	"apihelp-titleblacklist-example-1": "Kontrolli, kas [[Foo]] on mustas nimekirjas",
+	"apihelp-titleblacklist-example-2": "Kontrolli, kas [[Bar]] on mustas nimekirjas redigeerimise keelamisega"
+}

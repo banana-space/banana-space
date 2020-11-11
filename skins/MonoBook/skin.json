@@ -1,0 +1,55 @@
+{
+	"name": "MonoBook",
+	"author": [
+		"Gabriel Wicke",
+		"..."
+	],
+	"url": "https://www.mediawiki.org/wiki/Skin:MonoBook",
+	"descriptionmsg": "monobook-desc",
+	"namemsg": "skinname-monobook",
+	"license-name": "GPL-2.0-or-later",
+	"type": "skin",
+	"requires": {
+		"MediaWiki": ">= 1.25.0"
+	},
+	"ValidSkinNames": {
+		"monobook": "MonoBook"
+	},
+	"SkinOOUIThemes": {
+		"monobook": "Apex"
+	},
+	"MessagesDirs": {
+		"MonoBook": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"skins.monobook.styles": {
+			"styles": {
+				"resources/screen-common.less": {
+					"media": "screen"
+				},
+				"resources/screen-desktop.less": {
+					"media": "screen"
+				}
+			}
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "MonoBook"
+	},
+	"ResourceModuleSkinStyles": {
+		"monobook": {
+			"+mediawiki.action.view.redirectPage": "resources/skinStyles/mediawiki.action.view.redirectPage.css",
+			"+mediawiki.special.preferences.styles": "resources/skinStyles/mediawiki.special.preferences.styles.less",
+			"+mediawiki.notification": "resources/skinStyles/mediawiki.notification.less",
+			"+oojs-ui-core.styles": "resources/skinStyles/ooui.less"
+		}
+	},
+	"AutoloadClasses": {
+		"SkinMonoBook": "includes/SkinMonoBook.php",
+		"MonoBookTemplate": "includes/MonoBookTemplate.php"
+	},
+	"manifest_version": 1
+}

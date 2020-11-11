@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ainali",
+			"Boivie",
+			"Lejonel",
+			"M.M.S.",
+			"Lokal Profil",
+			"WikiPhoenix"
+		]
+	},
+	"action-titleblacklistlog": "visa svartlistningsloggen för titlar",
+	"log-name-titleblacklist": "Svartlistningslogg för titlar",
+	"log-description-titleblacklist": "Dessa händelser spårar svartlistningsträffar för titlar.",
+	"logentry-titleblacklist-hit-username": "$1 {{GENDER:$2|orsakade}} en svartlistningsträff för titlar när denne försökte skapa kontot $3 som matchade $4.",
+	"titleblacklist-desc": "Låter administratörer förbjuda skapande av sidor och användarkonton genom en [[MediaWiki:Titleblacklist|svartlista]] och en [[MediaWiki:Titlewhitelist|vitlista]].",
+	"titleblacklist": "# Det här är en svartlista för titlar. Titlar och användarnamn som matchar ett reguljärt uttryck här kan inte skapas.\n# Använd \"#\" för kommentarer.\n# Detta är okänsligt för skiftläge som förval",
+	"titlewhitelist": "# Det är en lista över tillåtna sidtitlar. Använd \"#\" för att skriva kommentarer.\n# Detta är okänsligt för skiftläge som förval",
+	"titleblacklist-forbidden-edit": "Sidtiteln \"$2\" har stoppats från att skapas. Den matchar följande rad i svarta listan för sidtitlar: <code>$1</code>",
+	"titleblacklist-forbidden-move": "Sidan \"$2\" kan inte flyttas till \"$3\", eftersom titeln \"$3\" har förbjudits att skapas. Titeln matchar följande rad i svarta listan för sidtitlar: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Filnamnet \"$2\" har stoppats från att skapas. Namnet matchar följande rad i svarta listan för sidtitlar: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Användarnamnet \"$2\" kan inte skapas.\nDet matchar följande element i svartlistan: <code>$1</code>",
+	"titleblacklist-invalid": "Följande {{PLURAL:$1|rad|rader}} i listan är {{PLURAL:$1|felaktig|felaktiga}}; {{PLURAL:$1|den|de}} måste rättas innan du kan spara:",
+	"titleblacklist-override": "Ignorera svartlistan",
+	"titleblacklist-warning": "<strong>Varning: Denna sida kan endast redigeras av administratörer och andra användare med <code>tboverride</code>-rättigheten eftersom den matchar följande post i svartlistan över titlar:</strong><br /><code>$1</code>",
+	"right-tboverride": "Åsidosätt svartlistan med titlar och användarnamn",
+	"right-tboverride-account": "Kör över svartlistan för användarnamn",
+	"right-titleblacklistlog": "Visa svartlistningslogg för titlar",
+	"apihelp-titleblacklist-description": "Validera en sidtitel, filnamn eller användarnamn mot TitleBlacklist.",
+	"apihelp-titleblacklist-summary": "Validera en sidtitel, filnamn eller användare mot TitleBlacklist.",
+	"apihelp-titleblacklist-param-title": "Strängen som ska valideras mot svartlistan.",
+	"apihelp-titleblacklist-param-action": "Åtgärden som ska kontrolleras.",
+	"apihelp-titleblacklist-param-nooverride": "Försök inte att åsidosätta svartlistan för titlar.",
+	"apihelp-titleblacklist-example-1": "Kontrollera om [[Foo]] är svartlistad",
+	"apihelp-titleblacklist-example-2": "Kontrollera om [[Bar]] är svartlistad för redigering"
+}

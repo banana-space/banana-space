@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pyt"
+		]
+	},
+	"spam-blacklist": " # Externe URLs, do der in disse Lieste äntheelden sunt, blokkierje dät Spiekerjen fon ju Siede.\n # Disse Lieste beträft bloot dit Wiki; sjuch uk ju globoale Blacklist.\n # Tou ju Dokumenation sjuch https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- Disse Riege duur nit ferannerd wäide! --> <pre>\n#\n# Syntax:\n#   * Alles fon dät \"#\"-Teeken ou bit tou Eende fon ju Riege is n Kommentoar\n#   * Älke nit-loose Riege is n regulären Uutdruk, ju der juun do Host-Noomen in do URLs wröiged wäd.\n\n #</pre> <!-- Disse Riege duur nit ferannerd wäide! -->",
+	"spam-whitelist": " #<!-- Disse Riege duur nit ferannerd wäide! --> <pre>\n# Externe URLs, do der in disse Lieste äntheelden sunt, blokkierje dät Spiekerjen fon ju Siede nit,\n# uk wan jo in ju globoale of lokoale swotte Lieste äntheelden sunt.\n#\n# Syntax:\n#  * Alles fon dät \"#\"-Teeken ou bit tou Eende fon ju Riege is n Kommentoar\n#  * Älke nit-loose Riege is n regulären Uutdruk, die der juun do Host-Noomen in do URLs wröided wäd.\n\n #</pre> <!-- Disse Riege duur nit ferannerd wäide! -->",
+	"spam-invalid-lines": "{{PLURAL:$1\n\t| Ju foulgjende Siede in ju Spam-Blacklist is n uungultigen regulären Uutdruk. Ju mout foar dät Spiekerjen fon ju Siede korrigierd wäide\n\t| Do foulgjende Sieden in ju Spam-Blacklist sunt uungultige reguläre Uutdrukke. Do mouten foar dät Spiekerjen fon ju Siede korrigierd wäide}}:",
+	"spam-blacklist-desc": "Regex-basierde Anti-Spam-Reewe: [[MediaWiki:Spam-blacklist]] un [[MediaWiki:Spam-whitelist]]"
+}

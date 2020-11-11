@@ -1,0 +1,44 @@
+.mw-cite-backlink,
+.cite-accessibility-label {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.mw-references-columns {
+	-webkit-column-width: 30em;
+	-moz-column-width: 30em;
+	column-width: 30em;
+}
+
+/* Avoid elements from breaking between columns */
+.mw-references-columns li {
+	-webkit-column-break-inside: avoid;
+	page-break-inside: avoid;
+	break-inside: avoid-column;
+}
+
+sup.reference {
+	/* Isolation to fix references in case of RTL words at the end of a reference */
+	unicode-bidi: -moz-isolate;
+	unicode-bidi: -webkit-isolate;
+	unicode-bidi: isolate;
+
+	/* Don't allow a reference that includes a group name
+	to break in the end of the line */
+	white-space: nowrap;
+}
+
+/* Highlight clicked reference in blue to help navigation */
+ol.references li:target,
+sup.reference:target {
+	background-color: #eaf3ff;
+}
+
+/* Make cite errors "strong" */
+.mw-ext-cite-error {
+	font-weight: bold;
+	/* For the case that the error is embedded in an element with a different direction */
+	unicode-bidi: embed;
+}

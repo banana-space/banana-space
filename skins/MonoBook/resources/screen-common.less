@@ -1,0 +1,413 @@
+/*
+** MediaWiki 'monobook' style sheet for CSS2-capable browsers.
+** Copyright Gabriel Wicke - http://wikidev.net/
+** License: GPL (http://www.gnu.org/copyleft/gpl.html)
+**
+** Loosely based on http://www.positioniseverything.net/ordered-floats.html by Big John
+** and the Plone 2.0 styles, see http://plone.org/ (Alexander Limi,Joe Geldart & Tom Croucher,
+** Michael Zeltner and Geir Bækholt)
+** All you guys rock :)
+*/
+
+@import 'variables.less';
+
+/*
+** Common styles across desktop and mobile
+*/
+
+div#column-content {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.mw-body {
+	padding: 1em;
+	position: relative;
+	z-index: 2;
+	background: @content-background;
+	color: @text-color;
+	border: 1px solid @content-border;
+	line-height: 1.5em;
+}
+
+/* Hide, but keep accessible for screen-readers */
+#column-one h2 {
+	.hidden();
+}
+
+/* the left column width is specified in class .portlet */
+
+/* Font size:
+** We take advantage of keyword scaling- browsers won't go below 9px
+** More at http://www.w3.org/2003/07/30-font-size
+** http://style.cleverchimp.com/font_size_intervals/altintervals.html
+*/
+
+body {
+	font: x-small sans-serif;
+	background-color: @background;
+	// don't bother with a fallback; the jpg book won't work with these anyway
+	.background-image( 'images/headbg-gradient.svg' );
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	color: @text-color;
+	margin: 0;
+	padding: 0;
+	direction: ltr; /* Needed for RTL flipping */
+	unicode-bidi: embed;
+}
+
+/* scale back up to a sane default */
+div#globalWrapper {
+	font-size: 127%;
+	.background-image-svg( 'images/headbg.svg', 'images/headbg.jpg' );
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	z-index: 0;
+}
+
+/* general styles */
+a {
+	color: @link;
+}
+
+a:visited {
+	color: @link-visited;
+}
+
+a.new,
+#p-personal a.new {
+	color: @link-new;
+}
+
+ul {
+	list-style-type: square;
+	.list-style-image-svg( 'images/bullet.svg', 'images/bullet.gif' );
+}
+
+pre,
+.mw-code {
+	line-height: 1.1em;
+}
+
+#firstHeading {
+	padding-top: 0;
+	overflow: visible;
+}
+
+.mw-indicators {
+	float: right;
+	line-height: 1.5em;
+	font-size: 95%;
+}
+
+.mw-indicator {
+	display: -moz-inline-block;
+	display: inline-block;
+	zoom: 1;
+	*display: inline; /* stylelint-disable-line declaration-block-no-duplicate-properties */
+}
+
+/*
+** the main content area
+*/
+
+#siteNotice {
+	font-size: 95%;
+	padding: 0 0.9em;
+
+	p {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+#localNotice {
+	margin: 0;
+}
+
+/*
+** classes for special content elements like town boxes
+** intended to be referenced directly from the wiki src
+*/
+
+/*
+** User styles
+*/
+/* table standards */
+table.rimage {
+	float: right;
+	position: relative;
+	margin-left: 1em;
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+/*
+** Structural Elements
+*/
+
+/*
+** general portlet styles (elements in the quickbar)
+*/
+.portlet {
+	overflow: hidden;
+
+	h3 {
+		background: transparent;
+		display: inline;
+		height: 1em;
+		text-transform: lowercase;
+		font-size: 91%;
+		font-weight: normal;
+		white-space: nowrap;
+	}
+
+	ul {
+		line-height: 1.5em;
+		font-size: 95%;
+	}
+
+	li {
+		padding: 0;
+		margin: 0;
+	}
+}
+
+.pBody {
+	font-size: 95%;
+	color: @text-color;
+	border-collapse: collapse;
+
+	/* allows .pBody styles to wrap around content added via BaseTemplateAfterPortlet hook */
+	&:after {
+		content: '';
+		clear: both;
+		display: block;
+	}
+}
+
+/*
+** Logo properties
+*/
+#p-logo {
+	position: absolute;
+	z-index: 3;
+	overflow: visible;
+
+	a,
+	a:hover {
+		display: block;
+		background-repeat: no-repeat;
+		text-decoration: none;
+	}
+}
+
+/*
+** the personal toolbar
+*/
+
+#p-personal h3 {
+	.hidden();
+
+	li {
+		color: #2f6fab;
+
+		a {
+			color: #005896;
+		}
+
+		&.active {
+			font-weight: bold;
+		}
+	}
+}
+
+/* Don't lowercase username */
+li#pt-userpage {
+	text-transform: none;
+}
+
+/* "Not logged in" text in gray */
+li#pt-anonuserpage {
+	color: @text-grey;
+}
+
+/*
+** the page-related actions- page/talk, edit etc
+*/
+
+#p-cactions h3 {
+	.hidden()
+}
+
+/* Override text-transform on languages where capitalization is significant */
+.capitalize-all-nouns .portlet h3,
+.capitalize-all-nouns #p-personal ul,
+.capitalize-all-nouns #p-cactions ul li a {
+	text-transform: none;
+}
+
+/*
+** footer
+*/
+#footer {
+	background-color: @content-background;
+	border-top: 1px solid @orange-border;
+	border-bottom: 1px solid @orange-border;
+	margin: 0.6em 0 1em 0;
+	overflow: hidden;
+	padding: 0.4em 0 0.3em 0;
+	text-align: center;
+	font-size: 90%;
+
+	li {
+		display: inline;
+		margin: 0 1.3em;
+	}
+}
+
+#userloginprompt,
+#languagelinks {
+	font-size: 85%;
+}
+
+#login-sectiontip {
+	font-size: 85%;
+	line-height: 1.2;
+	padding-top: 2em;
+}
+
+/**
+ * This was originally added by Gabriel Wicke in r3681 (committed on 25 May 2004)
+ * with the commit message "tweaks to page history".
+ * Unlike the other IE/Mac fixes that used to be present here, this seems to get
+ * applied on more modern browsers, so let's keep it here until someone has the
+ * time to properly test it out.
+ */
+#pagehistory li.selected {
+	position: relative;
+}
+
+div.patrollink {
+	clear: both;
+}
+
+.sharedUploadNotice {
+	font-style: italic;
+}
+
+.editExternally {
+	border: 1px solid @content-border;
+	background-color: @content-background;
+	padding: 3px;
+	margin-top: 0.5em;
+	float: left;
+	font-size: small;
+	text-align: center;
+}
+
+.editExternallyHelp {
+	font-style: italic;
+	color: @text-grey;
+}
+
+.toggle {
+	margin-left: 2em;
+	text-indent: -2em;
+}
+
+/* @bug 1714 */
+input#wpSave,
+input#wpDiff {
+	margin-right: 0.33em;
+}
+
+#wpSave {
+	font-weight: bold;
+}
+
+/* noarticletext */
+div.noarticletext {
+	border: 1px solid @content-border;
+	background: @content-background;
+	padding: 0.2em 1em;
+	color: @text-color;
+}
+
+#powersearch p {
+	margin-top: 0;
+}
+
+div.multipageimagenavbox {
+	border: solid 1px @content-border;
+	padding: 4px;
+	margin: 1em;
+	background: @background;
+
+	div.thumb {
+		border: 0;
+		margin-left: 2em;
+		margin-right: 2em;
+	}
+	hr {
+		margin: 6px;
+	}
+}
+
+table.multipageimage td {
+	text-align: center;
+}
+
+.templatesUsed {
+	margin-top: 1.5em;
+}
+
+.mw-summary-preview {
+	margin: 0.1em 0;
+}
+
+/* Friendlier slave lag warnings */
+div.mw-lag-warn-normal,
+div.mw-lag-warn-high {
+	padding: 3px;
+	text-align: center;
+	margin: 3px auto;
+}
+
+div.mw-lag-warn-normal {
+	border: 1px solid #fc6;
+	background-color: #ffc;
+}
+
+div.mw-lag-warn-high {
+	font-weight: bold;
+	border: 2px solid #f03;
+	background-color: #fcc;
+}
+
+.MediaTransformError {
+	background-color: @content-border;
+	padding: 0.1em;
+
+	td {
+		text-align: center;
+		vertical-align: middle;
+		font-size: 90%;
+	}
+}
+
+/* Sometimes people don't want personal tools to be lowercase! */
+.no-text-transform {
+	text-transform: none;
+}
+
+/* Tooltips are outside of the normal body code, so this helps make the size of the text sensible */
+.tipsy {
+	font-size: 127%;
+}

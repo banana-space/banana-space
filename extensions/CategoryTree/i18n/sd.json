@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sindhu",
+			"Mehtab ahmed"
+		]
+	},
+	"categorytree-mode-all": "سڀ صفحا",
+	"categorytree-expand": "ڦھلايو",
+	"categorytree-member-counts": "مشتمل آھي {{PLURAL:$1|ذيلي زمرو|$1 ذيلي زمرا}}، {{PLURAL:$2|صفحو|$2 صفحا}}، ۽ {{PLURAL:$3|هڪ فائيل| $3 فائيلَ}}",
+	"categorytree-num-categories": "$1 ز",
+	"categorytree-num-pages": "$1 ص",
+	"categorytree-num-files": "$1 ف"
+}

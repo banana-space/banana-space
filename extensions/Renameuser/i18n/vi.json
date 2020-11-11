@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Minh Nguyen",
+			"Vinhtantran",
+			"Dinhxuanduyet"
+		]
+	},
+	"renameuser": "Đổi tên thành viên",
+	"renameuser-linkoncontribs": "đổi tên thành viên",
+	"renameuser-linkoncontribs-text": "Đổi tên thành viên này",
+	"renameuser-desc": "Đổi tên thành viên (cần có quyền ''renameuser'')",
+	"renameuserold": "Tên hiệu hiện nay:",
+	"renameusernew": "Tên hiệu mới:",
+	"renameuserreason": "Lý do:",
+	"renameusermove": "Di chuyển trang thành viên và thảo luận thành viên (cùng với trang con của nó) sang tên mới",
+	"renameusersuppress": "Không tạo trang đổi hướng đến tên mới",
+	"renameuserreserve": "Không cho phép ai lấy tên cũ",
+	"renameuserwarnings": "Cảnh báo:",
+	"renameuserconfirm": "Đổi tên thành viên",
+	"renameusersubmit": "Thực hiện",
+	"renameuser-submit-blocklog": "Xem nhật trình cấm người dùng",
+	"renameusererrordoesnotexist": "Thành viên “<nowiki>$1</nowiki>” không tồn tại.",
+	"renameusererrorexists": "{{GENDER:$1|thành viên}} \"<nowiki>$1</nowiki>\" đã tồn tại.",
+	"renameusererrorinvalid": "Tên thành viên “<nowiki>$1</nowiki>” không hợp lệ.",
+	"renameuser-error-request": "Có trục trặc trong tiếp nhận yêu cầu. Xin hãy quay lại và thử lần nữa.",
+	"renameuser-error-same-user": "Bạn không thể đổi tên thành viên sang tên y hệt như vậy.",
+	"renameusersuccess": "Thành viên “<nowiki>$1</nowiki>” đã được đổi tên thành “<nowiki>$2</nowiki>”.",
+	"renameuser-page-exists": "Trang $1 đã tồn tại và không thể bị tự động ghi đè.",
+	"renameuser-page-moved": "Trang $1 đã được di chuyển đến $2.",
+	"renameuser-page-unmoved": "Trang $1 không thể di chuyển đến $2.",
+	"log-name-renameuser": "Nhật trình đổi tên thành viên",
+	"log-description-renameuser": "Đây là nhật trình ghi lại các thay đổi đối với tên thành viên",
+	"logentry-renameuser-renameuser": "{{GENDER:$2}}$1 đã đổi tên thành viên $4 ($6 lần sửa đổi) thành {{GENDER:$7}}$5",
+	"logentry-renameuser-renameuser-legacier": "$1 đã đổi tên thành viên $4 thành {{GENDER:$7}}$5",
+	"renameuser-move-log": "Đã tự động di chuyển trang khi đổi tên thành viên “[[User:$1|$1]]” thành “[[User:$2|$2]]”",
+	"action-renameuser": "đổi tên thành viên",
+	"right-renameuser": "Đổi tên thành viên",
+	"renameuser-renamed-notice": "Thành viên này đã được đổi tên.\nNhật trình đổi tên được ghi ở dưới để tiện theo dõi."
+}

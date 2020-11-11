@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Omnipaedista",
+			"Gts-tg"
+		]
+	},
+	"pfunc_expr_unrecognised_word": "Σφάλμα ἐκφράσεως: Μῆ άναγνωρισμένη λέξις \"$1\".",
+	"pfunc_expr_unexpected_operator": "Σφάλμα ἐκφράσεως: Μῆ ἀναμενόμενος τελεστής $1.",
+	"pfunc_expr_missing_operand": "Σφάλμα ἐκφράσεως: Ἐλλειπών τελεστής διά τό $1.",
+	"pfunc_expr_unrecognised_punctuation": "Σφάλμα ἐκφράσεως: Μή ἀναγνωρισμένος χαρακτήρας στίξεως \"$1\".",
+	"pfunc_expr_division_by_zero": "Διαίρεσις διὰ τοῦ μηδενός"
+}

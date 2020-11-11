@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kghbln",
+			"Metalhead64",
+			"Umherirrender"
+		]
+	},
+	"recaptcha-desc": "reCAPTCHA-Module für die Erweiterung „Confirm Edit“",
+	"recaptcha-edit": "Zum Schutz des Wikis vor automatisiertem Spam bitten wir dich, die folgenden Wörter in das untenstehende Feld einzugeben:",
+	"recaptcha-addurl": "Deine Bearbeitung enthält neue externe Links. Zum Schutz des Wikis vor automatisiertem Spam bitten wir dich, die folgenden Wörter in das folgende Feld einzugeben:",
+	"recaptcha-badlogin": "Zum Schutz des Wikis gegen automatisiertes Knacken von Passwörtern bitten wir dich, die folgenden Wörter in das folgende Feld einzugeben:",
+	"recaptcha-createaccount": "Zum Schutz des Wikis gegen die automatisierte Erstellung von Benutzerkonten bitten wir dich, die folgenden Wörter in das untenstehende Feld einzugeben:",
+	"recaptcha-createaccount-fail": "Fehlerhafte oder fehlende reCAPTCHA Antwort.",
+	"recaptcha-create": "Zum Schutz des Wikis gegen automatisierte Erstellung von Seiten bitten wir dich, die folgenden Wörter in das folgende Feld einzugeben:",
+	"recaptcha-info": "Bitte löse eine ReCaptcha-Herausforderung und gib die Herausforderungs- und Antwortwerte als captchaId und captchaWord zurück.",
+	"recaptcha-apihelp-param-recaptcha_challenge_field": "Feld von dem ReCaptcha-Widget",
+	"recaptcha-apihelp-param-recaptcha_response_field": "Feld von dem ReCaptcha-Widget",
+	"recaptcha-id-label": "ReCaptcha-Herausforderung",
+	"recaptcha-id-help": "Wert der ReCaptcha-Herausforderung",
+	"recaptcha-label": "ReCaptcha-Lösung",
+	"recaptcha-help": "Wert der ReCaptcha-Lösung"
+}

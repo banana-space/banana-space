@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Agilight",
+			"Sborsody",
+			"Монгуш Салим"
+		]
+	},
+	"skinname-vector": "Вектор",
+	"vector-action-addsection": "Тема немээр",
+	"vector-action-delete": "Ырадыры",
+	"vector-action-move": "Шимчээри",
+	"vector-action-protect": "Камгалаары",
+	"vector-action-undelete": "Эгидер",
+	"vector-action-unprotect": "Камгалалды өскертири",
+	"vector-view-create": "Кылыр",
+	"vector-view-edit": "Эдер",
+	"vector-view-history": "Төөгүнү көөр",
+	"vector-view-view": "Номчуур",
+	"vector-view-viewsource": "Дөзү бижиин көөрү",
+	"vector-more-actions": "Оон ыңай"
+}

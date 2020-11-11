@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"syntaxhighlight-desc": "Forni le coloration syntactic in <code>&lt;syntaxhighlight&gt;</code> per medio de [http://pygments.org/ Pygments - colorator syntactic pro Python]",
+	"syntaxhighlight-error-category": "Paginas con errores de coloration syntactic",
+	"syntaxhighlight-error-category-desc": "Un error occurreva durante le coloration del codice includite in le pagina."
+}

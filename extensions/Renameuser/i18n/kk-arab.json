@@ -1,0 +1,18 @@
+{
+	"@metadata": [],
+	"renameuser": "قاتىسۋشىنى قايتا اتاۋ",
+	"renameuserold": "اعىمداعى قاتىسۋشى اتى:",
+	"renameusernew": "جاڭا قاتىسۋشى اتى:",
+	"renameuserreason": "قايتا اتاۋ سەبەبى:",
+	"renameusermove": "قاتىسۋشىنىڭ جەكە جانە تالقىلاۋ بەتتەرىن (جانە دە ولاردىڭ تومەنگى بەتتەرىن) جاڭا اتاۋعا جىلجىتۋ",
+	"renameusersubmit": "جىبەرۋ",
+	"renameusererrordoesnotexist": "«<nowiki>$1» دەگەن قاتىسۋشى جوق",
+	"renameusererrorexists": "«$1» دەگەن قاتىسۋشى بار تۇگە",
+	"renameusererrorinvalid": "«$1» قاتىسۋشى اتى جارامسىز",
+	"renameusersuccess": "«$1» دەگەن قاتىسۋشى اتى «$2» دەگەنگە اۋىستىرىلدى",
+	"renameuser-page-exists": "$1 دەگەن بەت بار تۇگە, جانە وزدىك تۇردە ونىڭ ۇستىنە ەشتەڭە جازىلمايدى.",
+	"renameuser-page-moved": "$1 دەگەن بەت $2 دەگەن بەتكە جىلجىتىلدى.",
+	"renameuser-page-unmoved": "$1 دەگەن بەت $2 دەگەن بەتكە جىلجىتىلمادى.",
+	"log-name-renameuser": "قاتىسۋشىنى قايتا اتاۋ جۋرنالى",
+	"renameuser-move-log": "«[[User:$1|$1]]» دەگەن قاتىسۋشى اتىن «[[User:$2|$2]]» دەگەنگە اۋىسقاندا بەت وزدىك تۇردە جىلجىتىلدى"
+}

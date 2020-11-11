@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chorobek"
+		]
+	},
+	"renameuser": "Колдонуучунун атын өзгөрт",
+	"renameuser-linkoncontribs": "колдонуучунун атын өзгөрт",
+	"renameuser-linkoncontribs-text": "Колдонуучунун атын өзгөрт",
+	"renameuser-desc": "Колдонуучуну атын өзгөртүү үчүн (''renameuser'' укугу талап кылынат) [[Special:RenameUser|special page]] кошулат",
+	"renameuserold": "Азыркы аты:",
+	"renameusernew": "Жаңы аты",
+	"renameuserreason": "Атты өзгөртүүнүн себеби:",
+	"renameusermove": "Колдонуучу жана анын талкуу баракчаларын (ички баракчалары менен чогуу) жаңы атка өткөз",
+	"renameusersuppress": "Жаңы атка багыттама койбо",
+	"renameuserreserve": "Колдонуучунун эски атын кийин колдонуу үчүн ээлеп кой",
+	"renameuserwarnings": "Эскертүүлөр:",
+	"renameuserconfirm": "Ооба, колдонуучунун атын өзгөрт",
+	"renameusersubmit": "Аткар"
+}

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bugoslav"
+		]
+	},
+	"skinname-monobook": "MonoBook",
+	"monobook-desc": "Klasična tema dizajna MediaWiki od godine 2004., nazvana je u čast crno-bijele fotografije iz knjige, koju se rabilo kao pozadinu stranice",
+	"monobook.css": "/** Ovdje idu izmjene monobook stylesheeta */",
+	"monobook.js": "/* Ne rabi se više; molimo rabite [[MediaWiki:common.js]] */"
+}

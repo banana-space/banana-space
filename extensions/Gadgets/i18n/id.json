@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bennylin",
+			"Farras",
+			"IvanLanin",
+			"Kenrick95",
+			"WongKentir",
+			"Iwan Novirion"
+		]
+	},
+	"gadgets-desc": "Memungkinkan pengguna memilih [[Special:Gadgets|perkakas CSS dan JavaScript]] melalui [[Special:Preferences#mw-prefsection-gadgets|preferensi]] mereka",
+	"prefs-gadgets": "Perkakas",
+	"gadgets-prefstext": "Berikut adalah daftar perkakas istimewa yang dapat Anda aktifkan untuk akun Anda. Semua perkakas tersebut sebagian besar berbasis JavaScript sehingga Anda harus mengaktifkan JavaScript pada penjelajah Anda untuk dapat menjalankannya. Perhatikan bahwa berbagai perkakas tersebut tidak memiliki pengaruh terhadap halaman preferensi ini.\n\nJuga perhatikan bahwa perkakas istimewa ini bukanlah bagian dari perangkat lunak MediaWiki dan biasanya dikembangkan dan dipelihara oleh para pengguna di wiki lokal Anda. Pengurus lokal dapat menyunting perkakas yang tersedia melalui [[MediaWiki:Gadgets-definition]] dan [[Special:Gadgets]].",
+	"gadgets": "Alat (Perkakas)",
+	"gadgetusage": "Statistik penggunaan perkakas",
+	"gadgetusage-gadget": "Perkakas",
+	"gadgetusage-usercount": "Jumlah pengguna",
+	"gadgetusage-noresults": "Perkakas tidak ditemukan",
+	"gadgetusage-intro": "Tabel ini menunjukkan jumlah pengguna yang telah mengaktifkan perkakas pada wiki ini. Daftar ini tidak memasukkan data perkakas yang telah diaktifkan secara baku, dan juga mungkin termasuk perkakas yang sudah tidak ada.",
+	"gadgets-title": "Perkakas",
+	"gadgets-pagetext": "Berikut adalah daftar perkakas istimewa yang dapat diaktifkan pengguna melalui [[Special:Preferences#mw-prefsection-gadgets|halaman preferensi]] mereka sebagaimana didefinisikan oleh [[MediaWiki:Gadgets-definition]]. Tinjauan berikut memberikan kemudahan akses ke dalam halaman pesan sistem yang mendefinisikan deskripsi dan kode masing-masing perkakas.",
+	"gadgets-uses": "Penggunaan",
+	"gadgets-required-rights": "Memerlukan {{PLURAL:$2|hak|hak-hak}} berikut:\n\n$1",
+	"gadgets-required-skins": "Tersedia dalam {{PLURAL:$2|$1 kulit|kulit berikut: $1}}.",
+	"gadgets-default": "Diaktifkan untuk semua orang secara bawaan.",
+	"gadgets-export": "Ekspor",
+	"gadgets-export-title": "Ekspor perkakas",
+	"gadgets-not-found": "Perkakas \"$1\" tidak ditemukan.",
+	"gadgets-export-text": "Untuk mengekspor perkakas $1, klik tombol \"{{int:gadgets-export-download}}\", simpan berkas yang diunduh,\ntuju ke Special:Import pada wiki tujuan dan unggah berkas itu. Kemudian tambahkan berkas tersebut ke halaman MediaWiki:Gadgets-definition:\n<pre>$2</pre>\nAnda harus memeroleh izin pada wiki tujuan (termasuk hak menyunting pesan sistem) dan mengimpor dari unggahan berkas yang harus diaktifkan.",
+	"gadgets-export-download": "Unduh"
+}

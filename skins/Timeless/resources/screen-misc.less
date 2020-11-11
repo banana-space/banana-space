@@ -1,0 +1,26 @@
+@import 'variables.less';
+
+// Let's add some unnecessary white space. Or grey, as it were. In the dumbest possible way.
+
+// Top end of large screens
+@media screen and ( min-width: 1425px ) {
+	.color-middle-container,
+	.ts-inner {
+		padding: 0 3em;
+	}
+	.color-middle {
+		margin-left: @column-left-size;
+		margin-right: @column-right-size;
+	}
+}
+
+// Top half end of mid screens
+@media screen and ( min-width: ( @desktop-small-width + @desktop-mid-width ) / 2 ) and ( max-width: @desktop-mid-width ) {
+	.ts-inner {
+		padding: 0 3em;
+	}
+	.color-middle {
+		margin-left: @column-left-size + 3em;
+		margin-right: @column-right-size + 3em;
+	}
+}

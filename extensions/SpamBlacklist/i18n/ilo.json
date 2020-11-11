@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lam-ang"
+		]
+	},
+	"spam-blacklist": " # Dagiti akinruar a URL a maipada iti daytoy a listaan ket maserraan to no mainayon ditoy a panid.\n # Daytoy a listaan ket apektaranna laeng daytoy a wiki; kitaen pay ti sangalubongan a naiparit.\n # Para iti dokumentasion kitaen ti https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- baybayan daytoy a linia --> <pre>\n#\n# Ti gramatika ket kasla dagiti sumaganad:\n#   * Amin manipud iti \"#\" a karakter iti gibus ti linia ket komentario\n#   * Amin a saan a blanko a linia ket regex a pedaso a maipada laeng ti nagsangaili ti uneg dagiti URL\n\n #</pre> <!-- baybayan daytoy a linia -->",
+	"spam-whitelist": " #<!-- baybayan daytoy a linia --> <pre>\n# Dagiti akinruar a panilpo a maipada iti daytoy a listaan ket *saan* a maserraan urayno\n# naseraanen babaen ti naikabil kadagiti panagiparitan a listaan.\n#\n #</pre> <!-- baybayan daytoy a linia -->",
+	"email-blacklist": " #<!-- baybay-an daytoy a linia --> <pre>\n# Dagiti adres ti esurat a maipada iti datoy a listaan ket maserraanto manipud iti panagrehistro wenno iti panagipatulod kadagiti esurat\n# Maapektuan laeng daytoy a listaan iti daytoy a wiki; kitaen pay ti global a blacklist.\n# Para iti dokumentasion kitaen ti https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# Ti sintaksis ket kas dagiti sumaganad:\n#   * Amin manipud iti karakter ti \"#\" aginggana iti patingga daytoy a linia ket komentario\n#   * Amin a saan a blanko a linia ket pedaso ti regex a mangipada laeng kadagiti mangsangaili iti kaunegan dagiti adres ti esurat\n\n #</pre> <!-- baybay-an daytoy a linia -->",
+	"email-whitelist": " #<!-- baybayan daytoy a linia --> <pre>\n# Dagiti adres ti esurat a maipada iti daytoy a listaan ket *saanto* a maserraan urayno \n# naserraanda babaen dagiti naikabil a blacklist.\n #</pre> <!-- baybayan daytoy a linia -->\n# Ti gramatika ket kasla dagiti sumaganad:\n#   * Amin manipud iti \"#\" a karakter aginggana ti gibus iti linia ket maysa a komentario\n#   * Amin a saan a blanko a linia ket pedaso ti regex a mangipada laeng ti nagsangaili ti uneg dagiti adres ti esurat",
+	"spam-blacklisted-email": "Dagiti naiparit nga adres ti esurat",
+	"spam-blacklisted-email-text": "Ti adres ti esuratmo ket agdama a naiparit manipud iti panagipatulod kadagiti esurat kadagiti sabsabali nga agar-aramat.",
+	"spam-blacklisted-email-signup": "Ti naited nga adres ti esurat ket agdama a naiparit manipud iti panagusar.",
+	"spam-invalid-lines": "Ti sumaganad a spam blacklist {{PLURAL:$1| a linia ket|kadagiti linia ket}} imbalido a kadawyan {{PLURAL:$1|a nangisao|kadagiti panangisao}} ken {{PLURAL:$1|masapsapol|masapol}} a mapudnuan sakbay nga idulin ti panid:",
+	"spam-blacklist-desc": "Naibatay ti regex a ramit ti kontra-spam a mangipalubos a mangiparit kadagiti URL kadagiti panid ken dagiti adres ti esurat para kadagiti nakarehistro nga agar-aramat",
+	"log-name-spamblacklist": "Listaan ti naiparit para iti spam",
+	"log-description-spamblacklist": "Dagitoy a pasamak ket surotenna dagiti naiparit a listaan a napuntaan ti spam.",
+	"logentry-spamblacklist-hit": "Ti $1 ket gapuanan ti pannakapunta ti naiparit a listaan ti spam iti $3 babaen ti panagpadas nga aginayon iti $4.",
+	"right-spamblacklistlog": "Kitaen ti naiparit a listaan ti spam",
+	"action-spamblacklistlog": "kitaen ti naiparit a listaan ti spam",
+	"apihelp-spamblacklist-description": "Pasingkedan ti maysa wenno ad-adu kadagiti URL iti SpamBlacklist.",
+	"apihelp-spamblacklist-param-url": "Dagiti URL a mapasingkedan iti blacklist.",
+	"apihelp-spamblacklist-example-1": "Kitaen dagiti dua nga URL iti blacklist"
+}

@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kavya Manohar",
+			"Praveenp",
+			"Santhosh.thottingal",
+			"Vssun",
+			"Ranjithsiji"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "പുസ്തകം",
+	"visualeditor-cite-tool-name-journal": "ജേണൽ",
+	"visualeditor-cite-tool-name-news": "വാർത്തകൾ",
+	"visualeditor-cite-tool-name-web": "വെബ്‌സൈറ്റ്",
+	"cite-ve-dialog-reference-editing-reused": "ഈ അവലംബം ഈ താളിൽ $1 {{PLURAL:$1|പ്രാവശ്യം}} ഉപയോഗിച്ചിട്ടുണ്ട്.",
+	"cite-ve-dialog-reference-options-group-label": "ഈ ഗണം ഉപയോഗിക്കുക",
+	"cite-ve-dialog-reference-options-group-placeholder": "സാമാന്യ അവലംബങ്ങൾ",
+	"cite-ve-dialog-reference-options-name-label": "ഈ പേര് പുനരുപയോഗിക്കുക",
+	"cite-ve-dialog-reference-options-section": "ഐച്ഛികങ്ങൾ",
+	"cite-ve-dialog-reference-title": "അവലംബം",
+	"cite-ve-dialog-reference-useexisting-full-label": "ഈ താളിൽ നിലവിലുള്ള ഒരു അവലംബം വീണ്ടും ഉപയോഗിക്കുക",
+	"cite-ve-dialog-reference-useexisting-label": "നിലവിൽ ഉപയോഗിക്കുന്ന അവലംബം ഉപയോഗിക്കുക",
+	"cite-ve-dialog-reference-useexisting-tool": "പുനരുപയോഗം",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "പൊതു അവലംബങ്ങളുടെ പട്ടിക",
+	"cite-ve-dialog-referenceslist-contextitem-description-named": "\"$1\" എന്ന ഗണത്തിനുള്ള അവലംബങ്ങളുടെ പട്ടിക",
+	"cite-ve-dialog-referenceslist-title": "അവലംബങ്ങളുടെ പട്ടിക",
+	"cite-ve-dialogbutton-citation-educationpopup-text": "താങ്കൾ നൽകിയ ഉള്ളടക്കത്തിന്റെ സ്രോതസ്സ് വിവരങ്ങൾ ചേർത്ത് മെച്ചപ്പെടുത്തുന്നു. താങ്കൾക്ക് പുസ്തകങ്ങളും പത്രമാദ്ധ്യമങ്ങളും വെബ്‌സൈറ്റുകളും അവലംബിക്കാവുന്നതാണ്.",
+	"cite-ve-dialogbutton-citation-educationpopup-title": "അവലംബങ്ങൾ",
+	"cite-ve-dialogbutton-reference-full-label": "അടിസ്ഥാന രൂപം",
+	"cite-ve-dialogbutton-reference-title": "അവലംബം",
+	"cite-ve-dialogbutton-reference-tooltip": "അടിസ്ഥാനപരം",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "അവലംബങ്ങളുടെ പട്ടിക",
+	"cite-ve-reference-input-placeholder": "ഇപ്പോൾ ഉപയോഗിച്ചിരിക്കുന്ന അവലംബങ്ങളിൽ തിരയുക",
+	"cite-ve-referenceslist-isempty": "ഈ താളിൽ, \"$1\" ഗണത്തിൽ, ഈ പട്ടികയിൽ ഉൾപ്പെടുത്താവുന്ന അവലംബങ്ങളൊന്നും ഈ താളിലില്ല.",
+	"cite-ve-referenceslist-isempty-default": "ഈ പട്ടികയിൽ ഉൾപ്പെടുത്താവുന്ന അവലംബങ്ങളൊന്നും ഈ താളിലില്ല.",
+	"cite-ve-referenceslist-missingref": "ഈ അവലംബം ഫലകം ഉപയോഗിച്ചോ മറ്റേതെങ്കിലും ഘടകമുപയോഗിച്ചോ ആണ് ചേർത്തിരിക്കുന്നത്, അതിനാലിത് ഇപ്പോൾ മൂലരൂപത്തിൽ മാത്രമേ തിരുത്താനാവൂ.",
+	"cite-ve-toolbar-group-label": "ഉദ്ധരിക്കുക"
+}

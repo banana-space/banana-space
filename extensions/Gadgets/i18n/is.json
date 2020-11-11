@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jóna Þórunn",
+			"Maxí",
+			"Snævar",
+			"Sveinn í Felli"
+		]
+	},
+	"gadgets-desc": "Gerir notendum kleift að velja [[Special:Gadgets|CSS og JavaScript-forrit]] í [[Special:Preferences#mw-prefsection-gadgets|stillingum sínum]]",
+	"prefs-gadgets": "Smáforrit",
+	"gadgets-prefstext": "Eftirfarandi er listi yfir smáforrit sem þú getur notað á notandareikningi þínum. Þessi forrit eru að mestu byggð á JavaScript svo vafrinn þarf að styðja JavaScript til að þau virki. Athugaðu einnig að forritin hafa engin áhrif á stillingasíðunni.\n\nForritin eru ekki hluti af MediaWiki-hugbúnaðinum heldur eru skrifuð og viðhaldin af notendum á þessu wiki-verkefni. Möppudýr geta breytt forritunum á [[MediaWiki:Gadgets-definition]] og [[Special:Gadgets]]. Fjöldi notenda sem nota hvert smától fyrir sig er skráður á [[Special:GadgetUsage|Notkunarupplýsingar smátóla]].",
+	"gadgets": "Smáforrit",
+	"gadgetusage-activeusers": "Virkir notendur",
+	"gadgetusage-default": "Sjálfgefið",
+	"gadgets-title": "Smáforrit",
+	"gadgets-pagetext": "Eftirfarandi er listi yfir smáforrit sem notendur geta virkjað í [[Special:Preferences#mw-prefsection-gadgets|stillingunum sínum]] og eru tilgreind á [[MediaWiki:Gadgets-definition]].\nÞessi listi veitir auðveldan aðgang að lýsingum á smáforritunum og kóðanum þeirra.",
+	"gadgets-uses": "Notar",
+	"gadgets-required-rights": "Þarfnast eftifarandi {{PLURAL:$2|réttinda}}:\n\n$1",
+	"gadgets-required-skins": "Aðgengileg með eftirfarandi {{PLURAL:$2|þema|$2 þemum}}: $1",
+	"gadgets-default": "Virkt fyrir alla notendur.",
+	"gadgets-export": "Flytja út",
+	"gadgets-export-title": "Flytja út smától",
+	"gadgets-not-found": "Smátólið \"$1\" fannst ekki.",
+	"gadgets-export-text": "Til þess að flytja út smátólið $1, smelltu á \"{{int:gadgets-export-download}}\", vistaðu skránna,\nfarðu á þann wiki sem á að flytja smátólið á, farðu á kerfisíðuna Special:Import og hladdu því inn. Síðan bættu eftirfarandi við meldinguna MediaWiki:Gadgets-definition:\n<pre>$2</pre>\nÞú verður af hafa tilskilin réttindi á þeim wiki sem á að færa smátólið á (þar með talið réttindi til að breyta meldingum) og möguleikinn að flytja inn skrár þarf að vera virkur.",
+	"gadgets-export-download": "Hlaða niður",
+	"right-gadgets-edit": "Breyta JavaScript og CSS síðum smátóla"
+}

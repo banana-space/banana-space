@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yekrats"
+		]
+	},
+	"pdf-desc": "Ilo por vidi PDF-dosierojn en bilda reĝimo",
+	"pdf_no_metadata": "Ne povas preni metadatenon el PDF",
+	"pdf_page_error": "Paĝnombro ekster valida intervalo",
+	"exif-pdf-version": "Versio de PDF-formato",
+	"exif-pdf-encrypted": "Ĉifrita",
+	"exif-pdf-pagesize": "Grandeco de paĝo"
+}

@@ -1,0 +1,600 @@
+body {
+	color: #222;
+	margin: 0 1em;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+.oo-ui-theme-wikimediaui {
+	font-size: 0.875em;
+}
+
+.oo-ui-theme-apex {
+	font-size: 0.8em;
+}
+
+code {
+	/* Support: Blink, Gecko, Webkit */
+	/* Specify a valid second value to fix size, see T176636 */
+	font-family: monospace, monospace;
+}
+
+p {
+	margin: 0.5em 0;
+}
+
+/* Layout */
+.demo {
+	max-width: 62.5em;
+	margin: 0 auto 4.5em;
+}
+
+.demo-menu {
+	min-width: 320px; /* Let's not pretend it works on anything lower than that */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.demo-menu > .oo-ui-widget {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 1em;
+	margin-bottom: 1em;
+}
+
+.demo-menu .demo-pageDropdown {
+	width: 10em;
+}
+
+.demo-container {
+	/* Needed for applying `padding` further below */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Console */
+/* stylelint-disable selector-pseudo-element-colon-notation */
+.demo-console {
+	clear: both;
+	position: relative;
+	border: 1px solid transparent;
+	margin-bottom: -2px;
+	line-height: 1.4;
+	/* @noflip */
+	direction: ltr;
+}
+
+.demo-console-expanded {
+	width: 100%;
+	background-color: #fff;
+	border-color: #a2a9b1;
+	margin: 0.5em 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.demo-link-example,
+.demo-console-toggle {
+	float: right;
+	margin-top: -2.5em;
+	cursor: pointer;
+	-webkit-transition: background-color 100ms, color 100ms;
+	-moz-transition: background-color 100ms, color 100ms;
+	transition: background-color 100ms, color 100ms;
+}
+
+.demo-link-example {
+	position: relative;
+	top: 1px;
+	right: 2em;
+	opacity: 0;
+	-webkit-transition: opacity 100ms;
+	-moz-transition: opacity 100ms;
+	transition: opacity 100ms;
+}
+
+.oo-ui-fieldsetLayout-group > .oo-ui-fieldLayout:first-child .demo-link-example {
+	right: 7.2em;
+	opacity: 1;
+}
+
+.demo-console-expanded .demo-console-toggle {
+	margin-top: -3em;
+}
+
+.demo-link-example::after,
+.demo-console-toggle::after {
+	color: #36c;
+	position: relative;
+	display: inline-block;
+	margin-right: -1.2em;
+	padding: 0.703125em 0.9375em 0.625em; /* equals frameless button */
+	border-radius: 2px;
+	line-height: 1.172em;
+	font-weight: bold;
+	text-align: center;
+	-webkit-transition: color 100ms;
+	-moz-transition: color 100ms;
+	transition: color 100ms;
+}
+
+.demo-link-example:hover::after,
+.demo-console-toggle:hover::after {
+	color: #447ff5;
+}
+
+.demo-link-example::after {
+	content: '#';
+}
+
+.demo-container > .oo-ui-fieldsetLayout:first-child .oo-ui-fieldLayout:first-child .demo-link-example::after {
+	content: 'Link to this example #';
+}
+
+.demo-console-toggle::after {
+	content: '↓';
+}
+
+.demo-console-expanded .demo-console-toggle::after {
+	content: '↑';
+}
+
+.oo-ui-fieldsetLayout-group > .oo-ui-fieldLayout:first-child .demo-console-toggle::after {
+	content: 'Show code ↓';
+}
+
+.oo-ui-fieldsetLayout-group > .oo-ui-fieldLayout:first-child .demo-console-expanded .demo-console-toggle::after {
+	content: 'Hide code ↑';
+}
+
+.demo-link-example:focus,
+.oo-ui-fieldLayout:hover > .demo-link-example {
+	opacity: 1;
+}
+
+.demo-console-collapsed .demo-sample-code,
+.demo-console-collapsed .demo-console-log,
+.demo-console-collapsed .demo-console-label,
+.demo-console-collapsed .demo-console-submit {
+	display: none;
+}
+
+/* @noflip */
+.demo-console-log {
+	border: 1px solid #a2a9b1;
+	border-width: 0 0 1px 0;
+	max-height: 5em;
+	overflow: auto;
+}
+
+/* @noflip */
+.demo-console-log-line {
+	position: relative;
+	padding-left: 20px;
+}
+
+.demo-console-log-line-input {
+	font-style: italic;
+	color: #54595d;
+}
+
+/* @noflip */
+.demo-console-log-line-input::before {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 20px;
+	text-align: center;
+	bottom: 0;
+	content: '→';
+}
+
+.demo-console-log-line-error {
+	color: #d33;
+}
+
+/* @noflip */
+.demo-console-label {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-right: -20px;
+	cursor: pointer;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* @noflip */
+.demo-console-label::before {
+	content: '→';
+	color: #00f;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 20px;
+	text-align: center;
+}
+
+.demo-console-input {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	width: 100%;
+}
+
+.demo-console-input:focus {
+	outline: 0;
+}
+
+.demo-console-submit {
+	background: #f8f9fa;
+	color: #222;
+	display: inline-block;
+	position: relative;
+	width: 20px;
+	line-height: 1.6;
+	text-align: center;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: pointer;
+	-webkit-transition: background-color 100ms, color 100ms;
+	-moz-transition: background-color 100ms, color 100ms;
+	transition: background-color 100ms, color 100ms;
+}
+
+.demo-console-submit:hover {
+	background: #fff;
+	color: #444;
+}
+
+.demo-sample-code {
+	/* Need to override Prism (syntax highlighter) styles */
+	background-color: #eaecf0;
+	margin: 0 !important; /* stylelint-disable-line declaration-no-important */
+}
+
+/* Toolbars demo */
+
+.demo-container.demo-toolbars {
+	padding: 0;
+}
+
+.demo-toolbar {
+	margin-top: 4em;
+}
+
+.demo-toolbars-contents {
+	padding: 2em;
+	min-height: 100px;
+}
+
+/*
+ * VisualEditor FormatTool styles.
+ *
+ * @copyright 2011-2018 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.oo-ui-menuToolGroup .oo-ui-tool-name-paragraph .oo-ui-tool-title {
+	font-weight: normal;
+}
+
+.oo-ui-menuToolGroup .oo-ui-tool-name-heading1 .oo-ui-tool-title {
+	font-size: 190%;
+	font-weight: normal;
+}
+
+.oo-ui-menuToolGroup .oo-ui-tool-name-heading2 .oo-ui-tool-title {
+	font-size: 150%;
+	font-weight: normal;
+}
+
+.oo-ui-menuToolGroup .oo-ui-tool-name-heading3 .oo-ui-tool-title {
+	font-size: 130%;
+	font-weight: bold;
+}
+
+.oo-ui-menuToolGroup .oo-ui-tool-name-heading4 .oo-ui-tool-title {
+	font-size: 115%;
+	font-weight: bold;
+}
+
+.oo-ui-menuToolGroup .oo-ui-tool-name-heading5 .oo-ui-tool-title {
+	font-size: 100%;
+	font-weight: bold;
+}
+
+.oo-ui-menuToolGroup .oo-ui-tool-name-heading6 .oo-ui-tool-title {
+	font-size: 80%;
+	font-weight: bold;
+}
+
+.oo-ui-theme-apex .oo-ui-menuToolGroup .oo-ui-tool-name-heading1 .oo-ui-tool-title,
+.oo-ui-theme-apex .oo-ui-menuToolGroup .oo-ui-tool-name-heading2 .oo-ui-tool-title,
+.oo-ui-theme-apex .oo-ui-menuToolGroup .oo-ui-tool-name-heading3 .oo-ui-tool-title,
+.oo-ui-theme-apex .oo-ui-menuToolGroup .oo-ui-tool-name-heading4 .oo-ui-tool-title,
+.oo-ui-theme-apex .oo-ui-menuToolGroup .oo-ui-tool-name-heading5 .oo-ui-tool-title,
+.oo-ui-theme-apex .oo-ui-menuToolGroup .oo-ui-tool-name-heading6 .oo-ui-tool-title {
+	/* Use px so padding is not changed by font size. This is normally 0.5em. */
+	padding-left: 6.4px;
+}
+
+.oo-ui-menuToolGroup .oo-ui-tool-name-preformatted .oo-ui-tool-title {
+	/* Support: Blink, Gecko, Webkit */
+	/* Specify a valid second value to fix size, see T176636 */
+	font-family: monospace, monospace;
+}
+
+.oo-ui-menuToolGroup .oo-ui-tool-name-blockquote .oo-ui-tool-title {
+	/* Indent in addition to padding */
+	text-indent: 1.5em;
+}
+
+.oo-ui-menuToolGroup .oo-ui-tool-name-tableCellHeader .oo-ui-tool-title {
+	font-weight: bold;
+}
+
+/* Icons demo */
+
+.demo-icons .oo-ui-buttonSelectWidget {
+	margin-bottom: 2em;
+}
+
+.demo-icons .oo-ui-fieldLayout {
+	display: inline-block;
+	margin: 1em 1em 1em 0;
+	width: 13.75em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.demo-icons .oo-ui-fieldsetLayout-group {
+	margin-right: -1em;
+}
+/* stylelint-disable indentation */
+.demo-icons .oo-ui-fieldLayout .oo-ui-iconElement:not( .oo-ui-image-progressive ):not( .oo-ui-image-destructive ),
+.demo-icons .oo-ui-fieldLayout .oo-ui-indicatorElement {
+	opacity: 0.87; /* brings icons/indicators closer to text color */
+	/* Support Chrome by promoting layer to GPU, see T182257 */
+	-webkit-transform: translateZ( 0 );
+	transform: translateZ( 0 );
+}
+/* stylelint-enable indentation */
+.demo-icons .oo-ui-fieldLayout:hover .oo-ui-labelElement-label {
+	color: #000;
+}
+.demo-icons .oo-ui-fieldLayout:hover .oo-ui-iconElement,
+.demo-icons .oo-ui-fieldLayout:hover .oo-ui-indicatorElement {
+	opacity: 1 !important; /* stylelint-disable-line declaration-no-important */
+}
+
+/* Widgets demo */
+
+.oo-ui-horizontalLayout > .oo-ui-textInputWidget,
+.oo-ui-horizontalLayout > .oo-ui-dropdownInputWidget {
+	max-width: 10em;
+}
+
+.demo-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* Special cases: ActionFieldLayout top aligned,
+FieldLayout left & right aligned */
+.oo-ui-fieldLayout-align-left,
+.oo-ui-fieldLayout-align-right {
+	max-width: 50em;
+}
+
+.oo-ui-fieldLayout-align-top.oo-ui-actionFieldLayout .demo-link-example,
+.oo-ui-fieldLayout-align-top.oo-ui-actionFieldLayout .demo-console-toggle,
+.oo-ui-fieldLayout-align-left .demo-link-example,
+.oo-ui-fieldLayout-align-left .demo-console-toggle,
+.oo-ui-fieldLayout-align-right .demo-link-example,
+.oo-ui-fieldLayout-align-right .demo-console-toggle {
+	margin-right: -2em;
+}
+
+.oo-ui-fieldLayout-body:after {
+	content: ' ';
+	clear: both;
+	display: block;
+}
+
+/* Special case: FieldsetLayout with "Summary" */
+.oo-ui-formLayout .oo-ui-fieldsetLayout:last-child {
+	background-color: #eaecf0;
+	border: 1px solid #c8ccd1;
+	padding: 1em 1em 1.5em 1em;
+}
+
+/*
+ * Support: iOS 9.2, Android 4.4.4, Op Mobile 37, Chrome/Android 57, Fx/Android 52, UC Browser 11.4, Baidu 7.12
+ * Workaround for weak ancient mobile browser support of `fixed` positioning
+ */
+@supports ( position: fixed ) {
+	.demo-menu {
+		background-color: #fff;
+		position: fixed;
+		top: 0;
+		border-bottom: 1px solid #a2a9b1;
+		padding-top: 1em;
+		box-shadow: 0 4px 4px -4px rgba( 0, 0, 0, 0.25 );
+		z-index: 5;
+	}
+
+	/* This needs extra specificity to beat PanelLayout styles */
+	.demo-container.oo-ui-panelLayout {
+		/* Apex overrides. WikimediaUI wins for now in the demo framing in this browser subset */
+		border-color: #a2a9b1;
+		border-radius: 2px;
+		box-shadow: none;
+	}
+
+	.oo-ui-windowManager-modal > .oo-ui-dialog,
+	.oo-ui-processDialog-errors {
+		z-index: 6;
+	}
+}
+
+/* Media Queries */
+@media ( min-width: 320px ) {
+	.oo-ui-theme-wikimediaui,
+	.oo-ui-theme-apex {
+		font-size: 1em;
+	}
+
+	.demo-menu > .oo-ui-widget {
+		margin-bottom: 1em;
+	}
+
+	.demo-container {
+		border-radius: 0;
+		border-width: 1px 0 0;
+		padding: 1.5em 2.5em 1em 0;
+	}
+
+	.demo-container.demo-toolbars {
+		border-width: 1px;
+	}
+
+	.demo-console-expanded {
+		width: calc( 100% + 2.5em ); /* equals `100%` + `padding` of `.demo-container` above */
+	}
+
+	.demo-link-example,
+	.demo-console-toggle {
+		margin-right: -2.5em;
+	}
+
+	.demo-console-expanded .demo-console-toggle {
+		margin-right: 0;
+	}
+
+	.oo-ui-fieldsetLayout-group > .oo-ui-fieldLayout:first-child .demo-link-example,
+	.oo-ui-fieldsetLayout-group > .oo-ui-fieldLayout:first-child .demo-console-toggle {
+		margin-top: 0;
+	}
+
+	.oo-ui-fieldsetLayout-group > .oo-ui-fieldLayout:first-child .demo-console-expanded .demo-console-toggle {
+		margin-top: -0.5em;
+	}
+
+	@supports ( position: fixed ) {
+		.demo-menu {
+			min-height: 11.4em;
+			left: 1em;
+			right: 1em;
+		}
+
+		/* Hide “Docs“ Button on very small screens */
+		.demo-menu > .demo-button-docs {
+			display: none;
+		}
+
+		/* This needs extra specificity to beat PanelLayout styles */
+		.demo-menu + .demo-container.oo-ui-panelLayout {
+			margin-top: 11.4em;
+		}
+
+		/* Avoid `box-shadow` from menu lurkin into toolbar demo, +1.2em to be harmonious with menu */
+		.demo-menu + .demo-container.oo-ui-panelLayout.demo-toolbars {
+			margin-top: 12.6em;
+		}
+	}
+}
+
+@media ( min-width: 568px ) {
+	@supports ( position: fixed ) {
+		.demo-menu {
+			min-height: 7.5em;
+		}
+
+		.demo-menu > .demo-button-docs {
+			display: inline-block;
+		}
+
+		.demo-menu + .demo-container.oo-ui-panelLayout {
+			margin-top: 7.5em;
+		}
+
+		.demo-menu + .demo-container.oo-ui-panelLayout.demo-toolbars {
+			margin-top: 8.7em;
+		}
+
+		.demo-console-expanded .demo-console-toggle {
+			margin-right: 0.5em;
+		}
+	}
+}
+
+/* @media ( min-width: 768px ) {} */
+
+@media ( min-width: 960px ) {
+	.oo-ui-theme-wikimediaui {
+		font-size: 0.875em;
+	}
+
+	.oo-ui-theme-apex {
+		font-size: 0.8em;
+	}
+
+	.demo-container {
+		border-radius: 2px;
+		border-width: 1px;
+		padding: 2em;
+	}
+
+	.demo-menu {
+		width: 62.5em;
+		white-space: nowrap;
+	}
+
+	.demo-console-expanded {
+		width: 100%;
+	}
+
+	.demo-link-example,
+	.demo-console-toggle,
+	.demo-console-expanded .demo-console-toggle {
+		margin-right: 0;
+	}
+
+	.oo-ui-fieldsetLayout-group > .oo-ui-fieldLayout:first-child .demo-link-example,
+	.oo-ui-fieldsetLayout-group > .oo-ui-fieldLayout:first-child .demo-console-toggle {
+		margin-top: -2.5em;
+	}
+
+	.oo-ui-fieldsetLayout-group > .oo-ui-fieldLayout:first-child .demo-console-expanded .demo-console-toggle {
+		margin-top: -3em;
+	}
+
+	@supports ( position: fixed ) {
+		.demo-menu {
+			min-height: 4.5em;
+			left: auto;
+			right: auto;
+		}
+
+		.demo-menu + .demo-container.oo-ui-panelLayout {
+			margin-top: 4.5em;
+		}
+
+		.demo-menu + .demo-container.oo-ui-panelLayout.demo-toolbars {
+			margin-top: 5.7em;
+		}
+	}
+}
+/* stylelint-enable selector-pseudo-element-colon-notation */

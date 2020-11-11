@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Calak"
+		]
+	},
+	"action-titleblacklistlog": "دیتنی لۆگی پێرستی ڕەشی سەردێڕ",
+	"log-name-titleblacklist": "لۆگی پێرستی ڕەشی سەردێڕ",
+	"titleblacklist-override": "پێرستی ڕەش لەبەر چاو مەگرە",
+	"right-tboverride": "تێپەڕاندنی تاوتوێی پێرستی ڕەشی سەردێڕ یان ناوی بەکارھێنەری",
+	"right-titleblacklistlog": "دیتنی لۆگی پێرستی ڕەشی سەردێڕ"
+}

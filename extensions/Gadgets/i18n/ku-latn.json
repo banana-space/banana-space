@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"George Animal",
+			"Ghybu",
+			"Gomada"
+		]
+	},
+	"prefs-gadgets": "Amûr",
+	"gadgets": "Amûr",
+	"gadgets-title": "Amûr",
+	"gadgets-uses": "Bikaranîn",
+	"gadgets-required-rights": "{{PLURAL:$2|Mafa|Mafên}} di dorê de pêwîst in:\n\n$1",
+	"gadgets-export": "Derxe",
+	"gadgets-not-found": " Gadget \"$1\" nehate dîtin.",
+	"gadgets-export-download": "Daxe"
+}

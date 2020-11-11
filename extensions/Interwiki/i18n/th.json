@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Manop",
+			"Passawuth"
+		]
+	},
+	"interwiki": "ดูและแก้ไขข้อมูลอินเตอร์วิกิ",
+	"interwiki-title-norights": "ดูข้อมูลอินเตอร์วิกิ",
+	"interwiki_prefix": "คำนำหน้า",
+	"interwiki-prefix-label": "คำนำหน้า:",
+	"interwiki_reasonfield": "เหตุผล:",
+	"interwiki_delquestion": "ลบ \"$1\"",
+	"interwiki_addbutton": "เพิ่ม",
+	"interwiki_edittext": "แก้ไขคำนำหน้าอินเตอร์วิกิ",
+	"right-interwiki": "แก้ไขข้อมูลอินเตอร์วิกิ"
+}

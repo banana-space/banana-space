@@ -1,0 +1,16 @@
+{
+	"name": "QuestyCaptcha",
+	"MessagesDirs": {
+		"QuestyCaptcha": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"QuestyCaptcha": "QuestyCaptcha.class.php"
+	},
+	"config": {
+		"CaptchaClass": "QuestyCaptcha",
+		"CaptchaQuestions": []
+	},
+	"manifest_version": 1
+}

@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+  Create a standalone, executable 'pygmentize' bundle.
+  Author: Ori Livneh
+
+"""
+import hashlib
+import io
+import os
+import stat
+import textwrap
+import urllib.request
+import xmlrpc.client
+import zipfile
+
+
+PYGMENTIZE_LAUNCHER = textwrap.dedent('''\
+  #!/usr/bin/env python3
+
+  import sys
+  import pygments.cmdline
+  try:
+      sys.exit(pygments.cmdline.main(sys.argv))
+  except KeyboardInterrupt:
+      sys.exit(1)
+''')
+
+
+print('Querying PyPI for the latest Pygments release...')
+pypi = xmlrpc.client.ServerProxy('https://pypi.python.org/pypi')
+latest_version = pypi.package_releases('Pygments')[0]
+for release in pypi.release_urls('Pygments', latest_version):
+    if (release['packagetype'] == 'bdist_wheel' and
+            release['python_version'].startswith('py2')):
+        url = release['url']
+        md5_digest = release['md5_digest']
+        break
+    else:
+        raise RuntimeError('No suitable package found.')
+
+print('Retrieving version %s (%s)...' % (latest_version, url))
+req = urllib.request.urlopen(url)
+buf = io.BytesIO(req.read())
+
+print('Verifying...')
+if hashlib.md5(buf.getvalue()).hexdigest() != md5_digest:
+    raise RuntimeError('MD5 checksum mismatch.')
+
+print('Creating executable ZIP bundle...')
+with zipfile.ZipFile(buf, 'a') as zf:
+    zf.writestr('__main__.py', PYGMENTIZE_LAUNCHER)
+
+data = buf.getvalue()
+script_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(script_dir, 'pygmentize')
+with open(file_path, 'wb') as f:
+    f.write(b'#!/usr/bin/env python3\n')
+    f.write(data)
+
+file_st = os.stat(file_path)
+os.chmod(file_path, file_st.st_mode | stat.S_IEXEC)
+
+with open(os.path.join(script_dir, 'VERSION'), 'w') as f:
+    f.write(latest_version + '\n')
+
+print('Done. Wrote %s bytes to %s' % (len(data), file_path))

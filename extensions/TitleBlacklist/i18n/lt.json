@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eitvys200",
+			"Homo",
+			"Matasg",
+			"Albertas"
+		]
+	},
+	"action-titleblacklistlog": "peržiūrėti pavadinimų juodojo sąrašo žurnalą",
+	"log-name-titleblacklist": "Pavadinimų juodojo sąrašo žurnalas",
+	"log-description-titleblacklist": "Šie įvykiai seka pavadinimų juodojo sąrašo sužadinimus.",
+	"logentry-titleblacklist-hit-username": "$1 {{GENDER:$2|sukėlė}} pavadinimų juodojo sąrašo sužadinimą, kai bandė sukurti paskyrą $3, atitinkančią $4.",
+	"titleblacklist-desc": "Leidžia administratoriams uždrausti kurti puslapius ir vartotojų sąskaitas pagal [[MediaWiki:Titleblacklist|juodąjį sąrašą]] ir [[MediaWiki:Titlewhitelist|baltąjį sąrašą]]",
+	"titleblacklist": "# Tai pavadinimų juodasis sąrašas. Pavadinimai ir vartotojai, kurie atitinka įrašus čia, negali būti sukuriami. \n# Naudokite \"#\" komentarams. \n# Pagal nutylėjimą nejautrus raidžių dydžiui",
+	"titlewhitelist": "# Tai pavadinimų baltasis sąrašas. Naudokite \"#\" komentarams. \n# Pagal nutylėjimą nejautrus raidžių dydžiui",
+	"titleblacklist-forbidden-edit": "Pavadinimą \"$2\" buvo uždrausta sukurti.\nJis atitinką šį juodojo sąrašo įrašą: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" negali būti perkeltas į \"$3\", nes pavadinimą \"$3\" buvo uždrausta sukurti.\nJis atitinką šį juodojo sąrašo įrašą: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Failą \"$2\" buvo uždrausta sukurti.\nJis atitinką šį juodojo sąrašo įrašą: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Naudotojo vardą \"$2\" buvo uždrausta sukurti.\nJis atitinką šį juodojo sąrašo įrašą: <code>$1</code>",
+	"titleblacklist-invalid": "Žemiau {{PLURAL:$1|esanti eilutė|esančios eilutės}} pavadinimų juodajame sąraše {{PLURAL:$1|yra}} {{PLURAL:$1|netinkama|netinkamos}};\nprašome {{PLURAL:$1|ją|jas}} pataisyti prieš išsaugant:",
+	"titleblacklist-override": "Ignoruoti juodąjį sąrašą",
+	"titleblacklist-warning": "<strong>Įspėjimas: Šį puslapį gali redaguoti tik administratoriai ir kiti naudotojai, turinys  <code>tboverride</code> teisę, nes jis atitinka šį pavadinimų juodojo sąrašo įrašą:</strong><br /><code>$1</code>",
+	"right-tboverride": "Nepaisyti pavadinimų arba naudotojų juodojo sąrašo",
+	"right-tboverride-account": "Nepaisyti naudotojų juodojo sąrašo",
+	"right-titleblacklistlog": "Peržiūrėti pavadinimų juodojo sąrašo žurnalą",
+	"apihelp-titleblacklist-description": "Patikrinti, ar straipsnio pavadinimas, failo vardas ar naudotojo vardas nėra įtrauktas į juodąjį sąrašą.",
+	"apihelp-titleblacklist-param-title": "Eilutė, kurią patikrinti juodajame sąraše.",
+	"apihelp-titleblacklist-param-action": "Veiksmas, kurį patikrinti.",
+	"apihelp-titleblacklist-param-nooverride": "Nebandykite perrašyti pavadinimų juodojo sąrašo.",
+	"apihelp-titleblacklist-example-1": "Patikrinti, ar [[Foo]] yra juodajame sąraše",
+	"apihelp-titleblacklist-example-2": "Patikrinti, ar [[Bar]] yra redagavimo juodajame sąraše",
+	"apihelp-createaccount-param-ignoretitleblacklist": "Ignoruoti pokštų patikras (reikalinga bent viena iš šių teisių: <code>tboverride</code>, <code>tboverride-account</code>)."
+}

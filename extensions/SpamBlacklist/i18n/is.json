@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Snævar"
+		]
+	},
+	"spam-blacklist": " # Ytri tenglar sem passa við þennan lista er ekki hægt að bæta við á síður.\n # Þessi bannlisti hefur aðeins áhrif á þennan wiki. \n # Einnig er til altækur bannlisti sem hefur áhrif á öll wiki verkefni Wikimedia. Hann er að finna á http://meta.wikimedia.org/wiki/Spam_blacklist\n # Leiðbeiningar eru á https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- ekki breyta þessari línu --> <pre>\n#\n# Málskipan listans er eftirfarandi:\n#   * Allar línur sem byrja á \"#\" eru athugasemdir\n#   * Allar síður sem eru ekki tómar eru reglulegar segðir sem verða aðeins bornar saman við vefsvæði tengilsins\n\n #</pre> <!-- ekki breyta þessari línu -->",
+	"spam-whitelist": " #<!-- ekki breyta þessari línu --> <pre>\n# Ytri tenglar sem passa við þennan lista verður *hægt* að bæta við á síður, þrátt fyrir að\n# þeir séu á bannlistanum.\n#\n #</pre> <!-- ekki breyta þessari línu -->",
+	"email-blacklist": " # Netföng á þessum lista verður ekki hægt að nota til þess að skrá notenda eða senda tölvupost á notendur\n # Þessi bannlisti hefur eingöngu áhrif á þennan wiki, en einning er til altækur bannlisti sem hefur áhrif á öll wiki verkefni Wikimedia.\n # Leiðbeiningar eru á https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- ekki breyta þessari línu --> <pre>\n#\n# Málskipan listans er eftirfarandi:\n#  * Allar línur sem byrja á \"#\" eru athugasemdir\n#  * Allar síður sem eru ekki tómar eru reglulegar segðir sem verða aðeins bornar saman við vefsvæði netfangsins\n\n #</pre> <!-- ekki breyta þessari línu -->",
+	"email-whitelist": " #<!-- leave this line exactly as it is --> <pre>\n# Netföng sem passa við þennan lista verður *hægt* að bæta við á síður, þrátt fyrir að\n# þau séu á bannlistanum.\n#\n #</pre> <!-- leave this line exactly as it is -->\n# Málskipan listans er eftirfarandi:\n#  * Allar línur sem byrja á \"#\" eru athugasemdir\n#  * Allar síður sem eru ekki tómar eru reglulegar segðir sem verða aðeins bornar saman við vefsvæði netfangsins",
+	"spam-blacklisted-email": "Netfangið er á bannlista",
+	"spam-blacklisted-email-text": "Netfangið þitt er skráð á bannlista og ekki er hægt að senda tölfupóst frá því til annara notenda.",
+	"spam-blacklisted-email-signup": "Netfangið sem þú tilgreindir er á bannlista og er ekki hægt að nota.",
+	"spam-invalid-lines": "Eftirfarandi bannlista {{PLURAL:$1|færsla er ógild regluleg segð|færslur eru ógildar reglulegar segðir}} og leiðrétta þarf {{PLURAL:$1|hana|þær}} áður en síðan er vistuð:",
+	"spam-blacklist-desc": "Kæfuvörn byggð á reglulegum segðum sem gerir kleift að loka á vefslóðir á síðum og netföng skráðra notenda"
+}

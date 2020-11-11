@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Snævar",
+			"Sveinn í Felli"
+		]
+	},
+	"codeeditor-toolbar-toggle": "Kveikja/slökkva á kóða ritlinum",
+	"codeeditor-save-with-errors": "Skjalið inniheldur villur. Ertu viss um að þú viljir vista ?",
+	"codeeditor-invisibleChars-toggle": "Kveikja/slökkva á ósýnilegum stöfum",
+	"codeeditor-gotoline": "Fara á línu númer...",
+	"codeeditor-gotoline-placeholder": "lína[:dálkur]",
+	"codeeditor-indent": "Inndráttur"
+}

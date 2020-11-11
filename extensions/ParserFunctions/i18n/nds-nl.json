@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Servien"
+		]
+	},
+	"pfunc_expr_unrecognised_word": "Fout in uutdrokkige: woord \"$1\" niet herkend.",
+	"pfunc_expr_unexpected_operator": "Fout in uutdrokkige: niet verwachten operator $1.",
+	"pfunc_expr_missing_operand": "Fout in uutdrokkige: operand veur $1 ontbrik.",
+	"pfunc_expr_unrecognised_punctuation": "Fout in uutdrokkige: niet herkend leesteken \"$1\"."
+}

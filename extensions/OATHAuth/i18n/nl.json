@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"SPQRobin",
+			"Siebrand",
+			"Romaine",
+			"Sjoerddebruin",
+			"Southparkfan"
+		]
+	},
+	"oathauth-desc": "Biedt ondersteuning voor authenticatie via op HMAC-gebaseerde eenmalige wachtwoorden",
+	"specialpages-group-oath": "Tweetrapsauthenticatie",
+	"oathauth-account": "Accountnaam:",
+	"oathauth-secret": "Geheime sleutel voor tweetrapsauthenticatie:",
+	"oathauth-enable": "Tweetrapsauthenticatie inschakelen",
+	"oathauth-scratchtokens": "De onderstaande lijst bevat tokens voor eenmalig gebruik. Deze tokens kunnen slechts één keer gebruikt worden en zijn bedoeld voor noodgevallen. Noteer deze tokens en bewaar ze op een veilige plaats. Als u uw telefoon bent verloren, zijn deze tokens de enige manier om uw gebruikersaccount te redden. '''Deze tokens worden nooit meer weergegeven'''.",
+	"oathauth-token": "Token",
+	"oathauth-disable": "Tweetrapsauthenticatie uitschakelen",
+	"oathauth-validatedoath": "De gebruikersgegevens voor tweetrapsauthenticatie zijn gevalideerd. Tweetrapsauthenticatie is nu verplicht.",
+	"oathauth-failedtovalidateoath": "Het valideren van de gebruikersgegevens voor tweetrapsauthenticatie is mislukt.",
+	"oathauth-disabledoath": "Tweetrapsauthenticatie is uitgeschakeld.",
+	"oathauth-prefs-label": "Tweetrapsauthenticatie:",
+	"oathauth-entertoken": "Vul een code van uw  authenticatie-apparaat in om te bevestigen:",
+	"oathauth-auth-token-label": "Verificatiecode",
+	"oathauth-auth-ui": "Gelieve een verificatiecode van uw authenticatie-apparaat invullen",
+	"grant-group-authentication": "OAuth gebruiken voor authenticatie"
+}

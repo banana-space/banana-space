@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"action-titleblacklistlog": "'ndruche 'u titole de l'archivije de l'elenghe gnure",
+	"log-name-titleblacklist": "Archivije de le titole bloccate",
+	"log-description-titleblacklist": "Ste evende tracciane le trasute jndr'à l'elenghe gnure de le rummate.",
+	"logentry-titleblacklist-hit-username": "$1 {{GENDER:$2|ave causate}} l'attivazzione d'a lista gnore de le titole pruvanne a ccrejà 'u cunde $3 ca corrisponne a $4.",
+	"titleblacklist-desc": "Permette a l'amministrature de vietà ccrejaziune de le pàggene e le cunde utinde pe 'na [[MediaWiki:Titleblacklist|lista gnore]] e [[MediaWiki:Titlewhitelist|lista vianghe]]",
+	"titleblacklist": "# Stu titele jè in lista gnore. Le titele e l'utinde ca se ponne comborndà cu le espressiune regolare aqquà non ge ponne essere ccrejate.\n# Ause \"#\" pe le commende.\n# Quiste jè sensibbele a le maiuscole e le minuscole de partenze",
+	"titlewhitelist": "# Stu titele jè in lista vianghe.\n# Ause \"#\" pe le commende.\n# Quiste jè sensibbele a le maiuscole e le minuscole de partenze",
+	"titleblacklist-forbidden-edit": "'U titele \"$2\" ha state mise fore da 'a ccrejazione.<br />\nJidde se combronde cu le seguende vosce d'a lista gnore: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" non ge pò essere sustate sus a \"$3\", purcé 'u titele \"$3\" ha state escluse da 'a ccreiazione.<br />\nJidde se combronde cu le seguende vosce d'a lista gnore: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "'U nome d'u file \"$2\" ha state escluse da 'a ccreiazione.<br />\nJidde se combronde cu le vosce d'a lista gnore: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "'U nome de l'utende \"$2\" ha state escluse da 'a ccreiazione.<br />\nJidde se combronde cu le vosce d'a lista gnore: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|'A seguenda linèe|Le seguende linèe}} jndr'à lista gnore de le titele {{PLURAL:$1|jè|sonde}} invalide;\npe piacere corregge {{PLURAL:$1|jedde|lore}} apprime de reggistrà:",
+	"titleblacklist-override": "No scè penzanne 'a lista gnore",
+	"titleblacklist-override-help": "Le utinde cu le privilegge insufficiende ponne 'mbostà st'opzione pe cacà le condrolle de lista gnore sus a 'u titole.",
+	"right-tboverride": "Sovrascrive 'a lista gnore de le titole o de le utinde",
+	"right-tboverride-account": "Sovrasrive 'a lista gnore de le utinde",
+	"right-titleblacklistlog": "'Ndruche l'archivije de le titole jndr'à l'elenghe gnure",
+	"apihelp-titleblacklist-param-action": "L'azione ha state verificate.",
+	"apihelp-titleblacklist-param-nooverride": "No pruvà a sovrascrivere l'elenghe de le titole da scettà."
+}

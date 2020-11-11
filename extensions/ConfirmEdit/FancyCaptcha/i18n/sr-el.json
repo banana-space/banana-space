@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michaello",
+			"Жељко Тодоровић",
+			"Milicevic01",
+			"Srdjan m",
+			"Сербијана"
+		]
+	},
+	"fancycaptcha-desc": "Obogaćen stvarač slikovnog koda za potvrdu uređivanja",
+	"fancycaptcha-addurl": "Vaša izmena sadrži nove spoljašnje veze.\nU cilju zaštite od nepoželjnih poruka, unesite reči sa slike u polje ispod ([[Special:Captcha/help|više informacija]]):",
+	"fancycaptcha-badlogin": "Radi zaštite od automatizovanog razbijanja šifri, unesite reči sa slike u polje ispod ([[Special:Captcha/help|više informacija]]):",
+	"fancycaptcha-captcha": "Sigurnosna provera",
+	"fancycaptcha-accountcreate": "U cilju zaštite od automatskog otvaranja naloga, unesite reči sa slike u polje ispod ([[Special:Captcha/help|više informacija]]):",
+	"fancycaptcha-create": "Da bi se napravila stranica, potrebno je uneti reči koje se nalaze ispod kutije ([[Special:Captcha/help|detaljnije]]):",
+	"fancycaptcha-edit": "Za izmenu ove strane unesi reči koje se nalaze ispod kutije ([[Special:Captcha/help|detaljnije]]):",
+	"fancycaptcha-imgcaptcha-ph": "Unesite tekst koji vidite na slici",
+	"fancycaptcha-sendemail": "U cilju zaštite od nepoželjnih poruka, unesite reči sa slike u polje ispod ([[Special:Captcha/help|više informacija]]):",
+	"fancycaptcha-reload-text": "osveži"
+}

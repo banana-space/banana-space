@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shinjiman"
+		]
+	},
+	"syntaxhighlight-desc": "用[http://pygments.org/ Pygments]以<code>&lt;syntaxhighlight&gt;</code>提供醒目提示"
+}

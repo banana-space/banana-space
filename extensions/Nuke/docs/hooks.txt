@@ -1,0 +1,20 @@
+hooks.txt
+
+This document describes the events triggered by the Nuke extension.
+
+For more information about events and hooks in general see mediawiki/docs/hooks.txt in gerrit.
+
+==Events and parameters==
+
+'NukeGetNewPages': After searching for pages to delete. Can be used to add and remove pages.
+$username: the username filter specified by the user
+$pattern: the pattern filter specified by the user
+$namespace: the namespace filter specified by the user
+$limit: the limit filter specified by the user
+&$pages: list of pages title already retrieved
+
+'NukeDeletePage': Allows other extensions to handle the deletion of titles.
+Return true to let Nuke handle the deletion or false if it was already handled in the hook.
+$title: title to delete
+$reason: reason given by the user for deletion
+&$deletionResult: Whether the deletion was successful or not

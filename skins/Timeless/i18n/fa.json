@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Reza1615",
+			"Alirezaaa"
+		]
+	},
+	"timeless-desc": "پوسته بدون زمان طراحی شده بعد از پروتوتایپ زمستان توسط براندون هریس و بسیاری از مدل‌های بنیاد ویکی‌مدیا",
+	"timeless-search-placeholder": "جستجوی {{NUMBEROFARTICLES}} صفحه",
+	"timeless-loggedin": "حساب کاربری شما",
+	"timeless-anonymous": "ناشناس",
+	"timeless-loggedinas": "ورد به سامانه به عنوان '''$1'''",
+	"timeless-notloggedin": "عدم ورود به سامانه",
+	"timeless-userpage": "صفحهٔ {{GENDER:$1|کاربر}}",
+	"timeless-talkpage": "بحث {{GENDER:$1|کاربر}}",
+	"timeless-pagelog": "صفحه سیاهه",
+	"timeless-more": "بیشتر",
+	"timeless-sitetools": "ابزارهای ویکی",
+	"timeless-pageactions": "ابزارهای صفحه",
+	"timeless-userpagetools": "ابزارهای صفحهٔ کاربر",
+	"timeless-pagemisc": "بیشتر",
+	"timeless-namespaces": "فضاهای نام",
+	"timeless-pagetools": "عملکردهای صفحه",
+	"timeless-languages": "زبان‌ها",
+	"timeless.js": "/ * کدهای جاوااسکریپتی که در اینجا قرار می‌گیرند برای کاربران پوستهٔ تایم‌لاین بارگیری می‌شود * /"
+}

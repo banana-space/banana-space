@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yueman"
+		]
+	},
+	"timeless-desc": "Timeless 外觀係由 Brandon Harris 繼 Winter 原型之後嘅新設計，亦包含嚟自維基媒體基金會嘅式樣。",
+	"timeless-search-placeholder": "響約莫 {{NUMBEROFARTICLES}} 版度揾嘢",
+	"timeless-loggedin": "你個戶口",
+	"timeless-anonymous": "無名氏",
+	"timeless-loggedinas": "用  '''$1''' 身份簽到",
+	"timeless-notloggedin": "未簽到",
+	"timeless-userpage": "{{GENDER:$1|用戶}}頁",
+	"timeless-talkpage": "{{GENDER:$1|用戶}}傾偈",
+	"timeless-pagelog": "版嘅日誌",
+	"timeless-more": "多啲",
+	"timeless-sitetools": "維基架撐",
+	"timeless-pageactions": "版嘅架撐",
+	"timeless-userpagetools": "用戶頁架撐",
+	"timeless-pagemisc": "多啲",
+	"timeless-namespaces": "空間名",
+	"timeless-pagetools": "版嘅動作",
+	"timeless-languages": "語言"
+}

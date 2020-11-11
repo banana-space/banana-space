@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Davidpar",
+			"Jordi Roqué",
+			"SMP",
+			"Vriullop",
+			"Pere prlpz"
+		]
+	},
+	"cite-desc": "Afegeix les etiquetes <nowiki><ref[ name=id]></nowiki> i <nowiki><references/></nowiki>, per a cites",
+	"cite_error": "Error de citació: $1",
+	"cite_error_ref_numeric_key": "Etiqueta <code>&lt;ref&gt;</code> no vàlida;\nel nom no pot ser un nombre. Empreu una paraula o un títol descriptiu",
+	"cite_error_ref_no_key": "Etiqueta <code>&lt;ref&gt;</code> no vàlida;\nles refs sense contingut han de tenir nom",
+	"cite_error_ref_too_many_keys": "Etiqueta <code>&lt;ref&gt;</code> no vàlida;\nempreu l'estructura <code>&lt;ref name=\"Nom\"&gt;</code>",
+	"cite_error_ref_no_input": "Etiqueta <code>&lt;ref&gt;</code> no vàlida; \nles referències sense nom han de tenir contingut",
+	"cite_error_references_invalid_parameters": "Etiqueta <code>&lt;references&gt;</code> no vàlida; \nno es permeten paràmetres. \nUseu <code>&lt;references /&gt;</code>",
+	"cite_error_references_no_backlink_label": "Hi ha massa etiquetes personalitzades.\nSe'n poden definir més a <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_no_link_label_group": "No hi ha etiquetes vincle personalitzat per al grup \"$1\".\nDefineix més al missatge <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_text": "Etiqueta <code>&lt;ref&gt;</code> no vàlida;\nno s'ha proporcionat text per les refs amb l'etiqueta <code>$1</code>",
+	"cite_error_included_ref": "Es tanca el <code>&lt;/ref&gt;</code> que manca per una etiqueta <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "Existeixen etiquetes <code>&lt;ref&gt;</code> pel grup «$1» però no l'etiqueta <code>&lt;references group=\"$1\"/&gt;</code> corresponent",
+	"cite_error_references_group_mismatch": "L'etiqueta <code>&lt;ref&gt;</code> a <code>&lt;references&gt;</code> té un conflicte amb l'atribut de grup \"$1\".",
+	"cite_error_references_missing_group": "L'etiqueta <code>&lt;ref&gt;</code> definida a <code>&lt;references&gt;</code> té l'atribut de grup \"$1\" que no apareix en el text anterior.",
+	"cite_error_references_missing_key": "L'etiqueta <code>&lt;ref&gt;</code> amb el nom \"$1\" definida a <code>&lt;references&gt;</code> no s'utilitza en el text anterior.",
+	"cite_error_references_no_key": "L'etiqueta <code>&lt;ref&gt;</code> definida a <code>&lt;references&gt;</code> no té cap atribut de nom.",
+	"cite_error_empty_references_define": "L'etiqueta <code>&lt;ref&gt;</code> definida a <code>&lt;references&gt;</code> amb el nom \"$1\" no té contingut.",
+	"cite-tracking-category-cite-error": "Pàgines amb errors a les referències",
+	"cite_section_preview_references": "Previsualització de les referències"
+}

@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Klenje"
+		]
+	},
+	"wikieditor-toolbar-loading": "Daûr a cjamâ…",
+	"wikieditor-toolbar-tool-bold": "Gruessut",
+	"wikieditor-toolbar-tool-bold-example": "Test in gruessut",
+	"wikieditor-toolbar-tool-italic": "Corsîf",
+	"wikieditor-toolbar-tool-italic-example": "Test in corsîf",
+	"wikieditor-toolbar-tool-ilink": "Leam interni",
+	"wikieditor-toolbar-tool-ilink-example": "Titul dal leam",
+	"wikieditor-toolbar-tool-link": "Leam",
+	"wikieditor-toolbar-tool-table-preview": "Anteprime",
+	"wikieditor-toolbar-section-help": "Jutori"
+}

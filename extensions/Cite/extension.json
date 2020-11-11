@@ -1,0 +1,116 @@
+{
+	"name": "Cite",
+	"author": [
+		"Ævar Arnfjörð Bjarmason",
+		"Andrew Garrett",
+		"Brion Vibber",
+		"Ed Sanders",
+		"Marius Hoch",
+		"Steve Sanbeg",
+		"Trevor Parscal",
+		"..."
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Cite",
+	"descriptionmsg": "cite-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.30.0"
+	},
+	"MessagesDirs": {
+		"cite": "i18n",
+		"ve-cite": "modules/ve-cite/i18n"
+	},
+	"APIPropModules": {
+		"references": {
+			"class": "ApiQueryReferences"
+		}
+	},
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"Cite::setHooks"
+		],
+		"ContentHandlerDefaultModelFor": [
+			"CiteHooks::onContentHandlerDefaultModelFor"
+		],
+		"ResourceLoaderTestModules": [
+			"CiteHooks::onResourceLoaderTestModules"
+		],
+		"ResourceLoaderRegisterModules": [
+			"CiteHooks::onResourceLoaderRegisterModules"
+		],
+		"LinksUpdate": [
+			"CiteHooks::onLinksUpdate"
+		],
+		"LinksUpdateComplete": [
+			"CiteHooks::onLinksUpdateComplete"
+		],
+		"ResourceLoaderGetConfigVars": [
+			"CiteHooks::onResourceLoaderGetConfigVars"
+		],
+		"APIQuerySiteInfoGeneralInfo": "CiteHooks::onAPIQuerySiteInfoGeneralInfo"
+	},
+	"ResourceModules": {
+		"ext.cite.styles": {
+			"styles": {
+				"ext.cite.styles.css": {},
+				"ext.cite.print.css": {
+					"media": "print"
+				}
+			},
+			"skinStyles": {
+				"minerva": "ext.cite.styles.minerva.less"
+			},
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.cite.a11y": {
+			"scripts": "ext.cite.a11y.js",
+			"styles": "ext.cite.a11y.css",
+			"messages": [
+				"cite_references_link_accessibility_label",
+				"cite_references_link_many_accessibility_label"
+			]
+		},
+		"ext.cite.style": {
+			"class": "CiteCSSFileModule",
+			"styles": "ext.cite.style.css",
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "Cite/modules"
+	},
+	"VisualEditorPluginModules": [
+		"ext.cite.visualEditor"
+	],
+	"ConfigRegistry": {
+		"cite": "GlobalVarConfig::newInstance"
+	},
+	"config": {
+		"CiteStoreReferencesData": false,
+		"CiteCacheReferencesDataOnParse": false,
+		"CiteVisualEditorOtherGroup": false,
+		"CiteResponsiveReferences": true
+	},
+	"AutoloadClasses": {
+		"ApiQueryReferences": "includes/ApiQueryReferences.php",
+		"Cite": "includes/Cite.php",
+		"CiteHooks": "includes/CiteHooks.php",
+		"CiteDataModule": "includes/CiteDataModule.php",
+		"CiteCSSFileModule": "includes/CiteCSSFileModule.php"
+	},
+	"TrackingCategories": [
+		"cite-tracking-category-cite-error"
+	],
+	"CodeMirrorTagModes": {
+		"ref": "text/mediawiki"
+	},
+	"manifest_version": 1
+}

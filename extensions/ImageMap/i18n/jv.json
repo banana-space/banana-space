@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meursault2004",
+			"Pras",
+			"NoiX180"
+		]
+	},
+	"imagemap_desc": "Nyedyakaké péta gambar sing bisa diklik saka klièn mawa nganggo tag <code>&lt;imagemap&gt;</code>",
+	"imagemap_no_image": "Error: kudu mènèhi sawijining gambar ing baris kapisan",
+	"imagemap_invalid_image": "Masalah: Gambar ora trep utawa ora ana.",
+	"imagemap_bad_image": "Masalah: Barkas ora diidinaké ing kaca iki",
+	"imagemap_no_link": "Masalah: Pranala sing trep ora ana ing pungkasané $1.",
+	"imagemap_invalid_title": "Error: irah-irahan ora absah ing pranala ing baris kaping $1",
+	"imagemap_missing_coord": "Error: ora cukup koordinat kanggo wujud ing baris kaping $1",
+	"imagemap_unrecognised_shape": "Error: wujud ora ditepungi ing baris kaping $1, saben baris kudu diwiwiti mawa salah siji saka: <code>default</code>, <code>rect</code>, <code>circle</code> utawa <code>poly</code>",
+	"imagemap_invalid_coord": "Error: koordinat ora absah ing baris kaping $1, kudu awujud angka",
+	"imagemap_invalid_desc": "Error: spésifikasi desc ora absah, kudu salah siji saka: $1",
+	"imagemap_description": "Prekara gambar iki",
+	"imagemap_poly_odd": "Kasalahan: ana poligon kanthi nomer koordinat kliru ing larikan $1"
+}

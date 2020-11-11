@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pikne"
+		]
+	},
+	"spam-blacklist": " # Sellele nimekirjale vastavad internetiaadressid blokeeritakse.\n # See nimekiri puudutab ainult seda vikit; uuri ka globaalse musta nimekirja kohta.\n # Dokumentatsioon on asukohas https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- Jäta see rida muutmata kujule. --> <pre>\n#\n# Süntaks on järgmine:\n#   * Kõik alates märgist \"#\" kuni rea lõpuni on kommentaar\n#   * Iga rida, mis ei ole tühi, on regulaaravaldise osa, milleks sobib internetiaadressi osadest ainult hostinimi\n\n #</pre> <!-- Jäta see rida muutmata kujule. -->",
+	"spam-whitelist": " #<!-- Jäta see rida muutmata kujule. --> <pre>\n# Sellele nimekirjale vastavaid internetiaadresse *ei* blokeerita isegi mitte siis\n# kui musta nimekirja sissekande järgi võiks nad olla blokeeritud.\n#\n# Süntaks on järgmine:\n#   * Kõik alates märgist \"#\" kuni rea lõpuni on kommentaar\n#   * Iga rida, mis ei ole tühi, on regulaaravaldise osa, milleks sobib internetiaadressi osadest ainult hostinimi\n\n #</pre> <!-- Jäta see rida muutmata kujule. -->",
+	"email-blacklist": " # Sellele nimekirjale vastavatel e-posti aadressidel blokeeritakse registreerumine ja e-kirjade saatmine.\n # See nimekiri puudutab ainult seda vikit; uuri ka globaalse musta nimekirja kohta.\n # Dokumentatsioon on asukohas https://www.mediawiki.org/wiki/Extension:SpamBlacklist.\n #<!-- Jäta see rida muutmata kujule. --> <pre>\n#\n# Süntaks on järgmine:\n#   * Kõik alates märgist \"#\" kuni rea lõpuni on kommentaar.\n#   * Iga rida, mis ei ole tühi, on regulaaravaldise osa, mis vastab ainult e-posti aadressides sisalduvatele hostinimedele.\n\n #</pre> <!-- Jäta see rida muutmata kujule. -->",
+	"email-whitelist": " #<!-- Jäta see rida muutmata kujule. --> <pre>\n# Sellele nimekirjale vastavaid e-posti aadresse *ei* blokeerita isegi mitte siis,\n# kui musta nimekirja sissekande järgi võiks nad olla blokeeritud.\n#\n #</pre> <!-- Jäta see rida muutmata kujule. -->\n# Süntaks on järgmine:\n#   * Kõik alates märgist \"#\" kuni rea lõpuni on kommentaar.\n#   * Iga rida, mis ei ole tühi, on regulaaravaldise osa, mis vastab ainult e-posti aadressides sisalduvatele hostinimedele.",
+	"spam-blacklisted-email": "Musta nimekirja kantud e-posti aadress",
+	"spam-blacklisted-email-text": "Musta nimekirja sissekande tõttu on sinu e-posti aadressilt teistele kasutajatele e-kirjade saatmine praegu keelatud.",
+	"spam-blacklisted-email-signup": "Selle e-posti aadressi kasutamine on praegu musta nimekirja sissekandega keelatud.",
+	"spam-invalid-lines": "{{PLURAL:$1|Järgmine rida|Järgmised read}} rämpspostituste mustas nimekirjas on {{PLURAL:$1|vigane regulaaravaldis|vigased regulaaravaldised}} ja {{PLURAL:$1|see|need}} tuleb enne lehekülje salvestamist parandada:",
+	"spam-blacklist-desc": "Regulaaravaldisel põhinev tööriist, mis võimaldab lisada musta nimekirja lehekülgedel toodud internetiaadresse ning registreeritud kasutajate e-posti aadresse.",
+	"log-name-spamblacklist": "Rämpsu musta nimekirja logi",
+	"log-description-spamblacklist": "Siin on loetletud rämpspostituse musta nimekirja tabamused.",
+	"logentry-spamblacklist-hit": "$1 püüdis lisada leheküljele $3 rämpspostituse mustas nimekirjas olevat linki $4.",
+	"right-spamblacklistlog": "Vaadata rämpsu musta nimekirja",
+	"action-spamblacklistlog": "vaadata rämpsu musta nimekirja",
+	"apihelp-spamblacklist-description": "Ühe või enama internetiaadressi valideerimine rämpsposti musta nimekirja vastu.",
+	"apihelp-spamblacklist-param-url": "Internetiaadressid, mida musta nimekirja vastu valideerida.",
+	"apihelp-spamblacklist-example-1": "Kontrolli kaht internetiaadressi musta nimekirja vastu"
+}

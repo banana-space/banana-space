@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fryed-peach",
+			"Purodha",
+			"Shirayuki",
+			"Umherirrender"
+		]
+	},
+	"localisationupdate-extensionname": "{{name}}",
+	"localisationupdate-desc": "{{desc|name=Localisation Update|url=https://www.mediawiki.org/wiki/Extension:LocalisationUpdate}}"
+}

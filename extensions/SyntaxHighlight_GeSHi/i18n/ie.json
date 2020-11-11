@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Renan"
+		]
+	},
+	"syntaxhighlight-desc": "Provide superation de sintaxe de li code fonte, che li element <code>&lt;syntaxhighlight&gt;</code>, usant li [http://pygments.org/ GeSHi - Generic Syntax Highlighter]"
+}

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Санюн Вадик"
+		]
+	},
+	"categorytree-expand": "почаш",
+	"categorytree-num-categories": "$1 К",
+	"categorytree-num-pages": "$1 С",
+	"categorytree-num-files": "$1 Ф"
+}

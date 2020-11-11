@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Minh Nguyen"
+		]
+	},
+	"oathauth-desc": "Cho phép xác nhận dùng các mật khẩu một lần dựa trên mã xác thực thông điệp được băm (HMAC)",
+	"oath": "Xác thực OATH",
+	"specialpages-group-oath": "Xác thực dùng hai nhân tố",
+	"oathauth-account": "Tên tài khoản:",
+	"oathauth-secret": "Chìa khóa bí mật để xác thực dùng hai nhân tố:",
+	"oathauth-enable": "Xác thực dùng hai nhân tố",
+	"oathauth-scratchtokens": "Danh sách sau có các mã dùng một lần. Các mã này chỉ có thể dùng một lần cho mục đích khẩn cấp. Xin hãy ghi xuống các mã này và lưu giữ chúng tại một nơi an toàn. Nếu bạn mất điện thoại của bạn, các mã này là phương sách duy nhất để cứu tài khoản của bạn. Từ nay các mã này sẽ không bao giờ được hiển thị.",
+	"oathauth-token": "Mã",
+	"oathauth-disable": "Tắt xác thực dùng hai nhân tố",
+	"oathauth-validatedoath": "Đã xác nhận thông tin xác thực dùng hai nhân tố. Từ nay sẽ áp dụng việc xác thực dùng hai nhân tố.",
+	"oathauth-noscratchforvalidation": "Bạn không thể sử dụng mã thẻ để xác thực dùng hai nhân tố. Các mã thẻ chỉ để sao lưu hoặc sử dụng tình cờ. Xin hãy nhập mã xác nhận từ trình xác thực của bạn.",
+	"oathauth-failedtovalidateoath": "Thất bại khi xác nhận thông tin xác thực dùng hai nhân tố",
+	"oathauth-disabledoath": "Đã tắt xác thực dùng hai nhân tố.",
+	"oathauth-prefs-label": "Xác thực dùng hai nhân tố:",
+	"oathauth-step1": "Bước 1: Tải về ứng dụng xác thực dùng hai nhân tố",
+	"oathauth-step1-test": "Tải một chương trình có chức năng xác thực dùng hai nhân tố, có thể là ứng dụng di động như trình xác thực Google Authenticator hoặc một ứng dụng dành cho máy tính để bàn.",
+	"oathauth-step2": "Bước 2: Quét mã QR",
+	"oathauth-step2alt": "Hoặc nhập mật mã thủ công:",
+	"oathauth-step3": "Bước 3: Ghi xuống các mã thẻ",
+	"oathauth-step4": "Bước 4: Xác nhận",
+	"oathauth-entertoken": "Nhập một mã từ thiết bị xác thực của bạn để xác nhận:",
+	"right-oathauth-enable": "Xác thực dùng hai nhân tố",
+	"action-oathauth-enable": "xác thực dùng hai nhân tố",
+	"oathauth-auth-token-label": "Mã",
+	"oathauth-auth-token-help": "Mật khẩu dùng một lần được sử dụng làm nhân tố thứ hai trong quá trình xác thực dùng hai nhân tố.",
+	"oathauth-auth-ui": "Xin hãy nhập mã xác nhận từ máy xác thực của bạn",
+	"oathauth-throttled": "Đã cố xác nhận danh tính nhiều lần quá! Xin hãy chờ $1.",
+	"oathauth-login-failed": "Xác nhận thất bại.",
+	"oathauth-describe-provider": "Xác thực dùng hai nhân tố (OATH).",
+	"grant-group-authentication": "Thực hiện các tác vụ xác thực cho chính mình và những người khác",
+	"grant-oath": "Truy cập thông tin xác thực dùng hai nhân tố (OATH) về chính mình và những người khác",
+	"right-oathauth-api-all": "Truy vấn và xác nhận thông tin OATH về chính mình và những người khác",
+	"action-oathauth-api-all": "kiểm tra trạng thái OATH"
+}

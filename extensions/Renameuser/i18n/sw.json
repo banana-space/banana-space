@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kwisha",
+			"Stephenwanjau"
+		]
+	},
+	"renameuser": "Badili jina la mtumiaji",
+	"renameuser-linkoncontribs": "badili jina la mtumiaji",
+	"renameuser-linkoncontribs-text": "Badili jina la mtumiaji huyu",
+	"renameuserold": "Jina la sasa la mtumiaji:",
+	"renameusernew": "Jina lipya la mtumiaji:",
+	"renameuserreason": "Sababu ya kubadili jina:",
+	"renameuserwarnings": "Ilani:",
+	"renameuserconfirm": "Ndiyo, badili jina la mtumiaji",
+	"renameusersubmit": "Wasilisha",
+	"renameuser-page-moved": "Ukurasa wa $1 umehamishwa hadi $2.",
+	"renameuser-page-unmoved": "Ukurasa $1 haungesongezwa hadi $2.",
+	"action-renameuser": "badili jina la mtumiaji",
+	"right-renameuser": "Badili jina la watumiaji"
+}

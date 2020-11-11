@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Candalua"
+		]
+	},
+	"cite-desc": "Zonta i tag <nowiki><ref[ name=id]></nowiki> e <nowiki><references/></nowiki> par gestir le citazion",
+	"cite_error": "Eror ne la funsion Cite $1",
+	"cite_error_ref_numeric_key": "Eror ne l'uso del marcator <code>&lt;ref&gt;</code>: el nome no'l pode mìa èssar un nùmaro intiero. Dòpara un titolo esteso",
+	"cite_error_ref_no_key": "Eror ne l'uso del marcator <code>&lt;ref&gt;</code>: i ref vodi no i pol no verghe un nome",
+	"cite_error_ref_too_many_keys": "Eror ne l'uso del marcator <code>&lt;ref&gt;</code>: nomi mìa validi (ad es. nùmaro massa elevà)",
+	"cite_error_ref_no_input": "Eror ne l'uso del marcator <code>&lt;ref&gt;</code>: i ref che no gà un nome no i pol mìa èssar vodi",
+	"cite_error_references_invalid_parameters": "Eror ne l'uso del marcator <code>&lt;references&gt;</code>: parametri mìa consentìi, dòpara el marcator <code>&lt;references /&gt;</code>",
+	"cite_error_references_no_backlink_label": "Etichete de rimando personalizàe esaurìe, auménteghen el nùmaro nel messagio <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_no_link_label_group": "Etichete esaurìe par colegamenti personalizà del grupo \"$1\", aumentarne el numaro nel messajo <nowiki>[[MediaWiki:$2]]</nowiki>",
+	"cite_error_references_no_text": "Marcator <code>&lt;ref&gt;</code> mìa valido; no xe stà indicà nissun testo par el marcator <code>$1</code>",
+	"cite_error_included_ref": "<code>&lt;/ref&gt;</code> de chiusura mancante par el marcador <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "Ghe xe un tag <code>&lt;ref&gt;</code> par un grupo che se ciama \"$1\", ma no xe stà catà nissun tag <code>&lt;references group=\"$1\"/&gt;</code> che corisponda.",
+	"cite_error_references_group_mismatch": "El tag <code>&lt;ref&gt;</code> in <code>&lt;references&gt;</code> el gà l'atributo de grupo \"$1\" in conflito.",
+	"cite_error_references_missing_group": "El tag <code>&lt;ref&gt;</code> definìo in <code>&lt;references&gt;</code> el gà un atributo de grupo \"$1\" che no conpare mia nel testo precedente.",
+	"cite_error_references_missing_key": "El tag <code>&lt;ref&gt;</code> con nome \"$1\" definìo in <code>&lt;references&gt;</code> no'l xe doparà nel testo precedente.",
+	"cite_error_references_no_key": "El tag <code>&lt;ref&gt;</code> definìo in <code>&lt;references&gt;</code> no'l gà un atributo nome.",
+	"cite_error_empty_references_define": "El tag <code>&lt;ref&gt;</code> definìo in <code>&lt;references&gt;</code> con nome \"$1\" no'l gà nissun contenuto."
+}

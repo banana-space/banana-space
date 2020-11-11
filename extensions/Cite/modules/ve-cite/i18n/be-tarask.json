@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"EugeneZelenko",
+			"Red Winged Duck",
+			"Wizardist",
+			"Чаховіч Уладзіслаў",
+			"Zedlik",
+			"Renessaince"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "Кніга",
+	"visualeditor-cite-tool-name-journal": "Часопіс",
+	"visualeditor-cite-tool-name-news": "Навіны",
+	"visualeditor-cite-tool-name-web": "Вэб-сайт",
+	"cite-ve-dialog-reference-options-group-label": "Выкарыстаць гэтую групу",
+	"cite-ve-dialog-reference-options-group-placeholder": "Агульныя спасылкі",
+	"cite-ve-dialog-reference-options-name-label": "Ужываць паўторна пад гэтай назвай",
+	"cite-ve-dialog-reference-options-section": "Налады",
+	"cite-ve-dialog-reference-title": "Зноска",
+	"cite-ve-dialog-reference-useexisting-label": "Ужыць існуючую зноску",
+	"cite-ve-dialog-reference-useexisting-tool": "Паўторнае ўжываньне",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "Сьпіс агульных спасылак",
+	"cite-ve-dialog-referenceslist-title": "Сьпіс зносак",
+	"cite-ve-dialogbutton-reference-tooltip": "Звычайная",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Сьпіс зносак",
+	"cite-ve-reference-input-placeholder": "Што хочаце зьмясьціць у зносцы?",
+	"cite-ve-referenceslist-isempty": "На гэтай старонцы н�� мае зносак з групы «$1».",
+	"cite-ve-referenceslist-missingref": "Гэтая зноска вызначаная ў шаблёне ці іншым згенэраваным блёку і пакуль можа быць зьмененая толькі ў крынічным рэжыме.",
+	"cite-ve-toolbar-group-label": "Крыніцы"
+}

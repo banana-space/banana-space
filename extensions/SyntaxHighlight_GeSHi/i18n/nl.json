@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Siebrand",
+			"Tvdm",
+			"Romaine",
+			"SPQRobin",
+			"Mainframe98"
+		]
+	},
+	"syntaxhighlight-desc": "Voorziet in het markeren van syntaxis voor <code>&lt;syntaxhighlight&gt;</code> met [http://pygments.org/ Pygments]",
+	"syntaxhighlight-error-category": "Pagina's met fouten in de syntaxmarkering",
+	"syntaxhighlight-error-category-desc": "Er ging iets fout tijdens het markeren van de code op de pagina.",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Code",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Taal",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(Geen)",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "Toon regelnummers",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "Codeblok",
+	"syntaxhighlight-error-unknown-language": "Onbekende taal \"$1\"",
+	"syntaxhighlight-error-exceeds-size-limit": "Code grootte is $1 {{PLURAL:$1|bytes}} en overschrijdt de maximale waarde van $2 {{PLURAL:$2|bytes}}"
+}

@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Olsi"
+		]
+	},
+	"titleblacklist-desc": "Lejon administruesit të ndalojnë krijimin e faqeve dhe llogarive të përdoruesve për një [[MediaWiki:Titleblacklist|listë të zezë]] dhe [[MediaWiki:Titlewhitelist|listë të bardhë]]",
+	"titleblacklist": "# Ky është një titull i listës së zezë. Titujt dhe përdoruesit që përputhin një shprehje të rregullt këtu nuk mund të krijohen.\n# Përdorni \"#\" për komente.\n# Ky nuk është një rast i ndjeshëm",
+	"titlewhitelist": "# Ky është në titull i listës së bardhë. Përdorni \"#\" për komente.\n# Ky nuk është një rast i ndjeshëm",
+	"titleblacklist-forbidden-edit": "Titulli \"$2\"është ndaluar nga krijimi.\nAi përputhet me hyrjen e mëposhtem të listës së zezë: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" nuk mund të zhvendoset tek \"$3\", sepse titulli \"$3\" është ndaluar nga krijimi.\nAi përputhet me hyrjen e mëposhtme të listës së zezë: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Emri i skedës \"$2\"është ndaluar nga krijimi.\nAi përputhet me hyrjen e mëposhtme të listës së zezë: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Emri i përdoruesit \"$2\"është ndaluar nga krijimi.\nAi përputhet me hyrjen e mëposhtme të listës së zezë: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Rreshti i mëposhtëm|Rreshtat e mëposhtëm}} në titullin e listës së zezë {{PLURAL:$1|është i pavlefshëm|janë të pavlefshëm}};\nju lutemi {{PLURAL:$1|korrigjojeni|korrigjojini}} përpara ruajtjes:",
+	"titleblacklist-override": "Shpërfillni listën e zezë",
+	"right-tboverride": "Refuzoni titullin e listës së zezë",
+	"right-tboverride-account": "Refuzoni emrin e përdoruesit të listës së zezë"
+}

@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eduardo Addad de Oliveira",
+			"Felipe L. Ewald"
+		]
+	},
+	"skinname-timeless": "Timeless",
+	"timeless-desc": "Um tema timeless projetado após o protótipo Winter por Brandon Harris e vários estilos pela Fundação Wikimedia",
+	"timeless-search-placeholder": "Pesquisar em {{NUMBEROFARTICLES}} páginas",
+	"timeless-loggedin": "Sua conta",
+	"timeless-anonymous": "Anônimo",
+	"timeless-loggedinas": "Autenticado como '''$1'''",
+	"timeless-notloggedin": "Você não está autenticado",
+	"timeless-userpage": "Página de {{GENDER:$1|usuário}}",
+	"timeless-talkpage": "{{GENDER:$1|Usuário}} discussão",
+	"timeless-pagelog": "Registos da página",
+	"timeless-more": "Mais",
+	"timeless-sitetools": "Ferramentas da wiki",
+	"timeless-pageactions": "Ferramentas de páginas",
+	"timeless-userpagetools": "Ferramentas da página do usuário",
+	"timeless-pagemisc": "Mais",
+	"timeless-namespaces": "Espaços nominais",
+	"timeless-pagetools": "Ações da página",
+	"timeless-languages": "Idiomas",
+	"timeless.js": "/* Qualquer código JavaScript colocado aqui será carregado para os usuários do tema Timeless */"
+}

@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Siebrand",
+			"Wiki13",
+			"Robin0van0der0vliet",
+			"Robin van der Vliet",
+			"Sjoerddebruin"
+		]
+	},
+	"pdf-desc": "Handelt pdfbestanden af en maakt het mogelijk ze als afbeeldingen te bekijken",
+	"pdf-file-page-warning-header": "Privacyoverwegingen",
+	"pdf-file-page-warning-info": "Meer informatie over dit probleem.",
+	"pdf_no_metadata": "De metadata van het pdfbestand kan niet uitgelezen worden",
+	"pdf_page_error": "Het paginanummer ligt niet binnen het bereik",
+	"exif-pdf-producer": "Conversieprogramma",
+	"exif-pdf-version": "Versie van pdfopmaak",
+	"exif-pdf-encrypted": "Versleuteld",
+	"exif-pdf-pagesize": "Papierformaat"
+}

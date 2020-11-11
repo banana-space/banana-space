@@ -1,0 +1,37 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ashok modhvadia",
+			"KartikMistry",
+			"The Discoverer",
+			"Arbhatt",
+			"Dsvyas",
+			"NehalDaveND",
+			"Nisargjhaveri"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "પુસ્તક",
+	"visualeditor-cite-tool-name-journal": "પત્રિકા",
+	"visualeditor-cite-tool-name-news": "સમાચાર",
+	"visualeditor-cite-tool-name-web": "વેબસાઇટ",
+	"cite-ve-dialog-reference-options-group-label": "આ સમૂહ વાપરો",
+	"cite-ve-dialog-reference-options-group-placeholder": "સામાન્ય સંદર્ભો",
+	"cite-ve-dialog-reference-options-name-label": "આ નામ વડે ફરી વાપરો",
+	"cite-ve-dialog-reference-options-section": "વિકલ્પો",
+	"cite-ve-dialog-reference-title": "સંદર્ભ",
+	"cite-ve-dialog-reference-useexisting-label": "હાજર રહેલ સંદર્ભ વાપરો",
+	"cite-ve-dialog-reference-useexisting-tool": "ફરી ઉપયોગ",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "સામાન્ય સંદર્ભોની યાદી",
+	"cite-ve-dialog-referenceslist-title": "સંદર્ભ યાદી",
+	"cite-ve-dialogbutton-reference-full-label": "સામાન્ય ફોર્મ",
+	"cite-ve-dialogbutton-reference-title": "સંદર્ભ",
+	"cite-ve-dialogbutton-reference-tooltip": "પ્રાથમિક",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "સંદર્ભોની યાદી",
+	"cite-ve-reference-input-placeholder": "વર્તમાન સંદર્ભો સાથે શોધો",
+	"cite-ve-referenceslist-isempty": "આ યાદીમાં દાખલ કરવા માટે આ પાનાં પર સમૂહ \"$1\" નો કોઇ સંદર્ભ નથી.",
+	"cite-ve-referenceslist-isempty-default": "આ યાદીમાં ઉમેરવા માટે આ પાનાં પર કોઇ સંદર્ભ નથી.",
+	"cite-ve-referenceslist-missingref": "આ સંદર્ભ ટેમ્પલેટ અથવા બનેલ માળખાંમાં વ્યાખ્યાયિત થયેલ છે, અને અત્યારે તે માત્ર સ્રોત સ્થિતિમાં જ ફેરફાર કરી શકાય છે.",
+	"cite-ve-othergroup-item": "$1 સંદર્ભ",
+	"visualeditor-internal-list-diff-default-group-name-mwreference": "સંદર્ભો",
+	"visualeditor-internal-list-diff-group-name-mwreference": "સંદર્ભ સમૂહ નામ: \"$1\""
+}

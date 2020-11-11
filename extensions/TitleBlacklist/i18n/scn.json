@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pippinu",
+			"Sarvaturi"
+		]
+	},
+	"titleblacklist-forbidden-edit": "La criazzioni di pàggini cûn tìtulu comu «$2» fu sbannuta.\nLu tìtulu currispunni a sta vuci dâ lista nìura: <code>$1</code>",
+	"titleblacklist-forbidden-move": "«$2» nun si pò spustari nta «$3», pirchì la criazzioni di tìtula comu «$3» fu sbannuta.\nStu tìtulu currispunni a sta vuci dâ lista nìura: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "La criazzioni di nomi d'utenti comu «$2» fu sbannuta.\nLu nomu currispunni a sta vuci dâ lista nìura: <code>$1</code>"
+}

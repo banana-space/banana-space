@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Firilacroco",
+			"KlaudiuMihaila",
+			"Minisarm",
+			"Stelistcristi"
+		]
+	},
+	"interwiki": "Vizualizare și editare date interwiki",
+	"interwiki-title-norights": "Vizualizare date interwiki",
+	"interwiki-desc": "Adaugă o [[Special:Interwiki|pagină specială]] pentru vizualizarea și modificarea tabelului interwiki",
+	"interwiki_intro": "Aceasta este o imagine de ansamblu a tabelului interwiki.",
+	"interwiki_prefix": "Prefix",
+	"interwiki-prefix-label": "Prefix:",
+	"interwiki_local": "Înainte",
+	"interwiki-local-label": "Înainte:",
+	"interwiki_trans": "Transcludere",
+	"interwiki-trans-label": "Transcludere:",
+	"interwiki_1": "da",
+	"interwiki_0": "nu",
+	"interwiki_edit": "Modificare",
+	"interwiki_reasonfield": "Motiv:",
+	"interwiki_delquestion": "Ștergere „$1”",
+	"interwiki_deleting": "În prezent, ștergeți prefixul „$1”.",
+	"interwiki_addtext": "Adaugă un prefix interwiki",
+	"interwiki_addbutton": "Adaugă",
+	"interwiki_edittext": "Modificarea prefixului unui interwiki",
+	"log-name-interwiki": "Jurnal tabel interwiki",
+	"right-interwiki": "Modifică date interwiki",
+	"action-interwiki": "modificați această legătură interwiki"
+}

@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"replacetext": "Sostituisce 'u teste",
+	"replacetext_originaltext": "Teste origgenale:",
+	"replacetext_replacementtext": "Teste da sostituì:",
+	"replacetext_useregex": "Ause le espressiune regolare",
+	"replacetext_watchmovedpages": "Vide ste pàggene",
+	"replacetext_invertselections": "Selezione a smerse",
+	"replacetext_replace": "Sostituisce",
+	"replacetext_success": "\"$1\" avène sostituite cu \"$2\" jndr'à {{PLURAL:$3|'na pàgene|$3 pàggene}}.",
+	"replacetext_return": "Tuèrne a 'u module.",
+	"replacetext_continue": "Condinue",
+	"replacetext_editsummary": "Sostituzione d'u teste - \"$1\" cu \"$2\"",
+	"right-replacetext": "Fà 'a sostituzione de le stringhe sus a totte a uicchi"
+}

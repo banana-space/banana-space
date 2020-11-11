@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Les Meloures",
+			"Robby",
+			"Soued031"
+		]
+	},
+	"renameuser": "Benotzernumm änneren",
+	"renameuser-linkoncontribs": "Benotzer ëmbenennen",
+	"renameuser-linkoncontribs-text": "Dëse Benotzer ëmbenennen",
+	"renameuser-desc": "Benotzernumm änneren (Dir braucht dofir  ''renameuser''-Rechter)",
+	"renameuserold": "Aktuelle Benotzernumm:",
+	"renameusernew": "Neie Benotzernumm:",
+	"renameuserreason": "Grond:",
+	"renameusermove": "Benotzer- an Diskussiounssäiten (an déi jeweileg Ënnersäiten) op den neie Benotzernumm réckelen",
+	"renameusersuppress": "Keng Viruleedungen op den neien Numm maachen",
+	"renameuserreserve": "Den ale Benotzernumm fir de weitere Gebrauch spären",
+	"renameuserwarnings": "Warnungen:",
+	"renameuserconfirm": "Jo, Benotzer ëmbenennen",
+	"renameusersubmit": "Ëmbenennen",
+	"renameuser-submit-blocklog": "Lëscht vun de Späre fir de Benotzer weisen",
+	"renameusererrordoesnotexist": "De Benotzer \"<nowiki>$1</nowiki>\" gëtt et net.",
+	"renameusererrorexists": "De {{GENDER:$1|Benotzernumm}} \"<nowiki>$1</nowiki>\" gëtt et schonn.",
+	"renameusererrorinvalid": "De Benotzernumm \"<nowiki>$1</nowiki>\" kann net benotzt ginn.",
+	"renameuser-error-request": "Et gouf e Problem mat ärer Ufro.\nGitt w.e.g. zréck a versicht et nach eng Kéier.",
+	"renameuser-error-same-user": "Dir kënnt kee Benotzernumm änneren, an him deselwechten Numm erëmginn.",
+	"renameusersuccess": "De {{GENDER:$2|Benotzer}} \"<nowiki>$1</nowiki>\" gouf \"<nowiki>$2</nowiki>\" ëmbenannt.",
+	"renameuser-page-exists": "D'Säit $1 gëtt et schonn a kann net automatesch iwwerschriwwe ginn.",
+	"renameuser-page-moved": "D'Säit $1 gouf op $2 geréckelt.",
+	"renameuser-page-unmoved": "D'Säit $1 konnt net op $2 geréckelt ginn.",
+	"log-name-renameuser": "Logbuch vun den Ännerunge vum Benotzernumm",
+	"log-description-renameuser": "Dëst ass d'Logbuch vun den Ännerunge vun de Benotzernimm.",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|huet}} de Benotzer $4 ({{PLURAL:$6|$6 Ännerung|$6 Ännerungen}}) op {{GENDER:$7|$5}} ëmbenannt",
+	"logentry-renameuser-renameuser-legacier": "£1 huet de Benotzer $4 op {{GENDER:$7|$5}} ëmbenannt",
+	"renameuser-move-log": "Duerch d'Réckele vum  {{GENDER:$1|Benotzer}} \"[[User:$1|$1]]\" op \"[[User:$2|$2]]\" goufen déi folgend Säiten automatesch matgeréckelt:",
+	"action-renameuser": "Benotzer ëmbenennen",
+	"right-renameuser": "Benotzer ëmbenennen",
+	"renameuser-renamed-notice": "Dëse Benotzer gouf ëmbenannt.\nD'Logbuch mat den Ëmbenunngen ass hei ënnendrënner."
+}

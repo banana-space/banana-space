@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michawiki"
+		]
+	},
+	"titleblacklist-desc": "Dowola administratoram wutworjenje stronow a wužiwarskich kontow z pomocu [[MediaWiki:Titleblacklist|čorneje lisćiny]] a [[MediaWiki:Titlewhitelist|běłeje lisćiny]] zakazać",
+	"titleblacklist": "# To je čorna lisćina titulow. Titule a wužiwarjo, kotrež so na regularny wuraz hodźa, njehodźa so wutworić.\n# Wužij \"#\" za komentary.\n# Po standardźe to na wulkopisanje njedźiwa",
+	"titlewhitelist": "# To je běła lisćina titulow. Wužij \"#\" za komentary.\n# Po standardźe to na wulkopisanje njedźiwa",
+	"titleblacklist-forbidden-edit": "Strona z titulom \"$2\" njeda so wutworić. Wotpowěduje slědowacemu zapiskej čorneje lisćiny: <code>$1</code>",
+	"titleblacklist-forbidden-move": "Strona z titulom \"$2\" njeda so do \"$3\" přesunyć, dokelž titul \"$3\" njesmě so wutworjeć.\nKryje so ze slědowacym zaspiskom čorneje lisćiny: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Dataja z mjenom \"$2\" njesmě so wutworjeć. Kryje so ze slědowacym zapiskom čorneje lisćiny: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Wužiwarske mjeno \"$2\" bu za registrowanje zawrjene.\nWotpowěduje slědowacemu zapiskej čorneje lisćiny: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Slědowaca linka|Slědowace linki}} w čornej lisćinje titulow {{PLURAL:$1|je njepłaćiwa|su njepłaćiwe}}; prošu skoriguj {{PLURAL:$1|ju|je}} před składowanjom:",
+	"titleblacklist-override": "Čornu lisćinu ignorować",
+	"right-tboverride": "Płaćiwosć čorneje lisćiny nastawkow abo wužiwarskich mjenow zběhnyć",
+	"right-tboverride-account": "Płaćiwosć čorneje lisćiny wužiwarskich mjenow zběhnyć"
+}

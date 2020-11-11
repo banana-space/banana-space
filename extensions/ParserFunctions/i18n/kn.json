@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"ಶಿವಕುಮಾರ್ ನಾಯಕ್"
+		]
+	},
+	"pfunc_expr_unrecognised_word": "ಪದವಿನ್ಯಾಸ ದೋಷ: ಗುರುತಿಸಲಾಗದ ಪದ\"$1\".",
+	"pfunc_expr_unrecognised_punctuation": "ಪದವಿನ್ಯಾಸ ದೋಷ: ಗುರುತಿಸಲಾಗದ ವಿರಾಮ ಚಿಹ್ನೆ\"$1\"."
+}

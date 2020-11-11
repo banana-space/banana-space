@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Assele",
+			"Haqmar",
+			"Лилиә",
+			"Янмурза Баки"
+		]
+	},
+	"inputbox-desc": "Алдан билдәләнгән HTML формаларҙы индереү мөмкинлеген бирә",
+	"inputbox-error-no-type": "Һеҙ булдырыла торған юлдың төрөн күрһәтмәгеҙ.",
+	"inputbox-error-bad-type": "\"$1\" юл төрө танылмаған.\nЗинһар, \"create\", \"comment\", \"search\", \"search2\" йәки \"fulltext\" төрөнөң береһен күрһәтегеҙ.",
+	"inputbox-tryexact": "Теүәл тура килеү буйынса эҙләү",
+	"inputbox-searchfulltext": "Тулы текст буйынса эҙләү",
+	"inputbox-createarticle": "Яңы бит яһарға",
+	"inputbox-movearticle": "Битте икенсе урынға күсерергә",
+	"inputbox-postcomment": "Яңы бүлек",
+	"inputbox-postcommenttitle": "Яңы бүлек",
+	"inputbox-ns-main": "Төп"
+}

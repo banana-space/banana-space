@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tisave",
+			"Lucas"
+		]
+	},
+	"pfunc_expr_unrecognised_punctuation": "Pwoblèm ekspresyon : ponktiyasyon « $1 » a pa valid."
+}

@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Simon Shek",
+			"Cwlin0416",
+			"LNDDYL",
+			"Alexsh",
+			"Waihorace",
+			"A2093064",
+			"Hello903hello"
+		]
+	},
+	"oathauth-desc": "提供支援 HMAC 為基礎的一次性密碼認證",
+	"specialpages-group-oath": "雙重認證",
+	"oathauth-account": "帳號名稱：",
+	"oathauth-secret": "雙重認證秘密金鑰：",
+	"oathauth-enable": "開啟雙重認證",
+	"oathauth-scratchtokens": "以下是一次性使用的備用密碼，這些密碼於緊急情況使用，且只能使用一次。請寫下這些密碼，並存放在安全的地方。如果您遺失了您的行動電話，這些密碼可以回復您的帳號。\n這些密碼只會於現在顯示一次，之後將不會再次顯示。",
+	"oathauth-token": "金鑰",
+	"oathauth-disable": "停用雙重認證",
+	"oathauth-validatedoath": "已驗證您的代碼並啟動雙重認證。",
+	"oathauth-failedtovalidateoath": "驗證雙重認證失敗。",
+	"oathauth-disabledoath": "已停用雙重認證。",
+	"oathauth-prefs-label": "雙重認證：",
+	"oathauth-step1": "第1步：下載雙重認證應用程式",
+	"oathauth-step1-test": "下載雙重認證的應用程式。這可以是一個流動應用程式（例如Google Authenticator）或一個桌面應用程式",
+	"oathauth-step2": "掃描QR碼",
+	"oathauth-step2alt": "或手動輸入密鑰：",
+	"oathauth-step3": "記下備用碼",
+	"oathauth-step4": "驗證",
+	"oathauth-entertoken": "輸入顯示於您認證設備上應用程式的代碼：",
+	"right-oathauth-enable": "啟用雙重認證",
+	"action-oathauth-enable": "啟用雙重認證",
+	"oathauth-auth-token-label": "金鑰",
+	"oathauth-auth-token-help": "用作雙重認證的一次性密碼",
+	"oathauth-auth-ui": "請輸入您行動裝置上顯示的驗證碼",
+	"oathauth-throttled": "驗證次數過多，請稍等 $1。",
+	"oathauth-login-failed": "驗證失敗",
+	"oathauth-describe-provider": "雙重認證(OATH)",
+	"grant-group-authentication": "為自己及其他人進行身份認證動作",
+	"apihelp-oathvalidate-description": "驗證雙重認證金鑰",
+	"apihelp-oathvalidate-param-totp": "雙重認證金鑰"
+}

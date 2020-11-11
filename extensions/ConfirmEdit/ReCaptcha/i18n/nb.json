@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Event"
+		]
+	},
+	"recaptcha-edit": "Som beskyttelse mot automatisk redigert spam, vennligst skriv inn de to ordene du ser i boksen under:",
+	"recaptcha-addurl": "Din redigering inneholder nye eksterne lenker. Som beskyttelse mot automatisk spam, vennligst skriv inn de to ordene du ser i boksen under:",
+	"recaptcha-badlogin": "Som beskyttelse mot automatisk passordknekking, vennligst skriv inn de to ordene du ser i boksen under:",
+	"recaptcha-createaccount": "Som beskyttelse mot automatisk opprettelse av brukerkonto, vennligst skriv inn de to ordene du ser i boksen under:",
+	"recaptcha-createaccount-fail": "Feil eller manglende reCAPTCHA-svar.",
+	"recaptcha-create": "Som beskyttelse mot automatisk opprettelse av side, vennligst skriv inn de to ordene du ser i boksen under:"
+}

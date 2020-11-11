@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"عثمان خان شاہ",
+			"Obaid Raza",
+			"Muhammad Shuaib",
+			"BukhariSaeed"
+		]
+	},
+	"apihelp-query+references-example-1": "<kbd>البرٹ آئنسٹائن</kbd> متعلقہ حوالہ جات",
+	"cite-desc": "<nowiki><ref[ name=id]></nowiki> اور <nowiki><references/></nowiki> ٹیگز، برائے حوالہ جات کا اضافہ کرتا ہے",
+	"cite_error": "خطا در حوالہ: $1",
+	"cite_error_ref_too_many_keys": "نادرست <code>&lt;ref&gt;</code> ٹیگ؛\nنادرست نام، مثال کے طور پر کئی",
+	"cite_error_ref_no_input": "نادرست <code>&lt;ref&gt;</code> ٹیگ;\nبے نام حوالہ جات کا مواد ہونا چاہیے",
+	"cite_error_references_duplicate_key": "نادرست <code>&lt;ref&gt;</code> ٹیگ؛ نام \"$1\" مختلف مواد کے ساتھ کئی بار استعمال ہوا ہے۔",
+	"cite_error_references_invalid_parameters": "نادرست پیرامیٹر در <code>&lt;references&gt;</code> ٹیگ",
+	"cite_error_references_no_text": "ناقص <code>&lt;ref&gt;</code> ٹیگ؛ <code>$1</code> کے نام والے حوالوں کے لیے کوئی متن نہیں دیا گیا",
+	"cite-tracking-category-cite-error": "صفحات مع حوالہ جاتی اغلاط",
+	"cite-tracking-category-cite-error-desc": "اس زمرہ میں موجود صفحات میں حوالہ جاتی ٹیگز کو غلط استعمال کیا گیا ہے۔",
+	"cite_references_link_accessibility_label": "اوپر جائیں",
+	"cite_references_link_many_accessibility_label": "اس تک اوپر جائیں:",
+	"cite_section_preview_references": "حوالہ جات کی نما‏ئش",
+	"cite_warning": "انتباہ حوالہ: $1"
+}

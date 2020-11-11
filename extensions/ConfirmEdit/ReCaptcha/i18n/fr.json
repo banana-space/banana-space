@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko",
+			"Urhixidur",
+			"Verdy p",
+			"Orlodrim",
+			"Wladek92",
+			"Yasten"
+		]
+	},
+	"recaptcha-desc": "Module reCAPTCHA pour Confirm Edit",
+	"recaptcha-edit": "Afin de protéger le wiki contre les modifications automatiques des pourriels, nous vous demandons de bien vouloir écrire les mots que vous voyez dans le cadre.",
+	"recaptcha-addurl": "Votre modification contient de nouveaux liens vers des sites externes. Pour protéger le wiki contre le pourriel automatisé, nous vous demandons de bien vouloir écrire les mots que vous voyez dans le cadre.",
+	"recaptcha-badlogin": "Pour protéger le wiki contre les essais automatiques de découverte des mots de passe, nous vous demandons de bien vouloir écrire les mots que vous voyez dans le cadre.",
+	"recaptcha-createaccount": "Pour protéger le wiki des créations automatiques de compte, nous vous demandons de bien vouloir écrire les mots visibles dans le cadre.",
+	"recaptcha-createaccount-fail": "Réponse de reCAPTCHA fausse ou manquante.",
+	"recaptcha-create": "Pour protéger le wiki des créations automatiques de pages, nous vous demandons de bien vouloir écrire les mots visibles dans le cadre.",
+	"recaptcha-info": "Veuillez résoudre l'énigme ReCaptcha et retourner dans captchaId et captchaWord le test et les valeurs des réponses.",
+	"recaptcha-apihelp-param-recaptcha_challenge_field": "Champ du formulaire ReCaptcha",
+	"recaptcha-apihelp-param-recaptcha_response_field": "Champ du formulaire ReCaptcha",
+	"recaptcha-id-label": "Enigme ReCaptcha",
+	"recaptcha-id-help": "Valeur de l'énigme ReCaptcha",
+	"recaptcha-label": "Solution du ReCaptcha",
+	"recaptcha-help": "Valeur de la solution ReCaptcha"
+}

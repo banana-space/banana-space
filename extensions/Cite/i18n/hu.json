@@ -1,0 +1,37 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dani",
+			"Glanthor Reviol",
+			"KossuthRad",
+			"Tacsipacsi",
+			"Nyuszika7H"
+		]
+	},
+	"cite-desc": "Lehetővé teszi idézések létrehozását <nowiki><ref[ name=id]></nowiki> és <nowiki><references/></nowiki> tagek segítségével",
+	"cite_error": "Forráshivatkozás-hiba: $1",
+	"cite_error_ref_numeric_key": "Érvénytelen <code>&lt;ref&gt;</code> tag; a name értéke nem lehet csupán egy szám, használj leíró címeket",
+	"cite_error_ref_no_key": "Érvénytelen <code>&lt;ref&gt;</code> tag; a tartalom nélküli ref-eknek kötelező nevet (name) adni",
+	"cite_error_ref_too_many_keys": "Érvénytelen <code>&lt;ref&gt;</code> tag; hibás nevek, pl. túl sok",
+	"cite_error_ref_no_input": "Érvénytelen <code>&lt;ref&gt;</code> tag; a név (name) nélküli ref-eknek adni kell valamilyen tartalmat",
+	"cite_error_references_duplicate_key": "Érvénytelen <code>&lt;ref&gt;</code> elem, „$1” nevű forráshivatkozás többször van definiálva eltérő tartalommal",
+	"cite_error_references_invalid_parameters": "Érvénytelen <code>&lt;references&gt;</code> tag; nincsenek paraméterei, használd a <code>&lt;references /&gt;</code> formát",
+	"cite_error_references_no_backlink_label": "Elfogytak a visszahivatkozásra használt címkék, adj meg többet a <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki> üzenetben",
+	"cite_error_no_link_label_group": "Nincs több egyedi címke a következő csoport számára: „$1”.\nAdj meg többet a <nowiki>[[MediaWiki:$2]]</nowiki> lapon.",
+	"cite_error_references_no_text": "Érvénytelen <code>&lt;ref&gt;</code> tag; nincs megadva szöveg a(z) <code>$1</code> nevű ref-eknek",
+	"cite_error_included_ref": "Egy <code>&lt;ref&gt;</code> tag lezáró <code>&lt;/ref&gt;</code> része hiányzik",
+	"cite_error_group_refs_without_references": "<code>&lt;ref&gt;</code>-ek léteznek a(z) „$1” csoporthoz, de nincs hozzá <code>&lt;references group=\"$1\"/&gt;</code>, vagy egy lezáró <code>&lt;/ref&gt;</code> hiányzik.",
+	"cite_error_references_group_mismatch": "A <code>&lt;references&gt;</code> és a benne található <code>&lt;ref&gt;</code> tag csoport-attribútuma („$1”) nem egyezik meg.",
+	"cite_error_references_missing_group": "<code>&lt;ref&gt;</code> tag lett lett definiálva egy olyan <code>&lt;references&gt;</code> tagben, amely csoport-attribútuma („$1”) nem szerepel a szöveg korábbi részében.",
+	"cite_error_references_missing_key": "a <code>&lt;references&gt;</code> tagben definiált „$1” nevű <code>&lt;ref&gt;</code> tag nem szerepel a szöveg korábbi részében.",
+	"cite_error_references_no_key": "a <code>&lt;references&gt;</code> tagben definiált <code>&lt;ref&gt;</code> tagnek nincs név attribútuma.",
+	"cite_error_empty_references_define": "a <code>&lt;references&gt;</code> szakaszban definiált „$1” <code>&lt;ref&gt;</code> tagnek nincs tartalma.",
+	"cite-tracking-category-cite-error": "Lapok forráshivatkozás-hibákkal",
+	"cite-tracking-category-cite-error-desc": "Az ebben a kategóriában található lapokon hibásan használt forráshivatkozás-elemek találhatók.",
+	"cite_references_link_many": "<li id=\"$1\"><span class=\"mw-cite-backlink\">^ $2</span> $3</li>",
+	"cite_references_link_accessibility_label": "Ugrás fel",
+	"cite_references_link_many_accessibility_label": "Ugrás ehhez:",
+	"cite_section_preview_references": "Források előnézete",
+	"cite_warning": "Forráshivatkozás-figyelmeztetés: $1",
+	"cite_warning_sectionpreview_no_text": "A(z) <code>$1</code> nevű <code>&lt;ref&gt;</code> tag előnézete nem jeleníthető meg, mert a jelenlegi szakaszon kívül vagy egyáltalán nincs definiálva."
+}

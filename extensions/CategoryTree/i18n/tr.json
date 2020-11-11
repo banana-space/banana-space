@@ -1,0 +1,42 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joseph",
+			"Karduelis",
+			"Khutuck",
+			"Mach",
+			"Runningfridgesrule",
+			"Stultiwikia",
+			"Vito Genovese",
+			"Superyetkin"
+		]
+	},
+	"categorytree": "Kategori hiyerarşisi",
+	"categorytree-portlet": "Kategoriler",
+	"categorytree-legend": "Kategori ağacını göster",
+	"categorytree-desc": "[[Special:CategoryTree|Kategori yapısını]] dinamik olarak idare et",
+	"categorytree-header": "Kategori ismini girip, içeriğini hiyerarşik şekilde görebilirsiniz. Bu özellik AJAX adıyla bilinen gelişmiş JavaScript ile çalışabilir. Eğer tarayıcınız eski ise ya da JavaScript kullanımı kapalı ise, çalışmaz.",
+	"categorytree-category": "Kategori",
+	"categorytree-go": "Ağacı göster",
+	"categorytree-parents": "Üst kategoriler",
+	"categorytree-mode-label": "Mod:",
+	"categorytree-mode-categories": "sadece kategorileri göster",
+	"categorytree-mode-pages": "dosyalar dışındaki sayfalar",
+	"categorytree-mode-all": "tüm sayfalar",
+	"categorytree-collapse": "aç/kapat",
+	"categorytree-expand": "genişlet",
+	"categorytree-member-counts": "{{PLURAL:$1|1 alt kategori|$1 alt kategori}}, {{PLURAL:$2|1 sayfa|$2 sayfa}} ve {{PLURAL:$3|1 dosya|$3 dosya}} içeriyor",
+	"categorytree-num-categories": "$1 K",
+	"categorytree-num-pages": "$1 M",
+	"categorytree-num-files": "$1 D",
+	"categorytree-num-empty": "boş",
+	"categorytree-load": "yükle",
+	"categorytree-loading": "yükleniyor",
+	"categorytree-nothing-found": "hiçbir şey bulunamadı",
+	"categorytree-no-subcategories": "alt kategori yok.",
+	"categorytree-no-parent-categories": "üst kategori yok",
+	"categorytree-no-pages": "alt kategori veya madde yok.",
+	"categorytree-not-found": "<i>\"$1\"</i> isimli kategori bulunamadı",
+	"categorytree-error": "Bilgi yüklenmesi ile bir problem var.",
+	"categorytree-retry": "Lütfen kısa süre için bekleyin, sonra bir kere daha deneyin."
+}

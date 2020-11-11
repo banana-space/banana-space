@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"AmaryllisGardener"
+		]
+	},
+	"timeless-loggedin": "Yer accoont",
+	"timeless-loggedinas": "Logged in as '''$1'''",
+	"timeless-notloggedin": "Nae logged in",
+	"timeless-userpage": "{{GENDER:$1|Uiser}} page",
+	"timeless-talkpage": "{{GENDER:$1|Uiser}} tauk",
+	"timeless-pagelog": "Page logs",
+	"timeless-more": "Mair",
+	"timeless-sitetools": "Wiki tuils",
+	"timeless-pageactions": "Page tuils"
+}

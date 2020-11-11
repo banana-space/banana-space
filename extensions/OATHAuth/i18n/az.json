@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Zpizza",
+			"Wertuose"
+		]
+	},
+	"oathauth-account": "Hesab adı:",
+	"right-oathauth-enable": "ikifaktorlu autentifikasiyanı tətbiq et"
+}

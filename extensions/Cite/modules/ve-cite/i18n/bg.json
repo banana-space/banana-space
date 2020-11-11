@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"DCLXVI",
+			"Hristofor.mirchev",
+			"MegaAlex",
+			"පසිඳු කාවින්ද",
+			"Mitzev",
+			"StanProg",
+			"Spiritia",
+			"Лорд Бъмбъри",
+			"Vodnokon4e"
+		]
+	},
+	"visualeditor-cite-tool-definition.json": "null",
+	"visualeditor-cite-tool-name-book": "Книга",
+	"visualeditor-cite-tool-name-journal": "Списание",
+	"visualeditor-cite-tool-name-news": "Новини",
+	"visualeditor-cite-tool-name-web": "Уебсайт",
+	"cite-tool-definition.json": "null",
+	"cite-ve-dialog-reference-editing-reused": "Тази препратка се използва на страницата $1 {{PLURAL:$1|пъти}}.",
+	"cite-ve-dialog-reference-options-group-label": "Използвайте тази група",
+	"cite-ve-dialog-reference-options-group-placeholder": "Общи препратки",
+	"cite-ve-dialog-reference-options-name-label": "Повторно използване с това име",
+	"cite-ve-dialog-reference-options-section": "Настройки",
+	"cite-ve-dialog-reference-title": "Източник",
+	"cite-ve-dialog-reference-useexisting-full-label": "Повторно използване на цитиране, което вече съществува на страницата",
+	"cite-ve-dialog-reference-useexisting-label": "Използване на съществуващ източник",
+	"cite-ve-dialog-reference-useexisting-tool": "Повторно използване",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "Списък на общи препратки",
+	"cite-ve-dialog-referenceslist-contextitem-description-named": "Списък на препратки от група „$1“",
+	"cite-ve-dialog-referenceslist-title": "Списък с източници",
+	"cite-ve-dialogbutton-citation-educationpopup-text": "Подобрява съдържанието, добавяйки списък с източници на информация. Може да цитирате книги, вестници и уебсайтове.",
+	"cite-ve-dialogbutton-citation-educationpopup-title": "Цитати",
+	"cite-ve-dialogbutton-reference-full-label": "Основна форма",
+	"cite-ve-dialogbutton-reference-title": "Източник",
+	"cite-ve-dialogbutton-reference-tooltip": "Основен",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Списък с източници",
+	"cite-ve-reference-input-placeholder": "Търсене в текущите цитирания",
+	"cite-ve-toolbar-group-label": "Цитиране"
+}

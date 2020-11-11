@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Danny B.",
+			"Li-sung",
+			"Matěj Grabovský",
+			"Mormegil",
+			"Dvorapa"
+		]
+	},
+	"action-titleblacklistlog": "prohlížet knihu černé listiny názvů",
+	"log-name-titleblacklist": "Kniha černé listiny názvů",
+	"log-description-titleblacklist": "Tyto události sledují zásahy černé listiny názvů.",
+	"logentry-titleblacklist-hit-username": "$1 {{GENDER:$2|způsobil|způsobila}} zásah černé listiny názvů při pokusu o založení účtu $3 odpovídajícího $4.",
+	"titleblacklist-desc": "Umožňuje správcům zakázat tvorbu stránek a uživatelských účtů na základě [[MediaWiki:Titleblacklist|černé listiny názvů]] a [[MediaWiki:Titlewhitelist|bílé listiny názvů]]",
+	"titleblacklist": "# Toto je černá listina názvů. Stránky a uživatelské účty, jejichž název odpovídá některému regulárnímu výrazu, nebude možné vytvořit.\n# Komentáře začínají znakem „#“.\n# Na velikosti písmen nezáleží.",
+	"titlewhitelist": "# Toto je bílá listina názvů stránek. Řádky komentářů začínají znakem „#“.\n# Na velikosti písmen nezáleží.",
+	"titleblacklist-forbidden-edit": "Je zakázáno vytvořit stránku s názvem „$2“. Odpovídá následujícímu záznamu na černé listině: <code>$1</code>",
+	"titleblacklist-forbidden-move": "„$2“ nelze přesunout na název „$3“, protože název „$3“ je zakázáno vytvářet. Odpovídá následujícímu záznamu na černé listině: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Soubor s jménem „$2“ je zakázáno vytvářet. Název odpovídá následujícímu záznamu na černé listině: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Není dovoleno zaregistrovat uživatelské jméno „$2“.\nOdpovídá následující položce černé listiny: <code>$1</code>",
+	"titleblacklist-invalid": "Na černé listině názvů {{PLURAL:$1|je následující řádka neplatný regulární výraz|jsou následující řádky neplatné regulární výrazy|jsou následující řádky regulární výrazy}} a je nutné {{PLURAL:$1|ji|je|je}} před uložením stránky opravit :",
+	"titleblacklist-override": "Ignorovat černou listinu",
+	"titleblacklist-warning": "<strong>Upozornění: Tuto stránku mohou editovat jen správci a další uživatelé s oprávněním <code>tboverride</code>, protože odpovídá následujícímu záznamu černé listiny názvů:</strong><br /><code>$1</code>",
+	"right-tboverride": "Překonání zakázaných názvů stránek nebo uživatelských jmen",
+	"right-tboverride-account": "Překonání černé listiny uživatelských jmen",
+	"right-titleblacklistlog": "Prohlížení knihy černé listiny názvů",
+	"apihelp-titleblacklist-description": "Zkontrolovat název stránky, souboru nebo uživatelské jméno vůči černé listině TitleBlacklist.",
+	"apihelp-titleblacklist-param-title": "Řetězec, který se má vůči černé listině zkontrolovat.",
+	"apihelp-titleblacklist-param-action": "Akce, která se má zkontrolovat.",
+	"apihelp-titleblacklist-param-nooverride": "Nepokoušet se o překonání černé listiny názvů.",
+	"apihelp-titleblacklist-example-1": "Zkontrolovat, jestli je [[Foo]] na černé listině.",
+	"apihelp-titleblacklist-example-2": "Zkontrolovat, zda je černou listinou zakázána editace [[Bar]]."
+}

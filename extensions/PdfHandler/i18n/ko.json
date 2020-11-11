@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kwj2772",
+			"아라",
+			"Ykhwong",
+			"Garam"
+		]
+	},
+	"pdf-desc": "PDF 파일을 영상 방식으로 볼 수 있게 하는 조정기",
+	"pdf-file-page-warning-info": "이 문제에 대해 더 알아보세요.",
+	"pdf_no_metadata": "PDF 파일에서 메타데이터를 추출할 수 없습니다.",
+	"pdf_page_error": "쪽수가 범위 안에 있지 않습니다.",
+	"exif-pdf-producer": "변환 프로그램",
+	"exif-pdf-version": "PDF 형식 버전",
+	"exif-pdf-encrypted": "암호화함",
+	"exif-pdf-pagesize": "페이지 크기"
+}

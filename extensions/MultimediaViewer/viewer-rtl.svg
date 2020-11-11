@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="264" height="162" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 264 162">
+	<defs>
+		<path id="a" fill="#eaecf0" d="M0 5h22v6H0z"/>
+	</defs>
+	<path fill="#fff" d="M250.634 161.357l12.866-9.608V.5H.5v151.749l9 6.705V42.5h39v112.6l4.393-3.731 7.607 5.33V42.5h155v110.849l9.751 8.031 13.916-10.018"/>
+	<path fill="#eaecf0" d="M1 1v150.998l8 5.96V42h40v112.019l3.274-2.779.589-.499.633.44L60 155.738V42h156v111.099l9.257 7.661 13.295-9.569.644-.465.598.521 10.864 9.47L263 151.499V1H1M0 0h264v152l-13.391 10-11.473-10-13.891 10L215 153.6V43H61v114.66L52.922 152 48 156.18V43H10v116.95L0 152.5V0z"/>
+	<path fill="#eaecf0" d="M61 157.66V43h154v110.6l-2.145-1.6-12.555 10-13.809-10-14.229 10-12.972-10-12.973 10-13.811-10-12.136 10-13.391-10-14.229 10-12.972-10-12.974 10L61 157.66zM253 36c0-7.732-6.268-14-14-14s-14 6.268-14 14 6.268 14 14 14 14-6.268 14-14zM10 159.95V43h38v113.18L40.449 162l-13.811-10-13.891 10L10 159.95zM226 107V72h25v35h-25zM31.49 5h-26v6h26V5z"/>
+	<use width="264" height="162" x="208.50999" xlink:href="#a" transform="matrix(-1 0 0 1 264 0)"/>
+	<path fill="#eaecf0" d="M122 6v4h92V6h-92m-1-1h94v6h-94V5z"/>
+	<use width="264" height="162" x="184.50999" xlink:href="#a" transform="matrix(-1 0 0 1 264 0)"/>
+	<use width="13" height="162" x="161.50999" xlink:href="#a" transform="matrix(-1 0 0 1 264 0)"/>
+	<use width="6" height="162" x="176.50999" xlink:href="#a" transform="matrix(-1 0 0 1 264 0)"/>
+	<use width="6" height="162" x="153.50999" xlink:href="#a" transform="matrix(-1 0 0 1 264 0)"/>
+	<use width="32" height="162" x="9" xlink:href="#a" transform="matrix(-1 0 0 1 264 0)"/>
+	<path fill="#eaecf0" stroke="#eaecf0" d="M262 14.5H2"/>
+	<path fill="#a2a9b1" d="M43 73H19v1h24v-1z"/>
+	<use width="2" height="2" x="52" y="2" transform="matrix(-1 0 0 1 264 0)"/>
+	<path fill="#eaecf0" d="M226 59v-5h25v5h-25z"/>
+	<path fill="#8acdff" d="M14 47h30v24H14V47zm20.268 11h-1.08l-6.69 6.596-3.634-2.172-5.477 4.557V67h23.959l-7.078-9z"/>
+	<path fill="#fff" d="M210 15H55v128h155V15z"/>
+	<path fill="#36c" d="M60 24h144v112H60V24zm97.679 50h-5.184l-32.129 34.005-17.446-10.42-26.28 21.317V119h115.017l-33.978-45z"/>
+	<path fill="#fff" d="M72.205 34.937L76.045 31H66v10.067l3.948-4.221 6.478 6.494L72.79 47H82V36.933l-3.637 4.046-6.158-6.042z"/>
+</svg>

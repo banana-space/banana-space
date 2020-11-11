@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Firilacroco",
+			"Stelistcristi",
+			"Narlotep1",
+			"Strainu"
+		]
+	},
+	"specialpages-group-oath": "Autentificare pe două niveluri",
+	"oathauth-account": "Numele contului:",
+	"oathauth-token": "Jeton",
+	"oathauth-prefs-label": "Autentificare pe două niveluri:",
+	"oathauth-step4": "Pasul 4: Verificare",
+	"oathauth-auth-ui": "Va rugam introduceti codul de autentificare de pe dispozitivul dumneavoastra"
+}

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Horus",
+			"Manop"
+		]
+	},
+	"titleblacklist-forbidden-edit": "ชื่อบทความ \"$2\" ถูกห้ามสร้างในระบบนี้\n\nชื่อหัวข้อนี้ตรงกับบัญชีดำในส่วนของ: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "ไฟล์ชื่อ \"$2\" ถูกห้ามจากการสร้าง\nเนื่องจากตรงกับชื่อที่ปรากฎในบัญชีดำดังต่อไปนี้: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "ชื่อผู้ใช้ \"$2\" ถูกห้ามจากการสร้าง\nเนื่องจากตรงกับชื่อที่ปรากฎในบัญชีดำดังต่อไปนี้: <code>$1</code>",
+	"right-titleblacklistlog": "ดูปูมบัญชีดำชื่อเรื่อง"
+}

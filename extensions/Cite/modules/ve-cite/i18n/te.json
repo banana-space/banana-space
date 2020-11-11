@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arjunaraoc",
+			"Jayarathina",
+			"Sank",
+			"Shanmugamp7",
+			"Veeven",
+			"Visdaviva",
+			"மதனாஹரன்",
+			"రహ్మానుద్దీన్",
+			"Ravichandra",
+			"Chaduvari",
+			"Kiranmayee",
+			"Arunraman7"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "పుస్తకం",
+	"visualeditor-cite-tool-name-journal": "జర్నల్",
+	"visualeditor-cite-tool-name-news": "వార్తలు",
+	"visualeditor-cite-tool-name-web": "జాలస్థలి",
+	"cite-ve-dialog-reference-options-group-label": "ఈ సమూహము వాడు",
+	"cite-ve-dialog-reference-options-group-placeholder": "సాధారణ మూలాలు",
+	"cite-ve-dialog-reference-options-name-label": "ఈ పేరుతో మరల వాడు",
+	"cite-ve-dialog-reference-options-section": "ఎంపికలు",
+	"cite-ve-dialog-reference-title": "ఉల్లేఖన",
+	"cite-ve-dialog-reference-useexisting-label": "ఇప్పటికే వున్న ఉల్లేఖన వాడు",
+	"cite-ve-dialog-referenceslist-title": "ఉల్లేఖనల జాబితా",
+	"cite-ve-dialogbutton-reference-tooltip": "మూలాలు",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "మూలాల జాబితా",
+	"cite-ve-referenceslist-isempty": "ఈ జాబితాలో ఉన్న  పేజీలో గ్రూప్ \"$ 1\" తో ఎటువంటి సూచనలు లేవు.",
+	"cite-ve-referenceslist-missingref": "ఈ సూచన ఒక టెంప్లేట్ లేదా ఇతర ఉత్పత్తి బ్లాక్ లో వివరించబడింది, మరియు ఇప్పుడు  మూలం రీతిలో మాత్రమే సవరించవచ్చు."
+}

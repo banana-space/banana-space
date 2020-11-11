@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Giromin Cangiaxo"
+		]
+	},
+	"gadgets": "Gadget",
+	"gadgetusage": "Statisteghe insce l'uso di gadget",
+	"gadgetusage-noresults": "Nisciun gadget trovou.",
+	"gadgetusage-intro-noactive": "Questa tabella a l'indica o nummero di utenti ch'han attivou un gadget insce sta wiki. St'elenco o l'escludde e statisteghe pe-i gadget abilitæ pe tutti pe impostaçion predefinia e o poriæ includde di gadget che no son ciù disponibbili.",
+	"gadgets-pagetext": "Chì aprœuvo gh'è 'na lista di gadget (\"accessoi\") che i utenti pœuan abilitâ inta so paggina de [[Special:Preferences#mw-prefsection-gadgets|preferençe]], segondo e [[MediaWiki:Gadgets-definition|definiçioin]]. Questa panoramica a fornisce un commodo mezo pe accede a-i messaggi de scistema inti quæ l'è definio a descriçion e o coddiçe de ciascun gadget."
+}

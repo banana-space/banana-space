@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"ArmenBakkalian"
+		]
+	},
+	"pfunc_expr_unrecognised_word": "Արտայայտութեան սխալ․ չճանչցուած բառ՝ «$1»։",
+	"pfunc_expr_unrecognised_punctuation": "Արտայայտութեան սխալ․ չճանչցուած կէտադրական նշան՝ «$1»։"
+}

@@ -1,0 +1,76 @@
+{
+	"name": "SyntaxHighlight",
+	"version": "2.0",
+	"author": [
+		"Brion Vibber",
+		"Tim Starling",
+		"Rob Church",
+		"Niklas Laxström",
+		"Ori Livneh",
+		"Ed Sanders"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:SyntaxHighlight",
+	"descriptionmsg": "syntaxhighlight-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.31"
+	},
+	"MessagesDirs": {
+		"SyntaxHighlight_GeSHi": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"SyntaxHighlight": "includes/SyntaxHighlight.php",
+		"SyntaxHighlight_GeSHi": "includes/SyntaxHighlight.php",
+		"GeSHi": "includes/GeSHi.php",
+		"SyntaxHighlightAce": "includes/SyntaxHighlightAce.php",
+		"SyntaxHighlightGeSHiCompat": "includes/SyntaxHighlightGeSHiCompat.php",
+		"ResourceLoaderSyntaxHighlightVisualEditorModule": "includes/ResourceLoaderSyntaxHighlightVisualEditorModule.php"
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "SyntaxHighlight_GeSHi/modules"
+	},
+	"ResourceModules": {
+		"ext.pygments": {
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"styles": [
+				"pygments.generated.css",
+				"pygments.wrapper.css"
+			]
+		}
+	},
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"SyntaxHighlight::onParserFirstCallInit"
+		],
+		"ContentGetParserOutput": [
+			"SyntaxHighlight::onContentGetParserOutput"
+		],
+		"ApiFormatHighlight": [
+			"SyntaxHighlight::onApiFormatHighlight"
+		],
+		"ResourceLoaderRegisterModules": [
+			"SyntaxHighlight::onResourceLoaderRegisterModules"
+		]
+	},
+	"SyntaxHighlightModels": {
+		"css": "css",
+		"javascript": "javascript"
+	},
+	"VisualEditorPluginModules": [
+		"ext.geshi.visualEditor"
+	],
+	"config": {
+		"PygmentizePath": false
+	},
+	"TrackingCategories": [
+		"syntaxhighlight-error-category"
+	],
+	"manifest_version": 1
+}

@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Servien"
+		]
+	},
+	"categorytree": "Kategorieboom",
+	"categorytree-portlet": "Kategorieën",
+	"categorytree-legend": "Laot kategorieboom zien",
+	"categorytree-desc": "Dynamiese navigasie veur de [[Special:CategoryTree|kategoriestruktuur]]",
+	"categorytree-header": "Voer n kategorienaam in um de inhoud in boomstruktuur te bekieken.\nNB: veur disse funksie he'j de JavaScript-funksionaliteit AJAX neudig. A'j n hele ouwe webkieker hebben, of je JavaScript uuteschakeld hebben, dan zal disse funksie niet warken.",
+	"categorytree-category": "Kategorie:",
+	"categorytree-go": "Laojen",
+	"categorytree-parents": "Ouwerkategorieën",
+	"categorytree-mode-label": "Modus:",
+	"categorytree-mode-categories": "allinnig kategorieën",
+	"categorytree-mode-pages": "ziejen, gien aofbeeldingen",
+	"categorytree-mode-all": "alle ziejen",
+	"categorytree-collapse": "samenvouwen",
+	"categorytree-expand": "uutklappen",
+	"categorytree-member-counts": "bevat {{PLURAL:$1|één onderkategorie|$1 onderkategorieën}}, {{PLURAL:$2|één zied|$2 ziejen}} en {{PLURAL:$3|één bestaand|$3 bestaanden}}",
+	"categorytree-num-categories": "$1 C",
+	"categorytree-num-pages": "$1 P",
+	"categorytree-num-files": "$1 B",
+	"categorytree-num-empty": "leeg",
+	"categorytree-load": "laojen",
+	"categorytree-loading": "bezig mit laojen...",
+	"categorytree-nothing-found": "niks evunnen",
+	"categorytree-no-subcategories": "gien subkategorieën",
+	"categorytree-no-parent-categories": "gien ouwerkategorieën",
+	"categorytree-no-pages": "gien ziejen of subkategorieën",
+	"categorytree-not-found": "Kategorie <i>$1</i> niet evunnen",
+	"categorytree-error": "Probleem bie t laojen van de gegevens.",
+	"categorytree-retry": "Wacht even en probeer t opniej"
+}

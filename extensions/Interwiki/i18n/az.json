@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wertuose"
+		]
+	},
+	"interwiki": "İnterviki məlumatlarına bax və redaktə et",
+	"interwiki-title-norights": "İnterviki məlumatlarına bax",
+	"interwiki-desc": "İnterviki cədvəlinə baxmaq və redaktə etmək üçün [[Special:Interwiki|xüsusi səhifə]] əlavə edir",
+	"interwiki_prefix": "Prefiks",
+	"interwiki-prefix-label": "Prefiks:",
+	"interwiki_local": "Yönləndir",
+	"interwiki-local-label": "Yönləndir:",
+	"interwiki_trans": "Göstər",
+	"interwiki-trans-label": "Göstər:",
+	"interwiki_1": "bəli",
+	"interwiki_0": "xeyr",
+	"interwiki_edit": "Redaktə et",
+	"interwiki_reasonfield": "Səbəb:",
+	"interwiki_delquestion": "\"$1\" silinir",
+	"interwiki_addbutton": "Əlavə et",
+	"right-interwiki": "İntervikilərin redaktə edilməsi"
+}

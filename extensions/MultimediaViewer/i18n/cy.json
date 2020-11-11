@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lloffiwr",
+			"Robin Owain"
+		]
+	},
+	"multimediaviewer-datetime-created": "Gwnaethpwyd: $1",
+	"multimediaviewer-datetime-uploaded": "Uwchlwythwyd: $1",
+	"multimediaviewer-license-cc-pd": "Parth Cyhoeddus",
+	"multimediaviewer-license-pd": "Parth Cyhoeddus",
+	"multimediaviewer-license-default": "Gweld y drwydded",
+	"multimediaviewer-permission-title": "Manylion hawliau",
+	"multimediaviewer-permission-link": "gweld y termau",
+	"multimediaviewer-permission-viewmore": "Gweld mwy",
+	"multimediaviewer-about-mmv": "Am Media Viewer",
+	"multimediaviewer-discuss-mmv": "Trafod y nodwedd hon",
+	"multimediaviewer-help-mmv": "Cymorth",
+	"multimediaviewer-optout-mmv": "Analluoger Media Viewer",
+	"multimediaviewer-optin-mmv": "Galluoger Media Viewer",
+	"multimediaviewer-optout-pending-mmv": "Wrthi'n analluogi Media Viewer",
+	"multimediaviewer-optin-pending-mmv": "Wrthi'n galluogi Media Viewer",
+	"multimediaviewer-geolocation": "Lleoliad: $1",
+	"multimediaviewer-reuse-loading-placeholder": "Wrthi'n llwytho",
+	"multimediaviewer-embed-html": "HTML",
+	"multimediaviewer-view-expanded": "Agorer yn Media Viewer"
+}

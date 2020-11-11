@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shirayuki",
+			"Caliburn"
+		]
+	},
+	"multimediaviewer-license-default": "View licence",
+	"multimediaviewer-permission-title": "Permission details",
+	"multimediaviewer-embed-license": "Licenced under $1."
+}

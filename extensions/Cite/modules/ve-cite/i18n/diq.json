@@ -1,0 +1,37 @@
+{
+	"@metadata": {
+		"authors": [
+			"Erdemaslancan",
+			"Gorizon",
+			"Kghbln",
+			"Marmase",
+			"Mirzali",
+			"Se4598",
+			"Kumkumuk"
+		]
+	},
+	"visualeditor-cite-tool-definition.json": "veng",
+	"visualeditor-cite-tool-name-book": "Kıtab",
+	"visualeditor-cite-tool-name-journal": "Pêseroke",
+	"visualeditor-cite-tool-name-news": "Xeberi",
+	"visualeditor-cite-tool-name-web": "Websita",
+	"cite-tool-definition.json": "veng",
+	"cite-ve-dialog-reference-editing-reused": "Ena referans $1 {{PLURAL:$1|veror}} rna perer dı karıya ya.",
+	"cite-ve-dialog-reference-options-group-label": "Na gruber bıkarn",
+	"cite-ve-dialog-reference-options-group-placeholder": "Referansê bıngey",
+	"cite-ve-dialog-reference-options-name-label": "Ney nami fına bıkarne",
+	"cite-ve-dialog-reference-options-section": "Weçinegi",
+	"cite-ve-dialog-reference-title": "Referans",
+	"cite-ve-dialog-reference-useexisting-full-label": "Fınankarıyayış ena perer sero xora esten yew grotek o.",
+	"cite-ve-dialog-reference-useexisting-label": "Zu referansa mewcud bıkarne",
+	"cite-ve-dialog-reference-useexisting-tool": "Fına bıkarn",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "Listay umumi referansa",
+	"cite-ve-dialog-referenceslist-contextitem-description-named": "Qandé listay mıreceti gruba \"$1\"",
+	"cite-ve-dialog-referenceslist-title": "Listeya referansan",
+	"cite-ve-dialogbutton-citation-educationpopup-title": "Groteki",
+	"cite-ve-dialogbutton-reference-full-label": "Formo bıngehın",
+	"cite-ve-dialogbutton-reference-title": "Referans",
+	"cite-ve-dialogbutton-reference-tooltip": "Referans",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Listeya referansan",
+	"cite-ve-reference-input-placeholder": "Qanci referansi şıma qalıyé bıkarné?"
+}

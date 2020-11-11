@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"multimediaviewer-optin-pref": "Activar <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About visualisator multimedial]</span>",
+	"multimediaviewer-multiple-authors": "{{PLURAL:$1|un altere autor|$1 altere autores}}",
+	"multimediaviewer-multiple-authors-combine": "$1 e $2"
+}

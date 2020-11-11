@@ -1,0 +1,28 @@
+BROWSER:
+  - chrome
+  - firefox
+  - safari
+
+MEDIAWIKI_ENVIRONMENT:
+  - beta
+  - mediawiki
+
+PLATFORM:
+  - Linux
+  - OS X 10.9
+
+exclude:
+  - BROWSER: chrome
+    MEDIAWIKI_ENVIRONMENT: mediawiki
+
+  - BROWSER: chrome
+    PLATFORM: Linux
+
+  - BROWSER: firefox
+    PLATFORM: OS X 10.9
+
+  - BROWSER: safari
+    MEDIAWIKI_ENVIRONMENT: mediawiki
+
+  - BROWSER: safari
+    PLATFORM: Linux

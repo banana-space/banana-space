@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Maroen1990",
+			"محمد أحمد عبد الفتاح",
+			"Mido",
+			"ديفيد"
+		]
+	},
+	"timeless-desc": "برنامج مساعد خالد صُمِّم بعد النموذج المبدئي الشتوي الذي صممه براندون هاريس، وأساليب متنوعة من قبل مؤسسة ويكيميديا",
+	"timeless-search-placeholder": "ابحث في حوالي {{NUMBEROFARTICLES}} صفحة",
+	"timeless-loggedin": "حساب المستخدم",
+	"timeless-anonymous": "مجهول",
+	"timeless-loggedinas": "الدخول مسجل باسم '''$1'''",
+	"timeless-notloggedin": "غير مسجل الدخول",
+	"timeless-userpage": "صفحة {{GENDER:$1|المستخدم|المستخدمة}}",
+	"timeless-talkpage": "نقاش {{GENDER:$1|المستخدم|المستخدمة}}",
+	"timeless-pagelog": "سجلات الصفحة",
+	"timeless-more": "المزيد",
+	"timeless-sitetools": "ادوات ويكي",
+	"timeless-pageactions": "أدوات الصفحات",
+	"timeless-userpagetools": "ادوات صفحة المستخدم",
+	"timeless-pagemisc": "المزيد",
+	"timeless-namespaces": "أسماء النطاقات",
+	"timeless-pagetools": "إجراءات الصفحة",
+	"timeless-languages": "اللغات",
+	"timeless.js": "/ * سيتم تحميل أي جافا سكريبت هنا للمستخدمين باستخدام البرنامج المساعد الخالدة * /"
+}

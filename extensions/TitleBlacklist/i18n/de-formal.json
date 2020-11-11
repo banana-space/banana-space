@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Imre",
+			"Kghbln"
+		]
+	},
+	"titleblacklist": "# Dies ist eine Schwarze Liste für Seiten- und Benutzernamen. Sofern auf einen solchen Namen einer der folgenden regulären Ausdrücke zutrifft, kann er nicht erstellt werden.\n# Verwenden Sie „#“ für Kommentare.\n# Standardmäßig wird nicht zwischen Groß- und Kleinschreibung unterschieden.",
+	"titlewhitelist": "# Dies ist die Ausnahmeliste von der Schwarzen Liste unerwünschter Seiten- und Benutzernamen. Benutzen Sie „#“ für Kommentare.\n# Standardmäßig wird nicht zwischen Groß- und Kleinschreibung unterschieden.",
+	"titleblacklist-invalid": "Die {{PLURAL:$1|folgende Zeile|folgenden Zeilen}} in der Sperrliste {{PLURAL:$1|ist|sind}} ungültig; bitte korrigieren Sie diese vor dem Speichern:"
+}

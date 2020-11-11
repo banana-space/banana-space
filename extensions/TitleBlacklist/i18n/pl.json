@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Beau",
+			"BeginaFelicysym",
+			"Chrumps",
+			"Derbeth",
+			"Peter Bowman",
+			"Sp5uhe",
+			"WTM",
+			"Tar Lócesilion",
+			"Woytecr"
+		]
+	},
+	"action-titleblacklistlog": "przeglądania czarnej listy tytułów",
+	"log-name-titleblacklist": "Rejestr czarnej listy tytułów",
+	"log-description-titleblacklist": "Te zdarzenia służą do śledzenia trafień czarnej listy tytułów.",
+	"logentry-titleblacklist-hit-username": "$1 {{GENDER:$2|spowodował|spowodowała}} dopasowanie do czarnej listy tytułów podczas próby stworzenia konta $3, co pasowało do $4.",
+	"titleblacklist-desc": "Pozwala na blokowanie tworzenia stron i kont użytkowników o określonych nazwach wykorzystując [[MediaWiki:Titleblacklist|czarną]] oraz [[MediaWiki:Titlewhitelist|białą]] listę",
+	"titleblacklist": "# Lista zabronionych nazw. Strony i konta o nazwach odpowiadających poniższym wyrażeniom regularnym nie będą mogły zostać utworzone.\n# Użyj znaku „#”, aby utworzyć komentarz.\n# Domyślnie we wpisach ma znaczenie wielkość znaków.",
+	"titlewhitelist": "# To jest lista dopuszczalnych nazw artykułów. Użyj znaku „#”, aby utworzyć komentarz.\n# Domyślnie we wpisach ma znaczenie wielkość znaków.",
+	"titleblacklist-forbidden-edit": "Utworzenie strony o nazwie „$2” nie jest możliwe.  \nNazwa ta pasuje do wpisu z czarnej listy: <code>$1</code>",
+	"titleblacklist-forbidden-move": "Zmiana nazwy z „$2” na „$3” nie jest możliwa, ponieważ nie można utworzyć strony o nazwie „$3”.\nNazwa ta pasuje do wpisu z czarnej listy: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Utworzenie pliku o nazwie „$2” nie jest możliwe. \nNazwa ta pasuje do wpisu z czarnej listy: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Utworzenie konta o nazwie „$2” nie jest możliwe.\nNazwa ta pasuje do wpisu z czarnej listy: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Następująca linia|Następujące linie}} na liście zabronionych tytułów stron {{PLURAL:$1|jest nieprawidłowa|są nieprawidłowe}}. Popraw {{PLURAL:$1|ją|je}} przed zapisaniem:",
+	"titleblacklist-override": "Ignoruj czarną listę",
+	"titleblacklist-override-help": "Użytkownicy z odpowiednimi uprawnieniami mogą to ustawić, aby ignorować sprawdzanie z użyciem czarnej listy tytułów.",
+	"titleblacklist-warning": "<strong>Uwaga: tę stronę mogą edytować tylko administratorzy i użytkownicy z uprawnieniem <code>tboverride</code>, ponieważ znajduje się ona na czarnej liście, w punkcie:</strong><br /><code>$1</code>",
+	"right-tboverride": "Ignorowanie czarnej listy tytułów lub nazw użytkowników",
+	"right-tboverride-account": "Ignorowanie czarnej listy użytkowników",
+	"right-titleblacklistlog": "Podgląd rejestru czarnej listy tytułów",
+	"apihelp-titleblacklist-description": "Sprawdź tytuł artykułu, pliku lub nazwy użytkownika pod kątem obecności na czarnej liście tytułów.",
+	"apihelp-titleblacklist-param-title": "Ciąg znaków, który sprawdzić pod kątem obecności na czarnej liście tytułów.",
+	"apihelp-titleblacklist-param-action": "Akcja do sprawdzenia.",
+	"apihelp-titleblacklist-param-nooverride": "Nie próbuj omijać czarnej listy tytułów.",
+	"apihelp-titleblacklist-example-1": "Sprawdź czy [[Foo]] jest na czarnej liście",
+	"apihelp-titleblacklist-example-2": "Sprawdź czy [[Bar]] jest na czarnej liście dla edytowania",
+	"apihelp-createaccount-param-ignoretitleblacklist": "Ignoruj sprawdzenia dotyczące upodobniania (wymaga jednego z tych uprawnień: <code>tboverride</code>, <code>tboverride-account</code>)."
+}

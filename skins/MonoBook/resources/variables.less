@@ -1,0 +1,22 @@
+// Variables for common colours and things
+// Note that this does not affect screen-desktop.css and IEFixes files; update those separately.
+
+@import 'mediawiki.mixins';
+
+@background: #f9f9f9; // don't change this; matches headbg images
+@content-background: #fff;
+@content-border: #aaa;
+@orange-border: #fabd23;
+@text-color: #000;
+@text-grey: #707070;
+
+@link: #002bb8;
+@link-visited: #5a3696;
+@link-new: #c20;
+
+// To hide objects, but keep them accessible for screen-readers
+.hidden() {
+	position: absolute;
+	top: -9999px;
+	left: 0;
+}

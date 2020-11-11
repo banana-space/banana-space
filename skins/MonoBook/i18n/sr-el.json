@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rancher",
+			"Zoranzoki21"
+		]
+	},
+	"skinname-monobook": "Monobuk",
+	"monobook-desc": "Klasični Medijaviki skin od 2004, nazvan po crno-beloj fotografiji knjige u pozadini stranice",
+	"monobook.css": "/* CSS postavljen ovde će uticati na sve korisnike teme „Monobuk“ */",
+	"monobook.js": "/* Javaskript postavljen ovde će se učitati za sve one koji koriste temu „Monobuk“ */"
+}

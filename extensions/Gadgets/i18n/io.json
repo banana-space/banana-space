@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Malafaya",
+			"Joao Xavier"
+		]
+	},
+	"prefs-gadgets": "Utensili",
+	"gadgets-prefstext": "Adinfre esas listo pri specala utensili quin vu povas permisar por vua konto.\nIca utensili kreesis precipue per 'JavaScript', do vu mustas permisar JavaScript en vua retnavigilo por uzar li.\nRegardez ke ica utensili efektigos nule en ica pagino pri preferaji.\n\nAnke regardez ke ta specala utensili NE ESAS PARTO DE LA SOFTWARO* di MediaWiki, ed ordinare kreesas e mantenesas da altra uzeri de vua lokala wiki.\nLokala administreri povas skribar [[MediaWiki:Gadgets-definition|defini]] e [[Special:Gadgets|deskripti]] pri l'existanta utensili ('gadgets'). Listo pri la quanto di uzeri por singla 'gadget' en ica wiki povas videsar en la [[Special:GadgetUsage|statistiki pri uzo di 'Gadget'-i]].",
+	"gadgets": "Aparati:",
+	"gadgetusage-activeusers": "Aktiva uzeri",
+	"gadgets-title": "Aparati",
+	"gadgets-uses": "Ol uzas"
+}

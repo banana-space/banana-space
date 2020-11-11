@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shirayuki",
+			"ネイ",
+			"Yusuke1109"
+		]
+	},
+	"oathauth-desc": "ワンタイムパスワードに基づいた HMAC を使用する認証機能を提供する",
+	"specialpages-group-oath": "二要素認証",
+	"oathauth-account": "アカウント名:",
+	"oathauth-secret": "二要素認証の秘密鍵:",
+	"oathauth-enable": "二要素認証の有効化",
+	"oathauth-scratchtokens": "以下は、一度しか使用できないトークンの一覧です。これらのトークンは一度しか使用できず、緊急用です。これらを書き留めて、安全な場所に保管してください。携帯電話を紛失した際に、これらのトークンがあなたのアカウントを救済する唯一の手段になります。'''これらのトークンは二度と表示されません'''。",
+	"oathauth-token": "トークン",
+	"oathauth-disable": "二要素認証の無効化",
+	"oathauth-validatedoath": "二要素信用情報を検証しました。二要素認証を実行します。",
+	"oathauth-failedtovalidateoath": "二要素信用情報の検証に失敗しました。",
+	"oathauth-disabledoath": "二要素認証を無効にしました。",
+	"oathauth-prefs-label": "二要素認証:",
+	"right-oathauth-enable": "二要素認証を有効にする",
+	"action-oathauth-enable": "二要素認証の有効化"
+}

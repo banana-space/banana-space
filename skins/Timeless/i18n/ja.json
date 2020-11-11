@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sujiniku",
+			"Otokoume",
+			"Whym",
+			"Yusuke1109"
+		]
+	},
+	"timeless-desc": "Brandon HarrisによるWinterプロトタイプの後にデザインされたTimelessテーマ。ウィキメディア財団のさまざまなスタイル。",
+	"timeless-search-placeholder": "{{NUMBEROFARTICLES}}件のページから検索",
+	"timeless-loggedin": "あなたのアカウント",
+	"timeless-anonymous": "匿名",
+	"timeless-loggedinas": "'''$1''' としてログインしています",
+	"timeless-notloggedin": "ログインしていません",
+	"timeless-userpage": "{{GENDER:$1|利用者}}ページ",
+	"timeless-talkpage": "{{GENDER:$1|利用者}}トーク",
+	"timeless-pagelog": "ページの記録",
+	"timeless-more": "その他",
+	"timeless-sitetools": "ウィキツール",
+	"timeless-pageactions": "ページツール",
+	"timeless-userpagetools": "利用者ページツール",
+	"timeless-pagemisc": "その他",
+	"timeless-namespaces": "名前空間",
+	"timeless-pagetools": "ページアクション",
+	"timeless-languages": "言語",
+	"timeless.js": "/* ここにあるすべてのJavaScriptは、Timeless外装を使用している利用者に対して読み込まれます */"
+}

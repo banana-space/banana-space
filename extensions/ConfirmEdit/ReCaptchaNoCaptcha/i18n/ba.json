@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Азат Хәлилов",
+			"Айбикә"
+		]
+	},
+	"renocaptcha-createaccount-fail": "Һеҙ CAPTCHA -ны сисә алманығыҙ",
+	"renocaptcha-apihelp-param-g-recaptcha-response": "ReCaptcha виджеты майҙаны"
+}

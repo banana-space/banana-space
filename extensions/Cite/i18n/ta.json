@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jayarathina",
+			"Shanmugamp7",
+			"செல்வா"
+		]
+	},
+	"cite-desc": "சேர்க்கிறது <nowiki><ref[ name=id]></nowiki>மற்றும் <nowiki><references/></nowiki> குறிச்சொற்கள், மேற்கோள்களுக்காக",
+	"cite_error": "பிழை காட்டு: $1",
+	"cite_error_references_no_text": "செல்லாத <code>&lt;ref&gt;</code> குறிச்சொல்;\n<code>$1</code> என்னும் பெயரில் உள்ள ref குறிச்சொல்லுக்கு உரையேதும் வழங்கப்படவில்லை"
+}

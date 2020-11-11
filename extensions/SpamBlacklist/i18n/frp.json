@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"ChrisPtDe"
+		]
+	},
+	"spam-blacklist": " # Los lims hipèrtèxtos de defôr que sont dens ceta lista seront blocâs pendent lor entrebetâ dens una pâge.\n # Ceta lista afècte ren que ceti vouiqui ; refèrâd-vos asse-ben a la lista nêre globâla.\n # La documentacion sè trove a ceta adrèce : https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- lèssiéd ceta legne justo d’ense --> <pre>\n#\n# La sintaxa est ceta :\n#  * Tot tèxto que siut un « # » est considèrâ coment un comentèro.\n#  * Tota legne pas voueda est un bocon d’èxprèssion racionèla (*RegEx*) qu’analiserat ren que los hôtos dedens los lims hipèrtèxtos.\n\n  #</pre> <!-- lèssiéd ceta legne justo d’ense -->",
+	"spam-whitelist": " #<!-- lèssiéd ceta legne justo d’ense --> <pre>\n# Los lims hipèrtèxtos de defôr que sont dens ceta lista seront *pas* blocâs mémo\n# s’ils ariant étâ blocâs per les entrâs de la lista nêre.\n#\n# La sintaxa est ceta :\n#  * Tot tèxto que siut un « # » est considèrâ coment un comentèro.\n#  * Tota legne pas voueda est un bocon d’èxprèssion racionèla (*RegEx*) qu’analiserat ren que los hôtos dedens los lims hipèrtèxtos.\n\n  #</pre> <!-- lèssiéd ceta legne justo d’ense -->",
+	"spam-invalid-lines": "{{PLURAL:$1|Ceta legne|Cetes legnes}} de la lista nêre des spames {{PLURAL:$1|est una èxprèssion racionèla envalida|sont des èxprèssions racionèles envalides}} et dê{{PLURAL:$1||von}}t étre corregiê{{PLURAL:$1||s}} devant que sôvar la pâge :",
+	"spam-blacklist-desc": "Outil anti-spame basâ sur des èxprèssions racionèles (''RegEx'') : ''[[MediaWiki:Spam-blacklist]]'' et ''[[MediaWiki:Spam-whitelist]]''."
+}

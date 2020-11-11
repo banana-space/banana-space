@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"Rotem Liss",
+			"Guycn2"
+		]
+	},
+	"fancycaptcha-desc": "מחולל תמונות CAPTCHA מגניבות בשביל ההרבחבה Confirm Edit",
+	"fancycaptcha-addurl": "עריכתך כוללת קישורים חיצוניים חדשים.\nכהגנה מפני ספאם אוטומטי, נא להקליד את המילים המופיעות בתיבה שלהלן ([[Special:Captcha/help|מידע נוסף]]):",
+	"fancycaptcha-badlogin": "כהגנה מפני פריצת סיסמאות אוטומטית, נא להקליד את המילים המופיעות בתיבה שלהלן ([[Special:Captcha/help|מידע נוסף]]):",
+	"fancycaptcha-captcha": "בדיקת אבטחה",
+	"fancycaptcha-accountcreate": "כהגנה מפני יצירת חשבונות אוטומטית, נא להקליד את המילים המופיעות בתיבה שלהלן ([[Special:Captcha/help|מידע נוסף]]):",
+	"fancycaptcha-create": "כדי ליצור את הדף, נא להקליד את המילים המופיעות בתיבה שלהלן ([[Special:Captcha/help|מידע נוסף]]):",
+	"fancycaptcha-edit": "כדי לערוך את הדף, נא להקליד את המילים המופיעות בתיבה שלהלן ([[Special:Captcha/help|מידע נוסף]]):",
+	"fancycaptcha-imgcaptcha-ph": "נא להקליד את הטקסט שמופיע בתמונה",
+	"fancycaptcha-sendemail": "כהגנה מפני ספאם אוטומטי, נא להקליד את המילים המופיעות בתיבה שלהלן ([[Special:Captcha/help|מידע נוסף]]):",
+	"fancycaptcha-reload-text": "החלפה",
+	"apihelp-fancycaptchareload-description": "קבלת FancyCaptcha חדשה.",
+	"apihelp-fancycaptchareload-summary": "קבלת FancyCaptcha חדשה.",
+	"apihelp-fancycaptchareload-example-1": "קבלת FancyCaptcha חדשה"
+}

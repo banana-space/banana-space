@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hugo.arg"
+		]
+	},
+	"renameuserold": "Esams nauduotuojė vards:",
+	"renameusernew": "Naus nauduotuojė vards:",
+	"renameuserwarnings": "Pertarėmā:",
+	"renameusersuccess": "Nauduotuos \"<nowiki>$1</nowiki>\" bova parvadėnts i \"<nowiki>$2</nowiki>\".",
+	"log-name-renameuser": "Nauduotuoju pervadėnėma sārašos"
+}

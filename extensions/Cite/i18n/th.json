@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Horus",
+			"Passawuth"
+		]
+	},
+	"cite-desc": "เพิ่มป้ายระบุ <nowiki><ref[ name=id]></nowiki> และ <nowiki><references /></nowiki> สำหรับการอ้างอิง",
+	"cite_error": "อ้างอิงผิดพลาด: $1",
+	"cite_error_ref_numeric_key": "ป้ายระบุ <code>&lt;ref&gt;</code> ไม่ถูกต้อง\nชื่อไม่สามารถเป็นจำนวนเต็มอย่างง่าย ใช้ชื่อเรื่องพรรณนา",
+	"cite_error_ref_no_key": "ป้ายระบุ <code>&lt;ref&gt;</code> ไม่ถูกต้อง\nอ้างอิงที่ไม่มีเนื้อหาต้องมีชื่อ",
+	"cite_error_ref_too_many_keys": "ป้ายระบุ <code>&lt;ref&gt;</code> ไม่ถูกต้อง\nชื่อไม่ถูกต้อง เช่น มากเกินไป",
+	"cite_error_ref_no_input": "ป้ายระบุ <code>&lt;ref&gt;</code> ไม่ถูกต้อง\nอ้างอิงที่ไม่มีชื่อต้องมีเนื้อหา",
+	"cite_error_references_duplicate_key": "ป้ายระบุ <code>&lt;ref&gt;</code> ไม่สมเหตุสมผล มีนิยามชื่อ \"$1\" หลายครั้งด้วยเนื้อหาต่างกัน",
+	"cite_error_references_invalid_parameters": "ป้ายระบุ <code>&lt;references&gt;</code> ไม่ถูกต้อง\nไม่อนุญาตให้มีพารามิเตอร์\nให้ใช้ <code>&lt;references /&gt;</code>",
+	"cite_error_references_no_text": "ป้ายระบุ <code>&lt;ref&gt;</code> ไม่ถูกต้อง\nไม่มีการกำหนดข้อความสำหรับอ้างอิงชื่อ <code>$1</code>",
+	"cite_error_included_ref": "ไม่มีการปิด <code>&lt;/ref&gt;</code> สำหรับป้ายระบุ <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "มีป้ายระบุ <code>&lt;ref&gt;</code> สำหรับกลุ่มชื่อ \"$1\" แต่ไม่พบป้ายระบุ <code>&lt;references group=\"$1\"/&gt;</code> ที่สอดคล้องกัน หรือไม่มีการปิด <code>&lt;/ref&gt;</code>",
+	"cite_error_references_group_mismatch": "ป้ายระบุ <code>&lt;ref&gt;</code> ใน <code>&lt;references&gt;</code> มีลักษณะกลุ่มขัดแย้ง \"$1\"",
+	"cite_error_references_missing_group": "ป้ายระบุ <code>&lt;ref&gt;</code> ที่นิยามใน <code>&lt;references&gt;</code> มีลักษณะกลุ่ม \"$1\" ซึ่งไม่ปรากฏในข้อความก่อนหน้า",
+	"cite_error_references_missing_key": "ป้ายระบุ <code>&lt;ref&gt;</code> ชื่อ \"$1\" ซึ่งนิยามใน  <code>&lt;references&gt;</code> ไม่ถูกใช้ในข้อความก่อนหน้า",
+	"cite_error_references_no_key": "ป้ายระบุ <code>&lt;ref&gt;</code> ที่นิยามใน <code>&lt;references&gt;</code> ไม่มีลักษณะชื่อ",
+	"cite_error_empty_references_define": "ป้ายระบุ <code>&lt;ref&gt;</code> ที่นิยามใน <code>&lt;references&gt;</code> ด้วยชื่อ \"$1\" ไม่มีเนื้อหา",
+	"cite-tracking-category-cite-error": "หน้าที่มีข้อผิดพลาดการอ้างอิง",
+	"cite-tracking-category-cite-error-desc": "หน้าในหมวดหมู่นี้มีข้อผิดพลาดในการใช้ป้ายระบุอ้างอิง",
+	"cite_references_link_accessibility_label": "กระโดดขึ้น",
+	"cite_references_link_many_accessibility_label": "กระโดดขึ้นไป:"
+}

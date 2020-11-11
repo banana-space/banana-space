@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Als-Holder"
+		]
+	},
+	"syntaxhighlight-desc": "Syntax firihebe <code>&lt;syntaxhighlight&gt;</code> mit Hilf vum [http://pygments.org/ GeSHi-Highlighter]"
+}

@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ajdar",
+			"Ilnur efende",
+			"Ильнар",
+			"Derslek",
+			"Don Alessandro"
+		]
+	},
+	"categorytree": "Төркемнәр \"агачы\".",
+	"categorytree-portlet": "Төркемнәр",
+	"categorytree-legend": "Төркемнәрнең шәҗәрәсен ачарга",
+	"categorytree-desc": "[[Special:CategoryTree|Төркемнәрнең асылы]]н аңлату өчен төзелгән AJAX-бит",
+	"categorytree-header": "Төркемнең исемен кертегез һәм ул шәҗәрә рәвешендә күрсәтеләчәк (JavaScript кирәк булачак).",
+	"categorytree-category": "Төркем:",
+	"categorytree-go": "Йөкләү",
+	"categorytree-parents": "Төп төркемнәр",
+	"categorytree-mode-label": "Режим:",
+	"categorytree-mode-categories": "бары тик төркемнәр генә урнаштырылган",
+	"categorytree-mode-pages": "файллардан башка",
+	"categorytree-mode-all": "барлык битләр",
+	"categorytree-collapse": "яшерү",
+	"categorytree-expand": "ачу",
+	"categorytree-member-counts": "$1 {{PLURAL:$1|1 тәркемчәне|$1 тәркемчәләрне|$1 тәркемчәләрдән}}, $2 {{PLURAL:$2|1 битне|$2 битләрне|$2 битләрдән}} һәм {{PLURAL:$3|1 файл|$3 файлны}}ны үз эченә ала",
+	"categorytree-num-categories": "$1 Т",
+	"categorytree-num-pages": "$1 Б",
+	"categorytree-num-files": "$1 Ф",
+	"categorytree-num-empty": "буш",
+	"categorytree-load": "йөкләү",
+	"categorytree-loading": "йөкләү бара…",
+	"categorytree-nothing-found": "бернидә табылмады",
+	"categorytree-no-subcategories": "мондый төркемчәләр юк",
+	"categorytree-no-parent-categories": "төп бүлекләр юк",
+	"categorytree-no-pages": "мондый бит яки төркемчә юк",
+	"categorytree-not-found": "<i>$1</i> бүлеге табылмады",
+	"categorytree-error": "Хата",
+	"categorytree-retry": "Зинһар бераз көтеп торыгыз һәм тагын бер кат йөкләүне башкарып карагыз.",
+	"apihelp-categorytree-description": "CategoryTree кушымтасы өчен эчке модуль.",
+	"apihelp-categorytree-param-category": "Төркемнәр мәйданы исемлеге, куелган очракта префикс кулланылмый.",
+	"apihelp-categorytree-param-options": "JSON-җисемнәр сыман CategoryTree төзүчесе төрләре. <var>depth</var> (тирәнлек) параметры <kbd>1</kbd> итеп куелган.",
+	"apierror-categorytree-invalidjson": "Юрамалар JSON-җисемнәре белән валид булырга тиеш."
+}

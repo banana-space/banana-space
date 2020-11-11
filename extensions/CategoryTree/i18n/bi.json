@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fanjiayi"
+		]
+	},
+	"categorytree-member-counts": "Contains {{PLURAL:$1|1 subcategory|$1 subcategories}}, {{PLURAL:$2|1 pej|$2 pejs}}, and {{PLURAL:$3|1 file|$3 files}}"
+}

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mehtab ahmed",
+			"Aursani"
+		]
+	},
+	"multimediaviewer-thumbnail-error-description": "ڪو ٽيڪنيڪي مسئلو ٿيو آهي. جي حل نہ ٿي تہ توهان $1 يا $3 ڪري سگھو ٿا. چُڪَ: $2",
+	"multimediaviewer-thumbnail-error-report": "مسئلي جي رپورٽ ڪريو",
+	"multimediaviewer-about-mmv": "بابت",
+	"multimediaviewer-discuss-mmv": "بحث"
+}

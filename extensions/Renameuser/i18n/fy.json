@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"SK-luuut",
+			"Snakesteuben",
+			"Robin0van0der0vliet",
+			"Robin van der Vliet"
+		]
+	},
+	"renameuser": "Feroarje in meidochnamme",
+	"renameuser-desc": "Foeget in [[Special:RenameUser|spesiale side]] ta om in meidoggersnamme te feroarjen (jo hawwe hjirfoar it ''renameuser'' rjocht nedich)",
+	"renameuserold": "Alde namme:",
+	"renameusernew": "Nije namme:",
+	"renameuserreason": "Reden:",
+	"renameusermove": "Meidoggersside en oerlissiden omneame (mei ûnderlizzende siden) nei de nije namme",
+	"renameuserreserve": "Takomst brûken fan de âlde meidoggersnamme foarkomme",
+	"renameuserwarnings": "Warskôgings:",
+	"renameuserconfirm": "Ja, feroarje de namme fan de meidogger",
+	"renameusersubmit": "Ferstjoere",
+	"renameusererrordoesnotexist": "Der is gjin meidogger mei de namme \"<nowiki>$1</nowiki>\"",
+	"renameusererrorexists": "De meidochnamme \"<nowiki>$1</nowiki>\" wurdt al brûkt.",
+	"renameusererrorinvalid": "De meidochnamme \"<nowiki>$1</nowiki>\" mei net.",
+	"renameuser-error-request": "Der wie in probleem mei it ferwurkjen fan de oanfraach.\nGean tebek en probearje it asjebleaft op 'e nij.",
+	"renameuser-error-same-user": "Jo kinne in meidoggersnamme net nei deselde namme feroarje.",
+	"renameusersuccess": "Meidogger \"<nowiki>$1</nowiki>\" is no meidogger \"<nowiki>$2</nowiki>\".",
+	"renameuser-page-exists": "De side $1 bestiet al en kin net automatysk oerskreaun wurde.",
+	"renameuser-page-moved": "Sidenamme $1 is feroare yn $2.",
+	"renameuser-page-unmoved": "Sidenamme $1 koe net feroare wurde yn $2.",
+	"log-name-renameuser": "Nammeferoar-loch",
+	"renameuser-move-log": "Sidenamme automatysk feroare by it feroarjen fan de meidoggersnamme fan  \"[[User:$1|$1]]\" yn \"[[User:$2|$2]]\"",
+	"right-renameuser": "Feroarje meidoggersnammen"
+}

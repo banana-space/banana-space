@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Iltever",
+			"Ernác"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "Китаб",
+	"visualeditor-cite-tool-name-journal": "Журнал",
+	"visualeditor-cite-tool-name-news": "Джангылыкъла",
+	"visualeditor-cite-tool-name-web": "Веб-сайт",
+	"cite-ve-dialog-reference-editing-reused": "Бу белги бетде $1 {{PLURAL:$1|кере}} хайырландырылады.",
+	"cite-ve-dialog-reference-options-group-label": "Бу къауумну хайырландыр",
+	"cite-ve-dialog-reference-options-group-placeholder": "Баш джибериуле",
+	"cite-ve-dialog-reference-options-name-label": "Бу ат бла джангыдан хайырландыр",
+	"cite-ve-dialog-reference-options-section": "Параметрле",
+	"cite-ve-dialog-reference-title": "Белгиле",
+	"cite-ve-dialog-reference-useexisting-full-label": "Бу бетде алгъадан болгъан къайнакъны джангыдан хайырландырыу",
+	"cite-ve-dialog-reference-useexisting-label": "Болгъан белгини хайырланыу",
+	"cite-ve-dialog-reference-useexisting-tool": "Джангыдан хайырландырыу",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "Орта белгилени тизмеси",
+	"cite-ve-dialog-referenceslist-contextitem-description-named": "\"$1\" къауум ючюн белгилени тизмеси",
+	"cite-ve-dialog-referenceslist-title": "Белгиле",
+	"cite-ve-dialogbutton-reference-full-label": "Тамал форма",
+	"cite-ve-dialogbutton-reference-title": "Белгиле",
+	"cite-ve-dialogbutton-reference-tooltip": "Тамал",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Белгиле",
+	"cite-ve-reference-input-placeholder": "Бар болгъан къайнакъланы ичинде изле",
+	"cite-ve-referenceslist-isempty": "Бу тизмеге къошар ючюн бу бетде «$1» къауум бла къайнакъ джокъду.",
+	"cite-ve-referenceslist-isempty-default": "Бу бетде бу тизмеге къошар ючюн къайнакъ джокъду.",
+	"cite-ve-referenceslist-missingref": "Бу къайнакъ шаблонда неда башха генерация этилген блокда салыннганды эмда бусагъатда аннга джангыз вики-текстни тюрлендириу режимде редакторлукъ этерге болады.",
+	"cite-ve-toolbar-group-label": "Цитата этиу"
+}

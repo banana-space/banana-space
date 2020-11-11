@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shirayuki"
+		]
+	},
+	"pfunc_expr_unrecognised_word": "Expression error: Unrecognised word \"$1\".",
+	"pfunc_expr_unrecognised_punctuation": "Expression error: Unrecognised punctuation character \"$1\"."
+}

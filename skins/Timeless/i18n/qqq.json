@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Isarra",
+			"Liuxinyu970226",
+			"Robby",
+			"Amire80",
+			"Umherirrender",
+			"Pamputt"
+		]
+	},
+	"skinname-timeless": "{{name}}",
+	"timeless-desc": "{{desc|what=skin|name=Timeless|url=https://www.mediawiki.org/wiki/Skin:Timeless}}",
+	"timeless-search-placeholder": "Main search input placeholder text. Feel free to use <code><nowiki>{{PLURAL:{{NUMBEROFARTICLES}}|page|pages}}</nowiki></code>.",
+	"timeless-loggedin": "Label for logged in users' user menu (if their username is too long to fit)",
+	"timeless-anonymous": "Label for anonymous (not logged in) user menu\n{{Identical|Anonymous}}",
+	"timeless-loggedinas": "Note for personal menu for logged in users noting their current username\n\nParameters:\n* $1 - username",
+	"timeless-notloggedin": "Note for personal menu for anonymous users clarifying that they are not logged in\n{{Identical|Not logged in}}",
+	"timeless-userpage": "User page/profile link label in the personal menu\n{{Identical|User page}}\nParameters:\n* $1 - username, used for GENDER",
+	"timeless-talkpage": "Talk page link label in the personal menu.\nParameters:\n* $1 - username, used for GENDER",
+	"timeless-pagelog": "Label for Special:Log link for the page. The page is singular.",
+	"timeless-more": "Label for the more tools dropdown menu in the page actions toolbar\n{{Identical|More}}",
+	"timeless-sitetools": "Label for general site tools menu in sidebar",
+	"timeless-pageactions": "Label for some page actions",
+	"timeless-userpagetools": "Label for actions associated with a userpage",
+	"timeless-pagemisc": "Label for more tools\n{{Identical|More}}",
+	"timeless-namespaces": "Label for page namespaces and watch tools\n{{Identical|Namespace}}",
+	"timeless-pagetools": "Label for other page tools",
+	"timeless-languages": "Label for the other languages dropdown\n{{Identical|Language}}",
+	"timeless-sitetitle": "{{ignore}}\nSite title for site banner",
+	"timeless.css": "{{optional}}\nCSS applied to users using Timeless skin.",
+	"timeless.js": "{{optional}}\nJS for users using Timeless skin."
+}

@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hwangjy9",
+			"Revi",
+			"고솜",
+			"Ykhwong",
+			"아라",
+			"Garam",
+			"Nuevo Paso"
+		]
+	},
+	"skinname-timeless": "타임리스",
+	"timeless-desc": "브랜든 해리스의 윈터 프로토타입 이후 개발된 타임리스 스킨 및 위키미디어 재단의 다양한 스타일.",
+	"timeless-search-placeholder": "문서 {{NUMBEROFARTICLES}}개 검색",
+	"timeless-loggedin": "사용자 계정",
+	"timeless-anonymous": "익명 사용자",
+	"timeless-loggedinas": "'''$1'''님으로 로그인됨",
+	"timeless-notloggedin": "로그인하지 않음",
+	"timeless-userpage": "{{GENDER:$1|사용자}} 문서",
+	"timeless-talkpage": "{{GENDER:$1|사용자}}토론",
+	"timeless-pagelog": "문서 기록",
+	"timeless-more": "더 보기",
+	"timeless-sitetools": "위키 도구",
+	"timeless-pageactions": "문서 도구",
+	"timeless-userpagetools": "사용자 문서 도구",
+	"timeless-pagemisc": "더 보기",
+	"timeless-namespaces": "이름공간",
+	"timeless-pagetools": "문서 행위",
+	"timeless-languages": "언어"
+}

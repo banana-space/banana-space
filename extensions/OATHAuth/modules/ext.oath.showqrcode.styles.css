@@ -1,0 +1,13 @@
+.client-nojs .mw-display-qrcode {
+	display: none;
+}
+
+kbd {
+	font-family: monospace, monospace;
+	white-space: nowrap;
+	font-size: larger;
+}
+
+fieldset {
+	page-break-inside: avoid;
+}

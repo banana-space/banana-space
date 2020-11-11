@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sasan700",
+			"Умар"
+		]
+	},
+	"imagemap_desc": "Таро хуьлуьйту картан суьрта таӀийча латораш билгалдан <code>&lt;imagemap&gt;</code> теган гӀуьнца",
+	"imagemap_invalid_image": "ГӀалат: нийса доцу я доцуш долу сурт",
+	"imagemap_no_link": "ГӀалат: $1 могӀанан чаккхехь нийса йоцу хьажорг ю",
+	"imagemap_invalid_title": "ГӀалат: могӀана $1 хьажориган корта нийса яц",
+	"imagemap_description": "Суьртах лаьцна"
+}

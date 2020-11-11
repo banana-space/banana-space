@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dead3y3",
+			"ZaDiak"
+		]
+	},
+	"inputbox-desc": "Επιτρέπει την περίληψη προκαθορισμένων φορμών HTML",
+	"inputbox-error-no-type": "Δεν έχετε καθορίσει τον τύπο του κουτιού εισόδου προς δημιουργία.",
+	"inputbox-error-bad-type": "Τύπος κουτιού εισόδου \"$1\" δεν αναγνωρίστηκε.<br />\nΠαρακαλώ ορίστε \"create\", \"comment\", \"search\", \"search2\" ή \"fulltext\".",
+	"inputbox-tryexact": "Δοκιμάστε την επακριβή αντιστοιχία.",
+	"inputbox-searchfulltext": "Αναζήτηση με το πλήρες κείμενο",
+	"inputbox-createarticle": "Δημιουργία σελίδας",
+	"inputbox-ns-main": "Κύριος"
+}

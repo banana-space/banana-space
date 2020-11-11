@@ -1,0 +1,34 @@
+This document describes how event hooks work in the Renameuser extension.
+
+For a more comprehensive guide to hooks, navigate to your root MediaWiki
+directory and read docs/hooks.txt.
+
+== Events and parameters ==
+This is a list of known events and parameters; please add to it if you're going
+to add events to the Renameuser extension.
+
+'RenameUserAbort': Allows the renaming to be aborted
+$uid: The user ID
+$oldusername: The old username
+$newusername: The new username
+
+'RenameUserComplete': Called after a user was renamed
+$uid: The user ID
+$old: The new username
+$new: The old username
+
+'RenameUserPreRename': Called before a user is renamed
+$uid: The user ID
+$old: The new username
+$new: The old username
+
+'RenameUserSQL': Called in the constructer of RenameuserSQL (which performs
+	the actual renaming of users)
+&$this: RenameuserSQL
+
+'RenameUserWarning': Called on Special:Renameuser before a user is renamed.
+	Will show the given warnings to the user and ask for a confirmation.
+$oun: The old username
+$nun: The new username
+&$warnings: Array with message key(s) or message key(s) and parameter(s) for
+	the warnings to be shown

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Smeira"
+		]
+	},
+	"titleblacklist-desc": "Dälon guvanes ad proibön padi- e kalijafi medü [[MediaWiki:Titleblacklist|blägalised]] e [[MediaWiki:Titlewhitelist|vietalised]].",
+	"titlewhitelist": "# Atos binon vietalised tiädas. Gebolös el „#“ pro küpets.",
+	"titleblacklist-forbidden-edit": "Tiäd: „$2“ no dalon pajafön.\nTiäd at binon in blägalised as: <code>$1</code>",
+	"titleblacklist-forbidden-move": "Pad: „$2“ no kanon topätükön sui pad: „$3“, bi tiäd: „$3“ no dalon pajafön. Tiäd at binon in blägalised as: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Ragivanem: „$2“ no dalon pajafön. Ragivanem at binon in blägalised as: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Gebananem: „$2“ no dalon pajafön.\nGebananem at binon in blägalised as: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Lien|Liens}} sököl in tiädablägalised no {{PLURAL:$1|lonöfon|lonöfons}}; gudükumolös {{PLURAL:$1|oni|onis}} bü dakip:",
+	"right-tboverride": "Nedemön blägalisedi tiädas"
+}

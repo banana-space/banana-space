@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cekli829",
+			"PPerviz",
+			"Vago",
+			"Vugar 1981",
+			"Wertuose"
+		]
+	},
+	"prefs-gadgets": "Qadjetlər",
+	"gadgets": "Qadcetlər",
+	"gadgetusage-gadget": "Qadcet",
+	"gadgets-title": "Qadjetlər",
+	"gadgets-uses": "İstifadə",
+	"gadgets-export": "İxrac",
+	"gadgets-export-title": "Qadjet ixracı",
+	"gadgets-not-found": "Qadjet \"$1\" tapılmadı.",
+	"gadgets-export-download": "Yüklə"
+}

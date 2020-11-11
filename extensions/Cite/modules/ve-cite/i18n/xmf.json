@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Silovan",
+			"David1010"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "წიგნი",
+	"visualeditor-cite-tool-name-journal": "ჟურნალი",
+	"visualeditor-cite-tool-name-news": "სიახლეები",
+	"visualeditor-cite-tool-name-web": "ვებ-გვერდი",
+	"cite-ve-dialog-reference-editing-reused": "თე რსხილი ხასჷლას {{PLURAL:$1|-შა}} გიმირინუაფუ.",
+	"cite-ve-dialog-reference-options-group-label": "თე ბუნა გიმორინაფა",
+	"cite-ve-dialog-reference-options-group-placeholder": "ზოგადი წყუეფი",
+	"cite-ve-dialog-reference-options-name-label": "კინე მაჟირაშა გიმორინაფა თე ჯოხოთ",
+	"cite-ve-dialog-reference-options-section": "პარამეტრეფი",
+	"cite-ve-dialog-reference-title": "სქოლიო",
+	"cite-ve-dialog-reference-useexisting-full-label": "ხასჷლას უკვე არსებული წყუშ კინ მაჟირაშა გიმორინაფა",
+	"cite-ve-dialog-reference-useexisting-label": "არსებული სქოლიოშ გიმორინაფა",
+	"cite-ve-dialog-reference-useexisting-tool": "კინ გიმორინაფა",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "თარი სქოლიოშ ერკებული",
+	"cite-ve-dialog-referenceslist-contextitem-description-named": "ბუნა „$1“-იშ სქოლიოშ ერკებული",
+	"cite-ve-dialog-referenceslist-title": "სქოლიოშ ერკებული",
+	"cite-ve-dialogbutton-citation-educationpopup-title": "ციტატეფი",
+	"cite-ve-dialogbutton-reference-full-label": "უბრალო ფორმა",
+	"cite-ve-dialogbutton-reference-title": "სქოლიო",
+	"cite-ve-dialogbutton-reference-tooltip": "ოგაჭგაფუე",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "სქოლიოშ ერკებული"
+}

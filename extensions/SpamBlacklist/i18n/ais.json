@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Benel",
+			"Bunukwiki"
+		]
+	},
+	"spam-blacklist": "#<!—amana pisumad tina tusil --> <pre>\n#  amahicahica micunus ta kasabelih a hekal URL i tina piazihan tu sulit amalangat.\n# tina piazihan tu sulit silaheciay a subal dada’ i tina Wiki, kahica nu kawaw piazih tu tatenga’ay sacahamin-subal malangat piazihan tu sulit.\n#  mahizaay a cudad piazih tu tatenga’ay  https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# kamu-sakilul kese tinaku isasa’ay:\n#   * amahicahica nay \"#\" tatebanan nu nisulitan angangan a tusil u buhci tu kamu amin \n#   * amahicahica caay inayi’ ku cacan a tusil apakuhica tatungusay pakatineng a zateng sapisasutili’ URL a angangan-kikay kalungangan  \n #</pre> <!—amana pisumad tina tusil -->",
+	"spam-whitelist": "#<!—amana pisumad tina tusil --> <pre>\n#  amahicahica hekal URL itini piazihan-tu-sulit  *caay* amalangat \n# kanahatu macunus tuway i malangatay a piazihan-tu-sulit.\n#\n# kamu-sakilul kese mahiza isasa’ay:\n# * amahicahica nay \"#\" tatebanan nu nisulitan  angangan a tusil u buhci tu kamu amin \n# * amahicahica caay inayi’ ku cacan a tusil apakuhica tatungusay pakatineng a zateng sapisasutili’ URL a angangan-kikay kalungangan \n \n#</pre> <!—amana pisumad tina tusil -->",
+	"email-blacklist": "#<!—amana pisumad tina tusil --> <pre>\n#  amahicahica pangangan saca patayzaan a imyiyo(Email) puenengan i tina piazihan tu sulit amalangat.\n# tina piazihan tu sulit silaheciay a subal dada’ i tina Wiki, kahica nu kawaw piazih tu tatenga’ay sacahamin-subal malangat piazihan tu sulit.\n#  mahizaay a cudad piazih tu tatenga’ay  https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# kamu-sakilul kese tinaku isasa’ay:\n#   * amahicahica nay \"#\" tatebanan nu nisulitan  angangan a tusil u buhci tu kamu amin\n#   *  amahicahica caay nayi’ ku cacan a silsil apahica ku tatungusay pakatineng a zateng sapihica sasutili’ imyiyo(Email) puenengan a angangan-kikay kalungangan  \n#</pre> <!—amana pisumad tina tusil -->",
+	"email-whitelist": "#<!—amana pisumad tina tusil --> <pre>\n#  amahicahica hekal URL itini piazihan-tu-sulit  *caay* amalangat \n# kanahatu macunus tuway i malangatay a piazihan-tu-sulit。\n#\n# kamu-sakilul kese mahiza isasa’ay：\n# * amahicahica nay \"#\" tatebanan nu nisulitan  angangan a tusil u buhci tu kamu amin \n# * amahicahica caay inayi’ ku cacan a tusil apakuhica tatungusay pakatineng a zateng sapisasutili’ URL a angangan-kikay kalungangan \n \n #</pre> <!—amana pisumad tina tusil -->　",
+	"spam-blacklisted-email": "pasilsil tuway milangat piazihan-tu-sulit a imyiyo(email) puenengan",
+	"spam-blacklisted-email-text": "numisuay imyiyo(email) puenengan ayza mapacumud tu malangat  piazihan tu sulit, a mitena’ tunumisu pabahel tu imyiyo (email) pabeli tu zumaay a misaungayay.",
+	"spam-blacklisted-email-signup": "nipabeliay a imyiyo(email) puenengan ayzasa mapasilsil tu malangat piazihan tu sulit，la’cus pisaungay",
+	"spam-invalid-lines": "isasa’ patahtah a langat piazihan-tu-sulit izaw ku{{PLURAL:$1|cacay|yadah}} pisaungay tu la’cusay a tatungusay pakatineng a zateng, kanca misumad kyu kapah misuped tina kasabelih.",
+	"spam-blacklist-desc": "i tatungusay pakatineng a zateng tu palana’an a mitena’ patahtah sakaluk, taneng malangat ku kasabelih labu’ay URL atu pangangan tu misaungayay a Email ngangan nu luma’.",
+	"log-name-spamblacklist": "patahtah a malangat ku nasulitan",
+	"log-description-spamblacklist": "tina belih nasulit tu sacahamin matatungus patahtah malangat piazihan-tu-sulit a sikawaw.",
+	"logentry-spamblacklist-hit": "{{GENDER:$2|$1}} i $3 mitanam micunus a $4 matatungus patahtah malangat piazihan tu sulit labu’ay kasacacay.",
+	"right-spamblacklistlog": "ciwsace patahtah malangat nasulitan-nazipa’an"
+}

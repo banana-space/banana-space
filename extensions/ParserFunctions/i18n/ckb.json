@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Asoxor",
+			"Lost Whispers",
+			"Muhammed taha",
+			"Épine"
+		]
+	},
+	"pfunc_time_error": "ھەڵە: کات نادروستە.",
+	"pfunc_expr_unrecognised_word": "ھەڵەی Expression: وشەی نەناسراو \"$1\".",
+	"pfunc_expr_unexpected_operator": "ھەڵەی دەربڕین: کرداری $1 پێشبینی نەکراوە.",
+	"pfunc_expr_missing_operand": "ھەڵەى دەربڕین: کارلەسەکراوی $1 ونبووە.",
+	"pfunc_expr_unrecognised_punctuation": "ھەڵەی دەربڕین: پیتێکی نەناسراو ھەیە \"$1\"",
+	"pfunc_expr_division_by_zero": "دابەشکردن بەسەر سفردا."
+}

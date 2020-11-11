@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"specialpages-group-oath": "Autendicazione a Doje Fattore",
+	"oathauth-account": "Nome d'u cunde:",
+	"oathauth-secret": "Chiave segrete de autendicazione a Doje Fattore:",
+	"oathauth-enable": "Abbilite l'Autendicazione a Doje Fattore",
+	"oathauth-token": "Gettone",
+	"oathauth-disable": "Disabbilite l'Autendicazione a Doje Fattore",
+	"oathauth-auth-token-label": "Gettone",
+	"apihelp-oathvalidate-example-1": "Valide 'nu gettone pe l'utende de mò",
+	"apihelp-oathvalidate-example-2": "Valide 'nu gettone pe l'utende <kbd>Esembie</kbd>"
+}

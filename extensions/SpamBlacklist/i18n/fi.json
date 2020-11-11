@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cimon Avaro",
+			"Crt",
+			"Linnea",
+			"Nike",
+			"Olli",
+			"Pxos",
+			"01miki10"
+		]
+	},
+	"spam-blacklist": "  #<!-- leave this line exactly as it is --> <pre>\n # Tämän listan säännöillä voi estää ulkopuolisiin sivustoihin viittaavien osoitteiden lisäämisen.\n # Tämä lista koskee vain tätä wikiä. Tutustu myös järjestelmänlaajuiseen mustaan listaan.\n # Lisätietoja on osoitteessa http://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- Älä koske tähän riviin lainkaan --> <pre>\n#\n# Syntaksi on seuraavankaltainen:\n#   * Kaikki #-merkistä lähtien rivin loppuun asti on kommenttia\n#   * Jokainen ei-tyhjä rivi on säännöllisen lausekkeen osa, joka tunnistaa vain osoitteissa olevat verkkotunnukset.\n\n #</pre> <!-- Älä koske tähän riviin lainkaan -->",
+	"spam-whitelist": "  #<!-- älä koske tähän riviin --> <pre>\n # Tällä sivulla on säännöt, joihin osuvia ulkoisia osoitteita ei estetä, vaikka ne olisivat mustalla listalla.\n#\n# Syntaksi on seuraava:\n#  * Kommentti alkaa #-merkistä ja jatkuu rivin loppuun\n#  * Muut ei-tyhjät rivit tulkitaan säännöllisen lausekkeen osaksi, joka tutkii vain osoitteissa olevia verkko-osoitteita.\n\n #</pre> <!-- älä koske tähän riviin -->",
+	"email-blacklist": "  #<!-- leave this line exactly as it is --> <pre> \n# Tällä listalla olevia sähköpostiosoitteita estetään rekisteröitymästä tai lähettämästä sähköpostia\n# Tämä lista koskee vain tätä wikiä. Tutustu myös järjestelmänlaajuiseen mustaan listaan.\n# Lisätietoja on osoitteessa https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# Syntaksi on seuraavankaltainen:\n#   * Kaikki #-merkistä lähtien rivin loppuun asti on kommenttia\n#   * Jokainen ei-tyhjä rivi on säännöllisen lausekkeen osa, joka tunnistaa vain sähköpostiosoitteissa olevat verkkotunnukset.\n\n #</pre> <!-- Älä koske tähän riviin lainkaan -->",
+	"email-whitelist": " #<!-- älä koske tähän riviin --> <pre>\n# Tätä luetteloa vastaavia sähköpostiosoitteita *ei* estetä, vaikka \n# musta lista estäisi ne.\n#\n# Syntaksi on seuraava:\n#   * Kommentti alkaa #-merkistä ja jatkuu rivin loppuun\n#   * Muut ei-tyhjät rivit tulkitaan säännöllisen lausekkeen osaksi, joka tutkii vain sähköpostiosoitteita\n\n #</pre> <!-- älä koske tähän riviin -->",
+	"spam-blacklisted-email": "Mustalla listalla oleva sähköpostiosoite",
+	"spam-blacklisted-email-text": "Sähköpostisi on tällä hetkellä mustalla listalla, etkä voi lähettää sähköpostia muille käyttäjille.",
+	"spam-blacklisted-email-signup": "Annettu sähköpostiosoite on tällä hetkellä mustalla listalla.",
+	"spam-invalid-lines": "Listalla on {{PLURAL:$1|seuraava virheellinen säännöllinen lauseke, joka|seuraavat virheelliset säännölliset lausekkeet, jotka}} on korjattava ennen tallentamista:",
+	"spam-blacklist-desc": "Säännöllisiä lausekkeita (reg-ex) tukeva roskalinkkejä torjuva työkalu, jonka avulla internet-osoitteita (URL) sivuilla ja sähköpostiosoitteissa voidaan asettaa mustalle listalle. Tarkoitettu kirjautuneille käyttäjille.",
+	"log-name-spamblacklist": "Roskalinkkien torjuntalistan loki",
+	"log-description-spamblacklist": "Nämä tapahtumat ovat osumia roskalinkkien torjuntalistalla.",
+	"logentry-spamblacklist-hit": "$1 sai aikaan osuman roskalinkkien torjuntalistalla kohteessa $3 yrittäessään lisätä $4",
+	"right-spamblacklistlog": "Tarkastella roskalinkkien torjuntalistan lokia",
+	"action-spamblacklistlog": "nähdä roskalinkkien torjuntalistan lokia"
+}

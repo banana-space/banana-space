@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Snævar"
+		]
+	},
+	"fancycaptcha-addurl": "Breytingin þín inniheldur viðbætta ytri tengla.\nTil þess að verjast sjálfvirku auglýsingarusli, biðjum við þig vinsamlegast að slá inn orðin sem birtast hér fyrir neðan í reitinn ([[Special:Captcha/help|frekari upplýsingar]]):",
+	"fancycaptcha-badlogin": "Til þess að verjast gegn sjálfvirkum leyniorðaárásum, biðjum við þig vinsamlegast að slá inn orðin sem birtast hér fyrir neðan í reitinn ([[Special:Captcha/help|frekari upplýsingar]]):",
+	"fancycaptcha-captcha": "Öryggis athugun",
+	"fancycaptcha-accountcreate": "Til þess að verjast sjálfvirkri stofnun aðganga, biðjum við þig vinsamlegast að slá inn orðin sem birtast hér fyrir neðan í reitinn ([[Special:Captcha/help|frekari upplýsingar]]):",
+	"fancycaptcha-create": "Til þess að búa til þessa síðu, vinsamlegast sláðu inn orðin sem birtast hér fyrir neðan í reitinn ([[Special:Captcha/help|frekari upplýsingar]]):",
+	"fancycaptcha-edit": "Til þess að breyta þessari síðu, vinsamlegast sláðu inn orðin að neðan í reitinn ([[Special:Captcha/help|frekari upplýsingar]]):",
+	"fancycaptcha-imgcaptcha-ph": "Sláðu inn textann á myndinni",
+	"fancycaptcha-sendemail": "Til þess að verjast sjálfvirkum auglýsingapósti, biðjum við þig vinsamlegast að slá inn orðin hér fyrir neðan í reitinn ([[Special:Captcha/help|frekari upplýsinngar]]):",
+	"fancycaptcha-reload-text": "Endurhlaða"
+}

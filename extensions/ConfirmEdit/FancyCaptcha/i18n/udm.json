@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Irus",
+			"Wadorgurt"
+		]
+	},
+	"fancycaptcha-captcha": "Кышкыттэмлыкез эскерон",
+	"fancycaptcha-accountcreate": "Учётной записьёсыз автоматической кылдытонлэсь викиез возьман понна куриськомы тӥледыз гожтыны кылъёсыз, кудъёсыз адӟиськизы улӥ рамкаын ([[Special:Captcha/help|тупенгес…]]):",
+	"fancycaptcha-imgcaptcha-ph": "Гожтэ текстэз, кудзэ тӥ суредын адӟиськоды",
+	"fancycaptcha-reload-text": "Выльдыны"
+}

@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Grondin",
+			"Sherbrooke",
+			"Verdy p",
+			"Macofe",
+			"Mattho69",
+			"Dcausse",
+			"Orlodrim",
+			"Wladek92",
+			"Gomoko"
+		]
+	},
+	"syntaxhighlight-desc": "Fournit la mise en valeur de la syntaxe par la balise <code>&lt;syntaxhighlight&gt;</code> en utilisant [http://pygments.org/ Pygments - coloration syntaxique Python]",
+	"syntaxhighlight-error-category": "Pages avec des erreurs de coloration syntaxique",
+	"syntaxhighlight-error-category-desc": "Il y a eu une erreur lors de la tentative de mise en valeur du code inclus sur la page.",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Code",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Langage",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(aucun)",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "Afficher les numéros de ligne",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-startingline": "Numéro de ligne de début",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "Bloc de code",
+	"syntaxhighlight-error-pygments-invocation-failure": "Impossible d'appeler Pygments",
+	"syntaxhighlight-error-unknown-language": "Langue inconnue \"$1\"",
+	"syntaxhighlight-error-exceeds-size-limit": "Code de taille $1 {{PLURAL:$1|octets}} qui dépasse le  maximum autorisé $2 {{PLURAL:$2|octets}}"
+}

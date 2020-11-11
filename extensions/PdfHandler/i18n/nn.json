@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Harald Khan",
+			"Njardarlogar"
+		]
+	},
+	"pdf-desc": "Handering av PDF-vising i biletmodus",
+	"pdf_no_metadata": "Kan ikkje henta metadata frå PDF",
+	"pdf_page_error": "Sidenummer overstig talet på sider i dokumentet"
+}

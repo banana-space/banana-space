@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hanberke"
+		]
+	},
+	"gadgets-desc": "Ulanyjylaryň [[Special:Preferences#mw-prefsection-gadgets|ileri tutmalarynda]] ýörite [[Special:Gadgets|CSS we JavaScript gajetlerini]] saýlamaklaryna rugsat berýär",
+	"prefs-gadgets": "Gajetler",
+	"gadgets": "Gajetler",
+	"gadgets-title": "Gajetler",
+	"gadgets-uses": "Ulanýar",
+	"gadgets-export": "Eksportirle",
+	"gadgets-export-title": "Gajet eksporty",
+	"gadgets-not-found": "\"$1\" gajeti tapylmady.",
+	"gadgets-export-download": "Göçürip al"
+}

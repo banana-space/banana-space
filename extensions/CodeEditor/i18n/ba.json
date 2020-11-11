@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sagan"
+		]
+	},
+	"codeeditor-desc": "Синтаксисты JavaScript- һәм CSS-бит ярҙамында мөхәррирләү  [https://ace.c9.io/ редактор Ace]",
+	"codeeditor-next-annotation": "Киләһе аннотацияға күсергә",
+	"codeeditor-toolbar-toggle": "Мөхәррир кодын алыштырырға",
+	"codeeditor-save-with-errors": "Документта хаталар бар. Һаҡларға теләйһегеҙме?",
+	"codeeditor-invisibleChars-toggle": "Күренмәй торған символдар күһәткесенә күсеү",
+	"codeeditor-lineWrapping-toggle": "Юл күсергесенә күсеү",
+	"codeeditor-searchReplace-toggle": "Диалог эҙләү һәм тексты алмаштырыу күсергесе",
+	"codeeditor-gotoline": "... номерлы юлға күсеү",
+	"codeeditor-indent": "Юл башында буш ара",
+	"codeeditor-outdent": "Һулға күсеү"
+}

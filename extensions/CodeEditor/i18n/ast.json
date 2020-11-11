@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Xuacu"
+		]
+	},
+	"codeeditor-desc": "Edición con resaltáu de sintaxis pa páxines JavaScript y CSS usando [https://ace.c9.io/ l'editor Ace]",
+	"codeeditor-next-annotation": "Dir a la siguiente anotación",
+	"codeeditor-toolbar-toggle": "Activar o desactivar l'editor de códigu",
+	"codeeditor-save-with-errors": "El documentu contien errores. ¿Tas seguru de que quies guardalu?",
+	"codeeditor-invisibleChars-toggle": "Conmutar caráuteres invisibles",
+	"codeeditor-lineWrapping-toggle": "Conmutar l'axuste de llinies",
+	"codeeditor-searchReplace-toggle": "Conmutar el cuadru de buscar y trocar",
+	"codeeditor-gotoline": "Dir a la llinia númberu...",
+	"codeeditor-gotoline-placeholder": "llinia[:columna]",
+	"codeeditor-gotoline-prompt": "Escribe un númberu de llinia",
+	"codeeditor-indent": "Aumentar sangría",
+	"codeeditor-outdent": "Amenorgar sangría",
+	"codeeditor-error-title": "Faltó una dependencia",
+	"codeeditor-error-message": "CodeEditor necesita que tea cargáu el WikiEditor."
+}

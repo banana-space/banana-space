@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"multimediaviewer-optin-pref": "Abbilite 'u <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Media Viewer]</span>",
+	"multimediaviewer-thumbnail-error-retry": "pruève arrete",
+	"multimediaviewer-license-pd": "Dominie pubbleche",
+	"multimediaviewer-geolocation": "Posizione: $1"
+}

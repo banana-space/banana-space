@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bennylin",
+			"IvanLanin",
+			"Iwan Novirion",
+			"Rex"
+		]
+	},
+	"nuke": "Penghapusan massal (Nuklir)",
+	"action-nuke": "menghapus massal halaman",
+	"nuke-desc": "Memberikan kemampuan bagi pengurus untuk [[Special:Nuke|menghapus halaman secara massal]]",
+	"nuke-nopages": "Tak ditemukan halaman baru dari [[Special:Contributions/$1|{{GENDER:$1|$1}}]] di perubahan terbaru.",
+	"nuke-list": "Halaman berikut baru saja dibuat oleh [[Special:Contributions/$1|{{GENDER:$1|$1}}]]; berikan komentar dan tekan tombol untuk menghapus halaman-halaman tersebut.",
+	"nuke-list-multiple": "Halaman berikut baru dibuat;\nberikan komentar dan tekan tombol untuk menghapus.",
+	"nuke-defaultreason": "Penghapusan masal halaman-halaman yang dibuat oleh [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
+	"nuke-multiplepeople": "Penghapusan masal halaman yang baru saja ditambahkan",
+	"nuke-tools": "Perkakas ini memungkinkan penghapusan massal halaman-halaman yang baru saja dibuat oleh seorang pengguna ataupun alamat IP.\nMasukkan nama pengguna atau alamat IP untuk mendapat daftar halaman yang dapat dihapus atau kosongkan untuk semua pengguna.",
+	"nuke-submit-user": "Jalankan",
+	"nuke-toggleinvert": "Batalkan (invert)",
+	"nuke-submit-delete": "Hapus yang terpilih",
+	"right-nuke": "Melakukan penghapusan massal halaman",
+	"nuke-select": "Pilih: $1",
+	"nuke-userorip": "Nama pengguna, alamat IP, atau kosong:",
+	"nuke-maxpages": "Jumlah maksimum halaman:",
+	"nuke-editby": "Dibuat oleh [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
+	"nuke-deleted": "Halaman '''$1''' sudah dihapus.",
+	"nuke-not-deleted": "Halaman [[:$1]] '''tidak bisa''' dihapus.",
+	"nuke-delete-more": "[[Special:Nuke|Hapus lagi]]",
+	"nuke-pattern": "Pola untuk nama halaman:",
+	"nuke-nopages-global": "Tidak ditemukan halaman baru dalam [[Special:RecentChanges|perubahan terbaru]].",
+	"nuke-viewchanges": "lihat perubahan",
+	"nuke-namespace": "Batasan dari ruang nama:",
+	"nuke-linkoncontribs": "hapus massal",
+	"nuke-linkoncontribs-text": "Hapus massal halaman-halaman yang kontributornya hanya pengguna ini"
+}

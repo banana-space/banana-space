@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Incelemeelemani",
+			"Hbseren",
+			"Sayginer",
+			"HakanIST"
+		]
+	},
+	"oathauth-desc": "HMAC tabanlı tek kullanımlık şifreler kullanan bir kimlik doğrulama desteği sağlar",
+	"specialpages-group-oath": "İki faktörlü kimlik doğrulama",
+	"oathauth-account": "İki Faktörlü Hesap Adı:",
+	"oathauth-secret": "İki Faktörlü Gizli Anahtar:",
+	"oathauth-enable": "İki Faktörlü Doğrulamayı Etkinleştirin",
+	"oathauth-scratchtokens": "Aşağıdaki listede, yalnızca bir defa kullanımlık anahtar bulunmaktadır. Bu semboller yalnızca bir defalık kullanım içindir ve acil durum kullanımlarına özel olabilir. Lütfen aşağıda yazılı anahtarı bir yere yazın ve bunu güvenli bir yerde saklayın. Eğer telefonunuzu kaybederseniz, bu simgeler hesabınızı kurtarmanın tek yolu olacaktır. Bu simgeler asla tekrar gösterilmeyecektir.",
+	"oathauth-token": "Anahtar",
+	"oathauth-disable": "İki Faktörlü Kimlik Doğrulama Devre Dışı",
+	"oathauth-validatedoath": "İki Faktörlü kimlik onaylandı. İki faktörlü kimlik doğrulama artık etkinleştirilecektir.",
+	"oathauth-failedtovalidateoath": "İki faktörlü kimlik doğrulama başarısız oldu",
+	"oathauth-disabledoath": "İki faktörlü kimlik doğrulama devre dışı.",
+	"oathauth-prefs-label": "İki faktörlü kimlik doğrulama:",
+	"oathauth-step1": "1. Adım: Uygulamayı indirin",
+	"oathauth-step2": "2. Adım: QR kodunu tarayın",
+	"oathauth-step4": "4. Adım: Doğrulama",
+	"grant-group-authentication": "Kimlik doğrulama işlemlerini kendin ve diğerleri için uygula"
+}

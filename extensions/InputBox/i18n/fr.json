@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Crochet.david",
+			"IAlex",
+			"Kghbln",
+			"Sherbrooke",
+			"Wyz",
+			"Gomoko",
+			"Zetud"
+		]
+	},
+	"inputbox-desc": "Permet l’inclusion de formulaires HTML prédéfinis.",
+	"inputbox-error-no-type": "Vous n’avez pas précisé le type de la boîte d’entrée à créer.",
+	"inputbox-error-bad-type": "Type de boîte entrée « $1 » non reconnue.\nIndiquez une option parmi « create », « comment », « search », « searche2 » ou « fulltext ».",
+	"inputbox-tryexact": "Essayez la correspondance exacte",
+	"inputbox-searchfulltext": "Recherche en texte intégral",
+	"inputbox-createarticle": "Créer une page",
+	"inputbox-movearticle": "Renommer la page",
+	"inputbox-postcomment": "Nouvelle section",
+	"inputbox-postcommenttitle": "Nouvelle section",
+	"inputbox-ns-main": "Principal"
+}

@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Teslaton"
+		]
+	},
+	"oathauth-desc": "Poskytuje podporu pre autentifikáciu pomocou jednorázových hesiel, založených na HMAC",
+	"specialpages-group-oath": "Dvojfaktorová autentifikácia",
+	"oathauth-account": "Názov účtu:",
+	"oathauth-secret": "Tajný kľúč pre dvojfaktorovú autentifikáciu:",
+	"oathauth-enable": "Zapnutie dvojfaktorovej autentifikácie",
+	"oathauth-scratchtokens": "Nasledovný zoznam obsahuje jednorazové kódy. Tieto kódy možno použiť iba raz a slúžia pre prípad núdze. Opíšte si ich a uchovávajte ich na bezpečnom mieste. Ak stratíte svoj telefón, budú tieto kódy jediným spôsobom, ako zachrániť svoj účet. Tieto kódy sa už nikdy opätovne nezobrazia.",
+	"oathauth-token": "Kód",
+	"oathauth-disable": "Vypnutie dvojfaktorovej autentifikácie",
+	"oathauth-validatedoath": "Dvojfaktorové prihlásenie overené. Odteraz bude vynucovaná dvojfaktorová autentifikácia.",
+	"oathauth-failedtovalidateoath": "Nepodarilo se overiť dvojfaktorové prihlásenie.",
+	"oathauth-disabledoath": "Dvojfaktorová autentifikácia vypnutá.",
+	"oathauth-prefs-label": "Dvojfaktorová autentifikácia:",
+	"oathauth-step1": "Krok 1: Stiahnite si program pre dvojfaktorovú autentifikáciu",
+	"oathauth-step1-test": "Stiahnite si program alebo mobilnú aplikáciu (ako napr. Google Authenticator) pre dvojfaktorovú autentifikáciu",
+	"oathauth-step2": "Krok 2: Naskenujte QR kód",
+	"oathauth-step2alt": "Alebo zadajte tajomstvo manuálne:",
+	"oathauth-step3": "Krok 3: Zapíšte si jednorazové kódy",
+	"oathauth-step4": "Krok 4: Overenie",
+	"oathauth-entertoken": "Pre overenie zadajte kód z vášho autentifikačného zariadenia:",
+	"right-oathauth-enable": "Zapnutie dvojfaktorovej autentifikácie",
+	"action-oathauth-enable": "zapnúť dvojfaktorovú autentifikáciu",
+	"oathauth-auth-token-label": "Kód",
+	"oathauth-auth-token-help": "Jednorazové heslo používané ako druhý faktor dvojfaktorovej autentifikácie.",
+	"oathauth-auth-ui": "Zadajte prosím overovací kód zo svojho autentifikačného zariadenia",
+	"oathauth-throttled": "Príliš veľa pokusov o overenie! Počkajte prosím $1.",
+	"oathauth-login-failed": "Overenie sa nepodarilo.",
+	"oathauth-describe-provider": "Dvojfaktorová autentifikácia (OATH).",
+	"grant-group-authentication": "Vykonávanie autentifikačných akcií pre seba alebo pre ostatných",
+	"grant-oath": "Prístup k informáciám o dvojfaktorovej autentifikácii (OATH) k sebe a ostatným",
+	"right-oathauth-api-all": "Zisťovanie a overovanie informácií týkajúcich sa OATH k sebe a ostatným",
+	"action-oathauth-api-all": "kontrolovať stav OATH"
+}

@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Geopoet"
+		]
+	},
+	"fancycaptcha-addurl": "An saimong pagliwat minabale nin baguhong mga panluwas na sugpon.\nTanganing makatabang na protektaran kontra sa awtomatikong espam, pakikaag an mga tataramon na ipinapahiling sa ibaba sa laog nin kahon ([[Special:Captcha/help|kadagdagang impormasyon]]):",
+	"fancycaptcha-badlogin": "Tanganing makatabang na magprotekta kontra sa awtomatikong pagbaak kan pasa-taramon, pakikaag an mga tataramon na ipinapahiling sa ibaba sa laog nin kahon ([[Special:Captcha/help|kadagdagang impormasyon]]):",
+	"fancycaptcha-captcha": "Rikisang panseguridad",
+	"fancycaptcha-accountcreate": "Tanganing makatabang na magprotekta kontra sa awtomatikong pagmumukna nin panindog, pakikaag an mga tataramon na ipinapahiling sa ibaba sa laog nin kahon ([[Special:Captcha/help|kadagdagang impormasyon]]):",
+	"fancycaptcha-create": "Tanganing makapagmukna nin pahina, pakikaag kan mga tataramon na ipinapahiling sa ibaba sa laog nin kahon ([[Special:Captcha/help|kadagdagang impormasyon]]):",
+	"fancycaptcha-edit": "Tanganing makapagliwat kaining pahina, pakikaag an mga tataramon na ipinapahiling sa ibaba sa laog nin kahon ([[Special:Captcha/help|kadagdagang impormasyon]]):",
+	"fancycaptcha-imgcaptcha-ph": "Pakikaag an tekstong nahihiling mo sa ibabaw",
+	"fancycaptcha-sendemail": "Tanganing makatabang na magprotekta kontra sa awtomatikong pag-eespam, pakikaag an mga tataramon na ipinapahiling sa ibaba sa laog nin kahon ([[Special:Captcha/help|kadagdagang impormasyon]]):",
+	"fancycaptcha-reload-text": "Preskohon otro"
+}

@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sjoerddebruin",
+			"Mainframe98"
+		]
+	},
+	"timeless-desc": "Een tijdloze vormgeving, ontworpen naar het Winter-prototype door Brandon Harris en andere stijlen van de Wikimedia Foundation.",
+	"timeless-search-placeholder": "Doorzoek ongeveer {{NUMBEROFARTICLES}} pagina's",
+	"timeless-loggedin": "Uw account",
+	"timeless-anonymous": "Anonieme gebruiker",
+	"timeless-loggedinas": "Aangemeld als '''$1'''",
+	"timeless-notloggedin": "Niet aangemeld",
+	"timeless-userpage": "{{GENDER:$1|Gebruiker}}spagina",
+	"timeless-talkpage": "Overleg {{GENDER:$1|gebruiker}}",
+	"timeless-pagelog": "Paginalogboek",
+	"timeless-more": "Meer",
+	"timeless-sitetools": "Wikihulpmiddelen",
+	"timeless-pageactions": "Paginahulpmiddelen",
+	"timeless-userpagetools": "Gebruikerspagina-hulpmiddelen",
+	"timeless-pagemisc": "Meer",
+	"timeless-namespaces": "Naamruimten",
+	"timeless-pagetools": "Pagina-acties",
+	"timeless-languages": "Talen",
+	"timeless.js": "/* JavaScript die hier wordt geplaatst heeft alleen invloed op gebruikers die het uiterlijk Timeless gebruiken */"
+}

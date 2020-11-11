@@ -1,0 +1,166 @@
+/*
+ * Any rules which should not be flipped automatically in right-to-left situations should be
+ * prepended with @noflip in a comment block.
+ *
+ * This stylesheet employs a few CSS trick to accomplish compatibility with a wide range of web
+ * browsers. The most common trick is to use some styles in IE6 only. This is accomplished by using
+ * a rule that makes things work in IE6, and then following it with a rule that begins with
+ * "html > body" or use a child selector ">", which is ignored by IE6 because it does not support
+ * the child selector. You can spot this by looking for the "OVERRIDDEN BY COMPLIANT BROWSERS" and
+ * "IGNORED BY IE6" comments.
+ */
+@import 'mediawiki.mixins';
+
+/* Framework */
+html {
+	font-size: @html-font-size;
+}
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: @content-font-family;
+}
+body {
+	background-color: @menu-background-color;
+}
+
+/* Content */
+.mw-body,
+.parsoid-body {
+	padding: @content-padding;
+	background-color: @body-background-color;
+	color: @content-font-color;
+	direction: ltr;
+}
+
+.mw-body {
+	margin-left: 10em;
+	/* Border on top, left, and bottom side */
+	border: 1px solid @content-border-color;
+	border-right-width: 0;
+	/* Merge the border with tabs' one (in their background image) */
+	margin-top: -1px;
+
+	// h1's can exist outside of mw-body-content so some heading styles
+	// need to be defined in mw-body as well
+	& h1,
+	&-content h1,
+	&-content h2 {
+		font-family: @content-heading-font-family;
+		line-height: @heading-line-height;
+		margin-bottom: 0.25em;
+		padding: 0;
+
+		/* Fallback heading font for scripts which render poorly in @content-heading-font-family. */
+		/* See T73240 */
+		&:lang( ja ), /* See T65817 */
+		&:lang( he ), /* See T65843 and T65844 */
+		&:lang( ko ) { /* See T65827 */
+			font-family: @content-heading-font-family-generic;
+		}
+	}
+
+	& h1,
+	&-content h1 {
+		font-size: @content-heading-font-size;
+	}
+
+	.firstHeading {
+		/* Change the default from mediawiki.skinning CSS to let indicators float into heading area */
+		overflow: visible;
+	}
+
+	.mw-indicators {
+		float: right;
+		line-height: @content-line-height;
+		font-size: @content-font-size;
+		/* Ensure that this is displayed on top of .mw-body-content and clickable */
+		position: relative;
+		z-index: 1;
+	}
+
+	.mw-indicator {
+		display: inline-block;
+		zoom: 1;
+		*display: inline; // stylelint-disable declaration-block-no-duplicate-properties
+	}
+}
+
+.mw-body-content {
+	position: relative;
+	line-height: @content-line-height;
+	font-size: @content-font-size;
+	z-index: 0;
+
+	p {
+		line-height: inherit;
+		margin: 0.5em 0;
+	}
+
+	h1 {
+		margin-top: 1em;
+	}
+
+	h2 {
+		font-size: 1.5em;
+		margin-top: 1em;
+	}
+
+	h3,
+	h4,
+	h5,
+	h6 {
+		line-height: @content-line-height;
+		margin-top: 0.3em;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	h3 {
+		font-size: 1.2em;
+	}
+
+	h3,
+	h4 {
+		font-weight: bold;
+	}
+
+	h4,
+	h5,
+	h6 {
+		font-size: 100%; /* (reset) */
+	}
+
+	.toc h2 {
+		font-size: 100%; /* (reset) */
+		font-family: @content-font-family;
+	}
+}
+
+/* Allow edit sections outside of mw-body-content (T160269) */
+.mw-editsection,
+.mw-editsection-like {
+	font-family: @content-font-family;
+}
+
+/* Hide empty portlets */
+div.emptyPortlet {
+	display: none;
+}
+
+ul {
+	list-style-type: disc;
+	.list-style-image-svg('images/bullet-icon.svg', 'images/bullet-icon.png');
+}
+
+pre,
+.mw-code {
+	line-height: 1.3em;
+}
+
+/* Site Notice (includes notices from CentralNotice extension) */
+#siteNotice {
+	font-size: 0.8em;
+}

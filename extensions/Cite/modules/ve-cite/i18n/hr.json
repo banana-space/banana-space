@@ -1,0 +1,42 @@
+{
+	"@metadata": {
+		"authors": [
+			"MaGa",
+			"Roberta F.",
+			"SpeedyGonsales",
+			"Zeljko.filipin",
+			"Milicevic01",
+			"Teoo3",
+			"Bugoslav",
+			"Acamicamacaraca"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "Knjiga",
+	"visualeditor-cite-tool-name-journal": "Časopis",
+	"visualeditor-cite-tool-name-news": "Vijesti",
+	"visualeditor-cite-tool-name-web": "Web stranice",
+	"cite-ve-dialog-reference-editing-reused": "Ova je referencija rabljena $1 {{PLURAL:$1|put|puta}} na ovoj stranici.",
+	"cite-ve-dialog-reference-options-group-label": "Koristi ovu grupu",
+	"cite-ve-dialog-reference-options-group-placeholder": "Opće referencije",
+	"cite-ve-dialog-reference-options-name-label": "Ponovno koristi pod ovim imenom",
+	"cite-ve-dialog-reference-options-section": "Mogućnosti",
+	"cite-ve-dialog-reference-placeholder": "Ovdje napišite ili kopirajte referencu ili umetnite predložak za citiranje.",
+	"cite-ve-dialog-reference-title": "Izvori",
+	"cite-ve-dialog-reference-useexisting-full-label": "Ponovna uporaba citata koji već postoji na ovoj stranici",
+	"cite-ve-dialog-reference-useexisting-label": "Koristi postojeći izvor",
+	"cite-ve-dialog-reference-useexisting-tool": "Ponovno korištenje",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "Popis općih izvora",
+	"cite-ve-dialog-referenceslist-contextitem-description-named": "Popis izvora za grupu \"$1\"",
+	"cite-ve-dialog-referenceslist-title": "Popis izvora",
+	"cite-ve-dialogbutton-citation-educationpopup-text": "Poboljšavajte sadržaje dodavanjem izvora informacija. Citirajte knjige, novine i internetske stranice.",
+	"cite-ve-dialogbutton-citation-educationpopup-title": "Citati",
+	"cite-ve-dialogbutton-reference-full-label": "Osnovni oblik",
+	"cite-ve-dialogbutton-reference-title": "Referencije",
+	"cite-ve-dialogbutton-reference-tooltip": "Osnovno",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Popis izvora",
+	"cite-ve-reference-input-placeholder": "Koji izvor želite koristiti?",
+	"cite-ve-referenceslist-isempty": "Nema referenci u grupi \"$1\" na ovoj stranici koje bi mogle biti uključene u ovaj popis.",
+	"cite-ve-referenceslist-isempty-default": "Nema referenci na ovoj stranici koje bi mogle biti uključene u ovaj popis.",
+	"cite-ve-referenceslist-missingref": "Ova reference je definirana u predlošku ili drugom generiranom dijelu, i za sad može biti uređivana samo u prikazu za uređivanje izvornog koda.",
+	"cite-ve-toolbar-group-label": "Citiraj"
+}

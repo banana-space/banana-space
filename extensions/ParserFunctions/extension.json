@@ -1,0 +1,46 @@
+{
+	"name": "ParserFunctions",
+	"version": "1.6.0",
+	"author": [
+		"Tim Starling",
+		"Robert Rohde",
+		"Ross McClure",
+		"Juraj Simlovic"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:ParserFunctions",
+	"descriptionmsg": "pfunc_desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.25.0"
+	},
+	"config": {
+		"PFEnableStringFunctions": false,
+		"PFStringLengthLimit": 1000
+	},
+	"callback": "ParserFunctionsHooks::onRegistration",
+	"ExtensionMessagesFiles": {
+		"ParserFunctionsMagic": "ParserFunctions.i18n.magic.php"
+	},
+	"MessagesDirs": {
+		"ParserFunctions": [
+			"i18n"
+		]
+	},
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"ParserFunctionsHooks::onParserFirstCallInit"
+		],
+		"ScribuntoExternalLibraries": [
+			"ParserFunctionsHooks::onScribuntoExternalLibraries"
+		]
+	},
+	"AutoloadClasses": {
+		"ExtParserFunctions": "includes/ExtParserFunctions.php",
+		"ExprParser": "includes/ExprParser.php",
+		"ExprError": "includes/ExprError.php",
+		"Scribunto_LuaParserFunctionsLibrary": "includes/Scribunto_LuaParserFunctionsLibrary.php",
+		"ParserFunctionsHooks": "includes/ParserFunctionsHooks.php"
+	},
+	"manifest_version": 1
+}

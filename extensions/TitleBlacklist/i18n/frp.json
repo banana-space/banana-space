@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"ChrisPtDe"
+		]
+	},
+	"titleblacklist-desc": "Pèrmèt ux administrators de dèfendre la crèacion de pâges et de comptos usanciér d’aprés una [[MediaWiki:Titleblacklist|lista nêre]] et una [[MediaWiki:Titlewhitelist|lista blanche]].",
+	"titleblacklist": "# O est la lista nêre des titros. Los titros et los usanciérs que corrèspondont a una èxprèssion racionèla presenta sur ceta pâge pôvont pas étre fêts.\n# Utilisâd « # » por entrebetar des comentèros.\n# Per dèfôt, les entrâs sont pas sensibles a la câssa.",
+	"titlewhitelist": "# O est la lista blanche des titros. Utilisâd « # » por entrebetar des comentèros.\n# Per dèfôt, les entrâs sont pas sensibles a la câssa.",
+	"titleblacklist-forbidden-edit": "Lo titro « $2 » at étâ dèfendu a la crèacion.\nDens la lista nêre, corrèspond a ceta entrâ : <code>$1</code>",
+	"titleblacklist-forbidden-move": "La pâge « $2 » pôt pas étre renomâ en « $3 », perce que lo titro « $3 » at étâ dèfendu a la crèacion.\nDens la lista nêre, corrèspond a ceta entrâ : <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Lo nom de fichiér « $2 » at étâ dèfendu a la crèacion.\nDens la lista nêre, corrèspond a ceta entrâ : <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Lo nom d’usanciér « $2 » at étâ dèfendu a la crèacion.\nDens la lista nêre, corrèspond a ceta entrâ : <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Ceta legne|Cetes legnes}} dens la lista nêre des titros {{PLURAL:$1|est envalida|sont envalides}} ;\n{{PLURAL:$1|la|les}} volyéd corregiér devant qu’encartar :",
+	"titleblacklist-override": "Ignorar la lista nêre",
+	"right-tboverride": "Ignorar la lista nêre des titros ou ben des noms d’utilisator",
+	"right-tboverride-account": "Ignorar la lista nêre des noms d’usanciér"
+}

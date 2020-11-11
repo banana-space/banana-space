@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Frokor"
+		]
+	},
+	"spam-blacklist": " # Eksterne URL-ar som finnst på denne lista vil ikkje kunne leggast til på ei side.\n # Denne lista gjeld berre denne wikien; sjå òg den globale svartelistinga.\n # For dokumentasjon, sjå https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- La denne linja vere nøyaktig som ho er --> <pre>\n#\n# Syntaksen er som følgjer:\n#  * Alle linjer som byrjar med «#» er kommentarar\n#  * Alle ikkje-blanke linjer er eit regex-fragment som berre vil passe med domenenavn i URL-ar\n\n #</pre> <!-- la denne linja vere nøyaktig som ho er -->",
+	"spam-whitelist": " #<!-- la denne linja vere nøyaktig som ho er --> <pre>\n# Eksterne URL-ar på denne lista vil *ikkje* blokkerast, sjølv om\n# dei elles ville vorte blokkert av svartelista.\n#\n# Syntaksen er som følgjer:\n#  * Alle linjer som byrjar med «#» er kommentarar\n#  * Alle ikkje-blanke linjer er eit regex-fragment som berre vil passe med domenenamn i URL-ar\n\n #</pre> <!-- la denne linja vere nøyaktig som ho er -->",
+	"spam-invalid-lines": "Følgjande {{PLURAL:$1|linje|linjer}} i spamsvartelista er {{PLURAL:$1|eit ugyldig regulært uttrykk|ugyldige regulære uttrykk}} og må rettast før lagring av sida:",
+	"spam-blacklist-desc": "Antispamverktøy basert på regulære uttrykk: [[MediaWiki:Spam-blacklist]] og [[MediaWiki:Spam-whitelist]]"
+}

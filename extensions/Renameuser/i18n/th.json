@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Harley Hartwell",
+			"Mopza",
+			"Passawuth",
+			"Horus"
+		]
+	},
+	"renameuser": "เปลี่ยนชื่อผู้ใช้",
+	"renameuser-desc": "เพิ่ม[[Special:RenameUser|หน้าพิเศษ]] สำหรับเปลี่ยนชื่อผู้ใช้ (ต้องมีสิทธิ์ ''renameuser'' (เปลี่ยนชื่อผู้ใช้))",
+	"renameuserold": "ชื่อผู้ใช้ปัจจุบัน:",
+	"renameusernew": "ชื่อผู้ใช้ใหม่:",
+	"renameuserreason": "เหตุผลในการเปลี่ยนชื่อ:",
+	"renameusermove": "ย้ายหน้าผู้ใช้และหน้าคุย (รวมถึงหน้าย่อยด้วย) ไปชื่อใหม่",
+	"renameuserreserve": "บล็อกชื่อผู้ใช้เดิมจากการใช้งานในอนาคต",
+	"renameuserwarnings": "คำเตือน:",
+	"renameuserconfirm": "ใช่, เปลี่ยนชื่อผู้ใช้นี้",
+	"renameusersubmit": "ตกลง",
+	"renameusererrordoesnotexist": "ไม่พบผู้ใช้ \"<nowiki>$1</nowiki>\" ในระบบ",
+	"renameusererrorexists": "มีผู้ใช้ \"<nowiki>$1</nowiki>\" อยู่แล้ว",
+	"renameusererrorinvalid": "ไม่สามารถใช้ชื่อผู้ใช้ \"<nowiki>$1</nowiki>\" ได้",
+	"renameuser-error-request": "มีปัญหาเกิดขึ้นเกี่ยวกับการรับคำเรียกร้องของคุณ กรุณากลับไปที่หน้าเดิม และ พยายามอีกครั้ง",
+	"renameuser-error-same-user": "ไม่สามารถเปลี่ยนชื่อผู้ใช้ได้เนื่องจากมีชื่อผู้ใช้นี้อยู่ก่อนแล้ว",
+	"renameusersuccess": "ผู้ใช้:<nowiki>$1</nowiki> ถูกเปลี่ยนชื่อเป็น ผู้ใช้:<nowiki>$2</nowiki> เรียบร้อยแล้ว",
+	"renameuser-page-exists": "หน้า $1 มีอยู่แล้ว และไม่สามารถย้ายไปแทนที่ได้โดยอัตโนมัติ",
+	"renameuser-page-moved": "หน้า $1 ถูกย้ายไปยัง $2",
+	"renameuser-page-unmoved": "ไม่สามารถย้ายหน้า $1 ไปยัง $2 ได้",
+	"log-name-renameuser": "ปูมการเปลี่ยนชื่อผู้ใช้",
+	"renameuser-move-log": "ย้ายโดยอัตโนมัติ ขณะเปลี่ยนชื่อผู้ใช้จาก \"[[User:$1|$1]]\" เป็น \"[[User:$2|$2]]\"",
+	"right-renameuser": "เปลี่ยนชื่อผู้ใช้",
+	"renameuser-renamed-notice": "ผู้ใช้นี้ได้ถูกเปลี่ยนชื่อ บันทึกการเปลี่ยนชื่อแสดงอยู่ด้านล่างสำหรับการอ้างอิง"
+}

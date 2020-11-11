@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ильнар"
+		]
+	},
+	"prefs-gadgets": "Гаджетлар",
+	"gadgets": "Гаджетлар",
+	"gadgetusage-gadget": "Гаджет",
+	"gadgetusage-usercount": "Кулланучылар саны",
+	"gadgetusage-noresults": "Бернинди дә гаджетлар табылмады.",
+	"gadgetusage-activeusers": "Актив кулланучылар",
+	"gadgetusage-default": "Килешү буенча",
+	"gadgets-title": "Гаджетлар",
+	"gadgets-uses": "Кулланыла",
+	"gadgets-export": "Экспортлау",
+	"gadgets-export-title": "Гаджетны экспортлау",
+	"gadgets-not-found": "\"$1\" гаджеты табылмады.",
+	"gadgets-export-download": "Йөкләү"
+}

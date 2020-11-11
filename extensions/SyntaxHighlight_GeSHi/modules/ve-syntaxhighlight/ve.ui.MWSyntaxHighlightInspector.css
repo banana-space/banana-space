@@ -1,0 +1,15 @@
+/*!
+ * VisualEditor UserInterface MWSyntaxHighlightInspector styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwSyntaxHighlightInspector-content .ve-ui-mwExtensionWindow-input textarea {
+	/* T176636 */
+	font-family: monospace, monospace;
+}
+
+.ve-ui-mwSyntaxHighlightInspector-content .oo-ui-numberInputWidget {
+	width: 10em;
+}

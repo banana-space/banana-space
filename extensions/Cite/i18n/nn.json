@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Frokor",
+			"Harald Khan",
+			"Njardarlogar"
+		]
+	},
+	"cite-desc": "Legg til <nowiki><ref[ name=id]></nowiki> og <nowiki><references/></nowiki>-merke for referansar",
+	"cite_error": "Referansefeil: $1",
+	"cite_error_ref_numeric_key": "Ugyldig <code>&lt;ref&gt;</code>-kode; namnet kan ikkje vere eit enkelt heiltal, bruk ein skildrande tittel",
+	"cite_error_ref_no_key": "Ugyldig <code>&lt;ref&gt;</code>-kode; referansar utan innhald må innehalde namn",
+	"cite_error_ref_too_many_keys": "Ugyldig <code>&lt;ref&gt;</code>-kode; ugyldige namn, t.d. for mange",
+	"cite_error_ref_no_input": "Ugyldig <code>&lt;ref&gt;</code>-kode; referansar uten namn må ha innhald",
+	"cite_error_references_duplicate_key": "Ugyldig <code>&lt;ref&gt;</code>-merke; namnet «$1» er definert flere gonger med ulikt innhald",
+	"cite_error_references_invalid_parameters": "Ugyldig <code>&lt;references&gt;</code>-kode; ingen parametrar er tillat, bruk <code>&lt;references /&gt;</code>",
+	"cite_error_references_no_backlink_label": "Gjekk tom for eigendefinerte tilbakelenketekstar.\nDefiner fleire i meldinga <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_references_no_text": "Ugyldig <code>&lt;ref&gt;</code>-merke; ingen tekst vart gjeven for referansen med namnet <code>$1</code>",
+	"cite_error_included_ref": "Avsluttande <code>&lt;/ref&gt;</code>-tagg manglar for <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "<code>&lt;ref&gt;</code>-merke finst for gruppenamnet «$1», men inkje samsvarande <code>&lt;references group=\"$1\"/&gt;</code>-merke vart funne",
+	"cite_error_references_missing_group": "<code>&lt;ref&gt;</code>-merke definert i <code>&lt;references&gt;</code> har gruppenamnet «$1» som ikkje vert nytta i teksten føre.",
+	"cite_error_references_missing_key": "<code>&lt;ref&gt;</code>-merke med namnet «$1» definert i <code>&lt;references&gt;</code> vert ikkje nytta i teksten føre.",
+	"cite_error_references_no_key": "eit <code>&lt;ref&gt;</code>-merke definert i <code>&lt;references&gt;</code> er ikkje gjeve noko namn.",
+	"cite_section_preview_references": "Førehandsvising av kjelder"
+}

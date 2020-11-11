@@ -1,0 +1,24 @@
+/*!
+ * VisualEditor ContentEditable MediaWiki MWReferenceNode styles.
+ *
+ * @copyright 2011-2018 VisualEditor Team's Cite sub-team and others; see AUTHORS.txt
+ * @license MIT
+ */
+
+/* HACK: Hide Ref errors in templates */
+.mw-ext-cite-error {
+	display: none;
+}
+
+/* In IE, force hasLayout so the <sup>'s box gets measured correctly */
+.ve-init-target-ie .ve-ce-mwReferenceNode {
+	display: inline-block;
+}
+
+/* Use zero font size to hide the default rendering, rather than display:none, to
+ * work around T123608 (cursoring bug in Chromium). See that bug for a discussion
+ * of the effect this has on bidi text. */
+.ve-ce-mwReferenceNode span.mw-reflink-text {
+	font-size: 0;
+	display: inline;
+}

@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"គីមស៊្រុន"
+		]
+	},
+	"timeless-search-placeholder": "ស្វែងរកក្នុងទំព័រចំនួន {{NUMBEROFARTICLES}}",
+	"timeless-loggedin": "គណនីរបស់អ្នក",
+	"timeless-anonymous": "អនាមិក",
+	"timeless-loggedinas": "កំពុងកត់ឈ្មោះចូលជា​ '''$1'''",
+	"timeless-notloggedin": "មិនទាន់កត់ឈ្មោះចូលទេ",
+	"timeless-userpage": "ទំព័រ{{GENDER:$1|អ្នកប្រើប្រាស់}}",
+	"timeless-talkpage": "{{GENDER:$1|ការពិភាក្សា}}",
+	"timeless-pagelog": "កំណត់ត្រាទំព័រ",
+	"timeless-more": "ផ្សេងទៀត",
+	"timeless-sitetools": "ឧបករណ៍វិគី",
+	"timeless-pageactions": "ឧបករណ៍ទំព័រ",
+	"timeless-userpagetools": "ឧបករណ៍ទំព័រអ្នកប្រើប្រាស់",
+	"timeless-pagemisc": "ផ្សេងទៀត",
+	"timeless-namespaces": "លំហឈ្មោះ",
+	"timeless-pagetools": "អំពើធ្វើលើទំព័រ",
+	"timeless-languages": "ភាសា"
+}

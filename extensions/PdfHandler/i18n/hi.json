@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kaustubh",
+			"NehalDaveND"
+		]
+	},
+	"pdf-desc": "चित्र मोड में पीडीएफ फ़ाईल देखनेके लिये आवश्यक प्रणाली",
+	"pdf_no_metadata": "पीडीएफ से मेटाडाटा ले नहीं पायें",
+	"pdf_page_error": "पन्ने का क्रमांक सीमामें नहीं हैं",
+	"exif-pdf-pagesize": "पृष्ठ का आकार"
+}

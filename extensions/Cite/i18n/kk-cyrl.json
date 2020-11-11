@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek",
+			"Kaztrans",
+			"Нұрлан Рахымжанов"
+		]
+	},
+	"cite-desc": "Сілтемелер үшін <nowiki><ref[ name=id]></nowiki> және <nowiki><references/></nowiki> белгішелерін қолданыңыз",
+	"cite_error": "Дереккөз алу қатесі: $1",
+	"cite_error_ref_numeric_key": "Жарамсыз <code>&lt;ref&gt;</code> белгішесі;\nатау кәдімгі бүтін сан болуы мүмкін емес. Сипатауыш атау қолданыңыз",
+	"cite_error_ref_no_key": "Жарамсыз <code>&lt;ref&gt;</code> белгішесі;\nмағлұматсыз дерекөздерде атау болуы қажет",
+	"cite_error_ref_too_many_keys": "Жарамсыз <code>&lt;ref&gt;</code> белгіше; \nжарамсыз атаулар, мысалы, тым көп",
+	"cite_error_ref_no_input": "Жарамсыз <code>&lt;ref&gt;</code> белгіше;\nатаусыз дереккөздерде мағлұматы болуы қажет",
+	"cite_error_references_invalid_parameters": "Жарамсыз <code>&lt;references&gt;</code> белгіше;\nеш параметр рұқсат етілмейді, \nбылай <code>&lt;references /&gt;</code> қолданыңыз",
+	"cite_error_references_no_backlink_label": "Өзгертпелі белгілердің саны бітті, одан әрі көбірек <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki> жүйе хабарында белгілеңіз",
+	"cite_error_no_link_label_group": "\"$1\" тобы үшін өзгертпелі сілтеме белгілері бітті.\nDefine more in the <nowiki>[[MediaWiki:$2]]</nowiki> message.",
+	"cite_error_references_no_text": "Жарамсыз <code>&lt;ref&gt;</code> тегі;\nno text was provided for refs named <code>$1</code>",
+	"cite_error_included_ref": "<code>&lt;ref&gt;</code> тегін <code>&lt;/ref&gt;</code> тегімен жабуды қажет етеді",
+	"cite_error_group_refs_without_references": "\"$1\" деп аталған дереккөз тобында <code>&lt;ref&gt;</code> тегі бар, бірақ тиісті <code>&lt;references group=\"$1\"/&gt;</code> тегі табылмады, немесе <code>&lt;/ref&gt;</code> жабу тегін қажет етеді",
+	"cite-tracking-category-cite-error": "Қате сілтемелері бар беттер",
+	"cite_references_link_one": "<li id=\"$1\"><span class=\"mw-cite-backlink\">[[#$2|↑]]</span> $3</li>",
+	"cite_references_link_many": "<li id=\"$1\"><span class=\"mw-cite-backlink\">↑ $2</span> $3</li>",
+	"cite_references_link_accessibility_label": "Жоғарыға көтеріліңіз",
+	"cite_references_link_many_accessibility_label": "Мынаған өту:"
+}

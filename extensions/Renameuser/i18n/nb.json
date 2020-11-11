@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"Danmichaelo",
+			"Event",
+			"Nghtwlkr",
+			"Jon Harald Søby"
+		]
+	},
+	"renameuser": "Døp om bruker",
+	"renameuser-linkoncontribs": "døp om bruker",
+	"renameuser-linkoncontribs-text": "Døp om denne brukeren",
+	"renameuser-desc": "Legger til en [[Special:RenameUser|spesialside]] for å døpe om en bruker (krever ''renameuser''-rettigheter)",
+	"renameuserold": "Nåværende brukernavn:",
+	"renameusernew": "Nytt brukernavn:",
+	"renameuserreason": "Årsak:",
+	"renameusermove": "Flytt bruker- og brukerdiskusjonssider (og deres undersider) til nytt navn",
+	"renameusersuppress": "Ikke opprett omdirigeringer til det nye navnet",
+	"renameuserreserve": "Blokker det gamle brukernavnet fra framtidig bruk",
+	"renameuserwarnings": "Advarsler:",
+	"renameuserconfirm": "Ja, døp om brukeren",
+	"renameusersubmit": "Utfør",
+	"renameuser-submit-blocklog": "Vis blokkeringslogg for bruker",
+	"renameusererrordoesnotexist": "Brukeren «<nowiki>$1</nowiki>» finnes ikke.",
+	"renameusererrorexists": "{{GENDER:$1|Brukeren}} «<nowiki>$1</nowiki>» finnes allerede.",
+	"renameusererrorinvalid": "Brukernavnet «<nowiki>$1</nowiki>» er ugyldig.",
+	"renameuser-error-request": "Det var et problem med å motta forespørselen.\nGå tilbake og prøv igjen.",
+	"renameuser-error-same-user": "Du kan ikke gi en bruker samme navn som han/hun allerede har.",
+	"renameusersuccess": "{{GENDER:$2|Brukeren}} «<nowiki>$1</nowiki>» har blitt omdøpt til «<nowiki>$2</nowiki>».",
+	"renameuser-page-exists": "Siden $1 finnes allerede, og kunne ikke erstattes automatisk.",
+	"renameuser-page-moved": "Siden $1 har blitt flyttet til $2.",
+	"renameuser-page-unmoved": "Siden $1 kunne ikke flyttes til $2.",
+	"log-name-renameuser": "Omdøpingslogg",
+	"log-description-renameuser": "Dette er en logg over endrede brukernavn",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|omdøpte}} brukeren $4 ({{PLURAL:$6|$6 redigering|$6 redigeringer}}) til {{GENDER:$7|$5}}",
+	"logentry-renameuser-renameuser-legacier": "$1 omdøpte brukeren $4 til {{GENDER:$7|$5}}",
+	"renameuser-move-log": "Flyttet side automatisk under omdøping av {{GENDER:$2|brukeren}} «[[User:$1|$1]]» til «[[User:$2|$2]]»",
+	"action-renameuser": "endre navn på brukere",
+	"right-renameuser": "Endre navn på brukere",
+	"renameuser-renamed-notice": "Denne brukeren har fått endret navn.\nTil informasjon er navnendringsloggen vist nedenfor."
+}

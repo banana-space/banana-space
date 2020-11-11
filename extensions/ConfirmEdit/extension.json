@@ -1,0 +1,120 @@
+{
+	"@doc": "Please read README.md",
+	"name": "ConfirmEdit",
+	"version": "1.5.1",
+	"author": [
+		"Brion Vibber",
+		"Florian Schmidt",
+		"Sam Reed",
+		"..."
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:ConfirmEdit",
+	"descriptionmsg": "captcha-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "antispam",
+	"requires": {
+		"MediaWiki": ">= 1.28"
+	},
+	"GroupPermissions": {
+		"*": {
+			"skipcaptcha": false
+		},
+		"user": {
+			"skipcaptcha": false
+		},
+		"autoconfirmed": {
+			"skipcaptcha": false
+		},
+		"bot": {
+			"skipcaptcha": true
+		},
+		"sysop": {
+			"skipcaptcha": true
+		}
+	},
+	"AvailableRights": [
+		"skipcaptcha"
+	],
+	"ExtensionFunctions": [
+		"ConfirmEditHooks::confirmEditSetup"
+	],
+	"SpecialPages": {
+		"Captcha": "CaptchaSpecialPage"
+	},
+	"MessagesDirs": {
+		"ConfirmEdit": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"ConfirmEditAlias": "ConfirmEdit.alias.php"
+	},
+	"AutoloadClasses": {
+		"ConfirmEditHooks": "includes/ConfirmEditHooks.php",
+		"SimpleCaptcha": "SimpleCaptcha/Captcha.php",
+		"CaptchaStore": "includes/store/CaptchaStore.php",
+		"CaptchaSessionStore": "includes/store/CaptchaSessionStore.php",
+		"CaptchaCacheStore": "includes/store/CaptchaCacheStore.php",
+		"CaptchaHashStore": "includes/store/CaptchaHashStore.php",
+		"CaptchaTriggers": "includes/CaptchaTriggers.php",
+		"CaptchaSpecialPage": "includes/specials/SpecialCaptcha.php",
+		"CaptchaPreAuthenticationProvider": "includes/auth/CaptchaPreAuthenticationProvider.php",
+		"CaptchaAuthenticationRequest": "includes/auth/CaptchaAuthenticationRequest.php"
+	},
+	"ResourceModules": {
+		"ext.confirmEdit.editPreview.ipwhitelist.styles": {
+			"styles": "ext.confirmEdit.editPreview.ipwhitelist.styles.css"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "ConfirmEdit/resources"
+	},
+	"Hooks": {
+		"EditPageBeforeEditButtons": "ConfirmEditHooks::confirmEditPage",
+		"EmailUserForm": "ConfirmEditHooks::injectEmailUser",
+		"EmailUser": "ConfirmEditHooks::confirmEmailUser",
+		"PageContentSaveComplete": "ConfirmEditHooks::onPageContentSaveComplete",
+		"EditPage::showEditForm:fields": "ConfirmEditHooks::showEditFormFields",
+		"EditFilterMergedContent": "ConfirmEditHooks::confirmEditMerged",
+		"APIGetAllowedParams": "ConfirmEditHooks::APIGetAllowedParams",
+		"TitleReadWhitelist": "ConfirmEditHooks::onTitleReadWhitelist",
+		"AlternateEditPreview": "ConfirmEditHooks::onAlternateEditPreview",
+		"AuthChangeFormFields": "ConfirmEditHooks::onAuthChangeFormFields"
+	},
+	"AuthManagerAutoConfig": {
+		"preauth": {
+			"CaptchaPreAuthenticationProvider":{
+				"class": "CaptchaPreAuthenticationProvider",
+				"sort": 10
+			}
+		}
+	},
+	"config": {
+		"CaptchaWhitelistIP": false,
+		"Captcha": null,
+		"CaptchaTriggers": {
+			"edit": false,
+			"create": false,
+			"sendemail": false,
+			"addurl": true,
+			"createaccount": true,
+			"badlogin": true,
+			"badloginperuser": true,
+			"_merge_strategy": "array_plus"
+		},
+		"CaptchaTriggersOnNamespace": {
+			"_merge_strategy": "array_plus_2d"
+		},
+		"CaptchaStorageClass": "CaptchaSessionStore",
+		"CaptchaSessionExpiration": 1800,
+		"CaptchaBadLoginExpiration": 300,
+		"CaptchaBadLoginPerUserExpiration": 600,
+		"AllowConfirmedEmail": false,
+		"CaptchaBadLoginAttempts": 3,
+		"CaptchaBadLoginPerUserAttempts": 20,
+		"CaptchaWhitelist": false,
+		"CaptchaRegexes": []
+	},
+	"manifest_version": 1
+}

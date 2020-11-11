@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ajdar",
+			"Derslek",
+			"Ильнар"
+		]
+	},
+	"visualeditor-cite-tool-definition.json": "null",
+	"visualeditor-cite-tool-name-book": "Китап",
+	"visualeditor-cite-tool-name-journal": "Мәкалә",
+	"visualeditor-cite-tool-name-news": "Яңалыклар",
+	"visualeditor-cite-tool-name-web": "Веб-сәхифә",
+	"cite-tool-definition.json": "null",
+	"cite-ve-dialog-reference-editing-reused": "Әлеге сылтамабиттә $1 тапкыр {{PLURAL:$1|кулланыла}}.",
+	"cite-ve-dialog-reference-options-group-label": "Бу төркемне кулланырга",
+	"cite-ve-dialog-reference-options-group-placeholder": "Гомуми сылтамалар",
+	"cite-ve-dialog-reference-options-name-label": "Кабаттан шушы исем белән кулланырга",
+	"cite-ve-dialog-reference-options-section": "Көйләнмәләр",
+	"cite-ve-dialog-reference-title": "Искәрмә",
+	"cite-ve-dialog-reference-useexisting-full-label": "Биттә күрсәтелгән чыганакны кабат куллану",
+	"cite-ve-dialog-reference-useexisting-label": "Инде булган искәрмәне кулланырга",
+	"cite-ve-dialog-reference-useexisting-tool": "Кире куллану",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "Гомуми сылтамалар исемлеге",
+	"cite-ve-dialog-referenceslist-contextitem-description-named": "\"$1\" төркеме өчен искәрмәләр исемлеге",
+	"cite-ve-dialog-referenceslist-title": "Искәрмәләр исемлеге",
+	"cite-ve-dialogbutton-citation-educationpopup-text": "Ясалган мәкаләләрнең абруен чыганаклар ярдәмендә арттырырга тырышыгыз. Сез китаплардан, гәзитләрдән һәм төрле сәхифәләрдән кирәкле өзекләрне ала аласыз.",
+	"cite-ve-dialogbutton-citation-educationpopup-title": "Өзекләр",
+	"cite-ve-dialogbutton-reference-full-label": "Гади форма",
+	"cite-ve-dialogbutton-reference-title": "Искәрмә",
+	"cite-ve-dialogbutton-reference-tooltip": "Төп",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Искәрмәләр исемлеге",
+	"cite-ve-reference-input-placeholder": "Әлеге сылтамада эзләү",
+	"cite-ve-referenceslist-isempty": "Әлеге биттә « $1 » төркеме белән сылтамалар юк.",
+	"cite-ve-referenceslist-isempty-default": "Әлеге биттә исемлеккә кертер өчен сылтамалар юк.",
+	"cite-ve-referenceslist-missingref": "Әлеге сылтама калыпта гына яки аерым блокта гына билгеләнә, һәм хәзерге вакытта аны чыганак код режимында гына үзгәртеп була.",
+	"cite-ve-toolbar-group-label": "Чыганаклар",
+	"cite-ve-othergroup-item": "$1 искәрмә"
+}

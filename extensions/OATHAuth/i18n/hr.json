@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"MaGa"
+		]
+	},
+	"oathauth-account": "Suradnički račun:",
+	"oathauth-secret": "Tajni ključ za dvostruku provjeru autentičnosti:",
+	"oathauth-enable": "Omogući dvostruku provjeru autentičnosti",
+	"oathauth-scratchtokens": "Sljedeći popis je popis jednokratnih tokena. Mogu se uporabiti jednom, i to u hitnim slučajevima. Zapišite ih i čuvajte ih na sigurnom mjestu. Ako izgubite telefon, ovi tokeni su jedini način da spasite suradnički račun. Ovi tokeni više nikada neće biti prikazani.",
+	"oathauth-prefs-label": "Dvostruka provjera autentičnosti:",
+	"oathauth-step1": "Prvi korak: preuzmite program za dvostruku provjeru autentičnosti",
+	"oathauth-step1-test": "Preuzmite program za dvostruku provjeru autentičnosti. Može biti aplikacija za mobilni uređaj (kao Google Authenticator) ili aplikacija za stolno računalo",
+	"oathauth-step2": "Drugi korak: skenirajte QR kôd",
+	"oathauth-step2alt": "Možete unijeti i ručno:",
+	"oathauth-step3": "Treći korak: zapišite kôdove",
+	"oathauth-step4": "Četvrti korak: provjera",
+	"oathauth-entertoken": "Za provjeru unesite kôd s Vašeg uređaja:",
+	"right-oathauth-enable": "Omogući dvostruku provjeru autentičnosti",
+	"action-oathauth-enable": "omogući dvostruku provjeru autentičnosti"
+}

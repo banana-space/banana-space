@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Davidpar",
+			"SMP",
+			"Ssola",
+			"Joan manel",
+			"Pgellida"
+		]
+	},
+	"fancycaptcha-addurl": "La vostra modificació inclou nous enllaços externs. Com a protecció contra la propaganda automatitzada heu d'escriure en la caixa les paraules que apareixen a continuació ([[Special:Captcha/help|més informació]]):",
+	"fancycaptcha-badlogin": "Com a protecció contra l'obtenció automatitzada de contrasenyes cal que escriviu en la caixa les paraules que apareixen a continuació ([[Special:Captcha/help|més informació]]):",
+	"fancycaptcha-captcha": "Control de seguretat",
+	"fancycaptcha-accountcreate": "Com a protecció contra la creació automàtica de nous comptes cal que escriviu a la caixa les paraules que apareixen a continuació ([[Special:Captcha/help|més informació]]):",
+	"fancycaptcha-create": "Per a poder crear la pàgina heu d'escriure en la caixa les paraules que apareixen a continuació ([[Special:Captcha/help|més informació]]):",
+	"fancycaptcha-edit": "Per a poder modificar la pàgina heu d'escriure en la caixa les paraules que apareixen a continuació ([[Special:Captcha/help|més informació]]):",
+	"fancycaptcha-imgcaptcha-ph": "Introduïu el text que veieu a la imatge",
+	"fancycaptcha-sendemail": "Per ajudar a protegir contra el correu brossa automatitzat, si us plau, introduïu les paraules que apareixen a sota la caixa ([[Special:Captcha/help|més informació]]):",
+	"fancycaptcha-reload-text": "Actualitzar"
+}

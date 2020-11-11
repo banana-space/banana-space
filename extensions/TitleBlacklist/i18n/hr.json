@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dalibor Bosits",
+			"Dnik",
+			"Ex13",
+			"SpeedyGonsales",
+			"Bugoslav"
+		]
+	},
+	"log-name-titleblacklist": "Evidencija crne liste naslova",
+	"titleblacklist-desc": "Omogućava administratorima postavljanje zabrane kreiranja stranica ili računa s [[MediaWiki:Titleblacklist|crnim popisom]] i [[MediaWiki:Titlewhitelist|bijelim popisom]]",
+	"titleblacklist": "# Ovo je popis zabranjenih naslova. Naslovi i računi koji se podudaraju s regularnim izrazom ne mogu se kreirati.\n# Koristite \"#\" za komentare.\n# Ovo je osjetljivo na velika slova",
+	"titlewhitelist": "# Ovo je tzv. ''bijela knjiga'' ili ''whitelist'' imena članaka. Rabite \"#\" za komentar\n# Ovo je osjetljivo na velika slova",
+	"titleblacklist-forbidden-edit": "Naslov \"$2\" je zabranjen za kreiranje.  Podudara se sa sljedećom stavkom popisa zabranjenih: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" ne može biti premješten na \"$3\", jer je naslov \"$3\" zabranjeno kreirati. Podudara se sa sljedećom stavkom popisa zabranjenih: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Ime datoteke \"$2\" je zabranjeno kreirati. Poklapa se sa stavkom popisa zabranjenih: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Suradnički račun \"$2\" je zabranjen za kreiranje.\nPoklapa se sa sljedećim izrazom iz crnog popisa: <code>$1</code>",
+	"titleblacklist-invalid": "Sljedeći {{PLURAL:$1|redak|redci}} u popisu zabranjenih naslova {{PLURAL:$1|je|su}} nedozvoljeni; molimo ispravite {{PLURAL:$1|ga|ih}} prije spremanja:",
+	"titleblacklist-override": "Zanemari crnu listu",
+	"right-tboverride": "Premošćivanje naslova ili suradničkog imena na crnom popisu",
+	"right-tboverride-account": "Zaobilaženje popisa zabranjenih suradničkih imena"
+}

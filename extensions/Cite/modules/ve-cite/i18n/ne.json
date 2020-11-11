@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"RajeshPandey",
+			"सरोज कुमार ढकाल",
+			"Ganesh Paudel",
+			"बिप्लब आनन्द",
+			"Nirjal stha",
+			"NehalDaveND",
+			"राम प्रसाद जोशी"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "पुस्तकहरू",
+	"visualeditor-cite-tool-name-journal": "पत्रिका",
+	"visualeditor-cite-tool-name-news": "समाचार",
+	"visualeditor-cite-tool-name-web": "वेबसाइट",
+	"cite-ve-dialog-reference-options-section": "विकल्पहरू",
+	"cite-ve-dialog-reference-title": "सन्दर्भ सामग्रीहरू",
+	"cite-ve-dialogbutton-reference-tooltip": "सामान्य",
+	"cite-ve-toolbar-group-label": "उर्ध्वभरण"
+}

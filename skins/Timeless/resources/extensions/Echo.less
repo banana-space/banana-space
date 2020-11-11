@@ -1,0 +1,81 @@
+@import '../variables.less';
+
+/* Handle and position Echo icons */
+
+@media screen {
+
+	#personal h2,
+	#personal-extra,
+	#personal-extra ul,
+	#personal-extra li {
+		display: inline-block;
+	}
+	#personal-extra {
+		// Position and keep it from randomly overflowing massively for no apparent reason
+		margin: 0.7em 0 -2em 0;
+		white-space: nowrap;
+
+		ul {
+			list-style: none;
+			margin: 0 -1em 0 0;
+			padding: 0;
+		}
+		li {
+			margin: 0 0.75em 0 0;
+			float: left;
+		}
+	}
+
+	@media ( min-width: @desktop-small-floor ) {
+		#personal-extra {
+			float: left;
+			margin-left: -4.5em;
+		}
+		.extension-icons {
+			#p-search {
+				margin-right: 21em;
+			}
+		}
+
+		#mw-page-header-links #ca-more,
+		#mw-page-header-links #ca-languages,
+		.sidebar-chunk h2 {
+			display: none;
+		}
+	}
+
+	@media ( min-width: @desktop-small-floor ) and ( max-width: @desktop-small-width ) {
+		.extension-icons #p-search {
+			margin-right: 11em;
+		}
+		#personal-extra {
+			margin-left: -2.5em;
+		}
+	}
+
+	@media ( min-width: @desktop-mid-floor ) and ( max-width: @desktop-mid-width ) {
+		.extension-icons {
+			#user-tools {
+				width: auto;
+			}
+			.color-middle {
+				margin-right: @column-left-size + 2 * @content-padding + 4em;
+			}
+		}
+	}
+
+	@media ( max-width: @mobile-width ) {
+		.mw-echo-ui-notificationBadgeButtonPopupWidget {
+			z-index: 2;
+		}
+		#personal-extra {
+			position: absolute;
+			top: 0.9em;
+			right: 11.75em;
+
+			li {
+				margin-right: 1.25em;
+			}
+		}
+	}
+}

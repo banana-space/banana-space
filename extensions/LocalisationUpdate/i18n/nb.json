@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nghtwlkr",
+			"Jon Harald Søby"
+		]
+	},
+	"localisationupdate-extensionname": "LocalisationUpdate",
+	"localisationupdate-desc": "Holder de lokaliserte meldingene så oppdaterte som mulig"
+}

@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Purodha"
+		]
+	},
+	"recaptcha-edit": "Schrief di zwei Wööt en dä Kaste onge erin.\nDat sull jääje et automattesche Ändere un SPAM em Wiki schöze.",
+	"recaptcha-addurl": "Schrief di zwei Wööt en dä Kaste onge erin.\nDat sull jääje automattesch en et Wiki jebraate SPAM schöze, nohdämm en Dingem Beidraach {{PLURAL:$1|ene neue Lengk dren es|neue Lengks dren sin|kein neue Lengks dren sin}}.",
+	"recaptcha-badlogin": "Schrief di zwei Wööt en dä Kaste onge erin.\nDat sull jääje et automattesche Paßwoot Knacke em Wiki schöze.",
+	"recaptcha-createaccount": "Schrief di zwei Wööt en dä Kaste onge erin.\nDat sull jääje SPAM un automattesch aanjelaate Zohjäng nohm Wiki schöze.",
+	"recaptcha-createaccount-fail": "Dat wohr en verkehte udder jaa kei Antwoot op dat Kaptscha.",
+	"recaptcha-create": "Schrief di zwei Wööt en dä Kaste onge erin.\nDat sull jääje SPAM un automattesch aanjelaate Sigge em Wiki schöze."
+}

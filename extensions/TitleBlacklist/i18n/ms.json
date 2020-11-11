@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Anakmalaysia",
+			"Aviator",
+			"Izzudin",
+			"Pizza1016"
+		]
+	},
+	"titleblacklist-desc": "Membolehkan penyelia untuk menghalangkan penciptaan laman dan akaun pengguna melalui [[MediaWiki:Titleblacklist|senarai hitam]] dan [[MediaWiki:Titlewhitelist|senarai putih]]",
+	"titleblacklist": "# Ini ialah senarai hitam tajuk. Tajuk atau pengguna yang sepadan dengan mana-mana ungkapan nalar di sini tidak boleh dicipta.\n# Gunakan \"#\" untuk komen.\n# Secara asali, ini tidak peka huruf (mengabaikan besar kecil huruf)",
+	"titlewhitelist": "# Ini ialah senarai hitam tajuk. Gunakan \"#\" untuk komen.\n# Secara asali, ini tidak peka huruf (mengabaikan besar kecil huruf)",
+	"titleblacklist-forbidden-edit": "Tajuk \"$2\" telah diharamkan.\nTajuk tersebut sepadan dengan entri senarai hitam berikut: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" tidak boleh dipindahkan ke \"$3\" kerana tajuk \"$3\" telah diharamkan.\nTajuk tersebut sepadan dengan entri senarai hitam berikut: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Nama fail \"$2\" telah diharamkan.\nNama tersebut sepadan dengan entri senarai hitam berikut: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Nama pengguna \"$2\" telah diharamkan kerana sepadan dengan entri senarai hitam berikut: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Baris|Baris-baris}} berikut adalah tidak sah. Sila betulkannya sebelum menyimpan:",
+	"titleblacklist-override": "Abaikan senarai hitam",
+	"right-tboverride": "Membatalkan senarai hitam tajuk atau nama pengguna",
+	"right-tboverride-account": "Mengatasi senarai hitam nama pengguna"
+}

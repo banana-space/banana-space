@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Papuass",
+			"Silraks"
+		]
+	},
+	"oathauth-account": "Konta nosaukums:",
+	"oathauth-enable": "Iespējot divpakāpju autentifikāciju",
+	"oathauth-token": "Marķieris",
+	"right-oathauth-enable": "Iespējot divpakāpju autentifikāciju",
+	"action-oathauth-enable": "iespējot divpakāpju autentifikāciju",
+	"oathauth-auth-token-label": "Marķieris"
+}

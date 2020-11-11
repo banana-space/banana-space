@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"AiseluRB",
+			"Amire80",
+			"Assele",
+			"Haqmar",
+			"Sagan",
+			"Рустам Нурыев",
+			"Ләйсән"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "Китап",
+	"visualeditor-cite-tool-name-journal": "Мәҡәлә",
+	"visualeditor-cite-tool-name-news": "Яңылыҡтар",
+	"visualeditor-cite-tool-name-web": "Веб-сайт",
+	"cite-ve-dialog-reference-editing-reused": "Был һылтанма биттә $1 тапҡыр {{PLURAL:$1|ҡулланыла}}.",
+	"cite-ve-dialog-reference-options-group-label": "Был төркөмдө ҡулланырға",
+	"cite-ve-dialog-reference-options-group-placeholder": "Дөйөм һылтанмалар",
+	"cite-ve-dialog-reference-options-name-label": "Бирелгән исем аҫтында ҡабаттан ҡулланырға",
+	"cite-ve-dialog-reference-options-section": "Көйләүҙәр",
+	"cite-ve-dialog-reference-title": "Иҫкәрмәләр",
+	"cite-ve-dialog-reference-useexisting-full-label": "Биттә күрһәтелгән сығанаҡты ҡабаттан ҡулланыу",
+	"cite-ve-dialog-reference-useexisting-label": "Булған һылтанманы ҡулланыу",
+	"cite-ve-dialog-reference-useexisting-tool": "Яңынан ҡулланыу",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "Дөйөм һылтанмалар исемлеге",
+	"cite-ve-dialog-referenceslist-contextitem-description-named": "\"$1\" төркөмө өсөн иҫкәрмәләр исемлеге",
+	"cite-ve-dialog-referenceslist-title": "Иҫкәрмәләр исемлеге",
+	"cite-ve-dialogbutton-citation-educationpopup-text": "Яһалған мәҡәләләрҙең абруйын сығанаҡтар ярҙамында арттырырға тырышығыҙ. Һеҙ китап-гәзиттәрҙән һәм төрлө биттәрҙән кәрәкле өҙөктәрҙе ала алаһығыҙ.",
+	"cite-ve-dialogbutton-citation-educationpopup-title": "Өҙөктәр",
+	"cite-ve-dialogbutton-reference-full-label": "Ябай форма",
+	"cite-ve-dialogbutton-reference-title": "Иҫкәрмәләр",
+	"cite-ve-dialogbutton-reference-tooltip": "Иҫкәрмәләр",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Иҫкәрмәләр исемлеге",
+	"cite-ve-reference-input-placeholder": "Нимәгә һылтанырға теләйһегеҙ?",
+	"cite-ve-referenceslist-isempty": "Был биттә \"$1\" төркөмө менән һылтанмалар юҡ.",
+	"cite-ve-referenceslist-isempty-default": "Был биттә исемлеккә индерер һылтанмалар юҡ.",
+	"cite-ve-referenceslist-missingref": "Был төшөрмә ҡалыпта йәки икенсе өлөштә билдәләнә, шуға күрә башланғыс кодта ғына мөхәррирләп була.",
+	"cite-ve-toolbar-group-label": "Сығанаҡ"
+}

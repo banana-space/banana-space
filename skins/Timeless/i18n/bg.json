@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"DCLXVI",
+			"StanProg",
+			"ShockD"
+		]
+	},
+	"timeless-desc": "Обликът Timeless е създаден на базата на прототипа Winter от Брандън Харис и няколко други стилове на Фондация Уикимедия.",
+	"timeless-search-placeholder": "Търсене в {{NUMBEROFARTICLES}} страници",
+	"timeless-loggedin": "Вашата потребителска сметка",
+	"timeless-anonymous": "Анонимен",
+	"timeless-loggedinas": "Влезли сте като '''$1'''",
+	"timeless-notloggedin": "Не сте влезли",
+	"timeless-userpage": "{{GENDER:$1|Потребителска}} страница",
+	"timeless-talkpage": "{{GENDER:$1|Потребителска}} беседа",
+	"timeless-pagelog": "Дневници на страницата",
+	"timeless-more": "Повече",
+	"timeless-sitetools": "Уики инструменти",
+	"timeless-pageactions": "Инструменти за страниците",
+	"timeless-userpagetools": "Инструменти за потребителска страница",
+	"timeless-pagemisc": "Повече",
+	"timeless-namespaces": "Именни пространства",
+	"timeless-pagetools": "Действия на страницата",
+	"timeless-languages": "Езици",
+	"timeless.js": "/* Поставеният тук JavaScript ще бъде зареден за потребители, използващи облика Timeless */"
+}

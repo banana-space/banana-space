@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robin van der Vliet",
+			"Renardo"
+		]
+	},
+	"apihelp-main-param-format": "La formo de la eligaĵo.",
+	"apihelp-block-summary": "Bloki uzanton.",
+	"apihelp-block-param-user": "Salutnomo, IP-adreso aŭ IP-adresa intervalo forbarota.",
+	"apihelp-block-param-expiry": "Eksvalidiĝa tempo. Ĝi povas esti relativa (ekz. <kbd>5 months</kbd> aŭ <kbd>2 weeks</kbd> aŭ absoluta (ekz. <kbd>2014-09-18T12:34:56Z</kbd>). Se vi indikas <kbd>infinite</kbd> (senfine), <kbd>indefinite</kbd> (nedifinite) aŭ <kbd>never</kbd> (neniam), la forbaro neniam eksvalidiĝos.",
+	"apihelp-createaccount-param-name": "Uzantnomo.",
+	"apihelp-delete-summary": "Forigi paĝon.",
+	"apihelp-edit-param-minor": "Redakteto.",
+	"apihelp-edit-example-edit": "Redakti paĝon.",
+	"apihelp-feedrecentchanges-param-hideminor": "Kaŝi redaktetojn.",
+	"apihelp-feedrecentchanges-param-hidebots": "Kaŝi robotajn ŝanĝojn.",
+	"apihelp-feedrecentchanges-param-hideanons": "Kaŝi redaktojn de anonimuloj.",
+	"apihelp-feedrecentchanges-param-hideliu": "Kaŝi redaktojn de ensalutintaj uzantoj.",
+	"apihelp-feedrecentchanges-param-hidepatrolled": "Kaŝi reviziitajn ŝanĝojn.",
+	"apihelp-feedrecentchanges-param-hidemyself": "Kaŝi ŝanĝojn faritajn de la nuna uzanto.",
+	"apihelp-feedrecentchanges-param-hidecategorization": "Kaŝi ŝanĝojn de kategoria aneco.",
+	"apihelp-feedrecentchanges-example-simple": "Montri ĵusajn ŝanĝojn.",
+	"apihelp-filerevert-summary": "Restarigi malnovan version de dosiero.",
+	"apihelp-filerevert-param-comment": "Alŝuta komento.",
+	"apihelp-login-param-name": "Uzantnomo.",
+	"apihelp-login-param-password": "Pasvorto.",
+	"apihelp-login-example-login": "Ensaluti.",
+	"apihelp-userrights-param-user": "Uzantnomo."
+}

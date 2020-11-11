@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Iltever",
+			"Ernác"
+		]
+	},
+	"fancycaptcha-captcha": "Къоркъуусузлукъну тинтиу",
+	"fancycaptcha-accountcreate": "Тергеу джазыуланы (аккаунтланы) автомат халда регистрация этиуню къоймаз ючюн, текстлик терезеде суратланнган символланы джазыгъыз ([[Special:Captcha/help|толуракъ]]):",
+	"fancycaptcha-imgcaptcha-ph": "Башыракъдагъы текстни джаз",
+	"fancycaptcha-reload-text": "Джангырт"
+}

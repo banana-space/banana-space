@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"StephDC",
+			"Cwlin0416",
+			"Suchichi02",
+			"Liuxinyu970226",
+			"Kly"
+		]
+	},
+	"recaptcha-edit": "為保護 wiki 防止自動化垃圾內容編輯程式，我們要麻煩您輸入在方塊中顯示的單字。",
+	"recaptcha-addurl": "您的編輯使用了新的外部連結。為了防止自動化垃圾內容編輯程式，我們要麻煩您輸入在方塊中顯示的單字。",
+	"recaptcha-badlogin": "為保護 wiki 防止密碼破解程式，我們要麻煩您輸入在方塊中顯示的單字。",
+	"recaptcha-createaccount": "為保護 wiki 防止自動註冊程式，我們要麻煩您輸入在方塊中顯示的單字。",
+	"recaptcha-createaccount-fail": "不正確或者未輸入 reCAPTCHA 答案。",
+	"recaptcha-create": "為了防止自動建立頁面程式，我們要麻煩您輸入在方塊中顯示的單字。",
+	"recaptcha-info": "請解決 ReCaptcha 的盤問，並回傳作為驗證碼 ID、驗證碼文字的盤問值與回應值。",
+	"recaptcha-apihelp-param-recaptcha_challenge_field": "自 ReCaptcha 小工具的欄位",
+	"recaptcha-apihelp-param-recaptcha_response_field": "自 ReCaptcha 小工具的欄位",
+	"recaptcha-id-label": "ReCaptcha 盤問",
+	"recaptcha-id-help": "ReCaptcha 盤問值",
+	"recaptcha-label": "ReCaptcha 處理",
+	"recaptcha-help": "ReCaptcha 處理值"
+}

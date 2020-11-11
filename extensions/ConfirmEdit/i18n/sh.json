@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kolega2357",
+			"OC Ripper"
+		]
+	},
+	"captcha-label": "CAPTCHA",
+	"captcha-createaccount-fail": "Netačan unos ili nedostatak koda za potvrđivanje.",
+	"captcha-sendemail": "Da bi zaštitli wiki od automatskog spamiranja, ljubazno vas molimo da riješite jednostavno sabiranje/zbrajanje ispod i odgovor unesete u kutijicu ([[Special:Captcha/help|više informacija]]):"
+}

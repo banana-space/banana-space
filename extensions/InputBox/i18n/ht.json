@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Boukman",
+			"Masterches"
+		]
+	},
+	"inputbox-desc": "Pèmèt ou mete fòmilè HTML yo ki deja defini.",
+	"inputbox-error-no-type": "Atansyon, ou pa bay detay sou tip, kalite bwat antre pou ou kreye",
+	"inputbox-error-bad-type": "Kalite bwat $1 ou antre pa bon, sistèm nan pa konnen l.\nTanpri mete youn nan opsyon sa yo: \"create\", \"comment\", \"search\", \"search2\" oubyen \"fulltext\".",
+	"inputbox-tryexact": "Eseye paj ki koresponn toutbon.",
+	"inputbox-searchfulltext": "Fouye nan tout teks nèt",
+	"inputbox-createarticle": "Kreye atik sa"
+}

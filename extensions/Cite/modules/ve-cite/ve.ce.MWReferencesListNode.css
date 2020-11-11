@@ -1,0 +1,15 @@
+/*!
+ * VisualEditor ContentEditable MediaWiki MWReferencesListNode styles.
+ *
+ * @copyright 2011-2018 VisualEditor Team's Cite sub-team and others; see AUTHORS.txt
+ * @license MIT
+ */
+
+.ve-ce-mwReferencesListNode .ve-ce-generated-wrapper {
+	display: inline-block;
+}
+
+.ve-ce-mwReferencesListNode-muted {
+	color: #72777d;
+	font-style: italic;
+}

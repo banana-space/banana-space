@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Marwan Mohamad"
+		]
+	},
+	"vector-action-addsection": "Duhengi topik",
+	"vector-action-delete": "Luluta",
+	"vector-action-move": "Heyiya",
+	"vector-action-protect": "Dahayi",
+	"vector-view-create": "Mohutu",
+	"vector-view-edit": "Boli'o",
+	"vector-view-history": "Bilohi riwayati",
+	"vector-view-view": "Baca",
+	"vector-more-actions": "Uweewo"
+}

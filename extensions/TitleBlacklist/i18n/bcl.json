@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Geopoet"
+		]
+	},
+	"titleblacklist-desc": "Minatugot sa mga administrador na magbawal sa pagmumukna nin mga pahina asin mga panindog nin paragamit sa kada [[MediaWiki:Titleblacklist|pinagbarahang listahan]] and [[MediaWiki:Titlewhitelist|pinagtugutang listahan]]",
+	"titleblacklist": "#Ini sarong pinagbarahang listahan kan titulo. Mga titulo asin mga paragamit na minatampad nin sarong regular na ekspresyon digde dae puwedeng maipagmukna.\n#Gamiton an \"#\" para sa mga komento.\n#Ini bakong sensitibo sa pindutan bilang panugmad",
+	"titlewhitelist": "#Ini sarong pinagtutugutang listahan kan titulo. Gamiton an \"#\" para sa mga komento.\n#Ini bakong sensitibo sa pindutan bilang panugmad",
+	"titleblacklist-forbidden-edit": "An titulong \"$2\" pinagbabawalan sa makapagmukna.\nIni minatampad sa minasunod na entrada kan pinagbarahang listahan: <code>$1</code>",
+	"titleblacklist-forbidden-move": "An \"$2\" dae tabi maibabalyo sa \"$3\", nin huli ta an titulo \"$3\" pinagbabawalan sa makapagmukna.\nIni minatampad sa minasunod na entrada kan pinagbarahang listahan:<code>$1</code>",
+	"titleblacklist-forbidden-upload": "An pangaran nin sagunson na \"$2\" pinagbabawalan na makapagmukna.\nIni minatampad sa minasunod na entrada kan pinagbarahang listahan:<code>$1</code>",
+	"titleblacklist-forbidden-new-account": "An pangaran nin paragamit na \"$2\" pinagbabawalan na makapagmukna.\nIni minatampad sa minasunod na entrada kan pinagbarahang listahan:<code>$1</code>",
+	"titleblacklist-invalid": "An minasunod na {{PLURAL:$1|linya|mga linya}} na yaon sa pinagbarahang listahan kan titulo {{PLURAL:$1|iyo an|iyo an mga}} imbalido; pakikoriher tabi {{PLURAL:$1|ini|sinda}} bago pa man ipagtagama:",
+	"titleblacklist-override": "Pabayae an pinagbarahang listahan",
+	"right-tboverride": "Salambawan an titulo o pinagbabawal na listahan kan pangaran nin paragamit",
+	"right-tboverride-account": "Salambawan an pinagbarahang listahan kan pangaran nin paragamit"
+}

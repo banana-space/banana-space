@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Juanpabl"
+		]
+	},
+	"syntaxhighlight-desc": "Premite o resalte sintactico <code>&lt;syntaxhighlight&gt;</code> usando [http://pygments.org/ Pygments]"
+}

@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Snævar",
+			"Sveinn í Felli"
+		]
+	},
+	"cite-desc": "Bætir <nowiki><ref[ name=id]></nowiki> og <nowiki><references/></nowiki> tögum við fyrir heimildir",
+	"cite_error": "Tilvísunar villa: $1",
+	"cite_error_ref_numeric_key": "Villa í <code>&lt;ref&gt;</code> tag;\nnafn tilvísunar má ekki vera heil tala. Notaðu lýsandi titil",
+	"cite_error_ref_no_key": "Opna <code>&lt;ref&gt;</code> merkið er gallað eða hefur ógilt nafn",
+	"cite_error_ref_too_many_keys": "Villa í <code>&lt;ref&gt;</code> tag;\nógilt nafn, t.d. of mörg",
+	"cite_error_ref_no_input": "Villa í <code>&lt;ref&gt;</code> tag;\ntilvísunin verður annaðhvort að hafa nafn eða innihald.",
+	"cite_error_references_invalid_parameters": "Ógild færibreyta í <code>&lt;references&gt;</code> merkinu",
+	"cite_error_references_no_text": "Villa í <code>&lt;ref&gt;</code> tag;\ntilgreindu texta fyrir tilvísun með nafnið <code>$1</code>",
+	"cite_error_included_ref": "Loka þarf tilvísunni með <code>&lt;/ref&gt;</code> tagi",
+	"cite_error_group_refs_without_references": "<code>&lt;ref&gt;</code> tag er til fyrir hóp tilvísana undir nafninu \"$1\". Annaðhvort finnst ekkert sambærilegt <code>&lt;references group=\"$1\"/&gt;</code> tag, eða að það vanti að loka taginu með <code>&lt;/ref&gt;</code>.",
+	"cite_error_references_group_mismatch": "<code>&lt;ref&gt;</code> tag í <code>&lt;references&gt;</code> stangast á við hópa eigindið \"$1\".",
+	"cite_error_references_missing_group": "<code>&lt;ref&gt;</code> tag skilgreint í <code>&lt;references&gt;</code> hefur hópa eigindið \"$1\" sem birtist ekki í textanum á undan.",
+	"cite_error_references_missing_key": "<code>&lt;ref&gt;</code> tag með nafnið \"$1\" og er skilgreint í <code>&lt;references&gt;</code> er ekki notað í textanum á undan.",
+	"cite_error_references_no_key": "<code>&lt;ref&gt;</code> tag skilgreint í <code>&lt;references&gt;</code> hefur engin nafna eigindi.",
+	"cite_error_empty_references_define": "Bæta þarf innihaldi við tilvísun með nafnið \"$1\".",
+	"cite_reference_link_key_with_num": "$1_$2",
+	"cite_references_link_many_sep": "&#32;",
+	"cite_references_link_many_and": "&#32;",
+	"cite_references_link_accessibility_label": "Stökkva upp",
+	"cite_references_link_many_accessibility_label": "Stökkva upp til:"
+}

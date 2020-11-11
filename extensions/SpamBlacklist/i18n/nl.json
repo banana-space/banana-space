@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"SPQRobin",
+			"Siebrand"
+		]
+	},
+	"spam-blacklist": " # Externe URL's die voldoen aan deze lijst worden geweigerd bij het\n # toevoegen aan een pagina. Deze lijst heeft alleen invloed op deze wiki.\n # Er bestaat ook een globale zwarte lijst.\n # Documentatie: https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- laat deze regel zoals hij is --> <pre>\n#\n# De syntaxis is als volgt:\n#   * Alles vanaf het teken \"#\" tot het einde van de regel is opmerking\n#   * Iedere niet-lege regel is een fragment van een reguliere uitdrukking die\n#     alleen van toepassing is op hosts binnen URL's.\n\n #</pre> <!-- laat deze regel zoals hij is -->",
+	"spam-whitelist": " #<!-- laat deze regel zoals hij is --> <pre>\n# Externe URL's die voldoen aan deze lijst, worden *nooit* geweigerd, al\n# zouden ze geblokkeerd moeten worden door regels uit de zwarte lijst.\n#\n# De syntaxis is als volgt:\n#   * Alles vanaf het teken \"#\" tot het einde van de regel is opmerking\n#   * Iedere niet-lege regel is een fragment van een reguliere uitdrukking die\n#     alleen van toepassing is op hosts binnen URL's.\n\n #</pre> <!-- laat deze regel zoals hij is -->",
+	"email-blacklist": " # E-mailadressen die voldoen aan deze lijst worden geblokkeerd bij het registreren of het verzenden van e-mails.\n # Deze lijst heeft alleen invloed op deze wiki. Er bestaat ook een globale zwarte lijst.\n # Documentatie: https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- laat deze regel zoals hij is --> <pre>\n#\n# De syntaxis is als volgt:\n#   * Alles vanaf het teken \"#\" tot het einde van de regel is een opmerking\n#   * Iedere niet-lege regel is een fragment van een reguliere uitdrukking die\n#     alleen van toepassing is op hosts binnen e-mailadressen.\n\n #</pre> <!-- laat deze regel zoals hij is -->",
+	"email-whitelist": " #<!-- laat deze regel zoals hij is --> <pre>\n# E-mailadressen die voldoen aan deze lijst, worden *nooit* geweigerd, al\n# zouden ze geblokkeerd moeten worden door regels uit de zwarte lijst.\n#\n# De syntaxis is als volgt:\n#   * Alles vanaf het teken \"#\" tot het einde van de regel is opmerking\n#   * Iedere niet-lege regel is een fragment van een reguliere uitdrukking die\n#     alleen van toepassing is op hosts binnen e-mailadressen.\n\n #</pre> <!-- laat deze regel zoals hij is -->",
+	"spam-blacklisted-email": "E-mailadres op de zwarte lijst",
+	"spam-blacklisted-email-text": "Uw e-mailadres staat momenteel op de zwarte lijst waardoor u geen e-mails naar andere gebruikers kunt verzenden.",
+	"spam-blacklisted-email-signup": "Het opgegeven e-mailadres staat momenteel op de zwarte lijst.",
+	"spam-invalid-lines": "De volgende {{PLURAL:$1|regel|regels}} van de zwarte lijst {{PLURAL:$1|is een|zijn}} onjuiste reguliere {{PLURAL:$1|expressie|expressies}}  en {{PLURAL:$1|moet|moeten}} verbeterd worden alvorens de pagina kan worden opgeslagen:",
+	"spam-blacklist-desc": "Op reguliere expressies gebaseed antispamhulpprogramma dat het mogelijk maakt URL's in pagina's te blokkeren en e-mailadressen voor geblokkeerde gebruikers",
+	"log-name-spamblacklist": "Logboek zwarte lijst",
+	"log-description-spamblacklist": "Deze lijst bevat gebeurtenissen met betrekking tot de zwarte lijst.",
+	"logentry-spamblacklist-hit": "{{GENDER:$2|$1}} heeft geprobeerd $4 van de zwarte lijst toe te voegen op $3",
+	"right-spamblacklistlog": "Logboek zwarte lijst bekijken",
+	"action-spamblacklistlog": "logboek zwarte lijst te bekijken"
+}

@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tifinaghes"
+		]
+	},
+	"cite_reference_link_prefix": "cite_ref-",
+	"cite_references_link_many_sep": "&#32;",
+	"cite_references_link_many_and": "&#32;"
+}

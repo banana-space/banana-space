@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Papuass"
+		]
+	},
+	"timeless-loggedin": "Tavs konts",
+	"timeless-userpage": "{{GENDER:$1|Dalībnieka|Dalībnieces}} lapa",
+	"timeless-talkpage": "{{GENDER:$1|Dalībnieka|Dalībnieces}} diskusija",
+	"timeless-pagelog": "Lapas žurnāli",
+	"timeless-more": "Vairāk",
+	"timeless-pageactions": "Lapas rīki",
+	"timeless-userpagetools": "Dalībnieka lapas rīki",
+	"timeless-pagemisc": "Vairāk",
+	"timeless-namespaces": "Vārdtelpas",
+	"timeless-pagetools": "Lapas darbības",
+	"timeless-languages": "Valodas"
+}

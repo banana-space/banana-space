@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mpradeep",
+			"Veeven"
+		]
+	},
+	"citethispage": "ఉదహరించు",
+	"citethispage-desc": "[[Special:Cite|ఉదహరింపు]] అనే ప్రత్యేక పేజీని & పరికర పెట్టె లింకునీ చేరుస్తుంది",
+	"citethispage-link": "ఈ వ్యాసాన్ని ఉదహరించండి",
+	"tooltip-citethispage": "ఈ పేజీని ఎలా ఉదహరించాలి అన్నదానిపై సమాచారం",
+	"citethispage-change-submit": "ఉదహరించు",
+	"citethispage-change-target": "పేజీ:"
+}

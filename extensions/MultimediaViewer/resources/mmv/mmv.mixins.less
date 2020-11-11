@@ -1,0 +1,60 @@
+/* stylelint-disable function-parentheses-space-inside */
+/* stylelint-disable string-quotes */
+
+.unselectable() {
+	-webkit-user-select: none;
+	-moz-user-select: -moz-none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.opacity( @value ) {
+	opacity: @value;
+	filter: e( %( "alpha(opacity=%s )", round( @value * 100 ) ) ); // IE6-8
+	zoom: 1; // IE 6-7 hasLayout hack
+}
+
+// from http://stackoverflow.com/a/12178019/323407
+.fade-out-vertical( @backgroundColor: white ) {
+	@invisible: fadeout( @backgroundColor, 100% );
+	background-image: -moz-linear-gradient( top, @invisible 0%, @backgroundColor 100% ); // FF3.6+
+	background-image: -webkit-gradient( linear, left top, left bottom, color-stop( 0%, @invisible ), color-stop( 100%, @backgroundColor ) ); // Chrome,Safari4+
+	background-image: -webkit-linear-gradient( top, @invisible 0%, @backgroundColor 100% ); // Chrome10+,Safari5.1+
+	background-image: linear-gradient( to bottom, @invisible 0%, @backgroundColor 100% ); // W3C
+	filter: e( %( "progid:DXImageTransform.Microsoft.gradient( startColorstr='#%s', endColorstr='#%s',GradientType=0 )", rgbahex( @invisible ), rgbahex( @backgroundColor) ) ); // IE6-9
+}
+.fade-out-horizontal( @backgroundColor: white ) {
+	@invisible: fadeout( @backgroundColor, 100% );
+	background-image: -moz-linear-gradient( left, @invisible 0%, @backgroundColor 100% ); // FF3.6+
+	background-image: -webkit-gradient( linear, left top, right top, color-stop(0%, @invisible ), color-stop( 100%, @backgroundColor) ); // Chrome,Safari4+
+	background-image: -webkit-linear-gradient( left, @invisible 0%, @backgroundColor 100% ); // Chrome10+,Safari5.1+
+	background-image: linear-gradient( to right, @invisible 0%, @backgroundColor 100% ); // W3C
+	filter: e( %( "progid:DXImageTransform.Microsoft.gradient( startColorstr='#%s', endColorstr='#%s',GradientType=1 )", rgbahex( @invisible ), rgbahex( @backgroundColor) ) ); // IE6-9
+}
+
+.rotate( @degrees: 45deg ) {
+	-webkit-transform: rotate( @degrees );
+	-moz-transform: rotate( @degrees );
+	-ms-transform: rotate( @degrees ); // IE 9 only
+	transform: rotate( @degrees );
+
+	/* stylelint-disable number-no-trailing-zeros */
+	filter: progid:DXImageTransform.Microsoft.BasicImage( rotation=( @degrees / 90.0 ) );
+	-ms-filter: 'progid:DXImageTransform.Microsoft.BasicImage( rotation=( @degrees / 90.0 ) )';
+	/* stylelint-enable number-no-trailing-zeros */
+
+	// The filter rules ( which are for IE < 9 ) cause a bug in IE 9 where the rotated
+	// element will have a black background. So we have to disable them in IE9
+	/* stylelint-disable declaration-block-no-duplicate-properties */
+	filter: none \0;
+	-ms-filter: none \0;
+	/* stylelint-enable declaration-block-no-duplicate-properties */
+}
+
+// from http://pixelhunter.me/post/25782670606/css3-grayscale
+.grayscale() {
+	-webkit-filter: grayscale( 100% );
+	filter: url( "data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale" ); /* Firefox 3.5+ */ /* stylelint-disable-line function-url-quotes */
+	filter: grayscale( 100% );
+	filter: #72777d; // IE 6-9
+}

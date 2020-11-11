@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"DaBler",
+			"LTM3",
+			"Dvorapa",
+			"Mormegil",
+			"Matěj Suchánek"
+		]
+	},
+	"timeless-desc": "Nadčasový vzhled navržený podle prototypu Winter, vytvořeného Brandonem Harrisem, a dalších vzhledů vytvořených nadací Wikimedia",
+	"timeless-search-placeholder": "Prohledat {{NUMBEROFARTICLES}} stránek",
+	"timeless-loggedin": "Váš účet",
+	"timeless-anonymous": "Anonym",
+	"timeless-loggedinas": "{{GENDER:$1|Přihlášen|Přihlášena}} jako '''$1'''",
+	"timeless-notloggedin": "Nepřihlášen(a)",
+	"timeless-userpage": "Stránka {{GENDER:$1|uživatele|uživatelky}}",
+	"timeless-talkpage": "Diskuze {{GENDER:$1|uživatele|uživatelky}}",
+	"timeless-pagelog": "Protokolovací záznamy",
+	"timeless-more": "Více",
+	"timeless-sitetools": "Wiki nástroje",
+	"timeless-pageactions": "Nástroje ke stránkám",
+	"timeless-userpagetools": "Uživatelské nástroje",
+	"timeless-pagemisc": "Více",
+	"timeless-namespaces": "Jmenné prostory",
+	"timeless-pagetools": "Možnosti stránky",
+	"timeless-languages": "Jazyky",
+	"timeless.js": "/* JavaScript pro uživatele používající vzhled „Timeless“ */"
+}

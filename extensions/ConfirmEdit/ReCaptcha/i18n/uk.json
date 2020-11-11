@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Andriykopanytsia",
+			"Base",
+			"Тест",
+			"Piramidion",
+			"Ата"
+		]
+	},
+	"recaptcha-edit": "Для запобігання автоматичному спаму у редагуваннях просимо Вас ввести слова, які Ви бачите у поданому блоці.",
+	"recaptcha-addurl": "Ваше редагування містить зовнішні посилання. Для запобігання автоматичному спаму у редагуваннях просимо Вас ввести слова, які Ви бачите у блоці поданому блоці.",
+	"recaptcha-badlogin": "Для запобігання автоматичному підбору паролю просимо Вас ввести слова, які Ви бачите у поданому блоці.",
+	"recaptcha-createaccount": "Для запобігання автоматичному створенню облікових записів просимо Вас ввести слова, які Ви бачите у поданому блоці.",
+	"recaptcha-createaccount-fail": "Відповідь reCAPTCHA неправильна або відсутня.",
+	"recaptcha-create": "З метою захисту вікі від автоматичного створення сторінки просимо Вас ввести слова, які Ви бачите у блоці поданому блоці.",
+	"recaptcha-info": "Будь ласка, вирішіть завдання ReCaptcha і введіть значення завдання та відповіді як captchaId та captchaWord.",
+	"recaptcha-apihelp-param-recaptcha_challenge_field": "Поле із віджета ReCaptcha",
+	"recaptcha-apihelp-param-recaptcha_response_field": "Поле із віджета ReCaptcha",
+	"recaptcha-id-label": "Завдання ReCaptcha",
+	"recaptcha-id-help": "Значення завдання ReCaptcha",
+	"recaptcha-label": "Відповідь ReCaptcha",
+	"recaptcha-help": "Значення відповіді ReCaptcha"
+}

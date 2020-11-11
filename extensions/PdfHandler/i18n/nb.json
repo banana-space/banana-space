@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jsoby",
+			"Danmichaelo",
+			"Jon Harald Søby"
+		]
+	},
+	"pdf-desc": "Håndtering av PDF-visning i bildemodus",
+	"pdf-file-page-warning": "PDF er et komplekst format som kan eksponere din private informasjon. Forsikre deg om at du har sikre innstillinger i PDF-visningsprogrammet ditt.",
+	"pdf-file-page-warning-header": "Personvernhensyn",
+	"pdf-file-page-warning-footer": "Dette er ikke et problem med denne bestemte filen, men et generelt problem med PDF-formatet.",
+	"pdf-file-page-warning-info": "Lær mer.",
+	"pdf_no_metadata": "kan ikke hente metadata fra PDF",
+	"pdf_page_error": "Sidenummer overstiger antall sider i dokumentet",
+	"exif-pdf-producer": "Koverteringsprogram",
+	"exif-pdf-version": "Versjon av PDF-format",
+	"exif-pdf-encrypted": "Kryptert",
+	"exif-pdf-pagesize": "Sidestørrelse"
+}

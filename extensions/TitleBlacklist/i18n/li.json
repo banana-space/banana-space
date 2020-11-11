@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Matthias",
+			"Ooswesthoesbes"
+		]
+	},
+	"titleblacklist-desc": "Veurkömp het aanmake van pagina's èn gebroekers waenger 'ne [[MediaWiki:Titleblacklist|zwarte]] en [[MediaWiki:Titlewhitelist|witte]] lies.",
+	"titleblacklist": "# Dit is 'ne zjwarte lies veur paginaname. Paginaname en gebroekers die voldoon aan 'ne regex kinne neet aangemaak waere.\n# Gebroek \"#\" veur opmerkinge.\n# Dit is autematis huidlettergeveulig",
+	"titlewhitelist": "# Dit is 'ne witte lies veur paginaname. Gebroek \"#\" veur opmerkinge.\n# Dit is autematis huidlettergeveulig",
+	"titleblacklist-forbidden-edit": "Een pagina met de naam \"$2\" kan niet aangemaakt worden. Deze paginanaam voldoet aan de volgende beperking op de zwarte lijst: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" kan niet hernoemd worden naar \"$3\", omdat pagina's met de naam \"$3\" niet aangemaakt kunnen worden. Deze paginanaam voldoet aan de volgende beperking op de zwarte lijst: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Het bestand \"$2\" kan niet toegevoegd worden. Deze bestandsnaam voldoet aan de volgende beperking op de zwarte lijst: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "De gebroekersnaam \"$2\" kan neet aangemaak waere ómdet 't voldeit aan de volgende beperking op de zwarte lies: <code>$1</code>",
+	"titleblacklist-invalid": "De volgende {{PLURAL:$1|regel|regels}} in de zwarte lijst veur paginaname {{PLURAL:$1|is|zijn}} ongeldig. Verbeter die {{PLURAL:$1|regel|regels}} asjeblieft veurdat ge de lijst opslaat:",
+	"titleblacklist-override": "Negeer zwarte lies",
+	"right-tboverride": "De zwarte lies veur pazjenaname negere",
+	"right-tboverride-account": "De zwarte lies veur gebroekersname negere"
+}

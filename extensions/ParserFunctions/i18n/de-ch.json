@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"MichaelFrey"
+		]
+	},
+	"pfunc_expr_unexpected_closing_bracket": "Expression-Fehler: Unerwartete schliessende eckige Klammer"
+}

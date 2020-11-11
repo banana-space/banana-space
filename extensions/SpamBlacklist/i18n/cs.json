@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Li-sung",
+			"Matěj Grabovský",
+			"Mormegil"
+		]
+	},
+	"spam-blacklist": " # Externí URL odpovídající tomuto seznamu budou zablokovány při pokusu přidat je na stránku.\n # Tento seznam ovlivňuje jen tuto wiki; podívejte se také na globální černou listinu.\n # Dokumentaci najdete na https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- Nechte tento řádek přesně tak jak je --> <pre>\n#\n# Syntaxe je následující:\n#  * Všechno od znaku „#“ do konce řádku je komentář\n#  * Každý neprázdný řádek je část regulárního výrazu, kterému budou odpovídat pouze domény z URL\n\n #</pre> <!-- Nechte tento řádek přesně tak jak je -->",
+	"spam-whitelist": " #<!-- nechejte tento řádek přesně tak jak je --> <pre>\n# Externí URL odpovídající výrazům v tomto seznamu *nebudou* zablokovány, ani kdyby\n# je zablokovaly položky z černé listiny.\n#\n# Syntaxe je následující:\n#  * Všechno od znaku „#“ do konce řádku je komentář\n#  * Každý neprázdný řádek je část regulárního výrazu, kterému budou odpovídat pouze domény z URL\n\n #</pre> <!-- nechejte tento řádek přesně tak jak je -->",
+	"email-blacklist": " # Z e-mailů vyhovujících tomuto seznamu nebude možno zaregistrovat účet ani odesílat e-mail.\n # Tento seznam ovlivňuje jen tuto wiki; vizte také globální černou listinu.\n # Dokumentaci najdete na https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- tuto řádku ponechte přesně tak, jak je --> <pre>\n#\n# Syntaxe je následující:\n#  * Všechno od znaku „#“ do konce řádku je komentář\n#  * Každý neprázdný řádek je část regulárního výrazu, kterému budou odpovídat pouze domény v e-mailových adresách\n\n #</pre> <!-- tuto řádku ponechte přesně tak, jak je -->",
+	"email-whitelist": " #<!-- tuto řádku ponechte přesně tak, jak je --> <pre>\n# E-maily vyhovující tomuto seznamu *nebudou* blokovány, i kdyby\n# odpovídaly záznamům v černé listině.\n#\n# Syntaxe je následující:\n#  * Všechno od znaku „#“ do konce řádku je komentář\n#  * Každý neprázdný řádek je část regulárního výrazu, kterému budou odpovídat pouze domény v e-mailových adresách\n #</pre> <!-- tuto řádku ponechte přesně tak, jak je -->",
+	"spam-blacklisted-email": "E-mail na černé listině",
+	"spam-blacklisted-email-text": "Vaše e-mailová adresa je momentálně uvedena na černé listině, takže ostatním uživatelům nemůžete posílat e-maily.",
+	"spam-blacklisted-email-signup": "Uvedená e-mailová adresa je v současné době na černé listině.",
+	"spam-invalid-lines": "Na černé listině spamu {{PLURAL:$1|je následující řádka neplatný regulární výraz|jsou následující řádky neplatné regulární výrazy|jsou následující řádky regulární výrazy}} a je nutné {{PLURAL:$1|ji|je|je}} před uložením stránky opravit :",
+	"spam-blacklist-desc": "Antispamový nástroj na základě regulárních výrazů umožňující zakázat URL ve stránkách a e-mailových adresách registrovaných uživatelů",
+	"log-name-spamblacklist": "Kniha protispamové černé listiny",
+	"log-description-spamblacklist": "Tyto události sledují zásahy protispamové černé listiny.",
+	"logentry-spamblacklist-hit": "{{GENDER:$2|Uživateli|Uživatelce}} $1 zabránila protispamová černá listina přidat $4 na stránku $3.",
+	"right-spamblacklistlog": "Prohlížení knihy protispamové černé listiny",
+	"action-spamblacklistlog": "prohlížet knihu protispamové černé listiny"
+}

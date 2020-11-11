@@ -1,0 +1,150 @@
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+
+// Radio
+//
+// Styling radios in a way that works cross browser is a tricky problem to solve.
+// In MediaWiki UI put a radio and label inside a mw-ui-radio div.
+// This renders in all browsers except IE 6-8 which do not support the :checked selector;
+// these are kept backwards-compatible using the `:not( #noop )` selector.
+// You should give the radio and label matching "id" and "for" attributes, respectively.
+//
+// Markup:
+// <div class="mw-ui-radio">
+//   <input type="radio" id="kss-example-4" name="kss-example-4">
+//   <label for="kss-example-4">Standard radio</label>
+// </div>
+// <div class="mw-ui-radio">
+//   <input type="radio" id="kss-example-4-checked" name="kss-example-4" checked>
+//   <label for="kss-example-4-checked">Standard checked radio</label>
+// </div>
+// <div class="mw-ui-radio">
+//   <input type="radio" id="kss-example-4-disabled" name="kss-example-4-disabled" disabled>
+//   <label for="kss-example-4-disabled">Disabled radio</label>
+// </div>
+// <div class="mw-ui-radio">
+//   <input type="radio" id="kss-example-4-disabled-checked" name="kss-example-4-disabled" disabled checked>
+//   <label for="kss-example-4-disabled-checked">Disabled checked radio</label>
+// </div>
+//
+// Styleguide 4.
+.mw-ui-radio {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+// We use the not selector to cancel out styling on IE 8 and below.
+// We also disable this styling on JavaScript disabled devices. This fixes the issue with
+// Opera Mini where checking/unchecking doesn't apply styling but potentially leaves other
+// more capable browsers with unstyled radio buttons.
+.client-js .mw-ui-radio:not( #noop ) {
+	// Position relatively so we can make use of absolute pseudo elements
+	position: relative;
+	line-height: @sizeInputBinary;
+
+	* {
+		// reset font sizes (see T74727)
+		font: inherit;
+		vertical-align: middle;
+	}
+
+	[ type='radio' ] {
+		// ensure the invisible radio takes up the required width
+		width: @sizeInputBinary;
+		height: @sizeInputBinary;
+		// This is needed for Firefox mobile (See T73750 to workaround default Firefox stylesheet)
+		max-width: none;
+		margin: 0;
+		// Hide `input[ type=radio ]` and instead style the label that follows
+		// Support: VoiceOver. Use `opacity` so that VoiceOver can still identify the radio
+		opacity: 0;
+
+		& + label {
+			padding-left: 0.4em;
+
+			// Pseudo `:before` element of the label after the radio now looks like a radio
+			&:before {
+				content: '';
+				background-color: #fff;
+				.box-sizing( border-box );
+				position: absolute;
+				left: 0;
+				width: @sizeInputBinary;
+				height: @sizeInputBinary;
+				border: 1px solid @colorGray7;
+				border-radius: 100%;
+			}
+
+			// Needed for `:focus` state's inner white circle
+			&:after {
+				content: ' ';
+				position: absolute;
+				top: 2px; // `px` unit due to pixel rounding error when using `@sizeInputBinary / 4`
+				left: 2px;
+				width: 1.14285em; // equals `@sizeInputBinary - 4px`
+				height: 1.14285em;
+				border: 1px solid transparent;
+				border-radius: 100%;
+			}
+		}
+
+		// Apply a dot on the pseudo `:before` element when the input is checked
+		&:checked + label:before {
+			border-width: @borderWidthRadioChecked;
+		}
+
+		&:enabled {
+			cursor: pointer;
+
+			& + label:before {
+				cursor: pointer;
+				.transition( ~'background-color 100ms, color 100ms, border-color 100ms' );
+			}
+
+			&:hover + label:before {
+				border-color: @colorProgressive;
+			}
+
+			&:active + label:before {
+				background-color: @colorProgressiveActive;
+				border-color: @borderColorInputBinaryActive;
+			}
+
+			&:checked {
+				& + label:before {
+					border-color: @borderColorInputBinaryChecked;
+				}
+
+				&:focus + label:after {
+					border-color: #fff;
+				}
+
+				&:hover + label:before {
+					border-color: @colorProgressiveHighlight;
+				}
+
+				&:active {
+					& + label:before {
+						border-color: @borderColorInputBinaryActive;
+						box-shadow: @boxShadowInputBinaryActive;
+					}
+
+					& + label:after {
+						border-color: @borderColorInputBinaryActive;
+					}
+				}
+			}
+		}
+
+		&:disabled {
+			& + label:before {
+				background-color: @colorGray12;
+				border-color: @colorGray12;
+			}
+
+			&:checked + label:before {
+				background-color: #fff;
+			}
+		}
+	}
+}

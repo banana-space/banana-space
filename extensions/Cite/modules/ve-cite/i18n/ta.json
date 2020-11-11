@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jayarathina",
+			"Sank",
+			"Shanmugamp7",
+			"மதனாஹரன்",
+			"கௌசிக் பிரபு",
+			"Kalyanasundar",
+			"ElangoRamanujam",
+			"Info-farmer",
+			"Dineshkumar Ponnusamy"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "நூல்",
+	"visualeditor-cite-tool-name-journal": "இதழ்",
+	"visualeditor-cite-tool-name-news": "செய்திகள்",
+	"visualeditor-cite-tool-name-web": "இணையத்தளம்",
+	"cite-ve-dialog-reference-options-group-label": "இந்தக் குழுவை பாவிக்கவும்",
+	"cite-ve-dialog-reference-title": "மேற்கோள்",
+	"cite-ve-dialogbutton-reference-tooltip": "மேற்கோள்"
+}

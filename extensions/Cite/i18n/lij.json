@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Giromin Cangiaxo"
+		]
+	},
+	"apihelp-query+references-description": "O restitoisce una rapresentaçion di dæti de referençe associæ co-e paggine indicæ.",
+	"apihelp-query+references-example-1": "Referençe associæ con <kbd>Albert Einstein</kbd>.",
+	"cite-desc": "O l'azonze i tag <nowiki><ref[ name=id]></nowiki> e <nowiki><references/></nowiki> pe gestî e çitaçioin",
+	"cite_error": "Errô inte notte: $1",
+	"cite_error_ref_numeric_key": "Errô inte l'uso do marcatô <code>&lt;ref&gt;</code>: o nomme o no poeu ese un nummero intrego. Adoeuvia un tittolo esteiso",
+	"cite_error_ref_no_key": "L'avertua de l'etichetta <code>&lt;ref&gt;</code> a no l'è corretta ò a g'ha un nomme errou.",
+	"cite_error_ref_too_many_keys": "Tag <code>&lt;ref&gt;</code> non vallido: nommi non vallidi (pres. troppi)",
+	"cite_error_ref_no_input": "Tag <code>&lt;ref&gt;</code> non vallido: i ref sença nomme no poeuan ese voeui",
+	"cite_error_references_duplicate_key": "Tag <code>&lt;ref&gt;</code> non vallido; o nomme \"$1\" o l'è stæto definio ciù votte con di contegnui despægi",
+	"cite_error_references_invalid_parameters": "Tag <code>&lt;references&gt;</code> non vallido: parametri non ammissi, adoeuvia <code>&lt;references /&gt;</code>",
+	"cite_error_references_no_backlink_label": "Etichette de rimando personalizæ esaorie, aomentine o nummero into messaggio <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_no_link_label_group": "Etichette pe inganci personalizæ do groppo \"$1\" esaorie, aomentine o nummero into messaggio <nowiki>[[MediaWiki:$2]]</nowiki>",
+	"cite_error_references_no_text": "Marcatî <code>&lt;ref&gt;</code> non vallido; no l'è stæto indicou nisciun testo pe-o marcatô <code>$1</code>",
+	"cite_error_included_ref": "<code>&lt;/ref&gt;</code> finâ mancante pe-o marcatô <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "Ghè di tag  <code>&lt;ref&gt;</code> pe 'n groppo ciamou \"$1\" ma no l'è stæto trovou nisciun tag <code>&lt;references group=\"$1\"/&gt;</code> corrispondente, oppù manca un <code>&lt;/ref&gt;</code> finâ",
+	"cite_error_references_group_mismatch": "O tag <code>&lt;ref&gt;</code> in <code>&lt;references&gt;</code> o g'ha l'attributo groppo \"$1\" in conflito.",
+	"cite_error_references_missing_group": "O tag <code>&lt;ref&gt;</code> definio in <code>&lt;references&gt;</code> o g'ha un attributo gruppo \"$1\" ch'o no compâ into testo precedente.",
+	"cite_error_references_missing_key": "O tag <code>&lt;ref&gt;</code> con nomme \"$1\" definio in <code>&lt;references&gt;</code> o no l'è doeuviou into testo precedente.",
+	"cite_error_references_no_key": "O tag <code>&lt;ref&gt;</code> definio in <code>&lt;references&gt;</code> o no g'ha un attributo nomme.",
+	"cite_error_empty_references_define": "O tag <code>&lt;ref&gt;</code> definio in <code>&lt;references&gt;</code> con nomme \"$1\" o no g'ha arcun contegnuo.",
+	"cite-tracking-category-cite-error": "Paggine con erroî inte notte",
+	"cite-tracking-category-cite-error-desc": "E paggine in questa categoria g'han di erroî inte l'uso di tag pe-e notte.",
+	"cite_references_link_accessibility_label": "Sata",
+	"cite_references_link_many_accessibility_label": "Sata a:",
+	"cite_section_preview_references": "Anteprimma de notte",
+	"cite_warning": "Attençion inte notte: $1",
+	"cite_warning_sectionpreview_no_text": "O tag <code>&lt;ref&gt;</code> con nomme <code>$1</code> o no poeu ese vixualizou in anteprimma, perché o l'è definio a-o de foeua da seçion attoale ò o no l'è definio affæto."
+}

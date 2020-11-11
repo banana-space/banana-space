@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lam-ang"
+		]
+	},
+	"action-titleblacklistlog": "kitaen ti listaan ti title blacklist",
+	"log-name-titleblacklist": "Listaan ti title blacklist",
+	"log-description-titleblacklist": "Dagitoy a pasamak ket surotenna dagiti napuntaan ti title blacklist.",
+	"logentry-titleblacklist-hit-username": "Ni $1 ket {{GENDER:$2|nagpataud}} ti napuntaan a title blacklist idi nagpadpadas a nagpartuat ti pakabilangan ti $3 a maipada iti $4.",
+	"titleblacklist-desc": "Mangipalubos kadagiti administrador ti agiparit iti agpartuat kadagiti panid ken dagiti pakabilangan ti agar-aramat babaen ti [[MediaWiki:Titleblacklist|blacklist]] ken [[MediaWiki:Titlewhitelist|whitelist]]",
+	"titleblacklist": "# Daytoy ket ti title blacklist. Dagiti titulo ken dagiti agar-aramat a maipada ti kadawyan a panangiyebkas ditoy ket saan a mapartuat\n# Usaren ti \"#\" para kadagiti komentario.\n# Daytoy ket sensetibo ti kadakkel ti letra babaen ti kasisigud",
+	"titlewhitelist": "# Daytoy ket ti title whitelist. Usaren ti \"#\" para kadagiti komentario. \n# Daytoy ket sensetibo ti kadakkel ti letra babaen ti kasisigud",
+	"titleblacklist-forbidden-edit": "Ti titulo ti \"$2\" ket naiparit manipud iti pannakapartuat.\nNaipada iti sumaganad a naikabil a blacklist: <code>$1</code>",
+	"titleblacklist-forbidden-move": "Ti \"$2\" ket saan a maiyalis iti \"$3\", gapu ta ti titulo ti \"$3\" ket naiparit a manipud ti pannakapartuat.\nNaipada iti sumaganad a naikabil a blacklist: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Ti nagan ti papeles ti \"$2\" ket naiparit manipud iti pannakapartuat.\nNaipada iti sumaganad a naikabil a blacklist: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Ti nagan ti agar-aramat ti \"$2\" ket naiparit manipud iti pannakapartuat.\nNaipada iti sumaganad a naikabil a blacklist: <code>$1</code>",
+	"titleblacklist-invalid": "Ti sumaganad a {{PLURAL:$1|linia|linlinia}} iti title blacklist ket imbalido;\npangngaasi ta pasayaaten {{PLURAL:$1|dayta|dagita}} sakbay nga idulin:",
+	"titleblacklist-override": "Saan nga ikaskaso ti blacklist",
+	"titleblacklist-warning": "<strong>Ballaag: Daytoy a panid ket maurnos laeng babaen dagiti administrador ken dagiti sabali nga agar-aramat nga addaan iti karbengan ti <code>tboverride</code> gapu ta maipada iti sumaganad a naikabil a title blacklist:</strong><br /><code>$1</code>",
+	"right-tboverride": "Patuonan ti titulo wenno ti blacklist ti nagan ti agar-aramat",
+	"right-tboverride-account": "Patuonan ti blacklist ti nagan ti agar-aramat",
+	"right-titleblacklistlog": "Kitaen ti listaan ti title blacklist"
+}

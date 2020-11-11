@@ -1,0 +1,193 @@
+@import 'mediawiki.mixins.animation';
+@import 'mediawiki.ui/variables';
+@import 'mw.rcfilters.mixins';
+
+@rcfilters-spinner-size: 12px;
+@rcfilters-head-min-height: 210px;
+@rcfilters-head-margin-bottom: 20px;
+@rcfilters-wl-head-min-height: 300px;
+
+// Corrections for the standard special page
+.client-js {
+	.cloptions {
+		border: 0;
+	}
+
+	// Reserve space for the UI while it loads
+	.rcfilters-head {
+		min-height: @rcfilters-head-min-height;
+		margin-bottom: @rcfilters-head-margin-bottom;
+	}
+
+	// On the watchlist, reserve a bit more
+	.mw-special-Watchlist .rcfilters-head {
+		min-height: @rcfilters-wl-head-min-height;
+	}
+
+	.mw-recentchanges-toplinks {
+		padding-left: 0.5em;
+
+		&:not( .mw-recentchanges-toplinks-collapsed ) {
+			margin-top: -1px; // Make up for `border` to prevent link movement
+			margin-left: -1px;
+			margin-bottom: 0.5em;
+			border: 1px solid @colorGray12; // Same as the legend
+			padding: 0 0.5em 0.5em 0.5em;
+		}
+
+		/* stylelint-disable declaration-no-important */
+		.oo-ui-buttonElement > .oo-ui-buttonElement-button {
+			padding-right: 1.2em !important;
+
+			> .oo-ui-indicatorElement-indicator {
+				right: 0 !important;
+				width: 0.9375em !important;
+			}
+		}
+		/* stylelint-enable declaration-no-important */
+	}
+
+	body:not( .mw-rcfilters-ui-initialized ) {
+		.mw-recentchanges-toplinks.mw-recentchanges-toplinks-collapsed {
+			// Similar to the watchlist-details hack, we are going to make this float left
+			// while loading to prevent jumpiness in the min-height calculation
+			float: left;
+
+			.mw-recentchanges-toplinks-content {
+				display: none;
+			}
+		}
+
+		.rcfilters-head {
+			opacity: 0.5;
+			pointer-events: none;
+
+			.cloptions {
+				display: none;
+			}
+
+		}
+	}
+
+	.mw-changeslist {
+		// Reserve space for the highlight circles
+		ul,
+		table.mw-enhanced-rc {
+			.result-circle-margin();
+		}
+	}
+
+	// Temporarily hide the empty results section while we load rcfilters.
+	.mw-changeslist-empty {
+		display: none;
+	}
+
+	.errorbox {
+		display: none;
+	}
+
+	body.mw-rcfilters-ui-loading .mw-changeslist {
+		opacity: 0.5;
+	}
+
+	.rcfilters-spinner {
+		display: none;
+		position: absolute;
+		left: 50%;
+		// Make sure the middle of the spinner is centered, rather than its left edge
+		margin-left: -3 * @rcfilters-spinner-size / 2;
+
+		opacity: 0.8;
+		white-space: nowrap;
+
+		& .rcfilters-spinner-bounce,
+		&:before,
+		&:after {
+			content: '';
+			display: inline-block;
+			width: @rcfilters-spinner-size;
+			height: @rcfilters-spinner-size;
+			background-color: @colorGray12;
+			border-radius: 100%;
+			.animation( rcfiltersBouncedelay 1.5s ease-in-out -0.16s infinite both );
+		}
+
+		&:before {
+			.animation-delay( -0.33s );
+		}
+
+		&:after {
+			.animation-delay( 0s );
+		}
+	}
+	body:not( .mw-rcfilters-ui-initialized ) .rcfilters-spinner {
+		display: block;
+		// When initializing, display the spinner on top of the area where the UI will appear
+		margin-top: -( @rcfilters-head-min-height + @rcfilters-head-margin-bottom ) / 2;
+	}
+	body.mw-rcfilters-ui-loading .rcfilters-spinner {
+		display: block;
+		// When loading new results, display the spinner on top of the results area
+		margin-top: 2em;
+	}
+
+	#contentSub,
+	form#mw-watchlist-resetbutton {
+		display: none;
+	}
+
+	#jump-to-nav {
+		margin-top: -0.5em;
+		margin-bottom: 0.5em;
+	}
+
+	// Make the watchlist-details message display while loading, but make it not take up any
+	// space. This makes the min-height trick work better.
+	.watchlistDetails {
+		float: left;
+	}
+}
+
+.mw-rcfilters-staticfilters-selected {
+	font-weight: bold;
+}
+
+@-webkit-keyframes rcfiltersBouncedelay {
+	0%,
+	80%,
+	100% {
+		-webkit-transform: scale( 0.7 );
+		transform: scale( 0.7 );
+	}
+	40% {
+		background-color: @colorGray10;
+		-webkit-transform: scale( 1 );
+		transform: scale( 1 );
+	}
+}
+
+@-moz-keyframes rcfiltersBouncedelay {
+	0%,
+	80%,
+	100% {
+		-moz-transform: scale( 0.7 );
+		transform: scale( 0.7 );
+	}
+	40% {
+		background-color: @colorGray10;
+		-moz-transform: scale( 0.7 );
+		transform: scale( 1 );
+	}
+}
+
+@keyframes rcfiltersBouncedelay {
+	0%,
+	80%,
+	100% {
+		transform: scale( 0.7 );
+	}
+	40% {
+		background-color: @colorGray10;
+		transform: scale( 1 );
+	}
+}

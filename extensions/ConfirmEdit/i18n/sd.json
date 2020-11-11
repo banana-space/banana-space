@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aursani",
+			"Mehtab ahmed"
+		]
+	},
+	"captcha-edit-fail": "ڪيپچا گُم يا غير درست.",
+	"captcha-label": "ڪيپچا",
+	"confirmedit-preview-content": "مواد",
+	"confirmedit-preview-valid": "قابلِڪار",
+	"confirmedit-preview-invalid": "ناقابلِڪار"
+}

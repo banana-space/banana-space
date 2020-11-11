@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cheers!",
+			"Minh Nguyen",
+			"Vinhtantran",
+			"Nguyên Lê"
+		]
+	},
+	"fancycaptcha-desc": "Trình sản xuất hình CAPTCHA đặc biệt cho ConfirmEdit",
+	"fancycaptcha-addurl": "Sửa đổi của bạn có chứa các liên kết ngoài. Để giúp chúng tôi chống lại spam tự động, xin vui lòng nhập những từ xuất hiện ở dưới vào ô ([[Special:Captcha/help|thông tin thêm]]):",
+	"fancycaptcha-badlogin": "Để giúp chúng tôi tránh bẻ mật khẩu tự động, xin vui lòng nhập những từ xuất hiện ở dưới vào ô ([[Special:Captcha/help|thông tin thêm]]):",
+	"fancycaptcha-captcha": "Kiểm tra an ninh",
+	"fancycaptcha-accountcreate": "Để giúp chúng tôi tránh mở tài khoản tự động, xin vui lòng nhập những chữ xuất hiện ở dưới vào ô ([[Special:Captcha/help|thông tin thêm]]):",
+	"fancycaptcha-create": "Để tạo trang, xin hãy nhập những chữ xuất hiện ở dưới vào ô ([[Special:Captcha/help|thông tin thêm]]):",
+	"fancycaptcha-edit": "Để sửa trang này, xin hãy nhập những từ xuất hiện ở dưới vào ô ([[Special:Captcha/help|thông tin thêm]]):",
+	"fancycaptcha-imgcaptcha-ph": "Nhập dòng chữ bạn thấy ở trong hình",
+	"fancycaptcha-sendemail": "Để giúp chúng tôi chống lại spam tự động, xin vui lòng nhập những từ xuất hiện ở dưới vào ô ([[Special:Captcha/help|thông tin thêm]]):",
+	"fancycaptcha-reload-text": "Làm tươi",
+	"apihelp-fancycaptchareload-description": "Lấy FancyCaptcha mới.",
+	"apihelp-fancycaptchareload-example-1": "Lấy FancyCaptcha mới."
+}

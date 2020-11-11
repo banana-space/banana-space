@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eitvys200"
+		]
+	},
+	"oathauth-account": "Paskyros vardas:",
+	"action-oathauth-api-all": "patikrinti OATH būseną"
+}

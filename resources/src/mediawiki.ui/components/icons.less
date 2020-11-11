@@ -1,0 +1,112 @@
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+
+// Mixins
+.mixin-mw-ui-icon-bgimage( @iconSvg, @iconPng ) {
+	&.mw-ui-icon {
+		&:before {
+			.background-image-svg( @iconSvg, @iconPng );
+		}
+	}
+}
+
+// Icons
+//
+// To use icons you must be using a browser that supports pseudo elements.
+// This includes support for IE 8.
+// https://caniuse.com/#feat=css-gencontent
+//
+// For elements that are intended to have both an icon and text, browsers that
+// do not support pseudo-selectors will degrade to text-only.
+//
+// However, icon-only elements do not yet degrade to text-only elements in these
+// browsers.
+//
+// Styleguide 6.
+
+.mw-ui-icon {
+	position: relative;
+	line-height: @iconSize;
+	min-height: @iconSize;
+	min-width: @iconSize;
+
+	// If an inline element has been marked as a mw-ui-icon element it must be inline-block
+	span& {
+		display: inline-block;
+	}
+
+	// Standalone icons
+	//
+	// Markup:
+	// <div class="mw-ui-icon mw-ui-icon-element mw-ui-icon-ok">OK</div><br>
+	// <div class="mw-ui-icon mw-ui-icon-element mw-ui-icon-ok mw-ui-button mw-ui-progressive">OK</div><br>
+	// <button class="mw-ui-icon mw-ui-icon-ok mw-ui-icon-element mw-ui-button mw-ui-quiet" title="">Close</button>
+	//
+	// Styleguide 6.1.1.
+	&.mw-ui-icon-element {
+		@marginIcon: 2 * @iconGutterWidth;
+		@width: @iconSize + @marginIcon;
+		@sizeIconLarge: ( @iconSize * 1.75) + @marginIcon;
+
+		text-indent: -999px;
+		overflow: hidden;
+		width: @width;
+		min-width: @width;
+		max-width: @width;
+
+		&:before {
+			left: 0;
+			right: 0;
+			position: absolute;
+			margin: 0 @iconGutterWidth;
+		}
+
+		&.mw-ui-icon-large {
+			width: @sizeIconLarge;
+			min-width: @sizeIconLarge;
+			max-width: @sizeIconLarge;
+			line-height: @sizeIconLarge;
+			min-height: @sizeIconLarge;
+
+			&:before {
+				min-height: @sizeIconLarge;
+			}
+		}
+	}
+
+	&.mw-ui-icon-before:before,
+	&.mw-ui-icon-element:before {
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		background-size: 100% auto;
+		float: left;
+		display: block;
+		min-height: @iconSize;
+		content: '';
+	}
+
+	// Icons with text
+	//
+	// Markup:
+	// <div class="mw-ui-icon mw-ui-icon-before mw-ui-icon-ok">OK</div>
+	// <div class="mw-ui-icon mw-ui-icon-before mw-ui-icon-ok mw-ui-progressive mw-ui-button">OK</div>
+	//
+	// Styleguide 6.1.2
+	&.mw-ui-icon-before {
+		&:before {
+			position: relative;
+			width: @iconSize;
+			margin-right: @iconGutterWidth;
+		}
+	}
+
+	// Icons small for elements like indicators
+	//
+	// Markup:
+	// <div class="mw-ui-icon mw-ui-icon-small mw-ui-icon-help"></div>
+	//
+	// Styleguide 6.1.3
+	&.mw-ui-icon-small:before {
+		background-size: 66.67% auto; // 66.67% of 24px equals 16px
+	}
+}

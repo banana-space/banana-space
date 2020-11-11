@@ -1,0 +1,2 @@
+<?php
+	$wgUseInstantCommons = true;

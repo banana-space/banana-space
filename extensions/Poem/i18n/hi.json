@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kaustubh",
+			"Siddhartha Ghai"
+		]
+	},
+	"poem-desc": "कविता स्वरूपण के लिये <code>&lt;poem&gt;</code> टैग जोड़ता है"
+}

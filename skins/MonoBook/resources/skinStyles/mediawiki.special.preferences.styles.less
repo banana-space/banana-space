@@ -1,0 +1,85 @@
+.client-js #preftoc {
+	/* Tabs */
+	width: 100%;
+	clear: both;
+	margin: 0;
+	padding: 0;
+
+	li {
+		/* Tab */
+		background-color: #f0f0f0;
+		color: #000;
+		margin: 1px -2px 1px 2px;
+		float: left;
+		padding: 2px 0 3px 0;
+		border: 1px solid #fff;
+		border-right-color: #716f64;
+		border-bottom: 0;
+		position: relative;
+		white-space: nowrap;
+		list-style-type: none;
+		list-style-image: none;
+
+		&.selected {
+			font-weight: bold;
+			background-color: #f9f9f9;
+			border: 1px solid #aaa;
+			border-bottom: 0;
+			cursor: default;
+			top: 2px;
+			padding-top: 2px;
+			margin-right: -3px;
+
+			a {
+				cursor: default;
+				text-decoration: none;
+			}
+		}
+	}
+
+	a,
+	a:active {
+		display: inline-block;
+		color: #000;
+		padding: 0.7em;
+		position: relative;
+		text-decoration: none;
+	}
+}
+
+#preferences {
+	margin: 0;
+	border: 1px solid #aaa;
+	clear: both;
+	padding: 1.5em;
+	background-color: #f9f9f9;
+}
+
+.client-js #preferences {
+	> fieldset {
+		border: 0;
+		padding: 0;
+		margin: 0;
+
+		> legend {
+			display: none;
+		}
+	}
+
+	legend {
+		font-weight: bold;
+	}
+}
+
+.mw-htmlform-submit {
+	font-weight: bold;
+	padding-left: 0.3em;
+	padding-right: 0.3em;
+	margin-right: 2em;
+}
+
+.htmlform-tip {
+	font-size: x-small;
+	padding: 0.2em 2em;
+	color: #666;
+}

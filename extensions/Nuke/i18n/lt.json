@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eitvys200",
+			"Homo",
+			"Matasg",
+			"Pofka",
+			"Manvydasz"
+		]
+	},
+	"nuke": "Masinis trynimas",
+	"nuke-desc": "Suteikia administratoriams galimybę [[Special:Nuke|masiškai trinti]] puslapius",
+	"nuke-nopages": "Nėra naujų puslapių, sukurtų [[Special:Contributions/$1|$1]] naujausiuose keitimuose.",
+	"nuke-list": "Šiuos puslapius neseniai sukūrė [[Special:Contributions/$1|{{GENDER:$1|$1}}]];\nįrašykite komentarą ir paspauskite mygtuką, kad jie būtų ištrinti.",
+	"nuke-defaultreason": "Masinis pašalinimas puslapių, kuriuos sukūrė $1",
+	"nuke-multiplepeople": "Masinis neseniai sukurtų puslapių trynimas",
+	"nuke-tools": "Šis įrankis leidžia masiškai ištrinti puslapius, neseniai sukurtus nurodyto naudotojo ar IP.\nĮrašykite naudotojo vardą ar IP adresą, kad gautumėte trintinų puslapių sąrašą.",
+	"nuke-submit-user": "Puslapių sąrašas",
+	"nuke-toggleinvert": "Invertuoti",
+	"nuke-submit-delete": "Ištrinti pasirinktus(ą)",
+	"right-nuke": "Masinis puslapių trynėjas",
+	"nuke-select": "Pasirinkite: $1",
+	"nuke-userorip": "Vartotojo vardas, IP adresas arba tuščia:",
+	"nuke-maxpages": "Didžiausias puslapių skaičius:",
+	"nuke-editby": "Sukūrė [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
+	"nuke-deleted": "Puslapis '''$1''' buvo ištrintas.",
+	"nuke-not-deleted": "Puslapis [[:$1]] '''negalimas''' ištrinti.",
+	"nuke-pattern": "Šablonas puslapio pavadinimui:",
+	"nuke-viewchanges": "žiūrėti pakeitimus",
+	"nuke-namespace": "Apriboti vardų sritį:",
+	"nuke-linkoncontribs": "masinis trynimas"
+}

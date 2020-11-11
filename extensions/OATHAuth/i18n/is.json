@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sveinn í Felli"
+		]
+	},
+	"oathauth-account": "Heiti aðgangs:",
+	"oathauth-token": "Teikn",
+	"oathauth-auth-token-label": "Teikn",
+	"oathauth-login-failed": "Staðfesting mistókst."
+}

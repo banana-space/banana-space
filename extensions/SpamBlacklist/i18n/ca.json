@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aleator",
+			"Arnaugir",
+			"Jordi Roqué",
+			"SMP",
+			"Vriullop",
+			"Ssola"
+		]
+	},
+	"spam-blacklist": " #<!-- deixeu aquesta línia exactament com està --> <pre>\n# Les URLs externes coincidents amb aquesta llista seran blocades en ser afegides a una pàgina.\n# Aquesta llista afecta només aquesta wiki; vegeu també la llista negra global.\n# Per a més informació vegeu https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# La sintaxi és com segueix:\n#  * Tot allò des d'un caràcter \"#\" fins al final de la línia és un comentari\n#  * Cada línia que no estigui en blanc és un fragment regex que només coincidirà amb amfitrions dintre d'URLs\n\n #</pre> <!-- deixeu aquesta línia exactament com està -->",
+	"spam-whitelist": " #<!-- deixeu aquesta línia tal com està --> <pre>\n# Les adreces URL externes que apareguin en aquesta llista no seran blocades\n# fins i tot si haurien estat blocades per aparèixer a la llista negra.\n#\n# La sintaxi és la següent:\n#   * Tot allò que hi hagi des d'un símbol '#' fins a la fi de línia és un comentari\n#   * Cada línia no buida és un fragment d'expressió regular (regex) que només marcarà hosts dins les URL\n\n #</pre> <!-- deixeu aquesta línia tal com està -->",
+	"spam-blacklisted-email": "Adreces de correu electrònic a la llista negra",
+	"spam-blacklisted-email-text": "La vostra adreça de correu electrònic està actualment en la llista negra d'enviament de correus a altres usuaris.",
+	"spam-blacklisted-email-signup": "L'adreça de correu electrònic proporcionada està actualment en la llista negra d'ús.",
+	"spam-invalid-lines": "{{PLURAL:$1|La línia següent no es considera una expressió correcta|Les línies següents no es consideren expressions correctes}} {{PLURAL:$1|perquè recull|perquè recullen}} SPAM que està vetat. Heu d'esmenar-ho abans de salvar la pàgina:",
+	"spam-blacklist-desc": "Eina anti-spam basada en regexp: [[MediaWiki:Spam-blacklist]] i [[MediaWiki:Spam-whitelist]]"
+}

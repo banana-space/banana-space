@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Esbardu",
+			"Xuacu"
+		]
+	},
+	"renameuser": "Renomar usuariu",
+	"renameuser-linkoncontribs": "renomar usuariu",
+	"renameuser-linkoncontribs-text": "Renomar esti usuariu",
+	"renameuser-desc": "Renoma un usuariu (necesita'l permisu ''renameuser'')",
+	"renameuserold": "Nome d'usuariu actual:",
+	"renameusernew": "Nome d'usuariu nuevu:",
+	"renameuserreason": "Motivu:",
+	"renameusermove": "Treslladar les páxines d'usuariu y d'alderique (y toles subpáxines) al nome nuevu",
+	"renameusersuppress": "Nun crear redireiciones al nome nuevu",
+	"renameuserreserve": "Bloquiar el nome d'usuariu antiguu pa evitar usalu nun futuru",
+	"renameuserwarnings": "Avisos:",
+	"renameuserconfirm": "Sí, renomar l'usuariu",
+	"renameusersubmit": "Unviar",
+	"renameuser-submit-blocklog": "Amosar el rexistru de bloqueos del usuariu",
+	"renameusererrordoesnotexist": "L'usuariu \"<nowiki>$1</nowiki>\" nun esiste.",
+	"renameusererrorexists": "L'usuariu \"<nowiki>$1</nowiki>\" yá esiste.",
+	"renameusererrorinvalid": "El nome d'usuariu \"<nowiki>$1</nowiki>\" nun ye válidu.",
+	"renameuser-error-request": "Hebo un problema al recibir el pidimientu. Por favor vuelve atrás y inténtalo otra vuelta.",
+	"renameuser-error-same-user": "Nun pues renomar un usuariu al mesmu nome que tenía.",
+	"renameusersuccess": "L'usuariu \"<nowiki>$1</nowiki>\" foi renomáu como \"<nowiki>$2</nowiki>\".",
+	"renameuser-page-exists": "La páxina $1 yá esiste y nun pue ser sobreescrita automáticamente.",
+	"renameuser-page-moved": "La páxina $1 treslladóse a $2.",
+	"renameuser-page-unmoved": "La páxina $1 nun pudo treslladase a $2.",
+	"log-name-renameuser": "Rexistru de cambios de nome d'usuariu",
+	"log-description-renameuser": "Esti ye un rexistru de los cambios de nomes d'usuariu.",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|camudó de nome}} {{GENDER:$4|al usuariu|a la usuaria}} $4 ({{PLURAL:$6|$6 edición|$6 ediciones}}) a $5",
+	"logentry-renameuser-renameuser-legacier": "$1 camudó el nome {{GENDER:$4|del usuariu|de la usuaria}} $4 a $5",
+	"renameuser-move-log": "Treslladóse la páxina automáticamente al renomar al usuariu \"[[User:$1|$1]]\" como \"[[User:$2|$2]]\"",
+	"action-renameuser": "renomar usuarios",
+	"right-renameuser": "Renomar usuarios",
+	"renameuser-renamed-notice": "Se renomó esti usuariu.\nEl rexistru de renomaos s'ufre darréu pa referencia."
+}

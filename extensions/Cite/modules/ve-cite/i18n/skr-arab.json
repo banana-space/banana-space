@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saraiki"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "کتاب",
+	"visualeditor-cite-tool-name-journal": "جریدہ",
+	"visualeditor-cite-tool-name-news": "خبراں",
+	"visualeditor-cite-tool-name-web": "ویب سائٹ",
+	"cite-ve-dialog-reference-options-group-label": "ایہ گروپ ورتو",
+	"cite-ve-dialog-reference-options-group-placeholder": "عمومی حوالے",
+	"cite-ve-dialog-reference-options-section": "اختیارات",
+	"cite-ve-dialog-reference-title": "حوالہ",
+	"cite-ve-dialogbutton-citation-educationpopup-title": "حوالے",
+	"cite-ve-dialogbutton-reference-title": "حوالہ",
+	"cite-ve-dialogbutton-reference-tooltip": "بنیادی",
+	"cite-ve-toolbar-group-label": "حوالہ درج کرو",
+	"cite-ve-othergroup-item": "$1 حوالہ",
+	"visualeditor-internal-list-diff-default-group-name-mwreference": "حوالے"
+}

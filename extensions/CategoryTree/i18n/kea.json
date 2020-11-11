@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Quintino Lopes Castro Tavares"
+		]
+	},
+	"categorytree-expand": "amplia",
+	"categorytree-num-categories": "$1 C",
+	"categorytree-num-pages": "$1 P"
+}

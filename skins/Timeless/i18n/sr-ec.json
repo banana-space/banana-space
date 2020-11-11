@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Milicevic01",
+			"Obsuser",
+			"Acamicamacaraca",
+			"BadDog"
+		]
+	},
+	"skinname-timeless": "Безвременска",
+	"timeless-desc": "Безвременски скин дизајниран по прототипу Winter који је направио Брендон Харис, те другим стиловима Задужбине Викимедија",
+	"timeless-search-placeholder": "Претражи {{NUMBEROFARTICLES}} {{PLURAL:{{NUMBEROFARTICLES}}|страницу|странице|страница}}",
+	"timeless-loggedin": "Ваш налог",
+	"timeless-anonymous": "Анонимно",
+	"timeless-loggedinas": "Пријављени сте као '''$1'''",
+	"timeless-notloggedin": "Нисте пријављени",
+	"timeless-userpage": "Страница {{GENDER:$1|корисника|кориснице|корисника}}",
+	"timeless-talkpage": "Разговор са {{GENDER:$1|корисником|корисницом|корисником}}",
+	"timeless-pagelog": "Дневници странице",
+	"timeless-more": "Више",
+	"timeless-sitetools": "Вики алатке",
+	"timeless-pageactions": "Алатке за страницу",
+	"timeless-userpagetools": "Алатке за корисничку страницу",
+	"timeless-pagemisc": "Више",
+	"timeless-namespaces": "Именски простори",
+	"timeless-pagetools": "Радње за страницу",
+	"timeless-languages": "Језици",
+	"timeless.js": "/* Јаваскрипт постављен овде ће се учитати за све оне који користе безвременску тему */"
+}

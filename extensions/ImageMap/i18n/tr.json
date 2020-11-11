@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joseph",
+			"Karduelis"
+		]
+	},
+	"imagemap_desc": "<code>&lt;imagemap&gt;</code> etiketini kullanarak, alıcı-tarafında tıklanabilir resim haritalarına izin verir",
+	"imagemap_no_image": "Hata: ilk satırda bir resim belirtmelisiniz",
+	"imagemap_invalid_image": "Hata: resim geçersiz ya da mevcut değil",
+	"imagemap_bad_image": "Hata: resim bu sayfada karalistelenmiş",
+	"imagemap_no_link": "Hata: $1. satırın sonunda geçerli bir bağlantı bulunamadı",
+	"imagemap_invalid_title": "Hata: $1. satırdaki bağlantıda geçersiz başlık",
+	"imagemap_missing_coord": "Hata: $1. satırda şekil için yeterli koordinat yok",
+	"imagemap_unrecognised_shape": "Hata: $1. satırda tanımlanmamış şekil, her satır şunlardan biriyle başlamalı: <code>default</code>, <code>rect</code>, cirle ya da <code>poly</code>",
+	"imagemap_invalid_coord": "Hata: $1. satırda geçersiz koordinat, bir sayı olmalı",
+	"imagemap_invalid_desc": "Hata: geçersiz desc belirlemesi, şunlardan biri olmalı: <code>$1</code>",
+	"imagemap_description": "Resim hakkında",
+	"imagemap_poly_odd": "Hata: $1. satırda tek sayıda koordinata sahip poly bulundu"
+}

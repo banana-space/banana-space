@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Homo",
+			"Manvydasz"
+		]
+	},
+	"replacetext": "Keisti tekstą",
+	"replacetext_cannotmove": "{{PLURAL:$1|Šis puslapis|Šie $1 puslapiai|Šie $1 puslapių}} negali būti pervadinti:",
+	"replacetext_continue": "Tęsti",
+	"replacetext_editsummary": "Teksto pakeitimas - \"$1\" į \"$2\""
+}

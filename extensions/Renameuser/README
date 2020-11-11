@@ -1,0 +1,13 @@
+This is the readme file for the MediaWiki Renameuser extension.
+
+Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Renameuser
+Latest version of the readme file: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Renameuser.git;a=blob;f=README
+
+== About ==
+
+Renameuser provides a special page which allows authorized users to rename user accounts.
+This will cause page histories, etc. to be updated.
+
+== Hooks ==
+
+For details on available hooks see hooks.txt

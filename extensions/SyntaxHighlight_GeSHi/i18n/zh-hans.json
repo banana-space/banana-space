@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shinjiman",
+			"Liuxinyu970226"
+		]
+	},
+	"syntaxhighlight-desc": "使用[http://pygments.org/ Pygments - Python syntax highlighter]以提供语法高亮<code>&lt;syntaxhighlight&gt;</code>",
+	"syntaxhighlight-error-category": "有语法高亮错误的页面",
+	"syntaxhighlight-error-category-desc": "尝试高亮包含在页面中的代码时出错。",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "代码",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "语言",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "（无）",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "显示行数",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-startingline": "起始行数",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "代码块",
+	"syntaxhighlight-error-pygments-invocation-failure": "调用Pygments失败",
+	"syntaxhighlight-error-unknown-language": "未知的语言“$1”",
+	"syntaxhighlight-error-exceeds-size-limit": "$1{{PLURAL:$1|字节}}代码大小超过了最大值$2{{PLURAL:$2|字节}}"
+}

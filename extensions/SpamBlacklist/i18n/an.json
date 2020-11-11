@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Juanpabl"
+		]
+	},
+	"spam-blacklist": " # As URLs externas que concuerden con ista lista serán bloqueyatas quan s'encluyan en una pachina.\n # Ista lista afecta sólo ta ista wiki; mire-se tamién a lista negra global.\n # Más decumentación en https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- leave this line exactly as it is --> <pre>\n#\n# A sintaxi ye asinas:\n#  * Tot o que bi ha dende un carácter \"#\" dica a fin d'a linia ye un comentario\n#  * As linias no buedas son fragmentos d'expresions regulars que sólo concordarán con hosts adintro d'as URLs\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"spam-whitelist": " #<!-- leave this line exactly as it is --> <pre>\n# As URLs externas que concuerden con ista lista *no* serán bloqueyatas\n# mesmo si han estato bloqueyatas por dentradas d'a lista negra.\n#\n#  A sintaxi ye asinas:\n#  * Tot o que bi ha dende o carácter \"#\" dica a fin d'a linia ye un comentario\n#  * As linias no buedas ye un fragmento d'expresión regular que sólo concordarán con hosts adintro d'as URLs\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"email-blacklist": "# As adrezas de correu electronico que coincidan con ista lista se bloqueyarán ta o rechistro u ninviamiento de correus!\n# Ista lista no afecta que a iste wiki; Mire-se tamién a lista negra global.\n# Ta la documentación, mire-se https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#<!-- Deixe ista linia exactament como ye --> <pre>\n#\n# A sintaxi ye a siguient:\n #   * Tot texto a la dreita d'o caracter \"#\" dica la fin d'a linia ye un comentario\n #   * Toda linia que no sía en blanco ye un fragmento de codigo que compararán os servidors con as adrezas de correu electronico\n#</pre> <!-- Deixe ista linia como ye-->",
+	"email-whitelist": " #<!-- Deixe ista linia como ye --> <pre>\n# As adrezas de correu electronico que amaneixen en ista lista *no* serán bloqueyadas mesmo si s'hesen habiu de bloquiar por amaneixer en a lista negra.\n#\n #</pre> <!-- Deixe ista linia como ye-->\n# A sintaxi ye a siguient:\n#  * Tot texto a la dreita d'o caracter \"#\" dica a fin d'a linia ye un comentario\n#  * Toda linia que no sía en blanco ye un fragmento de codigo que os servidors compararán con as adrezas de correu electronico",
+	"spam-blacklisted-email": "Adreza de correu electronico en a lista negra",
+	"spam-blacklisted-email-text": "A suya adreza de correu-e ye agora en a lista negra, y no puede ninviar correu ta atros usuarios.",
+	"spam-blacklisted-email-signup": "L'adreza de correu-e que ha dau ye actualment en a lista negra, y no se puede fer servir.",
+	"spam-invalid-lines": "{{PLURAL:$1|A linia siguient ye una|As linias siguients son}} {{PLURAL:$1|expresión regular|expresions regulars}} y {{PLURAL:$1|ha|han}} d'estar correchitas antes d'alzar a pachina:",
+	"spam-blacklist-desc": "Ferramienta anti-spam basata en expresions regulars (regex): [[MediaWiki:Spam-blacklist]] y [[MediaWiki:Spam-whitelist]]"
+}

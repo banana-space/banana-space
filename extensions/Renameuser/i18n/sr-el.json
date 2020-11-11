@@ -1,0 +1,42 @@
+{
+	"@metadata": {
+		"authors": [
+			"FriedrickMILBarbarossa",
+			"Liangent",
+			"Michaello",
+			"Milicevic01",
+			"Жељко Тодоровић"
+		]
+	},
+	"renameuser": "Preimenuj korisnika",
+	"renameuser-linkoncontribs": "preimenuj korisnika",
+	"renameuser-linkoncontribs-text": "Preimenuj ovog korisnika",
+	"renameuser-desc": "Dodaje [[Special:RenameUser|posebnu stranicu]] za preimenovanje korisnika (potrebno pravo ''renameuser'').",
+	"renameuserold": "Trenutno korisničko ime:",
+	"renameusernew": "Novo korisničko ime:",
+	"renameuserreason": "Razlog:",
+	"renameusermove": "Premesti korisničku stranicu i stranicu za razgovor (i njihove podstranice) na novi naziv",
+	"renameusersuppress": "Ne pravite preusmerenja na novi naziv",
+	"renameuserreserve": "Blokiraj staro korisničko ime za dalju upotrebu",
+	"renameuserwarnings": "Upozorenja:",
+	"renameuserconfirm": "Da, preimenuj korisničko ime.",
+	"renameusersubmit": "Pošalji",
+	"renameuser-submit-blocklog": "Dnevnik blokiranja za korisnika",
+	"renameusererrordoesnotexist": "Korisnik „<nowiki>$1</nowiki>“ ne postoji.",
+	"renameusererrorexists": "Korisnik \"<nowiki>$1</nowiki>\" već postoji",
+	"renameusererrorinvalid": "Pogrešno korisničko ime: „<nowiki>$1</nowiki>“",
+	"renameuser-error-request": "Javio se problem prilikom prihvatanja zahteva. Idi nazad i pokušaj ponovo.",
+	"renameuser-error-same-user": "Ne možeš preimenovati korisničko ime u isto kao i prethodno.",
+	"renameusersuccess": "{{GENDER:$2|Korisnik|Korisnica}} „<nowiki>$1</nowiki>“ je {{GENDER:$2|preimenovan|preimenovana}} na „<nowiki>$2</nowiki>“",
+	"renameuser-page-exists": "Stranica $1 već postoji i ne može biti automatski presnimljena.",
+	"renameuser-page-moved": "Stranica $1 je premeštena na $2.",
+	"renameuser-page-unmoved": "Stranica $1 ne može biti premeštena na $2.",
+	"log-name-renameuser": "Dnevnik preimenovanja korisnika",
+	"log-description-renameuser": "Ispod je spisak preimenovanih korisnika.",
+	"logentry-renameuser-renameuser": "$1 je {{GENDER:$2|preimenovao|preimenovala}} {{GENDER:$7|korisnika|korisnicu}} $4 ({{PLURAL:$6|$6 izmena|$6 izmene|$6 izmena}}) u $5",
+	"logentry-renameuser-renameuser-legacier": "$1 je preimenovao {{GENDER:$7|korisnika|korisnicu}} $4 u $5",
+	"renameuser-move-log": "Automatsko premeštanje stranice zbog preimenovanja {{GENDER:$2|korisnika|korisnice}} „[[User:$1|$1]]“ u „[[User:$2|$2]]“",
+	"action-renameuser": "preimenovanje korisnika",
+	"right-renameuser": "preimenovanje korisničkih imena",
+	"renameuser-renamed-notice": "Ovom korisniku je promenjeno ime.\nIstorija promena imena je priložena ispod, kao informacija."
+}

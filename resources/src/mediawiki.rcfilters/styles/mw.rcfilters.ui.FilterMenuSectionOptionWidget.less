@@ -1,0 +1,51 @@
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+@import 'mw.rcfilters.variables';
+
+.mw-rcfilters-ui-filterMenuSectionOptionWidget {
+	background-color: @colorGray14;
+	padding-bottom: 8 / @font-size-system-ui / @font-size-vector;
+	padding-left: 12 / @font-size-system-ui / @font-size-vector;
+	padding-right: 12 / @font-size-system-ui / @font-size-vector;
+
+	&-header-title.oo-ui-labelElement-label {
+		color: @colorGray5;
+		display: inline-block;
+	}
+
+	&-whatsThisButton {
+		margin-left: 1.5em;
+
+		&.oo-ui-buttonElement > .oo-ui-buttonElement-button {
+			border: 0; // Override OOUI `border` needed for frameless keyboard focus
+			padding: 0;
+			font-weight: normal;
+
+			&:focus {
+				.box-shadow( none );
+				outline: 0;
+			}
+		}
+
+		&-popup-content {
+			padding: 1em;
+
+			&-header {
+				margin-bottom: 1em;
+				font-weight: bold;
+			}
+
+			&-link {
+				margin: 1em 0;
+			}
+
+			.oo-ui-buttonElement-frameless.oo-ui-labelElement > .oo-ui-buttonElement-button > .oo-ui-labelElement-label {
+				margin-left: 0;
+			}
+		}
+	}
+
+	&-active .mw-rcfilters-ui-filterMenuSectionOptionWidget-header-title {
+		font-weight: bold;
+	}
+}

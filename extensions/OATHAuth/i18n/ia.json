@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"oathauth-desc": "Forni supporto de authentication usante contrasignos a uso unic a base de HMAC",
+	"specialpages-group-oath": "Authentication bifactorial",
+	"oathauth-account": "Nomine de conto:",
+	"oathauth-secret": "Clave secrete de authentication bifactorial:",
+	"oathauth-enable": "Activar authentication bifactorial",
+	"oathauth-scratchtokens": "Le sequente lista contine indicios a uso unic. Iste indicios pote esser usate un sol vice e es pro casos de emergentia. Per favor nota los e guarda los in un loco secur. Si tu perde tu telephono, iste indicios es le sol maniera de salvar tu conto. Iste indicios nunquam essera monstrate un altere vice.",
+	"oathauth-token": "Indicio",
+	"oathauth-disable": "Disactivar authentication bifactorial",
+	"oathauth-validatedoath": "Le credentiales bifactorial ha essite validate. Le authentication bifactorial essera applicate desde ora.",
+	"oathauth-failedtovalidateoath": "Impossibile validar credentiales bifactorial",
+	"oathauth-disabledoath": "Le authentication bifactorial ha essite disactivate.",
+	"right-oathauth-enable": "Activar le authentication bifactorial",
+	"action-oathauth-enable": "activar le authentication bifactorial",
+	"oathauth-auth-token-label": "Indicio",
+	"oathauth-auth-token-help": "Le contrasigno a uso singule usate como secunde factor pro le authentication bifactorial.",
+	"oathauth-auth-ui": "Scribe le codice de verification ab tu dispositivo de authentication",
+	"oathauth-throttled": "Troppo de tentativas de verification! Per favor attende $1.",
+	"oathauth-login-failed": "Verification fallite.",
+	"oathauth-describe-provider": "Authentication bifactorial (OATH)."
+}

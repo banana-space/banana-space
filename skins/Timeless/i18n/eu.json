@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Subi",
+			"An13sa",
+			"Sator",
+			"Mikel Ibaiba"
+		]
+	},
+	"timeless-desc": "Brandon Harris-en Winter prototipoaren ondoren diseinatutako larrua, epemugarik gabea eta Wikimedia Fundazioaren hainbat estilo",
+	"timeless-search-placeholder": "{{NUMBEROFARTICLES}} orriak bilatu",
+	"timeless-loggedin": "Zure kontua",
+	"timeless-anonymous": "Anonimoa",
+	"timeless-loggedinas": "'''$1''' bezala saioa hasita",
+	"timeless-notloggedin": "saioa hasi gabe",
+	"timeless-userpage": "{{GENDER:$1|Erabiltzaile}} orria",
+	"timeless-talkpage": "{{GENDER:$1|Erabiltzaile}} eztabaida",
+	"timeless-pagelog": "Orriaren erregistroak",
+	"timeless-more": "Gehiago",
+	"timeless-sitetools": "Wiki-tresnak",
+	"timeless-pageactions": "Orrialde tresnak",
+	"timeless-userpagetools": "Lankide orrialdeko tresnak",
+	"timeless-pagemisc": "Gehiago",
+	"timeless-namespaces": "Izen-tarteak",
+	"timeless-pagetools": "Orriaren aukerak",
+	"timeless-languages": "Hizkuntzak"
+}

@@ -1,0 +1,541 @@
+@import 'variables.less';
+
+/* Page layout */
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: @fonts;
+	color: @text;
+	background: @background-dark;
+	font-size: @font-size;
+	line-height: 1.4;
+}
+
+#mw-content {
+	.box;
+	background: @background;
+	padding: 1em @content-padding 3em;
+	position: relative;
+}
+#mw-content-container {
+	background: @background2;
+	word-wrap: break-word;
+}
+#mw-footer-container {
+	border-top: solid 1px @background-dark2;
+	box-shadow: inset 0 7px 2px -4px rgba( 0, 0, 0, 0.1 );
+	color: @text-inverse;
+
+	a {
+		color: @text-inverse;
+	}
+	ul {
+		margin: 0;
+	}
+}
+
+#p-logo {
+	text-align: center;
+	margin: auto;
+}
+.mw-wiki-logo {
+	display: block;
+	content: '';
+	width: 11em;
+	height: 11em;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	margin: 0.75em auto 0;
+}
+#p-logo-text {
+	width: @column-left-size;
+	text-align: center;
+	line-height: 1;
+
+	a {
+		padding: 0.2em 1em;
+		color: @text;
+		font-family: @fonts-secondary;
+		font-variant: small-caps;
+		font-size: 1.75em;
+		display: block;
+
+		/* 13+ character names */
+		&.long {
+			font-size: 1.45em;
+			padding: 0 0.75em 0 0;
+			line-height: 0.8;
+		}
+	}
+}
+
+/* Search */
+
+#simpleSearch {
+	box-shadow: inset 0 2px 4px 0 rgba( 0, 0, 0, 0.05 );
+	background: @background;
+	position: relative;
+	border: solid 1px @grey;
+}
+#searchInput {
+	border: 0;
+	margin: 0;
+	height: 2.1em;
+	padding: 0.4em 4.5em 0.2em 2em;
+	box-shadow: none;
+	background: transparent;
+	width: 100%;
+	min-height: 0;
+}
+#searchButton,
+#mw-searchButton {
+	position: absolute;
+	top: 0;
+	right: 1.5em;
+	width: 2.5em;
+	height: 2.5em;
+	.icon;
+	.background-image-svg( 'images/search-ltr.svg', 'images/search-ltr.png' );
+	background-position: 50% 40%;
+	box-shadow: none;
+}
+
+.suggestions {
+	background: @background;
+	box-shadow: 0 2px 2px 1px rgba( 0, 0, 0, 0.05 );
+
+	.suggestions-special {
+		background-color: @background;
+		border: 1px solid @grey;
+		border-bottom-width: @border;
+		padding: 0.75em 2em;
+	}
+	.suggestions-results {
+		background-color: @background;
+		border: 1px solid @grey;
+		border-bottom-width: @border;
+	}
+	.suggestions-result {
+		color: @text;
+		padding: 0.65em 2em 0.35em;
+	}
+	.suggestions-result-current {
+		background-color: @blue;
+		color: @background;
+	}
+}
+div.suggestions {
+	position: fixed;
+	top: 2.75em !important; // Override js-provided value to account for fixed header
+}
+
+/* Dropdown stuff */
+
+.pokey,
+.pokey:after {
+	border-bottom: 10px solid @grey-bright;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	content: '';
+	height: 0;
+	position: absolute;
+	transform: rotate( 360deg ); // to force some smoothing in annoying browsers
+	width: 0;
+	z-index: 4;
+}
+.pokey {
+	top: 1.85em;
+	right: 1px;
+	display: none;
+}
+.pokey:after {
+	border-bottom-color: #fff;
+	right: -10px;
+	top: 2px;
+}
+
+.dropdown-toggle {
+	.dropdown-header();
+}
+
+/* Footer */
+
+#mw-footer {
+	padding-top: 0.5em;
+	padding-bottom: 1em;
+
+	ul,
+	li {
+		margin: 1em 0;
+		list-style: none;
+		padding: 0;
+	}
+	.footer-icons {
+		float: right;
+		margin: 0 0 0 1em;
+
+		li {
+			margin: 0 0 1em 0;
+		}
+	}
+	.footer-places li {
+		display: inline;
+		padding-right: 1em;
+	}
+	#lastmod {
+		display: block;
+	}
+}
+
+/* Content */
+
+#mw-content-container {
+	border-bottom: solid 4px @green;
+}
+#mw-page-header-links {
+	div,
+	ul,
+	li {
+		list-style: none;
+		display: inline-block;
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		margin: 0.25em 0 1em;
+		border-bottom: solid 3px transparent;
+
+		&:hover {
+			border-bottom-color: @grey;
+		}
+		&.selected {
+			border-bottom-color: @blue;
+
+			a {
+				color: @text;
+			}
+		}
+	}
+}
+#p-namespaces {
+	float: left;
+
+	li {
+		margin-right: 1em;
+	}
+}
+#p-views {
+	float: right;
+
+	li {
+		margin-left: 1em;
+	}
+}
+
+#ca-watch a {
+	.ca-icon();
+	.background-image-svg( 'images/star.svg', 'images/star.png' );
+}
+#ca-unwatch a {
+	.ca-icon();
+	.background-image-svg( 'images/star-filled.svg', 'images/star-filled.png' );
+}
+
+/* Misc */
+
+a {
+	text-decoration: none;
+	color: @blue;
+
+	&:hover,
+	&:visited {
+		color: @blue-dark;
+	}
+}
+a.new,
+.new a {
+	color: @red;
+
+	&:hover,
+	&:visited {
+		color: @red-dark;
+	}
+}
+
+.mw-editsection {
+	font-family: @fonts;
+
+	a {
+		.background-image-svg( 'images/pencil-grey.svg', 'images/pencil-grey.png' );
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		display: inline-block;
+		padding: 0.5em 0 0.25em 1.75em;
+	}
+}
+.mw-editsection-bracket {
+	display: none;
+}
+.visual-clear {
+	clear: both;
+}
+.mw-indicators {
+	float: right;
+	margin: 0.25em 0 0 1em;
+}
+.mw-indicator {
+	display: inline-block;
+}
+/* Subtitle area
+ * @see https://phabricator.wikimedia.org/T173951
+ */
+#contentSub {
+	font-size: 84%;
+	color: @grey-dark;
+
+	/* This forces "redirect page" (on a redirect page) etc. on a new line */
+	.subpages {
+		display: block;
+	}
+}
+
+/* pre and code styles copypasted from core
+ * /resources/src/mediawiki.skinning/elements.css and modified a bit
+ * @see https://phabricator.wikimedia.org/T177142
+ */
+code {
+	color: #000;
+	background-color: @grey-bright;
+	border: 1px solid @grey-dark;
+	border-radius: 2px;
+	padding: 1px 4px;
+}
+
+pre,
+.mw-code {
+	color: #000;
+	background-color: @grey-bright;
+	border: 1px solid @grey-dark;
+	padding: 1em;
+	/* Wrap lines in overflow. T2260, T103780 */
+	white-space: pre-wrap;
+}
+
+#mw-content {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	dt {
+		font-weight: normal;
+		font-family: @fonts-secondary;
+		line-height: 1.25;
+		margin: 1.5em 0 0.5em;
+	}
+	form dt {
+		margin: 0 0.5em 0 0;
+	}
+
+	h1,
+	h2 {
+		border-bottom: solid 2px @blue;
+		overflow: hidden;
+	}
+
+	h1.firstHeading {
+		margin: 0.25em 0 0.5em;
+		border-bottom: solid 4px @red;
+	}
+
+	h1 {
+		font-size: 2em;
+	}
+	h2 {
+		font-size: 1.7em;
+	}
+	h3 {
+		font-size: 1.5em;
+	}
+	h4 {
+		font-size: 1.35em;
+	}
+	h5 {
+		font-size: 1.25em;
+	}
+	h6 {
+		font-size: 1.2em;
+	}
+	dt {
+		margin-top: 1em;
+	}
+	dd {
+		margin-bottom: 1em;
+	}
+	.mw-changeslist-legend dd {
+		margin-bottom: 0;
+	}
+}
+
+hr {
+	border-width: 1px;
+	border-color: @grey;
+	border-style: solid none solid none;
+	margin: 0.5em 0;
+}
+
+pre {
+	overflow: auto;
+	white-space: pre-wrap;
+	font-family: @fonts-monospace;
+}
+
+p {
+	margin: 0.9em 0 0.8em;
+}
+
+.center,
+.center * {
+	margin: auto;
+	text-align: center;
+}
+
+/* Thumbnails */
+/* @noflip */
+.tright {
+	margin: 0 0 0.5em 0.5em;
+	padding: 0 0 1em 1.5em;
+}
+/* @noflip */
+.tleft {
+	margin: 0 0.5em 0.5em 0;
+	padding: 0 1.5em 1em 0;
+
+}
+.thumbinner {
+	.box;
+	padding: 0.75em;
+}
+.thumbcaption {
+	font-size: 95%;
+	padding: 0.5em 1em;
+}
+.thumbinner .thumbimage {
+	border: solid 1px @grey-bright;
+}
+#mw-content li.gallerybox div.thumb {
+	.box;
+	padding: 0;
+}
+
+/* Tables of contents */
+ul#filetoc,
+#toc,
+.toc,
+.mw-warning {
+	display: inline-block;
+	.box;
+	padding: 1.25em 1.75em;
+	margin: 1em 0;
+	min-width: 15em;
+}
+ul#filetoc {
+	display: block;
+	border: 0;
+}
+#toc ul,
+.toc ul {
+	margin: 1em 0 0;
+	list-style: none;
+}
+#mw-content .toc h2 {
+	font-size: 1.2em;
+	font-family: @fonts;
+	margin: 0;
+	display: inline-block;
+	border-bottom-color: @grey;
+}
+.toctoggle {
+	color: @background3;
+}
+#toc li:last-child {
+	margin-bottom: 0.5em;
+}
+.toclevel-1 {
+	margin-bottom: 0.25em;
+}
+.mw-changeslist-legend,
+#mw-content .mw-search-profile-tabs,
+#mw-content fieldset#mw-searchoptions,
+table.wikitable {
+	border: 0;
+	color: @text;
+	.box;
+}
+#mw-content .mw-search-profile-tabs {
+	padding: 0.5em;
+}
+
+table.wikitable > tr > th,
+table.wikitable > tr > td,
+table.wikitable > * > tr > th,
+table.wikitable > * > tr > td {
+	border: 1px solid @grey-bright;
+	padding: 0.5em;
+}
+
+table.wikitable > tr > th,
+table.wikitable > * > tr > th {
+	border: 0;
+}
+
+/* Color bars */
+
+.color-bar {
+	width: 100%;
+}
+.color-left {
+	height: @color-height;
+	background: @red-dark;
+	width: 50%;
+	float: left;
+}
+.color-right {
+	display: inline-block;
+	height: @color-height;
+	background: @green-dark;
+	width: 50%;
+	float: right;
+}
+.color-middle-container {
+	max-width: @content-width;
+	margin: 0 auto -@color-height;
+	position: relative;
+}
+.color-middle {
+	height: @color-height;
+	background: @blue-dark;
+	margin-left: @column-left-size + 1em;
+	margin-right: @column-right-size + 1em;
+}
+
+/* Portlets */
+.emptyPortlet {
+	display: none;
+}
+#p-lang.emptyPortlet {
+	display: inherit;
+}
+
+/* Hidden stuff */
+
+#p-namespaces h3,
+#p-views h3,
+#p-search h3 {
+	.hidden;
+}

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Artsiom91"
+		]
+	},
+	"multimediaviewer-optin-pref": "Уключыць <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Праглядчык медыяфайлаў]</span>",
+	"multimediaviewer-optin-mmv": "Уключыць «Праглядчык медыяфайлаў»"
+}

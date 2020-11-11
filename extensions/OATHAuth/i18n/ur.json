@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"පසිඳු කාවින්ද",
+			"Muhammad Shuaib"
+		]
+	},
+	"oathauth-enable": "دو مرحلہ تصدیق فعال کریں",
+	"oathauth-disable": "دو مرحلہ تصدیق غیر فعال کریں",
+	"oathauth-disabledoath": "معذور تصدیق دو عنصر.",
+	"oathauth-prefs-label": "دو مرحلہ تصدیق:",
+	"right-oathauth-enable": "دو مرحلہ تصدیق کا نفاذ",
+	"action-oathauth-enable": "دو مرحلہ تصدیق فعال کرنے"
+}

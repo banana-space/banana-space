@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"syntaxhighlight-desc": "Овозможува потцртување на синтакса <code>&lt;syntaxhighlight&gt;</code> со помош на [http://pygments.org/ Pygments — истакнува на Python-синтакса]",
+	"syntaxhighlight-error-category": "Страници со грешки при истакнување на синтаксата",
+	"syntaxhighlight-error-category-desc": "Се појави грешка при обидот да се подвлече кодот вклучен во страницава.",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Код",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Јазик",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(ниеден)",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "Прикажувај броеви на редовите",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-startingline": "Број на почетниот ред",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "Коден блок",
+	"syntaxhighlight-error-pygments-invocation-failure": "Не успеав да го повикам Pygments",
+	"syntaxhighlight-error-unknown-language": "Непознат јазик „$1“",
+	"syntaxhighlight-error-exceeds-size-limit": "Големината на кодот од {{PLURAL:$1|еден бајт|$1 бајти}} ја надминува горната граница од  {{PLURAL:$2|еден бајт|$2 бајти}}"
+}

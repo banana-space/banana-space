@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pyt"
+		]
+	},
+	"titleblacklist-desc": "Moaket dät Administratore muugelk, dät Moakjen fon nit wonskede Sieden- un Benutsernoomen tou ferhinnerjen: [[MediaWiki:Titleblacklist]] un [[MediaWiki:Titlewhitelist]]",
+	"titleblacklist": "# Dit is ne Swotte Lieste.\n# Älke Siede- un Benutsernoome, ap dän do foulgjende reguläre Uutdrukke touträffe, kon nit moaked wäide.\n# Text bääte ne Ruute „#“ wäd as Kommentoar betrachted.\n# Standoardmäitich wäd nit twiske Groot- un Littikskrieuwenge unnerskat.",
+	"titlewhitelist": "# Dit is ju Uutnoamelieste fon ju Swotte Lieste fon nit wonskede Siedennoomen. Benuts „#“ foar Kommentoare",
+	"titleblacklist-forbidden-edit": "'''Ne Siede mäd dän Tittel „$2“ kon nit moaked wäide.''' <br />\nDie Tittel kollidiert mäd dissen Speerbegriep: '''''$1'''''",
+	"titleblacklist-forbidden-move": "'''Ju Siede „$2“ kon nit ätter „$3“ ferskäuwen wäide.''' <br />\nDie Tittel kollidiert mäd dissen Speerbegriep: '''''$1'''''",
+	"titleblacklist-forbidden-upload": "'''Ne Doatäi mäd dän Noome „$2“ kon nit hoochleeden wäide.''' <br />\nDie Tittel kollidiert mäd dissen Speerbegriep: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Ju Registrierenge fon dän Benutsernoome „$2“ is nit wonsked.\nJu foulgjende Iendraach uut ju Lieste fon nit wonskede Benutsernoomen fierde tou Oulienenge: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Ju foulgjende Riege|Do foulgjende Riegen}} in ju Speerlieste {{PLURAL:$1|is|sunt}} uungultich; korrigier do foar dät Spiekerjen:",
+	"right-tboverride": "Buute Kraft sätten fon ju swotte Lieste fon nit wonskede Siedennoomen"
+}

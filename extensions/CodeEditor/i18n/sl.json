@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"NegativeTwelveDollars"
+		]
+	},
+	"codeeditor-gotoline-placeholder": "vrstica[:stolpec]",
+	"codeeditor-gotoline-prompt": "Vnesite številko vrstice"
+}

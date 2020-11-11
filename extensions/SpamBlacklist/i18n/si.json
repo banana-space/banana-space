@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Budhajeewa",
+			"පසිඳු කාවින්ද"
+		]
+	},
+	"spam-blacklist": " # External URLs matching this list will be blocked when added to a page.\n # This list affects only this wiki; refer also to the global blacklist.\n # For documentation see https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- leave this line exactly as it is --> <pre>\n#\n# Syntax is as follows:\n#   * Everything from a \"#\" character to the end of the line is a comment\n#   * Every non-blank line is a regex fragment which will only match hosts inside URLs\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"spam-whitelist": " #<!-- leave this line exactly as it is --> <pre>\n# External URLs matching this list will *not* be blocked even if they would\n# have been blocked by blacklist entries.\n#\n# Syntax is as follows:\n#   * Everything from a \"#\" character to the end of the line is a comment\n#   * Every non-blank line is a regex fragment which will only match hosts inside URLs\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"spam-blacklisted-email": "අපලේඛනගත විද්‍යුත්-තැපැල් ලිපින",
+	"spam-invalid-lines": "පහත දැක්වෙන කළු ලයිස්තු {{PLURAL:$1|පේලිය|පේලි}} වැරදි regular {{PLURAL:$1|expression|expressions}} වන අතර, පිටුව සුරැකීමට පෙර නිවැරදි කළ යුතුය:",
+	"spam-blacklist-desc": "Regex-පාදක ප්‍රති-ස්පෑම ආවුදය: [[MediaWiki:Spam-blacklist]] සහ [[MediaWiki:Spam-whitelist]]"
+}

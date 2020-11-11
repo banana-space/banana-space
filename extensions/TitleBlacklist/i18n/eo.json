@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mihxil",
+			"Yekrats",
+			"Gamliel Fishkin"
+		]
+	},
+	"titleblacklist-desc": "Rajtigas la adminstrantojn malpermesi kreadon de paĝoj kaj uzanto-kontoj per [[MediaWiki:Titleblacklist|nigralisto]] kaj [[MediaWiki:Titlewhitelist|blankalisto]]",
+	"titleblacklist": "# Jen titola nigralisto. Titoloj kaj uzantoj kiuj kongruas regulan esprimon ĉi tie ne povas esti kreitaj.\n# Uzu \"#\" por komentoj.\n# Ĉi tio estas usklecodistingiva defaŭlte.",
+	"titlewhitelist": "# Ĉi tio estas blanklisto por titoloj. Uzu \"#\" por komentoj.\n# Ĉi tio estas defaŭlte uskleca maldistingiva.",
+	"titleblacklist-forbidden-edit": "La titolo \"$2\" estis malpermesita de kreado.\nĜi similas la jenan nigralistan listeron: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" ne povas esti alinomita al \"$3\", ĉar la titolo \"$3\" estis forbarita de kreado.\nĜi kongruas la jenan nigralistanon: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "La dosiernomo \"$2\" estis forbarita de kreado.\nĜi kongruas la jenan nigralistanon: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "La uzanto-nomo \"$2\" estis forbarita de kreado.\nĜi kongruas la jenan nigralistano: <code>$1</code>",
+	"titleblacklist-invalid": "La {{PLURAL:$1|jena linio|jenaj linioj}} en la titola nigralisto estas {{PLURAL:$1|malvalida|malvalidaj}}; \nbonvolu korekti {{PLURAL:$1|gxi|ilin}} antaŭ konservado:",
+	"titleblacklist-override": "Ignori la nigraliston",
+	"titleblacklist-warning": "<strong>Averto:</strong> Ĉi tiun pagon povas redakti nur administrantoj kaj aliaj uzantoj kun la rajto <code>tboverride</code>, ĉar ĝi koincidas al jena rikordo en la nigra listo:<br /><code>$1</code>",
+	"right-tboverride": "Anstataŭskribi la nigraliston de salutnomoj kaj titloj",
+	"right-tboverride-account": "Transpasi la nigran liston pri uzantoj."
+}

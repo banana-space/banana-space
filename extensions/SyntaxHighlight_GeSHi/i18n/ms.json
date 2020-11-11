@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aviator"
+		]
+	},
+	"syntaxhighlight-desc": "Menyediakan tag <code>&lt;syntaxhighlight&gt;</code> untuk penonjolan sintaks menggunakan [http://pygments.org/ GeSHi]"
+}

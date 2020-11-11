@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kening Aldgilles",
+			"SK-luuut",
+			"Robin0van0der0vliet",
+			"Robin van der Vliet"
+		]
+	},
+	"vector-action-addsection": "Kopke tafoegje",
+	"vector-action-delete": "Fuortsmite",
+	"vector-action-move": "Omneame",
+	"vector-action-protect": "Beskermje",
+	"vector-action-undelete": "Tebeksette",
+	"vector-action-unprotect": "Beskerming fuorthelje",
+	"vector-view-create": "Oanmeitsje",
+	"vector-view-edit": "Bewurkje",
+	"vector-view-history": "Skiednis sjen litte",
+	"vector-view-view": "Lês",
+	"vector-view-viewsource": "Besjoch de boarne",
+	"vector-more-actions": "Mear"
+}

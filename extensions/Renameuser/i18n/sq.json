@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dori",
+			"FatosMorina",
+			"Mikullovci11",
+			"Olsi",
+			"Ammartivari"
+		]
+	},
+	"renameuser": "Riemëroje përdoruesin",
+	"renameuser-linkoncontribs": "Riemëroje përdoruesin",
+	"renameuser-linkoncontribs-text": "Riemëroje këtë përdoruesin",
+	"renameuser-desc": "Shton një [[Special:RenameUser|faqe speciale]] për të riemëruar një përdorues (duhet e drejta ''renameuser'')",
+	"renameuserold": "Emri i tanishëm",
+	"renameusernew": "Emri i ri",
+	"renameuserreason": "Arsyeja:",
+	"renameusermove": "Zhvendos faqet e përdoruesit dhe të diskutimit (dhe nën-faqet e tyre) tek emri i ri",
+	"renameusersuppress": "Mos krijoni përcjellime tek emri i ri",
+	"renameuserreserve": "Bllokoni emrin e vjetër të përdoruesit të përdorim në të ardhmen",
+	"renameuserwarnings": "Paralajmërimet:",
+	"renameuserconfirm": "Po, ndërrojë emrin e përdoruesit",
+	"renameusersubmit": "Ndryshoje",
+	"renameuser-submit-blocklog": "Shfaq shënimet e bllokimit për përdoruesin",
+	"renameusererrordoesnotexist": "Përdoruesi me emër \"<nowiki>$1</nowiki>\" nuk ekziston",
+	"renameusererrorexists": "Përdoruesi me emër \"<nowiki>$1</nowiki>\" ekziston",
+	"renameusererrorinvalid": "Emri \"<nowiki>$1</nowiki>\" nuk është i lejuar",
+	"renameuser-error-request": "Kishte një problem me marrjen e kërkesës.\nJu lutemi kthehuni prapa dhe provoni përsëri.",
+	"renameuser-error-same-user": "Ju nuk mund të riemëroni një përdorues tek e njëjta gjë si më parë.",
+	"renameusersuccess": "Përdoruesi \"<nowiki>$1</nowiki>\" u riemërua në \"<nowiki>$2</nowiki>\"",
+	"renameuser-page-exists": "Faqja $1 ekziston dhe nuk mund të mbivendoset automatikisht.",
+	"renameuser-page-moved": "Faqja $1 është zhvendosur tek $2.",
+	"renameuser-page-unmoved": "Faqja $1 s'mund të zhvendosej tek $2.",
+	"log-name-renameuser": "Regjistri i riemërtimeve",
+	"logentry-renameuser-renameuser-legacier": "$1 riemëroi përdoruesin $4 në $5",
+	"renameuser-move-log": "Lëvizi faqen automatikisht kur riemëroi përdoruesin \"[[User:$1|$1]]\" në \"[[User:$2|$2]]\"",
+	"action-renameuser": "riemëro përdoruesit",
+	"right-renameuser": "Riemëroni përdorueset",
+	"renameuser-renamed-notice": "Ky përdorues është riemëruar.\nRegjistri i riemërimit është poshtë për referencë."
+}

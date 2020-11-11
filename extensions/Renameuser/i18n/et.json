@@ -1,0 +1,42 @@
+{
+	"@metadata": {
+		"authors": [
+			"Avjoska",
+			"Jaan513",
+			"Pikne",
+			"Silvar",
+			"WikedKentaur"
+		]
+	},
+	"renameuser": "Kasutajanime muutmine",
+	"renameuser-linkoncontribs": "kasutaja ümbernimetamine",
+	"renameuser-linkoncontribs-text": "Nimeta see kasutaja ümber",
+	"renameuser-desc": "Lisab kasutajanime muutmise [[Special:RenameUser|erilehekülje]] (vajab ''renameuser''-õigust).",
+	"renameuserold": "Praegune kasutajanimi:",
+	"renameusernew": "Uus kasutajanimi:",
+	"renameuserreason": "Põhjus:",
+	"renameusermove": "Nimeta ümber kasutajaleht, aruteluleht ja nende alamlehed.",
+	"renameusersuppress": "Ära loo ümbersuunamisi uuele nimele",
+	"renameuserreserve": "Ära luba vana kasutajanime edaspidi kasutada",
+	"renameuserwarnings": "Hoiatused:",
+	"renameuserconfirm": "Jah, nimeta kasutaja ümber",
+	"renameusersubmit": "Muuda",
+	"renameuser-submit-blocklog": "Näita blokeerimislogi sissekandeid",
+	"renameusererrordoesnotexist": "Kasutajat \"<nowiki>$1</nowiki>\" ei ole olemas.",
+	"renameusererrorexists": "Kasutaja \"<nowiki>$1</nowiki>\" on juba olemas.",
+	"renameusererrorinvalid": "Kasutajanimi \"<nowiki>$1</nowiki>\" on vigane.",
+	"renameuser-error-request": "Palvet ei õnnestunud kätte saada.\nPalun ürita uuesti.",
+	"renameuser-error-same-user": "Vana ja uus nimi on samased.",
+	"renameusersuccess": "Kasutaja \"<nowiki>$1</nowiki>\" uus nimi on nüüd \"<nowiki>$2</nowiki>\".",
+	"renameuser-page-exists": "Lehekülg $1 on juba olemas ja seda ei saa automaatselt üle kirjutada.",
+	"renameuser-page-moved": "Lehekülg $1 on teisaldatud pealkirja $2 alla.",
+	"renameuser-page-unmoved": "Lehekülje $1 teisaldamine nime $2 alla ei õnnestunud.",
+	"log-name-renameuser": "Kasutajanime muutmise logi",
+	"log-description-renameuser": "See on kasutajanimede muutmise logi.",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|nimetas}} kasutaja ({{PLURAL:$6|üks redigeerimine|$6 redigeerimist}}) $4 ümber kasutajaks {{GENDER:$7|$5}}",
+	"logentry-renameuser-renameuser-legacier": "$1 nimetas kasutaja $4 ümber kasutajaks $5",
+	"renameuser-move-log": "Teisaldatud automaatselt, kui kasutaja \"[[User:$1|$1]]\" nimetati ümber kasutajaks \"[[User:$2|$2]]\"",
+	"action-renameuser": "kasutajaid ümber nimetadata",
+	"right-renameuser": "Muuta kasutajanimesid",
+	"renameuser-renamed-notice": "Kasutaja on ümbernimetatud.\nAllpool on toodud ümbernimetamislogi."
+}

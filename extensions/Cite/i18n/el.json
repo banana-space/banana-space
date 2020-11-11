@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Consta",
+			"Omnipaedista",
+			"Protnet",
+			"ZaDiak",
+			"Απεργός",
+			"Xaris333",
+			"Nikosgranturismogt"
+		]
+	},
+	"cite-desc": "Προσθέτει τις ετικέτες <nowiki><ref[ name=αναγνωριστικό]></nowiki> και <nowiki><references/></nowiki>, για παραπομπές",
+	"cite_error": "Σφάλμα παραπομπής: $1",
+	"cite_error_ref_numeric_key": "Μη έγκυρη ετικέτα <code>&lt;ref&gt;</code>·\nτο όνομα δεν μπορεί να είναι απλός ακέραιος. Χρησιμοποιήστε έναν περιγραφικό τίτλο",
+	"cite_error_ref_no_key": "Μη έγκυρη ετικέτα <code>&lt;ref&gt;</code>·\nπαραπομπές χωρίς περιεχόμενο πρέπει να έχουν όνομα",
+	"cite_error_ref_too_many_keys": "Μη έγκυρη ετικέτα <code>&lt;ref&gt;</code>·\nμη έγκυρα ονόματα, π.χ. πάρα πολλά",
+	"cite_error_ref_no_input": "Μη έγκυρη ετικέτα <code>&lt;ref&gt;</code>·\nοι παραπομπές χωρίς όνομα πρέπει να έχουν περιεχόμενο",
+	"cite_error_references_invalid_parameters": "Άκυρη παράμετρος στην <code>&lt;references&gt;</code> ετικέτα.",
+	"cite_error_references_no_backlink_label": "Εξαντλήθηκαν οι ειδικές ετικέτες συνδέσμων προς το κείμενο.\nΚαθορισμός περισσότερων στο μήνυμα <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>.",
+	"cite_error_no_link_label_group": "Εξαντλήθηκαν οι ειδικές ετικέτες συνδέσμων για την ομάδα «$1».\nΚαθορισμός περισσότερων στο μήνυμα <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_text": "Μη έγκυρη ετικέτα <code>&lt;ref&gt;</code>·\nδεν δίνεται κείμενο για παραπομπές με όνομα <code>$1</code>",
+	"cite_error_included_ref": "Λείπει η ετικέτα κλεισίματος <code>&lt;/ref&gt;</code> για την ετικέτα <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "Υπάρχουν ετικέτες <code>&lt;ref&gt;</code> για κάποια ομάδα με το όνομα «$1», αλλά δεν βρέθηκε καμία αντίστοιχη ετικέτα <code>&lt;references group=\"$1\"/&gt;</code>, ή λείπει η ετικέτα κλεισίματος <code>&lt;/ref&gt;</code>",
+	"cite_error_references_group_mismatch": "Η ετικέτα <code>&lt;ref&gt;</code> μέσα στο <code>&lt;references&gt;</code> έρχεται σε σύγκρουση με το χαρακτηριστικό ομαδοποίησης «$1».",
+	"cite_error_references_missing_group": "Η ετικέτα <code>&lt;ref&gt;</code> που ορίζεται μέσα στο <code>&lt;references&gt;</code> έχει χαρακτηριστικό ομαδοποίησης «$1» που δεν εμφανίζεται σε προηγούμενο κείμενο.",
+	"cite_error_references_missing_key": "Η ετικέτα <code>&lt;ref&gt;</code> με όνομα «$1» που ορίζεται μέσα στο <code>&lt;references&gt;</code> δεν χρησιμοποιείται σε προηγούμενο κείμενο.",
+	"cite_error_references_no_key": "Η ετικέτα <code>&lt;ref&gt;</code> που ορίζεται μέσα στο <code>&lt;references&gt;</code> δεν έχει χαρακτηριστικό ονόματος.",
+	"cite_error_empty_references_define": "Η ετικέτα <code>&lt;ref&gt;</code> που ορίζεται μέσα στο <code>&lt;references&gt;</code> με όνομα «$1» δεν έχει καθόλου περιεχόμενο.",
+	"cite-tracking-category-cite-error": "Σελίδες με σφάλματα αναφορών",
+	"cite_references_link_accessibility_label": "Άλμα πάνω",
+	"cite_references_link_many_accessibility_label": "Άλμα πάνω, στο:",
+	"cite_section_preview_references": "Προεπισκόπηση αναφορών",
+	"cite_warning_sectionpreview_no_text": "↓\n<code>&lt;ref&gt;</code> Η ετικέτα με την ονομασία <code>$1</code> δεν μπορεί να προβληθεί διότι καθορίζεται έξω από το τρέχον κομμάτι ή δεν καθορίζεται καθόλου."
+}

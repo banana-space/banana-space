@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334",
+			"Eleassar",
+			"Pinky sl",
+			"Yerpo"
+		]
+	},
+	"visualeditor-cite-tool-definition.json": "null",
+	"visualeditor-cite-tool-name-book": "Knjiga",
+	"visualeditor-cite-tool-name-journal": "Revija",
+	"visualeditor-cite-tool-name-news": "Novice",
+	"visualeditor-cite-tool-name-web": "Spletna stran",
+	"cite-tool-definition.json": "null",
+	"cite-ve-dialog-reference-editing-reused": "Sklic je na strani uporabljen $1-{{PLURAL:$1|krat}}.",
+	"cite-ve-dialog-reference-options-group-label": "Uporabi to skupino",
+	"cite-ve-dialog-reference-options-group-placeholder": "Splošni sklici",
+	"cite-ve-dialog-reference-options-name-label": "Ponovno uporabi pod tem imenom",
+	"cite-ve-dialog-reference-options-section": "Možnosti",
+	"cite-ve-dialog-reference-title": "Sklic",
+	"cite-ve-dialog-reference-useexisting-full-label": "Ponovna uporaba navedka, ki že obstaja na strani",
+	"cite-ve-dialog-reference-useexisting-label": "Uporabi obstoječi sklic",
+	"cite-ve-dialog-reference-useexisting-tool": "Uporabi ponovno",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "Seznam splošnih sklicev",
+	"cite-ve-dialog-referenceslist-contextitem-description-named": "Seznam sklicev za skupino »$1«",
+	"cite-ve-dialog-referenceslist-title": "Seznam sklicev",
+	"cite-ve-dialogbutton-citation-educationpopup-text": "Izboljšajte vsebino z navedbo virov podatkov. Navajate lahko knjige, časopise in spletna mesta.",
+	"cite-ve-dialogbutton-citation-educationpopup-title": "Navedki",
+	"cite-ve-dialogbutton-reference-full-label": "Osnovna oblika",
+	"cite-ve-dialogbutton-reference-title": "Sklic",
+	"cite-ve-dialogbutton-reference-tooltip": "Osnovno",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Seznam sklicev",
+	"cite-ve-reference-input-placeholder": "Išči znotraj trenutnih navedkov",
+	"cite-ve-referenceslist-isempty": "Na tej strani ni sklicev s skupino »$1« za vključitev na ta seznam.",
+	"cite-ve-referenceslist-isempty-default": "Na tej strani ni sklicev, ki bi jih lahko vključili v ta seznam.",
+	"cite-ve-referenceslist-missingref": "Sklic je opredeljen v predlogi ali drugem ustvarjenem bloku, zato ga lahko trenutno urejate samo v urejevalniku izvorne kode.",
+	"cite-ve-toolbar-group-label": "Navedi",
+	"cite-ve-othergroup-item": "$1 sklic"
+}

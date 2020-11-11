@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Emperyan",
+			"Erkan Yilmaz",
+			"Joseph",
+			"Srhat",
+			"Arystanbek"
+		]
+	},
+	"inputbox-desc": "Öntanımlı HTML formlarının dahil edilmesine olanak verir",
+	"inputbox-error-no-type": "Oluşturulacak girdi kutusunun tipini belirtmediniz.",
+	"inputbox-error-bad-type": "Girdi kutusu tipi \"$1\" tanınmadı.\nLütfen \"create\", \"comment\", \"search\", \"search2\" ya da  \"fulltext\" olarak belirtin.",
+	"inputbox-tryexact": "Tam eşleşme dene",
+	"inputbox-searchfulltext": "Tüm metni ara",
+	"inputbox-createarticle": "Sayfayı oluştur",
+	"inputbox-movearticle": "Sayfayı taşı",
+	"inputbox-postcomment": "Yeni bölüm",
+	"inputbox-postcommenttitle": "Yeni bölüm",
+	"inputbox-ns-main": "Ana"
+}

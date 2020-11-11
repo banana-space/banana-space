@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"UV",
+			"Laurentianus"
+		]
+	},
+	"titleblacklist": "# Hic est index titulorum prohibitorum. Tituli usoresque qui congruunt\n# cum una ex expressionibus regularis sequentibus creari non possunt.\n# Utere \"#\" pro commentariis.\n# Litterae maiusculae ab litteris minusculis distingui non solent.",
+	"titlewhitelist": "# Hic est index titulorum permissorum. Utere \"#\" pro commentariis.\n# Litterae maiusculae ab litteris minusculis distingui non solent.",
+	"titleblacklist-forbidden-edit": "Pagina cum titulo \"$2\" creari non potest. Hic titulus congruit cum expressione regulari: <code>$1</code>",
+	"titleblacklist-forbidden-move": "Pagina cum titulo \"$2\" non ad \"$3\" moveri potest, quia titulus \"$3\" prohibitus est ne pagina creetur. Hic titulus congruit cum expressione regulari: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Fasciculus cum titulo \"$2\" imponi non potest. Hic titulus congruit cum expressione regulari: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Nomen \"$2\" nulli imponi licet.\nQui titulus congruit cum hac expressione interdicta: <code>$1</code>"
+}

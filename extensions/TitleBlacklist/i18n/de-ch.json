@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Filzstift",
+			"Geitost"
+		]
+	},
+	"titleblacklist": "# Dies ist eine Schwarze Liste für Seiten- und Benutzernamen. Wenn auf einen solchen Namen einer der folgenden regulären Ausdrücke zutrifft, kann er nicht erstellt werden.\n# Verwende «#» für Kommentare.\n# Standardgemäss wird nicht zwischen Gross- und Kleinschreibung unterschieden.",
+	"titlewhitelist": "# Dies ist die Ausnahmeliste von der Schwarzen Liste unerwünschter Seiten- und Benutzernamen. Benutze «#» für Kommentare.\n# Standardmässig wird nicht zwischen Gross- und Kleinschreibung unterschieden.",
+	"right-tboverride": "Die schwarze Liste unerwünschter Seiten- oder Benutzernamen ausser Kraft setzen",
+	"right-tboverride-account": "Die schwarze Liste unerwünschter Benutzernamen ausser Kraft setzen."
+}

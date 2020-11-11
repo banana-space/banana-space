@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rachmat.Wahidi",
+			"Rachmat04"
+		]
+	},
+	"oathauth-auth-token-label": "Token",
+	"oathauth-auth-token-help": "Kata sandi satu kali digunakan sebagai faktor kedua dari otentikasi dua-faktor.",
+	"oathauth-auth-ui": "Silakan masukkan kode verifikasi dari aplikasi telepon genggam Anda",
+	"oathauth-throttled": "Terlalu banyak percobaan verifikasi dilakukan! Mohon menunggu $1.",
+	"oathauth-login-failed": "Verifikasi gagal.",
+	"oathauth-describe-provider": "Otentikasi dua-faktor (OATH)."
+}

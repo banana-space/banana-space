@@ -1,0 +1,299 @@
+/**
+ * Styling for namespace tabs (page, discussion) and views (read, edit, view history, watch and other actions)
+ */
+
+/* Navigation Labels */
+div.vectorTabs h3 {
+	display: none;
+}
+
+/* Namespaces and Views */
+div.vectorTabs {
+	float: left;
+	height: 2.5em;
+	.background-image('images/tab-break.png');
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	padding-left: 1px;
+
+	ul {
+		float: left;
+		height: 100%;
+		list-style-type: none;
+		list-style-image: none;
+		margin: 0;
+		padding: 0;
+		.background-image('images/tab-break.png');
+		background-position: right bottom;
+		background-repeat: no-repeat;
+
+		li {
+			float: left;
+			line-height: 1.125em;
+			/* For IE6, overridden later to display:block by modern browsers */
+			display: inline-block;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			.background-image('images/tab-normal-fade.png');
+			background-position: bottom left;
+			background-repeat: repeat-x;
+			white-space: nowrap;
+		}
+
+		/* IGNORED BY IE6 which doesn't support child selector */
+		> li {
+			display: block;
+		}
+	}
+
+	li {
+		&.new {
+			a,
+			a:visited {
+				color: #a55858;
+			}
+		}
+
+		&.selected {
+			.background-image('images/tab-current-fade.png');
+			a,
+			a:visited {
+				color: #222;
+				text-decoration: none;
+			}
+		}
+
+		&.icon {
+			a {
+				background-position: bottom right;
+				background-repeat: no-repeat;
+			}
+		}
+
+		a {
+			/* For IE6, overridden later to display:block by modern browsers */
+			display: inline-block;
+			height: 1.9em;
+			padding-left: 0.625em; // equals `8px` at computed `font-size` of `12.8px`
+			padding-right: 0.625em;
+			color: @menu-link-color;
+			cursor: pointer;
+			font-size: 0.8em;
+		}
+
+		/* Ignored by IE6 which doesn't support child selector */
+		> a {
+			display: block;
+		}
+	}
+
+	span {
+		display: inline-block;
+		.background-image('images/tab-break.png');
+		background-position: bottom right;
+		background-repeat: no-repeat;
+		height: 100%;
+
+		a {
+			/* For IE6, overridden later to display:block by modern browsers */
+			display: inline-block;
+			padding-top: 1.25em;
+		}
+
+		/* Ignored by IE6 which doesn't support child selector */
+		> a {
+			float: left;
+			display: block;
+		}
+	}
+}
+
+/* Variants and Actions */
+div.vectorMenu {
+	direction: ltr;
+	float: left;
+	cursor: pointer;
+	position: relative;
+	line-height: 1.125em;
+}
+
+div#mw-head div.vectorMenu h3 {
+	float: left;
+	.background-image('images/tab-break.png');
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	font-size: 1em;
+	height: 2.5em;
+	// `padding-right` >= `1px` effectively moves the "background border" outside of the element to act like a real
+	// border. It is necessary for `div.vectorMenu div.menu` dropdown to align well.
+	padding-right: 0.5em; // equals `8px` at computed `font-size` of `14px` as visually harmonically with `padding-left` in `div.vectorMenu h3 span`
+	margin-right: -1px;
+}
+
+div.vectorMenu h3 {
+	span {
+		position: relative;
+		display: block;
+		font-size: 0.8em;
+		padding-left: 0.625em;
+		padding-top: 1.25em;
+		padding-right: 16px;
+		font-weight: normal;
+		color: #444;
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 1.25em;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			.background-image-svg('images/arrow-down.svg', 'images/arrow-down.png');
+			background-position: 100% 50%;
+			background-repeat: no-repeat;
+			// Modify the color of the image from the default #222 to approx. #444 to match the text.
+			opacity: 0.85;
+		}
+	}
+
+	&:hover span,
+	&:focus span {
+		color: @content-font-color;
+
+		&:after {
+			opacity: 1;
+		}
+	}
+}
+
+div.vectorMenu .vectorMenuCheckbox:checked + h3 span:after {
+	transform: scaleY( -1 );
+}
+
+div.vectorMenu .vectorMenuCheckbox:focus + h3 {
+	// Simulate browser focus ring
+	outline: dotted 1px; // Firefox style
+	outline: auto -webkit-focus-ring-color; // Webkit style
+}
+
+div.vectorMenu div.menu {
+	// Match the width of the dropdown "heading" (the tab)
+	min-width: 100%;
+	position: absolute;
+	top: 2.5em;
+	left: -1px;
+	background-color: @body-background-color;
+	border: 1px solid #a2a9b1;
+	border-top-width: 0;
+	clear: both;
+	box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
+	text-align: left;
+	display: none;
+	// Menus must overlap indicators (z-index: 1) and VisualEditor toolbar (z-index: 2)
+	z-index: 2;
+}
+
+div.vectorMenu:hover div.menu {
+	display: block;
+}
+// This is in a separate block, so that browsers supporting :hover but not :checked still apply the rule above
+// Support: IE8
+div.vectorMenu .vectorMenuCheckbox:checked ~ div.menu {
+	display: block;
+}
+
+div.vectorMenu ul {
+	list-style-type: none;
+	list-style-image: none;
+	padding: 0;
+	margin: 0;
+	text-align: left;
+}
+
+// stylelint-disable selector-no-vendor-prefix, selector-type-no-unknown
+
+/* Fixes old versions of FireFox */
+div.vectorMenu ul,
+x:-moz-any-link {
+	min-width: 5em;
+}
+
+/* Returns things back to normal in modern versions of FireFox */
+div.vectorMenu ul,
+x:-moz-any-link,
+x:default {
+	min-width: 0;
+}
+
+// stylelint-enable selector-no-vendor-prefix, selector-type-no-unknown
+
+div.vectorMenu li {
+	padding: 0;
+	margin: 0;
+	text-align: left;
+	line-height: 1em;
+}
+
+/* OVERRIDDEN BY COMPLIANT BROWSERS */
+div.vectorMenu li a {
+	display: inline-block;
+	padding: 0.625em;
+	white-space: nowrap;
+	color: @menu-link-color;
+	cursor: pointer;
+	font-size: 0.8em;
+}
+
+/* IGNORED BY IE6 */
+div.vectorMenu li > a {
+	display: block;
+}
+
+div.vectorMenu li.selected a,
+div.vectorMenu li.selected a:visited {
+	color: #222;
+	text-decoration: none;
+}
+
+// Invisible checkbox covering the dropdown menu handle
+.vectorMenuCheckbox {
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	// Hide the checkbox completely in browsers that don't support :checked
+	display: none;
+}
+
+:not( :checked ) > .vectorMenuCheckbox {
+	// When the browser supports :checked, display it
+	display: block;
+}
+
+// Expand vectorMenu as basic tabs in IE6
+// (IE6 doesn't support :hover on DIV)
+* html div.vectorMenu div.menu {
+	display: block;
+	position: static;
+	border: 0;
+}
+* html div#mw-head div.vectorMenu h3 {
+	display: none;
+}
+* html div.vectorMenu li {
+	float: left;
+	line-height: 1.125em;
+	border-right: 1px solid #a7d7f9;
+}
+* html div.vectorMenu li a {
+	padding-top: 1.25em;
+}
+
+@import 'watchstar.less';

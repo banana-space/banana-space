@@ -1,0 +1,143 @@
+{
+	"name": "CategoryTree",
+	"author": "Daniel Kinzler",
+	"url": "https://www.mediawiki.org/wiki/Extension:CategoryTree",
+	"descriptionmsg": "categorytree-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "parserhook",
+	"ConfigRegistry": {
+		"categorytree": "GlobalVarConfig::newInstance"
+	},
+	"ExtensionFunctions": [
+		"CategoryTreeHooks::initialize"
+	],
+	"SpecialPages": {
+		"CategoryTree": "CategoryTreePage"
+	},
+	"APIModules": {
+		"categorytree": "ApiCategoryTree"
+	},
+	"MessagesDirs": {
+		"CategoryTree": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"CategoryTreeAlias": "CategoryTree.alias.php",
+		"CategoryTreeMagic": "CategoryTree.i18n.magic.php"
+	},
+	"AutoloadClasses": {
+		"CategoryTreePage": "includes/CategoryTreePage.php",
+		"CategoryTree": "includes/CategoryTree.php",
+		"CategoryTreeCategoryPage": "includes/CategoryTreeCategoryPage.php",
+		"CategoryTreeCategoryViewer": "includes/CategoryTreeCategoryViewer.php",
+		"CategoryTreeHooks": "includes/CategoryTreeHooks.php",
+		"CategoryTreeMode": "includes/CategoryTreeMode.php",
+		"CategoryTreeHidePrefix": "includes/CategoryTreeHidePrefix.php",
+		"ApiCategoryTree": "includes/ApiCategoryTree.php"
+	},
+	"ResourceModules": {
+		"ext.categoryTree": {
+			"scripts": "ext.categoryTree.js",
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"messages": [
+				"categorytree-collapse",
+				"categorytree-expand",
+				"categorytree-collapse-bullet",
+				"categorytree-expand-bullet",
+				"categorytree-load",
+				"categorytree-loading",
+				"categorytree-nothing-found",
+				"categorytree-no-subcategories",
+				"categorytree-no-parent-categories",
+				"categorytree-no-pages",
+				"categorytree-error",
+				"categorytree-retry"
+			],
+			"dependencies": [
+				"mediawiki.api"
+			]
+		},
+		"ext.categoryTree.css": {
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"styles": "ext.categoryTree.css"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "CategoryTree/modules"
+	},
+	"Hooks": {
+		"ArticleFromTitle": [
+			"CategoryTreeHooks::articleFromTitle"
+		],
+		"SpecialTrackingCategories::preprocess": [
+			"CategoryTreeHooks::onSpecialTrackingCategoriesPreprocess"
+		],
+		"SpecialTrackingCategories::generateCatLink": [
+			"CategoryTreeHooks::onSpecialTrackingCategoriesGenerateCatLink"
+		],
+		"SkinTemplateOutputPageBeforeExec": "CategoryTreeHooks::skinTemplateOutputPageBeforeExec",
+		"MakeGlobalVariablesScript": "CategoryTreeHooks::getConfigVars",
+		"ParserFirstCallInit": "CategoryTreeHooks::setHooks",
+		"OutputPageMakeCategoryLinks": "CategoryTreeHooks::outputPageMakeCategoryLinks",
+		"SkinJoinCategoryLinks": "CategoryTreeHooks::skinJoinCategoryLinks",
+		"BeforePageDisplay": "CategoryTreeHooks::addHeaders",
+		"BeforePageDisplayMobile": "CategoryTreeHooks::addHeaders",
+		"OutputPageParserOutput": "CategoryTreeHooks::parserOutput"
+	},
+	"config": {
+		"CategoryTreeMaxChildren": 200,
+		"CategoryTreeAllowTag": true,
+		"CategoryTreeDisableCache": 21600,
+		"CategoryTreeHTTPCache": false,
+		"CategoryTreeMaxDepth": {
+			"10": 1,
+			"20": 1,
+			"0": 2
+		},
+		"CategoryTreeForceHeaders": false,
+		"CategoryTreeSidebarRoot": null,
+		"CategoryTreeHijackPageCategories": false,
+		"CategoryTreeUseCategoryTable": true,
+		"CategoryTreeOmitNamespace": 20,
+		"CategoryTreeDefaultMode": 0,
+		"CategoryTreeDefaultOptions": {
+			"mode": null,
+			"hideprefix": null,
+			"showcount": false,
+			"namespaces": false
+		},
+		"CategoryTreeCategoryPageMode": 0,
+		"CategoryTreeCategoryPageOptions": {
+			"mode": null,
+			"showcount": true
+		},
+		"CategoryTreeSpecialPageOptions": {
+			"showcount": true
+		},
+		"CategoryTreeSidebarOptions": {
+			"mode": 0,
+			"hideprefix": 20,
+			"showcount": false,
+			"hideroot": true,
+			"namespaces": false,
+			"depth": 1
+		},
+		"CategoryTreePageCategoryOptions": {
+			"mode": 100,
+			"hideprefix": 20,
+			"showcount": false,
+			"hideroot": false,
+			"namespaces": false,
+			"depth": 0
+		}
+	},
+	"manifest_version": 1
+}

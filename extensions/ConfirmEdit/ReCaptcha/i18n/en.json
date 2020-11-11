@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"recaptcha-desc": "reCAPTCHA module for Confirm Edit",
+	"recaptcha-edit": "To protect the wiki against automated edit spam, we kindly ask you to type the words you see in the box.",
+	"recaptcha-addurl": "Your edit includes new external links. To protect the wiki against automated spam, we kindly ask you to type the words you see in the box.",
+	"recaptcha-badlogin": "To protect the wiki against automated password cracking, we kindly ask you to type the words you see in the box.",
+	"recaptcha-createaccount": "To protect the wiki against automated account creation, we kindly ask you to type the words you see in the box.",
+	"recaptcha-createaccount-fail": "Incorrect or missing reCAPTCHA answer.",
+	"recaptcha-create": "To protect the wiki against automated page creation, we kindly ask you to type the words you see in the box.",
+	"recaptcha-info": "Please solve a ReCaptcha challenge and return the challenge and response values as captchaId and captchaWord.",
+	"recaptcha-apihelp-param-recaptcha_challenge_field": "Field from the ReCaptcha widget",
+	"recaptcha-apihelp-param-recaptcha_response_field": "Field from the ReCaptcha widget",
+	"recaptcha-id-label": "ReCaptcha challenge",
+	"recaptcha-id-help": "ReCaptcha challenge value",
+	"recaptcha-label": "ReCaptcha solution",
+	"recaptcha-help": "ReCaptcha solution value"
+}

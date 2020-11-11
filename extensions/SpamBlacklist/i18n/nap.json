@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"C.R."
+		]
+	},
+	"spam-blacklist": " #<!-- lassa sta linea comm'è mo' --> <pre>\n# Ll'url esterne ca s'azzeccano dint'a st'elenco sarranno bluccate quanno s'azzecarranno a na paggena.\n# St'elenco s'apprecase surtanto a sta wiki; si vulite vedite l'elenco niro globbale.\n# Pe' documentazione vedite https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# 'A sintassi sta ccà abbascio:\n#   * Tuttuquante 'e nu carattere \"#\" a 'o fine d' 'a linea è nu commento\n#   * Tuttuquante linee 'n bianco songo nu fragmento regex ca mmustarrà surtanto 'e host dint'a n'URL\n\n #</pre> <!-- lassa sta linea tale quale comm'è mo' -->",
+	"spam-whitelist": " #<!-- lassa sta linea accussì comm' 'è --> <pre>\n# L' URLs 'e fore ca s'azzeccassero a st'elenco *nun* sarranno bloccate pure quanno se songo mise dint'a\n# l'elenco 'e site bluccate p' 'a lista nera.\n#\n# 'A sintasse è chesta ccà, oj cann:\n#   * Ognecose ca tène 'o carattere \"#\" mponta 'a fine d' 'a linea è nu commento\n#   * Ogne linea ca nun è abbacante è nu frammento 'e regex ca ve facesse 'o cunfronto cu ll'host dint'a ll'URL\n\n #</pre> <!-- lassate sta linea accussì comm'è -->",
+	"email-blacklist": " #<!-- lassate sta linea comm'è mo' --> <pre>\n# Indirizze e-mail, quanno fossero azzeccate a st'elenco sarranno bluccate 'e se ffà 'o riggistro o mannà mail.\n# St'elenco s'apprecase surtanto a sta wiki; si vulite vedite l'elenco niro globbale.\n# Pe' documentazione vedite https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# 'A sintassi 'a vedite ccà abbascio, oj cann:\n#   * Tuttuquante 'e nu carattere \"#\" a 'o fine d' 'a linea è nu commento\n#   * Tuttuquante linee 'n bianco songo nu fragmento regex ca mmustarrà surtanto 'e host dint'a n'URL\n\n #</pre> <!-- lassate sta linea tale quale comm'è mo' -->",
+	"email-whitelist": " #<!-- lassate sta linea accussì comm' 'è --> <pre>\n# E-mail ca s'azzeccassero a st'elenco *nun* sarranno bloccate pure quanno se songo mise dint'a\n# l'elenco 'e site bluccate p' 'a lista nera.\n#\n# 'A sintasse è chesta ccà, oj cann:\n#   * Ognecose ca tène 'o carattere \"#\" mponta 'a fine d' 'a linea è nu commento\n#   * Ogne linea ca nun è abbacante è nu frammento 'e regex ca ve facesse 'o cunfronto cu ll'host dint'a ll'URL\n\n #</pre> <!-- lassate sta linea accussì comm'è -->",
+	"spam-blacklisted-email": "Elenco 'email a gnurà",
+	"spam-blacklisted-email-text": "'O ndirizzo mail d' 'o vuosto è mo' mo' dint'a na lista nira pe' nun putè mannà mmasciate a ll'ati utente",
+	"spam-blacklisted-email-signup": "'O indirizzo e-mail dato è dint'a lista nira pe' nun 'o puté ausà.",
+	"spam-invalid-lines": "Dint'a l'elenco nero 'e spam {{PLURAL:$1|'a linea ccà|'e linee ccà}} {{PLURAL:$1|è n'espressione|songo espressiune}} regolare e {{PLURAL:$1|ce buò|ce vonno}} l'arricette primm' 'e sarvà 'a paggena:",
+	"spam-blacklist-desc": "'O tool anti-spam basato ncopp' 'o Regex-based premmettesse 'e ce miettere dint' 'a lista nira tutte l'URLs dint' 'e paggene e indirizze email pe utente riggistrate",
+	"log-name-spamblacklist": "Riggistro d' 'a lista nira p' 'o spam",
+	"log-description-spamblacklist": "Sti evente se pigliassero e cuntrullasero 'e click dint'a l'elenco niro d' 'o spam.",
+	"logentry-spamblacklist-hit": "{{GENDER:$2|$1}} causaje na trasuta dint'a l'elenco niro dint'a $3 pe' pruvà 'e s'azzeccà $4.",
+	"right-spamblacklistlog": "Vide 'o riggistro d' 'a lista nira",
+	"action-spamblacklistlog": "vide 'o riggistro d' 'a lista nira",
+	"apihelp-spamblacklist-description": "Valida uno o cchiù URL annanz' 'o SpamBlackList.",
+	"apihelp-spamblacklist-param-url": "URL pe' validà annanz' 'a lista nira.",
+	"apihelp-spamblacklist-example-1": "Cuntrolla ddoje URL nfacci' 'a lista nira"
+}

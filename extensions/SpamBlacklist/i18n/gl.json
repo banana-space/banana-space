@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alma",
+			"Toliño",
+			"Xosé",
+			"Elisardojm"
+		]
+	},
+	"spam-blacklist": " #<!-- Deixe esta liña tal e como está --> <pre>\n# As ligazóns externas que coincidan na súa totalidade ou en parte con algún rexistro desta lista serán bloqueadas cando se intenten engadir a unha páxina.\n# Esta lista afecta unicamente a este wiki; tamén existe unha lista global.\n# Para obter máis documentación vaia a https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# A sintaxe é a seguinte:\n#   * Todo o que vaia despois dun carácter \"#\" ata o final da liña é un comentario\n#   * Toda liña que non estea en branco é un fragmento de expresión regular que só coincide con dominios dentro de enderezos URL\n\n #</pre> <!-- Deixe esta liña tal e como está -->",
+	"spam-whitelist": " #<!-- Deixe esta liña tal e como está --> <pre>\n# As ligazóns externas que coincidan con esta lista *non* serán bloqueadas mesmo se\n# fosen bloqueadas mediante entradas na lista negra.\n#\n# A sintaxe é a seguinte:\n#   * Todo o que vaia despois dun carácter \"#\" ata o final da liña é un comentario\n#   * Toda liña que non estea en branco é un fragmento de expresión regular que só coincide con dominios dentro de enderezos URL\n\n #</pre> <!-- Deixe esta liña tal e como está -->",
+	"email-blacklist": " #<!-- Deixe esta liña tal e como está --> <pre>\n# Os enderezos de correo electrónico que coincidan na súa totalidade ou en parte con algún rexistro desta lista serán bloqueadas cando se intenten rexistrar ou se intente enviar un correo desde eles.\n# Esta lista afecta unicamente a este wiki; tamén existe unha lista global.\n# Para obter máis documentación vaia a https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# A sintaxe é a seguinte:\n#   * Todo o que vaia despois dun carácter \"#\" ata o final da liña é un comentario\n#   * Toda liña que non estea en branco é un fragmento de expresión regular que só coincide con dominios dentro de enderezos de correo electrónico\n\n #</pre> <!-- Deixe esta liña tal e como está -->",
+	"email-whitelist": " #<!-- Deixe esta liña tal e como está --> <pre>\n# Os enderezos de correo electrónico que coincidan con algún desta lista *non* serán bloqueados,\n# mesmo se foron bloqueados por entradas da lista negra.\n#\n# A sintaxe é a seguinte:\n#   * Todo o que vaia despois dun carácter \"#\" ata o final da liña é un comentario\n#   * Toda liña que non estea en branco é un fragmento de expresión regular que só coincide con dominios dentro de enderezos de correo electrónico\n\n #</pre> <!-- Deixe esta liña tal e como está -->",
+	"spam-blacklisted-email": "Enderezo de correo electrónico presente na lista negra",
+	"spam-blacklisted-email-text": "O seu enderezo de correo electrónico atópase na lista negra e non pode enviar correos electrónicos aos outros usuarios.",
+	"spam-blacklisted-email-signup": "O enderezo de correo electrónico especificado está na lista negra e non se pode empregar.",
+	"spam-invalid-lines": "{{PLURAL:$1|A seguinte liña|As seguintes}} da lista negra de spam {{PLURAL:$1|é unha expresión regular inválida|son expresións regulares inválidas}} e {{PLURAL:$1|haina|hainas}} que corrixir antes de gardar a páxina:",
+	"spam-blacklist-desc": "Ferramenta antispam baseada en expresións regulares que permite incluír enderezos URL e enderezos de correo electrónico nunha lista negra para os usuarios rexistrados",
+	"log-name-spamblacklist": "Rexistro da lista negra de spam",
+	"log-description-spamblacklist": "Este rexistro fai un seguimento das coincidencias coa lista negra de publicidade.",
+	"logentry-spamblacklist-hit": "$1 provocou a activación da lista negra de spam en \"$3\" ao intentar engadir $4.",
+	"right-spamblacklistlog": "Ver o rexistro da lista negra de spam",
+	"action-spamblacklistlog": "ver o rexistro da lista negra de spam",
+	"apihelp-spamblacklist-description": "Validar unha o máis URLs contra a lista negra de spam.",
+	"apihelp-spamblacklist-summary": "Validar unha o máis URLs contra a lista negra de spam.",
+	"apihelp-spamblacklist-param-url": "URLs a validar contra a lista negra.",
+	"apihelp-spamblacklist-example-1": "Comprobar dúas URLs contra a lista negra."
+}

@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"Istabani",
+			"පසිඳු කාවින්ද",
+			"Obaid Raza",
+			"Muhammad Shuaib",
+			"BukhariSaeed"
+		]
+	},
+	"categorytree": "شجرہ زمرہ جات",
+	"categorytree-portlet": "زمرہ",
+	"categorytree-legend": "مختلف اقسام دکھائیں",
+	"categorytree-desc": "[[Special:CategoryTree|زمرہ جات کی متحرک ساخت]]",
+	"categorytree-header": "ایک زمرہ کا نام لکھ کے اس کا مکمل ساخت کو [[شجرہ نسب|شجرہ]] کی صورت میں دیکھیے۔ (جاوا اسکرپٹ کی ضرورت ہے)",
+	"categorytree-category": "زمرہ",
+	"categorytree-go": "بہ ترتیب شجر",
+	"categorytree-parents": "والدین",
+	"categorytree-mode-label": "طور:",
+	"categorytree-mode-categories": "صرف زمرہ جات",
+	"categorytree-mode-pages": "فائلوں کے علاوہ صفحات",
+	"categorytree-mode-all": "تمام صفحات",
+	"categorytree-collapse": "چھپائیں",
+	"categorytree-expand": "وسیع کریں",
+	"categorytree-expand-bullet": "◄",
+	"categorytree-empty-bullet": "◄",
+	"categorytree-member-counts": "اس میں {{PLURAL:$1|1 ذیلی زمرہ|$1 ذیلی زمرہ جات}}، {{PLURAL:$2|1 صفحہ|$2 صفحات}} اور {{PLURAL:$3|1 فائل|$3 فائلیں}} موجود ہیں/ہے۔",
+	"categorytree-num-categories": "$1 ز",
+	"categorytree-num-pages": "$1 ص",
+	"categorytree-num-files": "$1 F",
+	"categorytree-num-empty": "خالی",
+	"categorytree-load": "اثقال",
+	"categorytree-loading": "دوران اثقال",
+	"categorytree-nothing-found": "کچھ دستیاب نہیں",
+	"categorytree-no-subcategories": "کوئی ذیلی زمرہ نہیں",
+	"categorytree-no-parent-categories": "کوئی والدین کے زمرہ جات",
+	"categorytree-no-pages": "کوئی صفحہ یا ذیلی زمرہ موجود نہیں",
+	"categorytree-not-found": "زمرہ <i>$1</i> نہیں ملا",
+	"categorytree-error": "مسئلہ ڈیٹا لوڈ ہو رہا ہے.",
+	"categorytree-retry": "براہ مہربانی ایک لمحے کا انتظار کریں اور دوبارہ کوشش کریں."
+}

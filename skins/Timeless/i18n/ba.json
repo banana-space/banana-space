@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sagan"
+		]
+	},
+	"timeless-desc": "Timeless биҙәлеше Брэндон Харрисның Winter прототипыннҙан һәм Викимедия Фондының башҡа төр стилдәренән  яһалған.",
+	"timeless-search-placeholder": "Текста яҡынса {{NUMBEROFARTICLES}} бит эсендә эҙләү",
+	"timeless-loggedin": "Иҫәп яҙмаһы",
+	"timeless-anonymous": "Танытмаған",
+	"timeless-loggedinas": "'''$1''' булып танылған",
+	"timeless-notloggedin": "Танылмағанһығыҙ",
+	"timeless-userpage": "{{GENDER:$1|Ҡатнашыусы}} бите",
+	"timeless-talkpage": "{{GENDER:$1|Ҡатнашыусы}} менән фекер алышыу",
+	"timeless-pagelog": "Бит журналы",
+	"timeless-more": "Тағы",
+	"timeless-sitetools": "Вики-инструменттар",
+	"timeless-pageactions": "Бит өсөн инструмент",
+	"timeless-userpagetools": "Ҡатнашыусы бите инструменты",
+	"timeless-pagemisc": "Тағы",
+	"timeless-namespaces": "Исем арауыҡтары",
+	"timeless-pagetools": "Биттәге ғәмәлдәр",
+	"timeless-languages": "Телдәр"
+}

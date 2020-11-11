@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joseph",
+			"Karduelis",
+			"Marmase",
+			"Runningfridgesrule",
+			"Uğur Başak",
+			"Vito Genovese",
+			"Rapsar"
+		]
+	},
+	"renameuser": "Kullanıcı adı değiştir",
+	"renameuser-linkoncontribs": "kullanıcıyı yeniden adlandır",
+	"renameuser-linkoncontribs-text": "Bu kullanıcıyı yeniden adlandır",
+	"renameuser-desc": "Kullanıcıyı yeniden adlandırmak için bir [[Special:RenameUser|özel sayfa]] ekler (''kullanıcıyıyenidenadlandır'' hakkı gerekir)",
+	"renameuserold": "Güncel kullanıcı adı:",
+	"renameusernew": "Yeni kullanıcı adı:",
+	"renameuserreason": "Neden:",
+	"renameusermove": "Kullanıcı ve tartışma sayfalarını (ve alt sayfalarını) yeni isme taşı",
+	"renameusersuppress": "Yeni ada yönlendirmeler oluşturma",
+	"renameuserreserve": "Eski kullanıcı adını ilerdeki kullanımlar için engelle",
+	"renameuserwarnings": "Uyarılar:",
+	"renameuserconfirm": "Evet, kullanıcıyı yeniden adlandır",
+	"renameusersubmit": "Gönder",
+	"renameusererrordoesnotexist": "\"<nowiki>$1</nowiki>\" adlı kullanıcı bulunmamaktadır.",
+	"renameusererrorexists": "\"<nowiki>$1</nowiki>\" kullanıcısı zaten mevcut.",
+	"renameusererrorinvalid": "\"<nowiki>$1</nowiki>\" kullanıcı adı geçersiz.",
+	"renameuser-error-request": "İsteğin alımıyla ilgili bir problem var.\nLütfen geri dönüp tekrar deneyin.",
+	"renameuser-error-same-user": "Bir kullanıcıyı eskiden olduğu isme yeniden adlandıramazsınız.",
+	"renameusersuccess": "Daha önce \"<nowiki>$1</nowiki>\" olarak kayıtlı kullanıcının rumuzu \"<nowiki>$2</nowiki>\" olarak değiştirilmiştir.",
+	"renameuser-page-exists": "$1 sayfası zaten mevcut ve otomatik olarak üstüne yazılamaz.",
+	"renameuser-page-moved": "$1 sayfası $2 sayfasına taşındı.",
+	"renameuser-page-unmoved": "$1 sayfası $2 sayfasına taşınamıyor.",
+	"log-name-renameuser": "Kullanıcı adı değişikliği günlüğü",
+	"logentry-renameuser-renameuser-legacier": "$1, $4 adlı kullanıcının adını {{GENDER:$7|$5}} olarak değiştirdi",
+	"renameuser-move-log": "Kullanıcıyı \"[[User:$1|$1]]\" isminden \"[[User:$2|$2]]\" ismine yeniden adlandırırken, sayfa otomatik olarak taşındı",
+	"right-renameuser": "Kullanıcıların adlarını değiştirir",
+	"renameuser-renamed-notice": "Bu kullanıcının adı değiştirildi.\nReferans için ad değiştirme günlüğü aşağıda sağlanmıştır."
+}

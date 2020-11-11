@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="5.64mm"
+   width="5.64mm"
+   version="1.1"
+   viewBox="0 0 20 20"
+   id="svg4136"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="user-grey.svg"
+   inkscape:export-filename="/media/shintaiden/home/rahah/mediawiki/skins/Timeless/resources/images/user.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <metadata
+     id="metadata4148">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4146" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="743"
+     id="namedview4144"
+     showgrid="true"
+     inkscape:zoom="16.868941"
+     inkscape:cx="-12.733021"
+     inkscape:cy="12.067589"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4136"
+     inkscape:snap-bbox="true"
+     inkscape:object-paths="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-others="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4150" />
+  </sodipodi:namedview>
+  <path
+     style="fill:#aaaaaa;fill-opacity:1"
+     d="M 3.640625 9.453125 C 1.8835375 11.840633 1.6848657 14.447685 2.4140625 16.175781 C 2.9026774 17.354852 3.5929816 18.045174 4.4023438 18.464844 C 5.1937201 18.892507 6.1506693 18.982377 7 18.984375 L 13.324219 18.984375 C 14.244494 18.984375 15.173286 18.777179 15.972656 18.310547 C 16.772026 17.843915 17.431752 17.112579 17.771484 16.023438 C 18.261099 14.474658 18.036595 11.996446 16.292969 9.5683594 C 16.285395 9.5799893 16.271857 9.5865465 16.263672 9.5976562 A 7.5000009 7.5000009 0 0 1 10 12.984375 A 7.5000009 7.5000009 0 0 1 3.640625 9.453125 z "
+     transform="scale(1.0007881,1.0007881)"
+     id="path4140" />
+  <path
+     sodipodi:nodetypes="sssss"
+     inkscape:connector-curvature="0"
+     id="path4142"
+     d="m 10.007881,0.99211966 c -2.4852804,0 -4.5000004,2.01471904 -4.5000004,4.50000004 0,2.485281 2.01472,4.5 4.5000004,4.5 2.48528,0 4.5,-2.014719 4.5,-4.5 0,-2.485281 -2.01472,-4.50000004 -4.5,-4.50000004 z"
+     style="fill:#aaaaaa;fill-rule:evenodd;fill-opacity:1" />
+</svg>

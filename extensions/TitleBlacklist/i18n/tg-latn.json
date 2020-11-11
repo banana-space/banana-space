@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liangent"
+		]
+	},
+	"titleblacklist-forbidden-edit": "Eçodi unvoni \"$2\" man' şudaast.  In unvon bo in dastur az fehristi sijoh mutobiqat mekunad: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" nametavonad ba \"$3\" kūconida şavad, zero eçodi unvoni \"$3\" man' şudaast. Cun bo in dastur az fehristi sijoh mutobiqat mekunad: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Eçodi nomi \"$2\" baroi parvandaho man' ast. On bo in dastur az fexristi sijohi zerin mutobiqat mekunad: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Satri|Satrhoi}} zerin dar fehristi sijohi unvonho ƣajrimiçoz {{PLURAL:$1|ast|hastand}}; lutfan {{PLURAL:$1|on|onho}}ro qabl az zaxira kardan, isloh kuned:"
+}

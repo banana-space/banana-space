@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shinjiman",
+			"Xiaomingyan"
+		]
+	},
+	"imagemap_desc": "容许客户端可以使用<code>&lt;imagemap&gt;</code>标签整可点击图像地图",
+	"imagemap_no_image": "错误: 必须要在第一行指定一幅图像",
+	"imagemap_invalid_image": "错误: 图像不正确或者不存在",
+	"imagemap_bad_image": "错误: 图像已被本页列入黑名单内",
+	"imagemap_no_link": "错误: 在第$1行结尾中找不到一个正式的链接",
+	"imagemap_invalid_title": "错误: 在第$1行中的标题链接不正确",
+	"imagemap_missing_coord": "错误: 在第$1行中未有足够的座标组成一个形状",
+	"imagemap_unrecognised_shape": "错误: 在第$1行中有未能认出的形状，每一行必须使用以下其中一组字开始: <code>default</code>, <code>rect</code>, <code>circle</code> 或者是 <code>poly</code>",
+	"imagemap_invalid_coord": "错误: 在第$1行中有不正确的座标，它必须是一个数字",
+	"imagemap_invalid_desc": "错误: 不正确的 desc 参数，必须是以下的其中之一: $1",
+	"imagemap_description": "关于该图像",
+	"imagemap_desc_types": "右上, 右下, 左下, 左上, 无",
+	"imagemap_poly_odd": "错误: 在第$1行找到单数的多边坐标"
+}

@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Christian List"
+		]
+	},
+	"multimediaviewer-desc": "Udvid miniaturebilleder i en større størrelse på en fuld skærm.",
+	"multimediaviewer-pref": "Medieviser",
+	"multimediaviewer-pref-desc": "Med dette nye værktøj kan du forbedre din multimedieoplevelse. Det viser billeder i større størrelse på sider, der har miniaturer. Billederne er vist i et pænere fuldskærmsformat, og kan også ses i fuld størrelse.",
+	"multimediaviewer-file-page": "Gå til tilsvarende filside",
+	"multimediaviewer-repository-local": "Lær mere",
+	"multimediaviewer-datetime-created": "Oprettet den $1",
+	"multimediaviewer-datetime-uploaded": "Uploadet den $1",
+	"multimediaviewer-license-cc-pd": "Offentlig ejendom",
+	"multimediaviewer-license-default": "Se licens",
+	"multimediaviewer-about-mmv": "Om Medieviser",
+	"multimediaviewer-discuss-mmv": "Giv feedback",
+	"multimediaviewer-geolocation": "Sted: $1",
+	"multimediaviewer-reuse-link": "Brug denne fil"
+}

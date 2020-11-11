@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kandar"
+		]
+	},
+	"titleblacklist-forbidden-edit": "Judul “$2” dicaram dijieun, luyu jeung éntri daptar hideung: <code>$1</code>",
+	"titleblacklist-forbidden-move": "“$2” teu bisa dipindahkeun ka “$3”, sababa judul “$3” dicaram dijieun, luyu jeung éntri daptar hideung: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Ngaran koropak “$2” dicaram dijieun, luyu jeung éntri daptar hideung: <code>$1</code>"
+}

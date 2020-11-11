@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Assele",
+			"Рустам Нурыев",
+			"Sagan",
+			"Янмурза Баки",
+			"Азат Хәлилов",
+			"Ләйсән"
+		]
+	},
+	"fancycaptcha-addurl": "Һеҙҙең текстығыҙҙа яңы тышҡы һылтанмалар бар.\nАвтоматик спамдан һаҡлау маҡсатында, зинһар, күрһәтелгән һүҙҙәрҙе түбәндәге юлға керетегеҙ ([[Special:Captcha/help|тулыраҡ мәғлүмәт]]):",
+	"fancycaptcha-badlogin": "Серһүҙҙе автоматик ватыуҙан һаҡлау маҡсатында, зинһар, күрһәтелгән һүҙҙәрҙе түбәндәрәк рамкаға индереүегеҙҙе һорайбыҙ ([[Special:Captcha/help|more info]]):",
+	"fancycaptcha-captcha": "Хәүефһеҙлекте тикшереү",
+	"fancycaptcha-accountcreate": "Иҫәп яҙмаларын автоматик булдырыуҙан һаҡлау маҡсатында, зинһар, күрһәтелгән һүҙҙәрҙе түбәндәге юлға керетегеҙ ([[Special:Captcha/help|тулыраҡ мәғлүмәт]]):",
+	"fancycaptcha-create": "Яңы бит булдырыу өсөн, зинһар, күрһәтелгән һүҙҙәрҙе түбәндәге юлға керетегеҙ ([[Special:Captcha/help|тулыраҡ мәғлүмәт]]):",
+	"fancycaptcha-edit": "Был битте мөхәррирләү өсөн, зинһар, күрһәтелгән һүҙҙәрҙе түбәндәге юлға керетегеҙ ([[Special:Captcha/help|тулыраҡ мәғлүмәт]]):",
+	"fancycaptcha-imgcaptcha-ph": "Һүрәттә күргән тексты индерегеҙ",
+	"fancycaptcha-sendemail": "Автоматик спамдан һаҡлау маҡсатында,  түбәндә килтерелгән һорауға яуап бирегеҙ ([[Special:Captcha/help|тулыраҡ мәғлүмәт]]):",
+	"fancycaptcha-reload-text": "Яңыртыу",
+	"apihelp-fancycaptchareload-description": "Яңы FancyCaptcha алырға.",
+	"apihelp-fancycaptchareload-example-1": "Яңы FancyCaptcha алырға"
+}

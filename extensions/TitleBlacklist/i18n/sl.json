@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334"
+		]
+	},
+	"titleblacklist-desc": "Omogoča administratorjem preprečiti ustvarjanje strani in uporabniških računov glede na [[MediaWiki:Titleblacklist|črni seznam]] in [[MediaWiki:Titlewhitelist|beli seznam]]",
+	"titleblacklist": "# To je črni seznam naslovov. Naslovov in uporabnikov, ki ustrezajo regularnim izrazom tukaj, ni mogoče ustvariti.\n# Uporabite »#« za pripombe. \n# Po privzetem seznam ni občutljiv na velikost črk",
+	"titlewhitelist": "# To je beli seznam naslovov. Uporabite »#« za pripombe. \n# Po privzetem seznam ni občutljiv na velikost črk",
+	"titleblacklist-forbidden-edit": "Naslov »$2« je bil preprečen pred ustvarjanjem.\nUstreza naslednjemu vnosu na črnem seznamu: <code>$1</code>",
+	"titleblacklist-forbidden-move": "»$2« ni mogoče prestaviti na »$3«, ker je bil naslov »$3« preprečen pred ustvarjanjem.\nUstreza naslednjemu vnosu na črnem seznamu: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Ime datoteke »$2« je bilo preprečeno pred ustvarjanjem.\nUstreza naslednjemu vnosu na črnem seznamu: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Uporabniško ime »$2« je bilo preprečeno pred ustvarjanjem.\nUstreza naslednjemu vnosu na črnem seznamu: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Naslednja vrstica|Naslednji vrstici|Naslednje vrstice}} v črnem seznamu naslovov {{PLURAL:$1|je neveljavna|sta neveljavni|so neveljavne}};\nprosimo, popravite {{PLURAL:$1|jo|ju|jih}} pred shranjevanjem:",
+	"titleblacklist-override": "Prezri črni seznam",
+	"right-tboverride": "Prepisovanje črnega seznama naslovov ali uporabniških imen",
+	"right-tboverride-account": "Prepis črnega seznama uporabniških imen"
+}

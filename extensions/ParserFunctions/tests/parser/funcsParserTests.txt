@@ -1,0 +1,343 @@
+# Force the test runner to ensure the extension is loaded
+# fixme... this doesn't seem to work :D
+#!! functionhooks
+#time
+#!! endfunctionhooks
+
+# fixme: #time seems to be accepting input as local time, which strikes me as wrong
+
+!! article
+ParserFunctions page
+!! text
+A sample page so we can test ifexist.
+
+This used to be a Main Page, but that caused duplicate article
+warnings when running the normal tests at the same time.
+!! endarticle
+
+!! article
+File:Dionysos-Brunnen am Kölner Dom.jpg
+!! text
+blah blah
+!! endarticle
+
+!! article
+File:Redirect_to_Foobar.jpg
+!! text
+#REDIRECT[[File:Foobar.jpg]]
+!! endarticle
+
+!! article
+File:Redirect_to_nowhere.jpg
+!! text
+#REDIRECT[[File:Missing target file.jpg]]
+!! endarticle
+
+!! test
+Input times are UTC, not local time
+!! input
+{{#time:c|15 January 2001}}
+!!result
+<p>2001-01-15T00:00:00+00:00
+</p>
+!! end
+
+!! test
+Time test in traditional range...
+!! input
+{{#time:Y|15 January 2001}}
+!! result
+<p>2001
+</p>
+!! end
+
+!! test
+Time test prior to 1970 Unix creation myth
+!! input
+{{#time:Y|5 April 1967}}
+!! result
+<p>1967
+</p>
+!! end
+
+!! test
+Time test after the 2038 32-bit Apocalype
+!! input
+{{#time:Y|28 July 2061}}
+!! result
+<p>2061
+</p>
+!! end
+
+!! test
+Explicitly specified timezone: UTC
+!! input
+{{#time:Y-m-d H:i| 2011-11-12 23:00 UTC }}
+!! result
+<p>2011-11-12 23:00
+</p>
+!! end
+
+!! test
+Explicitly specified timezone: Europe/Paris (UTC+1)
+!! input
+{{#time:Y-m-d H:i| 2011-11-12 23:00 Europe/Paris }}
+!! result
+<p>2011-11-12 22:00
+</p>
+!! end
+
+!! test
+Explicitly specified timezone: America/New_York (UTC-5)
+!! input
+{{#time:Y-m-d H:i| 2011-11-12 23:00 America/New_York }}
+!! result
+<p>2011-11-13 04:00
+</p>
+!! end
+
+!! test
+Explicitely specified output language (Dutch)
+!! input
+{{#time:d F Y|1988-02-28|nl}}
+!! result
+<p>28 februari 1988
+</p>
+!! end
+
+!! test
+Preserve tags in #switch default value
+!! input
+{{#switch:a|b|<div>c</div>}}
+!! result
+<div>c</div>
+
+!! end
+
+!! test
+Bug 19093: Default values don't fall through in switch
+!! input
+<{{#switch: foo | bar | #default = DEF }}>
+<{{#switch: foo | #default | bar = DEF }}>
+!! result
+<p>&lt;DEF&gt;
+&lt;DEF&gt;
+</p>
+!! end
+
+!! test
+{{#ifexist}}
+!! input
+{{#ifexist:Media:Foobar.jpg|Found|Not found}}
+{{#ifexist:ParserFunctions page|Found|Not found}}
+{{#ifexist:Missing|Found|Not found}}
+!! result
+<p>Found
+Found
+Not found
+</p>
+!! end
+
+!! test
+{{#ifexist:}} media redirect (bug 32031)
+!! input
+{{#ifexist:Media:Redirect_to_Foobar.jpg|Found|Not found}}
+{{#ifexist:Media:Redirect_to_nowhere.jpg|Found|Not found}}
+{{#ifexist:Media:Missing file.jpg|Found|Not found}}
+{{#ifexist:Media:Dionysos-Brunnen am Kölner Dom.jpg|Found|Not found}}
+!!result
+<p>Found
+Not found
+Not found
+Not found
+</p>
+!!end
+
+!! test
+#if
+!! input
+{{#if: | yes | no}}
+{{#if: string | yes | no}}
+{{#if:      | yes | no}}
+{{#if:
+
+
+| yes | no}}
+{{#if: 1==2 | yes | no}}
+{{#if: foo | yes }}
+{{#if: | yes }}(empty)
+{{#if: foo | | no}}(empty)
+{{#if: {{{1}}} | yes | no}}
+{{#if: {{{1|}}} | yes | no}}
+!! result
+<p>no
+yes
+no
+no
+yes
+yes
+(empty)
+(empty)
+yes
+no
+</p>
+!! end
+
+!! test
+#ifeq
+!!input
+{{#ifeq: 01 | 1 | yes | no}}
+{{#ifeq: 0 | -0 | yes | no}}
+{{#ifeq: foo | bar | yes | no}}
+{{#ifeq: foo | Foo | yes | no}}
+{{#ifeq: "01" | "1" | yes | no}}
+!! result
+<p>yes
+yes
+no
+no
+no
+</p>
+!! end
+
+!! test
+#ifeq entities
+!!input
+{{#ifeq: {{PAGENAME:*foo&bar}} | *foo&bar | yes | no}}
+{{#ifeq: a'b | a&#39;b | yes | no}}
+{{#ifeq: a'b | a&amp;#39;b | yes | no}}
+{{#ifeq: foo | Foo | *yes | *no}}
+!! result
+<p>yes
+yes
+no
+</p>
+<ul><li>no</li></ul>
+
+!! end
+
+
+!! test
+#iferror
+!!input
+{{#iferror: {{#expr: 1 + 2 }} | error | correct }}
+{{#iferror: {{#expr: 1 + X }} | error | correct }}
+{{#iferror: {{#expr: 1 + 2 }} | error }}
+{{#iferror: {{#expr: 1 + X }} | error }}
+{{#iferror: {{#expr: 1 + 2 }} }}
+{{#iferror: {{#expr: 1 + X }} }}empty
+!! result
+<p>correct
+error
+3
+error
+3
+empty
+</p>
+!! end
+
+
+!! test
+#ifexpr
+!! input
+{{#ifexpr: | yes | no}}
+{{#ifexpr: 1 > 0 | yes }}
+{{#ifexpr: 1 < 0 | yes }}empty
+{{#ifexpr: 1 > 0 | | no}}empty
+{{#ifexpr: 1 < 0 | | no}}
+{{#ifexpr: 1 > 0 }}empty
+!! result
+<p>no
+yes
+empty
+empty
+no
+empty
+</p>
+!! end
+
+!! test
+Bug 22866: #ifexpr should evaluate "-0" as false
+!! input
+{{#ifexpr: (-1)*0 | true | false }}
+!! result
+<p>false
+</p>
+!! end
+
+!! test
+Templates: Parser functions don't strip whitespace from positional parameters
+!! input
+{{#if: {{foo}}
+| no-pre-then
+| no-pre-else
+}}
+!! result
+<p>no-pre-then
+</p>
+!! end
+
+!! test
+#switch
+!! input
+{{#switch:foo&bar|foo&amp;bar=yes|no}}
+{{#switch:foo&bar|fred=1|foo&amp;bar|g=yes|no}}
+{{#switch:foo&bar|fred=1|foo&amp;&#39;bar|g=yes|no}}
+{{#switch:foo|bar|baz=no|*default}}
+{{#switch:none|foo=1|bar=2|#default=no match|baz=3}}
+{{#switch:none|foo=1|bar=2|#default=ignored|baz=3|Second default}}
+{{#switch:|a&amp;#39;b}}
+!! result
+<p>yes
+yes
+no
+</p>
+<ul><li>default</li></ul>
+<p>no match
+Second default
+a&amp;#39;b
+</p>
+!!end
+
+!! test
+#switch #default should match next and not last named parameter
+!! input
+<{{#switch: foo | #default | bar = DEF }}>
+<{{#switch: foo | #default | bar = DEF | baz = GHI }}>
+!! result
+<p>&lt;DEF&gt;
+&lt;DEF&gt;
+</p>
+!! end
+
+!! test
+#switch should not match #default as a prefix
+!! input
+<{{#switch: foo | #defaultWTF? = This is crazy }}>
+<{{#switch: foo | #defaultWTF? | bar = This is crazy }}>
+!! result
+<p>&lt;&gt;
+&lt;&gt;
+</p>
+!! end
+
+!! test
+#switch Test php truthy
+!!input
+{{#switch: 01 | 1 = yes | no}}
+{{#switch: 0 | -0 = yes | no}}
+{{#switch: foo | bar = yes | no}}
+{{#switch: foo | Foo = yes | no}}
+{{#switch: "01" | "1" = yes | no}}
+{{#switch: 1 | 02 | 01 = yes | no}}
+{{#switch: 1 | "01" | "1" = yes | no}}
+!! result
+<p>yes
+yes
+no
+no
+no
+yes
+no
+</p>
+!! end

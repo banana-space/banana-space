@@ -1,0 +1,26 @@
+{
+	"name": "Poem",
+	"author": [
+		"Nikola Smolenski",
+		"Brion Vibber",
+		"Steve Sanbeg"
+	],
+	"license-name": "CC0-1.0",
+	"url": "https://www.mediawiki.org/wiki/Extension:Poem",
+	"descriptionmsg": "poem-desc",
+	"type": "parserhook",
+	"MessagesDirs": {
+		"Poem": [
+			"i18n"
+		]
+	},
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"Poem::init"
+		]
+	},
+	"AutoloadClasses": {
+		"Poem": "includes/Poem.php"
+	},
+	"manifest_version": 1
+}

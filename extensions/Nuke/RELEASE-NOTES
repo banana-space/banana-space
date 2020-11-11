@@ -1,0 +1,54 @@
+These are the release notes for the Nuke extension.
+
+Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Nuke
+Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Nuke.git;a=blob;f=RELEASE-NOTES
+
+=== Version 1.1.7 ===
+(2012-10-05)
+
+* Added option to limit page selection by namespace.
+
+=== Version 1.1.6 ===
+(2012-08-14)
+
+* Making use of of the new message methods introduced in MW 1.18 instead of wfMsg*.
+* Use of User::getEditToken rather then deprecated User::editToken.
+* Updated release notes, readme and install to reflect the Git migration.
+* Changed minimum required MediaWiki version from 1.18 to 1.19.
+
+=== Version 1.1.5 ===
+(2012-03-14)
+
+* (bug 35214) Special:Nuke allows deletions even when blocked
+* (bug 16985) Show number of recent edits in Special:Nuke
+* (bug 23600) Nuke extension w/PostgreSQL: column "recentchanges.rc_timestamp" should be in GROUP BY
+
+=== Version 1.1.4 ===
+(2012-2-12)
+
+* Changed "n changes" links by "view changes" links, since the edit count was broken and cannot be made to work nicely.
+
+=== Version 1.1.3 ===
+(2012-01-11)
+
+* Modernizing of some of the code to make use of newly introduced features.
+
+=== Version 1.1.2 ===
+(2011-11-10)
+
+* Implemented sql like match feature as suggested in bug 5835.
+* Removed inline JavaScript and make use of jQuery loaded via the resource loader instead.
+* Modernizing of some of the code to make use of newly introduced features.
+* Changed minimum required MediaWiki version from 1.16 to 1.18.
+
+=== Version 1.1.1 ===
+(2011-10-19)
+
+* Do not show author names when filtering on a single author.
+* Added "delete more pages" link.
+* Fixed Special:Nuke/authorname behavior.
+
+=== Version 1.1 ===
+(2011-2-14)
+
+* Added a changable limit and the option to not filter the recent changes on a single user.

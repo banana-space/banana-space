@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Behdarvandyani"
+		]
+	},
+	"inputbox-desc": "اجازه استفاده زه فرم‌های HTML قبلا تعریف وابیده را اده",
+	"inputbox-error-no-type": "نوع جعبه ورودی  درست شونده را معلوم نکردین.",
+	"inputbox-error-bad-type": "نوع \"$1\" سی جعبه ورودی شناخته نه. لطفاً یکی زه موارد \n\"create\", \"comment\", \"search\" or \"search2\" را مشخص کنین.",
+	"inputbox-tryexact": "تطبیق مورد به مورد را آزمایش کن",
+	"inputbox-searchfulltext": "جستجوی همه متن",
+	"inputbox-createarticle": "درست کردن صفحه"
+}

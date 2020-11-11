@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bináris",
+			"BáthoryPéter",
+			"Dani",
+			"Tgr",
+			"Vogone",
+			"Tacsipacsi",
+			"Rodrigo"
+		]
+	},
+	"gadgets-desc": "A felhasználók saját [[Special:Gadgets|CSS és JavaScript eszközöket]] választhatnak ki a [[Special:Preferences#mw-prefsection-gadgets|beállításaiknál]]",
+	"prefs-gadgets": "Segédeszközök",
+	"gadgets-prefstext": "Az alábbi listában látható kiegészítő segédeszközök bekapcsolásával kényelmesebbé teheted a wiki használatát és szerkesztését.\nLegtöbbjük JavaScriptet használ, így ezt engedélyezned kell a böngésződben, hogy működjenek.\nA segédeszközök nem működnek ezen a beállításoldalon, így probléma esetén ki tudod őket kapcsolni.\n\nEzek az eszközök nem részei a MediaWiki szoftvernek, általában a wiki felhasználói tartják karban őket.\nAz adminisztrátorok a [[MediaWiki:Gadgets-definition|definíciókat]] és a [[Special:Gadgets|leírásokat]] tartalmazó lapok segítségével tudják módosítani az elérhető eszközök listáját. Hogy melyik mennyire népszerű, azt itt láthatod: [[Special:GadgetUsage|kiegészítő használói satisztikák]].",
+	"gadgets": "Segédeszközök",
+	"gadgetusage": "Segédeszköz-használati statisztika",
+	"gadgetusage-gadget": "Segédeszköz",
+	"gadgetusage-usercount": "Használók száma",
+	"gadgetusage-noresults": "Nem található segédeszköz.",
+	"gadgetusage-intro": "Ez a táblázat azt mutatja, hogy hányan engedélyezték az egyes segédeszközöket ezen a wikin. Aktívnak számít valaki, aki szerkesztett a legutóbbi $1 napon. A lista nem tartalmaz statisztikát alapértelmezetten mindenkinek bekapcsolt segédeszközökhöz, de tartalmazhat már nem elérhetőeket is.",
+	"gadgetusage-intro-noactive": "Ez a táblázat azt mutatja, hogy hányan engedélyezték az egyes segédeszközöket ezen a wikin. A lista nem tartalmaz statisztikát alapértelmezetten mindenkinek bekapcsolt segédeszközökhöz, de tartalmazhat már nem elérhetőeket is.",
+	"gadgetusage-activeusers": "Aktív szerkesztők",
+	"gadgetusage-default": "Alapértelmezett",
+	"gadgets-title": "Segédeszközök",
+	"gadgets-pagetext": "Itt látható azon segédeszközök listája, amiket a felhasználók bekapcsolhatnak a [[Special:Preferences#mw-prefsection-gadgets|beállításaiknál]]. A lista a [[MediaWiki:Gadgets-definition|definíciókat]] tartalmazó lapon módosítható.\nEz az áttekintő lap egyszerű hozzáférést nyújt az eszközök kódját, illetve leírását tartalmazó rendszerüzenet-lapokhoz.",
+	"gadgets-uses": "Kód",
+	"gadgets-required-rights": "A következő {{PLURAL:$2|jogosultságra|jogosultságokra}} van szükség:\n\n$1",
+	"gadgets-required-skins": "{{PLURAL:$2|$1 felületen érhető el|Az alábbi felületeken érhető el: $1}}.",
+	"gadgets-default": "Mindenki számára engedélyezett alapértelmezettként.",
+	"gadgets-legacy": "A segédeszköz nincs betöltve. Állítsd át ResourceLoaderre. ([https://www.mediawiki.org/wiki/ResourceLoader/Migration_guide_(users) További információk])",
+	"gadgets-export": "Exportálás",
+	"gadgets-export-title": "Segédeszköz exportálása",
+	"gadgets-not-found": "A(z) „$1“ segédeszköz nem található.",
+	"gadgets-export-text": "A(z) $1 segédeszköz exportálásához kattints a „{{int:gadgets-export-download}}“ gombra, mentsd el a fájlt, majd a célwikiben a Special:Import lapon töltsd fel. Ezután a MediaWiki:Gadgets-definition laphoz add hozzá a következőket:\n<pre>$2</pre>\nA célwikiben rendelkezned kell a megfelelő jogokkal (beleértve a rendszerüzenetek szerkesztését) és engedélyezve kell lennie a fájlimportálásnak.",
+	"gadgets-export-download": "Letöltés",
+	"apihelp-query+gadgetcategories-description": "A segédeszköz-kategóriák listáját adja vissza.",
+	"apihelp-query+gadgetcategories-param-prop": "Milyen információkat szeretnél a segédeszköz-kategóriáról:\n;name:Belső kategórianév.\n;title:Kategória címe.\n;members:A kategóriában található segédeszközök száma.",
+	"right-gadgets-edit": "segédeszközök JavaScript- és CSS-lapjainak szerkesztése",
+	"action-gadgets-edit": "ennek a segédeszköz-JavaScriptnek vagy -CSS-nek a szerkesztése",
+	"right-gadgets-definition-edit": "segédeszköz-definíciók szerkesztése",
+	"action-gadgets-definition-edit": "ennek a segédeszköz-definíciónak a szerkesztése"
+}

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ninjastrikers",
+			"9.sinistra"
+		]
+	},
+	"categorytree-category": "ကဏ္ဍ:",
+	"categorytree-expand": "ချဲ့ကား",
+	"categorytree-member-counts": "{{PLURAL:$1|ကဏ္ဍခွဲ ၁ ခု|$1 ကဏ္ဍခွဲများ}}၊ {{PLURAL:$2|စာမျက်နှာ ၁ ခု| စာမျက်နှာ $2 ခု}}၊ နှင့် {{PLURAL:$3|ဖိုင် ၁ ခု| ဖိုင် $3 ခု }} ပါဝင်သည်",
+	"categorytree-num-categories": "$1 ကဏ္ဍ",
+	"categorytree-num-pages": "$1 စာမျက်နှာ",
+	"categorytree-num-files": "$1 ဖိုင်",
+	"categorytree-num-empty": "ဘာမှမရှိ"
+}

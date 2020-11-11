@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dalibor Bosits",
+			"Dnik",
+			"Ex13",
+			"Roberta F.",
+			"SpeedyGonsales",
+			"Bugoslav"
+		]
+	},
+	"pfunc_desc": "Mogućnost proširivanja parsera logičkim funkcijama",
+	"pfunc_time_error": "Pogrješka: oblik vremena nije valjan",
+	"pfunc_time_too_long": "Pogrješka: prevelik broj #time (vremenskih) poziva",
+	"pfunc_time_too_small": "Pogrješka: #time podržava godine samo od 0.",
+	"pfunc_rel2abs_invalid_depth": "Pogrješka: Nevaljana dubina putanje: \"$1\" (pokušaj pristupanja čvoru iznad korijenskog)",
+	"pfunc_expr_stack_exhausted": "Pogrješka u predlošku: prepunjen stog",
+	"pfunc_expr_unexpected_number": "Pogrješka u predlošku: Neočekivan broj",
+	"pfunc_expr_preg_match_failure": "Pogrješka u predlošku: Neočekivana preg_match pogrješka",
+	"pfunc_expr_unrecognised_word": "Pogrješka u predlošku: Nepoznata riječ \"$1\"",
+	"pfunc_expr_unexpected_operator": "Pogrješka u predlošku: Neočekivani operator $1",
+	"pfunc_expr_missing_operand": "Pogrješka u predlošku: Operator $1 nedostaje",
+	"pfunc_expr_unexpected_closing_bracket": "Pogrješka u predlošku: Neočekivana zatvorena zagrada",
+	"pfunc_expr_unrecognised_punctuation": "Pogrješka u predlošku: Nepoznat interpunkcijski znak \"$1\"",
+	"pfunc_expr_unclosed_bracket": "Pogrješka u predlošku: Nezatvorene zagrade",
+	"pfunc_expr_division_by_zero": "Dijeljenje s nulom",
+	"pfunc_expr_invalid_argument": "Nevaljani argumenti za $1: < -1 ili > 1",
+	"pfunc_expr_invalid_argument_ln": "Nevaljani argument za ln: <= 0",
+	"pfunc_expr_unknown_error": "Pogrješka u predlošku: Nepoznata pogrješka ($1)",
+	"pfunc_expr_not_a_number": "U $1: rezultat nije broj",
+	"pfunc_string_too_long": "Pogrješka: Niz prelazi ograničenje od $1 znakova"
+}

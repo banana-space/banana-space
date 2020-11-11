@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Snakesteuben",
+			"Robin0van0der0vliet",
+			"Robin van der Vliet"
+		]
+	},
+	"interwiki-legend-label": "Leginda",
+	"interwiki_url": "URL",
+	"interwiki-url-label": "URL",
+	"interwiki_1": "ja",
+	"interwiki_0": "nee",
+	"interwiki_edit": "Bewurkje",
+	"interwiki_reasonfield": "Reden:",
+	"interwiki_addbutton": "Tafoegje"
+}

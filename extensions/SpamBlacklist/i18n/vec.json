@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Candalua",
+			"GatoSelvadego"
+		]
+	},
+	"spam-blacklist": " # Le URL esterne al sito che corisponde a la lista seguente le vegnarà blocà.\n # La lista la xe valida solo par sto sito qua; far riferimento anca a la blacklist globale.\n # Par la documentazion vardar https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- no sta modificar in alcun modo sta riga --> <pre>\n# La sintassi la xe la seguente:\n#  * Tuto quel che segue un caràtere \"#\" el xe un comento, fin a la fine de la riga\n#  * Tute le righe mìa vode le xe framenti de espressioni regolari che se àplica al solo nome de l'host ne le URL\n #</pre> <!-- no sta modificar in alcun modo sta riga -->",
+	"spam-whitelist": " #<!-- no sta modificar in alcun modo sta riga --> <pre>\n# Le URL esterne al sito che corisponde a la lista seguente *no* le vegnarà\n# mìa blocà, anca nel caso che le corisponda a de le voçi de la lista nera\n#\n# La sintassi la xe la seguente:\n#  * Tuto quel che segue un caràtere \"#\" el xe un comento, fin a la fine de la riga\n#  * Tute le righe mìa vode le xe framenti de espressioni regolari che se àplica al solo nome de l'host ne le URL\n\n #</pre> <!-- no sta modificar in alcun modo sta riga -->",
+	"email-blacklist": " # I indirisi e-mail che corisponde a ła lista seguente i sarà blocai, nó sarà posibiłe salvar o inviar e-mail.\n # Ła lista ła xe vałida soło che pa' sta wiki; far riferimento anca a ła blacklist globałe.\n # Pa' ła documentasion se varde https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n # <!-- nó modifegar sta linea --> <pre>\n# Ła sintasi ła xe ła seguente:\n#  * Tuto chel che xe conprexo intrà un caratere \"#\" e ła fine de ła riga el xe un comento\n#  * Tute łe righe nó vode i xe tochi de espresion regołari che se aplica soło che al nome del host de i indirisi e-mail\n #</pre> <!-- nó modifegar sta linea -->",
+	"email-whitelist": " #<!-- nó modifegar sta linea --> <pre>\n# I indirisi e-mail conprexi in sta lista *nó* i sarà blocai anca se i dovaria\n# eser stai blocai da i elementi prexenti inte ła lista nera.\n#\n #</pre> <!-- nó modifegar sta linea -->\n# Ła sintasi ła xe ła seguente:\n#  * Tuto chel che xe conprexo intrà un caratere \"#\" e ła fine de ła riga el xe un comento\n#  * Tute łe righe nó vode i xe tochi de espresion regołari che se aplica soło che al nome del host de i indirisi e-mail",
+	"spam-blacklisted-email": "Indiriso de posta eletronega blocà",
+	"spam-blacklisted-email-text": "El to indiriso de posta eletronega el xe atualmente inte ła lista nera par 'l invio de e-mail verso altri utenti.",
+	"spam-blacklisted-email-signup": "El indiriso de posta eletronega indicà el xe atualmente inte ła lista nera.",
+	"spam-invalid-lines": "{{PLURAL:$1|La seguente riga|Le seguenti righe}} de la lista nera del spam {{PLURAL:$1|no la xe na espression regolare valida|no le xe espressioni regolari valide}}; se prega de corègiar {{PLURAL:$1|l'eror|i erori}} prima de salvar la pagina.",
+	"spam-blacklist-desc": "Strumento antispam basà su le espressioni regolari [[MediaWiki:Spam-blacklist]] e [[MediaWiki:Spam-whitelist]]"
+}

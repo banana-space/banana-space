@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chrumps",
+			"Alan ffm"
+		]
+	},
+	"specialpages-group-oath": "Uwierzytelnianie dwuskładnikowe",
+	"oathauth-account": "Nazwa konta:",
+	"oathauth-secret": "Tajny klucz uwierzytelniania dwuskładnikowego:",
+	"oathauth-enable": "Włączenie uwierzytelniania dwuskładnikowego",
+	"oathauth-token": "Token",
+	"oathauth-disable": "Wyłączenie uwierzytelniania dwuskładnikowego",
+	"oathauth-prefs-label": "Uwierzytelnianie dwuskładnikowe:",
+	"oathauth-step1": "Krok 1: Pobierz program do uwierzytelniania dwuskładnikowego",
+	"oathauth-step1-test": "Pobierz program do uwierzytelniania dwuskładnikowego. Może to być aplikacja mobilna (np. Google Authenticator) lub aplikacja komputerowa",
+	"oathauth-step2": "Krok 2: Zeskanuj kod QR",
+	"oathauth-step2alt": "Lub ręcznie wprowadź tajny klucz:",
+	"oathauth-step4": "Krok 4: Weryfikacja",
+	"oathauth-entertoken": "Wpisz kod z urządzenia uwierzytelniającego w celu weryfikacji:",
+	"oathauth-auth-token-label": "Token",
+	"oathauth-auth-ui": "Wpisz kod weryfikacyjny z urządzenia uwierzytelniającego",
+	"oathauth-throttled": "Zbyt wiele prób weryfikacji! Poczekaj $1.",
+	"oathauth-login-failed": "Weryfikacja nie powiodła się.",
+	"oathauth-describe-provider": "Uwierzytelnianie dwuetapowe (OATH).",
+	"action-oathauth-api-all": "sprawdzania statusu OATH",
+	"apihelp-query+oath-example-1": "Pobierz informacje o aktualnym użytkowniku",
+	"apihelp-query+oath-example-2": "Pobierz informacje na temat użytkownika <kbd>Example</kbd>",
+	"apihelp-oathvalidate-param-totp": "Token uwierzytelniania dwuetapowego (OATH)."
+}

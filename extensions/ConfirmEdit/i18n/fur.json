@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Klenje",
+			"Tocaibon"
+		]
+	},
+	"captcha-edit": "Par cambiâ cheste pagjine, tu âs di risolvi cheste facile some e inserî la rispueste inte casele ([[Special:Captcha/help|altris informazions]]):",
+	"captcha-label": "CAPTCHA",
+	"captcha-addurl": "Il to cambiament al inclût gnûfs leams esternis.\nPar judânus cuintri la creazion automatiche di spam, tu âs di risolvi cheste facile some e inserî la rispueste inte casele ([[Special:Captcha/help|altris informazions]]):",
+	"captcha-badlogin": "Par judânus cuintri dai atacs automotics a lis peraulis clâfs, tu âs di risolvi cheste facile some e inserî la rispueste inte casele ([[Special:Captcha/help|altris informazions]]):",
+	"captcha-createaccount-fail": "Il codiç di control al mancje o nol è just.",
+	"captcha-create": "Par creâ cheste pagjine, tu âs di risolvi cheste facile some e inserî la rispueste inte casele ([[Special:Captcha/help|altris informazions]]):"
+}

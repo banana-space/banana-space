@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334"
+		]
+	},
+	"nuke": "Množični izbris",
+	"action-nuke": "množično brisanje",
+	"nuke-desc": "Da administratorjem zmožnost [[Special:Nuke|množičnega izbrisa]] strani",
+	"nuke-nopages": "V zadnjih spremembah ni novih strani {{GENDER:$1|uporabnika|uporabnice}} [[Special:Contributions/$1|$1]].",
+	"nuke-list": "Naslednje strani je nedavno {{GENDER:$1|ustvaril uporabnik|ustvarila uporabnica}} [[Special:Contributions/$1|$1]];\nvnesite pripombo in pritisnite gumb za njihov izbris.",
+	"nuke-list-multiple": "Naslednje strani so bile pred kratkim ustvarjene;\nvnesite pripombo in kliknite gumb, da jih izbrišete.",
+	"nuke-defaultreason": "Množično brisanje strani, ki jih je {{GENDER:$1|dodal|dodala}} [[Special:Contributions/$1|$1]]",
+	"nuke-multiplepeople": "Množični izbris nedavno dodanih strani",
+	"nuke-tools": "To orodje omogoča množični izbris strani, ki jih je nedavno ustvaril določen uporabnik ali IP.\nVnesite uporabniško ime ali IP, da pridobite seznam strani za izbris, ali pustite prazno za vse uporabnike.",
+	"nuke-submit-user": "Navedi strani",
+	"nuke-toggleinvert": "Obrni",
+	"nuke-submit-delete": "Izbriši izbrano",
+	"right-nuke": "Množično brisanje strani",
+	"nuke-select": "Izberite: $1",
+	"nuke-userorip": "Uporabniško ime, IP-naslov ali prazno:",
+	"nuke-maxpages": "Največje število strani:",
+	"nuke-editby": "{{GENDER:$1|Ustvaril|Ustvarila|Ustvaril(-a)}} [[Special:Contributions/$1|$1]]",
+	"nuke-deleted": "Stran '''$1''' je bila izbrisana.",
+	"nuke-not-deleted": "Strani [[:$1]] '''ni bilo mogoče''' izbrisati.",
+	"nuke-delete-more": "[[Special:Nuke|Izbriši več strani]]",
+	"nuke-pattern": "Vzorec imena strani:",
+	"nuke-nopages-global": "Z vašim iskanjem se ne ujema noben naslov strani.",
+	"nuke-viewchanges": "ogled sprememb",
+	"nuke-namespace": "Omeji na imenski prostor:",
+	"nuke-linkoncontribs": "množični izbris",
+	"nuke-linkoncontribs-text": "Množični izbris strani, katerih {{GENDER:$1|edini avtor je ta uporabnik|edina avtorica je ta uporabnica}}"
+}

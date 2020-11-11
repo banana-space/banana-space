@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334",
+			"Eleassar",
+			"Smihael"
+		]
+	},
+	"gadgets-desc": "Omogoča uporabnikom, da vključijo [[Special:Gadgets|vtičnike CSS in JavaScript]] v [[Special:Preferences#mw-prefsection-gadgets|nastavitvah]]",
+	"prefs-gadgets": "Vtičniki",
+	"gadgets-prefstext": "Prikazan je seznam posebnih vtičnikov, ki jih lahko omogočite za vaš račun.\nVečinoma temeljijo na JavaScriptu, zato mora biti za njihovo delovanje omogočen v vašem brskalniku.\nTi vtičniki nimajo nobenega vpliva na to nastavitveno stran.\n\nPrav tako upoštevajte, da ti vtičniki niso del programja MediaWiki in jih običajno razvijajo ter vzdržujejo uporabniki na vašem lokalnem wikiju.\nLokalni administratorji lahko uredite [[MediaWiki:Gadgets-definition|opredelitve]] in [[Special:Gadgets|opise]] vtičnikov, ki so na voljo. Število uporabnikov posameznega vtičnika na tem wikiju je navedeno na [[Special:GadgetUsage|statistiki uporabe vtičnikov]].",
+	"gadgets": "Vtičniki",
+	"gadgets-title": "Vtičniki",
+	"gadgets-pagetext": "Spodaj je seznam posebnih vtičnikov (opredeljenih z [[MediaWiki:Gadgets-definition|definicijami]]), ki jih lahko uporabniki vključijo v svojih [[Special:Preferences#mw-prefsection-gadgets|nastavitvah]].\nTa pregled omogoča enostaven dostop do sistema za nastavljanje opisa in kode vsakega vtičnika posebej.",
+	"gadgets-uses": "Uporablja",
+	"gadgets-required-rights": "Zahteva {{PLURAL:$2|naslednjo pravico|naslednji pravici|naslednje pravice}}:\n\n$1",
+	"gadgets-required-skins": "Na voljo na {{PLURAL:$2|koži $1|naslednjih kožah: $1}}.",
+	"gadgets-default": "Privzeto omogočeno za vsakogar.",
+	"gadgets-export": "Izvozi",
+	"gadgets-export-title": "Izvoz vtičnika",
+	"gadgets-not-found": "Vtičnika »$1« ni mogoče najti.",
+	"gadgets-export-text": "Za izvoz vtičnika $1 kliknite na gumb »{{int:gadgets-export-download}}«, shranite preneseno datoteko,\npojdite na Special:Import na ciljnem wikiju in jo naložite. Nato dodajte naslednjo vrstico na stran MediaWiki:Gadgets-definition:\n<pre>$2</pre>\nNa ciljnem wikiju morate imeti ustrezna dovoljenja (vključno s pravico urejanja sistemskih sporočil) in omogočeni morajo biti uvozi iz naloženih datotek.",
+	"gadgets-export-download": "Prenesi"
+}

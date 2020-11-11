@@ -1,0 +1,12 @@
+Parser tests can be run either via PHPUnit or by using the standalone
+parserTests.php in this directory. The standalone version provides more
+options.
+
+To run parser tests via PHPUnit:
+
+ $ cd tests/phpunit
+ ./phpunit.php --testsuite parsertests
+
+You can optionally filter by title using --filter, e.g.
+
+ ./phpunit.php --testsuite parsertests --filter="T6400"

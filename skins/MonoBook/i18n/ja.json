@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fryed-peach",
+			"青子守歌",
+			"Takot"
+		]
+	},
+	"skinname-monobook": "モノブック",
+	"monobook-desc": "ページ背景にモノクロの本の写真があることから名付けられた、2004年以来のクラシックなMediaWiki外装。",
+	"monobook.css": "/* ここに記述したCSSはモノブック外装の利用者に影響します */",
+	"monobook.js": "/* ここにあるすべてのJavaScriptは、モノブック外装を使用している利用者に対して読み込まれます */"
+}

@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek"
+		]
+	},
+	"timeless-loggedin": "Тіркелгіңіз",
+	"timeless-anonymous": "Анонимді",
+	"timeless-loggedinas": "'''$1''' ретінде кіру",
+	"timeless-notloggedin": "Кірмегенсіз",
+	"timeless-userpage": "Қатысушы беті",
+	"timeless-talkpage": "Қатысушы талқылауы",
+	"timeless-pagelog": "Бет журналдары",
+	"timeless-more": "Тағы",
+	"timeless-sitetools": "Уики құралдар",
+	"timeless-pageactions": "Бет құралдары",
+	"timeless-userpagetools": "Қатысушы құралдары",
+	"timeless-pagemisc": "Тағы",
+	"timeless-namespaces": "Есім кеңістіктері",
+	"timeless-pagetools": "Бет әрекеттері",
+	"timeless-languages": "Тілдер"
+}

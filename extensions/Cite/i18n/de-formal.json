@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Imre",
+			"Kghbln",
+			"Raimond Spekking"
+		]
+	},
+	"cite_error_ref_numeric_key": "Ungültige Verwendung von <code>&lt;ref&gt;</code>: Der Parameter „name“ darf kein reiner Zahlenwert sein. Benutzen Sie einen beschreibenden Namen.",
+	"cite_error_references_invalid_parameters": "Ungültige Verwendung von <code>&lt;references&gt;</code>: Es sind keine Parameter möglich. Verwenden Sie ausschließlich <code><nowiki><references /></nowiki></code>."
+}

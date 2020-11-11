@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chrisportelli"
+		]
+	},
+	"titleblacklist-forbidden-new-account": "Il-ħolqien ta' utenti bl-isem \"$2\" ġie imblukkat. Dan jaqbel mad-daħla fil-lista s-sewda segwenti: <code>$1</code>",
+	"titleblacklist-override": "Injora l-lista s-sewda",
+	"right-tboverride": "Jinjora l-lista s-sewda tat-titli",
+	"right-tboverride-account": "Jinjora l-lista s-sewda tal-ismijiet tal-utent"
+}

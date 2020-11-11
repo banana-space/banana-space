@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334",
+			"Yerpo"
+		]
+	},
+	"apihelp-query+references-description": "Vrne predstavitev podatkov sklicev, povezano z danimi stranmi.",
+	"apihelp-query+references-example-1": "Sklici, povezani z <kbd>Albertom Einsteinom</kbd>.",
+	"cite-desc": "Doda etiketi <nowiki><ref[ name=id]></nowiki> in <nowiki><references/></nowiki> za navajanje",
+	"cite_error": "Napaka pri navajanju: $1",
+	"cite_error_ref_numeric_key": "Neveljavna oznaka <code>&lt;ref&gt;</code>;\nime ne more biti samo število. Uporabite opisni naslov",
+	"cite_error_ref_no_key": "Začetna oznaka <code>&lt;ref&gt;</code> je poškodovana ali ima slabo ime",
+	"cite_error_ref_too_many_keys": "Neveljavna etiketa <code>&lt;ref&gt;</code>;\nneveljavna imena, npr. preveč",
+	"cite_error_ref_no_input": "Neveljavna oznaka <code>&lt;ref&gt;</code>;\nsklici brez imena morajo imeti vsebino",
+	"cite_error_references_duplicate_key": "Neveljavna oznaka <code>&lt;ref&gt;</code>; ime »$1« je opredeljeno večkrat z drugačno vsebino",
+	"cite_error_references_invalid_parameters": "Neveljaven parameter v oznaki <code>&lt;references&gt;</code>",
+	"cite_error_references_no_backlink_label": "Zmanjkalo je oznak za povratne povezave.\nDoločite jih več v sporočilu <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>.",
+	"cite_error_no_link_label_group": "Zmanjkalo je oznak povezav po meri za skupino »$1«.\nDoločite jih več v sporočilu <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_text": "Neveljavna oznaka <code>&lt;ref&gt;</code>;\nsklici imenovani <code>$1</code> nimajo določenega besedila",
+	"cite_error_included_ref": "Zaključek <code>&lt;/ref&gt;</code> manjka za etiketo <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "Obstajajo etikete <code>&lt;ref&gt;</code> za skupino, imenovano »$1«, vendar ustrezne etikete <code>&lt;references group=\"$1\"/&gt;</code> ni bilo mogoče najti ali pa manjka zaključni <code>&lt;/ref&gt;</code>",
+	"cite_error_references_group_mismatch": "Oznaka <code>&lt;ref&gt;</code> v <code>&lt;references&gt;</code> ima atribut nasprotujoče si skupine »$1«.",
+	"cite_error_references_missing_group": "Oznaka <code>&lt;ref&gt;</code>, opredeljena v <code>&lt;references&gt;</code>, ima atribut skupine »$1«, ki se ne pojavi v predhodnem besedilu.",
+	"cite_error_references_missing_key": "Oznaka <code>&lt;ref&gt;</code> z imenom »$1«, opredeljena v <code>&lt;references&gt;</code>, ni uporabljena v predhodnem besedilu.",
+	"cite_error_references_no_key": "Etiketa <code>&lt;ref&gt;</code>, določena v <code>&lt;references&gt;</code>, nima lastnosti »name«.",
+	"cite_error_empty_references_define": "Etiketa <code>&lt;ref&gt;</code>, določena v <code>&lt;references&gt;</code> z imenom »$1«, nima vsebine.",
+	"cite-tracking-category-cite-error": "Strani z napakami sklicev",
+	"cite-tracking-category-cite-error-desc": "Strani v tej kategoriji imajo napake pri uporabi oznak za sklice.",
+	"cite_references_link_one": "<li id=\"$1\"><span class=\"mw-cite-backlink\">'''[[#$2|^]]'''</span> $3</li>",
+	"cite_references_link_many": "<li id=\"$1\"><span class=\"mw-cite-backlink\">^ $2</span> $3</li>",
+	"cite_references_link_many_format_backlink_labels": "a b c č d e f g h i j k l m n o p r s š t u v z ž a aa ab ac ač ad ae af ag ah ai aj ak al am an ao ap ar as aš at au av az až b ba bb bc bč bd be bf bg bh bi bj bk bl bm bn bo bp br bs bš bt bu bv bz bž c ca cb cc cč cd ce cf cg ch ci cj ck cl cm cn co cp cr cs cš ct cu cv cz cž č ča čb čc čč čd če čf čg čh či čj čk čl čm čn čo čp čr čs čš čt ču čv čz čž d da db dc dč dd de df dg dh di dj dk dl dm dn do dp dr ds dš dt du dv dz dž e ea eb ec eč ed ee ef eg eh ei ej ek el em en eo ep er es eš et eu ev ez ež f fa fb fc fč fd fe ff fg fh fi fj fk fl fm fn fo fp fr fs fš ft fu fv fz fž g ga gb gc gč gd ge gf gg gh gi gj gk gl gm gn go gp gr gs gš gt gu gv gz gž h ha hb hc hč hd he hf hg hh hi hj hk hl hm hn ho hp hr hs hš ht hu hv hz hž i ia ib ic ič id ie if ig ih ii ij ik il im in io ip ir is iš it iu iv iz iž j ja jb jc jč jd je jf jg jh ji jj jk jl jm jn jo jp jr js jš jt ju jv jz jž k ka kb kc kč kd ke kf kg kh ki kj kk kl km kn ko kp kr ks kš kt ku kv kz kž l la lb lc lč ld le lf lg lh li lj lk ll lm ln lo lp lr ls lš lt lu lv lz lž m ma mb mc mč md me mf mg mh mi mj mk ml mm mn mo mp mr ms mš mt mu mv mz mž n na nb nc nč nd ne nf ng nh ni nj nk nl nm nn no np nr ns nš nt nu nv nz nž o oa ob oc oč od oe of og oh oi oj ok ol om on oo op or os oš ot ou ov oz ož p pa pb pc pč pd pe pf pg ph pi pj pk pl pm pn po pp pr ps pš pt pu pv pz pž r ra rb rc rč rd re rf rg rh ri rj rk rl rm rn ro rp rr rs rš rt ru rv rz rž s sa sb sc sč sd se sf sg sh si sj sk sl sm sn so sp sr ss sš st su sv sz sž š ša šb šc šč šd še šf šg šh ši šj šk šl šm šn šo šp šr šs šš št šu šv šz šž t ta tb tc tč td te tf tg th ti tj tk tl tm tn to tp tr ts tš tt tu tv tz tž u ua ub uc uč ud ue uf ug uh ui uj uk ul um un uo up ur us uš ut uu uv uz už v va vb vc vč vd ve vf vg vh vi vj vk vl vm vn vo vp vr vs vš vt vu vv vz vž z za zb zc zč zd ze zf zg zh zi zj zk zl zm zn zo zp zr zs zš zt zu zv zz zž ž ža žb žc žč žd že žf žg žh ži žj žk žl žm žn žo žp žr žs žš žt žu žv žz žž",
+	"cite_references_link_accessibility_label": "Skoči gor",
+	"cite_references_link_many_accessibility_label": "Skoči gor na:",
+	"cite_section_preview_references": "Predogled sklicev",
+	"cite_warning": "Napaka navajanja: $1",
+	"cite_warning_sectionpreview_no_text": "Oznake <code>&lt;ref&gt;</code> z imenom <code>$1</code> ne morete predogledati, ker je opredeljena zunaj trenutnega razdelka ali pa sploh ni opredeljena."
+}

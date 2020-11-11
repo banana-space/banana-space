@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bennylin",
+			"Farras",
+			"Irwangatot",
+			"IvanLanin",
+			"Rex"
+		]
+	},
+	"renameuser": "Penggantian nama pengguna",
+	"renameuser-linkoncontribs": "mengubah nama pengguna",
+	"renameuser-linkoncontribs-text": "Ubah nama pengguna ini",
+	"renameuser-desc": "Mengganti nama pengguna (perlu hak akses ''renameuser'')",
+	"renameuserold": "Nama sekarang:",
+	"renameusernew": "Nama baru:",
+	"renameuserreason": "Alasan penggantian nama:",
+	"renameusermove": "Pindahkan halaman pengguna dan pembicaraannya (berikut subhalamannya) ke nama baru",
+	"renameusersuppress": "Jangan membuat pengalihan untuk nama baru",
+	"renameuserreserve": "Cadangkan nama pengguna lama sehingga tidak dapat digunakan lagi",
+	"renameuserwarnings": "Peringatan:",
+	"renameuserconfirm": "Ya, ganti nama pengguna tersebut",
+	"renameusersubmit": "Kirim",
+	"renameuser-submit-blocklog": "Tampilkan catatan pemblokiran pengguna",
+	"renameusererrordoesnotexist": "Pengguna \"<nowiki>$1</nowiki>\" tidak ada",
+	"renameusererrorexists": "Pengguna \"<nowiki>$1</nowiki>\" telah ada",
+	"renameusererrorinvalid": "Nama pengguna \"<nowiki>$1</nowiki>\" tidak sah",
+	"renameuser-error-request": "Ada masalah dalam pemrosesan permintaan. Silakan kembali dan coba lagi.",
+	"renameuser-error-same-user": "Anda tak dapat mengganti nama pengguna sama seperti asalnya.",
+	"renameusersuccess": "Pengguna \"<nowiki>$1</nowiki>\" telah diganti namanya menjadi \"<nowiki>$2</nowiki>\"",
+	"renameuser-page-exists": "Halaman $1 telah ada dan tidak dapat ditimpa secara otomatis.",
+	"renameuser-page-moved": "Halaman $1 telah dipindah ke $2.",
+	"renameuser-page-unmoved": "Halaman $1 tidak dapat dipindah ke $2.",
+	"log-name-renameuser": "Catatan penggantian nama pengguna",
+	"log-description-renameuser": "Di bawah ini adalah log penggantian nama pengguna",
+	"renameuser-move-log": "Secara otomatis memindahkan halaman sewaktu mengganti nama pengguna \"[[User:$1|$1]]\" menjadi \"[[User:$2|$2]]\"",
+	"action-renameuser": "ganti nama pengguna",
+	"right-renameuser": "Mengganti nama pengguna",
+	"renameuser-renamed-notice": "Penguna ini telah berganti nama.\nLog pergantian nama disediakan di bawah untuk referensi."
+}

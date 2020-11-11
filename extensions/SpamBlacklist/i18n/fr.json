@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko",
+			"Sherbrooke",
+			"Urhixidur",
+			"Verdy p",
+			"Thibaut120094",
+			"Wladek92"
+		]
+	},
+	"spam-blacklist": " # Les liens externes faisant partie de cette liste seront bloqués lors de leur insertion dans une page.\n # Cette liste n’affecte que ce wiki ; référez-vous aussi à la liste noire globale.\n # La documentation se trouve à l’adresse suivante : https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- Laissez cette ligne telle quelle --><pre>\n#\n# La syntaxe est la suivante :\n#  * tout texte qui suit un « # » est considéré comme un commentaire ;\n#  * toute ligne non vide est un fragment d’expression rationnelle qui n’analysera que les hôtes dans les liens hypertextes.\n\n #</pre><!-- Laissez cette ligne telle quelle -->",
+	"spam-whitelist": " #<!-- Laissez cette ligne telle quelle--><pre>\n# Les liens hypertextes externes correspondant à cette liste ne seront *pas* bloqués\n# même s’ils auraient été bloqués par les entrées de la liste noire.\n#\n# La syntaxe est la suivante :\n#  * tout texte qui suit un « # » est considéré comme un commentaire ;\n#  * toute ligne non vide est un fragment d’expression rationnelle qui n’analysera que les hôtes dans les liens hypertextes.\n\n #</pre> <!--Laissez cette ligne telle quelle -->",
+	"email-blacklist": "# Les adresses de courriel correspondant à cette liste seront bloquées lors l'enregistrement ou de l'envoi d'un courriel\n # Cette liste n’affecte que ce wiki ; référez-vous aussi à la liste noire globale.\n # La documentation se trouve à l’adresse suivante : https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- Laissez cette ligne telle quelle --><pre>\n#\n# La syntaxe est la suivante :\n#  * tout texte qui suit un \"#\" est considéré comme un commentaire\n#  * toute ligne non vide est un fragment d’expression rationnelle qui n’analysera que les hôtes correspondant dans les URLs.\n\n #</pre><!-- Laissez cette ligne telle quelle -->",
+	"email-whitelist": "<!-- laissez cette ligne telle quelle --> <pre>\n# Les adresses de courriels correspondant à cette liste ne seront *pas* bloqués même s'ils auraient\n# dû l'être par les entrées de la liste noire.\n#\n #</pre> <!-- laissez cette ligne telle quelle -->\n# La syntaxe est comme suit :\n#  * Tout texte à partir du caractère « # » jusqu'à la fin de la ligne est un commentaire.\n#  * Chaque ligne non vide est un morceau de regex (expression rationnelle) qui sera mis en correspondance avec la partie « hosts » des adresses de courriels",
+	"spam-blacklisted-email": "Adresses courriel et liste noire",
+	"spam-blacklisted-email-text": "Votre adresse de courriel est actuellement sur une liste noire d'envoi de courriel aux autres utilisateurs.",
+	"spam-blacklisted-email-signup": "L'adresse de courriel fournie est actuellement sur une liste noire d'utilisation.",
+	"spam-invalid-lines": "{{PLURAL:$1|La ligne suivante|Les lignes suivantes}} de la liste noire des polluriels {{PLURAL:$1|est une expression rationnelle invalide|sont des expressions rationnelles invalides}} et doi{{PLURAL:$1||ven}}t être corrigée{{PLURAL:$1||s}} avant d’enregistrer la page :",
+	"spam-blacklist-desc": "Outil anti-pollution basé sur des expressions rationnelles permettant de mettre en liste noire des URL dans les pages et des adresses de courriel pour les utilisateurs enregistrés",
+	"log-name-spamblacklist": "Journal de liste noire des pourriels",
+	"log-description-spamblacklist": "Ces événements tracent les correspondances avec la liste noire du pollupostage.",
+	"logentry-spamblacklist-hit": "{{GENDER:$2|$1}} a provoqué une correspondance avec la liste noire des pourriels sur $3 en essayant d’ajouter $4.",
+	"right-spamblacklistlog": "Afficher le journal de la liste noire des pourriels",
+	"action-spamblacklistlog": "afficher le journal de la liste noir des pourriels",
+	"apihelp-spamblacklist-description": "Valider une ou plus URLs d’après SpamBlacklist.",
+	"apihelp-spamblacklist-summary": "Valider une ou plusieurs URL de la Liste Noire des pourriels.",
+	"apihelp-spamblacklist-param-url": "URLs à valider d’après la liste noire.",
+	"apihelp-spamblacklist-example-1": "Vérifier deux URLs d’après la liste noire"
+}

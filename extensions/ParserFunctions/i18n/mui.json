@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jawadywn"
+		]
+	},
+	"pfunc_expr_unrecognised_word": "Salah jingok: Kato \"$1\" dak ketemu.",
+	"pfunc_expr_unrecognised_punctuation": "Salah jingok: Karakter tando baco \"$1\" dak ketemu."
+}

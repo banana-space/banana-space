@@ -1,0 +1,23 @@
+.demo-simpleWidget {
+	display: block;
+	position: relative;
+	padding: 0.703125em 0.9375em 0.625em;
+	line-height: 1;
+}
+
+.demo-simpleWidget.oo-ui-labelElement {
+	line-height: 1.172em;
+}
+
+.demo-simpleWidget.oo-ui-iconElement {
+	padding-left: 2.96875em;
+}
+
+.demo-simpleWidget.oo-ui-iconElement .oo-ui-iconElement-icon {
+	position: absolute;
+	left: 0.9375em;
+}
+
+.demo-simpleWidget.oo-ui-widget-disabled .oo-ui-iconElement-icon {
+	opacity: 0.51;
+}

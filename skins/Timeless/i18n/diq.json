@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gorizon",
+			"Mirzali",
+			"Marmase",
+			"Kumkumuk",
+			"1917 Ekim Devrimi"
+		]
+	},
+	"timeless-desc": "Tereftê Brandon Harris ra vıraziyayê ciltê Timeless prototipê zımıstani, u tayna ciltê Weqıfta Wikimedia.",
+	"timeless-search-placeholder": "Nezdi {{NUMBEROFARTICLES}} peley ena metin de vineyay",
+	"timeless-loggedin": "Hesabê şıma",
+	"timeless-anonymous": "Anonim",
+	"timeless-loggedinas": "Be nameyê '''$1''' ra kewt cı",
+	"timeless-notloggedin": "Cıkewtış nêvıraziya",
+	"timeless-userpage": "Pella {{GENDER:$1|karberi}}",
+	"timeless-talkpage": "Vatena {{GENDER:$1|Karberi}}",
+	"timeless-pagelog": "Qeydê pele",
+	"timeless-more": "Zêde",
+	"timeless-sitetools": "Hacetê Wikiyi",
+	"timeless-pageactions": "Hacetê pele",
+	"timeless-userpagetools": "Hacetê perakarberi",
+	"timeless-pagemisc": "Zêde",
+	"timeless-namespaces": "Heruna nameyan",
+	"timeless-pagetools": "Hereketê pele",
+	"timeless-languages": "Zıwani"
+}

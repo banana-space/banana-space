@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cedric31"
+		]
+	},
+	"titleblacklist-desc": "Permet als administrators d'interdire la creacion de paginas e de comptes d'utilizaires en foncion d'una [[MediaWiki:Titleblacklist|lista negra]] e d'una [[MediaWiki:Titlewhitelist|lista blanca]]",
+	"titleblacklist": "# Aquò es un títol mes en lista negra. Los títols e los utilizaires que correspondon aicí a una expression regulara pòdon pas èsser creats.\n# Utilizatz \"#\" per escriure los comentaris.\n# Las entradas son pas sensiblas a la cassa per defaut.",
+	"titlewhitelist": "# Aquò es la lista blanca dels títols. Utilizatz « # » per inserir de comentaris.\n# Las entradas son pas sensiblas a la cassa per defaut.",
+	"titleblacklist-forbidden-edit": "La pagina intitolada « $2 » pòt pas èsser creada. Dins la lista negra, correspond a l'expression racionala : <code>$1</code>",
+	"titleblacklist-forbidden-move": "La page intitolada \"$2\" pòt pas èsser renomenada \"$3\". Dins la lista negra, correspond a l'expression racionala : <code>$1</code>",
+	"titleblacklist-forbidden-upload": "'''Un fichièr nomenat \"$2\" pòt pas èsser telecargat.''' <br /> Dins la lista negra, correspond a l'expression racionala :  <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Lo nom d’utilizaire « $2 » es estat interdich a la creacion.\nCorrespond a l’entrada seguenta de la lista negra : <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|La linha seguenta|Las linhas seguentas}} dins la lista negra dels títols {{PLURAL:$1|es invalida|son invalidas}} : sètz convidat a {{PLURAL:$1|la|las}} corregir abans de salvar.",
+	"titleblacklist-override": "Ignorar la lista negra",
+	"right-tboverride": "Remplaçar la lista negra dels títols o dels noms d'utilizaires"
+}

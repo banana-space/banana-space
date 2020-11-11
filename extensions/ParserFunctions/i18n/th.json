@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ans",
+			"Horus"
+		]
+	},
+	"pfunc_time_error": "เกิดข้อผิดพลาด: ค่าเวลาไม่ถูกต้อง",
+	"pfunc_time_too_long": "เกิดข้อผิดพลาด: มีการเรียกใช้ #time มากเกินไป",
+	"pfunc_rel2abs_invalid_depth": "เกิดข้อผิดพลาด: path depth ไม่ถูกต้อง: \"$1\" (เป็นการพยายามที่จะเข้าถึงตำแหน่งที่อยู่เหนือตำแหน่งราก)",
+	"pfunc_expr_stack_exhausted": "สูตรเกิดข้อผิดพลาด: มี stack ไม่พอในการคำนวณสูตร",
+	"pfunc_expr_unexpected_number": "สูตรไม่ถูกต้อง: ค่าตัวเลขอยู่ผิดที่",
+	"pfunc_expr_preg_match_failure": "สูตรเกิดข้อผิดพลาด: เกิดความล้มเหลวในการสั่ง preg_match โดยไม่ทราบสาเหตุ",
+	"pfunc_expr_unrecognised_word": "ข้อผิดพลาดนิพจน์: \"$1\" เป็นคำที่ไม่รู้จัก",
+	"pfunc_expr_unexpected_operator": "สูตรไม่ถูกต้อง: $1 อยู่ผิดที่",
+	"pfunc_expr_missing_operand": "ข้อผิดพลาดนิพจน์: ขาดตัวถูกดำเนินการสำหรับ $1",
+	"pfunc_expr_unexpected_closing_bracket": "สูตรไม่ถูกต้อง: ปิดวงเล็บเกิน หรือ ปิดวงเล็บผิดที่",
+	"pfunc_expr_unrecognised_punctuation": "ข้อผิดพลาดนิพจน์: \"$1\" เป็นอักขระที่ไม่รู้จัก",
+	"pfunc_expr_unclosed_bracket": "สูตรไม่ถูกต้อง: ไม่ได้ปิดวงเล็บ",
+	"pfunc_expr_division_by_zero": "ตัวหารเป็นศูนย์",
+	"pfunc_expr_invalid_argument": "ค่าตัวแปรไม่ถูกต้อง: $1 ไม่สามารถรับค่าที่น้อยกว่า -1 หรือ มากกว่า 1",
+	"pfunc_expr_invalid_argument_ln": "ค่าตัวแปรไม่ถูกต้อง: ln ไม่สามารถรับค่าที่น้อยกว่าหรือเท่ากับศูนย์",
+	"pfunc_expr_unknown_error": "สูตรไม่ถูกต้อง: เกิดความผิดพลาดในสูตรโดยไม่ทราบสาเหตุ ($1)",
+	"pfunc_expr_not_a_number": "$1: ผลลัพธ์ไม่สามารถแทนด้วยจำนวน (NAN or not a number)"
+}

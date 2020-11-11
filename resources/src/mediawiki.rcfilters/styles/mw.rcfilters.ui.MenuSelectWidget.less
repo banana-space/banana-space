@@ -1,0 +1,35 @@
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+@import 'mw.rcfilters.variables';
+
+.mw-rcfilters-ui-menuSelectWidget {
+	z-index: auto;
+	max-width: 650px;
+
+	&.oo-ui-menuSelectWidget-invisible {
+		display: block;
+	}
+
+	&-noresults {
+		color: @colorGray5;
+		padding: 12 / @font-size-system-ui / @font-size-vector;
+	}
+
+	&-body {
+		max-height: 70vh;
+	}
+
+	&-footer {
+		background-color: @colorGray15;
+		border-top: 1px solid @colorGray12;
+		padding: 12 / @font-size-system-ui / @font-size-vector;
+
+		& + & {
+			border-top: 0;
+		}
+
+		&-feedback {
+			text-align: right;
+		}
+	}
+}

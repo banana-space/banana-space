@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"gadgets-desc": "Permitte que usatores selige [[Special:Gadgets|gadgets CSS e JavaScript]] personalisate in lor [[Special:Preferences#mw-prefsection-gadgets|preferentias]]",
+	"prefs-gadgets": "Gadgets",
+	"gadgets-prefstext": "Infra es un lista de gadgets special que tu pote activar in tu conto.\nIste gadgets se basa pro le major parte sur JavaScript, dunque JavaScript debe esser active in tu navigator pro permitter que illos functiona.\nNota que iste gadgets non habera effecto in iste pagina de preferentias.\n\nNota etiam que iste gadgets special non face parte del software de MediaWiki, e es normalmente disveloppate e mantenite per usatores in tu wiki local.\nLe administratores local pote modificar le [[MediaWiki:Gadgets-definition|definitiones]] e [[Special:Gadgets|descriptiones]] del gadgets disponibile. Le numero de usatores de cata gadget sur iste wiki es listate in le pagina [[Special:GadgetUsage|Statisticas de uso de gadgets]].",
+	"gadgets": "Gadgets",
+	"gadgets-title": "Gadgets",
+	"gadgets-pagetext": "Infra es un lista de gadgets special que le usatores pote activar in lor [[Special:Preferences#mw-prefsection-gadgets|paginas de preferentias]], secundo le [[MediaWiki:Gadgets-definition|definitiones]].\nIste supervista permitte le accesso commode al paginas de messages de systema que defini le description e codice de cata gadget.",
+	"gadgets-uses": "Usa",
+	"gadgets-required-rights": "Require le sequente {{PLURAL:$2|derecto|derectos}}:\n\n$1",
+	"gadgets-required-skins": "Disponibile con le {{PLURAL:$2|apparentia $1|sequente apparentias: $1}}.",
+	"gadgets-default": "Activate pro omnes per predefinition.",
+	"gadgets-export": "Exportar",
+	"gadgets-export-title": "Exportation de gadget",
+	"gadgets-not-found": "Gadget \"$1\" non trovate.",
+	"gadgets-export-text": "Pro exportar le gadget $1, clicca super le button \"{{int:gadgets-export-download}}\", salveguarda le file discargate,\nva a Special:Import in le wiki de destination e incarga lo. Postea adde lo sequente al pagina MediaWiki:Gadgets-definition:\n<pre>$2</pre>\nTu debe haber le permissiones appropriate in le wiki de destination (includente le derecto de modificar le messages de systema) e le importation ex files incargate debe esser activate.",
+	"gadgets-export-download": "Discargar"
+}

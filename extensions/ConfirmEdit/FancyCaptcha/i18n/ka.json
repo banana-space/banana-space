@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"David1010",
+			"ITshnik",
+			"Tokoko",
+			"BRUTE",
+			"MIKHEIL"
+		]
+	},
+	"fancycaptcha-addurl": "თქვენი ცვლილება შეიცავს ახალ გარე ბმულებს.\nვიკის ავტომატური სპამინგისგან თავდაცვის მიზნით, ჩვენ მოგიწოდებთ, შეიყვანოთ ქვემოთ მოცემული სიტყვები ყუთში ([[Special:Captcha/help|მეტი ინფორმაცია]]):",
+	"fancycaptcha-badlogin": "ვიკის პაროლების ავტომატური გატეხვისგან თავდაცვის მიზნით, ჩვენ მოგიწოდებთ, შეიყვანოთ ქვემოთ მოცემული სიტყვები ყუთში ([[Special:Captcha/help|მეტი ინფორმაცია]]):",
+	"fancycaptcha-captcha": "უსაფრთხოების შემოწმება",
+	"fancycaptcha-accountcreate": "ვიკის ანგარიშების ავტომატური რეგისტრაციისაგან თავდაცვის მიზნით, ჩვენ მოგიწოდებთ, შეიყვანოთ ნაჩვენები სიმბოლოები ტექსტურ ველში ([[Special:Captcha/help|დეტალურად]]):",
+	"fancycaptcha-create": "გვერდის შესაქმნელად, გთხოვთ, შეიყვანეთ ასოები, რომლებიც ნაჩვენებია ქვედა სურათზე ([[Special:Captcha/help|დეტალურად…]]):",
+	"fancycaptcha-edit": "გვერდის რედაქტირებისათვის, გთხოვთ, შეიყვანეთ ასოები, რომლებიც ნაჩვენებია ქვედა სურათზე ([[Special:Captcha/help|დეტალურად…]]):",
+	"fancycaptcha-imgcaptcha-ph": "შეიყვანეთ სურათზე მოცემული ტექსტი",
+	"fancycaptcha-sendemail": "ვიკის ავტომატური სპამისაგან თავდაცვის მიზნით, ჩვენ მოგიწოდებთ, შეიყვანოთ ქვევით ნაჩვენები სიტყვა ტექსტურ ველში ([[Special:Captcha/help|მეტი ინფორმაცია]]):",
+	"fancycaptcha-reload-text": "განახლება",
+	"apihelp-fancycaptchareload-description": "მიიღეთ ახალი FancyCaptcha.",
+	"apihelp-fancycaptchareload-example-1": "ახალი FancyCaptcha-ის მიღება"
+}

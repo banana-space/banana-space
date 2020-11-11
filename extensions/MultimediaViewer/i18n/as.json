@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bishnu Saikia",
+			"Dibya Dutta"
+		]
+	},
+	"multimediaviewer-thumbnail-error-description": "কিবা কৌশলগত সমস্যা থাকিব পাৰে। আপুনি $1 বা $3 কৰিব পাৰে। ক্ৰুটি: $2",
+	"multimediaviewer-thumbnail-error-report": "সমস্যাটো অভিযোগ কৰক",
+	"multimediaviewer-share-tab": "বিতৰণ",
+	"multimediaviewer-download-preview-link-title": "ডাউনল’ড",
+	"multimediaviewer-download-original-button-name": "প্ৰকৃত আকৃতি ডাউনল’ড কৰক",
+	"multimediaviewer-download-large-button-name": "ডাঙৰ আকৃতি ডাউনল’ড কৰক",
+	"multimediaviewer-embed-wt": "ৱিকিপাঠ্য",
+	"multimediaviewer-embed-byline": "$1 ৰ দ্বাৰা",
+	"multimediaviewer-title-popup-text": "বিৱৰণ",
+	"multimediaviewer-title-popup-text-more": "সম্পূৰ্ণ বিৱৰণ চাওক"
+}

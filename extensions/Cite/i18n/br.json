@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fohanno",
+			"Fulup",
+			"VIGNERON"
+		]
+	},
+	"cite-desc": "Ouzhpennañ a ra ar tikedennoù <nowiki><ref[ name=id]></nowiki> ha <nowiki><references/></nowiki>, evit an arroudoù.",
+	"cite_error": "Fazi arroud : $1",
+	"cite_error_ref_numeric_key": "Fazi implijout an dikedenn <code>&lt;ref&gt;</code> ;\nn'hall ket an anv bezañ un niver anterin. Grit gant un titl deskrivus",
+	"cite_error_ref_no_key": "Fazi implijout ar valizenn <code>&lt;ref&gt;</code> ;\nret eo d'an daveennoù goullo kaout un anv",
+	"cite_error_ref_too_many_keys": "Fazi implijout an dikedenn <code>&lt;ref&gt;</code> ;\nanvioù direizh, re niverus, da sk.",
+	"cite_error_ref_no_input": "Fazi implijout an dikedenn <code>&lt;ref&gt;</code> ;\nret eo d'an daveennoù hep anv bezañ danvez enno",
+	"cite_error_references_invalid_parameters": "Tikedenn direizh <code>&lt;ref&gt;</code> ;\narventenn ebet n'eo aotreet.\nGrit gant <code>&lt;references /&gt;</code>",
+	"cite_error_references_no_backlink_label": "N'eus ket a dikedennoù personelaet mui.\nSpisait un niver brasoc'h anezho er gemennadenn <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_no_link_label_group": "Tikedenn liamm bersonelaet ebet ken evit ar strollad \"$1\".\nTermenit re all e kemennadenn <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_text": "Tikedenn <code>&lt;ref&gt;</code> direizh ;\nne oa bet lakaet tamm testenn ebet evit an daveennoù anvet <code>$1</code>",
+	"cite_error_included_ref": "Kod digeriñ <code>&lt;/ref&gt;</code> hep kod serriñ <code>&lt;ref&gt;</code>",
+	"cite_error_group_refs_without_references": "<code>&lt;ref&gt;</code> balizennoù zo evit ur strollad anvet \"$1\", met n'eus bet kavet balizenn <code>&lt;references group=\"$1\"/&gt;</code> ebet o klotañ",
+	"cite_error_references_group_mismatch": "Gant an dikedenn <code>&lt;ref&gt;</code> e <code>&lt;references&gt;</code> emañ an dezverk strollad trubuilhus \"$1\".",
+	"cite_error_references_missing_group": "<code>&lt;ref&gt;</code> an dikedenn termenet e <code>&lt;references&gt;</code> zo dezhi un dezverk strollad \"$1\" na gaver ket en destenn a-raok.",
+	"cite_error_references_missing_key": "N'eo ket bet implijet en destenn gent an <code>&lt;ref&gt;</code> dikedenn hec'h anv \"$1\" termenet e <code>&lt;references&gt;</code>.",
+	"cite_error_references_no_key": "<code>&lt;ref&gt;</code> an dikedenn termenet e <code>&lt;references&gt;</code> n'he deus dezverk anv ebet.",
+	"cite_error_empty_references_define": "<code>&lt;ref&gt;</code> ar valiezenn termenet e <code>&lt;references&gt;</code> dezhi an anv a \"$1\" zo goullo.",
+	"cite_references_link_many_and": " ha",
+	"cite_references_link_accessibility_label": "Lammat",
+	"cite_references_link_many_accessibility_label": "Lammat da :"
+}

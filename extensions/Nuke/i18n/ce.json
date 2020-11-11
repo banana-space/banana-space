@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sasan700",
+			"Умар"
+		]
+	},
+	"nuke": "Дуккха дӀаяхар",
+	"action-nuke": "дуккха агӀонаш дӀаяхар",
+	"nuke-desc": "Куьйгалхошна таро хуьлуьйту  [[Special:Nuke|дуккха агӀонаш]] дӀаяха",
+	"nuke-nopages": "{{GENDER:$1|Декъашхочо}} кеста кхоьллина [[Special:Contributions/$1|$1]] агӀонаш цакарий.",
+	"nuke-list": "{{GENDER:$1|Декъашхочо}} [[Special:Contributions/$1|$1]] кеста лахара агӀонаш кхоьллина. Уьш дӀаяха коммент язйина тӀетаӀае кнопка.",
+	"nuke-list-multiple": "Лахахь гайтина агӀонаш дукху хан йоцуш кхолийна.\nУьш дӀаяха билгалонаш Ӏадйите тӀетаӀе кнопка.",
+	"nuke-defaultreason": "{{GENDER:$1|Декъашхочо}} кхоьллина [[Special:Contributions/$1|$1]], дуккха дӀаяхар",
+	"nuke-multiplepeople": "Дуккха агӀонаш дӀаяхар",
+	"nuke-tools": "ХӀокху агӀонехь йиш ю дуккха агӀонаш дӀаяха, дукх хан йоцуш кхолийна йолу.",
+	"nuke-submit-user": "Кхочушде",
+	"nuke-toggleinvert": "Инверт ян",
+	"nuke-submit-delete": "ДӀаяха хаьржнарш",
+	"right-nuke": "дуккха агӀонаш дӀаяхар",
+	"nuke-select": "Харжар: $1",
+	"nuke-userorip": "Декъашхочун цӀе, IP-адрес (еса йита мега):",
+	"nuke-maxpages": "АгӀонийн максимум дукхалла:",
+	"nuke-editby": "Кхолийна {{GENDER:$1|декъашхочо}} [[Special:Contributions/$1|$1]]",
+	"nuke-deleted": "'''$1''' агӀо дӀаяьккхина.",
+	"nuke-not-deleted": "[[:$1]] агӀо дӀайоккхила '''дац'''.",
+	"nuke-delete-more": "[[Special:Nuke|Дуккха агӀонаш дӀаяхар]]",
+	"nuke-pattern": "Кеп агӀона цӀеран:",
+	"nuke-nopages-global": "[[Special:RecentChanges|Кеста бинчу хийцамашкахь]] керла агӀонаш яц.",
+	"nuke-viewchanges": "ХӀоттина болу хийцам",
+	"nuke-namespace": "Къастае меттиг цӀерш:",
+	"nuke-linkoncontribs": "Дуккха дӀаяхар",
+	"nuke-linkoncontribs-text": "ХӀокху декъашхочо кхоьллина агӀонаш массо дӀаяха"
+}

@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sagan",
+			"Лилиә"
+		]
+	},
+	"recaptcha-edit": "Спамдан һаҡланыу өсөн ике һүҙҙе яҙыуығыҙҙы һорайбыҙ:",
+	"recaptcha-addurl": "Һеҙҙең төҙәтеүҙә тышҡы һылтанма бар. Спамдан һаҡланыу өсөн ике һүҙҙе яҙыуығыҙҙы һорайбыҙ:",
+	"recaptcha-badlogin": "Автоматик рәүештә пароль һайлап алыуҙан һаҡланыу өсөн ике һүҙҙе яҙыуығыҙҙы һорайбыҙ:",
+	"recaptcha-createaccount": "Автоматик рәүештә иҫәп яҙмаһы булдырыуҙан һаҡланыу өсөн түбәндәге ике һүҙҙе яҙыуығыҙҙы һорайбыҙ:",
+	"recaptcha-createaccount-fail": "reCAPTCHA яуабы дөрөҫ түгел йәки юҡ.",
+	"recaptcha-create": "Автоматик рәүештә биттәр булдырыуҙан һаҡланыу өсөн түбәндәге ике һүҙҙе яҙыуығыҙҙы һорайбыҙ:",
+	"recaptcha-apihelp-param-recaptcha_challenge_field": "ReCaptcha виджитендағы ялан",
+	"recaptcha-apihelp-param-recaptcha_response_field": "ReCaptcha виджитындағы ялан"
+}

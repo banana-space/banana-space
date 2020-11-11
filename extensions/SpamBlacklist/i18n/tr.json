@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joseph",
+			"Arystanbek",
+			"Incelemeelemani",
+			"Vito Genovese"
+		]
+	},
+	"spam-blacklist": " # Bu listeyle eşleşen dış bağlantılar, bir sayfaya eklendiğinde engellenecektir. \n # Bu liste sadece bu vikiyi etkiler; ayrıca küresel karalisteye de bakın.\n # Dokümantasyon için https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- bu satırı olduğu gibi bırakın --> <pre>\n#\n# Sözdizimi aşağıdaki gibidir:\n#  * \"#\" karakterinden satır sonuna kadar her şey bir yorumdur\n#  * Her boş olmayan satır, sadece URLlerin içindeki sunucularla eşleşen regex parçasıdır\n\n #</pre> <!-- bu satırı olduğu gibi bırakın -->",
+	"spam-whitelist": " #<!-- bu satırı olduğu gibi bırakın --> <pre>\n# Bu listeyle eşlenen dış bağlantılar *engellenmeyecektir*,\n# karaliste girdileriyle engellenmiş olsalar bile.\n#\n# Sözdizimi aşağıdaki gibidir:\n#  * \"#\" karakterinden satır sonuna kadar her şey bir yorumdur\n#  * Her boş olmayan satır, sadece URLlerin içindeki sunucularla eşleşen regex parçasıdır\n\n #</pre> <!--bu satırı olduğu gibi bırakın -->",
+	"spam-blacklisted-email": "Kara listeye e-posta adresi",
+	"spam-blacklisted-email-text": "E-posta adresinizi şu anda diğer kullanıcılara e-posta gönderme ve gelen kara listeye alındı.",
+	"spam-blacklisted-email-signup": "Verilen e-posta adresi şu anda gelen kara listeye alındı.",
+	"spam-invalid-lines": "Şu spam karaliste {{PLURAL:$1|satırı|satırları}} geçersiz düzenli {{PLURAL:$1|tanımdır|tanımlardır}} ve sayfayı kaydetmeden düzeltilmesi gerekmektedir:",
+	"spam-blacklist-desc": "Düzenli ifade tabanlı anti-spam kayıtlı kullanıcılar için sayfaları ve e-posta adresleri kara listeye URL için izin aracı",
+	"log-name-spamblacklist": "Reklam kara listesi günlüğü",
+	"log-description-spamblacklist": "Bu olaylar, spam kara liste, hit parça.",
+	"logentry-spamblacklist-hit": "{{CİNSİYET:$2|$1}} neden bir spam kara liste, vurmak $3 tarafından eklemeye $4.",
+	"right-spamblacklistlog": "Reklam kara listesini gör",
+	"action-spamblacklistlog": "reklam kara listesi günlüğünü gör",
+	"apihelp-spamblacklist-description": "Bu SpamBlacklist karşı bir veya daha fazla URL doğrulamak.",
+	"apihelp-spamblacklist-param-url": "Kara liste URL lerine yönelik doğrulama",
+	"apihelp-spamblacklist-example-1": "Kara liste URL lerini iki defa kontrol ediniz"
+}

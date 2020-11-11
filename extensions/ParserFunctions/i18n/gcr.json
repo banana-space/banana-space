@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"LeGuyanaisPure"
+		]
+	},
+	"pfunc_time_error": "Éròr : douré envalid.",
+	"pfunc_expr_unrecognised_word": "Éròr d’èksprésyon : mo « $1 » pa roukonèt.",
+	"pfunc_expr_unexpected_operator": "Éròr d’èksprésyon : opératò '''$1''' inatandou.",
+	"pfunc_expr_missing_operand": "Éròr d’èksprésyon : opérand mankan pou '''$1'''.",
+	"pfunc_expr_unrecognised_punctuation": "Éròr d’èksprésyon : karaktèr di ponktchwasyon « $1 » pa roukonèt.",
+	"pfunc_expr_division_by_zero": "Divizyon pa zéro."
+}

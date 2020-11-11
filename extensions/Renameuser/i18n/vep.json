@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Игорь Бродский"
+		]
+	},
+	"renameuser": "Udesnimitada kävutajad",
+	"renameuserold": "Nügüdläine kävutajannimi:",
+	"renameusernew": "Uz' kävutajan nimi:",
+	"renameuserreason": "Udesnimitandan sü:",
+	"renameusersubmit": "Tehta",
+	"right-renameuser": "Udesnimitada kävutajid"
+}

@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gazeb",
+			"Gmelfi",
+			"HalanTul",
+			"Elitre",
+			"Elitre82",
+			"Gloria sah",
+			"Pippinu",
+			"Sarvaturi"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "Libbru",
+	"cite-ve-dialog-reference-options-group-label": "Usa stu gruppu",
+	"cite-ve-dialog-reference-options-name-label": "Riutilizzari cu stu nomu",
+	"cite-ve-dialog-reference-options-section": "Opzioni",
+	"cite-ve-dialog-reference-title": "Rifirenza",
+	"cite-ve-dialog-reference-useexisting-label": "Usa nu rifirimentu esistenti",
+	"cite-ve-dialog-referenceslist-title": "Elencu rifirimenti",
+	"cite-ve-dialogbutton-reference-tooltip": "Sìmplici",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Elencu rifirimenti",
+	"cite-ve-reference-input-placeholder": "Cerca ntê citazzioni attuali",
+	"cite-ve-referenceslist-isempty": "Nun sunnu prisenti rifirimenti cû gruppu \"$1\" nti sta pàggina ca s'hannu a nclùdiri nti st'elencu.",
+	"cite-ve-referenceslist-isempty-default": "Nun sunnu prisenti rifirimenti nti sta pàggina ca s'hannu a nclùdiri nti st'elencu.",
+	"cite-ve-referenceslist-missingref": "Stu rifirimentu è difinutu nti nu mudellu o nti n'àutru bloccu giniratu e accamarora pò èssiri canciatu sulu n mudalità surgenti."
+}

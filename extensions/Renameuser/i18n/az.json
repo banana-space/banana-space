@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cekli829",
+			"Vago",
+			"Vugar 1981",
+			"Wertuose",
+			"AZISS"
+		]
+	},
+	"renameuser": "İstifadəçi adını dəyişdir",
+	"renameuser-linkoncontribs": "istifadəçi adını dəyiş",
+	"renameuser-linkoncontribs-text": "Bu istifadəçinin adını dəyiş",
+	"renameuserold": "Hal-hazırki istifadəçi adı:",
+	"renameusernew": "Yeni istifadəçi adı:",
+	"renameuserwarnings": "Xəbərdarlıqlar:",
+	"renameuserconfirm": "Bəli, istifadəçinin adını dəyiş",
+	"renameusersubmit": "Təsdiqlə",
+	"renameusererrordoesnotexist": "\"<nowiki>$1</nowiki>\" istifadəçi adı mövcud deyil.",
+	"renameusererrorexists": "\"<nowiki>$1</nowiki>\" istifadəçi adı artıq mövcuddur.",
+	"renameusererrorinvalid": "\"<nowiki>$1</nowiki>\" istifadəçi adı yolverilməzdir.",
+	"renameusersuccess": "\"<nowiki>$1</nowiki>\" adlı istifadəçinin adı \"<nowiki>$2</nowiki>\" olaraq dəyişdirildi.",
+	"renameuser-page-moved": "$1 $2 səhifəsinə köçürülüb.",
+	"renameuser-page-unmoved": "$1 $2 səhifəsinə köçürülə bilinmir.",
+	"log-name-renameuser": "İstifadəçi adı dəyişiklikləri jurnalı",
+	"right-renameuser": "istifadəçilərin adını dəyiş"
+}

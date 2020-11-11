@@ -1,0 +1,63 @@
+.mw-highlight {
+	/* All supported programming languages are written left-to-right */
+	/* @noflip */
+	direction: ltr;
+	unicode-bidi: embed;
+}
+
+.mw-highlight pre {
+	/* Use a more commonly found tab size of 4 (e.g. as used in CodeEditor)
+	instead of the browser-default value of 8 */
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+}
+
+/* Avoid displaying double borders for nested 'code' elements.
+   Before we started using the 'code' tag for inline code snippets,
+   <code><syntaxhighlight enclose=none ...>...</syntaxhighlight></code>
+   was a common pattern. Continue supporting it in existing content. */
+code code.mw-highlight {
+	background-color: transparent;
+	border: 0;
+	padding: 0;
+}
+
+/* The nested pre already has a background. T126010 */
+div.mw-hightlight {
+	background-color: inherit;
+}
+
+/*
+ * Don't show a red border around syntax errors. This behavior may be useful
+ * in code editors, but it is not useful in a wiki environment, especially
+ * given the longstanding habit of using an existing, mostly-compatible lexer
+ * to highlight a language for which no lexer exists.
+ */
+.mw-highlight .err {
+	border: 0;
+}
+
+/* Highlight background of whole lines, not just text in them */
+.mw-highlight .hll {
+	display: block;
+}
+
+/* Make line numbers non copyable */
+.mw-highlight .lineno {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* To interact better with the 'display: block' above, doesn't affect other uses */
+/* @noflip */
+.mw-highlight.mw-content-ltr .lineno {
+	float: left;
+}
+
+/* @noflip */
+.mw-highlight.mw-content-rtl .lineno {
+	float: right;
+}

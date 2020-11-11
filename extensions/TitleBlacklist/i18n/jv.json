@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meursault2004",
+			"NoiX180",
+			"Pras"
+		]
+	},
+	"titleblacklist-desc": "Marengaké pangurus menggak wong nggawé kaca lan akun miturut [[MediaWiki:Titleblacklist|daftar-ireng]] lan [[MediaWiki:Titlewhitelist|daftar-putih]]",
+	"titleblacklist": "# Iki dhaptar-ireng irah-irahan. Irah-irahan lan panganggo sing cocog karo sawijining regex ing kéné ora bisa digawé.\n# Anggonen \"#\" kanggo komentar.\n# Dhaptar iki sacara baku ora mbédakaké aksara gedhé-cilik.",
+	"titlewhitelist": "# Dhaptar iki arupa dhaptar-putih irah-irahan. Anggonen \"#\" kanggo komentar.\n# Dhaptar iki sacara baku ora mbédakaké aksara gedhé-cilik.",
+	"titleblacklist-forbidden-edit": "Sesirah \"$2\" dilarang digawé.\nSesirah iki cocog karo isi pratélan ireng iki: <code>$1</code>",
+	"titleblacklist-forbidden-move": "\"$2\" ora bisa dipindhahaké menyang \"$3\", amerga irah-irahan iki \"$3\" dilarang ora olèh digawé.\nIrah-irahan iki soalé cocog karo èntri daftar ireng iki: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Jeneng berkas \"$2\" wis dilarang kanggo digawé. \nIrah-irahan iku cocog karo èntri daftar ireng iki: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Jeneng panganggo \"$2\" wis dipenggak.\nIki cocog karo jeneng ing dhaptar-ireng: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Baris|Baris-baris}} ing daftar ireng irah-irahan (judhul) {{PLURAL:$1|ing ngisor|ing ngisor}} iki ora absah; mangga dikorèksi {{PLURAL:$1|item|item-item}} iku sadurungé disimpen:",
+	"titleblacklist-override": "Lirwakaké pratélan ireng",
+	"right-tboverride": "''Override'' daftar ireng judhul",
+	"right-tboverride-account": "Lirwakaké pratélan ireng bab jeneng panganggo"
+}

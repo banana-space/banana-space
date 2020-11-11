@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gts-tg"
+		]
+	},
+	"fancycaptcha-captcha": "Ἔλεγχος ἀσφαλείας",
+	"fancycaptcha-accountcreate": "Διά την προστασίαν του βίκι ἔναντι αὐτομάτης δημιουργίας λογισμών, παρακαλούμε ὐμᾶς πρός συμπλήρωσιν τῶν λέξεων ἐμφανισθέντων εἴς το κάτωθιν κυτίο ([[Special:Captcha/help|πλείονας πληροφορίαι]]):",
+	"fancycaptcha-imgcaptcha-ph": "Παρέχειν το ἄνωθεν κείμενο",
+	"fancycaptcha-reload-text": "Ἀναψύχειν"
+}

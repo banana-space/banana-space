@@ -1,0 +1,65 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"description": "Gadget definition schema",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"settings": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"rights": {
+					"description": "The rights required to be able to enable/load this gadget",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"default": {
+					"description": "Whether this gadget is enabled by default",
+					"type": "boolean",
+					"default": false
+				},
+				"hidden": {
+					"description": "Whether this gadget is hidden from preferences",
+					"type": "boolean",
+					"default": false
+				},
+				"skins": {
+					"description": "Skins supported by this gadget; empty or true if all skins are supported",
+					"type": [ "array", "boolean" ],
+					"items": {
+						"type": "string"
+					}
+				},
+				"category": {
+					"description": "Key of the category this gadget belongs to",
+					"type": "string",
+					"default": ""
+				}
+			}
+		},
+		"module": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"scripts": {
+					"type": "array",
+					"description": "List of JavaScript pages included in this gadget"
+				},
+				"styles": {
+					"type": "array",
+					"description": "List of CSS pages included in this gadget"
+				},
+				"dependencies": {
+					"type": "array",
+					"description": "ResourceLoader modules this gadget depends upon"
+				},
+				"messages": {
+					"type": "array",
+					"description": "Messages this gadget depends upon"
+				}
+			}
+		}
+	}
+}

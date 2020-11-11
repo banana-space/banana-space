@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bencmq",
+			"Fdcn",
+			"Hydra",
+			"Liangent",
+			"PhiLiP",
+			"Shinjiman",
+			"Xiaomingyan",
+			"乌拉跨氪",
+			"Liuxinyu970226"
+		]
+	},
+	"action-titleblacklistlog": "查看标题黑名单日志",
+	"log-name-titleblacklist": "标题黑名单日志",
+	"log-description-titleblacklist": "这些事件触发了标题黑名单。",
+	"logentry-titleblacklist-hit-username": "当$1尝试创建账户$3时由于匹配$4而{{GENDER:$2|触发}}标题黑名单。",
+	"titleblacklist-desc": "允许管理员通过[[MediaWiki:Titleblacklist|黑名单]]和[[MediaWiki:Titlewhitelist|白名单]]禁止页面和用户帐户的创建",
+	"titleblacklist": "# 本页面为“标题黑名单”。任何匹配本名单正则表达式的标题会被阻止建立和编辑。\n# 请使用\"#\"来添加注释。\n# 本页默认忽略大小写",
+	"titlewhitelist": "# 本页面为“标题白名单”。 请使用\"#\"来添加注释。\n# 本页默认忽略大小写",
+	"titleblacklist-forbidden-edit": "标题 \"$2\" 已被禁止创建。\n其与以下黑名单项匹配：<code>$1</code>",
+	"titleblacklist-forbidden-move": "标题 \"$3\" 已被禁止创建，\"$2\" 无法移动至 \"$3\"。\n其与以下黑名单项匹配： <code>$1</code>",
+	"titleblacklist-forbidden-upload": "文件名称“$2”已被禁止创建。\n其与以下黑名单项匹配：<code>$1</code>",
+	"titleblacklist-forbidden-new-account": "用户名“$2”已被禁止创建。\n其与以下黑名单项匹配：<code>$1</code>",
+	"titleblacklist-invalid": "标题黑名单中以下{{PLURAL:$1|一行|多行}}无效；请在保存前改正{{PLURAL:$1|它|它们}}：",
+	"titleblacklist-override": "忽略黑名单",
+	"titleblacklist-override-help": "有足够特权的用户可以将其设置为忽略标题黑名单检查。",
+	"titleblacklist-warning": "<strong>警告：此页面只能由管理员和其他拥有<code>tboverride</code>权限的用户编辑，因为它匹配以下标题黑名单：</strong><br /><code>$1</code>",
+	"right-tboverride": "覆盖标题或用户名黑名单",
+	"right-tboverride-account": "覆盖用户名黑名单",
+	"right-titleblacklistlog": "查看标题黑名单日志",
+	"apihelp-titleblacklist-description": "验证一个页面的标题、文件名或用户名是否触发标题黑名单。",
+	"apihelp-titleblacklist-summary": "验证一个页面的标题、文件名或用户名是否触发标题黑名单。",
+	"apihelp-titleblacklist-param-title": "验证是否触发黑名单的字符串。",
+	"apihelp-titleblacklist-param-action": "要检查的操作。",
+	"apihelp-titleblacklist-param-nooverride": "不要尝试绕开标题黑名单。",
+	"apihelp-titleblacklist-example-1": "检查[[Foo]]是否被列入黑名单",
+	"apihelp-titleblacklist-example-2": "检查[[Bar]]是否被列入禁止编辑的黑名单",
+	"apihelp-createaccount-param-ignoretitleblacklist": "忽略电子欺骗检查（需要以下权限之一：<code>tboverride</code>、<code>tboverride-account</code>）。"
+}

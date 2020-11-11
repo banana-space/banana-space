@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"SPQRobin",
+			"Siebrand",
+			"Southparkfan",
+			"Esketti",
+			"Mainframe98",
+			"McDutchie"
+		]
+	},
+	"codeeditor-desc": "Syntaxis-gemarkeerd bewerken voor JavaScript- en CSS-pagina's met behulp van de [https://ace.c9.io/ Ace-tekstverwerker]",
+	"codeeditor-next-annotation": "Ga naar de volgende annotatie",
+	"codeeditor-toolbar-toggle": "Codetekstverwerker in- of uitschakelen",
+	"codeeditor-save-with-errors": "Het document bevat fouten. Weet u zeker dat u het wilt opslaan?",
+	"codeeditor-invisibleChars-toggle": "Onzichtbare tekens tonen of verbergen",
+	"codeeditor-lineWrapping-toggle": "Regelomslag aan- of uitzetten",
+	"codeeditor-searchReplace-toggle": "Schakelen dialoogvenster zoeken en vervangen",
+	"codeeditor-gotoline": "Ga naar regelnummer...",
+	"codeeditor-gotoline-placeholder": "regel[:kolom]",
+	"codeeditor-gotoline-prompt": "Voer een regelnummer in",
+	"codeeditor-indent": "Inspringen",
+	"codeeditor-outdent": "Uitspringen"
+}

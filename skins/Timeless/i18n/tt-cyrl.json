@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ильнар"
+		]
+	},
+	"timeless-desc": "Timeless бизәлеше Брэндон Харрисның Winter прототипыннан һәм Викимедия Фондының башка төр стильләреннән чыгып ясалган.",
+	"timeless-search-placeholder": "Якынча {{NUMBEROFARTICLES}} бит аша эзләү",
+	"timeless-loggedin": "Хисап язмасы",
+	"timeless-anonymous": "Аноним",
+	"timeless-loggedinas": "'''$1''' булып кергән",
+	"timeless-notloggedin": "Сез хисап язмагызга кермәгәнсез",
+	"timeless-userpage": "{{GENDER:$1|Кулланучы}} бите",
+	"timeless-talkpage": "{{GENDER:$1|Кулланучы}} бәхәсе",
+	"timeless-pagelog": "Бит көндәлекләре",
+	"timeless-more": "Тагын",
+	"timeless-sitetools": "Вики-кораллар",
+	"timeless-pageactions": "Бит очен кораллар",
+	"timeless-userpagetools": "Кулланучы бите кораллары",
+	"timeless-pagemisc": "Тагын",
+	"timeless-namespaces": "Исемнәр мәйданы",
+	"timeless-pagetools": "Биттәге гамәлләр",
+	"timeless-languages": "Телләр"
+}

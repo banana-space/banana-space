@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bonevarluri",
+			"Mogoeilor"
+		]
+	},
+	"pfunc_time_error": "خطا:وخت نامعتور.",
+	"pfunc_expr_unrecognised_word": "خطا جمله ای: کلیمه دسه بنی نبیه \"$1\".",
+	"pfunc_expr_unexpected_operator": "خطا جمله: عملدیارکن ناحاستنی $1",
+	"pfunc_expr_missing_operand": "خطا جمله ای:عملیار گم بیه سی $1",
+	"pfunc_expr_unrecognised_punctuation": "خطا جمله ای: کاراکتر نقطه نیائن دسه بنی نبیه\"$1\".",
+	"pfunc_expr_division_by_zero": "بهرکنون وا صفر",
+	"pfunc_expr_invalid_argument_ln": "چک چنه گن سی درینده:<=0."
+}

@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gleki",
+			"NoiX180",
+			"Pras",
+			"Jadinegara",
+			"Meursault2004",
+			"Macofe"
+		]
+	},
+	"visualeditor-cite-tool-definition.json": "null",
+	"visualeditor-cite-tool-name-book": "Buku",
+	"visualeditor-cite-tool-name-journal": "Jurnal",
+	"visualeditor-cite-tool-name-news": "Warta",
+	"visualeditor-cite-tool-name-web": "Situs jaringan",
+	"cite-tool-definition.json": "null",
+	"cite-ve-dialog-reference-editing-reused": "Rujukan iki dianggo {{PLURAL:$1|ping}} $1 ing kaca iki.",
+	"cite-ve-dialog-reference-options-group-label": "Anggo golongan iki",
+	"cite-ve-dialog-reference-options-group-placeholder": "Rujukan umum",
+	"cite-ve-dialog-reference-options-name-label": "Anggo manèh mawa jeneng iki",
+	"cite-ve-dialog-reference-options-section": "Pilihan",
+	"cite-ve-dialog-reference-placeholder": "Tulisen utawa tèmplèken réferènsiné panjenengan ing kéné, utawa wuwuhen sawijining cithakan sitiran.",
+	"cite-ve-dialog-reference-title": "Rujukan",
+	"cite-ve-dialog-reference-useexisting-full-label": "Anggo manèh sitiran sing wis ana ing kaca iki",
+	"cite-ve-dialog-reference-useexisting-label": "Anggo rujukan sing ana",
+	"cite-ve-dialog-reference-useexisting-tool": "Anggo manèh",
+	"cite-ve-dialog-referenceslist-contextitem-description-general": "Pratélaning rujukan umum",
+	"cite-ve-dialog-referenceslist-contextitem-description-named": "Pratélaning rujukan kanggo golongan \"$1\"",
+	"cite-ve-dialog-referenceslist-title": "Pratélaning rujukan",
+	"cite-ve-dialogbutton-citation-educationpopup-text": "Kembangaké isi sarana nambahi sumbering katerangan. Sampéyan bisa nyitir saka buku, ariwarta, lan sana jaringan.",
+	"cite-ve-dialogbutton-citation-educationpopup-title": "Sitiran",
+	"cite-ve-dialogbutton-reference-full-label": "Rupa dhasar",
+	"cite-ve-dialogbutton-reference-title": "Rujukan",
+	"cite-ve-dialogbutton-reference-tooltip": "Baku",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Pratélaning rujukan",
+	"cite-ve-reference-input-placeholder": "Golèk ing sitiran iki",
+	"cite-ve-referenceslist-isempty": "Ora ana rujukan golongan \"$1\" ing kaca iki kanggo dilebokaké ing pratélan iki.",
+	"cite-ve-referenceslist-isempty-default": "Ora ana rujukan ing kaca iki kanggo dilebokaké ing pratélan iki.",
+	"cite-ve-referenceslist-missingref": "Rujukan iki diwedharaké ing cithakan utawa babagan liya, lan kanggo saiki mung bisa dibesut mawa cara sumber.",
+	"cite-ve-toolbar-group-label": "Sitir",
+	"cite-ve-othergroup-item": "$1 rujukan"
+}

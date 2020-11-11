@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meursault2004",
+			"NoiX180",
+			"Pras"
+		]
+	},
+	"renameuser": "Ganti jeneng panganggo",
+	"renameuser-linkoncontribs": "ganti jeneng panganggo",
+	"renameuser-linkoncontribs-text": "Ganti jenengé panganggo iki",
+	"renameuser-desc": "Ngganti jeneng panganggo (perlu hak aksès ''renameuser'')",
+	"renameuserold": "Jeneng panganggo saiki:",
+	"renameusernew": "Jeneng panganggo anyar:",
+	"renameuserreason": "Alesan:",
+	"renameusermove": "Mindhah kaca panganggo lan kaca dhiskusiné (sarta subkaca-kacané) menyang jeneng anyar",
+	"renameusersuppress": "Aja gawé pangalihan kanggo jeneng anyar",
+	"renameuserreserve": "Blokir utawa cadhangaké jeneng panganggo lawas supaya ora bisa dianggo manèh",
+	"renameuserwarnings": "Pélik:",
+	"renameuserconfirm": "Ya, ganti jeneng panganggo kasebut",
+	"renameusersubmit": "Kirim",
+	"renameuser-submit-blocklog": "Tuduhaké log blokir kanggo panganggo",
+	"renameusererrordoesnotexist": "Panganggo \"<nowiki>$1</nowiki>\" ora ana.",
+	"renameusererrorexists": "{{GENDER:$1|Panganggo}} \"<nowiki>$1</nowiki>\" wis ana.",
+	"renameusererrorinvalid": "Jeneng panganggo \"<nowiki>$1</nowiki>\" ora absah",
+	"renameuser-error-request": "Ana masalah nalika nampa panyuwunan panjenengan.\nMangga balènana lan nyoba manèh.",
+	"renameuser-error-same-user": "Panjenengan ora bisa ngganti jeneng panganggo dadi kaya jeneng asalé.",
+	"renameusersuccess": "{{GENDER:$2|Panganggo}} \"<nowiki>$1</nowiki>\" wis ganti jeneng dadi \"<nowiki>$2</nowiki>\".",
+	"renameuser-page-exists": "Kaca $1 wis ana lan ora bisa ditimpa sacara otomatis.",
+	"renameuser-page-moved": "Kaca $1 wis dialihaké menyang $2.",
+	"renameuser-page-unmoved": "Kaca $1 ora bisa dialihaké menyang $2.",
+	"log-name-renameuser": "Log ganti jeneng panganggo",
+	"log-description-renameuser": "Iki log owah-owahan jeneng panganggo",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|ngganti jeneng}} panganggo $4 ({{PLURAL:$6|$6 besutan}}) dadi {{GENDER:$7|$5}}",
+	"logentry-renameuser-renameuser-legacier": "$1 ngganti jeneng panganggo $4 dadi {{GENDER:$7|$5}}",
+	"renameuser-move-log": "Otomatis ngalih kaca nalika ngganti jeneng {{GENDER:$2|panganggo}} \"[[User:$1|$1]]\" dadi \"[[User:$2|$2]]\"",
+	"action-renameuser": "ganti jeneng panganggo",
+	"right-renameuser": "Ganti jeneng panganggo",
+	"renameuser-renamed-notice": "Panganggo iki wis diganti jenengé.\nLog ganti jeneng cumepak ing ngisor iki kanggo rujukan."
+}

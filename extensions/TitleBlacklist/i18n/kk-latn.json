@@ -1,0 +1,9 @@
+{
+	"@metadata": [],
+	"titleblacklist": "# Bul atawlardıñ qara tizimi. Jüýeli aýtılımdarğa (regex) säýkes mındağı atawlar jaratılmaýdı.\nMändemeler üşin «#» nışanın qoldanıñız.",
+	"titlewhitelist": "# Bul atawlardıñ aq tizimi. Mändemeler üşin «#» nışanın qoldanıñız",
+	"titleblacklist-forbidden-edit": "«$2» degen ataw jaratwı qulıptalğan.  Bul qara tizimniñ jazbasına säýkes: <code>$1</code>",
+	"titleblacklist-forbidden-move": "«$2» degen «$3» degenge jıljıtılmaýdı, sebebi «$3» degen ataw jaratwı qulıptalğan. Bul qara tizimniñ jazbasına säýkes: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "«$2» degen faýl atı jaratwı qulıptalğan.  Bul qara tizimniñ jazbasına säýkes: <code>$1</code>",
+	"titleblacklist-invalid": "Atawlardıñ qara tizimindegi kelesi {{PLURAL:$1|jol|joldar}} {{PLURAL:$1||}} jaramsız; saqtaw aldında {{PLURAL:$1|bunı|bulardı}} durıstap şığıñız:"
+}

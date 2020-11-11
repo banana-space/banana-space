@@ -1,0 +1,10 @@
+!! test
+dummy test
+!! input
+<imagemap>
+Image:Foobar.jpg
+</imagemap>
+!! result
+<div class="noresize" style="height: 220px; width: 1941px; "><img alt="Foobar.jpg" src="http://example.com/images/3/3a/Foobar.jpg" width="1941" height="220"></img><div style="margin-left: 1921px; margin-top: -20px; text-align: left;"><a href="/wiki/File:Foobar.jpg" title="About this image"><img alt="About this image" src="/extensions/ImageMap/desc-20.png?15600" style="border: none;"></img></a></div></div>
+
+!! end

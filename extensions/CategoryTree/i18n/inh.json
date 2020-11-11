@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sapral Mikail",
+			"Исмаил Садуев",
+			"ElizaMag",
+			"Adam-Yourist"
+		]
+	},
+	"categorytree": "Категорий га",
+	"categorytree-portlet": "Категореш",
+	"categorytree-legend": "Категорий га хьахьокха",
+	"categorytree-category": "Категори:",
+	"categorytree-go": "Га хьахьокха",
+	"categorytree-parents": "Хьалхара категореш",
+	"categorytree-mode-label": "Раж:",
+	"categorytree-mode-categories": "алхха категореш",
+	"categorytree-mode-all": "еррига оагIонаш",
+	"categorytree-expand": "хьадоаржаде",
+	"categorytree-member-counts": "Укхунах йоалл $1 {{PLURAL:$1|1=кIалоагIат}} а, $2 {{PLURAL:$2|1=оагӀув}} а, $3 {{PLURAL:$3|1=файл}} а",
+	"categorytree-num-categories": "$1 К",
+	"categorytree-num-pages": "$1 Оа",
+	"categorytree-num-files": "$1 Ф",
+	"categorytree-num-empty": "яьсса",
+	"categorytree-load": "чуяккха",
+	"categorytree-loading": "доттар...",
+	"categorytree-nothing-found": "Укх категори чу кIалкатегореш яц.",
+	"categorytree-no-subcategories": "кIалкатегореш яц",
+	"categorytree-no-parent-categories": "хьалхара категореш яц",
+	"categorytree-no-pages": "оагӀонаш а кIалкатегореш а яц"
+}

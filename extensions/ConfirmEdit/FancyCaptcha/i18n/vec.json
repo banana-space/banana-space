@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Candalua"
+		]
+	},
+	"fancycaptcha-addurl": "La to modifica la include dei novi colegamenti esterni.\nPar jutarne a conbàtar el spam, par piaser inserissi ne la casela le parole che vien fora qua soto ([[Special:Captcha/help|magiori informazion]]):",
+	"fancycaptcha-badlogin": "Par precauzion contro i tentativi de forzatura automatica de le password, par piaser inserissi ne la casela le parole che vien fora qua soto ([[Special:Captcha/help|magiori informazion]]):",
+	"fancycaptcha-captcha": "Controlo de sicuresa",
+	"fancycaptcha-accountcreate": "Par deféndar la wiki da la creazion automatica dei account, te domandemo par piaser de inserir ne la casela le parole che vien fora qua soto ([[Special:Captcha/help|piassè informazion]]):",
+	"fancycaptcha-create": "Par crear la pagina, par piaser inserissi ne la casela le parole che vien fora qua soto ([[Special:Captcha/help|magiori informazion]]):",
+	"fancycaptcha-edit": "Par modificar la pagina, par piaser inserissi ne la casela le parole che vien fora qua soto ([[Special:Captcha/help|magiori informazion]]):",
+	"fancycaptcha-imgcaptcha-ph": "Scrivi el testo che te vedi in te la figura",
+	"fancycaptcha-sendemail": "Par precauzion contro i tentativi de forzatura automatica de le password, par piaser inserissi ne la casela le parole che vien fora qua soto ([[Special:Captcha/help|magiori informazion]]):",
+	"fancycaptcha-reload-text": "Ajorna"
+}

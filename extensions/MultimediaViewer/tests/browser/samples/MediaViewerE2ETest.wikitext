@@ -1,0 +1,14 @@
+<big>PLEASE DO NOT EDIT THIS PAGE! IT NEEDS TO STAY THE SAME FOR THE PURPOSE OF AUTOMATED TESTING</big>
+
+==Test Images==
+Here are some sample images for testing different features of Media Viewer. 
+
+[[File:Sunrise over fishing boats in Kerala.jpg|thumb|left|Sunrise over fishing boats]] [[File:Wikimedia_Foundation_2013_All_Hands_Offsite_-_Day_2_-_Photo_24.jpg|thumb|Tropical Fish Aquarium]]  [[File:Wikimania 2013 - Hong Kong - Photo 090.jpg|thumb|center|Hong Kong Harbor at night]] 
+<br clear="all"/>
+
+[[File:Wikimedia_Foundation_2013_All_Hands_Offsite_-_Day_2_-_Photo_16.jpg|thumb|left|Nautilus Shell at California Academy of Sciences]] [[File:Multimedia_Team_-_Wikimedia_Foundation.jpg|thumb|center|Multimedia Team]] [[File:Zonotrichia atricapilla -British Columbia, Canada-8.jpg|thumb|Golden-crowned Sparrow]] 
+<br clear="all"/>
+
+[[File:Multimedia Roundtable 5 Photo 2.jpg|thumb|left|Multimedia Roundtable]]  [[File:Wikimedia Foundation - Team 1 - California Academy of Sciences.jpg|thumb|Wikimedia Team]] 
+
+<br clear="all"/>

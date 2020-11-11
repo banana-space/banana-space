@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Servien"
+		]
+	},
+	"fancycaptcha-addurl": "Joew bewarking bevat uutgaonde verwiezingen. \nUm dit projekt te bescharmen tegen automatiese spam, mu'j t woord dat hieronder steet invullen ([[Special:Captcha/help|hulpe]]):",
+	"fancycaptcha-badlogin": "Um disse webstee te beveiligen tegen t kraken van wachtwoorden, mu'j de woorden die'j hieronder zien effen invullen ([[Special:Captcha/help|hulpe]]):",
+	"fancycaptcha-captcha": "Veiligheidskontraole",
+	"fancycaptcha-accountcreate": "Um disse wiki te bescharmen tegen t automaties anmaken van gebrukersprofielen mu'j t woord hieronder invullen ([[Special:Captcha/help|hulpe]]):",
+	"fancycaptcha-create": "Um n pagina an te maken, mö'j t woord dat hieronder steet invullen\n([[Special:Captcha/help|hulpe]]):",
+	"fancycaptcha-edit": "Vul de woorden die hieronder staon in um disse zied te bewarken ([[Special:Captcha/help|hulpe]]):",
+	"fancycaptcha-imgcaptcha-ph": "Voer de tekste in die'j op de aofbeelding zien",
+	"fancycaptcha-sendemail": "Voer de woorden die hieronder staon in t invoerveld in as bescharming tegen automatiese ongewunste reklame \n([[Special:Captcha/help|hulpe]]):",
+	"fancycaptcha-reload-text": "Verniejen"
+}

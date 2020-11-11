@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bodhisattwa",
+			"আজিজ",
+			"Aftabuzzaman"
+		]
+	},
+	"skinname-timeless": "টাইমলেস",
+	"timeless-search-placeholder": "{{NUMBEROFARTICLES}}টি পাতায় অনুসন্ধান করুন",
+	"timeless-loggedin": "আপনার অ্যাকাউন্ট",
+	"timeless-anonymous": "নামহীন",
+	"timeless-loggedinas": "'''$1''' হিসাবে প্রবেশ",
+	"timeless-notloggedin": "প্রবেশ করেন নি",
+	"timeless-userpage": "{{GENDER:$1|ব্যবহারকারী}} পাতা",
+	"timeless-talkpage": "{{GENDER:$1|ব্যবহারকারী}} আলাপ",
+	"timeless-pagelog": "পৃষ্ঠার লগসমূহ",
+	"timeless-more": "আরও",
+	"timeless-sitetools": "উইকি সরঞ্জামসমূহ",
+	"timeless-pageactions": "পাতার সরঞ্জামসমূহ",
+	"timeless-userpagetools": "ব্যবহারকারীর পাতার সরঞ্জামসমূহ",
+	"timeless-pagemisc": "আরও",
+	"timeless-namespaces": "নামস্থানসমূহ",
+	"timeless-pagetools": "পৃষ্ঠার ক্রিয়া",
+	"timeless-languages": "ভাষাসমূহ",
+	"timeless.js": "/* এখানের যে কোন জাভাস্ক্রিপ্ট টাইমলেস আবরণ ব্যবহারকারীদের জন্য লোড হবে */"
+}

@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Erkan Yilmaz",
+			"Joseph",
+			"Srhat",
+			"Suelnur",
+			"Tarikozket",
+			"Vito Genovese",
+			"Bulgu"
+		]
+	},
+	"nuke": "Toplu sil",
+	"nuke-desc": "Hizmetlilere, sayfaları [[Special:Nuke|kitlesel silme]] yeteneği verir",
+	"nuke-nopages": "Son değişikliklerde [[Special:Contributions/$1|$1]] tarafından oluşturulan yeni sayfa yok.",
+	"nuke-list": "Aşağıdaki sayfalar yakın zamanda [[Special:Contributions/$1|$1]] tarafından oluşturuldu;\nbir yorum girin ve silmek için düğmeye basın.",
+	"nuke-defaultreason": "$1 tarafından eklenen sayfaların kitlesel kaldırımı",
+	"nuke-tools": "Bu araç, bir kullanıcı ya da IP tarafından yakın zamanda eklenen sayfaların kitlesel silinmelerine izin verir.\nSilinecek sayfaların listesini almak için kullanıcı adını ya da IPyi girin.",
+	"nuke-submit-user": "Git",
+	"nuke-submit-delete": "Seçileni sil",
+	"right-nuke": "Sayfaları kitlesel olarak sil",
+	"nuke-select": "Seçilmiş: $1",
+	"nuke-deleted": "'''$1''' sayfası silindi.",
+	"nuke-nopages-global": "Aramanızla eşleşen bir sayfa başlığı yoktur.",
+	"nuke-linkoncontribs": "toplu sil"
+}

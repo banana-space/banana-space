@@ -1,0 +1,36 @@
+{
+	"name": "cssjanus/cssjanus",
+	"description": "Convert CSS stylesheets between left-to-right and right-to-left.",
+	"license": "Apache-2.0",
+	"authors": [
+		{
+			"name": "Trevor Parscal"
+		},
+		{
+			"name": "Roan Kattouw"
+		},
+		{
+			"name": "Timo Tijhof"
+		}
+	],
+	"autoload": {
+		"psr-0": {
+			"": "src/"
+		}
+	},
+	"require": {
+		"php": ">=5.6.0"
+	},
+	"require-dev": {
+		"jakub-onderka/php-parallel-lint": "^0.9.2",
+		"phpunit/phpunit": "^4.8.36",
+		"squizlabs/php_codesniffer": "^3.1.1"
+	},
+	"scripts": {
+		"test": [
+			"parallel-lint . --exclude vendor",
+			"phpunit",
+			"phpcs -p"
+		]
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chrisportelli",
+			"CharlieTheCabbie",
+			"Leli Forte"
+		]
+	},
+	"visualeditor-cite-tool-name-book": "Ktieb",
+	"visualeditor-cite-tool-name-journal": "Rivista",
+	"visualeditor-cite-tool-name-news": "Aħbarijiet",
+	"visualeditor-cite-tool-name-web": "Sit tal-web",
+	"cite-ve-dialog-reference-title": "Referenza",
+	"cite-ve-dialog-referenceslist-title": "Lista ta' referenzi"
+}

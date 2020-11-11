@@ -1,0 +1,75 @@
+@import 'mediawiki.mixins';
+
+.group-codeeditor-format,
+.group-codeeditor-style,
+.codeEditor-ui-toolbar .group-insert,
+.codeEditor-ui-toolbar .group-format,
+.codeEditor-ui-toolbar .tabs span.tab-advanced,
+.codeEditor-ui-toolbar .tabs span.tab-characters,
+.codeEditor-ui-toolbar .tabs span.tab-help,
+.codeEditor-ui-toolbar .sections {
+	display: none;
+}
+
+.codeEditor-ui-toolbar .group-codeeditor-format,
+.codeEditor-ui-toolbar .group-codeeditor-style {
+	display: block;
+}
+
+.wikiEditor-ui .ace_editor {
+	/* Same as mw-editfont-monospace, repeated for higher specificity */
+	font-size: 13px;
+	font-family: monospace, monospace;
+}
+
+.wikiEditor-ui-toolbar .group-codeeditor-style {
+	border-right: 0;
+}
+
+.ace_editor textarea,
+.ace_editor input {
+	/* Inherit directionality from editor, not sitedir (T186329) */
+	direction: inherit;
+}
+
+.codeEditor-status {
+	clear: both;
+	width: 100%;
+	background-color: #f8f9fa;
+	border-top: 1px solid #c8ccd1;
+	display: table;
+}
+
+.codeEditor-status .codeEditor-status-worker-cell.ace_gutter-cell {
+	background-position: 0 center;
+}
+
+.codeEditor-status-worker {
+	padding: 0 0.3em;
+	user-select: none;
+	cursor: pointer;
+	display: table-cell;
+}
+
+.codeEditor-status-message {
+	border-left: 1px solid #c8ccd1;
+	border-right: 1px solid #c8ccd1;
+	padding: 0 0.3em;
+	width: 100%;
+	display: table-cell;
+}
+
+.codeEditor-status-line {
+	padding: 0 0.3em;
+	text-align: right;
+	white-space: nowrap;
+	display: table-cell;
+}
+
+/* Hide vanilla MediaWiki's "Editing help" link, as we provide it in the toolbar */
+/* Copied from the same code in WikiEditor */
+.client-js .editButtons {
+	.editHelp {
+		display: none;
+	}
+}

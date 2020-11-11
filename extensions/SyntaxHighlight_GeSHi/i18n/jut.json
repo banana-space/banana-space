@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Huslåke",
+			"Ælsån"
+		]
+	},
+	"syntaxhighlight-desc": "Gäv syntaks highlighting <code>&lt;syntaxhighlight&gt;</code> via [http://pygments.org/ Pygments]"
+}

@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"Умар",
+			"Исмаил Садуев"
+		]
+	},
+	"visualeditor-cite-tool-definition.json": "нуль",
+	"visualeditor-cite-tool-name-book": "Жайна",
+	"visualeditor-cite-tool-name-journal": "Тептар",
+	"visualeditor-cite-tool-name-news": "Керланаш",
+	"visualeditor-cite-tool-name-web": "Веб-сайт",
+	"cite-tool-definition.json": "нуль",
+	"cite-ve-dialog-reference-options-group-label": "Лелае хӀара тоба",
+	"cite-ve-dialog-reference-options-group-placeholder": "Юкъара хььажоргаш",
+	"cite-ve-dialog-reference-options-name-label": "ХӀокху цӀарца юху лелае",
+	"cite-ve-dialog-reference-options-section": "Параметраш",
+	"cite-ve-dialog-reference-title": "Билгалдаккхар",
+	"cite-ve-dialog-reference-useexisting-label": "Леладе долуш долу тIетовжар",
+	"cite-ve-dialog-reference-useexisting-tool": "Юха лелор",
+	"cite-ve-dialog-referenceslist-title": "Билгалдаккхаршан могӀам",
+	"cite-ve-dialogbutton-citation-educationpopup-text": "Дика йе хьайн контент хаамийн хьосташ тӀетоьхна. Хайн йиш ю цитаташ дало жайнаш тӀера, газеташ тӀера я веб-сайташ тӀера.",
+	"cite-ve-dialogbutton-citation-educationpopup-title": "Цитаташ",
+	"cite-ve-dialogbutton-reference-tooltip": "Коьрта",
+	"cite-ve-dialogbutton-referenceslist-tooltip": "Билгалдаккхаршан могӀам",
+	"cite-ve-reference-input-placeholder": "Муьлхачунна тӀетовжа лаьа хьуна?",
+	"cite-ve-toolbar-group-label": "Белгалдахарш"
+}

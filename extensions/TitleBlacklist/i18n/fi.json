@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Agony",
+			"Cimon Avaro",
+			"Crt",
+			"Nike",
+			"Str4nd",
+			"Stryn",
+			"Pxos"
+		]
+	},
+	"action-titleblacklistlog": "tarkastella nimien mustan listan lokia",
+	"log-name-titleblacklist": "Nimien mustan listan loki",
+	"log-description-titleblacklist": "Nämä merkinnät jäljittävät osumia nimien mustalla listalla.",
+	"logentry-titleblacklist-hit-username": "$1 {{GENDER:$2|aiheutti}} osuman nimien mustalla listalla yrittäessään luoda tunnusta $3, joka vastaa merkintää $4.",
+	"titleblacklist-desc": "Antaa ylläpitäjille mahdollisuuden kieltää sivujen ja käyttäjätunnusten luominen niiden nimen perusteella: [[MediaWiki:Titleblacklist|musta lista]] ja [[MediaWiki:Titlewhitelist|valkea lista]].",
+	"titleblacklist": "# Tämä on nimien musta lista. Sivuja tai käyttäjätunnuksia, jotka vastaavat täällä määritettyihin säännöllisiin lausekkeisiin, ei voi luoda.\n# Käytä #-merkkiä kommentointiin.\n# Oletusarvoisesti tämä on riippuvainen kirjainkoosta",
+	"titlewhitelist": "# Tämä on nimien valkea lista. Käytä #-merkkiä kommentointiin.\n# Oletusarvoisesti tämä on riippuvainen kirjainkoosta",
+	"titleblacklist-forbidden-edit": "Sivun ”$2” luonti on estetty, koska se täsmää seuraavaan merkintään mustassa listassa: <code>$1</code>",
+	"titleblacklist-forbidden-move": "Sivua ”$2” ei voi siirtää nimelle ”$3”, koska sivun ”$3” luonti on estetty. Se täsmää seuraavaan merkintään mustassa listassa: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "Tiedoston ”$2” luonti on estetty, koska se täsmää seuraavaan merkintään mustassa listassa: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "Käyttäjätunnuksen ”$2” luonti on estetty.\nSe täsmää seuraavaan mustan listan merkintään: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Seuraava rivi mustalla listalla ei ole kelvollinen|Seuraavat rivit mustalla listalla eivät ole kelvollisia}}. Korjaa {{PLURAL:$1|se|ne}} ennen tallentamista:",
+	"titleblacklist-override": "Ohita mustan listan merkinnät",
+	"right-tboverride": "Ohittaa sivunimien tai käyttäjänimien musta lista",
+	"right-tboverride-account": "Ohittaa käyttäjänimien musta lista",
+	"right-titleblacklistlog": "Tarkastella nimien mustan listan lokia",
+	"apihelp-titleblacklist-example-2": "Tarkista, onko [[Bar]] on mustalla listalla muokkausta varten"
+}

@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Anakmalaysia",
+			"Aviator",
+			"Izzudin"
+		]
+	},
+	"cite-desc": "Menambah tag <nowiki><ref[ name=id]></nowiki> dan <nowiki><references/></nowiki> untuk pemetikan",
+	"cite_error": "Ralat petik: $1",
+	"cite_error_ref_numeric_key": "Tag <code>&lt;ref&gt;</code> tidak sah; nombor ringkas tidak dibenarkan, sila masukkan tajuk yang lebih terperinci",
+	"cite_error_ref_no_key": "Tag <code>&lt;ref&gt;</code> tidak sah; rujukan tanpa kandungan mestilah mempunyai nama",
+	"cite_error_ref_too_many_keys": "Tag <code>&lt;ref&gt;</code> tidak sah; nama-nama tidak sah, misalnya terlalu banyak",
+	"cite_error_ref_no_input": "'Tag <code>&lt;ref&gt;</code> tidak sah; rujukan tanpa nama mestilah mempunyai kandungan",
+	"cite_error_references_invalid_parameters": "Tag <code>&lt;references&gt;</code> tidak sah; parameter tidak dibenarkan, gunakan <code>&lt;references /&gt;</code>",
+	"cite_error_references_no_backlink_label": "Kehabisan label pautan balik tempahan. Sila tambah label dalam pesanan <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_no_link_label_group": "Kehabisan label pautan tempahan untuk kumpulan \"$1\".\nTentukan lagi dalam mesej <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_text": "Tag <code>&lt;ref&gt;</code> tidak sah; teks bagi rujukan <code>$1</code> tidak disediakan",
+	"cite_error_included_ref": "Tag <code>&lt;ref&gt;</code> tidak ditutup dengan <code>&lt;/ref&gt;</code>",
+	"cite_error_group_refs_without_references": "Tag <code>&lt;ref&gt;</code> untuk kumpulan \"$1\" ada tetapi tag <code>&lt;references group=\"$1\"/&gt;</code> yang sepadan tidak disertakan",
+	"cite_error_references_group_mismatch": "Tag <code>&lt;ref&gt;</code> dalam <code>&lt;references&gt;</code> mempunyai atribut kumpulan yang bercanggah, \"$1\".",
+	"cite_error_references_missing_group": "Tag <code>&lt;ref&gt;</code> yang ditentukan dalam <code>&lt;references&gt;</code> mempunyai atribut kumpulan \"$1\" yang tiada dalam teks sebelumnya.",
+	"cite_error_references_missing_key": "Tag <code>&lt;ref&gt;</code> dengan nama \"$1\" yang ditentukan dalam <code>&lt;references&gt;</code> tidak digunakan dalam teks sebelumnya.",
+	"cite_error_references_no_key": "Tag <code>&lt;ref&gt;</code> yang ditentukan dalam <code>&lt;references&gt;</code> tiada atribut nama.",
+	"cite_error_empty_references_define": "Tag <code>&lt;ref&gt;</code> yang ditentukan dalam <code>&lt;references&gt;</code> dengan nama \"$1\" tiada kandungan.",
+	"cite_references_link_accessibility_label": "Panjat",
+	"cite_references_link_many_accessibility_label": "Panjat ke:"
+}

@@ -1,0 +1,113 @@
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+
+/* Search */
+#p-search {
+	float: left;
+	margin-right: 0.5em;
+	margin-left: 0.5em;
+
+	h3 {
+		.mixin-screen-reader-text;
+	}
+
+	form,
+	input {
+		margin: 0.4em 0 0;
+	}
+}
+
+#simpleSearch {
+	background-color: #fff;
+	.background-image( 'images/search-fade.png' );
+	background-position: top left;
+	background-repeat: repeat-x;
+	color: #000;
+	display: block;
+	width: 12.6em;
+	width: 20vw; /* responsive width */
+	min-width: 5em;
+	max-width: 20em;
+	padding-right: 1.4em;
+	height: 1.4em;
+	margin-top: 0.65em;
+	position: relative;
+	min-height: 1px; /* Gotta trigger hasLayout for IE7 */
+	border: 1px solid @colorGray10;
+	border-radius: @borderRadius;
+	.transition( border-color 250ms );
+
+	&:hover {
+		border-color: @colorGray7;
+	}
+
+	// Styles for both the search input and the button
+	input {
+		background-color: transparent;
+		color: #000;
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+
+	// The search input
+	#searchInput {
+		width: 100%;
+		padding: 0.2em 0 0.2em 0.2em;
+		font-size: 13px;
+		direction: ltr;
+
+		&:focus {
+			outline: 0;
+		}
+
+		/* stylelint-disable indentation */
+		.mixin-placeholder( {
+			color: @colorGray7;
+			opacity: 1;
+		} );
+		/* stylelint-enable indentation */
+
+		// Undo the styles Webkit browsers apply to type=search fields,
+		// we provide our own
+		-webkit-appearance: textfield;
+
+		&::-webkit-search-decoration,
+		&::-webkit-search-cancel-button,
+		&::-webkit-search-results-button,
+		&::-webkit-search-results-decoration {
+			-webkit-appearance: textfield;
+		}
+	}
+
+	// The buttons. They are displayed in the same position, and if both are
+	// present the fulltext search one obscures the 'Go' one.
+	#searchButton,
+	#mw-searchButton {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 1.65em;
+		height: 100%;
+		cursor: pointer;
+		/* Hide button text and replace it with the image. */
+		text-indent: -99999px;
+		/* Needed to make IE6 respect the text-indent. */
+		line-height: 1;
+		/* Opera 12 on RTL flips the text in a funny way without this. */
+		/* @noflip */
+		direction: ltr;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	#searchButton {
+		.background-image-svg( 'images/search-ltr.svg', 'images/search-ltr.png' );
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+
+	#mw-searchButton {
+		z-index: 1;
+	}
+}

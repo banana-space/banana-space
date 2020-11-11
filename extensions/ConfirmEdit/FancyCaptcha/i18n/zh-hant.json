@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Horacewai2",
+			"Justincheng12345",
+			"Liuxinyu970226",
+			"Waihorace",
+			"Cwlin0416",
+			"LNDDYL",
+			"Suchichi02",
+			"Kly"
+		]
+	},
+	"fancycaptcha-addurl": "您的編輯使用了新的外部連結。\n為了防止垃圾編輯程式，我們要麻煩您輸入在下面的方框中顯示的單字　([[Special:Captcha/help|更多資訊]])：",
+	"fancycaptcha-badlogin": "為了防止密碼破解程式，我們要麻煩您輸入在下面的方框中顯示的單字　([[Special:Captcha/help|更多資訊]])：",
+	"fancycaptcha-captcha": "安全性檢查",
+	"fancycaptcha-accountcreate": "為了防止自動註冊程式，我們要麻煩您輸入在下面的方框中顯示的單字　([[Special:Captcha/help|更多資訊]])：",
+	"fancycaptcha-create": "為了防止自動建立頁面程式，我們要麻煩您輸入在下面的方框中顯示的單字　([[Special:Captcha/help|更多資訊]])：",
+	"fancycaptcha-edit": "若要編輯此頁面，請輸入在下面的方框中顯示的單字　([[Special:Captcha/help|更多資訊]])：",
+	"fancycaptcha-imgcaptcha-ph": "輸入您在圖中看到的文字",
+	"fancycaptcha-sendemail": "為了防止垃圾編輯程式，我們要麻煩您輸入在下面的方框中顯示的單字　([[Special:Captcha/help|更多資訊]])：",
+	"fancycaptcha-reload-text": "重新整理",
+	"apihelp-fancycaptchareload-description": "取得新 FancyCaptcha。",
+	"apihelp-fancycaptchareload-summary": "取得新的 FancyCaptcha。",
+	"apihelp-fancycaptchareload-example-1": "取得新 FancyCaptcha。"
+}

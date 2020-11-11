@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"NoiX180"
+		]
+	},
+	"timeless-loggedin": "Akun panjenengan",
+	"timeless-anonymous": "Anonim",
+	"timeless-loggedinas": "Mlebu log minangka '''$1'''",
+	"timeless-notloggedin": "Durung mlebu log",
+	"timeless-userpage": "Kaca {{GENDER:$1|panganggo}}",
+	"timeless-talkpage": "Parembugan {{GENDER:$1|panganggo}}",
+	"timeless-pagelog": "Log kaca",
+	"timeless-more": "Liyané",
+	"timeless-sitetools": "Piranti wiki",
+	"timeless-pageactions": "Piranti kaca",
+	"timeless-userpagetools": "Piranti panganggo",
+	"timeless-pagemisc": "Liyané",
+	"timeless-namespaces": "Mandala aran",
+	"timeless-pagetools": "Tumindak kaca",
+	"timeless-languages": "Basa"
+}

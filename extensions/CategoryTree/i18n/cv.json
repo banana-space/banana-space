@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chuvash2014",
+			"Chavash"
+		]
+	},
+	"categorytree-portlet": "Категорисем",
+	"categorytree-category": "Категори:",
+	"categorytree-expand": "сар",
+	"categorytree-member-counts": "$1 айтӗркем, $2 эл тата $3 файл пур",
+	"categorytree-num-categories": "$1 Э",
+	"categorytree-num-pages": "$1 Э",
+	"categorytree-num-files": "$1 Ф"
+}

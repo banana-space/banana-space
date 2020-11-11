@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ashok modhvadia",
+			"Dsvyas",
+			"KartikMistry",
+			"Sushant savla"
+		]
+	},
+	"cite-desc": "અવતરણો માટે <nowiki><ref[ name=id]></nowiki> અને <nowiki><references/></nowiki> ટેગ ઉમેરે છે",
+	"cite_error": "સંદર્ભ ત્રુટિ: $1",
+	"cite_error_ref_numeric_key": "અમાન્ય <code>&lt;ref&gt;</code> ટેગ;\nનામ માત્ર સરળ રાશિ ન હોઈ શકે, વિસ્તૃત શીર્ષક આપો",
+	"cite_error_ref_no_key": "અમાન્ય <code>&lt;ref&gt;</code> ટેગ;\nનામ વગરના refs ને કાંઈક નામ તો હોવું જ જોઈએ",
+	"cite_error_ref_too_many_keys": "અમાન્ય <code>&lt;ref&gt;</code> ચકતી;\nઅમાન્ય નામો , દા.ત. ઘણાં બધાં",
+	"cite_error_ref_no_input": "અમાન્ય <code>&lt;ref&gt;</code> ટેગ;\nનામ વગરના refs માં કાંઈક સામગ્રી હોવી જોઈએ",
+	"cite_error_references_invalid_parameters": "અમાન્ય <code>&lt;references&gt;</code> ટેગ;\nકોઈ પણ પરિમાણની પરવાનગી નથી.\n<code>&lt;references /&gt;</code> વાપરો",
+	"cite_error_references_no_backlink_label": "કસ્ટમ બેકલિંક લેબલ ખલાસ થઈ ગયાં.\n<nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki> સંદેશામાં વહારે લેબલ બનાવો..",
+	"cite_error_no_link_label_group": "\"$1\" સમૂહ માટે કસ્ટમ બેકલિંક લેબલ ખલાસ થઈ ગયાં.\n<nowiki>[[MediaWiki:$2]]</nowiki> સંદેશામાં વહારે લેબલ બનાવો..",
+	"cite_error_references_no_text": "અમાન્ય <code>&lt;ref&gt;</code> ટેગ;\n<code>$1</code>નામના સંદર્ભ માટે કોઈ પણ લેખન અપાયું નથી",
+	"cite_error_included_ref": "<code>&lt;ref&gt;</code> ટેગને બંધ કરતું <code>&lt;/ref&gt;</code> ખૂટે છે",
+	"cite_error_group_refs_without_references": " \"$1\" નામના સમૂહમાં <code>&lt;ref&gt;</code> ટેગ વિહરમાન છે, પણ તેને અનુરૂપ <code>&lt;references group=\"$1\"/&gt;</code> ટેગ ન મળ્યો. અથવા સમાપ્તિ <code>&lt;/ref&gt;</code> ખુટે છે.",
+	"cite_error_references_group_mismatch": "<code>&lt;ref&gt;</code> ટેગને  <code>&lt;references&gt;</code> માં આ વિરોધાભાસી લક્ષણ છે : \"$1\".",
+	"cite_error_references_missing_group": "<code>&lt;references&gt;</code>માં વ્યાખ્યાયીત <code>&lt;ref&gt;</code> ટેગનો સમૂહ ગુણ \"$1\" છે જે પહેલાંની પહેલાંના લેખનમાં નથી.",
+	"cite_error_references_missing_key": "<code>&lt;references&gt;</code> માં વ્યાખ્યાયિત  $1\" નામ સાથેનું <code>&lt;ref&gt;</code> ટેગ આગળના લેખનમાં વપરાયો નથી.",
+	"cite_error_references_no_key": "<code>&lt;ref&gt;</code> ટેગની વ્યાખ્યા <code>&lt;references&gt;</code> ને કોઈ નામકરણ નથી.",
+	"cite_error_empty_references_define": "<code>&lt;ref&gt;</code> ટેગની વ્યાખ્યા <code>&lt;references&gt;</code> માં \"$1\" નામે છે તેને કોઈ content નથી.",
+	"cite_references_link_accessibility_label": "ઉપર જાઓ",
+	"cite_references_link_many_accessibility_label": "અહીં સુધી ઉપર જાઓ:"
+}

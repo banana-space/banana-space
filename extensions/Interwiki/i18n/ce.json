@@ -1,0 +1,37 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sasan700",
+			"Умар"
+		]
+	},
+	"interwiki": "Юкъарвикийн нисдаран гӀирсе хьажар а хийцар а",
+	"interwiki-title-norights": "Юкъарвикийн хаамаш хьажар",
+	"interwiki-desc": "ТӀетуху [[Special:Interwiki|белхан агӀо]] юкъаравикин дешхьалхенашка хьажа а уьш тая а.",
+	"interwiki_intro": "ХӀара ду юкъарвикийн таблице хьажар.",
+	"interwiki-legend-label": "Легенда",
+	"interwiki_prefix": "ТӀетоьхна элпаш",
+	"interwiki-prefix-label": "Префикс:",
+	"interwiki_prefix_intro": "Юкъарвикин дешхьалхе вики-йозана синтаксисехь лело: <code>[<nowiki />[дешхьалхе:<em>агӀона цӀе</em>]]</code>.",
+	"interwiki_url_intro": "URLлан кеп. $1 метта хира ю <em>агӀона цӀе</em>, Лакхара синтаксис лелачу хенахь гайтина йолу.",
+	"interwiki_local": "ДӀасхьажор",
+	"interwiki-local-label": "ДӀасхьажор:",
+	"interwiki_local_0_intro": "магийна яц, хаамо блоктуху «агӀо цакарий»",
+	"interwiki_local_1_intro": "Арахьара HTTP-дехарш локальни викиш тӀе хӀара юкъаравики-префикс лела еш URL-адрес чохь тӀе хьажа йо URL-адрес юкъаравики-хьаоргаш (локальни агӀонийн тӀе йолу хьажоргаш санна кеч йо).",
+	"interwiki_trans": "Юкъатохар",
+	"interwiki-trans-label": "Юкъатохар:",
+	"interwiki_trans_1_intro": "Кхечу вики чура юкъарвикеш чуяха йиш хуьлуьйту хӀокху вики чохь магийна делахь.",
+	"interwiki_trans_0_intro": "ТӀетоха магийна дац, кепийн цӀерийн меттигехь агӀо лоху.",
+	"interwiki_1": "ю",
+	"interwiki_0": "яц",
+	"interwiki_edit": "Нисъе",
+	"interwiki_reasonfield": "Бахьана:",
+	"interwiki_delquestion": "«$1» дӀаяккхар",
+	"interwiki-logtext": "Тептаршка хьажар",
+	"interwiki_addbutton": "ТӀетоха",
+	"logentry-interwiki-iw_add": "$1 {{GENDER:$2|тӀетоьхна}} префикс «$4» ($5) (trans: $6; local: $7) юкъарвики-таблицехь",
+	"logentry-interwiki-iw_edit": "$1 {{GENDER:$2|хийцина}} префикс «$4» ($5) (trans: $6; local: $7) юкъарвики-таблицехь",
+	"logentry-interwiki-iw_delete": "$1 {{GENDER:$2|дӀаяьккхина}} префикс «$4» юкъарвики-таблицан чура",
+	"log-description-interwiki": "ХӀара [[Special:Interwiki|юкъарвики таблицан]] хицаман тептар ду.",
+	"interwiki-links": "Юкъарвикийн префиксаш"
+}

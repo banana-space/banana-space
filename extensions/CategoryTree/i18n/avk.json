@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wikimistusik"
+		]
+	},
+	"categorytree": "LomaAal",
+	"categorytree-header": "Ta wira va aaldrekoraf cek va lomayolt bazel !\nStragal da batcoba va AJAX JavaScript fliaca kucilar.\nEde va guazafi exulesiki favel oke ede JavaScript fliaceem tir metegis, batcoba me guyundeter.",
+	"categorytree-category": "Loma:",
+	"categorytree-go": "Nedira va aal",
+	"categorytree-parents": "Veylomeem",
+	"categorytree-mode-categories": "Anton lomeem",
+	"categorytree-mode-pages": "Bueem rade ewaveem",
+	"categorytree-mode-all": "bueem",
+	"categorytree-collapse": "koatcera",
+	"categorytree-expand": "divatcera",
+	"categorytree-load": "vajara",
+	"categorytree-loading": "vajas",
+	"categorytree-nothing-found": "mek trasiks",
+	"categorytree-no-subcategories": "meka volveyloma",
+	"categorytree-no-pages": "meku bu oku volveyloma",
+	"categorytree-not-found": "<i>$1</i> loma metrasiyina",
+	"categorytree-error": "Zvak remi origvajara.",
+	"categorytree-retry": "Vay kemel aze tolyawal !"
+}

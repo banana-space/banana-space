@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Giromin Cangiaxo"
+		]
+	},
+	"log-name-renameuser": "Utenti rinominæ",
+	"log-description-renameuser": "Chì de sotta gh'è a lista di cangiamenti a-i nommi utente.",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|o l'ha rinominou}} l'utente $4 (con {{PLURAL:$6|$6 contribuçion|$6 contribuçioin}}) in {{GENDER:$7|$5}}"
+}

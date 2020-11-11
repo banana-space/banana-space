@@ -1,0 +1,146 @@
+{
+	"name": "CodeEditor",
+	"author": [
+		"Brion Vibber",
+		"Derk-Jan Hartman",
+		"[https://ace.c9.io/ authors of Ace]"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:CodeEditor",
+	"descriptionmsg": "codeeditor-desc",
+	"license-name": "GPL-2.0-or-later AND BSD-3-Clause",
+	"type": "editor",
+	"requires": {
+		"MediaWiki": ">= 1.29.0",
+		"extensions": {
+			"WikiEditor": "*"
+		}
+	},
+	"Hooks": {
+		"EditPage::showEditForm:initial": [
+			"CodeEditorHooks::editPageShowEditFormInitial"
+		],
+		"EditPage::showReadOnlyForm:initial": [
+			"CodeEditorHooks::editPageShowEditFormInitial"
+		],
+		"GetPreferences": [
+			"CodeEditorHooks::getPreferences"
+		]
+	},
+	"MessagesDirs": {
+		"CodeEditor": [
+			"i18n"
+		]
+	},
+	"config": {
+		"CodeEditorEnableCore": true
+	},
+	"DefaultUserOptions": {
+		"usecodeeditor": 1
+	},
+	"ResourceModules": {
+		"ext.codeEditor": {
+			"scripts": "ext.codeEditor.js",
+			"dependencies": [
+				"jquery.codeEditor"
+			],
+			"group": "ext.wikiEditor"
+		},
+		"jquery.codeEditor": {
+			"scripts": "jquery.codeEditor.js",
+			"styles": "jquery.codeEditor.less",
+			"dependencies": [
+				"ext.wikiEditor",
+				"ext.codeEditor.ace",
+				"jquery.ui.resizable",
+				"mediawiki.api",
+				"mediawiki.api.options",
+				"mediawiki.user",
+				"user.options",
+				"mediawiki.cookie",
+				"jquery.textSelection",
+				"oojs-ui-windows",
+				"oojs-ui.styles.icons-content",
+				"oojs-ui.styles.icons-editing-advanced",
+				"oojs-ui.styles.icons-editing-list",
+				"ext.codeEditor.icons"
+			],
+			"messages": [
+				"codeeditor-next-annotation",
+				"codeeditor-toolbar-toggle",
+				"codeeditor-save-with-errors",
+				"codeeditor-invisibleChars-toggle",
+				"codeeditor-lineWrapping-toggle",
+				"codeeditor-searchReplace-toggle",
+				"codeeditor-gotoline",
+				"codeeditor-gotoline-placeholder",
+				"codeeditor-gotoline-prompt",
+				"codeeditor-indent",
+				"codeeditor-outdent"
+			],
+			"group": "ext.wikiEditor"
+		},
+		"ext.codeEditor.icons": {
+			"class": "ResourceLoaderImageModule",
+			"selectorWithoutVariant": ".oo-ui-icon-{name}",
+			"selectorWithVariant": ".oo-ui-image-{variant}.oo-ui-icon-{name}",
+			"variants": {
+				"progressive": {
+					"color": "#36c"
+				}
+			},
+			"images": {
+				"gotoLine": {
+					"file": "../images/gotoLine.svg"
+				},
+				"pilcrow": {
+					"file": "../images/pilcrow.svg",
+					"variants": [ "progressive" ]
+				},
+				"wrapping": {
+					"file": "../images/wrapping.svg",
+					"variants": [ "progressive" ]
+				}
+			}
+		},
+		"ext.codeEditor.ace": {
+			"group": "ext.codeEditor.ace",
+			"scripts": [
+				"ace/ace.js",
+				"ace/mode-javascript.js",
+				"ace/mode-json.js",
+				"ace/mode-css.js",
+				"ace/mode-lua.js",
+				"ace/ext-language_tools.js",
+				"ace/ext-modelist.js"
+			]
+		},
+		"ext.codeEditor.ace.modes": {
+			"group": "ext.codeEditor.ace",
+			"scripts": [
+				"ace/mode-c_cpp.js",
+				"ace/mode-clojure.js",
+				"ace/mode-csharp.js",
+				"ace/mode-coffee.js",
+				"ace/mode-groovy.js",
+				"ace/mode-html.js",
+				"ace/mode-java.js",
+				"ace/mode-latex.js",
+				"ace/mode-ocaml.js",
+				"ace/mode-perl.js",
+				"ace/mode-php.js",
+				"ace/mode-python.js",
+				"ace/mode-ruby.js",
+				"ace/mode-scala.js"
+			],
+			"dependencies": "ext.codeEditor.ace"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "CodeEditor/modules"
+	},
+	"AutoloadClasses": {
+		"CodeEditorHooks": "includes/CodeEditorHooks.php"
+	},
+	"manifest_version": 1
+}

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Slomox"
+		]
+	},
+	"spam-blacklist": "  # URLs na buten de Websteed in disse List stoppt dat Spiekern vun de Sied.\n  # Disse List gellt blot för dit Wiki; kiek ok na de globale Swartlist.\n  # För mehr Infos kiek op https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n  #<!-- Disse Reeg dröff nich ännert warrn! --> <pre>\n#\n# Syntax:\n#  * Allens vun dat „#“-Teken af an bet to dat Enn vun de Reeg is en Kommentar\n#  * Elkeen Reeg, de nich leddig is, is en regulären Utdruck, bi den nakeken warrt, wat he op de Host-Naams in de URLs passt\n\n  #</pre> <!-- Disse Reeg dröff nich ännert warrn! -->",
+	"spam-whitelist": "  #<!-- Disse Reeg dröff nich ännert warrn! --> <pre>\n# URLs na buten de Websteed in disse List stoppt dat Spiekern vun de Sied nich, ok wenn se\n# in de globale oder lokale swarte List in sünd.\n#\n# Syntax:\n#  * Allens vun dat „#“-Teken af an bet to dat Enn vun de Reeg is en Kommentar\n#  * Elkeen Reeg, de nich leddig is, is en regulären Utdruck, bi den nakeken warrt, wat he op de Host-Naams in de URLs passt\n\n  #</pre> <!-- Disse Reeg dröff nich ännert warrn! -->",
+	"spam-invalid-lines": "Disse {{PLURAL:$1|Reeg|Regen}} in de Spam-Swartlist {{PLURAL:$1|is en ungülligen regulären Utdruck|sünd ungüllige reguläre Utdrück}}. De {{PLURAL:$1|mutt|mööt}} utbetert warrn, ehrdat de Sied spiekert warrn kann:",
+	"spam-blacklist-desc": "Regex-baseert Anti-Spam-Warktüüch: [[MediaWiki:Spam-blacklist]] un [[MediaWiki:Spam-whitelist]]"
+}

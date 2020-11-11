@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chelin",
+			"C.R."
+		]
+	},
+	"vector-skin-desc": "Verziona muderna 'e MonoBook cu n'aspetto nuovo nuovo e tante migliuramente d'uso",
+	"vector-action-addsection": "Aggiunge chiacchierata",
+	"vector-action-delete": "Scancèlla",
+	"vector-action-move": "Mòve",
+	"vector-action-protect": "Prutegge",
+	"vector-action-undelete": "Arrepiglia",
+	"vector-action-unprotect": "Càgna prutezzione",
+	"vector-view-create": "Crèa",
+	"vector-view-edit": "Càgna",
+	"vector-view-history": "Vire cronologgia",
+	"vector-view-view": "Liegge",
+	"vector-view-viewsource": "Vere sorgente",
+	"vector-more-actions": "Cchiù"
+}

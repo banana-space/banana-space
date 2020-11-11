@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tacsipacsi"
+		]
+	},
+	"recaptcha-edit": "Az automatizált spamek megelőzése miatt kérjük, hogy add meg a lenti keretben olvasható szavakat:",
+	"recaptcha-addurl": "A szerkesztésed új külső hivatkozásokat tartalmaz. Az automatizált spamek megelőzése miatt kérjük, hogy add meg a lenti keretben olvasható szavakat:",
+	"recaptcha-badlogin": "Hogy az automatizált jelszófeltörési kísérleteket megelőzzük, kérjük, hogy add meg a lenti keretben olvasható szavakat:",
+	"recaptcha-createaccount": "A felhasználói fiókok automatizált létrehozásának elkerülésére kérjük, írd be az alább megjelenő szavakat a szövegdobozba:",
+	"recaptcha-createaccount-fail": "Hibás vagy hiányzó reCAPTCHA-válasz.",
+	"recaptcha-create": "Az automatizált laplétrehozás megelőzése miatt kérjük, add meg a lenti keretben olvasható szavakat:",
+	"recaptcha-info": "Oldd meg a reCAPTCHA-feladatot, és küldd vissza a feladatot és a választ captchaId és captchaWord paraméterekként.",
+	"recaptcha-id-label": "ReCaptcha-feladat",
+	"recaptcha-label": "ReCaptcha-megoldás"
+}

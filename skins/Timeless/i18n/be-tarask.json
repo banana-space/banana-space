@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Renessaince",
+			"Red Winged Duck"
+		]
+	},
+	"timeless-desc": "Вечная тэма афармленьня, створаная паводле прататыпу Winter аўтарства Брэндана Гарыса і розных стыляў фундацыі «Вікімэдыя».",
+	"timeless-search-placeholder": "Пошук сярод {{NUMBEROFARTICLES}} старонак",
+	"timeless-loggedin": "Ваш рахунак",
+	"timeless-anonymous": "Ананім",
+	"timeless-loggedinas": "Увайшлі як '''$1'''",
+	"timeless-notloggedin": "Не ўвайшлі ў сыстэму",
+	"timeless-userpage": "Старонка {{GENDER:$1|ўдзельніка|ўдзельніцы}}",
+	"timeless-talkpage": "Гутаркі {{GENDER:$1|ўдзельніка|ўдзельніцы}}",
+	"timeless-pagelog": "Журналы старонкі",
+	"timeless-more": "Болей",
+	"timeless-sitetools": "Вікі-інструмэнты",
+	"timeless-pageactions": "Інструмэнты старонкі",
+	"timeless-userpagetools": "Прылады карыстальніка",
+	"timeless-pagemisc": "Болей",
+	"timeless-namespaces": "Прасторы назваў",
+	"timeless-pagetools": "Дзеяньні на старонцы",
+	"timeless-languages": "Мовы",
+	"timeless.js": "/* Кожны JavaScript, зьмешчаны тут, будзе загружаны для ўсіх удзельнікаў, якія выкарыстоўваюць тэму афармленьня Timeless */"
+}

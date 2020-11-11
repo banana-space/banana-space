@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michawiki"
+		]
+	},
+	"spam-blacklist": " # Eksterne URL, kotrež su w lisćinje wobsahowane, blokuja składowanje strony.\n # Tuta lisćina nastupa jenož tutón Wiki; hlej tež globalnu čornu lisćinu.\n # Za dokumentaciju hlej https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- Tuta linka njesmě so změnić! --> <pre>\n#\n# Syntaksa:\n#   * Wšitko wot znamjenja \"#\" hač ke kóncej linki je komentar\n#   * Kóžda njeprózdna linka je regularny wuraz, kotryž so přećiwo mjenu hosta w URL pruwuje.\n\n #</pre> <!-- Tuta linka njesmě so změnić! -->",
+	"spam-whitelist": " #<!-- Tuta linka njesmě so změnić! --> <pre>\n# Eksterne URL, kotrež su w tutej lisćinje wobsahowane, njeblokuja składowanje strony, byrnjež\n# w globalnej abo lokalnej čornej lisćinje wobsahowane byli.\n#\n# Syntaksa:\n#   * Wšitko wot znamjenja \"#\" hač ke kóncej linki je komentar\n#   * Kóžda njeprózdna linka je regularny wuraz, kotryž so přećiwo mjenu hosta w URL pruwuje.\n\n #</pre> <!-- Tuta linka njesmě so změnić! -->",
+	"email-blacklist": "# E-mejlowe adresy, kotrež su w lisćinje wobsahowane, blokuja registrowanje a słanje e-mejlkow.\n # Tuta lisćina nastupa jenož tutón Wiki; hlej tež globalnu čornu lisćinu.\n # Za dokumentaciju hlej https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- Tuta linka njesmě so změnić! --> <pre>\n#\n# Syntaksa:\n#   * Wšitko wot znamjenja \"#\" hač ke kóncej linki je komentar\n#   * Kóžda njeprózdna linka je regularny wuraz, kotryž so přećiwo mjenu hosta w e-mejlach pruwuje.\n\n #</pre> <!-- Tuta linka njesmě so změnić! -->",
+	"email-whitelist": "#<!-- Tuta linka njesmě so změnić! --> <pre>\n# E-mejlowe adresy, kotrež su w tutej lisćinje, *nje*blokuja so, byrnjež so \n# přez zapiski čornje lisćiny blokowali.\n#\n #</pre> <!-- Tuta linka njesmě so změnić! -->\n# Syntaksa je slědowaca:\n# * Wšitko wot znamješka \"#\" ke kóncej linki je komentar\n# * Kóžda njeprózdna linka je regularny wuraz, kotryž jenož hostam znutřka e-mejlow wotpowěduje",
+	"spam-blacklisted-email": "E-mejlowe adresy w čornej lisćinje",
+	"spam-blacklisted-email-text": "Twoja e-mejlowa adresa je tuchwilu w čornej lisćinje a tohodla za słanje e-mejlow do druhich wužiwarjow zablokowana.",
+	"spam-blacklisted-email-signup": "Podata e-mejlowa adresa je tuchwilu přećiwo wužiwanju zablokowana.",
+	"spam-invalid-lines": "{{PLURAL:$1|slědowaca linka je njepłaćiwy regularny wuraz|slědowacych linkow je regularny wuraz|slědowace linki su regularne wurazy|slědowacej lince stej regularnej wurazaj}} a {{PLURAL:$1|dyrbi|dyrbi|dyrbja|dyrbjetej}} so korigować, prjedy hač so strona składuje:",
+	"spam-blacklist-desc": "Přećiwospamowy nastroj na zakładźe Regex, kotryž zmóznja URL na stronach a e-mejlowe adresy za zregistrowanych wužiwarjow do čorneje lisćiny stajić"
+}

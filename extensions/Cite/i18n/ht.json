@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Boukman",
+			"Masterches"
+		]
+	},
+	"cite-desc": "Ajoute baliz sa yo <nowiki><ref[ name=id]></nowiki> epi <nowiki><referans/></nowiki>, pou sitasyon yo.",
+	"cite_error": "Erè nan sitasyon : $1",
+	"cite_error_ref_numeric_key": "Etikèt <code>&lt;ref&gt;</code> pa valab;\nnon pa kapab yon nimewo.  Itilize yon tit ki dekri bagay la.",
+	"cite_error_ref_no_key": "Etikèt <code>&lt;ref&gt;</code> pa valab;\nreferans ki pa genyen anyen ladan l dwe gen yon non",
+	"cite_error_ref_too_many_keys": "Etikèt <code>&lt;ref&gt;</code> pa valab;\nnon yo pa bon (pa ekzanp, genyen trop)",
+	"cite_error_ref_no_input": "Etikèt <code>&lt;ref&gt;</code> pa valab;\nreferans ki pa gen non dwe gen kontni nan yo",
+	"cite_error_references_invalid_parameters": "Etikèt <code>&lt;references&gt;</code> pa valab;\npa gendwa mete paramèt.\nItilize <code>&lt;references /&gt;</code>",
+	"cite_error_references_no_backlink_label": "Pa genyen etikèt pèsonalize ankò.\nPresize yon kantite ki pi gwo nan mesaj <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_references_no_text": "Etikèt <code>&lt;ref&gt;</code> pa valab;\nNou pa bay pyès tèks pou referans ki rele <code>$1</code>"
+}

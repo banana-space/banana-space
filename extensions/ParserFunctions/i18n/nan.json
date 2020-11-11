@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ianbu",
+			"Luuva",
+			"Yoxem"
+		]
+	},
+	"pfunc_expr_unrecognised_word": "Piáu-ta̍t chhò-ngō͘: Jīn-bô \"$1\" chit ê jī.",
+	"pfunc_expr_missing_operand": "Piáu-tat chha-chhok: Phàng-kiàn $1 ê pī-sǹg-sò͘.",
+	"pfunc_expr_unrecognised_punctuation": "Piáu-ta̍t chhò-ngō͘: jīn-bô piau-tiám hû-hō \"$1\"."
+}

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chavash"
+		]
+	},
+	"pfunc_expr_unrecognised_word": "Ҫырнинчи йӑнӑш: Палласа илеймен сӑмах: \"$1\"",
+	"pfunc_expr_unrecognised_punctuation": "Ҫырнинчи йӑнӑш: Палласа илеймен паллӑ: $1"
+}

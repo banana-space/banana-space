@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cekli829",
+			"PPerviz",
+			"Vugar 1981",
+			"Wertuose",
+			"Dağlı95"
+		]
+	},
+	"categorytree": "Kateqoriya ağacı",
+	"categorytree-portlet": "Kateqoriyalar",
+	"categorytree-legend": "Kateqoriya ağacını göstər.",
+	"categorytree-desc": "[[Special:CategoryTree|Kategori sistemini]] dinamik idarə et",
+	"categorytree-header": "Kategoriya adını girib, içerisini ierarxik şəkildə görə bilərsiniz. Bu özəllik AJAX adıyla biliən JavaScript ilə oşləyər. əgər operatorunuz köhnə isə ya da JavaScript istifadəsi mümkün deyilsə, işləməz.",
+	"categorytree-category": "Kateqoriya:",
+	"categorytree-go": "Yüklə",
+	"categorytree-parents": "Üst kateqoriyalar",
+	"categorytree-mode-categories": "sadəcə kateqoriyaları göstər",
+	"categorytree-mode-pages": "Fayllardan əlavə səhifələr",
+	"categorytree-mode-all": "bütün səhifələr",
+	"categorytree-collapse": "gizlə",
+	"categorytree-expand": "genişləndir",
+	"categorytree-member-counts": "Bu kateqoriya, {{PLURAL:$1|1 altkategoriya|$1 altkategoriya}}, {{PLURAL:$2|1 səhifə|$2 səhifə}} və {{PLURAL:$3|1 şəkil|$3 şəkil}}dən ibarətdir.",
+	"categorytree-num-categories": "$1 K",
+	"categorytree-num-pages": "$1 S",
+	"categorytree-num-files": "$1 F",
+	"categorytree-num-empty": "boş",
+	"categorytree-load": "yüklə",
+	"categorytree-loading": "yüklənir…",
+	"categorytree-nothing-found": "Təəsüf edirik, nəticə yoxdur.",
+	"categorytree-no-subcategories": "alt kateqoriyalar yoxdur",
+	"categorytree-no-parent-categories": "Üst kateqoriya yoxdur.",
+	"categorytree-no-pages": "Alt kateqoriya və məqalə yoxdur.",
+	"categorytree-not-found": "<i>\"$1\"</i> adlı kateqoriya tapılmadı.",
+	"categorytree-error": "Məlumat bazasında problem var.",
+	"categorytree-retry": "Xahiş edirik bir az gözləyin və yenidən yoxlayın."
+}

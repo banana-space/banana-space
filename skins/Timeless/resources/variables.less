@@ -1,0 +1,209 @@
+@import 'mediawiki.mixins';
+
+// Colours
+
+@text: #013;
+@background: #fff;
+@background2: #f3f3f3;
+@background3: #fcfcfc;
+
+@background-dark: #777;
+@background-dark2: #555;
+@text-inverse: #fff;
+
+@link: @blue;
+@link-red: @red;
+
+@grey: #ccc;
+@grey-bright: #eee;
+@grey-dark: #666;
+
+@red: #d44;
+@red-bright: #f55;
+@red-dark: #900;
+
+@green: #3b7;
+@green-bright: #4c8;
+@green-dark: #396;
+
+@blue: #08d;
+@blue-bright: #2af;
+@blue-dark: #069;
+
+@link: @blue;
+@link-red: @red;
+
+// Flair
+
+// Fonts are chosen for consistent metrics, not necessarily overall prettiness.
+// This will NEED fixes for different languages.
+@fonts: 'Helvetica Neue', 'Nimbus Sans', 'Helvetica', 'Arial', sans-serif;
+@fonts-secondary: 'Linux Libertine', 'Times New Roman', serif;
+// Based on information on https://wiki.archlinux.org/index.php/Metric-compatible_fonts
+@fonts-monospace: 'Consolas', 'Courier', 'Nimbus Mono', 'Liberation Mono', 'Courier New', monospace;
+
+@border: 0.2em;
+@radius: 0.2em;
+
+@font-size: 0.95em;
+
+// Widths
+
+// Remember to also update skin.json (and possibly mobile.js) if you change these
+// For some reason doing @mobile-width + 1px doesn't seem to actually work,
+// so we need both for each thing
+@mobile-width: 850px;
+@desktop-small-floor: 851px;
+@desktop-small-width: 1099px;
+@desktop-mid-floor: 1100px;
+@desktop-mid-width: 1339px;
+@desktop-large-floor: 1340px;
+
+// The max-width for the content
+@content-width: 100em;
+
+@content-padding: 2em;
+
+@column-left-size: 14em;
+@column-right-size: 16em;
+
+@fixed-header-height: 3.125em;
+@color-height: 0.35em;
+
+// Miscellaneous functions
+
+// To hide objects, but keep them accessible for screen-readers
+.hidden() {
+	position: absolute;
+	top: -9999px;
+	left: 0;
+}
+
+// Icons - hides labels, but keep them accessible for screen-readers
+.icon() {
+	text-indent: -99999px;
+	border: 0;
+	background-color: transparent;
+	background-repeat: no-repeat;
+}
+
+.box() {
+	background: @background3;
+	border: solid @grey-bright;
+	border-width: 1px 1px @border;
+	padding: 1.25em 1.75em;
+	box-shadow: 0 1px 2px 1px rgba( 0, 0, 0, 0.02 );
+}
+
+// Icons for the page actions menus
+.ca-icon() {
+	.icon;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	box-sizing: border-box;
+	margin-bottom: -0.5em;
+}
+
+// Navigation column blocks
+
+.nav-block() {
+	.box();
+	overflow: auto;
+	padding: 1.5em 1.5em 0;
+	margin: 1em 0;
+	line-height: 1.1;
+
+	ul,
+	li {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	h3 {
+		font-weight: normal;
+		font-size: 1em;
+		margin: 0.25em 0 0.75em 0;
+		padding-bottom: 0.15em;
+		border-bottom: solid 2px @grey;
+	}
+	ul {
+		margin-bottom: 2em;
+	}
+	li {
+		margin: 0 0 0.35em;
+	}
+}
+
+.column-right() {
+	width: @column-right-size;
+	float: right;
+	clear: right;
+	padding-left: 1em;
+	box-sizing: border-box;
+
+	.sidebar-chunk {
+		.nav-block();
+	}
+}
+.column-left() {
+	width: @column-left-size;
+	float: left;
+	clear: left;
+	padding-right: 1em;
+	box-sizing: border-box;
+
+	.sidebar-chunk {
+		.nav-block();
+	}
+}
+
+// Dropdowns
+.dropdown-header() {
+	cursor: pointer;
+	margin-bottom: -1em;
+	padding-bottom: 1em;
+
+	&:after {
+		display: inline-block;
+		content: '';
+		width: 22px;
+		height: 12px;
+		.background-image-svg( 'images/arrow-down-grey.svg', 'images/arrow-down-grey.png' );
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+}
+.dropdown-menu( @direction: right ) {
+	.nav-block();
+	background: @background;
+	box-shadow: 0 2px 3px 1px rgba( 0, 0, 0, 0.05 );
+	position: absolute;
+	padding: 20px 2em 0;
+	margin: 0;
+	min-width: 9.153em;
+	top: 2.95em;
+	@{direction}: -1em;
+	overflow: visible;
+	z-index: 3;
+}
+
+// Categories on bottom of page
+
+.categories-bottom() {
+	#catlinks-sidebar {
+		display: none;
+	}
+
+	#catlinks {
+		margin: 0 @content-padding;
+		padding: 1.5em 0 0.5em;
+
+		li {
+			border-left: 0;
+		}
+		div {
+			margin: 0 0 0.35em;
+		}
+	}
+}

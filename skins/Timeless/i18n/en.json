@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [ "Isarra" ]
+	},
+	"skinname-timeless": "Timeless",
+	"timeless-desc": "A timeless skin designed after the Winter prototype by Brandon Harris, and various styles by the Wikimedia Foundation",
+	"timeless-search-placeholder": "Search {{NUMBEROFARTICLES}} pages",
+	"timeless-loggedin": "Your account",
+	"timeless-anonymous": "Anonymous",
+	"timeless-loggedinas": "Logged in as '''$1'''",
+	"timeless-notloggedin": "Not logged in",
+	"timeless-userpage": "{{GENDER:$1|User}} page",
+	"timeless-talkpage": "{{GENDER:$1|User}} talk",
+	"timeless-pagelog": "Page logs",
+	"timeless-more": "More",
+	"timeless-sitetools": "Wiki tools",
+	"timeless-pageactions": "Page tools",
+	"timeless-userpagetools": "Userpage tools",
+	"timeless-pagemisc": "More",
+	"timeless-namespaces": "Namespaces",
+	"timeless-pagetools": "Page actions",
+	"timeless-languages": "Languages",
+	"timeless-sitetitle": "{{MediaWiki:Sitetitle}}",
+	"timeless.css": "/* CSS placed here will affect users of the Timeless skin */",
+	"timeless.js": "/* Any JavaScript here will be loaded for users using the Timeless skin */"
+}

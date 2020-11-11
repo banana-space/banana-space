@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saraiki"
+		]
+	},
+	"vector-action-addsection": "نواں موضوع",
+	"vector-action-delete": "مٹاؤ",
+	"vector-action-move": "ٹورو",
+	"vector-action-protect": "بچاؤ",
+	"vector-view-create": "بݨاؤ",
+	"vector-view-edit": "لکھو",
+	"vector-view-history": "تاریخچہ",
+	"vector-view-view": "پڑھو",
+	"vector-more-actions": "ٻئے"
+}

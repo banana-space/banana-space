@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Farras",
+			"IvanLanin",
+			"Meursault2004",
+			"Gombang"
+		]
+	},
+	"spam-blacklist": "\n # URL eksternal yang cocok dengan daftar berikut akan diblokir jika ditambahkan pada suatu halaman.\n # Daftar ini hanya berpengaruh pada wiki ini; rujuklah juga daftar hitam global.\n # Untuk dokumentasi, lihat https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- biarkan baris ini seperti adanya --> <pre>\n#\n# Sintaksnya adalah sebagai berikut:\n#   * Semua yang diawali dengan karakter \"#\" hingga akhir baris adalah komentar\n#   * Semua baris yang tidak kosong adalah fragmen regex yang hanya akan dicocokkan dengan nama host di dalam URL\n\n #</pre> <!-- biarkan baris ini seperti adanya -->",
+	"spam-whitelist": " #<!-- biarkan baris ini seperti adanya --> <pre>\n # URL eksternal yang cocok dengan daftar berikut *tidak* akan diblokir walaupun\n# pasti akan diblokir oleh entri pada daftar hitam\n#\n# Sintaksnya adalah sebagai berikut:\n#   * Semua yang diawali dengan karakter \"#\" hingga akhir baris adalah komentar\n#   * Semua baris yang tidak kosong adalah fragmen regex yang hanya akan dicocokkan dengan nama host di dalam URL\n\n #</pre> <!-- biarkan baris ini seperti adanya -->",
+	"spam-blacklisted-email": "Alamat surel yang masuk daftar hitam",
+	"spam-blacklisted-email-signup": "Alamat surel yang dimasukkan saat ini sedang tidak boleh digunakan.",
+	"spam-invalid-lines": "{{PLURAL:$1|Baris|Baris-baris}} daftar hitam spam berikut adalah {{PLURAL:$1|ekspresi|ekspresi}} regular yang tak valid dan {{PLURAL:$1|perlu|perlu}} dikoreksi sebelum disimpan:",
+	"spam-blacklist-desc": "Perkakas anti-spam berbasis regex: [[MediaWiki:Spam-blacklist]] dan [[MediaWiki:Spam-whitelist]]",
+	"log-name-spamblacklist": "Catatan daftar hitam spam",
+	"right-spamblacklistlog": "Lihat catatan daftar hitam spam"
+}

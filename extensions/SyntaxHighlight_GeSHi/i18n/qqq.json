@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meno25",
+			"Shirayuki",
+			"The Evil IP address",
+			"Legoktm",
+			"Umherirrender",
+			"Liuxinyu970226",
+			"Robby"
+		]
+	},
+	"syntaxhighlight-desc": "{{desc|name=Syntax Highlight GeSHi|url=https://www.mediawiki.org/wiki/Extension:SyntaxHighlight_GeSHi}}",
+	"syntaxhighlight-error-category": "Tracking category for pages with syntax highlighting errors",
+	"syntaxhighlight-error-category-desc": "Description on [[Special:TrackingCategories]] for the {{msg-mw|syntaxhighlight-error-category}} tracking category.",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Label for the code input field\n{{Identical|Code}}",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Label for the language field\n{{Identical|Language}}",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "Label of the 'None' option in the language dropdown field\n{{Identical|None}}",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "Label for the checkbox to show line numbers",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-startingline": "Label for the starting line field",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "Title for the VisualEditor syntax highlighter inspector, above the text area for the code",
+	"syntaxhighlight-error-pygments-invocation-failure": "Error message shown when the syntax highlighting library failed with an unspecified error",
+	"syntaxhighlight-error-unknown-language": "Error message shown when the programming language name was not recognized by the syntax highlighting library. Parameters:\n* $1 - the language name",
+	"syntaxhighlight-error-exceeds-size-limit": "Error message shown when the block of code to be highlighted exceeds the size limit. Parameters:\n* $1 - the size of the code block, in bytes\n* $2 - the maximum size allowed, in bytes."
+}

@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Candalua",
+			"GatoSelvadego"
+		]
+	},
+	"renameuser": "Rinomina utente",
+	"renameuser-linkoncontribs": "rinomina utente",
+	"renameuser-linkoncontribs-text": "Rinomina sto utente",
+	"renameuser-desc": "Funsion par rinominar un utente (ghe vole i diriti de ''renameuser'')",
+	"renameuserold": "Vecio nome utente:",
+	"renameusernew": "Novo nome utente:",
+	"renameuserreason": "Motivo:",
+	"renameusermove": "Rinomina anca la pagina utente, la pagina de discussion e le relative sotopagine",
+	"renameusersuppress": "No stà crear rimandi al nome novo",
+	"renameuserreserve": "Tien da conto el vecio nome utente par inpedir che'l vegna doparà in futuro",
+	"renameuserwarnings": "Avertimenti:",
+	"renameuserconfirm": "Sì, rinomina l'utente",
+	"renameusersubmit": "Invia",
+	"renameuser-submit-blocklog": "Mostra registro de i blochi pa'l utente",
+	"renameusererrordoesnotexist": "El nome utente \"<nowiki>$1</nowiki>\" no l'esiste",
+	"renameusererrorexists": "El nome utente \"<nowiki>$1</nowiki>\" l'esiste de zà",
+	"renameusererrorinvalid": "El nome utente \"<nowiki>$1</nowiki>\" no'l xe mìa valido.",
+	"renameuser-error-request": "Se gà verificà un problema ne la ricezion de la richiesta. Torna indrìo e ripróa da novo.",
+	"renameuser-error-same-user": "No se pol rinominar un utente al stesso nome che'l gavea zà.",
+	"renameusersuccess": "El nome utente \"<nowiki>$1</nowiki>\" el xe stà canbià in \"<nowiki>$2</nowiki>\"",
+	"renameuser-page-exists": "La pagina $1 la esiste de zà; no se pole sovrascrìvarla automaticamente.",
+	"renameuser-page-moved": "La pagina $1 la xe stà spostà a $2.",
+	"renameuser-page-unmoved": "No se pole spostar la pagina $1 a $2.",
+	"log-name-renameuser": "Registro dei utenti rinominà",
+	"log-description-renameuser": "Sto cuà el xe el registro de łe modifeghe a i nome utente.",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|ga rinominà}} 'l utente $4 (có {{PLURAL:$6|$6 contributo|$6 contributi}}) in $5",
+	"logentry-renameuser-renameuser-legacier": "$1 ga rinominà 'l utente $4 in $5",
+	"renameuser-move-log": "Spostamento automatico de la pagina - utente rinominà da \"[[User:$1|$1]]\" a \"[[User:$2|$2]]\"",
+	"action-renameuser": "rinominar i utenti",
+	"right-renameuser": "Rinomina utenti",
+	"renameuser-renamed-notice": "Sto utente el gà canbià nome.\nQua soto ghe xe el riferimento sul registro de rinomina."
+}

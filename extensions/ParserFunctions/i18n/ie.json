@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Stavanger7"
+		]
+	},
+	"pfunc_expr_missing_operand": "Errore de expression: operande mancant por $1."
+}

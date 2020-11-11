@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liuxinyu970226",
+			"Eflyjason"
+		]
+	},
+	"timeless-desc": "在由Brandon Harris设计的冬季标准之后设计的一个不受时间影响的皮肤，以及一些来自维基媒体基金会的风格",
+	"timeless-search-placeholder": "搜索{{NUMBEROFARTICLES}}个页面",
+	"timeless-loggedin": "您的帐户",
+	"timeless-anonymous": "匿名",
+	"timeless-loggedinas": "以'''$1'''登录",
+	"timeless-notloggedin": "未登录",
+	"timeless-userpage": "{{GENDER:$1|用户}}页",
+	"timeless-talkpage": "{{GENDER:$1|用户}}讨论",
+	"timeless-pagelog": "页面日志",
+	"timeless-more": "更多",
+	"timeless-sitetools": "Wiki工具",
+	"timeless-pageactions": "页面工具",
+	"timeless-userpagetools": "用户页面工具",
+	"timeless-pagemisc": "更多",
+	"timeless-namespaces": "名字空间",
+	"timeless-pagetools": "页面选项",
+	"timeless-languages": "语言",
+	"timeless.js": "/* 这里的任何JavaScript将为使用Timeless皮肤的用户加载 */"
+}

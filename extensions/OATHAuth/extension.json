@@ -1,0 +1,118 @@
+{
+	"name": "OATHAuth",
+	"version": "0.2.2",
+	"author": "Ryan Lane",
+	"url": "https://www.mediawiki.org/wiki/Extension:OATHAuth",
+	"descriptionmsg": "oathauth-desc",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.31.0"
+	},
+	"license-name": "GPL-2.0-or-later AND GPL-3.0-or-later",
+	"AutoloadClasses": {
+		"ApiOATHValidate": "includes/api/ApiOATHValidate.php",
+		"ApiQueryOATH": "includes/api/ApiQueryOATH.php",
+		"OATHAuthHooks": "includes/OATHAuthHooks.php",
+		"OATHAuthKey": "includes/OATHAuthKey.php",
+		"OATHAuthUtils": "includes/OATHAuthUtils.php",
+		"OATHUserRepository": "includes/OATHUserRepository.php",
+		"HOTP": "includes/lib/hotp.php",
+		"HOTPResult": "includes/lib/hotp.php",
+		"Base32": "includes/lib/base32.php",
+		"OATHUser": "includes/OATHUser.php",
+		"SpecialOATH": "includes/special/SpecialOATH.php",
+		"SpecialOATHEnable": "includes/special/SpecialOATHEnable.php",
+		"SpecialOATHDisable": "includes/special/SpecialOATHDisable.php",
+		"ProxySpecialPage": "includes/special/ProxySpecialPage.php",
+		"TOTPAuthenticationRequest": "includes/auth/TOTPAuthenticationRequest.php",
+		"TOTPSecondaryAuthenticationProvider": "includes/auth/TOTPSecondaryAuthenticationProvider.php"
+	},
+	"AuthManagerAutoConfig": {
+		"secondaryauth": {
+			"TOTPSecondaryAuthenticationProvider":{
+				"class": "TOTPSecondaryAuthenticationProvider",
+				"sort": 50
+			}
+		}
+	},
+	"ExtensionMessagesFiles": {
+		"OATHAuthAlias": "OATHAuth.alias.php"
+	},
+	"Hooks": {
+		"AuthChangeFormFields": [
+			"OATHAuthHooks::onAuthChangeFormFields"
+		],
+		"TwoFactorIsEnabled": [
+			"OATHAuthHooks::onTwoFactorIsEnabled"
+		],
+		"LoadExtensionSchemaUpdates": [
+			"OATHAuthHooks::onLoadExtensionSchemaUpdates"
+		],
+		"GetPreferences": [
+			"OATHAuthHooks::onGetPreferences"
+		]
+	},
+	"MessagesDirs": {
+		"OATHAuth": [
+			"i18n"
+		]
+	},
+	"config": {
+		"OATHAuthWindowRadius": 4,
+		"OATHAuthDatabase": false,
+		"OATHAuthSecret": false,
+		"OATHAuthAccountPrefix": false
+	},
+	"ResourceModules": {
+		"ext.oath.showqrcode": {
+			"scripts": [
+				"jquery.qrcode.js",
+				"qrcode.js",
+				"ext.oath.showqrcode.js"
+			]
+		},
+		"ext.oath.showqrcode.styles": {
+			"styles": [
+				"ext.oath.showqrcode.styles.css"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "OATHAuth"
+	},
+	"SpecialPages": {
+		"OATH": "SpecialOATH"
+	},
+	"AvailableRights": [
+		"oathauth-enable",
+		"oathauth-api-all"
+	],
+	"GroupPermissions": {
+		"*": {
+			"oathauth-enable": true
+		}
+	},
+	"GrantPermissions": {
+		"oath": {
+			"oathauth-api-all": true
+		}
+	},
+	"GrantPermissionGroups": {
+		"oath": "authentication"
+	},
+	"APIModules": {
+		"oathvalidate": "ApiOATHValidate"
+	},
+	"APIMetaModules": {
+		"oath": "ApiQueryOATH"
+	},
+	"RateLimits": {
+		"badoath": {
+			"&can-bypass": false,
+			"user": [ 10, 60 ],
+			"user-global": [ 10, 60 ]
+		}
+	},
+	"manifest_version": 1
+}

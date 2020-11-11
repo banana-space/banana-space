@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"skinname-timeless": "Безвременско",
+	"timeless-desc": "Безвременско руво по образ на прототипот „Зима“ на Брендон Харис и разни стилови на Фондацијата Викимедија.",
+	"timeless-search-placeholder": "Пребарување по околу {{NUMBEROFARTICLES}} страници",
+	"timeless-loggedin": "Вашата сметка",
+	"timeless-anonymous": "Анонимен",
+	"timeless-loggedinas": "Најавени сте како '''$1'''",
+	"timeless-notloggedin": "Не сте најавени",
+	"timeless-userpage": "{{GENDER:$1|Корисничка}} страница",
+	"timeless-talkpage": "{{GENDER:$1|Разговор}} со корисникот",
+	"timeless-pagelog": "Дневници на страницата",
+	"timeless-more": "Повеќе",
+	"timeless-sitetools": "Викиалатки",
+	"timeless-pageactions": "Алатки за страници",
+	"timeless-userpagetools": "Алатки за корисничката страница",
+	"timeless-pagemisc": "Повеќе",
+	"timeless-namespaces": "Именски простори",
+	"timeless-pagetools": "Дејства врз страници",
+	"timeless-languages": "Јазици",
+	"timeless.css": "/* Тука поставениот CSS се однесува на корисниците на рувото „Безвременско“ */",
+	"timeless.js": "/* Тука поставениот JavaScript ќе им се вчитува на корисниците што го користат рувото „Безвременско“ */"
+}

@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"SpeedyGonsales",
+			"MaGa",
+			"Roberta F."
+		]
+	},
+	"fancycaptcha-addurl": "Vaše uređivanje sadrži nove vanjske poveznice. Kao zaštitu od automatskog spama,\nmolimo unesite slova koja vidite na slici dolje: ([[Special:Captcha/help|Pomoć]])",
+	"fancycaptcha-badlogin": "Da se spriječi automatiziranje pogađanja lozinki, molimo unesite\nslova koja vidite na slici dolje: <br />([[Special:Captcha/help|Pomoć]])",
+	"fancycaptcha-captcha": "Sigurnosna provjera",
+	"fancycaptcha-accountcreate": "Kao zaštitu wiki od automatskog otvaranja računa, pri otvaranju računa ljubazno Vas molimo upišite slova koja vidite na slici: <br />([[Special:Captcha/help|Pomoć]])",
+	"fancycaptcha-create": "Da bi stvorili novu stranicu, molimo unesite\nslova koja vidite na slici dolje: <br />([[Special:Captcha/help|Pomoć]])",
+	"fancycaptcha-edit": "Da bi uređivali ovu stranicu, molimo unesite slova koja vidite na slici dolje: <br />([[Special:Captcha/help|Pomoć]])",
+	"fancycaptcha-imgcaptcha-ph": "Unesite tekst koji vidite iznad",
+	"fancycaptcha-sendemail": "Da bi ste nam pomogli protiv automatskog spama, molimo unesite riječi koje su prikazane ispod u okvir ([[Special:Captcha/help|više informacija]]):",
+	"fancycaptcha-reload-text": "Učitaj ponovno"
+}

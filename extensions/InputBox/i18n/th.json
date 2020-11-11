@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Horus"
+		]
+	},
+	"inputbox-tryexact": "ลองตรงทุกตัวอักษร",
+	"inputbox-searchfulltext": "ค้นหาข้อมูล",
+	"inputbox-createarticle": "สร้างเนื้อหา"
+}

@@ -1,0 +1,109 @@
+{
+	"name": "Vector",
+	"author": [
+		"Trevor Parscal",
+		"Roan Kattouw",
+		"..."
+	],
+	"url": "https://www.mediawiki.org/wiki/Skin:Vector",
+	"descriptionmsg": "vector-skin-desc",
+	"namemsg": "skinname-vector",
+	"license-name": "GPL-2.0-or-later",
+	"type": "skin",
+	"requires": {
+		"MediaWiki": ">= 1.29.0"
+	},
+	"ConfigRegistry": {
+		"vector": "GlobalVarConfig::newInstance"
+	},
+	"ValidSkinNames": {
+		"vector": "Vector"
+	},
+	"MessagesDirs": {
+		"Vector": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"Vector\\Hooks": "includes/Hooks.php",
+		"SkinVector": "includes/SkinVector.php",
+		"VectorTemplate": "includes/VectorTemplate.php",
+		"Vector\\ResourceLoaderLessModule": "includes/ResourceLoaderLessModule.php"
+	},
+	"Hooks": {
+		"BeforePageDisplayMobile": [
+			"Vector\\Hooks::onBeforePageDisplayMobile"
+		]
+	},
+	"@note": "When modifying skins.vector.styles definition, make sure the installer still works",
+	"ResourceModules": {
+		"skins.vector.styles": {
+			"class": "Vector\\ResourceLoaderLessModule",
+			"targets": [ "desktop", "mobile" ],
+			"styles": {
+				"screen.less": {
+					"media": "screen"
+				},
+				"screen-hd.less": {
+					"media": "screen and (min-width: 982px)"
+				},
+				"print.less": {}
+			}
+		},
+
+		"skins.vector.styles.responsive": {
+			"targets": [ "desktop", "mobile" ],
+			"styles": [
+				"responsive.less"
+			]
+		},
+		"skins.vector.js": {
+			"scripts": [
+				"collapsibleTabs.js",
+				"vector.js"
+			],
+			"dependencies": [
+				"jquery.throttle-debounce",
+				"jquery.tabIndex"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "Vector"
+	},
+	"ResourceModuleSkinStyles": {
+		"vector": {
+			"jquery.tipsy": "skinStyles/jquery.tipsy.less",
+			"jquery.ui.core": [
+				"skinStyles/jquery.ui/jquery.ui.core.css",
+				"skinStyles/jquery.ui/jquery.ui.theme.css"
+			],
+			"jquery.ui.accordion": "skinStyles/jquery.ui/jquery.ui.accordion.css",
+			"jquery.ui.autocomplete": "skinStyles/jquery.ui/jquery.ui.autocomplete.css",
+			"jquery.ui.button": "skinStyles/jquery.ui/jquery.ui.button.css",
+			"jquery.ui.datepicker": "skinStyles/jquery.ui/jquery.ui.datepicker.css",
+			"jquery.ui.dialog": "skinStyles/jquery.ui/jquery.ui.dialog.css",
+			"jquery.ui.menu": "skinStyles/jquery.ui/jquery.ui.menu.css",
+			"jquery.ui.progressbar": "skinStyles/jquery.ui/jquery.ui.progressbar.css",
+			"jquery.ui.resizable": "skinStyles/jquery.ui/jquery.ui.resizable.css",
+			"jquery.ui.selectable": "skinStyles/jquery.ui/jquery.ui.selectable.css",
+			"jquery.ui.slider": "skinStyles/jquery.ui/jquery.ui.slider.css",
+			"jquery.ui.spinner": "skinStyles/jquery.ui/jquery.ui.spinner.css",
+			"jquery.ui.tabs": "skinStyles/jquery.ui/jquery.ui.tabs.css",
+			"jquery.ui.tooltips": "skinStyles/jquery.ui/jquery.ui.tooltips.css",
+			"+mediawiki.action.view.redirectPage": "skinStyles/mediawiki.action.view.redirectPage.less",
+			"+mediawiki.notification": "skinStyles/mediawiki.notification.less",
+			"+oojs-ui-core.styles": "skinStyles/ooui.less",
+			"mediawiki.special": "skinStyles/mediawiki.special.less",
+			"+mediawiki.special.preferences.styles": "skinStyles/mediawiki.special.preferences.styles.less"
+		}
+	},
+	"config": {
+		"VectorUseSimpleSearch": true,
+		"VectorUseIconWatch": true,
+		"VectorResponsive": false,
+		"VectorPrintLogo": false
+	},
+	"manifest_version": 1
+}

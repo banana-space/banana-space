@@ -1,0 +1,25 @@
+@import '../variables.less';
+
+@media screen {
+	.client-js {
+		.mw-editsection a {
+			.background-image-svg( '../images/brackets-grey.svg', '../images/brackets-grey.png' );
+			margin-right: 1.25em;
+		}
+		.mw-editsection a.mw-editsection-visualeditor {
+			.background-image-svg( '../images/pencil-grey.svg', '../images/pencil-grey.png' );
+		}
+		.mw-editsection-divider {
+			display: none;
+		}
+
+		@media ( max-width: @mobile-width ) {
+			#ca-ve-edit a {
+				.background-image-svg( '../images/pencil-grey.svg', '../images/pencil-grey.png' );
+			}
+			#ca-edit a {
+				.background-image-svg( '../images/brackets-grey.svg', '../images/brackets-grey.png' );
+			}
+		}
+	}
+}

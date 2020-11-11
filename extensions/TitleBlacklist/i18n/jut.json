@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Huslåke",
+			"Ælsån"
+		]
+	},
+	"titleblacklist-desc": "Kan til førbæd skeppenge der pæger ve spæsifiærn titler: [[MediaWiki:Titleblacklist]] og [[MediaWiki:Titlewhitelist]]",
+	"titleblacklist": "# Dett'er en titel blackliste. Titler dette match en regex her ken ekke være skeppen.\n# Brug \"#\" før bemærkenge.",
+	"titlewhitelist": "# Dett'er en titel whiteliste. Brug \"#\" før bemærkenge"
+}

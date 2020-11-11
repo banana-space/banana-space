@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Praveenp"
+		]
+	},
+	"oathauth-desc": "എച്ച്.എം.എ.സി. അധിഷ്ഠിത ഒറ്റത്തവണ രഹസ്യവാക്കുക്കൾ വഴി സാധൂകരണം ചെയ്യുന്നു",
+	"specialpages-group-oath": "ദ്വി-ഘടക സാധൂകരണം",
+	"oathauth-account": "അംഗത്വ നാമം:",
+	"oathauth-secret": "ദ്വി-ഘടക സാധൂകരണത്തിനുള്ള രഹസ്യചാവി:",
+	"oathauth-enable": "ദ്വി-ഘടക സാധൂകരണം സജ്ജമാക്കുക",
+	"oathauth-token": "ചീട്ട്",
+	"oathauth-disable": "ദ്വി-ഘടക സാധൂകരണം ഒഴിവാക്കുക",
+	"oathauth-disabledoath": "ദ്വി-ഘടക സാധൂകരണം പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നു.",
+	"oathauth-prefs-label": "ദ്വി-ഘടക സാധൂകരണം:",
+	"oathauth-step1": "ഘട്ടം 1: ദ്വി-ഘടക സാധൂകരണ പ്രോഗ്രാം ഡൗൺലോഡ് ചെയ്യുക",
+	"oathauth-step2": "ഘട്ടം 2: ക്യൂ.ആർ. കോഡ് സ്കാൻ ചെയുക",
+	"oathauth-step3": "ഘട്ടം 3: സ്ക്രാച്ച് കോഡുകൾ എഴുതിവെക്കുക",
+	"oathauth-step4": "ഘട്ടം 4: പരിശോധിക്കൽ",
+	"oathauth-auth-token-label": "ചീട്ട്"
+}

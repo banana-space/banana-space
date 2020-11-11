@@ -1,0 +1,12 @@
+{
+	"--title": "MultimediaViewer - Documentation",
+	"--categories": "jsduck.categories.json",
+	"--builtin-classes": true,
+	"--processes": "0",
+	"--warnings-exit-nonzero": true,
+	"--output": "docs",
+	"--": [
+		"jsduck.external.js",
+		"resources/mmv"
+	]
+}

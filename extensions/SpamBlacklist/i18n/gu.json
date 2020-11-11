@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ashok modhvadia",
+			"KartikMistry",
+			"Sushant savla"
+		]
+	},
+	"spam-blacklist": " # જ્યારે કોઈ પાનામાં આ યાદીને મળતા બાહ્ય URLs ઉમેરાશે ત્યારે તેમને રોકી દેવાશે. \n # આ યાદી માત્ર આ વિકિ પરજ કાર્યાન્વીત છે.; વૈશ્વીક પ્રતિબંધ યાદી જોવા પણ વિનંતી. \n # દસ્તાવજ માટે  https://www.mediawiki.org/wiki/Extension:SpamBlacklist જુઓ.\n #<!-- leave this line exactly as it is --> <pre>\n#\n# સૂત્ર લેખન (સિન્ટેક્સ) આ પ્રમાણે છે:\n#   * Everything from a \"#\" character to the end of the line is a comment\n#   * Every non-blank line is a regex fragment which will only match hosts inside URLs\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"spam-whitelist": " #<!-- આ લાઈનને એમની એમ જ રહેવા દેશો --> <pre>\n# યાદીને મળતા અવતા બાહ્ય URLs નેપ્રતિબંધિત  *નહીં* કરાય  પછી ભલે તેમના\n# પ્રતિબંધીત યાદીને ઍંટ્રીમાં રોક લગાડેલી હોય.\n#\n #</pre> <!-- આ લાઈનને એમની એમ જ રહેવા દેશો  -->",
+	"email-blacklist": " # આ યાદીને મળતા ઈ-મેલની નોંધણી કે તેમના દ્વારા મેલ આવાગમનને રોકી દેવાશે. \n # આ યાદી માત્ર આ વિકિ પરજ કાર્યાન્વીત છે.; વૈશ્વીક પ્રતિબંધ યાદી જોવા પણ વિનંતી. \n # દસ્તાવજ માટે  https://www.mediawiki.org/wiki/Extension:SpamBlacklist જુઓ.\n #<!-- leave this line exactly as it is --> <pre>\n#\n# સૂત્ર લેખન (સિન્ટેક્સ) આ પ્રમાણે છે:\n#   * Everything from a \"#\" character to the end of the line is a comment\n#   * Every non-blank line is a regex fragment which will only match hosts inside URLs\n\n #</pre> <!-- leave this line exactly as it is -->",
+	"email-whitelist": " #<!-- leave this line exactly as it is --> <pre>\n# આ યાદીને મળતાં ઈ-મેલ ને પ્રતિબંધિત *નહીં* કરી શકાય પછી ભલે તેમના પર\n# પ્રતિબંધીત સૂચિ દ્વારા રોક લગાવાઈ હોય. \n#\n #</pre> <!-- leave this line exactly as it is -->\n# સૂત્ર રચના આમુજબ હશે.:\n#   * Everything from a \"#\" character to the end of the line is a comment\n#   * Every non-blank line is a regex fragment which will only match hosts inside e-mail addresses",
+	"spam-blacklisted-email": "પ્રતિબંધિત ઈ-મેલ સરનામું",
+	"spam-blacklisted-email-text": "તમારા ઈ-મેલ સરનામાં પર હાલમાં પ્રતિબંધ લગાડેલો છે આથી તમે ઈ-મેલ મોકલી  નહીં શકો.",
+	"spam-blacklisted-email-signup": "આ ઈ-મેલ પર હાલમાં વપરાશ પ્રતિબંધ લાગેલો છે.",
+	"spam-invalid-lines": "નીચેને સ્પૅમ બ્લેકલીસ્ટમાં {{PLURAL:$1| લાઈન|લાઈનો}} અમાન્ય છે. નિયમીત {{PLURAL:$1|expression|expressions}} અને પાનુમ્ સાચવ્યાં પહેલા તેને સુધારી લેશો.",
+	"spam-blacklist-desc": "Regex-આધારિત ઍન્ટી સ્પૅમ સાધનો પાનાઓ અને નોંધાયેલા સભ્યોનાં ઇમેલ સરનામાઓમાં URLs ને બ્લેકલિસ્ટ કરવા દે છે."
+}

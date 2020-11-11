@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334",
+			"Yerpo",
+			"Eleassar"
+		]
+	},
+	"syntaxhighlight-desc": "Nudi označevanje skladnje <code>&lt;syntaxhighlight&gt;</code> z uporabo [http://pygments.org/ Pygments – označevalnika skladnje Python]",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "Blok kode"
+}

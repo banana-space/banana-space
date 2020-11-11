@@ -1,0 +1,12 @@
+{
+	"@metadata": [],
+	"wikieditor-toolbar-tool-bold-example": "Rubutu mai gwaɓi",
+	"wikieditor-toolbar-tool-italic-example": "Rubutun tsutsa",
+	"wikieditor-toolbar-tool-ilink": "Mahaɗin ciki",
+	"wikieditor-toolbar-tool-ilink-example": "Sunan mahaɗi",
+	"wikieditor-toolbar-tool-xlink": "Mahaɗi mai zuwa waje (a tuna da zagin http://)",
+	"wikieditor-toolbar-tool-xlink-example": "http://www.example.com sunan mahaɗi",
+	"wikieditor-toolbar-tool-link-cancel": "Soke",
+	"wikieditor-toolbar-tool-reference-cancel": "Soke",
+	"wikieditor-toolbar-tool-table-cancel": "Soke"
+}

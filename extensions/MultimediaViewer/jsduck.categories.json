@@ -1,0 +1,104 @@
+[
+	{
+		"name": "Media Viewer classes",
+		"groups": [
+			{
+				"name": "Base",
+				"classes": [
+					"mw.mmv.Config",
+					"mw.mmv.EmbedFileFormatter",
+					"mw.mmv.HtmlUtils",
+					"mw.mmv.LightboxImage",
+					"mw.mmv.LightboxInterface",
+					"mw.mmv.MultimediaViewer",
+					"mw.mmv.MultimediaViewerBootstrap",
+					"mw.mmv.ThumbnailWidthCalculator"
+				]
+			},
+			{
+				"name": "Loggers",
+				"classes": [
+					"mw.mmv.logging.*"
+				]
+			},
+			{
+				"name": "Models",
+				"classes": [
+					"mw.mmv.model.*"
+				]
+			},
+			{
+				"name": "Providers",
+				"classes": [
+					"mw.mmv.provider.*"
+				]
+			},
+			{
+				"name": "Routers",
+				"classes": [
+					"mw.mmv.routing.*"
+				]
+			},
+			{
+				"name": "Interface",
+				"classes": [
+					"mw.mmv.ui.*"
+				]
+			}
+		]
+	},
+
+	{
+		"name": "External",
+		"groups": [
+			{
+				"name": "jQuery",
+				"classes": [
+					"jQuery",
+					"jQuery.Promise",
+					"jQuery.Deferred",
+					"jQuery.Event",
+					"jqXHR"
+				]
+			},
+			{
+				"name": "JavaScript natives",
+				"classes": [
+					"Array",
+					"Boolean",
+					"Date",
+					"Function",
+					"Number",
+					"Object",
+					"RegExp",
+					"String"
+				]
+			},
+			{
+				"name": "OOUI",
+				"classes": [
+					"OO.ui.*"
+				]
+			},
+			{
+				"name": "MediaWiki",
+				"classes": [
+					"mw",
+					"mw.Api",
+					"mw.Title",
+					"mw.Map",
+					"mw.storage",
+					"mw.eventLog"
+				]
+			},
+			{
+				"name": "Browser native classes",
+				"classes": [
+					"HTMLElement",
+					"HTMLImageElement",
+					"XMLHttpRequest"
+				]
+			}
+		]
+	}
+]

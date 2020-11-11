@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ælsån"
+		]
+	},
+	"spam-blacklist-desc": "Regex-basærn anti-spem tø: [[MediaWiki:Spam-blacklist]] og [[MediaWiki:Spam-whitelist]]"
+}
