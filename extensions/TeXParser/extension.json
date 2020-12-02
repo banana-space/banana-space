@@ -11,10 +11,16 @@
 		"TeXParserHooks": "includes/TeXParserHooks.php"
 	},
 	"Hooks": {
-		"ParserFirstCallInit": "TeXParserHooks::onParserFirstCallInit",
 		"ParserBeforeInternalParse": "TeXParserHooks::onParserBeforeInternalParse"
 	},
 	"ExtensionMessagesFiles": {
 		"TeXParserMagic": "includes/TeXParserMagic.php"
+	},
+	"ResourceModules": {
+		"ext.boilerPlate.foo": {
+			"styles": [
+				"resources/ext.boilerPlate.foo.css"
+			]
+		}
 	}
 }
