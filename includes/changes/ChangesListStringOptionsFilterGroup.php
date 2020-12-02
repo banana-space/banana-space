@@ -38,17 +38,17 @@ class ChangesListStringOptionsFilterGroup extends ChangesListFilterGroup {
 	/**
 	 * Type marker, used by JavaScript
 	 */
-	const TYPE = 'string_options';
+	public const TYPE = 'string_options';
 
 	/**
 	 * Delimiter
 	 */
-	const SEPARATOR = ';';
+	public const SEPARATOR = ';';
 
 	/**
 	 * Signifies that all options in the group are selected.
 	 */
-	const ALL = 'all';
+	public const ALL = 'all';
 
 	/**
 	 * Signifies that no options in the group are selected, meaning the group has no effect.
@@ -56,19 +56,19 @@ class ChangesListStringOptionsFilterGroup extends ChangesListFilterGroup {
 	 * For full-coverage groups, this is the same as ALL if all filters are allowed.
 	 * For others, it is not.
 	 */
-	const NONE = '';
+	public const NONE = '';
 
 	/**
 	 * Defaul parameter value
 	 *
-	 * @var string $defaultValue
+	 * @var string
 	 */
 	protected $defaultValue;
 
 	/**
 	 * Callable used to do the actual query modification; see constructor
 	 *
-	 * @var callable $queryCallable
+	 * @var callable
 	 */
 	protected $queryCallable;
 
@@ -155,6 +155,7 @@ class ChangesListStringOptionsFilterGroup extends ChangesListFilterGroup {
 	 * Registers a filter in this group
 	 *
 	 * @param ChangesListStringOptionsFilter $filter
+	 * @suppress PhanParamSignaturePHPDocMismatchHasParamType,PhanParamSignatureMismatch
 	 */
 	public function registerFilter( ChangesListStringOptionsFilter $filter ) {
 		$this->filters[$filter->getName()] = $filter;
@@ -200,19 +201,16 @@ class ChangesListStringOptionsFilterGroup extends ChangesListFilterGroup {
 
 		sort( $selectedValues );
 
-		call_user_func_array(
-			$this->queryCallable,
-			[
-				get_class( $specialPage ),
-				$specialPage->getContext(),
-				$dbr,
-				&$tables,
-				&$fields,
-				&$conds,
-				&$query_options,
-				&$join_conds,
-				$selectedValues
-			]
+		( $this->queryCallable )(
+			get_class( $specialPage ),
+			$specialPage->getContext(),
+			$dbr,
+			$tables,
+			$fields,
+			$conds,
+			$query_options,
+			$join_conds,
+			$selectedValues
 		);
 	}
 

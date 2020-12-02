@@ -1,6 +1,7 @@
 /* Ace syntax-highlighting code editor extension for wikiEditor */
 /* global ace */
-( function ( $, mw, OO ) {
+/* eslint-disable no-jquery/no-global-selector */
+( function () {
 	$.wikiEditor.modules.codeEditor = {
 		/**
 		 * Core Requirements
@@ -216,7 +217,7 @@
 							tools: {
 								codeEditor: {
 									labelMsg: 'codeeditor-toolbar-toggle',
-									type: 'button',
+									type: 'toggle',
 									oouiIcon: 'markup',
 									action: {
 										type: 'callback',
@@ -252,7 +253,7 @@
 							tools: {
 								invisibleChars: {
 									labelMsg: 'codeeditor-invisibleChars-toggle',
-									type: 'button',
+									type: 'toggle',
 									oouiIcon: 'pilcrow',
 									action: {
 										type: 'callback',
@@ -261,7 +262,7 @@
 								},
 								lineWrapping: {
 									labelMsg: 'codeeditor-lineWrapping-toggle',
-									type: 'button',
+									type: 'toggle',
 									oouiIcon: 'wrapping',
 									action: {
 										type: 'callback',
@@ -279,7 +280,7 @@
 								},
 								toggleSearchReplace: {
 									labelMsg: 'codeeditor-searchReplace-toggle',
-									type: 'button',
+									type: 'toggle',
 									oouiIcon: 'articleSearch',
 									action: {
 										type: 'callback',
@@ -341,9 +342,9 @@
 			 * Sets up the iframe in place of the textarea to allow more advanced operations
 			 */
 			setupCodeEditor: function () {
-				var box, lang, basePath, container, editdiv, session;
+				var $box, lang, basePath, container, editdiv, session;
 
-				box = context.$textarea;
+				$box = context.$textarea;
 				lang = mw.config.get( 'wgCodeEditorCurrentLanguage' );
 				basePath = mw.config.get( 'wgExtensionAssetsPath', '' );
 				if ( basePath.slice( 0, 2 ) === '//' ) {
@@ -358,26 +359,27 @@
 					// Ace doesn't like replacing a textarea directly.
 					// We'll stub this out to sit on top of it...
 					// line-height is needed to compensate for oddity in WikiEditor extension, which zeroes the line-height on a parent container
-					container = context.$codeEditorContainer = $( '<div style="position: relative"><div class="editor" style="line-height: 1.5em; top: 0; left: 0; right: 0; bottom: 0; position: absolute;"></div></div>' ).insertAfter( box );
+					// eslint-disable-next-line no-jquery/no-parse-html-literal
+					container = context.$codeEditorContainer = $( '<div style="position: relative"><div class="editor" style="line-height: 1.5em; top: 0; left: 0; right: 0; bottom: 0; position: absolute;"></div></div>' ).insertAfter( $box );
 					editdiv = container.find( '.editor' );
 
-					box.css( 'display', 'none' );
-					container.height( box.height() );
+					$box.css( 'display', 'none' );
+					container.height( $box.height() );
 
 					// Non-lazy loaded dependencies: Enable code completion
 					ace.require( 'ace/ext/language_tools' );
 
 					// Load the editor now
 					context.codeEditor = ace.edit( editdiv[ 0 ] );
-					context.codeEditor.getSession().setValue( box.val() );
-					box.textSelection( 'register', textSelectionFn );
+					context.codeEditor.getSession().setValue( $box.val() );
+					$box.textSelection( 'register', textSelectionFn );
 
 					// Disable some annoying commands
 					context.codeEditor.commands.removeCommand( 'replace' ); // ctrl+R
 					context.codeEditor.commands.removeCommand( 'transposeletters' ); // ctrl+T
 					context.codeEditor.commands.removeCommand( 'gotoline' ); // ctrl+L
 
-					context.codeEditor.setReadOnly( box.prop( 'readonly' ) );
+					context.codeEditor.setReadOnly( $box.prop( 'readonly' ) );
 					context.codeEditor.setShowInvisibles( context.showInvisibleChars );
 
 					// The options to enable
@@ -393,9 +395,9 @@
 						readOnly: true
 					} );
 
-					box.closest( 'form' )
-						.submit( context.evt.codeEditorSubmit )
-						.find( '#wpSave' ).click( context.evt.codeEditorSave );
+					$box.closest( 'form' )
+						.on( 'submit', context.evt.codeEditorSubmit )
+						.find( '#wpSave' ).on( 'click', context.evt.codeEditorSave );
 
 					session = context.codeEditor.getSession();
 
@@ -412,10 +414,10 @@
 						session.setMode( 'ace/mode/' + lang );
 					} );
 
-					// Use jquery.ui.resizable so user can make the box taller too
+					// Use jQuery UI resizable() so that users can make the box taller
 					container.resizable( {
 						handles: 's',
-						minHeight: box.height(),
+						minHeight: $box.height(),
 						resize: function () {
 							context.codeEditor.resize();
 						}
@@ -506,9 +508,9 @@
 					delayedUpdate,
 					editor = context.codeEditor,
 					lang = ace.require( 'ace/lib/lang' ),
-					$errors = $( '<span class="codeEditor-status-worker-cell ace_gutter-cell ace_error">0</span>' ),
-					$warnings = $( '<span class="codeEditor-status-worker-cell ace_gutter-cell ace_warning">0</span>' ),
-					$infos = $( '<span class="codeEditor-status-worker-cell ace_gutter-cell ace_info">0</span>' ),
+					$errors = $( '<span>' ).addClass( 'codeEditor-status-worker-cell ace_gutter-cell ace_error' ).text( '0' ),
+					$warnings = $( '<span>' ).addClass( 'codeEditor-status-worker-cell ace_gutter-cell ace_warning' ).text( '0' ),
+					$infos = $( '<span>' ).addClass( 'codeEditor-status-worker-cell ace_gutter-cell ace_info' ).text( '0' ),
 					$message = $( '<div>' ).addClass( 'codeEditor-status-message' ),
 					$lineAndMode = $( '<div>' ).addClass( 'codeEditor-status-line' ),
 					$workerStatus = $( '<div>' )
@@ -683,6 +685,7 @@
 		 * @param {Object} extended
 		 */
 		saveAndExtend = function ( base, extended ) {
+			// eslint-disable-next-line no-jquery/no-map-util
 			$.map( extended, function ( func, name ) {
 				var orig;
 				if ( name in base ) {
@@ -848,4 +851,4 @@
 		}
 
 	};
-}( jQuery, mediaWiki, OO ) );
+}() );

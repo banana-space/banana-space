@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eduardo Addad de Oliveira"
+		]
+	},
+	"securelinkfixer-desc": "Reescreve os URL para HTTPS se o domínio requer sempre HTTPS"
+}

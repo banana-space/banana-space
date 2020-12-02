@@ -1,16 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Macofe",
-			"SinNovedades",
-			"Julián L",
 			"Fitoschido",
-			"MarcoAurelio"
+			"Hasley",
+			"Johny Weissmuller Jr",
+			"Julián L",
+			"Macofe",
+			"MarcoAurelio",
+			"SinNovedades"
 		]
 	},
 	"timeless-desc": "Una apariencia atemporal, diseñada por Brandon Harris en base al prototipo Winter y a varios estilos de la Fundación Wikimedia.",
-	"timeless-search-placeholder": "Buscar en {{NUMBEROFARTICLES}} páginas",
-	"timeless-loggedin": "Tu cuenta",
 	"timeless-anonymous": "Anónimo",
 	"timeless-loggedinas": "Sesión iniciada como '''$1'''",
 	"timeless-notloggedin": "No has accedido",
@@ -21,9 +21,12 @@
 	"timeless-sitetools": "Herramientas wiki",
 	"timeless-pageactions": "Herramientas de página",
 	"timeless-userpagetools": "Herramientas de página de usuario",
+	"timeless-action-addsection": "Tema nuevo",
+	"timeless-view-view": "Leer",
 	"timeless-pagemisc": "Más",
 	"timeless-namespaces": "Espacios de nombres",
 	"timeless-pagetools": "Acciones de página",
 	"timeless-languages": "Idiomas",
+	"timeless-projects": "Otros proyectos",
 	"timeless.js": "/* Cualquier código JavaScript escrito aquí se cargará para todos los usuarios que usen la apariencia Timeless */"
 }

@@ -20,6 +20,7 @@
 
 /**
  * MalformedTitleException is thrown when a TitleParser is unable to parse a title string.
+ * @newable
  * @since 1.23
  */
 class MalformedTitleException extends Exception implements ILocalizedException {
@@ -28,8 +29,9 @@ class MalformedTitleException extends Exception implements ILocalizedException {
 	private $errorMessageParameters = [];
 
 	/**
+	 * @stable to call
 	 * @param string $errorMessage Localisation message describing the error (since MW 1.26)
-	 * @param string $titleText The invalid title text (since MW 1.26)
+	 * @param string|null $titleText The invalid title text (since MW 1.26)
 	 * @param string[] $errorMessageParameters Additional parameters for the error message.
 	 * $titleText will be appended if it's not null. (since MW 1.26)
 	 */

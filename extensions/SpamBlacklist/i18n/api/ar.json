@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meno25"
+		]
+	},
+	"apihelp-spamblacklist-description": "تحقق من مسار واحد أو أكثر ضد قائمة السبام السوداء.",
+	"apihelp-spamblacklist-example-1": "تحقق من مسارين في القائمة السوداء",
+	"apihelp-spamblacklist-param-url": "المسارات للتحقيق ضد القائمة السوداء.",
+	"apihelp-spamblacklist-summary": "تحقق من مسار واحد أو أكثر ضد قائمة السبام السوداء."
+}

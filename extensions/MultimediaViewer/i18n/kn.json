@@ -1,14 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vikassy",
+			"Nayvik",
 			"Pavanaja",
-			"Nayvik"
+			"Vikassy"
 		]
 	},
 	"multimediaviewer-desc": "ಚಿಕ್ಕ ಚಿತ್ರವನ್ನು ಪೂರ್ತಿ ಪರದೆಗೆ ದೊಡ್ಡದು ಮಾಡಿ",
-	"multimediaviewer-pref": "ಮೀಡಿಯಾ ವ್ಯೂವರ್",
-	"multimediaviewer-pref-desc": "ನಿಮ್ಮ ಬಹುಮಾಧ‍್ಯಮ ವೀಕ್ಷಣೆಯ ಅನುಭವವನ್ನು ಈ ಸಾಧನ ಬಳಸಿ ಸುಧಾರಿಸಿಕೊಳ್ಳಿ. ಚಿಕ್ಕ ಚಿತ್ರಗಳಿರುವ ಪುಟಗಳಲ್ಲಿಯ ಚಿತ್ರಗಳನ್ನು ಇದು ದೊಡ್ಡದು ಮಾಡಿ ತೋರಿಸುತ್ತದೆ. ಚಿತ್ರಗಳನ್ನು ಪೂರ್ಣಪರದೆಯಲ್ಲಿ ತೋರಿಸುತ್ತದೆ.",
 	"multimediaviewer-optin-pref": "ಬಹುಮಾಧ್ಯಮ ವೀಕ್ಷಣೆಯ ಹೊಸ ಅನುಭವವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
 	"multimediaviewer-file-page": "ಸಂಬಂಧಪಟ್ಟ ಫೈಲ್ ಪುಟಕ್ಕೆ ಹೋಗಿ",
 	"multimediaviewer-repository-local": "ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ",

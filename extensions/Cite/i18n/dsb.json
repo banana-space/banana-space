@@ -4,15 +4,15 @@
 			"Michawiki"
 		]
 	},
-	"cite-desc": "Pśidawa toflicce <nowiki><ref[ name=id]></nowiki> a <nowiki><references/></nowiki> za pódaśa zrědłow",
+	"cite-desc": "Pśidawa toflicce <code>&lt;ref[ name=id]&gt;</code> a <code>&lt;references/&gt;</code> za pódaśa zrědłow",
 	"cite_error": "Referencna zmólka: $1",
 	"cite_error_ref_numeric_key": "Njepłaśiwa toflicka <code>&lt;ref&gt;</code>;\nmě njamóžo jadnora licba byś. Wužyj wugroniwy titel",
 	"cite_error_ref_no_key": "Njepłaśiwa toflicka <code>&lt;ref&gt;</code>;\n\"ref\" bźez wopśimjeśa musy mě měś",
 	"cite_error_ref_too_many_keys": "Njepłaśiwa toflicka <code>&lt;ref&gt;</code>;\nnjepłaśiwe mjenja, na pś. pśewjele",
 	"cite_error_ref_no_input": "Njepłaśiwa toflicka <code>&lt;ref&gt;</code>;\n\"ref\" bźez mjenja musy wopśimjeśe měś",
 	"cite_error_references_invalid_parameters": "Njepłaśiwa toflicka <code>&lt;references&gt;</code>;\nžedne parametry dowólone.\nWužyj <code>&lt;references /&gt;</code>",
-	"cite_error_references_no_backlink_label": "Swójske etikety slědkwótkazow wupócerane.\nDefiněruj dalšne w powěsći <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
-	"cite_error_no_link_label_group": "Žedne swójske wótkazowe etikety za \"$1\" wěcej k dispoziciji.\nDefiněruj dalšne w powěsći <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_backlink_label": "Swójske etikety slědkwótkazow wupócerane. Definěruj dalšne w powěsći [[MediaWiki:Cite references link many format backlink labels]]",
+	"cite_error_no_link_label_group": "Žedne swójske wótkazowe etikety za \"$1\" wěcej k dispoziciji. Definěruj dalšne w powěsći [[MediaWiki:$2]].",
 	"cite_error_references_no_text": "Njepłaśiwa toflicka <code>&lt;ref&gt;</code>;\nza ref z mjenim <code>$1</code> njejo se tekst pódał",
 	"cite_error_included_ref": "Kóńceca toflicka <code>&lt;/ref&gt;</code> felujo za toflicku <code>&lt;ref&gt;</code>",
 	"cite_error_group_refs_without_references": "Toflicki <code>&lt;ref&gt;</code> eksistěruju za kupku z mjenim \"$1\", ale wótpowědujuca toflicka <code>&lt;references group=\"$1\"/&gt;</code> njejo se namakała abo zacynjacy <code>&lt;/ref&gt;</code> felujo",

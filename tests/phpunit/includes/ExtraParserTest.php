@@ -1,34 +1,41 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+use Wikimedia\TestingAccessWrapper;
+
 /**
  * Parser-related tests that don't suit for parserTests.txt
  *
  * @group Database
  */
-class ExtraParserTest extends MediaWikiTestCase {
+class ExtraParserTest extends MediaWikiIntegrationTestCase {
 
 	/** @var ParserOptions */
 	protected $options;
 	/** @var Parser */
 	protected $parser;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
-		$contLang = Language::factory( 'en' );
 		$this->setMwGlobals( [
-			'wgShowDBErrorBacktrace' => true,
+			'wgShowExceptionDetails' => true,
 			'wgCleanSignatures' => true,
 		] );
 		$this->setUserLang( 'en' );
-		$this->setContentLang( $contLang );
+		$this->setContentLang( 'en' );
+
+		$services = MediaWikiServices::getInstance();
+
+		$contLang = $services->getContentLanguage();
 
 		// FIXME: This test should pass without setting global content language
 		$this->options = ParserOptions::newFromUserAndLang( new User, $contLang );
 		$this->options->setTemplateCallback( [ __CLASS__, 'statelessFetchTemplate' ] );
-		$this->parser = new Parser;
+		$services->resetServiceForTesting( 'MagicWordFactory' );
+		$services->resetServiceForTesting( 'ParserFactory' );
 
-		MagicWord::clearCache();
+		$this->parser = $services->getParserFactory()->create();
 	}
 
 	/**
@@ -42,6 +49,25 @@ class ExtraParserTest extends MediaWikiTestCase {
 		$options = ParserOptions::newFromUser( new User() );
 		$this->assertEquals( "<p>$longLine</p>",
 			$this->parser->parse( $longLine, $title, $options )->getText( [ 'unwrap' => true ] ) );
+	}
+
+	/**
+	 * @covers Parser::braceSubstitution
+	 * @covers SpecialPageFactory::capturePath
+	 */
+	public function testSpecialPageTransclusionRestoresGlobalState() {
+		$text = "{{Special:ApiHelp/help}}";
+		$title = Title::newFromText( 'testSpecialPageTransclusionRestoresGlobalState' );
+		$options = ParserOptions::newFromUser( new User() );
+
+		RequestContext::getMain()->setTitle( $title );
+		RequestContext::getMain()->getWikiPage()->CustomTestProp = true;
+
+		$parsed = $this->parser->parse( $text, $title, $options )->getText();
+		$this->assertStringContainsString( 'apihelp-header', $parsed );
+
+		// Verify that this property wasn't wiped out by the parse
+		$this->assertTrue( RequestContext::getMain()->getWikiPage()->CustomTestProp );
 	}
 
 	/**
@@ -180,7 +206,7 @@ class ExtraParserTest extends MediaWikiTestCase {
 	 *
 	 * @return array
 	 */
-	static function statelessFetchTemplate( $title, $parser = false ) {
+	public static function statelessFetchTemplate( $title, $parser = false ) {
 		$text = "Content of ''" . $title->getFullText() . "''";
 		$deps = [];
 
@@ -211,6 +237,113 @@ class ExtraParserTest extends MediaWikiTestCase {
 		$title = SpecialPage::getTitleFor( 'Contributions' );
 		$parserOutput = $this->parser->parse( "[[file:nonexistent]]", $title, $this->options );
 		$result = $parserOutput->getCategoryLinks();
-		$this->assertEmpty( $result );
+		$this->assertSame( [], $result );
+	}
+
+	/**
+	 * @covers Parser::parseLinkParameter
+	 * @dataProvider provideParseLinkParameter
+	 */
+	public function testParseLinkParameter( $input, $expected, $expectedLinks, $desc ) {
+		$this->setTemporaryHook( 'InterwikiLoadPrefix', function ( $prefix, &$iwData ) {
+			static $testInterwikis = [
+				'local' => [
+					'iw_url' => 'http://doesnt.matter.invalid/$1',
+					'iw_api' => '',
+					'iw_wikiid' => '',
+					'iw_local' => 0
+				],
+				'mw' => [
+					'iw_url' => 'https://www.mediawiki.org/wiki/$1',
+					'iw_api' => 'https://www.mediawiki.org/w/api.php',
+					'iw_wikiid' => '',
+					'iw_local' => 0
+				]
+			];
+			if ( array_key_exists( $prefix, $testInterwikis ) ) {
+				$iwData = $testInterwikis[$prefix];
+			}
+
+			// We only want to rely on the above fixtures
+			return false;
+		} );
+
+		Title::clearCaches();
+		$this->parser->startExternalParse(
+			Title::newFromText( __FUNCTION__ ),
+			$this->options,
+			Parser::OT_HTML
+		);
+		$output = TestingAccessWrapper::newFromObject( $this->parser )
+			->parseLinkParameter( $input );
+
+		$this->assertEquals( $expected[0], $output[0], "$desc (type)" );
+
+		if ( $expected[0] === 'link-title' ) {
+			$this->assertTrue(
+				$output[1]->equals( Title::newFromText( $expected[1] ) ),
+				"$desc (target); link list title instance matches new title instance"
+			);
+		} else {
+			$this->assertEquals( $expected[1], $output[1], "$desc (target)" );
+		}
+
+		foreach ( $expectedLinks as $func => $expected ) {
+			$output = $this->parser->getOutput()->$func();
+			$this->assertEquals( $expected, $output, "$desc ($func)" );
+		}
+	}
+
+	public static function provideParseLinkParameter() {
+		return [
+			[
+				'',
+				[ 'no-link', false ],
+				[],
+				'Return no link when requested',
+			],
+			[
+				'https://example.com/',
+				[ 'link-url', 'https://example.com/' ],
+				[ 'getExternalLinks' => [ 'https://example.com/' => 1 ] ],
+				'External link',
+			],
+			[
+				'//example.com/',
+				[ 'link-url', '//example.com/' ],
+				[ 'getExternalLinks' => [ '//example.com/' => 1 ] ],
+				'External link',
+			],
+			[
+				'Test',
+				[ 'link-title', 'Test' ],
+				[ 'getLinks' => [ 0 => [ 'Test' => 0 ] ] ],
+				'Internal link',
+			],
+			[
+				'mw:Test',
+				[ 'link-title', 'mw:Test' ],
+				[ 'getInterwikiLinks' => [ 'mw' => [ 'Test' => 1 ] ] ],
+				'Internal link (interwiki)',
+			],
+			[
+				'https://',
+				[ null, false ],
+				[],
+				'Invalid link target',
+			],
+			[
+				'<>',
+				[ null, false ],
+				[],
+				'Invalid link target',
+			],
+			[
+				' ',
+				[ null, false ],
+				[],
+				'Invalid link target',
+			],
+		];
 	}
 }

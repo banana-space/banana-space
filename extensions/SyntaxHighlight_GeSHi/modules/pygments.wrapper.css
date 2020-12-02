@@ -24,7 +24,7 @@ code code.mw-highlight {
 }
 
 /* The nested pre already has a background. T126010 */
-div.mw-hightlight {
+div.mw-highlight {
 	background-color: inherit;
 }
 

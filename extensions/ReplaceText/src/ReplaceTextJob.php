@@ -32,7 +32,7 @@ class ReplaceTextJob extends Job {
 	 * @param Title $title
 	 * @param array|bool $params Cannot be === true
 	 */
-	function __construct( $title, $params = '' ) {
+	function __construct( $title, $params = [] ) {
 		parent::__construct( 'replaceText', $title, $params );
 	}
 
@@ -48,33 +48,38 @@ class ReplaceTextJob extends Job {
 			} );
 		}
 
-		if ( is_null( $this->title ) ) {
+		if ( $this->title === null ) {
 			$this->error = "replaceText: Invalid title";
 			return false;
 		}
 
 		if ( array_key_exists( 'move_page', $this->params ) ) {
-			global $wgUser;
-			$actual_user = $wgUser;
-			$wgUser = User::newFromId( $this->params['user_id'] );
-			$cur_page_name = $this->title->getText();
-			if ( $this->params['use_regex'] ) {
-				$new_page_name = preg_replace(
-					"/" . $this->params['target_str'] . "/Uu", $this->params['replacement_str'], $cur_page_name
-				);
-			} else {
-				$new_page_name =
-					str_replace( $this->params['target_str'], $this->params['replacement_str'], $cur_page_name );
+			$current_user = User::newFromId( $this->params['user_id'] );
+			$new_title = ReplaceTextSearch::getReplacedTitle(
+				$this->title,
+				$this->params['target_str'],
+				$this->params['replacement_str'],
+				$this->params['use_regex']
+			);
+
+			if ( $new_title === null ) {
+				$this->error = "replaceText: Invalid new title - " . $this->params['replacement_str'];
+				return false;
 			}
 
-			$new_title = Title::newFromText( $new_page_name, $this->title->getNamespace() );
 			$reason = $this->params['edit_summary'];
 			$create_redirect = $this->params['create_redirect'];
-			$this->title->moveTo( $new_title, true, $reason, $create_redirect );
-			if ( $this->params['watch_page'] ) {
-				WatchAction::doWatch( $new_title, $wgUser );
+			$mvPage = new MovePage( $this->title, $new_title );
+			$mvStatus = $mvPage->move( $current_user, $reason, $create_redirect );
+			if ( !$mvStatus->isOK() ) {
+				$this->error = "replaceText: error while moving: " . $this->title->getPrefixedDBkey() .
+					". Errors: " . $mvStatus->getWikiText();
+				return false;
 			}
-			$wgUser = $actual_user;
+
+			if ( $this->params['watch_page'] ) {
+				WatchAction::doWatch( $new_title, $current_user );
+			}
 		} else {
 			if ( $this->title->getContentModel() !== CONTENT_MODEL_WIKITEXT ) {
 				$this->error = 'replaceText: Wiki page "' .
@@ -82,14 +87,8 @@ class ReplaceTextJob extends Job {
 				return false;
 			}
 			$wikiPage = new WikiPage( $this->title );
-			// Is this check necessary?
-			if ( !$wikiPage ) {
-				$this->error =
-					'replaceText: Wiki page not found for "' . $this->title->getPrefixedDBkey() . '."';
-				return false;
-			}
 			$wikiPageContent = $wikiPage->getContent();
-			if ( is_null( $wikiPageContent ) ) {
+			if ( $wikiPageContent === null ) {
 				$this->error =
 					'replaceText: No contents found for wiki page at "' . $this->title->getPrefixedDBkey() . '."';
 				return false;

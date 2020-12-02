@@ -7,8 +7,8 @@
 		]
 	},
 	"renameuser": "Benotzernumm änneren",
-	"renameuser-linkoncontribs": "Benotzer ëmbenennen",
-	"renameuser-linkoncontribs-text": "Dëse Benotzer ëmbenennen",
+	"renameuser-linkoncontribs": " {{GENDER:$1|Benotzer}} ëmbenennen",
+	"renameuser-linkoncontribs-text": "Dëse {{GENDER:$1|Benotzer}} ëmbenennen",
 	"renameuser-desc": "Benotzernumm änneren (Dir braucht dofir  ''renameuser''-Rechter)",
 	"renameuserold": "Aktuelle Benotzernumm:",
 	"renameusernew": "Neie Benotzernumm:",
@@ -23,7 +23,7 @@
 	"renameusererrordoesnotexist": "De Benotzer \"<nowiki>$1</nowiki>\" gëtt et net.",
 	"renameusererrorexists": "De {{GENDER:$1|Benotzernumm}} \"<nowiki>$1</nowiki>\" gëtt et schonn.",
 	"renameusererrorinvalid": "De Benotzernumm \"<nowiki>$1</nowiki>\" kann net benotzt ginn.",
-	"renameuser-error-request": "Et gouf e Problem mat ärer Ufro.\nGitt w.e.g. zréck a versicht et nach eng Kéier.",
+	"renameuser-error-request": "Et gouf e Problem mat ärer Ufro.\nGitt wgl. zréck a versicht et nach eng Kéier.",
 	"renameuser-error-same-user": "Dir kënnt kee Benotzernumm änneren, an him deselwechten Numm erëmginn.",
 	"renameusersuccess": "De {{GENDER:$2|Benotzer}} \"<nowiki>$1</nowiki>\" gouf \"<nowiki>$2</nowiki>\" ëmbenannt.",
 	"renameuser-page-exists": "D'Säit $1 gëtt et schonn a kann net automatesch iwwerschriwwe ginn.",
@@ -35,6 +35,6 @@
 	"logentry-renameuser-renameuser-legacier": "£1 huet de Benotzer $4 op {{GENDER:$7|$5}} ëmbenannt",
 	"renameuser-move-log": "Duerch d'Réckele vum  {{GENDER:$1|Benotzer}} \"[[User:$1|$1]]\" op \"[[User:$2|$2]]\" goufen déi folgend Säiten automatesch matgeréckelt:",
 	"action-renameuser": "Benotzer ëmbenennen",
-	"right-renameuser": "Benotzer ëmbenennen",
+	"right-renameuser": "Erlaabt et Benotzer ëmzebenennen",
 	"renameuser-renamed-notice": "Dëse Benotzer gouf ëmbenannt.\nD'Logbuch mat den Ëmbenunngen ass hei ënnendrënner."
 }

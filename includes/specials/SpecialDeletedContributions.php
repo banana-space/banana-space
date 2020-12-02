@@ -21,17 +21,19 @@
  * @ingroup SpecialPage
  */
 
+use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\MediaWikiServices;
+use Wikimedia\IPUtils;
 
 /**
  * Implements Special:DeletedContributions to display archived revisions
  * @ingroup SpecialPage
  */
-class DeletedContributionsPage extends SpecialPage {
+class SpecialDeletedContributions extends SpecialPage {
 	/** @var FormOptions */
 	protected $mOpts;
 
-	function __construct() {
+	public function __construct() {
 		parent::__construct( 'DeletedContributions', 'deletedhistory' );
 	}
 
@@ -41,12 +43,11 @@ class DeletedContributionsPage extends SpecialPage {
 	 *
 	 * @param string $par (optional) user name of the user for which to show the contributions
 	 */
-	function execute( $par ) {
+	public function execute( $par ) {
 		$this->setHeaders();
 		$this->outputHeader();
 		$this->checkPermissions();
-
-		$user = $this->getUser();
+		$this->addHelpLink( 'Help:User contributions' );
 
 		$out = $this->getOutput();
 		$out->setPageTitle( $this->msg( 'deletedcontributions-title' ) );
@@ -61,7 +62,9 @@ class DeletedContributionsPage extends SpecialPage {
 		$opts->validateIntBounds( 'limit', 0, $this->getConfig()->get( 'QueryPageDefaultLimit' ) );
 
 		if ( $par !== null ) {
-			$opts->setValue( 'target', $par );
+			// Beautify the username
+			$par = User::getCanonicalName( $par, false );
+			$opts->setValue( 'target', (string)$par );
 		}
 
 		$ns = $opts->getValue( 'namespace' );
@@ -71,7 +74,7 @@ class DeletedContributionsPage extends SpecialPage {
 
 		$this->mOpts = $opts;
 
-		$target = $opts->getValue( 'target' );
+		$target = trim( $opts->getValue( 'target' ) );
 		if ( !strlen( $target ) ) {
 			$this->getForm();
 
@@ -91,7 +94,8 @@ class DeletedContributionsPage extends SpecialPage {
 
 		$this->getForm();
 
-		$pager = new DeletedContribsPager( $this->getContext(), $target, $opts->getValue( 'namespace' ) );
+		$pager = new DeletedContribsPager( $this->getContext(), $target, $opts->getValue( 'namespace' ),
+			$this->getLinkRenderer() );
 		if ( !$pager->getNumRows() ) {
 			$out->addWikiMsg( 'nocontribs' );
 
@@ -99,8 +103,7 @@ class DeletedContributionsPage extends SpecialPage {
 		}
 
 		# Show a message about replica DB lag, if applicable
-		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
-		$lag = $lb->safeGetLag( $pager->getDatabase() );
+		$lag = $pager->getDatabase()->getSessionLagStatus()['lag'];
 		if ( $lag > 0 ) {
 			$out->showLagWarning( $lag );
 		}
@@ -112,17 +115,15 @@ class DeletedContributionsPage extends SpecialPage {
 
 		# If there were contributions, and it was a valid user or IP, show
 		# the appropriate "footer" message - WHOIS tools, etc.
-		if ( $target != 'newbies' ) {
-			$message = IP::isIPAddress( $target ) ?
-				'sp-contributions-footer-anon' :
-				'sp-contributions-footer';
+		$message = IPUtils::isIPAddress( $target ) ?
+			'sp-contributions-footer-anon' :
+			'sp-contributions-footer';
 
-			if ( !$this->msg( $message )->isDisabled() ) {
-				$out->wrapWikiMsg(
-					"<div class='mw-contributions-footer'>\n$1\n</div>",
-					[ $message, $target ]
-				);
-			}
+		if ( !$this->msg( $message )->isDisabled() ) {
+			$out->wrapWikiMsg(
+				"<div class='mw-contributions-footer'>\n$1\n</div>",
+				[ $message, $target ]
+			);
 		}
 	}
 
@@ -131,7 +132,7 @@ class DeletedContributionsPage extends SpecialPage {
 	 * @param User $userObj User object for the target
 	 * @return string Appropriately-escaped HTML to be output literally
 	 */
-	function getSubTitle( $userObj ) {
+	private function getSubTitle( $userObj ) {
 		$linkRenderer = $this->getLinkRenderer();
 		if ( $userObj->isAnon() ) {
 			$user = htmlspecialchars( $userObj->getName() );
@@ -144,23 +145,27 @@ class DeletedContributionsPage extends SpecialPage {
 		if ( $talk ) {
 			$tools = SpecialContributions::getUserLinks( $this, $userObj );
 
-			# Link to contributions
-			$insert['contribs'] = $linkRenderer->makeKnownLink(
+			$contributionsLink = $linkRenderer->makeKnownLink(
 				SpecialPage::getTitleFor( 'Contributions', $nt->getDBkey() ),
 				$this->msg( 'sp-deletedcontributions-contribs' )->text()
 			);
-
-			// Swap out the deletedcontribs link for our contribs one
-			$tools = wfArrayInsertAfter( $tools, $insert, 'deletedcontribs' );
-			unset( $tools['deletedcontribs'] );
+			if ( isset( $tools['deletedcontribs'] ) ) {
+				// Swap out the deletedcontribs link for our contribs one
+				$tools = wfArrayInsertAfter(
+					$tools, [ 'contribs' => $contributionsLink ], 'deletedcontribs' );
+				unset( $tools['deletedcontribs'] );
+			} else {
+				$tools['contribs'] = $contributionsLink;
+			}
 
 			$links = $this->getLanguage()->pipeList( $tools );
 
 			// Show a note if the user is blocked and display the last block log entry.
-			$block = Block::newFromTarget( $userObj, $userObj );
-			if ( !is_null( $block ) && $block->getType() != Block::TYPE_AUTO ) {
-				if ( $block->getType() == Block::TYPE_RANGE ) {
-					$nt = MWNamespace::getCanonicalName( NS_USER ) . ':' . $block->getTarget();
+			$block = DatabaseBlock::newFromTarget( $userObj, $userObj );
+			if ( $block !== null && $block->getType() != DatabaseBlock::TYPE_AUTO ) {
+				if ( $block->getType() == DatabaseBlock::TYPE_RANGE ) {
+					$nt = MediaWikiServices::getInstance()->getNamespaceInfo()->
+						getCanonicalName( NS_USER ) . ':' . $block->getTarget();
 				}
 
 				// LogEventsList::showLogExtract() wants the first parameter by ref
@@ -189,7 +194,7 @@ class DeletedContributionsPage extends SpecialPage {
 	/**
 	 * Generates the namespace selector form with hidden attributes.
 	 */
-	function getForm() {
+	private function getForm() {
 		$opts = $this->mOpts;
 
 		$formDescriptor = [

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shirayuki",
+			"Yusuke1109"
+		]
+	},
+	"apihelp-spamblacklist-description": "1 件以上の URL についてスパムブラックリストに登録されているか検証します。",
+	"apihelp-spamblacklist-example-1": "2 件の URL についてブラックリストに登録されているか検証",
+	"apihelp-spamblacklist-param-url": "ブラックリストに登録されているか検証する URL です。",
+	"apihelp-spamblacklist-summary": "1件以上の URL についてスパムブラックリストに登録されているか検証します。"
+}

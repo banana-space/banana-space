@@ -1,7 +1,5 @@
 <?php
 /**
- * Media-handling base classes and generic functionality.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -23,19 +21,28 @@
 use MediaWiki\MediaWikiServices;
 
 /**
+ * @defgroup Media Media
+ *
+ * Media handlers and other classes relating to Multimedia support,
+ * with the exception of FileRepo and FileBackend, which have their own groups.
+ */
+
+/**
  * Base media handler class
+ *
+ * @stable to extend
  *
  * @ingroup Media
  */
 abstract class MediaHandler {
-	const TRANSFORM_LATER = 1;
-	const METADATA_GOOD = true;
-	const METADATA_BAD = false;
-	const METADATA_COMPATIBLE = 2; // for old but backwards compatible.
+	public const TRANSFORM_LATER = 1;
+	public const METADATA_GOOD = true;
+	public const METADATA_BAD = false;
+	public const METADATA_COMPATIBLE = 2; // for old but backwards compatible.
 	/**
 	 * Max length of error logged by logErrorForExternalProcess()
 	 */
-	const MAX_ERR_LOG_SIZE = 65535;
+	private const MAX_ERR_LOG_SIZE = 65535;
 
 	/**
 	 * Get a MediaHandler for a given MIME type from the instance cache
@@ -43,7 +50,7 @@ abstract class MediaHandler {
 	 * @param string $type
 	 * @return MediaHandler|bool
 	 */
-	static function getHandler( $type ) {
+	public static function getHandler( $type ) {
 		return MediaWikiServices::getInstance()
 			->getMediaHandlerFactory()->getHandler( $type );
 	}
@@ -87,7 +94,7 @@ abstract class MediaHandler {
 	 * @param File $image
 	 * @param array &$params
 	 */
-	abstract function normaliseParams( $image, &$params );
+	abstract public function normaliseParams( $image, &$params );
 
 	/**
 	 * Get an image size array like that returned by getimagesize(), or false if it
@@ -103,23 +110,24 @@ abstract class MediaHandler {
 	 * @param File|FSFile $image The image object, or false if there isn't one.
 	 *   Warning, FSFile::getPropsFromPath might pass an FSFile instead of File (!)
 	 * @param string $path The filename
-	 * @return array|bool Follow the format of PHP getimagesize() internal function.
-	 *   See https://secure.php.net/getimagesize. MediaWiki will only ever use the
+	 * @return array|false Follow the format of PHP getimagesize() internal function.
+	 *   See https://www.php.net/getimagesize. MediaWiki will only ever use the
 	 *   first two array keys (the width and height), and the 'bits' associative
 	 *   key. All other array keys are ignored. Returning a 'bits' key is optional
 	 *   as not all formats have a notion of "bitdepth". Returns false on failure.
 	 */
-	abstract function getImageSize( $image, $path );
+	abstract public function getImageSize( $image, $path );
 
 	/**
 	 * Get handler-specific metadata which will be saved in the img_metadata field.
+	 * @stable to override
 	 *
 	 * @param File|FSFile $image The image object, or false if there isn't one.
 	 *   Warning, FSFile::getPropsFromPath might pass an FSFile instead of File (!)
 	 * @param string $path The filename
 	 * @return string A string of metadata in php serialized form (Run through serialize())
 	 */
-	function getMetadata( $image, $path ) {
+	public function getMetadata( $image, $path ) {
 		return '';
 	}
 
@@ -136,11 +144,13 @@ abstract class MediaHandler {
 	 * version 3 it might add to the end of the array the element 'foo=3'. if the core metadata
 	 * version is 2, the end version string would look like '2;foo=3'.
 	 *
+	 * @stable to override
+	 *
 	 * @return string Version string
 	 */
-	static function getMetadataVersion() {
+	public static function getMetadataVersion() {
 		$version = [ '2' ]; // core metadata version
-		Hooks::run( 'GetMetadataVersion', [ &$version ] );
+		Hooks::runner()->onGetMetadataVersion( $version );
 
 		return implode( ';', $version );
 	}
@@ -150,12 +160,13 @@ abstract class MediaHandler {
 	 *
 	 * By default just returns $metadata, but can be used to allow
 	 * media handlers to convert between metadata versions.
+	 * @stable to override
 	 *
 	 * @param string|array $metadata Metadata array (serialized if string)
 	 * @param int $version Target version
 	 * @return array Serialized metadata in specified version, or $metadata on fail.
 	 */
-	function convertMetadataVersion( $metadata, $version = 1 ) {
+	public function convertMetadataVersion( $metadata, $version = 1 ) {
 		if ( !is_array( $metadata ) ) {
 			// unserialize to keep return parameter consistent.
 			Wikimedia\suppressWarnings();
@@ -170,12 +181,13 @@ abstract class MediaHandler {
 
 	/**
 	 * Get a string describing the type of metadata, for display purposes.
+	 * @stable to override
 	 *
 	 * @note This method is currently unused.
 	 * @param File $image
 	 * @return string
 	 */
-	function getMetadataType( $image ) {
+	public function getMetadataType( $image ) {
 		return false;
 	}
 
@@ -191,11 +203,13 @@ abstract class MediaHandler {
 	 *  file on page view. Always returning this from a broken file, or suddenly
 	 *  triggering as bad metadata for a large number of files can cause
 	 *  performance problems.
+	 *
+	 * @stable to override
 	 * @param File $image
 	 * @param string $metadata The metadata in serialized form
-	 * @return bool
+	 * @return bool|int
 	 */
-	function isMetadataValid( $image, $metadata ) {
+	public function isMetadataValid( $image, $metadata ) {
 		return self::METADATA_GOOD;
 	}
 
@@ -227,6 +241,8 @@ abstract class MediaHandler {
 	 * Note, if the file simply has no metadata, but the handler supports
 	 * this interface, it should return an empty array, not false.
 	 *
+	 * @stable to override
+	 *
 	 * @param File $file
 	 * @return array|bool False if interface not supported
 	 * @since 1.23
@@ -242,12 +258,15 @@ abstract class MediaHandler {
 	 * Used when the repository has a thumbnailScriptUrl option configured.
 	 *
 	 * Return false to fall back to the regular getTransform().
+	 *
+	 * @stable to override
+	 *
 	 * @param File $image
 	 * @param string $script
 	 * @param array $params
 	 * @return bool|ThumbnailImage
 	 */
-	function getScriptedTransform( $image, $script, $params ) {
+	public function getScriptedTransform( $image, $script, $params ) {
 		return false;
 	}
 
@@ -255,19 +274,23 @@ abstract class MediaHandler {
 	 * Get a MediaTransformOutput object representing the transformed output. Does not
 	 * actually do the transform.
 	 *
+	 * @stable to override
+	 *
 	 * @param File $image
 	 * @param string $dstPath Filesystem destination path
 	 * @param string $dstUrl Destination URL to use in output HTML
 	 * @param array $params Arbitrary set of parameters validated by $this->validateParam()
 	 * @return MediaTransformOutput
 	 */
-	final function getTransform( $image, $dstPath, $dstUrl, $params ) {
+	final public function getTransform( $image, $dstPath, $dstUrl, $params ) {
 		return $this->doTransform( $image, $dstPath, $dstUrl, $params, self::TRANSFORM_LATER );
 	}
 
 	/**
 	 * Get a MediaTransformOutput object representing the transformed output. Does the
 	 * transform unless $flags contains self::TRANSFORM_LATER.
+	 *
+	 * @stable to override
 	 *
 	 * @param File $image
 	 * @param string $dstPath Filesystem destination path
@@ -277,24 +300,26 @@ abstract class MediaHandler {
 	 * @param int $flags A bitfield, may contain self::TRANSFORM_LATER
 	 * @return MediaTransformOutput
 	 */
-	abstract function doTransform( $image, $dstPath, $dstUrl, $params, $flags = 0 );
+	abstract public function doTransform( $image, $dstPath, $dstUrl, $params, $flags = 0 );
 
 	/**
 	 * Get the thumbnail extension and MIME type for a given source MIME type
 	 *
+	 * @stable to override
+	 *
 	 * @param string $ext Extension of original file
 	 * @param string $mime MIME type of original file
-	 * @param array $params Handler specific rendering parameters
+	 * @param array|null $params Handler specific rendering parameters
 	 * @return array Thumbnail extension and MIME type
 	 */
-	function getThumbType( $ext, $mime, $params = null ) {
+	public function getThumbType( $ext, $mime, $params = null ) {
 		$magic = MediaWiki\MediaWikiServices::getInstance()->getMimeAnalyzer();
 		if ( !$ext || $magic->isMatchingExtension( $ext, $mime ) === false ) {
 			// The extension is not valid for this MIME type and we do
 			// recognize the MIME type
-			$extensions = $magic->getExtensionsForType( $mime );
-			if ( $extensions ) {
-				return [ strtok( $extensions, ' ' ), $mime ];
+			$knownExt = $magic->getExtensionFromMimeTypeOrNull( $mime );
+			if ( $knownExt !== null ) {
+				return [ $knownExt, $mime ];
 			}
 		}
 
@@ -304,17 +329,9 @@ abstract class MediaHandler {
 	}
 
 	/**
-	 * @deprecated since 1.30, use MediaHandler::getContentHeaders instead
-	 * @param array $metadata
-	 * @return array
-	 */
-	public function getStreamHeaders( $metadata ) {
-		wfDeprecated( __METHOD__, '1.30' );
-		return $this->getContentHeaders( $metadata );
-	}
-
-	/**
 	 * True if the handled types can be transformed
+	 *
+	 * @stable to override
 	 *
 	 * @param File $file
 	 * @return bool
@@ -327,6 +344,8 @@ abstract class MediaHandler {
 	 * True if handled types cannot be displayed directly in a browser
 	 * but can be rendered
 	 *
+	 * @stable to override
+	 *
 	 * @param File $file
 	 * @return bool
 	 */
@@ -336,6 +355,8 @@ abstract class MediaHandler {
 
 	/**
 	 * True if the type has multi-page capabilities
+	 *
+	 * @stable to override
 	 *
 	 * @param File $file
 	 * @return bool
@@ -347,20 +368,24 @@ abstract class MediaHandler {
 	/**
 	 * Page count for a multi-page document, false if unsupported or unknown
 	 *
+	 * @stable to override
+	 *
 	 * @param File $file
-	 * @return bool
+	 * @return int|false
 	 */
-	function pageCount( File $file ) {
+	public function pageCount( File $file ) {
 		return false;
 	}
 
 	/**
 	 * The material is vectorized and thus scaling is lossless
 	 *
+	 * @stable to override
+	 *
 	 * @param File $file
 	 * @return bool
 	 */
-	function isVectorized( $file ) {
+	public function isVectorized( $file ) {
 		return false;
 	}
 
@@ -369,10 +394,12 @@ abstract class MediaHandler {
 	 * In particular, video material need not return true.
 	 * @note Before 1.20, this was a method of ImageHandler only
 	 *
+	 * @stable to override
+	 *
 	 * @param File $file
 	 * @return bool
 	 */
-	function isAnimatedImage( $file ) {
+	public function isAnimatedImage( $file ) {
 		return false;
 	}
 
@@ -380,18 +407,22 @@ abstract class MediaHandler {
 	 * If the material is animated, we can animate the thumbnail
 	 * @since 1.20
 	 *
+	 * @stable to override
+	 *
 	 * @param File $file
 	 * @return bool If material is not animated, handler may return any value.
 	 */
-	function canAnimateThumbnail( $file ) {
+	public function canAnimateThumbnail( $file ) {
 		return true;
 	}
 
 	/**
 	 * False if the handler is disabled for all files
+	 * @stable to override
+	 *
 	 * @return bool
 	 */
-	function isEnabled() {
+	public function isEnabled() {
 		return true;
 	}
 
@@ -407,11 +438,13 @@ abstract class MediaHandler {
 	 *
 	 * @note For non-paged media, use getImageSize.
 	 *
+	 * @stable to override
+	 *
 	 * @param File $image
 	 * @param int $page What page to get dimensions of
 	 * @return array|bool
 	 */
-	function getPageDimensions( File $image, $page ) {
+	public function getPageDimensions( File $image, $page ) {
 		$gis = $this->getImageSize( $image, $image->getLocalRefPath() );
 		if ( $gis ) {
 			return [
@@ -426,12 +459,14 @@ abstract class MediaHandler {
 	/**
 	 * Generic getter for text layer.
 	 * Currently overloaded by PDF and DjVu handlers
+	 * @stable to override
+	 *
 	 * @param File $image
 	 * @param int $page Page number to get information for
 	 * @return bool|string Page text or false when no text found or if
 	 *   unsupported.
 	 */
-	function getPageText( File $image, $page ) {
+	public function getPageText( File $image, $page ) {
 		return false;
 	}
 
@@ -483,11 +518,13 @@ abstract class MediaHandler {
 	 * should generate HTML instead. It can do all the formatting according
 	 * to some standard. That makes it possible to do things like visual
 	 * indication of grouped and chained streams in ogg container files.
+	 * @stable to override
+	 *
 	 * @param File $image
 	 * @param bool|IContextSource $context Context to use (optional)
 	 * @return array|bool
 	 */
-	function formatMetadata( $image, $context = false ) {
+	public function formatMetadata( $image, $context = false ) {
 		return false;
 	}
 
@@ -497,11 +534,13 @@ abstract class MediaHandler {
 	 *
 	 * This is used by the media handlers that use the FormatMetadata class
 	 *
+	 * @stable to override
+	 *
 	 * @param array $metadataArray
 	 * @param bool|IContextSource $context Context to use (optional)
 	 * @return array Array for use displaying metadata.
 	 */
-	function formatMetadataHelper( $metadataArray, $context = false ) {
+	protected function formatMetadataHelper( $metadataArray, $context = false ) {
 		$result = [
 			'visible' => [],
 			'collapsed' => []
@@ -526,6 +565,8 @@ abstract class MediaHandler {
 	/**
 	 * Get a list of metadata items which should be displayed when
 	 * the metadata table is collapsed.
+	 *
+	 * @stable to override
 	 *
 	 * @return array Array of strings
 	 */
@@ -566,7 +607,7 @@ abstract class MediaHandler {
 			// property is defined that we don't know about
 			// (not a major issue since such a property would be collapsed
 			// by default).
-			wfDebug( __METHOD__ . ' Unknown metadata name: ' . $id . "\n" );
+			wfDebug( __METHOD__ . ' Unknown metadata name: ' . $id );
 			$name = wfEscapeWikiText( $id );
 		}
 		$array[$visibility][] = [
@@ -579,20 +620,24 @@ abstract class MediaHandler {
 	/**
 	 * Short description. Shown on Special:Search results.
 	 *
+	 * @stable to override
+	 *
 	 * @param File $file
 	 * @return string
 	 */
-	function getShortDesc( $file ) {
+	public function getShortDesc( $file ) {
 		return self::getGeneralShortDesc( $file );
 	}
 
 	/**
 	 * Long description. Shown under image on image description page surounded by ().
 	 *
+	 * @stable to override
+	 *
 	 * @param File $file
 	 * @return string
 	 */
-	function getLongDesc( $file ) {
+	public function getLongDesc( $file ) {
 		return self::getGeneralLongDesc( $file );
 	}
 
@@ -602,7 +647,7 @@ abstract class MediaHandler {
 	 * @param File $file
 	 * @return string
 	 */
-	static function getGeneralShortDesc( $file ) {
+	public static function getGeneralShortDesc( $file ) {
 		global $wgLang;
 
 		return htmlspecialchars( $wgLang->formatSize( $file->getSize() ) );
@@ -614,7 +659,7 @@ abstract class MediaHandler {
 	 * @param File $file
 	 * @return string
 	 */
-	static function getGeneralLongDesc( $file ) {
+	public static function getGeneralLongDesc( $file ) {
 		return wfMessage( 'file-info' )->sizeParams( $file->getSize() )
 			->params( '<span class="mime-type">' . $file->getMimeType() . '</span>' )->parse();
 	}
@@ -640,10 +685,12 @@ abstract class MediaHandler {
 	/**
 	 * Shown in file history box on image description page.
 	 *
+	 * @stable to override
+	 *
 	 * @param File $file
 	 * @return string Dimensions
 	 */
-	function getDimensionsString( $file ) {
+	public function getDimensionsString( $file ) {
 		return '';
 	}
 
@@ -654,10 +701,12 @@ abstract class MediaHandler {
 	 * in order to add some javascript to render a viewer.
 	 * See TimedMediaHandler or OggHandler for an example.
 	 *
+	 * @stable to override
+	 *
 	 * @param Parser $parser
 	 * @param File $file
 	 */
-	function parserTransformHook( $parser, $file ) {
+	public function parserTransformHook( $parser, $file ) {
 	}
 
 	/**
@@ -667,10 +716,12 @@ abstract class MediaHandler {
 	 * match the handler class, a Status object should be returned containing
 	 * relevant errors.
 	 *
+	 * @stable to override
+	 *
 	 * @param string $fileName The local path to the file.
 	 * @return Status
 	 */
-	function verifyUpload( $fileName ) {
+	public function verifyUpload( $fileName ) {
 		return Status::newGood();
 	}
 
@@ -678,11 +729,13 @@ abstract class MediaHandler {
 	 * Check for zero-sized thumbnails. These can be generated when
 	 * no disk space is available or some other error occurs
 	 *
+	 * @stable to override
+	 *
 	 * @param string $dstPath The location of the suspect file
 	 * @param int $retval Return value of some shell process, file will be deleted if this is non-zero
 	 * @return bool True if removed, false otherwise
 	 */
-	function removeBadFile( $dstPath, $retval = 0 ) {
+	public function removeBadFile( $dstPath, $retval = 0 ) {
 		if ( file_exists( $dstPath ) ) {
 			$thumbstat = stat( $dstPath );
 			if ( $thumbstat['size'] == 0 || $retval != 0 ) {
@@ -713,6 +766,7 @@ abstract class MediaHandler {
 	 * regenerate.
 	 *
 	 * @see LocalFile::purgeThumbnails
+	 * @stable to override
 	 *
 	 * @param array &$files
 	 * @param array $options Purge options. Currently will always be
@@ -725,6 +779,8 @@ abstract class MediaHandler {
 	/**
 	 * True if the handler can rotate the media
 	 * @since 1.24 non-static. From 1.21-1.23 was static
+	 * @stable to override
+	 *
 	 * @return bool
 	 */
 	public function canRotate() {
@@ -741,6 +797,8 @@ abstract class MediaHandler {
 	 * any produced output views.
 	 *
 	 * For files we don't know, we return 0.
+	 *
+	 * @stable to override
 	 *
 	 * @param File $file
 	 * @return int 0, 90, 180 or 270
@@ -772,6 +830,8 @@ abstract class MediaHandler {
 	/**
 	 * Get list of languages file can be viewed in.
 	 *
+	 * @stable to override
+	 *
 	 * @param File $file
 	 * @return string[] Array of language codes, or empty array if unsupported.
 	 * @since 1.23
@@ -781,12 +841,29 @@ abstract class MediaHandler {
 	}
 
 	/**
+	 * When overridden in a descendant class, returns a language code most suiting
+	 *
+	 * @stable to override
+	 *
+	 * @since 1.32
+	 *
+	 * @param string $userPreferredLanguage Language code requesed
+	 * @param string[] $availableLanguages Languages present in the file
+	 * @return string|null Language code picked or null if not supported/available
+	 */
+	public function getMatchedLanguage( $userPreferredLanguage, array $availableLanguages ) {
+		return null;
+	}
+
+	/**
 	 * On file types that support renderings in multiple languages,
 	 * which language is used by default if unspecified.
 	 *
 	 * If getAvailableLanguages returns a non-empty array, this must return
 	 * a valid language code. Otherwise can return null if files of this
 	 * type do not support alternative language renderings.
+	 *
+	 * @stable to override
 	 *
 	 * @param File $file
 	 * @return string|null Language code or null if multi-language not supported for filetype.
@@ -802,6 +879,8 @@ abstract class MediaHandler {
 	 * File::getLength() existed for a long time, but was calling a method
 	 * that only existed in some subclasses of this class (The TMH ones).
 	 *
+	 * @stable to override
+	 *
 	 * @param File $file
 	 * @return float Length in seconds
 	 * @since 1.23
@@ -812,6 +891,8 @@ abstract class MediaHandler {
 
 	/**
 	 * True if creating thumbnails from the file is large or otherwise resource-intensive.
+	 * @stable to override
+	 *
 	 * @param File $file
 	 * @return bool
 	 */
@@ -822,6 +903,8 @@ abstract class MediaHandler {
 	/**
 	 * Returns whether or not this handler supports the chained generation of thumbnails according
 	 * to buckets
+	 * @stable to override
+	 *
 	 * @return bool
 	 * @since 1.24
 	 */
@@ -832,6 +915,8 @@ abstract class MediaHandler {
 	/**
 	 * Returns a normalised params array for which parameters have been cleaned up for bucketing
 	 * purposes
+	 * @stable to override
+	 *
 	 * @param array $params
 	 * @return array
 	 */
@@ -861,6 +946,7 @@ abstract class MediaHandler {
 	 *   ]
 	 *
 	 * Returns null if no warning is necessary.
+	 * @stable to override
 	 * @param File $file
 	 * @return array|null
 	 */
@@ -871,8 +957,8 @@ abstract class MediaHandler {
 	/**
 	 * Converts a dimensions array about a potentially multipage document from an
 	 * exhaustive list of ordered page numbers to a list of page ranges
-	 * @param Array $pagesByDimensions
-	 * @return String
+	 * @param array[] $pagesByDimensions
+	 * @return string
 	 * @since 1.30
 	 */
 	public static function getPageRangesByDimensions( $pagesByDimensions ) {
@@ -916,6 +1002,8 @@ abstract class MediaHandler {
 
 	/**
 	 * Get useful response headers for GET/HEAD requests for a file with the given metadata
+	 * @stable to override
+	 *
 	 * @param array $metadata Contains this handler's unserialized getMetadata() for a file
 	 * @return array
 	 * @since 1.30

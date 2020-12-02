@@ -1,15 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Frankou",
-			"Waihorace",
-			"Liuxinyu970226",
+			"A2093064",
 			"Cwlin0416",
+			"Frankou",
 			"LNDDYL",
-			"Wbxshiori"
+			"Liuxinyu970226",
+			"Waihorace",
+			"Wbxshiori",
+			"Xiplus"
 		]
 	},
-	"citethispage": "引用此頁",
+	"citethispage": "引用此頁面",
 	"citethispage-desc": "加入 [[Special:CiteThisPage|引用]] 特殊頁面及工具箱連結",
 	"citethispage-link": "引用此頁面",
 	"tooltip-citethispage": "關於如何引用此頁的資訊",

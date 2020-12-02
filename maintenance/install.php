@@ -36,7 +36,7 @@ define( 'MEDIAWIKI_INSTALL', true );
  * @ingroup Maintenance
  */
 class CommandLineInstaller extends Maintenance {
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 		global $IP;
 
@@ -57,6 +57,12 @@ class CommandLineInstaller extends Maintenance {
 		$this->addOption(
 			'scriptpath',
 			'The relative path of the wiki in the web server (/wiki)',
+			false,
+			true
+		);
+		$this->addOption(
+			'server',
+			'The base URL of the web server the wiki will be on (http://localhost)',
 			false,
 			true
 		);
@@ -90,6 +96,10 @@ class CommandLineInstaller extends Maintenance {
 		$this->addOption( 'env-checks', "Run environment checks only, don't change anything" );
 
 		$this->addOption( 'with-extensions', "Detect and include extensions" );
+		$this->addOption( 'extensions', 'Comma-separated list of extensions to install',
+			false, true, false, true );
+		$this->addOption( 'skins', 'Comma-separated list of skins to install (default: all)',
+			false, true, false, true );
 	}
 
 	public function getDbType() {
@@ -99,7 +109,7 @@ class CommandLineInstaller extends Maintenance {
 		return parent::getDbType();
 	}
 
-	function execute() {
+	public function execute() {
 		global $IP;
 
 		$siteName = $this->getArg( 0, 'MediaWiki' ); // Will not be set if used with --env-checks
@@ -111,7 +121,12 @@ class CommandLineInstaller extends Maintenance {
 			$this->setPassOption();
 		}
 
-		$installer = InstallerOverrides::getCliInstaller( $siteName, $adminName, $this->mOptions );
+		try {
+			$installer = InstallerOverrides::getCliInstaller( $siteName, $adminName, $this->mOptions );
+		} catch ( \MediaWiki\Installer\InstallException $e ) {
+			$this->output( $e->getStatus()->getMessage( false, false, 'en' )->text() . "\n" );
+			return false;
+		}
 
 		$status = $installer->doEnvironmentChecks();
 		if ( $status->isGood() ) {
@@ -119,12 +134,23 @@ class CommandLineInstaller extends Maintenance {
 		} else {
 			$installer->showStatusMessage( $status );
 
-			return;
+			return false;
 		}
 		if ( !$envChecksOnly ) {
-			$installer->execute();
+			$status = $installer->execute();
+			if ( !$status->isGood() ) {
+				$installer->showStatusMessage( $status );
+
+				return false;
+			}
 			$installer->writeConfigurationFile( $this->getOption( 'confpath', $IP ) );
+			$installer->showMessage(
+				'config-install-success',
+				$installer->getVar( 'wgServer' ),
+				$installer->getVar( 'wgScriptPath' )
+			);
 		}
+		return true;
 	}
 
 	private function setDbPassOption() {
@@ -163,7 +189,7 @@ class CommandLineInstaller extends Maintenance {
 		}
 	}
 
-	function validateParamsAndArgs() {
+	public function validateParamsAndArgs() {
 		if ( !$this->hasOption( 'env-checks' ) ) {
 			parent::validateParamsAndArgs();
 		}

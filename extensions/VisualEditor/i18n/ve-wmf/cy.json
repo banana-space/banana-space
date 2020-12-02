@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"DChan (WMF)",
+			"Lloffiwr",
+			"Robin Owain",
+			"ОйЛ"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Golygu gyda'r llygad]]",
+	"tag-visualeditor-description": "Golygwyd gyda'r  [[{{MediaWiki:visualeditor-descriptionpagelink}}|golygydd gweladwy]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit: Check]]\n\n[[{{MediaWiki:visualeditor-descriptionpagelink}}|Golygwch:Angen gwirio]]",
+	"tag-visualeditor-needcheck-description": "Golygwyd gyda'r [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] pan adnabu'r sustem y gallai'r gystrawen wici arwain at newidiadau anfwriadol.",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Golygu gweledol: Newidiwyd]]",
+	"tag-visualeditor-switched-description": "Dechreuodd y defnyddiwr olygu yn y golygydd gweledol, yna newid i'r golygydd wicidestun.",
+	"visualeditor-feedback-link": "Project:VisualEditor/Adborth",
+	"visualeditor-feedback-tool": "Anfon adborth am y meddalwedd hwn",
+	"visualeditor-help-label": "Canllawiau",
+	"visualeditor-help-title": "Canllawiau ar sut i ddefnyddio'r golygydd",
+	"visualeditor-welcomedialog-action": "Dechrau golygu",
+	"visualeditor-welcomedialog-content": "Gall unrhywun olygu, ac mae pob gwelliant i'w groesawu.",
+	"visualeditor-welcomedialog-content-thanks": "Diolch am ehangu'r wybodaeth sydd ar gael i bawb a'i fyn.",
+	"visualeditor-welcomedialog-switch": "Golygu'r testun wici yn uniongyrchol",
+	"visualeditor-welcomedialog-switch-ve": "Golygu drwy'r golygydd gweledol",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Croeso}} i $2"
+}

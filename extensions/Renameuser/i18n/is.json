@@ -5,13 +5,14 @@
 			"S.Örvarr.S",
 			"Snævar",
 			"Spacebirdy",
+			"Sveinn í Felli",
 			"Ævar Arnfjörð Bjarmason",
 			"לערי ריינהארט"
 		]
 	},
 	"renameuser": "Breyta notandanafni",
-	"renameuser-linkoncontribs": "breyta notendanafni",
-	"renameuser-linkoncontribs-text": "breyta notendanafni notandans",
+	"renameuser-linkoncontribs": "endurnefna {{GENDER:$1|notanda}}",
+	"renameuser-linkoncontribs-text": "Endurnefna þennan {{GENDER:$1|notanda}}",
 	"renameuser-desc": "Bætir við [[Special:RenameUser|kerfissíðu]] til að breyta notendanafni (þarfnast ''renameuser'' réttinda)",
 	"renameuserold": "Núverandi notandanafn:",
 	"renameusernew": "Nýja notandanafnið:",
@@ -32,11 +33,11 @@
 	"renameuser-page-exists": "Síða sem heitir $1 er nú þegar til og það er ekki hægt að búa til nýja grein með sama heiti.",
 	"renameuser-page-moved": "Síðan $1 hefur verið færð á $2.",
 	"renameuser-page-unmoved": "Ekki var hægt að færa síðuna $1 á $2.",
-	"log-name-renameuser": "Skrá yfir nafnabreytingar notenda",
+	"log-name-renameuser": "Skrá yfir nafnabreytingar notanda",
 	"log-description-renameuser": "Þetta er skrá yfir breytingar á notendanöfnum.",
 	"logentry-renameuser-renameuser": "$1 breytti {{GENDER:$2|notendanafni}} $4 ({{PLURAL:$6|$6 breyting|$6 breytingar}}) í {{GENDER:$7|$5}}",
 	"renameuser-move-log": "Færði síðuna sjálfvirkt þegar {{GENDER:$2|notendanafni}} \"[[User:$1|$1]]\" var breytt í \"[[User:$2|$2]]\"",
 	"action-renameuser": "endurnefna notendur",
-	"right-renameuser": "Breyta notandanafni notenda",
+	"right-renameuser": "Endurnefna notendur",
 	"renameuser-renamed-notice": "Nafni notandans hefur verið breytt. \nSíðasta færsla notandans úr skrá yfir nafnabreytingar notenda er sýnd hér fyrir neðan til skýringar:"
 }

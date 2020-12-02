@@ -1,10 +1,10 @@
 <?php
 
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * A service class for fetching the wiki's current read-only mode.
- * To obtain an instance, use MediaWikiServices::getReadOnlyMode().
+ * To obtain an instance, use MediaWikiServices::getInstance()->getReadOnlyMode().
  *
  * @since 1.29
  */
@@ -12,10 +12,10 @@ class ReadOnlyMode {
 	/** @var ConfiguredReadOnlyMode */
 	private $configuredReadOnly;
 
-	/** @var LoadBalancer */
+	/** @var ILoadBalancer */
 	private $loadBalancer;
 
-	public function __construct( ConfiguredReadOnlyMode $cro, LoadBalancer $loadBalancer ) {
+	public function __construct( ConfiguredReadOnlyMode $cro, ILoadBalancer $loadBalancer ) {
 		$this->configuredReadOnly = $cro;
 		$this->loadBalancer = $loadBalancer;
 	}
@@ -57,12 +57,5 @@ class ReadOnlyMode {
 	 */
 	public function setReason( $msg ) {
 		$this->configuredReadOnly->setReason( $msg );
-	}
-
-	/**
-	 * Clear the cache of the read only file
-	 */
-	public function clearCache() {
-		$this->configuredReadOnly->clearCache();
 	}
 }

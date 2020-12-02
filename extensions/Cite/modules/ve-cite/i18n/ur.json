@@ -1,27 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
+			"Muhammad Shuaib",
 			"Noor2020",
-			"පසිඳු කාවින්ද",
-			"عثمان خان شاہ",
-			"Syedalinaqinaqvi",
-			"عرفان ارشد",
 			"Obaid Raza",
-			"Muhammad Shuaib"
+			"Syedalinaqinaqvi",
+			"عثمان خان شاہ",
+			"عرفان ارشد",
+			"පසිඳු කාවින්ද"
 		]
 	},
-	"visualeditor-cite-tool-definition.json": "خالی",
 	"visualeditor-cite-tool-name-book": "کتاب",
 	"visualeditor-cite-tool-name-journal": "جریدہ",
 	"visualeditor-cite-tool-name-news": "خبر",
 	"visualeditor-cite-tool-name-web": "ویب سائٹ",
-	"cite-tool-definition.json": "خالی",
 	"cite-ve-dialog-reference-options-group-label": "اس گروہ کو استعمال کریں",
 	"cite-ve-dialog-reference-options-group-placeholder": "عمومی حوالہ جات",
 	"cite-ve-dialog-reference-options-name-label": "اس نام کو دوبارہ استعمال کریں",
 	"cite-ve-dialog-reference-options-section": "اختیارات",
 	"cite-ve-dialog-reference-title": "حوالہ",
-	"cite-ve-dialog-reference-useexisting-full-label": "اس صفحے میں پہلے سے موجود حوالے کو دوبارہ استعمال کریں",
 	"cite-ve-dialog-reference-useexisting-tool": "دوبارہ استعمال کریں",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "عمومی حوالہ جات کی فہرست",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "گروہ «$1» کے حوالوں کی فہرست",

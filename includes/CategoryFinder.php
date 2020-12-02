@@ -58,7 +58,7 @@ class CategoryFinder {
 	/** @var array Array of article/category IDs */
 	protected $next = [];
 
-	/** @var int Max layer depth **/
+	/** @var int Max layer depth */
 	protected $maxdepth = -1;
 
 	/** @var array Array of DBKEY category names */
@@ -72,6 +72,10 @@ class CategoryFinder {
 
 	/** @var IDatabase Read-DB replica DB */
 	protected $dbr;
+
+	public function __construct() {
+		wfDeprecated( __METHOD__, '1.31' );
+	}
 
 	/**
 	 * Initializes the instance. Do this prior to calling run().
@@ -145,7 +149,7 @@ class CategoryFinder {
 	/**
 	 * This functions recurses through the parent representation, trying to match the conditions
 	 * @param int $id The article/category to check
-	 * @param array $conds The array of categories to match
+	 * @param array &$conds The array of categories to match
 	 * @param array $path Used to check for recursion loops
 	 * @return bool Does this match the conditions?
 	 */
@@ -213,14 +217,14 @@ class CategoryFinder {
 			/* WHERE  */ [ 'cl_from' => $this->next ],
 			__METHOD__ . '-1'
 		);
-		foreach ( $res as $o ) {
-			$k = $o->cl_to;
+		foreach ( $res as $row ) {
+			$k = $row->cl_to;
 
 			# Update parent tree
-			if ( !isset( $this->parents[$o->cl_from] ) ) {
-				$this->parents[$o->cl_from] = [];
+			if ( !isset( $this->parents[$row->cl_from] ) ) {
+				$this->parents[$row->cl_from] = [];
 			}
-			$this->parents[$o->cl_from][$k] = $o;
+			$this->parents[$row->cl_from][$k] = $row;
 
 			# Ignore those we already have
 			if ( in_array( $k, $this->deadend ) ) {
@@ -245,9 +249,9 @@ class CategoryFinder {
 				/* WHERE  */ [ 'page_namespace' => NS_CATEGORY, 'page_title' => $layer ],
 				__METHOD__ . '-2'
 			);
-			foreach ( $res as $o ) {
-				$id = $o->page_id;
-				$name = $o->page_title;
+			foreach ( $res as $row ) {
+				$id = $row->page_id;
+				$name = $row->page_title;
 				$this->name2id[$name] = $id;
 				$this->next[] = $id;
 				unset( $layer[$name] );

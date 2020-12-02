@@ -1,12 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bjankuloski06"
+			"Bjankuloski06",
+			"Vlad5250"
 		]
 	},
 	"multimediaviewer-desc": "Зголемување на минијатурите на цел екран.",
-	"multimediaviewer-pref": "Прегледувач",
-	"multimediaviewer-pref-desc": "Дава поубаво прегледување на слики на страници. Ги прикажува поголеми на страниците со минијатури. Можат да се прегледуваат и на цел екран.",
 	"multimediaviewer-optin-pref": "Вклучи го <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Мултимедијалниот изведувач]</span>",
 	"multimediaviewer-file-page": "Оди на соодветната податотечна страница",
 	"multimediaviewer-repository-local": "Поподробно",
@@ -18,7 +17,7 @@
 	"multimediaviewer-multiple-authors-combine": "$1 и $2",
 	"multimediaviewer-metadata-error": "Не можев да ги вчитам податоците за сликата. (грешка: $1)",
 	"multimediaviewer-thumbnail-error": "За жал, не можев да ја прикажам податотеката",
-	"multimediaviewer-thumbnail-error-description": "Имаме технички проблем. Можете да $1 или $3 ако упрно се јавува. Грешка: $2",
+	"multimediaviewer-thumbnail-error-description": "Имаме технички проблем. Можете да $1 ако упорно се јавува. Грешка: $2",
 	"multimediaviewer-thumbnail-error-retry": "пробај пак",
 	"multimediaviewer-thumbnail-error-report": "го пријавите проблемот",
 	"multimediaviewer-license-cc-by-4.0": "CC BY 4.0",
@@ -45,14 +44,14 @@
 	"multimediaviewer-restriction-trademarked": "Сликава има содржини што може да подлежат на законите за заштитен знак.",
 	"multimediaviewer-restriction-default": "Сликава може да е предмет на ограничувања согласно правни одредби вон авторското право. Погледајте ја описната страница на податотеката за повеќе информации.",
 	"multimediaviewer-restriction-default-and-others": "Сликава може да подлежи на понатамошни ограничувања согласно други правни одредби вон авторското право. Погледајте ја описната страница на податотеката за повеќе информации.",
-	"multimediaviewer-about-mmv": "За прегледувачот",
+	"multimediaviewer-about-mmv": "За посредников",
 	"multimediaviewer-discuss-mmv": "Разговор",
 	"multimediaviewer-help-mmv": "Ппомош",
 	"multimediaviewer-optout-mmv": "Исклучи го Прегледувачот",
 	"multimediaviewer-optin-mmv": "Вклучи го Прегледувачот",
 	"multimediaviewer-optout-pending-mmv": "Исклучување на Прегледувачот",
 	"multimediaviewer-optin-pending-mmv": "Вклучување на Прегледувачот",
-	"multimediaviewer-optout-help": "Прегледувачот повеќе нема да се користи за прикажување на слики. Ако сакате да го користите повторно, стиснете на копчето „{{int:multimediaviewer-view-expanded}}“ веднаш до секоја слика. Потоа стниснете на „{{int:multimediaviewer-optin-mmv}}“.",
+	"multimediaviewer-optout-help": "Медијапрегледувачот повеќе нема да се користи за прикажување на слики. Ако сакате да го користите повторно, стиснете на копчето „{{int:multimediaviewer-view-expanded}}“ веднаш до секоја слика. Потоа стиснете на „{{int:multimediaviewer-optin-mmv}}“.",
 	"multimediaviewer-optin-help": "Прегледувачот ќе се користи за прикажување на слики.",
 	"multimediaviewer-geoloc-north": "СГШ",
 	"multimediaviewer-geoloc-east": "ИГД",
@@ -72,6 +71,7 @@
 	"multimediaviewer-download-small-button-name": "Преземи мало",
 	"multimediaviewer-download-medium-button-name": "Преземи средно",
 	"multimediaviewer-download-large-button-name": "Преземи големо",
+	"multimediaviewer-download-xl-button-name": "Преземи многу голема",
 	"multimediaviewer-link-to-page": "Врска до описната страница на податотеката",
 	"multimediaviewer-link-to-file": "Врска до изворната податотека",
 	"multimediaviewer-share-explanation": "Ископирајте ја врската и слободно споделувајте ја",
@@ -88,6 +88,7 @@
 	"multimediaviewer-embed-via": "Преку $1.",
 	"multimediaviewer-default-embed-dimensions": "Стандардна големина на минијатурата",
 	"multimediaviewer-original-embed-dimensions": "Изворна податотека $1",
+	"multimediaviewer-xl-embed-dimensions": "Многу голема $1",
 	"multimediaviewer-large-embed-dimensions": "Голема $1",
 	"multimediaviewer-medium-embed-dimensions": "Средна $1",
 	"multimediaviewer-small-embed-dimensions": "Мала $1",

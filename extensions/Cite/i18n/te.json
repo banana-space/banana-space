@@ -2,19 +2,36 @@
 	"@metadata": {
 		"authors": [
 			"Chaduvari",
+			"Pavan santhosh.s",
 			"Ravichandra",
 			"Veeven"
 		]
 	},
-	"cite-desc": "ఉదహరింపులకు <nowiki><ref[ name=id]></nowiki> మరియు <nowiki><references/></nowiki> టాగులను చేర్చుతుంది",
+	"cite-desc": "ఉదహరింపులకు <code>&lt;ref[ name=id]&gt;</code>, <code>&lt;references/&gt;</code> టాగులను చేర్చుతుంది",
 	"cite_error": "ఉదహరింపు పొరపాటు: $1",
+	"cite_error_ref_invalid_dir": "చెల్లని <code>&lt;ref&gt;</code> ట్యాగు; dir లక్షణం \"$1\" ఏమిటో తెలియ లేదు. ltr గానీ, rtl గానీ ఉండాలి",
 	"cite_error_ref_numeric_key": "తప్పుడు <code>&lt;ref&gt;</code> టాగు; పేరు సరళ సంఖ్య అయివుండకూడదు, వివరమైన శీర్షిక వాడండి",
-	"cite_error_ref_no_key": "సరైన <code>&lt;ref&gt;</code> ట్యాగు కాదు; విషయం లేని ref లకు తప్పనిసరిగా పేరొకటుండాలి",
+	"cite_error_ref_no_key": "తెరిచే <code>&lt;ref&gt;</code> ట్యాగు సరిగ్గా లేదు, లేదా దాని పేరు సరైనది కాదు",
 	"cite_error_ref_too_many_keys": "సరైన <code>&lt;ref&gt;</code> ట్యాగు కాదు; తప్పు పేర్లు, ఉదాహరణకు మరీ ఎక్కువ",
 	"cite_error_ref_no_input": "సరైన <code>&lt;ref&gt;</code> ట్యాగు కాదు; పేరు లేని ref లలో తప్పనిసరిగా విషయం ఉండాలి",
-	"cite_error_references_invalid_parameters": "సరైన <code>&lt;references&gt;</code> ట్యాగు కాదు; పారామీటర్లకు కు అనుమతి లేదు, ఈ లోపాన్ని కలుగజేసే ఒక ఉదాహరణ: <references someparameter=\"value\" />",
-	"cite_error_references_no_backlink_label": "మీ స్వంత బ్యాక్‌లింకు లేబుళ్ళు అయిపోయాయి. <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki> సందేశంలో మరిన్ని లేబుళ్ళను నిర్వచించుకోండి.",
+	"cite_error_references_duplicate_key": "చెల్లని <code>&lt;ref&gt;</code> ట్యాగు; \"$1\" అనే పేరును విభిన్న కంటెంటుతో అనేక సార్లు నిర్వచించారు",
+	"cite_error_references_invalid_parameters": "<code>&lt;references&gt;</code> ట్యాగులో చెల్లని పరామితి ఉంది",
+	"cite_error_references_no_backlink_label": "మీ స్వంత బ్యాక్‌లింకు లేబుళ్ళు అయిపోయాయి. [[MediaWiki:Cite references link many format backlink labels]] సందేశంలో మరిన్ని లేబుళ్ళను నిర్వచించుకోండి.",
+	"cite_error_no_link_label_group": "\"$1\"గుంపుకు కస్టమ్ లింకు లేబుళ్ళు అయిపోయాయి. [[MediaWiki:$2]] సందేశంలో ఇంకొన్నిటిని నిర్వచించండి.",
 	"cite_error_references_no_text": "సరైన <code>&lt;ref&gt;</code> కాదు; <code>$1</code> అనే పేరుగల ref లకు పాఠ్యమేమీ ఇవ్వలేదు",
+	"cite_error_included_ref": "<code>&lt;ref&gt;</code> ట్యాగుకు, మూసే <code>&lt;/ref&gt;</code> లేదు.",
+	"cite_error_group_refs_without_references": "\"$1\" అనే గుంపుకు <code>&lt;ref&gt;</code> ట్యాగులున్నాయి, కానీ సంబంధిత <code>&lt;references group=\"$1\"/&gt;</code> ట్యాగేదీ కనబడలేదు. లేదా మూసే <code>&lt;/ref&gt;</code> లేదు",
+	"cite_error_references_group_mismatch": "<code>&lt;references&gt;</code> లోని <code>&lt;ref&gt;</code> ట్యాగుకు చెందిన \"$1\" అనే గుణంలో వైరుద్ధ్యం ఉంది.",
+	"cite_error_references_missing_group": "<code>&lt;references&gt;</code> లో నిర్వచించిన <code>&lt;ref&gt;</code> ట్యాగు యొక్క \"$1\" అనే గుంపు గుణం ముందున్న పాఠ్యంలో లేదు.",
+	"cite_error_references_missing_key": "<code>&lt;references&gt;</code> లో \"$1\" అనే పేరుతో నిర్వచించిన <code>&lt;ref&gt;</code> ట్యాగును ముందరి పాఠ్యంలో వాడలేదు.",
+	"cite_error_references_no_key": "<code>&lt;references&gt;</code> లో నిర్వచించిన <code>&lt;ref&gt;</code> ట్యాగుకు పేరు గుణం లేదు.",
+	"cite_error_empty_references_define": "<code>&lt;references&gt;</code> లో \"$1\" పేరుతో నిర్వచించిన <code>&lt;ref&gt;</code> ట్యాగులో పాఠ్యమేమీ లేదు.",
+	"cite-tracking-category-cite-error": "మూలాల లోపాలున్న పేజీలు",
+	"cite-tracking-category-cite-error-desc": "ఈ వర్గం లోని పేజీల్లో మూలాల ట్యాగుల వాడకంలో లోపాలున్నాయి.",
 	"cite_references_link_accessibility_label": "పైకి దూకు",
-	"cite_references_link_many_accessibility_label": "ఇక్కడికి దుముకు:"
+	"cite_references_link_many_accessibility_label": "ఇక్కడికి దుముకు:",
+	"cite_references_link_accessibility_back_label": "వెనక్కి గెంతు",
+	"cite_section_preview_references": "మూలాల మునుజూపు",
+	"cite_warning": "ఉల్లేఖన హెచ్చరిక: $1",
+	"cite_warning_sectionpreview_no_text": "<code>$1</code> పేరుతో ఉన్న <code>&lt;ref&gt;</code> ట్యాగును మునుజూపులో చూపలేం. ఎందుకంటే అది ప్రస్తుత విభాగానికి బయటైనా ఉండి ఉండాలి, లేదా అసలు దాన్ని నిర్వచించకపోయి అయినా ఉండాలి."
 }

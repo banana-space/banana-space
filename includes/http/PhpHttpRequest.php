@@ -23,6 +23,20 @@ class PhpHttpRequest extends MWHttpRequest {
 	private $fopenErrors = [];
 
 	/**
+	 * @internal Use HttpRequestFactory
+	 */
+	public function __construct() {
+		if ( !wfIniGetBool( 'allow_url_fopen' ) ) {
+			throw new RuntimeException( __METHOD__ . ': allow_url_fopen needs to be enabled for ' .
+				'pure PHP http requests to work. If possible, curl should be used instead. See ' .
+				'https://www.php.net/curl.'
+			);
+		}
+
+		parent::__construct( ...func_get_args() );
+	}
+
+	/**
 	 * @param string $url
 	 * @return string
 	 */
@@ -137,13 +151,7 @@ class PhpHttpRequest extends MWHttpRequest {
 		}
 
 		if ( $this->sslVerifyHost ) {
-			// PHP 5.6.0 deprecates CN_match, in favour of peer_name which
-			// actually checks SubjectAltName properly.
-			if ( version_compare( PHP_VERSION, '5.6.0', '>=' ) ) {
-				$options['ssl']['peer_name'] = $this->parsedUrl['host'];
-			} else {
-				$options['ssl']['CN_match'] = $this->parsedUrl['host'];
-			}
+			$options['ssl']['peer_name'] = $this->parsedUrl['host'];
 		}
 
 		$options['ssl'] += $this->getCertOptions();
@@ -169,19 +177,6 @@ class PhpHttpRequest extends MWHttpRequest {
 			restore_error_handler();
 
 			if ( !$fh ) {
-				// HACK for instant commons.
-				// If we are contacting (commons|upload).wikimedia.org
-				// try again with CN_match for en.wikipedia.org
-				// as php does not handle SubjectAltName properly
-				// prior to "peer_name" option in php 5.6
-				if ( isset( $options['ssl']['CN_match'] )
-					&& ( $options['ssl']['CN_match'] === 'commons.wikimedia.org'
-						|| $options['ssl']['CN_match'] === 'upload.wikimedia.org' )
-				) {
-					$options['ssl']['CN_match'] = 'en.wikipedia.org';
-					$context = stream_context_create( $options );
-					continue;
-				}
 				break;
 			}
 
@@ -201,7 +196,7 @@ class PhpHttpRequest extends MWHttpRequest {
 			$url = $this->getResponseHeader( "Location" );
 
 			if ( !Http::isValidURI( $url ) ) {
-				$this->logger->debug( __METHOD__ . ": insecure redirection\n" );
+				$this->logger->debug( __METHOD__ . ": insecure redirection" );
 				break;
 			}
 		} while ( true );
@@ -236,7 +231,7 @@ class PhpHttpRequest extends MWHttpRequest {
 					break;
 				}
 
-				if ( strlen( $buf ) ) {
+				if ( $buf !== '' ) {
 					call_user_func( $this->callback, $fh, $buf );
 				}
 			}

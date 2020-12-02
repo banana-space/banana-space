@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chrumps",
+			"Rail",
+			"Railfail536"
+		]
+	},
+	"apihelp-query+oath-description": "Sprawdź czy weryfikacja dwuetapowa (OATH) jest włączona u użytkownika.",
+	"apihelp-query+oath-summary": "Sprawdź czy weryfikacja dwuetapowa (OATH) jest włączona u użytkownika.",
+	"apihelp-query+oath-param-user": "Użytkownik o którym pobierane będą informacje. Domyślnie obecny użytkownik.",
+	"apihelp-query+oath-example-1": "Pobierz informacje o aktualnym użytkowniku",
+	"apihelp-query+oath-example-2": "Pobierz informacje na temat użytkownika <kbd>Example</kbd>",
+	"apihelp-oathvalidate-description": "Waliduj token weryfikacji dwuetapowej (OATH).",
+	"apihelp-oathvalidate-summary": "Waliduj token weryfikacji dwuetapowej (OATH).",
+	"apihelp-oathvalidate-param-user": "Użytkownik którego token ma być walidowany. Domyślnie obecny użytkownik.",
+	"apihelp-oathvalidate-param-totp": "Token uwierzytelniania dwuetapowego (OATH). Przestarzała funkcja, zamiast tego użyj parametru „data”",
+	"apihelp-oathvalidate-example-1": "Waliduj token obecnego użytkownika",
+	"apihelp-oathvalidate-example-2": "Waliduj token użytkownika <kbd>Przykład</kbd>",
+	"apihelp-oathvalidate-example-3": "Waliduj dane JSON użytkownika <kbd>Przykład</kbd>",
+	"apihelp-oathvalidate-param-data": "Dane oczekiwane przez aktualnie aktywowany moduł autoryzacji dla użytkownika zakodowane w formacie JSON"
+}

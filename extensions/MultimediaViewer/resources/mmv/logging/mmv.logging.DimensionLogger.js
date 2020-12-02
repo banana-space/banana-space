@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $, oo ) {
+( function () {
 	var DL;
 
 	/**
@@ -28,7 +28,7 @@
 	 */
 	function DimensionLogger() {}
 
-	oo.inheritClass( DimensionLogger, mw.mmv.logging.Logger );
+	OO.inheritClass( DimensionLogger, mw.mmv.logging.Logger );
 
 	DL = DimensionLogger.prototype;
 
@@ -61,7 +61,7 @@
 			viewportHeight: $( window ).height(),
 			canvasWidth: canvasDimensions.width,
 			canvasHeight: canvasDimensions.height,
-			devicePixelRatio: $.devicePixelRatio(),
+			devicePixelRatio: window.devicePixelRatio || 1,
 			imgWidth: imageWidths.cssWidth,
 			imageAspectRatio: imageWidths.cssWidth / imageWidths.cssHeight,
 			thumbWidth: imageWidths.real,
@@ -78,4 +78,4 @@
 
 	mw.mmv.logging.DimensionLogger = DimensionLogger;
 	mw.mmv.dimensionLogger = new DimensionLogger();
-}( mediaWiki, jQuery, OO ) );
+}() );

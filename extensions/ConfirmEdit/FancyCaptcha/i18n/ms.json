@@ -3,6 +3,7 @@
 		"authors": [
 			"Anakmalaysia",
 			"Aviator",
+			"MNH48",
 			"Pizza1016"
 		]
 	},
@@ -12,9 +13,7 @@
 	"fancycaptcha-accountcreate": "Untuk melindungi wiki ini dari pembukaan akaun secara automatik, kami memohon anda untuk mengisi perkataan-perkataan berikut dalam kotak yang disediakan ([[Special:Captcha/help|maklumat lanjut]]):",
 	"fancycaptcha-create": "Untuk mencipta laman ini, anda diminta mengisi huruf-huruf berikut dalam kotak yang disediakan ([[Special:Captcha/help|maklumat lanjut]]):",
 	"fancycaptcha-edit": "Untuk menyunting laman ini, anda diminta mengisi huruf-huruf berikut dalam kotak yang disediakan ([[Special:Captcha/help|maklumat lanjut]]):",
-	"fancycaptcha-imgcaptcha-ph": "Isikan teks yang anda lihat di atas",
+	"fancycaptcha-imgcaptcha-ph": "Masukkan teks yang anda lihat dalam gambar",
 	"fancycaptcha-sendemail": "Untuk membanteras kegiatan spam secara automatik, anda diminta mengisi huruf-huruf berikut dalam kotak yang disediakan ([[Special:Captcha/help|maklumat lanjut]]):",
-	"fancycaptcha-reload-text": "Muat semula",
-	"apihelp-fancycaptchareload-description": "Dapatkan FancyCaptcha baru.",
-	"apihelp-fancycaptchareload-example-1": "Dapatkan FancyCaptcha baru"
+	"fancycaptcha-reload-text": "Muat semula"
 }

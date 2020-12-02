@@ -2,15 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Ficell",
+			"Jerrykim306",
 			"Klutzy",
 			"Kwj2772",
+			"Mooozi",
 			"Priviet",
 			"ToePeu",
-			"아라",
-			"Mooozi",
 			"Ykhwong",
-			"Jerrykim306",
-			"렌즈"
+			"렌즈",
+			"아라"
 		]
 	},
 	"categorytree": "분류 트리",
@@ -40,10 +40,5 @@
 	"categorytree-no-pages": "문서나 하위 분류 없음",
 	"categorytree-not-found": "$1 분류가 없습니다",
 	"categorytree-error": "값을 불러오는 중 오류 발생",
-	"categorytree-retry": "잠시 후에 다시 해보세요.",
-	"apihelp-categorytree-description": "CategoryTree 확장 기능을 위한 내부 모듈입니다.",
-	"apihelp-categorytree-summary": "CategoryTree 확장 기능을 위한 내부 모듈입니다.",
-	"apihelp-categorytree-param-category": "분류 이름공간에서의 제목, 접두어는 무시됩니다.",
-	"apihelp-categorytree-param-options": "JSON 오브젝트 자격의 CategoryTree 생성자를 위한 옵션입니다. <var>depth</var> 옵션의 기본값은 <kbd>1</kbd>입니다.",
-	"apierror-categorytree-invalidjson": "옵션은 반드시 유효한 JSON 형식이어야 합니다."
+	"categorytree-retry": "잠시 후에 다시 해보세요."
 }

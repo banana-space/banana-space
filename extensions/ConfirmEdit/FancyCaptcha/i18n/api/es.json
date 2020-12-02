@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fitoschido"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "Obtener un FancyCaptcha nuevo.",
+	"apihelp-fancycaptchareload-summary": "Obtener un FancyCaptcha nuevo.",
+	"apihelp-fancycaptchareload-example-1": "Obtener un FancyCaptcha nuevo"
+}

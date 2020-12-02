@@ -4,6 +4,7 @@
 			"Artsiom91"
 		]
 	},
-	"syntaxhighlight-error-category": "Старонкі з памылкамі падсветкі сінтаксіса‎",
-	"syntaxhighlight-error-category-desc": "Пры спробе дадаць падсветку сінтаксісу на старонцы адбылася памылка"
+	"syntaxhighlight-error-category": "Старонкі з памылкамі падсветкі сінтаксісу",
+	"syntaxhighlight-error-category-desc": "Пры спробе дадаць падсветку сінтаксісу на старонцы адбылася памылка",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Мова"
 }

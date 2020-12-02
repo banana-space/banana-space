@@ -1,11 +1,15 @@
 <?php
 
+use MediaWiki\HookContainer\ProtectedHookAccessorTrait;
+
 /**
  * Helper functions for the login form that need to be shared with other special pages
  * (such as CentralAuth's SpecialCentralLogin).
  * @since 1.27
  */
 class LoginHelper extends ContextSource {
+	use ProtectedHookAccessorTrait;
+
 	/**
 	 * Valid error and warning messages
 	 *
@@ -25,6 +29,7 @@ class LoginHelper extends ContextSource {
 		'resetpass-no-info',
 		'confirmemail_needlogin',
 		'prefsnologintext2',
+		'specialmute-login-required',
 	];
 
 	/**
@@ -37,7 +42,7 @@ class LoginHelper extends ContextSource {
 		static $messages = null;
 		if ( !$messages ) {
 			$messages = self::$validErrorMessages;
-			Hooks::run( 'LoginFormValidErrorMessages', [ &$messages ] );
+			Hooks::runner()->onLoginFormValidErrorMessages( $messages );
 		}
 
 		return $messages;
@@ -65,7 +70,7 @@ class LoginHelper extends ContextSource {
 		$type, $returnTo = '', $returnToQuery = '', $stickHTTPS = false
 	) {
 		$config = $this->getConfig();
-		if ( $type !== 'error' && $wgRedirectOnLogin !== null ) {
+		if ( $type !== 'error' && $config->get( 'RedirectOnLogin' ) !== null ) {
 			$returnTo = $config->get( 'RedirectOnLogin' );
 			$returnToQuery = [];
 		} elseif ( is_string( $returnToQuery ) ) {
@@ -73,7 +78,7 @@ class LoginHelper extends ContextSource {
 		}
 
 		// Allow modification of redirect behavior
-		Hooks::run( 'PostLoginRedirect', [ &$returnTo, &$returnToQuery, &$type ] );
+		$this->getHookRunner()->onPostLoginRedirect( $returnTo, $returnToQuery, $type );
 
 		$returnToTitle = Title::newFromText( $returnTo ) ?: Title::newMainPage();
 

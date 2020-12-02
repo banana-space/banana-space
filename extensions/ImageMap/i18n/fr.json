@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Derugon",
 			"Grondin",
 			"Urhixidur",
-			"Verdy p",
-			"Derugon"
+			"Verdy p"
 		]
 	},
 	"imagemap_desc": "Permet les cartes images clientes cliquables, grâce à la balise <code>&lt;imagemap&gt;</code>",

@@ -73,6 +73,11 @@ $specialPageAliases['ckb'] = [
 	'Interwiki' => [ 'نێوانویکی' ],
 ];
 
+/** Czech (čeština) */
+$specialPageAliases['cs'] = [
+	'Interwiki' => [ 'Mezijazykové_odkazy' ],
+];
+
 /** German (Deutsch) */
 $specialPageAliases['de'] = [
 	'Interwiki' => [ 'Interwikitabelle', 'Interwiki-Tabelle' ],
@@ -221,6 +226,16 @@ $specialPageAliases['ru'] = [
 /** Sanskrit (संस्कृतम्) */
 $specialPageAliases['sa'] = [
 	'Interwiki' => [ 'आंन्तरविकि' ],
+];
+
+/** Serbian (Cyrillic script) (српски (ћирилица)‎) */
+$specialPageAliases['sr-ec'] = [
+	'Interwiki' => [ 'Међувики' ],
+];
+
+/** Serbian (Latin script) (srpski (latinica)‎) */
+$specialPageAliases['sr-el'] = [
+	'Interwiki' => [ 'Međuviki' ],
 ];
 
 /** Swahili (Kiswahili) */

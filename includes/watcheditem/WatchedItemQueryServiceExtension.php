@@ -1,7 +1,8 @@
 <?php
 
-use Wikimedia\Rdbms\ResultWrapper;
+use MediaWiki\User\UserIdentity;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Extension mechanism for WatchedItemQueryService
@@ -11,7 +12,7 @@ use Wikimedia\Rdbms\IDatabase;
  * @file
  * @ingroup Watchlist
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  */
 interface WatchedItemQueryServiceExtension {
 
@@ -21,7 +22,7 @@ interface WatchedItemQueryServiceExtension {
 	 *
 	 * @warning Any joins added *must* join on a unique key of the target table
 	 *  unless you really know what you're doing.
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @param array $options Options from
 	 *  WatchedItemQueryService::getWatchedItemsWithRecentChangeInfo()
 	 * @param IDatabase $db Database connection being used for the query
@@ -31,26 +32,27 @@ interface WatchedItemQueryServiceExtension {
 	 * @param array &$dbOptions Options for Database::select()
 	 * @param array &$joinConds Join conditions for Database::select()
 	 */
-	public function modifyWatchedItemsWithRCInfoQuery( User $user, array $options, IDatabase $db,
-		array &$tables, array &$fields, array &$conds, array &$dbOptions, array &$joinConds
+	public function modifyWatchedItemsWithRCInfoQuery( UserIdentity $user, array $options,
+		IDatabase $db, array &$tables, array &$fields, array &$conds, array &$dbOptions,
+		array &$joinConds
 	);
 
 	/**
 	 * Modify the results from WatchedItemQueryService::getWatchedItemsWithRecentChangeInfo()
 	 * before they're returned.
 	 *
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @param array $options Options from
 	 *  WatchedItemQueryService::getWatchedItemsWithRecentChangeInfo()
 	 * @param IDatabase $db Database connection being used for the query
 	 * @param array &$items array of pairs ( WatchedItem $watchedItem, string[] $recentChangeInfo ).
 	 *  May be truncated if necessary, in which case $startFrom must be updated.
-	 * @param ResultWrapper|bool $res Database query result
+	 * @param IResultWrapper|bool $res Database query result
 	 * @param array|null &$startFrom Continuation value. If you truncate $items, set this to
 	 *  [ $recentChangeInfo['rc_timestamp'], $recentChangeInfo['rc_id'] ] from the first item
 	 *  removed.
 	 */
-	public function modifyWatchedItemsWithRCInfo( User $user, array $options, IDatabase $db,
+	public function modifyWatchedItemsWithRCInfo( UserIdentity $user, array $options, IDatabase $db,
 		array &$items, $res, &$startFrom
 	);
 

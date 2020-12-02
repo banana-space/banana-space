@@ -1,6 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
+			"Banjo",
+			"Elisardojm",
 			"Toliño",
 			"Xosé"
 		]
@@ -8,5 +10,11 @@
 	"skinname-monobook": "MonoBook",
 	"monobook-desc": "A aparencia clásica de MediaWiki desde 2004; recibe o seu nome pola foto en branco e negro dun libro que aparece no fondo das páxinas",
 	"monobook.css": "/* O CSS que se coloque aquí afectará a quen use a aparencia Monobook */",
-	"monobook.js": "/* Calquera JavaScript que haxa aquí será cargado para os usuarios que usen a aparencia MonoBook */"
+	"monobook.js": "/* Calquera JavaScript que haxa aquí será cargado para os usuarios que usen a aparencia MonoBook */",
+	"monobook-jumptopersonal": "ferramentas de usuario",
+	"monobook-jumptonavigation": "Saltar ata a navegación",
+	"monobook-jumptosearch": "Saltar á procura",
+	"monobook-more-actions": "Máis",
+	"monobook-notifications-link": "Notificacións ($1)",
+	"monobook-notifications-link-none": "Notificacións"
 }

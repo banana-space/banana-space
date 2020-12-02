@@ -31,7 +31,6 @@
 	"interwiki-cached": "Mellomwikidataa er mellomlagra. Det er ikkje mogeleg å endra mellomlageret.",
 	"interwiki_edit": "Endra",
 	"interwiki_reasonfield": "Årsak:",
-	"interwiki_delquestion": "Slettar «$1»",
 	"interwiki_deleting": "Du slettar førefestet «$1».",
 	"interwiki_deleted": "Førefestet «$1» vart fjerna frå mellomwikitabellen.",
 	"interwiki_delfailed": "Førefestet «$1» kunne ikkje fjernast frå mellomwikitabellen.",

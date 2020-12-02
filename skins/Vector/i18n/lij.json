@@ -6,6 +6,11 @@
 			"S4b1nuz E.656"
 		]
 	},
+	"vector-skin-desc": "Verscion moderna do MonoBook co-in aspetto rinovou e di belli avantaggi inta dœuviabilitæ",
+	"prefs-vector-enable-vector-1-label": "Adœuvia o Vector vegio",
+	"prefs-vector-enable-vector-1-help": "Inti proscimi anni ciancianin agiorniemo e pelle do Vector. O Vector Legacy  o te permetiâ d'amiâ a verscion vegia do Vector (do dexembre 2019). Pe saveine de ciu in scî agiornamenti vanni a-a nostra [[mw:Reading/Web/Desktop_Improvements|paggina do progetto]]",
+	"vector-opt-out": "Passa a l'aspetto vegio",
+	"vector-opt-out-tooltip": "Cangia e to impostassioin pe tornâ a-a vixoalizassion da pelle vegia (legacy Vector)",
 	"vector-action-addsection": "Azónzi discusción",
 	"vector-action-delete": "Scancella",
 	"vector-action-move": "Mescia",
@@ -17,5 +22,7 @@
 	"vector-view-history": "Cronologîa",
 	"vector-view-view": "Lêzi",
 	"vector-view-viewsource": "Vixualizza wikitesto",
+	"vector-jumptonavigation": "Sata a-a navegassion",
+	"vector-jumptosearch": "Sata a-a serchia",
 	"vector-more-actions": "Âtro"
 }

@@ -34,14 +34,15 @@ class TestLogger extends \Psr\Log\AbstractLogger {
 	private $collect = false;
 	private $collectContext = false;
 	private $buffer = [];
-	private $filter = null;
+	/** @var callable|null */
+	private $filter;
 
 	/**
 	 * @param bool $collect Whether to collect logs. @see setCollect()
-	 * @param callable $filter Filter logs before collecting/printing. Signature is
+	 * @param callable|null $filter Filter logs before collecting/printing. Signature is
 	 *  string|null function ( string $message, string $level, array $context );
-	 * @param bool $collectContext Whether to keep the context passed to log.
-	 *                             @since 1.29 @see setCollectContext()
+	 * @param bool $collectContext Whether to keep the context passed to log
+	 *             (since 1.29, @see setCollectContext()).
 	 */
 	public function __construct( $collect = false, $filter = null, $collectContext = false ) {
 		$this->collect = $collect;
@@ -73,8 +74,8 @@ class TestLogger extends \Psr\Log\AbstractLogger {
 
 	/**
 	 * Return the collected logs
-	 * @return array Array of array( string $level, string $message ), or
-	 *   array( string $level, string $message, array $context ) if $collectContext was true.
+	 * @return array Array of [ string $level, string $message ], or
+	 *   [ string $level, string $message, array $context ] if $collectContext was true.
 	 */
 	public function getBuffer() {
 		return $this->buffer;
@@ -91,7 +92,7 @@ class TestLogger extends \Psr\Log\AbstractLogger {
 		$message = trim( $message );
 
 		if ( $this->filter ) {
-			$message = call_user_func( $this->filter, $message, $level, $context );
+			$message = ( $this->filter )( $message, $level, $context );
 			if ( $message === null ) {
 				return;
 			}

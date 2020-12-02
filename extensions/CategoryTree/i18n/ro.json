@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Andrei Stroe",
 			"Cin",
 			"Firilacroco",
 			"KlaudiuMihaila",
@@ -14,7 +15,7 @@
 	"categorytree-portlet": "Categorii",
 	"categorytree-legend": "Arată arborele categoriilor",
 	"categorytree-desc": "Navighează dinamic în [[Special:CategoryTree|stuctura categoriilor]]",
-	"categorytree-header": "Introduceți numele categoriei pentru vizualizarea conținutului în structură arborescentă. Notați faptul că această operație necesită funcționalități JavaScript avansate cunoscute sub numele de AJAX. Dacă aveți un browser vechi sau nu aveți activat JavaScript, nu va funcționa.",
+	"categorytree-header": "Introduceți un nume de categorie pentru vizualizarea conținutului în structură arborescentă. (Necesită JavaScript.)",
 	"categorytree-category": "Categorie:",
 	"categorytree-go": "Arată arborele",
 	"categorytree-parents": "Părinți",

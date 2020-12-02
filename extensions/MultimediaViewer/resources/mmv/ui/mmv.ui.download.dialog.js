@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $, oo ) {
+( function () {
 	// Shortcut for prototype later
 	var DP;
 
@@ -38,7 +38,7 @@
 		this.eventPrefix = 'download';
 	}
 
-	oo.inheritClass( Dialog, mw.mmv.ui.Dialog );
+	OO.inheritClass( Dialog, mw.mmv.ui.Dialog );
 	DP = Dialog.prototype;
 
 	/**
@@ -47,10 +47,10 @@
 	DP.attach = function () {
 		var dialog = this;
 
-		this.handleEvent( 'mmv-download-open', $.proxy( this.handleOpenCloseClick, this ) );
+		this.handleEvent( 'mmv-download-open', this.handleOpenCloseClick.bind( this ) );
 
-		this.handleEvent( 'mmv-reuse-open', $.proxy( this.closeDialog, this ) );
-		this.handleEvent( 'mmv-options-open', $.proxy( this.closeDialog, this ) );
+		this.handleEvent( 'mmv-reuse-open', this.closeDialog.bind( this ) );
+		this.handleEvent( 'mmv-options-open', this.closeDialog.bind( this ) );
 
 		this.$container.on( 'mmv-download-cta-open', function () {
 			dialog.$warning.hide();
@@ -66,11 +66,13 @@
 	 * Clears listeners.
 	 */
 	DP.unattach = function () {
+		mw.mmv.ui.Dialog.prototype.unattach.call( this );
+
 		this.$container.off( 'mmv-download-cta-open mmv-download-cta-close' );
 	};
 
 	/**
-	 * Sets data needed by contaned tabs and makes dialog launch link visible.
+	 * Sets data needed by contained tabs and makes dialog launch link visible.
 	 *
 	 * @param {mw.mmv.model.Image} image
 	 * @param {mw.mmv.model.Repo} repo
@@ -125,4 +127,4 @@
 	};
 
 	mw.mmv.ui.download.Dialog = Dialog;
-}( mediaWiki, jQuery, OO ) );
+}() );

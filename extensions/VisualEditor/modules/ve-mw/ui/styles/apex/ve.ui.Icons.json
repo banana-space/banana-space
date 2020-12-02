@@ -1,0 +1,13 @@
+{
+	"images": {
+		"parameter": {
+			"file": "../images/icons/parameter-ltr.svg"
+		},
+		"parameter-set": {
+			"file": "../images/icons/parameter-set-ltr.svg"
+		},
+		"public-domain": {
+			"file": "../images/icons/public-domain.svg"
+		}
+	}
+}

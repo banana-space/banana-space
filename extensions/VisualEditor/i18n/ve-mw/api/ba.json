@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lizalizaufa",
+			"Азат Хәлилов",
+			"Лилиә",
+			"Ләйсән",
+			"Янмурза Баки"
+		]
+	},
+	"apihelp-visualeditor-description": "Возвращает  для страницы со сервиса \nParsoid сервисынан бит өсөн HTML5-ға ҡайтара",
+	"apihelp-visualeditor-param-basetimestamp": "Һаҡлаған саҡта үҙгәртеү ваҡытын ҡуйығыҙ. Был мөхәррирләгәндә, конфликттарҙы күреү өсөн ҡулланыла.",
+	"apihelp-visualeditor-param-cachekey": "Сериллау һәм дифференциал өсөн алдағы ошо уҡ асҡыс менән  һоралған кэшты сериаллау һөҙөмтәһен ҡулланырға.$1html-ды алмаштыра.",
+	"apihelp-visualeditor-param-etag": "Ебәреү өсөн ETag.",
+	"apihelp-visualeditor-param-html": " для отправки в , чтобы конвертировать в вики-текст.\n\nвики- текста конвертларға Parsoid ебәреү өсөн HTML",
+	"apihelp-visualeditor-param-oldid": "Файҙаланыу өсөн фараз һаны (килешеү буйынса - һуңғы версия)",
+	"apihelp-visualeditor-param-paction": "Мотлаҡ үтәү өсөн эш.",
+	"apihelp-visualeditor-param-page": "Мотлаҡ эште башҡарыу өсөн бит.",
+	"apihelp-visualeditor-param-pst": "Parsoid -кә ебәреү алдынан (paction=parsefragment)Вики-тексты үҙгәртеүҙе алдан һаҡлағыҙ.",
+	"apihelp-visualeditor-param-starttimestamp": "Һаҡлаған саҡта үҙгәртеү ваҡытын ҡуйығыҙ. Был мөхәррирләгәндә конфликттарҙы күреү өсөн ҡулланыла.",
+	"apihelp-visualeditor-param-wikitext": "\n\nВикитексты  HTML (paction=parsefragment) конвертациялау өсөн уны Parsoid-ҡа ебәрегеҙ.",
+	"apihelp-visualeditoredit-description": "HTML5-битен Медиавикила һаҡларға (вики-тексты Parsoid хеҙмәте аша үҙгәртергә).",
+	"apihelp-visualeditoredit-param-basetimestamp": "Һаҡлаған саҡта үҙгәртеү ваҡытын ҡуйығыҙ. Был мөхәриррләгәндә конфликттарҙы күреү өсөн ҡулланыла.",
+	"apihelp-visualeditoredit-param-cachekey": "Сериллау һәм дифференциал өсөн алдағы ошо уҡ асҡыс менән  һоралған кэшты сериаллау һөҙөмтәһен ҡулланырға.$1html-ды алмаштыра.",
+	"apihelp-visualeditoredit-param-captchaid": "Капсаның идентификаторы -ID (капсаны күрһәтеп һаҡлағанда).",
+	"apihelp-visualeditoredit-param-captchaword": "капсаға яуап (капсаны яуап менән һаҡлағанда).",
+	"apihelp-visualeditoredit-param-etag": "Ебәреү өсөн ETag.",
+	"apihelp-visualeditoredit-param-html": "\n\nвики- текста конвертларға Parsoid ебәреү өсөн HTML",
+	"apihelp-visualeditoredit-param-minor": "Бәләкәй үҙгәртеүгә флаг.",
+	"apihelp-visualeditoredit-param-needcheck": "Байҡау проблема бирһә, һаҡлағанда ошо параметрҙы бирегеҙ. Үҙгәртеүҙәрҙә билдәләр",
+	"apihelp-visualeditoredit-param-oldid": "Ҡулланған версияның номеры. Һуңғы версияла һайланмайынса. Яңы биткә 0 ҡулланығыҙ.",
+	"apihelp-visualeditoredit-param-page": "Мотлаҡ эште башҡарыу өсөн бит.",
+	"apihelp-visualeditoredit-param-starttimestamp": "Һаҡлаған саҡта, үҙгәртеү ваҡытын ҡуйығыҙ. Был мөхәррирләгәндә конфликттарҙы күреү өсөн ҡулланыла.",
+	"apihelp-visualeditoredit-param-summary": "Үҙгәртеүҙәр тасуирламаһын мөхәррирләргә"
+}

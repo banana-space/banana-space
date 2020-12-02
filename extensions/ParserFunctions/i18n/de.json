@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"FriedhelmW",
 			"Kghbln",
 			"LWChris",
 			"Metalhead64",
+			"PerfektesChaos",
 			"Purodha",
 			"Raimond Spekking",
 			"Rentenirer",
@@ -22,9 +24,9 @@
 	"pfunc_expr_unrecognised_word": "Fehler im Ausdruck: Unerkanntes Wort „$1“",
 	"pfunc_expr_unexpected_operator": "Fehler im Ausdruck: Unerwarteter Operator $1",
 	"pfunc_expr_missing_operand": "Fehler im Ausdruck: Fehlender Operand für $1",
-	"pfunc_expr_unexpected_closing_bracket": "Expression-Fehler: Unerwartete schließende eckige Klammer",
+	"pfunc_expr_unexpected_closing_bracket": "Expression-Fehler: Unerwartete schließende Klammer",
 	"pfunc_expr_unrecognised_punctuation": "Fehler im Ausdruck: Nicht erkanntes Satzzeichen „$1“",
-	"pfunc_expr_unclosed_bracket": "Expression-Fehler: Nicht geschlossene eckige Klammer",
+	"pfunc_expr_unclosed_bracket": "Expression-Fehler: Nicht geschlossene Klammer",
 	"pfunc_expr_division_by_zero": "Division durch Null",
 	"pfunc_expr_invalid_argument": "Ungültiges Argument für $1: < -1 oder > 1",
 	"pfunc_expr_invalid_argument_ln": "Ungültiges Argument für ln: <= 0",

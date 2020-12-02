@@ -3,9 +3,9 @@
 		"authors": [
 			"Michaello",
 			"Milicevic01",
+			"Srdjan m",
 			"Жељко Тодоровић",
-			"Сербијана",
-			"Srdjan m"
+			"Сербијана"
 		]
 	},
 	"gadgets-desc": "Omogućava korisnicima da izaberu prilagođene [[Special:Gadgets|CSS i javaskript spravice]] u svojim [[Special:Preferences#mw-prefsection-gadgets|podešavanjima]]",
@@ -23,7 +23,7 @@
 	"gadgets-required-rights": "Zahteva {{PLURAL:$2|sledeće pravo|sledeća prava}}:\n\n$1",
 	"gadgets-required-skins": "Dostupno u {{PLURAL:$2|temi $1|sledećim temama: $1}}.",
 	"gadgets-default": "Podrazumevano uključen za svakog.",
-	"gadgets-legacy": "Gedžet nije učitan. Molimo vas prebacite ga na ResourceLoader. ([https://www.mediawiki.org/wiki/ResourceLoader/Migration_guide_(users) Saznajte više])",
+	"gadgets-legacy": "Gedžet nije učitan. Molimo vas prebacite ga na ResourceLoader. ([https://www.mediawiki.org/wiki/Special:MyLanguage/ResourceLoader/Migration_guide_(users) Saznajte više])",
 	"gadgets-export": "Izvezi",
 	"gadgets-export-title": "Izvoz spravice",
 	"gadgets-not-found": "Gadžet „$1“ nije pronađen.",

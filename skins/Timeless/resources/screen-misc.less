@@ -1,26 +1,27 @@
 @import 'variables.less';
 
-// Let's add some unnecessary white space. Or grey, as it were. In the dumbest possible way.
+// Prevent logo text overlapping icons on small displays
+@media screen and ( max-width: 550px ) {
+	#p-logo-text {
+		position: static;
 
-// Top end of large screens
-@media screen and ( min-width: 1425px ) {
-	.color-middle-container,
-	.ts-inner {
-		padding: 0 3em;
-	}
-	.color-middle {
-		margin-left: @column-left-size;
-		margin-right: @column-right-size;
+		a {
+			padding-top: 0;
+		}
+
+		a.long {
+			padding-bottom: 0.2em;
+		}
 	}
 }
 
-// Top half end of mid screens
-@media screen and ( min-width: ( @desktop-small-width + @desktop-mid-width ) / 2 ) and ( max-width: @desktop-mid-width ) {
-	.ts-inner {
-		padding: 0 3em;
-	}
-	.color-middle {
-		margin-left: @column-left-size + 3em;
-		margin-right: @column-right-size + 3em;
+// Internet Explorer 10-11
+/* stylelint-disable media-feature-parentheses-space-inside */
+@media screen and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	/* stylelint-enable media-feature-parentheses-space-inside */
+	// T190991
+	textarea,
+	#searchInput {
+		box-shadow: none;
 	}
 }

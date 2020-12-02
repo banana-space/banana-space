@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Beta16",
 			"BrokenArrow",
 			"Darth Kule",
-			"Karika",
-			"Beta16"
+			"Karika"
 		]
 	},
 	"inputbox-desc": "Consente l'inserimento di moduli HTML predefiniti",

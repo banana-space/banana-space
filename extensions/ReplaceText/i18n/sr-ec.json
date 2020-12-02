@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"BadDog",
 			"Milicevic01",
 			"Rancher",
 			"Sasa Stefanovic",
@@ -10,7 +11,7 @@
 		]
 	},
 	"replacetext": "Замена текста",
-	"replacetext_originaltext": "Изворни текст:",
+	"replacetext_originaltext": "Првобитни текст:",
 	"replacetext_replacementtext": "Нови текст:",
 	"replacetext_optionalfilters": "Необавезни филтери:",
 	"replacetext_categorysearch": "Замени само у категорији:",

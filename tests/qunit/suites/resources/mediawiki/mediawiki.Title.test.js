@@ -1,10 +1,10 @@
-( function ( mw, $ ) {
+( function () {
 	/* eslint-disable camelcase */
 	var repeat = function ( input, multiplier ) {
 			return new Array( multiplier + 1 ).join( input );
 		},
 		// See also TitleTest.php#testSecureAndSplit
-		cases = {
+		sharedCases = {
 			valid: [
 				'Sandbox',
 				'A "B"',
@@ -134,161 +134,220 @@
 	} ) );
 
 	QUnit.test( 'constructor', function ( assert ) {
-		var i, title;
-		for ( i = 0; i < cases.valid.length; i++ ) {
-			title = new mw.Title( cases.valid[ i ] );
-		}
-		for ( i = 0; i < cases.invalid.length; i++ ) {
-			title = cases.invalid[ i ];
-			// eslint-disable-next-line no-loop-func
+		sharedCases.valid.forEach( function ( title ) {
+			// Check no exception is thrown
+			return new mw.Title( title );
+		} );
+		sharedCases.invalid.forEach( function ( title ) {
 			assert.throws( function () {
 				return new mw.Title( title );
-			}, cases.invalid[ i ] );
-		}
+			}, title );
+		} );
 	} );
 
 	QUnit.test( 'newFromText', function ( assert ) {
-		var i;
-		for ( i = 0; i < cases.valid.length; i++ ) {
-			assert.equal(
-				$.type( mw.Title.newFromText( cases.valid[ i ] ) ),
+		sharedCases.valid.forEach( function ( title ) {
+			assert.strictEqual(
+				typeof mw.Title.newFromText( title ),
 				'object',
-				cases.valid[ i ]
+				title
 			);
-		}
-		for ( i = 0; i < cases.invalid.length; i++ ) {
-			assert.equal(
-				$.type( mw.Title.newFromText( cases.invalid[ i ] ) ),
-				'null',
-				cases.invalid[ i ]
+		} );
+		sharedCases.invalid.forEach( function ( title ) {
+			assert.strictEqual(
+				mw.Title.newFromText( title ),
+				null,
+				title
 			);
-		}
+		} );
 	} );
 
 	QUnit.test( 'makeTitle', function ( assert ) {
-		var cases, i, title, expected,
+		var cases,
 			NS_MAIN = 0,
 			NS_TALK = 1,
 			NS_TEMPLATE = 10;
 
 		cases = [
-			[ NS_TEMPLATE, 'Foo', 'Template:Foo' ],
-			[ NS_TEMPLATE, 'Category:Foo', 'Template:Category:Foo' ],
-			[ NS_TEMPLATE, 'Template:Foo', 'Template:Template:Foo' ],
-			[ NS_TALK, 'Help:Foo', null ],
-			[ NS_TEMPLATE, '<', null ],
-			[ NS_MAIN, 'Help:Foo', 'Help:Foo' ]
+			{
+				namespace: NS_TEMPLATE,
+				text: 'Foo',
+				expected: 'Template:Foo'
+			},
+			{
+				namespace: NS_TEMPLATE,
+				text: 'Category:Foo',
+				expected: 'Template:Category:Foo'
+			},
+			{
+				namespace: NS_TEMPLATE,
+				text: 'Template:Foo',
+				expected: 'Template:Template:Foo'
+			},
+			{
+				namespace: NS_TALK,
+				text: 'Help:Foo',
+				expected: null
+			},
+			{
+				namespace: NS_TEMPLATE,
+				text: '<',
+				expected: null
+			},
+			{
+				namespace: NS_MAIN,
+				text: 'Help:Foo',
+				expected: 'Help:Foo'
+			}
 		];
 
-		for ( i = 0; i < cases.length; i++ ) {
-			title = mw.Title.makeTitle( cases[ i ][ 0 ], cases[ i ][ 1 ] );
-			expected = cases[ i ][ 2 ];
-			if ( expected === null ) {
-				assert.strictEqual( title, expected );
-			} else {
-				assert.strictEqual( title.getPrefixedText(), expected );
-			}
-		}
+		cases.forEach( function ( caseItem ) {
+			var title = mw.Title.makeTitle( caseItem.namespace, caseItem.text );
+			assert.strictEqual( title && title.getPrefixedText(), caseItem.expected );
+		} );
 	} );
 
 	QUnit.test( 'Basic parsing', function ( assert ) {
 		var title;
 		title = new mw.Title( 'File:Foo_bar.JPG' );
 
-		assert.equal( title.getNamespaceId(), 6 );
-		assert.equal( title.getNamespacePrefix(), 'File:' );
-		assert.equal( title.getName(), 'Foo_bar' );
-		assert.equal( title.getNameText(), 'Foo bar' );
-		assert.equal( title.getExtension(), 'JPG' );
-		assert.equal( title.getDotExtension(), '.JPG' );
-		assert.equal( title.getMain(), 'Foo_bar.JPG' );
-		assert.equal( title.getMainText(), 'Foo bar.JPG' );
-		assert.equal( title.getPrefixedDb(), 'File:Foo_bar.JPG' );
-		assert.equal( title.getPrefixedText(), 'File:Foo bar.JPG' );
+		assert.strictEqual( title.getNamespaceId(), 6 );
+		assert.strictEqual( title.getNamespacePrefix(), 'File:' );
+		assert.strictEqual( title.getName(), 'Foo_bar' );
+		assert.strictEqual( title.getNameText(), 'Foo bar' );
+		assert.strictEqual( title.getExtension(), 'JPG' );
+		assert.strictEqual( title.getDotExtension(), '.JPG' );
+		assert.strictEqual( title.getMain(), 'Foo_bar.JPG' );
+		assert.strictEqual( title.getMainText(), 'Foo bar.JPG' );
+		assert.strictEqual( title.getPrefixedDb(), 'File:Foo_bar.JPG' );
+		assert.strictEqual( title.getPrefixedText(), 'File:Foo bar.JPG' );
 
 		title = new mw.Title( 'Foo#bar' );
-		assert.equal( title.getPrefixedText(), 'Foo' );
-		assert.equal( title.getFragment(), 'bar' );
+		assert.strictEqual( title.getPrefixedText(), 'Foo' );
+		assert.strictEqual( title.getFragment(), 'bar' );
 
 		title = new mw.Title( '.foo' );
-		assert.equal( title.getPrefixedText(), '.foo' );
-		assert.equal( title.getName(), '' );
-		assert.equal( title.getNameText(), '' );
-		assert.equal( title.getExtension(), 'foo' );
-		assert.equal( title.getDotExtension(), '.foo' );
-		assert.equal( title.getMain(), '.foo' );
-		assert.equal( title.getMainText(), '.foo' );
-		assert.equal( title.getPrefixedDb(), '.foo' );
-		assert.equal( title.getPrefixedText(), '.foo' );
+		assert.strictEqual( title.getPrefixedText(), '.foo' );
+		assert.strictEqual( title.getName(), '' );
+		assert.strictEqual( title.getNameText(), '' );
+		assert.strictEqual( title.getExtension(), 'foo' );
+		assert.strictEqual( title.getDotExtension(), '.foo' );
+		assert.strictEqual( title.getMain(), '.foo' );
+		assert.strictEqual( title.getMainText(), '.foo' );
+		assert.strictEqual( title.getPrefixedDb(), '.foo' );
+		assert.strictEqual( title.getPrefixedText(), '.foo' );
 	} );
 
 	QUnit.test( 'Transformation', function ( assert ) {
 		var title;
 
 		title = new mw.Title( 'File:quux pif.jpg' );
-		assert.equal( title.getNameText(), 'Quux pif', 'First character of title' );
+		assert.strictEqual( title.getNameText(), 'Quux pif', 'First character of title' );
 
 		title = new mw.Title( 'File:Glarg_foo_glang.jpg' );
-		assert.equal( title.getNameText(), 'Glarg foo glang', 'Underscores' );
+		assert.strictEqual( title.getNameText(), 'Glarg foo glang', 'Underscores' );
 
 		title = new mw.Title( 'User:ABC.DEF' );
-		assert.equal( title.toText(), 'User:ABC.DEF', 'Round trip text' );
-		assert.equal( title.getNamespaceId(), 2, 'Parse canonical namespace prefix' );
+		assert.strictEqual( title.toText(), 'User:ABC.DEF', 'Round trip text' );
+		assert.strictEqual( title.getNamespaceId(), 2, 'Parse canonical namespace prefix' );
 
 		title = new mw.Title( 'Image:quux pix.jpg' );
-		assert.equal( title.getNamespacePrefix(), 'File:', 'Transform alias to canonical namespace' );
+		assert.strictEqual( title.getNamespacePrefix(), 'File:', 'Transform alias to canonical namespace' );
 
 		title = new mw.Title( 'uSEr:hAshAr' );
-		assert.equal( title.toText(), 'User:HAshAr' );
-		assert.equal( title.getNamespaceId(), 2, 'Case-insensitive namespace prefix' );
+		assert.strictEqual( title.toText(), 'User:HAshAr' );
+		assert.strictEqual( title.getNamespaceId(), 2, 'Case-insensitive namespace prefix' );
 
 		title = new mw.Title( 'Foo \u00A0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u2028\u2029\u202F\u205F\u3000 bar' );
-		assert.equal( title.getMain(), 'Foo_bar', 'Merge multiple types of whitespace/underscores into a single underscore' );
+		assert.strictEqual( title.getMain(), 'Foo_bar', 'Merge multiple types of whitespace/underscores into a single underscore' );
 
 		title = new mw.Title( 'Foo\u200E\u200F\u202A\u202B\u202C\u202D\u202Ebar' );
-		assert.equal( title.getMain(), 'Foobar', 'Strip Unicode bidi override characters' );
+		assert.strictEqual( title.getMain(), 'Foobar', 'Strip Unicode bidi override characters' );
 
 		// Regression test: Previously it would only detect an extension if there is no space after it
 		title = new mw.Title( 'Example.js  ' );
-		assert.equal( title.getExtension(), 'js', 'Space after an extension is stripped' );
+		assert.strictEqual( title.getExtension(), 'js', 'Space after an extension is stripped' );
 
 		title = new mw.Title( 'Example#foo' );
-		assert.equal( title.getFragment(), 'foo', 'Fragment' );
+		assert.strictEqual( title.getFragment(), 'foo', 'Fragment' );
 
 		title = new mw.Title( 'Example#_foo_bar baz_' );
-		assert.equal( title.getFragment(), ' foo bar baz', 'Fragment' );
+		assert.strictEqual( title.getFragment(), ' foo bar baz', 'Fragment' );
 	} );
 
 	QUnit.test( 'Namespace detection and conversion', function ( assert ) {
 		var title;
 
 		title = new mw.Title( 'File:User:Example' );
-		assert.equal( title.getNamespaceId(), 6, 'Titles can contain namespace prefixes, which are otherwise ignored' );
+		assert.strictEqual( title.getNamespaceId(), 6, 'Titles can contain namespace prefixes, which are otherwise ignored' );
 
 		title = new mw.Title( 'Example', 6 );
-		assert.equal( title.getNamespaceId(), 6, 'Default namespace passed is used' );
+		assert.strictEqual( title.getNamespaceId(), 6, 'Default namespace passed is used' );
 
 		title = new mw.Title( 'User:Example', 6 );
-		assert.equal( title.getNamespaceId(), 2, 'Included namespace prefix overrides the given default' );
+		assert.strictEqual( title.getNamespaceId(), 2, 'Included namespace prefix overrides the given default' );
 
 		title = new mw.Title( ':Example', 6 );
-		assert.equal( title.getNamespaceId(), 0, 'Colon forces main namespace' );
+		assert.strictEqual( title.getNamespaceId(), 0, 'Colon forces main namespace' );
 
 		title = new mw.Title( 'something.PDF', 6 );
-		assert.equal( title.toString(), 'File:Something.PDF' );
+		assert.strictEqual( title.toString(), 'File:Something.PDF' );
 
 		title = new mw.Title( 'NeilK', 3 );
-		assert.equal( title.toString(), 'User_talk:NeilK' );
-		assert.equal( title.toText(), 'User talk:NeilK' );
+		assert.strictEqual( title.toString(), 'User_talk:NeilK' );
+		assert.strictEqual( title.toText(), 'User talk:NeilK' );
 
 		title = new mw.Title( 'Frobisher', 100 );
-		assert.equal( title.toString(), 'Penguins:Frobisher' );
+		assert.strictEqual( title.toString(), 'Penguins:Frobisher' );
 
 		title = new mw.Title( 'antarctic_waterfowl:flightless_yet_cute.jpg' );
-		assert.equal( title.toString(), 'Penguins:Flightless_yet_cute.jpg' );
+		assert.strictEqual( title.toString(), 'Penguins:Flightless_yet_cute.jpg' );
 
 		title = new mw.Title( 'Penguins:flightless_yet_cute.jpg' );
-		assert.equal( title.toString(), 'Penguins:Flightless_yet_cute.jpg' );
+		assert.strictEqual( title.toString(), 'Penguins:Flightless_yet_cute.jpg' );
+	} );
+
+	QUnit.test( 'isTalkPage/getTalkPage/getSubjectPage', function ( assert ) {
+		var title;
+
+		title = new mw.Title( 'User:Foo' );
+		assert.strictEqual( title.isTalkPage(), false, 'Non-talk page detected as such' );
+		assert.strictEqual( title.getSubjectPage().getPrefixedText(), 'User:Foo', 'getSubjectPage on a subject page is a no-op' );
+
+		title = title.getTalkPage();
+		assert.strictEqual( title.getPrefixedText(), 'User talk:Foo', 'getTalkPage creates correct title' );
+		assert.strictEqual( title.getTalkPage().getPrefixedText(), 'User talk:Foo', 'getTalkPage on a talk page is a no-op' );
+		assert.strictEqual( title.isTalkPage(), true, 'Talk page is detected as such' );
+
+		title = title.getSubjectPage();
+		assert.strictEqual( title.getPrefixedText(), 'User:Foo', 'getSubjectPage creates correct title' );
+
+		title = new mw.Title( 'Special:AllPages' );
+		assert.strictEqual( title.isTalkPage(), false, 'Special page is not a talk page' );
+		assert.strictEqual( title.getTalkPage(), null, 'getTalkPage not valid for this namespace' );
+		assert.strictEqual( title.getSubjectPage().getPrefixedText(), 'Special:AllPages', 'getSubjectPage is self for special pages' );
+
+		title = new mw.Title( 'Category:Project:Maintenance' );
+		assert.strictEqual( title.getTalkPage().getPrefixedText(), 'Category talk:Project:Maintenance', 'getTalkPage is not confused by colon in main text' );
+		title = new mw.Title( 'Category talk:Project:Maintenance' );
+		assert.strictEqual( title.getSubjectPage().getPrefixedText(), 'Category:Project:Maintenance', 'getSubjectPage is not confused by colon in main text' );
+
+		title = new mw.Title( 'Foo#Caption' );
+		assert.strictEqual( title.getFragment(), 'Caption', 'Subject page has a fragment' );
+		title = title.getTalkPage();
+		assert.strictEqual( title.getPrefixedText(), 'Talk:Foo', 'getTalkPage creates correct title' );
+		assert.strictEqual( title.getFragment(), null, 'getTalkPage does not copy the fragment' );
+	} );
+
+	QUnit.test( 'wantSignaturesNamespace', function ( assert ) {
+		mw.config.set( 'wgExtraSignatureNamespaces', [] );
+		assert.strictEqual( mw.Title.wantSignaturesNamespace( 0 ), false, 'Main namespace has no signatures' );
+		assert.strictEqual( mw.Title.wantSignaturesNamespace( 1 ), true, 'Talk namespace has signatures' );
+		assert.strictEqual( mw.Title.wantSignaturesNamespace( 2 ), false, 'NS2 has no signatures' );
+		assert.strictEqual( mw.Title.wantSignaturesNamespace( 3 ), true, 'NS3 has signatures' );
+
+		mw.config.set( 'wgExtraSignatureNamespaces', [ 0 ] );
+		assert.strictEqual( mw.Title.wantSignaturesNamespace( 0 ), true, 'Main namespace has signatures when explicitly defined' );
 	} );
 
 	QUnit.test( 'Throw error on invalid title', function ( assert ) {
@@ -304,35 +363,35 @@
 		mw.config.set( 'wgCaseSensitiveNamespaces', [] );
 
 		title = new mw.Title( 'article' );
-		assert.equal( title.toString(), 'Article', 'Default config: No sensitive namespaces by default. First-letter becomes uppercase' );
+		assert.strictEqual( title.toString(), 'Article', 'Default config: No sensitive namespaces by default. First-letter becomes uppercase' );
 
 		title = new mw.Title( 'ß' );
-		assert.equal( title.toString(), 'ß', 'Uppercasing matches PHP behaviour (ß -> ß, not SS)' );
+		assert.strictEqual( title.toString(), 'ß', 'Uppercasing matches PHP behaviour (ß -> ß, not SS)' );
 
 		title = new mw.Title( 'ǆ (digraph)' );
-		assert.equal( title.toString(), 'ǅ_(digraph)', 'Uppercasing matches PHP behaviour (ǆ -> ǅ, not Ǆ)' );
+		assert.strictEqual( title.toString(), 'ǅ_(digraph)', 'Uppercasing matches PHP behaviour (ǆ -> ǅ, not Ǆ)' );
 
 		// $wgCapitalLinks = false;
 		mw.config.set( 'wgCaseSensitiveNamespaces', [ 0, -2, 1, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15 ] );
 
 		title = new mw.Title( 'article' );
-		assert.equal( title.toString(), 'article', '$wgCapitalLinks=false: Article namespace is sensitive, first-letter case stays lowercase' );
+		assert.strictEqual( title.toString(), 'article', '$wgCapitalLinks=false: Article namespace is sensitive, first-letter case stays lowercase' );
 
 		title = new mw.Title( 'john', 2 );
-		assert.equal( title.toString(), 'User:John', '$wgCapitalLinks=false: User namespace is insensitive, first-letter becomes uppercase' );
+		assert.strictEqual( title.toString(), 'User:John', '$wgCapitalLinks=false: User namespace is insensitive, first-letter becomes uppercase' );
 	} );
 
 	QUnit.test( 'toString / toText', function ( assert ) {
 		var title = new mw.Title( 'Some random page' );
 
-		assert.equal( title.toString(), title.getPrefixedDb() );
-		assert.equal( title.toText(), title.getPrefixedText() );
+		assert.strictEqual( title.toString(), title.getPrefixedDb() );
+		assert.strictEqual( title.toText(), title.getPrefixedText() );
 	} );
 
 	QUnit.test( 'getExtension', function ( assert ) {
 		function extTest( pagename, ext, description ) {
 			var title = new mw.Title( pagename );
-			assert.equal( title.getExtension(), ext, description || pagename );
+			assert.strictEqual( title.getExtension(), ext, description || pagename );
 		}
 
 		extTest( 'MediaWiki:Vector.js', 'js' );
@@ -374,365 +433,328 @@
 		} );
 
 		title = new mw.Title( 'Foobar' );
-		assert.equal( title.getUrl(), '/wiki/Foobar', 'Basic functionality, getUrl uses mw.util.getUrl' );
-		assert.equal( title.getUrl( { action: 'edit' } ), '/w/index.php?title=Foobar&action=edit', 'Basic functionality, \'params\' parameter' );
+		assert.strictEqual( title.getUrl(), '/wiki/Foobar', 'Basic functionality, getUrl uses mw.util.getUrl' );
+		assert.strictEqual( title.getUrl( { action: 'edit' } ), '/w/index.php?title=Foobar&action=edit', 'Basic functionality, \'params\' parameter' );
 
 		title = new mw.Title( 'John Doe', 3 );
-		assert.equal( title.getUrl(), '/wiki/User_talk:John_Doe', 'Escaping in title and namespace for urls' );
+		assert.strictEqual( title.getUrl(), '/wiki/User_talk:John_Doe', 'Escaping in title and namespace for urls' );
 
 		title = new mw.Title( 'John Cena#And_His_Name_Is', 3 );
-		assert.equal( title.getUrl( { meme: true } ), '/w/index.php?title=User_talk:John_Cena&meme=true#And_His_Name_Is', 'title with fragment and query parameter' );
+		assert.strictEqual( title.getUrl( { meme: true } ), '/w/index.php?title=User_talk:John_Cena&meme=true#And_His_Name_Is', 'title with fragment and query parameter' );
 	} );
 
 	QUnit.test( 'newFromImg', function ( assert ) {
-		var title, i, thisCase, prefix,
-			cases = [
-				{
-					url: '//upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Princess_Alexandra_of_Denmark_%28later_Queen_Alexandra%2C_wife_of_Edward_VII%29_with_her_two_eldest_sons%2C_Prince_Albert_Victor_%28Eddy%29_and_George_Frederick_Ernest_Albert_%28later_George_V%29.jpg/939px-thumbnail.jpg',
-					typeOfUrl: 'Hashed thumb with shortened path',
-					nameText: 'Princess Alexandra of Denmark (later Queen Alexandra, wife of Edward VII) with her two eldest sons, Prince Albert Victor (Eddy) and George Frederick Ernest Albert (later George V)',
-					prefixedText: 'File:Princess Alexandra of Denmark (later Queen Alexandra, wife of Edward VII) with her two eldest sons, Prince Albert Victor (Eddy) and George Frederick Ernest Albert (later George V).jpg'
-				},
+		var cases = [
+			{
+				url: '/wiki/images/9/91/Anticlockwise_heliotrope%27s.jpg',
+				typeOfUrl: 'Full image',
+				nameText: 'Anticlockwise heliotrope\'s',
+				prefixedText: 'File:Anticlockwise heliotrope\'s.jpg'
+			},
 
-				{
-					url: '//upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Princess_Alexandra_of_Denmark_%28later_Queen_Alexandra%2C_wife_of_Edward_VII%29_with_her_two_eldest_sons%2C_Prince_Albert_Victor_%28Eddy%29_and_George_Frederick_Ernest_Albert_%28later_George_V%29.jpg/939px-ki708pr1r6g2dl5lbhvwdqxenhait13.jpg',
-					typeOfUrl: 'Hashed thumb with sha1-ed path',
-					nameText: 'Princess Alexandra of Denmark (later Queen Alexandra, wife of Edward VII) with her two eldest sons, Prince Albert Victor (Eddy) and George Frederick Ernest Albert (later George V)',
-					prefixedText: 'File:Princess Alexandra of Denmark (later Queen Alexandra, wife of Edward VII) with her two eldest sons, Prince Albert Victor (Eddy) and George Frederick Ernest Albert (later George V).jpg'
-				},
+			{
+				url: 'http://localhost/thumb.php?f=Stuffless_Figaro%27s.jpg&width=180',
+				typeOfUrl: 'thumb.php-based thumbnail',
+				nameText: 'Stuffless Figaro\'s',
+				prefixedText: 'File:Stuffless Figaro\'s.jpg'
+			},
 
-				{
-					url: '/wiki/images/thumb/9/91/Anticlockwise_heliotrope%27s.jpg/99px-Anticlockwise_heliotrope%27s.jpg',
-					typeOfUrl: 'Normal hashed directory thumbnail',
-					nameText: 'Anticlockwise heliotrope\'s',
-					prefixedText: 'File:Anticlockwise heliotrope\'s.jpg'
-				},
+			{
+				url: 'foo',
+				typeOfUrl: 'String with only alphabet characters'
+			}
 
-				{
-					url: '/wiki/images/thumb/8/80/Wikipedia-logo-v2.svg/langde-150px-Wikipedia-logo-v2.svg.png',
-					typeOfUrl: 'Normal hashed directory thumbnail with complex thumbnail parameters',
-					nameText: 'Wikipedia-logo-v2',
-					prefixedText: 'File:Wikipedia-logo-v2.svg'
-				},
+		];
 
-				{
-					url: '//upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/150px-Wikipedia-logo-v2.svg.png',
-					typeOfUrl: 'Commons thumbnail',
-					nameText: 'Wikipedia-logo-v2',
-					prefixedText: 'File:Wikipedia-logo-v2.svg'
-				},
+		cases.forEach( function ( caseItem ) {
+			var prefix,
+				title = mw.Title.newFromImg( { src: caseItem.url } );
 
-				{
-					url: '/wiki/images/9/91/Anticlockwise_heliotrope%27s.jpg',
-					typeOfUrl: 'Full image',
-					nameText: 'Anticlockwise heliotrope\'s',
-					prefixedText: 'File:Anticlockwise heliotrope\'s.jpg'
-				},
-
-				{
-					url: 'http://localhost/thumb.php?f=Stuffless_Figaro%27s.jpg&width=180',
-					typeOfUrl: 'thumb.php-based thumbnail',
-					nameText: 'Stuffless Figaro\'s',
-					prefixedText: 'File:Stuffless Figaro\'s.jpg'
-				},
-
-				{
-					url: '/wikipedia/commons/thumb/Wikipedia-logo-v2.svg/150px-Wikipedia-logo-v2.svg.png',
-					typeOfUrl: 'Commons unhashed thumbnail',
-					nameText: 'Wikipedia-logo-v2',
-					prefixedText: 'File:Wikipedia-logo-v2.svg'
-				},
-
-				{
-					url: '/wikipedia/commons/thumb/Wikipedia-logo-v2.svg/langde-150px-Wikipedia-logo-v2.svg.png',
-					typeOfUrl: 'Commons unhashed thumbnail with complex thumbnail parameters',
-					nameText: 'Wikipedia-logo-v2',
-					prefixedText: 'File:Wikipedia-logo-v2.svg'
-				},
-
-				{
-					url: '/wiki/images/Anticlockwise_heliotrope%27s.jpg',
-					typeOfUrl: 'Unhashed local file',
-					nameText: 'Anticlockwise heliotrope\'s',
-					prefixedText: 'File:Anticlockwise heliotrope\'s.jpg'
-				},
-
-				{
-					url: '',
-					typeOfUrl: 'Empty string'
-				},
-
-				{
-					url: 'foo',
-					typeOfUrl: 'String with only alphabet characters'
-				},
-
-				{
-					url: 'foobar.foobar',
-					typeOfUrl: 'Not a file path'
-				},
-
-				{
-					url: '/a/a0/blah blah blah',
-					typeOfUrl: 'Space characters'
-				}
-			];
-
-		for ( i = 0; i < cases.length; i++ ) {
-			thisCase = cases[ i ];
-			title = mw.Title.newFromImg( { src: thisCase.url } );
-
-			if ( thisCase.nameText !== undefined ) {
-				prefix = '[' + thisCase.typeOfUrl + ' URL] ';
+			if ( caseItem.nameText !== undefined ) {
+				prefix = '[' + caseItem.typeOfUrl + ' URL] ';
 
 				assert.notStrictEqual( title, null, prefix + 'Parses successfully' );
-				assert.equal( title.getNameText(), thisCase.nameText, prefix + 'Filename matches original' );
-				assert.equal( title.getPrefixedText(), thisCase.prefixedText, prefix + 'File page title matches original' );
-				assert.equal( title.getNamespaceId(), 6, prefix + 'Namespace ID matches File namespace' );
+				assert.strictEqual( title.getNameText(), caseItem.nameText, prefix + 'Filename matches original' );
+				assert.strictEqual( title.getPrefixedText(), caseItem.prefixedText, prefix + 'File page title matches original' );
+				assert.strictEqual( title.getNamespaceId(), 6, prefix + 'Namespace ID matches File namespace' );
 			} else {
-				assert.strictEqual( title, null, thisCase.typeOfUrl + ', should not produce an mw.Title object' );
+				assert.strictEqual( title, null, caseItem.typeOfUrl + ', should not produce an mw.Title object' );
 			}
-		}
+		} );
 	} );
 
 	QUnit.test( 'getRelativeText', function ( assert ) {
-		var i, thisCase, title,
-			cases = [
-				{
-					text: 'asd',
-					relativeTo: 123,
-					expectedResult: ':Asd'
-				},
-				{
-					text: 'dfg',
-					relativeTo: 0,
-					expectedResult: 'Dfg'
-				},
-				{
-					text: 'Template:Ghj',
-					relativeTo: 0,
-					expectedResult: 'Template:Ghj'
-				},
-				{
-					text: 'Template:1',
-					relativeTo: 10,
-					expectedResult: '1'
-				},
-				{
-					text: 'User:Hi',
-					relativeTo: 10,
-					expectedResult: 'User:Hi'
-				}
-			];
+		var cases = [
+			{
+				text: 'asd',
+				relativeTo: 123,
+				expectedResult: ':Asd'
+			},
+			{
+				text: 'dfg',
+				relativeTo: 0,
+				expectedResult: 'Dfg'
+			},
+			{
+				text: 'Template:Ghj',
+				relativeTo: 0,
+				expectedResult: 'Template:Ghj'
+			},
+			{
+				text: 'Template:1',
+				relativeTo: 10,
+				expectedResult: '1'
+			},
+			{
+				text: 'User:Hi',
+				relativeTo: 10,
+				expectedResult: 'User:Hi'
+			}
+		];
 
-		for ( i = 0; i < cases.length; i++ ) {
-			thisCase = cases[ i ];
-
-			title = mw.Title.newFromText( thisCase.text );
-			assert.equal( title.getRelativeText( thisCase.relativeTo ), thisCase.expectedResult );
-		}
+		cases.forEach( function ( caseItem ) {
+			var title = mw.Title.newFromText( caseItem.text );
+			assert.strictEqual( title.getRelativeText( caseItem.relativeTo ), caseItem.expectedResult );
+		} );
 	} );
 
 	QUnit.test( 'normalizeExtension', function ( assert ) {
-		var extension, i, thisCase, prefix,
-			cases = [
-				{
-					extension: 'png',
-					expected: 'png',
-					description: 'Extension already in canonical form'
-				},
-				{
-					extension: 'PNG',
-					expected: 'png',
-					description: 'Extension lowercased in canonical form'
-				},
-				{
-					extension: 'jpeg',
-					expected: 'jpg',
-					description: 'Extension changed in canonical form'
-				},
-				{
-					extension: 'JPEG',
-					expected: 'jpg',
-					description: 'Extension lowercased and changed in canonical form'
-				},
-				{
-					extension: '~~~',
-					expected: '',
-					description: 'Extension invalid and discarded'
-				}
-			];
+		var cases = [
+			{
+				extension: 'png',
+				expected: 'png',
+				description: 'Extension already in canonical form'
+			},
+			{
+				extension: 'PNG',
+				expected: 'png',
+				description: 'Extension lowercased in canonical form'
+			},
+			{
+				extension: 'jpeg',
+				expected: 'jpg',
+				description: 'Extension changed in canonical form'
+			},
+			{
+				extension: 'JPEG',
+				expected: 'jpg',
+				description: 'Extension lowercased and changed in canonical form'
+			},
+			{
+				extension: '~~~',
+				expected: '',
+				description: 'Extension invalid and discarded'
+			}
+		];
 
-		for ( i = 0; i < cases.length; i++ ) {
-			thisCase = cases[ i ];
-			extension = mw.Title.normalizeExtension( thisCase.extension );
-
-			prefix = '[' + thisCase.description + '] ';
-			assert.equal( extension, thisCase.expected, prefix + 'Extension as expected' );
-		}
+		cases.forEach( function ( caseItem ) {
+			var extension = mw.Title.normalizeExtension( caseItem.extension ),
+				prefix = '[' + caseItem.description + '] ';
+			assert.strictEqual( extension, caseItem.expected, prefix + 'Extension as expected' );
+		} );
 	} );
 
 	QUnit.test( 'newFromUserInput', function ( assert ) {
-		var title, i, thisCase, prefix,
-			cases = [
-				{
-					title: 'DCS0001557854455.JPG',
-					expected: 'DCS0001557854455.JPG',
-					description: 'Title in normal namespace without anything invalid but with "file extension"'
+		var cases = [
+			{
+				title: 'DCS0001557854455.JPG',
+				expected: 'DCS0001557854455.JPG',
+				description: 'Title in normal namespace without anything invalid but with "file extension"'
+			},
+			{
+				title: 'MediaWiki:Msg-awesome',
+				expected: 'MediaWiki:Msg-awesome',
+				description: 'Full title (page in MediaWiki namespace) supplied as string'
+			},
+			{
+				title: 'The/Mw/Sound.flac',
+				defaultNamespace: -2,
+				expected: 'Media:The-Mw-Sound.flac',
+				description: 'Page in Media-namespace without explicit options'
+			},
+			{
+				title: 'File:The/Mw/Sound.kml',
+				defaultNamespace: 6,
+				options: {
+					forUploading: false
 				},
-				{
-					title: 'MediaWiki:Msg-awesome',
-					expected: 'MediaWiki:Msg-awesome',
-					description: 'Full title (page in MediaWiki namespace) supplied as string'
-				},
-				{
-					title: 'The/Mw/Sound.flac',
-					defaultNamespace: -2,
-					expected: 'Media:The-Mw-Sound.flac',
-					description: 'Page in Media-namespace without explicit options'
-				},
-				{
-					title: 'File:The/Mw/Sound.kml',
-					defaultNamespace: 6,
-					options: {
-						forUploading: false
-					},
-					expected: 'File:The/Mw/Sound.kml',
-					description: 'Page in File-namespace without explicit options'
-				},
-				{
-					title: 'File:Foo.JPEG',
-					expected: 'File:Foo.JPEG',
-					description: 'Page in File-namespace with non-canonical extension'
-				},
-				{
-					title: 'File:Foo.JPEG  ',
-					expected: 'File:Foo.JPEG',
-					description: 'Page in File-namespace with trailing whitespace'
-				}
-			];
+				expected: 'File:The/Mw/Sound.kml',
+				description: 'Page in File-namespace without explicit options'
+			},
+			{
+				title: 'File:Foo.JPEG',
+				expected: 'File:Foo.JPEG',
+				description: 'Page in File-namespace with non-canonical extension'
+			},
+			{
+				title: 'File:Foo.JPEG  ',
+				expected: 'File:Foo.JPEG',
+				description: 'Page in File-namespace with trailing whitespace'
+			},
+			{
+				title: 'File:Foo',
+				description: 'File name without file extension'
+			},
+			{
+				title: 'File:Foo.',
+				description: 'File name with empty file extension'
+			}
+		];
 
-		for ( i = 0; i < cases.length; i++ ) {
-			thisCase = cases[ i ];
-			title = mw.Title.newFromUserInput( thisCase.title, thisCase.defaultNamespace, thisCase.options );
+		cases.forEach( function ( caseItem ) {
+			var prefix,
+				title = mw.Title.newFromUserInput( caseItem.title, caseItem.defaultNamespace, caseItem.options );
 
-			if ( thisCase.expected !== undefined ) {
-				prefix = '[' + thisCase.description + '] ';
+			if ( caseItem.expected !== undefined ) {
+				prefix = '[' + caseItem.description + '] ';
 
 				assert.notStrictEqual( title, null, prefix + 'Parses successfully' );
-				assert.equal( title.toText(), thisCase.expected, prefix + 'Title as expected' );
+				assert.strictEqual( title.toText(), caseItem.expected, prefix + 'Title as expected' );
+				if ( caseItem.defaultNamespace === undefined ) {
+					title = mw.Title.newFromUserInput( caseItem.title, 0, caseItem.options );
+					assert.strictEqual( title.toText(), caseItem.expected, prefix + 'Skipping namespace argument' );
+				}
 			} else {
-				assert.strictEqual( title, null, thisCase.description + ', should not produce an mw.Title object' );
+				assert.strictEqual( title, null, caseItem.description + ', should not produce an mw.Title object' );
 			}
-		}
+		} );
+	} );
+
+	QUnit.test( 'newFromUserInput with invalid file name for upload', function ( assert ) {
+		var title = mw.Title.newFromUserInput( 'File:No_dot' );
+		// Invalid file name is rejected by default
+		assert.strictEqual( title, null, 'file name is not accepted for upload' );
+	} );
+
+	QUnit.test( 'newFromUserInput with misplaced parameter', function ( assert ) {
+		var title = mw.Title.newFromUserInput( 'File:No_dot', { forUploading: false } );
+		// Misplaces options parameter (pseudo-compat with MW 1.33 and earlier),
+		// behaves as if it wasn't passed - rejected the same as the default would.
+		assert.strictEqual( title, null, 'misplaced options parameter is ignored' );
+	} );
+
+	QUnit.test( 'newFromUserInput with invalid file name, but not for upload', function ( assert ) {
+		var title = mw.Title.newFromUserInput( 'File:No_dot', 0, { forUploading: false } );
+		// Invalid file name is tolerated with this option
+		assert.strictEqual( title.getPrefixedText(), 'File:No dot', 'file name is accepted' );
 	} );
 
 	QUnit.test( 'newFromFileName', function ( assert ) {
-		var title, i, thisCase, prefix,
-			cases = [
-				{
-					fileName: 'DCS0001557854455.JPG',
-					typeOfName: 'Standard camera output',
-					nameText: 'DCS0001557854455',
-					prefixedText: 'File:DCS0001557854455.JPG'
-				},
-				{
-					fileName: 'File:Sample.png',
-					typeOfName: 'Carrying namespace',
-					nameText: 'File-Sample',
-					prefixedText: 'File:File-Sample.png'
-				},
-				{
-					fileName: 'Treppe 2222 Test upload.jpg',
-					typeOfName: 'File name with spaces in it and lower case file extension',
-					nameText: 'Treppe 2222 Test upload',
-					prefixedText: 'File:Treppe 2222 Test upload.jpg'
-				},
-				{
-					fileName: 'I contain a \ttab.jpg',
-					typeOfName: 'Name containing a tab character',
-					nameText: 'I contain a tab',
-					prefixedText: 'File:I contain a tab.jpg'
-				},
-				{
-					fileName: 'I_contain multiple__ ___ _underscores.jpg',
-					typeOfName: 'Name containing multiple underscores',
-					nameText: 'I contain multiple underscores',
-					prefixedText: 'File:I contain multiple underscores.jpg'
-				},
-				{
-					fileName: 'I like ~~~~~~~~es.jpg',
-					typeOfName: 'Name containing more than three consecutive tilde characters',
-					nameText: 'I like ~~es',
-					prefixedText: 'File:I like ~~es.jpg'
-				},
-				{
-					fileName: 'BI\u200EDI.jpg',
-					typeOfName: 'Name containing BIDI overrides',
-					nameText: 'BIDI',
-					prefixedText: 'File:BIDI.jpg'
-				},
-				{
-					fileName: '100%ab progress.jpg',
-					typeOfName: 'File name with URL encoding',
-					nameText: '100% ab progress',
-					prefixedText: 'File:100% ab progress.jpg'
-				},
-				{
-					fileName: '<([>]):/#.jpg',
-					typeOfName: 'File name with characters not permitted in titles that are replaced',
-					nameText: '((()))---',
-					prefixedText: 'File:((()))---.jpg'
-				},
-				{
-					fileName: 'spaces\u0009\u2000\u200A\u200Bx.djvu',
-					typeOfName: 'File name with different kind of spaces',
-					nameText: 'Spaces \u200Bx',
-					prefixedText: 'File:Spaces \u200Bx.djvu'
-				},
-				{
-					fileName: 'dot.dot.dot.dot.dotdot',
-					typeOfName: 'File name with a lot of dots',
-					nameText: 'Dot.dot.dot.dot',
-					prefixedText: 'File:Dot.dot.dot.dot.dotdot'
-				},
-				{
-					fileName: 'dot. dot ._dot',
-					typeOfName: 'File name with multiple dots and spaces',
-					nameText: 'Dot. dot',
-					prefixedText: 'File:Dot. dot. dot'
-				},
-				{
-					fileName: '𠜎𠜱𠝹𠱓𠱸𠲖𠳏𠳕𠴕𠵼𠵿𠸎𠸏𠹷𠺝𠺢𠻗𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵𢫕𢭃𢯊𢱑𢱕𢳂𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵𢫕𢭃𢯊𢱑𢱕𢳂.png',
-					typeOfName: 'File name longer than 240 bytes',
-					nameText: '𠜎𠜱𠝹𠱓𠱸𠲖𠳏𠳕𠴕𠵼𠵿𠸎𠸏𠹷𠺝𠺢𠻗𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵𢫕𢭃𢯊𢱑𢱕𢳂𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵',
-					prefixedText: 'File:𠜎𠜱𠝹𠱓𠱸𠲖𠳏𠳕𠴕𠵼𠵿𠸎𠸏𠹷𠺝𠺢𠻗𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵𢫕𢭃𢯊𢱑𢱕𢳂𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵.png'
-				},
-				{
-					fileName: '',
-					typeOfName: 'Empty string'
-				},
-				{
-					fileName: 'foo',
-					typeOfName: 'String with only alphabet characters'
-				}
-			];
+		var cases = [
+			{
+				fileName: 'DCS0001557854455.JPG',
+				typeOfName: 'Standard camera output',
+				nameText: 'DCS0001557854455',
+				prefixedText: 'File:DCS0001557854455.JPG'
+			},
+			{
+				fileName: 'Treppe 2222 Test upload.jpg',
+				typeOfName: 'File name with spaces in it and lower case file extension',
+				nameText: 'Treppe 2222 Test upload',
+				prefixedText: 'File:Treppe 2222 Test upload.jpg'
+			},
+			{
+				fileName: 'I contain a \ttab.jpg',
+				typeOfName: 'Name containing a tab character',
+				nameText: 'I contain a tab',
+				prefixedText: 'File:I contain a tab.jpg'
+			},
+			{
+				fileName: 'I_contain multiple__ ___ _underscores.jpg',
+				typeOfName: 'Name containing multiple underscores',
+				nameText: 'I contain multiple underscores',
+				prefixedText: 'File:I contain multiple underscores.jpg'
+			},
+			{
+				fileName: 'I like ~~~~~~~~es.jpg',
+				typeOfName: 'Name containing more than three consecutive tilde characters',
+				nameText: 'I like ~~es',
+				prefixedText: 'File:I like ~~es.jpg'
+			},
+			{
+				fileName: 'BI\u200EDI.jpg',
+				typeOfName: 'Name containing BIDI overrides',
+				nameText: 'BIDI',
+				prefixedText: 'File:BIDI.jpg'
+			},
+			{
+				fileName: '100%ab progress.jpg',
+				typeOfName: 'File name with URL encoding',
+				nameText: '100% ab progress',
+				prefixedText: 'File:100% ab progress.jpg'
+			},
+			{
+				fileName: '<([>])/#.jpg',
+				typeOfName: 'File name with characters not permitted in titles that are replaced',
+				nameText: '((()))--',
+				prefixedText: 'File:((()))--.jpg'
+			},
+			{
+				fileName: 'spaces\u0009\u2000\u200A\u200Bx.djvu',
+				typeOfName: 'File name with different kind of spaces',
+				nameText: 'Spaces \u200Bx',
+				prefixedText: 'File:Spaces \u200Bx.djvu'
+			},
+			{
+				fileName: 'dot.dot.dot.dot.dotdot',
+				typeOfName: 'File name with a lot of dots',
+				nameText: 'Dot.dot.dot.dot',
+				prefixedText: 'File:Dot.dot.dot.dot.dotdot'
+			},
+			{
+				fileName: 'dot. dot ._dot',
+				typeOfName: 'File name with multiple dots and spaces',
+				nameText: 'Dot. dot',
+				prefixedText: 'File:Dot. dot. dot'
+			},
+			{
+				fileName: '𠜎𠜱𠝹𠱓𠱸𠲖𠳏𠳕𠴕𠵼𠵿𠸎𠸏𠹷𠺝𠺢𠻗𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵𢫕𢭃𢯊𢱑𢱕𢳂𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵𢫕𢭃𢯊𢱑𢱕𢳂.png',
+				typeOfName: 'File name longer than 240 bytes',
+				nameText: '𠜎𠜱𠝹𠱓𠱸𠲖𠳏𠳕𠴕𠵼𠵿𠸎𠸏𠹷𠺝𠺢𠻗𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵𢫕𢭃𢯊𢱑𢱕𢳂𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵',
+				prefixedText: 'File:𠜎𠜱𠝹𠱓𠱸𠲖𠳏𠳕𠴕𠵼𠵿𠸎𠸏𠹷𠺝𠺢𠻗𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵𢫕𢭃𢯊𢱑𢱕𢳂𠻹𠻺𠼭𠼮𠽌𠾴𠾼𠿪𡁜𡁯𡁵𡁶𡁻𡃁𡃉𡇙𢃇𢞵.png'
+			},
+			{
+				fileName: '',
+				typeOfName: 'Empty string'
+			},
+			{
+				fileName: 'foo',
+				typeOfName: 'String with only alphabet characters'
+			}
+		];
 
-		for ( i = 0; i < cases.length; i++ ) {
-			thisCase = cases[ i ];
-			title = mw.Title.newFromFileName( thisCase.fileName );
+		if ( mw.config.get( 'wgIllegalFileChars', '' ).indexOf( ':' ) > -1 ) {
+			// ":" is automatically replaced with "-". Only test this if it is present
+			// in wgIllegalFileChars. Bug: T196480
+			cases.push( {
+				fileName: 'File:Sample.png',
+				typeOfName: 'Carrying namespace',
+				nameText: 'File-Sample',
+				prefixedText: 'File:File-Sample.png'
+			} );
+			cases.push( {
+				fileName: 'Illegal:Char.png',
+				typeOfName: 'File name with : character not permitted in titles that are replaced',
+				nameText: 'Illegal-Char',
+				prefixedText: 'File:Illegal-Char.png'
+			} );
+		}
 
-			if ( thisCase.nameText !== undefined ) {
-				prefix = '[' + thisCase.typeOfName + '] ';
+		cases.forEach( function ( caseItem ) {
+			var prefix,
+				title = mw.Title.newFromFileName( caseItem.fileName );
+
+			if ( caseItem.nameText !== undefined ) {
+				prefix = '[' + caseItem.typeOfName + '] ';
 
 				assert.notStrictEqual( title, null, prefix + 'Parses successfully' );
-				assert.equal( title.getNameText(), thisCase.nameText, prefix + 'Filename matches original' );
-				assert.equal( title.getPrefixedText(), thisCase.prefixedText, prefix + 'File page title matches original' );
-				assert.equal( title.getNamespaceId(), 6, prefix + 'Namespace ID matches File namespace' );
+				assert.strictEqual( title.getNameText(), caseItem.nameText, prefix + 'Filename matches original' );
+				assert.strictEqual( title.getPrefixedText(), caseItem.prefixedText, prefix + 'File page title matches original' );
+				assert.strictEqual( title.getNamespaceId(), 6, prefix + 'Namespace ID matches File namespace' );
 			} else {
-				assert.strictEqual( title, null, thisCase.typeOfName + ', should not produce an mw.Title object' );
+				assert.strictEqual( title, null, caseItem.typeOfName + ', should not produce an mw.Title object' );
 			}
-		}
+		} );
 	} );
 
-}( mediaWiki, jQuery ) );
+}() );

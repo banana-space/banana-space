@@ -22,9 +22,14 @@
 namespace Wikimedia\Rdbms;
 
 /**
+ * @newable
+ * @stable to extend
  * @ingroup Database
  */
 class DBTransactionError extends DBExpectedError {
 }
 
+/**
+ * @deprecated since 1.29
+ */
 class_alias( DBTransactionError::class, 'DBTransactionError' );

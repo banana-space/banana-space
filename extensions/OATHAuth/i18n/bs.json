@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Semina x",
 			"Srdjan m"
 		]
 	},
@@ -28,5 +29,8 @@
 	"oathauth-auth-ui": "Upišite kôd za potvrdu s Vašeg uređaja",
 	"oathauth-throttled": "Previše pokušaja potvrde! Sačekajte $1.",
 	"oathauth-login-failed": "Potvrda nije uspjela.",
-	"oathauth-describe-provider": "Potvrda u 2 koraka (OATH)."
+	"oathauth-describe-provider": "Potvrda u 2 koraka (OATH).",
+	"oathauth-module-totp-label": "TOTP (jednokratna šifra)",
+	"oathauth-ui-manage": "Upravljaj",
+	"oathauth-invalidrequest": "Nevažeći zahtjev"
 }

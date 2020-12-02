@@ -1,19 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
+			"Acamicamacaraca",
 			"Kolega2357",
 			"OC Ripper",
-			"Acamicamacaraca"
+			"Vlad5250"
 		]
 	},
 	"categorytree": "Stablasti prikaz hijerarhije kategorija",
 	"categorytree-portlet": "Kategorije",
 	"categorytree-legend": "Prikaži stablo kategorija",
 	"categorytree-desc": "Dinamička navigacija [[Special:CategoryTree|strukture kategorija]].",
-	"categorytree-header": "Unesite ime kategorije da vidite njen sadržaj kao strukturno stablo. Ovo zahtijeva proširenu JavaScript funkcionalnost kao AJAX. Ako imate neki stariji preglednik, ili ste isključili JavaScript, ovo neće raditi.",
+	"categorytree-header": "Upišite naziv kategorije da biste vidjeli njen sadržaj u obliku stabla (zahtijeva JavaScript).",
 	"categorytree-category": "Kategorija:",
 	"categorytree-go": "Prikaži stablo",
 	"categorytree-parents": "Nadkategorije - Наткатегорије",
+	"categorytree-mode-label": "Režim:",
 	"categorytree-mode-categories": "samo kategorije - само категорије",
 	"categorytree-mode-pages": "stranice bez slika - странице без слика",
 	"categorytree-mode-all": "sve stranice - све странице",
@@ -23,6 +25,7 @@
 	"categorytree-num-categories": "$1 K",
 	"categorytree-num-pages": "$1 P",
 	"categorytree-num-files": "$1 F",
+	"categorytree-num-empty": "prazna",
 	"categorytree-load": "učitaj - учитај",
 	"categorytree-loading": "učitavam - учитавам",
 	"categorytree-nothing-found": "ništa nije pronađeno",
@@ -30,5 +33,6 @@
 	"categorytree-no-parent-categories": "nema nadkategorija",
 	"categorytree-no-pages": "nema ni stranica ni podkategorija",
 	"categorytree-not-found": "Kategorija <i>$1</i> nije pronađena",
-	"categorytree-error": "Problem pri učitavanju podataka."
+	"categorytree-error": "Problem pri učitavanju podataka.",
+	"categorytree-retry": "Pričekajte malo pa pokušajte opet."
 }

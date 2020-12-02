@@ -1,31 +1,33 @@
 <?php
 
+use MediaWiki\Revision\RevisionRecord;
+
 /**
  * @covers CategoryMembershipChangeJob
  *
  * @group JobQueue
  * @group Database
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
-class CategoryMembershipChangeJobTest extends MediaWikiTestCase {
+class CategoryMembershipChangeJobTest extends MediaWikiIntegrationTestCase {
 
-	const TITLE_STRING = 'UTCatChangeJobPage';
+	private const TITLE_STRING = 'UTCatChangeJobPage';
 
 	/**
 	 * @var Title
 	 */
 	private $title;
 
-	public function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		$this->setMwGlobals( 'wgRCWatchCategoryMembership', true );
 		$this->setContentLang( 'qqx' );
 	}
 
-	public function addDBDataOnce() {
-		parent::addDBDataOnce();
+	public function addDBData() {
+		parent::addDBData();
 		$insertResult = $this->insertPage( self::TITLE_STRING, 'UT Content' );
 		$this->title = $insertResult['title'];
 	}
@@ -48,11 +50,11 @@ class CategoryMembershipChangeJobTest extends MediaWikiTestCase {
 			ContentHandler::makeContent( $text, $this->title ),
 			__METHOD__
 		);
-		/** @var Revision $revision */
-		$revision = $editResult->value['revision'];
+		/** @var RevisionRecord $revisionRecord */
+		$revisionRecord = $editResult->value['revision-record'];
 		$this->runJobs();
 
-		return $revision->getId();
+		return $revisionRecord->getId();
 	}
 
 	/**
@@ -61,13 +63,16 @@ class CategoryMembershipChangeJobTest extends MediaWikiTestCase {
 	 * @return RecentChange|null
 	 */
 	private function getCategorizeRecentChangeForRevId( $revId ) {
-		return RecentChange::newFromConds(
+		$rc = RecentChange::newFromConds(
 			[
 				'rc_type' => RC_CATEGORIZE,
 				'rc_this_oldid' => $revId,
 			],
 			__METHOD__
 		);
+
+		$this->assertNotNull( $rc, 'rev__id = ' . $revId );
+		return $rc;
 	}
 
 	public function testRun_normalCategoryAddedAndRemoved() {
@@ -84,4 +89,20 @@ class CategoryMembershipChangeJobTest extends MediaWikiTestCase {
 		);
 	}
 
+	public function testJobSpecRemovesDuplicates() {
+		$jobSpec = CategoryMembershipChangeJob::newSpec( $this->title, MWTimestamp::now() );
+		$job = new CategoryMembershipChangeJob(
+			$this->title,
+			$jobSpec->getParams()
+		);
+		$this->assertTrue( $job->ignoreDuplicates() );
+		$this->assertTrue( $jobSpec->ignoreDuplicates() );
+		$this->assertEquals( $job->getDeduplicationInfo(), $jobSpec->getDeduplicationInfo() );
+	}
+
+	public function testJobSpecDeduplicationIgnoresRevTimestamp() {
+		$jobSpec1 = CategoryMembershipChangeJob::newSpec( $this->title, '20191008204617' );
+		$jobSpec2 = CategoryMembershipChangeJob::newSpec( $this->title, '20201008204617' );
+		$this->assertArrayEquals( $jobSpec1->getDeduplicationInfo(), $jobSpec2->getDeduplicationInfo() );
+	}
 }

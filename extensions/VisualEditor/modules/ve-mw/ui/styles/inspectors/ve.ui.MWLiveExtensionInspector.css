@@ -1,0 +1,27 @@
+/*!
+ * VisualEditor MediaWiki UserInterface alien extension inspector styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwLiveExtensionInspector-error-container-hidden {
+	display: none;
+}
+
+.ve-ui-mwLiveExtensionInspector-error {
+	display: block;
+	margin-right: 2.5em;
+	color: #d33;
+}
+
+.ve-ui-mwLiveExtensionInspector-error-collapsed {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.ve-ui-mwLiveExtensionInspector-error-button {
+	float: right;
+	margin-top: -0.3em;
+}

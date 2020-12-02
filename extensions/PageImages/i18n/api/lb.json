@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robby"
+		]
+	},
+	"apihelp-query+pageimages-param-thumbsize": "Maximal Breet a Pixel fir Miniatur-Biller.",
+	"apihelp-query+pageimages-paramvalue-license-free": "nëmme fräi Biller",
+	"apihelp-query+pageimages-paramvalue-license-any": "bescht Bild, egal ob fräi oder net."
+}

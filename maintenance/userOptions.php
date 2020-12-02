@@ -31,7 +31,7 @@ require_once __DIR__ . '/Maintenance.php';
  */
 class UserOptionsMaintenance extends Maintenance {
 
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 
 		$this->addDescription( 'Pass through all users and change one of their options.
@@ -40,7 +40,7 @@ The new option is NOT validated.' );
 		$this->addOption( 'list', 'List available user options and their default value' );
 		$this->addOption( 'usage', 'Report all options statistics or just one if you specify it' );
 		$this->addOption( 'old', 'The value to look for', false, true );
-		$this->addOption( 'new', 'Rew value to update users with', false, true );
+		$this->addOption( 'new', 'New value to update users with', false, true );
 		$this->addOption( 'nowarn', 'Hides the 5 seconds warning' );
 		$this->addOption( 'dry', 'Do not save user settings back to database' );
 		$this->addArg( 'option name', 'Name of the option to change or provide statistics about', false );
@@ -60,7 +60,7 @@ The new option is NOT validated.' );
 		) {
 			$this->updateOptions();
 		} else {
-			$this->maybeHelp( /* force = */ true );
+			$this->maybeHelp( true );
 		}
 	}
 
@@ -107,16 +107,13 @@ The new option is NOT validated.' );
 
 				$userValue = $user->getOption( $option );
 				if ( $userValue <> $defaultOptions[$option] ) {
-					// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
-					@$ret[$option][$userValue]++;
+					$ret[$option][$userValue] = ( $ret[$option][$userValue] ?? 0 ) + 1;
 				}
 			} else {
-
 				foreach ( $defaultOptions as $name => $defaultValue ) {
 					$userValue = $user->getOption( $name );
 					if ( $userValue != $defaultValue ) {
-						// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
-						@$ret[$name][$userValue]++;
+						$ret[$name][$userValue] = ( $ret[$name][$userValue] ?? 0 ) + 1;
 					}
 				}
 			}

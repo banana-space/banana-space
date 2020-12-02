@@ -2,9 +2,10 @@
 
 namespace Wikimedia\Tests\Rdbms;
 
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LoadBalancer;
-use PHPUnit_Framework_MockObject_MockObject;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
@@ -12,10 +13,9 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  *
  * @author Daniel Kinzler
  */
-class SessionConsistentConnectionManagerTest extends \PHPUnit\Framework\TestCase {
-
+class SessionConsistentConnectionManagerTest extends TestCase {
 	/**
-	 * @return IDatabase|PHPUnit_Framework_MockObject_MockObject
+	 * @return IDatabase|MockObject
 	 */
 	private function getIDatabaseMock() {
 		return $this->getMockBuilder( IDatabase::class )
@@ -23,14 +23,10 @@ class SessionConsistentConnectionManagerTest extends \PHPUnit\Framework\TestCase
 	}
 
 	/**
-	 * @return LoadBalancer|PHPUnit_Framework_MockObject_MockObject
+	 * @return LoadBalancer|MockObject
 	 */
 	private function getLoadBalancerMock() {
-		$lb = $this->getMockBuilder( LoadBalancer::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		return $lb;
+		return $this->createMock( LoadBalancer::class );
 	}
 
 	public function testGetReadConnection() {

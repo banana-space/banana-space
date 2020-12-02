@@ -5,11 +5,12 @@
 			"Amire80",
 			"Express2000",
 			"HalanTul",
+			"INS Pirat",
 			"Kaganer",
 			"NBS",
 			"Okras",
-			"Александр Сигачёв",
-			"INS Pirat"
+			"Vlad5250",
+			"Александр Сигачёв"
 		]
 	},
 	"spam-blacklist": " #<!-- не изменяйте эту строку --> <pre>\n# Внешние ссылки, соответствующие этому списку, будут запрещены для внесения на страницы.\n# Этот список действует только для данной вики, существует также общий чёрный список.\n# Подробнее на странице https://www.mediawiki.org/wiki/Extension:SpamBlacklist#\n# Синтаксис:\n#   * Всё, начиная с символа \"#\" и до конца строки, считается комментарием\n#   * Каждая непустая строка - фрагмент регулярного выражения, применяемого только к узлу в URL\n\n #</pre> <!-- не изменяйте эту строку -->",
@@ -24,10 +25,6 @@
 	"log-name-spamblacklist": "Журнал спам-листа",
 	"log-description-spamblacklist": "Это журнал, отслеживающий срабатывание спам-листа.",
 	"logentry-spamblacklist-hit": "$1 вызвал срабатывание спам-листа на странице $3 из-за попытки добавить $4.",
-	"right-spamblacklistlog": "просмотр журнала спам-листа",
-	"action-spamblacklistlog": "просмотр журнала спам-листа",
-	"apihelp-spamblacklist-description": "Проверить один или несколько URL-адресов с помощью SpamBlacklist.",
-	"apihelp-spamblacklist-summary": "Проверить один или несколько URL-адресов с помощью SpamBlacklist.",
-	"apihelp-spamblacklist-param-url": "URL-адреса для проверки в чёрном списке.",
-	"apihelp-spamblacklist-example-1": "Проверить два URL-адреса по чёрному списку"
+	"right-spamblacklistlog": "Просмотр журнала спам-листа",
+	"action-spamblacklistlog": "просмотр журнала спам-листа"
 }

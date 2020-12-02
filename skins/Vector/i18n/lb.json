@@ -6,6 +6,8 @@
 	},
 	"skinname-vector": "Vector",
 	"vector-skin-desc": "Modern Versioun vu Monobook mat frëschem Look a ville Verbesserunge vun der Benotzerfrëndlechkeet",
+	"prefs-vector-enable-vector-1-label": "Déi al-Versioun vu Vector benotzen",
+	"vector-opt-out": "An den ale Layout wiesselen",
 	"vector.css": "/* CSS deen hei steet huet Afloss op all Benotzer vum Ausgesinn Vector */",
 	"vector.js": "/* All JavaScript hei gëtt gelueden esoubal ee Benotzer d'Ausgesinn Vector benotzt */",
 	"vector-action-addsection": "Sujet dobäisetzen",
@@ -19,5 +21,7 @@
 	"vector-view-history": "Versioune weisen",
 	"vector-view-view": "Liesen",
 	"vector-view-viewsource": "Quellcode weisen",
+	"vector-jumptonavigation": "Op d'Navigatioun wiesselen",
+	"vector-jumptosearch": "Op d'Siche wiesselen",
 	"vector-more-actions": "Méi"
 }

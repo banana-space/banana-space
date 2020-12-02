@@ -1,0 +1,21 @@
+{{!
+	@typedef object emphasized-sidebar-action
+	@prop string href
+	@prop string text
+
+	string html-logo-attributes for site logo. Must be used inside tag e.g. `class="logo" lang="en-gb"`
+	MenuDefinition data-portals-first
+	MenuDefinition[] array-portals-rest
+	emphasized-sidebar-action data-emphasized-sidebar-action For displaying an emphasized action in the sidebar.
+}}
+
+<div id="mw-panel" class="mw-sidebar">
+	{{#data-portals-first}}{{>Menu}}{{/data-portals-first}}
+	{{#data-emphasized-sidebar-action}}
+	<div class="mw-sidebar-action">
+		<a class="mw-sidebar-action-link" title="{{title}}" href="{{href}}">{{text}}</a>
+	</div>
+	{{/data-emphasized-sidebar-action}}
+	{{#array-portals-rest}}{{>Menu}}{{/array-portals-rest}}
+	{{#data-portals-languages}}{{>Menu}}{{/data-portals-languages}}
+</div>

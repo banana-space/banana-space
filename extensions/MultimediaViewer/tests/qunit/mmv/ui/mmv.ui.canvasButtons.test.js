@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.ui.CanvasButtons', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'Prev/Next', function ( assert ) {
@@ -30,7 +30,7 @@
 			assert.ok( true, 'Switched to prev image' );
 		} );
 
-		buttons.$next.click();
-		buttons.$prev.click();
+		buttons.$next.trigger( 'click' );
+		buttons.$prev.trigger( 'click' );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

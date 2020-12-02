@@ -2,10 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Event",
+			"Jon Harald Søby",
 			"Laaknor",
 			"Nghtwlkr",
-			"Simny",
-			"Jon Harald Søby"
+			"Simny"
 		]
 	},
 	"replacetext": "Erstatt tekst",
@@ -39,7 +39,9 @@
 	"replacetext_warning": "'''Advarsel:''' Det er {{PLURAL:$1|én side|$1 sider}} som allerede har erstatningsteksten «$2». Om du gjør denne erstatningen vil du ikke kunne skille ut dine erstatninger fra denne teksten.",
 	"replacetext_blankwarning": "Fordi erstatningsteksten er tom vil denne handlingen ikke kunne angres automatisk; fortsette?",
 	"replacetext_continue": "Fortsett",
+	"replacetext_announce": "Kunngjør disse redigeringene via $1 og overvåkningslister",
 	"replacetext_editsummary": "Teksterstatting – «$1» til «$2»",
 	"right-replacetext": "Gjennomfør teksterstatninger på hele wikien",
-	"action-replacetext": "gjennomføre strengerstatninger på hele wikien"
+	"action-replacetext": "gjennomføre strengerstatninger på hele wikien",
+	"replacetext_reminder": "For å også endre lenker til denne siden på andre sider, gå til $1."
 }

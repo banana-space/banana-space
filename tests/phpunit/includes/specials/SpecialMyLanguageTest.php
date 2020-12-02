@@ -4,7 +4,7 @@
  * @group Database
  * @covers SpecialMyLanguage
  */
-class SpecialMyLanguageTest extends MediaWikiTestCase {
+class SpecialMyLanguageTest extends MediaWikiIntegrationTestCase {
 	public function addDBDataOnce() {
 		$titles = [
 			'Page/Another',
@@ -35,7 +35,7 @@ class SpecialMyLanguageTest extends MediaWikiTestCase {
 	 * @param string $userLang
 	 */
 	public function testFindTitle( $expected, $subpage, $langCode, $userLang ) {
-		$this->setMwGlobals( 'wgLanguageCode', $langCode );
+		$this->setContentLang( $langCode );
 		$special = new SpecialMyLanguage();
 		$special->getContext()->setLanguage( $userLang );
 		// Test with subpages both enabled and disabled

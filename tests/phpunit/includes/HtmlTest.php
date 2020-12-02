@@ -1,20 +1,25 @@
 <?php
 
-class HtmlTest extends MediaWikiTestCase {
+use MediaWiki\MediaWikiServices;
+use PHPUnit\Framework\Error\Notice;
 
-	protected function setUp() {
+class HtmlTest extends MediaWikiIntegrationTestCase {
+	private $restoreWarnings;
+
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setMwGlobals( [
 			'wgUseMediaWikiUIEverywhere' => false,
 		] );
 
-		$langObj = Language::factory( 'en' );
+		$langFactory = MediaWikiServices::getInstance()->getLanguageFactory();
+		$contLangObj = $langFactory->getLanguage( 'en' );
 
 		// Hardcode namespaces during test runs,
 		// so that html output based on existing namespaces
 		// can be properly evaluated.
-		$langObj->setNamespaces( [
+		$contLangObj->setNamespaces( [
 			-2 => 'Media',
 			-1 => 'Special',
 			0 => '',
@@ -34,8 +39,52 @@ class HtmlTest extends MediaWikiTestCase {
 			100 => 'Custom',
 			101 => 'Custom_talk',
 		] );
-		$this->setUserLang( $langObj );
-		$this->setContentLang( $langObj );
+		$this->setContentLang( $contLangObj );
+
+		$userLangObj = $langFactory->getLanguage( 'es' );
+		$userLangObj->setNamespaces( [
+			-2 => "Medio",
+			-1 => "Especial",
+			0 => "",
+			1 => "Discusión",
+			2 => "Usuario",
+			3 => "Usuario discusión",
+			4 => "Wiki",
+			5 => "Wiki discusión",
+			6 => "Archivo",
+			7 => "Archivo discusión",
+			8 => "MediaWiki",
+			9 => "MediaWiki discusión",
+			10 => "Plantilla",
+			11 => "Plantilla discusión",
+			12 => "Ayuda",
+			13 => "Ayuda discusión",
+			14 => "Categoría",
+			15 => "Categoría discusión",
+			100 => "Personalizado",
+			101 => "Personalizado discusión",
+		] );
+		$this->setUserLang( $userLangObj );
+
+		$this->restoreWarnings = false;
+	}
+
+	protected function tearDown() : void {
+		if ( $this->restoreWarnings ) {
+			$this->restoreWarnings = false;
+			Wikimedia\restoreWarnings();
+		}
+
+		parent::tearDown();
+	}
+
+	/**
+	 * @covers Html::openElement
+	 */
+	public function testOpenElement() {
+		$this->expectException( Notice::class );
+		$this->expectExceptionMessage( 'given element name with space' );
+		Html::openElement( 'span id="x"' );
 	}
 
 	/**
@@ -114,12 +163,12 @@ class HtmlTest extends MediaWikiTestCase {
 	 * @covers Html::expandAttributes
 	 */
 	public function testExpandAttributesForBooleans() {
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			Html::expandAttributes( [ 'selected' => false ] ),
 			'Boolean attributes do not generates output when value is false'
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			Html::expandAttributes( [ 'selected' => null ] ),
 			'Boolean attributes do not generates output when value is null'
@@ -165,7 +214,6 @@ class HtmlTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * Test for Html::expandAttributes()
 	 * Please note it output a string prefixed with a space!
 	 * @covers Html::expandAttributes
 	 */
@@ -270,7 +318,7 @@ class HtmlTest extends MediaWikiTestCase {
 
 	/**
 	 * How do we handle duplicate keys in HTML attributes expansion?
-	 * We could pass a "class" the values: 'GREEN' and array( 'GREEN' => false )
+	 * We could pass a "class" the values: 'GREEN' and [ 'GREEN' => false ]
 	 * The latter will take precedence.
 	 *
 	 * Feature added by r96188
@@ -289,11 +337,11 @@ class HtmlTest extends MediaWikiTestCase {
 
 	/**
 	 * @covers Html::expandAttributes
-	 * @expectedException MWException
 	 */
 	public function testExpandAttributes_ArrayOnNonListValueAttribute_ThrowsException() {
 		// Real-life test case found in the Popups extension (see Gerrit cf0fd64),
 		// when used with an outdated BetaFeatures extension (see Gerrit deda1e7)
+		$this->expectException( MWException::class );
 		Html::expandAttributes( [
 			'src' => [
 				'ltr' => 'ltr.svg',
@@ -309,7 +357,7 @@ class HtmlTest extends MediaWikiTestCase {
 	public function testNamespaceSelector() {
 		$this->assertEquals(
 			'<select id="namespace" name="namespace">' . "\n" .
-				'<option value="0">(Main)</option>' . "\n" .
+				'<option value="0">(Principal)</option>' . "\n" .
 				'<option value="1">Talk</option>' . "\n" .
 				'<option value="2">User</option>' . "\n" .
 				'<option value="3">User talk</option>' . "\n" .
@@ -331,10 +379,10 @@ class HtmlTest extends MediaWikiTestCase {
 		);
 
 		$this->assertEquals(
-			'<label for="mw-test-namespace">Select a namespace:</label>&#160;' .
+			'<label for="mw-test-namespace">Select a namespace:</label>' . "\u{00A0}" .
 				'<select id="mw-test-namespace" name="wpNamespace">' . "\n" .
-				'<option value="all">all</option>' . "\n" .
-				'<option value="0">(Main)</option>' . "\n" .
+				'<option value="all">todos</option>' . "\n" .
+				'<option value="0">(Principal)</option>' . "\n" .
 				'<option value="1">Talk</option>' . "\n" .
 				'<option value="2" selected="">User</option>' . "\n" .
 				'<option value="3">User talk</option>' . "\n" .
@@ -359,9 +407,9 @@ class HtmlTest extends MediaWikiTestCase {
 		);
 
 		$this->assertEquals(
-			'<label for="namespace">Select a namespace:</label>&#160;' .
+			'<label for="namespace">Select a namespace:</label>' . "\u{00A0}" .
 				'<select id="namespace" name="namespace">' . "\n" .
-				'<option value="0">(Main)</option>' . "\n" .
+				'<option value="0">(Principal)</option>' . "\n" .
 				'<option value="1">Talk</option>' . "\n" .
 				'<option value="2">User</option>' . "\n" .
 				'<option value="3">User talk</option>' . "\n" .
@@ -382,6 +430,33 @@ class HtmlTest extends MediaWikiTestCase {
 				[ 'label' => 'Select a namespace:' ]
 			),
 			'Basic namespace selector with a custom label but no id attribtue for the <select>'
+		);
+
+		$this->assertEquals(
+			'<select id="namespace" name="namespace">' . "\n" .
+				'<option value="0">(Principal)</option>' . "\n" .
+				'<option value="1">Discusión</option>' . "\n" .
+				'<option value="2">Usuario</option>' . "\n" .
+				'<option value="3">Usuario discusión</option>' . "\n" .
+				'<option value="4">Wiki</option>' . "\n" .
+				'<option value="5">Wiki discusión</option>' . "\n" .
+				'<option value="6">Archivo</option>' . "\n" .
+				'<option value="7">Archivo discusión</option>' . "\n" .
+				'<option value="8">MediaWiki</option>' . "\n" .
+				'<option value="9">MediaWiki discusión</option>' . "\n" .
+				'<option value="10">Plantilla</option>' . "\n" .
+				'<option value="11">Plantilla discusión</option>' . "\n" .
+				'<option value="12">Ayuda</option>' . "\n" .
+				'<option value="13">Ayuda discusión</option>' . "\n" .
+				'<option value="14">Categoría</option>' . "\n" .
+				'<option value="15">Categoría discusión</option>' . "\n" .
+				'<option value="100">Personalizado</option>' . "\n" .
+				'<option value="101">Personalizado discusión</option>' . "\n" .
+				'</select>',
+			Html::namespaceSelector(
+				[ 'in-user-lang' => true ]
+			),
+			'Basic namespace selector in user language'
 		);
 	}
 
@@ -408,6 +483,26 @@ class HtmlTest extends MediaWikiTestCase {
 			),
 			'Namespace selector namespace filtering.'
 		);
+		$this->assertEquals(
+			'<select id="namespace" name="namespace">' . "\n" .
+				'<option value="" selected="">todos</option>' . "\n" .
+				'<option value="2">User</option>' . "\n" .
+				'<option value="4">MyWiki</option>' . "\n" .
+				'<option value="5">MyWiki Talk</option>' . "\n" .
+				'<option value="6">File</option>' . "\n" .
+				'<option value="7">File talk</option>' . "\n" .
+				'<option value="8">MediaWiki</option>' . "\n" .
+				'<option value="9">MediaWiki talk</option>' . "\n" .
+				'<option value="10">Template</option>' . "\n" .
+				'<option value="11">Template talk</option>' . "\n" .
+				'<option value="14">Category</option>' . "\n" .
+				'<option value="15">Category talk</option>' . "\n" .
+				'</select>',
+			Html::namespaceSelector(
+				[ 'exclude' => [ 0, 1, 3, 100, 101 ], 'all' => '' ]
+			),
+			'Namespace selector namespace filtering with empty custom "all" option.'
+		);
 	}
 
 	/**
@@ -416,7 +511,7 @@ class HtmlTest extends MediaWikiTestCase {
 	public function testCanDisableANamespaces() {
 		$this->assertEquals(
 			'<select id="namespace" name="namespace">' . "\n" .
-				'<option disabled="" value="0">(Main)</option>' . "\n" .
+				'<option disabled="" value="0">(Principal)</option>' . "\n" .
 				'<option disabled="" value="1">Talk</option>' . "\n" .
 				'<option disabled="" value="2">User</option>' . "\n" .
 				'<option disabled="" value="3">User talk</option>' . "\n" .
@@ -473,8 +568,12 @@ class HtmlTest extends MediaWikiTestCase {
 			'<div class="errorbox">err</div>'
 		);
 		$this->assertEquals(
-			Html::errorBox( 'err', 'heading' ),
-			'<div class="errorbox"><h2>heading</h2>err</div>'
+			Html::errorBox( 'err', 'heading', 'errorbox-custom-class' ),
+			'<div class="errorbox errorbox-custom-class"><h2>heading</h2>err</div>'
+		);
+		$this->assertEquals(
+			Html::errorBox( 'err', '0', '' ),
+			'<div class="errorbox"><h2>0</h2>err</div>'
 		);
 	}
 
@@ -513,12 +612,10 @@ class HtmlTest extends MediaWikiTestCase {
 			'tel',
 			'color',
 		];
-		$cases = [];
-		foreach ( $types as $type ) {
-			$cases[] = [ $type ];
-		}
 
-		return $cases;
+		foreach ( $types as $type ) {
+			yield [ $type ];
+		}
 	}
 
 	/**
@@ -670,17 +767,7 @@ class HtmlTest extends MediaWikiTestCase {
 			"dropDefaults accepts values given as an array"
 		];
 
-		# Craft the Html elements
-		$ret = [];
-		foreach ( $cases as $case ) {
-			$ret[] = [
-				$case[0],
-				$case[1], $case[2],
-				isset( $case[3] ) ? $case[3] : ''
-			];
-		}
-
-		return $ret;
+		return $cases;
 	}
 
 	/**
@@ -785,10 +872,62 @@ class HtmlTest extends MediaWikiTestCase {
 	public function testSrcSet( $images, $expected, $message ) {
 		$this->assertEquals( Html::srcSet( $images ), $expected, $message );
 	}
+
+	public static function provideInlineScript() {
+		return [
+			'Empty' => [
+				'',
+				'<script></script>'
+			],
+			'Simple' => [
+				'EXAMPLE.label("foo");',
+				'<script>EXAMPLE.label("foo");</script>'
+			],
+			'Ampersand' => [
+				'EXAMPLE.is(a && b);',
+				'<script>EXAMPLE.is(a && b);</script>'
+			],
+			'HTML' => [
+				'EXAMPLE.label("<a>");',
+				'<script>EXAMPLE.label("<a>");</script>'
+			],
+			'Script closing string (lower)' => [
+				'EXAMPLE.label("</script>");',
+				'<script>/* ERROR: Invalid script */</script>',
+				true,
+			],
+			'Script closing with non-standard attributes (mixed)' => [
+				'EXAMPLE.label("</SCriPT and STyLE>");',
+				'<script>/* ERROR: Invalid script */</script>',
+				true,
+			],
+			'HTML-comment-open and script-open' => [
+				// In HTML, <script> contents aren't just plain CDATA until </script>,
+				// there are levels of escaping modes, and the below sequence puts an
+				// HTML parser in a state where </script> would *not* close the script.
+				// https://html.spec.whatwg.org/multipage/parsing.html#script-data-double-escape-end-state
+				'var a = "<!--<script>";',
+				'<script>/* ERROR: Invalid script */</script>',
+				true,
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideInlineScript
+	 * @covers Html::inlineScript
+	 */
+	public function testInlineScript( $code, $expected, $error = false ) {
+		if ( $error ) {
+			Wikimedia\suppressWarnings();
+			$this->restoreWarnings = true;
+		}
+		$this->assertSame( Html::inlineScript( $code ), $expected );
+	}
 }
 
 class HtmlTestValue {
-	function __toString() {
+	public function __toString() {
 		return 'stringValue';
 	}
 }

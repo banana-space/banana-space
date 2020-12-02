@@ -1,0 +1,23 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWReferenceDialog styles.
+ *
+ * @copyright 2011-2019 VisualEditor Team's Cite sub-team and others; see AUTHORS.txt
+ * @license MIT
+ */
+
+.ve-ui-mwReferenceDialog-reuseWarning {
+	display: table;
+	margin-bottom: 1em;
+}
+
+.ve-ui-mwReferenceDialog-reuseWarning > * {
+	display: table-cell;
+}
+
+.ve-ui-mwReferenceDialog-reuseWarning > :first-child {
+	background-position: top;
+}
+
+.ve-ui-mwReferenceDialog-reuseWarning > :last-child {
+	padding-left: 0.5em;
+}

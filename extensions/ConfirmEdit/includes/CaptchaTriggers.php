@@ -5,13 +5,13 @@
  * add more possible triggers, which are not included in this class.
  */
 abstract class CaptchaTriggers {
-	const EDIT = 'edit';
-	const CREATE = 'create';
-	const SENDEMAIL = 'sendemail';
-	const ADD_URL = 'addurl';
-	const CREATE_ACCOUNT = 'createaccount';
-	const BAD_LOGIN = 'badlogin';
-	const BAD_LOGIN_PER_USER = 'badloginperuser';
+	public const EDIT = 'edit';
+	public const CREATE = 'create';
+	public const SENDEMAIL = 'sendemail';
+	public const ADD_URL = 'addurl';
+	public const CREATE_ACCOUNT = 'createaccount';
+	public const BAD_LOGIN = 'badlogin';
+	public const BAD_LOGIN_PER_USER = 'badloginperuser';
 
-	const EXT_REG_ATTRIBUTE_NAME = 'CaptchaTriggers';
+	public const EXT_REG_ATTRIBUTE_NAME = 'CaptchaTriggers';
 }

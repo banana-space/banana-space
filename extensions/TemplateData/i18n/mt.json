@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Leli Forte"
+		]
+	},
+	"templatedata-doc-param-autovalue": "Valur awtomatiku",
+	"templatedata-doc-param-type-content": "Kuntent",
+	"templatedata-doc-param-type-line": "Linja",
+	"templatedata-doc-param-type-unbalanced-wikitext": "Wikitest żbilanċjat",
+	"templatedata-helplink": "Informazzjoni dwar TemplateData",
+	"templatedata-modal-button-delparam": "Neħħi",
+	"templatedata-modal-table-param-autovalue": "Valur awtomatiku"
+}

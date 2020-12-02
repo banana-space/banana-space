@@ -7,6 +7,11 @@
  * @since 1.25
  */
 class ComposerLock {
+	/**
+	 * @var array[]
+	 * @phan-var array{packages:array{name:string,version:string,type:string,license?:string,authors?:mixed,description?:string}}
+	 */
+	private $contents;
 
 	/**
 	 * @param string $location
@@ -18,7 +23,7 @@ class ComposerLock {
 	/**
 	 * Dependencies currently installed according to composer.lock
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	public function getInstalledDependencies() {
 		$deps = [];
@@ -26,9 +31,9 @@ class ComposerLock {
 			$deps[$installed['name']] = [
 				'version' => ComposerJson::normalizeVersion( $installed['version'] ),
 				'type' => $installed['type'],
-				'licenses' => isset( $installed['license'] ) ? $installed['license'] : [],
-				'authors' => isset( $installed['authors'] ) ? $installed['authors'] : [],
-				'description' => isset( $installed['description'] ) ? $installed['description'] : '',
+				'licenses' => $installed['license'] ?? [],
+				'authors' => $installed['authors'] ?? [],
+				'description' => $installed['description'] ?? '',
 			];
 		}
 

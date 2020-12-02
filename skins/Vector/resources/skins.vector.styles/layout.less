@@ -1,0 +1,161 @@
+// Layout rules divide the page into sections and how VectorComponents should be arranged in the skin.
+// The rules here should only define the layout, not color or typography.
+
+@import '../../variables.less';
+@import 'mediawiki.mixins.less';
+
+// Modern layout variables
+@height-tabs: 2.5em; // Keep in sync with .vector-menu-tabs height.
+@margin-top-sidebar: 0.5em;
+
+// Header sizes defined in the description of T246170 and comment T246170#5957100
+@padding-left-sidebar: 0.5em;
+@padding-horizontal-header: @margin-end-portal +
+	@padding-left-sidebar +
+	( @margin-start-nav-main-body / @font-size-nav-main-heading );
+@padding-vertical-header: 0.125em;
+@margin-top-header: 0.625em;
+@margin-bottom-header: 0.3125em;
+@height-logo-icon: 3.125em; // Logo sizes per specification in T245190.
+@height-header: @height-logo-icon +
+	@margin-top-header + @margin-bottom-header +
+	2 * @padding-vertical-header;
+@width-grid-column-one: 11em;
+
+body {
+	// General background/foreground color definition as one exception to the rule.
+	background-color: @background-color-base;
+	color: @color-base;
+	// Vertical scrollbar always visible.
+	overflow-y: scroll;
+}
+
+.mw-body,
+.parsoid-body {
+	direction: ltr;
+	padding: @padding-content;
+}
+
+.mw-body {
+	// Will be removed when we limit content width (T246420).
+	/* Border on top, left, and bottom side */
+	border: @border-width-base @border-style-base @border-color-content;
+	border-right-width: 0;
+	/* Merge the border with tabs' one (in their background image) */
+	margin-top: -@border-width-base;
+
+	.firstHeading {
+		/* Change the default from mediawiki.skinning CSS to let indicators float into heading area */
+		overflow: visible;
+	}
+}
+
+/* Space for header above content */
+.mw-header-placeholder {
+	// Reserve space for the absolute positioned header and tabs.
+	height: @height-header + @height-tabs;
+}
+
+/* Header layout */
+.mw-header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	// A height is set to account for projects where no icon is set.
+	height: @height-logo-icon;
+	margin: @margin-top-header 0 @margin-bottom-header;
+	padding: @padding-vertical-header @padding-horizontal-header;
+	// Vertical centering of header elements (IE>=11), requires flex.
+	// Non-flex fallback for IE<=9: float rule on the child elements.
+	.flex-display();
+	// https://caniuse.com/#search=align-items
+	align-items: center;
+	z-index: @z-index-header;
+}
+
+/* Main column */
+.mw-body,
+#mw-data-after-content,
+#left-navigation,
+.mw-footer {
+	margin-left: @width-grid-column-one;
+}
+
+/* Content */
+.mw-indicators {
+	float: right;
+	z-index: @z-index-indicators;
+}
+
+.mw-body-content {
+	position: relative;
+	z-index: @z-index-base;
+}
+
+/* Hide, but keep accessible for screen-readers */
+#mw-navigation h2 {
+	position: absolute;
+	top: -9999px;
+}
+
+/* Tabs */
+#mw-head {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+}
+
+/* Navigation Containers */
+#left-navigation {
+	float: left;
+	margin-top: @height-header;
+	/* When right nav would overlap left nav, it's placed below it
+	(normal CSS floats behavior). This rule ensures that no empty space
+	is shown between them due to right nav's margin-top. Page layout
+	is still broken, but at least the nav overlaps only the page title
+	instead of half the content. */
+	margin-bottom: -@height-header;
+}
+
+#right-navigation {
+	float: right;
+	margin-top: @height-header;
+}
+
+#p-personal {
+	position: absolute;
+	top: @top-personal-tools;
+	right: 0.75em;
+	z-index: @z-index-personal;
+
+	ul {
+		// Keep from spilling out into the first column
+		// For completeness this should also include the width of the logo.
+		// As a result it is possible for the personal tools to overlap the logo.
+		padding-left: @width-grid-column-one;
+	}
+
+	li {
+		display: inline-block;
+	}
+}
+
+#mw-panel {
+	position: absolute;
+	// The sidebar is absolutely positioned inside the header which applies a top
+	// margin so we need to subtract this top margin in order to get the correct
+	// sidebar position.
+	top: @height-header - @margin-top-header;
+	left: 0;
+	width: @width-grid-column-one;
+	.box-sizing( border-box );
+	margin-top: @margin-top-sidebar;
+	padding-left: @padding-left-sidebar;
+	z-index: @z-index-sidebar;
+}
+
+.mw-footer {
+	margin-top: 0;
+}

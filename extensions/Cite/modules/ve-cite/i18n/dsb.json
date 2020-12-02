@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Michawiki",
-			"Derbeth"
+			"Derbeth",
+			"Michawiki"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Knigły",
@@ -14,7 +14,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Toś to mě dalej wužywaś",
 	"cite-ve-dialog-reference-options-section": "Opcije",
 	"cite-ve-dialog-reference-title": "Referenca",
-	"cite-ve-dialog-reference-useexisting-label": "Eksistěrujucu referencu wužywaś",
 	"cite-ve-dialog-referenceslist-title": "Lisćina referencow",
 	"cite-ve-dialogbutton-reference-tooltip": "Referenca",
 	"cite-ve-dialogbutton-referenceslist-tooltip": "Lisćina referencow",

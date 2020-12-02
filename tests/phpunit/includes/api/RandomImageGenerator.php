@@ -23,12 +23,13 @@
  * @author Neil Kandalgaonkar <neilk@wikimedia.org>
  */
 
+use MediaWiki\Shell\Shell;
+
 /**
  * RandomImageGenerator: does what it says on the tin.
  * Can fetch a random image, or also write a number of them to disk with random filenames.
  */
 class RandomImageGenerator {
-	private $dictionaryFile;
 	private $minWidth = 400;
 	private $maxWidth = 800;
 	private $minHeight = 400;
@@ -70,32 +71,12 @@ class RandomImageGenerator {
 	];
 
 	public function __construct( $options = [] ) {
-		foreach ( [ 'dictionaryFile', 'minWidth', 'minHeight',
+		foreach ( [ 'minWidth', 'minHeight',
 			'maxWidth', 'maxHeight', 'shapesToDraw' ] as $property
 		) {
 			if ( isset( $options[$property] ) ) {
 				$this->$property = $options[$property];
 			}
-		}
-
-		// find the dictionary file, to generate random names
-		if ( !isset( $this->dictionaryFile ) ) {
-			foreach (
-				[
-					'/usr/share/dict/words',
-					'/usr/dict/words',
-					__DIR__ . '/words.txt'
-				] as $dictionaryFile
-			) {
-				if ( is_file( $dictionaryFile ) && is_readable( $dictionaryFile ) ) {
-					$this->dictionaryFile = $dictionaryFile;
-					break;
-				}
-			}
-		}
-		if ( !isset( $this->dictionaryFile ) ) {
-			throw new Exception( "RandomImageGenerator: dictionary file not "
-				. "found or not specified properly" );
 		}
 	}
 
@@ -105,10 +86,10 @@ class RandomImageGenerator {
 	 *
 	 * @param int $number Number of filenames to write
 	 * @param string $format Optional, must be understood by ImageMagick, such as 'jpg' or 'gif'
-	 * @param string $dir Directory, optional (will default to current working directory)
+	 * @param string|null $dir Directory, optional (will default to current working directory)
 	 * @return array Filenames we just wrote
 	 */
-	function writeImages( $number, $format = 'jpg', $dir = null ) {
+	public function writeImages( $number, $format = 'jpg', $dir = null ) {
 		$filenames = $this->getRandomFilenames( $number, $format, $dir );
 		$imageWriteMethod = $this->getImageWriteMethod( $format );
 		foreach ( $filenames as $filename ) {
@@ -126,7 +107,7 @@ class RandomImageGenerator {
 	 * @throws Exception
 	 * @return string
 	 */
-	function getImageWriteMethod( $format ) {
+	public function getImageWriteMethod( $format ) {
 		global $wgUseImageMagick, $wgImageMagickConvertCommand;
 		if ( $format === 'svg' ) {
 			return 'writeSvg';
@@ -147,26 +128,27 @@ class RandomImageGenerator {
 	}
 
 	/**
-	 * Return a number of randomly-generated filenames
-	 * Each filename uses two words randomly drawn from the dictionary, like elephantine_spatula.jpg
+	 * Return a number of randomly-generated filenames.
+	 *
+	 * Each filename uses follows the pattern "hex_timestamp_1.jpg".
 	 *
 	 * @param int $number Number of filenames to generate
 	 * @param string $extension Optional, defaults to 'jpg'
-	 * @param string $dir Optional, defaults to current working directory
+	 * @param string|null $dir Optional, defaults to current working directory
 	 * @return array Array of filenames
 	 */
 	private function getRandomFilenames( $number, $extension = 'jpg', $dir = null ) {
-		if ( is_null( $dir ) ) {
+		if ( $dir === null ) {
 			$dir = getcwd();
 		}
 		$filenames = [];
-		foreach ( $this->getRandomWordPairs( $number ) as $pair ) {
-			$basename = $pair[0] . '_' . $pair[1];
-			if ( !is_null( $extension ) ) {
-				$basename .= '.' . $extension;
+		$prefix = wfRandomString( 3 ) . '_' . gmdate( 'YmdHis' ) . '_';
+		foreach ( range( 1, $number ) as $offset ) {
+			$filename = $prefix . $offset;
+			if ( $extension !== null ) {
+				$filename .= '.' . $extension;
 			}
-			$basename = preg_replace( '/\s+/', '', $basename );
-			$filenames[] = "$dir/$basename";
+			$filenames[] = "$dir/$filename";
 		}
 
 		return $filenames;
@@ -187,7 +169,7 @@ class RandomImageGenerator {
 		$spec['height'] = mt_rand( $this->minHeight, $this->maxHeight );
 		$spec['fill'] = $this->getRandomColor();
 
-		$diagonalLength = sqrt( pow( $spec['width'], 2 ) + pow( $spec['height'], 2 ) );
+		$diagonalLength = sqrt( $spec['width'] ** 2 + $spec['height'] ** 2 );
 
 		$draws = [];
 		for ( $i = 0; $i <= $this->shapesToDraw; $i++ ) {
@@ -224,7 +206,7 @@ class RandomImageGenerator {
 	 * @param array $shape Array of arrays, each array containing x & y keys mapped to numeric values
 	 * @return string
 	 */
-	static function shapePointsToString( $shape ) {
+	public static function shapePointsToString( $shape ) {
 		$points = [];
 		foreach ( $shape as $point ) {
 			$points[] = $point['x'] . ',' . $point['y'];
@@ -310,16 +292,16 @@ class RandomImageGenerator {
 		// for now (only works if you have exiv2 installed, a program to read
 		// and manipulate exif).
 		if ( $wgExiv2Command ) {
-			$cmd = wfEscapeShellArg( $wgExiv2Command )
-				. " -M "
-				. wfEscapeShellArg( "set Exif.Image.Orientation " . $orientation['exifCode'] )
-				. " "
-				. wfEscapeShellArg( $filename );
+			$command = Shell::command( $wgExiv2Command,
+				'-M',
+				"set Exif.Image.Orientation {$orientation['exifCode']}",
+				$filename
+			)->includeStderr();
 
-			$retval = 0;
-			$err = wfShellExec( $cmd, $retval );
+			$result = $command->execute();
+			$retval = $result->getExitCode();
 			if ( $retval !== 0 ) {
-				print "Error with $cmd: $retval, $err\n";
+				print "Error with $command: $retval, {$result->getStdout()}\n";
 			}
 		}
 	}
@@ -327,7 +309,7 @@ class RandomImageGenerator {
 	/**
 	 * Given an image specification, produce rotated version
 	 * This is used when simulating a rotated image capture with Exif orientation
-	 * @param array $spec Returned by getImageSpec
+	 * @param array &$spec Returned by getImageSpec
 	 * @param array $matrix 2x2 transformation matrix
 	 * @return array Transformed Spec
 	 */
@@ -396,22 +378,25 @@ class RandomImageGenerator {
 	 */
 	public function writeImageWithCommandLine( $spec, $format, $filename ) {
 		global $wgImageMagickConvertCommand;
-		$args = [];
-		$args[] = "-size " . wfEscapeShellArg( $spec['width'] . 'x' . $spec['height'] );
-		$args[] = wfEscapeShellArg( "xc:" . $spec['fill'] );
+
+		$args = [
+			$wgImageMagickConvertCommand,
+			'-size',
+			$spec['width'] . 'x' . $spec['height'],
+			"xc:{$spec['fill']}",
+		];
 		foreach ( $spec['draws'] as $draw ) {
 			$fill = $draw['fill'];
 			$polygon = self::shapePointsToString( $draw['shape'] );
 			$drawCommand = "fill $fill  polygon $polygon";
-			$args[] = '-draw ' . wfEscapeShellArg( $drawCommand );
+			$args[] = '-draw';
+			$args[] = $drawCommand;
 		}
-		$args[] = wfEscapeShellArg( $filename );
+		$args[] = $filename;
 
-		$command = wfEscapeShellArg( $wgImageMagickConvertCommand ) . " " . implode( " ", $args );
-		$retval = null;
-		wfShellExec( $command, $retval );
+		$result = Shell::command( $args )->execute();
 
-		return ( $retval === 0 );
+		return ( $result->getExitCode() === 0 );
 	}
 
 	/**
@@ -426,72 +411,5 @@ class RandomImageGenerator {
 		}
 
 		return 'rgb(' . implode( ', ', $components ) . ')';
-	}
-
-	/**
-	 * Get an array of random pairs of random words, like
-	 * [ [ 'foo', 'bar' ], [ 'quux', 'baz' ] ];
-	 *
-	 * @param int $number Number of pairs
-	 * @return array Two-element arrays
-	 */
-	private function getRandomWordPairs( $number ) {
-		$lines = $this->getRandomLines( $number * 2 );
-		// construct pairs of words
-		$pairs = [];
-		$count = count( $lines );
-		for ( $i = 0; $i < $count; $i += 2 ) {
-			$pairs[] = [ $lines[$i], $lines[$i + 1] ];
-		}
-
-		return $pairs;
-	}
-
-	/**
-	 * Return N random lines from a file
-	 *
-	 * Will throw exception if the file could not be read or if it had fewer lines than requested.
-	 *
-	 * @param int $number_desired Number of lines desired
-	 *
-	 * @throws Exception
-	 * @return array Array of exactly n elements, drawn randomly from lines the file
-	 */
-	private function getRandomLines( $number_desired ) {
-		$filepath = $this->dictionaryFile;
-
-		// initialize array of lines
-		$lines = [];
-		for ( $i = 0; $i < $number_desired; $i++ ) {
-			$lines[] = null;
-		}
-
-		/*
-		 * This algorithm obtains N random lines from a file in one single pass.
-		 * It does this by replacing elements of a fixed-size array of lines,
-		 * less and less frequently as it reads the file.
-		 */
-		$fh = fopen( $filepath, "r" );
-		if ( !$fh ) {
-			throw new Exception( "couldn't open $filepath" );
-		}
-		$line_number = 0;
-		$max_index = $number_desired - 1;
-		while ( !feof( $fh ) ) {
-			$line = fgets( $fh );
-			if ( $line !== false ) {
-				$line_number++;
-				$line = trim( $line );
-				if ( mt_rand( 0, $line_number ) <= $max_index ) {
-					$lines[mt_rand( 0, $max_index )] = $line;
-				}
-			}
-		}
-		fclose( $fh );
-		if ( $line_number < $number_desired ) {
-			throw new Exception( "not enough lines in $filepath" );
-		}
-
-		return $lines;
 	}
 }

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abdullahi",
 			"Maax"
 		]
 	},
@@ -10,9 +11,10 @@
 	"vector-action-protect": "Difaac",
 	"vector-action-undelete": "Ha tirtirin",
 	"vector-action-unprotect": "Bedel difaacida",
-	"vector-view-create": "Sameey",
-	"vector-view-edit": "Wax ka bedel",
-	"vector-view-history": "Itusi taariikhda",
+	"vector-view-create": "Abuur",
+	"vector-view-edit": "Wax ka badal",
+	"vector-view-history": "Fiiri taariikhda",
 	"vector-view-view": "Akhri",
-	"vector-view-viewsource": "Itusi xogta"
+	"vector-view-viewsource": "Itusi xogta",
+	"vector-more-actions": "Dheeraad"
 }

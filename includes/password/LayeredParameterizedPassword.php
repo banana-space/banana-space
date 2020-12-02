@@ -20,6 +20,8 @@
  * @file
  */
 
+declare( strict_types = 1 );
+
 /**
  * This password hash type layers one or more parameterized password types
  * on top of each other.
@@ -31,11 +33,11 @@
  * @since 1.24
  */
 class LayeredParameterizedPassword extends ParameterizedPassword {
-	protected function getDelimiter() {
+	protected function getDelimiter() : string {
 		return '!';
 	}
 
-	protected function getDefaultParams() {
+	protected function getDefaultParams() : array {
 		$params = [];
 
 		foreach ( $this->config['types'] as $type ) {
@@ -53,12 +55,13 @@ class LayeredParameterizedPassword extends ParameterizedPassword {
 		return $params;
 	}
 
-	public function crypt( $password ) {
+	public function crypt( string $password ) : void {
 		$lastHash = $password;
 		foreach ( $this->config['types'] as $i => $type ) {
 			// Construct pseudo-hash based on params and arguments
 			/** @var ParameterizedPassword $passObj */
 			$passObj = $this->factory->newFromType( $type );
+			'@phan-var ParameterizedPassword $passObj';
 
 			$params = '';
 			$args = '';
@@ -72,6 +75,7 @@ class LayeredParameterizedPassword extends ParameterizedPassword {
 
 			// Hash the last hash with the next type in the layer
 			$passObj = $this->factory->newFromCiphertext( $existingHash );
+			'@phan-var ParameterizedPassword $passObj';
 			$passObj->crypt( $lastHash );
 
 			// Move over the params and args
@@ -109,11 +113,12 @@ class LayeredParameterizedPassword extends ParameterizedPassword {
 		foreach ( $this->config['types'] as $i => $type ) {
 			if ( $i == 0 ) {
 				continue;
-			};
+			}
 
 			// Construct pseudo-hash based on params and arguments
 			/** @var ParameterizedPassword $passObj */
 			$passObj = $this->factory->newFromType( $type );
+			'@phan-var ParameterizedPassword $passObj';
 
 			$params = '';
 			$args = '';
@@ -127,6 +132,7 @@ class LayeredParameterizedPassword extends ParameterizedPassword {
 
 			// Hash the last hash with the next type in the layer
 			$passObj = $this->factory->newFromCiphertext( $existingHash );
+			'@phan-var ParameterizedPassword $passObj';
 			$passObj->crypt( $lastHash );
 
 			// Move over the params and args

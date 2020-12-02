@@ -2,13 +2,14 @@
 
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
 use Wikimedia\Rdbms\Database;
 
 /**
  * Gadgets repo powered by MediaWiki:Gadgets-definition
  */
 class MediaWikiGadgetsDefinitionRepo extends GadgetRepo {
-	const CACHE_VERSION = 2;
+	private const CACHE_VERSION = 2;
 
 	private $definitionCache;
 
@@ -48,11 +49,17 @@ class MediaWikiGadgetsDefinitionRepo extends GadgetRepo {
 	 */
 	private function purgeDefinitionCache() {
 		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
-		$cache->touchCheckKey( $this->getCheckKey() );
+		$cache->touchCheckKey( $this->getDefinitionCacheKey() );
 	}
 
-	private function getCheckKey() {
-		return wfMemcKey( 'gadgets-definition', Gadget::GADGET_CLASS_VERSION, self::CACHE_VERSION );
+	private function getDefinitionCacheKey() {
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+
+		return $cache->makeKey(
+			'gadgets-definition',
+			Gadget::GADGET_CLASS_VERSION,
+			self::CACHE_VERSION
+		);
 	}
 
 	/**
@@ -70,12 +77,15 @@ class MediaWikiGadgetsDefinitionRepo extends GadgetRepo {
 		$t1Cache = ObjectCache::getLocalServerInstance( 'hash' );
 		$wanCache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 
-		$key = $this->getCheckKey();
+		$key = $this->getDefinitionCacheKey();
 
 		// (a) Check the tier 1 cache
 		$value = $t1Cache->get( $key );
+		// Randomize logical APC expiry to avoid stampedes
+		// somewhere between 7.0 and 15.0 (seconds)
+		$cutoffAge = mt_rand( 7000000, 15000000 ) / 1000000;
 		// Check if it passes a blind TTL check (avoids I/O)
-		if ( $value && ( microtime( true ) - $value['time'] ) < 10 ) {
+		if ( $value && ( microtime( true ) - $value['time'] ) < $cutoffAge ) {
 			$this->definitionCache = $value['gadgets']; // process cache
 			return $this->definitionCache;
 		}
@@ -120,19 +130,24 @@ class MediaWikiGadgetsDefinitionRepo extends GadgetRepo {
 	/**
 	 * Fetch list of gadgets and returns it as associative array of sections with gadgets
 	 * e.g. [ $name => $gadget1, etc. ]
-	 * @param string $forceNewText Injected text of MediaWiki:gadgets-definition [optional]
+	 * @param string|null $forceNewText Injected text of MediaWiki:gadgets-definition [optional]
 	 * @return array|bool
 	 */
 	public function fetchStructuredList( $forceNewText = null ) {
 		if ( $forceNewText === null ) {
 			// T157210: avoid using wfMessage() to avoid staleness due to cache layering
 			$title = Title::makeTitle( NS_MEDIAWIKI, 'Gadgets-definition' );
-			$rev = Revision::newFromTitle( $title );
-			if ( !$rev || !$rev->getContent() || $rev->getContent()->isEmpty() ) {
+			$revRecord = MediaWikiServices::getInstance()
+				->getRevisionLookup()
+				->getRevisionByTitle( $title );
+			if ( !$revRecord
+				|| !$revRecord->getContent( SlotRecord::MAIN )
+				|| $revRecord->getContent( SlotRecord::MAIN )->isEmpty()
+			) {
 				return false; // don't cache
 			}
 
-			$g = $rev->getContent()->getNativeData();
+			$g = $revRecord->getContent( SlotRecord::MAIN )->getNativeData();
 		} else {
 			$g = $forceNewText;
 		}
@@ -241,7 +256,7 @@ class MediaWikiGadgetsDefinitionRepo extends GadgetRepo {
 					break;
 				case 'type':
 					// Single value, not a list
-					$info['type'] = isset( $params[0] ) ? $params[0] : '';
+					$info['type'] = $params[0] ?? '';
 					break;
 			}
 		}

@@ -2,9 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Akhilan",
+			"Macofe",
 			"McDutchie",
-			"Praveenp",
-			"Macofe"
+			"Praveenp"
 		]
 	},
 	"wikieditor": "വിക്കിഎഴുത്തുകൾ തിരുത്തുവാനുള്ള നൂതന സമ്പർക്കമുഖം",
@@ -13,7 +13,8 @@
 	"wikieditor-loading": "ശേഖരിക്കുന്നു...",
 	"wikieditor-toolbar": "തിരുത്തൽ പണിപ്പെട്ടി",
 	"wikieditor-toolbar-desc": "തിരുത്താനുള്ള താളിൽ മെച്ചപ്പെട്ട ഉപയോഗത്തിനായുള്ള പണിപ്പെട്ടി",
-	"wikieditor-toolbar-preference": "തിരുത്തുവാനുള്ള വിശദ പണിപ്പെട്ടി ഉപയോഗപ്പെടുത്തുക",
+	"wikieditor-toolbar-preference": "തിരുത്തുവാനുള്ള പണിപ്പെട്ടി സജ്ജമാക്കുക",
+	"wikieditor-toolbar-preference-help": "ഇതിനെ '2010 വിക്കിഎഴുത്ത് തിരുത്ത് ഉപകരണം' എന്ന് വിളിക്കാറുണ്ട്.",
 	"wikieditor-toolbar-loading": "ശേഖരിക്കുന്നു...",
 	"wikieditor-toolbar-tool-bold": "കടുപ്പിക്കുക",
 	"wikieditor-toolbar-tool-bold-example": "കട്ടികൂട്ടിയ എഴുത്ത്",
@@ -46,7 +47,7 @@
 	"wikieditor-toolbar-tool-link-lookslikeinternal-int": "ആഭ്യന്തര കണ്ണി",
 	"wikieditor-toolbar-tool-link-lookslikeinternal-ext": "പുറത്തേയ്ക്കുള്ള കണ്ണി",
 	"wikieditor-toolbar-tool-link-empty": "കണ്ണിവത്കരിക്കേണ്ട ഒന്നും താങ്കൾ നൽകിയിട്ടില്ല.",
-	"wikieditor-toolbar-tool-file": "പ്രമാണം ചേർക്കൽ",
+	"wikieditor-toolbar-tool-file": "ചിത്രങ്ങളും മീഡിയയും",
 	"wikieditor-toolbar-tool-file-example": "ഉദാഹരണം.jpg",
 	"wikieditor-toolbar-tool-file-title": "പ്രമാണം ഉൾപ്പെടുത്തുക",
 	"wikieditor-toolbar-file-target": "പ്രമാണത്തിന്റെ പേര്‌:",
@@ -126,6 +127,7 @@
 	"wikieditor-toolbar-tool-replace-success": "{{PLURAL:$1|ഒരു മാറ്റിച്ചേർക്കൽ|$1 മാറ്റിച്ചേർക്കലുകൾ}} നടത്തി.",
 	"wikieditor-toolbar-tool-replace-emptysearch": "തിരയാനായി താങ്കൾ ഒന്നും നൽകിയിട്ടില്ല.",
 	"wikieditor-toolbar-tool-replace-invalidregex": "താങ്കൾ നൽകിയ റെഗുലർ എക്സ്പ്രഷൻ അസാധുവാണ്‌: $1",
+	"wikieditor-toolbar-tool-replace-word": "വാക്ക് പൂർണ്ണമായി ഒത്തുനോക്കുക",
 	"wikieditor-toolbar-section-characters": "പ്രത്യേക ലിപികൾ",
 	"wikieditor-toolbar-section-help": "സഹായം",
 	"wikieditor-toolbar-help-heading-description": "വിവരണം",

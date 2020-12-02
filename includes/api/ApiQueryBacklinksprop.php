@@ -88,7 +88,7 @@ class ApiQueryBacklinksprop extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @param ApiPageSet $resultPageSet
+	 * @param ApiPageSet|null $resultPageSet
 	 */
 	private function run( ApiPageSet $resultPageSet = null ) {
 		$settings = self::$settings[$this->getModuleName()];
@@ -127,6 +127,9 @@ class ApiQueryBacklinksprop extends ApiQueryGeneratorBase {
 		$bl_from = "{$p}_from";
 
 		if ( !$titles ) {
+			return; // nothing to do
+		}
+		if ( $params['namespace'] !== null && count( $params['namespace'] ) === 0 ) {
 			return; // nothing to do
 		}
 
@@ -169,7 +172,7 @@ class ApiQueryBacklinksprop extends ApiQueryGeneratorBase {
 		$sortby[$bl_from] = 'int';
 
 		// Now use the $sortby to figure out the continuation
-		if ( !is_null( $params['continue'] ) ) {
+		if ( $params['continue'] !== null ) {
 			$cont = explode( '|', $params['continue'] );
 			$this->dieContinueUsageIf( count( $cont ) != count( $sortby ) );
 			$where = '';
@@ -208,7 +211,7 @@ class ApiQueryBacklinksprop extends ApiQueryGeneratorBase {
 
 		$this->addFields( array_keys( $sortby ) );
 		$this->addFields( [ 'bl_namespace' => $bl_namespace, 'bl_title' => $bl_title ] );
-		if ( is_null( $resultPageSet ) ) {
+		if ( $resultPageSet === null ) {
 			$fld_pageid = isset( $prop['pageid'] );
 			$fld_title = isset( $prop['title'] );
 			$fld_redirect = isset( $prop['redirect'] );
@@ -282,7 +285,11 @@ class ApiQueryBacklinksprop extends ApiQueryGeneratorBase {
 
 		$res = $this->select( __METHOD__ );
 
-		if ( is_null( $resultPageSet ) ) {
+		if ( $resultPageSet === null ) {
+			if ( $fld_title ) {
+				$this->executeGenderCacheFromResultWrapper( $res, __METHOD__ );
+			}
+
 			$count = 0;
 			foreach ( $res as $row ) {
 				if ( ++$count > $params['limit'] ) {
@@ -331,6 +338,12 @@ class ApiQueryBacklinksprop extends ApiQueryGeneratorBase {
 					$this->setContinue( $row, $sortby );
 					break;
 				}
+
+				if ( $miser_ns !== null && !in_array( $row->page_namespace, $miser_ns ) ) {
+					// Miser mode namespace check
+					continue;
+				}
+
 				$titles[] = Title::makeTitle( $row->page_namespace, $row->page_title );
 			}
 			$resultPageSet->populateFromTitles( $titles );
@@ -419,7 +432,7 @@ class ApiQueryBacklinksprop extends ApiQueryGeneratorBase {
 		$settings = self::$settings[$this->getModuleName()];
 		$name = $this->getModuleName();
 		$path = $this->getModulePath();
-		$title = isset( $settings['exampletitle'] ) ? $settings['exampletitle'] : 'Main Page';
+		$title = $settings['exampletitle'] ?? 'Main Page';
 		$etitle = rawurlencode( $title );
 
 		return [

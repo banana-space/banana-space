@@ -32,6 +32,12 @@ class JobQueueMemory extends JobQueue {
 	/** @var array[] */
 	protected static $data = [];
 
+	public function __construct( array $params ) {
+		$params['wanCache'] = new WANObjectCache( [ 'cache' => new HashBagOStuff() ] );
+
+		parent::__construct( $params );
+	}
+
 	/**
 	 * @see JobQueue::doBatchPush
 	 *
@@ -43,10 +49,7 @@ class JobQueueMemory extends JobQueue {
 
 		foreach ( $jobs as $job ) {
 			if ( $job->ignoreDuplicates() ) {
-				$sha1 = Wikimedia\base_convert(
-					sha1( serialize( $job->getDeduplicationInfo() ) ),
-					16, 36, 31
-				);
+				$sha1 = sha1( serialize( $job->getDeduplicationInfo() ) );
 				if ( !isset( $unclaimed[$sha1] ) ) {
 					$unclaimed[$sha1] = $job;
 				}
@@ -108,7 +111,7 @@ class JobQueueMemory extends JobQueue {
 	/**
 	 * @see JobQueue::doPop
 	 *
-	 * @return Job|bool
+	 * @return RunnableJob|bool
 	 */
 	protected function doPop() {
 		if ( $this->doGetSize() == 0 ) {
@@ -132,7 +135,7 @@ class JobQueueMemory extends JobQueue {
 		$job = $this->jobFromSpecInternal( $spec );
 
 		end( $claimed );
-		$job->metadata['claimId'] = key( $claimed );
+		$job->setMetadata( 'claimId', key( $claimed ) );
 
 		return $job;
 	}
@@ -140,23 +143,23 @@ class JobQueueMemory extends JobQueue {
 	/**
 	 * @see JobQueue::doAck
 	 *
-	 * @param Job $job
+	 * @param RunnableJob $job
 	 */
-	protected function doAck( Job $job ) {
+	protected function doAck( RunnableJob $job ) {
 		if ( $this->getAcquiredCount() == 0 ) {
 			return;
 		}
 
 		$claimed =& $this->getQueueData( 'claimed' );
-		unset( $claimed[$job->metadata['claimId']] );
+		unset( $claimed[$job->getMetadata( 'claimId' )] );
 	}
 
 	/**
-	 * @see JobQueue::doDelete
+	 * @inheritDoc
 	 */
 	protected function doDelete() {
-		if ( isset( self::$data[$this->type][$this->wiki] ) ) {
-			unset( self::$data[$this->type][$this->wiki] );
+		if ( isset( self::$data[$this->type][$this->domain] ) ) {
+			unset( self::$data[$this->type][$this->domain] );
 			if ( !self::$data[$this->type] ) {
 				unset( self::$data[$this->type] );
 			}
@@ -203,28 +206,27 @@ class JobQueueMemory extends JobQueue {
 
 	/**
 	 * @param IJobSpecification $spec
-	 *
-	 * @return Job
+	 * @return RunnableJob
 	 */
 	public function jobFromSpecInternal( IJobSpecification $spec ) {
-		return Job::factory( $spec->getType(), $spec->getTitle(), $spec->getParams() );
+		return $this->factoryJob( $spec->getType(), $spec->getParams() );
 	}
 
 	/**
 	 * @param string $field
-	 * @param mixed $init
+	 * @param mixed|null $init
 	 *
 	 * @return mixed
 	 */
 	private function &getQueueData( $field, $init = null ) {
-		if ( !isset( self::$data[$this->type][$this->wiki][$field] ) ) {
+		if ( !isset( self::$data[$this->type][$this->domain][$field] ) ) {
 			if ( $init !== null ) {
-				self::$data[$this->type][$this->wiki][$field] = $init;
+				self::$data[$this->type][$this->domain][$field] = $init;
 			} else {
 				return $init;
 			}
 		}
 
-		return self::$data[$this->type][$this->wiki][$field];
+		return self::$data[$this->type][$this->domain][$field];
 	}
 }

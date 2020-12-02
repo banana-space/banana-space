@@ -909,7 +909,7 @@ class JSParser
 				}
 				else
 				{
-					$n->setup = $n2 ? $n2 : null;
+					$n->setup = $n2 ?: null;
 					$this->t->mustMatch(OP_SEMICOLON);
 					$n->condition = $this->t->peek() == OP_SEMICOLON ? null : $this->Expression($x);
 					$this->t->mustMatch(OP_SEMICOLON);
@@ -1292,7 +1292,10 @@ class JSParser
 
 					if ($tt == OP_DOT)
 					{
-						$this->t->mustMatch(TOKEN_IDENTIFIER);
+						$tt = $this->t->get();
+						if (!$this->isKeyword($tt) && $tt !== TOKEN_IDENTIFIER)
+							throw $this->t->newSyntaxError("Unexpected token; token identifier or keyword expected.");
+
 						array_push($operands, new JSNode($this->t, OP_DOT, array_pop($operands), new JSNode($this->t)));
 					}
 					else
@@ -1427,6 +1430,11 @@ class JSParser
 							}
 							else
 							{
+								// Accept keywords as property names by treating
+								// them similarly with identifiers
+								if ($this->isKeyword($tt))
+									$tt = TOKEN_IDENTIFIER;
+
 								switch ($tt)
 								{
 									case TOKEN_IDENTIFIER:
@@ -1573,7 +1581,7 @@ class JSParser
 	private function nest($x, $node, $end = false)
 	{
 		array_push($x->stmtStack, $node);
-		$n = $this->statement($x);
+		$n = $this->Statement($x);
 		array_pop($x->stmtStack);
 
 		if ($end)
@@ -1618,6 +1626,46 @@ class JSParser
 
 		return $n;
 	}
+
+	private function isKeyword($tt)
+	{
+		switch ($tt) {
+			case KEYWORD_BREAK:
+			case KEYWORD_CASE:
+			case KEYWORD_CATCH:
+			case KEYWORD_CONST:
+			case KEYWORD_CONTINUE:
+			case KEYWORD_DEBUGGER:
+			case KEYWORD_DEFAULT:
+			case KEYWORD_DELETE:
+			case KEYWORD_DO:
+			case KEYWORD_ELSE:
+			case KEYWORD_ENUM:
+			case KEYWORD_FALSE:
+			case KEYWORD_FINALLY:
+			case KEYWORD_FOR:
+			case KEYWORD_FUNCTION:
+			case KEYWORD_IF:
+			case KEYWORD_IN:
+			case KEYWORD_INSTANCEOF:
+			case KEYWORD_NEW:
+			case KEYWORD_NULL:
+			case KEYWORD_RETURN:
+			case KEYWORD_SWITCH:
+			case KEYWORD_THIS:
+			case KEYWORD_THROW:
+			case KEYWORD_TRUE:
+			case KEYWORD_TRY:
+			case KEYWORD_TYPEOF:
+			case KEYWORD_VAR:
+			case KEYWORD_VOID:
+			case KEYWORD_WHILE:
+			case KEYWORD_WITH:
+				return true;
+			default:
+				return false;
+		}
+	}
 }
 
 class JSCompilerContext
@@ -1652,11 +1700,11 @@ class JSNode
 	public $funDecls = array();
 	public $varDecls = array();
 
-	public function __construct($t, $type=0)
+	public function __construct($t, $type=0, ...$nodes)
 	{
 		if ($token = $t->currentToken())
 		{
-			$this->type = $type ? $type : $token->type;
+			$this->type = $type ?: $token->type;
 			$this->value = $token->value;
 			$this->lineno = $token->lineno;
 			$this->start = $token->start;
@@ -1668,11 +1716,9 @@ class JSNode
 			$this->lineno = $t->lineno;
 		}
 
-		if (($numargs = func_num_args()) > 2)
+		foreach($nodes as $node)
 		{
-			$args = func_get_args();
-			for ($i = 2; $i < $numargs; $i++)
-				$this->addNode($args[$i]);
+			$this->addNode($node);
 		}
 	}
 
@@ -1752,7 +1798,7 @@ class JSTokenizer
 	public function init($source, $filename = '', $lineno = 1)
 	{
 		$this->source = $source;
-		$this->filename = $filename ? $filename : '[inline]';
+		$this->filename = $filename ?: '[inline]';
 		$this->lineno = $lineno;
 
 		$this->cursor = 0;

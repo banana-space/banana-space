@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"1917 Ekim Devrimi"
+		]
+	},
+	"apihelp-spamblacklist-description": "Dustê SpamBlacklist yew ra zêde URL araşt kerdış .",
+	"apihelp-spamblacklist-example-1": "URL lista siyayi dı reti kontrol kerê",
+	"apihelp-spamblacklist-param-url": "Hetê URL lista siyayi araşt kerdış",
+	"apihelp-spamblacklist-summary": "Dustê SpamBlacklist yew ra zêde URL araşt kerdış ."
+}

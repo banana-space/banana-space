@@ -88,4 +88,11 @@ snippet re\n\
 	return";
 exports.scope = "wollok";
 
-});
+});                (function() {
+                    ace.require(["ace/snippets/wollok"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

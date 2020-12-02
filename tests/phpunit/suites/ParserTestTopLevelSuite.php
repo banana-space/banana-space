@@ -1,21 +1,28 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+use PHPUnit\Framework\TestSuite;
 use Wikimedia\ScopedCallback;
 
 /**
- * The UnitTest must be either a class that inherits from MediaWikiTestCase
+ * The UnitTest must be either a class that inherits from MediaWikiIntegrationTestCase
  * or a class that provides a public static suite() method which returns
- * an PHPUnit_Framework_Test object
+ * an PHPUnit\Framework\Test object
  *
  * @group Parser
  * @group ParserTests
  * @group Database
  */
-class ParserTestTopLevelSuite extends PHPUnit_Framework_TestSuite {
+class ParserTestTopLevelSuite extends TestSuite {
+	use SuiteEventsTrait;
+
 	/** @var ParserTestRunner */
 	private $ptRunner;
 
 	/** @var ScopedCallback */
 	private $ptTeardownScope;
+
+	private $oldTablePrefix = '';
 
 	/**
 	 * @defgroup filtering_constants Filtering constants
@@ -25,11 +32,11 @@ class ParserTestTopLevelSuite extends PHPUnit_Framework_TestSuite {
 	 */
 
 	/** Include files shipped with MediaWiki core */
-	const CORE_ONLY = 1;
+	public const CORE_ONLY = 1;
 	/** Include non core files as set in $wgParserTestFiles */
-	const NO_CORE = 2;
+	public const NO_CORE = 2;
 	/** Include anything set via $wgParserTestFiles */
-	const WITH_ALL = 3; # CORE_ONLY | NO_CORE
+	public const WITH_ALL = self::CORE_ONLY | self::NO_CORE;
 
 	/** @} */
 
@@ -54,13 +61,13 @@ class ParserTestTopLevelSuite extends PHPUnit_Framework_TestSuite {
 	 * @param int $flags Bitwise flag to filter out the $wgParserTestFiles that
 	 * will be included.  Default: ParserTestTopLevelSuite::CORE_ONLY
 	 *
-	 * @return PHPUnit_Framework_TestSuite
+	 * @return TestSuite
 	 */
 	public static function suite( $flags = self::CORE_ONLY ) {
 		return new self( $flags );
 	}
 
-	function __construct( $flags ) {
+	public function __construct( $flags ) {
 		parent::__construct();
 
 		$this->ptRecorder = new PhpunitTestRecorder;
@@ -83,7 +90,7 @@ class ParserTestTopLevelSuite extends PHPUnit_Framework_TestSuite {
 		# Filter out .txt files
 		$files = ParserTestRunner::getParserTestFiles();
 		foreach ( $files as $extName => $parserTestFile ) {
-			$isCore = ( 0 === strpos( $parserTestFile, $mwTestDir ) );
+			$isCore = ( strpos( $parserTestFile, $mwTestDir ) === 0 );
 
 			if ( $isCore && $wantsCore ) {
 				self::debug( "included core parser tests: $parserTestFile" );
@@ -110,7 +117,7 @@ class ParserTestTopLevelSuite extends PHPUnit_Framework_TestSuite {
 			$testsName = $extensionName . '__' . basename( $fileName, '.txt' );
 			$parserTestClassName = ucfirst( $testsName );
 
-			// Official spec for class names: https://secure.php.net/manual/en/language.oop5.basic.php
+			// Official spec for class names: https://www.php.net/manual/en/language.oop5.basic.php
 			// Prepend 'ParserTest_' to be paranoid about it not starting with a number
 			$parserTestClassName = 'ParserTest_' .
 				preg_replace( '/[^a-zA-Z0-9_\x7f-\xff]/', '_', $parserTestClassName );
@@ -131,23 +138,36 @@ class ParserTestTopLevelSuite extends PHPUnit_Framework_TestSuite {
 		}
 	}
 
-	public function setUp() {
+	protected function setUp() : void {
 		wfDebug( __METHOD__ );
-		$db = wfGetDB( DB_MASTER );
+
+		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$db = $lb->getConnection( DB_MASTER );
 		$type = $db->getType();
-		$prefix = $type === 'oracle' ?
-			MediaWikiTestCase::ORA_DB_PREFIX : MediaWikiTestCase::DB_PREFIX;
-		MediaWikiTestCase::setupTestDB( $db, $prefix );
-		$teardown = $this->ptRunner->setDatabase( $db );
+		$prefix = MediaWikiIntegrationTestCase::DB_PREFIX;
+		$this->oldTablePrefix = $db->tablePrefix();
+		MediaWikiIntegrationTestCase::setupTestDB( $db, $prefix );
+		CloneDatabase::changePrefix( $prefix );
+
+		$this->ptRunner->setDatabase( $db );
+
+		MediaWikiIntegrationTestCase::resetNonServiceCaches();
+
+		MediaWikiIntegrationTestCase::installMockMwServices();
+		$teardown = new ScopedCallback( function () {
+			MediaWikiIntegrationTestCase::restoreMwServices();
+		} );
+
 		$teardown = $this->ptRunner->setupUploads( $teardown );
 		$this->ptTeardownScope = $teardown;
 	}
 
-	public function tearDown() {
+	protected function tearDown() : void {
 		wfDebug( __METHOD__ );
 		if ( $this->ptTeardownScope ) {
 			ScopedCallback::consume( $this->ptTeardownScope );
 		}
+		CloneDatabase::changePrefix( $this->oldTablePrefix );
 	}
 
 	/**

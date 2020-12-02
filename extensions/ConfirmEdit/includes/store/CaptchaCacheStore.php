@@ -1,30 +1,48 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class CaptchaCacheStore extends CaptchaStore {
-	function store( $index, $info ) {
+	/** @var BagOStuff */
+	private $cache;
+
+	public function __construct() {
+		parent::__construct();
+
+		$this->cache = MediaWikiServices::getInstance()->getMainObjectStash();
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function store( $index, $info ) {
 		global $wgCaptchaSessionExpiration;
 
-		ObjectCache::getMainStashInstance()->set(
-			wfMemcKey( 'captcha', $index ),
+		$cache = $this->cache;
+		$cache->set(
+			$cache->makeKey( 'captcha', $index ),
 			$info,
 			$wgCaptchaSessionExpiration
 		);
 	}
 
-	function retrieve( $index ) {
-		$info = ObjectCache::getMainStashInstance()->get( wfMemcKey( 'captcha', $index ) );
-		if ( $info ) {
-			return $info;
-		} else {
-			return false;
-		}
+	/**
+	 * @inheritDoc
+	 */
+	public function retrieve( $index ) {
+		$cache = $this->cache;
+		return $cache->get( $cache->makeKey( 'captcha', $index ) ) ?: false;
 	}
 
-	function clear( $index ) {
-		ObjectCache::getMainStashInstance()->delete( wfMemcKey( 'captcha', $index ) );
+	/**
+	 * @inheritDoc
+	 */
+	public function clear( $index ) {
+		$cache = $this->cache;
+		$cache->delete( $cache->makeKey( 'captcha', $index ) );
 	}
 
-	function cookiesNeeded() {
+	public function cookiesNeeded() {
 		return false;
 	}
 }

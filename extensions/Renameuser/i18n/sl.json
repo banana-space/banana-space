@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Dbc334"
+			"Dbc334",
+			"Upwinxp"
 		]
 	},
 	"renameuser": "Preimenovanje uporabnika",
-	"renameuser-linkoncontribs": "preimenuj uporabnika",
-	"renameuser-linkoncontribs-text": "Preimenuj tega uporabnika",
+	"renameuser-linkoncontribs": "Preimenuj {{GENDER:$1|uporabnika|uporabnico}}",
+	"renameuser-linkoncontribs-text": "Preimenuj {{GENDER:$1|tega uporabnika|to uporabnico}}",
 	"renameuser-desc": "Doda [[Special:RenameUser|posebno stran]] za preimenovanje uporabnika (potrebna je pravica ''renameuser'')",
 	"renameuserold": "Trenutno uporabniško ime:",
 	"renameusernew": "Novo uporabniško ime:",

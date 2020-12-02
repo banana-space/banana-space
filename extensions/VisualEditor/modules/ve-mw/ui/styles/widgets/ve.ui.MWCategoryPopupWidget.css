@@ -1,0 +1,48 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWCategoryPopupWidget styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwCategoryPopupWidget {
+	position: absolute;
+}
+
+.ve-ui-mwCategoryPopupWidget-content {
+	padding: 0.75em 0.5em;
+}
+
+.ve-ui-mwCategoryPopupWidget .oo-ui-buttonElement-frameless {
+	display: block;
+	float: left;
+}
+
+.ve-ui-mwCategoryPopupWidget label {
+	opacity: 0.8;
+	display: block;
+}
+
+.ve-ui-mwCategoryPopupWidget-title {
+	background-position: left center;
+	background-repeat: no-repeat;
+	padding: 0.5em 0.5em 0.5em 2.25em;
+	margin: -0.4em 0 1em 0.125em;
+}
+
+.ve-ui-mwCategoryPopupWidget-removeButton {
+	position: absolute;
+	margin-right: 2px;
+	padding: 0.5em;
+	right: 0;
+	top: 0;
+}
+
+.ve-ui-mwCategoryPopupWidget-sortKeyForm {
+	padding: 0.5em;
+	display: block;
+}
+
+.ve-ui-mwCategoryPopupWidget-sortKeyForm .oo-ui-labelWidget {
+	padding: 0 0.125em 0.5em 0.125em;
+}

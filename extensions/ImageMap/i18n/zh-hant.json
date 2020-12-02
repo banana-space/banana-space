@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Cwlin0416",
 			"Mark85296341",
 			"Shinjiman",
-			"Tomchiukc",
-			"Cwlin0416"
+			"Tomchiukc"
 		]
 	},
 	"imagemap_desc": "允許客戶端使用 <code>&lt;imagemap&gt;</code> 標籤製作可點選的影像地圖",

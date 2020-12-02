@@ -3,11 +3,23 @@
 		"authors": [
 			"AlexSm",
 			"Kaganer",
-			"Okras"
+			"Movses",
+			"Okras",
+			"Ole Yves",
+			"Stjn"
 		]
 	},
 	"skinname-monobook": "MonoBook",
 	"monobook-desc": "Классическая тема оформления MediaWiki, созданная в 2004 году и названая в честь чёрно-белой фотографии книги с фонового изображения страницы",
 	"monobook.css": "/* Размещённый здесь CSS будет применяться к теме оформления Monobook */",
-	"monobook.js": "/* Размещённый здесь код JavaScript будет загружаться пользователям, использующим тему оформления MonoBook */"
+	"monobook.js": "/* Размещённый здесь код JavaScript будет загружаться пользователям, использующим тему оформления MonoBook */",
+	"monobook-jumptotop": "возврат наверх",
+	"monobook-jumptopersonal": "пользовательские инструменты",
+	"monobook-jumptonavigation": "Перейти к навигации",
+	"monobook-jumptosearch": "Перейти к поиску",
+	"monobook-more-actions": "Ещё",
+	"monobook-cactions-label": "Действия на странице",
+	"monobook-notifications-link": "Уведомления ($1)",
+	"monobook-notifications-link-none": "Уведомления",
+	"monobook-responsive-label": "Включить оформление MonoBook"
 }

@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vadgt"
+		]
+	},
+	"templatedata-doc-param-type-number": "Թիվը",
+	"templatedata-doc-param-type-string": "Տող",
+	"templatedata-doc-param-type-wiki-page-name": "Էջ",
+	"templatedata-doc-param-type-wiki-user-name": "Մասնակից",
+	"templatedata-modal-button-addparam": "Ավելացնել պարամետր",
+	"templatedata-modal-button-apply": "Կիրառել",
+	"templatedata-modal-button-cancel": "Չեղյալ",
+	"templatedata-modal-button-delparam": "Հեռացնել պարամետրը",
+	"templatedata-modal-table-param-default": "Լռությամբ",
+	"templatedata-modal-table-param-label": "Պիտակ",
+	"templatedata-modal-table-param-name": "Անունը"
+}

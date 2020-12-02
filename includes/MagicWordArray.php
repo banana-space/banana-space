@@ -1,7 +1,7 @@
 <?php
 
 /**
- * See docs/magicword.txt.
+ * See docs/magicword.md.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,27 +23,34 @@
  */
 
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
 
 /**
  * Class for handling an array of magic words
  * @ingroup Parser
  */
 class MagicWordArray {
-	/** @var array */
+	/** @var string[] */
 	public $names = [];
+
+	/** @var MagicWordFactory */
+	private $factory;
 
 	/** @var array */
 	private $hash;
 
+	/** @var string[]|null */
 	private $baseRegex;
 
 	private $regex;
 
 	/**
-	 * @param array $names
+	 * @param string[] $names
+	 * @param MagicWordFactory|null $factory
 	 */
-	public function __construct( $names = [] ) {
+	public function __construct( $names = [], MagicWordFactory $factory = null ) {
 		$this->names = $names;
+		$this->factory = $factory ?: MediaWikiServices::getInstance()->getMagicWordFactory();
 	}
 
 	/**
@@ -59,7 +66,7 @@ class MagicWordArray {
 	/**
 	 * Add a number of magic words by name
 	 *
-	 * @param array $names
+	 * @param string[] $names
 	 */
 	public function addArray( $names ) {
 		$this->names = array_merge( $this->names, array_values( $names ) );
@@ -71,15 +78,14 @@ class MagicWordArray {
 	 * @return array
 	 */
 	public function getHash() {
-		if ( is_null( $this->hash ) ) {
-			global $wgContLang;
+		if ( $this->hash === null ) {
 			$this->hash = [ 0 => [], 1 => [] ];
 			foreach ( $this->names as $name ) {
-				$magic = MagicWord::get( $name );
+				$magic = $this->factory->get( $name );
 				$case = intval( $magic->isCaseSensitive() );
 				foreach ( $magic->getSynonyms() as $syn ) {
 					if ( !$case ) {
-						$syn = $wgContLang->lc( $syn );
+						$syn = $this->factory->getContentLanguage()->lc( $syn );
 					}
 					$this->hash[$case][$syn] = $name;
 				}
@@ -90,14 +96,14 @@ class MagicWordArray {
 
 	/**
 	 * Get the base regex
-	 * @return array
+	 * @return string[]
 	 */
-	public function getBaseRegex() {
-		if ( is_null( $this->baseRegex ) ) {
+	public function getBaseRegex() : array {
+		if ( $this->baseRegex === null ) {
 			$this->baseRegex = [ 0 => '', 1 => '' ];
 			$allGroups = [];
 			foreach ( $this->names as $name ) {
-				$magic = MagicWord::get( $name );
+				$magic = $this->factory->get( $name );
 				$case = intval( $magic->isCaseSensitive() );
 				foreach ( $magic->getSynonyms() as $i => $syn ) {
 					// Group name must start with a non-digit in PCRE 8.34+
@@ -124,10 +130,11 @@ class MagicWordArray {
 
 	/**
 	 * Get an unanchored regex that does not match parameters
-	 * @return array
+	 * @return string[]
+	 * @suppress PhanTypeArraySuspiciousNullable False positive
 	 */
 	public function getRegex() {
-		if ( is_null( $this->regex ) ) {
+		if ( $this->regex === null ) {
 			$base = $this->getBaseRegex();
 			$this->regex = [ '', '' ];
 			if ( $this->baseRegex[0] !== '' ) {
@@ -143,7 +150,7 @@ class MagicWordArray {
 	/**
 	 * Get a regex for matching variables with parameters
 	 *
-	 * @return string
+	 * @return string[]
 	 */
 	public function getVariableRegex() {
 		return str_replace( "\\$1", "(.*?)", $this->getRegex() );
@@ -152,7 +159,7 @@ class MagicWordArray {
 	/**
 	 * Get a regex anchored to the start of the string that does not match parameters
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	public function getRegexStart() {
 		$base = $this->getBaseRegex();
@@ -169,7 +176,7 @@ class MagicWordArray {
 	/**
 	 * Get an anchored regex for matching variables with parameters
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	public function getVariableStartToEndRegex() {
 		$base = $this->getBaseRegex();
@@ -185,7 +192,7 @@ class MagicWordArray {
 
 	/**
 	 * @since 1.20
-	 * @return array
+	 * @return string[]
 	 */
 	public function getNames() {
 		return $this->names;
@@ -259,12 +266,8 @@ class MagicWordArray {
 		if ( isset( $hash[1][$text] ) ) {
 			return $hash[1][$text];
 		}
-		global $wgContLang;
-		$lc = $wgContLang->lc( $text );
-		if ( isset( $hash[0][$lc] ) ) {
-			return $hash[0][$lc];
-		}
-		return false;
+		$lc = $this->factory->getContentLanguage()->lc( $text );
+		return $hash[0][$lc] ?? false;
 	}
 
 	/**

@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"BRUTE",
 			"David1010",
 			"ITshnik",
-			"Tokoko",
-			"BRUTE",
-			"MIKHEIL"
+			"MIKHEIL",
+			"Tokoko"
 		]
 	},
 	"fancycaptcha-addurl": "თქვენი ცვლილება შეიცავს ახალ გარე ბმულებს.\nვიკის ავტომატური სპამინგისგან თავდაცვის მიზნით, ჩვენ მოგიწოდებთ, შეიყვანოთ ქვემოთ მოცემული სიტყვები ყუთში ([[Special:Captcha/help|მეტი ინფორმაცია]]):",
@@ -16,7 +16,5 @@
 	"fancycaptcha-edit": "გვერდის რედაქტირებისათვის, გთხოვთ, შეიყვანეთ ასოები, რომლებიც ნაჩვენებია ქვედა სურათზე ([[Special:Captcha/help|დეტალურად…]]):",
 	"fancycaptcha-imgcaptcha-ph": "შეიყვანეთ სურათზე მოცემული ტექსტი",
 	"fancycaptcha-sendemail": "ვიკის ავტომატური სპამისაგან თავდაცვის მიზნით, ჩვენ მოგიწოდებთ, შეიყვანოთ ქვევით ნაჩვენები სიტყვა ტექსტურ ველში ([[Special:Captcha/help|მეტი ინფორმაცია]]):",
-	"fancycaptcha-reload-text": "განახლება",
-	"apihelp-fancycaptchareload-description": "მიიღეთ ახალი FancyCaptcha.",
-	"apihelp-fancycaptchareload-example-1": "ახალი FancyCaptcha-ის მიღება"
+	"fancycaptcha-reload-text": "განახლება"
 }

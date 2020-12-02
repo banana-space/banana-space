@@ -20,7 +20,7 @@
  * @ingroup Media
  * @author Ævar Arnfjörð Bjarmason <avarab@gmail.com>
  * @copyright Copyright © 2005, Ævar Arnfjörð Bjarmason, 2009 Brent Garber
- * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @license GPL-2.0-or-later
  * @see http://exif.org/Exif2-2.PDF The Exif 2.2 specification
  * @file
  */
@@ -31,40 +31,40 @@
  */
 class Exif {
 	/** An 8-bit (1-byte) unsigned integer. */
-	const BYTE = 1;
+	private const BYTE = 1;
 
 	/** An 8-bit byte containing one 7-bit ASCII code.
 	 *  The final byte is terminated with NULL.
 	 */
-	const ASCII = 2;
+	private const ASCII = 2;
 
 	/** A 16-bit (2-byte) unsigned integer. */
-	const SHORT = 3;
+	private const SHORT = 3;
 
 	/** A 32-bit (4-byte) unsigned integer. */
-	const LONG = 4;
+	private const LONG = 4;
 
 	/** Two LONGs. The first LONG is the numerator and the second LONG expresses
 	 *  the denominator
 	 */
-	const RATIONAL = 5;
+	private const RATIONAL = 5;
 
 	/** A 16-bit (2-byte) or 32-bit (4-byte) unsigned integer. */
-	const SHORT_OR_LONG = 6;
+	private const SHORT_OR_LONG = 6;
 
 	/** An 8-bit byte that can take any value depending on the field definition */
-	const UNDEFINED = 7;
+	private const UNDEFINED = 7;
 
 	/** A 32-bit (4-byte) signed integer (2's complement notation), */
-	const SLONG = 9;
+	private const SLONG = 9;
 
 	/** Two SLONGs. The first SLONG is the numerator and the second SLONG is
 	 *  the denominator.
 	 */
-	const SRATIONAL = 10;
+	private const SRATIONAL = 10;
 
 	/** A fake value for things we don't want or don't support. */
-	const IGNORE = -1;
+	private const IGNORE = -1;
 
 	/** @var array Exif tags grouped by category, the tagname itself is the key
 	 *    and the type is the value, in the case of more than one possible value
@@ -105,7 +105,7 @@ class Exif {
 	 *   DigitalZoomRatio = 0/0 is rejected. need to determine if that's valid.
 	 *   Possibly should treat 0/0 = 0. need to read exif spec on that.
 	 */
-	function __construct( $file, $byteOrder = '' ) {
+	public function __construct( $file, $byteOrder = '' ) {
 		/**
 		 * Page numbers here refer to pages in the Exif 2.2 standard
 		 *
@@ -290,7 +290,7 @@ class Exif {
 			$this->byteOrder = 'BE'; // BE seems about twice as popular as LE in jpg's.
 		}
 
-		$this->debugFile( $this->basename, __FUNCTION__, true );
+		$this->debugFile( __FUNCTION__, true );
 		if ( function_exists( 'exif_read_data' ) ) {
 			Wikimedia\suppressWarnings();
 			$data = exif_read_data( $this->file, 0, true );
@@ -313,7 +313,7 @@ class Exif {
 	/**
 	 * Make $this->mFilteredExifData
 	 */
-	function makeFilteredData() {
+	private function makeFilteredData() {
 		$this->mFilteredExifData = [];
 
 		foreach ( array_keys( $this->mRawExifData ) as $section ) {
@@ -359,7 +359,7 @@ class Exif {
 	 * As an alternative approach, some of this could be done in the validate phase
 	 * if we make up our own types like Exif::DATE.
 	 */
-	function collapseData() {
+	private function collapseData() {
 		$this->exifGPStoNumber( 'GPSLatitude' );
 		$this->exifGPStoNumber( 'GPSDestLatitude' );
 		$this->exifGPStoNumber( 'GPSLongitude' );
@@ -455,8 +455,7 @@ class Exif {
 			$val = substr( $this->mFilteredExifData[$prop], 8 );
 
 			switch ( $charCode ) {
-				case "\x4A\x49\x53\x00\x00\x00\x00\x00":
-					// JIS
+				case "JIS\x00\x00\x00\x00\x00":
 					$charset = "Shift-JIS";
 					break;
 				case "UNICODE\x00":
@@ -544,16 +543,17 @@ class Exif {
 		}
 	}
 
-	/**#@-*/
+	/** #@- */
 
-	/**#@+
+	/** #@+
 	 * @return array
 	 */
+
 	/**
 	 * Get $this->mRawExifData
 	 * @return array
 	 */
-	function getData() {
+	public function getData() {
 		return $this->mRawExifData;
 	}
 
@@ -561,11 +561,11 @@ class Exif {
 	 * Get $this->mFilteredExifData
 	 * @return array
 	 */
-	function getFilteredData() {
+	public function getFilteredData() {
 		return $this->mFilteredExifData;
 	}
 
-	/**#@-*/
+	/** #@- */
 
 	/**
 	 * The version of the output format
@@ -721,7 +721,7 @@ class Exif {
 		}
 	}
 
-	/**#@-*/
+	/** #@- */
 
 	/**
 	 * Validates if a tag has a legal value according to the Exif spec

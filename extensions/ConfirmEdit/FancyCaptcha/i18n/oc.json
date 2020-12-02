@@ -13,7 +13,5 @@
 	"fancycaptcha-edit": "Vòstra modificacion inclutz de ligams extèrnes novèls. Per verificar que s’agís pas de spam automatic, picatz los mots qu'apareisson dins la bóstia çaijós ([[Special:Captcha/help|mai d’entresenhas]]) :",
 	"fancycaptcha-imgcaptcha-ph": "Entratz lo tèxte que vesètz sus l'imatge",
 	"fancycaptcha-sendemail": "Per tal de nos ajudar a prevenir lo spam automatic, entratz los mots qu'apareisson dins la bóstia çaijós ([[Special:Captcha/help|mai d’informacions]]) :",
-	"fancycaptcha-reload-text": "Actualizar",
-	"apihelp-fancycaptchareload-description": "Obténer un novèl FancyCaptcha.",
-	"apihelp-fancycaptchareload-example-1": "Obténer un novèl FancyCaptcha."
+	"fancycaptcha-reload-text": "Actualizar"
 }

@@ -16,8 +16,10 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @ingroup Deployment
+ * @ingroup Installer
  */
+
+use Wikimedia\IPUtils;
 
 class WebInstallerOptions extends WebInstallerPage {
 
@@ -31,10 +33,8 @@ class WebInstallerOptions extends WebInstallerPage {
 			$this->submitSkins();
 			return 'skip';
 		}
-		if ( $this->parent->request->wasPosted() ) {
-			if ( $this->submit() ) {
-				return 'continue';
-			}
+		if ( $this->parent->request->wasPosted() && $this->submit() ) {
+			return 'continue';
 		}
 
 		$emailwrapperStyle = $this->getVar( 'wgEnableEmail' ) ? '' : 'display: none';
@@ -106,7 +106,8 @@ class WebInstallerOptions extends WebInstallerPage {
 			$this->getFieldsetEnd()
 		);
 
-		$skins = $this->parent->findExtensions( 'skins' );
+		$skins = $this->parent->findExtensions( 'skins' )->value;
+		'@phan-var array[] $skins';
 		$skinHtml = $this->getFieldsetStart( 'config-skins' );
 
 		$skinNames = array_map( 'strtolower', array_keys( $skins ) );
@@ -138,7 +139,7 @@ class WebInstallerOptions extends WebInstallerPage {
 			}
 		} else {
 			$skinHtml .=
-				$this->parent->getWarningBox( wfMessage( 'config-skins-missing' )->plain() ) .
+				Html::warningBox( wfMessage( 'config-skins-missing' )->plain(), 'config-warning-box' ) .
 				Html::hidden( 'config_wgDefaultSkin', $chosenSkinName );
 		}
 
@@ -146,7 +147,8 @@ class WebInstallerOptions extends WebInstallerPage {
 			$this->getFieldsetEnd();
 		$this->addHTML( $skinHtml );
 
-		$extensions = $this->parent->findExtensions();
+		$extensions = $this->parent->findExtensions()->value;
+		'@phan-var array[] $extensions';
 		$dependencyMap = [];
 
 		if ( $extensions ) {
@@ -263,7 +265,7 @@ class WebInstallerOptions extends WebInstallerPage {
 			] ) .
 			'</div>' .
 			$this->parent->getTextBox( [
-				'var' => 'wgLogo',
+				'var' => '_Logo',
 				'label' => 'config-logo',
 				'attribs' => [ 'dir' => 'ltr' ],
 				'help' => $this->parent->getHelpBox( 'config-logo-help' )
@@ -326,11 +328,17 @@ class WebInstallerOptions extends WebInstallerPage {
 		return null;
 	}
 
+	/**
+	 * @param string $name
+	 * @param array $screenshots
+	 * @return string HTML
+	 */
 	private function makeScreenshotsLink( $name, $screenshots ) {
 		global $wgLang;
 		if ( count( $screenshots ) > 1 ) {
 			$links = [];
 			$counter = 1;
+
 			foreach ( $screenshots as $shot ) {
 				$links[] = Html::element(
 					'a',
@@ -366,7 +374,7 @@ class WebInstallerOptions extends WebInstallerPage {
 		] );
 		$styleUrl = $server . dirname( dirname( $this->parent->getUrl() ) ) .
 			'/mw-config/config-cc.css';
-		$iframeUrl = '//creativecommons.org/license/?' .
+		$iframeUrl = 'https://creativecommons.org/license/?' .
 			wfArrayToCgi( [
 				'partner' => 'MediaWiki',
 				'exit_url' => $exitUrl,
@@ -397,7 +405,7 @@ class WebInstallerOptions extends WebInstallerPage {
 		$wrapperStyle = ( $this->getVar( '_LicenseCode' ) == 'cc-choose' ) ? '' : 'display: none';
 
 		return "<div class=\"config-cc-wrapper\" id=\"config-cc-wrapper\" style=\"$wrapperStyle\">\n" .
-			Html::element( 'iframe', $iframeAttribs, '', false /* not short */ ) .
+			Html::element( 'iframe', $iframeAttribs ) .
 			"</div>\n";
 	}
 
@@ -412,7 +420,7 @@ class WebInstallerOptions extends WebInstallerPage {
 
 		return '<p>' .
 			Html::element( 'img', [ 'src' => $this->getVar( 'wgRightsIcon' ) ] ) .
-			'&#160;&#160;' .
+			"\u{00A0}\u{00A0}" .
 			htmlspecialchars( $this->getVar( 'wgRightsText' ) ) .
 			"</p>\n" .
 			"<p style=\"text-align: center;\">" .
@@ -450,7 +458,7 @@ class WebInstallerOptions extends WebInstallerPage {
 	 * @return bool
 	 */
 	public function submitSkins() {
-		$skins = array_keys( $this->parent->findExtensions( 'skins' ) );
+		$skins = array_keys( $this->parent->findExtensions( 'skins' )->value );
 		$this->parent->setVar( '_Skins', $skins );
 
 		if ( $skins ) {
@@ -466,7 +474,7 @@ class WebInstallerOptions extends WebInstallerPage {
 	 */
 	public function submit() {
 		$this->parent->setVarsFromRequest( [ '_RightsProfile', '_LicenseCode',
-			'wgEnableEmail', 'wgPasswordSender', 'wgEnableUploads', 'wgLogo',
+			'wgEnableEmail', 'wgPasswordSender', 'wgEnableUploads', '_Logo',
 			'wgEnableUserEmail', 'wgEnotifUserTalk', 'wgEnotifWatchlist',
 			'wgEmailAuthentication', '_MainCacheType', '_MemCachedServers',
 			'wgUseInstantCommons', 'wgDefaultSkin' ] );
@@ -476,6 +484,13 @@ class WebInstallerOptions extends WebInstallerPage {
 		if ( !array_key_exists( $this->getVar( '_RightsProfile' ), $this->parent->rightsProfiles ) ) {
 			reset( $this->parent->rightsProfiles );
 			$this->setVar( '_RightsProfile', key( $this->parent->rightsProfiles ) );
+		}
+
+		// If this is empty, either the default got lost internally
+		// or the user blanked it
+		if ( strval( $this->getVar( '_Logo' ) ) === '' ) {
+			$this->parent->showError( 'config-install-logo-blank' );
+			$retVal = false;
 		}
 
 		$code = $this->getVar( '_LicenseCode' );
@@ -490,11 +505,8 @@ class WebInstallerOptions extends WebInstallerPage {
 			// config-license-cc-0, config-license-pd, config-license-gfdl, config-license-none,
 			// config-license-cc-choose
 			$entry = $this->parent->licenses[$code];
-			if ( isset( $entry['text'] ) ) {
-				$this->setVar( 'wgRightsText', $entry['text'] );
-			} else {
-				$this->setVar( 'wgRightsText', wfMessage( 'config-license-' . $code )->text() );
-			}
+			$this->setVar( 'wgRightsText',
+				$entry['text'] ?? wfMessage( 'config-license-' . $code )->text() );
 			$this->setVar( 'wgRightsUrl', $entry['url'] );
 			$this->setVar( 'wgRightsIcon', $entry['icon'] );
 		} else {
@@ -503,7 +515,7 @@ class WebInstallerOptions extends WebInstallerPage {
 			$this->setVar( 'wgRightsIcon', '' );
 		}
 
-		$skinsAvailable = array_keys( $this->parent->findExtensions( 'skins' ) );
+		$skinsAvailable = array_keys( $this->parent->findExtensions( 'skins' )->value );
 		$skinsToInstall = [];
 		foreach ( $skinsAvailable as $skin ) {
 			$this->parent->setVarsFromRequest( [ "skin-$skin" ] );
@@ -524,7 +536,7 @@ class WebInstallerOptions extends WebInstallerPage {
 			$retVal = false;
 		}
 
-		$extsAvailable = array_keys( $this->parent->findExtensions() );
+		$extsAvailable = array_keys( $this->parent->findExtensions()->value );
 		$extsToInstall = [];
 		foreach ( $extsAvailable as $ext ) {
 			$this->parent->setVarsFromRequest( [ "ext-$ext" ] );
@@ -544,7 +556,7 @@ class WebInstallerOptions extends WebInstallerPage {
 			foreach ( $memcServers as $server ) {
 				$memcParts = explode( ":", $server, 2 );
 				if ( !isset( $memcParts[0] )
-					|| ( !IP::isValid( $memcParts[0] )
+					|| ( !IPUtils::isValid( $memcParts[0] )
 						&& ( gethostbyname( $memcParts[0] ) == $memcParts[0] ) )
 				) {
 					$this->parent->showError( 'config-memcache-badip', $memcParts[0] );

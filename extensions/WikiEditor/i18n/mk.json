@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Bjankuloski06",
-			"Brest"
+			"Brest",
+			"Vlad5250"
 		]
 	},
 	"wikieditor": "Посредник за напредно уредување со викитекст",
@@ -11,7 +12,8 @@
 	"wikieditor-loading": "Вчитувам",
 	"wikieditor-toolbar": "Алатник за уредување",
 	"wikieditor-toolbar-desc": "Алатник за уредување со подобрена употребливост",
-	"wikieditor-toolbar-preference": "Вклучи го подобрениот алатник за уредување",
+	"wikieditor-toolbar-preference": "Вклучи го алатникот за уредување",
+	"wikieditor-toolbar-preference-help": "Ова понекогаш се нарекува „уредникот на викитекст од 2010 г.“.",
 	"wikieditor-toolbar-loading": "Вчитувам...",
 	"wikieditor-toolbar-tool-bold": "Задебелено",
 	"wikieditor-toolbar-tool-bold-example": "Задебелен текст",
@@ -44,7 +46,7 @@
 	"wikieditor-toolbar-tool-link-lookslikeinternal-int": "Внатрешна врска",
 	"wikieditor-toolbar-tool-link-lookslikeinternal-ext": "Надворешна врска",
 	"wikieditor-toolbar-tool-link-empty": "Не внесовте одредница за врската.",
-	"wikieditor-toolbar-tool-file": "Вметната податотека",
+	"wikieditor-toolbar-tool-file": "Слики и медиуми",
 	"wikieditor-toolbar-tool-file-example": "Пример.jpg",
 	"wikieditor-toolbar-tool-file-title": "Вметни податотека",
 	"wikieditor-toolbar-file-target": "Податотека:",
@@ -97,6 +99,7 @@
 	"wikieditor-toolbar-tool-table-example-old": "-\n! наслов 1\n! наслов 2\n! наслов 3\n|-\n| ред 1, поле 1\n| ред 1, поле 2\n| ред 1, поле 3\n|-\n| ред 2, поле 1\n| ред 2, поле 2\n| ред 2, поле 3",
 	"wikieditor-toolbar-tool-table-example-cell-text": "Текст во полето",
 	"wikieditor-toolbar-tool-table-example-header": "Текст на наслов",
+	"wikieditor-toolbar-tool-table-example-caption": "Описен текст",
 	"wikieditor-toolbar-tool-table-title": "Вметни табела",
 	"wikieditor-toolbar-tool-table-dimensions-rows": "Редови",
 	"wikieditor-toolbar-tool-table-dimensions-columns": "Столбови",
@@ -107,7 +110,7 @@
 	"wikieditor-toolbar-tool-table-preview": "Преглед",
 	"wikieditor-toolbar-tool-table-insert": "Вметни",
 	"wikieditor-toolbar-tool-table-cancel": "Откажи",
-	"wikieditor-toolbar-tool-table-toomany": "Не можете да вметнувате табела со повеќе од $1 {{PLURAL:$1|ќелии}} со овој дијалог.",
+	"wikieditor-toolbar-tool-table-toomany": "Не можете да вметнувате табела со повеќе од $1 {{PLURAL:$1|ќелија|ќелии}} со овој дијалог.",
 	"wikieditor-toolbar-tool-table-invalidnumber": "Не внесовте важечки број на редови или столбови.",
 	"wikieditor-toolbar-tool-table-zero": "Не можете да вметнувате табела со нула редови или столбови.",
 	"wikieditor-toolbar-tool-replace": "Најди и замени",
@@ -124,6 +127,7 @@
 	"wikieditor-toolbar-tool-replace-success": "{{PLURAL:$1|Направена е $1 замена.|Направени се $1 замени.}}",
 	"wikieditor-toolbar-tool-replace-emptysearch": "Не внесовте зборови за пребарување.",
 	"wikieditor-toolbar-tool-replace-invalidregex": "Регуларниот израз кој го внесовте е неважечки: $1",
+	"wikieditor-toolbar-tool-replace-word": "Целиот збор",
 	"wikieditor-toolbar-section-characters": "Посебни знаци",
 	"wikieditor-toolbar-section-help": "Помош",
 	"wikieditor-toolbar-help-heading-description": "Опис",

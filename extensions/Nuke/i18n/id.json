@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bagas Chrisara",
 			"Bennylin",
 			"IvanLanin",
 			"Iwan Novirion",
 			"Rex"
 		]
 	},
-	"nuke": "Penghapusan massal (Nuklir)",
+	"nuke": "Penghapusan massal",
 	"action-nuke": "menghapus massal halaman",
 	"nuke-desc": "Memberikan kemampuan bagi pengurus untuk [[Special:Nuke|menghapus halaman secara massal]]",
 	"nuke-nopages": "Tak ditemukan halaman baru dari [[Special:Contributions/$1|{{GENDER:$1|$1}}]] di perubahan terbaru.",
@@ -16,11 +17,9 @@
 	"nuke-defaultreason": "Penghapusan masal halaman-halaman yang dibuat oleh [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
 	"nuke-multiplepeople": "Penghapusan masal halaman yang baru saja ditambahkan",
 	"nuke-tools": "Perkakas ini memungkinkan penghapusan massal halaman-halaman yang baru saja dibuat oleh seorang pengguna ataupun alamat IP.\nMasukkan nama pengguna atau alamat IP untuk mendapat daftar halaman yang dapat dihapus atau kosongkan untuk semua pengguna.",
-	"nuke-submit-user": "Jalankan",
-	"nuke-toggleinvert": "Batalkan (invert)",
+	"nuke-submit-user": "Daftar halaman",
 	"nuke-submit-delete": "Hapus yang terpilih",
 	"right-nuke": "Melakukan penghapusan massal halaman",
-	"nuke-select": "Pilih: $1",
 	"nuke-userorip": "Nama pengguna, alamat IP, atau kosong:",
 	"nuke-maxpages": "Jumlah maksimum halaman:",
 	"nuke-editby": "Dibuat oleh [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
@@ -28,9 +27,10 @@
 	"nuke-not-deleted": "Halaman [[:$1]] '''tidak bisa''' dihapus.",
 	"nuke-delete-more": "[[Special:Nuke|Hapus lagi]]",
 	"nuke-pattern": "Pola untuk nama halaman:",
-	"nuke-nopages-global": "Tidak ditemukan halaman baru dalam [[Special:RecentChanges|perubahan terbaru]].",
+	"nuke-nopages-global": "Tidak ditemukan halaman baru yang cocok dengan pencarian Anda.",
 	"nuke-viewchanges": "lihat perubahan",
 	"nuke-namespace": "Batasan dari ruang nama:",
 	"nuke-linkoncontribs": "hapus massal",
-	"nuke-linkoncontribs-text": "Hapus massal halaman-halaman yang kontributornya hanya pengguna ini"
+	"nuke-linkoncontribs-text": "Hapus massal halaman-halaman yang kontributornya hanya {{GENDER:$1|pengguna ini}}",
+	"nuke-confirm": "Anda akan menghapus {{PLURAL:$1|suatu halaman|$1 beberapa halaman}}. Apa Anda yakin ingin menghapusnya?"
 }

@@ -17,8 +17,5 @@
 	"log-description-spamblacklist": "Dagitoy a pasamak ket surotenna dagiti naiparit a listaan a napuntaan ti spam.",
 	"logentry-spamblacklist-hit": "Ti $1 ket gapuanan ti pannakapunta ti naiparit a listaan ti spam iti $3 babaen ti panagpadas nga aginayon iti $4.",
 	"right-spamblacklistlog": "Kitaen ti naiparit a listaan ti spam",
-	"action-spamblacklistlog": "kitaen ti naiparit a listaan ti spam",
-	"apihelp-spamblacklist-description": "Pasingkedan ti maysa wenno ad-adu kadagiti URL iti SpamBlacklist.",
-	"apihelp-spamblacklist-param-url": "Dagiti URL a mapasingkedan iti blacklist.",
-	"apihelp-spamblacklist-example-1": "Kitaen dagiti dua nga URL iti blacklist"
+	"action-spamblacklistlog": "kitaen ti naiparit a listaan ti spam"
 }

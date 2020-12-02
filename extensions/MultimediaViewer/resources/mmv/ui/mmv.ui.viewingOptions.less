@@ -1,9 +1,8 @@
-@import '../mmv.globals';
-@import '../mmv.mixins';
+@import '../mmv.variables.less';
+@import '../mmv.mixins.less';
 
 .mw-mmv-options-dialog {
 	@offset-top: ( @buttons-offset-right + ( 2 * @buttons-offset-each-top ) + 6px );
-
 	top: @offset-top;
 	height: auto;
 	z-index: 1004;
@@ -61,12 +60,12 @@
 
 	.mw-mmv-disable-confirmation {
 		.mw-mmv-options-dialog-header {
-			color: #222;
+			color: @color-base;
 			padding: 0;
 		}
 
 		.mw-mmv-options-text-header {
-			color: #222;
+			color: @color-base;
 		}
 	}
 
@@ -128,7 +127,7 @@
 	padding-top: 0;
 	font-weight: normal;
 	font-size: 1.25em;
-	color: #222;
+	color: @color-base;
 
 	.mw-mmv-options-enable & {
 		top: 35px;
@@ -148,7 +147,7 @@
 
 .mw-mmv-options-enable-alert {
 	background-color: #eaecf0;
-	color: #222;
+	color: @color-base;
 	position: absolute;
 	left: -15px;
 	right: -15px;

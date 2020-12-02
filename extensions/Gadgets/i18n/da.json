@@ -2,13 +2,20 @@
 	"@metadata": {
 		"authors": [
 			"Byrial",
-			"Peter Alberti"
+			"Peter Alberti",
+			"Saederup92"
 		]
 	},
 	"gadgets-desc": "Lader brugere vælge brugerdefinerede [[Special:Gadgets|CSS og JavaScript gadgets]] i deres [[Special:Preferences#mw-prefsection-gadgets|indstillinger]]",
 	"prefs-gadgets": "Gadgets",
 	"gadgets-prefstext": "Nedenstående er en liste over de gadgets som du kan aktivere for din brugerkonto.\nDa disse gadgets hovedsageligt er baseret på JavaScript skal du slå JavaScript til i din browser for at få dem til at virke.\nBemærk at disse gadgets ikke vil have nogen effekt på denne side (indstillinger).\n\nBemærk også at disse specielle gadgets ikke er en del af MediaWiki-softwaren og at de typisk bliver vedligeholdt af brugere på din lokale wiki.\nLokale administratorer kan redigere tilgængelige gadgets med [[MediaWiki:Gadgets-definition|definitioner]] og [[Special:Gadgets|beskrivelser]].",
 	"gadgets": "Gadgets",
+	"gadgetusage": "Statistik for brug af gadget",
+	"gadgetusage-gadget": "Gadget",
+	"gadgetusage-usercount": "Antal af brugere",
+	"gadgetusage-noresults": "Ingen gadgets blev fundet.",
+	"gadgetusage-activeusers": "Aktive brugere",
+	"gadgetusage-default": "Standard",
 	"gadgets-title": "Gadgets",
 	"gadgets-pagetext": "Nedenstående er en liste med de specielle gadgets som brugere kan aktivere i deres [[Special:Preferences#mw-prefsection-gadgets|indstillinger]], som defineret i [[MediaWiki:Gadgets-definition|definitionerne]].\nDenne oversigtsside giver simpel adgang til de beskedsider som definerer hver gadgets beskrivelse og kode.",
 	"gadgets-uses": "Bruger",

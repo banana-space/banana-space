@@ -22,7 +22,7 @@ use MediaWiki\Site\MediaWikiPageNameNormalizer;
  *
  * @file
  * @ingroup Site
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -36,8 +36,8 @@ use MediaWiki\Site\MediaWikiPageNameNormalizer;
  * @ingroup Site
  */
 class MediaWikiSite extends Site {
-	const PATH_FILE = 'file_path';
-	const PATH_PAGE = 'page_path';
+	public const PATH_FILE = 'file_path';
+	public const PATH_PAGE = 'page_path';
 
 	/**
 	 * @since 1.21
@@ -86,7 +86,7 @@ class MediaWikiSite extends Site {
 	 * @throws MWException
 	 */
 	public function normalizePageName( $pageName ) {
-		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+		if ( defined( 'MW_PHPUNIT_TEST' ) || defined( 'MW_DEV_ENV' ) ) {
 			// If the code is under test, don't call out to other sites, just
 			// normalize locally.
 			// Note: this may cause results to be inconsistent with the actual
@@ -176,13 +176,13 @@ class MediaWikiSite extends Site {
 	 *
 	 * @param string|bool $pageName Page name or false (default: false)
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function getPageUrl( $pageName = false ) {
 		$url = $this->getLinkPath();
 
-		if ( $url === false ) {
-			return false;
+		if ( $url === null ) {
+			return null;
 		}
 
 		if ( $pageName !== false ) {

@@ -1,0 +1,16 @@
+/*!
+ * VisualEditor ContentEditable MediaWiki MWBlockImageNode styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/* Override paragraph margins inside of captions */
+.ve-ce-mwBlockImageNode > figcaption p {
+	margin: 0 !important; /* stylelint-disable-line declaration-no-important */
+}
+
+/* Disable zoom link */
+.ve-ce-mwBlockImageNode > a:after {
+	pointer-events: none;
+}

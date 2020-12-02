@@ -12,6 +12,7 @@ class ButtonInputWidget extends InputWidget {
 	use LabelElement {
 		LabelElement::setLabel as setLabelElementLabel;
 	}
+	use FlaggedElement;
 
 	/* Static Properties */
 
@@ -28,13 +29,13 @@ class ButtonInputWidget extends InputWidget {
 
 	/**
 	 * @param array $config Configuration options
-	 * @param string $config['type'] HTML tag `type` attribute, may be 'button', 'submit' or 'reset'
-	 *   (default: 'button')
-	 * @param bool $config['useInputTag'] Whether to use `<input>` rather than `<button>`. Only
-	 *   useful if you need IE 6 support in a form with multiple buttons. If you use this option,
-	 *   icons and indicators will not be displayed, it won't be possible to have a non-plaintext
-	 *   label, and it won't be possible to set a value (which will internally become identical to the
-	 *   label). (default: false)
+	 *      - string $config['type'] HTML tag `type` attribute, may be 'button', 'submit' or 'reset'
+	 *          (default: 'button')
+	 *      - bool $config['useInputTag'] Whether to use `<input>` rather than `<button>`. Only
+	 *          useful if you need IE 6 support in a form with multiple buttons. If you use this
+	 *          option, icons and indicators will not be displayed, it won't be possible to have a
+	 *          non-plaintext label, and it won't be possible to set a value (which will internally
+	 *          become identical to the label). (default: false)
 	 */
 	public function __construct( array $config = [] ) {
 		// Configuration initialization
@@ -48,12 +49,14 @@ class ButtonInputWidget extends InputWidget {
 
 		// Traits
 		$this->initializeButtonElement(
-			array_merge( $config, [ 'button' => $this->input ] ) );
+			array_merge( [ 'button' => $this->input ], $config )
+		);
 		$this->initializeIconElement( $config );
 		$this->initializeIndicatorElement( $config );
 		$this->initializeLabelElement( $config );
-		$this->initializeTitledElement(
-			array_merge( $config, [ 'titled' => $this->input ] ) );
+		$this->initializeFlaggedElement(
+			array_merge( [ 'flagged' => $this ], $config )
+		);
 
 		// Initialization
 		if ( !$config['useInputTag'] ) {

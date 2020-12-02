@@ -17,8 +17,8 @@
  *
  * @file
  */
-use Wikimedia\Rdbms\IDatabase;
 use MediaWiki\MediaWikiServices;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Class designed for counting of stats.
@@ -68,15 +68,15 @@ class SiteStatsInit {
 	 * @return int
 	 */
 	public function articles() {
-		$config = MediaWikiServices::getInstance()->getMainConfig();
+		$services = MediaWikiServices::getInstance();
 
 		$tables = [ 'page' ];
 		$conds = [
-			'page_namespace' => MWNamespace::getContentNamespaces(),
+			'page_namespace' => $services->getNamespaceInfo()->getContentNamespaces(),
 			'page_is_redirect' => 0,
 		];
 
-		if ( $config->get( 'ArticleCountMethod' ) == 'link' ) {
+		if ( $services->getMainConfig()->get( 'ArticleCountMethod' ) == 'link' ) {
 			$tables[] = 'pagelinks';
 			$conds[] = 'pl_from=page_id';
 		}
@@ -171,32 +171,32 @@ class SiteStatsInit {
 	 * Refresh site_stats
 	 */
 	public function refresh() {
-		$values = [
-			'ss_row_id' => 1,
+		$set = [
 			'ss_total_edits' => $this->edits === null ? $this->edits() : $this->edits,
 			'ss_good_articles' => $this->articles === null ? $this->articles() : $this->articles,
 			'ss_total_pages' => $this->pages === null ? $this->pages() : $this->pages,
 			'ss_users' => $this->users === null ? $this->users() : $this->users,
 			'ss_images' => $this->files === null ? $this->files() : $this->files,
 		];
+		$row = [ 'ss_row_id' => 1 ] + $set;
 
 		self::getDB( DB_MASTER )->upsert(
 			'site_stats',
-			$values,
-			[ 'ss_row_id' ],
-			$values,
+			$row,
+			'ss_row_id',
+			$set,
 			__METHOD__
 		);
 	}
 
 	/**
 	 * @param int $index
-	 * @param string[] $groups
+	 * @param string[]|string $groups
 	 * @return IDatabase
 	 */
 	private static function getDB( $index, $groups = [] ) {
-		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
-
-		return $lb->getConnection( $index, $groups );
+		return MediaWikiServices::getInstance()
+			->getDBLoadBalancer()
+			->getConnectionRef( $index, $groups );
 	}
 }

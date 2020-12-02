@@ -20,8 +20,8 @@
  *
  * @file
  */
-use MediaWiki\Services\SalvageableService;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Services\SalvageableService;
 
 /**
  * Factory class to create Config objects
@@ -44,7 +44,7 @@ class ConfigFactory implements SalvageableService {
 	protected $configs = [];
 
 	/**
-	 * @deprecated since 1.27, use MediaWikiServices::getConfigFactory() instead.
+	 * @deprecated since 1.27, use MediaWikiServices::getInstance()->getConfigFactory() instead.
 	 *
 	 * @return ConfigFactory
 	 */
@@ -66,7 +66,8 @@ class ConfigFactory implements SalvageableService {
 	public function salvage( SalvageableService $other ) {
 		Assert::parameterType( self::class, $other, '$other' );
 
-		/** @var ConfigFactory $other */
+		/** @var self $other */
+		'@phan-var self $other';
 		foreach ( $other->factoryFunctions as $name => $otherFunc ) {
 			if ( !isset( $this->factoryFunctions[$name] ) ) {
 				continue;

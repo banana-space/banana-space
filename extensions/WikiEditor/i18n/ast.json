@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Xuacu",
+			"Fitoschido",
 			"Macofe",
-			"Fitoschido"
+			"Xuacu"
 		]
 	},
 	"wikieditor": "Interfaz avanzada d'edición de testu wiki",
@@ -12,7 +12,8 @@
 	"wikieditor-loading": "Cargando...",
 	"wikieditor-toolbar": "Editando la barra de ferramientes",
 	"wikieditor-toolbar-desc": "Barra de ferramientes de la páxina d'edición con usabilidá enantada",
-	"wikieditor-toolbar-preference": "Activar a barra d'edición enantada",
+	"wikieditor-toolbar-preference": "Activar la barra d'edición",
+	"wikieditor-toolbar-preference-help": "Dacuando llámase-y «editor de testu wiki 2010».",
 	"wikieditor-toolbar-loading": "Cargando...",
 	"wikieditor-toolbar-tool-bold": "Negrina",
 	"wikieditor-toolbar-tool-bold-example": "Testu en negrina",
@@ -45,7 +46,7 @@
 	"wikieditor-toolbar-tool-link-lookslikeinternal-int": "Enllaz internu",
 	"wikieditor-toolbar-tool-link-lookslikeinternal-ext": "Enllaz esternu",
 	"wikieditor-toolbar-tool-link-empty": "Nun escribisti nada pa enllazar.",
-	"wikieditor-toolbar-tool-file": "Ficheru incrustáu",
+	"wikieditor-toolbar-tool-file": "Imáxenes y multimedia",
 	"wikieditor-toolbar-tool-file-example": "Exemplu.jpg",
 	"wikieditor-toolbar-tool-file-title": "Inxertar un ficheru",
 	"wikieditor-toolbar-file-target": "Nome del ficheru:",
@@ -125,6 +126,7 @@
 	"wikieditor-toolbar-tool-replace-success": "$1 {{PLURAL:$1|reemplazu fechu|reemplazos fechos}}.",
 	"wikieditor-toolbar-tool-replace-emptysearch": "Nun escribisti nada pa guetar.",
 	"wikieditor-toolbar-tool-replace-invalidregex": "La espresión regular qu'escribisti ye inválida: $1",
+	"wikieditor-toolbar-tool-replace-word": "Casar con palabra completa",
 	"wikieditor-toolbar-section-characters": "Caráuteres especiales",
 	"wikieditor-toolbar-section-help": "Ayuda",
 	"wikieditor-toolbar-help-heading-description": "Descripción",

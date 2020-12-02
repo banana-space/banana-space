@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Supriya kankumbikar"
+			"Supriya kankumbikar",
+			"The Discoverer"
 		]
 	},
-	"cite_error": "संदर्भ त्रुटीः$1"
+	"cite_error": "उल्लेख त्रुटीः$1"
 }

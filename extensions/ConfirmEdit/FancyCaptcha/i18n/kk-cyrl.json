@@ -12,7 +12,5 @@
 	"fancycaptcha-edit": "Бұл бетті өңдеу үшін төмендегі көрсетілген сөздерді енгізіңіз ([[Special:Captcha/help|көбірек ақпарат]]):",
 	"fancycaptcha-imgcaptcha-ph": "Суреттегі мәтінді енгізіңіз",
 	"fancycaptcha-sendemail": "Уикиді автоматты спамдаудан қорғау үшін, төмендегі\nкөрсетілген сөздерді енгізуіңізді сұраймыз ([[Special:Captcha/help|көбірек ақпарат]]):",
-	"fancycaptcha-reload-text": "Жаңарту",
-	"apihelp-fancycaptchareload-description": "Жаңа FancyCaptcha алу.",
-	"apihelp-fancycaptchareload-example-1": "Жаңа FancyCaptcha алу"
+	"fancycaptcha-reload-text": "Жаңарту"
 }

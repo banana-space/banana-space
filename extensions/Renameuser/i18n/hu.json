@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Adam78",
+			"Bencemac",
 			"Dani",
 			"Dj",
 			"Hunyadym",
@@ -9,8 +10,8 @@
 		]
 	},
 	"renameuser": "Szerkesztő átnevezése",
-	"renameuser-linkoncontribs": "felhasználó átnevezése",
-	"renameuser-linkoncontribs-text": "Felhasználó átnevezése",
+	"renameuser-linkoncontribs": "{{GENDER:$1|felhasználó}} átnevezése",
+	"renameuser-linkoncontribs-text": "{{GENDER:$1|Felhasználó}} átnevezése",
 	"renameuser-desc": "Lehetővé teszi egy felhasználó átnevezését (''renameuser'' jog szükséges)",
 	"renameuserold": "Jelenlegi felhasználónév:",
 	"renameusernew": "Új felhasználónév:",
@@ -21,6 +22,7 @@
 	"renameuserwarnings": "Figyelmeztetések:",
 	"renameuserconfirm": "Igen, nevezd át a szerkesztőt",
 	"renameusersubmit": "Elküld",
+	"renameuser-submit-blocklog": "Felhasználóhoz kapcsolódó naplóbejegyzések megjelenítése",
 	"renameusererrordoesnotexist": "Nem létezik „<nowiki>$1</nowiki>” nevű felhasználó",
 	"renameusererrorexists": "Már létezik „<nowiki>$1</nowiki>” nevű felhasználó",
 	"renameusererrorinvalid": "A felhasználónév („<nowiki>$1</nowiki>”) érvénytelen",
@@ -31,10 +33,11 @@
 	"renameuser-page-moved": "$1 át lett nevezve $2 névre",
 	"renameuser-page-unmoved": "$1-t nem sikerült $2 névre nevezi",
 	"log-name-renameuser": "Felhasználóátnevezési napló",
-	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|átnevezte}} $4 szerkesztőt ({{PLURAL:$6|egy|$6}} szerkesztés) erre: $5",
-	"logentry-renameuser-renameuser-legacier": "$1 átnevezte $4 szerkesztőt erre: $5",
-	"renameuser-move-log": "„[[User:$1|$1]]” „[[User:$2|$2]]” névre való átnevezése közben automatikusan átnevezett oldal",
+	"log-description-renameuser": "Ez a rendszernapló a szerkesztői nevek változásait mutatja.",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|átnevezte}} $4 szerkesztőt ({{PLURAL:$6|egy|$6}} szerkesztés) erre: {{GENDER:$7|$5}}",
+	"logentry-renameuser-renameuser-legacier": "$1 átnevezte $4 szerkesztőt erre: {{GENDER:$7|$5}}",
+	"renameuser-move-log": "Lap automatikusan átnevezve „[[User:$1|$1]]” névről „[[User:$2|$2]]” névre való átnevezés közben",
 	"action-renameuser": "felhasználó átnevezése",
-	"right-renameuser": "felhasználók átnevezése",
+	"right-renameuser": "Felhasználók átnevezése",
 	"renameuser-renamed-notice": "Ezt a szerkesztőt átnevezték.\nAlább látható a szerkesztőátnevezési napló tájékoztatásként."
 }

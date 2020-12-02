@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ComposerVersionNormalizer {
@@ -55,7 +55,7 @@ class ComposerVersionNormalizer {
 			$version = substr( $version, 0, $dashPosition );
 		}
 
-		$version = implode( '.', array_pad( explode( '.', $version ), 4, '0' ) );
+		$version = implode( '.', array_pad( explode( '.', $version, 4 ), 4, '0' ) );
 
 		if ( $dashPosition !== false ) {
 			$version .= $suffix;

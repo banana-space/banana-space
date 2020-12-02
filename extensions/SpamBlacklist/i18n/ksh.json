@@ -17,8 +17,5 @@
 	"log-description-spamblacklist": "Heh di Vörjäng verfollje de Träffer en de „schwazze Leß“ jähje der <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"„in der Regel massenhaft übertragene unerwünschte Nachrichten“\">SPAM</i>.",
 	"logentry-spamblacklist-hit": "{{GENDER:$2|Dä|Dat|Dä Metmaacher|De|Dat}} $1 hädd_ene Träffer en de „schwazze Leß“ jähje der <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"„in der Regel massenhaft übertragene unerwünschte Nachrichten“\">SPAM</i> op dä Sigg „$3“ ußjelöhß, wi {{GENDER:$2|hä|et|hä|sei|et}} „$4“ doh eren donn wullt.",
 	"right-spamblacklistlog": "Donn et Logbohch vun de „schwazze Leß“ för der <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"in der Regel massenhaft übertragene unerwünschte Nachrichten\">SPAM</i> aanlohre",
-	"action-spamblacklistlog": "donn et Logbohch vun de „schwazze Leß“ för der <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"in der Regel massenhaft übertragene unerwünschte Nachrichten\">SPAM</i> aanlohre",
-	"apihelp-spamblacklist-description": "Donn <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"Uniform Ressource Locators\">URLs</i>  jähje de „schwazze Leß“ jähje der <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"in der Regel massenhaft übertragene unerwünschte Nachrichten\">SPAM</i> pröhve.",
-	"apihelp-spamblacklist-param-url": "De <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"Uniform Ressource Locators\">URLs</i> zom Pröhve jähje de „schwazze Leß“.",
-	"apihelp-spamblacklist-example-1": "Donn zwai <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"Uniform Ressource Locators\">URLs</i> jähje de „schwazze Leß“ pröhve."
+	"action-spamblacklistlog": "donn et Logbohch vun de „schwazze Leß“ för der <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"in der Regel massenhaft übertragene unerwünschte Nachrichten\">SPAM</i> aanlohre"
 }

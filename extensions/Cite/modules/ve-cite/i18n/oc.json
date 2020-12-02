@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jfblanc",
 			"Cedric31",
 			"Fitoschido",
+			"Jfblanc",
 			"McDutchie",
 			"Unuaiga"
 		]
@@ -17,8 +17,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Reütilizar per aquel nom",
 	"cite-ve-dialog-reference-options-section": "Opcions",
 	"cite-ve-dialog-reference-title": "Referéncia",
-	"cite-ve-dialog-reference-useexisting-full-label": "Reütilizar una referéncia qu'existís ja sus aquesta pagina",
-	"cite-ve-dialog-reference-useexisting-label": "Reütilizar una referéncia",
 	"cite-ve-dialog-reference-useexisting-tool": "Reütilizar",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Lista de referéncias generalas",
 	"cite-ve-dialog-referenceslist-title": "Lista de referéncias",

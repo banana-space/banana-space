@@ -1,13 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Eduardo Addad de Oliveira",
 			"Eduardo.mps",
+			"Felipe L. Ewald",
 			"Giro720",
 			"Luckas",
-			"555",
-			"Felipe L. Ewald"
+			555
 		]
 	},
+	"questycaptcha-desc": "Gerador de Questy CAPTCHA para Confirm Edit",
 	"questycaptcha-addurl": "Sua edição inclui novos links externos.\nPara proteger a wiki contra spam automatizado de edição, nós lhe pedimos gentilmente que responda a pergunta que aparece abaixo ([[Special:Captcha/help|mais informações]]):",
 	"questycaptcha-badlogin": "Para proteger a wiki contra spam automatizado de edição, nós lhe pedimos gentilmente que responda a pergunta que aparece abaixo ([[Special:Captcha/help|mais informações]]):",
 	"questycaptcha-createaccount": "Para proteger o wiki contra a quebra automática de senha, nós lhe pedimos gentilmente que responda a pergunta que aparece abaixo ([[Special:Captcha/help|mais informações]]):",

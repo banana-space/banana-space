@@ -1,4 +1,4 @@
-( function ( mw ) {
+( function () {
 	QUnit.module( 'mmv.ThumbnailWidthCalculator', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'ThumbnailWidthCalculator constructor sanity check', function ( assert ) {
@@ -146,4 +146,4 @@
 		assert.strictEqual( widths.cssHeight, 200, 'css height is correct when limited by width' );
 		assert.strictEqual( widths.real, 256, 'real width is correct when same aspect ratio' );
 	} );
-}( mediaWiki ) );
+}() );

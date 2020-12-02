@@ -1,20 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mogoeilor",
-			"Beyronvan"
+			"Beyronvan",
+			"Lorestani",
+			"Mogoeilor"
 		]
 	},
-	"vector-action-addsection": "داسون اضاف بكيد",
+	"vector-action-addsection": "سالفٱ اْزاف بٱکؽت",
 	"vector-action-delete": "پاکسا کردن",
-	"vector-action-move": "جاوه جا بوئيت",
-	"vector-action-protect": "پر و پیم بكيد",
+	"vector-action-move": "جا ڤ جا بۊئیت",
+	"vector-action-protect": "پر ۉ پیم بٱکؽت",
 	"vector-action-undelete": "حذف نبيئني",
 	"vector-action-unprotect": "حمايت آلشت بكيد",
-	"vector-view-create": "راس كردن",
-	"vector-view-edit": "ڤیرایشت",
-	"vector-view-history": "دیاٛن ڤیرگار",
-	"vector-view-view": "هنن",
+	"vector-view-create": "دۏرس كردن",
+	"vector-view-edit": "ڤیرایش",
+	"vector-view-history": "دیئن ڤیرگار",
+	"vector-view-view": "ڤٱناْ",
 	"vector-view-viewsource": "سرچشمه نه بوينيت",
-	"vector-more-actions": "بیشتر"
+	"vector-more-actions": "بؽشتر"
 }

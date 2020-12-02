@@ -1,0 +1,29 @@
+.mw-templateData-doc-params tbody > tr > th {
+	text-align: left;
+	font-weight: normal;
+}
+
+.mw-templateData-doc-param-alias {
+	color: #777;
+	display: block;
+	margin-left: 1em;
+}
+
+.mw-templateData-doc-muted {
+	font-style: italic;
+	color: #777;
+}
+
+.mw-templatedata-doc-param-status-required {
+	font-weight: bold;
+}
+
+.mw-templateData-format {
+	font-weight: normal;
+	font-size: 0.85em;
+}
+
+.mw-templateData-doc-param-name,
+.mw-templateData-doc-param-type {
+	white-space: nowrap;
+}

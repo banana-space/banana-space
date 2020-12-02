@@ -4,9 +4,9 @@
 			"Beta16",
 			"BrokenArrow",
 			"Darth Kule",
-			"Nemo bis",
 			"Lucas2",
 			"Matteocng",
+			"Nemo bis",
 			"Selven"
 		]
 	},
@@ -32,8 +32,6 @@
 	"captchahelp-text": "Capita spesso che i siti web che accettano contributi pubblici, come questo wiki, siano presi di mira da spammer che usano strumenti automatici per inserire collegamenti pubblicitari verso un gran numero di siti. Per quanto i collegamenti indesiderati si possano rimuovere, si tratta comunque di una seccatura non indifferente.\n\nIn alcuni casi, specie quando si tenta di aggiungere nuovi collegamenti web in una pagina, il software wiki può mostrare una immagine con un breve testo colorato e/o distorto chiedendo di riscriverlo in un'apposita casella. Poiché l'interpretazione dell'immagine è un'azione difficile da far eseguire a un programma, tale sistema permette agli utenti reali di completare l'inserimento desiderato, impedendo l'accesso alla maggior parte degli spammer e degli altri attacchi automatizzati.\n\nSfortunatamente, queste misure di sicurezza possono mettere in difficoltà gli utenti con problemi visivi o coloro che utilizzano browser testuali o basati sulla sintesi vocale. Purtroppo al momento non è disponibile un meccanismo alternativo basato su messaggi audio; se queste procedure impediscono l'inserimento di informazioni appropriate, si prega di contattare gli [[Special:ListAdmins|amministratori del sito]] e chiedere loro assistenza.\n\nFare clic sul pulsante \"indietro\" del browser per tornare alla pagina di modifica.",
 	"captcha-addurl-whitelist": " #<!-- non modificare in alcun modo questa riga --> <pre>\n# La sintassi è la seguente:\n#  * Tutto ciò che segue un carattere \"#\" è un commento, fino al termine della riga\n#  * Tutte le righe non vuote sono frammenti di espressioni regolari che si applicano al solo nome dell'host nelle URL\n  #</pre> <!-- non modificare in alcun modo questa riga -->",
 	"right-skipcaptcha": "Compie le azioni che attiverebbero il captcha senza dover passare per il captcha",
-	"captcha-apihelp-param-captchaword": "Risposta al CAPTCHA",
-	"captcha-apihelp-param-captchaid": "ID CAPTCHA dalla precedente richiesta",
 	"confirmedit-preview-line": "Numero di riga",
 	"confirmedit-preview-content": "Contenuto",
 	"confirmedit-preview-validity": "Validità",

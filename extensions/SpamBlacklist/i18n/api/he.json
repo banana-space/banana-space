@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80"
+		]
+	},
+	"apihelp-spamblacklist-description": "לבדוק URL אחד או יותר אל מול SpamBlacklist.",
+	"apihelp-spamblacklist-example-1": "לבדוק שני URL־ים אל מול הרשימה השחורה.",
+	"apihelp-spamblacklist-param-url": "URL־ים לבדוק אל מול SpamBlacklist.",
+	"apihelp-spamblacklist-summary": "בדיקת תקינות של URL אחד או יותר אל מול SpamBlacklist."
+}

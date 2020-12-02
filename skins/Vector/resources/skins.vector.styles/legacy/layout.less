@@ -1,0 +1,153 @@
+// Layout rules divide the page into sections and how VectorComponents should be arranged in the skin.
+// The rules here should only define the layout, not color or typography.
+
+@import 'mediawiki.mixins.less';
+@import '../../../variables.less';
+
+body {
+	background-color: @background-color-secondary;
+	overflow-y: scroll;
+}
+
+.mw-body,
+.parsoid-body {
+	// General background/foreground color definition as one exception to the rule.
+	background-color: @background-color-base;
+	color: @color-base;
+	direction: ltr;
+	padding: @padding-content;
+}
+
+#p-personal {
+	position: absolute;
+	top: @top-personal-tools;
+	right: 0.75em;
+	z-index: @z-index-personal;
+
+	ul {
+		padding-left: 10em; /* Keep from overlapping logo */
+	}
+
+	li {
+		float: left;
+	}
+}
+
+.mw-body,
+#mw-data-after-content {
+	margin-left: 10em;
+}
+
+.mw-body {
+	// Merge the border below with tabs' one (in their background image).
+	margin-top: -@border-width-base;
+	// Border on top, left, and bottom side.
+	border: @border-width-base @border-style-base @border-color-content;
+	border-right-width: 0;
+
+	.firstHeading {
+		/* Change the default from mediawiki.skinning CSS to let indicators float into heading area */
+		overflow: visible;
+	}
+}
+
+.mw-indicators {
+	float: right;
+	z-index: @z-index-indicators;
+}
+
+.mw-body-content {
+	position: relative;
+	z-index: @z-index-base;
+	// Clearfix here for legacy reasons of floated children (gadgets?),
+	// to be revisited to clarify historic need and possibly remove.
+	.mixin-clearfix();
+}
+
+/* Head */
+#mw-page-base {
+	.vertical-gradient( @background-color-base, @background-color-secondary, 50%, 100% );
+	background-position: bottom left;
+	height: 5em;
+}
+
+#mw-head-base {
+	margin-top: -5em;
+	margin-left: 10em;
+	height: 5em;
+}
+
+/* Hide, but keep accessible for screen-readers */
+#mw-navigation h2 {
+	position: absolute;
+	top: -9999px;
+}
+
+#mw-head {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+}
+
+/* Navigation Containers */
+#left-navigation {
+	float: left;
+	margin-left: 10em;
+	margin-top: 2.5em;
+	/* When right nav would overlap left nav, it's placed below it
+	(normal CSS floats behavior). This rule ensures that no empty space
+	is shown between them due to right nav's margin-top. Page layout
+	is still broken, but at least the nav overlaps only the page title
+	instead of half the content. */
+	margin-bottom: -2.5em;
+}
+
+#right-navigation {
+	float: right;
+	margin-top: 2.5em;
+}
+
+#mw-panel {
+	position: absolute;
+	top: 0;
+	width: 10em;
+	left: 0;
+}
+
+.mw-footer {
+	margin-left: 10em;
+	margin-top: 0;
+}
+
+/* Vector screen styles for high definition displays. These rules cross the above components and are
+   grouped together here only for the sake of the media query common to each. */
+@media ( min-width: 982px ) {
+	.mw-body,
+	#mw-head-base,
+	#left-navigation,
+	#mw-data-after-content,
+	.mw-footer {
+		margin-left: 11em;
+	}
+
+	.mw-body {
+		padding: 1.25em 1.5em 1.5em 1.5em;
+	}
+
+	.mw-footer {
+		padding: 1.25em;
+	}
+
+	#mw-panel {
+		padding-left: 0.5em;
+	}
+
+	#p-search {
+		margin-right: 1em;
+	}
+
+	#p-personal {
+		right: 1em;
+	}
+}

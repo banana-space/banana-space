@@ -18,7 +18,6 @@
 	"nuke-submit-user": "გადასვლა",
 	"nuke-submit-delete": "არჩეულის წაშლა",
 	"right-nuke": "გვერდების მასობრივად წაშლა",
-	"nuke-select": "აირჩიეთ: $1",
 	"nuke-userorip": "მომხმარებლის სახელი, IP-მისამართი (შესაძლებელია ცარიელის დატოვება):",
 	"nuke-maxpages": "გვერდების მაქსიმალური რაოდენობა:",
 	"nuke-editby": "შექმნილია მოხმარებელ [[Special:Contributions/$1|{{GENDER:$1|$1}}]]-ის მიერ",

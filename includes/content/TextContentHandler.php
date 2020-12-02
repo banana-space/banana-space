@@ -38,14 +38,15 @@ class TextContentHandler extends ContentHandler {
 	 * Returns the content's text as-is.
 	 *
 	 * @param Content $content
-	 * @param string $format The serialization format to check
+	 * @param string|null $format The serialization format to check
 	 *
 	 * @return mixed
 	 */
 	public function serializeContent( Content $content, $format = null ) {
 		$this->checkFormat( $format );
 
-		return $content->getNativeData();
+		// @phan-suppress-next-line PhanUndeclaredMethod
+		return $content->getText();
 	}
 
 	/**
@@ -108,7 +109,7 @@ class TextContentHandler extends ContentHandler {
 	 * @since 1.21
 	 *
 	 * @param string $text Serialized form of the content
-	 * @param string $format The format used for serialization
+	 * @param string|null $format The format used for serialization
 	 *
 	 * @return Content The TextContent object wrapping $text
 	 */

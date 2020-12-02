@@ -9,7 +9,7 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "media",
 	"requires": {
-		"MediaWiki": ">= 1.25.0"
+		"MediaWiki": ">= 1.34.0"
 	},
 	"config": {
 		"PdfOutputExtension": "jpg",

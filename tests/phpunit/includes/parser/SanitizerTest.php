@@ -1,95 +1,15 @@
 <?php
 
+use Wikimedia\TestingAccessWrapper;
+
 /**
- * @todo Tests covering decodeCharReferences can be refactored into a single
- * method and dataprovider.
- *
  * @group Sanitizer
  */
-class SanitizerTest extends MediaWikiTestCase {
+class SanitizerTest extends MediaWikiIntegrationTestCase {
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		MWTidy::destroySingleton();
 		parent::tearDown();
-	}
-
-	/**
-	 * @covers Sanitizer::decodeCharReferences
-	 */
-	public function testDecodeNamedEntities() {
-		$this->assertEquals(
-			"\xc3\xa9cole",
-			Sanitizer::decodeCharReferences( '&eacute;cole' ),
-			'decode named entities'
-		);
-	}
-
-	/**
-	 * @covers Sanitizer::decodeCharReferences
-	 */
-	public function testDecodeNumericEntities() {
-		$this->assertEquals(
-			"\xc4\x88io bonas dans l'\xc3\xa9cole!",
-			Sanitizer::decodeCharReferences( "&#x108;io bonas dans l'&#233;cole!" ),
-			'decode numeric entities'
-		);
-	}
-
-	/**
-	 * @covers Sanitizer::decodeCharReferences
-	 */
-	public function testDecodeMixedEntities() {
-		$this->assertEquals(
-			"\xc4\x88io bonas dans l'\xc3\xa9cole!",
-			Sanitizer::decodeCharReferences( "&#x108;io bonas dans l'&eacute;cole!" ),
-			'decode mixed numeric/named entities'
-		);
-	}
-
-	/**
-	 * @covers Sanitizer::decodeCharReferences
-	 */
-	public function testDecodeMixedComplexEntities() {
-		$this->assertEquals(
-			"\xc4\x88io bonas dans l'\xc3\xa9cole! (mais pas &#x108;io dans l'&eacute;cole)",
-			Sanitizer::decodeCharReferences(
-				"&#x108;io bonas dans l'&eacute;cole! (mais pas &amp;#x108;io dans l'&#38;eacute;cole)"
-			),
-			'decode mixed complex entities'
-		);
-	}
-
-	/**
-	 * @covers Sanitizer::decodeCharReferences
-	 */
-	public function testInvalidAmpersand() {
-		$this->assertEquals(
-			'a & b',
-			Sanitizer::decodeCharReferences( 'a & b' ),
-			'Invalid ampersand'
-		);
-	}
-
-	/**
-	 * @covers Sanitizer::decodeCharReferences
-	 */
-	public function testInvalidEntities() {
-		$this->assertEquals(
-			'&foo;',
-			Sanitizer::decodeCharReferences( '&foo;' ),
-			'Invalid named entity'
-		);
-	}
-
-	/**
-	 * @covers Sanitizer::decodeCharReferences
-	 */
-	public function testInvalidNumberedEntities() {
-		$this->assertEquals(
-			UtfNormal\Constants::UTF8_REPLACEMENT,
-			Sanitizer::decodeCharReferences( "&#88888888888888;" ),
-			'Invalid numbered entity'
-		);
 	}
 
 	/**
@@ -100,15 +20,13 @@ class SanitizerTest extends MediaWikiTestCase {
 	 * @param bool $escaped Whether sanitizer let the tag in or escape it (ie: '&lt;video&gt;')
 	 */
 	public function testRemovehtmltagsOnHtml5Tags( $tag, $escaped ) {
-		MWTidy::setInstance( false );
-
 		if ( $escaped ) {
 			$this->assertEquals( "&lt;$tag&gt;",
 				Sanitizer::removeHTMLtags( "<$tag>" )
 			);
 		} else {
 			$this->assertEquals( "<$tag></$tag>\n",
-				Sanitizer::removeHTMLtags( "<$tag>" )
+				Sanitizer::removeHTMLtags( "<$tag></$tag>\n" )
 			);
 		}
 	}
@@ -127,7 +45,7 @@ class SanitizerTest extends MediaWikiTestCase {
 		];
 	}
 
-	function dataRemoveHTMLtags() {
+	public function dataRemoveHTMLtags() {
 		return [
 			// former testSelfClosingTag
 			[
@@ -162,89 +80,14 @@ class SanitizerTest extends MediaWikiTestCase {
 	 * @covers Sanitizer::removeHTMLtags
 	 */
 	public function testRemoveHTMLtags( $input, $output, $msg = null ) {
-		MWTidy::setInstance( false );
 		$this->assertEquals( $output, Sanitizer::removeHTMLtags( $input ), $msg );
-	}
-
-	/**
-	 * @dataProvider provideTagAttributesToDecode
-	 * @covers Sanitizer::decodeTagAttributes
-	 */
-	public function testDecodeTagAttributes( $expected, $attributes, $message = '' ) {
-		$this->assertEquals( $expected,
-			Sanitizer::decodeTagAttributes( $attributes ),
-			$message
-		);
-	}
-
-	public static function provideTagAttributesToDecode() {
-		return [
-			[ [ 'foo' => 'bar' ], 'foo=bar', 'Unquoted attribute' ],
-			[ [ 'עברית' => 'bar' ], 'עברית=bar', 'Non-Latin attribute' ],
-			[ [ '६' => 'bar' ], '६=bar', 'Devanagari number' ],
-			[ [ '搭𨋢' => 'bar' ], '搭𨋢=bar', 'Non-BMP character' ],
-			[ [], 'ńgh=bar', 'Combining accent is not allowed' ],
-			[ [ 'foo' => 'bar' ], '    foo   =   bar    ', 'Spaced attribute' ],
-			[ [ 'foo' => 'bar' ], 'foo="bar"', 'Double-quoted attribute' ],
-			[ [ 'foo' => 'bar' ], 'foo=\'bar\'', 'Single-quoted attribute' ],
-			[
-				[ 'foo' => 'bar', 'baz' => 'foo' ],
-				'foo=\'bar\'   baz="foo"',
-				'Several attributes'
-			],
-			[
-				[ 'foo' => 'bar', 'baz' => 'foo' ],
-				'foo=\'bar\'   baz="foo"',
-				'Several attributes'
-			],
-			[
-				[ 'foo' => 'bar', 'baz' => 'foo' ],
-				'foo=\'bar\'   baz="foo"',
-				'Several attributes'
-			],
-			[ [ ':foo' => 'bar' ], ':foo=\'bar\'', 'Leading :' ],
-			[ [ '_foo' => 'bar' ], '_foo=\'bar\'', 'Leading _' ],
-			[ [ 'foo' => 'bar' ], 'Foo=\'bar\'', 'Leading capital' ],
-			[ [ 'foo' => 'BAR' ], 'FOO=BAR', 'Attribute keys are normalized to lowercase' ],
-
-			# Invalid beginning
-			[ [], '-foo=bar', 'Leading - is forbidden' ],
-			[ [], '.foo=bar', 'Leading . is forbidden' ],
-			[ [ 'foo-bar' => 'bar' ], 'foo-bar=bar', 'A - is allowed inside the attribute' ],
-			[ [ 'foo-' => 'bar' ], 'foo-=bar', 'A - is allowed inside the attribute' ],
-			[ [ 'foo.bar' => 'baz' ], 'foo.bar=baz', 'A . is allowed inside the attribute' ],
-			[ [ 'foo.' => 'baz' ], 'foo.=baz', 'A . is allowed as last character' ],
-			[ [ 'foo6' => 'baz' ], 'foo6=baz', 'Numbers are allowed' ],
-
-			# This bit is more relaxed than XML rules, but some extensions use
-			# it, like ProofreadPage (see T29539)
-			[ [ '1foo' => 'baz' ], '1foo=baz', 'Leading numbers are allowed' ],
-			[ [], 'foo$=baz', 'Symbols are not allowed' ],
-			[ [], 'foo@=baz', 'Symbols are not allowed' ],
-			[ [], 'foo~=baz', 'Symbols are not allowed' ],
-			[
-				[ 'foo' => '1[#^`*%w/(' ],
-				'foo=1[#^`*%w/(',
-				'All kind of characters are allowed as values'
-			],
-			[
-				[ 'foo' => '1[#^`*%\'w/(' ],
-				'foo="1[#^`*%\'w/("',
-				'Double quotes are allowed if quoted by single quotes'
-			],
-			[
-				[ 'foo' => '1[#^`*%"w/(' ],
-				'foo=\'1[#^`*%"w/(\'',
-				'Single quotes are allowed if quoted by double quotes'
-			],
-			[ [ 'foo' => '&"' ], 'foo=&amp;&quot;', 'Special chars can be provided as entities' ],
-			[ [ 'foo' => '&foobar;' ], 'foo=&foobar;', 'Entity-like items are accepted' ],
-		];
 	}
 
 	/**
 	 * @dataProvider provideDeprecatedAttributes
 	 * @covers Sanitizer::fixTagAttributes
+	 * @covers Sanitizer::validateTagAttributes
+	 * @covers Sanitizer::validateAttributes
 	 */
 	public function testDeprecatedAttributesUnaltered( $inputAttr, $inputEl, $message = '' ) {
 		$this->assertEquals( " $inputAttr",
@@ -271,159 +114,52 @@ class SanitizerTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideCssCommentsFixtures
-	 * @covers Sanitizer::checkCss
+	 * @dataProvider provideValidateTagAttributes
+	 * @covers Sanitizer::validateTagAttributes
+	 * @covers Sanitizer::validateAttributes
 	 */
-	public function testCssCommentsChecking( $expected, $css, $message = '' ) {
-		$this->assertEquals( $expected,
-			Sanitizer::checkCss( $css ),
-			$message
-		);
+	public function testValidateTagAttributes( $element, $attribs, $expected ) {
+		$actual = Sanitizer::validateTagAttributes( $attribs, $element );
+		$this->assertArrayEquals( $expected, $actual, false, true );
 	}
 
-	public static function provideCssCommentsFixtures() {
-		/** [ <expected>, <css>, [message] ] */
+	public static function provideValidateTagAttributes() {
 		return [
-			// Valid comments spanning entire input
-			[ '/**/', '/**/' ],
-			[ '/* comment */', '/* comment */' ],
-			// Weird stuff
-			[ ' ', '/****/' ],
-			[ ' ', '/* /* */' ],
-			[ 'display: block;', "display:/* foo */block;" ],
-			[ 'display: block;', "display:\\2f\\2a foo \\2a\\2f block;",
-				'Backslash-escaped comments must be stripped (T30450)' ],
-			[ '', '/* unfinished comment structure',
-				'Remove anything after a comment-start token' ],
-			[ '', "\\2f\\2a unifinished comment'",
-				'Remove anything after a backslash-escaped comment-start token' ],
-			[
-				'/* insecure input */',
-				'filter: progid:DXImageTransform.Microsoft.AlphaImageLoader'
-					. '(src=\'asdf.png\',sizingMethod=\'scale\');'
+			[ 'math',
+				[ 'id' => 'foo bar', 'bogus' => 'stripped', 'data-foo' => 'bar' ],
+				[ 'id' => 'foo_bar', 'data-foo' => 'bar' ],
 			],
-			[
-				'/* insecure input */',
-				'-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader'
-					. '(src=\'asdf.png\',sizingMethod=\'scale\')";'
+			[ 'meta',
+				[ 'id' => 'foo bar', 'itemprop' => 'foo', 'content' => 'bar' ],
+				[ 'itemprop' => 'foo', 'content' => 'bar' ],
 			],
-			[ '/* insecure input */', 'width: expression(1+1);' ],
-			[ '/* insecure input */', 'background-image: image(asdf.png);' ],
-			[ '/* insecure input */', 'background-image: -webkit-image(asdf.png);' ],
-			[ '/* insecure input */', 'background-image: -moz-image(asdf.png);' ],
-			[ '/* insecure input */', 'background-image: image-set("asdf.png" 1x, "asdf.png" 2x);' ],
-			[
-				'/* insecure input */',
-				'background-image: -webkit-image-set("asdf.png" 1x, "asdf.png" 2x);'
+			[ 'div',
+				[ 'role' => 'presentation', 'aria-hidden' => 'true' ],
+				[ 'role' => 'presentation', 'aria-hidden' => 'true' ],
 			],
-			[
-				'/* insecure input */',
-				'background-image: -moz-image-set("asdf.png" 1x, "asdf.png" 2x);'
+			[ 'div',
+				[ 'role' => 'menuitem', 'aria-hidden' => 'false' ],
+				[ 'role' => 'menuitem', 'aria-hidden' => 'false' ],
 			],
-			[ '/* insecure input */', 'foo: attr( title, url );' ],
-			[ '/* insecure input */', 'foo: attr( title url );' ],
-			[ '/* insecure input */', 'foo: var(--evil-attribute)' ],
 		];
 	}
 
 	/**
-	 * @dataProvider provideEscapeHtmlAllowEntities
-	 * @covers Sanitizer::escapeHtmlAllowEntities
+	 * @dataProvider provideAttributesAllowed
+	 * @covers Sanitizer::attributesAllowedInternal
 	 */
-	public function testEscapeHtmlAllowEntities( $expected, $html ) {
-		$this->assertEquals(
-			$expected,
-			Sanitizer::escapeHtmlAllowEntities( $html )
-		);
+	public function testAttributesAllowedInternal( $element, $attribs ) {
+		$sanitizer = TestingAccessWrapper::newFromClass( Sanitizer::class );
+		$actual = $sanitizer->attributesAllowedInternal( $element );
+		$this->assertArrayEquals( $attribs, array_keys( $actual ) );
 	}
 
-	public static function provideEscapeHtmlAllowEntities() {
+	public function provideAttributesAllowed() {
+		/** [ <element>, [ <good attribute 1>, <good attribute 2>, ...] ] */
 		return [
-			[ 'foo', 'foo' ],
-			[ 'a¡b', 'a&#161;b' ],
-			[ 'foo&#039;bar', "foo'bar" ],
-			[ '&lt;script&gt;foo&lt;/script&gt;', '<script>foo</script>' ],
-		];
-	}
-
-	/**
-	 * Test Sanitizer::escapeId
-	 *
-	 * @dataProvider provideEscapeId
-	 * @covers Sanitizer::escapeId
-	 */
-	public function testEscapeId( $input, $output ) {
-		$this->assertEquals(
-			$output,
-			Sanitizer::escapeId( $input, [ 'noninitial', 'legacy' ] )
-		);
-	}
-
-	public static function provideEscapeId() {
-		return [
-			[ '+', '.2B' ],
-			[ '&', '.26' ],
-			[ '=', '.3D' ],
-			[ ':', ':' ],
-			[ ';', '.3B' ],
-			[ '@', '.40' ],
-			[ '$', '.24' ],
-			[ '-_.', '-_.' ],
-			[ '!', '.21' ],
-			[ '*', '.2A' ],
-			[ '/', '.2F' ],
-			[ '[]', '.5B.5D' ],
-			[ '<>', '.3C.3E' ],
-			[ '\'', '.27' ],
-			[ '§', '.C2.A7' ],
-			[ 'Test:A & B/Here', 'Test:A_.26_B.2FHere' ],
-			[ 'A&B&amp;C&amp;amp;D&amp;amp;amp;E', 'A.26B.26amp.3BC.26amp.3Bamp.3BD.26amp.3Bamp.3Bamp.3BE' ],
-		];
-	}
-
-	/**
-	 * Test escapeIdReferenceList for consistency with escapeIdForAttribute
-	 *
-	 * @dataProvider provideEscapeIdReferenceList
-	 * @covers Sanitizer::escapeIdReferenceList
-	 */
-	public function testEscapeIdReferenceList( $referenceList, $id1, $id2 ) {
-		$this->assertEquals(
-			Sanitizer::escapeIdReferenceList( $referenceList ),
-			Sanitizer::escapeIdForAttribute( $id1 )
-				. ' '
-				. Sanitizer::escapeIdForAttribute( $id2 )
-		);
-	}
-
-	public static function provideEscapeIdReferenceList() {
-		/** [ <reference list>, <individual id 1>, <individual id 2> ] */
-		return [
-			[ 'foo bar', 'foo', 'bar' ],
-			[ '#1 #2', '#1', '#2' ],
-			[ '+1 +2', '+1', '+2' ],
-		];
-	}
-
-	/**
-	 * @dataProvider provideIsReservedDataAttribute
-	 * @covers Sanitizer::isReservedDataAttribute
-	 */
-	public function testIsReservedDataAttribute( $attr, $expected ) {
-		$this->assertSame( $expected, Sanitizer::isReservedDataAttribute( $attr ) );
-	}
-
-	public static function provideIsReservedDataAttribute() {
-		return [
-			[ 'foo', false ],
-			[ 'data', false ],
-			[ 'data-foo', false ],
-			[ 'data-mw', true ],
-			[ 'data-ooui', true ],
-			[ 'data-parsoid', true ],
-			[ 'data-mw-foo', true ],
-			[ 'data-ooui-foo', true ],
-			[ 'data-mwfoo', true ], // could be false but this is how it's implemented currently
+			[ 'math', [ 'class', 'style', 'id', 'title' ] ],
+			[ 'meta', [ 'itemprop', 'content' ] ],
+			[ 'link', [ 'itemprop', 'href', 'title' ] ],
 		];
 	}
 
@@ -434,6 +170,7 @@ class SanitizerTest extends MediaWikiTestCase {
 	 * @covers Sanitizer::escapeIdForLink()
 	 * @covers Sanitizer::escapeIdForExternalInterwiki()
 	 * @covers Sanitizer::escapeIdInternal()
+	 * @covers Sanitizer::escapeIdInternalUrl()
 	 *
 	 * @param string $stuff
 	 * @param string[] $config
@@ -448,17 +185,17 @@ class SanitizerTest extends MediaWikiTestCase {
 			'wgFragmentMode' => $config,
 			'wgExternalInterwikiFragmentMode' => $iwFlavor,
 		] );
-		$escaped = call_user_func( $func, $id, $mode );
+		$escaped = $func( $id, $mode );
 		self::assertEquals( $expected, $escaped );
 	}
 
 	public function provideEscapeIdForStuff() {
 		// Test inputs and outputs
-		$text = 'foo тест_#%!\'()[]:<>&&amp;&amp;amp;';
+		$text = 'foo тест_#%!\'()[]:<>&&amp;&amp;amp;%F0';
 		$legacyEncoded = 'foo_.D1.82.D0.B5.D1.81.D1.82_.23.25.21.27.28.29.5B.5D:.3C.3E' .
-			'.26.26amp.3B.26amp.3Bamp.3B';
-		$html5Encoded = 'foo_тест_#%!\'()[]:<>&&amp;&amp;amp;';
-		$html5Experimental = 'foo_тест_!_()[]:<>_amp;_amp;amp;';
+			'.26.26amp.3B.26amp.3Bamp.3B.25F0';
+		$html5EncodedId = 'foo_тест_#%!\'()[]:<>&&amp;&amp;amp;%F0';
+		$html5EncodedHref = 'foo_тест_#%!\'()[]:<>&&amp;&amp;amp;%25F0';
 
 		// Settings: last element is $wgExternalInterwikiFragmentMode, the rest is $wgFragmentMode
 		$legacy = [ 'legacy', 'legacy' ];
@@ -466,8 +203,6 @@ class SanitizerTest extends MediaWikiTestCase {
 		$newLegacy = [ 'html5', 'legacy', 'legacy' ];
 		$new = [ 'html5', 'legacy' ];
 		$allNew = [ 'html5', 'html5' ];
-		$experimentalLegacy = [ 'html5-legacy', 'legacy', 'legacy' ];
-		$newExperimental = [ 'html5', 'html5-legacy', 'legacy' ];
 
 		return [
 			// Pure legacy: how MW worked before 2017
@@ -478,94 +213,86 @@ class SanitizerTest extends MediaWikiTestCase {
 
 			// Transition to a new world: legacy links with HTML5 fallback
 			[ 'Attribute', $legacyNew, $text, $legacyEncoded, Sanitizer::ID_PRIMARY ],
-			[ 'Attribute', $legacyNew, $text, $html5Encoded, Sanitizer::ID_FALLBACK ],
+			[ 'Attribute', $legacyNew, $text, $html5EncodedId, Sanitizer::ID_FALLBACK ],
 			[ 'Link', $legacyNew, $text, $legacyEncoded ],
 			[ 'ExternalInterwiki', $legacyNew, $text, $legacyEncoded ],
 
 			// New world: HTML5 links, legacy fallbacks
-			[ 'Attribute', $newLegacy, $text, $html5Encoded, Sanitizer::ID_PRIMARY ],
+			[ 'Attribute', $newLegacy, $text, $html5EncodedId, Sanitizer::ID_PRIMARY ],
 			[ 'Attribute', $newLegacy, $text, $legacyEncoded, Sanitizer::ID_FALLBACK ],
-			[ 'Link', $newLegacy, $text, $html5Encoded ],
+			[ 'Link', $newLegacy, $text, $html5EncodedHref ],
 			[ 'ExternalInterwiki', $newLegacy, $text, $legacyEncoded ],
 
 			// Distant future: no legacy fallbacks, but still linking to leagacy wikis
-			[ 'Attribute', $new, $text, $html5Encoded, Sanitizer::ID_PRIMARY ],
+			[ 'Attribute', $new, $text, $html5EncodedId, Sanitizer::ID_PRIMARY ],
 			[ 'Attribute', $new, $text, false, Sanitizer::ID_FALLBACK ],
-			[ 'Link', $new, $text, $html5Encoded ],
+			[ 'Link', $new, $text, $html5EncodedHref ],
 			[ 'ExternalInterwiki', $new, $text, $legacyEncoded ],
 
 			// Just before the heat death of universe: external interwikis are also HTML5 \m/
-			[ 'Attribute', $allNew, $text, $html5Encoded, Sanitizer::ID_PRIMARY ],
+			[ 'Attribute', $allNew, $text, $html5EncodedId, Sanitizer::ID_PRIMARY ],
 			[ 'Attribute', $allNew, $text, false, Sanitizer::ID_FALLBACK ],
-			[ 'Link', $allNew, $text, $html5Encoded ],
-			[ 'ExternalInterwiki', $allNew, $text, $html5Encoded ],
+			[ 'Link', $allNew, $text, $html5EncodedHref ],
+			[ 'ExternalInterwiki', $allNew, $text, $html5EncodedHref ],
 
-			// Someone flipped $wgExperimentalHtmlIds on
-			[ 'Attribute', $experimentalLegacy, $text, $html5Experimental, Sanitizer::ID_PRIMARY ],
-			[ 'Attribute', $experimentalLegacy, $text, $legacyEncoded, Sanitizer::ID_FALLBACK ],
-			[ 'Link', $experimentalLegacy, $text, $html5Experimental ],
-			[ 'ExternalInterwiki', $experimentalLegacy, $text, $legacyEncoded ],
-
-			// Migration from $wgExperimentalHtmlIds to modern HTML5
-			[ 'Attribute', $newExperimental, $text, $html5Encoded, Sanitizer::ID_PRIMARY ],
-			[ 'Attribute', $newExperimental, $text, $html5Experimental, Sanitizer::ID_FALLBACK ],
-			[ 'Link', $newExperimental, $text, $html5Encoded ],
-			[ 'ExternalInterwiki', $newExperimental, $text, $legacyEncoded ],
+			// Whitespace
+			[ 'attribute', $allNew, "foo bar", 'foo_bar', Sanitizer::ID_PRIMARY ],
+			[ 'attribute', $allNew, "foo\fbar", 'foo_bar', Sanitizer::ID_PRIMARY ],
+			[ 'attribute', $allNew, "foo\nbar", 'foo_bar', Sanitizer::ID_PRIMARY ],
+			[ 'attribute', $allNew, "foo\tbar", 'foo_bar', Sanitizer::ID_PRIMARY ],
+			[ 'attribute', $allNew, "foo\rbar", 'foo_bar', Sanitizer::ID_PRIMARY ],
 		];
 	}
 
 	/**
-	 * @dataProvider provideStripAllTags
-	 *
-	 * @covers Sanitizer::stripAllTags()
-	 * @covers RemexStripTagHandler
-	 *
-	 * @param string $input
-	 * @param string $expected
-	 */
-	public function testStripAllTags( $input, $expected ) {
-		$this->assertEquals( $expected, Sanitizer::stripAllTags( $input ) );
-	}
-
-	public function provideStripAllTags() {
-		return [
-			[ '<p>Foo</p>', 'Foo' ],
-			[ '<p id="one">Foo</p><p id="two">Bar</p>', 'FooBar' ],
-			[ "<p>Foo</p>\n<p>Bar</p>", 'Foo Bar' ],
-			[ '<p>Hello &lt;strong&gt; wor&#x6c;&#100; caf&eacute;</p>', 'Hello <strong> world café' ],
-			[
-				'<p><small data-foo=\'bar"&lt;baz>quux\'><a href="./Foo">Bar</a></small> Whee!</p>',
-				'Bar Whee!'
-			],
-			[ '1<span class="<?php">2</span>3', '123' ],
-			[ '1<span class="<?">2</span>3', '123' ],
-		];
-	}
-
-	/**
-	 * @expectedException InvalidArgumentException
 	 * @covers Sanitizer::escapeIdInternal()
 	 */
 	public function testInvalidFragmentThrows() {
 		$this->setMwGlobals( 'wgFragmentMode', [ 'boom!' ] );
+		$this->expectException( InvalidArgumentException::class );
 		Sanitizer::escapeIdForAttribute( 'This should throw' );
 	}
 
 	/**
-	 * @expectedException UnexpectedValueException
 	 * @covers Sanitizer::escapeIdForAttribute()
 	 */
 	public function testNoPrimaryFragmentModeThrows() {
 		$this->setMwGlobals( 'wgFragmentMode', [ 666 => 'html5' ] );
+		$this->expectException( UnexpectedValueException::class );
 		Sanitizer::escapeIdForAttribute( 'This should throw' );
 	}
 
 	/**
-	 * @expectedException UnexpectedValueException
 	 * @covers Sanitizer::escapeIdForLink()
 	 */
 	public function testNoPrimaryFragmentModeThrows2() {
 		$this->setMwGlobals( 'wgFragmentMode', [ 666 => 'html5' ] );
+		$this->expectException( UnexpectedValueException::class );
 		Sanitizer::escapeIdForLink( 'This should throw' );
 	}
+
+	/**
+	 * Test escapeIdReferenceList for consistency with escapeIdForAttribute
+	 *
+	 * @dataProvider provideEscapeIdReferenceList
+	 * @covers Sanitizer::escapeIdReferenceList
+	 */
+	public function testEscapeIdReferenceList( $referenceList, $id1, $id2 ) {
+		$this->assertEquals(
+			Sanitizer::escapeIdReferenceList( $referenceList ),
+			Sanitizer::escapeIdForAttribute( $id1 )
+			. ' '
+			. Sanitizer::escapeIdForAttribute( $id2 )
+		);
+	}
+
+	public static function provideEscapeIdReferenceList() {
+		/** [ <reference list>, <individual id 1>, <individual id 2> ] */
+		return [
+			[ 'foo bar', 'foo', 'bar' ],
+			[ '#1 #2', '#1', '#2' ],
+			[ '+1 +2', '+1', '+2' ],
+		];
+	}
+
 }

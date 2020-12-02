@@ -41,6 +41,20 @@ class FieldLayout extends Layout {
 	protected $errors;
 
 	/**
+	 * Warning messages.
+	 *
+	 * @var array
+	 */
+	protected $warnings;
+
+	/**
+	 * Success messages.
+	 *
+	 * @var array
+	 */
+	protected $successMessages;
+
+	/**
 	 * Notice messages.
 	 *
 	 * @var array
@@ -57,12 +71,14 @@ class FieldLayout extends Layout {
 	/**
 	 * @param Widget $fieldWidget Field widget
 	 * @param array $config Configuration options
-	 * @param string $config['align'] Alignment mode, either 'left', 'right', 'top' or 'inline'
-	 *   (default: 'left')
-	 * @param array $config['errors'] Error messages about the widget, as strings or HtmlSnippet
-	 *   instances.
-	 * @param array $config['notices'] Notices about the widget, as strings or HtmlSnippet instances.
-	 * @param string|HtmlSnippet $config['help'] Explanatory text shown as a '?' icon.
+	 *      - string $config['align'] Alignment mode, either 'left', 'right', 'top' or 'inline'
+	 *          (default: 'left')
+	 *      - string[]|HtmlSnippet[] $config['errors'] Error messages about the widget.
+	 *      - string[]|HtmlSnippet[] $config['warnings'] Warning messages about the widget.
+	 *      - string[]|HtmlSnippet[] $config['notices'] Notices about the widget.
+	 *      - string|HtmlSnippet $config['help'] Explanatory text shown as a '?' icon, or inline.
+	 *      - bool $config['helpInline'] Whether or not the help should be inline,
+	 *          or shown when the "help" icon is clicked. (default: false)
 	 * @throws Exception An exception is thrown if no widget is specified
 	 */
 	public function __construct( $fieldWidget, array $config = [] ) {
@@ -78,46 +94,55 @@ class FieldLayout extends Layout {
 		}
 
 		// Config initialization
-		$config = array_merge( [ 'align' => 'left' ], $config );
+		$config = array_merge( [ 'align' => 'left', 'helpInline' => false ], $config );
 
 		// Parent constructor
 		parent::__construct( $config );
 
 		// Properties
 		$this->fieldWidget = $fieldWidget;
-		$this->errors = isset( $config['errors'] ) ? $config['errors'] : [];
-		$this->notices = isset( $config['notices'] ) ? $config['notices'] : [];
+		$this->errors = $config['errors'] ?? [];
+		$this->warnings = $config['warnings'] ?? [];
+		$this->successMessages = $config['successMessages'] ?? [];
+		$this->notices = $config['notices'] ?? [];
 		$this->field = $this->isFieldInline() ? new Tag( 'span' ) : new Tag( 'div' );
-		$this->messages = new Tag( 'ul' );
+		$this->messages = new Tag( 'div' );
 		$this->header = new Tag( 'span' );
 		$this->body = new Tag( 'div' );
-		if ( isset( $config['help'] ) ) {
-			$this->help = new ButtonWidget( [
-				'classes' => [ 'oo-ui-fieldLayout-help' ],
-				'framed' => false,
-				'icon' => 'info',
-				'title' => $config['help'],
-			] );
-		} else {
-			$this->help = '';
-		}
+		$this->helpText = $config['help'] ?? '';
+		$this->helpInline = $config['helpInline'];
 
 		// Traits
-		$this->initializeLabelElement( array_merge( $config, [
+		$this->initializeLabelElement( array_merge( [
 			'labelElement' => new Tag( 'label' )
-		] ) );
+		], $config ) );
 		$this->initializeTitledElement(
-			array_merge( $config, [ 'titled' => $this->label ] ) );
+			array_merge( [ 'titled' => $this->label ], $config )
+		);
 
 		// Initialization
+		$this->help = $this->helpText === '' ? '' : $this->createHelpElement();
 		if ( $this->fieldWidget->getInputId() ) {
 			$this->label->setAttributes( [ 'for' => $this->fieldWidget->getInputId() ] );
+			if ( $this->helpText !== '' && $this->helpInline ) {
+				$this->help->setAttributes( [ 'for' => $this->fieldWidget->getInputId() ] );
+			}
+		} else {
+			// We can't use `label for` with non-form elements, use `aria-labelledby` instead
+			$id = Tag::generateElementId();
+			$this->label->setAttributes( [ 'id' => $id ] );
+			$this->fieldWidget->setLabelledBy( $id );
 		}
 		$this
 			->addClasses( [ 'oo-ui-fieldLayout' ] )
 			->toggleClasses( [ 'oo-ui-fieldLayout-disabled' ], $this->fieldWidget->isDisabled() )
 			->appendContent( $this->body );
-		if ( count( $this->errors ) || count( $this->notices ) ) {
+		if (
+			count( $this->errors ) ||
+			count( $this->warnings ) ||
+			count( $this->successMessages ) ||
+			count( $this->notices )
+		) {
 			$this->appendContent( $this->messages );
 		}
 		$this->body->addClasses( [ 'oo-ui-fieldLayout-body' ] );
@@ -127,11 +152,17 @@ class FieldLayout extends Layout {
 			->addClasses( [ 'oo-ui-fieldLayout-field' ] )
 			->appendContent( $this->fieldWidget );
 
-		foreach ( $this->notices as $text ) {
-			$this->messages->appendContent( $this->makeMessage( 'notice', $text ) );
-		}
 		foreach ( $this->errors as $text ) {
 			$this->messages->appendContent( $this->makeMessage( 'error', $text ) );
+		}
+		foreach ( $this->warnings as $text ) {
+			$this->messages->appendContent( $this->makeMessage( 'warning', $text ) );
+		}
+		foreach ( $this->successMessages as $text ) {
+			$this->messages->appendContent( $this->makeMessage( 'success', $text ) );
+		}
+		foreach ( $this->notices as $text ) {
+			$this->messages->appendContent( $this->makeMessage( 'notice', $text ) );
 		}
 
 		$this->setAlignment( $config['align'] );
@@ -140,25 +171,16 @@ class FieldLayout extends Layout {
 	}
 
 	/**
-	 * @param string $kind 'error' or 'notice'
+	 * @param string $kind 'error', 'warning', 'success' or 'notice'
 	 * @param string|HtmlSnippet $text
 	 * @return Tag
 	 */
 	private function makeMessage( $kind, $text ) {
-		$listItem = new Tag( 'li' );
-		if ( $kind === 'error' ) {
-			$icon = new IconWidget( [ 'icon' => 'alert', 'flags' => [ 'warning' ] ] );
-			$listItem->setAttributes( [ 'role' => 'alert' ] );
-		} elseif ( $kind === 'notice' ) {
-			$icon = new IconWidget( [ 'icon' => 'notice' ] );
-		} else {
-			$icon = null;
-		}
-		$message = new LabelWidget( [ 'label' => $text ] );
-		$listItem
-			->appendContent( $icon, $message )
-			->addClasses( [ "oo-ui-fieldLayout-messages-$kind" ] );
-		return $listItem;
+		return new MessageWidget( [
+			'type' => $kind,
+			'inline' => true,
+			'label' => $text,
+		] );
 	}
 
 	/**
@@ -200,15 +222,29 @@ class FieldLayout extends Layout {
 			}
 			// Reorder elements
 			$this->body->clearContent();
-			if ( $value === 'top' ) {
-				$this->header->appendContent( $this->help, $this->label );
-				$this->body->appendContent( $this->header, $this->field );
-			} elseif ( $value === 'inline' ) {
-				$this->header->appendContent( $this->help, $this->label );
-				$this->body->appendContent( $this->field, $this->header );
+
+			if ( $this->helpInline ) {
+				if ( $value === 'top' ) {
+					$this->header->appendContent( $this->label );
+					$this->body->appendContent( $this->header, $this->field, $this->help );
+				} elseif ( $value === 'inline' ) {
+					$this->header->appendContent( $this->label, $this->help );
+					$this->body->appendContent( $this->field, $this->header );
+				} else {
+					$this->header->appendContent( $this->label, $this->help );
+					$this->body->appendContent( $this->header, $this->field );
+				}
 			} else {
-				$this->header->appendContent( $this->label );
-				$this->body->appendContent( $this->header, $this->help, $this->field );
+				if ( $value === 'top' ) {
+					$this->header->appendContent( $this->help, $this->label );
+					$this->body->appendContent( $this->header, $this->field );
+				} elseif ( $value === 'inline' ) {
+					$this->header->appendContent( $this->help, $this->label );
+					$this->body->appendContent( $this->field, $this->header );
+				} else {
+					$this->header->appendContent( $this->label );
+					$this->body->appendContent( $this->header, $this->help, $this->field );
+				}
 			}
 			// Set classes. The following classes can be used here:
 			// * oo-ui-fieldLayout-align-left
@@ -241,13 +277,53 @@ class FieldLayout extends Layout {
 
 	public function getConfig( &$config ) {
 		$config['fieldWidget'] = $this->fieldWidget;
-		$config['align'] = $this->align;
-		$config['errors'] = $this->errors;
-		$config['notices'] = $this->notices;
-		if ( $this->help !== '' ) {
-			$config['help'] = $this->help->getTitle();
+		if ( $this->align !== 'left' ) {
+			$config['align'] = $this->align;
+		}
+		if ( count( $this->errors ) ) {
+			$config['errors'] = $this->errors;
+		}
+		if ( count( $this->warnings ) ) {
+			$config['warnings'] = $this->warnings;
+		}
+		if ( count( $this->successMessages ) ) {
+			$config['successMessages'] = $this->successMessages;
+		}
+		if ( count( $this->notices ) ) {
+			$config['notices'] = $this->notices;
+		}
+		if ( $this->helpText !== '' ) {
+			$config['help'] = $this->helpText;
+		}
+		if ( $this->helpInline ) {
+			$config['helpInline'] = $this->helpInline;
 		}
 		$config['$overlay'] = true;
 		return parent::getConfig( $config );
+	}
+
+	/**
+	 * Creates and returns the help element.
+	 *
+	 * @return Widget The element that should become `$this->help`.
+	 */
+	private function createHelpElement() {
+		if ( $this->helpInline ) {
+			return new LabelWidget( [
+				'classes' => [ 'oo-ui-inline-help' ],
+				'label' => $this->helpText,
+			] );
+		} else {
+			return new ButtonWidget( [
+				'classes' => [ 'oo-ui-fieldLayout-help' ],
+				'framed' => false,
+				'icon' => 'info',
+				'title' => $this->helpText,
+				// TODO We have no way to use localisation messages in PHP
+				// (and to use different languages when used from MediaWiki)
+				// 'label' => msg( 'ooui-field-help' ),
+				// 'invisibleLabel' => true,
+			] );
+		}
 	}
 }

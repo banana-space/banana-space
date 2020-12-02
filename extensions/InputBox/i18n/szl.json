@@ -2,8 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Ozi64",
-			"Przemub"
+			"Przemub",
+			"Uostofchuodnego"
 		]
 	},
-	"inputbox-createarticle": "Naszkryflej artikel"
+	"inputbox-tryexact": "Użyj akuratnego wyrażyniŏ",
+	"inputbox-createarticle": "Stwōrz artykuł"
 }

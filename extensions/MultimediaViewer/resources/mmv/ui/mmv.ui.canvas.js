@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $, oo ) {
+( function () {
 	var C;
 
 	/**
@@ -47,6 +47,7 @@
 
 		/**
 		 * Contains image.
+		 *
 		 * @property {jQuery}
 		 */
 		this.$imageDiv = $( '<div>' )
@@ -56,6 +57,7 @@
 
 		/**
 		 * Container of canvas and controls, needed for canvas size calculations.
+		 *
 		 * @property {jQuery}
 		 * @private
 		 */
@@ -63,6 +65,7 @@
 
 		/**
 		 * Main container of image and metadata, needed to propagate events.
+		 *
 		 * @property {jQuery}
 		 * @private
 		 */
@@ -70,24 +73,27 @@
 
 		/**
 		 * Raw metadata of current image, needed for canvas size calculations.
+		 *
 		 * @property {mw.mmv.LightboxImage}
 		 * @private
 		 */
 		this.imageRawMetadata = null;
 	}
-	oo.inheritClass( Canvas, mw.mmv.ui.Element );
+	OO.inheritClass( Canvas, mw.mmv.ui.Element );
 	C = Canvas.prototype;
 
 	/**
 	 * Maximum blownup factor tolerated
-	 * @property MAX_BLOWUP_FACTOR
+	 *
+	 * @property {number} MAX_BLOWUP_FACTOR
 	 * @static
 	 */
 	Canvas.MAX_BLOWUP_FACTOR = 11;
 
 	/**
 	 * Blowup factor threshold at which blurring kicks in
-	 * @property BLUR_BLOWUP_FACTOR_THRESHOLD
+	 *
+	 * @property {number} BLUR_BLOWUP_FACTOR_THRESHOLD
 	 * @static
 	 */
 	Canvas.BLUR_BLOWUP_FACTOR_THRESHOLD = 2;
@@ -185,12 +191,12 @@
 	C.setUpImageClick = function () {
 		var canvas = this;
 
-		this.handleEvent( 'mmv-reuse-opened', $.proxy( this.handleDialogEvent, this ) );
-		this.handleEvent( 'mmv-reuse-closed', $.proxy( this.handleDialogEvent, this ) );
-		this.handleEvent( 'mmv-download-opened', $.proxy( this.handleDialogEvent, this ) );
-		this.handleEvent( 'mmv-download-closed', $.proxy( this.handleDialogEvent, this ) );
-		this.handleEvent( 'mmv-options-opened', $.proxy( this.handleDialogEvent, this ) );
-		this.handleEvent( 'mmv-options-closed', $.proxy( this.handleDialogEvent, this ) );
+		this.handleEvent( 'mmv-reuse-opened', this.handleDialogEvent.bind( this ) );
+		this.handleEvent( 'mmv-reuse-closed', this.handleDialogEvent.bind( this ) );
+		this.handleEvent( 'mmv-download-opened', this.handleDialogEvent.bind( this ) );
+		this.handleEvent( 'mmv-download-closed', this.handleDialogEvent.bind( this ) );
+		this.handleEvent( 'mmv-options-opened', this.handleDialogEvent.bind( this ) );
+		this.handleEvent( 'mmv-options-closed', this.handleDialogEvent.bind( this ) );
 
 		this.$image.on( 'click.mmv-canvas', function ( e ) {
 			// ignore clicks if the metadata panel or one of the dialogs is open - assume the intent is to
@@ -315,12 +321,16 @@
 			animationLength = 300;
 
 		// The blurred class has an opacity < 1. This animated the image to become fully opaque
+		// FIXME: Use CSS transition
+		// eslint-disable-next-line no-jquery/no-animate
 		this.$image
 			.addClass( 'blurred' )
 			.animate( { opacity: 1.0 }, animationLength );
 
 		// During the same amount of time (animationLength) we animate a blur value from 3.0 to 0.0
 		// We pass that value to an inline CSS Gaussian blur effect
+		// FIXME: Use CSS transition
+		// eslint-disable-next-line no-jquery/no-animate
 		$( { blur: 3.0 } ).animate( { blur: 0.0 }, {
 			duration: animationLength,
 			step: function ( step ) {
@@ -347,7 +357,7 @@
 	 * @param {string} error error message
 	 */
 	C.showError = function ( error ) {
-		var errorDetails, description, errorUri, retryLink, reportLink,
+		var errorDetails, description, errorUri, $retryLink, $reportLink,
 			canvasDimensions = this.getDimensions(),
 			thumbnailDimensions = this.getCurrentImageWidths(),
 			htmlUtils = new mw.mmv.HtmlUtils();
@@ -367,9 +377,9 @@
 			'Error details:\n\n' + errorDetails.join( '\n' );
 		errorUri = mw.msg( 'multimediaviewer-report-issue-url', encodeURIComponent( description ) );
 
-		retryLink = $( '<a>' ).addClass( 'mw-mmv-retry-link' ).text(
+		$retryLink = $( '<a>' ).addClass( 'mw-mmv-retry-link' ).text(
 			mw.msg( 'multimediaviewer-thumbnail-error-retry' ) );
-		reportLink = $( '<a>' ).attr( 'href', errorUri ).text(
+		$reportLink = $( '<a>' ).attr( 'href', errorUri ).text(
 			mw.msg( 'multimediaviewer-thumbnail-error-report' ) );
 
 		this.$imageDiv.empty()
@@ -382,14 +392,14 @@
 				).append(
 					$( '<div>' ).addClass( 'mw-mmv-error-description' ).append(
 						mw.msg( 'multimediaviewer-thumbnail-error-description',
-							htmlUtils.jqueryToHtml( retryLink ),
+							htmlUtils.jqueryToHtml( $retryLink ),
 							error,
-							htmlUtils.jqueryToHtml( reportLink )
+							htmlUtils.jqueryToHtml( $reportLink )
 						)
 					)
 				)
 			);
-		this.$imageDiv.find( '.mw-mmv-retry-link' ).click( function () {
+		this.$imageDiv.find( '.mw-mmv-retry-link' ).on( 'click', function () {
 			location.reload();
 		} );
 	};
@@ -403,6 +413,7 @@
 	 */
 	C.getDimensions = function ( forFullscreen ) {
 		var $window = $( window ),
+			// eslint-disable-next-line no-jquery/no-global-selector
 			$aboveFold = $( '.mw-mmv-above-fold' ),
 			isFullscreened = !!$aboveFold.closest( '.jq-fullscreened' ).length,
 			// Don't rely on this.$imageWrapper's sizing because it's fragile.
@@ -464,4 +475,4 @@
 	};
 
 	mw.mmv.ui.Canvas = Canvas;
-}( mediaWiki, jQuery, OO ) );
+}() );

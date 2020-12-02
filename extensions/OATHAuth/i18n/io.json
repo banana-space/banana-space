@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joao Xavier"
+		]
+	},
+	"oathauth-verify-for-user": "Videz se l'uzero uzas la sistemo di autentikigo tra du etapi (\"two-factor authentication\")",
+	"right-oathauth-verify-user": "Videz se l'uzero uzas sistemo di autentikigo tra du etapi (\"two-factor authentication\")",
+	"oathauth-enterverifyreason": "Motivo por verifikar:",
+	"logentry-oath-verify": "$1 {{GENDER:$2|ja verifikis}} se $3 uzas sistemo di autentikigo tra du etapi (\"two-factor authentication\")",
+	"oauthauth-ui-no-module": "Nulu permisata",
+	"oathauth-verify-enabled": "{{GENDER:$1|$1}} uzas sistemo di autentikigo tra du etapi (\"two-factor authentication\")."
+}

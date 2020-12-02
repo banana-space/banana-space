@@ -38,11 +38,13 @@ class JSParseHelper extends Maintenance {
 	}
 
 	public function execute() {
-		if ( $this->hasArg() ) {
+		if ( $this->hasArg( 0 ) ) {
 			$files = $this->mArgs;
 		} else {
-			$this->maybeHelp( true ); // @todo fixme this is a lame API :)
-			exit( 1 ); // it should exit from the above first...
+			// @todo fixme this is a lame API :)
+			$this->maybeHelp( true );
+			// it should exit from the above first...
+			exit( 1 );
 		}
 
 		$parser = new JSParser();

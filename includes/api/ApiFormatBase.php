@@ -20,6 +20,8 @@
  * @file
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * This is the abstract base class for API formatters.
  *
@@ -73,9 +75,9 @@ abstract class ApiFormatBase extends ApiBase {
 		} elseif ( $this->getIsHtml() ) {
 			return 'api-result.html';
 		} else {
-			$exts = MediaWiki\MediaWikiServices::getInstance()->getMimeAnalyzer()
-				->getExtensionsForType( $this->getMimeType() );
-			$ext = $exts ? strtok( $exts, ' ' ) : strtolower( $this->mFormat );
+			$mimeAnalyzer = MediaWikiServices::getInstance()->getMimeAnalyzer();
+			$ext = $mimeAnalyzer->getExtensionFromMimeTypeOrNull( $this->getMimeType() )
+				?? strtolower( $this->mFormat );
 			return "api-result.$ext";
 		}
 	}
@@ -158,11 +160,9 @@ abstract class ApiFormatBase extends ApiBase {
 
 		if ( !is_array( $paramSettings ) ) {
 			return $paramSettings;
-		} elseif ( isset( $paramSettings[self::PARAM_DFLT] ) ) {
-			return $paramSettings[self::PARAM_DFLT];
-		} else {
-			return null;
 		}
+
+		return $paramSettings[self::PARAM_DFLT] ?? null;
 	}
 
 	/**
@@ -247,11 +247,13 @@ abstract class ApiFormatBase extends ApiBase {
 			$result = $this->getBuffer();
 
 			$context = new DerivativeContext( $this->getMain() );
-			$context->setSkin( SkinFactory::getDefaultInstance()->makeSkin( 'apioutput' ) );
+			$skinFactory = MediaWikiServices::getInstance()->getSkinFactory();
+			$context->setSkin( $skinFactory->makeSkin( 'apioutput' ) );
 			$context->setTitle( SpecialPage::getTitleFor( 'ApiHelp' ) );
 			$out = new OutputPage( $context );
 			$context->setOutput( $out );
 
+			$out->setRobotPolicy( 'noindex,nofollow' );
 			$out->addModuleStyles( 'mediawiki.apipretty' );
 			$out->setPageTitle( $context->msg( 'api-format-title' ) );
 
@@ -290,7 +292,7 @@ abstract class ApiFormatBase extends ApiBase {
 				}
 			}
 
-			if ( Hooks::run( 'ApiFormatHighlight', [ $context, $result, $mime, $format ] ) ) {
+			if ( $this->getHookRunner()->onApiFormatHighlight( $context, $result, $mime, $format ) ) {
 				$out->addHTML(
 					Html::element( 'pre', [ 'class' => 'api-pretty-content' ], $result )
 				);
@@ -306,7 +308,6 @@ abstract class ApiFormatBase extends ApiBase {
 						'html' => $out->getHTML(),
 						'modules' => array_values( array_unique( array_merge(
 							$out->getModules(),
-							$out->getModuleScripts(),
 							$out->getModuleStyles()
 						) ) ),
 						'continue' => $this->getResult()->getResultData( 'continue' ),

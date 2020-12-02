@@ -21,8 +21,9 @@
  * @ingroup SpecialPage
  */
 
-use Wikimedia\Rdbms\IResultWrapper;
+use MediaWiki\MediaWikiServices;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * A special page listing redirects to redirecting page.
@@ -30,8 +31,8 @@ use Wikimedia\Rdbms\IDatabase;
  *
  * @ingroup SpecialPage
  */
-class DoubleRedirectsPage extends QueryPage {
-	function __construct( $name = 'DoubleRedirects' ) {
+class SpecialDoubleRedirects extends QueryPage {
+	public function __construct( $name = 'DoubleRedirects' ) {
 		parent::__construct( $name );
 	}
 
@@ -39,19 +40,19 @@ class DoubleRedirectsPage extends QueryPage {
 		return true;
 	}
 
-	function isSyndicated() {
+	public function isSyndicated() {
 		return false;
 	}
 
-	function sortDescending() {
+	protected function sortDescending() {
 		return false;
 	}
 
-	function getPageHeader() {
+	protected function getPageHeader() {
 		return $this->msg( 'doubleredirectstext' )->parseAsBlock();
 	}
 
-	function reallyGetQueryInfo( $namespace = null, $title = null ) {
+	private function reallyGetQueryInfo( $namespace = null, $title = null ) {
 		$limitToTitle = !( $namespace === null && $title === null );
 		$dbr = wfGetDB( DB_REPLICA );
 		$retval = [
@@ -106,7 +107,7 @@ class DoubleRedirectsPage extends QueryPage {
 		return $this->reallyGetQueryInfo();
 	}
 
-	function getOrderFields() {
+	protected function getOrderFields() {
 		return [ 'ra.rd_namespace', 'ra.rd_title' ];
 	}
 
@@ -115,7 +116,7 @@ class DoubleRedirectsPage extends QueryPage {
 	 * @param object $result Result row
 	 * @return string
 	 */
-	function formatResult( $skin, $result ) {
+	public function formatResult( $skin, $result ) {
 		// If no Title B or C is in the query, it means this came from
 		// querycache (which only saves the 3 columns for title A).
 		// That does save the bulk of the query cost, but now we need to
@@ -154,9 +155,14 @@ class DoubleRedirectsPage extends QueryPage {
 		// if the page is editable, add an edit link
 		if (
 			// check user permissions
-			$this->getUser()->isAllowed( 'edit' ) &&
+			MediaWikiServices::getInstance()
+				->getPermissionManager()
+				->userHasRight( $this->getUser(), 'edit' ) &&
 			// check, if the content model is editable through action=edit
-			ContentHandler::getForTitle( $titleA )->supportsDirectEditing()
+			MediaWikiServices::getInstance()
+				->getContentHandlerFactory()
+				->getContentHandler( $titleA->getContentModel() )
+				->supportsDirectEditing()
 		) {
 			$edit = $linkRenderer->makeKnownLink(
 				$titleA,
@@ -197,13 +203,18 @@ class DoubleRedirectsPage extends QueryPage {
 		return ( "{$linkA} {$edit} {$arr} {$linkB} {$arr} {$linkC}" );
 	}
 
+	public function execute( $par ) {
+		$this->addHelpLink( 'Help:Redirects' );
+		parent::execute( $par );
+	}
+
 	/**
 	 * Cache page content model and gender distinction for performance
 	 *
 	 * @param IDatabase $db
 	 * @param IResultWrapper $res
 	 */
-	function preprocessResults( $db, $res ) {
+	public function preprocessResults( $db, $res ) {
 		if ( !$res->numRows() ) {
 			return;
 		}

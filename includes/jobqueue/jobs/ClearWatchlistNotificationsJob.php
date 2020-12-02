@@ -22,23 +22,25 @@
 use MediaWiki\MediaWikiServices;
 
 /**
- * Job for clearing all of the "last viewed" timestamps for a user's watchlist
+ * Job for clearing all of the "last viewed" timestamps for a user's watchlist, or setting them all
+ * to the same value.
  *
  * Job parameters include:
  *   - userId: affected user ID [required]
  *   - casTime: UNIX timestamp of the event that triggered this job [required]
+ *   - timestamp: value to set all of the "last viewed" timestamps to [optional, defaults to null]
  *
  * @ingroup JobQueue
  * @since 1.31
  */
-class ClearWatchlistNotificationsJob extends Job {
-	function __construct( Title $title, array $params ) {
-		parent::__construct( 'clearWatchlistNotifications', $title, $params );
+class ClearWatchlistNotificationsJob extends Job implements GenericParameterJob {
+	public function __construct( array $params ) {
+		parent::__construct( 'clearWatchlistNotifications', $params );
 
 		static $required = [ 'userId', 'casTime' ];
 		$missing = implode( ', ', array_diff( $required, array_keys( $this->params ) ) );
 		if ( $missing != '' ) {
-			throw new InvalidArgumentException( "Missing paramter(s) $missing" );
+			throw new InvalidArgumentException( "Missing parameter(s) $missing" );
 		}
 
 		$this->removeDuplicates = true;
@@ -49,31 +51,51 @@ class ClearWatchlistNotificationsJob extends Job {
 		$lbFactory = $services->getDBLoadBalancerFactory();
 		$rowsPerQuery = $services->getMainConfig()->get( 'UpdateRowsPerQuery' );
 
-		$dbw = $lbFactory->getMainLB()->getConnection( DB_MASTER );
+		$dbw = $lbFactory->getMainLB()->getConnectionRef( DB_MASTER );
 		$ticket = $lbFactory->getEmptyTransactionTicket( __METHOD__ );
+		$timestamp = $this->params['timestamp'] ?? null;
+		if ( $timestamp === null ) {
+			$timestampCond = 'wl_notificationtimestamp IS NOT NULL';
+		} else {
+			$timestamp = $dbw->timestamp( $timestamp );
+			$timestampCond = 'wl_notificationtimestamp != ' . $dbw->addQuotes( $timestamp ) .
+				' OR wl_notificationtimestamp IS NULL';
+		}
+		// New notifications since the reset should not be cleared
+		$casTimeCond = 'wl_notificationtimestamp < ' .
+			$dbw->addQuotes( $dbw->timestamp( $this->params['casTime'] ) ) .
+			' OR wl_notificationtimestamp IS NULL';
 
-		$asOfTimes = array_unique( $dbw->selectFieldValues(
-			'watchlist',
-			'wl_notificationtimestamp',
-			[ 'wl_user' => $this->params['userId'], 'wl_notificationtimestamp IS NOT NULL' ],
-			__METHOD__,
-			[ 'ORDER BY' => 'wl_notificationtimestamp DESC' ]
-		) );
-
-		foreach ( array_chunk( $asOfTimes, $rowsPerQuery ) as $asOfTimeBatch ) {
-			$dbw->update(
+		$firstBatch = true;
+		do {
+			$idsToUpdate = $dbw->selectFieldValues(
 				'watchlist',
-				[ 'wl_notificationtimestamp' => null ],
+				'wl_id',
 				[
 					'wl_user' => $this->params['userId'],
-					'wl_notificationtimestamp' => $asOfTimeBatch,
-					// New notifications since the reset should not be cleared
-					'wl_notificationtimestamp < ' .
-						$dbw->addQuotes( $dbw->timestamp( $this->params['casTime'] ) )
+					$timestampCond,
+					$casTimeCond,
 				],
-				__METHOD__
+				__METHOD__,
+				[ 'LIMIT' => $rowsPerQuery ]
 			);
-			$lbFactory->commitAndWaitForReplication( __METHOD__, $ticket );
-		}
+			if ( $idsToUpdate ) {
+				$dbw->update(
+					'watchlist',
+					[ 'wl_notificationtimestamp' => $timestamp ],
+					[
+						'wl_id' => $idsToUpdate,
+						// For paranoia, enforce the CAS time condition here too
+						$casTimeCond
+					],
+					__METHOD__
+				);
+				if ( !$firstBatch ) {
+					$lbFactory->commitAndWaitForReplication( __METHOD__, $ticket );
+				}
+				$firstBatch = false;
+			}
+		} while ( $idsToUpdate );
+		return true;
 	}
 }

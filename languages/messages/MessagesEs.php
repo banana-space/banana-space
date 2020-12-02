@@ -42,7 +42,10 @@ $specialPageAliases = [
 	'Allmessages'               => [ 'TodosLosMensajes', 'Todos_los_mensajes' ],
 	'AllMyUploads'              => [ 'TodasMisSubidas', 'Todas_mis_subidas', 'TodosMisArchivos', 'Todos_mis_archivos' ],
 	'Allpages'                  => [ 'Todas', 'Todas_las_páginas' ],
+	'ApiHelp'                   => [ 'AyudaAPI', 'Ayuda_de_la_API' ],
+	'ApiSandbox'                => [ 'Zona_de_pruebas_de_la_API' ],
 	'Ancientpages'              => [ 'PáginasAntiguas', 'Páginas_antiguas' ],
+	'Autoblocklist'             => [ 'Lista_de_bloqueos_automáticos' ],
 	'Badtitle'                  => [ 'Título_incorrecto' ],
 	'Blankpage'                 => [ 'PáginaEnBlanco', 'Blanquear_página', 'BlanquearPágina', 'Página_en_blanco' ],
 	'Block'                     => [ 'Bloquear' ],
@@ -94,11 +97,12 @@ $specialPageAliases = [
 	'MyLanguage'                => [ 'MiIdioma', 'Mi_idioma' ],
 	'Mypage'                    => [ 'MiPágina', 'Mi_página' ],
 	'Mytalk'                    => [ 'MiDiscusión', 'Mi_discusión' ],
-	'Myuploads'                 => [ 'MisArchivosSubidos' ],
+	'Myuploads'                 => [ 'MisArchivosSubidos', 'Mis_archivos_subidos' ],
 	'Newimages'                 => [ 'NuevasImágenes', 'Nuevas_imágenes' ],
 	'Newpages'                  => [ 'PáginasNuevas', 'Páginas_nuevas' ],
-	'PasswordReset'             => [ 'RestablecerContraseña' ],
-	'PermanentLink'             => [ 'EnlacePermanente' ],
+	'PasswordPolicies'          => [ 'Política_de_contraseñas' ],
+	'PasswordReset'             => [ 'RestablecerContraseña', 'Restablecer_contraseña' ],
+	'PermanentLink'             => [ 'EnlacePermanente', 'Enlace_permanente' ],
 	'Preferences'               => [ 'Preferencias' ],
 	'Prefixindex'               => [ 'PáginasPorPrefijo', 'Páginas_por_prefijo' ],
 	'Protectedpages'            => [ 'PáginasProtegidas', 'Páginas_protegidas' ],
@@ -116,7 +120,7 @@ $specialPageAliases = [
 	'Specialpages'              => [ 'PáginasEspeciales', 'Páginas_especiales' ],
 	'Statistics'                => [ 'Estadísticas' ],
 	'Tags'                      => [ 'Etiquetas' ],
-	'TrackingCategories'        => [ 'CategoríasDeSeguimiento' ],
+	'TrackingCategories'        => [ 'CategoríasDeSeguimiento', 'Categorías_de_seguimiento' ],
 	'Unblock'                   => [ 'Desbloquear' ],
 	'Uncategorizedcategories'   => [ 'CategoríasSinCategorizar', 'Categorías_sin_categorizar' ],
 	'Uncategorizedimages'       => [ 'ImágenesSinCategorizar', 'Imágenes_sin_categorizar' ],
@@ -298,7 +302,7 @@ $dateFormats = [
 	'dmy both' => 'H:i j M Y',
 ];
 
-$separatorTransformTable = [ ',' => "\xc2\xa0", '.' => ',' ];
+$separatorTransformTable = [ ',' => "\u{00A0}", '.' => ',' ];
 $minimumGroupingDigits = 2;
 
 $linkTrail = '/^([a-záéíóúñ]+)(.*)$/sDu';

@@ -8,9 +8,10 @@ use RemexHtml\Tokenizer\Attributes;
 abstract class InsertionMode {
 	use PropGuard;
 
-	const SELF_CLOSE_ERROR = 'unacknowledged self closing tag';
-
+	/** @var TreeBuilder */
 	protected $builder;
+
+	/** @var Dispatcher */
 	protected $dispatcher;
 
 	public function __construct( TreeBuilder $builder, Dispatcher $dispatcher ) {
@@ -93,7 +94,6 @@ abstract class InsertionMode {
 	}
 
 	protected function stripNulls( $callback, $text, $start, $length, $sourceStart, $sourceLength ) {
-		$originalLength = $length;
 		$errorOffset = $sourceStart - $start;
 		while ( $length > 0 ) {
 			$validLength = strcspn( $text, "\0", $start, $length );
@@ -112,8 +112,11 @@ abstract class InsertionMode {
 	}
 
 	abstract public function characters( $text, $start, $length, $sourceStart, $sourceLength );
+
 	abstract public function startTag( $name, Attributes $attrs, $selfClose,
 		$sourceStart, $sourceLength );
+
 	abstract public function endTag( $name, $sourceStart, $sourceLength );
+
 	abstract public function endDocument( $pos );
 }

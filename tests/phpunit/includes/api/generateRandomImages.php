@@ -17,7 +17,6 @@ class GenerateRandomImages extends Maintenance {
 
 	public function execute() {
 		$getOptSpec = [
-			'dictionaryFile::',
 			'minWidth::',
 			'maxWidth::',
 			'minHeight::',
@@ -30,7 +29,7 @@ class GenerateRandomImages extends Maintenance {
 		];
 		$options = getopt( null, $getOptSpec );
 
-		$format = isset( $options['format'] ) ? $options['format'] : 'jpg';
+		$format = $options['format'] ?? 'jpg';
 		unset( $options['format'] );
 
 		$number = isset( $options['number'] ) ? intval( $options['number'] ) : 10;
@@ -41,5 +40,5 @@ class GenerateRandomImages extends Maintenance {
 	}
 }
 
-$maintClass = 'GenerateRandomImages';
+$maintClass = GenerateRandomImages::class;
 require RUN_MAINTENANCE_IF_MAIN;

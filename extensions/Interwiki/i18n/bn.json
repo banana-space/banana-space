@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Aftab1995",
-			"Wikitanvir",
-			"Tauhid16",
 			"Aftabuzzaman",
-			"আজিজ"
+			"Tauhid16",
+			"Wikitanvir",
+			"আজিজ",
+			"আফতাবুজ্জামান"
 		]
 	},
 	"interwiki": "আন্তঃউইকি তথ্য দেখুন ও সম্পাদনা করুন",
@@ -23,7 +24,6 @@
 	"interwiki-cached": "এই আন্তঃউইকি উপাত্ত ক্যাশে করা হয়েছে। ক্যাশে সংশোধন করা সম্ভব নয়।",
 	"interwiki_edit": "সম্পাদনা",
 	"interwiki_reasonfield": "কারণ:",
-	"interwiki_delquestion": "\"$1\" অপসারণ",
 	"interwiki_deleting": "আপনি উপসর্গ \"$1\" অপসারণ করছেন।",
 	"interwiki_deleted": "\"$1\" উপসর্গটি আন্তঃউইকি তালিকা থেকে সারনো হয়েছে।",
 	"interwiki_delfailed": "\"$1\" উপসর্গটি আন্তঃউইকি তালিকা থেকে সরানো যাবে না।",

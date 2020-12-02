@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $, oo ) {
+( function () {
 	var SBP;
 
 	/**
@@ -37,13 +37,14 @@
 
 		/**
 		 * This holds the actual buttons.
+		 *
 		 * @property {Object.<string, jQuery>}
 		 */
 		this.buttons = {};
 
 		this.initDescriptionPageButton();
 	}
-	oo.inheritClass( StripeButtons, mw.mmv.ui.Element );
+	OO.inheritClass( StripeButtons, mw.mmv.ui.Element );
 	SBP = StripeButtons.prototype;
 
 	/**
@@ -56,6 +57,7 @@
 	SBP.createButton = function ( cssClass ) {
 		var $button;
 
+		// eslint-disable-next-line mediawiki/class-doc
 		$button = $( '<a>' )
 			.addClass( 'mw-mmv-stripe-button empty ' + cssClass )
 			// elements are right-floated so we use prepend instead of append to keep the order
@@ -73,7 +75,7 @@
 	SBP.initDescriptionPageButton = function () {
 		this.buttons.$descriptionPage = this.createButton(
 			'empty mw-mmv-description-page-button mw-ui-big mw-ui-button mw-ui-progressive'
-		).click( function () {
+		).on( 'click', function () {
 			mw.mmv.actionLogger.log( 'file-description-page-abovefold' );
 		} );
 	};
@@ -133,4 +135,4 @@
 	};
 
 	mw.mmv.ui.StripeButtons = StripeButtons;
-}( mediaWiki, jQuery, OO ) );
+}() );

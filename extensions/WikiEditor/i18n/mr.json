@@ -2,15 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Htt",
+			"Macofe",
 			"Mahitgar",
 			"McDutchie",
 			"Rahuldeshmukh101",
 			"Shantanoo",
+			"Sureshkhole",
 			"V.narsikar",
 			"अभय नातू",
-			"संतोष दहिवळ",
-			"Macofe",
-			"Sureshkhole"
+			"संतोष दहिवळ"
 		]
 	},
 	"wikieditor": "विकिमजकूर संपादनाची विकसित सुविधा",
@@ -19,7 +19,8 @@
 	"wikieditor-loading": "प्रभारण करीत आहे",
 	"wikieditor-toolbar": "संपादन साधनपट्टी",
 	"wikieditor-toolbar-desc": "सुलभीकरणाने वर्धित संपादनपान  साधनपट्टी",
-	"wikieditor-toolbar-preference": "वर्धित संपादन साधनपट्टी सक्षम करा",
+	"wikieditor-toolbar-preference": "संपादन साधनपट्टीस सक्षम करा",
+	"wikieditor-toolbar-preference-help": "यास कधी-कधी '२०१० विकिटेक्स्ट एडिटर' असेही म्हणतात.",
 	"wikieditor-toolbar-loading": "प्रभारण करीत आहे",
 	"wikieditor-toolbar-tool-bold": "ठळक",
 	"wikieditor-toolbar-tool-bold-example": "ठळक मजकूर",
@@ -115,6 +116,7 @@
 	"wikieditor-toolbar-tool-table-preview": "झलक",
 	"wikieditor-toolbar-tool-table-insert": "समाविष्टकरा",
 	"wikieditor-toolbar-tool-table-cancel": "रद्द करा",
+	"wikieditor-toolbar-tool-table-example-text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec purus diam. Sed aliquam imperdiet nunc quis lacinia. Donec rutrum consectetur placerat. Sed volutpat neque non purus faucibus id ultricies enim euismod.",
 	"wikieditor-toolbar-tool-table-toomany": "$1 {{PLURAL:$1|कक्षा}}पेक्षा जास्त कक्ष(cell) असलेली सारणी (टेबल) या संवादगवाक्षातून शक्य नाही.",
 	"wikieditor-toolbar-tool-table-invalidnumber": "आपण रकाने(कॉलम) किंवा ओळींचा (रो) ग्राह्य  आकडा टाकला नाही.",
 	"wikieditor-toolbar-tool-table-zero": "आपण शून्य रकाने किंवा ओळींची सारणी टाकू शकत नाही.",

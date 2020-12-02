@@ -18,9 +18,11 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
+ * @license GPL-2.0-or-later
  * @since 1.26
  */
+
+use MediaWiki\MediaWikiServices;
 
 /**
  * This class formats protect log entries.
@@ -85,21 +87,25 @@ class ProtectLogFormatter extends LogFormatter {
 			return '';
 		}
 
-		// Show history link for all changes after the protection
+		// Show history link for pages that exist otherwise show nothing
 		$title = $this->entry->getTarget();
-		$links = [
-			$linkRenderer->makeLink( $title,
+		$links = [];
+		if ( $title->exists() ) {
+			$links [] = $linkRenderer->makeLink( $title,
 				$this->msg( 'hist' )->text(),
 				[],
 				[
 					'action' => 'history',
 					'offset' => $this->entry->getTimestamp(),
 				]
-			)
-		];
+			);
+		}
 
 		// Show change protection link
-		if ( $this->context->getUser()->isAllowed( 'protect' ) ) {
+		if ( MediaWikiServices::getInstance()
+				->getPermissionManager()
+				->userHasRight( $this->context->getUser(), 'protect' )
+		) {
 			$links[] = $linkRenderer->makeKnownLink(
 				$title,
 				$this->msg( 'protect_change' )->text(),
@@ -108,8 +114,13 @@ class ProtectLogFormatter extends LogFormatter {
 			);
 		}
 
-		return $this->msg( 'parentheses' )->rawParams(
-			$this->context->getLanguage()->pipeList( $links ) )->escaped();
+		if ( empty( $links ) ) {
+			return '';
+		} else {
+			return $this->msg( 'parentheses' )->rawParams(
+				$this->context->getLanguage()->pipeList( $links )
+			)->escaped();
+		}
 	}
 
 	protected function getParametersForApi() {
@@ -146,13 +157,13 @@ class ProtectLogFormatter extends LogFormatter {
 	}
 
 	public function formatParametersForApi() {
-		global $wgContLang;
-
 		$ret = parent::formatParametersForApi();
 		if ( isset( $ret['details'] ) && is_array( $ret['details'] ) ) {
+			$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 			foreach ( $ret['details'] as &$detail ) {
 				if ( isset( $detail['expiry'] ) ) {
-					$detail['expiry'] = $wgContLang->formatExpiry( $detail['expiry'], TS_ISO_8601, 'infinite' );
+					$detail['expiry'] = $contLang->
+						formatExpiry( $detail['expiry'], TS_ISO_8601, 'infinite' );
 				}
 			}
 		}
@@ -163,7 +174,7 @@ class ProtectLogFormatter extends LogFormatter {
 	/**
 	 * Create the protect description to show in the log formatter
 	 *
-	 * @param array $details
+	 * @param array[] $details
 	 * @return string
 	 */
 	public function createProtectDescription( array $details ) {

@@ -20,10 +20,22 @@
  * @file
  */
 
+use MediaWiki\ParamValidator\TypeDef\UserDef;
+use MediaWiki\User\UserIdentity;
+
 /**
  * @ingroup API
  */
 class ApiRollback extends ApiBase {
+
+	use ApiWatchlistTrait;
+
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$this->watchlistExpiryEnabled = $this->getConfig()->get( 'WatchlistExpiry' );
+		$this->watchlistMaxDuration = $this->getConfig()->get( 'WatchlistExpiryMaxDuration' );
+	}
 
 	/**
 	 * @var Title
@@ -31,7 +43,7 @@ class ApiRollback extends ApiBase {
 	private $mTitleObj = null;
 
 	/**
-	 * @var User
+	 * @var UserIdentity
 	 */
 	private $mUser = null;
 
@@ -55,8 +67,17 @@ class ApiRollback extends ApiBase {
 			}
 		}
 
+		// @TODO: remove this hack once rollback uses POST (T88044)
+		$fname = __METHOD__;
+		$trxLimits = $this->getConfig()->get( 'TrxProfilerLimits' );
+		$trxProfiler = Profiler::instance()->getTransactionProfiler();
+		$trxProfiler->redefineExpectations( $trxLimits['POST'], $fname );
+		DeferredUpdates::addCallableUpdate( function () use ( $trxProfiler, $trxLimits, $fname ) {
+			$trxProfiler->redefineExpectations( $trxLimits['PostSend-POST'], $fname );
+		} );
+
 		$retval = $pageObj->doRollback(
-			$this->getRbUser( $params ),
+			$this->getRbUser( $params )->getName(),
 			$summary,
 			$params['token'],
 			$params['markbot'],
@@ -69,23 +90,24 @@ class ApiRollback extends ApiBase {
 			$this->dieStatus( $this->errorArrayToStatus( $retval, $user ) );
 		}
 
-		$watch = 'preferences';
-		if ( isset( $params['watchlist'] ) ) {
-			$watch = $params['watchlist'];
-		}
+		$watch = $params['watchlist'] ?? 'preferences';
+		$watchlistExpiry = $this->getExpiryFromParams( $params );
 
 		// Watch pages
-		$this->setWatch( $watch, $titleObj, 'watchrollback' );
+		$this->setWatch( $watch, $titleObj, $user, 'watchrollback', $watchlistExpiry );
+
+		$currentRevisionRecord = $details['current-revision-record'];
+		$targetRevisionRecord = $details['target-revision-record'];
 
 		$info = [
 			'title' => $titleObj->getPrefixedText(),
-			'pageid' => intval( $details['current']->getPage() ),
+			'pageid' => $currentRevisionRecord->getPageId(),
 			'summary' => $details['summary'],
-			'revid' => intval( $details['newid'] ),
+			'revid' => (int)$details['newid'],
 			// The revision being reverted (previously the current revision of the page)
-			'old_revid' => intval( $details['current']->getID() ),
+			'old_revid' => $currentRevisionRecord->getID(),
 			// The revision being restored (the last revision before revision(s) by the reverted user)
-			'last_revid' => intval( $details['target']->getID() )
+			'last_revid' => $targetRevisionRecord->getID()
 		];
 
 		$this->getResult()->addValue( null, $this->getModuleName(), $info );
@@ -100,7 +122,7 @@ class ApiRollback extends ApiBase {
 	}
 
 	public function getAllowedParams() {
-		return [
+		$params = [
 			'title' => null,
 			'pageid' => [
 				ApiBase::PARAM_TYPE => 'integer'
@@ -111,19 +133,19 @@ class ApiRollback extends ApiBase {
 			],
 			'user' => [
 				ApiBase::PARAM_TYPE => 'user',
+				UserDef::PARAM_ALLOWED_USER_TYPES => [ 'name', 'ip', 'id', 'interwiki' ],
+				UserDef::PARAM_RETURN_OBJECT => true,
 				ApiBase::PARAM_REQUIRED => true
 			],
 			'summary' => '',
 			'markbot' => false,
-			'watchlist' => [
-				ApiBase::PARAM_DFLT => 'preferences',
-				ApiBase::PARAM_TYPE => [
-					'watch',
-					'unwatch',
-					'preferences',
-					'nochange'
-				],
-			],
+		];
+
+		// Params appear in the docs in the order they are defined,
+		// which is why this is here (we want it above the token param).
+		$params += $this->getWatchlistParams();
+
+		return $params + [
 			'token' => [
 				// Standard definition automatically inserted
 				ApiBase::PARAM_HELP_MSG_APPEND => [ 'api-help-param-token-webui' ],
@@ -138,20 +160,14 @@ class ApiRollback extends ApiBase {
 	/**
 	 * @param array $params
 	 *
-	 * @return string
+	 * @return UserIdentity
 	 */
-	private function getRbUser( array $params ) {
+	private function getRbUser( array $params ) : UserIdentity {
 		if ( $this->mUser !== null ) {
 			return $this->mUser;
 		}
 
-		// We need to be able to revert IPs, but getCanonicalName rejects them
-		$this->mUser = User::isIP( $params['user'] )
-			? $params['user']
-			: User::getCanonicalName( $params['user'] );
-		if ( !$this->mUser ) {
-			$this->dieWithError( [ 'apierror-invaliduser', wfEscapeWikiText( $params['user'] ) ] );
-		}
+		$this->mUser = $params['user'];
 
 		return $this->mUser;
 	}

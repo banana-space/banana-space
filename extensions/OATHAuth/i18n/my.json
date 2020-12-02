@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dr Lotus Black"
+		]
+	},
+	"oathauth-token": "တိုကင်",
+	"oathauth-auth-token-label": "တိုကင်",
+	"oathauth-user-not-found": "ဤအမည်ဖြင့် အသုံးပြုသူအကောင့်ကို မတွေ့ပါ",
+	"oauthauth-ui-no-module": "ဘာတစ်ခုမှ ပြုလုပ်ခွင့်မပေးထား",
+	"oathauth-ui-manage": "စီမံရန်",
+	"oathauth-enable-generic": "လုပ်ခွင့်ပြုရန်",
+	"oathauth-disable-generic": "ခွင့်မပြုပါနှင့်",
+	"oathauth-ui-available-modules": "ရရှိနိုင်သော နည်းလမ်းများ"
+}

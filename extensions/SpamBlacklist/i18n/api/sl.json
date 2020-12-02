@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334"
+		]
+	},
+	"apihelp-spamblacklist-description": "Ovrednoti enega ali več URL-jev s SpamBlacklist.",
+	"apihelp-spamblacklist-example-1": "Preveri dva URL-ja s črnim seznamom.",
+	"apihelp-spamblacklist-param-url": "URL-ji za primerjavo s črnim seznamom."
+}

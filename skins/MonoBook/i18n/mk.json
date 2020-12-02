@@ -7,5 +7,14 @@
 	"skinname-monobook": "Монобук",
 	"monobook-desc": "Класичното руво на МедијаВики од 2004 г., наречена по црнобелата слика на книга во позадината",
 	"monobook.css": "/* Тука поставениот CSS ќе се применува врз корисниците на рувото „Монобук“ */",
-	"monobook.js": "/* Тука поставениот JavaScript  ќе им се вчитува на корисниците што го користат рувото „Монобук“ */"
+	"monobook.js": "/* Тука поставениот JavaScript  ќе им се вчитува на корисниците што го користат рувото „Монобук“ */",
+	"monobook-jumptotop": "најгоре",
+	"monobook-jumptopersonal": "кориснички алатки",
+	"monobook-jumptonavigation": "Прејди на прегледникот",
+	"monobook-jumptosearch": "Прејди на пребарувањето",
+	"monobook-more-actions": "Повеќе",
+	"monobook-cactions-label": "Дејства врз страници",
+	"monobook-notifications-link": "Известувања ($1)",
+	"monobook-notifications-link-none": "Известувања",
+	"monobook-responsive-label": "Овозможи го одѕивниот изглед на рувото „Монобук“"
 }

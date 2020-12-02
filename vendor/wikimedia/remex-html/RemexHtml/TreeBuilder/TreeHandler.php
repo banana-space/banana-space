@@ -13,14 +13,14 @@ interface TreeHandler {
 	 * @param string|null $fragmentName The fragment tag name, or null to run
 	 *   in document mode.
 	 */
-	function startDocument( $fragmentNamespace, $fragmentName );
+	public function startDocument( $fragmentNamespace, $fragmentName );
 
 	/**
 	 * Called when parsing stops.
 	 *
 	 * @param int $pos The input string length, i.e. the past-the-end position.
 	 */
-	function endDocument( $pos );
+	public function endDocument( $pos );
 
 	/**
 	 * Insert characters.
@@ -43,7 +43,9 @@ interface TreeHandler {
 	 * @param int $sourceLength The length of the input which is consumed.
 	 *   The same caveats apply as for $sourceStart.
 	 */
-	function characters( $preposition, $ref, $text, $start, $length, $sourceStart, $sourceLength );
+	public function characters(
+		$preposition, $ref, $text, $start, $length, $sourceStart, $sourceLength
+	);
 
 	/**
 	 * Insert an element. The element name and attributes are given in the
@@ -72,7 +74,7 @@ interface TreeHandler {
 	 * @param int $sourceStart The input position
 	 * @param int $sourceLength The length of the input which is consumed
 	 */
-	function insertElement( $preposition, $ref, Element $element, $void,
+	public function insertElement( $preposition, $ref, Element $element, $void,
 		$sourceStart, $sourceLength );
 
 	/**
@@ -83,7 +85,7 @@ interface TreeHandler {
 	 * @param int $sourceStart The input position
 	 * @param int $sourceLength The length of the input which is consumed
 	 */
-	function endTag( Element $element, $sourceStart, $sourceLength );
+	public function endTag( Element $element, $sourceStart, $sourceLength );
 
 	/**
 	 * A valid DOCTYPE token was found.
@@ -98,7 +100,7 @@ interface TreeHandler {
 	 * @param int $sourceStart The input position
 	 * @param int $sourceLength The length of the input which is consumed
 	 */
-	function doctype( $name, $public, $system, $quirks, $sourceStart, $sourceLength );
+	public function doctype( $name, $public, $system, $quirks, $sourceStart, $sourceLength );
 
 	/**
 	 * Insert a comment
@@ -114,7 +116,7 @@ interface TreeHandler {
 	 * @param int $sourceStart The input position
 	 * @param int $sourceLength The length of the input which is consumed
 	 */
-	function comment( $preposition, $ref, $text, $sourceStart, $sourceLength );
+	public function comment( $preposition, $ref, $text, $sourceStart, $sourceLength );
 
 	/**
 	 * A parse error
@@ -124,7 +126,7 @@ interface TreeHandler {
 	 *   situation.
 	 * @param int $pos The input position at which the error occurred
 	 */
-	function error( $text, $pos );
+	public function error( $text, $pos );
 
 	/**
 	 * Add attributes to an existing element. This is used to update the
@@ -136,7 +138,7 @@ interface TreeHandler {
 	 * @param Attributes $attrs The new attributes to add
 	 * @param int $sourceStart The input position
 	 */
-	function mergeAttributes( Element $element, Attributes $attrs, $sourceStart );
+	public function mergeAttributes( Element $element, Attributes $attrs, $sourceStart );
 
 	/**
 	 * Remove a node from the tree, and all its children. This is only done
@@ -147,7 +149,7 @@ interface TreeHandler {
 	 * @param int $sourceStart The location in the source at which this
 	 *   action was triggered.
 	 */
-	function removeNode( Element $element, $sourceStart );
+	public function removeNode( Element $element, $sourceStart );
 
 	/**
 	 * Take all children of a given parent $element, and insert them as
@@ -159,6 +161,6 @@ interface TreeHandler {
 	 * @param int $sourceStart The location in the source at which this
 	 *   action was triggered.
 	 */
-	function reparentChildren( Element $element, Element $newParent, $sourceStart );
+	public function reparentChildren( Element $element, Element $newParent, $sourceStart );
 
 }

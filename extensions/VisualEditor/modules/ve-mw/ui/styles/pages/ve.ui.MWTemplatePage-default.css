@@ -1,0 +1,24 @@
+/*!
+ * VisualEditor MediaWiki UserInterface TemplatePage styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwTemplatePage-more {
+	display: none;
+	margin: 2.25em 0 0.5em 0;
+}
+
+.ve-ui-mwTemplatePage:last-child .ve-ui-mwTemplatePage-more {
+	display: block;
+}
+
+.ve-ui-mwTemplatePage-description {
+	color: #54595d;
+}
+
+.ve-ui-mwTemplatePage-description-extra,
+.ve-ui-mwTemplatePage-description-missing {
+	font-style: italic;
+}

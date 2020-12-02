@@ -28,7 +28,6 @@
 	"interwiki-cached": "Nakatago ang dato ng interwiki. Hindi maaari ang pagbago sa taguan.",
 	"interwiki_edit": "Baguhin",
 	"interwiki_reasonfield": "Dahilan:",
-	"interwiki_delquestion": "Binubura ang \"$1\"",
 	"interwiki_deleting": "Binubura mo ang unlaping \"$1\".",
 	"interwiki_deleted": "Matagumpay na natanggal ang unlaping \"$1\" mula sa tablang pangugnayang-wiki (''interwiki'').",
 	"interwiki_delfailed": "Hindi matanggal ang unlaping \"$1\" mula sa tablang pangugnayang-wiki (''interwiki'').",

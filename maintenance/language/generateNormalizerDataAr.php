@@ -23,10 +23,17 @@
 
 require_once __DIR__ . '/../Maintenance.php';
 
+use Wikimedia\StaticArrayWriter;
+
 /**
  * Generates the normalizer data file for Arabic.
  *
  * This data file is used after normalizing to NFC.
+ *
+ * Example usage:
+ *
+ *    curl 'https://unicode.org/Public/6.0.0/ucd/UnicodeData.txt' > /tmp/UnicodeData.txt
+ *    php generateNormalizerDataAr.php --unicode-data-file /tmp/UnicodeData.txt
  *
  * @ingroup MaintenanceLanguage
  */
@@ -35,7 +42,7 @@ class GenerateNormalizerDataAr extends Maintenance {
 		parent::__construct();
 		$this->addDescription( 'Generate the normalizer data file for Arabic' );
 		$this->addOption( 'unicode-data-file', 'The local location of the data file ' .
-			'from http://unicode.org/Public/UNIDATA/UnicodeData.txt', false, true );
+			'from https://unicode.org/Public/6.0.0/ucd/UnicodeData.txt', false, true );
 	}
 
 	public function getDbType() {
@@ -61,7 +68,7 @@ class GenerateNormalizerDataAr extends Maintenance {
 			$this->fatalError( 'Unable to open the data file.' );
 		}
 
-		// For the file format, see http://www.unicode.org/reports/tr44/
+		// For the file format, see https://www.unicode.org/reports/tr44/
 		$fieldNames = [
 			'Code',
 			'Name',
@@ -83,7 +90,7 @@ class GenerateNormalizerDataAr extends Maintenance {
 		$pairs = [];
 
 		$lineNum = 0;
-		while ( false !== ( $line = fgets( $file ) ) ) {
+		while ( ( $line = fgets( $file ) ) !== false ) {
 			++$lineNum;
 
 			# Strip comments
@@ -122,7 +129,12 @@ class GenerateNormalizerDataAr extends Maintenance {
 		}
 
 		global $IP;
-		file_put_contents( "$IP/serialized/normalize-ar.ser", serialize( $pairs ) );
+		$writer = new StaticArrayWriter();
+		file_put_contents( "$IP/languages/data/normalize-ar.php", $writer->create(
+			$pairs,
+			'File created by generateNormalizerDataAr.php'
+		) );
+
 		echo "ar: " . count( $pairs ) . " pairs written.\n";
 	}
 }

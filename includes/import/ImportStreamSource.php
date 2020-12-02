@@ -30,21 +30,27 @@ use MediaWiki\MediaWikiServices;
  * @ingroup SpecialPage
  */
 class ImportStreamSource implements ImportSource {
-	function __construct( $handle ) {
+	/** @var resource */
+	private $mHandle;
+
+	/**
+	 * @param resource $handle
+	 */
+	public function __construct( $handle ) {
 		$this->mHandle = $handle;
 	}
 
 	/**
 	 * @return bool
 	 */
-	function atEnd() {
+	public function atEnd() {
 		return feof( $this->mHandle );
 	}
 
 	/**
 	 * @return string
 	 */
-	function readChunk() {
+	public function readChunk() {
 		return fread( $this->mHandle, 32768 );
 	}
 
@@ -52,7 +58,7 @@ class ImportStreamSource implements ImportSource {
 	 * @param string $filename
 	 * @return Status
 	 */
-	static function newFromFile( $filename ) {
+	public static function newFromFile( $filename ) {
 		Wikimedia\suppressWarnings();
 		$file = fopen( $filename, 'rt' );
 		Wikimedia\restoreWarnings();
@@ -66,7 +72,7 @@ class ImportStreamSource implements ImportSource {
 	 * @param string $fieldname
 	 * @return Status
 	 */
-	static function newFromUpload( $fieldname = "xmlimport" ) {
+	public static function newFromUpload( $fieldname = "xmlimport" ) {
 		$upload =& $_FILES[$fieldname];
 
 		if ( $upload === null || !$upload['name'] ) {
@@ -74,20 +80,21 @@ class ImportStreamSource implements ImportSource {
 		}
 		if ( !empty( $upload['error'] ) ) {
 			switch ( $upload['error'] ) {
-				case 1:
-					# The uploaded file exceeds the upload_max_filesize directive in php.ini.
+				case UPLOAD_ERR_INI_SIZE:
+					// The uploaded file exceeds the upload_max_filesize directive in php.ini.
 					return Status::newFatal( 'importuploaderrorsize' );
-				case 2:
-					# The uploaded file exceeds the MAX_FILE_SIZE directive that
-					# was specified in the HTML form.
+				case UPLOAD_ERR_FORM_SIZE:
+					// The uploaded file exceeds the MAX_FILE_SIZE directive that
+					// was specified in the HTML form.
+					// FIXME This is probably never used since that directive was removed in 8e91c520?
 					return Status::newFatal( 'importuploaderrorsize' );
-				case 3:
-					# The uploaded file was only partially uploaded
+				case UPLOAD_ERR_PARTIAL:
+					// The uploaded file was only partially uploaded
 					return Status::newFatal( 'importuploaderrorpartial' );
-				case 6:
-					# Missing a temporary folder.
+				case UPLOAD_ERR_NO_TMP_DIR:
+					// Missing a temporary folder.
 					return Status::newFatal( 'importuploaderrortemp' );
-				# case else: # Currently impossible
+				// Other error codes get the generic 'importnofile' error message below
 			}
 
 		}
@@ -104,14 +111,14 @@ class ImportStreamSource implements ImportSource {
 	 * @param string $method
 	 * @return Status
 	 */
-	static function newFromURL( $url, $method = 'GET' ) {
+	public static function newFromURL( $url, $method = 'GET' ) {
 		global $wgHTTPImportTimeout;
-		wfDebug( __METHOD__ . ": opening $url\n" );
+		wfDebug( __METHOD__ . ": opening $url" );
 		# Use the standard HTTP fetch function; it times out
 		# quicker and sorts out user-agent problems which might
 		# otherwise prevent importing from large sites, such
 		# as the Wikimedia cluster, etc.
-		$data = Http::request(
+		$data = MediaWikiServices::getInstance()->getHttpRequestFactory()->request(
 			$method,
 			$url,
 			[

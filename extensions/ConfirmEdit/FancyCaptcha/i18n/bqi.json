@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Isevand",
 			"Mogoeilor"
 		]
 	},
-	"fancycaptcha-captcha": "ڤارسي أمنيتي",
-	"fancycaptcha-accountcreate": "سی پر و پیم کاری ویکی د ری وه ری حساو راس کنی خود انجوم، ایما وا نازاری دتو میهایم که کلیمه یایی که هان د جعوه ([[Special:رازینه کپچا/هومیاری|دونسمنیا هنی]]):ایچه بنیسیت",
-	"fancycaptcha-imgcaptcha-ph": "نڤشدإ مإن اي متن نأ ڤارڌ کو",
+	"fancycaptcha-captcha": "ڤارسی ٱمنیتی",
+	"fancycaptcha-accountcreate": "سی هیاری ڤاْ پٱلاْ کرڌن خودکار هساومؽنتوری،اؽما ڤا الخا زاْ اؽسا اْخویم کٱلیماٛ ناْ کاْ مؽن شؽڤات اْڤینین ناْ مؽن جٱڤاْ لٱلمی ڤامؽ کونین\n([[Special:Captcha/help|ڌونایٱل ڤؽشڌٱر]]):",
+	"fancycaptcha-imgcaptcha-ph": "نڤشداْ میٛن ای متن نٱ ڤارڌ کو",
 	"fancycaptcha-reload-text": "ز نۉ كردن"
 }

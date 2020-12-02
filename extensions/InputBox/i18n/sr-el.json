@@ -2,13 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Michaello",
-			"Milicevic01"
+			"Milicevic01",
+			"Zoranzoki21"
 		]
 	},
 	"inputbox-desc": "Omogući uključivanje prethodno definisanih HTML formi.",
 	"inputbox-error-no-type": "Niste odredili tip kutije za unos koju pravite.",
 	"inputbox-error-bad-type": "Tip „$1“ kutijice za unos podataka je nepoznat.\nMolimo vas da ga promenite na „create“, „comment“, „search“, „search2“ ili „fulltext“.",
-	"inputbox-tryexact": "Pokušaj tačno",
+	"inputbox-tryexact": "Pokušaj da nađeš tačan upit",
 	"inputbox-searchfulltext": "Pretraži ceo tekst",
 	"inputbox-createarticle": "Napravi stranicu",
 	"inputbox-postcomment": "Novi odeljak",

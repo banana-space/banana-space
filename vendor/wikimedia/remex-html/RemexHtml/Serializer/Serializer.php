@@ -3,10 +3,10 @@
 namespace RemexHtml\Serializer;
 
 use RemexHtml\PropGuard;
-use RemexHtml\TreeBuilder\TreeBuilder;
-use RemexHtml\TreeBuilder\Element;
 use RemexHtml\Tokenizer\Attributes;
 use RemexHtml\Tokenizer\PlainAttributes;
+use RemexHtml\TreeBuilder\Element;
+use RemexHtml\TreeBuilder\TreeBuilder;
 
 /**
  * A TreeHandler which builds a serialized representation of a document, by
@@ -39,7 +39,7 @@ class Serializer implements AbstractSerializer {
 	 * referred to by integer indexes. This is a way to emulate weak references,
 	 * to avoid circular references, allowing nodes to be freed.
 	 *
-	 * @var SerializerNode[integer]
+	 * @var SerializerNode[]
 	 * @internal
 	 */
 	protected $nodes = [];
@@ -127,6 +127,7 @@ class Serializer implements AbstractSerializer {
 				$this->result .= $this->serializeNode( $root, $child, false );
 			}
 		}
+		// @phan-suppress-next-line PhanTypeMismatchProperty
 		$this->root = null;
 		$this->nodes = [];
 	}
@@ -198,6 +199,7 @@ class Serializer implements AbstractSerializer {
 		if ( $element->userData ) {
 			// This element has already been inserted, this is a reparenting operation
 			$self = $element->userData;
+			'@phan-var SerializerNode $self'; /** @var SerializerNode $self */
 			$oldParent = $this->nodes[$self->parentId];
 			$oldChildren =& $oldParent->children;
 			$oldChildIndex = array_search( $self, $oldChildren, true );

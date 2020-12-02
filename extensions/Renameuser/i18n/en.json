@@ -3,8 +3,8 @@
 		"authors": []
 	},
 	"renameuser": "Rename user",
-	"renameuser-linkoncontribs": "rename user",
-	"renameuser-linkoncontribs-text": "Rename this user",
+	"renameuser-linkoncontribs": "rename {{GENDER:$1|user}}",
+	"renameuser-linkoncontribs-text": "Rename this {{GENDER:$1|user}}",
 	"renameuser-desc": "Adds a [[Special:RenameUser|special page]] to rename a user (need ''renameuser'' right)",
 	"renameuser-summary": "",
 	"renameuserold": "Current username:",

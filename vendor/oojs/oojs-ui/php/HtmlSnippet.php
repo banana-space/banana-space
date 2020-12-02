@@ -20,6 +20,7 @@ class HtmlSnippet {
 
 	/**
 	 * @param string $content HTML snippet
+	 * @param-taint $content exec_html
 	 */
 	public function __construct( $content ) {
 		if ( !is_string( $content ) ) {

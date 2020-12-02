@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lalotahes"
+		]
+	},
+	"categorytree-portlet": " ’a’apolen",
+	"categorytree-category": " ’a’apolen:",
+	"categorytree-mode-all": " saeboeh ye:myen",
+	"categorytree-expand": "pawSika:",
+	"categorytree-member-counts": "hani saeboeh  $1 ka ’a’apolan 、$2 ka ye:myen ki $3 ka tang’an",
+	"categorytree-num-categories": "$1 ’a’apolen",
+	"categorytree-num-pages": "$1 ye:myen",
+	"categorytree-num-files": "$1 tang’an"
+}

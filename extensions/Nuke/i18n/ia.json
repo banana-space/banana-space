@@ -16,14 +16,17 @@
 	"nuke-submit-user": "Listar paginas",
 	"nuke-submit-delete": "Deler selection",
 	"right-nuke": "Deler paginas in massa",
-	"nuke-select": "Seliger: $1",
 	"nuke-userorip": "Nomine de usator, adresse IP o vacue:",
 	"nuke-maxpages": "Numero maxime de paginas:",
 	"nuke-editby": "Create per [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
 	"nuke-deleted": "Le pagina '''$1''' ha essite delite.",
 	"nuke-not-deleted": "Le pagina [[:$1]] '''non poteva''' esser delite.",
 	"nuke-delete-more": "[[Special:Nuke|Deler plus paginas]]",
-	"nuke-pattern": "Patrono pro le nomine de pagina:",
-	"nuke-nopages-global": "Il non ha nove paginas in le [[Special:RecentChanges|modificationes recente]].",
-	"nuke-viewchanges": "vider modificationes"
+	"nuke-pattern": "Patrono SQL LIKE (p.ex. %) pro le nomine de pagina:",
+	"nuke-nopages-global": "Il non ha titulos de pagina que corresponde a tu recerca.",
+	"nuke-viewchanges": "vider modificationes",
+	"nuke-namespace": "Limitar al spatio de nomines:",
+	"nuke-linkoncontribs": "deletion in massa",
+	"nuke-linkoncontribs-text": "Deler tote le paginas del quales {{GENDER:$1|iste usator}} es le unic autor",
+	"nuke-confirm": "Tu es sur le puncto de deler {{PLURAL:$1|1 pagina|$1 paginas}}. Es tu secur de voler deler {{PLURAL:$1|lo|los}}?"
 }

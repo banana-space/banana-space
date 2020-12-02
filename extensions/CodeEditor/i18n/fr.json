@@ -2,17 +2,17 @@
 	"@metadata": {
 		"authors": [
 			"Gomoko",
-			"Sherbrooke",
-			"Urhixidur",
-			"Wladek92",
 			"McDutchie",
-			"Thibaut120094"
+			"Sherbrooke",
+			"Thibaut120094",
+			"Urhixidur",
+			"Wladek92"
 		]
 	},
 	"codeeditor-desc": "Coloration syntaxique dans les pages écrites en JavaScript et CSS en utilisant l’[https://ace.c9.io/ Éditeur ACE]",
 	"codeeditor-next-annotation": "Allez à la prochaine annotation",
 	"codeeditor-toolbar-toggle": "Activer/désactiver l’éditeur de code",
-	"codeeditor-save-with-errors": "Le document contient des erreurs. Êtes-vous sûr de vouloir l’enregistrer ?",
+	"codeeditor-save-with-errors": "Le document contient des erreurs. Êtes-vous sûr de vouloir l’enregistrer ?",
 	"codeeditor-invisibleChars-toggle": "Afficher/masquer les caractères invisibles",
 	"codeeditor-lineWrapping-toggle": "Activer/désactiver le repli de ligne",
 	"codeeditor-searchReplace-toggle": "Afficher/masquer l'outil de recherche et de remplacement",

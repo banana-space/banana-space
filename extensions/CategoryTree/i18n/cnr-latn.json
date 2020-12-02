@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bellatrix10"
+		]
+	},
+	"categorytree-expand": "raširi",
+	"categorytree-member-counts": "sadrži {{PLURAL:$1|1 potkategoriju|$1 potkategorije|$1 potkategorija}}, {{PLURAL:$2|1 stranicu|$2 stranice|$2 stranica}} i {{PLURAL:$3|1 datoteku|$3 datoteke|$3 datoteka}}",
+	"categorytree-num-categories": "$1 K",
+	"categorytree-num-pages": "$1 str.",
+	"categorytree-num-files": "$1 D"
+}

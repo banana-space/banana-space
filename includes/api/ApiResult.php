@@ -18,6 +18,8 @@
  * @file
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * This class represents the result of the API operations.
  * It simply wraps a nested array structure, adding some functions to simplify
@@ -36,7 +38,7 @@ class ApiResult implements ApiSerializable {
 	 * Override existing value in addValue(), setValue(), and similar functions
 	 * @since 1.21
 	 */
-	const OVERRIDE = 1;
+	public const OVERRIDE = 1;
 
 	/**
 	 * For addValue(), setValue() and similar functions, if the value does not
@@ -44,7 +46,7 @@ class ApiResult implements ApiSerializable {
 	 * (numerical index), all indexes will be renumbered.
 	 * @since 1.21
 	 */
-	const ADD_ON_TOP = 2;
+	public const ADD_ON_TOP = 2;
 
 	/**
 	 * For addValue() and similar functions, do not check size while adding a value
@@ -53,7 +55,7 @@ class ApiResult implements ApiSerializable {
 	 * Ignored for setValue() and similar functions.
 	 * @since 1.24
 	 */
-	const NO_SIZE_CHECK = 4;
+	public const NO_SIZE_CHECK = 4;
 
 	/**
 	 * For addValue(), setValue() and similar functions, do not validate data.
@@ -61,31 +63,31 @@ class ApiResult implements ApiSerializable {
 	 * probably wrong.
 	 * @since 1.25
 	 */
-	const NO_VALIDATE = 12;
+	public const NO_VALIDATE = self::NO_SIZE_CHECK | 8;
 
 	/**
 	 * Key for the 'indexed tag name' metadata item. Value is string.
 	 * @since 1.25
 	 */
-	const META_INDEXED_TAG_NAME = '_element';
+	public const META_INDEXED_TAG_NAME = '_element';
 
 	/**
 	 * Key for the 'subelements' metadata item. Value is string[].
 	 * @since 1.25
 	 */
-	const META_SUBELEMENTS = '_subelements';
+	public const META_SUBELEMENTS = '_subelements';
 
 	/**
 	 * Key for the 'preserve keys' metadata item. Value is string[].
 	 * @since 1.25
 	 */
-	const META_PRESERVE_KEYS = '_preservekeys';
+	public const META_PRESERVE_KEYS = '_preservekeys';
 
 	/**
 	 * Key for the 'content' metadata item. Value is string.
 	 * @since 1.25
 	 */
-	const META_CONTENT = '_content';
+	public const META_CONTENT = '_content';
 
 	/**
 	 * Key for the 'type' metadata item. Value is one of the following strings:
@@ -105,7 +107,7 @@ class ApiResult implements ApiSerializable {
 	 *    [{"name":key,"*":value}] in JSON. META_KVP_KEY_NAME must also be set.
 	 * @since 1.25
 	 */
-	const META_TYPE = '_type';
+	public const META_TYPE = '_type';
 
 	/**
 	 * Key for the metadata item whose value specifies the name used for the
@@ -114,7 +116,7 @@ class ApiResult implements ApiSerializable {
 	 * Value is string.
 	 * @since 1.25
 	 */
-	const META_KVP_KEY_NAME = '_kvpkeyname';
+	public const META_KVP_KEY_NAME = '_kvpkeyname';
 
 	/**
 	 * Key for the metadata item that indicates that the KVP key should be
@@ -124,42 +126,30 @@ class ApiResult implements ApiSerializable {
 	 * Value is boolean.
 	 * @since 1.26
 	 */
-	const META_KVP_MERGE = '_kvpmerge';
+	public const META_KVP_MERGE = '_kvpmerge';
 
 	/**
 	 * Key for the 'BC bools' metadata item. Value is string[].
 	 * Note no setter is provided.
 	 * @since 1.25
 	 */
-	const META_BC_BOOLS = '_BC_bools';
+	public const META_BC_BOOLS = '_BC_bools';
 
 	/**
 	 * Key for the 'BC subelements' metadata item. Value is string[].
 	 * Note no setter is provided.
 	 * @since 1.25
 	 */
-	const META_BC_SUBELEMENTS = '_BC_subelements';
+	public const META_BC_SUBELEMENTS = '_BC_subelements';
 
 	private $data, $size, $maxSize;
 	private $errorFormatter;
 
-	// Deprecated fields
-	private $checkingSize, $mainForContinuation;
-
 	/**
 	 * @param int|bool $maxSize Maximum result "size", or false for no limit
-	 * @since 1.25 Takes an integer|bool rather than an ApiMain
 	 */
 	public function __construct( $maxSize ) {
-		if ( $maxSize instanceof ApiMain ) {
-			wfDeprecated( 'ApiMain to ' . __METHOD__, '1.25' );
-			$this->errorFormatter = $maxSize->getErrorFormatter();
-			$this->mainForContinuation = $maxSize;
-			$maxSize = $maxSize->getConfig()->get( 'APIMaxResultSize' );
-		}
-
 		$this->maxSize = $maxSize;
-		$this->checkingSize = true;
 		$this->reset();
 	}
 
@@ -330,8 +320,6 @@ class ApiResult implements ApiSerializable {
 	 * @return array|mixed|string
 	 */
 	private static function validateValue( $value ) {
-		global $wgContLang;
-
 		if ( is_object( $value ) ) {
 			// Note we use is_callable() here instead of instanceof because
 			// ApiSerializable is an informal protocol (see docs there for details).
@@ -374,7 +362,7 @@ class ApiResult implements ApiSerializable {
 		} elseif ( is_float( $value ) && !is_finite( $value ) ) {
 			throw new InvalidArgumentException( 'Cannot add non-finite floats to ApiResult' );
 		} elseif ( is_string( $value ) ) {
-			$value = $wgContLang->normalize( $value );
+			$value = MediaWikiServices::getInstance()->getContentLanguage()->normalize( $value );
 		} elseif ( $value !== null && !is_scalar( $value ) ) {
 			$type = gettype( $value );
 			if ( is_resource( $value ) ) {
@@ -405,7 +393,7 @@ class ApiResult implements ApiSerializable {
 	public function addValue( $path, $name, $value, $flags = 0 ) {
 		$arr = &$this->path( $path, ( $flags & self::ADD_ON_TOP ) ? 'prepend' : 'append' );
 
-		if ( $this->checkingSize && !( $flags & self::NO_SIZE_CHECK ) ) {
+		if ( !( $flags & self::NO_SIZE_CHECK ) ) {
 			// self::size needs the validated value. Then flag
 			// to not re-validate later.
 			$value = self::validateValue( $value );
@@ -459,7 +447,7 @@ class ApiResult implements ApiSerializable {
 			$name = array_pop( $path );
 		}
 		$ret = self::unsetValue( $this->path( $path, 'dummy' ), $name );
-		if ( $this->checkingSize && !( $flags & self::NO_SIZE_CHECK ) ) {
+		if ( !( $flags & self::NO_SIZE_CHECK ) ) {
 			$newsize = $this->size - self::size( $ret );
 			$this->size = max( $newsize, 0 );
 		}
@@ -498,7 +486,7 @@ class ApiResult implements ApiSerializable {
 			throw new InvalidArgumentException( 'Content value must be named' );
 		}
 		$this->addContentField( $path, $name, $flags );
-		$this->addValue( $path, $name, $value, $flags );
+		return $this->addValue( $path, $name, $value, $flags );
 	}
 
 	/**
@@ -514,7 +502,7 @@ class ApiResult implements ApiSerializable {
 			self::OVERRIDE | self::NO_SIZE_CHECK );
 	}
 
-	/**@}*/
+	/** @} */
 
 	/************************************************************************//**
 	 * @name   Metadata
@@ -723,7 +711,7 @@ class ApiResult implements ApiSerializable {
 	 * @since 1.25
 	 * @param array &$arr
 	 * @param string $type See ApiResult::META_TYPE
-	 * @param string $kvpKeyName See ApiResult::META_KVP_KEY_NAME
+	 * @param string|null $kvpKeyName See ApiResult::META_KVP_KEY_NAME
 	 */
 	public static function setArrayType( array &$arr, $type, $kvpKeyName = null ) {
 		if ( !in_array( $type, [
@@ -742,7 +730,7 @@ class ApiResult implements ApiSerializable {
 	 * @since 1.25
 	 * @param array|string|null $path See ApiResult::addValue()
 	 * @param string $tag See ApiResult::META_TYPE
-	 * @param string $kvpKeyName See ApiResult::META_KVP_KEY_NAME
+	 * @param string|null $kvpKeyName See ApiResult::META_KVP_KEY_NAME
 	 */
 	public function addArrayType( $path, $tag, $kvpKeyName = null ) {
 		$arr = &$this->path( $path );
@@ -754,7 +742,7 @@ class ApiResult implements ApiSerializable {
 	 * @since 1.25
 	 * @param array &$arr
 	 * @param string $type See ApiResult::META_TYPE
-	 * @param string $kvpKeyName See ApiResult::META_KVP_KEY_NAME
+	 * @param string|null $kvpKeyName See ApiResult::META_KVP_KEY_NAME
 	 */
 	public static function setArrayTypeRecursive( array &$arr, $type, $kvpKeyName = null ) {
 		self::setArrayType( $arr, $type, $kvpKeyName );
@@ -770,14 +758,14 @@ class ApiResult implements ApiSerializable {
 	 * @since 1.25
 	 * @param array|string|null $path See ApiResult::addValue()
 	 * @param string $tag See ApiResult::META_TYPE
-	 * @param string $kvpKeyName See ApiResult::META_KVP_KEY_NAME
+	 * @param string|null $kvpKeyName See ApiResult::META_KVP_KEY_NAME
 	 */
 	public function addArrayTypeRecursive( $path, $tag, $kvpKeyName = null ) {
 		$arr = &$this->path( $path );
 		self::setArrayTypeRecursive( $arr, $tag, $kvpKeyName );
 	}
 
-	/**@}*/
+	/** @} */
 
 	/************************************************************************//**
 	 * @name   Utility
@@ -804,11 +792,11 @@ class ApiResult implements ApiSerializable {
 	 * @return array|object
 	 */
 	protected static function applyTransformations( array $dataIn, array $transforms ) {
-		$strip = isset( $transforms['Strip'] ) ? $transforms['Strip'] : 'none';
+		$strip = $transforms['Strip'] ?? 'none';
 		if ( $strip === 'base' ) {
 			$transforms['Strip'] = 'none';
 		}
-		$transformTypes = isset( $transforms['Types'] ) ? $transforms['Types'] : null;
+		$transformTypes = $transforms['Types'] ?? null;
 		if ( $transformTypes !== null && !is_array( $transformTypes ) ) {
 			throw new InvalidArgumentException( __METHOD__ . ':Value for "Types" must be an array' );
 		}
@@ -954,9 +942,7 @@ class ApiResult implements ApiSerializable {
 
 				case 'kvp':
 				case 'BCkvp':
-					$key = isset( $metadata[self::META_KVP_KEY_NAME] )
-						? $metadata[self::META_KVP_KEY_NAME]
-						: $transformTypes['ArmorKVP'];
+					$key = $metadata[self::META_KVP_KEY_NAME] ?? $transformTypes['ArmorKVP'];
 					$valKey = isset( $transforms['BC'] ) ? '*' : 'value';
 					$assocAsObject = !empty( $transformTypes['AssocAsObject'] );
 					$merge = !empty( $metadata[self::META_KVP_MERGE] );
@@ -1052,7 +1038,7 @@ class ApiResult implements ApiSerializable {
 	 *
 	 * @since 1.25
 	 * @param array|object $data
-	 * @param array &$metadata Store metadata here, if provided
+	 * @param array|null &$metadata Store metadata here, if provided
 	 * @return array|object
 	 */
 	public static function stripMetadataNonRecursive( $data, &$metadata = null ) {
@@ -1219,7 +1205,7 @@ class ApiResult implements ApiSerializable {
 		}
 	}
 
-	/**@}*/
+	/** @} */
 
 }
 

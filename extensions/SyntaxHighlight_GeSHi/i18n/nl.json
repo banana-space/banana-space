@@ -1,16 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
-			"Siebrand",
-			"Tvdm",
+			"Bdijkstra",
+			"Mainframe98",
+			"PonkoSasuke",
 			"Romaine",
 			"SPQRobin",
-			"Mainframe98"
+			"Siebrand",
+			"Tvdm"
 		]
 	},
 	"syntaxhighlight-desc": "Voorziet in het markeren van syntaxis voor <code>&lt;syntaxhighlight&gt;</code> met [http://pygments.org/ Pygments]",
 	"syntaxhighlight-error-category": "Pagina's met fouten in de syntaxmarkering",
 	"syntaxhighlight-error-category-desc": "Er ging iets fout tijdens het markeren van de code op de pagina.",
+	"syntaxhighlight-enclose-category": "Pagina's die verouderde enclose attributen gebruiken",
+	"syntaxhighlight-enclose-category-desc": "De syntaxmarkering op de pagina gebruikt verouderde enclose syntax",
+	"syntaxhighlight-source-category": "Pagina's die verouderde source-labels gebruiken",
+	"syntaxhighlight-source-category-desc": "De syntaxmarkering op de pagina gebruikt verouderde source labels.",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Code",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Taal",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(Geen)",

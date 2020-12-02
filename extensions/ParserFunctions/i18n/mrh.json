@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Laitei",
+			"Teitei Para"
+		]
+	},
+	"pfunc_expr_unrecognised_word": "Palâsana pâpa: Apy leipa châfâ \"$1\".",
+	"pfunc_expr_missing_operand": "Palâsana pâpa: $1 châta operand leipa",
+	"pfunc_expr_unrecognised_punctuation": "Palâsapa adoleina:A py leipa chârohna ngiana\"$1\"."
+}

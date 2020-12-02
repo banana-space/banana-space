@@ -5,8 +5,6 @@
 		]
 	},
 	"multimediaviewer-desc": "Vis større storleikar av miniatyrbilete i eit fullskjermgrensesnitt.",
-	"multimediaviewer-pref": "Medieframsynar",
-	"multimediaviewer-pref-desc": "Betra medievisingsopplevinga di med dette nye verktøyet. Det viser fram bilete i større storleikar på sider som har miniatyrbilete. Bileta vert viste i eit betre overlagt fullskjermsgrensesnitt og kan òg visast som fullskjerm.",
 	"multimediaviewer-optin-pref": "Slå på <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About medieframsynaren]</span>",
 	"multimediaviewer-file-page": "Gå til den tilhøyrande filsida",
 	"multimediaviewer-repository-local": "Fleire detaljar",

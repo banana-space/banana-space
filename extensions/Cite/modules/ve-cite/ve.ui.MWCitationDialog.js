@@ -30,7 +30,7 @@ OO.inheritClass( ve.ui.MWCitationDialog, ve.ui.MWTemplateDialog );
 
 /* Static Properties */
 
-ve.ui.MWCitationDialog.static.name = 'citation';
+ve.ui.MWCitationDialog.static.name = 'cite';
 
 /* Methods */
 
@@ -68,7 +68,12 @@ ve.ui.MWCitationDialog.prototype.getSelectedNode = function () {
 			leaves[ 0 ];
 	}
 
-	return transclusionNode || null;
+	// Only use the selected node if it is the same template as this dialog expects
+	if ( transclusionNode && transclusionNode.isSingleTemplate( this.citationTemplate ) ) {
+		return transclusionNode;
+	}
+
+	return null;
 };
 
 /**
@@ -80,6 +85,8 @@ ve.ui.MWCitationDialog.prototype.initialize = function ( data ) {
 
 	// HACK: Use the same styling as single-mode transclusion dialog - this should be generalized
 	this.$content.addClass( 've-ui-mwTransclusionDialog-single' );
+
+	this.$content.on( 'change', this.onInputChange.bind( this ) );
 };
 
 /**
@@ -87,57 +94,48 @@ ve.ui.MWCitationDialog.prototype.initialize = function ( data ) {
  */
 ve.ui.MWCitationDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWCitationDialog.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.first( function () {
 			data = data || {};
 			this.inDialog = data.inDialog;
+			this.citationTemplate = data.template;
+			this.citationTitle = data.title;
+
+			this.trackedCitationInputChange = false;
+		}, this )
+		.next( function () {
+			this.updateTitle();
 
 			// Initialization
-			if ( this.selectedNode ) {
-				this.referenceNode = this.getReferenceNode();
-				if ( this.referenceNode ) {
-					this.referenceModel = ve.dm.MWReferenceModel.static.newFromReferenceNode(
-						this.referenceNode
-					);
-				}
+			this.referenceNode = this.getReferenceNode();
+			if ( this.referenceNode ) {
+				this.referenceModel = ve.dm.MWReferenceModel.static.newFromReferenceNode(
+					this.referenceNode
+				);
 			}
-			this.actions.forEach( { actions: 'insert' }, function ( action ) {
-				action.setLabel( ve.msg( 'visualeditor-dialog-action-insert' ) );
-			} );
 		}, this );
 };
 
-ve.ui.MWCitationDialog.prototype.onTransclusionReady = function () {
-	// Parent method
-	ve.ui.MWCitationDialog.super.prototype.onTransclusionReady.call( this );
-
-	if ( !this.hasUsefulParameter() ) {
-		this.actions.setAbilities( { apply: false, insert: false } );
+/**
+ * @inheritdoc
+ */
+ve.ui.MWCitationDialog.prototype.updateTitle = function () {
+	if ( this.citationTitle ) {
+		this.title.setLabel( this.citationTitle );
+	} else {
+		// Parent method
+		ve.ui.MWCitationDialog.super.prototype.updateTitle.call( this );
 	}
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.MWCitationDialog.prototype.setPageByName = function ( param ) {
-	var hasUsefulParameter = this.hasUsefulParameter();
-
-	// Parent method
-	ve.ui.MWCitationDialog.super.prototype.setPageByName.call( this, param );
-
-	this.actions.setAbilities( { apply: hasUsefulParameter, insert: hasUsefulParameter } );
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.MWCitationDialog.prototype.onAddParameterBeforeLoad = function ( page ) {
-	var dialog = this,
-		hasUsefulParameter = this.hasUsefulParameter();
-
-	page.preLoad = true;
-	page.valueInput.on( 'change', function () {
-		dialog.actions.setAbilities( { apply: hasUsefulParameter, insert: hasUsefulParameter } );
-	} );
+ve.ui.MWCitationDialog.prototype.setApplicableStatus = function () {
+	ve.ui.MWCitationDialog.super.prototype.setApplicableStatus.call( this );
+	// Parent method disables 'done' if no changes were made (this is okay for us), and
+	// disables 'insert' if transclusion is empty (but it is never empty in our case).
+	// Instead, disable 'insert' if no parameters were added.
+	this.actions.setAbilities( { insert: this.hasUsefulParameter() } );
 };
 
 /**
@@ -146,17 +144,18 @@ ve.ui.MWCitationDialog.prototype.onAddParameterBeforeLoad = function ( page ) {
  * @return {boolean}
  */
 ve.ui.MWCitationDialog.prototype.hasUsefulParameter = function () {
-	var foundUseful = false;
-	$.each( this.bookletLayout.pages, function () {
+	var name, page;
+
+	for ( name in this.bookletLayout.pages ) {
+		page = this.bookletLayout.pages[ name ];
 		if (
-			this instanceof ve.ui.MWParameterPage &&
-			( !this.preLoad || this.valueInput.getValue() !== '' )
+			page instanceof ve.ui.MWParameterPage &&
+			page.valueInput.getValue() !== ''
 		) {
-			foundUseful = true;
-			return false;
+			return true;
 		}
-	} );
-	return foundUseful;
+	}
+	return false;
 };
 
 /**
@@ -166,16 +165,26 @@ ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
 	var dialog = this;
 	if (
 		this.inDialog !== 'reference' &&
-		( action === 'apply' || action === 'insert' )
+		( action === 'done' || action === 'insert' )
 	) {
 		return new OO.ui.Process( function () {
 			var deferred = $.Deferred();
 			dialog.checkRequiredParameters().done( function () {
-				var item,
+				var item, refDoc,
 					surfaceModel = dialog.getFragment().getSurface(),
 					doc = surfaceModel.getDocument(),
 					internalList = doc.getInternalList(),
 					obj = dialog.transclusionModel.getPlainObject();
+
+				// We had a reference, but no template node (or wrong kind of template node)
+				if ( dialog.referenceModel && !dialog.selectedNode ) {
+					refDoc = dialog.referenceModel.getDocument();
+					// Empty the existing reference, whatever it contained. This allows the dialog to be
+					// used for arbitrary references (to replace their contents with a citation).
+					refDoc.commit(
+						ve.dm.TransactionBuilder.static.newFromRemoval( refDoc, refDoc.getDocumentRange(), true )
+					);
+				}
 
 				if ( !dialog.referenceModel ) {
 					// Collapse returns a new fragment, so update dialog.fragment
@@ -201,7 +210,7 @@ ve.ui.MWCitationDialog.prototype.getActionProcess = function ( action ) {
 							// item covers the entire paragraph so we have to get the range of it's
 							// first (and empty) child
 							dialog.getFragment().clone(
-								new ve.dm.LinearSelection( doc, item.getChildren()[ 0 ].getRange() )
+								new ve.dm.LinearSelection( item.getChildren()[ 0 ].getRange() )
 							),
 							'inline'
 						);
@@ -239,3 +248,19 @@ ve.ui.MWCitationDialog.prototype.getTeardownProcess = function ( data ) {
 			this.referenceNode = null;
 		}, this );
 };
+
+/**
+ * Handle change events on the transclusion inputs
+ *
+ * @param {jQuery.Event} ev The browser event
+ */
+ve.ui.MWCitationDialog.prototype.onInputChange = function () {
+	if ( !this.trackedCitationInputChange ) {
+		ve.track( 'activity.' + this.constructor.static.name, { action: 'manual-template-input' } );
+		this.trackedCitationInputChange = true;
+	}
+};
+
+/* Registration */
+
+ve.ui.windowFactory.register( ve.ui.MWCitationDialog );

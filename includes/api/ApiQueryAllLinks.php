@@ -20,6 +20,8 @@
  * @file
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Query module to enumerate links from all pages together.
  *
@@ -90,7 +92,7 @@ class ApiQueryAllLinks extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @param ApiPageSet $resultPageSet
+	 * @param ApiPageSet|null $resultPageSet
 	 * @return void
 	 */
 	private function run( $resultPageSet = null ) {
@@ -129,7 +131,7 @@ class ApiQueryAllLinks extends ApiQueryGeneratorBase {
 			$this->addWhereFld( $pfx . 'namespace', $namespace );
 		}
 
-		$continue = !is_null( $params['continue'] );
+		$continue = $params['continue'] !== null;
 		if ( $continue ) {
 			$continueArr = explode( '|', $params['continue'] );
 			$op = $params['dir'] == 'descending' ? '<' : '>';
@@ -140,7 +142,7 @@ class ApiQueryAllLinks extends ApiQueryGeneratorBase {
 			} else {
 				$this->dieContinueUsageIf( count( $continueArr ) != 2 );
 				$continueTitle = $db->addQuotes( $continueArr[0] );
-				$continueFrom = intval( $continueArr[1] );
+				$continueFrom = (int)$continueArr[1];
 				$this->addWhere(
 					"{$pfx}{$fieldTitle} $op $continueTitle OR " .
 					"({$pfx}{$fieldTitle} = $continueTitle AND " .
@@ -150,10 +152,10 @@ class ApiQueryAllLinks extends ApiQueryGeneratorBase {
 		}
 
 		// 'continue' always overrides 'from'
-		$from = ( $continue || $params['from'] === null ? null :
-			$this->titlePartToKey( $params['from'], $namespace ) );
-		$to = ( $params['to'] === null ? null :
-			$this->titlePartToKey( $params['to'], $namespace ) );
+		$from = $continue || $params['from'] === null ? null :
+			$this->titlePartToKey( $params['from'], $namespace );
+		$to = $params['to'] === null ? null :
+			$this->titlePartToKey( $params['to'], $namespace );
 		$this->addWhereRange( $pfx . $fieldTitle, 'newer', $from, $to );
 
 		if ( isset( $params['prefix'] ) ) {
@@ -183,6 +185,20 @@ class ApiQueryAllLinks extends ApiQueryGeneratorBase {
 
 		$res = $this->select( __METHOD__ );
 
+		// Get gender information
+		if ( $res->numRows() && $resultPageSet === null ) {
+			$services = MediaWikiServices::getInstance();
+			if ( $services->getNamespaceInfo()->hasGenderDistinction( $namespace ) ) {
+				$users = [];
+				foreach ( $res as $row ) {
+					$users[] = $row->pl_title;
+				}
+				if ( $users !== [] ) {
+					$services->getGenderCache()->doQuery( $users, __METHOD__ );
+				}
+			}
+		}
+
 		$pageids = [];
 		$titles = [];
 		$count = 0;
@@ -199,12 +215,12 @@ class ApiQueryAllLinks extends ApiQueryGeneratorBase {
 				break;
 			}
 
-			if ( is_null( $resultPageSet ) ) {
+			if ( $resultPageSet === null ) {
 				$vals = [
 					ApiResult::META_TYPE => 'assoc',
 				];
 				if ( $fld_ids ) {
-					$vals['fromid'] = intval( $row->pl_from );
+					$vals['fromid'] = (int)$row->pl_from;
 				}
 				if ( $fld_title ) {
 					$title = Title::makeTitle( $namespace, $row->pl_title );
@@ -231,7 +247,7 @@ class ApiQueryAllLinks extends ApiQueryGeneratorBase {
 			}
 		}
 
-		if ( is_null( $resultPageSet ) ) {
+		if ( $resultPageSet === null ) {
 			$result->addIndexedTagName( [ 'query', $this->getModuleName() ], $this->indexTag );
 		} elseif ( $params['unique'] ) {
 			$resultPageSet->populateFromTitles( $titles );
@@ -291,7 +307,7 @@ class ApiQueryAllLinks extends ApiQueryGeneratorBase {
 
 		return [
 			"action=query&list={$name}&{$p}from=B&{$p}prop=ids|title"
-				=> "apihelp-$path-example-B",
+				=> "apihelp-$path-example-b",
 			"action=query&list={$name}&{$p}unique=&{$p}from=B"
 				=> "apihelp-$path-example-unique",
 			"action=query&generator={$name}&g{$p}unique=&g{$p}from=B"

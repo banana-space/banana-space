@@ -15,40 +15,23 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "parserhook",
 	"requires": {
-		"MediaWiki": ">= 1.30.0"
+		"MediaWiki": ">= 1.34.0"
 	},
 	"MessagesDirs": {
-		"cite": "i18n",
-		"ve-cite": "modules/ve-cite/i18n"
-	},
-	"APIPropModules": {
-		"references": {
-			"class": "ApiQueryReferences"
-		}
+		"Cite": [
+			"i18n",
+			"modules/ve-cite/i18n"
+		]
 	},
 	"Hooks": {
-		"ParserFirstCallInit": [
-			"Cite::setHooks"
-		],
-		"ContentHandlerDefaultModelFor": [
-			"CiteHooks::onContentHandlerDefaultModelFor"
-		],
-		"ResourceLoaderTestModules": [
-			"CiteHooks::onResourceLoaderTestModules"
-		],
-		"ResourceLoaderRegisterModules": [
-			"CiteHooks::onResourceLoaderRegisterModules"
-		],
-		"LinksUpdate": [
-			"CiteHooks::onLinksUpdate"
-		],
-		"LinksUpdateComplete": [
-			"CiteHooks::onLinksUpdateComplete"
-		],
-		"ResourceLoaderGetConfigVars": [
-			"CiteHooks::onResourceLoaderGetConfigVars"
-		],
-		"APIQuerySiteInfoGeneralInfo": "CiteHooks::onAPIQuerySiteInfoGeneralInfo"
+		"APIQuerySiteInfoGeneralInfo": "Cite\\Hooks\\CiteHooks::onAPIQuerySiteInfoGeneralInfo",
+		"ContentHandlerDefaultModelFor": "Cite\\Hooks\\CiteHooks::onContentHandlerDefaultModelFor",
+		"ParserAfterParse": "Cite\\Hooks\\CiteParserHooks::onParserAfterParse",
+		"ParserClearState": "Cite\\Hooks\\CiteParserHooks::onParserClearStateOrCloned",
+		"ParserCloned": "Cite\\Hooks\\CiteParserHooks::onParserClearStateOrCloned",
+		"ParserFirstCallInit": "Cite\\Hooks\\CiteParserHooks::onParserFirstCallInit",
+		"ResourceLoaderGetConfigVars": "Cite\\Hooks\\CiteHooks::onResourceLoaderGetConfigVars",
+		"ResourceLoaderRegisterModules": "Cite\\Hooks\\CiteHooks::onResourceLoaderRegisterModules"
 	},
 	"ResourceModules": {
 		"ext.cite.styles": {
@@ -66,16 +49,8 @@
 				"mobile"
 			]
 		},
-		"ext.cite.a11y": {
-			"scripts": "ext.cite.a11y.js",
-			"styles": "ext.cite.a11y.css",
-			"messages": [
-				"cite_references_link_accessibility_label",
-				"cite_references_link_many_accessibility_label"
-			]
-		},
 		"ext.cite.style": {
-			"class": "CiteCSSFileModule",
+			"class": "Cite\\ResourceLoader\\CiteCSSFileModule",
 			"styles": "ext.cite.style.css",
 			"targets": [
 				"desktop",
@@ -87,30 +62,63 @@
 		"localBasePath": "modules",
 		"remoteExtPath": "Cite/modules"
 	},
-	"VisualEditorPluginModules": [
-		"ext.cite.visualEditor"
-	],
+	"QUnitTestModule": {
+		"localBasePath": "modules/ve-cite/tests",
+		"remoteExtPath": "Cite/modules/ve-cite/tests",
+		"scripts": [
+			"ve.dm.citeExample.js",
+			"ve.dm.Converter.test.js",
+			"ve.dm.InternalList.test.js",
+			"ve.dm.Transaction.test.js",
+			"ve.ui.DiffElement.test.js",
+			"ve.ui.MWWikitextStringTransferHandler.test.js"
+		],
+		"dependencies": [
+			"ext.cite.visualEditor",
+			"test.VisualEditor"
+		]
+	},
+	"attributes": {
+		"CodeMirror": {
+			"TagModes": {
+				"ref": "text/mediawiki"
+			}
+		},
+		"EventLogging": {
+			"Schemas": {
+				"ReferencePreviewsBaseline": 19489336,
+				"ReferencePreviewsCite": 19489328
+			}
+		},
+		"VisualEditor": {
+			"PluginModules": [
+				"ext.cite.visualEditor"
+			]
+		}
+	},
 	"ConfigRegistry": {
 		"cite": "GlobalVarConfig::newInstance"
 	},
 	"config": {
-		"CiteStoreReferencesData": false,
-		"CiteCacheReferencesDataOnParse": false,
-		"CiteVisualEditorOtherGroup": false,
-		"CiteResponsiveReferences": true
+		"CiteBookReferencing": {
+			"description": "Development feature flag for Book Referencing, a way to nest citations. Please don't enable in production.",
+			"public": true,
+			"value": false
+		},
+		"CiteVisualEditorOtherGroup": {
+			"public": true,
+			"value": false
+		},
+		"CiteResponsiveReferences": {
+			"public": true,
+			"value": true
+		}
 	},
-	"AutoloadClasses": {
-		"ApiQueryReferences": "includes/ApiQueryReferences.php",
-		"Cite": "includes/Cite.php",
-		"CiteHooks": "includes/CiteHooks.php",
-		"CiteDataModule": "includes/CiteDataModule.php",
-		"CiteCSSFileModule": "includes/CiteCSSFileModule.php"
+	"AutoloadNamespaces": {
+		"Cite\\": "src/"
 	},
 	"TrackingCategories": [
 		"cite-tracking-category-cite-error"
 	],
-	"CodeMirrorTagModes": {
-		"ref": "text/mediawiki"
-	},
-	"manifest_version": 1
+	"manifest_version": 2
 }

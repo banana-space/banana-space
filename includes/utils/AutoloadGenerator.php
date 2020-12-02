@@ -1,4 +1,22 @@
 <?php
+/**
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * @file
+ */
 
 /**
  * Accepts a list of files and directories to search for
@@ -14,8 +32,8 @@
  *     $gen->getAutoload();
  */
 class AutoloadGenerator {
-	const FILETYPE_JSON = 'json';
-	const FILETYPE_PHP = 'php';
+	private const FILETYPE_JSON = 'json';
+	private const FILETYPE_PHP = 'php';
 
 	/**
 	 * @var string Root path of the project being scanned for classes
@@ -50,6 +68,13 @@ class AutoloadGenerator {
 	protected $excludePaths = [];
 
 	/**
+	 * Configured PSR4 namespaces
+	 *
+	 * @var string[] namespace => path
+	 */
+	protected $psr4Namespaces = [];
+
+	/**
 	 * @param string $basepath Root path of the project being scanned for classes
 	 * @param array|string $flags
 	 *
@@ -76,6 +101,22 @@ class AutoloadGenerator {
 	public function setExcludePaths( array $paths ) {
 		foreach ( $paths as $path ) {
 			$this->excludePaths[] = self::normalizePathSeparator( $path );
+		}
+	}
+
+	/**
+	 * Set PSR4 namespaces
+	 *
+	 * Unlike self::setExcludePaths(), this will only skip outputting the
+	 * autoloader entry when the namespace matches the path.
+	 *
+	 * @since 1.32
+	 * @param string[] $namespaces Associative array mapping namespace to path
+	 */
+	public function setPsr4Namespaces( array $namespaces ) {
+		foreach ( $namespaces as $ns => $path ) {
+			$ns = rtrim( $ns, '\\' ) . '\\';
+			$this->psr4Namespaces[$ns] = rtrim( self::normalizePathSeparator( $path ), '/' );
 		}
 	}
 
@@ -135,6 +176,25 @@ class AutoloadGenerator {
 		$result = $this->collector->getClasses(
 			file_get_contents( $inputPath )
 		);
+
+		// Filter out classes that will be found by PSR4
+		$result = array_filter( $result, function ( $class ) use ( $inputPath ) {
+			$parts = explode( '\\', $class );
+			for ( $i = count( $parts ) - 1; $i > 0; $i-- ) {
+				$ns = implode( '\\', array_slice( $parts, 0, $i ) ) . '\\';
+				if ( isset( $this->psr4Namespaces[$ns] ) ) {
+					$expectedPath = $this->psr4Namespaces[$ns] . '/'
+						. implode( '/', array_slice( $parts, $i ) )
+						. '.php';
+					if ( $inputPath === $expectedPath ) {
+						return false;
+					}
+				}
+			}
+
+			return true;
+		} );
+
 		if ( $result ) {
 			$shortpath = substr( $inputPath, $len );
 			$this->classes[$shortpath] = $result;
@@ -258,16 +318,16 @@ EOD;
 	 * @return string
 	 */
 	public function getAutoload( $commandName = 'AutoloadGenerator' ) {
-		// We need to check whether an extenson.json or skin.json exists or not, and
+		// We need to check whether an extension.json or skin.json exists or not, and
 		// incase it doesn't, update the autoload.php file.
 
 		$fileinfo = $this->getTargetFileinfo();
 
 		if ( $fileinfo['type'] === self::FILETYPE_JSON ) {
 			return $this->generateJsonAutoload( $fileinfo['filename'] );
-		} else {
-			return $this->generatePHPAutoload( $commandName, $fileinfo['filename'] );
 		}
+
+		return $this->generatePHPAutoload( $commandName, $fileinfo['filename'] );
 	}
 
 	/**
@@ -279,23 +339,23 @@ EOD;
 	 * @return array
 	 */
 	public function getTargetFileinfo() {
-		$fileinfo = [
-			'filename' => $this->basepath . '/autoload.php',
-			'type' => self::FILETYPE_PHP
-		];
 		if ( file_exists( $this->basepath . '/extension.json' ) ) {
-			$fileinfo = [
+			return [
 				'filename' => $this->basepath . '/extension.json',
 				'type' => self::FILETYPE_JSON
 			];
-		} elseif ( file_exists( $this->basepath . '/skin.json' ) ) {
-			$fileinfo = [
+		}
+		if ( file_exists( $this->basepath . '/skin.json' ) ) {
+			return [
 				'filename' => $this->basepath . '/skin.json',
 				'type' => self::FILETYPE_JSON
 			];
 		}
 
-		return $fileinfo;
+		return [
+			'filename' => $this->basepath . '/autoload.php',
+			'type' => self::FILETYPE_PHP
+		];
 	}
 
 	/**
@@ -315,7 +375,7 @@ EOD;
 	 *  * languages/
 	 *  * maintenance/
 	 *  * mw-config/
-	 *  * /*.php
+	 *  * any `*.php` file in the base directory
 	 */
 	public function initMediaWikiDefault() {
 		foreach ( [ 'includes', 'languages', 'maintenance', 'mw-config' ] as $dir ) {
@@ -324,185 +384,5 @@ EOD;
 		foreach ( glob( $this->basepath . '/*.php' ) as $file ) {
 			$this->readFile( $file );
 		}
-	}
-}
-
-/**
- * Reads PHP code and returns the FQCN of every class defined within it.
- */
-class ClassCollector {
-
-	/**
-	 * @var string Current namespace
-	 */
-	protected $namespace = '';
-
-	/**
-	 * @var array List of FQCN detected in this pass
-	 */
-	protected $classes;
-
-	/**
-	 * @var array Token from token_get_all() that started an expect sequence
-	 */
-	protected $startToken;
-
-	/**
-	 * @var array List of tokens that are members of the current expect sequence
-	 */
-	protected $tokens;
-
-	/**
-	 * @var array Class alias with target/name fields
-	 */
-	protected $alias;
-
-	/**
-	 * @param string $code PHP code (including <?php) to detect class names from
-	 * @return array List of FQCN detected within the tokens
-	 */
-	public function getClasses( $code ) {
-		$this->namespace = '';
-		$this->classes = [];
-		$this->startToken = null;
-		$this->alias = null;
-		$this->tokens = [];
-
-		foreach ( token_get_all( $code ) as $token ) {
-			if ( $this->startToken === null ) {
-				$this->tryBeginExpect( $token );
-			} else {
-				$this->tryEndExpect( $token );
-			}
-		}
-
-		return $this->classes;
-	}
-
-	/**
-	 * Determine if $token begins the next expect sequence.
-	 *
-	 * @param array $token
-	 */
-	protected function tryBeginExpect( $token ) {
-		if ( is_string( $token ) ) {
-			return;
-		}
-		// Note: When changing class name discovery logic,
-		// AutoLoaderTest.php may also need to be updated.
-		switch ( $token[0] ) {
-			case T_NAMESPACE:
-			case T_CLASS:
-			case T_INTERFACE:
-			case T_TRAIT:
-			case T_DOUBLE_COLON:
-				$this->startToken = $token;
-				break;
-			case T_STRING:
-				if ( $token[1] === 'class_alias' ) {
-					$this->startToken = $token;
-					$this->alias = [];
-				}
-		}
-	}
-
-	/**
-	 * Accepts the next token in an expect sequence
-	 *
-	 * @param array $token
-	 */
-	protected function tryEndExpect( $token ) {
-		switch ( $this->startToken[0] ) {
-			case T_DOUBLE_COLON:
-				// Skip over T_CLASS after T_DOUBLE_COLON because this is something like
-				// "self::static" which accesses the class name. It doens't define a new class.
-				$this->startToken = null;
-				break;
-			case T_NAMESPACE:
-				if ( $token === ';' || $token === '{' ) {
-					$this->namespace = $this->implodeTokens() . '\\';
-				} else {
-					$this->tokens[] = $token;
-				}
-				break;
-
-			case T_STRING:
-				if ( $this->alias !== null ) {
-					// Flow 1 - Two string literals:
-					// - T_STRING  class_alias
-					// - '('
-					// - T_CONSTANT_ENCAPSED_STRING 'TargetClass'
-					// - ','
-					// - T_WHITESPACE
-					// - T_CONSTANT_ENCAPSED_STRING 'AliasName'
-					// - ')'
-					// Flow 2 - Use of ::class syntax for first parameter
-					// - T_STRING  class_alias
-					// - '('
-					// - T_STRING TargetClass
-					// - T_DOUBLE_COLON ::
-					// - T_CLASS class
-					// - ','
-					// - T_WHITESPACE
-					// - T_CONSTANT_ENCAPSED_STRING 'AliasName'
-					// - ')'
-					if ( $token === '(' ) {
-						// Start of a function call to class_alias()
-						$this->alias = [ 'target' => false, 'name' => false ];
-					} elseif ( $token === ',' ) {
-						// Record that we're past the first parameter
-						if ( $this->alias['target'] === false ) {
-							$this->alias['target'] = true;
-						}
-					} elseif ( is_array( $token ) && $token[0] === T_CONSTANT_ENCAPSED_STRING ) {
-						if ( $this->alias['target'] === true ) {
-							// We already saw a first argument, this must be the second.
-							// Strip quotes from the string literal.
-							$this->alias['name'] = substr( $token[1], 1, -1 );
-						}
-					} elseif ( $token === ')' ) {
-						// End of function call
-						$this->classes[] = $this->alias['name'];
-						$this->alias = null;
-						$this->startToken = null;
-					} elseif ( !is_array( $token ) || (
-						$token[0] !== T_STRING &&
-						$token[0] !== T_DOUBLE_COLON &&
-						$token[0] !== T_CLASS &&
-						$token[0] !== T_WHITESPACE
-					) ) {
-						// Ignore this call to class_alias() - compat/Timestamp.php
-						$this->alias = null;
-						$this->startToken = null;
-					}
-				}
-				break;
-
-			case T_CLASS:
-			case T_INTERFACE:
-			case T_TRAIT:
-				$this->tokens[] = $token;
-				if ( is_array( $token ) && $token[0] === T_STRING ) {
-					$this->classes[] = $this->namespace . $this->implodeTokens();
-				}
-		}
-	}
-
-	/**
-	 * Returns the string representation of the tokens within the
-	 * current expect sequence and resets the sequence.
-	 *
-	 * @return string
-	 */
-	protected function implodeTokens() {
-		$content = [];
-		foreach ( $this->tokens as $token ) {
-			$content[] = is_string( $token ) ? $token : $token[1];
-		}
-
-		$this->tokens = [];
-		$this->startToken = null;
-
-		return trim( implode( '', $content ), " \n\t" );
 	}
 }

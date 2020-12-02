@@ -5,7 +5,7 @@
 			"Sveinn í Felli"
 		]
 	},
-	"cite-desc": "Bætir <nowiki><ref[ name=id]></nowiki> og <nowiki><references/></nowiki> tögum við fyrir heimildir",
+	"cite-desc": "Bætir <code>&lt;ref[ name=id]&gt;</code> og <code>&lt;references/&gt;</code> tögum við fyrir heimildir",
 	"cite_error": "Tilvísunar villa: $1",
 	"cite_error_ref_numeric_key": "Villa í <code>&lt;ref&gt;</code> tag;\nnafn tilvísunar má ekki vera heil tala. Notaðu lýsandi titil",
 	"cite_error_ref_no_key": "Opna <code>&lt;ref&gt;</code> merkið er gallað eða hefur ógilt nafn",
@@ -20,9 +20,6 @@
 	"cite_error_references_missing_key": "<code>&lt;ref&gt;</code> tag með nafnið \"$1\" og er skilgreint í <code>&lt;references&gt;</code> er ekki notað í textanum á undan.",
 	"cite_error_references_no_key": "<code>&lt;ref&gt;</code> tag skilgreint í <code>&lt;references&gt;</code> hefur engin nafna eigindi.",
 	"cite_error_empty_references_define": "Bæta þarf innihaldi við tilvísun með nafnið \"$1\".",
-	"cite_reference_link_key_with_num": "$1_$2",
-	"cite_references_link_many_sep": "&#32;",
-	"cite_references_link_many_and": "&#32;",
 	"cite_references_link_accessibility_label": "Stökkva upp",
 	"cite_references_link_many_accessibility_label": "Stökkva upp til:"
 }

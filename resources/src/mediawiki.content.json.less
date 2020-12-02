@@ -1,0 +1,51 @@
+/*!
+ * CSS for styling HTML-formatted JSON Schema objects
+ *
+ * @file
+ * @author Munaf Assaf <massaf@wikimedia.org>
+ */
+
+.mw-json {
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-style: normal;
+}
+
+.mw-json th,
+.mw-json td {
+	border: 1px solid #72777d;
+	font-size: 16px;
+	padding: 0.5em 1em;
+}
+
+.mw-json-value,
+.mw-json-single-value {
+	background-color: #dcfae3;
+	font-family: monospace, monospace;
+	white-space: pre-wrap;
+}
+
+.mw-json-single-value {
+	background-color: #eaecf0;
+}
+
+.mw-json-empty {
+	background-color: #fff;
+	font-style: italic;
+}
+
+.mw-json tr {
+	background-color: #eaecf0;
+	margin-bottom: 0.5em;
+}
+
+.mw-json th {
+	background-color: #fff;
+	font-weight: normal;
+	vertical-align: top;
+}
+
+.mw-json th span {
+	position: sticky;
+	top: 0.5em;
+}

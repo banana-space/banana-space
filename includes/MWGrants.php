@@ -58,15 +58,16 @@ class MWGrants {
 		// Give grep a chance to find the usages:
 		// grant-blockusers, grant-createeditmovepage, grant-delete,
 		// grant-editinterface, grant-editmycssjs, grant-editmywatchlist,
-		// grant-editpage, grant-editprotected, grant-highvolume,
-		// grant-oversight, grant-patrol, grant-protect, grant-rollback,
-		// grant-sendemail, grant-uploadeditmovefile, grant-uploadfile,
-		// grant-basic, grant-viewdeleted, grant-viewmywatchlist,
-		// grant-createaccount
+		// grant-editsiteconfig, grant-editpage, grant-editprotected,
+		// grant-highvolume, grant-oversight, grant-patrol, grant-protect,
+		// grant-rollback, grant-sendemail, grant-uploadeditmovefile,
+		// grant-uploadfile, grant-basic, grant-viewdeleted,
+		// grant-viewmywatchlist, grant-createaccount, grant-mergehistory
 		$msg = wfMessage( "grant-$grant" );
 		if ( $lang !== null ) {
 			if ( is_string( $lang ) ) {
-				$lang = Language::factory( $lang );
+				$lang = MediaWikiServices::getInstance()->getLanguageFactory()
+					->getLanguage( $lang );
 			}
 			$msg->inLanguage( $lang );
 		}
@@ -86,10 +87,8 @@ class MWGrants {
 	 * @return string[] Corresponding grant descriptions
 	 */
 	public static function grantNames( array $grants, $lang = null ) {
-		if ( $lang !== null ) {
-			if ( is_string( $lang ) ) {
-				$lang = Language::factory( $lang );
-			}
+		if ( $lang !== null && is_string( $lang ) ) {
+			$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $lang );
 		}
 
 		$ret = [];
@@ -193,12 +192,10 @@ class MWGrants {
 	 * @return string Wikitext
 	 */
 	public static function getGrantsWikiText( $grantsFilter, $lang = null ) {
-		global $wgContLang;
-
 		if ( is_string( $lang ) ) {
-			$lang = Language::factory( $lang );
+			$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $lang );
 		} elseif ( $lang === null ) {
-			$lang = $wgContLang;
+			$lang = MediaWikiServices::getInstance()->getContentLanguage();
 		}
 
 		$s = '';

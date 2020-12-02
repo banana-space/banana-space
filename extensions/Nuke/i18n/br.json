@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Fohanno",
 			"Fulup",
-			"Y-M D",
-			"Fohanno"
+			"Y-M D"
 		]
 	},
 	"nuke": "Diverkañ a-vloc'h",
@@ -18,7 +18,6 @@
 	"nuke-submit-user": "Rollañ ar pajennoù",
 	"nuke-submit-delete": "Dilemel ar re diuzet",
 	"right-nuke": "Diverkañ pajennoù a-vras",
-	"nuke-select": "Diuzañ : $1",
 	"nuke-userorip": "Anv implijer, chomlec'h IP pe gwenn :",
 	"nuke-maxpages": "Niver brasañ a bajennoù :",
 	"nuke-editby": "Savet gant [[Special:Contributions/$1|$1]]",

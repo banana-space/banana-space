@@ -1,9 +1,12 @@
 <?php
+
 use Liuggio\StatsdClient\Entity\StatsdData;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 
 /**
  * MediaWiki adaptation of StatsdDataFactory that provides buffering functionality.
+ *
+ * @stable to implement
  *
  * @see BufferingStatsdDataFactory
  */

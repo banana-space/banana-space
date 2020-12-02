@@ -5,24 +5,24 @@ namespace Wikimedia\Rdbms;
 class SQLiteField implements Field {
 	private $info, $tableName;
 
-	function __construct( $info, $tableName ) {
+	public function __construct( $info, $tableName ) {
 		$this->info = $info;
 		$this->tableName = $tableName;
 	}
 
-	function name() {
+	public function name() {
 		return $this->info->name;
 	}
 
-	function tableName() {
+	public function tableName() {
 		return $this->tableName;
 	}
 
-	function defaultValue() {
+	public function defaultValue() {
 		if ( is_string( $this->info->dflt_value ) ) {
 			// Typically quoted
-			if ( preg_match( '/^\'(.*)\'$', $this->info->dflt_value ) ) {
-				return str_replace( "''", "'", $this->info->dflt_value );
+			if ( preg_match( '/^\'(.*)\'$/', $this->info->dflt_value, $matches ) ) {
+				return str_replace( "''", "'", $matches[1] );
 			}
 		}
 
@@ -32,11 +32,11 @@ class SQLiteField implements Field {
 	/**
 	 * @return bool
 	 */
-	function isNullable() {
+	public function isNullable() {
 		return !$this->info->notnull;
 	}
 
-	function type() {
+	public function type() {
 		return $this->info->type;
 	}
 }

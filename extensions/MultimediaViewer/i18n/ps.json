@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ahmed-Najib-Biabani-Ibrahimkhel"
+			"Ahmed-Najib-Biabani-Ibrahimkhel",
+			"Amjad Khan",
+			"Baloch Khan"
 		]
 	},
-	"multimediaviewer-pref": "رسنۍ ښکاره کوونکی",
 	"multimediaviewer-optin-pref": "<span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About رسنۍ کتونکی]</span> چارنول",
 	"multimediaviewer-repository-local": "نور تفصيل",
 	"multimediaviewer-datetime-created": "په $1 جوړ شو",
@@ -13,6 +14,8 @@
 	"multimediaviewer-license-cc-pd": "ټولگړی شپول",
 	"multimediaviewer-license-default": "د منښتليک مالومات",
 	"multimediaviewer-permission-title": "د اجازې تفصيل",
+	"multimediaviewer-permission-link": "شرطونه وګورئ",
+	"multimediaviewer-permission-link-hide": "شرطونه پټ کړئ",
 	"multimediaviewer-about-mmv": "په اړه",
 	"multimediaviewer-discuss-mmv": "خبرې اترې",
 	"multimediaviewer-optout-mmv": "رسنۍ کتونکی ناچارنول",

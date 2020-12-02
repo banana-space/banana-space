@@ -1,10 +1,39 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dr Lotus Black",
 			"Ninjastrikers"
 		]
 	},
 	"multimediaviewer-repository-local": "နောက်ထပ် အချက်အလက်များ",
+	"multimediaviewer-datetime-uploaded": "တင်ခဲ့သည့်နေ့: $1",
+	"multimediaviewer-credit-fallback": "စာရေးသူ သတင်းအချက်အလက် ကြည့်ရန်",
+	"multimediaviewer-permission-viewmore": "ပိုမိုကြည့်ရှုရန်",
+	"multimediaviewer-discuss-mmv": "ဆွေးနွေးချက်",
 	"multimediaviewer-help-mmv": "အကူအညီ",
-	"multimediaviewer-description-page-popup-text": "$1 ရှိ ဤဖိုင်အကြောင်း နောက်ထပ် အချက်အလက်များ"
+	"multimediaviewer-optout-mmv": "မီဒီယာ မြင်ကွင်းကို ပိတ်မည်",
+	"multimediaviewer-optin-mmv": "မီဒီယာ မြင်ကွင်းကို ခွင့်ပြုမည်",
+	"multimediaviewer-optout-pending-mmv": "မီဒီယာ မြင်ကွင်းကို ပိတ်နေသည်",
+	"multimediaviewer-optin-pending-mmv": "မီဒီယာ မြင်ကွင်းကို ခွင့်ပြုနေသည်",
+	"multimediaviewer-geoloc-north": "N",
+	"multimediaviewer-geoloc-east": "E",
+	"multimediaviewer-geoloc-south": "S",
+	"multimediaviewer-geoloc-west": "W",
+	"multimediaviewer-geoloc-coord": "$1° $2′ $3″ $4",
+	"multimediaviewer-geoloc-coords": "$1၊ $2",
+	"multimediaviewer-geolocation": "တည်နေရာ: $1",
+	"multimediaviewer-reuse-loading-placeholder": "ဝန်ဆွဲတင်နေသည်...",
+	"multimediaviewer-html-embed-credit-link-text": "လင့်",
+	"multimediaviewer-description-page-popup-text": "$1 ရှိ ဤဖိုင်အကြောင်း နောက်ထပ် အချက်အလက်များ",
+	"multimediaviewer-title-popup-text": "ဖော်ပြချက်",
+	"multimediaviewer-title-popup-text-more": "ဖော်ပြချက်အပြည့်အစုံ ကြည့်မည်",
+	"multimediaviewer-options-tooltip": "မီဒီယာ မြင်ကွင်းကို ခွင့်ပြု သို့မဟုတ် ပိတ်ပင်မည်",
+	"multimediaviewer-options-dialog-header": "မီဒီယာ မြင်ကွင်းကို ပိတ်မည်လား",
+	"multimediaviewer-options-learn-more": "ပိုမို လေ့လာရန်",
+	"multimediaviewer-option-submit-button": "မီဒီယာ မြင်ကွင်းကို ပိတ်မည်",
+	"multimediaviewer-option-cancel-button": "မလုပ်တော့ပါ",
+	"multimediaviewer-disable-confirmation-header": "မီဒီယာ မြင်ကွင်းကို ပိတ်လိုက်ပါပြီ",
+	"multimediaviewer-enable-dialog-header": "မီဒီယာ မြင်ကွင်းကို ခွင့်ပြုမည်လား",
+	"multimediaviewer-enable-submit-button": "မီဒီယာ မြင်ကွင်းကို ခွင့်ပြုမည်",
+	"multimediaviewer-disable-info-title": "မီဒီယာ မြင်ကွင်းကို ပိတ်လိုက်ပါပြီ"
 }

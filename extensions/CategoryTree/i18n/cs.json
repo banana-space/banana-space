@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Danny B.",
+			"Ilimanaq29",
 			"Li-sung",
-			"Mormegil",
 			"LordMsz",
-			"Matěj Suchánek"
+			"Matěj Suchánek",
+			"Mormegil"
 		]
 	},
 	"categorytree": "Strom kategorií",
@@ -35,6 +36,5 @@
 	"categorytree-no-pages": "žádné články ani podkategorie.",
 	"categorytree-not-found": "Kategorie <em>$1</em> nenalezena",
 	"categorytree-error": "Chyba při načítání dat.",
-	"categorytree-retry": "Počkejte chvilku a zkuste to znova.",
-	"apihelp-categorytree-description": "Interní modul pro rozšíření CategoryTree."
+	"categorytree-retry": "Počkejte chvilku a zkuste to znova."
 }

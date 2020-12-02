@@ -4,14 +4,14 @@
  * @copyright 2011-2018 MediaWiki Widgets Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-( function ( $, mw ) {
+( function () {
 
 	/**
 	 * RadioSelectInputWidget and a TextInputWidget to set minimum or maximum byte size
 	 *
 	 *     mw.loader.using( 'mediawiki.widgets.SizeFilterWidget', function () {
 	 *       var sf = new mw.widgets.SizeFilterWidget();
-	 *       $( 'body' ).append( sf.$element );
+	 *       $( document.body ).append( sf.$element );
 	 *     } );
 	 *
 	 * @class mw.widgets.SizeFilterWidget
@@ -21,7 +21,7 @@
 	 *
 	 * @constructor
 	 * @param {Object} [config] Configuration options
-   * @cfg {Object} [radioselectinput] Config for the radio select input
+	 * @cfg {Object} [radioselectinput] Config for the radio select input
 	 * @cfg {Object} [textinput] Config for the text input
 	 * @cfg {boolean} [selectMin=true] Whether to select 'min', false would select 'max'
 	 */
@@ -105,4 +105,4 @@
 		this.textinput.restorePreInfuseState( state.textinput );
 	};
 
-}( jQuery, mediaWiki ) );
+}() );

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Praveenp"
+		]
+	},
+	"apihelp-spamblacklist-description": "പാഴെഴുത്ത് കരിമ്പട്ടികയിൽ ഒന്നോ അതിലധികമോ യു.ആർ.എല്ലുകൾ പരിശോധിക്കുക.",
+	"apihelp-spamblacklist-example-1": "കരിമ്പട്ടികയിൽ രണ്ട് യു.ആർ.എല്ലുകൾ പരിശോധിക്കുക",
+	"apihelp-spamblacklist-param-url": "കരിമ്പട്ടികയിൽ പരിശോധിക്കേണ്ട യു.ആർ.എല്ലുകൾ",
+	"apihelp-spamblacklist-summary": "ഒന്നോ അതിലധികമോ യു.ആർ.എൽ. പാഴെഴുത്ത് കരിമ്പട്ടികയുമായി ഒത്തുനോക്കി സാധുത പരിശോധിക്കുക."
+}

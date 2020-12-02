@@ -31,6 +31,8 @@ When /^I click the (.*) download size$/ do |size_option|
       @index = 2
     when 'large'
       @index = 3
+    when 'extra large'
+      @index = 4
     else
       @index = 0
     end

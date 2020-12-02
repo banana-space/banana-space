@@ -2,12 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"BáthoryPéter",
-			"Dani",
-			"Tgr",
-			"Tacsipacsi",
 			"Csega",
+			"Dani",
 			"Ildiko Santana",
-			"Máté"
+			"Máté",
+			"Tacsipacsi",
+			"Tgr"
 		]
 	},
 	"action-titleblacklistlog": "címek feketelista-naplójának megtekintése",

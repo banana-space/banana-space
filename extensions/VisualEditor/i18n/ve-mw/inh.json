@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Adam-Yourist",
+			"ElizaMag",
+			"Умар"
+		]
+	},
+	"tooltip-ca-ve-edit": "Ху́вца ер оагIув",
+	"visualeditor-ca-createlocaldescriptionsource": "Локальни йоазонца сурт оттадара хьаст (источник) тIатIоха",
+	"visualeditor-ca-createsource": "Хьакхолла дӀадолалу текст санна",
+	"visualeditor-ca-editsource": "Тоаде чура",
+	"visualeditor-ca-editsource-section": "тоаде чура",
+	"visualeditor-descriptionpagelink": "Project:Визуальни редактор",
+	"visualeditor-dialog-media-info-created": "Кхеллад: $1",
+	"visualeditor-dialog-media-position-center": "Юкъе",
+	"visualeditor-dialog-media-position-right": "Аьттехьа",
+	"visualeditor-dialog-template-title": "Ло",
+	"visualeditor-dialog-transclusion-content": "Чудар",
+	"visualeditor-dialogbutton-media-tooltip": "Сурташи медиафайлаши",
+	"visualeditor-dialogbutton-template-tooltip": "Ло",
+	"visualeditor-linkinspector-educationpopup-title": "Тӏатовжамаш",
+	"visualeditor-preference-betatempdisable": "ХIанзарчоа дIадоаде визуальни хувцар, бета-эрше из мел долча хана",
+	"visualeditor-preference-newwikitexteditor-description": "Хьалотае вики-текста керда раж визуальни редактора чу. Цунга визуальни редактора дукха кечалаш я, цун тара йола дизайн лелаю, иштта уж хувцам бара ши раж дIа-хьа етта аттагIа да.",
+	"visualeditor-preference-newwikitexteditor-label": "Вики-текста керда раж",
+	"visualeditor-preference-visualdiffpage-description": "Хьалотае керда визуальни раж эршаш вIаши юстача оагIонашка.",
+	"visualeditor-preference-visualdiffpage-label": "Эршаш визуальни вIаши йистар",
+	"visualeditor-savedialog-label-create": "Хьакхолла оагIув"
+}

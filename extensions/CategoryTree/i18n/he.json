@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
-			"Rotem Liss",
-			"Guycn2"
+			"Guycn2",
+			"Rotem Liss"
 		]
 	},
 	"categorytree": "עץ קטגוריות",
@@ -35,10 +35,5 @@
 	"categorytree-no-pages": "אין דפים או קטגוריות משנה",
 	"categorytree-not-found": "הקטגוריה <i>$1</i> לא נמצאה",
 	"categorytree-error": "בעיה בטעינת הנתונים.",
-	"categorytree-retry": "נא להמתין מעט ולנסות שוב.",
-	"apihelp-categorytree-description": "מודול פנימי של ההרחבה CategoryTree.",
-	"apihelp-categorytree-summary": "מודול פנימי של ההרחבה CategoryTree.",
-	"apihelp-categorytree-param-category": "כותרת במרחב השם קטגוריה, התחילית לא תשפיע על התוצאה גם אם תינתן.",
-	"apihelp-categorytree-param-options": "אפשרויות לקונסטרוקטור של CategoryTree בתור עצם JSON. ברירת המחדל עבור האפשרות <var>depth</var> היא <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "האופציות צריכות להיות עצם JSON תקין."
+	"categorytree-retry": "נא להמתין מעט ולנסות שוב."
 }

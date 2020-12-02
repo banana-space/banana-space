@@ -13,8 +13,5 @@
 	"fancycaptcha-edit": "За да ја уредите страницава, внесете ги зборовите на сликичката подолу ([[Special:Captcha/help|повеќе информации]]):",
 	"fancycaptcha-imgcaptcha-ph": "Внесете го текстот прикажан на сликата",
 	"fancycaptcha-sendemail": "За да се заштитиме од автоматизирано спамирање, би ве замолиле да ги внесете зборовите од сликичката во полето подолу ([[Special:Captcha/help|повеќе информации]]):",
-	"fancycaptcha-reload-text": "Превчитај",
-	"apihelp-fancycaptchareload-description": "Дај нова FancyCaptcha.",
-	"apihelp-fancycaptchareload-summary": "Дај нова FancyCaptcha.",
-	"apihelp-fancycaptchareload-example-1": "Дај нова FancyCaptcha."
+	"fancycaptcha-reload-text": "Превчитај"
 }

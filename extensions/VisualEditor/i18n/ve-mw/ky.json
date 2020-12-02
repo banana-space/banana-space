@@ -1,0 +1,42 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek",
+			"Askar Nazyrov",
+			"Chorobek",
+			"Connexx",
+			"George Animal",
+			"Janatkg",
+			"Nrowe",
+			"Tynchtyk Chorotegin",
+			"Викиней"
+		]
+	},
+	"tooltip-ca-createsource": "Барактын баштапкы кодун түзүү",
+	"tooltip-ca-editsource": "Барактын баштапкы кодун оңдоо",
+	"tooltip-ca-ve-edit": "Бул баракты оңдоо",
+	"visualeditor-ca-editsource": "Булагын оңдоо",
+	"visualeditor-ca-editsource-section": "булагын оңдоо",
+	"visualeditor-categories-tool": "Категориялар",
+	"visualeditor-dialog-media-content-section": "Кол тамга",
+	"visualeditor-dialog-meta-categories-category": "Категория",
+	"visualeditor-dialog-meta-categories-data-label": "Категориялар",
+	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Жаңы категория",
+	"visualeditor-dialog-meta-categories-input-placeholder": "Категория кошуу",
+	"visualeditor-dialog-meta-categories-options": "Ырастоолор",
+	"visualeditor-dialog-meta-categories-section": "Категориялар",
+	"visualeditor-dialog-meta-languages-code-label": "Тилдин коду",
+	"visualeditor-dialog-meta-languages-label": "Тилдер",
+	"visualeditor-dialog-meta-languages-section": "Тилдер",
+	"visualeditor-dialog-transclusion-options": "Ырастоолор",
+	"visualeditor-dialog-transclusion-placeholder": "Жаңы калып",
+	"visualeditor-dialog-transclusion-remove-content": "Мазмунун өчүрүү",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Артка кайтуу",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Баары бир улантуу",
+	"visualeditor-formatdropdown-format-mw-heading2": "Баш сөз",
+	"visualeditor-savedialog-label-create": "Барак түзүү",
+	"visualeditor-savedialog-label-error": "Ката",
+	"visualeditor-savedialog-label-warning": "Эскертүү",
+	"visualeditor-savedialog-title-review": "Өзгөртүүлөрдү карап чыгуу",
+	"visualeditor-savedialog-title-save": "Өзгөртүүлөрдү сактоо"
+}

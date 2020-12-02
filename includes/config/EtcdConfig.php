@@ -20,6 +20,7 @@
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use Wikimedia\IPUtils;
 use Wikimedia\ObjectFactory;
 use Wikimedia\WaitConditionLoop;
 
@@ -161,6 +162,7 @@ class EtcdConfig implements Config, LoggerAwareInterface {
 						if ( is_array( $etcdResponse['config'] ) ) {
 							// Avoid having all servers expire cache keys at the same time
 							$expiry = microtime( true ) + $this->baseCacheTTL;
+							// @phan-suppress-next-line PhanTypeMismatchArgumentInternal
 							$expiry += mt_rand( 0, 1e6 ) / 1e6 * $this->skewCacheTTL;
 							$data = [
 								'config' => $etcdResponse['config'],
@@ -217,7 +219,7 @@ class EtcdConfig implements Config, LoggerAwareInterface {
 		do {
 			// Pick a random etcd server from dns
 			$server = $dsd->pickServer( $servers );
-			$host = IP::combineHostAndPort( $server['target'], $server['port'] );
+			$host = IPUtils::combineHostAndPort( $server['target'], $server['port'] );
 			// Try to load the config from this particular server
 			$response = $this->fetchAllFromEtcdServer( $host );
 			if ( is_array( $response['config'] ) || $response['retry'] ) {
@@ -301,6 +303,7 @@ class EtcdConfig implements Config, LoggerAwareInterface {
 		}
 
 		foreach ( $dirNode['nodes'] as $node ) {
+			'@phan-var array $node';
 			$baseName = basename( $node['key'] );
 			$fullName = $dirName === '' ? $baseName : "$dirName/$baseName";
 			if ( !empty( $node['dir'] ) ) {
@@ -326,7 +329,7 @@ class EtcdConfig implements Config, LoggerAwareInterface {
 	private function unserialize( $string ) {
 		if ( $this->encoding === 'YAML' ) {
 			return yaml_parse( $string );
-		} else { // JSON
+		} else {
 			return json_decode( $string, true );
 		}
 	}

@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Charunandan16",
 			"NehalDaveND"
 		]
 	},
-	"oathauth-token": "स्तोकम् (token)"
+	"oathauth-token": "स्तोकम् (token)",
+	"oathauth-disable-intro": "बलाधिक्ये दायित्वाधिक्यम्।"
 }

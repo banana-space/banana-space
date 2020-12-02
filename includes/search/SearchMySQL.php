@@ -24,6 +24,8 @@
  * @ingroup Search
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Search engine hook for MySQL 4+
  * @ingroup Search
@@ -34,17 +36,15 @@ class SearchMySQL extends SearchDatabase {
 	private static $mMinSearchLength;
 
 	/**
-	 * Parse the user's query and transform it into an SQL fragment which will
-	 * become part of a WHERE clause
+	 * Parse the user's query and transform it into two SQL fragments:
+	 * a WHERE condition and an ORDER BY expression
 	 *
 	 * @param string $filteredText
 	 * @param string $fulltext
 	 *
-	 * @return string
+	 * @return array
 	 */
-	function parseQuery( $filteredText, $fulltext ) {
-		global $wgContLang;
-
+	private function parseQuery( $filteredText, $fulltext ) {
 		$lc = $this->legalSearchChars( self::CHARS_NO_SYNTAX ); // Minus syntax chars (" and *)
 		$searchon = '';
 		$this->searchTerms = [];
@@ -76,7 +76,8 @@ class SearchMySQL extends SearchDatabase {
 
 				// Some languages such as Serbian store the input form in the search index,
 				// so we may need to search for matches in multiple writing system variants.
-				$convertedVariants = $wgContLang->autoConvertToAllVariants( $term );
+				$contLang = MediaWikiServices::getInstance()->getContentLanguage();
+				$convertedVariants = $contLang->autoConvertToAllVariants( $term );
 				if ( is_array( $convertedVariants ) ) {
 					$variants = array_unique( array_values( $convertedVariants ) );
 				} else {
@@ -87,9 +88,7 @@ class SearchMySQL extends SearchDatabase {
 				// around problems with minimum lengths and encoding in MySQL's
 				// fulltext engine.
 				// For Chinese this also inserts spaces between adjacent Han characters.
-				$strippedVariants = array_map(
-					[ $wgContLang, 'normalizeForSearch' ],
-					$variants );
+				$strippedVariants = array_map( [ $contLang, 'normalizeForSearch' ], $variants );
 
 				// Some languages such as Chinese force all variants to a canonical
 				// form when stripping to the low-level search index, so to be sure
@@ -119,22 +118,24 @@ class SearchMySQL extends SearchDatabase {
 				$regexp = $this->regexTerm( $term, $wildcard );
 				$this->searchTerms[] = $regexp;
 			}
-			wfDebug( __METHOD__ . ": Would search with '$searchon'\n" );
-			wfDebug( __METHOD__ . ': Match with /' . implode( '|', $this->searchTerms ) . "/\n" );
+			wfDebug( __METHOD__ . ": Would search with '$searchon'" );
+			wfDebug( __METHOD__ . ': Match with /' . implode( '|', $this->searchTerms ) . "/" );
 		} else {
-			wfDebug( __METHOD__ . ": Can't understand search query '{$filteredText}'\n" );
+			wfDebug( __METHOD__ . ": Can't understand search query '{$filteredText}'" );
 		}
 
-		$searchon = $this->db->addQuotes( $searchon );
+		$dbr = $this->lb->getConnectionRef( DB_REPLICA );
+		$searchon = $dbr->addQuotes( $searchon );
 		$field = $this->getIndexField( $fulltext );
-		return " MATCH($field) AGAINST($searchon IN BOOLEAN MODE) ";
+		return [
+			" MATCH($field) AGAINST($searchon IN BOOLEAN MODE) ",
+			" MATCH($field) AGAINST($searchon IN NATURAL LANGUAGE MODE) DESC "
+		];
 	}
 
-	function regexTerm( $string, $wildcard ) {
-		global $wgContLang;
-
+	private function regexTerm( $string, $wildcard ) {
 		$regex = preg_quote( $string, '/' );
-		if ( $wgContLang->hasWordBreaks() ) {
+		if ( MediaWikiServices::getInstance()->getContentLanguage()->hasWordBreaks() ) {
 			if ( $wildcard ) {
 				// Don't cut off the final bit!
 				$regex = "\b$regex";
@@ -144,12 +145,12 @@ class SearchMySQL extends SearchDatabase {
 		} else {
 			// For Chinese, words may legitimately abut other words in the text literal.
 			// Don't add \b boundary checks... note this could cause false positives
-			// for latin chars.
+			// for Latin chars.
 		}
 		return $regex;
 	}
 
-	public static function legalSearchChars( $type = self::CHARS_ALL ) {
+	public function legalSearchChars( $type = self::CHARS_ALL ) {
 		$searchChars = parent::legalSearchChars( $type );
 		if ( $type === self::CHARS_ALL ) {
 			// " for phrase, * for wildcard
@@ -162,9 +163,9 @@ class SearchMySQL extends SearchDatabase {
 	 * Perform a full text search query and return a result set.
 	 *
 	 * @param string $term Raw search term
-	 * @return SqlSearchResultSet
+	 * @return SqlSearchResultSet|null
 	 */
-	function searchText( $term ) {
+	protected function doSearchTextInDB( $term ) {
 		return $this->searchInternal( $term, true );
 	}
 
@@ -172,9 +173,9 @@ class SearchMySQL extends SearchDatabase {
 	 * Perform a title-only search query and return a result set.
 	 *
 	 * @param string $term Raw search term
-	 * @return SqlSearchResultSet
+	 * @return SqlSearchResultSet|null
 	 */
-	function searchTitle( $term ) {
+	protected function doSearchTitleInDB( $term ) {
 		return $this->searchInternal( $term, false );
 	}
 
@@ -186,14 +187,15 @@ class SearchMySQL extends SearchDatabase {
 
 		$filteredTerm = $this->filter( $term );
 		$query = $this->getQuery( $filteredTerm, $fulltext );
-		$resultSet = $this->db->select(
+		$dbr = $this->lb->getConnectionRef( DB_REPLICA );
+		$resultSet = $dbr->select(
 			$query['tables'], $query['fields'], $query['conds'],
 			__METHOD__, $query['options'], $query['joins']
 		);
 
 		$total = null;
 		$query = $this->getCountQuery( $filteredTerm, $fulltext );
-		$totalResult = $this->db->select(
+		$totalResult = $dbr->select(
 			$query['tables'], $query['fields'], $query['conds'],
 			__METHOD__, $query['options'], $query['joins']
 		);
@@ -224,7 +226,8 @@ class SearchMySQL extends SearchDatabase {
 	protected function queryFeatures( &$query ) {
 		foreach ( $this->features as $feature => $value ) {
 			if ( $feature === 'title-suffix-filter' && $value ) {
-				$query['conds'][] = 'page_title' . $this->db->buildLike( $this->db->anyString(), $value );
+				$dbr = $this->lb->getConnectionRef( DB_REPLICA );
+				$query['conds'][] = 'page_title' . $dbr->buildLike( $dbr->anyString(), $value );
 			}
 		}
 	}
@@ -234,7 +237,7 @@ class SearchMySQL extends SearchDatabase {
 	 * @param array &$query
 	 * @since 1.18 (changed)
 	 */
-	function queryNamespaces( &$query ) {
+	private function queryNamespaces( &$query ) {
 		if ( is_array( $this->namespaces ) ) {
 			if ( count( $this->namespaces ) === 0 ) {
 				$this->namespaces[] = '0';
@@ -261,7 +264,7 @@ class SearchMySQL extends SearchDatabase {
 	 * @return array
 	 * @since 1.18 (changed)
 	 */
-	function getQuery( $filteredTerm, $fulltext ) {
+	private function getQuery( $filteredTerm, $fulltext ) {
 		$query = [
 			'tables' => [],
 			'fields' => [],
@@ -283,7 +286,7 @@ class SearchMySQL extends SearchDatabase {
 	 * @param bool $fulltext
 	 * @return string
 	 */
-	function getIndexField( $fulltext ) {
+	private function getIndexField( $fulltext ) {
 		return $fulltext ? 'si_text' : 'si_title';
 	}
 
@@ -295,7 +298,7 @@ class SearchMySQL extends SearchDatabase {
 	 * @param bool $fulltext
 	 * @since 1.18 (changed)
 	 */
-	function queryMain( &$query, $filteredTerm, $fulltext ) {
+	private function queryMain( &$query, $filteredTerm, $fulltext ) {
 		$match = $this->parseQuery( $filteredTerm, $fulltext );
 		$query['tables'][] = 'page';
 		$query['tables'][] = 'searchindex';
@@ -303,7 +306,8 @@ class SearchMySQL extends SearchDatabase {
 		$query['fields'][] = 'page_namespace';
 		$query['fields'][] = 'page_title';
 		$query['conds'][] = 'page_id=si_page';
-		$query['conds'][] = $match;
+		$query['conds'][] = $match[0];
+		$query['options']['ORDER BY'] = $match[1];
 	}
 
 	/**
@@ -312,13 +316,13 @@ class SearchMySQL extends SearchDatabase {
 	 * @param bool $fulltext
 	 * @return array
 	 */
-	function getCountQuery( $filteredTerm, $fulltext ) {
+	private function getCountQuery( $filteredTerm, $fulltext ) {
 		$match = $this->parseQuery( $filteredTerm, $fulltext );
 
 		$query = [
 			'tables' => [ 'page', 'searchindex' ],
 			'fields' => [ 'COUNT(*) as c' ],
-			'conds' => [ 'page_id=si_page', $match ],
+			'conds' => [ 'page_id=si_page', $match[0] ],
 			'options' => [],
 			'joins' => [],
 		];
@@ -337,15 +341,18 @@ class SearchMySQL extends SearchDatabase {
 	 * @param string $title
 	 * @param string $text
 	 */
-	function update( $id, $title, $text ) {
-		$dbw = wfGetDB( DB_MASTER );
-		$dbw->replace( 'searchindex',
-			[ 'si_page' ],
+	public function update( $id, $title, $text ) {
+		$dbw = $this->lb->getConnectionRef( DB_MASTER );
+		$dbw->replace(
+			'searchindex',
+			'si_page',
 			[
 				'si_page' => $id,
 				'si_title' => $this->normalizeText( $title ),
 				'si_text' => $this->normalizeText( $text )
-			], __METHOD__ );
+			],
+			__METHOD__
+		);
 	}
 
 	/**
@@ -355,14 +362,13 @@ class SearchMySQL extends SearchDatabase {
 	 * @param int $id
 	 * @param string $title
 	 */
-	function updateTitle( $id, $title ) {
-		$dbw = wfGetDB( DB_MASTER );
-
+	public function updateTitle( $id, $title ) {
+		$dbw = $this->lb->getConnectionRef( DB_MASTER );
 		$dbw->update( 'searchindex',
 			[ 'si_title' => $this->normalizeText( $title ) ],
 			[ 'si_page' => $id ],
-			__METHOD__,
-			[ $dbw->lowPriorityOption() ] );
+			__METHOD__
+		);
 	}
 
 	/**
@@ -372,9 +378,8 @@ class SearchMySQL extends SearchDatabase {
 	 * @param int $id Page id that was deleted
 	 * @param string $title Title of page that was deleted
 	 */
-	function delete( $id, $title ) {
-		$dbw = wfGetDB( DB_MASTER );
-
+	public function delete( $id, $title ) {
+		$dbw = $this->lb->getConnectionRef( DB_MASTER );
 		$dbw->delete( 'searchindex', [ 'si_page' => $id ], __METHOD__ );
 	}
 
@@ -384,9 +389,7 @@ class SearchMySQL extends SearchDatabase {
 	 * @param string $string
 	 * @return mixed|string
 	 */
-	function normalizeText( $string ) {
-		global $wgContLang;
-
+	public function normalizeText( $string ) {
 		$out = parent::normalizeText( $string );
 
 		// MySQL fulltext index doesn't grok utf-8, so we
@@ -394,7 +397,7 @@ class SearchMySQL extends SearchDatabase {
 		$out = preg_replace_callback(
 			"/([\\xc0-\\xff][\\x80-\\xbf]*)/",
 			[ $this, 'stripForSearchCallback' ],
-			$wgContLang->lc( $out ) );
+			MediaWikiServices::getInstance()->getContentLanguage()->lc( $out ) );
 
 		// And to add insult to injury, the default indexing
 		// ignores short words... Pad them so we can pass them
@@ -439,10 +442,10 @@ class SearchMySQL extends SearchDatabase {
 	 * @return int
 	 */
 	protected function minSearchLength() {
-		if ( is_null( self::$mMinSearchLength ) ) {
+		if ( self::$mMinSearchLength === null ) {
 			$sql = "SHOW GLOBAL VARIABLES LIKE 'ft\\_min\\_word\\_len'";
 
-			$dbr = wfGetDB( DB_REPLICA );
+			$dbr = $this->lb->getConnectionRef( DB_REPLICA );
 			$result = $dbr->query( $sql, __METHOD__ );
 			$row = $result->fetchObject();
 			$result->free();

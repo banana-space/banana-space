@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Akapochtli",
 			"Ricardo gs",
-			"Taresi",
-			"Akapochtli"
+			"Taresi"
 		]
 	},
-	"vector-action-addsection": "Xicahxilti netlahtōlpepechtiliztli",
+	"vector-action-addsection": "Xicahxilti netlahtolpepechtiliztli",
 	"vector-action-delete": "Xicpolo",
 	"vector-action-move": "Xiczaca",
 	"vector-action-protect": "Xicpiya",
@@ -17,5 +17,5 @@
 	"vector-view-history": "Tiquittaz tlahtollotl",
 	"vector-view-view": "Tamapohuaz",
 	"vector-view-viewsource": "Xiquitta tzintiliztli",
-	"vector-more-actions": "Noihuan"
+	"vector-more-actions": "Ocachi"
 }

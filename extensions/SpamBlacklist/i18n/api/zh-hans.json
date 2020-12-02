@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liuxinyu970226",
+			"WhitePhosphorus",
+			"Yfdyh000"
+		]
+	},
+	"apihelp-spamblacklist-description": "验证一个或多个URL是否触发SpamBlacklist。",
+	"apihelp-spamblacklist-example-1": "检查两个URL是否触发黑名单",
+	"apihelp-spamblacklist-param-url": "要验证是否触发黑名单的URL。",
+	"apihelp-spamblacklist-summary": "验证一个或多个URL是否触发垃圾链接黑名单。"
+}

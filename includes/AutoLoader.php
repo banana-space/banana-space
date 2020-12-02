@@ -28,20 +28,20 @@
 require_once __DIR__ . '/../autoload.php';
 
 class AutoLoader {
-	static protected $autoloadLocalClassesLower = null;
+	protected static $autoloadLocalClassesLower = null;
 
 	/**
-	 * @private Only public for ExtensionRegistry
+	 * @internal Only public for ExtensionRegistry
 	 * @var string[] Namespace (ends with \) => Path (ends with /)
 	 */
-	static public $psr4Namespaces = [];
+	public static $psr4Namespaces = [];
 
 	/**
 	 * autoload - take a class name and attempt to load it
 	 *
 	 * @param string $className Name of class we're looking for.
 	 */
-	static function autoload( $className ) {
+	public static function autoload( $className ) {
 		global $wgAutoloadClasses, $wgAutoloadLocalClasses,
 			$wgAutoloadAttemptLowercase;
 
@@ -113,7 +113,7 @@ class AutoLoader {
 	 * Method to clear the protected class property $autoloadLocalClassesLower.
 	 * Used in tests.
 	 */
-	static function resetAutoloadLocalClassesLower() {
+	public static function resetAutoloadLocalClassesLower() {
 		self::$autoloadLocalClassesLower = null;
 	}
 
@@ -121,14 +121,49 @@ class AutoLoader {
 	 * Get a mapping of namespace => file path
 	 * The namespaces should follow the PSR-4 standard for autoloading
 	 *
-	 * @see <http://www.php-fig.org/psr/psr-4/>
-	 * @private Only public for usage in AutoloadGenerator
+	 * @see <https://www.php-fig.org/psr/psr-4/>
+	 * @internal Only public for usage in AutoloadGenerator
+	 * @codeCoverageIgnore
 	 * @since 1.31
 	 * @return string[]
 	 */
 	public static function getAutoloadNamespaces() {
 		return [
-			'MediaWiki\\Linker\\' => __DIR__ .'/linker/'
+			'MediaWiki\\' => __DIR__ . '/',
+			'MediaWiki\\Api\\' => __DIR__ . '/api/',
+			'MediaWiki\\Auth\\' => __DIR__ . '/auth/',
+			'MediaWiki\\Block\\' => __DIR__ . '/block/',
+			'MediaWiki\\Cache\\' => __DIR__ . '/cache/',
+			'MediaWiki\\ChangeTags\\' => __DIR__ . '/changetags/',
+			'MediaWiki\\Config\\' => __DIR__ . '/config/',
+			'MediaWiki\\Content\\' => __DIR__ . '/content/',
+			'MediaWiki\\DB\\' => __DIR__ . '/db/',
+			'MediaWiki\\Diff\\' => __DIR__ . '/diff/',
+			'MediaWiki\\Edit\\' => __DIR__ . '/edit/',
+			'MediaWiki\\EditPage\\' => __DIR__ . '/editpage/',
+			'MediaWiki\\FileBackend\\LockManager\\' => __DIR__ . '/filebackend/lockmanager/',
+			'MediaWiki\\Http\\' => __DIR__ . '/http/',
+			'MediaWiki\\Installer\\' => __DIR__ . '/installer/',
+			'MediaWiki\\Interwiki\\' => __DIR__ . '/interwiki/',
+			'MediaWiki\\Linker\\' => __DIR__ . '/linker/',
+			'MediaWiki\\Logger\\' => __DIR__ . '/debug/logger/',
+			'MediaWiki\\Logger\Monolog\\' => __DIR__ . '/debug/logger/monolog/',
+			'MediaWiki\\Page\\' => __DIR__ . '/page/',
+			'MediaWiki\\Preferences\\' => __DIR__ . '/preferences/',
+			'MediaWiki\\ResourceLoader\\' => __DIR__ . '/resourceloader/',
+			'MediaWiki\\Search\\' => __DIR__ . '/search/',
+			'MediaWiki\\Search\\SearchWidgets\\' => __DIR__ . '/search/searchwidgets/',
+			'MediaWiki\\Session\\' => __DIR__ . '/session/',
+			'MediaWiki\\Shell\\' => __DIR__ . '/shell/',
+			'MediaWiki\\Site\\' => __DIR__ . '/site/',
+			'MediaWiki\\Sparql\\' => __DIR__ . '/sparql/',
+			'MediaWiki\\SpecialPage\\' => __DIR__ . '/specialpage/',
+			'MediaWiki\\Tidy\\' => __DIR__ . '/tidy/',
+			'MediaWiki\\User\\' => __DIR__ . '/user/',
+			'MediaWiki\\Widget\\' => __DIR__ . '/widget/',
+			'Wikimedia\\' => __DIR__ . '/libs/',
+			'Wikimedia\\Http\\' => __DIR__ . '/libs/http/',
+			'Wikimedia\\UUID\\' => __DIR__ . '/libs/uuid/',
 		];
 	}
 }

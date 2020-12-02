@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aursani",
+			"Mehtab ahmed"
+		]
+	},
+	"templatedata-doc-param-example": "مثال",
+	"templatedata-doc-param-type-wiki-page-name": "صفحو",
+	"templatedata-modal-button-cancel": "رد",
+	"templatedata-modal-button-done": "ٿي ويو",
+	"templatedata-modal-button-saveparam": "سانڍيو",
+	"templatedata-modal-format-block": "بندشيو",
+	"templatedata-modal-json-error-replace": "مٽايو",
+	"templatedata-modal-table-param-example": "مثال ($1)",
+	"templatedata-modal-title-templateformat": "تجويزڪيل وڪيٽيڪسٽ فارميٽنگ"
+}

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ләйсән",
+			"Янмурза Баки"
+		]
+	},
+	"apihelp-templatedata-description": "TemplateData киңәйтеүендә һаҡланыусы мәғлүмәттәрҙе алырға.",
+	"apihelp-templatedata-example-1": "Ҡалыптар булмаһа, йәки булып та, уларҙың TemplateData булмаһа, [[Template:Stub]] һәм  [[Template:Example]] өсөн TemplateData һөҙөмтәләре менән кире ҡайтарырға",
+	"apihelp-templatedata-param-lang": "Был телдәге локалләшкән дәүмәлдәрҙе кире ҡайтарырға. Бөтә асыҡ дәүмәлдәр ғәмәлдә кире ҡайтарыла."
+}

@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alison",
+			"Kscanne"
+		]
+	},
+	"visualeditor": "EagarthóirAmhairc",
+	"visualeditor-annotationbutton-language-tooltip": "Teanga",
+	"visualeditor-annotationbutton-underline-tooltip": "Béim",
+	"visualeditor-dialog-action-cancel": "Cealaigh",
+	"visualeditor-dialog-action-goback": "Ar ais",
+	"visualeditor-help-tool": "Cabhair",
+	"visualeditor-languageinspector-title": "Teanga",
+	"visualeditor-languageinspector-widget-label-language": "Teanga"
+}

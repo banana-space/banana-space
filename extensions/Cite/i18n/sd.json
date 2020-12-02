@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Aursani",
-			"Mehtab ahmed"
+			"Mehtab ahmed",
+			"Tweety"
 		]
 	},
 	"cite_error": "حوالي جي چڪ: $1",
+	"cite_error_group_refs_without_references": "\"$1\" نالي جي حوالن جي لاءِ ٽيگ <code>&lt;ref&gt;</code> آهن، پر لاڳاپيل ٽيگ <code>&lt;references group=\"$1\"/&gt;</code> نہ مليو، يا پوءِ بند <code>&lt;/ref&gt;</code> کٽل آھي",
 	"cite-tracking-category-cite-error": "حوالن جي چُڪَ وارا صفحا",
-	"cite_section_preview_references": "حوالن جي پيشِ نگاھ"
+	"cite_section_preview_references": "حوالن جي پيش-نگاھ"
 }

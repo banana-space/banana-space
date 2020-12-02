@@ -20,7 +20,7 @@
 	"categorytree-expand": "ياي",
 	"categorytree-expand-bullet": "◄",
 	"categorytree-empty-bullet": "◄",
-	"categorytree-member-counts": "{PLURAL:$1|1 تارماق تۈر|$1 تارماق تۈر}}، {{PLURAL:$2|1 بەت|$2 بەت}} ۋە {{PLURAL:$3|1 ھۆججەت|$3 ھۆججەت}}نى ئۆز ئىچىگە ئالىدۇ",
+	"categorytree-member-counts": "{{PLURAL:$1|1 تارماق تۈر|$1 تارماق تۈر}}, {{PLURAL:$2|1 بەت|$2 بەت}} ۋە {{PLURAL:$3|1 ھۆججەت|$3 ھۆججەت}} نى ئۆز ئىچىگە ئالىدۇ",
 	"categorytree-num-categories": "$1 تۈر",
 	"categorytree-num-pages": "$1 بەت",
 	"categorytree-num-files": "$1 ھۆججەت",

@@ -3,6 +3,7 @@
 use MediaWiki\Auth\AuthenticationRequest;
 use MediaWiki\Auth\AuthenticationResponse;
 use MediaWiki\Auth\AuthManager;
+use MediaWiki\MediaWikiServices;
 
 /**
  * Links/unlinks external accounts to the current user.
@@ -23,7 +24,7 @@ class SpecialLinkAccounts extends AuthManagerSpecialPage {
 	}
 
 	public function isListed() {
-		return AuthManager::singleton()->canLinkAccounts();
+		return MediaWikiServices::getInstance()->getAuthManager()->canLinkAccounts();
 	}
 
 	protected function getRequestBlacklist() {
@@ -32,8 +33,8 @@ class SpecialLinkAccounts extends AuthManagerSpecialPage {
 
 	/**
 	 * @param null|string $subPage
-	 * @throws MWException
-	 * @throws PermissionsError
+	 * @throws ErrorPageError
+	 * @throws LogicException
 	 */
 	public function execute( $subPage ) {
 		$this->setHeaders();
@@ -42,8 +43,8 @@ class SpecialLinkAccounts extends AuthManagerSpecialPage {
 		if ( !$this->isActionAllowed( $this->authAction ) ) {
 			if ( $this->authAction === AuthManager::ACTION_LINK ) {
 				// looks like no linking provider is installed or willing to take this user
-				$titleMessage = wfMessage( 'cannotlink-no-provider-title' );
-				$errorMessage = wfMessage( 'cannotlink-no-provider' );
+				$titleMessage = $this->msg( 'cannotlink-no-provider-title' );
+				$errorMessage = $this->msg( 'cannotlink-no-provider' );
 				throw new ErrorPageError( $titleMessage, $errorMessage );
 			} else {
 				// user probably back-button-navigated into an auth session that no longer exists

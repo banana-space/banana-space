@@ -2,11 +2,16 @@
 
 namespace Wikimedia\Rdbms;
 
+/**
+ * @newable
+ * @stable to extend
+ */
 class Blob implements IBlob {
 	/** @var string */
 	protected $data;
 
 	/**
+	 * @stable to call
 	 * @param string $data
 	 */
 	public function __construct( $data ) {
@@ -18,4 +23,7 @@ class Blob implements IBlob {
 	}
 }
 
+/**
+ * @deprecated since 1.29
+ */
 class_alias( Blob::class, 'Blob' );

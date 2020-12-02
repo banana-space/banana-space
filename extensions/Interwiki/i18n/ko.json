@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Devunt",
+			"HDNua",
+			"Hym411",
+			"IRTC1015",
 			"Kwj2772",
 			"Mintz0223",
-			"ToePeu",
-			"아라",
-			"Hym411",
 			"Revi",
-			"HDNua",
-			"IRTC1015"
+			"ToePeu",
+			"Ykhwong",
+			"아라"
 		]
 	},
 	"interwiki": "인터위키 데이터 보기 및 편집",
@@ -22,11 +23,11 @@
 	"interwiki_prefix_intro": "<code>[<nowiki />[접두어:문서 이름]]</code> 위키 링크에 쓰일 인터위키 접두어",
 	"interwiki_url_intro": "URL 서식. $1 자리에는 <code>[<nowiki />[접두어:<em>문서 이름</em>]]</code>에서의 <em>문서 이름</em>으로 바뀔 것입니다.",
 	"interwiki_local": "전달",
-	"interwiki-local-label": "전달:",
+	"interwiki-local-label": "전달",
 	"interwiki_local_0_intro": "이 인터위키 접두어를 사용한 외부 HTTP 요청에 대해 \"{{int:badtitle}}\" 오류 문서가 표시됩니다.",
 	"interwiki_local_1_intro": "이 인터위키 접두어를 사용한 외부 HTTP 요청을 인터위키의 대상 URL로 넘깁니다 (즉, 로컬 문서의 링크처럼 취급됩니다)",
 	"interwiki_trans": "끼워넣기",
-	"interwiki-trans-label": "끼워넣기:",
+	"interwiki-trans-label": "끼워넣기",
 	"interwiki_trans_1_intro": "위키문법 <code>{<nowiki />{접두어:<em>문서 이름</em>}}</code>이 쓰였다면, 일반적으로 인터위키 틀 포함(([//www.mediawiki.org/wiki/Manual:$wgEnableScaryTranscluding scary transclusion])이 활성화되었을 때 다른 위키에서 틀/문서 포함을 허용합니다.",
 	"interwiki_trans_0_intro": "다른 위키의 틀/문서를 포함하기 위한 <code>{<nowiki />{접두어:<em>문서 이름</em>}}</code> 코드를 허용하지 않고, 틀 이름공간의 문서를 찾아봅니다.",
 	"interwiki_1": "예",
@@ -35,7 +36,6 @@
 	"interwiki-cached": "인터위키 데이터는 캐시됩니다. 캐시를 수정하는 것은 불가능합니다.",
 	"interwiki_edit": "편집",
 	"interwiki_reasonfield": "이유:",
-	"interwiki_delquestion": "\"$1\" 지우기",
 	"interwiki_deleting": "\"$1\" 접두어를 지웁니다.",
 	"interwiki_deleted": "\"$1\" 접두어가 인터위키 테이블에서 제거되었습니다.",
 	"interwiki_delfailed": "\"$1\" 접두어를 인터위키 테이블에서 제거할 수 없습니다.",

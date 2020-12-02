@@ -1,15 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Csega",
 			"Dj",
 			"Einstein2",
-			"Misibacsi",
-			"ViDam",
-			"Tacsipacsi",
-			"Csega",
 			"Kishajnalka",
 			"Macofe",
-			"Nyuszika7H"
+			"Misibacsi",
+			"Nyuszika7H",
+			"Tacsipacsi",
+			"ViDam"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Könyv",
@@ -22,7 +22,8 @@
 	"cite-ve-changedesc-reflist-group-both": "Forráslista-csoport megváltozott erről: „$1” erre: „$2”",
 	"cite-ve-changedesc-reflist-group-from": "Forráslista-csoport megváltozott erről: „$1” az általános csoportra",
 	"cite-ve-changedesc-reflist-group-to": "Forráslista-csoport megváltozott az általános csoportról erre: „$1”",
-	"cite-ve-dialog-reference-editing-reused": "Ez a forráshivatkozás $1 helyen szerepel ezen a lapon.",
+	"cite-ve-dialog-reference-editing-reused": "Ez a forráshivatkozás {{PLURAL:$1|egyszer|2=kétszer|$1 helyen}} szerepel ezen a lapon.",
+	"cite-ve-dialog-reference-editing-reused-long": "Ez a forráshivatkozás {{PLURAL:$1|egyszer|2=kétszer|$1 helyen}} szerepel ezen a lapon. Az itt végrehajtott változtatások mindenhol meg fognak jelenni, ahol ez a hivatkozás használatban van.",
 	"cite-ve-dialog-reference-options-group-label": "Csoport használata",
 	"cite-ve-dialog-reference-options-group-placeholder": "Általános forráshivatkozások",
 	"cite-ve-dialog-reference-options-name-label": "Újrafelhasználás ezen a néven",
@@ -30,8 +31,6 @@
 	"cite-ve-dialog-reference-options-section": "Beállítások",
 	"cite-ve-dialog-reference-placeholder": "Írd vagy másold ide a forráshivatkozásodat, vagy illessz be egy forrássablont.",
 	"cite-ve-dialog-reference-title": "Forráshivatkozás",
-	"cite-ve-dialog-reference-useexisting-full-label": "Olyan forráshivatkozás felhasználása, ami már szerepel ezen a lapon",
-	"cite-ve-dialog-reference-useexisting-label": "Egy létező forráshivatkozás használata",
 	"cite-ve-dialog-reference-useexisting-tool": "Újrahasználás",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Általános forráshivatkozások listája",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "„$1” csoportba tartozó forráshivatkozások listája",

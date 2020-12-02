@@ -22,6 +22,7 @@
  *
  * @file
  */
+
 use MediaWiki\MediaWikiServices;
 
 /**
@@ -73,10 +74,12 @@ class ApiSetNotificationTimestamp extends ApiBase {
 			if ( $params['entirewatchlist'] || $pageSet->getGoodTitleCount() > 1 ) {
 				$this->dieWithError( [ 'apierror-multpages', $this->encodeParamName( 'torevid' ) ] );
 			}
-			$title = reset( $pageSet->getGoodTitles() );
+			$titles = $pageSet->getGoodTitles();
+			$title = reset( $titles );
 			if ( $title ) {
-				$timestamp = Revision::getTimestampFromId(
-					$title, $params['torevid'], Revision::READ_LATEST );
+				// XXX $title isn't actually used, can we just get rid of the previous six lines?
+				$timestamp = MediaWikiServices::getInstance()->getRevisionStore()
+					->getTimestampFromId( $params['torevid'], IDBAccessObject::READ_LATEST );
 				if ( $timestamp ) {
 					$timestamp = $dbw->timestamp( $timestamp );
 				} else {
@@ -87,14 +90,17 @@ class ApiSetNotificationTimestamp extends ApiBase {
 			if ( $params['entirewatchlist'] || $pageSet->getGoodTitleCount() > 1 ) {
 				$this->dieWithError( [ 'apierror-multpages', $this->encodeParamName( 'newerthanrevid' ) ] );
 			}
-			$title = reset( $pageSet->getGoodTitles() );
+			$titles = $pageSet->getGoodTitles();
+			$title = reset( $titles );
 			if ( $title ) {
-				$revid = $title->getNextRevisionID(
-					$params['newerthanrevid'], Title::GAID_FOR_UPDATE );
-				if ( $revid ) {
-					$timestamp = $dbw->timestamp( Revision::getTimestampFromId( $title, $revid ) );
-				} else {
-					$timestamp = null;
+				$timestamp = null;
+				$rl = MediaWikiServices::getInstance()->getRevisionLookup();
+				$currRev = $rl->getRevisionById( $params['newerthanrevid'], Title::READ_LATEST );
+				if ( $currRev ) {
+					$nextRev = $rl->getNextRevision( $currRev, Title::READ_LATEST );
+					if ( $nextRev ) {
+						$timestamp = $dbw->timestamp( $nextRev->getTimestamp() );
+					}
 				}
 			}
 		}
@@ -104,12 +110,9 @@ class ApiSetNotificationTimestamp extends ApiBase {
 		$result = [];
 		if ( $params['entirewatchlist'] ) {
 			// Entire watchlist mode: Just update the thing and return a success indicator
-			$watchedItemStore->setNotificationTimestampsForUser(
-				$user,
-				$timestamp
-			);
+			$watchedItemStore->resetAllNotificationTimestampsForUser( $user, $timestamp );
 
-			$result['notificationtimestamp'] = is_null( $timestamp )
+			$result['notificationtimestamp'] = $timestamp === null
 				? ''
 				: wfTimestamp( TS_ISO_8601, $timestamp );
 		} else {
@@ -153,7 +156,7 @@ class ApiSetNotificationTimestamp extends ApiBase {
 					$ns = $title->getNamespace();
 					$dbkey = $title->getDBkey();
 					$r = [
-						'ns' => intval( $ns ),
+						'ns' => (int)$ns,
 						'title' => $title->getPrefixedText(),
 					];
 					if ( !$title->exists() ) {

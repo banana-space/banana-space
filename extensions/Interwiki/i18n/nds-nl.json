@@ -4,8 +4,8 @@
 			"Servien"
 		]
 	},
-	"interwiki": "Interwikigegevens bekieken en wiezigen",
-	"interwiki-title-norights": "Interwikigegevens bekieken",
+	"interwiki": "Interwikigegeavens bekyken en wysigen",
+	"interwiki-title-norights": "Interwikigegeavens bekyken en wysigen",
 	"interwiki_prefix": "Veurvoegsel",
 	"interwiki-prefix-label": "Veurvoegsel:",
 	"interwiki_local": "Veuruut",
@@ -13,7 +13,6 @@
 	"interwiki_trans": "Transkluderen",
 	"interwiki-trans-label": "Transkluderen:",
 	"interwiki_edit": "Bewarken",
-	"interwiki_delquestion": "\"$1\" vortdoon",
 	"interwiki_deleting": "Je bin veurvoegsel \"$1\" an t vortdoon.",
 	"interwiki_addbutton": "Derbie doon"
 }

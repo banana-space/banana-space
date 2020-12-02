@@ -1,8 +1,8 @@
 <?php
 
-class ObjectCacheTest extends MediaWikiTestCase {
+class ObjectCacheTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		// Parent calls ObjectCache::clear() among other things
 		parent::setUp();
 
@@ -82,9 +82,6 @@ class ObjectCacheTest extends MediaWikiTestCase {
 
 	/** @covers ObjectCache::newAnything */
 	public function testNewAnythingNoAccelNoDb() {
-		$this->overrideMwServices(); // Ensures restore on tear down
-		MediaWiki\MediaWikiServices::disableStorageBackend();
-
 		$this->setMwGlobals( [
 			'wgMainCacheType' => CACHE_ACCEL
 		] );
@@ -93,6 +90,8 @@ class ObjectCacheTest extends MediaWikiTestCase {
 			// Mock APC not being installed (T160519, T147161)
 			CACHE_ACCEL => [ 'class' => EmptyBagOStuff::class ]
 		] );
+
+		MediaWiki\MediaWikiServices::disableStorageBackend();
 
 		$this->assertInstanceOf(
 			EmptyBagOStuff::class,
@@ -103,7 +102,6 @@ class ObjectCacheTest extends MediaWikiTestCase {
 
 	/** @covers ObjectCache::newAnything */
 	public function testNewAnythingNothingNoDb() {
-		$this->overrideMwServices();
 		MediaWiki\MediaWikiServices::disableStorageBackend();
 
 		$this->assertInstanceOf(

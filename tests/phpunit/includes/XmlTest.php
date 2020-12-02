@@ -1,14 +1,17 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
+ * TODO: refactor encodeJsVar() tests to be one method with a provider
  * @group Xml
  */
-class XmlTest extends MediaWikiTestCase {
+class XmlTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
-		$langObj = Language::factory( 'en' );
+		$langObj = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
 		$langObj->setNamespaces( [
 			-2 => 'Media',
 			-1 => 'Special',
@@ -34,11 +37,6 @@ class XmlTest extends MediaWikiTestCase {
 		] );
 	}
 
-	protected function tearDown() {
-		Language::factory( 'en' )->resetNamespaces();
-		parent::tearDown();
-	}
-
 	/**
 	 * @covers Xml::expandAttributes
 	 */
@@ -46,7 +44,7 @@ class XmlTest extends MediaWikiTestCase {
 		$this->assertNull( Xml::expandAttributes( null ),
 			'Converting a null list of attributes'
 		);
-		$this->assertEquals( '', Xml::expandAttributes( [] ),
+		$this->assertSame( '', Xml::expandAttributes( [] ),
 			'Converting an empty list of attributes'
 		);
 	}
@@ -55,7 +53,7 @@ class XmlTest extends MediaWikiTestCase {
 	 * @covers Xml::expandAttributes
 	 */
 	public function testExpandAttributesException() {
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 		Xml::expandAttributes( 'string' );
 	}
 
@@ -97,8 +95,8 @@ class XmlTest extends MediaWikiTestCase {
 	 */
 	public function testElementEscaping() {
 		$this->assertEquals(
-			'<element>hello &lt;there&gt; you &amp; you</element>',
-			Xml::element( 'element', null, 'hello <there> you & you' ),
+			'<element>"hello &lt;there&gt; your\'s &amp; you"</element>',
+			Xml::element( 'element', null, '"hello <there> your\'s & you"' ),
 			'Element with no attributes and content that needs escaping'
 		);
 	}
@@ -414,7 +412,7 @@ class XmlTest extends MediaWikiTestCase {
 	 * @covers Xml::encodeJsVar
 	 */
 	public function testEncodeJsVarInt() {
-		$this->assertEquals(
+		$this->assertSame(
 			'123456',
 			Xml::encodeJsVar( 123456 ),
 			'encodeJsVar() with int'
@@ -425,9 +423,9 @@ class XmlTest extends MediaWikiTestCase {
 	 * @covers Xml::encodeJsVar
 	 */
 	public function testEncodeJsVarFloat() {
-		$this->assertEquals(
-			'1.23456',
-			Xml::encodeJsVar( 1.23456 ),
+		$this->assertSame(
+			'1.5',
+			Xml::encodeJsVar( 1.5 ),
 			'encodeJsVar() with float'
 		);
 	}
@@ -451,6 +449,34 @@ class XmlTest extends MediaWikiTestCase {
 			'"1.23456"',
 			Xml::encodeJsVar( '1.23456' ),
 			'encodeJsVar() with float-like string'
+		);
+	}
+
+	/**
+	 * @covers Xml::encodeJsVar
+	 */
+	public function testXmlJsCode() {
+		$code = 'function () { foo( 42 ); }';
+		$this->assertEquals(
+			$code,
+			Xml::encodeJsVar( new XmlJsCode( $code ) )
+		);
+	}
+
+	/**
+	 * @covers Xml::encodeJsVar
+	 * @covers XmlJsCode::encodeObject
+	 */
+	public function testEncodeObject() {
+		$codeA = 'function () { foo( 42 ); }';
+		$codeB = 'function ( jQuery ) { bar( 142857 ); }';
+		$obj = XmlJsCode::encodeObject( [
+			'a' => new XmlJsCode( $codeA ),
+			'b' => new XmlJsCode( $codeB )
+		] );
+		$this->assertEquals(
+			"{\"a\":$codeA,\"b\":$codeB}",
+			Xml::encodeJsVar( $obj )
 		);
 	}
 

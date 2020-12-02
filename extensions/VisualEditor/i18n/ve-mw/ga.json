@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alison",
+			"Kscanne",
+			"Kwekubo",
+			"Moilleadóir",
+			"Nmacu",
+			"Tem"
+		]
+	},
+	"tooltip-ca-ve-edit": "Cuir an leathanach seo in eagar",
+	"visualeditor-ca-editsource": "Cuir foinse in eagar",
+	"visualeditor-ca-editsource-section": "athraigh foinse",
+	"visualeditor-ca-ve-create": "EagarthóirAmhairc",
+	"visualeditor-ca-ve-edit": "EagarthóirAmhairc",
+	"visualeditor-ca-ve-edit-section": "EagarthóirAmhairc",
+	"visualeditor-dialog-meta-categories-category": "Catagóir",
+	"visualeditor-dialog-meta-categories-data-label": "Catagóirí",
+	"visualeditor-dialog-meta-categories-options": "Roghanna",
+	"visualeditor-dialog-meta-categories-section": "Catagóirí",
+	"visualeditor-dialog-meta-languages-label": "Teangacha",
+	"visualeditor-dialog-transclusion-options": "Roghanna",
+	"visualeditor-dialogbutton-media-tooltip": "Meáin",
+	"visualeditor-formatdropdown-format-mw-heading4": "Fotheideal 2",
+	"visualeditor-formatdropdown-format-mw-heading6": "Fotheideal 4",
+	"visualeditor-preference-core-label": "EagarthóirAmhairc",
+	"visualeditor-savedialog-label-publish-short": "Foilsigh",
+	"visualeditor-savedialog-label-warning": "Rabhadh",
+	"visualeditor-version-label": "Leagan"
+}

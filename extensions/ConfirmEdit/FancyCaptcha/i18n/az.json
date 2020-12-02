@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Dağlı95"
+			"Dağlı95",
+			"Toghrul Rahimli"
 		]
 	},
+	"fancycaptcha-badlogin": "Vikini avtomatlaşdırılmış parol sındırılmasından qorumaq üçün, aşağıdakı qutuda göstərilən sözləri daxil etməyinizi xahiş edirik ([[Xüsusi:Captcha/help|daha çox məlumat]]):",
 	"fancycaptcha-captcha": "Təhlükəsizlik nəzarəti",
 	"fancycaptcha-accountcreate": "Vikidə avtomatik hesab yaradılmasının qarşısını almaq üçün xahiş edirik tələb olunan sözləri daxil edin ([[Special:Captcha/help|ətraflı məlumat]]):",
 	"fancycaptcha-imgcaptcha-ph": "Yuxarıda gördüyünüz mətni daxil edin",

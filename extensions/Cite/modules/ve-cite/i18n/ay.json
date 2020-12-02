@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Jduranboger",
-			"Vikytinta",
-			"Macofe"
+			"Macofe",
+			"Vikytinta"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Panka",
@@ -15,7 +15,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Aka sutimp wasitat apanaqaña",
 	"cite-ve-dialog-reference-options-section": "Ajllinaka",
 	"cite-ve-dialog-reference-title": "Yatiyäwi",
-	"cite-ve-dialog-reference-useexisting-label": "Utjir yatiyaw apnaqaña",
 	"cite-ve-dialog-reference-useexisting-tool": "Wasitat apanaqaña",
 	"cite-ve-dialog-referenceslist-title": "Yatiyaw list uchaña",
 	"cite-ve-dialogbutton-reference-tooltip": "Jasa",

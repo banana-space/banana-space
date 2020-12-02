@@ -6,8 +6,13 @@
 	},
 	"skinname-vector": "Vettore",
 	"vector-skin-desc": "Versione moderne de MonoBook cu 'nu sguarde aggiornate e 'nu sbuènne de miglioramende sus a l'ausabbilità",
+	"prefs-vector-enable-vector-1-label": "Ause 'u vettore andiche",
+	"prefs-vector-enable-vector-1-help": "Jndr'à le prossime anne, amma aggiornà a chiane chiane 'u skin Vector. Legacy Vector te face 'ndrucà 'a versione vecchie de Vector (partenne da decembre 2019). Pe sapè de cchiù sus a le aggiornaminde, vèje sus 'a [[mw:Reading/Web/Desktop_Improvements|pàgene d'u pruggette]] nostre.",
+	"vector-opt-out": "Passe a grafeche d'apprime",
+	"vector-opt-out-tooltip": "Cange le 'mbostaziune pe turnà rrete a 'u vecchie mode d'u skin (Vector andiche)",
 	"vector.css": "/* 'U CSS ca se iacchie aqquà 'u 'ndrucane le utinde d'a masckere Vettore */",
 	"vector.js": "/* Ogne JavaScript aqquà avène carecate pe le utinde ca ausane 'a masckere Vettore */",
+	"vector-action-toggle-sidebar": "Live e mitte 'a barre laterale",
 	"vector-action-addsection": "Aggiunge 'na discussiona",
 	"vector-action-delete": "Scangille",
 	"vector-action-move": "Spuèste",
@@ -19,5 +24,7 @@
 	"vector-view-history": "Vide 'u cunde",
 	"vector-view-view": "Ligge",
 	"vector-view-viewsource": "Vide 'u sorgende",
+	"vector-jumptonavigation": "Zumbe sus 'a navigazzione",
+	"vector-jumptosearch": "Zumbe sus 'a recerche",
 	"vector-more-actions": "De cchiù"
 }

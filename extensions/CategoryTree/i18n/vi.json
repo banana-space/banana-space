@@ -32,7 +32,5 @@
 	"categorytree-no-pages": "Không có trang hay thể loại con",
 	"categorytree-not-found": "Không tìm thấy thể loại <i>$1</i>",
 	"categorytree-error": "Có vấn đề khi tải dữ liệu.",
-	"categorytree-retry": "Xin hãy chờ một chút rồi thử lại.",
-	"apihelp-categorytree-description": "Mô đun nội bộ cho phần mở rộng Cây thể loại.",
-	"apihelp-categorytree-param-category": "Tên trang trong không gian tên thể loại; tiền tố nào đó sẽ được bỏ qua."
+	"categorytree-retry": "Xin hãy chờ một chút rồi thử lại."
 }

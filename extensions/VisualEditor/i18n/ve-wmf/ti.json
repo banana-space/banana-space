@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joanmp17"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ርእየታዊ ተዓርያ]]",
+	"tag-visualeditor-wikitext": "ኮድ መታዓራረይ 2017",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ርእየታዊ ተዓርያ፦ ተላወጠ]]",
+	"visualeditor-welcomedialog-action": "ኣተዓራረየ ኣጀማሪ",
+	"visualeditor-welcomedialog-switch": "ናብ ኮድ መታዓራረይ ለውጥ",
+	"visualeditor-welcomedialog-switch-ve": "ናብ ርእየታዊ መታዓራረይ ለውጥ",
+	"visualeditor-welcomedialog-title": "ናብ $2 {{GENDER:$1|እንኳዕ ብደሓን መጻኻ}}"
+}

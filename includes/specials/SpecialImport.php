@@ -24,6 +24,9 @@
  * @ingroup SpecialPage
  */
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\PermissionManager;
+
 /**
  * MediaWiki page data importer
  *
@@ -42,12 +45,20 @@ class SpecialImport extends SpecialPage {
 	private $history = true;
 	private $includeTemplates = false;
 	private $pageLinkDepth;
+
+	/** @var array */
 	private $importSources;
 	private $assignKnownUsers;
 	private $usernamePrefix;
 
+	/**
+	 * @var PermissionManager
+	 */
+	private $permManager;
+
 	public function __construct() {
 		parent::__construct( 'Import', 'import' );
+		$this->permManager = MediaWikiServices::getInstance()->getPermissionManager();
 	}
 
 	public function doesWrites() {
@@ -60,7 +71,7 @@ class SpecialImport extends SpecialPage {
 	 * @throws PermissionsError
 	 * @throws ReadOnlyError
 	 */
-	function execute( $par ) {
+	public function execute( $par ) {
 		$this->useTransactionalTimeLimit();
 
 		$this->setHeaders();
@@ -71,23 +82,27 @@ class SpecialImport extends SpecialPage {
 		$this->getOutput()->addModules( 'mediawiki.special.import' );
 
 		$this->importSources = $this->getConfig()->get( 'ImportSources' );
-		Hooks::run( 'ImportSources', [ &$this->importSources ] );
+		// Avoid phan error by checking the type
+		if ( !is_array( $this->importSources ) ) {
+			throw new UnexpectedValueException( '$wgImportSources must be an array' );
+		}
+		$this->getHookRunner()->onImportSources( $this->importSources );
 
 		$user = $this->getUser();
-		if ( !$user->isAllowedAny( 'import', 'importupload' ) ) {
+		if ( !$this->permManager->userHasAnyRight( $user, 'import', 'importupload' ) ) {
 			throw new PermissionsError( 'import' );
 		}
 
-		# @todo Allow Title::getUserPermissionsErrors() to take an array
-		# @todo FIXME: Title::checkSpecialsAndNSPermissions() has a very wierd expectation of what
-		# getUserPermissionsErrors() might actually be used for, hence the 'ns-specialprotected'
+		# @todo Allow PermissionManager::getPermissionErrors() to take an array
 		$errors = wfMergeErrorArrays(
-			$this->getPageTitle()->getUserPermissionsErrors(
-				'import', $user, true,
+			$this->permManager->getPermissionErrors(
+				'import', $user, $this->getPageTitle(),
+				PermissionManager::RIGOR_FULL,
 				[ 'ns-specialprotected', 'badaccess-group0', 'badaccess-groups' ]
 			),
-			$this->getPageTitle()->getUserPermissionsErrors(
-				'importupload', $user, true,
+			$this->permManager->getPermissionErrors(
+				'importupload', $user, $this->getPageTitle(),
+				PermissionManager::RIGOR_FULL,
 				[ 'ns-specialprotected', 'badaccess-group0', 'badaccess-groups' ]
 			)
 		);
@@ -134,13 +149,13 @@ class SpecialImport extends SpecialPage {
 		} elseif ( $this->sourceName === 'upload' ) {
 			$isUpload = true;
 			$this->usernamePrefix = $this->fullInterwikiPrefix = $request->getVal( 'usernamePrefix' );
-			if ( $user->isAllowed( 'importupload' ) ) {
+			if ( $this->permManager->userHasRight( $user, 'importupload' ) ) {
 				$source = ImportStreamSource::newFromUpload( "xmlimport" );
 			} else {
 				throw new PermissionsError( 'importupload' );
 			}
 		} elseif ( $this->sourceName === 'interwiki' ) {
-			if ( !$user->isAllowed( 'import' ) ) {
+			if ( !$this->permManager->userHasRight( $user, 'import' ) ) {
 				throw new PermissionsError( 'import' );
 			}
 			$this->interwiki = $this->fullInterwikiPrefix = $request->getVal( 'interwiki' );
@@ -179,20 +194,22 @@ class SpecialImport extends SpecialPage {
 
 		$out = $this->getOutput();
 		if ( !$source->isGood() ) {
-			$out->addWikiText( "<p class=\"error\">\n" .
-				$this->msg( 'importfailed', $source->getWikiText() )->parse() . "\n</p>" );
+			$out->wrapWikiTextAsInterface( 'error',
+				$this->msg( 'importfailed', $source->getWikiText( false, false, $this->getLanguage() ) )
+					->plain()
+			);
 		} else {
 			$importer = new WikiImporter( $source->value, $this->getConfig() );
-			if ( !is_null( $this->namespace ) ) {
+			if ( $this->namespace !== null ) {
 				$importer->setTargetNamespace( $this->namespace );
-			} elseif ( !is_null( $this->rootpage ) ) {
+			} elseif ( $this->rootpage !== null ) {
 				$statusRootPage = $importer->setTargetRootPage( $this->rootpage );
 				if ( !$statusRootPage->isGood() ) {
 					$out->wrapWikiMsg(
-						"<p class=\"error\">\n$1\n</p>",
+						"<div class=\"error\">\n$1\n</div>",
 						[
 							'import-options-wrong',
-							$statusRootPage->getWikiText(),
+							$statusRootPage->getWikiText( false, false, $this->getLanguage() ),
 							count( $statusRootPage->getErrorsArray() )
 						]
 					);
@@ -224,14 +241,14 @@ class SpecialImport extends SpecialPage {
 			if ( $exception ) {
 				# No source or XML parse error
 				$out->wrapWikiMsg(
-					"<p class=\"error\">\n$1\n</p>",
+					"<div class=\"error\">\n$1\n</div>",
 					[ 'importfailed', $exception->getMessage() ]
 				);
 			} elseif ( !$result->isGood() ) {
 				# Zero revisions
 				$out->wrapWikiMsg(
-					"<p class=\"error\">\n$1\n</p>",
-					[ 'importfailed', $result->getWikiText() ]
+					"<div class=\"error\">\n$1\n</div>",
+					[ 'importfailed', $result->getWikiText( false, false, $this->getLanguage() ) ]
 				);
 			} else {
 				# Success!
@@ -256,7 +273,7 @@ class SpecialImport extends SpecialPage {
 						"mw-import-mapping-$sourceName-default",
 						( $isSameSourceAsBefore ?
 							( $this->mapping === 'default' ) :
-							is_null( $defaultNamespace ) )
+							$defaultNamespace === null )
 					) .
 					"</td>
 				</tr>
@@ -272,13 +289,14 @@ class SpecialImport extends SpecialPage {
 						"mw-import-mapping-$sourceName-namespace",
 						( $isSameSourceAsBefore ?
 							( $this->mapping === 'namespace' ) :
-							!is_null( $defaultNamespace ) )
+							$defaultNamespace !== null )
 					) . ' ' .
 					Html::namespaceSelector(
 						[
 							'selected' => ( $isSameSourceAsBefore ?
 								$this->namespace :
 								( $defaultNamespace || '' ) ),
+							'in-user-lang' => true,
 						], [
 							'name' => "namespace",
 							// mw-import-namespace-interwiki, mw-import-namespace-upload
@@ -318,9 +336,9 @@ class SpecialImport extends SpecialPage {
 		$action = $this->getPageTitle()->getLocalURL( [ 'action' => 'submit' ] );
 		$user = $this->getUser();
 		$out = $this->getOutput();
-		$this->addHelpLink( '//meta.wikimedia.org/wiki/Special:MyLanguage/Help:Import', true );
+		$this->addHelpLink( 'https://meta.wikimedia.org/wiki/Special:MyLanguage/Help:Import', true );
 
-		if ( $user->isAllowed( 'importupload' ) ) {
+		if ( $this->permManager->userHasRight( $user, 'importupload' ) ) {
 			$mappingSelection = $this->getMappingFormPart( 'upload' );
 			$out->addHTML(
 				Xml::fieldset( $this->msg( 'import-upload' )->text() ) .
@@ -389,13 +407,11 @@ class SpecialImport extends SpecialPage {
 					Xml::closeElement( 'form' ) .
 					Xml::closeElement( 'fieldset' )
 			);
-		} else {
-			if ( empty( $this->importSources ) ) {
-				$out->addWikiMsg( 'importnosources' );
-			}
+		} elseif ( empty( $this->importSources ) ) {
+			$out->addWikiMsg( 'importnosources' );
 		}
 
-		if ( $user->isAllowed( 'import' ) && !empty( $this->importSources ) ) {
+		if ( $this->permManager->userHasRight( $user, 'import' ) && !empty( $this->importSources ) ) {
 			# Show input field for import depth only if $wgExportMaxLinkDepth > 0
 			$importDepth = '';
 			if ( $this->getConfig()->get( 'ExportMaxLinkDepth' ) > 0 ) {
@@ -526,7 +542,7 @@ class SpecialImport extends SpecialPage {
 					Xml::checkLabel(
 						$this->msg( 'import-assign-known-users' )->text(),
 						'assignKnownUsers',
-						'assignKnownUsers',
+						'interwikiAssignKnownUsers',
 						$this->assignKnownUsers
 					) .
 					"</td>

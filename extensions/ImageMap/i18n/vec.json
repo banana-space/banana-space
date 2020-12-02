@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Candalua"
+			"Candalua",
+			"Fierodelveneto"
 		]
 	},
 	"imagemap_desc": "Parméte de realizar ''image map'' clicàbili lato client col tag <code>&lt;imagemap&gt;</code>",
@@ -14,6 +15,6 @@
 	"imagemap_unrecognised_shape": "Error: Forma (shape) mìa riconossiùa ne la riga $1, ogni riga la ga da scuminsiar con uno dei seguenti: <code>default</code>, <code>rect</code>, <code>circle</code> o <code>poly</code>",
 	"imagemap_invalid_coord": "Error: coordinata mìa valida ne la riga $1, la gà da èssar un nùmaro",
 	"imagemap_invalid_desc": "Error: Valor mìa valido par el parametro desc, el gà da èssar uno dei seguenti: $1",
-	"imagemap_description": "Informazion su sta imagine",
+	"imagemap_description": "Informasion so sta someja",
 	"imagemap_poly_odd": "Erór: gò catà un polìgono co' un nùmaro dispari de coordinate in te la riga $1"
 }

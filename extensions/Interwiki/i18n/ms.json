@@ -30,7 +30,6 @@
 	"interwiki-cached": "Data interwiki sudah dicachekan. Cache tidak boleh diubah suai.",
 	"interwiki_edit": "Sunting",
 	"interwiki_reasonfield": "Sebab:",
-	"interwiki_delquestion": "Menghapuskan \"$1\"",
 	"interwiki_deleting": "Anda sedang menghapuskan awalan \"$1\".",
 	"interwiki_deleted": "Awalan \"$1\" telah dibuang daripada jadual interwiki.",
 	"interwiki_delfailed": "Awalan \"$1\" tidak dapat dibuang daripada jadual interwiki.",

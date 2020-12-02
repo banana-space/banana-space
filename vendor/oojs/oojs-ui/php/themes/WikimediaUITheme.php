@@ -8,10 +8,12 @@ class WikimediaUITheme extends Theme {
 
 	public function getElementClasses( Element $element ) {
 		$variants = [
-			'warning' => false,
 			'invert' => false,
 			'progressive' => false,
-			'destructive' => false
+			'destructive' => false,
+			'error' => false,
+			'warning' => false,
+			'success' => false
 		];
 
 		// Parent method
@@ -29,14 +31,17 @@ class WikimediaUITheme extends Theme {
 			if ( $isFramed && ( $isActive || $element->isDisabled() || $element->hasFlag( 'primary' ) ) ) {
 				// Button with a dark background, use white icon
 				$variants['invert'] = true;
-			} elseif ( !$isFramed && $element->isDisabled() ) {
+			} elseif ( !$isFramed && $element->isDisabled() && !$element->hasFlag( 'invert' ) ) {
 				// Frameless disabled button, always use black icon regardless of flags
 				$variants['invert'] = false;
 			} elseif ( !$element->isDisabled() ) {
 				// Any other kind of button, use the right colored icon if available
 				$variants['progressive'] = $element->hasFlag( 'progressive' );
 				$variants['destructive'] = $element->hasFlag( 'destructive' );
+				$variants['invert'] = $element->hasFlag( 'invert' );
+				$variants['error'] = $element->hasFlag( 'error' );
 				$variants['warning'] = $element->hasFlag( 'warning' );
+				$variants['success'] = $element->hasFlag( 'success' );
 			}
 		}
 

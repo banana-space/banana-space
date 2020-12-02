@@ -5,11 +5,13 @@
  * Such updates must be representable using IJobSpecification, so that
  * they can be serialized into jobs and enqueued for later execution
  *
+ * @stable to implement
+ *
  * @since 1.27
  */
 interface EnqueueableDataUpdate {
 	/**
-	 * @return array (wiki => wiki ID, job => IJobSpecification)
+	 * @return array (domain => DB domain ID, job => IJobSpecification)
 	 */
 	public function getAsJobSpecification();
 }

@@ -22,6 +22,7 @@
  */
 
 $( function () {
+	// eslint-disable-next-line no-jquery/no-global-selector
 	var $wpTextbox1 = $( '#wpTextbox1' );
 
 	// Code is supposed to be always LTR. See bug 39364.

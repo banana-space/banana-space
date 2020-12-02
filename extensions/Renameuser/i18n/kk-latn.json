@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"renameuser": "Qatıswşını qaýta ataw",
 	"renameuserold": "Ağımdağı qatıswşı atı:",
 	"renameusernew": "Jaña qatıswşı atı:",

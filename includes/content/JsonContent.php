@@ -29,17 +29,6 @@ class JsonContent extends TextContent {
 	}
 
 	/**
-	 * Decodes the JSON into a PHP associative array.
-	 *
-	 * @deprecated since 1.25 Use getData instead.
-	 * @return array|null
-	 */
-	public function getJsonData() {
-		wfDeprecated( __METHOD__, '1.25' );
-		return FormatJson::decode( $this->getNativeData(), true );
-	}
-
-	/**
 	 * Decodes the JSON string.
 	 *
 	 * Note that this parses it without casting objects to associative arrays.
@@ -49,7 +38,7 @@ class JsonContent extends TextContent {
 	 */
 	public function getData() {
 		if ( $this->jsonParse === null ) {
-			$this->jsonParse = FormatJson::parse( $this->getNativeData() );
+			$this->jsonParse = FormatJson::parse( $this->getText() );
 		}
 		return $this->jsonParse;
 	}
@@ -174,7 +163,8 @@ class JsonContent extends TextContent {
 	 * @return string HTML.
 	 */
 	protected function objectRow( $key, $val ) {
-		$th = Html::element( 'th', [], $key );
+		$thContent = Html::element( 'span', [], $key );
+		$th = Html::rawElement( 'th', [], $thContent );
 		$td = $this->valueCell( $val );
 		return Html::rawElement( 'tr', [], $th . $td );
 	}
@@ -231,7 +221,7 @@ class JsonContent extends TextContent {
 			return Html::rawElement( 'td', [], $this->arrayTable( $val ) );
 		}
 
-		return Html::element( 'td', [ 'class' => 'value' ], $this->primitiveValue( $val ) );
+		return Html::element( 'td', [ 'class' => 'mw-json-value' ], $this->primitiveValue( $val ) );
 	}
 
 	/**

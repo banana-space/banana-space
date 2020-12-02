@@ -1,15 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Araceletorres",
 			"Cainamarques",
 			"Carla404",
+			"Eduardo Addad de Oliveira",
 			"Eduardo.mps",
+			"Felipe L. Ewald",
 			"Giro720",
 			"MetalBrasil",
-			"555",
-			"Araceletorres",
-			"Felipe L. Ewald",
-			"Eduardo Addad de Oliveira"
+			555
 		]
 	},
 	"nuke": "Eliminar de forma massiva",
@@ -22,17 +22,15 @@
 	"nuke-multiplepeople": "Eliminação em massa de páginas criadas recentemente",
 	"nuke-tools": "Esta ferramenta permite que páginas criadas recentemente por um usuário ou IP específico sejam eliminadas de forma massiva.\nInsira um nome de usuário ou IP para listar páginas a eliminar; deixe em branco se deseja listar de todos os usuários.",
 	"nuke-submit-user": "Listar páginas",
-	"nuke-toggleinvert": "Inverter",
 	"nuke-submit-delete": "Eliminar selecionadas",
 	"right-nuke": "Eliminar páginas em massa",
-	"nuke-select": "Selecionar: $1",
 	"nuke-userorip": "Nome de usuário, endereço IP ou em branco:",
 	"nuke-maxpages": "Número máximo de páginas:",
 	"nuke-editby": "Criada [[Special:Contributions/$1|{{GENDER:$1|pelo usuário $1|pela usuária $1|por $1}}]]",
 	"nuke-deleted": "A página \"\"$1\"\" foi excluída.",
 	"nuke-not-deleted": "A página [[:$1]] '''não pôde''' ser excluída.",
 	"nuke-delete-more": "[[Special:Nuke|Eliminar mais páginas]]",
-	"nuke-pattern": "Padrão em nomes de páginas:",
+	"nuke-pattern": "Padrão (por exemplo %) para o nome da página:",
 	"nuke-nopages-global": "Não há títulos de páginas que correspondam à sua pesquisa.",
 	"nuke-viewchanges": "ver alterações",
 	"nuke-namespace": "Limitar ao espaço nominal:",

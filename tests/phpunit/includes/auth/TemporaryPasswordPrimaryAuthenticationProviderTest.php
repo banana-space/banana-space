@@ -3,15 +3,17 @@
 namespace MediaWiki\Auth;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\PermissionManager;
+use Psr\Container\ContainerInterface;
 use Wikimedia\ScopedCallback;
 use Wikimedia\TestingAccessWrapper;
 
 /**
  * @group AuthManager
  * @group Database
- * @covers MediaWiki\Auth\TemporaryPasswordPrimaryAuthenticationProvider
+ * @covers \MediaWiki\Auth\TemporaryPasswordPrimaryAuthenticationProvider
  */
-class TemporaryPasswordPrimaryAuthenticationProviderTest extends \MediaWikiTestCase {
+class TemporaryPasswordPrimaryAuthenticationProviderTest extends \MediaWikiIntegrationTestCase {
 
 	private $manager = null;
 	private $config = null;
@@ -36,9 +38,20 @@ class TemporaryPasswordPrimaryAuthenticationProviderTest extends \MediaWikiTestC
 			$this->config,
 			MediaWikiServices::getInstance()->getMainConfig()
 		] );
+		$hookContainer = $this->createHookContainer();
 
 		if ( !$this->manager ) {
-			$this->manager = new AuthManager( new \FauxRequest(), $config );
+			$services = $this->createNoOpAbstractMock( ContainerInterface::class );
+			$objectFactory = new \Wikimedia\ObjectFactory( $services );
+			$permManager = $this->createNoOpMock( PermissionManager::class );
+
+			$this->manager = new AuthManager(
+				new \FauxRequest(),
+				$config,
+				$objectFactory,
+				$permManager,
+				$hookContainer
+			);
 		}
 		$this->validity = \Status::newGood();
 
@@ -54,31 +67,22 @@ class TemporaryPasswordPrimaryAuthenticationProviderTest extends \MediaWikiTestC
 		$provider->setConfig( $config );
 		$provider->setLogger( new \Psr\Log\NullLogger() );
 		$provider->setManager( $this->manager );
+		$provider->setHookContainer( $hookContainer );
 
 		return $provider;
 	}
 
 	protected function hookMailer( $func = null ) {
-		\Hooks::clear( 'AlternateUserMailer' );
+		$hookContainer = MediaWikiServices::getInstance()->getHookContainer();
 		if ( $func ) {
-			\Hooks::register( 'AlternateUserMailer', $func );
-			// Safety
-			\Hooks::register( 'AlternateUserMailer', function () {
-				return false;
-			} );
+			$reset = $hookContainer->scopedRegister( 'AlternateUserMailer', $func, true );
 		} else {
-			\Hooks::register( 'AlternateUserMailer', function () {
+			$reset = $hookContainer->scopedRegister( 'AlternateUserMailer', function () {
 				$this->fail( 'AlternateUserMailer hook called unexpectedly' );
 				return false;
-			} );
+			}, true );
 		}
-
-		return new ScopedCallback( function () {
-			\Hooks::clear( 'AlternateUserMailer' );
-			\Hooks::register( 'AlternateUserMailer', function () {
-				return false;
-			} );
-		} );
+		return $reset;
 	}
 
 	public function testBasics() {
@@ -105,6 +109,7 @@ class TemporaryPasswordPrimaryAuthenticationProviderTest extends \MediaWikiTestC
 			'EnableEmail' => false,
 			'NewPasswordExpiry' => 100,
 			'PasswordReminderResendTime' => 101,
+			'AllowRequiringEmailForResets' => false,
 		] );
 
 		$p = TestingAccessWrapper::newFromObject( new TemporaryPasswordPrimaryAuthenticationProvider() );
@@ -117,22 +122,23 @@ class TemporaryPasswordPrimaryAuthenticationProviderTest extends \MediaWikiTestC
 			'emailEnabled' => true,
 			'newPasswordExpiry' => 42,
 			'passwordReminderResendTime' => 43,
+			'allowRequiringEmailForResets' => true,
 		] ) );
 		$p->setConfig( $config );
 		$this->assertSame( true, $p->emailEnabled );
 		$this->assertSame( 42, $p->newPasswordExpiry );
 		$this->assertSame( 43, $p->passwordReminderResendTime );
+		$this->assertSame( true, $p->allowRequiringEmail );
 	}
 
 	public function testTestUserCanAuthenticate() {
 		$user = self::getMutableTestUser()->getUser();
 
 		$dbw = wfGetDB( DB_MASTER );
-
-		$passwordFactory = new \PasswordFactory();
-		$passwordFactory->init( \RequestContext::getMain()->getConfig() );
+		$config = MediaWikiServices::getInstance()->getMainConfig();
 		// A is unsalted MD5 (thus fast) ... we don't care about security here, this is test only
-		$passwordFactory->setDefaultType( 'A' );
+		$passwordFactory = new \PasswordFactory( $config->get( 'PasswordConfig' ), 'A' );
+
 		$pwhash = $passwordFactory->newFromPlaintext( 'password' )->toString();
 
 		$provider = $this->getProvider();
@@ -192,7 +198,8 @@ class TemporaryPasswordPrimaryAuthenticationProviderTest extends \MediaWikiTestC
 	 * @param array $expected
 	 */
 	public function testGetAuthenticationRequests( $action, $options, $expected ) {
-		$actual = $this->getProvider()->getAuthenticationRequests( $action, $options );
+		$actual = $this->getProvider( [ 'emailEnabled' => true ] )
+			->getAuthenticationRequests( $action, $options );
 		foreach ( $actual as $req ) {
 			if ( $req instanceof TemporaryPasswordAuthenticationRequest && $req->password !== null ) {
 				$req->password = 'random';
@@ -522,11 +529,15 @@ class TemporaryPasswordPrimaryAuthenticationProviderTest extends \MediaWikiTestC
 		$status = $provider->providerAllowsAuthenticationDataChange( $req, true );
 		$this->assertEquals( \StatusValue::newFatal( 'passwordreset-emaildisabled' ), $status );
 
-		$provider = $this->getProvider( [ 'passwordReminderResendTime' => 10 ] );
+		$provider = $this->getProvider( [
+			'emailEnabled' => true, 'passwordReminderResendTime' => 10
+		] );
 		$status = $provider->providerAllowsAuthenticationDataChange( $req, true );
 		$this->assertEquals( \StatusValue::newFatal( 'throttled-mailpassword', 10 ), $status );
 
-		$provider = $this->getProvider( [ 'passwordReminderResendTime' => 3 ] );
+		$provider = $this->getProvider( [
+			'emailEnabled' => true, 'passwordReminderResendTime' => 3
+		] );
 		$status = $provider->providerAllowsAuthenticationDataChange( $req, true );
 		$this->assertFalse( $status->hasMessage( 'throttled-mailpassword' ) );
 
@@ -535,7 +546,9 @@ class TemporaryPasswordPrimaryAuthenticationProviderTest extends \MediaWikiTestC
 			[ 'user_newpass_time' => $dbw->timestamp( time() + 5 * 3600 ) ],
 			[ 'user_id' => $user->getId() ]
 		);
-		$provider = $this->getProvider( [ 'passwordReminderResendTime' => 0 ] );
+		$provider = $this->getProvider( [
+			'emailEnabled' => true, 'passwordReminderResendTime' => 0
+		] );
 		$status = $provider->providerAllowsAuthenticationDataChange( $req, true );
 		$this->assertFalse( $status->hasMessage( 'throttled-mailpassword' ) );
 
@@ -567,7 +580,7 @@ class TemporaryPasswordPrimaryAuthenticationProviderTest extends \MediaWikiTestC
 		{
 			$mailed = true;
 			$this->assertSame( $user->getEmail(), $to[0]->address );
-			$this->assertContains( $req->password, $body );
+			$this->assertStringContainsString( $req->password, $body );
 			return false;
 		} );
 		$provider->providerChangeAuthenticationData( $req );
@@ -698,7 +711,7 @@ class TemporaryPasswordPrimaryAuthenticationProviderTest extends \MediaWikiTestC
 		{
 			$mailed = true;
 			$this->assertSame( 'test@localhost.localdomain', $to[0]->address );
-			$this->assertContains( $req->password, $body );
+			$this->assertStringContainsString( $req->password, $body );
 			return false;
 		} );
 

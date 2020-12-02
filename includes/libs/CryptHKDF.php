@@ -100,21 +100,13 @@ class CryptHKDF {
 	];
 
 	/**
-	 * @var CryptRand
-	 */
-	private $cryptRand;
-
-	/**
 	 * @param string $secretKeyMaterial
 	 * @param string $algorithm Name of hashing algorithm
 	 * @param BagOStuff $cache
 	 * @param string|array $context Context to mix into HKDF context
-	 * @param CryptRand $cryptRand
 	 * @throws InvalidArgumentException if secret key material is too short
 	 */
-	public function __construct( $secretKeyMaterial, $algorithm, BagOStuff $cache, $context,
-		CryptRand $cryptRand
-	) {
+	public function __construct( $secretKeyMaterial, $algorithm, BagOStuff $cache, $context ) {
 		if ( strlen( $secretKeyMaterial ) < 16 ) {
 			throw new InvalidArgumentException( "secret was too short." );
 		}
@@ -122,7 +114,6 @@ class CryptHKDF {
 		$this->algorithm = $algorithm;
 		$this->cache = $cache;
 		$this->context = is_array( $context ) ? $context : [ $context ];
-		$this->cryptRand = $cryptRand;
 
 		// To prevent every call from hitting the same memcache server, pick
 		// from a set of keys to use. mt_rand is only use to pick a random
@@ -135,7 +126,7 @@ class CryptHKDF {
 	 * from the same SKM. This should keep things unpredictable even if an attacker
 	 * is able to influence CTXinfo.
 	 */
-	function __destruct() {
+	public function __destruct() {
 		if ( $this->lastK ) {
 			$this->cache->set( $this->cacheKey, $this->lastK );
 		}
@@ -150,12 +141,12 @@ class CryptHKDF {
 			$lastSalt = $this->cache->get( $this->cacheKey );
 			if ( $lastSalt === false ) {
 				// If we don't have a previous value to use as our salt, we use
-				// 16 bytes from CryptRand, which will use a small amount of
+				// 16 bytes from random_bytes(), which will use a small amount of
 				// entropy from our pool. Note, "XTR may be deterministic or keyed
 				// via an optional “salt value”  (i.e., a non-secret random
 				// value)..." - http://eprint.iacr.org/2010/264.pdf. However, we
 				// use a strongly random value since we can.
-				$lastSalt = $this->cryptRand->generate( 16 );
+				$lastSalt = random_bytes( 16 );
 			}
 			// Get a binary string that is hashLen long
 			$this->salt = hash( $this->algorithm, $lastSalt, true );
@@ -217,7 +208,7 @@ class CryptHKDF {
 	 * @param string $ikm The input keying material
 	 * @param string $salt The salt to add to the ikm, to get the prk
 	 * @param string $info Optional context (change the output without affecting
-	 *	the randomness properties of the output)
+	 * 	the randomness properties of the output)
 	 * @param int $L Number of bytes to return
 	 * @return string Cryptographically secure pseudorandom binary string
 	 */

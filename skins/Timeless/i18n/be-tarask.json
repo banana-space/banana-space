@@ -1,13 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Renessaince",
-			"Red Winged Duck"
+			"Red Winged Duck",
+			"Renessaince"
 		]
 	},
 	"timeless-desc": "Вечная тэма афармленьня, створаная паводле прататыпу Winter аўтарства Брэндана Гарыса і розных стыляў фундацыі «Вікімэдыя».",
-	"timeless-search-placeholder": "Пошук сярод {{NUMBEROFARTICLES}} старонак",
-	"timeless-loggedin": "Ваш рахунак",
 	"timeless-anonymous": "Ананім",
 	"timeless-loggedinas": "Увайшлі як '''$1'''",
 	"timeless-notloggedin": "Не ўвайшлі ў сыстэму",
@@ -22,5 +20,5 @@
 	"timeless-namespaces": "Прасторы назваў",
 	"timeless-pagetools": "Дзеяньні на старонцы",
 	"timeless-languages": "Мовы",
-	"timeless.js": "/* Кожны JavaScript, зьмешчаны тут, будзе загружаны для ўсіх удзельнікаў, якія выкарыстоўваюць тэму афармленьня Timeless */"
+	"timeless.js": "/* Усе JavaScript, зьмешчаныя тут, будуць загружаныя для удзельнікаў, якія выкарыстоўваюць тэму афармленьня Timeless */"
 }

@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Santu",
 			"Pippinu",
+			"Santu",
 			"Sarvaturi"
 		]
 	},
@@ -20,7 +20,6 @@
 	"interwiki-trans-label": "Ncludi:",
 	"interwiki_error": "SBÀGGHIU: La tabedda di li interwiki è vacanti, o c'è qualchi àutru sbàgghiu.",
 	"interwiki_reasonfield": "Mutivu:",
-	"interwiki_delquestion": "Scancellu \"$1\"",
 	"interwiki_deleting": "Stai pi scancillari lu prufissu \"$1\"",
 	"interwiki_deleted": "Lu prifissu \"$1\" vinni scancillatu cu successu dâ tabedda di li interwiki.",
 	"interwiki_delfailed": "Rimuzzioni dû prifissi \"$1\" dâ tabedda di li interwiki non arinisciuta.",

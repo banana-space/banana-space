@@ -1,4 +1,4 @@
-[![Latest Stable Version]](https://packagist.org/packages/mediawiki/at-ease) [![License]](https://packagist.org/packages/mediawiki/at-ease)
+[![Latest Stable Version]](https://packagist.org/packages/wikimedia/at-ease) [![License]](https://packagist.org/packages/wikimedia/at-ease)
 
 at-ease
 =======
@@ -25,14 +25,16 @@ to suppress the warnings and prevent PHP from being noisy.
 Usage
 -----
 
+    use Wikimedia\AtEase\AtEase;
+
     // Suppress warnings in a block of code:
-    \MediaWiki\suppressWarnings();
+    AtEase::suppressWarnings();
     $content = file_get_contents( 'foobar.txt' );
-    \MediaWiki\restoreWarnings();
+    AtEase::restoreWarnings();
 
 
     // ..or in a callback function:
-    \MediaWiki\quietCall( 'file_get_contents', 'foobar.txt' );
+    AtEase::quietCall( 'file_get_contents', 'foobar.txt' );
 
 
 Running tests
@@ -55,5 +57,5 @@ during the [MediaWiki 1.26][] development cycle.
 [MediaWiki 1.3]: https://www.mediawiki.org/wiki/MediaWiki_1.3
 [r4261]: https://phabricator.wikimedia.org/rSVN4261
 [MediaWiki 1.26]: https://www.mediawiki.org/wiki/MediaWiki_1.26
-[Latest Stable Version]: https://poser.pugx.org/mediawiki/at-ease/v/stable.svg
-[License]: https://poser.pugx.org/mediawiki/at-ease/license.svg
+[Latest Stable Version]: https://poser.pugx.org/wikimedia/at-ease/v/stable.svg
+[License]: https://poser.pugx.org/wikimedia/at-ease/license.svg

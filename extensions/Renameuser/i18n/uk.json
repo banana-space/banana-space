@@ -7,14 +7,15 @@
 			"Base",
 			"EugeneZelenko",
 			"Microcell",
+			"Piramidion",
 			"Prima klasy4na",
-			"Тест",
-			"Piramidion"
+			"Vlad5250",
+			"Тест"
 		]
 	},
 	"renameuser": "Перейменувати користувача",
-	"renameuser-linkoncontribs": "перейменувати користувача",
-	"renameuser-linkoncontribs-text": "Перейменувати цього користувача",
+	"renameuser-linkoncontribs": "перейменувати {{GENDER:$1|користувача|користувачку}}",
+	"renameuser-linkoncontribs-text": "Перейменувати {{GENDER:$1|цього користувача|цю користувачку}}",
 	"renameuser-desc": "Перейменування користувача (потрібні права ''renameuser'')",
 	"renameuserold": "Поточне ім'я:",
 	"renameusernew": "Нове ім'я:",
@@ -41,6 +42,6 @@
 	"logentry-renameuser-renameuser-legacier": "$1 {{GENDER:$2|перейменував|перейменувала}} {{GENDER:$7|користувача|користувачку}} $4 на $5",
 	"renameuser-move-log": "Автоматичне перейменування сторінки при перейменуванні {{GENDER:$2|користувача|користувачки}} «[[User:$1|$1]]» на «[[User:$2|$2]]»",
 	"action-renameuser": "перейменування користувачів",
-	"right-renameuser": "перейменування користувачів",
+	"right-renameuser": "Перейменування користувачів",
 	"renameuser-renamed-notice": "Цей користувач був перейменований.\nДля довідки нижче наведений журнал перейменувань."
 }

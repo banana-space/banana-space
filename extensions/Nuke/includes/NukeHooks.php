@@ -1,5 +1,7 @@
 <?php
 
+use Wikimedia\IPUtils;
+
 class NukeHooks {
 
 	/**
@@ -14,7 +16,7 @@ class NukeHooks {
 		SpecialPage $sp
 	) {
 		$username = $userPageTitle->getText();
-		if ( $sp->getUser()->isAllowed( 'nuke' ) && !IP::isValidRange( $username ) ) {
+		if ( $sp->getUser()->isAllowed( 'nuke' ) && !IPUtils::isValidRange( $username ) ) {
 			$toolLinks['nuke'] = $sp->getLinkRenderer()->makeKnownLink(
 				SpecialPage::getTitleFor( 'Nuke' ),
 				$sp->msg( 'nuke-linkoncontribs' )->text(),

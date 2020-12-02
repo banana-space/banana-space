@@ -19,6 +19,8 @@
  * @file
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Generates a colourful notification intended for humans on IRC.
  *
@@ -64,8 +66,8 @@ class IRCColourfulRCFeedFormatter implements RCFeedFormatter {
 			if ( $wgUseRCPatrol || ( $attribs['rc_type'] == RC_NEW && $wgUseNPPatrol ) ) {
 				$query .= '&rcid=' . $attribs['rc_id'];
 			}
-			// HACK: We need this hook for WMF's secure server setup
-			Hooks::run( 'IRCLineURL', [ &$url, &$query, $rc ] );
+
+			Hooks::runner()->onIRCLineURL( $url, $query, $rc );
 			$url .= $query;
 		}
 
@@ -93,8 +95,9 @@ class IRCColourfulRCFeedFormatter implements RCFeedFormatter {
 			) );
 			$flag = $attribs['rc_log_action'];
 		} else {
+			$store = MediaWikiServices::getInstance()->getCommentStore();
 			$comment = self::cleanupForIRC(
-				CommentStore::getStore()->getComment( 'rc_comment', $attribs )->text
+				$store->getComment( 'rc_comment', $attribs )->text
 			);
 			$flag = '';
 			if ( !$attribs['rc_patrolled']
@@ -129,7 +132,7 @@ class IRCColourfulRCFeedFormatter implements RCFeedFormatter {
 	}
 
 	/**
-	 * Remove newlines, carriage returns and decode html entites
+	 * Remove newlines, carriage returns and decode html entities
 	 * @param string $text
 	 * @return string
 	 */

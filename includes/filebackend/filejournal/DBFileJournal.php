@@ -22,8 +22,9 @@
  */
 
 use MediaWiki\MediaWikiServices;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBError;
+use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * Version of FileJournal that logs to a DB table
@@ -32,24 +33,24 @@ use Wikimedia\Rdbms\DBError;
 class DBFileJournal extends FileJournal {
 	/** @var IDatabase */
 	protected $dbw;
-
-	protected $wiki = false; // string; wiki DB name
+	/** @var string */
+	protected $domain;
 
 	/**
 	 * Construct a new instance from configuration.
 	 *
 	 * @param array $config Includes:
-	 *     'wiki' : wiki name to use for LoadBalancer
+	 *   - domain: database domain ID of the wiki
 	 */
-	protected function __construct( array $config ) {
+	public function __construct( array $config ) {
 		parent::__construct( $config );
 
-		$this->wiki = $config['wiki'];
+		$this->domain = $config['domain'] ?? $config['wiki']; // b/c
 	}
 
 	/**
 	 * @see FileJournal::logChangeBatch()
-	 * @param array $entries
+	 * @param array[] $entries
 	 * @param string $batchId
 	 * @return StatusValue
 	 */
@@ -64,7 +65,7 @@ class DBFileJournal extends FileJournal {
 			return $status;
 		}
 
-		$now = wfTimestamp( TS_UNIX );
+		$now = ConvertibleTimestamp::time();
 
 		$data = [];
 		foreach ( $entries as $entry ) {
@@ -80,8 +81,11 @@ class DBFileJournal extends FileJournal {
 
 		try {
 			$dbw->insert( 'filejournal', $data, __METHOD__ );
+			// XXX Should we do this deterministically so it's testable? Maybe look at the last two
+			// digits of a hash of a bunch of the data?
 			if ( mt_rand( 0, 99 ) == 0 ) {
-				$this->purgeOldLogs(); // occasionally delete old logs
+				// occasionally delete old logs
+				$this->purgeOldLogs(); // @codeCoverageIgnore
 			}
 		} catch ( DBError $e ) {
 			$status->fatal( 'filejournal-fail-dbquery', $this->backend );
@@ -164,7 +168,7 @@ class DBFileJournal extends FileJournal {
 		}
 
 		$dbw = $this->getMasterDB();
-		$dbCutoff = $dbw->timestamp( time() - 86400 * $this->ttlDays );
+		$dbCutoff = $dbw->timestamp( ConvertibleTimestamp::time() - 86400 * $this->ttlDays );
 
 		$dbw->delete( 'filejournal',
 			[ 'fj_timestamp < ' . $dbw->addQuotes( $dbCutoff ) ],
@@ -184,7 +188,7 @@ class DBFileJournal extends FileJournal {
 		if ( !$this->dbw ) {
 			// Get a separate connection in autocommit mode
 			$lb = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->newMainLB();
-			$this->dbw = $lb->getConnection( DB_MASTER, [], $this->wiki );
+			$this->dbw = $lb->getConnection( DB_MASTER, [], $this->domain );
 			$this->dbw->clearFlag( DBO_TRX );
 		}
 

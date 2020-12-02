@@ -14,7 +14,10 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "parserhook",
 	"requires": {
-		"MediaWiki": ">= 1.31"
+		"MediaWiki": ">= 1.34",
+		"platform": {
+			"ability-shell": true
+		}
 	},
 	"MessagesDirs": {
 		"SyntaxHighlight_GeSHi": [
@@ -23,8 +26,6 @@
 	},
 	"AutoloadClasses": {
 		"SyntaxHighlight": "includes/SyntaxHighlight.php",
-		"SyntaxHighlight_GeSHi": "includes/SyntaxHighlight.php",
-		"GeSHi": "includes/GeSHi.php",
 		"SyntaxHighlightAce": "includes/SyntaxHighlightAce.php",
 		"SyntaxHighlightGeSHiCompat": "includes/SyntaxHighlightGeSHiCompat.php",
 		"ResourceLoaderSyntaxHighlightVisualEditorModule": "includes/ResourceLoaderSyntaxHighlightVisualEditorModule.php"
@@ -59,18 +60,28 @@
 			"SyntaxHighlight::onResourceLoaderRegisterModules"
 		]
 	},
-	"SyntaxHighlightModels": {
-		"css": "css",
-		"javascript": "javascript"
+	"attributes": {
+		"SyntaxHighlight": {
+			"Models" : {
+				"css": "css",
+				"javascript": "javascript"
+			}
+		},
+		"VisualEditor": {
+			"PluginModules": [
+				"ext.geshi.visualEditor"
+			]
+		}
 	},
-	"VisualEditorPluginModules": [
-		"ext.geshi.visualEditor"
-	],
 	"config": {
-		"PygmentizePath": false
+		"PygmentizePath": {
+			"value": false
+		}
 	},
 	"TrackingCategories": [
-		"syntaxhighlight-error-category"
+		"syntaxhighlight-error-category",
+		"syntaxhighlight-enclose-category",
+		"syntaxhighlight-source-category"
 	],
-	"manifest_version": 1
+	"manifest_version": 2
 }

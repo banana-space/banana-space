@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Arianit",
 			"Dori",
-			"Olsi",
-			"Liridon",
 			"Kosovastar",
-			"Arianit"
+			"Liridon",
+			"Olsi"
 		]
 	},
 	"fancycaptcha-addurl": "Redaktimi juaj ka lidhje URL të reja dhe si mbrojtje kundër abuzimeve automatike duhet të shtypni çfarë shfaqet tek figura e mëposhtme:<br /> ([[Special:Captcha|Çfarë është kjo?]])",

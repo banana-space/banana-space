@@ -7,6 +7,7 @@
 	},
 	"skinname-vector": "Vector",
 	"vector-skin-desc": "Versión moderna de MonoBook, con un aspeutu frescu y munchos ameyoramientos d'usabilidá",
+	"prefs-vector-enable-vector-1-label": "Utilizar versión anticuada de Vector",
 	"vector.css": "/* Los CSS allugaos equí afeutarán a los usuarios del aspeutu Vector */",
 	"vector.js": "/* Cualesquier JavaScript que tea equí se cargará pa los usuarios del aspeutu Vector */",
 	"vector-action-addsection": "Amestar seición",
@@ -20,5 +21,7 @@
 	"vector-view-history": "Ver historial",
 	"vector-view-view": "Lleer",
 	"vector-view-viewsource": "Ver fonte",
+	"vector-jumptonavigation": "Saltar a navegación",
+	"vector-jumptosearch": "Saltar a la gueta",
 	"vector-more-actions": "Más"
 }

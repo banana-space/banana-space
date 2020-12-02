@@ -1,0 +1,99 @@
+/*!
+ * VisualEditor ContentEditable ResizableNode styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ce-resizableNode-handles {
+	position: absolute;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.ve-ce-resizableNode-handles-resizing {
+	box-shadow: inset 0 0 0 1px rgba( 0, 0, 0, 0.2 );
+	background: rgba( 0, 0, 0, 0.1 );
+}
+
+.ve-ce-resizableNode-handles div {
+	position: absolute;
+	width: 11px;
+	height: 11px;
+	background-repeat: no-repeat;
+}
+
+.ve-ce-resizableNode-nwHandle {
+	cursor: nw-resize;
+	left: -6px;
+	top: -6px;
+}
+
+.ve-ce-resizableNode-neHandle {
+	cursor: ne-resize;
+	right: -6px;
+	top: -6px;
+}
+
+.ve-ce-resizableNode-swHandle {
+	cursor: sw-resize;
+	bottom: -6px;
+	left: -6px;
+}
+
+.ve-ce-resizableNode-seHandle {
+	cursor: se-resize;
+	bottom: -6px;
+	right: -6px;
+}
+
+.ve-ce-resizableNode-nwHandle,
+.ve-ce-resizableNode-seHandle {
+	/* @embed */
+	background-image: url( ../../../ui/styles/images/resize-nw-se.svg );
+}
+
+.ve-ce-resizableNode-neHandle,
+.ve-ce-resizableNode-swHandle {
+	/* @embed */
+	background-image: url( ../../../ui/styles/images/resize-ne-sw.svg );
+}
+
+.ve-ce-resizableNode-hide-nw .ve-ce-resizableNode-nwHandle,
+.ve-ce-resizableNode-hide-ne .ve-ce-resizableNode-neHandle,
+.ve-ce-resizableNode-hide-sw .ve-ce-resizableNode-swHandle,
+.ve-ce-resizableNode-hide-se .ve-ce-resizableNode-seHandle {
+	display: none;
+}
+
+.ve-ce-resizableNode-sizeLabel {
+	position: absolute;
+	text-align: center;
+	opacity: 0;
+	-webkit-transition: opacity 200ms;
+	-moz-transition: opacity 200ms;
+	transition: opacity 200ms;
+}
+
+.ve-ce-resizableNode-sizeLabel-resizing {
+	opacity: 1;
+}
+
+.ve-ce-resizableNode-sizeText {
+	padding: 0.25em 0.5em;
+	border: 1px solid #c8ccd1;
+	background-color: #fff;
+	border-radius: 2px;
+	white-space: nowrap;
+}
+
+.ve-ce-resizableNode-sizeText span:not( :first-child ) {
+	margin-left: 0.4em;
+	padding-left: 0.4em;
+	border-left: 1px solid #c8ccd1;
+}
+
+.ve-ce-resizableNode-sizeText-warning {
+	background-color: #ecc;
+	border-color: #caa;
+}

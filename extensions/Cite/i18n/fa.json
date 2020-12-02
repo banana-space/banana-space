@@ -1,20 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dalba",
 			"Ebraminio",
 			"Huji",
-			"Wayiran",
-			"ZxxZxxZ",
+			"Ladsgroup",
 			"Reza1615",
-			"Dalba",
-			"Ladsgroup"
+			"Wayiran",
+			"ZxxZxxZ"
 		]
 	},
-	"apihelp-query+references-description": "یک بازنمودِ دادگانی از ارجاع‌هایی که با صفحه‌های داده شده مرتبط هستند برمی‌گرداند.",
-	"apihelp-query+references-summary": "یک بازنمودِ دادگانی از ارجاع‌هایی که با صفحه‌های داده شده مرتبط هستند برمی‌گرداند.",
-	"apihelp-query+references-example-1": "ارجاع‌های مرتبط با <kbd>Albert Einstein</kbd>.",
-	"apierror-citestoragedisabled": "ذخیره‌سازی ارجاع‌ها برای افزونهٔ یادکرد فعال نشده‌است.",
-	"cite-desc": "برچسب‌های <nowiki><ref[ name=id]></nowiki> و <nowiki><references/></nowiki> را برای یادکرد اضافه می‌کند",
+	"cite-desc": "برچسب‌های <code>&lt;ref[ name=id]&gt;</code> و <code>&lt;references/&gt;</code> را برای یادکرد اضافه می‌کند",
 	"cite_error": "خطای یادکرد: $1",
 	"cite_error_ref_numeric_key": "برچسب <code><ref></code> نامعتبر؛ نام نمی‌تواند یک عدد باشد. عنوان روشنی برگزینید",
 	"cite_error_ref_no_key": "برچسب بازکنندهٔ <code><ref></code> بدشکل است یا نام بدی دارد",
@@ -22,8 +18,8 @@
 	"cite_error_ref_no_input": "برچسب <code><ref></code> نامعتبر؛ یادکردهای بدون نام باید محتوا داشته باشند",
 	"cite_error_references_duplicate_key": "برچسب <code>&lt;ref&gt;</code> نامعتبر؛ نام «$1» چندین بار با محتوای متفاوت تعریف شده‌است",
 	"cite_error_references_invalid_parameters": "پارامتر نامعتبر در برچسب <code><references></code> نامعتبر",
-	"cite_error_references_no_backlink_label": "برچسب‌های پساپیوند سفارشی به انتها رسید.\nموارد جدیدی را در پیغام <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki> تعریف کنید.",
-	"cite_error_no_link_label_group": "برچسب‌های پساپیوند سفارشی برای گروه «$1» به انتها رسید.\nموارد جدیدی را در پیغام <nowiki>[[MediaWiki:$2]]</nowiki> کنید.",
+	"cite_error_references_no_backlink_label": "برچسب‌های پساپیوند سفارشی به انتها رسید. موارد جدیدی را در پیغام [[MediaWiki:Cite references link many format backlink labels]] تعریف کنید.",
+	"cite_error_no_link_label_group": "برچسب‌های پساپیوند سفارشی برای گروه «$1» به انتها رسید. موارد جدیدی را در پیغام [[MediaWiki:$2]] کنید.",
 	"cite_error_references_no_text": "برچسب <code><ref></code> نامعتبر؛ متنی برای ارجاع‌های با نام <code>$1</code> وارد نشده‌است",
 	"cite_error_included_ref": "برچسب تمام‌کنندهٔ <code>&lt;/ref&gt;</code> برای برچسب <code>&lt;ref&gt;</code> پیدا نشد",
 	"cite_error_group_refs_without_references": "برچسب <code>&lt;ref&gt;</code> برای گروهی به نام «$1» وجود دارد، اما برچسب متناظر با <code>&lt;references group=\"$1\"/&gt;</code> یافت نشد یا <code>&lt;/ref&gt;</code> بسته یافت نشد.",
@@ -34,10 +30,9 @@
 	"cite_error_empty_references_define": "برچسپ <code>&lt;ref&gt;</code> تعریف شده درون <code>&lt;references&gt;</code> با نام «$1» محتوایی ندارد.",
 	"cite-tracking-category-cite-error": "صفحات دارای خطا در ارجاع",
 	"cite-tracking-category-cite-error-desc": "صفحات موجود در این رده دارای خطا در استفاده از برچسب ارجاع هستند.",
-	"cite_reference_link_key_with_num": "$1_$2",
-	"cite_reference_link_prefix": "cite_ref-",
 	"cite_references_link_accessibility_label": "پرش به بالا",
 	"cite_references_link_many_accessibility_label": "پرش به بالا به:",
+	"cite_references_link_accessibility_back_label": "بازگشت به پشتیبانی",
 	"cite_section_preview_references": "پیش‌نمایش ارجاع‌ها",
 	"cite_warning": "هشدار یادکرد: $1",
 	"cite_warning_sectionpreview_no_text": "برچسب <code>&lt;ref&gt;</code> با نام <code>$1</code> قابل پیش‌نمایش نیست چرا که خارج از این بخش تعریف شده‌است یا کلاً تعریف نشده‌است."

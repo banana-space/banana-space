@@ -9,8 +9,13 @@
 	},
 	"skinname-vector": "Vector",
 	"vector-skin-desc": "Stellt eine modernisierte Benutzeroberfläche bereit",
+	"prefs-vector-enable-vector-1-label": "Verwende Legacy-Vector",
+	"prefs-vector-enable-vector-1-help": "Im Laufe der nächsten Jahre werden wir den Vector-Skin schrittweise aktualisieren. Legacy-Vector wird es dir ermöglichen, die alte Version von Vector (Dezember 2019) anzusehen. Um mehr über die Aktualisierungen zu erfahren, gehe zu unserer  [[mw:Reading/Web/Desktop_Improvements|Projektseite]].",
+	"vector-opt-out": "Umschalten zum bisherigen Aussehen",
+	"vector-opt-out-tooltip": "Ändere deine Einstellungen, um zum alten Aussehen der Benutzeroberfläche zurückzukehren (Legacy-Vector)",
 	"vector.css": "/* Das folgende CSS wird für Benutzer der Vector-Benutzeroberfläche geladen. */",
 	"vector.js": "/* Das folgende JavaScript wird für Benutzer der Vector-Benutzeroberfläche geladen. */",
+	"vector-action-toggle-sidebar": "Seitenleiste umschalten",
 	"vector-action-addsection": "Abschnitt hinzufügen",
 	"vector-action-delete": "Löschen",
 	"vector-action-move": "Verschieben",
@@ -22,5 +27,7 @@
 	"vector-view-history": "Versionsgeschichte",
 	"vector-view-view": "Lesen",
 	"vector-view-viewsource": "Quelltext anzeigen",
+	"vector-jumptonavigation": "Zur Navigation springen",
+	"vector-jumptosearch": "Zur Suche springen",
 	"vector-more-actions": "Mehr"
 }

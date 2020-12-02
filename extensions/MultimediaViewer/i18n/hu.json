@@ -1,15 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Tgr",
+			"Csega",
 			"Misibacsi",
 			"Tacsipacsi",
-			"Csega"
+			"Tgr"
 		]
 	},
 	"multimediaviewer-desc": "A teljes képernyőre kinagyíthatóvá teszi a beágyazott képeket",
-	"multimediaviewer-pref": "Képnézegető",
-	"multimediaviewer-pref-desc": "A multimédiás tartalmak megnézését könnyebbé tevő eszköz. Az oldalak szövegébe beágyazott bélyegképeket kattintásra nagyobb méretben jeleníti meg, és számos egyéb adatot is mutat róluk.",
 	"multimediaviewer-optin-pref": "<span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Képnézegető]</span> engedélyezése",
 	"multimediaviewer-file-page": "Ugrás a fájl saját lapjára",
 	"multimediaviewer-repository-local": "További részletek",
@@ -19,7 +17,7 @@
 	"multimediaviewer-multiple-authors": "$1 további szerző",
 	"multimediaviewer-multiple-authors-combine": "$1 és $2",
 	"multimediaviewer-metadata-error": "Nem sikerült betölteni a kép adatait (hibaüzenet: $1)",
-	"multimediaviewer-thumbnail-error": "Bocsánat, a fájl nem jeleníthető meg",
+	"multimediaviewer-thumbnail-error": "Sajnáljuk, a fájl nem jeleníthető meg",
 	"multimediaviewer-thumbnail-error-description": "Úgy tűnik, technikai hiba lépett fel. $1 vagy $3, ha nem szűnik meg. Hibaüzenet: $2",
 	"multimediaviewer-thumbnail-error-retry": "Újrapróbálkozhatsz",
 	"multimediaviewer-thumbnail-error-report": "jelentheted a hibát",

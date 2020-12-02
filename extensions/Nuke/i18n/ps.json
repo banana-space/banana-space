@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ahmed-Najib-Biabani-Ibrahimkhel",
+			"Amjad Khan",
 			"Baloch Khan"
 		]
 	},
@@ -11,7 +12,6 @@
 	"nuke-submit-user": "د مخونو لړليک کښل",
 	"nuke-submit-delete": "ټاکل شوی ړنگول",
 	"right-nuke": "د ډله ايز ړنگون مخونه",
-	"nuke-select": "ټاکل: $1",
 	"nuke-userorip": "کارن-نوم، آي پي پته يا تش:",
 	"nuke-maxpages": "د حد اکثر شمېر مخونه:",
 	"nuke-deleted": "د '''$1''' مخ ړنگ شو.",

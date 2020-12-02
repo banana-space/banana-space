@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Asoxor",
+			"Calak",
+			"Lost Whispers",
+			"Muhammed taha",
+			"Épine"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|دەستکاریی دیداری]]",
+	"tag-visualeditor-description": "دەستکاری بە [[{{MediaWiki:visualeditor-descriptionpagelink}}|دەستکاریکەری دیداری]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|دەستکاریکەری دیداری: تاوتوێ]]",
+	"visualeditor-help-label": "ڕێنوێنیی بەکارھێنەر بخوێنەرەوە",
+	"visualeditor-welcomedialog-action": "دەستپێکردن",
+	"visualeditor-welcomedialog-content": "ھەمووکەسێک دەتوانێت دەستکاری بکات، و ھەر چاکسازییەکیش یارمەتی دەدات.",
+	"visualeditor-welcomedialog-content-thanks": "بۆ ھەر چاکسازییەک، خزمەتێکی زمانی کوردی و کوردستان دەکەیت. سوپاس!",
+	"visualeditor-welcomedialog-switch": "گۆڕین بۆ دەستکاریکەری سەرچاوە",
+	"visualeditor-welcomedialog-switch-ve": "گۆڕین بۆ دەستکاریکەری دیداری",
+	"visualeditor-welcomedialog-title": "بەخێربێیت بۆ $2"
+}

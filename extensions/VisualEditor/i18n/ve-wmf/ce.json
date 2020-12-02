@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"Умар"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|БӀаьран редактор]]",
+	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|БӀаьран тадарца]] дина нисдарш",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|БӀаьран редактор]]: талла",
+	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|БӀаьран тадаран]] гӀоьнца дина нисдар, цунна чохь системин карина нийса боцу вики-йозан хийцамаш.",
+	"tag-visualeditor-wikitext": "вики-йозан 2017 редактор",
+	"tag-visualeditor-wikitext-description": "\"Вики-йоза 2017 редактор\" гӀоьнца дина нисдарш",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|бӀаьран редактор]] дӀадайина",
+	"tag-visualeditor-switched-description": "Декъашхо VisualEditor-ца болх болийнера, амма тӀакха чухулара тадар чохь болх би цо.",
+	"visualeditor-feedback-link": "Project:БӀаьран редактор/Хетарш",
+	"visualeditor-feedback-tool": "Язде хьайна хетарг",
+	"visualeditor-help-label": "Деша декъашхочун куьйгалла дар",
+	"visualeditor-help-title": "Тадар лело декъашхочун куьйгалла дар",
+	"visualeditor-welcomedialog-action": "Доладе тадар",
+	"visualeditor-welcomedialog-content": "Муьлха луучо кхузахь хийцам бан йиш ю.",
+	"visualeditor-welcomedialog-content-thanks": "Баркалла, гӀодарна!",
+	"visualeditor-welcomedialog-switch": "ДӀайолалун кодан редактор чохь тое",
+	"visualeditor-welcomedialog-switch-ve": "Тае бӀаьра",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Марша догӀийла}} $2"
+}

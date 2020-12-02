@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "Pridobi novo FancyCaptcha.",
+	"apihelp-fancycaptchareload-example-1": "Pridobi novo FancyCaptcha"
+}

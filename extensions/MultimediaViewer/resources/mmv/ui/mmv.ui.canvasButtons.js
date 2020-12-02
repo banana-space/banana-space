@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $, oo ) {
+( function () {
 	var CBP;
 
 	/**
@@ -38,7 +38,8 @@
 		this.$close = $closeButton;
 		this.$fullscreen = $fullscreenButton;
 
-		this.$reuse = $( '<button>' )
+		this.$reuse = $( '<a>' )
+			.attr( 'role', 'button' )
 			.addClass( 'mw-mmv-reuse-button' )
 			.html( '&nbsp;' )
 			.prop( 'title', mw.message( 'multimediaviewer-reuse-link' ).text() )
@@ -56,7 +57,8 @@
 				gravity: this.correctEW( 'se' )
 			} );
 
-		this.$download = $( '<button>' )
+		this.$download = $( '<a>' )
+			.attr( 'role', 'button' )
 			.addClass( 'mw-mmv-download-button' )
 			.html( '&nbsp;' )
 			.prop( 'title', mw.message( 'multimediaviewer-download-link' ).text() )
@@ -92,19 +94,19 @@
 			buttons.$nav.addClass( 'disabled' );
 		} );
 
-		this.$close.click( function () {
+		this.$close.on( 'click', function () {
 			$container.trigger( $.Event( 'mmv-close' ) );
 		} );
 
-		this.$next.click( function () {
+		this.$next.on( 'click', function () {
 			buttons.emit( 'next' );
 		} );
 
-		this.$prev.click( function () {
+		this.$prev.on( 'click', function () {
 			buttons.emit( 'prev' );
 		} );
 	}
-	oo.inheritClass( CanvasButtons, mw.mmv.ui.Element );
+	OO.inheritClass( CanvasButtons, mw.mmv.ui.Element );
 	CBP = CanvasButtons.prototype;
 
 	/**
@@ -149,6 +151,8 @@
 
 		// We don't use animation chaining because delay() can't be stop()ed
 		this.buttonsFadeTimeout = setTimeout( function () {
+			// FIXME: Use CSS transition
+			// eslint-disable-next-line no-jquery/no-animate
 			buttons.$buttons.not( '.disabled' ).animate( { opacity: 0 }, 1000, 'swing',
 				function () {
 					buttons.$buttons.addClass( 'hidden' );
@@ -221,7 +225,7 @@
 
 		this.$reuse.on( 'click.mmv-canvasButtons', function ( e ) {
 			$( document ).trigger( 'mmv-reuse-open', e );
-			e.stopPropagation(); // the dialog would take it as an outside click and close
+			return false;
 		} );
 		this.handleEvent( 'mmv-reuse-opened', function () {
 			buttons.$reuse.addClass( 'open' );
@@ -232,7 +236,7 @@
 
 		this.$download.on( 'click.mmv-canvasButtons', function ( e ) {
 			$( document ).trigger( 'mmv-download-open', e );
-			e.stopPropagation();
+			return false;
 		} );
 		this.handleEvent( 'mmv-download-opened', function () {
 			buttons.$download.addClass( 'open' );
@@ -266,6 +270,8 @@
 	 * Removes all UI things from the DOM, or hides them
 	 */
 	CBP.unattach = function () {
+		mw.mmv.ui.Element.prototype.unattach.call( this );
+
 		this.$download
 			.add( this.$reuse )
 			.add( this.$options )
@@ -277,9 +283,21 @@
 			} );
 	};
 
+	/**
+	 * @param {mw.mmv.model.Image} image
+	 */
+	CBP.set = function ( image ) {
+		this.$reuse.prop( 'href', image.descriptionUrl );
+		this.$download.prop( 'href', image.url );
+	};
+
 	CBP.empty = function () {
-		this.$reuse.removeClass( 'open' );
+		this.$reuse
+			.removeClass( 'open' )
+			.prop( 'href', null );
+		this.$download
+			.prop( 'href', null );
 	};
 
 	mw.mmv.ui.CanvasButtons = CanvasButtons;
-}( mediaWiki, jQuery, OO ) );
+}() );

@@ -26,8 +26,21 @@
 	"action-oathauth-enable": "шина-факторан аутентификаци латае",
 	"oathauth-auth-token-label": "Токен",
 	"oathauth-auth-ui": "Дехар до, хьайн телефон тӀера код дӀаязъе, хьажархьама:",
-	"oathauth-login-failed": "Хьажа цаделий",
+	"oathauth-login-failed": "Таллар кхочушдан цаделий.",
 	"oathauth-describe-provider": "Шина-факторан аутентификаци (OATH).",
 	"grant-oath": "Шина-факторан аутентификаци (OAUTH) тӀекхачар",
-	"action-oathauth-api-all": "Хьажа OATH статус"
+	"action-oathauth-api-all": "Хьажа OATH статус",
+	"oauthauth-ui-no-module": "Латина яц",
+	"oathauth-module-totp-label": "TOTP (цкъа мега пароль)",
+	"oathauth-ui-manage": "Урхалладар",
+	"oathmanage": "Шина-факторан аутентификацина урхалладар",
+	"oathauth-ui-not-enabled-modules": "Альтернативин кепан тӀеерзор",
+	"oathauth-ui-enabled-module": "Аутентификаци лелоран кеп",
+	"oathauth-enable-generic": "Латае",
+	"oathauth-disable-generic": "ДӀаяйа",
+	"oathauth-disable-page-title": "ДӀаяйа $1",
+	"oathauth-enable-page-title": "Латае $1",
+	"oathauth-ui-available-modules": "ТӀекхочу методаш",
+	"oathauth-ui-general-help": "'''Дуккха факторан аутентификаци''' ('''ДФА''') — шорйина аутентификаци, компьютеран тӀекхачаран тергонан хьесап ду, лелочунна хаамашна тӀекхача оьшу цхьаннал сов «аутентификацин механизман тешалла». [https://ru.wikipedia.org/wiki/Многофакторная_аутентификация Мадарра]",
+	"oathauth-totp-description": "TOTP (Time-based One-Time Password Algorithm) — ларйина аутентификацин цкъа мега паролаш кхуллу OATH-алгоритм, иза дика лардалар  HOTP (HMAC-Based One-Time Password Algorithm)."
 }

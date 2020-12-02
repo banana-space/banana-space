@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Benel",
+			"Bunukwiki"
+		]
+	},
+	"action-titleblacklistlog": "ciwsace satangahan malangat piazihan-tu-sulit nasulitan-nazipa’an",
+	"log-description-titleblacklist": "tina belih misult tu sacahamin matatungus satangahan malangat piazihan-tu-sulit a sikawaw.",
+	"logentry-titleblacklist-hit-username": "$1 mitanam panganganen ku canghaw $3 sa {{GENDER:$2|matebing}} matatungus sakacucek $4 ku tangan malangat piazihan tu sulit sikawaw.",
+	"titleblacklist-desc": "mahasa mikuwanay kapah misaungay [[MediaWiki:Titleblacklist|milangat  piazihan-tu-sulit]] atu [[MediaWiki:Titlewhitelist|mahasa piazihan-tu-sulit]] ngay satezep patizeng kasabelih atu misaungayay canghaw.",
+	"titleblacklist": "# tina kasabilih sa u satangahanay nu malangat piazihan-tu-sulit, matatungus tina tatungusay pakatineng a zateng a satangahan atu misaungayay apasatezep misaungay.\n#  buhci tu kamu pisaungay \"#\".\n#  piazihan-tu-sulit pataayaw tu kawaw malecad ku tabakiay atu adidi’ay nu sulit-bacu",
+	"titlewhitelist": "# tina kasabelih satangahan mahasa piazihan tu sulit buhci tu kamu ka pisaungay \"#\".\n# piazihan tu sulit pataayaw tu kawaw caay kasasizuma ku tabakiay atu adidi’ay a sulit",
+	"titleblacklist-forbidden-edit": "pyawti \"$2\" masatezep tu ku pisaungay.\nyapyawti matatungus isasa’ malangat ku piazihan tu sulit tu kasacacay: <code>$1</code>",
+	"titleblacklist-forbidden-move": "satangahan \"$3\" masatezep tuway misaungay, la’cus milimad \"$2\" tayza \"$3\". \nkya satangahan matatungus isasa’ay malangatay a piazihan-tu-sulit kasacacay:<code>$1</code>",
+	"titleblacklist-forbidden-upload": "tangan kalungangan \"$2\" mapasatezep tuway pisaungay.\nkya kalungangan matatungus isasa’ay a malangat piazihan tu sulit kasacacay: code>$1</code>",
+	"titleblacklist-forbidden-new-account": "misaungayay a kalungangan \"$2\" mapasatezep tu ku pisaungay.\nu kalungangan matatungus tu zikuz malangat piazihan tu sulit nu kasacacay:<code>$1</code>",
+	"titleblacklist-invalid": "satangahan malangat piazihan tu sulit labu’ay isasa’ay {{PLURAL:$1|cacay silsil|yadah silsil}} la’cus; taayaw misuped kapisumad henay:",
+	"titleblacklist-override": "sekipo malangat piazihan tu sulit",
+	"titleblacklist-override-help": "mataneng tu ku tungus a situngusay kapah tu misetin ciniza misekipo satangahan kakaian tademaw kinsa.",
+	"titleblacklist-warning": "<strong> patalaw: tina kasabelih matatungus isasa’ay a satangahan malangat piazihan-tu-sulit kasacacay, kapah a dada’ nay mikuwanay saca izaway <code>tboverride</code> tungus a misaungayay mikawaway-kalumyiti: </strong><br /><code>$1</code>",
+	"right-tboverride": "mitahpu satangahan saca misaungayay a kalungangan   kakaian tademaw",
+	"right-tboverride-account": "mitahpu misaungayay a kalungangan kakaian tademaw",
+	"right-titleblacklistlog": "satangahan milangat piazihan-tu-sulit nasulitan-nazipa’an"
+}

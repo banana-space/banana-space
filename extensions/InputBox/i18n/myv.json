@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Botuzhaleny-sodamo"
+			"Botuzhaleny-sodamo",
+			"Rueter"
 		]
 	},
+	"inputbox-tryexact": "Варчамс цяр понгома",
 	"inputbox-createarticle": "Шкамс лопа"
 }

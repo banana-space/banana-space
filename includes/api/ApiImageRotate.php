@@ -18,6 +18,11 @@
  * @file
  */
 
+use MediaWiki\MediaWikiServices;
+
+/**
+ * @ingroup API
+ */
 class ApiImageRotate extends ApiBase {
 	private $mPageSet = null;
 
@@ -32,8 +37,6 @@ class ApiImageRotate extends ApiBase {
 
 		$pageSet = $this->getPageSet();
 		$pageSet->execute();
-
-		$result = [];
 
 		$result = $pageSet->getInvalidTitlesAndRevisions( [
 			'invalidTitles', 'special', 'missingIds', 'missingRevIds', 'interwikiTitles',
@@ -58,7 +61,9 @@ class ApiImageRotate extends ApiBase {
 				}
 			}
 
-			$file = wfFindFile( $title, [ 'latest' => true ] );
+			$file = MediaWikiServices::getInstance()->getRepoGroup()->findFile(
+				$title, [ 'latest' => true ]
+			);
 			if ( !$file ) {
 				$r['result'] = 'Failure';
 				$r['errors'] = $this->getErrorFormatter()->arrayFromStatus(
@@ -78,15 +83,7 @@ class ApiImageRotate extends ApiBase {
 			}
 
 			// Check whether we're allowed to rotate this file
-			$permError = $this->checkTitleUserPermissions( $file->getTitle(), [ 'edit', 'upload' ] );
-			if ( $permError ) {
-				$r['result'] = 'Failure';
-				$r['errors'] = $this->getErrorFormatter()->arrayFromStatus(
-					$this->errorArrayToStatus( $permError )
-				);
-				$result[] = $r;
-				continue;
-			}
+			$this->checkTitleUserPermissions( $file->getTitle(), [ 'edit', 'upload' ] );
 
 			$srcPath = $file->getLocalRefPath();
 			if ( $srcPath === false ) {
@@ -98,8 +95,10 @@ class ApiImageRotate extends ApiBase {
 				continue;
 			}
 			$ext = strtolower( pathinfo( "$srcPath", PATHINFO_EXTENSION ) );
-			$tmpFile = TempFSFile::factory( 'rotate_', $ext, wfTempDir() );
+			$tmpFile = MediaWikiServices::getInstance()->getTempFSFileFactory()
+				->newTempFSFile( 'rotate_', $ext );
 			$dstPath = $tmpFile->getPath();
+			// @phan-suppress-next-line PhanUndeclaredMethod
 			$err = $handler->rotate( $file, [
 				'srcPath' => $srcPath,
 				'dstPath' => $dstPath,
@@ -109,6 +108,7 @@ class ApiImageRotate extends ApiBase {
 				$comment = wfMessage(
 					'rotate-comment'
 				)->numParams( $rotation )->inContentLanguage()->text();
+				// @phan-suppress-next-line PhanUndeclaredMethod
 				$status = $file->upload(
 					$dstPath,
 					$comment,

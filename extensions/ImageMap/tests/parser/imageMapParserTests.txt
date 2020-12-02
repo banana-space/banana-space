@@ -1,10 +1,27 @@
+!! Version 2
+# Force the test runner to ensure the extension is loaded
+!! hooks
+imagemap
+!! endhooks
+
 !! test
-dummy test
-!! input
+imagemap test 1
+!! wikitext
 <imagemap>
 Image:Foobar.jpg
 </imagemap>
-!! result
-<div class="noresize" style="height: 220px; width: 1941px; "><img alt="Foobar.jpg" src="http://example.com/images/3/3a/Foobar.jpg" width="1941" height="220"></img><div style="margin-left: 1921px; margin-top: -20px; text-align: left;"><a href="/wiki/File:Foobar.jpg" title="About this image"><img alt="About this image" src="/extensions/ImageMap/desc-20.png?15600" style="border: none;"></img></a></div></div>
+!! html
+<div class="noresize" style="height: 220px; width: 1941px; "><img alt="Foobar.jpg" src="http://example.com/images/3/3a/Foobar.jpg" decoding="async" width="1941" height="220" /><div style="margin-left: 1921px; margin-top: -20px; text-align: left;"><a href="/wiki/File:Foobar.jpg" title="About this image"><img alt="About this image" src="/extensions/ImageMap/resources/desc-20.png?15600" style="border: none;" /></a></div></div>
+!! end
 
+!! test
+imagemap test 2
+!! wikitext
+<imagemap>
+File:Foobar.jpg
+
+poly 10.1 10.9 10 30 -30 15 [[Main Page]]
+</imagemap>
+!! html
+<div class="noresize" style="height: 220px; width: 1941px; "><map name="ImageMap_79ccc6c89d422b0c"><area href="/wiki/Main_Page" shape="poly" coords="10,11,10,30,-30,15" alt="Main Page" title="Main Page" /></map><img alt="Foobar.jpg" src="http://example.com/images/3/3a/Foobar.jpg" decoding="async" width="1941" height="220" usemap="#ImageMap_79ccc6c89d422b0c" /><div style="margin-left: 1921px; margin-top: -20px; text-align: left;"><a href="/wiki/File:Foobar.jpg" title="About this image"><img alt="About this image" src="/extensions/ImageMap/resources/desc-20.png?15600" style="border: none;" /></a></div></div>
 !! end

@@ -3,8 +3,8 @@
 		"authors": [
 			"AdiJapan",
 			"KlaudiuMihaila",
-			"Stelistcristi",
-			"Minisarm"
+			"Minisarm",
+			"Stelistcristi"
 		]
 	},
 	"syntaxhighlight-desc": "Produce evidențierea sintaxei prin eticheta <code>&lt;syntaxhighlight&gt;</code> folosind [http://pygments.org/ Pygments - evidențiere Python de sintaxă]",

@@ -22,7 +22,7 @@
 require_once __DIR__ . '/../Maintenance.php';
 
 class StorageTypeStats extends Maintenance {
-	function execute() {
+	public function execute() {
 		$dbr = $this->getDB( DB_REPLICA );
 
 		$endId = $dbr->selectField( 'text', 'MAX(old_id)', '', __METHOD__ );
@@ -31,7 +31,7 @@ class StorageTypeStats extends Maintenance {
 			exit( 1 );
 		}
 
-		$binSize = intval( pow( 10, floor( log10( $endId ) ) - 3 ) );
+		$binSize = intval( 10 ** ( floor( log10( $endId ) ) - 3 ) );
 		if ( $binSize < 100 ) {
 			$binSize = 100;
 		}
@@ -66,15 +66,15 @@ SQL;
 				'text',
 				[
 					'old_flags',
-					"$classSql AS class",
-					'COUNT(*) as count',
+					'class' => $classSql,
+					'count' => 'COUNT(*)',
 				],
 				[
 					'old_id >= ' . intval( $rangeStart ),
 					'old_id < ' . intval( $rangeStart + $binSize )
 				],
 				__METHOD__,
-				[ 'GROUP BY' => 'old_flags, class' ]
+				[ 'GROUP BY' => [ 'old_flags', 'class' ] ]
 			);
 
 			foreach ( $res as $row ) {

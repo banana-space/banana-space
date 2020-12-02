@@ -7,7 +7,7 @@ for updated informations:
 == Requirements ==
 
 This version of the extension has been tested with Pygments 2.2.0 and
-MediaWiki 1.31. To get releases of this extension compatible
+MediaWiki 1.33. To get releases of this extension compatible
 with earlier versions of MediaWiki, visit:
 
     https://www.mediawiki.org/wiki/Special:ExtensionDistributor/SyntaxHighlight_GeSHi
@@ -43,7 +43,7 @@ HtmlFormatter at <http://pygments.org/docs/formatters/#HtmlFormatter>.
 
 * lang;		Defines the language.
 * line;		Corresponds to linenos="inline" option.
-* start;	Corresponds to linenostart opion.
+* start;	Corresponds to linenostart option.
 * enclose;  If set to "none", corresponds to the nowrap=1 option.
 * inline;   Corresponds to the nowrap=1 option.
 * highlight;    Corresponds to hl_lines option (comma separated).

@@ -1,5 +1,10 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": [
+			"Yasen igra"
+		]
+	},
 	"fancycaptcha-captcha": "Kuangalia usalama",
-	"fancycaptcha-imgcaptcha-ph": "Ingiza maandishi unayoyaona hapo juu"
+	"fancycaptcha-imgcaptcha-ph": "Ingiza maandishi unayoyaona hapo juu",
+	"fancycaptcha-reload-text": "Fanyiza upya"
 }

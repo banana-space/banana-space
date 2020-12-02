@@ -28,17 +28,17 @@ class TestUserRegistry {
 	 *
 	 * @param string $testName Caller's __CLASS__. Used to generate the
 	 *  user's username.
-	 * @param string[] $groups Groups the test user should be added to.
+	 * @param string|string[] $groups Groups the test user should be added to.
 	 * @return TestUser
 	 */
 	public static function getMutableTestUser( $testName, $groups = [] ) {
 		$id = self::getNextId();
-		$password = wfRandomString( 20 );
+		$password = "password_for_test_user_id_{$id}";
 		$testUser = new TestUser(
 			"TestUser $testName $id",  // username
 			"Name $id",                // real name
 			"$id@mediawiki.test",      // e-mail
-			$groups,                   // groups
+			(array)$groups,            // groups
 			$password                  // password
 		);
 		$testUser->getUser()->clearInstanceCache();
@@ -54,17 +54,15 @@ class TestUserRegistry {
 	 *
 	 * @since 1.28
 	 *
-	 * @param string[] $groups Groups the test user should be added to.
+	 * @param string|string[] $groups Groups the test user should be added to.
 	 * @return TestUser
 	 */
 	public static function getImmutableTestUser( $groups = [] ) {
-		$groups = array_unique( $groups );
+		$groups = array_unique( (array)$groups );
 		sort( $groups );
 		$key = implode( ',', $groups );
 
-		$testUser = isset( self::$testUsers[$key] )
-			? self::$testUsers[$key]
-			: false;
+		$testUser = self::$testUsers[$key] ?? false;
 
 		if ( !$testUser || !$testUser->getUser()->isLoggedIn() ) {
 			$id = self::getNextId();
@@ -77,7 +75,7 @@ class TestUserRegistry {
 				$password = 'UTSysopPassword';
 			} else {
 				$username = "TestUser $id";
-				$password = wfRandomString( 20 );
+				$password = "password_for_test_user_id_{$id}";
 			}
 			self::$testUsers[$key] = $testUser = new TestUser(
 				$username,            // username
@@ -101,7 +99,6 @@ class TestUserRegistry {
 	 *
 	 * @since 1.28
 	 *
-	 * @param string[] $groups Groups the test user should be added to.
 	 * @return TestUser
 	 */
 	public static function clear() {
@@ -112,6 +109,7 @@ class TestUserRegistry {
 	 * @todo It would be nice if this were a non-static method of TestUser
 	 * instead, but that doesn't seem possible without friends?
 	 *
+	 * @param User $user
 	 * @return bool True if it's safe to modify the user
 	 */
 	public static function isMutable( User $user ) {

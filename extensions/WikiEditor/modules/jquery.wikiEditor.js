@@ -1,14 +1,15 @@
 /**
  * This plugin provides a way to build a wiki-text editing user interface around a textarea.
  *
- * @example To initialize without any modules:
+ * @example To initialize without any modules,
+ * overqualified `div#edittoolbar` to avoid MediaWiki's heading to id automatism:
  *     $( 'div#edittoolbar' ).wikiEditor();
  *
  * @example To initialize with one or more modules, or to add modules after it's already been initialized:
  *     $( 'textarea#wpTextbox1' ).wikiEditor( 'addModule', 'toolbar', { ... config ... } );
  *
  */
-( function ( $, mw ) {
+( function () {
 
 	var hasOwn = Object.prototype.hasOwnProperty,
 
@@ -16,7 +17,8 @@
 		 * Array of language codes.
 		 */
 		fallbackChain = ( function () {
-			var isRTL = $( 'body' ).hasClass( 'rtl' ),
+			// eslint-disable-next-line no-jquery/no-class-state
+			var isRTL = $( document.body ).hasClass( 'rtl' ),
 				chain = mw.language.getFallbackLanguageChain();
 
 			// Do not fallback to 'en'
@@ -39,7 +41,10 @@
 		 * module name. The existence of a module in this object only indicates the module is available. To check if a
 		 * module is in use by a specific context check the context.modules object.
 		 */
-		modules: {},
+		modules: {
+			toolbar: require( './jquery.wikiEditor.toolbar.js' ),
+			dialogs: require( './jquery.wikiEditor.dialogs.js' )
+		},
 
 		/**
 		 * A context can be extended, such as adding iframe support, on a per-wikiEditor instance basis.
@@ -59,20 +64,6 @@
 		 * core - or anywhere for that matter...
 		 */
 		imgPath: mw.config.get( 'wgExtensionAssetsPath' ) + '/WikiEditor/modules/images/',
-
-		/**
-		 * Checks if the client supports WikiEditor.
-		 *
-		 * Since 1.31 this check is deprecated and can be skipped as all browsers
-		 * which are served JS by MediaWiki support WikiEditor.
-		 *
-		 * @deprecated since 1.31
-		 * @return {boolean}
-		 */
-		isSupported: function () {
-			mw.log.warn( '$.wikiEditor.isSupported is deprecated.' );
-			return true;
-		},
 
 		/**
 		 * Checks if a module has a specific requirement
@@ -95,6 +86,10 @@
 
 		/**
 		 * Provides a way to extract messages from objects. Wraps a mw.message( ... ).text() call.
+		 *
+		 * FIXME: This is a security nightmare. Only use is for the help toolbar panel. Inline the
+		 *        special need instead?
+		 * FIXME: Also, this is ludicrously complex. Just use mw.message().text() directly.
 		 *
 		 * @param {Object} object Object to extract messages from
 		 * @param {string} property String of name of property which contains the message. This should be the base name of the
@@ -121,7 +116,46 @@
 				if ( Array.isArray( p ) && p.length >= 2 ) {
 					return mw.message.apply( mw.message, p ).text();
 				} else {
+					// eslint-disable-next-line mediawiki/msg-doc
 					return mw.message( p ).text();
+				}
+			} else {
+				return '';
+			}
+		},
+
+		/**
+		 * Provides a way to extract messages from objects. Wraps a mw.message( ... ).escaped() call.
+		 *
+		 * FIXME: This is ludicrously complex. Just use mw.message().escaped() directly.
+		 *
+		 * @param {Object} object Object to extract messages from
+		 * @param {string} property String of name of property which contains the message. This should be the base name of the
+		 * property, which means that in the case of the object { this: 'that', fooMsg: 'bar' }, passing property as 'this'
+		 * would return the raw text 'that', while passing property as 'foo' would return the internationalized message
+		 * with the key 'bar'. This is then escaped.
+		 * @return {string}
+		 */
+		autoSafeMsg: function ( object, property ) {
+			var i, p;
+			// Accept array of possible properties, of which the first one found will be used
+			if ( typeof property === 'object' ) {
+				for ( i in property ) {
+					if ( property[ i ] in object || property[ i ] + 'Msg' in object ) {
+						property = property[ i ];
+						break;
+					}
+				}
+			}
+			if ( property in object ) {
+				return object[ property ];
+			} else if ( property + 'Msg' in object ) {
+				p = object[ property + 'Msg' ];
+				if ( Array.isArray( p ) && p.length >= 2 ) {
+					return mw.message.apply( mw.message, p ).escaped();
+				} else {
+					// eslint-disable-next-line mediawiki/msg-doc
+					return mw.message( p ).escaped();
 				}
 			} else {
 				return '';
@@ -166,11 +200,17 @@
 				key = fallbackChain[ i ];
 				if ( icon && hasOwn.call( icon, key ) ) {
 					src = icon[ key ];
+
+					// Return a data URL immediately
+					if ( src.substr( 0, 5 ) === 'data:' ) {
+						return src;
+					}
+
 					// Prepend path if src is not absolute
 					if ( src.substr( 0, 7 ) !== 'http://' && src.substr( 0, 8 ) !== 'https://' && src[ 0 ] !== '/' ) {
 						src = path + src;
 					}
-					return src + '?' + mw.loader.getVersion( 'jquery.wikiEditor' );
+					return src;
 				}
 			}
 			return icon;
@@ -184,7 +224,7 @@
 	 */
 	$.fn.wikiEditor = function () {
 		var context, hasFocus, cursorPos,
-			args, modules, module, e, call;
+			args, modules, module, extension, call;
 
 		/* Initialization */
 
@@ -198,6 +238,8 @@
 			context = {
 				// Reference to the textarea element which the wikiEditor is being built around
 				$textarea: $( this ),
+				// Reference to the focused element before the dialog opens, so it can be restored once it closes
+				$focusedElem: null,
 				// Container for any number of mutually exclusive views that are accessible by tabs
 				views: {},
 				// Container for any number of module-specific data - only including data for modules in use on this context
@@ -339,7 +381,7 @@
 					context.$buttons.show();
 					return $( '<button>' )
 						.text( $.wikiEditor.autoMsg( options, 'caption' ) )
-						.click( options.action )
+						.on( 'click', options.action )
 						.appendTo( context.$buttons );
 				},
 
@@ -361,22 +403,27 @@
 							.attr( 'rel', 'wikiEditor-ui-view-' + options.name )
 							.addClass( context.view === options.name ? 'current' : null )
 							.append( $( '<a>' )
-								.attr( 'href', '#' )
-								.mousedown( function () {
+								.attr( 'tabindex', 0 )
+								.on( 'mousedown', function () {
 									// No dragging!
 									return false;
 								} )
-								.click( function ( event ) {
-									context.$ui.find( '.wikiEditor-ui-view' ).hide();
-									context.$ui.find( '.' + $( this ).parent().attr( 'rel' ) ).show();
-									context.$tabs.find( 'div' ).removeClass( 'current' );
-									$( this ).parent().addClass( 'current' );
-									$( this ).blur();
-									if ( 'init' in options && typeof options.init === 'function' ) {
-										options.init( context );
+								.on( 'click keydown', function ( event ) {
+									if (
+										event.type === 'click' ||
+										event.type === 'keydown' && event.key === 'Enter'
+									) {
+										context.$ui.find( '.wikiEditor-ui-view' ).hide();
+										context.$ui.find( '.' + $( this ).parent().attr( 'rel' ) ).show();
+										context.$tabs.find( 'div' ).removeClass( 'current' );
+										$( this ).parent().addClass( 'current' );
+										$( this ).trigger( 'blur' );
+										if ( 'init' in options && typeof options.init === 'function' ) {
+											options.init( context );
+										}
+										event.preventDefault();
+										return false;
 									}
-									event.preventDefault();
-									return false;
 								} )
 								.text( $.wikiEditor.autoMsg( options, 'title' ) )
 							)
@@ -399,11 +446,9 @@
 				 * Save text selection
 				 */
 				saveSelection: function () {
-					context.$textarea.focus();
-					context.savedSelection = {
-						selectionStart: context.$textarea[ 0 ].selectionStart,
-						selectionEnd: context.$textarea[ 0 ].selectionEnd
-					};
+					context.$focusedElem = $( ':focus' );
+					context.$textarea.trigger( 'focus' );
+					context.savedSelection = context.$textarea.textSelection( 'getCaretPosition', { startAndEnd: true } );
 				},
 
 				/**
@@ -411,9 +456,12 @@
 				 */
 				restoreSelection: function () {
 					if ( context.savedSelection ) {
-						context.$textarea.focus();
-						context.$textarea[ 0 ].setSelectionRange( context.savedSelection.selectionStart, context.savedSelection.selectionEnd );
+						context.$textarea.trigger( 'focus' );
+						context.$textarea.textSelection( 'setSelection', { start: context.savedSelection[ 0 ], end: context.savedSelection[ 1 ] } );
 						context.savedSelection = null;
+					}
+					if ( context.$focusedElem ) {
+						context.$focusedElem.trigger( 'focus' );
 					}
 				}
 			};
@@ -451,7 +499,7 @@
 			context.$textarea.prop( 'scrollTop', $( '#wpScrolltop' ).val() );
 			// Restore focus and cursor if needed
 			if ( hasFocus ) {
-				context.$textarea.focus();
+				context.$textarea.trigger( 'focus' );
 				context.$textarea.textSelection( 'setSelection', { start: cursorPos[ 0 ], end: cursorPos[ 1 ] } );
 			}
 
@@ -480,7 +528,7 @@
 			// Setup the initial view
 			context.view = 'wikitext';
 			// Trigger the "resize" event anytime the window is resized
-			$( window ).resize( function ( event ) {
+			$( window ).on( 'resize', function ( event ) {
 				context.fn.trigger( 'resize', event );
 			} );
 		}
@@ -500,13 +548,13 @@
 			for ( module in modules ) {
 				if ( module in $.wikiEditor.modules ) {
 					// Activate all required core extensions on context
-					for ( e in $.wikiEditor.extensions ) {
+					for ( extension in $.wikiEditor.extensions ) {
 						if (
-							$.wikiEditor.isRequired( $.wikiEditor.modules[ module ], e ) &&
-							$.inArray( e, context.extensions ) === -1
+							$.wikiEditor.isRequired( $.wikiEditor.modules[ module ], extension ) &&
+							context.extensions.indexOf( extension ) === -1
 						) {
-							context.extensions[ context.extensions.length ] = e;
-							$.wikiEditor.extensions[ e ]( context );
+							context.extensions[ context.extensions.length ] = extension;
+							$.wikiEditor.extensions[ extension ]( context );
 						}
 					}
 					break;
@@ -528,4 +576,4 @@
 
 	};
 
-}( jQuery, mediaWiki ) );
+}() );

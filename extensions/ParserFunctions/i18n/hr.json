@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bugoslav",
 			"Dalibor Bosits",
 			"Dnik",
 			"Ex13",
 			"Roberta F.",
-			"SpeedyGonsales",
-			"Bugoslav"
+			"SpeedyGonsales"
 		]
 	},
 	"pfunc_desc": "Mogućnost proširivanja parsera logičkim funkcijama",

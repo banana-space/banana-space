@@ -1,6 +1,6 @@
 {
 	"name": "Interwiki",
-	"version": "3.1 20160307",
+	"version": "3.2",
 	"author": [
 		"Stephanie Amanda Stevens",
 		"Alexandre Emsenhuber",
@@ -18,13 +18,14 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "specialpage",
 	"requires": {
-		"MediaWiki": ">= 1.26.0"
+		"MediaWiki": ">= 1.28.0"
 	},
 	"ExtensionMessagesFiles": {
 		"InterwikiAlias": "Interwiki.alias.php"
 	},
 	"config": {
 		"InterwikiCentralDB": null,
+		"InterwikiCentralInterlanguageDB": null,
 		"InterwikiViewOnly": false
 	},
 	"MessagesDirs": {
@@ -33,9 +34,8 @@
 		]
 	},
 	"Hooks": {
-		"InterwikiLoadPrefix": [
-			"InterwikiHooks::onInterwikiLoadPrefix"
-		]
+		"InterwikiLoadPrefix": "InterwikiHooks::onInterwikiLoadPrefix",
+		"UserGetAllRights": "InterwikiHooks::onUserGetAllRights"
 	},
 	"ResourceModules": {
 		"ext.interwiki.specialpage": {
@@ -56,6 +56,9 @@
 		"InterwikiHooks": "includes/InterwikiHooks.php",
 		"SpecialInterwiki": "includes/SpecialInterwiki.php",
 		"InterwikiLogFormatter": "includes/InterwikiLogFormatter.php"
+	},
+	"LogActionsHandlers": {
+		"interwiki/*": "InterwikiLogFormatter"
 	},
 	"manifest_version": 1
 }

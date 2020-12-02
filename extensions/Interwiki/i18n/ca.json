@@ -30,7 +30,6 @@
 	"interwiki_error": "Error: La taula interwiki és buida, o alguna cosa ha sortit malament.",
 	"interwiki_edit": "Modifica",
 	"interwiki_reasonfield": "Raó:",
-	"interwiki_delquestion": "S'està eliminant «$1»",
 	"interwiki_deleting": "Estàs eliminant el prefix \"$1\".",
 	"interwiki_deleted": "Prefix \"$1\" s'ha suprimit amb èxit  de la taula de interwiki.",
 	"interwiki_delfailed": "Prefix \" $1 \"no pot ser eliminat de la taula interwiki.",

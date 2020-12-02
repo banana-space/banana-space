@@ -1,12 +1,12 @@
 Hooks provided by the Vector skin.
 
-'VectorAfterToolbox': Called after rendering the toolbox portlet (div#p-tb).
+'VectorAfterToolbox': Called after rendering the toolbox portlet (#p-tb).
 You can use this to inject items (such as ads or a hit counter, for example)
 from an extension.
-This is the Vector couterpart to the MonoBookAfterToolbox hook in the MonoBook
+This is the Vector counterpart to the MonoBookAfterToolbox hook in the MonoBook
 skin.
 
-'VectorBeforeFooter': Called before the footer (div#footer) is output, but after
-div#mw-navigation has been closed.
+'VectorBeforeFooter': Called before the footer (#footer) is output, but after
+#mw-navigation has been closed.
 You can use this to inject items (such as ads or a hit counter, for example)
 from an extension.

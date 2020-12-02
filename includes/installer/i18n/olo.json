@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ilja.mos",
 			"Mashoi7",
-			"Ilja.mos"
+			"Pyscowicz"
 		]
 	},
 	"config-your-language": "Sinun kieli:",
@@ -17,25 +18,18 @@
 	"config-page-options": "Azetukset",
 	"config-page-install": "Azenda",
 	"config-page-complete": "Valmis!",
-	"config-page-readme": "Luve minut",
 	"config-page-copying": "Kopiruijah",
 	"config-page-upgradedoc": "Päivitetäh",
 	"config-page-existingwiki": "Olemasolii wiki",
 	"config-restart": "Muga, käynnistä uvvelleh",
 	"config-env-php": "PHP $1 on azendettu.",
-	"config-env-hhvm": "HHVM $1 on azendettu.",
 	"config-db-name": "Tiedokannan nimi:",
 	"config-db-username": "Tiedokannan käyttäinimi:",
 	"config-db-password": "Tiedokannan salasana:",
-	"config-type-mssql": "Microsoft SQL Server",
-	"config-header-mysql": "MySQL-azetukset",
+	"config-header-mysql": "MariaDB/MySQL-azetukset",
 	"config-header-postgres": "PostgreSQL-azetukset",
 	"config-header-sqlite": "SQLite-azetukset",
-	"config-header-oracle": "Oracle-azetukset",
-	"config-header-mssql": "Microsoft SQL Server azetukset",
 	"config-mysql-innodb": "InnoDB",
-	"config-mysql-myisam": "MyISAM",
-	"config-mysql-utf8": "UTF-8",
 	"config-site-name": "Wikin nimi:",
 	"config-site-name-blank": "Kirjuta sivun nimi.",
 	"config-project-namespace": "Projektan nimitila:",

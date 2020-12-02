@@ -7,7 +7,6 @@
 .wikiEditor-ui-toolbar {
 	position: relative;
 	display: block;
-	.vertical-gradient( #fdfefe, #e8f2f8, 0, 32px );
 
 	.empty {
 		display: none;
@@ -18,13 +17,11 @@
 		float: left;
 		width: 100%;
 		clear: both;
-		height: 0;
 
 		.section {
 			float: left;
 			width: 100%;
 			border-top: 1px solid #c8ccd1;
-			background-color: #eaf3ff;
 		}
 
 		.section-hidden {
@@ -38,36 +35,61 @@
 		float: left;
 		height: 100%;
 		list-style: none;
-		margin: 3px;
-		min-height: 26px;
+		margin: 0 3px;
+		min-height: 32px;
 		position: relative;
 
 		span.tab {
-			display: block;
+			position: relative;
 			float: left;
-			line-height: 26px;
+			line-height: 32px;
 
-			a,
-			a:visited {
-				.background-image-svg('images/toolbar/arrow-ltr.svg', 'images/toolbar/arrow-ltr.png');
-				background-position: left center;
-				background-repeat: no-repeat;
+			a {
 				color: #0645ad;
 				cursor: pointer;
-				display: inline-block;
-				float: left;
-				height: 26px;
+				display: block;
+				height: 32px;
 				padding-left: 18px;
 				padding-right: 12px;
+
+				&:before {
+					content: '';
+					background: url( images/toolbar/arrow-down.svg ) center no-repeat;
+					display: block;
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 16px;
+					height: 32px;
+					.transition( ~'transform 100ms' );
+
+					body.ltr & {
+						.transform( rotate( -90deg ) );
+					}
+
+					body.rtl & {
+						.transform( rotate( 90deg ) );
+					}
+				}
+			}
+
+			a:visited {
+				color: #0645ad;
 			}
 
 			a.current,
 			a.current:visited {
-				.background-image-svg('images/toolbar/arrow-down.svg', 'images/toolbar/arrow-down.png');
 				color: #222;
 
 				&:hover {
 					text-decoration: none;
+				}
+
+				&:before {
+					body.ltr &,
+					body.rtl & {
+						.transform( rotate( 0 ) );
+					}
 				}
 			}
 		}
@@ -78,14 +100,14 @@
 	.section-main {
 		position: relative;
 		float: left;
-		min-height: 26px;
+		min-height: 32px;
 		height: 100%;
 	}
 
 	/* Groups */
 	.group {
 		float: left;
-		height: 26px;
+		min-height: 26px;
 		padding-right: 6px;
 		border-right: 1px solid #c8ccd1;
 		margin: 3px;
@@ -96,10 +118,8 @@
 			border: 0;
 			height: 22px;
 			line-height: 22px;
-			margin: 2px;
-			margin-left: 5px;
-			margin-right: 8px;
-			color: #666;
+			margin: 2px 8px 2px 5px;
+			color: #54595d;
 			cursor: default;
 		}
 
@@ -114,40 +134,46 @@
 
 		.tool-select {
 			float: left;
-			margin: 2px;
+			margin: 2px 0 2px 2px;
 			height: 22px;
 			cursor: pointer;
 			border: 1px solid #c8ccd1;
 			padding: 0;
-			margin-right: 0;
 			background-color: #fff;
 
 			.label {
-				.background-image-svg( 'images/toolbar/arrow-down.svg', 'images/toolbar/arrow-down.png' );
-				background-position: center right;
-				background-repeat: no-repeat;
-				padding: 0;
+				position: relative;
+				padding: 0 26px 0 4px;
 				margin: 0;
-				padding-left: 4px;
-				padding-right: 22px;
-				margin-right: 4px;
 				cursor: pointer;
 				text-decoration: none;
 				color: #222;
-			}
 
-			.menu {
-				.options {
+				&:after {
+					content: '';
+					background: url( images/toolbar/arrow-down.svg ) center no-repeat;
+					display: block;
 					position: absolute;
-					display: none;
-					margin-left: -1px;
-					margin-top: 22px;
-					border: 1px solid #c8ccd1;
-					background-color: #fff;
+					top: 0;
+					right: 4px;
+					width: 16px;
+					height: 22px;
 				}
 			}
 
+			&.options-shown .label:after {
+				.transform( rotate( 180deg ) );
+			}
+
 			.options {
+				position: absolute;
+				display: none;
+				margin-left: -1px;
+				margin-top: 22px;
+				border: 1px solid #c8ccd1;
+				background-color: #fff;
+				z-index: 1;
+
 				.option {
 					display: block;
 					padding: 0.5em;
@@ -180,45 +206,36 @@
 					}
 				}
 			}
-		}
 
-		&:last-of-type {
-			border-right: 0;
+			&:hover .options,
+			&.options-shown .options {
+				display: block;
+			}
 		}
 	}
 
 	.group-search {
 		float: right;
-		padding: 0 0 0 6px;
 		border-right: 0;
 		border-left: 1px solid #c8ccd1;
 	}
 
 	/* Booklet */
 	.booklet {
-		.index {
+		> .index {
 			float: left;
 			width: 20%;
 			height: 125px;
 			overflow: auto;
 			resize: horizontal;
 
-			div {
-				padding: 4px;
-				padding-left: 6px;
+			> div {
+				padding: 4px 4px 4px 6px;
 				cursor: pointer;
-				color: #0645ad;
-			}
-
-			.current {
-				background-color: #eaecf0;
-				color: #222;
-				cursor: default;
 			}
 		}
 
 		.pages {
-			background-color: #f8f9fa;
 			height: 125px;
 			overflow: auto;
 		}
@@ -283,12 +300,11 @@
 	/* Characters Pages */
 	.page-characters {
 		padding-bottom: 5px;
+
 		div {
 			span {
-				border: 1px solid #c8ccd1;
-				padding: 5px;
-				padding-left: 8px;
-				padding-right: 8px;
+				border: 1px solid #eaecf0;
+				padding: 5px 8px;
 				margin-left: 5px;
 				margin-top: 5px;
 				height: 1em;
@@ -303,7 +319,7 @@
 				&:hover {
 					background-color: #fff;
 					text-decoration: none;
-					border-color: #36c;
+					border-color: #c8ccd1;
 				}
 			}
 		}
@@ -316,14 +332,13 @@
 }
 
 .tool-button {
-	background-position: 2px 2px;
+	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	display: inline-block;
 	vertical-align: middle;
-	height: 22px;
+	width: 24px;
+	height: 24px;
 	text-indent: -9999px;
-	width: 22px;
-	padding: 2px;
 	cursor: pointer;
 	overflow: hidden;
 }
@@ -331,32 +346,6 @@
 /* OOUI buttons */
 .tool.oo-ui-buttonElement-frameless.oo-ui-iconElement {
 	margin: 0;
-	padding: 3px;
-	> .oo-ui-buttonElement-button {
-		padding: 0;
-		border: 0;
-		> .oo-ui-iconElement-icon {
-			margin: 0;
-			width: 20px;
-			height: 20px;
-			min-width: 20px;
-			min-height: 20px;
-			left: 0;
-			// Reduce opacity like Apex theme
-			opacity: 0.7;
-		}
-	}
-}
-
-.tool-button.tool-active,
-.tool.tool-active.oo-ui-buttonElement-frameless.oo-ui-iconElement {
-	outline: 1px solid #dae5ec;
-	background-color: #ecf4f9;
-	box-shadow: inset 0 -10px 10px rgba( 255, 255, 255, 0.4 );
-}
-
-.tool.tool-active.oo-ui-buttonElement-frameless.oo-ui-iconElement > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon {
-	opacity: 0.9;
 }
 
 .ui-widget {
@@ -364,6 +353,7 @@
 		td.wikieditor-toolbar-table-preview-wrapper {
 			background: #eaecf0;
 			padding: 10px;
+
 			span {
 				padding: 4px 6px 0;
 				display: block;

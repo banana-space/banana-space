@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"OIS",
 			"Stavanger7"
 		]
 	},
-	"pfunc_expr_missing_operand": "Errore de expression: operande mancant por $1."
+	"pfunc_time_error": "Errore: hora ínvalid.",
+	"pfunc_expr_unrecognised_word": "Ínreconosset parole \"$1\".",
+	"pfunc_expr_missing_operand": "Errore de expression: operande mancant por $1.",
+	"pfunc_expr_unrecognised_punctuation": "Errore in li expression: ínreconosset signe de punctuation \"$1\".",
+	"pfunc_expr_division_by_zero": "Division per zero."
 }

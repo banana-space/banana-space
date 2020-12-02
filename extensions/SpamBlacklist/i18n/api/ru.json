@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Okras"
+		]
+	},
+	"apihelp-spamblacklist-description": "Проверить один или несколько URL-адресов с помощью SpamBlacklist.",
+	"apihelp-spamblacklist-example-1": "Проверить два URL-адреса по чёрному списку",
+	"apihelp-spamblacklist-param-url": "URL-адреса для проверки в чёрном списке.",
+	"apihelp-spamblacklist-summary": "Проверить один или несколько URL-адресов с помощью SpamBlacklist."
+}

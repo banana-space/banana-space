@@ -86,7 +86,7 @@ var ActionScriptHighlightRules = function() {
               'storage.modifier.extends.actionscript.2',
               'meta.class.actionscript.2',
               'entity.other.inherited-class.actionscript.2' ],
-           regex: '\\b(class)(\\s+)([a-zA-Z_](?:\\w|\\.)*)(?:(\\s+)(extends)(\\s+)([a-zA-Z_](?:\\w|\\.)*))?' } ] }
+           regex: '\\b(class)(\\s+)([a-zA-Z_](?:\\w|\\.)*)(?:(\\s+)(extends)(\\s+)([a-zA-Z_](?:\\w|\\.)*))?' } ] };
     
     this.normalizeRules();
 };
@@ -94,7 +94,7 @@ var ActionScriptHighlightRules = function() {
 ActionScriptHighlightRules.metaData = { fileTypes: [ 'as' ],
       keyEquivalent: '^~A',
       name: 'ActionScript',
-      scopeName: 'source.actionscript.2' }
+      scopeName: 'source.actionscript.2' };
 
 
 oop.inherits(ActionScriptHighlightRules, TextHighlightRules);
@@ -123,8 +123,8 @@ oop.inherits(FoldMode, BaseFoldMode);
 
 (function() {
     
-    this.foldingStartMarker = /(\{|\[)[^\}\]]*$|^\s*(\/\*)/;
-    this.foldingStopMarker = /^[^\[\{]*(\}|\])|^[\s\*]*(\*\/)/;
+    this.foldingStartMarker = /([\{\[\(])[^\}\]\)]*$|^\s*(\/\*)/;
+    this.foldingStopMarker = /^[^\[\{\(]*([\}\]\)])|^[\s\*]*(\*\/)/;
     this.singleLineBlockCommentRe= /^\s*(\/\*).*\*\/\s*$/;
     this.tripleStarBlockCommentRe = /^\s*(\/\*\*\*).*\*\/\s*$/;
     this.startRegionRe = /^\s*(\/\*|\/\/)#?region\b/;
@@ -261,7 +261,15 @@ oop.inherits(Mode, TextMode);
     this.lineCommentStart = "//";
     this.blockComment = {start: "/*", end: "*/"};
     this.$id = "ace/mode/actionscript";
+    this.snippetFileId = "ace/snippets/actionscript";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;
-});
+});                (function() {
+                    ace.require(["ace/mode/actionscript"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

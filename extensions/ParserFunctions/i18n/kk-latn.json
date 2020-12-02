@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"pfunc_time_error": "Qate: jaramsız waqıt",
 	"pfunc_time_too_long": "Qate: #time şaqırwı tım köp",
 	"pfunc_rel2abs_invalid_depth": "Qate: Mına joldıñ jaramsız terendigi «$1» (tamır tüýinniñ üstindegi tüýinge qatınaw talabı)",

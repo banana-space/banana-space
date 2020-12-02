@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"John Reid",
 			"Amire80",
-			"Foxj"
+			"Foxj",
+			"John Reid"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Buik",
@@ -16,8 +16,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Re-uise bi this name",
 	"cite-ve-dialog-reference-options-section": "Opties",
 	"cite-ve-dialog-reference-title": "Referance",
-	"cite-ve-dialog-reference-useexisting-full-label": "Re-uise a soorce fae anither part o this page",
-	"cite-ve-dialog-reference-useexisting-label": "Uise aen exeestin referance",
 	"cite-ve-dialog-reference-useexisting-tool": "Re-uise",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Leet o general soorces",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "Leet o soorces fer group \"$1\"",

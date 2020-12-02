@@ -37,6 +37,7 @@
  *
  * The use of Message objects should be avoided when serializability is needed.
  *
+ * @newable
  * @since 1.25
  */
 class StatusValue {
@@ -63,19 +64,19 @@ class StatusValue {
 	 * Factory function for fatal errors
 	 *
 	 * @param string|MessageSpecifier $message Message key or object
+	 * @param mixed ...$parameters
 	 * @return static
 	 */
-	public static function newFatal( $message /*, parameters...*/ ) {
-		$params = func_get_args();
+	public static function newFatal( $message, ...$parameters ) {
 		$result = new static();
-		call_user_func_array( [ &$result, 'fatal' ], $params );
+		$result->fatal( $message, ...$parameters );
 		return $result;
 	}
 
 	/**
 	 * Factory function for good results
 	 *
-	 * @param mixed $value
+	 * @param mixed|null $value
 	 * @return static
 	 */
 	public static function newGood( $value = null ) {
@@ -93,21 +94,21 @@ class StatusValue {
 	 *     1 => object(StatusValue) # The StatusValue with warning messages, only
 	 * ]
 	 *
-	 * @return StatusValue[]
+	 * @return static[]
 	 */
 	public function splitByErrorType() {
-		$errorsOnlyStatusValue = clone $this;
-		$warningsOnlyStatusValue = clone $this;
-		$warningsOnlyStatusValue->ok = true;
+		$errorsOnlyStatusValue = static::newGood();
+		$warningsOnlyStatusValue = static::newGood();
+		$warningsOnlyStatusValue->setResult( true, $this->getValue() );
+		$errorsOnlyStatusValue->setResult( $this->isOK(), $this->getValue() );
 
-		$errorsOnlyStatusValue->errors = $warningsOnlyStatusValue->errors = [];
 		foreach ( $this->errors as $item ) {
 			if ( $item['type'] === 'warning' ) {
 				$warningsOnlyStatusValue->errors[] = $item;
 			} else {
 				$errorsOnlyStatusValue->errors[] = $item;
 			}
-		};
+		}
 
 		return [ $errorsOnlyStatusValue, $warningsOnlyStatusValue ];
 	}
@@ -162,7 +163,7 @@ class StatusValue {
 	 * Change operation result
 	 *
 	 * @param bool $ok Whether the operation completed
-	 * @param mixed $value
+	 * @param mixed|null $value
 	 */
 	public function setResult( $ok, $value = null ) {
 		$this->ok = (bool)$ok;
@@ -173,12 +174,13 @@ class StatusValue {
 	 * Add a new warning
 	 *
 	 * @param string|MessageSpecifier $message Message key or object
+	 * @param mixed ...$parameters
 	 */
-	public function warning( $message /*, parameters... */ ) {
+	public function warning( $message, ...$parameters ) {
 		$this->errors[] = [
 			'type' => 'warning',
 			'message' => $message,
-			'params' => array_slice( func_get_args(), 1 )
+			'params' => $parameters
 		];
 	}
 
@@ -187,12 +189,13 @@ class StatusValue {
 	 * This can be used for non-fatal errors
 	 *
 	 * @param string|MessageSpecifier $message Message key or object
+	 * @param mixed ...$parameters
 	 */
-	public function error( $message /*, parameters... */ ) {
+	public function error( $message, ...$parameters ) {
 		$this->errors[] = [
 			'type' => 'error',
 			'message' => $message,
-			'params' => array_slice( func_get_args(), 1 )
+			'params' => $parameters
 		];
 	}
 
@@ -201,12 +204,13 @@ class StatusValue {
 	 * as a whole was fatal
 	 *
 	 * @param string|MessageSpecifier $message Message key or object
+	 * @param mixed ...$parameters
 	 */
-	public function fatal( $message /*, parameters... */ ) {
+	public function fatal( $message, ...$parameters ) {
 		$this->errors[] = [
 			'type' => 'error',
 			'message' => $message,
-			'params' => array_slice( func_get_args(), 1 )
+			'params' => $parameters
 		];
 		$this->ok = false;
 	}
@@ -339,7 +343,7 @@ class StatusValue {
 				$out .= sprintf( "| %4d | %-25.25s | %-40.40s |\n",
 					$i,
 					$key,
-					implode( " ", $params )
+					self::flattenParams( $params )
 				);
 				$i += 1;
 			}
@@ -347,5 +351,23 @@ class StatusValue {
 		}
 
 		return $out;
+	}
+
+	/**
+	 * @param array $params Message parameters
+	 * @return string String representation
+	 */
+	private function flattenParams( array $params ) : string {
+		$ret = [];
+		foreach ( $params as $p ) {
+			if ( is_array( $p ) ) {
+				$ret[] = '[ ' . self::flattenParams( $p ) . ' ]';
+			} elseif ( $p instanceof MessageSpecifier ) {
+				$ret[] = '{ ' . $p->getKey() . ': ' . self::flattenParams( $p->getParams() ) . ' }';
+			} else {
+				$ret[] = (string)$p;
+			}
+		}
+		return implode( ' ', $ret );
 	}
 }

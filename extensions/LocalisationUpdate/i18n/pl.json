@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Jdx",
 			"Sp5uhe"
 		]
 	},
-	"localisationupdate-desc": "Uaktualnia lokalne komunikaty w miarę możliwości na bieżąco"
+	"localisationupdate-desc": "Uaktualnia zlokalizowane komunikaty oprogramowania MediaWiki, w miarę możliwości na bieżąco"
 }

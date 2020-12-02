@@ -1,14 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Red Winged Duck"
+			"Red Winged Duck",
+			"Renessaince"
 		]
 	},
 	"multimediaviewer-optin-pref": "Уключыць <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About мэдыяпраглядальнік]</span>",
 	"multimediaviewer-repository-local": "Падрабязьней",
 	"multimediaviewer-datetime-created": "Створаны: $1",
+	"multimediaviewer-datetime-uploaded": "Загружана: $1",
+	"multimediaviewer-credit": "$1 — $2",
 	"multimediaviewer-permission-link": "паказаць умовы",
-	"multimediaviewer-about-mmv": "Апісаньне",
+	"multimediaviewer-about-mmv": "Пра гэты інтэрфэйс",
 	"multimediaviewer-discuss-mmv": "Абмеркаваньне",
 	"multimediaviewer-help-mmv": "Даведка",
 	"multimediaviewer-optin-mmv": "Уключыць мэдыяпраглядальнік",
@@ -35,7 +38,7 @@
 	"multimediaviewer-options-text-body": "Вы можаце потым уключыць яго на старонцы зьвестак пра файл.",
 	"multimediaviewer-options-learn-more": "Даведацца болей",
 	"multimediaviewer-option-submit-button": "Адключыць мэдыяпраглядальнік",
-	"multimediaviewer-option-cancel-button": "Адмяніць",
+	"multimediaviewer-option-cancel-button": "Скасаваць",
 	"multimediaviewer-disable-confirmation-header": "Вы адключылі мэдыяпраглядальнік",
 	"multimediaviewer-disable-confirmation-text": "Наступны раз, калі вы націсьніце на мініятуру на сайце $1, вы наўпрост пабачыце ўсе зьвесткі пра файл.",
 	"multimediaviewer-enable-text-header": "Уключыць гэтую функцыю мэдыяпрагляду па змоўчаньні для ўсіх файлаў.",

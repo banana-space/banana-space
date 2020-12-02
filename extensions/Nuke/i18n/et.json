@@ -14,20 +14,19 @@
 	"nuke-multiplepeople": "Hiljuti lisatud lehekülgede lauskustutamine",
 	"nuke-tools": "See tööriist võimaldab kasutaja või IP-aadressi hiljuti lisatud leheküljed lauskustutada.\nKustutatavate lehekülgede nimekirja näitamiseks sisesta kasutajanimi või IP-aadress. Kõigi kasutajate lisatud lehekülgede jaoks jäta väli tühjaks.",
 	"nuke-submit-user": "Loetle leheküljed",
-	"nuke-toggleinvert": "Pööra ümber",
 	"nuke-submit-delete": "Kustuta väljavalitud",
 	"right-nuke": "Lehekülgi lauskustutada",
-	"nuke-select": "Valik: $1",
 	"nuke-userorip": "Kasutajanimi, IP-aadress või tühemik:",
 	"nuke-maxpages": "Lehekülgede ülemmäär:",
 	"nuke-editby": "Alustanud [[Special:Contributions/$1|$1]]",
 	"nuke-deleted": "Lehekülg '''$1''' on kustutatud.",
 	"nuke-not-deleted": "Lehekülge [[:$1]] '''ei saa''' kustutada.",
 	"nuke-delete-more": "[[Special:Nuke|Kustuta veel lehekülgi]]",
-	"nuke-pattern": "Lehekülje pealkirja kuju:",
+	"nuke-pattern": "Lehekülje pealkirja LIKE-kuju (SQL, nt %):",
 	"nuke-nopages-global": "Sinu otsingule vastavad leheküljepealkirjad puuduvad.",
 	"nuke-viewchanges": "vaata muudatusi",
 	"nuke-namespace": "Nimeruumipiirang:",
 	"nuke-linkoncontribs": "lauskustutamine",
-	"nuke-linkoncontribs-text": "Lauskustuta leheküljed, mille ainus autor on see {{GENDER:$1|kasutaja}}"
+	"nuke-linkoncontribs-text": "Lauskustuta leheküljed, mille ainus autor on see {{GENDER:$1|kasutaja}}",
+	"nuke-confirm": "Oled kustutamas {{PLURAL:$1|üht lehekülge|$1 lehekülge}}. Kas oled kindel, et tahad kustutada?"
 }

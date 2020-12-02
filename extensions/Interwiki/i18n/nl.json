@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"SPQRobin",
-			"Siebrand",
-			"Tvdm",
-			"Mar(c)",
-			"Sjoerddebruin",
+			"Elroy",
 			"Esketti",
 			"Mainframe98",
-			"McDutchie"
+			"Mar(c)",
+			"McDutchie",
+			"SPQRobin",
+			"Siebrand",
+			"Sjoerddebruin",
+			"Tvdm"
 		]
 	},
 	"interwiki": "Interwikigegevens bekijken en wijzigen",
@@ -25,7 +26,7 @@
 	"interwiki_local_0_intro": "Externe HTTP-verzoeken voor de lokale wiki met behulp van dit interwikivoorvoegsel in de URL resulteert in een \"{{int:badtitle}}\"-foutpagina.",
 	"interwiki_local_1_intro": "Externe HTTP-verzoeken op de lokale wiki die dit interwikivoorvoegsel gebruiken worden omgeleid naar de doel-URL van de interwiki, dat wil zeggen, worden behandeld als koppelingen naar lokale pagina's.",
 	"interwiki_trans": "Transcluderen",
-	"interwiki-trans-label": "Transcluderen:",
+	"interwiki-trans-label": "Verduisteren",
 	"interwiki_trans_1_intro": "Als de wikitekst syntax <code>{<nowiki />{voorvoegsel:<em>paginanaam</em>}}</code> wordt gebruikt, is het mogelijk om sjablonen of pagina's van een externe wiki in te voegen, wanneer interwiki transclusie is ingeschakeld in het algemeen ([//www.mediawiki.org/wiki/Manual:$wgEnableScaryTranscluding enge transclusie]).",
 	"interwiki_trans_0_intro": "Laat <code>{<nowiki />{voorvoegsel:<em>paginanaam</em>}}</code> niet toe om externe sjablonen of pagina's in te sluiten. Zoek in plaats daarvan naar een lokale pagina in de sjabloon-naamruimte.",
 	"interwiki_1": "ja",
@@ -34,7 +35,6 @@
 	"interwiki-cached": "De interwikigegevens staan in de cache. De cache wijzigen is niet mogelijk.",
 	"interwiki_edit": "Bewerken",
 	"interwiki_reasonfield": "Reden:",
-	"interwiki_delquestion": "\"$1\" aan het verwijderen",
 	"interwiki_deleting": "U bent voorvoegsel \"$1\" aan het verwijderen.",
 	"interwiki_deleted": "Voorvoegsel \"$1\" is verwijderd uit de interwikitabel.",
 	"interwiki_delfailed": "Voorvoegsel \"$1\" kon niet worden verwijderd uit de interwikitabel.",

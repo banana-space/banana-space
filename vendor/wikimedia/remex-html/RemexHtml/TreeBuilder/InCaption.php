@@ -56,7 +56,7 @@ class InCaption extends InsertionMode {
 				return;
 			}
 
-			$builder->generateImpliedEndTags( null, $sourceStart );
+			$builder->generateImpliedEndTags( false, $sourceStart );
 			if ( $stack->current->htmlName !== 'caption' ) {
 				$builder->error( "</caption> found but another element is open", $sourceStart );
 			}

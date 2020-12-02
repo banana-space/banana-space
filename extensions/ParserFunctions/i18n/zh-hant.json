@@ -1,14 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Cwlin0416",
 			"Gaoxuewei",
 			"Justincheng12345",
 			"Liangent",
 			"Mark85296341",
 			"Shinjiman",
 			"Simon Shek",
-			"Waihorace",
-			"Cwlin0416"
+			"Waihorace"
 		]
 	},
 	"pfunc_desc": "加強分析器，提供邏輯函數功能",

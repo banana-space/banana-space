@@ -91,18 +91,14 @@ class BufferingStatsdDataFactory extends StatsdDataFactory implements IBuffering
 		return $entity;
 	}
 
-	/**
-	 * @deprecated Use getData()
-	 * @return StatsdData[]
-	 */
-	public function getBuffer() {
-		return $this->buffer;
-	}
-
 	public function hasData() {
 		return !empty( $this->buffer );
 	}
 
+	/**
+	 * @since 1.30
+	 * @return StatsdData[]
+	 */
 	public function getData() {
 		return $this->buffer;
 	}

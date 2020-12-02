@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dvorapa",
 			"Mormegil",
-			"Tchoř",
-			"Dvorapa"
+			"Tchoř"
 		]
 	},
 	"fancycaptcha-desc": "Pokročilý generátor captcha pro rozšíření „Confirm Edit“",
@@ -15,7 +15,5 @@
 	"fancycaptcha-edit": "Abyste mohli editovat tuto stránku, musíte opsat text z následujícího obrázku: ([[Special:Captcha/help|Co tohle znamená?]])",
 	"fancycaptcha-imgcaptcha-ph": "Opište text, který vidíte na obrázku",
 	"fancycaptcha-sendemail": "Abychom wiki ochránili proti automatizovanému spamování, žádáme vás o opsání textu z následujícího obrázku ([[Special:Captcha/help|více informací]]):",
-	"fancycaptcha-reload-text": "Vygenerovat nový obrázek",
-	"apihelp-fancycaptchareload-description": "Získat novou FancyCaptcha.",
-	"apihelp-fancycaptchareload-example-1": "Získat novou FancyCaptcha."
+	"fancycaptcha-reload-text": "Vygenerovat nový obrázek"
 }

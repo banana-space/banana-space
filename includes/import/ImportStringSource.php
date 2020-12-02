@@ -32,7 +32,16 @@
  * @ingroup SpecialPage
  */
 class ImportStringSource implements ImportSource {
-	function __construct( $string ) {
+	/** @var string */
+	private $mString;
+
+	/** @var bool */
+	private $mRead;
+
+	/**
+	 * @param string $string
+	 */
+	public function __construct( $string ) {
 		$this->mString = $string;
 		$this->mRead = false;
 	}
@@ -40,14 +49,14 @@ class ImportStringSource implements ImportSource {
 	/**
 	 * @return bool
 	 */
-	function atEnd() {
+	public function atEnd() {
 		return $this->mRead;
 	}
 
 	/**
 	 * @return bool|string
 	 */
-	function readChunk() {
+	public function readChunk() {
 		if ( $this->atEnd() ) {
 			return false;
 		}

@@ -3,15 +3,15 @@
 		"authors": [
 			"Armando-Martin",
 			"Dferg",
+			"Dgstranz",
 			"Drini",
 			"Fitoschido",
+			"Lemondoge",
+			"Macofe",
 			"MarcoAurelio",
 			"Sanbec",
 			"Savh",
-			"Vivaelcelta",
-			"Macofe",
-			"Lemondoge",
-			"Dgstranz"
+			"Vivaelcelta"
 		]
 	},
 	"spam-blacklist": " #<!-- Deje esta línea exactamente como está --> <pre>\n# Los enlaces externos que coincidan con esta lista se bloquearán al añadirse a una página.\n# Esta lista afecta sólo a esta wiki. Consulta además la lista negra global. \n# Para documentación consulta: https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# La sintaxis es:\n#  * Todo lo que aparezca desde un carácter \"#\" hasta el fin de la línea, es un comentario\n#  * Toda línea que no esté en blanco, es un fragmento de expresión regular que solo coincidirá con equipos dentro de URL\n\n #</pre> <!-- Deje esta línea exactamente como está -->",
@@ -25,10 +25,7 @@
 	"spam-blacklist-desc": "Herramienta anti-spam basada en expresiones regulares que permite filtrar URLs en páginas y direcciones de correo electrónico para usuarios registrados",
 	"log-name-spamblacklist": "Registro de la lista negra de spam",
 	"log-description-spamblacklist": "Este registro muestra acciones bloqueadas por la lista negra de spam.",
-	"logentry-spamblacklist-hit": "{{GENDER:$2|$1}} ha activado la lista negra de spam en $3 al tratar de intentar agregar $4.",
+	"logentry-spamblacklist-hit": "{{GENDER:$2|$1}} ha activado la lista negra de spam en $3 al tratar de agregar $4.",
 	"right-spamblacklistlog": "Ver registro de la lista negra de ''spam''",
-	"action-spamblacklistlog": "ver la lista negra de spam de registro",
-	"apihelp-spamblacklist-description": "Validar uno o más URL contra la SpamBlacklist (lista negra de spam).",
-	"apihelp-spamblacklist-param-url": "URL que validar contra la lista negra.",
-	"apihelp-spamblacklist-example-1": "Verificar dos URL contra la lista negra"
+	"action-spamblacklistlog": "ver la lista negra de spam de registro"
 }

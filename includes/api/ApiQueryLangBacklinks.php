@@ -42,7 +42,7 @@ class ApiQueryLangBacklinks extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @param ApiPageSet $resultPageSet
+	 * @param ApiPageSet|null $resultPageSet
 	 * @return void
 	 */
 	public function run( $resultPageSet = null ) {
@@ -59,7 +59,7 @@ class ApiQueryLangBacklinks extends ApiQueryGeneratorBase {
 			);
 		}
 
-		if ( !is_null( $params['continue'] ) ) {
+		if ( $params['continue'] !== null ) {
 			$cont = explode( '|', $params['continue'] );
 			$this->dieContinueUsageIf( count( $cont ) != 3 );
 
@@ -67,7 +67,7 @@ class ApiQueryLangBacklinks extends ApiQueryGeneratorBase {
 			$op = $params['dir'] == 'descending' ? '<' : '>';
 			$prefix = $db->addQuotes( $cont[0] );
 			$title = $db->addQuotes( $cont[1] );
-			$from = intval( $cont[2] );
+			$from = (int)$cont[2];
 			$this->addWhere(
 				"ll_lang $op $prefix OR " .
 				"(ll_lang = $prefix AND " .
@@ -115,6 +115,11 @@ class ApiQueryLangBacklinks extends ApiQueryGeneratorBase {
 
 		$count = 0;
 		$result = $this->getResult();
+
+		if ( $resultPageSet === null ) {
+			$this->executeGenderCacheFromResultWrapper( $res, __METHOD__ );
+		}
+
 		foreach ( $res as $row ) {
 			if ( ++$count > $params['limit'] ) {
 				// We've reached the one extra which shows that there are
@@ -127,7 +132,7 @@ class ApiQueryLangBacklinks extends ApiQueryGeneratorBase {
 				break;
 			}
 
-			if ( !is_null( $resultPageSet ) ) {
+			if ( $resultPageSet !== null ) {
 				$pages[] = Title::newFromRow( $row );
 			} else {
 				$entry = [ 'pageid' => (int)$row->page_id ];
@@ -158,7 +163,7 @@ class ApiQueryLangBacklinks extends ApiQueryGeneratorBase {
 			}
 		}
 
-		if ( is_null( $resultPageSet ) ) {
+		if ( $resultPageSet === null ) {
 			$result->addIndexedTagName( [ 'query', $this->getModuleName() ], 'll' );
 		} else {
 			$resultPageSet->populateFromTitles( $pages );

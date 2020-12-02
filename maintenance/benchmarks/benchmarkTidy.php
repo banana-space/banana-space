@@ -1,11 +1,32 @@
 <?php
+/**
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * @file
+ * @ingroup Benchmark
+ */
 
-require __DIR__ . '/../Maintenance.php';
+use MediaWiki\MediaWikiServices;
 
-class BenchmarkTidy extends Maintenance {
+require __DIR__ . '/../includes/Benchmarker.php';
+
+class BenchmarkTidy extends Benchmarker {
 	public function __construct() {
 		parent::__construct();
-		$this->addOption( 'file', 'A filename which contains the input text', true, true );
+		$this->addOption( 'file', 'Path to file containing the input text', false, true );
 		$this->addOption( 'driver', 'The Tidy driver name, or false to use the configured instance',
 			false,  true );
 		$this->addOption( 'tidy-config', 'JSON encoded value for the tidy configuration array',
@@ -13,7 +34,8 @@ class BenchmarkTidy extends Maintenance {
 	}
 
 	public function execute() {
-		$html = file_get_contents( $this->getOption( 'file' ) );
+		$file = $this->getOption( 'file', __DIR__ . '/tidy/australia-untidy.html.gz' );
+		$html = $this->loadFile( $file );
 		if ( $html === false ) {
 			$this->fatalError( "Unable to open input file" );
 		}
@@ -35,8 +57,7 @@ class BenchmarkTidy extends Maintenance {
 	}
 
 	private function benchmark( $driver, $html ) {
-		global $wgContLang;
-
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 		$times = [];
 		$innerCount = 10;
 		$outerCount = 10;
@@ -44,7 +65,7 @@ class BenchmarkTidy extends Maintenance {
 			$t = microtime( true );
 			for ( $i = 0; $i < $innerCount; $i++ ) {
 				$driver->tidy( $html );
-				print $wgContLang->formatSize( memory_get_usage( true ) ) . "\n";
+				print $contLang->formatSize( memory_get_usage( true ) ) . "\n";
 			}
 			$t = ( ( microtime( true ) - $t ) / $innerCount ) * 1000;
 			$times[] = $t;
@@ -57,6 +78,7 @@ class BenchmarkTidy extends Maintenance {
 		$min = $times[0];
 		$max = end( $times );
 		if ( $n % 2 ) {
+			// @phan-suppress-next-line PhanTypeMismatchDimFetch
 			$median = $times[ ( $n - 1 ) / 2 ];
 		} else {
 			$median = ( $times[$n / 2] + $times[$n / 2 - 1] ) / 2;
@@ -67,10 +89,9 @@ class BenchmarkTidy extends Maintenance {
 		print "Median: $median ms\n";
 		print "Mean: $mean ms\n";
 		print "Maximum: $max ms\n";
-		print "Memory usage: " .
-			$wgContLang->formatSize( memory_get_usage( true ) ) . "\n";
+		print "Memory usage: " . $contLang->formatSize( memory_get_usage( true ) ) . "\n";
 		print "Peak memory usage: " .
-			$wgContLang->formatSize( memory_get_peak_usage( true ) ) . "\n";
+			$contLang->formatSize( memory_get_peak_usage( true ) ) . "\n";
 	}
 }
 

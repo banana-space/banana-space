@@ -2,13 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Danny B.",
+			"Dvorapa",
 			"Jkjk",
 			"Li-sung",
 			"Littledogboy",
 			"Matěj Grabovský",
-			"Mormegil",
 			"Matěj Suchánek",
-			"Dvorapa"
+			"Mormegil"
 		]
 	},
 	"nuke": "Hromadné mazání",
@@ -21,17 +21,15 @@
 	"nuke-multiplepeople": "Hromadné smazání nedávno založených stránek",
 	"nuke-tools": "Tento nástroj umožňuje hromadné smazání stránek nedávno vytvořených zadaným uživatelem nebo IP adresou.\nZadejte uživatelské jméno nebo IP adresu, zobrazí se seznam stránek ke smazání; případně ponechte prázdné pro všechny uživatele.",
 	"nuke-submit-user": "Vypsat stránky",
-	"nuke-toggleinvert": "Obrátit",
 	"nuke-submit-delete": "Smazat vybrané",
 	"right-nuke": "Hromadné mazání stránek",
-	"nuke-select": "Vybrat: $1",
 	"nuke-userorip": "Uživatelské jméno, IP adresa nebo ponechte prázdné:",
 	"nuke-maxpages": "Maximální počet stran:",
 	"nuke-editby": "{{GENDER:$1|Vytvořil|Vytvořila}} [[Special:Contributions/$1|$1]]",
 	"nuke-deleted": "Stránka '''$1''' byla smazána.",
 	"nuke-not-deleted": "Stránka [[:$1]] '''nemohla být''' smazána.",
 	"nuke-delete-more": "[[Special:Nuke|Odstranit další stránky]]",
-	"nuke-pattern": "Vzor pro název stránky:",
+	"nuke-pattern": "SQL LIKE vzor (např. %) pro název stránky:",
 	"nuke-nopages-global": "Pro hledaný výraz nebyly nalezeny žádné názvy stránek.",
 	"nuke-viewchanges": "ukázat změny",
 	"nuke-namespace": "Omezit na jmenný prostor:",

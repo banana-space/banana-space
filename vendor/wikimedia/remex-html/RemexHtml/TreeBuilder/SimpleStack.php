@@ -15,7 +15,7 @@ class SimpleStack extends Stack {
 	 * A 2-d array giving the element types which break a scope region for the
 	 * default scope, i.e. the one for phrases of the form "has an X element
 	 * in scope".
-	 * @var bool[string][string]
+	 * @var array<string,array<string,bool>>
 	 */
 	private static $defaultScope = [
 		HTMLData::NS_HTML => [
@@ -46,7 +46,7 @@ class SimpleStack extends Stack {
 
 	/**
 	 * The element types which break the table scope.
-	 * @var bool[string][string]
+	 * @var array<string,array<string,bool>>
 	 */
 	private static $tableScope = [
 		HTMLData::NS_HTML => [
@@ -58,13 +58,13 @@ class SimpleStack extends Stack {
 
 	/**
 	 * The element types which break the list scope. This is lazy-initialised.
-	 * @var bool[string][string]
+	 * @var array<string,array<string,bool>>
 	 */
 	private static $listScope;
 
 	/**
 	 * The element types which break the button scope. This is lazy-initialised.
-	 * @var bool[string][string]
+	 * @var array<string,array<string,bool>>
 	 */
 	private static $buttonScope;
 

@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"D41D8CD98F",
 			"Liangent",
+			"Liuxinyu970226",
 			"PhiLiP",
 			"Wmr89502270",
-			"Xiaomingyan",
-			"Liuxinyu970226",
-			"D41D8CD98F"
+			"Xiaomingyan"
 		]
 	},
 	"inputbox-desc": "允许包含预先设置的HTML表单",

@@ -1,10 +1,10 @@
 {
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "1.0.0",
-		"mediawiki/mediawiki-codesniffer": "18.0.0",
-		"jakub-onderka/php-console-highlighter": "0.3.2",
-		"mediawiki/minus-x": "0.3.1",
-		"mediawiki/mediawiki-phan-config": "0.2.0"
+		"mediawiki/mediawiki-codesniffer": "30.0.0",
+		"jakub-onderka/php-console-highlighter": "0.4.0",
+		"mediawiki/minus-x": "1.0.0",
+		"mediawiki/mediawiki-phan-config": "0.9.1"
 	},
 	"scripts": {
 		"test": [
@@ -13,11 +13,11 @@
 			"minus-x check ."
 		],
 		"fix": [
-			"phpcbf",
-			"minus-x fix ."
+			"minus-x fix .",
+			"phpcbf"
 		]
 	},
 	"extra": {
-		"phan-taint-check-plugin": "1.2.0"
+		"phan-taint-check-plugin": "2.0.1"
 	}
 }

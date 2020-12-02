@@ -1,22 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alexmar983",
 			"Beta16",
 			"CristianCantoro",
-			"Maria victoria",
-			"OrbiliusMagister",
-			"Rosh",
-			"Melos",
-			"PeppeAeco",
-			"Toadino2",
+			"Fringio",
 			"Macofe",
-			"Alexmar983",
-			"Fringio"
+			"Maria victoria",
+			"Melos",
+			"OrbiliusMagister",
+			"PeppeAeco",
+			"Rosh",
+			"Toadino2"
 		]
 	},
 	"multimediaviewer-desc": "Espande le miniature in dimensioni maggiori in un'interfaccia a schermo intero.",
-	"multimediaviewer-pref": "Media Viewer",
-	"multimediaviewer-pref-desc": "Sperimenta una miglior visualizzazione dei file multimediali con questo nuovo strumento che visualizza le immagini più grandi su pagine che ne riportano le miniature. Le immagini sono mostrate in un'interfaccia a schermo intero più gradevole, ma possono essere visualizzate anche alla dimensione originale.",
 	"multimediaviewer-optin-pref": "Attiva <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Media Viewer]</span>",
 	"multimediaviewer-file-page": "Vai alla corrispondente pagina del file",
 	"multimediaviewer-repository-local": "Ulteriori dettagli",
@@ -27,7 +25,7 @@
 	"multimediaviewer-multiple-authors-combine": "$1 e $2",
 	"multimediaviewer-metadata-error": "Impossibile caricare i dettagli dell'immagine (errore: $1)",
 	"multimediaviewer-thumbnail-error": "Spiacenti, il file non può essere visualizzato",
-	"multimediaviewer-thumbnail-error-description": "Sembra esserci un problema tecnico. Puoi $1 o $2 se persiste. Errore: $3",
+	"multimediaviewer-thumbnail-error-description": "Sembra esserci un problema tecnico. Puoi $1 se persiste. Errore: $2",
 	"multimediaviewer-thumbnail-error-retry": "riprova",
 	"multimediaviewer-thumbnail-error-report": "segnalare il problema",
 	"multimediaviewer-license-cc-pd": "Pubblico dominio",
@@ -52,7 +50,7 @@
 	"multimediaviewer-restriction-trademarked": "Il contenuto di quest'immagine potrebbe essere limitato da leggi sui marchi registrati.",
 	"multimediaviewer-restriction-default": "Questa immagine potrebbe essere limitata da clausole legali fuori dalla legge sul diritto dl'autore. Maggiori dettagli nella pagina di descrizione del file.",
 	"multimediaviewer-restriction-default-and-others": "Questa immagine potrebbe essere ulteriormente limitata da altre clausole legali fuori dalla legge sul diritto d'autore. Maggiori dettagli nella pagina di descrizione del file.",
-	"multimediaviewer-about-mmv": "Informazioni",
+	"multimediaviewer-about-mmv": "Informazioni su questa interfaccia",
 	"multimediaviewer-discuss-mmv": "Discussione",
 	"multimediaviewer-help-mmv": "Aiuto",
 	"multimediaviewer-optout-mmv": "Disattiva Media Viewer",

@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jeblad",
+			"Njardarlogar"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell endring]]",
+	"tag-visualeditor-description": "Endring gjord med [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuell endring]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell endring: Kontroller]]",
+	"tag-visualeditor-needcheck-description": "Endring gjord med [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuell endring]] der systemet fann at wikiteksten kan ha umeinte endringar.",
+	"tag-visualeditor-wikitext": "2017-kjeldeendring",
+	"tag-visualeditor-wikitext-description": "Endring gjord med 2017-tekstendraren",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell endring: Bytte]]",
+	"tag-visualeditor-switched-description": "Brukaren byrja endra med visuell endring, men bytte så til wikitekstendring.",
+	"visualeditor-feedback-tool": "Gje attendemelding på programvara",
+	"visualeditor-help-label": "Les brukarrettleiinga",
+	"visualeditor-help-title": "Handbok for bruk av tekstendraren",
+	"visualeditor-welcomedialog-action": "Kom i gang med endringa",
+	"visualeditor-welcomedialog-content": "Alle kan endra, og kvar einaste betring hjelper på.",
+	"visualeditor-welcomedialog-content-thanks": "Takk for at du hjelper verda med å oppdaga meir!",
+	"visualeditor-welcomedialog-switch": "Byt til kjeldeendring",
+	"visualeditor-welcomedialog-switch-ve": "Byt til visuell endring",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Velkomen}} til $2"
+}

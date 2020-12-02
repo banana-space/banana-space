@@ -1,7 +1,5 @@
 <?php
 /**
- * ResourceLoader module for site style customizations.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -23,9 +21,14 @@
  */
 
 /**
- * Module for site style customizations
+ * Module for site style customizations.
+ *
+ * @ingroup ResourceLoader
+ * @internal
  */
 class ResourceLoaderSiteStylesModule extends ResourceLoaderWikiModule {
+	/** @var string[] What client platforms the module targets (e.g. desktop, mobile) */
+	protected $targets = [ 'desktop', 'mobile' ];
 
 	/**
 	 * Get list of pages used by this module
@@ -36,10 +39,11 @@ class ResourceLoaderSiteStylesModule extends ResourceLoaderWikiModule {
 	protected function getPages( ResourceLoaderContext $context ) {
 		$pages = [];
 		if ( $this->getConfig()->get( 'UseSiteCss' ) ) {
+			$skin = $context->getSkin();
 			$pages['MediaWiki:Common.css'] = [ 'type' => 'style' ];
-			$pages['MediaWiki:' . ucfirst( $context->getSkin() ) . '.css'] = [ 'type' => 'style' ];
+			$pages['MediaWiki:' . ucfirst( $skin ) . '.css'] = [ 'type' => 'style' ];
 			$pages['MediaWiki:Print.css'] = [ 'type' => 'style', 'media' => 'print' ];
-
+			$this->getHookRunner()->onResourceLoaderSiteStylesModulePages( $skin, $pages );
 		}
 		return $pages;
 	}

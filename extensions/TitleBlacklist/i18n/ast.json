@@ -5,6 +5,8 @@
 			"Xuacu"
 		]
 	},
+	"action-tboverride": "sobrescribir la llista prieta de títulos o nomes d'usuariu",
+	"action-tboverride-account": "sobrescribir la llista prieta de nomes d'usuariu",
 	"action-titleblacklistlog": "ver el rexistru de la llista prieta de títulos",
 	"log-name-titleblacklist": "Rexistru de llista prieta de títulos",
 	"log-description-titleblacklist": "Estos socesos rexistren les coincidencies cola llista prieta de títulos.",
@@ -17,18 +19,10 @@
 	"titleblacklist-forbidden-upload": "Torgóse la creación del nome d'archivu \"$2\".\nConcueya cola siguiente entrada na llista prieta: <code>$1</code>",
 	"titleblacklist-forbidden-new-account": "Torgóse la creación del nome d'usuariu \"$2\".\nConcueya cola siguiente entrada na llista prieta: <code>$1</code>",
 	"titleblacklist-invalid": "{{PLURAL:$1|La siguiente llinia|Les siguientes llinies}} de la llista prieta de títulos {{PLURAL:$1|nun ye válida|nun son válides}};\npor favor {{PLURAL:$1|corríxila|corríxiles}} enantes de guardar:",
-	"titleblacklist-override": "Inorar la llista prieta",
+	"titleblacklist-override": "Saltar la llista prieta de títulos si casa",
 	"titleblacklist-override-help": "Los usuarios con permisu bastante pueden configurar esto pa ignorar les comprobaciones de títulos de la llista prieta.",
 	"titleblacklist-warning": "<strong>Atención: Esta páxina sólo puen editala alministradores y otros usuarios col permisu <code>tboverride</code> porque casa cola siguiente entrada de la llista prieta de títulos:</strong><br /><code>$1</code>",
 	"right-tboverride": "Sobrescribir la llista prieta de títulos o nomes d'usuariu",
 	"right-tboverride-account": "Saltar la llista prieta d'usuarios",
-	"right-titleblacklistlog": "Ver el rexistru de llista prieta de títulos",
-	"apihelp-titleblacklist-description": "Validar un títulu de páxina, o nome de ficheru o d'usuariu escontra la llista prieta de títulos.",
-	"apihelp-titleblacklist-summary": "Validar un títulu de páxina, o nome de ficheru o d'usuariu escontra la llista prieta de títulos.",
-	"apihelp-titleblacklist-param-title": "La cadena a validar escontra la llista prieta.",
-	"apihelp-titleblacklist-param-action": "L'aición a comprobar.",
-	"apihelp-titleblacklist-param-nooverride": "Nun intentes saltate la llista prieta de títulos.",
-	"apihelp-titleblacklist-example-1": "Comprobar si [[Foo]] ta na llista prieta",
-	"apihelp-titleblacklist-example-2": "Comprobar si [[Bar]] ta na llista prieta pa la edición",
-	"apihelp-createaccount-param-ignoretitleblacklist": "Inorar les comprobaciones de suplantación (necesita unu de los permisos siguientes: <code>tboverride</code>, <code>tboverride-account</code>)."
+	"right-titleblacklistlog": "Ver el rexistru de llista prieta de títulos"
 }

@@ -3,10 +3,16 @@
 class CaptchaHashStore extends CaptchaStore {
 	protected $data = [];
 
+	/**
+	 * @inheritDoc
+	 */
 	public function store( $index, $info ) {
 		$this->data[$index] = $info;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function retrieve( $index ) {
 		if ( array_key_exists( $index, $this->data ) ) {
 			return $this->data[$index];
@@ -14,6 +20,9 @@ class CaptchaHashStore extends CaptchaStore {
 		return false;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function clear( $index ) {
 		unset( $this->data[$index] );
 	}

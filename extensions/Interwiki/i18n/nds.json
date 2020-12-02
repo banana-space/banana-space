@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Joachim Mos",
 			"Purodha",
-			"Slomox",
-			"Joachim Mos"
+			"Slomox"
 		]
 	},
 	"interwiki_intro": "Disse Sied gifft en Överblick över de Interwiki-Tabell.",
@@ -18,7 +18,6 @@
 	"interwiki_error": "De Interwiki-Tabell is leddig, oder wat anners is verkehrt lopen.",
 	"interwiki_edit": "Ännern",
 	"interwiki_reasonfield": "Grund:",
-	"interwiki_delquestion": "„$1“ warrt rutsmeten",
 	"interwiki_addtext": "Interwiki- oder Spraakpräfix tofögen",
 	"interwiki_addbutton": "Tofögen",
 	"right-interwiki": "Interwiki-Tabell ännern",

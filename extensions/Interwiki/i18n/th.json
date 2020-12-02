@@ -1,17 +1,25 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aefgh39622",
 			"Manop",
 			"Passawuth"
 		]
 	},
 	"interwiki": "ดูและแก้ไขข้อมูลอินเตอร์วิกิ",
 	"interwiki-title-norights": "ดูข้อมูลอินเตอร์วิกิ",
+	"interwiki-desc": "เพิ่ม[[Special:Interwiki|หน้าพิเศษ]]เพื่อดูและแก้ไขตารางอินเตอร์วิกิ",
 	"interwiki_prefix": "คำนำหน้า",
 	"interwiki-prefix-label": "คำนำหน้า:",
+	"interwiki_local": "ส่งต่อ",
+	"interwiki_trans": "การใช้แม่แบบ",
+	"interwiki_1": "ใช่",
+	"interwiki_0": "ไม่",
+	"interwiki_edit": "แก้ไข",
 	"interwiki_reasonfield": "เหตุผล:",
-	"interwiki_delquestion": "ลบ \"$1\"",
+	"interwiki_deleting": "คุณกำลังจะลบคำนำหน้า \"$1\"",
 	"interwiki_addbutton": "เพิ่ม",
 	"interwiki_edittext": "แก้ไขคำนำหน้าอินเตอร์วิกิ",
-	"right-interwiki": "แก้ไขข้อมูลอินเตอร์วิกิ"
+	"right-interwiki": "แก้ไขข้อมูลอินเตอร์วิกิ",
+	"action-interwiki": "เปลี่ยนแปลงรายการอินเตอร์วิกินี้"
 }

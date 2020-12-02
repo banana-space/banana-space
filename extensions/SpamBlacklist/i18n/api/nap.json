@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"C.R."
+		]
+	},
+	"apihelp-spamblacklist-description": "Valida uno o cchiù URL annanz' 'o SpamBlackList.",
+	"apihelp-spamblacklist-example-1": "Cuntrolla ddoje URL nfacci' 'a lista nira",
+	"apihelp-spamblacklist-param-url": "URL pe' validà annanz' 'a lista nira."
+}

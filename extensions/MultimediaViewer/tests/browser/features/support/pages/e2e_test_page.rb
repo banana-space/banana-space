@@ -42,7 +42,7 @@ class E2ETestPage < CommonsPage
   div(:mmv_image_loaded_cucumber, class: 'mw-mmv-image-loaded-cucumber')
 
   # Download
-  button(:mmv_download_icon, class: 'mw-mmv-download-button')
+  a(:mmv_download_icon, class: 'mw-mmv-download-button')
   div(:mmv_download_menu, class: 'mw-mmv-download-dialog')
   span(:mmv_download_size_label, class: 'mw-mmv-download-image-size')
   span(:mmv_download_down_arrow_icon, class: 'mw-mmv-download-select-menu')

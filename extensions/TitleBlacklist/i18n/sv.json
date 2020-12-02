@@ -4,8 +4,8 @@
 			"Ainali",
 			"Boivie",
 			"Lejonel",
-			"M.M.S.",
 			"Lokal Profil",
+			"M.M.S.",
 			"WikiPhoenix"
 		]
 	},
@@ -25,12 +25,5 @@
 	"titleblacklist-warning": "<strong>Varning: Denna sida kan endast redigeras av administratörer och andra användare med <code>tboverride</code>-rättigheten eftersom den matchar följande post i svartlistan över titlar:</strong><br /><code>$1</code>",
 	"right-tboverride": "Åsidosätt svartlistan med titlar och användarnamn",
 	"right-tboverride-account": "Kör över svartlistan för användarnamn",
-	"right-titleblacklistlog": "Visa svartlistningslogg för titlar",
-	"apihelp-titleblacklist-description": "Validera en sidtitel, filnamn eller användarnamn mot TitleBlacklist.",
-	"apihelp-titleblacklist-summary": "Validera en sidtitel, filnamn eller användare mot TitleBlacklist.",
-	"apihelp-titleblacklist-param-title": "Strängen som ska valideras mot svartlistan.",
-	"apihelp-titleblacklist-param-action": "Åtgärden som ska kontrolleras.",
-	"apihelp-titleblacklist-param-nooverride": "Försök inte att åsidosätta svartlistan för titlar.",
-	"apihelp-titleblacklist-example-1": "Kontrollera om [[Foo]] är svartlistad",
-	"apihelp-titleblacklist-example-2": "Kontrollera om [[Bar]] är svartlistad för redigering"
+	"right-titleblacklistlog": "Visa svartlistningslogg för titlar"
 }

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Anakmalaysia"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "Dapatkan FancyCaptcha baru.",
+	"apihelp-fancycaptchareload-example-1": "Dapatkan FancyCaptcha baru"
+}

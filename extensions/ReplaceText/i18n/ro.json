@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Andrei Stroe",
 			"Firilacroco",
 			"KlaudiuMihaila",
 			"Stelistcristi"
@@ -15,5 +16,5 @@
 	"replacetext_nomove": "Nu a fost găsită nici o pagină al cărei titlu să conțină '$1'.",
 	"replacetext_return": "Revenire la formular.",
 	"replacetext_continue": "Continuare",
-	"replacetext_editsummary": "Înlocuire de text - '$1' în '$2'"
+	"replacetext_editsummary": "Înlocuire de text - „$1” cu „$2”"
 }

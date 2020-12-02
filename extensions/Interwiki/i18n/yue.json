@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Antonytse",
+			"Hello903hello",
 			"Zoranzoki21"
 		]
 	},
@@ -9,14 +10,13 @@
 	"interwiki-title-norights": "去睇跨維基資料",
 	"interwiki_intro": "睇吓[//www.mediawiki.org/wiki/Interwiki_table MediaWiki.org]有關跨維基表嘅更多資料。",
 	"interwiki_prefix": "前綴",
-	"interwiki-prefix-label": "前綴:",
+	"interwiki-prefix-label": "字頭：",
 	"interwiki_local": "定義呢個做一個本地wiki",
 	"interwiki-local-label": "定義呢個做一個本地wiki:",
 	"interwiki_trans": "容許跨維基包含",
 	"interwiki-trans-label": "容許跨維基包含:",
 	"interwiki_error": "錯誤: 跨維基表係空、又或者有其它嘢出錯。",
 	"interwiki_reasonfield": "原因：",
-	"interwiki_delquestion": "刪緊 \"$1\"",
 	"interwiki_deleting": "你而家拎走緊前綴 \"$1\"。",
 	"interwiki_deleted": "前綴 \"$1\" 已經成功噉響個跨維基表度拎走咗。",
 	"interwiki_delfailed": "前綴 \"$1\" 唔能夠響個跨維基表度拎走。",

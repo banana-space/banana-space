@@ -11,25 +11,28 @@ interface Field {
 	 * Field name
 	 * @return string
 	 */
-	function name();
+	public function name();
 
 	/**
 	 * Name of table this field belongs to
 	 * @return string
 	 */
-	function tableName();
+	public function tableName();
 
 	/**
 	 * Database type
 	 * @return string
 	 */
-	function type();
+	public function type();
 
 	/**
 	 * Whether this field can store NULL values
 	 * @return bool
 	 */
-	function isNullable();
+	public function isNullable();
 }
 
+/**
+ * @deprecated since 1.29
+ */
 class_alias( Field::class, 'Field' );

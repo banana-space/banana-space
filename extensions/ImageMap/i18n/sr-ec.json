@@ -1,18 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
+			"BadDog",
+			"Milicevic01",
 			"Millosh",
 			"Rancher",
 			"Sasa Stefanovic",
-			"Михајло Анђелковић",
-			"Milicevic01"
+			"Михајло Анђелковић"
 		]
 	},
-	"imagemap_desc": "Омогућава клијентској страни кликабилну мапу коришћњењм ознаке <code>&lt;imagemap&gt;</code>.",
+	"imagemap_desc": "Омогућава мапе слика на клијентском рачунару на којима се може кликнути коришћењем ознаке <code>&lt;imagemap&gt;</code>",
 	"imagemap_no_image": "Грешка: неопходно је одредити слику у првој линији.",
 	"imagemap_invalid_image": "Грешка: слика је лоша или не постоји.",
 	"imagemap_bad_image": "Грешка: слика се налази на црном списку за ову страну",
-	"imagemap_no_link": "Грешка: није пронађена ниједна ваљана веза на крају линије $1.",
+	"imagemap_no_link": "Грешка: није пронађена ниједна валидна веза на крају линије $1.",
 	"imagemap_invalid_title": "Грешка: лош наслов у вези у линији $1.",
 	"imagemap_missing_coord": "Грешка: нема довољно координата за облик на линији $1.",
 	"imagemap_unrecognised_shape": "Грешка: непознат облик на линији $1, свака линија мора почети једном од: <code>default</code>, <code>rect</code>, <code>circle</code> или <code>poly</code>.",

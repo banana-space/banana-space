@@ -24,6 +24,8 @@
  * @file
  */
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\ParamValidator\TypeDef\UserDef;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
@@ -36,7 +38,7 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 
 	public function __construct( ApiQuery $query, $moduleName ) {
 		parent::__construct( $query, $moduleName, 'ai' );
-		$this->mRepo = RepoGroup::singleton()->getLocalRepo();
+		$this->mRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
 	}
 
 	/**
@@ -71,7 +73,7 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @param ApiPageSet $resultPageSet
+	 * @param ApiPageSet|null $resultPageSet
 	 * @return void
 	 */
 	private function run( $resultPageSet = null ) {
@@ -126,18 +128,18 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 			}
 
 			// Pagination
-			if ( !is_null( $params['continue'] ) ) {
+			if ( $params['continue'] !== null ) {
 				$cont = explode( '|', $params['continue'] );
 				$this->dieContinueUsageIf( count( $cont ) != 1 );
-				$op = ( $ascendingOrder ? '>' : '<' );
+				$op = $ascendingOrder ? '>' : '<';
 				$continueFrom = $db->addQuotes( $cont[0] );
 				$this->addWhere( "img_name $op= $continueFrom" );
 			}
 
 			// Image filters
-			$from = ( $params['from'] === null ? null : $this->titlePartToKey( $params['from'], NS_FILE ) );
-			$to = ( $params['to'] === null ? null : $this->titlePartToKey( $params['to'], NS_FILE ) );
-			$this->addWhereRange( 'img_name', ( $ascendingOrder ? 'newer' : 'older' ), $from, $to );
+			$from = $params['from'] === null ? null : $this->titlePartToKey( $params['from'], NS_FILE );
+			$to = $params['to'] === null ? null : $this->titlePartToKey( $params['to'], NS_FILE );
+			$this->addWhereRange( 'img_name', $ascendingOrder ? 'newer' : 'older', $from, $to );
 
 			if ( isset( $params['prefix'] ) ) {
 				$this->addWhere( 'img_name' . $db->buildLike(
@@ -159,7 +161,7 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 					);
 				}
 			}
-			if ( !is_null( $params['user'] ) && $params['filterbots'] != 'all' ) {
+			if ( $params['user'] !== null && $params['filterbots'] != 'all' ) {
 				// Since filterbots checks if each user has the bot right, it
 				// doesn't make sense to use it with user
 				$this->dieWithError(
@@ -177,7 +179,7 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 			// Include in ORDER BY for uniqueness
 			$this->addWhereRange( 'img_name', $ascendingOrder ? 'newer' : 'older', null, null );
 
-			if ( !is_null( $params['continue'] ) ) {
+			if ( $params['continue'] !== null ) {
 				$cont = explode( '|', $params['continue'] );
 				$this->dieContinueUsageIf( count( $cont ) != 2 );
 				$op = ( $ascendingOrder ? '>' : '<' );
@@ -190,9 +192,9 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 			}
 
 			// Image filters
-			if ( !is_null( $params['user'] ) ) {
+			if ( $params['user'] !== null ) {
 				$actorQuery = ActorMigration::newMigration()
-					->getWhere( $db, 'img_user', User::newFromName( $params['user'], false ) );
+					->getWhere( $db, 'img_user', $params['user'] );
 				$this->addTables( $actorQuery['tables'] );
 				$this->addJoinConds( $actorQuery['joins'] );
 				$this->addWhere( $actorQuery['conds'] );
@@ -205,23 +207,23 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 				$this->addJoinConds( [ 'user_groups' => [
 					'LEFT JOIN',
 					[
-						'ug_group' => User::getGroupsWithPermission( 'bot' ),
+						'ug_group' => $this->getPermissionManager()->getGroupsWithPermission( 'bot' ),
 						'ug_user = ' . $actorQuery['fields']['img_user'],
 						'ug_expiry IS NULL OR ug_expiry >= ' . $db->addQuotes( $db->timestamp() )
 					]
 				] ] );
-				$groupCond = ( $params['filterbots'] == 'nobots' ? 'NULL' : 'NOT NULL' );
+				$groupCond = $params['filterbots'] == 'nobots' ? 'NULL' : 'NOT NULL';
 				$this->addWhere( "ug_group IS $groupCond" );
 			}
 		}
 
 		// Filters not depending on sort
 		if ( isset( $params['minsize'] ) ) {
-			$this->addWhere( 'img_size>=' . intval( $params['minsize'] ) );
+			$this->addWhere( 'img_size>=' . (int)$params['minsize'] );
 		}
 
 		if ( isset( $params['maxsize'] ) ) {
-			$this->addWhere( 'img_size<=' . intval( $params['maxsize'] ) );
+			$this->addWhere( 'img_size<=' . (int)$params['maxsize'] );
 		}
 
 		$sha1 = false;
@@ -241,7 +243,7 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 			$this->addWhereFld( 'img_sha1', $sha1 );
 		}
 
-		if ( !is_null( $params['mime'] ) ) {
+		if ( $params['mime'] !== null ) {
 			if ( $this->getConfig()->get( 'MiserMode' ) ) {
 				$this->dieWithError( 'apierror-mimesearchdisabled' );
 			}
@@ -296,7 +298,7 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 				break;
 			}
 
-			if ( is_null( $resultPageSet ) ) {
+			if ( $resultPageSet === null ) {
 				$file = $repo->newFileFromRow( $row );
 				$info = array_merge( [ 'name' => $row->img_name ],
 					ApiQueryImageInfo::getInfo( $file, $prop, $result ) );
@@ -316,7 +318,7 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 			}
 		}
 
-		if ( is_null( $resultPageSet ) ) {
+		if ( $resultPageSet === null ) {
 			$result->addIndexedTagName( [ 'query', $this->getModuleName() ], 'img' );
 		} else {
 			$resultPageSet->populateFromTitles( $titles );
@@ -372,7 +374,9 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 			'sha1' => null,
 			'sha1base36' => null,
 			'user' => [
-				ApiBase::PARAM_TYPE => 'user'
+				ApiBase::PARAM_TYPE => 'user',
+				UserDef::PARAM_ALLOWED_USER_TYPES => [ 'name', 'ip', 'id', 'interwiki' ],
+				UserDef::PARAM_RETURN_OBJECT => true,
 			],
 			'filterbots' => [
 				ApiBase::PARAM_DFLT => 'all',
@@ -406,7 +410,7 @@ class ApiQueryAllImages extends ApiQueryGeneratorBase {
 	protected function getExamplesMessages() {
 		return [
 			'action=query&list=allimages&aifrom=B'
-				=> 'apihelp-query+allimages-example-B',
+				=> 'apihelp-query+allimages-example-b',
 			'action=query&list=allimages&aiprop=user|timestamp|url&' .
 				'aisort=timestamp&aidir=older'
 				=> 'apihelp-query+allimages-example-recent',

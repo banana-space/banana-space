@@ -1,24 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
-			"Crt",
-			"Nike",
-			"Nedergard",
-			"Stryn",
-			"McSalama",
 			"01miki10",
-			"Alluk."
+			"Alluk.",
+			"Crt",
+			"Kyykaarme",
+			"McSalama",
+			"Nedergard",
+			"Nike",
+			"Pyscowicz",
+			"Stryn"
 		]
 	},
-	"fancycaptcha-addurl": "Muokkauksesi sisältää uusia linkkejä muille sivuille. Kirjoita kuvan sisältämät sanat alla olevaan tekstikenttään ([[Special:Captcha/help|lisätietoja]]):",
+	"fancycaptcha-addurl": "Muokkauksesi sisältää uusia linkkejä muille sivuille. \nKirjoita kuvan sisältämät sanat alla olevaan tekstikenttään \n([[Special:Captcha/help|lisätietoja]]):",
 	"fancycaptcha-badlogin": "Automatisoidun salasanan murtamisen estämiseksi kirjoita kuvan sisältämät sanat alla olevaan tekstikenttään ([[Special:Captcha/help|lisätietoja]]):",
-	"fancycaptcha-captcha": "Roskapostisuojaus",
-	"fancycaptcha-accountcreate": "Automaattisen käyttäjätunnusten luonnin estämiseksi ratkaise alla oleva laskutoimitus ja kirjoita se kenttään ([[Special:Captcha/help|lisätietoa]]):",
+	"fancycaptcha-captcha": "Turvallisuustarkistus",
+	"fancycaptcha-accountcreate": "Automaattisten käyttäjätunnusten luonnin estämiseksi kirjoita kuvassa näkyvät kirjaimet alla olevaan tekstikenttään ([[Special:Captcha/help|lisätietoa]]):",
 	"fancycaptcha-create": "Muokkauksesi sisältää uusia linkkejä muille sivuille. Kirjoita kuvan sisältämät sanat alla olevaan tekstikenttään ([[Special:Captcha/help|lisätietoja]]):",
 	"fancycaptcha-edit": "Muokkauksesi sisältää uusia linkkejä muille sivuille. Kirjoita kuvan sisältämät sanat alla olevaan tekstikenttään ([[Special:Captcha/help|lisätietoja]]):",
 	"fancycaptcha-imgcaptcha-ph": "Kirjoita kuvassa oleva teksti",
-	"fancycaptcha-sendemail": "Automatisoidun roskapostin lähettämisen vaikeuttamiseksi kirjoita kuvan sisältämät sanat alla olevaan tekstikenttään ([[Special:Captcha/help|lisätietoja]]):",
-	"fancycaptcha-reload-text": "Vaihda",
-	"apihelp-fancycaptchareload-description": "Hae uusi FancyCaptcha.",
-	"apihelp-fancycaptchareload-example-1": "Hae uusi FancyCaptcha"
+	"fancycaptcha-sendemail": "Automatisoidun roskapostin lähettämisen vaikeuttamiseksi kirjoita kuvan sisältämät sanat alla olevaan tekstikenttään \n([[Special:Captcha/help|lisätietoja]]):",
+	"fancycaptcha-reload-text": "Vaihda"
 }

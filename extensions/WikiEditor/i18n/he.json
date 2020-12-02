@@ -2,12 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"Guycn2",
+			"Meni181818",
 			"Rotemliss",
 			"YaronSh",
 			"Yonidebest",
-			"חיים",
-			"Guycn2",
-			"Meni181818"
+			"חיים"
 		]
 	},
 	"wikieditor": "ממשק מתקדם לעריכת טקסט ויקי",
@@ -16,7 +16,8 @@
 	"wikieditor-loading": "בטעינה...",
 	"wikieditor-toolbar": "סרגל עריכה",
 	"wikieditor-toolbar-desc": "סרגל עריכת הדף עם שמישות מורחבת",
-	"wikieditor-toolbar-preference": "הפעלת סרגל העריכה המשופר",
+	"wikieditor-toolbar-preference": "הפעלת סרגל העריכה",
+	"wikieditor-toolbar-preference-help": "לפעמים זה נקרא \"עורך קוד ויקי 2010\".",
 	"wikieditor-toolbar-loading": "בטעינה...",
 	"wikieditor-toolbar-tool-bold": "הדגשה",
 	"wikieditor-toolbar-tool-bold-example": "טקסט מודגש",
@@ -49,7 +50,7 @@
 	"wikieditor-toolbar-tool-link-lookslikeinternal-int": "קישור פנימי",
 	"wikieditor-toolbar-tool-link-lookslikeinternal-ext": "קישור חיצוני",
 	"wikieditor-toolbar-tool-link-empty": "לא הזנת שום דבר לקשר אליו.",
-	"wikieditor-toolbar-tool-file": "קובץ מוטבע",
+	"wikieditor-toolbar-tool-file": "תמונות ומדיה",
 	"wikieditor-toolbar-tool-file-example": "דוגמה.jpg",
 	"wikieditor-toolbar-tool-file-title": "הוספת קובץ",
 	"wikieditor-toolbar-file-target": "שם הקובץ:",
@@ -102,6 +103,7 @@
 	"wikieditor-toolbar-tool-table-example-old": "-\n! כותרת 1\n! כותרת 2\n! כותרת 3\n|-\n| שורה 1, תא 1\n| שורה 1, תא 2\n| שורה 1, תא 3\n|-\n| שורה 2, תא 1\n| שורה 2, תא 2\n| שורה 2, תא 3",
 	"wikieditor-toolbar-tool-table-example-cell-text": "טקסט התא",
 	"wikieditor-toolbar-tool-table-example-header": "טקסט הכותרת",
+	"wikieditor-toolbar-tool-table-example-caption": "טקסט הכיתוב",
 	"wikieditor-toolbar-tool-table-title": "הוספת טבלה",
 	"wikieditor-toolbar-tool-table-dimensions-rows": "שורות",
 	"wikieditor-toolbar-tool-table-dimensions-columns": "עמודות",
@@ -130,6 +132,7 @@
 	"wikieditor-toolbar-tool-replace-success": "{{PLURAL:$1|בוצעה החלפה אחת|בוצעו $1 החלפות}}.",
 	"wikieditor-toolbar-tool-replace-emptysearch": "לא הזנת טקסט לחיפוש.",
 	"wikieditor-toolbar-tool-replace-invalidregex": "הביטוי הרגולרי שהוכנס אינו תקין: $1",
+	"wikieditor-toolbar-tool-replace-word": "התאמה למילה שלמה",
 	"wikieditor-toolbar-section-characters": "תווים מיוחדים",
 	"wikieditor-toolbar-section-help": "עזרה",
 	"wikieditor-toolbar-help-heading-description": "תיאור",

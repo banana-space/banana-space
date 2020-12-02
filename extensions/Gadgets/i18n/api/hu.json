@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tacsipacsi"
+		]
+	},
+	"apihelp-query+gadgetcategories-description": "A segédeszköz-kategóriák listáját adja vissza.",
+	"apihelp-query+gadgetcategories-param-prop": "Milyen információkat szeretnél a segédeszköz-kategóriáról:\n;name:Belső kategórianév.\n;title:Kategória címe.\n;members:A kategóriában található segédeszközök száma."
+}

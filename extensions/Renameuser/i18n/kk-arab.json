@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"renameuser": "قاتىسۋشىنى قايتا اتاۋ",
 	"renameuserold": "اعىمداعى قاتىسۋشى اتى:",
 	"renameusernew": "جاڭا قاتىسۋشى اتى:",

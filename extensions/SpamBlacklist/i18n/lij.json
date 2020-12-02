@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Giromin Cangiaxo"
+		]
+	},
+	"spam-blacklist": " #<!-- lascia sta riga coscì comm'a l'è --> <pre>\n# I inganci esterni che crrispondan a sta lista saian bloccæ se azonti a 'na paggina.\n# A lista a pertocca solo questa wiki; consurta ascì a lista neigra globâ.\n# Pe-a documentassion amia https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SpamBlacklist\n#\n# A scintasci a l'è:\n#  * Tutto 'lo che ven aproeuvo a 'na \"#\" scin a-a fin da riga o l'è un comento, \n#  * Ogni riga non voeua a l'è 'n framento d'esprescioin regolare ch'o s'apprica soo ch'a-i host inti URL\n #</pre> <!-- lascia sta riga coscì comm'a l'è -->",
+	"spam-whitelist": " #<!-- lascia sta riga coscì comm'a l'è --> <pre>\n# I inganci esterni che corispondan a sta lista *no* saian\n# blocæ, sciben che-o saieivan stæti essendo inta lista \n# neigra\n# A scintasci a l'è:\n#  * Tutto 'lo che ven aproeuvo a 'na \"#\" scin a-a fin da riga o l'è un commento, \n#  * Ogni riga non voeua a l'è 'n framento d'esprescioin regolare ch'o s'apprica soo ch'a-i host inti URL\n #</pre> <!-- lascia sta riga coscì comm'a l'è -->",
+	"email-blacklist": " #<!-- lascia sta riga coscì comm'a l'è --> <pre>\n# I adressi email inte sta lista saian blocæ e no porian registrâse ò mandâ de email.\n# A lista a pertocca soo che sta wiki; amia ascì a lista neigra globâ.\n# Pe-a documentassion amia https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SpamBlacklist\n#\n# A scintasci a l'è:\n#  * Tutto 'lo che ven aproeuvo a 'na \"#\" scin a-a fin da riga o l'è un commento\n#  * Ogni riga non voeua a l'è 'n framento d'esprescioin regolare ch'o s'apprica soo ch'a-i host inti adressi email\n\n #</pre> <!-- lascia sta riga coscì comm'a l'è -->",
+	"email-whitelist": " #<!-- lascia sta riga coscì comm'a l'è --> <pre>\n# I adressi email ch'en inte sta lista *no* saian\n# blocæ, anche se foisan stæti inta lista neigra.\n#\n# A scintasci a l'è:\n#  * Tutto 'lo che ven aproeuvo a 'na \"#\" scin a-a fin da riga o l'è un commento, \n#  * Ogni riga non voeua a l'è 'n framento d'esprescioin regolare ch'o s'apprica soo ch'a-i host inti adressi email\n #</pre> <!-- lascia sta riga coscì comm'a l'è -->",
+	"spam-blacklisted-email": "Adresso email inta lista neigra",
+	"spam-blacklisted-email-text": "O to adresso email pe-o momento o l'è inta lista neigra di adressi che no poean mandâ de email a-i atri utenti.",
+	"spam-blacklisted-email-signup": "L'adresso email fornio po-u momento o l'è inta lista neigra di adressi che no poeuan vese doeuviæ.",
+	"spam-invalid-lines": "{{PLURAL:$1|A seguente riga|E seguente righe}} da lista neigra do spam {{PLURAL:$1|a no l'è 'n'esprescion regolâ vallida|no son di esprescioin regolæ vallide}}; e {{PLURAL:$1|a dev'ese|dev'esan}} corette primma de sarvâ a paggina.",
+	"spam-blacklist-desc": "Strumento antispam bazou in scê esprescioin regolæ ch'o permette de mette in lista neigra di URL e di adressi email pe-i utenti registræ",
+	"log-name-spamblacklist": "Registro da lista neigra do spam",
+	"log-description-spamblacklist": "Questi eventi tennan traccia di ativassioin da lista neigra do spam.",
+	"logentry-spamblacklist-hit": "{{GENDER:$2|$1}} o l'ha caxonou l'attivassion da lista neigra do spam sciu $3 tentando d'azonze $4.",
+	"right-spamblacklistlog": "Amia o registro da lista neigra do spam",
+	"action-spamblacklistlog": "amiâ o registro da lista neigra do spam"
+}

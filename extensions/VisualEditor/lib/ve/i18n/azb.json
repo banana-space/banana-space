@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arjanizary",
+			"Sadiqr"
+		]
+	},
+	"visualeditor-align-widget-left": "سوْل",
+	"visualeditor-align-widget-right": "ساغ",
+	"visualeditor-commentinspector-tooltip": "باخیش",
+	"visualeditor-contextitemwidget-label-remove": "سیل",
+	"visualeditor-contextitemwidget-label-secondary": "دَییشدیر",
+	"visualeditor-dialog-action-cancel": "وازگئچ",
+	"visualeditor-dialog-action-goback": "گئری قایؽت",
+	"visualeditor-formatdropdown-format-heading1": "باشلیق ۱",
+	"visualeditor-formatdropdown-format-heading2": "باشلیق ۲",
+	"visualeditor-formatdropdown-format-heading3": "باشلیق ۳",
+	"visualeditor-formatdropdown-format-heading4": "باشلیق ۴",
+	"visualeditor-formatdropdown-format-heading5": "باشلیق ۵",
+	"visualeditor-formatdropdown-format-heading6": "باشلیق ۶",
+	"visualeditor-inspector-close-tooltip": "باغلا",
+	"visualeditor-inspector-remove-tooltip": "سیل",
+	"visualeditor-languageinspector-title": "دیل",
+	"visualeditor-languageinspector-widget-label-direction": "یؤن",
+	"visualeditor-languageinspector-widget-label-language": "دیل",
+	"visualeditor-linkinspector-title": "باغلانتی",
+	"visualeditor-shortcuts-other": "باشقا",
+	"visualeditor-table-contextitem-properties": "اؤزللیک‌لر"
+}

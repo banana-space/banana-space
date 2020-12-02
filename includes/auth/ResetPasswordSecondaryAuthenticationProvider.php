@@ -96,7 +96,9 @@ class ResetPasswordSecondaryAuthenticationProvider extends AbstractSecondaryAuth
 			}
 		}
 
-		$needReq = isset( $data->req ) ? $data->req : new PasswordAuthenticationRequest();
+		/** @var PasswordAuthenticationRequest $needReq */
+		$needReq = $data->req ?? new PasswordAuthenticationRequest();
+		'@phan-var PasswordAuthenticationRequest $needReq';
 		if ( !$needReq->action ) {
 			$needReq->action = AuthManager::ACTION_CHANGE;
 		}

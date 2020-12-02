@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ayame"
+			"Ayame",
+			"Kkairri"
 		]
 	},
 	"renocaptcha-edit": "Wikiを自動編集スパムから保護するために、下のチェックボックスをクリックしてください。",
-	"renocaptcha-addurl": "あなたは新しい外部リンクを追加しました。Wikiを自動投稿スパムから保護するために、下のチェックボックスをクリックしてください。",
+	"renocaptcha-addurl": "あなたの編集には新しい外部リンクが含まれています。Wikiを自動投稿スパムから保護するために、以下のCAPTCHAを解いてください。",
 	"renocaptcha-badlogin": "あなたのアカウントを攻撃から保護するために、下のチェックボックスをクリックしてください。",
 	"renocaptcha-createaccount": "Wikiをアカウント自動作成から保護するために、下のチェックボックスをクリックしてください。",
 	"renocaptcha-create": "Wikiを記事の自動作成から保護するために、下のチェックボックスをクリックしてください。"

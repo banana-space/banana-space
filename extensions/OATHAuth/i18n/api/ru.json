@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alexander Istomin",
+			"Alexandr Efremov",
+			"Kareyac",
+			"Mouse21",
+			"Movses",
+			"Vlad5250"
+		]
+	},
+	"apihelp-query+oath-description": "Проверьте, включена ли двухфакторная аутентификация (OATH) для пользователя.",
+	"apihelp-query+oath-summary": "Проверьте, включена ли двухфакторная аутентификация (OATH) для пользователя.",
+	"apihelp-query+oath-param-user": "Пользователь для получения информации о. По умолчанию для текущего пользователя.",
+	"apihelp-query+oath-example-1": "Получить информацию о текущем пользователе",
+	"apihelp-query+oath-example-2": "Получать информацию о пользователе <kbd>Пример</kbd>",
+	"apihelp-oathvalidate-description": "Подтвердите двухфакторный токен аутентификации (OAUTH).",
+	"apihelp-oathvalidate-summary": "Подтвердите двухфакторный токен аутентификации (OAUTH).",
+	"apihelp-oathvalidate-param-user": "Пользователь для проверки токена для. По умолчанию для текущего пользователя.",
+	"apihelp-oathvalidate-param-totp": "Токен двухфакторной аутентификации (OATH). Ради обратной совместимости, используйте параметр \"data\" взамен.",
+	"apihelp-oathvalidate-example-1": "Проверка токена для текущего пользователя",
+	"apihelp-oathvalidate-example-2": "Проверить токен для пользователя <kbd>пример</kbd>",
+	"apihelp-oathvalidate-example-3": "Проверить JSON-данные для участника <kbd>Example</kbd>",
+	"apihelp-oathvalidate-param-data": "Данные в формате JSON, которые ожидаются от модуля, активированного для участника в процессе аутентификации"
+}

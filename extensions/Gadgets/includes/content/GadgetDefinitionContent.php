@@ -97,7 +97,7 @@ class GadgetDefinitionContent extends JsonContent {
 
 	/**
 	 * @param WikiPage $page
-	 * @param ParserOutput $parserOutput
+	 * @param ParserOutput|null $parserOutput
 	 * @return DeferrableUpdate[]
 	 */
 	public function getDeletionUpdates( WikiPage $page, ParserOutput $parserOutput = null ) {
@@ -109,9 +109,9 @@ class GadgetDefinitionContent extends JsonContent {
 
 	/**
 	 * @param Title $title
-	 * @param Content $old
+	 * @param Content|null $old
 	 * @param bool $recursive
-	 * @param ParserOutput $parserOutput
+	 * @param ParserOutput|null $parserOutput
 	 * @return DataUpdate[]
 	 */
 	public function getSecondaryDataUpdates( Title $title, Content $old = null,

@@ -4,6 +4,7 @@
 			"Xuacu"
 		]
 	},
+	"questycaptcha-desc": "Xenerador Questy CAPTCHA pa Confirmar Edición",
 	"questycaptcha-addurl": "La so edición incluye nuevos enllaces esternos. Pa protexer la wiki escontra'l spam d'edición automatizáu, pidimos-y que conteste la entruga qu'apaez embaxo ([[Special:Captcha/help|más información]]):",
 	"questycaptcha-badlogin": "Pa protexer la wiki escontra'l descifráu automáticu de claves, pidimos-y que conteste la entruga qu'apaez embaxo ([[Special:Captcha/help|más información]]):",
 	"questycaptcha-createaccount": "Pa protexer la wiki escontra la creación automática de cuentes, pidimos-y que conteste la entruga qu'apaez embaxo ([[Special:Captcha/help|más información]]):",

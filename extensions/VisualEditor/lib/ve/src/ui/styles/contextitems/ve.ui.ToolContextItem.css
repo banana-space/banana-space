@@ -1,0 +1,11 @@
+/*!
+ * VisualEditor UserInterface ToolContextItem styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-toolContextItem .ve-ui-linearContextItem-body {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

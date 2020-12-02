@@ -1,15 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
+			"500000000006城",
+			"Cwek",
 			"Hydra",
 			"Liangent",
 			"Liuxinyu970226",
-			"Xiaomingyan",
-			"Cwek"
+			"Xiaomingyan"
 		]
 	},
 	"skinname-vector": "Vector",
 	"vector-skin-desc": "提供清新的外观和许多可用性改进的现代版MonoBook",
+	"prefs-vector-enable-vector-1-label": "使用旧的矢量",
+	"prefs-vector-enable-vector-1-help": "在接下来的几年中，我们将逐步更新Vector外观。 旧版Vector将允许您查看Vector的旧版本（截至2019年12月）。 要了解有关更新的更多信息，请转到我们的[[mw:Reading/Web/Desktop_Improvements|project page]]",
 	"vector.css": "/* 这里放置的CSS将影响使用Vector皮肤的用户 */",
 	"vector.js": "/* 这里的任何JavaScript将为使用Vector皮肤的用户加载 */",
 	"vector-action-addsection": "添加话题",
@@ -23,5 +26,7 @@
 	"vector-view-history": "查看历史",
 	"vector-view-view": "阅读",
 	"vector-view-viewsource": "查看源代码",
+	"vector-jumptonavigation": "跳到导航",
+	"vector-jumptosearch": "跳到搜索",
 	"vector-more-actions": "更多"
 }

@@ -12,7 +12,7 @@
 	"renameusermove": "нарьци тако польꙃєватєлꙗ страницѫ · бєсѣдѫ и ихъ подъстраницѧ",
 	"renameusersubmit": "єи",
 	"renameusererrordoesnotexist": "польꙃєватєлꙗ ⁖ <nowiki>$1</nowiki> ⁖ нѣстъ",
-	"renameusererrorexists": "польꙃєватєл҄ь ⁖ <nowiki>$1</nowiki> ⁖ ѥстъ ю",
+	"renameusererrorexists": "{{GENDER:$1|польꙃєватєл҄ь|польꙃєватєлица}} ⁖ <nowiki>$1</nowiki> ⁖ ѥстъ ю",
 	"renameusererrorinvalid": "имѧ ⁖ <nowiki>$1</nowiki> ⁖ нѣстъ годѣ",
 	"log-name-renameuser": "польꙃєватєлъ прѣимєнованиꙗ їсторїꙗ",
 	"log-description-renameuser": "сѥ ѥстъ їсторїꙗ польꙃєватєльскъ имєнъ иꙁмѣнѥниꙗ",

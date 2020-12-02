@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	var tqp;
 
 	/**
@@ -28,6 +28,7 @@
 	function TaskQueue() {
 		/**
 		 * The list of functions to execute.
+		 *
 		 * @protected
 		 * @property {Array.<function()>}
 		 */
@@ -35,6 +36,7 @@
 
 		/**
 		 * State of the task queue (running, finished etc)
+		 *
 		 * @protected
 		 * @property {mw.mmv.model.TaskQueue.State}
 		 */
@@ -42,6 +44,7 @@
 
 		/**
 		 * A deferred which shows the state of the queue.
+		 *
 		 * @protected
 		 * @property {jQuery.Deferred}
 		 */
@@ -138,4 +141,4 @@
 	};
 
 	mw.mmv.model.TaskQueue = TaskQueue;
-}( mediaWiki, jQuery ) );
+}() );

@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bjakupi",
 			"Dori"
 		]
 	},
-	"monobook.css": "/* redaktoni këtë faqe për të përshtatur pamjen Monobook për tëra faqet tuaja */"
+	"monobook.css": "/* redaktoni këtë faqe për të përshtatur pamjen Monobook për tëra faqet tuaja */",
+	"monobook-responsive-label": "Mundeso dizajnin pergjegjes te MonoLibrit"
 }

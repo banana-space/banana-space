@@ -426,6 +426,16 @@ $specialPageAliases['sk'] = [
 	'CategoryTree' => [ 'StromKategórií' ],
 ];
 
+/** Serbian Cyrillic (српски (ћирилица)) */
+$specialPageAliases['sr-ec'] = [
+	'CategoryTree' => [ 'СтаблоКатегорија' ],
+];
+
+/** Serbian Latin (srpski (latinica)) */
+$specialPageAliases['sr-el'] = [
+	'CategoryTree' => [ 'StabloKategorija' ],
+];
+
 /** Swedish (svenska) */
 $specialPageAliases['sv'] = [
 	'CategoryTree' => [ 'Kategoriträd' ],

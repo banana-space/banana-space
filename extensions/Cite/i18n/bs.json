@@ -2,21 +2,21 @@
 	"@metadata": {
 		"authors": [
 			"CERminator",
-			"Reedy",
 			"KWiki",
+			"Reedy",
 			"Semso98",
 			"Srdjan m"
 		]
 	},
-	"cite-desc": "Dodaje oznake <nowiki><ref[ name=id]></nowiki> i <nowiki><references/></nowiki> za citiranje",
+	"cite-desc": "Dodaje oznake <code>&lt;ref[ name=id]&gt;</code> i <code>&lt;references/&gt;</code> za citiranje",
 	"cite_error": "Greška kod citiranja: $1",
 	"cite_error_ref_numeric_key": "Nevaljana oznaka <code>&lt;ref&gt;</code>;\nnaslov ne može biti jednostavni cijeli broj. Koristite opisni naslov",
 	"cite_error_ref_no_key": "Početna oznaka <code>&lt;ref&gt;</code> nije ispravno oblikovana ili sadrži neispravan naziv",
 	"cite_error_ref_too_many_keys": "Nevaljana oznaka <code>&lt;ref&gt;</code>;\nnevaljani nazivi, npr. možda ih je previše",
 	"cite_error_ref_no_input": "Nevaljana oznaka <code>&lt;ref&gt;</code>;\nreference bez naziva moraju imati sadržaj",
 	"cite_error_references_invalid_parameters": "Neispravan parametar u oznaci <code>&lt;references&gt;</code>",
-	"cite_error_references_no_backlink_label": "Ponestalo je prilagođenih naslova backlinkova.\nDefinirajte ih još u <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki> poruci",
-	"cite_error_no_link_label_group": "Nedovoljan broj proizvoljnih naslova linkova za grupu \"$1\".\nDefinišite više putem poruke <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_backlink_label": "Ponestalo je prilagođenih naslova backlinkova. Definirajte ih još u [[MediaWiki:Cite references link many format backlink labels]] poruci",
+	"cite_error_no_link_label_group": "Nedovoljan broj proizvoljnih naslova linkova za grupu \"$1\". Definišite više putem poruke [[MediaWiki:$2]].",
 	"cite_error_references_no_text": "Nevaljana oznaka <code>&lt;ref&gt;</code>;\nnije naveden tekst za reference s imenom <code>$1</code>",
 	"cite_error_included_ref": "Nedostaje oznaka za zatvaranje <code>&lt;/ref&gt;</code> nakon <code>&lt;ref&gt;</code>",
 	"cite_error_group_refs_without_references": "<code>&lt;ref&gt;</code> oznake postoje za grupu pod imenom \"$1\", ali nije pronađena pripadajuća <code>&lt;references group=\"$1\"/&gt;</code> oznaka, ili zatvarajući <code>&lt;/ref&gt;</code> nedostaje",

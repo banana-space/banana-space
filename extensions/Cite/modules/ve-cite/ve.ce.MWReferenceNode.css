@@ -15,10 +15,21 @@
 	display: inline-block;
 }
 
-/* Use zero font size to hide the default rendering, rather than display:none, to
- * work around T123608 (cursoring bug in Chromium). See that bug for a discussion
- * of the effect this has on bidi text. */
+/* Use transparency to hide the default rendering, rather than display:none.
+ * This allows the browser to paint the native selection background over it.
+ *
+ * The real content is displayed using the :after pseudo-element, but browsers
+ * do not allow them to be selected, which makes for a poor editing experience.
+ *
+ * Previously this was also required to work around a cursoring bug in Chromium
+ * (T123608), but as of 2020 that bug seems to be fixed in the browser.
+ */
 .ve-ce-mwReferenceNode span.mw-reflink-text {
-	font-size: 0;
+	color: transparent;
+	position: absolute;
 	display: inline;
+}
+
+.ve-ce-mwReferenceNode-placeholder a:after {
+	content: '[…]';
 }

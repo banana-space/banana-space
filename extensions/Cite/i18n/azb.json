@@ -4,6 +4,6 @@
 			"Amir a57"
 		]
 	},
-	"cite-desc": "گؤتورمه‌لر اوچون، <nowiki><ref[ name=id]></nowiki> ve <nowiki><references/></nowiki> ائلئمئنت‌لری‌نین علاوه‌لر",
+	"cite-desc": "گؤتورمه‌لر اوچون، <code>&lt;ref[ name=id]&gt;</code> ve <code>&lt;references/&gt;</code> ائلئمئنت‌لری‌نین علاوه‌لر",
 	"cite_error": "قایناق خطاسی $1"
 }

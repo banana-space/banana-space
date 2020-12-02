@@ -1,0 +1,32 @@
+/*!
+ * Convert watchstar to text label in IE 8.
+ *
+ * Hide the SVG icon and show the text label instead.
+ * This is in a separate file because it uses a
+ * @media query, which can't be nested, so we need to include
+ * this outside the overall '@media screen'.
+ */
+
+// stylelint-disable no-duplicate-selectors
+
+// Support IE 8: Show label instead (Grade C).
+// See https://stackoverflow.com/a/17699986/1696030
+// https://keithclark.co.uk/articles/moving-ie-specific-css-into-media-blocks/media-tests/
+@ie8-media-start: ~'@media \0screen {';
+@ie8-media-end: ~'} after';
+@{ie8-media-start}
+.vector-menu-tabs .mw-watchlink.icon a {
+	width: auto;
+	height: auto;
+	// Copied from 'MenuTabs.less'.
+	padding: 1.25em 8px 0 8px;
+}
+
+// LESS nesting doesn't work in this hack.
+.vector-menu-tabs .mw-watchlink.icon a:before {
+	display: none;
+}
+// Bogus extra rule for LESS compiler to render `@media` ending bracket.
+@{ie8-media-end} {
+	/* This comment makes the block non-empty. */
+}

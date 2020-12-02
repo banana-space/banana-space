@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"MF-Warburg"
+			"MF-Warburg",
+			"Raphael Merx"
 		]
 	},
 	"renameuser": "Fó naran foun ba uza-na'in sira",
+	"renameuser-linkoncontribs-text": "Naran foun ba {{GENDER:$1|uza nain}}",
 	"renameuser-desc": "Fó naran foun ba uza-na'in sira (presiza priviléjiu ''renameuser'')",
 	"renameuserold": "Naran uza-na'in atuál:",
 	"renameusernew": "Naran uza-na'in foun:",

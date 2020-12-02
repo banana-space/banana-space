@@ -20,6 +20,8 @@
  * @file
  */
 
+declare( strict_types = 1 );
+
 /**
  * A PBKDF2-hashed password
  *
@@ -29,7 +31,7 @@
  * @since 1.24
  */
 class Pbkdf2Password extends ParameterizedPassword {
-	protected function getDefaultParams() {
+	protected function getDefaultParams() : array {
 		return [
 			'algo' => $this->config['algo'],
 			'rounds' => $this->config['cost'],
@@ -37,21 +39,16 @@ class Pbkdf2Password extends ParameterizedPassword {
 		];
 	}
 
-	protected function getDelimiter() {
+	protected function getDelimiter() : string {
 		return ':';
 	}
 
-	protected function shouldUseHashExtension() {
-		return isset( $this->config['use-hash-extension'] ) ?
-			$this->config['use-hash-extension'] : function_exists( 'hash_pbkdf2' );
-	}
-
-	public function crypt( $password ) {
+	public function crypt( string $password ) : void {
 		if ( count( $this->args ) == 0 ) {
-			$this->args[] = base64_encode( MWCryptRand::generate( 16, true ) );
+			$this->args[] = base64_encode( random_bytes( 16 ) );
 		}
 
-		if ( $this->shouldUseHashExtension() ) {
+		try {
 			$hash = hash_pbkdf2(
 				$this->params['algo'],
 				$password,
@@ -60,36 +57,14 @@ class Pbkdf2Password extends ParameterizedPassword {
 				(int)$this->params['length'],
 				true
 			);
+
+			// PHP < 8 raises a warning in case of an error, such as unknown algorithm...
 			if ( !is_string( $hash ) ) {
 				throw new PasswordError( 'Error when hashing password.' );
 			}
-		} else {
-			$hashLenHash = hash( $this->params['algo'], '', true );
-			if ( !is_string( $hashLenHash ) ) {
-				throw new PasswordError( 'Error when hashing password.' );
-			}
-			$hashLen = strlen( $hashLenHash );
-			$blockCount = ceil( $this->params['length'] / $hashLen );
-
-			$hash = '';
-			$salt = base64_decode( $this->args[0] );
-			for ( $i = 1; $i <= $blockCount; ++$i ) {
-				$roundTotal = $lastRound = hash_hmac(
-					$this->params['algo'],
-					$salt . pack( 'N', $i ),
-					$password,
-					true
-				);
-
-				for ( $j = 1; $j < $this->params['rounds']; ++$j ) {
-					$lastRound = hash_hmac( $this->params['algo'], $lastRound, $password, true );
-					$roundTotal ^= $lastRound;
-				}
-
-				$hash .= $roundTotal;
-			}
-
-			$hash = substr( $hash, 0, $this->params['length'] );
+		} catch ( ValueError $e ) {
+			// ...while PHP 8 throws ValueError
+			throw new PasswordError( 'Error when hashing password.', 0, $e );
 		}
 
 		$this->hash = base64_encode( $hash );

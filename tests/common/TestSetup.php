@@ -4,6 +4,23 @@
  * Common code for test environment initialisation and teardown
  */
 class TestSetup {
+	public static $bootstrapGlobals;
+
+	/**
+	 * For use in MediaWikiUnitTestCase.
+	 *
+	 * This should be called before DefaultSettings.php or Setup.php loads.
+	 */
+	public static function snapshotGlobals() {
+		self::$bootstrapGlobals = [];
+		foreach ( $GLOBALS as $key => $_ ) {
+			// Support: HHVM (avoid self-ref)
+			if ( $key !== 'GLOBALS' ) {
+				self::$bootstrapGlobals[ $key ] =& $GLOBALS[$key];
+			}
+		}
+	}
+
 	/**
 	 * This should be called before Setup.php, e.g. from the finalSetup() method
 	 * of a Maintenance subclass
@@ -11,13 +28,18 @@ class TestSetup {
 	public static function applyInitialConfig() {
 		global $wgMainCacheType, $wgMessageCacheType, $wgParserCacheType, $wgMainWANCache;
 		global $wgMainStash;
+		global $wgObjectCaches;
 		global $wgLanguageConverterCacheType, $wgUseDatabaseMessages;
 		global $wgLocaltimezone, $wgLocalisationCacheConf;
 		global $wgSearchType;
 		global $wgDevelopmentWarnings;
 		global $wgSessionProviders, $wgSessionPbkdf2Iterations;
 		global $wgJobTypeConf;
-		global $wgAuthManagerConfig, $wgAuth;
+		global $wgMWLoggerDefaultSpi;
+		global $wgAuthManagerConfig;
+		global $wgShowExceptionDetails;
+
+		$wgShowExceptionDetails = true;
 
 		// wfWarn should cause tests to fail
 		$wgDevelopmentWarnings = true;
@@ -25,7 +47,7 @@ class TestSetup {
 		// Make sure all caches and stashes are either disabled or use
 		// in-process cache only to prevent tests from using any preconfigured
 		// cache meant for the local wiki from outside the test run.
-		// See also MediaWikiTestCase::run() which mocks CACHE_DB and APC.
+		// See also MediaWikiIntegrationTestCase::run() which mocks CACHE_DB and APC.
 
 		// Disabled in DefaultSettings, override local settings
 		$wgMainWANCache =
@@ -37,9 +59,18 @@ class TestSetup {
 		$wgLanguageConverterCacheType = 'hash';
 		// Uses db-replicated in DefaultSettings
 		$wgMainStash = 'hash';
+		// Use hash instead of db
+		$wgObjectCaches['db-replicated'] = $wgObjectCaches['hash'];
 		// Use memory job queue
 		$wgJobTypeConf = [
 			'default' => [ 'class' => JobQueueMemory::class, 'order' => 'fifo' ],
+		];
+		// Always default to LegacySpi and LegacyLogger during test
+		// See also MediaWikiIntegrationTestCase::setNullLogger().
+		// Note that MediaWikiLoggerPHPUnitTestListener may wrap this in
+		// a MediaWiki\Logger\LogCapturingSpi at run-time.
+		$wgMWLoggerDefaultSpi = [
+			'class' => \MediaWiki\Logger\LegacySpi::class,
 		];
 
 		$wgUseDatabaseMessages = false; # Set for future resets
@@ -47,6 +78,7 @@ class TestSetup {
 		// Assume UTC for testing purposes
 		$wgLocaltimezone = 'UTC';
 
+		$wgLocalisationCacheConf['class'] = TestLocalisationCache::class;
 		$wgLocalisationCacheConf['storeClass'] = LCStoreNull::class;
 
 		// Do not bother updating search tables
@@ -87,16 +119,7 @@ class TestSetup {
 			],
 			'secondaryauth' => [],
 		];
-		$wgAuth = new MediaWiki\Auth\AuthManagerAuthPlugin();
 
-		// T46192 Do not attempt to send a real e-mail
-		Hooks::clear( 'AlternateUserMailer' );
-		Hooks::register(
-			'AlternateUserMailer',
-			function () {
-				return false;
-			}
-		);
 		// xdebug's default of 100 is too low for MediaWiki
 		ini_set( 'xdebug.max_nesting_level', 1000 );
 
@@ -104,10 +127,6 @@ class TestSetup {
 		// may break testing against floating point values
 		// treated with PHP's serialize()
 		ini_set( 'serialize_precision', 17 );
-
-		// TODO: we should call MediaWikiTestCase::prepareServices( new GlobalVarConfig() ) here.
-		// But PHPUnit may not be loaded yet, so we have to wait until just
-		// before PHPUnit_TextUI_Command::main() is executed.
 	}
 
 }

@@ -25,11 +25,11 @@ if ( function_exists( 'wfLoadExtension' ) ) {
 	wfLoadExtension( 'MultimediaViewer' );
 	// Keep i18n globals so mergeMessageFileList.php doesn't break
 	$wgMessagesDirs['MultimediaViewer'] = __DIR__ . '/i18n';
-	/* wfWarn(
+	wfWarn(
 		'Deprecated PHP entry point used for MultimediaViewer extension. ' .
 		'Please use wfLoadExtension instead, ' .
 		'see https://www.mediawiki.org/wiki/Extension_registration for more details.'
-	); */
+	);
 	return;
 } else {
 	die( 'This version of the MultimediaViewer extension requires MediaWiki 1.25+' );
@@ -87,12 +87,6 @@ $wgMediaViewerDimensionLoggingSamplingFactor = false;
 $wgMediaViewerActionLoggingSamplingFactorMap = false;
 
 /**
- * If set, Media Viewer will try to use BetaFeatures. False if unset.
- * @var bool
- */
-$wgMediaViewerIsInBeta = false;
-
-/**
  * When this is enabled, MediaViewer will try to guess image URLs instead of making an
  * imageinfo API to get them from the server. This speeds up image loading, but will
  * result in 404s when $wgGenerateThumbnailOnParse (so the thumbnails are only generated
@@ -106,8 +100,7 @@ $wgMediaViewerIsInBeta = false;
 $wgMediaViewerUseThumbnailGuessing = false;
 
 /**
- * If trueish, and $wgMediaViewerIsInBeta is unset,
- * Media Viewer will be turned on by default.
+ * If true, Media Viewer will be turned on by default.
  * @var bool
  */
 $wgMediaViewerEnableByDefault = true;

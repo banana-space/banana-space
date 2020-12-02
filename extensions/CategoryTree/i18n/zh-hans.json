@@ -2,14 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Breawycker",
+			"Impersonator 1",
 			"Liangent",
+			"Liuxinyu970226",
+			"Mywood",
 			"PhiLiP",
 			"Shinjiman",
 			"Shizhao",
-			"Xiaomingyan",
-			"Mywood",
-			"Impersonator 1",
-			"Liuxinyu970226"
+			"Xiaomingyan"
 		]
 	},
 	"categorytree": "分类树",
@@ -39,10 +39,5 @@
 	"categorytree-no-pages": "没有页面或子分类",
 	"categorytree-not-found": "找不到分类<i>$1</i>",
 	"categorytree-error": "载入数据出错。",
-	"categorytree-retry": "请稍后重试。",
-	"apihelp-categorytree-description": "用于CategoryTree扩展的内部模块。",
-	"apihelp-categorytree-summary": "用于CategoryTree扩展的内部模块。",
-	"apihelp-categorytree-param-category": "分类名字空间中的标题，如果提供前缀将会被忽略。",
-	"apihelp-categorytree-param-options": "用于CategoryTree构造器的选项，作为一个JSON对象。<var>depth</var>选项默认为<kbd>1</kbd>。",
-	"apierror-categorytree-invalidjson": "选项必须是有效的JSON对象。"
+	"categorytree-retry": "请稍后重试。"
 }

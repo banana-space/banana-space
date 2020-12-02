@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Snævar",
+			"Sveinn í Felli"
+		]
+	},
+	"apihelp-visualeditor-description": "Skilar HTML5 fyrir síðu frá Parsoid þjónustunni.",
+	"apihelp-visualeditor-summary": "Skilar HTML5 fyrir síðu frá Parsoid þjónustunni.",
+	"apihelp-visualeditoredit-param-summary": "Breytingarágrip."
+}

@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"!Silent",
 			"Brunoy Anastasiya Seryozhenko",
 			"Eduardo.mps",
+			"Felipe L. Ewald",
 			"MetalBrasil",
-			"Opraco",
-			"!Silent",
-			"Felipe L. Ewald"
+			"Opraco"
 		]
 	},
 	"inputbox-desc": "Permite a inclusão de formulários definidos de HTML",

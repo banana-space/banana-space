@@ -32,25 +32,20 @@ class LBFactorySimple extends LBFactory {
 	/** @var LoadBalancer */
 	private $mainLB;
 	/** @var LoadBalancer[] */
-	private $extLBs = [];
+	private $externalLBs = [];
 
-	/** @var array[] Map of (server index => server config) */
-	private $servers = [];
-	/** @var array[] Map of (cluster => (server index => server config)) */
-	private $externalClusters = [];
+	/** @var array Configuration for the LoadMonitor to use within LoadBalancer instances */
+	private $loadMonitorConfig;
 
-	/** @var string */
-	private $loadMonitorClass;
-	/** @var int */
-	private $maxLag;
-
-	/** @var int Default 'maxLag' when unspecified */
-	const MAX_LAG_DEFAULT = 10;
+	/** @var array[] Map of (server index => server config map) */
+	private $mainServers = [];
+	/** @var array[][] Map of (cluster => server index => server config map) */
+	private $externalServersByCluster = [];
 
 	/**
 	 * @see LBFactory::__construct()
-	 * @param array $conf Parameters of LBFactory::__construct() as well as:
-	 *   - servers : list of server configuration maps to Database::factory().
+	 * @param array $conf Additional parameters include:
+	 *   - servers : list of server config maps to Database::factory().
 	 *      Additionally, the server maps should have a 'load' key, which is used to decide
 	 *      how often clients connect to one server verses the others. A 'max lag' key should
 	 *      also be set on server maps, indicating how stale the data can be before the load
@@ -58,84 +53,74 @@ class LBFactorySimple extends LBFactory {
 	 *      replication sync checks (intended for archive servers with unchanging data).
 	 *   - externalClusters : map of cluster names to server arrays. The servers arrays have the
 	 *      same format as "servers" above.
+	 *   - loadMonitor: LoadMonitor::__construct() parameters with "class" field. [optional]
 	 */
 	public function __construct( array $conf ) {
 		parent::__construct( $conf );
 
-		$this->servers = isset( $conf['servers'] ) ? $conf['servers'] : [];
-		foreach ( $this->servers as $i => $server ) {
-			if ( $i == 0 ) {
-				$this->servers[$i]['master'] = true;
-			} else {
-				$this->servers[$i]['replica'] = true;
+		$this->mainServers = $conf['servers'] ?? [];
+		foreach ( ( $conf['externalClusters'] ?? [] ) as $cluster => $servers ) {
+			foreach ( $servers as $index => $server ) {
+				$this->externalServersByCluster[$cluster][$index] = $server;
 			}
 		}
 
-		$this->externalClusters = isset( $conf['externalClusters'] )
-			? $conf['externalClusters']
-			: [];
-		$this->loadMonitorClass = isset( $conf['loadMonitorClass'] )
-			? $conf['loadMonitorClass']
-			: 'LoadMonitor';
-		$this->maxLag = isset( $conf['maxLag'] ) ? $conf['maxLag'] : self::MAX_LAG_DEFAULT;
+		if ( isset( $conf['loadMonitor'] ) ) {
+			$this->loadMonitorConfig = $conf['loadMonitor'];
+		} elseif ( isset( $conf['loadMonitorClass'] ) ) { // b/c
+			$this->loadMonitorConfig = [ 'class' => $conf['loadMonitorClass'] ];
+		} else {
+			$this->loadMonitorConfig = [ 'class' => LoadMonitor::class ];
+		}
 	}
 
-	/**
-	 * @param bool|string $domain
-	 * @return LoadBalancer
-	 */
-	public function newMainLB( $domain = false ) {
-		return $this->newLoadBalancer( $this->servers );
+	public function newMainLB( $domain = false, $owner = null ) {
+		return $this->newLoadBalancer( $this->mainServers, $owner );
 	}
 
-	/**
-	 * @param bool|string $domain
-	 * @return LoadBalancer
-	 */
 	public function getMainLB( $domain = false ) {
-		if ( !isset( $this->mainLB ) ) {
-			$this->mainLB = $this->newMainLB( $domain );
+		if ( $this->mainLB === null ) {
+			$this->mainLB = $this->newMainLB( $domain, $this->getOwnershipId() );
 		}
 
 		return $this->mainLB;
 	}
 
-	public function newExternalLB( $cluster ) {
-		if ( !isset( $this->externalClusters[$cluster] ) ) {
-			throw new InvalidArgumentException( __METHOD__ . ": Unknown cluster \"$cluster\"." );
+	public function newExternalLB( $cluster, $owner = null ) {
+		if ( !isset( $this->externalServersByCluster[$cluster] ) ) {
+			throw new InvalidArgumentException( "Unknown cluster '$cluster'." );
 		}
 
-		return $this->newLoadBalancer( $this->externalClusters[$cluster] );
+		return $this->newLoadBalancer( $this->externalServersByCluster[$cluster], $owner );
 	}
 
 	public function getExternalLB( $cluster ) {
-		if ( !isset( $this->extLBs[$cluster] ) ) {
-			$this->extLBs[$cluster] = $this->newExternalLB( $cluster );
+		if ( !isset( $this->externalLBs[$cluster] ) ) {
+			$this->externalLBs[$cluster] = $this->newExternalLB( $cluster, $this->getOwnershipId() );
 		}
 
-		return $this->extLBs[$cluster];
+		return $this->externalLBs[$cluster];
 	}
 
 	public function getAllMainLBs() {
-		return [ 'DEFAULT' => $this->getMainLB() ];
+		return [ self::CLUSTER_MAIN_DEFAULT => $this->getMainLB() ];
 	}
 
 	public function getAllExternalLBs() {
 		$lbs = [];
-		foreach ( $this->externalClusters as $cluster => $unused ) {
+		foreach ( array_keys( $this->externalServersByCluster ) as $cluster ) {
 			$lbs[$cluster] = $this->getExternalLB( $cluster );
 		}
 
 		return $lbs;
 	}
 
-	private function newLoadBalancer( array $servers ) {
+	private function newLoadBalancer( array $servers, $owner ) {
 		$lb = new LoadBalancer( array_merge(
-			$this->baseLoadBalancerParams(),
+			$this->baseLoadBalancerParams( $owner ),
 			[
 				'servers' => $servers,
-				'maxLag' => $this->maxLag,
-				'loadMonitor' => [ 'class' => $this->loadMonitorClass ],
+				'loadMonitor' => $this->loadMonitorConfig,
 			]
 		) );
 		$this->initLoadBalancer( $lb );
@@ -143,20 +128,12 @@ class LBFactorySimple extends LBFactory {
 		return $lb;
 	}
 
-	/**
-	 * Execute a function for each tracked load balancer
-	 * The callback is called with the load balancer as the first parameter,
-	 * and $params passed as the subsequent parameters.
-	 *
-	 * @param callable $callback
-	 * @param array $params
-	 */
 	public function forEachLB( $callback, array $params = [] ) {
-		if ( isset( $this->mainLB ) ) {
-			call_user_func_array( $callback, array_merge( [ $this->mainLB ], $params ) );
+		if ( $this->mainLB !== null ) {
+			$callback( $this->mainLB, ...$params );
 		}
-		foreach ( $this->extLBs as $lb ) {
-			call_user_func_array( $callback, array_merge( [ $lb ], $params ) );
+		foreach ( $this->externalLBs as $lb ) {
+			$callback( $lb, ...$params );
 		}
 	}
 }

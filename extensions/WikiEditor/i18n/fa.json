@@ -1,17 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alifakoor",
+			"Alirezaaa",
 			"BMRG14",
 			"Ebraminio",
 			"Huji",
 			"Ladsgroup",
 			"Mjbmr",
+			"MohandesWiki",
+			"Physicsch",
 			"Reza1615",
 			"Wayiran",
-			"ZxxZxxZ",
-			"Alirezaaa",
-			"MohandesWiki",
-			"Alifakoor"
+			"ZxxZxxZ"
 		]
 	},
 	"wikieditor": "رابط ویرایش پیشرفته ویکی‌متن",
@@ -20,7 +21,7 @@
 	"wikieditor-loading": "در حال بارگیری...",
 	"wikieditor-toolbar": "نوار ابزار ویرایش",
 	"wikieditor-toolbar-desc": "نوار ابزار ویرایش صفحه با استفاده‌پذیری بالاتر",
-	"wikieditor-toolbar-preference": "نوارابزار ویرایش پیشرفته فعال شود",
+	"wikieditor-toolbar-preference": "نوارابزار ویرایش فعال شود",
 	"wikieditor-toolbar-loading": "در حال بارگیری...",
 	"wikieditor-toolbar-tool-bold": "پررنگ",
 	"wikieditor-toolbar-tool-bold-example": "متن پررنگ",

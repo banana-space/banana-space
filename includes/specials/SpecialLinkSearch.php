@@ -22,24 +22,30 @@
  * @author Brion Vibber
  */
 
-use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Special:LinkSearch to search the external-links table.
  * @ingroup SpecialPage
  */
-class LinkSearchPage extends QueryPage {
+class SpecialLinkSearch extends QueryPage {
 	/** @var array|bool */
 	private $mungedQuery = false;
+	/** @var string|null */
+	private $mQuery;
+	/** @var int|null */
+	private $mNs;
+	/** @var string|null */
+	private $mProt;
 
-	function setParams( $params ) {
+	private function setParams( $params ) {
 		$this->mQuery = $params['query'];
 		$this->mNs = $params['namespace'];
 		$this->mProt = $params['protocol'];
 	}
 
-	function __construct( $name = 'LinkSearch' ) {
+	public function __construct( $name = 'LinkSearch' ) {
 		parent::__construct( $name );
 
 		// Since we don't control the constructor parameters, we can't inject services that way.
@@ -47,7 +53,7 @@ class LinkSearchPage extends QueryPage {
 		// using the setServices() method.
 	}
 
-	function isCacheable() {
+	public function isCacheable() {
 		return false;
 	}
 
@@ -69,7 +75,7 @@ class LinkSearchPage extends QueryPage {
 			}
 		}
 
-		$target2 = $target;
+		$target2 = Parser::normalizeLinkUrl( $target );
 		// Get protocol, default is http://
 		$protocol = 'http://';
 		$bits = wfParseUrl( $target );
@@ -128,7 +134,7 @@ class LinkSearchPage extends QueryPage {
 
 		if ( $target != '' ) {
 			$this->setParams( [
-				'query' => Parser::normalizeLinkUrl( $target2 ),
+				'query' => $target2,
 				'namespace' => $namespace,
 				'protocol' => $protocol ] );
 			parent::execute( $par );
@@ -142,42 +148,11 @@ class LinkSearchPage extends QueryPage {
 	 * Disable RSS/Atom feeds
 	 * @return bool
 	 */
-	function isSyndicated() {
+	public function isSyndicated() {
 		return false;
 	}
 
-	/**
-	 * Return an appropriately formatted LIKE query and the clause
-	 *
-	 * @param string $query Search pattern to search for
-	 * @param string $prot Protocol, e.g. 'http://'
-	 *
-	 * @return array
-	 */
-	static function mungeQuery( $query, $prot ) {
-		$field = 'el_index';
-		$dbr = wfGetDB( DB_REPLICA );
-
-		if ( $query === '*' && $prot !== '' ) {
-			// Allow queries like 'ftp://*' to find all ftp links
-			$rv = [ $prot, $dbr->anyString() ];
-		} else {
-			$rv = LinkFilter::makeLikeArray( $query, $prot );
-		}
-
-		if ( $rv === false ) {
-			// LinkFilter doesn't handle wildcard in IP, so we'll have to munge here.
-			$pattern = '/^(:?[0-9]{1,3}\.)+\*\s*$|^(:?[0-9]{1,3}\.){3}[0-9]{1,3}:[0-9]*\*\s*$/';
-			if ( preg_match( $pattern, $query ) ) {
-				$rv = [ $prot . rtrim( $query, " \t*" ), $dbr->anyString() ];
-				$field = 'el_to';
-			}
-		}
-
-		return [ $rv, $field ];
-	}
-
-	function linkParameters() {
+	protected function linkParameters() {
 		$params = [];
 		$params['target'] = $this->mProt . $this->mQuery;
 		if ( $this->mNs !== null && !$this->getConfig()->get( 'MiserMode' ) ) {
@@ -189,16 +164,27 @@ class LinkSearchPage extends QueryPage {
 
 	public function getQueryInfo() {
 		$dbr = wfGetDB( DB_REPLICA );
-		// strip everything past first wildcard, so that
-		// index-based-only lookup would be done
-		list( $this->mungedQuery, $clause ) = self::mungeQuery( $this->mQuery, $this->mProt );
-		if ( $this->mungedQuery === false ) {
-			// Invalid query; return no results
-			return [ 'tables' => 'page', 'fields' => 'page_id', 'conds' => '0=1' ];
+
+		$orderBy = [];
+		if ( $this->mQuery === '*' && $this->mProt !== '' ) {
+			$this->mungedQuery = [
+				'el_index_60' . $dbr->buildLike( $this->mProt, $dbr->anyString() ),
+			];
+		} else {
+			$this->mungedQuery = LinkFilter::getQueryConditions( $this->mQuery, [
+				'protocol' => $this->mProt,
+				'oneWildcard' => true,
+				'db' => $dbr
+			] );
+			if ( $this->mungedQuery === false ) {
+				// Invalid query; return no results
+				return [ 'tables' => 'page', 'fields' => 'page_id', 'conds' => '0=1' ];
+			}
+			$orderBy[] = 'el_index_60';
 		}
 
-		$stripped = LinkFilter::keepOneWildcard( $this->mungedQuery );
-		$like = $dbr->buildLike( $stripped );
+		$orderBy[] = 'el_id';
+
 		$retval = [
 			'tables' => [ 'page', 'externallinks' ],
 			'fields' => [
@@ -207,11 +193,13 @@ class LinkSearchPage extends QueryPage {
 				'value' => 'el_index',
 				'url' => 'el_to'
 			],
-			'conds' => [
-				'page_id = el_from',
-				"$clause $like"
-			],
-			'options' => [ 'USE INDEX' => $clause ]
+			'conds' => array_merge(
+				[
+					'page_id = el_from',
+				],
+				$this->mungedQuery
+			),
+			'options' => [ 'ORDER BY' => $orderBy ]
 		];
 
 		if ( $this->mNs !== null && !$this->getConfig()->get( 'MiserMode' ) ) {
@@ -227,7 +215,7 @@ class LinkSearchPage extends QueryPage {
 	 * @param IDatabase $db
 	 * @param IResultWrapper $res
 	 */
-	function preprocessResults( $db, $res ) {
+	public function preprocessResults( $db, $res ) {
 		$this->executeLBFromResultWrapper( $res );
 	}
 
@@ -236,7 +224,7 @@ class LinkSearchPage extends QueryPage {
 	 * @param object $result Result row
 	 * @return string
 	 */
-	function formatResult( $skin, $result ) {
+	public function formatResult( $skin, $result ) {
 		$title = new TitleValue( (int)$result->namespace, $result->title );
 		$pageLink = $this->getLinkRenderer()->makeLink( $title );
 
@@ -248,17 +236,15 @@ class LinkSearchPage extends QueryPage {
 
 	/**
 	 * Override to squash the ORDER BY.
-	 * We do a truncated index search, so the optimizer won't trust
-	 * it as good enough for optimizing sort. The implicit ordering
-	 * from the scan will usually do well enough for our needs.
+	 * Not much point in descending order here.
 	 * @return array
 	 */
-	function getOrderFields() {
+	protected function getOrderFields() {
 		return [];
 	}
 
 	protected function getGroupName() {
-		return 'redirects';
+		return 'pages';
 	}
 
 	/**

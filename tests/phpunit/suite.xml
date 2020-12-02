@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="./bootstrap.php"
+<phpunit bootstrap="./bootstrap.maintenance.php"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
 
@@ -10,19 +10,13 @@
 	convertWarningsToExceptions="true"
 	forceCoversAnnotation="true"
 	stopOnFailure="false"
-	timeoutForSmallTests="10"
-	timeoutForMediumTests="30"
-	timeoutForLargeTests="60"
+	failOnRisky="true"
 	beStrictAboutTestsThatDoNotTestAnything="true"
 	beStrictAboutOutputDuringTests="true"
-	beStrictAboutTestSize="true"
-	stderr="true"
 	verbose="false">
 	<testsuites>
 		<testsuite name="includes">
 			<directory>includes</directory>
-			<!-- Parser tests must be invoked via their suite -->
-			<exclude>includes/parser/ParserIntegrationTest.php</exclude>
 		</testsuite>
 		<testsuite name="languages">
 			<directory>languages</directory>
@@ -47,21 +41,25 @@
 		<testsuite name="tests">
 			<directory>tests</directory>
 		</testsuite>
-		<testsuite name="uploadfromurl">
-			<file>suites/UploadFromUrlTestSuite.php</file>
-		</testsuite>
 		<testsuite name="extensions">
 			<directory>structure</directory>
 			<file>suites/ExtensionsTestSuite.php</file>
 			<file>suites/ExtensionsParserTestSuite.php</file>
 			<file>suites/LessTestSuite.php</file>
 		</testsuite>
+		<testsuite name="documentation">
+			<directory>documentation</directory>
+		</testsuite>
+		<testsuite name="unit">
+			<directory>unit</directory>
+		</testsuite>
+		<testsuite name="integration">
+			<directory>integration</directory>
+		</testsuite>
 	</testsuites>
 	<groups>
 		<exclude>
-			<group>Utility</group>
 			<group>Broken</group>
-			<group>Stub</group>
 		</exclude>
 	</groups>
 	<filter>
@@ -71,7 +69,24 @@
 			<directory suffix=".php">../../maintenance</directory>
 			<exclude>
 				<directory suffix=".php">../../languages/messages</directory>
+				<directory suffix=".php">../../maintenance/benchmarks</directory>
+				<file>../../languages/data/normalize-ar.php</file>
+				<file>../../languages/data/normalize-ml.php</file>
 			</exclude>
 		</whitelist>
 	</filter>
+	<listeners>
+		<listener class="JohnKary\PHPUnit\Listener\SpeedTrapListener">
+			<arguments>
+				<array>
+					<element key="slowThreshold">
+						<integer>50</integer>
+					</element>
+					<element key="reportLength">
+						<integer>50</integer>
+					</element>
+				</array>
+			</arguments>
+		</listener>
+	</listeners>
 </phpunit>

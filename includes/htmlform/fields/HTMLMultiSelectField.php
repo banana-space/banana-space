@@ -2,9 +2,13 @@
 
 /**
  * Multi-select field
+ *
+ * @stable to extend
  */
 class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable {
 	/**
+	 * @stable to call
+	 *
 	 * @param array $params
 	 *   In adition to the usual HTMLFormField parameters, this can take the following fields:
 	 *   - dropdown: If given, the options will be displayed inside a dropdown with a text field that
@@ -22,8 +26,7 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 			$this->mParams['disabled-options'] = [];
 		}
 
-		// For backwards compatibility, also handle the old way with 'cssclass' => 'mw-chosen'
-		if ( isset( $params['dropdown'] ) || strpos( $this->mClass, 'mw-chosen' ) !== false ) {
+		if ( isset( $params['dropdown'] ) ) {
 			$this->mClass .= ' mw-htmlform-dropdown';
 		}
 
@@ -32,6 +35,10 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function validate( $value, $alldata ) {
 		$p = parent::validate( $value, $alldata );
 
@@ -55,6 +62,10 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function getInputHTML( $value ) {
 		if ( isset( $this->mParams['dropdown'] ) ) {
 			$this->mParent->getOutput()->addModules( 'jquery.chosen' );
@@ -66,6 +77,15 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 		return $html;
 	}
 
+	/**
+	 * @stable to override
+	 *
+	 * @param array $options
+	 * @param mixed $value
+	 *
+	 * @return string
+	 * @throws MWException
+	 */
 	public function formatOptions( $options, $value ) {
 		$html = '';
 
@@ -105,7 +125,7 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 			$elementFunc = [ Html::class, $this->mOptionsLabelsNotFromMessage ? 'rawElement' : 'element' ];
 			$checkbox =
 				Xml::check( "{$this->mName}[]", $checked, $attribs ) .
-				'&#160;' .
+				"\u{00A0}" .
 				call_user_func( $elementFunc,
 					'label',
 					[ 'for' => $attribs['id'] ],
@@ -122,7 +142,8 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 
 	/**
 	 * Get options and make them into arrays suitable for OOUI.
-	 * @return array Options for inclusion in a select or whatever.
+	 * @stable to override
+	 * @throws MWException
 	 */
 	public function getOptionsOOUI() {
 		// Sections make this difficult. See getInputOOUI().
@@ -135,9 +156,11 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 	 * Returns OOUI\CheckboxMultiselectInputWidget for fields that only have one section,
 	 * string otherwise.
 	 *
+	 * @stable to override
 	 * @since 1.28
 	 * @param string[] $value
 	 * @return string|OOUI\CheckboxMultiselectInputWidget
+	 * @suppress PhanParamSignatureMismatch
 	 */
 	public function getInputOOUI( $value ) {
 		$this->mParent->getOutput()->addModules( 'oojs-ui-widgets' );
@@ -162,6 +185,7 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 				$optionsOouiSections
 			);
 		}
+		'@phan-var array[][] $optionsOouiSections';
 
 		$out = [];
 		foreach ( $optionsOouiSections as $sectionLabel => $optionsOoui ) {
@@ -169,16 +193,18 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 			$attr['name'] = "{$this->mName}[]";
 
 			$attr['value'] = $value;
-			$attr['options'] = $optionsOoui;
 
-			foreach ( $attr['options'] as &$option ) {
+			$options = $optionsOoui;
+			foreach ( $options as &$option ) {
 				$option['disabled'] = in_array( $option['data'], $this->mParams['disabled-options'], true );
 			}
 			if ( $this->mOptionsLabelsNotFromMessage ) {
-				foreach ( $attr['options'] as &$option ) {
+				foreach ( $options as &$option ) {
 					$option['label'] = new OOUI\HtmlSnippet( $option['label'] );
 				}
 			}
+			unset( $option );
+			$attr['options'] = $options;
 
 			$attr += OOUI\Element::configFromHtmlAttributes(
 				$this->getAttributes( [ 'disabled', 'tabindex' ] )
@@ -199,7 +225,7 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 			}
 		}
 
-		if ( !$hasSections ) {
+		if ( !$hasSections && $out ) {
 			// Directly return the only OOUI\CheckboxMultiselectInputWidget.
 			// This allows it to be made infusable and later tweaked by JS code.
 			return $out[ 0 ];
@@ -209,29 +235,38 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 	}
 
 	/**
+	 * @stable to override
 	 * @param WebRequest $request
 	 *
 	 * @return string|array
 	 */
 	public function loadDataFromRequest( $request ) {
-		if ( $this->isSubmitAttempt( $request ) ) {
+		$fromRequest = $request->getArray( $this->mName, [] );
+		// Fetch the value in either one of the two following case:
+		// - we have a valid submit attempt (form was just submitted)
+		// - we have a value (an URL manually built by the user, or GET form with no wpFormIdentifier)
+		if ( $this->isSubmitAttempt( $request ) || $fromRequest ) {
 			// Checkboxes are just not added to the request arrays if they're not checked,
 			// so it's perfectly possible for there not to be an entry at all
-			return $request->getArray( $this->mName, [] );
+			return $fromRequest;
 		} else {
 			// That's ok, the user has not yet submitted the form, so show the defaults
 			return $this->getDefault();
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function getDefault() {
-		if ( isset( $this->mDefault ) ) {
-			return $this->mDefault;
-		} else {
-			return [];
-		}
+		return $this->mDefault ?? [];
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function filterDataForSubmit( $data ) {
 		$data = HTMLFormField::forceToStringRecursive( $data );
 		$options = HTMLFormField::flattenOptions( $this->getOptions() );
@@ -244,6 +279,10 @@ class HTMLMultiSelectField extends HTMLFormField implements HTMLNestedFilterable
 		return $res;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	protected function needsLabel() {
 		return false;
 	}

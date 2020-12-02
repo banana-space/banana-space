@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ykhwong",
+			"아라"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "새 FancyCaptcha를 얻습니다.",
+	"apihelp-fancycaptchareload-summary": "새 FancyCaptcha를 가져옵니다.",
+	"apihelp-fancycaptchareload-example-1": "새 FancyCaptcha 얻기"
+}

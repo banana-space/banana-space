@@ -1,4 +1,4 @@
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.logging.ActionLogger', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'log()', function ( assert ) {
@@ -14,7 +14,7 @@
 		this.sandbox.stub( logger, 'loadDependencies' ).returns( $.Deferred().resolve() );
 		this.sandbox.stub( mw, 'log' );
 
-		logger.samplingFactorMap = { 'default': 1 };
+		logger.samplingFactorMap = { default: 1 };
 		logger.setEventLog( fakeEventLog );
 		logger.logActions = {};
 		logger.logActions[ action1key ] = action1value;
@@ -24,7 +24,7 @@
 		clock.tick( 10 );
 
 		assert.strictEqual( mw.log.lastCall.args[ 0 ], unknownAction, 'Log message defaults to unknown key' );
-		assert.ok( fakeEventLog.logEvent.called, 'event log has been recorded' );
+		assert.strictEqual( fakeEventLog.logEvent.called, true, 'event log has been recorded' );
 
 		mw.log.reset();
 		fakeEventLog.logEvent.reset();
@@ -32,17 +32,17 @@
 		clock.tick( 10 );
 
 		assert.strictEqual( mw.log.lastCall.args[ 0 ], action1value, 'Log message is translated to its text' );
-		assert.ok( fakeEventLog.logEvent.called, 'event log has been recorded' );
+		assert.strictEqual( fakeEventLog.logEvent.called, true, 'event log has been recorded' );
 
 		mw.log.reset();
 		fakeEventLog.logEvent.reset();
-		logger.samplingFactorMap = { 'default': 0 };
+		logger.samplingFactorMap = { default: 0 };
 		logger.log( action1key, true );
 		clock.tick( 10 );
 
-		assert.ok( !mw.log.called, 'No logging when disabled' );
-		assert.ok( fakeEventLog.logEvent.called, 'event log has been recorded' );
+		assert.strictEqual( mw.log.called, false, 'No logging when disabled' );
+		assert.strictEqual( fakeEventLog.logEvent.called, true, 'event log has been recorded' );
 
 		clock.restore();
 	} );
-}( mediaWiki, jQuery ) );
+}() );

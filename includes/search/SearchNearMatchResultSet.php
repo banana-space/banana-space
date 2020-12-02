@@ -1,30 +1,20 @@
 <?php
 /**
- * A SearchResultSet wrapper for SearchNearMatcher
+ * A ISearchResultSet wrapper for SearchNearMatcher
  */
 class SearchNearMatchResultSet extends SearchResultSet {
-	private $fetched = false;
-
 	/**
 	 * @param Title|null $match Title if matched, else null
 	 */
 	public function __construct( $match ) {
-		$this->result = $match;
+		if ( $match === null ) {
+			$this->results = [];
+		} else {
+			$this->results = [ SearchResult::newFromTitle( $match, $this ) ];
+		}
 	}
 
 	public function numRows() {
-		return $this->result ? 1 : 0;
-	}
-
-	public function next() {
-		if ( $this->fetched || !$this->result ) {
-			return false;
-		}
-		$this->fetched = true;
-		return SearchResult::newFromTitle( $this->result, $this );
-	}
-
-	public function rewind() {
-		$this->fetched = false;
+		return $this->results ? 1 : 0;
 	}
 }

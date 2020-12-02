@@ -18,8 +18,9 @@
  * @file
  */
 
-use Wikimedia\Http\HttpAcceptParser;
+use MediaWiki\MediaWikiServices;
 use Wikimedia\Http\HttpAcceptNegotiator;
+use Wikimedia\Http\HttpAcceptParser;
 
 /**
  * Request handler implementing a data interface for mediawiki pages.
@@ -40,39 +41,29 @@ class PageDataRequestHandler {
 	 * @param WebRequest $request
 	 *
 	 * @return bool
-	 * @throws HttpError
 	 */
 	public function canHandleRequest( $subPage, WebRequest $request ) {
 		if ( $subPage === '' || $subPage === null ) {
-			if ( $request->getText( 'target', '' ) === '' ) {
-				return false;
-			} else {
-				return true;
-			}
+			return $request->getText( 'target' ) !== '';
 		}
 
 		$parts = explode( '/', $subPage, 2 );
-		if ( $parts !== 2 ) {
-			$slot = $parts[0];
-			if ( $slot === 'main' || $slot === '' ) {
-				return true;
-			}
-		}
-
-		return false;
+		$slot = $parts[0];
+		$title = $parts[1] ?? '';
+		return ( $slot === 'main' || $slot === '' ) && $title !== '';
 	}
 
 	/**
 	 * Main method for handling requests.
 	 *
-	 * @param string $subPage
+	 * @param string|null $subPage
 	 * @param WebRequest $request The request parameters. Known parameters are:
 	 *        - title: the page title
 	 *        - format: the format
 	 *        - oldid|revision: the revision ID
 	 * @param OutputPage $output
 	 *
-	 * @note: Instead of an output page, a WebResponse could be sufficient, but
+	 * @note Instead of an output page, a WebResponse could be sufficient, but
 	 *        redirect logic is currently implemented in OutputPage.
 	 *
 	 * @throws HttpError
@@ -87,18 +78,18 @@ class PageDataRequestHandler {
 
 		$revision = 0;
 
-		$parts = explode( '/', $subPage, 2 );
 		if ( $subPage !== '' ) {
-			$title = $parts[1];
+			$parts = explode( '/', $subPage, 2 );
+			$title = $parts[1] ?? '';
 		} else {
-			$title = $request->getText( 'target', '' );
+			$title = $request->getText( 'target' );
 		}
 
 		$revision = $request->getInt( 'oldid', $revision );
 		$revision = $request->getInt( 'revision', $revision );
 
 		if ( $title === null || $title === '' ) {
-			//TODO: different error message?
+			// TODO: different error message?
 			throw new HttpError( 400, wfMessage( 'pagedata-bad-title', $title ) );
 		}
 
@@ -129,13 +120,15 @@ class PageDataRequestHandler {
 		Title $title,
 		$revision = 0
 	) {
-		$contentHandler = ContentHandler::getForTitle( $title );
-		$mimeTypes = $contentHandler->getSupportedFormats();
+		$mimeTypes = MediaWikiServices::getInstance()
+			->getContentHandlerFactory()
+			->getContentHandler( $title->getContentModel() )
+			->getSupportedFormats();
 
-		$headers = $request->getAllHeaders();
-		if ( isset( $headers['ACCEPT'] ) ) {
+		$acceptHeader = $request->getHeader( 'Accept' );
+		if ( $acceptHeader !== false ) {
 			$parser = new HttpAcceptParser();
-			$accept = $parser->parseWeights( $headers['ACCEPT'] );
+			$accept = $parser->parseWeights( $acceptHeader );
 		} else {
 			// anything goes
 			$accept = [
@@ -146,7 +139,7 @@ class PageDataRequestHandler {
 		}
 
 		$negotiator = new HttpAcceptNegotiator( $mimeTypes );
-		$format = $negotiator->getBestSupportedKey( $accept, null );
+		$format = $negotiator->getBestSupportedKey( $accept );
 
 		if ( $format === null ) {
 			$format = isset( $accept['text/html'] ) ? 'text/html' : null;

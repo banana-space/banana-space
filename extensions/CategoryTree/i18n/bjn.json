@@ -1,7 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ezagren",
 			"J Subhi",
+			"Mnam23",
 			"Riemogerz"
 		]
 	},
@@ -17,8 +19,8 @@
 	"categorytree-mode-pages": "tutungkaran kacuali barakas",
 	"categorytree-mode-all": "samunyaan tutungkaran",
 	"categorytree-collapse": "tutup",
-	"categorytree-expand": "Singkai",
-	"categorytree-member-counts": "baisi {{PLURAL:$1|1 subtumbung|$1 subtumbung}}, {{PLURAL:$2|1 tungkaran|$2 tungkaran}}, dan {{PLURAL:$3|1 barakas|$3 barakas}}",
+	"categorytree-expand": "singkai",
+	"categorytree-member-counts": "baisi {{PLURAL:$1|1 subpilah|$1 subpilah}}, {{PLURAL:$2|1 tungkaran|$2 tungkaran}}, wan {{PLURAL:$3|1 barakas|$3 barakas}}",
 	"categorytree-num-categories": "$1 T",
 	"categorytree-num-pages": "$1 T",
 	"categorytree-num-files": "$1 B",

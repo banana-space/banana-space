@@ -1,4 +1,4 @@
-( function ( $, mw ) {
+( function () {
 	var simpleSample, U_20AC, poop, mbSample,
 		trimByteLength = require( 'mediawiki.String' ).trimByteLength;
 
@@ -23,7 +23,7 @@
 	 * @param {string} options.description Test name
 	 * @param {string} options.sample Sequence of characters to trim
 	 * @param {string} [options.initial] Previous value of the sequence of characters, if any
-	 * @param {Number} options.limit Length to trim to
+	 * @param {number} options.limit Length to trim to
 	 * @param {Function} [options.fn] Filter function
 	 * @param {string} options.expected Expected final value
 	 */
@@ -40,7 +40,7 @@
 		QUnit.test( opt.description, function ( assert ) {
 			var res = trimByteLength( opt.initial, opt.sample, opt.limit, opt.fn );
 
-			assert.equal(
+			assert.strictEqual(
 				res.newVal,
 				opt.expected,
 				'New value matches the expected string'
@@ -147,4 +147,4 @@
 		expected: '\uD800'
 	} );
 
-}( jQuery, mediaWiki ) );
+}() );

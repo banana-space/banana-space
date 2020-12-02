@@ -15,7 +15,7 @@
 	"replacetext_choosepagesforedit": "من فضلك اختار {{PLURAL:$3|الصفحه|الصفحات}} اللى فيها عايز تستبدل ب'$1' '$2':",
 	"replacetext_choosepagesformove": "استبدل \"$1\" ب\"$2\" فى {{PLURAL:$3||اسم الصفحة التالية|اسمى الصفحتين التاليتين|أسماء الصفحات التالية}}:",
 	"replacetext_cannotmove": "{{PLURAL:$1|الصفحة|الصفحات}} التالية لا يمكن نقلها:",
-	"replacetext_savemovedpages": "احفظ العناوين القديمة كتحويلات للعناوين الجديدة",
+	"replacetext_savemovedpages": "سييف العناوين القديمه كتحويلات للعناوين الجديده",
 	"replacetext_invertselections": "عكس الاختيارات",
 	"replacetext_replace": "استبدل",
 	"replacetext_success": "'$1' ح تتبدل بـ '$2' فى $3 {{PLURAL:$3|صفحه|صفحات}}.",

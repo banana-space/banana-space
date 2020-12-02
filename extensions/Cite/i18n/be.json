@@ -1,13 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"Чаховіч Уладзіслаў",
-			"Artsiom91"
+			"Artsiom91",
+			"Чаховіч Уладзіслаў"
 		]
 	},
 	"cite_error": "Памылка цытавання $1",
+	"cite_error_ref_too_many_keys": "Няправільны тэг <code>&lt;ref&gt;</code>;\nпамылковыя імёны, магчыма, зашмат",
 	"cite_error_references_duplicate_key": "памылковы тэг <code>&lt;ref&gt;</code>; імя \"$1\" вызначана некалькі разоў з розным зместам",
+	"cite_error_references_invalid_parameters": "Няправільныя параметры ў тэгу <code>&lt;references&gt;</code>",
+	"cite_error_references_no_text": "Няправільны тэг <code>&lt;ref&gt;</code>;\nдля зносак <code>$1</code> няма тэксту",
 	"cite_error_references_missing_key": "тэг <code>&lt;ref&gt;</code> з імем \"$1\", вызначаны ў <code>&lt;references&gt;</code>, не згадваецца ў папярэднім тэксце.",
 	"cite-tracking-category-cite-error": "Старонкі з памылкамі ў зносках",
-	"cite-tracking-category-cite-error-desc": "Старонка мае памылкі ў выкарыстанні тэгаў зносак"
+	"cite-tracking-category-cite-error-desc": "Старонка мае памылкі ў выкарыстанні тэгаў зносак",
+	"cite_references_link_accessibility_label": "Назад",
+	"cite_references_link_accessibility_back_label": "Вярнуцца назад",
+	"cite_section_preview_references": "Перадпрагляд зносак",
+	"cite_warning": "Папярэджанне пра цытаванне: $1",
+	"cite_warning_sectionpreview_no_text": "Тэг <code>&lt;ref&gt;</code> з імем <code>$1</code> не можа быць перадпрагледжаны, бо ён вызначаны за межамі рэдагуемага раздзела або не вызначаны ўвогуле."
 }

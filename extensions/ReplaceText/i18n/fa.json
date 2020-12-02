@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alifakoor",
+			"Alirezaaa",
 			"Armin1392",
 			"Ebraminio",
 			"Huji",
 			"Omidh",
 			"Reza1615",
-			"Wayiran",
-			"Alirezaaa"
+			"Wayiran"
 		]
 	},
 	"replacetext": "جایگزینی متن",
@@ -41,7 +42,9 @@
 	"replacetext_warning": "'''هشدار:''' در حال حاضر $1 صفحه وجود دارد که حاوی رشتهٔ جایگزینی «$2» {{PLURAL:$1|است|هستند}}. اگر شما این جایگزینی را انجام دهید، قادر نخواهید بود تا جایگزینی‌هایتان را از این رشته‌ها جدا کنید.",
 	"replacetext_blankwarning": "چون متن جایگزین خالی است، این عمل قابل بازگشت نخواهد بود؛ ادامه می‌دهید؟",
 	"replacetext_continue": "ادامه",
+	"replacetext_announce": "این ویرایش‌ها را از طریق $1 و فهرست‌های پیگیری اطلاع‌رسانی کن",
 	"replacetext_editsummary": "جایگزینی متن - '$1' به '$2'",
 	"right-replacetext": "انجام جایگزین کردن رشته در تمام ویکی",
-	"action-replacetext": "ساختن جایگزین کردن رشته در تمام ویکی"
+	"action-replacetext": "ساختن جایگزین کردن رشته در تمام ویکی",
+	"replacetext_reminder": "برای اینکه پیوند ها به این صفحه را در صفحات دیگر نیز جایگزین کنید، به $1بروید."
 }

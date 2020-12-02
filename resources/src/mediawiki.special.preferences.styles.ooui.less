@@ -1,0 +1,188 @@
+@import 'mediawiki.mixins.less';
+
+/* Uses standard message block colors, compare mediawiki.legacy/shared.css */
+.mw-email-not-authenticated .oo-ui-labelWidget,
+.mw-email-none .oo-ui-labelWidget {
+	color: #000;
+	border-width: 1px;
+	border-style: solid;
+	padding: 8px 12px;
+}
+
+.mw-email-not-authenticated .oo-ui-labelWidget {
+	background-color: #fef6e7;
+	border-color: #fc3;
+}
+
+.mw-email-none .oo-ui-labelWidget {
+	background-color: #eaecf0;
+	border-color: #a2a9b1;
+}
+
+/* Authenticated email field has its own class too. Unstyled by default */
+/*
+.mw-email-authenticated .oo-ui-labelWidget { }
+*/
+
+/*
+ * Use `position: sticky` on supported browsers, degrades gracefully in
+ * all others, therefore no `@supports` feature query to reduce code complexity.
+ */
+.mw-prefs-buttons {
+	background-color: #fff;
+	position: -webkit-sticky;
+	position: sticky;
+	bottom: 0;
+	margin-top: -1px;
+	border-top: 1px solid #c8ccd1;
+	padding: 1em 0;
+	// Add top box shadow on top only to emphasize content is scrollable underneath `sticky`.
+	.box-shadow( 0 -4px 4px -4px rgba( 0, 0, 0, 0.25 ) );
+}
+
+// Support Edge: The `position: sticky` rule above causes the buttons to
+// disappear in RTL languages on Microsoft Edge. This magically fixes the issue. See T220706.
+#preferences {
+	filter: brightness( 1 );
+}
+
+/* This is needed because add extra buttons in a weird way */
+.mw-prefs-buttons .mw-htmlform-submit-buttons {
+	display: inline;
+	margin: 0;
+}
+
+#prefcontrol {
+	margin-right: 0.5em;
+}
+
+/*
+ * Hide, when not keyboard focussed.
+ */
+.client-js .mw-navigation-hint:not( :focus ) {
+	height: 0;
+	overflow: hidden;
+}
+
+.mw-prefs-tabs {
+	.mw-prefs-fieldset-wrapper {
+		padding-left: 0;
+		padding-right: 0;
+
+		&:first-child {
+			padding-top: 0;
+		}
+
+		&:last-child {
+			padding-bottom: 0;
+		}
+	}
+}
+
+.mw-prefs-tabs-wrapper.oo-ui-panelLayout-framed,
+.mw-prefs-tabs > .oo-ui-menuLayout-content > .oo-ui-indexLayout-stackLayout > .oo-ui-tabPanelLayout {
+	/* Decrease contrast of `border` slightly as padding/border combination is sufficient
+	 * accessibility wise and focus of content is more important here. */
+	border-color: #c8ccd1;
+}
+
+/* JavaScript disabled */
+.client-nojs {
+	// Disable .oo-ui-panelLayout-framed on outer wrapper
+	.mw-prefs-tabs-wrapper {
+		border-width: 0;
+		border-radius: 0;
+	}
+
+	.mw-prefs-tabs {
+		// Hide the tab menu when JS is disabled as we can't use this feature
+		> .oo-ui-menuLayout-menu {
+			display: none;
+		}
+
+		.mw-prefs-section-fieldset {
+			// <legend> is hard to style, so apply border to top of group
+			> .oo-ui-fieldsetLayout-group {
+				padding-top: 1.5em;
+				border-top: 1px solid #c8ccd1;
+			}
+
+			// Remove spacing between legend and underline
+			&.oo-ui-labelElement > .oo-ui-fieldsetLayout-header > .oo-ui-labelElement-label {
+				margin-bottom: 0;
+			}
+		}
+
+		// Spacing between sections
+		> .oo-ui-menuLayout-content > .oo-ui-indexLayout-stackLayout > .oo-ui-tabPanelLayout {
+			margin-bottom: 1em;
+		}
+	}
+}
+
+/* JavaScript enabled */
+.client-js .mw-prefs-tabs {
+	.oo-ui-tabPanelLayout {
+		// Panels don't need borders as the IndexLayout is inside a framed wrapper.
+		border: 0;
+
+		// Hide section legend, only used in nojs mode
+		> fieldset > legend {
+			display: none;
+		}
+	}
+
+	// Hide all but the first panel before infusion
+	&:not( .mw-prefs-tabs-infused ) {
+		.oo-ui-tabPanelLayout:not( :first-child ) {
+			display: none;
+		}
+	}
+}
+
+/* Make the "Basic information" section more compact */
+/* OOUI's `align: 'left'` for FieldLayouts sucks, so we do our own */
+#mw-htmlform-info {
+	> .oo-ui-fieldLayout-align-top > .oo-ui-fieldLayout-body > .oo-ui-fieldLayout-header {
+		display: inline-block;
+		width: 20%;
+		padding: 0;
+		vertical-align: middle;
+	}
+
+	> .oo-ui-fieldLayout-align-top .oo-ui-fieldLayout-help {
+		margin-right: 0;
+	}
+
+	> .oo-ui-fieldLayout.oo-ui-fieldLayout-align-top > .oo-ui-fieldLayout-body > .oo-ui-fieldLayout-field {
+		display: inline-block;
+		width: 80%;
+		vertical-align: middle;
+	}
+}
+
+/* Compact number inputs, used at "Display options" on "Recent changes" */
+.mw-htmlform-field-HTMLFloatField,
+.mw-htmlform-field-HTMLIntField {
+	.oo-ui-inputWidget {
+		max-width: 10em;
+	}
+}
+
+/* Expand the dropdown and textfield of "Time zone" field to the */
+/* usual maximum width and display them on separate lines. */
+#wpTimeCorrection .oo-ui-dropdownInputWidget,
+#wpTimeCorrection .oo-ui-textInputWidget {
+	display: block;
+	max-width: 50em;
+}
+
+#wpTimeCorrection .oo-ui-textInputWidget {
+	margin-top: 0.5em;
+}
+
+/* HACK: expand width of gadget descriptions.
+ * This should be moved to the Gadgets extension */
+#mw-htmlform-gadgets .oo-ui-fieldLayout.oo-ui-fieldLayout-align-inline > .oo-ui-fieldLayout-body {
+	max-width: none;
+}

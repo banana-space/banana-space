@@ -2,6 +2,7 @@
 	"name": "MonoBook",
 	"author": [
 		"Gabriel Wicke",
+		"Isarra Yos",
 		"..."
 	],
 	"url": "https://www.mediawiki.org/wiki/Skin:MonoBook",
@@ -10,13 +11,20 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "skin",
 	"requires": {
-		"MediaWiki": ">= 1.25.0"
+		"MediaWiki": ">= 1.29.0"
 	},
 	"ValidSkinNames": {
 		"monobook": "MonoBook"
 	},
 	"SkinOOUIThemes": {
 		"monobook": "Apex"
+	},
+	"DefaultUserOptions": {
+		"monobook-responsive": true
+	},
+	"Hooks": {
+		"GetPreferences": "SkinMonoBook::onGetPreferences",
+		"ResourceLoaderRegisterModules": "SkinMonoBook::registerMobileExtensionStyles"
 	},
 	"MessagesDirs": {
 		"MonoBook": [
@@ -25,14 +33,57 @@
 	},
 	"ResourceModules": {
 		"skins.monobook.styles": {
+			"class": "ResourceLoaderSkinModule",
+			"features": [ "elements", "content", "interface", "logo", "legacy" ],
 			"styles": {
 				"resources/screen-common.less": {
 					"media": "screen"
 				},
-				"resources/screen-desktop.less": {
+				"resources/screen-desktop.css": {
 					"media": "screen"
 				}
 			}
+		},
+		"skins.monobook.responsive": {
+			"class": "ResourceLoaderSkinModule",
+			"features": [
+				"elements",
+				"content",
+				"interface",
+				"legacy",
+				"logo"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"styles": {
+				"resources/screen-common.less": {
+					"media": "screen"
+				},
+				"resources/screen-desktop.css": {
+					"media": "screen and (min-width: 551px)"
+				},
+				"resources/screen-mobile.less": {
+					"media": "screen and (max-width: 550px)"
+				}
+			}
+		},
+		"skins.monobook.mobile": {
+			"class": "ResourceLoaderSkinModule",
+			"features": [ "elements", "content", "interface", "logo", "legacy" ],
+			"targets": [ "desktop", "mobile" ],
+			"scripts": [
+				"resources/mobile.js"
+			],
+			"styles": {
+				"resources/mobile.js.less": {
+					"media": "screen and (max-width: 550px)"
+				}
+			},
+			"dependencies": [
+				"mediawiki.util"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {
@@ -42,14 +93,15 @@
 	"ResourceModuleSkinStyles": {
 		"monobook": {
 			"+mediawiki.action.view.redirectPage": "resources/skinStyles/mediawiki.action.view.redirectPage.css",
-			"+mediawiki.special.preferences.styles": "resources/skinStyles/mediawiki.special.preferences.styles.less",
 			"+mediawiki.notification": "resources/skinStyles/mediawiki.notification.less",
-			"+oojs-ui-core.styles": "resources/skinStyles/ooui.less"
+			"+oojs-ui-core.styles": "resources/skinStyles/ooui.less",
+			"+ext.uls.interface": "resources/skinStyles/ext.uls.interface.less",
+			"+ext.relatedArticles.readMore": "resources/skinStyles/ext.relatedArticles.readMore.less"
 		}
 	},
 	"AutoloadClasses": {
 		"SkinMonoBook": "includes/SkinMonoBook.php",
 		"MonoBookTemplate": "includes/MonoBookTemplate.php"
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }

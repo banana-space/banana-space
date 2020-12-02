@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hugo.arg"
+		]
+	},
+	"tooltip-ca-ve-edit": "Taisītė ton poslapi",
+	"visualeditor-ca-createlocaldescriptionsource": "Prėkergtė vėitėni aprašīma",
+	"visualeditor-ca-createsource": "Dėrbtė kap pradėni teksta",
+	"visualeditor-ca-editsource": "Taisītė straipsnė wiki teksta",
+	"visualeditor-ca-editsource-section": "taisītė straipsnė wiki teksta",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-preference-betatempdisable": "Nanauduotė ėšuorėnės taisītovės, pakuol ana nie ėšdėrbta",
+	"visualeditor-savedialog-title-save": "Ėšsauguotė pakeitėmus"
+}

@@ -1,0 +1,46 @@
+/*!
+ * VisualEditor Surface styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-surface {
+	position: relative;
+}
+
+.ve-ui-surface:after {
+	content: '.';
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+.ve-ui-surface-placeholder {
+	opacity: 0.33;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+.ve-ui-surface-placeholder,
+.ve-ui-surface .ve-ce-attachedRootNode {
+	/* Use an non-zero padding to disable margin collapse */
+	padding: 0.05px 0;
+}
+
+.ve-ui-surface-source .ve-ui-surface-placeholder,
+.ve-ui-surface-source .ve-ce-attachedRootNode {
+	/* Support: Blink, Gecko, Webkit */
+	/* Specify a valid second value to fix size, see T176636 */
+	font-family: monospace, monospace;
+	-moz-tab-size: 4;
+	tab-size: 4;
+}
+
+.ve-ui-surface-source .ve-ce-paragraphNode {
+	margin: 0;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}

@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 /* global moment */
-( function ( $, mw ) {
+( function () {
 
 	/**
 	 * Creates an mw.widgets.DateInputWidget object.
@@ -40,7 +40,7 @@
 	 *         )
 	 *       ]
 	 *     } );
-	 *     $( 'body' ).append( fieldset.$element );
+	 *     $( document.body ).append( fieldset.$element );
 	 *
 	 * The value is stored in 'YYYY-MM-DD' or 'YYYY-MM' format:
 	 *
@@ -48,7 +48,7 @@
 	 *     // Accessing values in a date input widget
 	 *     var dateInput = new mw.widgets.DateInputWidget();
 	 *     var $label = $( '<p>' );
-	 *     $( 'body' ).append( $label, dateInput.$element );
+	 *     $( document.body ).append( $label, dateInput.$element );
 	 *     dateInput.on( 'change', function () {
 	 *       // The value will always be a valid date or empty string, malformed input is ignored
 	 *       var date = dateInput.getValue();
@@ -110,7 +110,9 @@
 			// We have no way to display a translated placeholder for custom formats
 			placeholderDateFormat = '';
 		} else {
-			// Messages: mw-widgets-dateinput-placeholder-day, mw-widgets-dateinput-placeholder-month
+			// The following messages are used here:
+			// * mw-widgets-dateinput-placeholder-day
+			// * mw-widgets-dateinput-placeholder-month
 			placeholderDateFormat = mw.msg( 'mw-widgets-dateinput-placeholder-' + config.precision );
 		}
 
@@ -168,6 +170,7 @@
 			focusout: this.onBlur.bind( this )
 		} );
 		this.calendar.$element.on( {
+			focusout: this.onBlur.bind( this ),
 			click: this.onCalendarClick.bind( this ),
 			keypress: this.onCalendarKeyPress.bind( this )
 		} );
@@ -200,10 +203,9 @@
 				if ( e.which === OO.ui.Keys.TAB ) {
 					if ( e.shiftKey ) {
 						// Tabbing backward from text input: normal browser behavior
-						$.noop();
 					} else {
 						// Tabbing forward from text input: just focus the calendar
-						this.calendar.$element.focus();
+						this.calendar.$element.trigger( 'focus' );
 						return false;
 					}
 				}
@@ -212,12 +214,12 @@
 				if ( e.which === OO.ui.Keys.TAB ) {
 					if ( e.shiftKey ) {
 						// Tabbing backward from calendar: just focus the text input
-						this.textInput.$input.focus();
+						this.textInput.$input.trigger( 'focus' );
 						return false;
 					} else {
 						// Tabbing forward from calendar: focus the text input, then allow normal browser
 						// behavior to move focus to next focusable after it
-						this.textInput.$input.focus();
+						this.textInput.$input.trigger( 'focus' );
 					}
 				}
 			}.bind( this ) );
@@ -406,7 +408,7 @@
 		if ( userSelected ) {
 			// Prevent focusing the handle from reopening the calendar
 			this.closing = true;
-			this.$handle.focus();
+			this.$handle.trigger( 'focus' );
 			this.closing = false;
 		}
 
@@ -425,7 +427,7 @@
 		this.textInput.toggle( true );
 		this.calendar.toggle( true );
 
-		this.textInput.$input.focus();
+		this.textInput.$input.trigger( 'focus' );
 	};
 
 	/**
@@ -579,6 +581,7 @@
 		if (
 			!this.isDisabled() &&
 			e.which === 1 &&
+			// eslint-disable-next-line no-jquery/no-class-state
 			$( e.target ).hasClass( targetClass )
 		) {
 			this.deactivate( true );
@@ -692,4 +695,4 @@
 		}
 	};
 
-}( jQuery, mediaWiki ) );
+}() );

@@ -1,18 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"F3RaN",
 			"Fitoschido",
-			"QuimGil",
-			"Vriullop",
-			"Ssola",
 			"Macofe",
 			"Pginer",
-			"F3RaN"
+			"QuimGil",
+			"Ssola",
+			"Vriullop"
 		]
 	},
 	"multimediaviewer-desc": "Amplia les miniatures en una interfície a pantalla completa.",
-	"multimediaviewer-pref": "Visualitzador multimèdia",
-	"multimediaviewer-pref-desc": "Milloreu la vostra experiència de visualització multimèdia amb aquesta nova eina. Mostra imatges a mida més gran en les pàgines que tenen miniatures. Les imatges es mostren en una pantalla completa més agradable, i també es poden veure a mida completa.",
 	"multimediaviewer-optin-pref": "Activa el <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About visor multimèdia]</span>",
 	"multimediaviewer-file-page": "Vés a la pàgina corresponent del fitxer",
 	"multimediaviewer-repository-local": "Més informació",
@@ -38,7 +36,7 @@
 	"multimediaviewer-restriction-personality": "Aquesta imatge conté persones que poden tenir drets que legalment restringeixin determinats re-usos de la imatge sense el seu consentiment.",
 	"multimediaviewer-restriction-default": "Aquesta imatge encara és susceptible de ser restringida degut a altres disposicions legals fora de la llei de propietat intel·lectual. Vegeu la pàgina de descripció del fitxer per a més detalls.",
 	"multimediaviewer-restriction-default-and-others": "Aquesta imatge encara és susceptible de ser restringida degut a altres disposicions legals fora de la llei de propietat intel·lectual. Vegeu la pàgina de descripció del fitxer per a més detalls.",
-	"multimediaviewer-about-mmv": "Quant al visor multimèdia",
+	"multimediaviewer-about-mmv": "Quant a aquesta interfície",
 	"multimediaviewer-discuss-mmv": "Comenta aquesta funcionalitat",
 	"multimediaviewer-help-mmv": "Ajuda",
 	"multimediaviewer-optout-mmv": "Desactiva el visor multimèdia",
@@ -79,5 +77,6 @@
 	"multimediaviewer-close-popup-text": "Tanca aquesta eina (Esc)",
 	"multimediaviewer-fullscreen-popup-text": "Mostra a pantalla completa",
 	"multimediaviewer-defullscreen-popup-text": "Surt del mode de pantalla completa",
-	"multimediaviewer-title-popup-text": "Descripció"
+	"multimediaviewer-title-popup-text": "Descripció",
+	"multimediaviewer-options-learn-more": "Més informació"
 }

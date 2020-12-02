@@ -1,20 +1,26 @@
 <?php
 
 use Wikimedia\Rdbms\Database;
-use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\DatabaseDomain;
 use Wikimedia\Rdbms\DatabaseMysqli;
+use Wikimedia\Rdbms\DatabasePostgres;
+use Wikimedia\Rdbms\DatabaseSqlite;
+use Wikimedia\Rdbms\DBReadOnlyRoleError;
+use Wikimedia\Rdbms\DBUnexpectedError;
+use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\LBFactorySingle;
 use Wikimedia\Rdbms\TransactionProfiler;
 use Wikimedia\TestingAccessWrapper;
-use Wikimedia\Rdbms\DatabaseSqlite;
-use Wikimedia\Rdbms\DatabasePostgres;
-use Wikimedia\Rdbms\DatabaseMssql;
 
 class DatabaseTest extends PHPUnit\Framework\TestCase {
 
 	use MediaWikiCoversValidator;
 
-	protected function setUp() {
+	/** @var DatabaseTestHelper */
+	private $db;
+
+	protected function setUp() : void {
 		$this->db = new DatabaseTestHelper( __CLASS__ . '::' . $this->getName() );
 	}
 
@@ -33,7 +39,6 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( DatabasePostgres::class, Database::factory( 'Postgres', $p, $m ) );
 
 		$x = $p + [ 'port' => 10000, 'UseWindowsAuth' => false ];
-		$this->assertInstanceOf( DatabaseMssql::class, Database::factory( 'mssql', $x, $m ) );
 
 		$x = $p + [ 'dbFilePath' => 'some/file.sqlite' ];
 		$this->assertInstanceOf( DatabaseSqlite::class, Database::factory( 'sqlite', $x, $m ) );
@@ -44,7 +49,7 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 	public static function provideAddQuotes() {
 		return [
 			[ null, 'NULL' ],
-			[ 1234, "'1234'" ],
+			[ 1234, "1234" ],
 			[ 1234.5678, "'1234.5678'" ],
 			[ 'string', "'string'" ],
 			[ 'string\'s cause trouble', "'string\'s cause trouble'" ],
@@ -171,7 +176,7 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers Wikimedia\Rdbms\Database::onTransactionIdle
+	 * @covers Wikimedia\Rdbms\Database::onTransactionCommitOrIdle
 	 * @covers Wikimedia\Rdbms\Database::runOnTransactionIdleCallbacks
 	 */
 	public function testTransactionIdle() {
@@ -180,12 +185,12 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 		$db->clearFlag( DBO_TRX );
 		$called = false;
 		$flagSet = null;
-		$callback = function () use ( $db, &$flagSet, &$called ) {
+		$callback = function ( $trigger, IDatabase $db ) use ( &$flagSet, &$called ) {
 			$called = true;
 			$flagSet = $db->getFlag( DBO_TRX );
 		};
 
-		$db->onTransactionIdle( $callback, __METHOD__ );
+		$db->onTransactionCommitOrIdle( $callback, __METHOD__ );
 		$this->assertTrue( $called, 'Callback reached' );
 		$this->assertFalse( $flagSet, 'DBO_TRX off in callback' );
 		$this->assertFalse( $db->getFlag( DBO_TRX ), 'DBO_TRX still default' );
@@ -193,7 +198,7 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 		$flagSet = null;
 		$called = false;
 		$db->startAtomic( __METHOD__ );
-		$db->onTransactionIdle( $callback, __METHOD__ );
+		$db->onTransactionCommitOrIdle( $callback, __METHOD__ );
 		$this->assertFalse( $called, 'Callback not reached during TRX' );
 		$db->endAtomic( __METHOD__ );
 
@@ -202,8 +207,8 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 		$this->assertFalse( $db->getFlag( DBO_TRX ), 'DBO_TRX restored to default' );
 
 		$db->clearFlag( DBO_TRX );
-		$db->onTransactionIdle(
-			function () use ( $db ) {
+		$db->onTransactionCommitOrIdle(
+			function ( $trigger, IDatabase $db ) {
 				$db->setFlag( DBO_TRX );
 			},
 			__METHOD__
@@ -212,13 +217,14 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers Wikimedia\Rdbms\Database::onTransactionIdle
+	 * @covers Wikimedia\Rdbms\Database::onTransactionCommitOrIdle
 	 * @covers Wikimedia\Rdbms\Database::runOnTransactionIdleCallbacks
 	 */
 	public function testTransactionIdle_TRX() {
-		$db = $this->getMockDB( [ 'isOpen', 'ping' ] );
+		$db = $this->getMockDB( [ 'isOpen', 'ping', 'getDBname' ] );
 		$db->method( 'isOpen' )->willReturn( true );
 		$db->method( 'ping' )->willReturn( true );
+		$db->method( 'getDBname' )->willReturn( '' );
 		$db->setFlag( DBO_TRX );
 
 		$lbFactory = LBFactorySingle::newFromConnection( $db );
@@ -236,14 +242,14 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 			$flagSet = $db->getFlag( DBO_TRX );
 		};
 
-		$db->onTransactionIdle( $callback, __METHOD__ );
+		$db->onTransactionCommitOrIdle( $callback, __METHOD__ );
 		$this->assertTrue( $called, 'Called when idle if DBO_TRX is set' );
 		$this->assertFalse( $flagSet, 'DBO_TRX off in callback' );
 		$this->assertTrue( $db->getFlag( DBO_TRX ), 'DBO_TRX still default' );
 
 		$called = false;
 		$lbFactory->beginMasterChanges( __METHOD__ );
-		$db->onTransactionIdle( $callback, __METHOD__ );
+		$db->onTransactionCommitOrIdle( $callback, __METHOD__ );
 		$this->assertFalse( $called, 'Not called when lb-transaction is active' );
 
 		$lbFactory->commitMasterChanges( __METHOD__ );
@@ -251,7 +257,7 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 
 		$called = false;
 		$lbFactory->beginMasterChanges( __METHOD__ );
-		$db->onTransactionIdle( $callback, __METHOD__ );
+		$db->onTransactionCommitOrIdle( $callback, __METHOD__ );
 		$this->assertFalse( $called, 'Not called when lb-transaction is active' );
 
 		$lbFactory->rollbackMasterChanges( __METHOD__ );
@@ -259,6 +265,16 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 
 		$lbFactory->commitMasterChanges( __METHOD__ );
 		$this->assertFalse( $called, 'Not called in next round commit' );
+
+		$db->setFlag( DBO_TRX );
+		try {
+			$db->onTransactionCommitOrIdle( function () {
+				throw new RuntimeException( 'test' );
+			} );
+			$this->fail( "Exception not thrown" );
+		} catch ( RuntimeException $e ) {
+			$this->assertTrue( $db->getFlag( DBO_TRX ) );
+		}
 	}
 
 	/**
@@ -274,7 +290,7 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 
 		$called = false;
 		$db->onTransactionPreCommitOrIdle(
-			function () use ( &$called ) {
+			function ( IDatabase $db ) use ( &$called ) {
 				$called = true;
 			},
 			__METHOD__
@@ -284,7 +300,7 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 		$db->begin( __METHOD__ );
 		$called = false;
 		$db->onTransactionPreCommitOrIdle(
-			function () use ( &$called ) {
+			function ( IDatabase $db ) use ( &$called ) {
 				$called = true;
 			},
 			__METHOD__
@@ -299,9 +315,10 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 	 * @covers Wikimedia\Rdbms\Database::runOnTransactionPreCommitCallbacks
 	 */
 	public function testTransactionPreCommitOrIdle_TRX() {
-		$db = $this->getMockDB( [ 'isOpen', 'ping' ] );
+		$db = $this->getMockDB( [ 'isOpen', 'ping', 'getDBname' ] );
 		$db->method( 'isOpen' )->willReturn( true );
 		$db->method( 'ping' )->willReturn( true );
+		$db->method( 'getDBname' )->willReturn( 'unittest' );
 		$db->setFlag( DBO_TRX );
 
 		$lbFactory = LBFactorySingle::newFromConnection( $db );
@@ -314,7 +331,7 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 		$this->assertFalse( $lb->hasMasterChanges() );
 		$this->assertTrue( $db->getFlag( DBO_TRX ), 'DBO_TRX is set' );
 		$called = false;
-		$callback = function () use ( &$called ) {
+		$callback = function ( IDatabase $db ) use ( &$called ) {
 			$called = true;
 		};
 		$db->onTransactionPreCommitOrIdle( $callback, __METHOD__ );
@@ -352,7 +369,7 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 		$db->clearFlag( DBO_TRX );
 		$db->begin( __METHOD__ );
 		$called = false;
-		$db->onTransactionResolution( function () use ( $db, &$called ) {
+		$db->onTransactionResolution( function ( $trigger, IDatabase $db ) use ( &$called ) {
 			$called = true;
 			$db->setFlag( DBO_TRX );
 		} );
@@ -363,11 +380,11 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 		$db->clearFlag( DBO_TRX );
 		$db->begin( __METHOD__ );
 		$called = false;
-		$db->onTransactionResolution( function () use ( $db, &$called ) {
+		$db->onTransactionResolution( function ( $trigger, IDatabase $db ) use ( &$called ) {
 			$called = true;
 			$db->setFlag( DBO_TRX );
 		} );
-		$db->rollback( __METHOD__, IDatabase::FLUSHING_ALL_PEERS );
+		$db->rollback( __METHOD__ );
 		$this->assertFalse( $db->getFlag( DBO_TRX ), 'DBO_TRX restored to default' );
 		$this->assertTrue( $called, 'Callback reached' );
 	}
@@ -429,6 +446,7 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 			'numFields', 'numRows',
 			'open',
 			'strencode',
+			'tableExists'
 		];
 		$db = $this->getMockBuilder( Database::class )
 			->disableOriginalConstructor()
@@ -441,6 +459,8 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 		$wdb->trxProfiler = new TransactionProfiler();
 		$wdb->connLogger = new \Psr\Log\NullLogger();
 		$wdb->queryLogger = new \Psr\Log\NullLogger();
+		$wdb->replLogger = new \Psr\Log\NullLogger();
+		$wdb->currentDomain = DatabaseDomain::newUnspecified();
 		return $db;
 	}
 
@@ -470,56 +490,76 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 	 * @covers Wikimedia\Rdbms\Database::lockIsFree
 	 */
 	public function testGetScopedLock() {
-		$db = $this->getMockDB( [ 'isOpen' ] );
+		$db = $this->getMockDB( [ 'isOpen', 'getDBname' ] );
 		$db->method( 'isOpen' )->willReturn( true );
+		$db->method( 'getDBname' )->willReturn( 'unittest' );
 
-		$this->assertEquals( 0, $db->trxLevel() );
-		$this->assertEquals( true, $db->lockIsFree( 'x', __METHOD__ ) );
-		$this->assertEquals( true, $db->lock( 'x', __METHOD__ ) );
-		$this->assertEquals( false, $db->lockIsFree( 'x', __METHOD__ ) );
-		$this->assertEquals( true, $db->unlock( 'x', __METHOD__ ) );
-		$this->assertEquals( true, $db->lockIsFree( 'x', __METHOD__ ) );
-		$this->assertEquals( 0, $db->trxLevel() );
-
-		$db->setFlag( DBO_TRX );
-		$this->assertEquals( true, $db->lockIsFree( 'x', __METHOD__ ) );
-		$this->assertEquals( true, $db->lock( 'x', __METHOD__ ) );
-		$this->assertEquals( false, $db->lockIsFree( 'x', __METHOD__ ) );
-		$this->assertEquals( true, $db->unlock( 'x', __METHOD__ ) );
-		$this->assertEquals( true, $db->lockIsFree( 'x', __METHOD__ ) );
-		$db->clearFlag( DBO_TRX );
-
-		$this->assertEquals( 0, $db->trxLevel() );
+		$this->assertSame( 0, $db->trxLevel() );
+		$this->assertTrue( $db->lockIsFree( 'x', __METHOD__ ) );
+		$this->assertTrue( $db->lock( 'x', __METHOD__ ) );
+		$this->assertFalse( $db->lockIsFree( 'x', __METHOD__ ) );
+		$this->assertTrue( $db->unlock( 'x', __METHOD__ ) );
+		$this->assertTrue( $db->lockIsFree( 'x', __METHOD__ ) );
+		$this->assertSame( 0, $db->trxLevel() );
 
 		$db->setFlag( DBO_TRX );
-		try {
-			$this->badLockingMethodImplicit( $db );
-		} catch ( RunTimeException $e ) {
-			$this->assertTrue( $db->trxLevel() > 0, "Transaction not committed." );
-		}
+		$this->assertTrue( $db->lockIsFree( 'x', __METHOD__ ) );
+		$this->assertTrue( $db->lock( 'x', __METHOD__ ) );
+		$this->assertFalse( $db->lockIsFree( 'x', __METHOD__ ) );
+		$this->assertTrue( $db->unlock( 'x', __METHOD__ ) );
+		$this->assertTrue( $db->lockIsFree( 'x', __METHOD__ ) );
 		$db->clearFlag( DBO_TRX );
-		$db->rollback( __METHOD__, IDatabase::FLUSHING_ALL_PEERS );
-		$this->assertTrue( $db->lockIsFree( 'meow', __METHOD__ ) );
 
+		// Pending writes with DBO_TRX
+		$this->assertSame( 0, $db->trxLevel() );
+		$this->assertTrue( $db->lockIsFree( 'meow', __METHOD__ ) );
+		$db->setFlag( DBO_TRX );
+		$db->query( "DELETE FROM test WHERE t = 1" ); // trigger DBO_TRX transaction before lock
 		try {
-			$this->badLockingMethodExplicit( $db );
-		} catch ( RunTimeException $e ) {
-			$this->assertTrue( $db->trxLevel() > 0, "Transaction not committed." );
+			$lock = $db->getScopedLockAndFlush( 'meow', __METHOD__, 1 );
+			$this->fail( "Exception not reached" );
+		} catch ( DBUnexpectedError $e ) {
+			$this->assertSame( 1, $db->trxLevel(), "Transaction not committed." );
+			$this->assertTrue( $db->lockIsFree( 'meow', __METHOD__ ), 'Lock not acquired' );
 		}
 		$db->rollback( __METHOD__, IDatabase::FLUSHING_ALL_PEERS );
-		$this->assertTrue( $db->lockIsFree( 'meow', __METHOD__ ) );
-	}
-
-	private function badLockingMethodImplicit( IDatabase $db ) {
-		$lock = $db->getScopedLockAndFlush( 'meow', __METHOD__, 1 );
-		$db->query( "SELECT 1" ); // trigger DBO_TRX
-		throw new RunTimeException( "Uh oh!" );
-	}
-
-	private function badLockingMethodExplicit( IDatabase $db ) {
-		$lock = $db->getScopedLockAndFlush( 'meow', __METHOD__, 1 );
+		// Pending writes without DBO_TRX
+		$db->clearFlag( DBO_TRX );
+		$this->assertSame( 0, $db->trxLevel() );
+		$this->assertTrue( $db->lockIsFree( 'meow2', __METHOD__ ) );
 		$db->begin( __METHOD__ );
-		throw new RunTimeException( "Uh oh!" );
+		$db->query( "DELETE FROM test WHERE t = 1" ); // trigger DBO_TRX transaction before lock
+		try {
+			$lock = $db->getScopedLockAndFlush( 'meow2', __METHOD__, 1 );
+			$this->fail( "Exception not reached" );
+		} catch ( DBUnexpectedError $e ) {
+			$this->assertSame( 1, $db->trxLevel(), "Transaction not committed." );
+			$this->assertTrue( $db->lockIsFree( 'meow2', __METHOD__ ), 'Lock not acquired' );
+		}
+		$db->rollback( __METHOD__ );
+		// No pending writes, with DBO_TRX
+		$db->setFlag( DBO_TRX );
+		$this->assertSame( 0, $db->trxLevel() );
+		$this->assertTrue( $db->lockIsFree( 'wuff', __METHOD__ ) );
+		$db->query( "SELECT 1", __METHOD__ );
+		$this->assertSame( 1, $db->trxLevel() );
+		$lock = $db->getScopedLockAndFlush( 'wuff', __METHOD__, 1 );
+		$this->assertSame( 0, $db->trxLevel() );
+		$this->assertFalse( $db->lockIsFree( 'wuff', __METHOD__ ), 'Lock already acquired' );
+		$db->rollback( __METHOD__, IDatabase::FLUSHING_ALL_PEERS );
+		// No pending writes, without DBO_TRX
+		$db->clearFlag( DBO_TRX );
+		$this->assertSame( 0, $db->trxLevel() );
+		$this->assertTrue( $db->lockIsFree( 'wuff2', __METHOD__ ) );
+		$db->begin( __METHOD__ );
+		try {
+			$lock = $db->getScopedLockAndFlush( 'wuff2', __METHOD__, 1 );
+			$this->fail( "Exception not reached" );
+		} catch ( DBUnexpectedError $e ) {
+			$this->assertSame( 1, $db->trxLevel(), "Transaction not committed." );
+			$this->assertFalse( $db->lockIsFree( 'wuff2', __METHOD__ ), 'Lock not acquired' );
+		}
+		$db->rollback( __METHOD__ );
 	}
 
 	/**
@@ -530,84 +570,304 @@ class DatabaseTest extends PHPUnit\Framework\TestCase {
 	public function testFlagSetting() {
 		$db = $this->db;
 		$origTrx = $db->getFlag( DBO_TRX );
-		$origSsl = $db->getFlag( DBO_SSL );
+		$origNoBuffer = $db->getFlag( DBO_NOBUFFER );
 
 		$origTrx
 			? $db->clearFlag( DBO_TRX, $db::REMEMBER_PRIOR )
 			: $db->setFlag( DBO_TRX, $db::REMEMBER_PRIOR );
 		$this->assertEquals( !$origTrx, $db->getFlag( DBO_TRX ) );
 
-		$origSsl
-			? $db->clearFlag( DBO_SSL, $db::REMEMBER_PRIOR )
-			: $db->setFlag( DBO_SSL, $db::REMEMBER_PRIOR );
-		$this->assertEquals( !$origSsl, $db->getFlag( DBO_SSL ) );
+		$origNoBuffer
+			? $db->clearFlag( DBO_NOBUFFER, $db::REMEMBER_PRIOR )
+			: $db->setFlag( DBO_NOBUFFER, $db::REMEMBER_PRIOR );
+		$this->assertEquals( !$origNoBuffer, $db->getFlag( DBO_NOBUFFER ) );
 
 		$db->restoreFlags( $db::RESTORE_INITIAL );
 		$this->assertEquals( $origTrx, $db->getFlag( DBO_TRX ) );
-		$this->assertEquals( $origSsl, $db->getFlag( DBO_SSL ) );
+		$this->assertEquals( $origNoBuffer, $db->getFlag( DBO_NOBUFFER ) );
 
 		$origTrx
 			? $db->clearFlag( DBO_TRX, $db::REMEMBER_PRIOR )
 			: $db->setFlag( DBO_TRX, $db::REMEMBER_PRIOR );
-		$origSsl
-			? $db->clearFlag( DBO_SSL, $db::REMEMBER_PRIOR )
-			: $db->setFlag( DBO_SSL, $db::REMEMBER_PRIOR );
+		$origNoBuffer
+			? $db->clearFlag( DBO_NOBUFFER, $db::REMEMBER_PRIOR )
+			: $db->setFlag( DBO_NOBUFFER, $db::REMEMBER_PRIOR );
 
 		$db->restoreFlags();
-		$this->assertEquals( $origSsl, $db->getFlag( DBO_SSL ) );
+		$this->assertEquals( $origNoBuffer, $db->getFlag( DBO_NOBUFFER ) );
 		$this->assertEquals( !$origTrx, $db->getFlag( DBO_TRX ) );
 
 		$db->restoreFlags();
-		$this->assertEquals( $origSsl, $db->getFlag( DBO_SSL ) );
+		$this->assertEquals( $origNoBuffer, $db->getFlag( DBO_NOBUFFER ) );
 		$this->assertEquals( $origTrx, $db->getFlag( DBO_TRX ) );
 	}
 
-	/**
-	 * @expectedException UnexpectedValueException
-	 * @covers Wikimedia\Rdbms\Database::setFlag
-	 */
-	public function testDBOIgnoreSet() {
-		$db = $this->getMockBuilder( DatabaseMysqli::class )
-			->disableOriginalConstructor()
-			->setMethods( null )
-			->getMock();
-
-		$db->setFlag( Database::DBO_IGNORE );
+	public function provideImmutableDBOFlags() {
+		return [
+			[ Database::DBO_IGNORE ],
+			[ Database::DBO_DEFAULT ],
+			[ Database::DBO_PERSISTENT ]
+		];
 	}
 
 	/**
-	 * @expectedException UnexpectedValueException
-	 * @covers Wikimedia\Rdbms\Database::clearFlag
+	 * @covers Wikimedia\Rdbms\Database::setFlag
+	 * @dataProvider provideImmutableDBOFlags
+	 * @param int $flag
 	 */
-	public function testDBOIgnoreClear() {
+	public function testDBOCannotSet( $flag ) {
 		$db = $this->getMockBuilder( DatabaseMysqli::class )
 			->disableOriginalConstructor()
 			->setMethods( null )
 			->getMock();
 
-		$db->clearFlag( Database::DBO_IGNORE );
+		$this->expectException( DBUnexpectedError::class );
+		$db->setFlag( $flag );
+	}
+
+	/**
+	 * @covers Wikimedia\Rdbms\Database::clearFlag
+	 * @dataProvider provideImmutableDBOFlags
+	 * @param int $flag
+	 */
+	public function testDBOCannotClear( $flag ) {
+		$db = $this->getMockBuilder( DatabaseMysqli::class )
+			->disableOriginalConstructor()
+			->setMethods( null )
+			->getMock();
+
+		$this->expectException( DBUnexpectedError::class );
+		$db->clearFlag( $flag );
 	}
 
 	/**
 	 * @covers Wikimedia\Rdbms\Database::tablePrefix
 	 * @covers Wikimedia\Rdbms\Database::dbSchema
 	 */
-	public function testMutators() {
+	public function testSchemaAndPrefixMutators() {
+		$ud = DatabaseDomain::newUnspecified();
+
+		$this->assertEquals( $ud->getId(), $this->db->getDomainID() );
+
 		$old = $this->db->tablePrefix();
-		$this->assertInternalType( 'string', $old, 'Prefix is string' );
-		$this->assertEquals( $old, $this->db->tablePrefix(), "Prefix unchanged" );
-		$this->assertEquals( $old, $this->db->tablePrefix( 'xxx' ) );
-		$this->assertEquals( 'xxx', $this->db->tablePrefix(), "Prefix set" );
+		$oldDomain = $this->db->getDomainID();
+		$this->assertIsString( $old, 'Prefix is string' );
+		$this->assertSame( $old, $this->db->tablePrefix(), "Prefix unchanged" );
+		$this->assertSame( $old, $this->db->tablePrefix( 'xxx_' ) );
+		$this->assertSame( 'xxx_', $this->db->tablePrefix(), "Prefix set" );
 		$this->db->tablePrefix( $old );
-		$this->assertNotEquals( 'xxx', $this->db->tablePrefix() );
+		$this->assertNotEquals( 'xxx_', $this->db->tablePrefix() );
+		$this->assertSame( $oldDomain, $this->db->getDomainID() );
 
 		$old = $this->db->dbSchema();
-		$this->assertInternalType( 'string', $old, 'Schema is string' );
-		$this->assertEquals( $old, $this->db->dbSchema(), "Schema unchanged" );
-		$this->assertEquals( $old, $this->db->dbSchema( 'xxx' ) );
-		$this->assertEquals( 'xxx', $this->db->dbSchema(), "Schema set" );
+		$oldDomain = $this->db->getDomainID();
+		$this->assertIsString( $old, 'Schema is string' );
+		$this->assertSame( $old, $this->db->dbSchema(), "Schema unchanged" );
+
+		$this->db->selectDB( 'y' );
+		$this->assertSame( $old, $this->db->dbSchema( 'xxx' ) );
+		$this->assertSame( 'xxx', $this->db->dbSchema(), "Schema set" );
 		$this->db->dbSchema( $old );
 		$this->assertNotEquals( 'xxx', $this->db->dbSchema() );
+		$this->assertSame( "y", $this->db->getDomainID() );
 	}
 
+	/**
+	 * @covers Wikimedia\Rdbms\Database::tablePrefix
+	 * @covers Wikimedia\Rdbms\Database::dbSchema
+	 */
+	public function testSchemaWithNoDB() {
+		$ud = DatabaseDomain::newUnspecified();
+
+		$this->assertEquals( $ud->getId(), $this->db->getDomainID() );
+		$this->assertSame( '', $this->db->dbSchema() );
+
+		$this->expectException( DBUnexpectedError::class );
+		$this->db->dbSchema( 'xxx' );
+	}
+
+	/**
+	 * @covers Wikimedia\Rdbms\Database::selectDomain
+	 */
+	public function testSelectDomain() {
+		$oldDomain = $this->db->getDomainID();
+		$oldDatabase = $this->db->getDBname();
+		$oldSchema = $this->db->dbSchema();
+		$oldPrefix = $this->db->tablePrefix();
+
+		$this->db->selectDomain( 'testselectdb-xxx_' );
+		$this->assertSame( 'testselectdb', $this->db->getDBname() );
+		$this->assertSame( '', $this->db->dbSchema() );
+		$this->assertSame( 'xxx_', $this->db->tablePrefix() );
+
+		$this->db->selectDomain( $oldDomain );
+		$this->assertSame( $oldDatabase, $this->db->getDBname() );
+		$this->assertSame( $oldSchema, $this->db->dbSchema() );
+		$this->assertSame( $oldPrefix, $this->db->tablePrefix() );
+		$this->assertSame( $oldDomain, $this->db->getDomainID() );
+
+		$this->db->selectDomain( 'testselectdb-schema-xxx_' );
+		$this->assertSame( 'testselectdb', $this->db->getDBname() );
+		$this->assertSame( 'schema', $this->db->dbSchema() );
+		$this->assertSame( 'xxx_', $this->db->tablePrefix() );
+
+		$this->db->selectDomain( $oldDomain );
+		$this->assertSame( $oldDatabase, $this->db->getDBname() );
+		$this->assertSame( $oldSchema, $this->db->dbSchema() );
+		$this->assertSame( $oldPrefix, $this->db->tablePrefix() );
+		$this->assertSame( $oldDomain, $this->db->getDomainID() );
+	}
+
+	/**
+	 * @covers Wikimedia\Rdbms\Database::getLBInfo
+	 * @covers Wikimedia\Rdbms\Database::setLBInfo
+	 */
+	public function testGetSetLBInfo() {
+		$db = $this->getMockDB();
+
+		$this->assertEquals( [], $db->getLBInfo() );
+		$this->assertNull( $db->getLBInfo( 'pringles' ) );
+
+		$db->setLBInfo( 'soda', 'water' );
+		$this->assertEquals( [ 'soda' => 'water' ], $db->getLBInfo() );
+		$this->assertNull( $db->getLBInfo( 'pringles' ) );
+		$this->assertEquals( 'water', $db->getLBInfo( 'soda' ) );
+
+		$db->setLBInfo( 'basketball', 'Lebron' );
+		$this->assertEquals( [ 'soda' => 'water', 'basketball' => 'Lebron' ], $db->getLBInfo() );
+		$this->assertEquals( 'water', $db->getLBInfo( 'soda' ) );
+		$this->assertEquals( 'Lebron', $db->getLBInfo( 'basketball' ) );
+
+		$db->setLBInfo( 'soda', null );
+		$this->assertEquals( [ 'basketball' => 'Lebron' ], $db->getLBInfo() );
+
+		$db->setLBInfo( [ 'King' => 'James' ] );
+		$this->assertNull( $db->getLBInfo( 'basketball' ) );
+		$this->assertEquals( [ 'King' => 'James' ], $db->getLBInfo() );
+	}
+
+	/**
+	 * @covers Wikimedia\Rdbms\Database::isWriteQuery
+	 * @param string $query
+	 * @param bool $res
+	 * @dataProvider provideIsWriteQuery
+	 */
+	public function testIsWriteQuery( string $query, bool $res ) {
+		$db = TestingAccessWrapper::newFromObject( $this->db );
+		$this->assertSame( $res, $db->isWriteQuery( $query, 0 ) );
+	}
+
+	/**
+	 * Provider for testIsWriteQuery
+	 * @return array
+	 */
+	public function provideIsWriteQuery() : array {
+		return [
+			[ 'SELECT foo', false ],
+			[ '  SELECT foo FROM bar', false ],
+			[ 'BEGIN', false ],
+			[ 'SHOW EXPLAIN FOR 12;', false ],
+			[ 'USE foobar', false ],
+			[ '(SELECT 1)', false ],
+			[ 'INSERT INTO foo', true ],
+			[ 'TRUNCATE bar', true ],
+			[ 'DELETE FROM baz', true ],
+			[ 'CREATE TABLE foobar', true ]
+		];
+	}
+
+	/**
+	 * @covers Database::executeQuery()
+	 * @covers Database::assertIsWritableMaster()
+	 */
+	public function testShouldRejectPersistentWriteQueryOnReplicaDatabaseConnection(): void {
+		$this->expectException( DBReadOnlyRoleError::class );
+		$this->expectDeprecationMessage( 'Server is configured as a read-only replica database.' );
+
+		$dbr = new DatabaseTestHelper(
+			__CLASS__ . '::' . $this->getName(),
+			[ 'topologyRole' => Database::ROLE_STREAMING_REPLICA ]
+		);
+
+		$dbr->query( "INSERT INTO test_table (a_column) VALUES ('foo');", __METHOD__ );
+	}
+
+	/**
+	 * @covers Database::executeQuery()
+	 * @covers Database::assertIsWritableMaster()
+	 */
+	public function testShouldAcceptTemporaryTableOperationsOnReplicaDatabaseConnection(): void {
+		$dbr = new DatabaseTestHelper(
+			__CLASS__ . '::' . $this->getName(),
+			[ 'topologyRole' => Database::ROLE_STREAMING_REPLICA ]
+		);
+
+		$resCreate = $dbr->query(
+			"CREATE TEMPORARY TABLE temp_test_table (temp_column int);",
+			__METHOD__
+		);
+
+		$resModify = $dbr->query(
+			"INSERT INTO temp_test_table (temp_column) VALUES (42);",
+			__METHOD__
+		);
+
+		$this->assertInstanceOf( IResultWrapper::class, $resCreate );
+		$this->assertInstanceOf( IResultWrapper::class, $resModify );
+	}
+
+	/**
+	 * @covers Database::executeQuery()
+	 * @covers Database::assertIsWritableMaster()
+	 */
+	public function testShouldRejectPseudoPermanentTemporaryTableOperationsOnReplicaDatabaseConnection(): void {
+		$this->expectException( DBReadOnlyRoleError::class );
+		$this->expectDeprecationMessage( 'Server is configured as a read-only replica database.' );
+
+		$dbr = new DatabaseTestHelper(
+			__CLASS__ . '::' . $this->getName(),
+			[ 'topologyRole' => Database::ROLE_STREAMING_REPLICA ]
+		);
+
+		$dbr->query(
+			"CREATE TEMPORARY TABLE temp_test_table (temp_column int);",
+			__METHOD__,
+			Database::QUERY_PSEUDO_PERMANENT
+		);
+	}
+
+	/**
+	 * @covers Database::executeQuery()
+	 * @covers Database::assertIsWritableMaster()
+	 */
+	public function testShouldAcceptWriteQueryOnPrimaryDatabaseConnection(): void {
+		$dbr = new DatabaseTestHelper(
+			__CLASS__ . '::' . $this->getName(),
+			[ 'topologyRole' => Database::ROLE_STREAMING_MASTER ]
+		);
+
+		$res = $dbr->query( "INSERT INTO test_table (a_column) VALUES ('foo');", __METHOD__ );
+
+		$this->assertInstanceOf( IResultWrapper::class, $res );
+	}
+
+	/**
+	 * @covers Database::executeQuery()
+	 * @covers Database::assertIsWritableMaster()
+	 */
+	public function testShouldRejectWriteQueryOnPrimaryDatabaseConnectionWhenReplicaQueryRoleFlagIsSet(): void {
+		$this->expectException( DBReadOnlyRoleError::class );
+		$this->expectDeprecationMessage( 'Cannot write; target role is DB_REPLICA' );
+
+		$dbr = new DatabaseTestHelper(
+			__CLASS__ . '::' . $this->getName(),
+			[ 'topologyRole' => Database::ROLE_STREAMING_MASTER ]
+		);
+
+		$dbr->query(
+			"INSERT INTO test_table (a_column) VALUES ('foo');",
+			__METHOD__,
+			Database::QUERY_REPLICA_ROLE
+		);
+	}
 }

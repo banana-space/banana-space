@@ -22,6 +22,7 @@
 /**
  * @ingroup Pager
  */
+use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
 
 class NewFilesPager extends RangeChronologicalPager {
@@ -39,9 +40,12 @@ class NewFilesPager extends RangeChronologicalPager {
 	/**
 	 * @param IContextSource $context
 	 * @param FormOptions $opts
+	 * @param LinkRenderer $linkRenderer
 	 */
-	function __construct( IContextSource $context, FormOptions $opts ) {
-		parent::__construct( $context );
+	public function __construct( IContextSource $context, FormOptions $opts,
+		LinkRenderer $linkRenderer
+	) {
+		parent::__construct( $context, $linkRenderer );
 
 		$this->opts = $opts;
 		$this->setLimit( $opts->getValue( 'limit' ) );
@@ -57,14 +61,14 @@ class NewFilesPager extends RangeChronologicalPager {
 		$this->getDateRangeCond( $startTimestamp, $endTimestamp );
 	}
 
-	function getQueryInfo() {
+	public function getQueryInfo() {
 		$opts = $this->opts;
 		$conds = [];
-		$imgQuery = LocalFile::getQueryInfo();
-		$tables = $imgQuery['tables'];
-		$fields = [ 'img_name', 'img_timestamp' ] + $imgQuery['fields'];
+		$actorQuery = ActorMigration::newMigration()->getJoin( 'img_user' );
+		$tables = [ 'image' ] + $actorQuery['tables'];
+		$fields = [ 'img_name', 'img_timestamp' ] + $actorQuery['fields'];
 		$options = [];
-		$jconds = $imgQuery['joins'];
+		$jconds = $actorQuery['joins'];
 
 		$user = $opts->getValue( 'user' );
 		if ( $user !== '' ) {
@@ -72,22 +76,10 @@ class NewFilesPager extends RangeChronologicalPager {
 				->getWhere( wfGetDB( DB_REPLICA ), 'img_user', User::newFromName( $user, false ) )['conds'];
 		}
 
-		if ( $opts->getValue( 'newbies' ) ) {
-			// newbie = most recent 1% of users
-			$dbr = wfGetDB( DB_REPLICA );
-			$max = $dbr->selectField( 'user', 'max(user_id)', '', __METHOD__ );
-			$conds[] = $imgQuery['fields']['img_user'] . ' >' . (int)( $max - $max / 100 );
-
-			// there's no point in looking for new user activity in a far past;
-			// beyond a certain point, we'd just end up scanning the rest of the
-			// table even though the users we're looking for didn't yet exist...
-			// see T140537, (for ContribsPages, but similar to this)
-			$conds[] = 'img_timestamp > ' .
-				$dbr->addQuotes( $dbr->timestamp( wfTimestamp() - 30 * 24 * 60 * 60 ) );
-		}
-
 		if ( !$opts->getValue( 'showbots' ) ) {
-			$groupsWithBotPermission = User::getGroupsWithPermission( 'bot' );
+			$groupsWithBotPermission = MediaWikiServices::getInstance()
+				->getPermissionManager()
+				->getGroupsWithPermission( 'bot' );
 
 			if ( count( $groupsWithBotPermission ) ) {
 				$dbr = wfGetDB( DB_REPLICA );
@@ -97,7 +89,7 @@ class NewFilesPager extends RangeChronologicalPager {
 					'LEFT JOIN',
 					[
 						'ug_group' => $groupsWithBotPermission,
-						'ug_user = ' . $imgQuery['fields']['img_user'],
+						'ug_user = ' . $actorQuery['fields']['img_user'],
 						'ug_expiry IS NULL OR ug_expiry >= ' . $dbr->addQuotes( $dbr->timestamp() )
 					]
 				];
@@ -105,34 +97,20 @@ class NewFilesPager extends RangeChronologicalPager {
 		}
 
 		if ( $opts->getValue( 'hidepatrolled' ) ) {
-			global $wgActorTableSchemaMigrationStage;
-
 			$tables[] = 'recentchanges';
 			$conds['rc_type'] = RC_LOG;
 			$conds['rc_log_type'] = 'upload';
 			$conds['rc_patrolled'] = RecentChange::PRC_UNPATROLLED;
 			$conds['rc_namespace'] = NS_FILE;
 
-			if ( $wgActorTableSchemaMigrationStage === MIGRATION_NEW ) {
-				$jcond = 'rc_actor = ' . $imgQuery['fields']['img_actor'];
-			} else {
-				$rcQuery = ActorMigration::newMigration()->getJoin( 'rc_user' );
-				$tables += $rcQuery['tables'];
-				$jconds += $rcQuery['joins'];
-				$jcond = $rcQuery['fields']['rc_user'] . ' = ' . $imgQuery['fields']['img_user'];
-			}
 			$jconds['recentchanges'] = [
-				'INNER JOIN',
+				'JOIN',
 				[
 					'rc_title = img_name',
-					$jcond,
+					'rc_actor = ' . $actorQuery['fields']['img_actor'],
 					'rc_timestamp = img_timestamp'
 				]
 			];
-			// We're ordering by img_timestamp, so we have to make sure MariaDB queries `image` first.
-			// It sometimes decides to query `recentchanges` first and filesort the result set later
-			// to get the right ordering. T124205 / https://mariadb.atlassian.net/browse/MDEV-8880
-			$options[] = 'STRAIGHT_JOIN';
 		}
 
 		if ( $opts->getValue( 'mediatype' ) ) {
@@ -153,6 +131,11 @@ class NewFilesPager extends RangeChronologicalPager {
 			}
 		}
 
+		// We're ordering by img_timestamp, but MariaDB sometimes likes to query other tables first
+		// and filesort the result set later.
+		// See T124205 / https://mariadb.atlassian.net/browse/MDEV-8880, and T244533
+		$options[] = 'STRAIGHT_JOIN';
+
 		$query = [
 			'tables' => $tables,
 			'fields' => $fields,
@@ -164,11 +147,11 @@ class NewFilesPager extends RangeChronologicalPager {
 		return $query;
 	}
 
-	function getIndexField() {
+	public function getIndexField() {
 		return 'img_timestamp';
 	}
 
-	function getStartBody() {
+	protected function getStartBody() {
 		if ( !$this->gallery ) {
 			// Note that null for mode is taken to mean use default.
 			$mode = $this->getRequest()->getVal( 'gallerymode', null );
@@ -183,26 +166,45 @@ class NewFilesPager extends RangeChronologicalPager {
 		return '';
 	}
 
-	function getEndBody() {
+	protected function getEndBody() {
 		return $this->gallery->toHTML();
 	}
 
-	function formatRow( $row ) {
+	protected function doBatchLookups() {
+		$userIds = [];
+		$this->mResult->seek( 0 );
+		foreach ( $this->mResult as $row ) {
+			$userIds[] = $row->img_user;
+		}
+		// Do a link batch query for names and userpages
+		UserCache::singleton()->doQuery( $userIds, [ 'userpage' ], __METHOD__ );
+	}
+
+	public function formatRow( $row ) {
 		$name = $row->img_name;
-		$user = User::newFromId( $row->img_user );
+		$username = UserCache::singleton()->getUserName( $row->img_user, $row->img_user_text );
 
 		$title = Title::makeTitle( NS_FILE, $name );
-		$ul = MediaWikiServices::getInstance()->getLinkRenderer()->makeLink(
-			$user->getUserPage(),
-			$user->getName()
-		);
+		if ( ExternalUserNames::isExternal( $username ) ) {
+			$ul = htmlspecialchars( $username );
+		} else {
+			$ul = $this->getLinkRenderer()->makeLink(
+				Title::makeTitle( NS_USER, $username ),
+				$username
+			);
+		}
 		$time = $this->getLanguage()->userTimeAndDate( $row->img_timestamp, $this->getUser() );
 
 		$this->gallery->add(
 			$title,
 			"$ul<br />\n<i>"
 			. htmlspecialchars( $time )
-			. "</i><br />\n"
+			. "</i><br />\n",
+			'',
+			'',
+			[],
+			ImageGalleryBase::LOADING_LAZY
 		);
+		return '';
 	}
 }

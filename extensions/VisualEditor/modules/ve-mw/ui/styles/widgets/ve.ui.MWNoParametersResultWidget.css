@@ -1,0 +1,13 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWNoParametersResultWidget styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwNoParametersResultWidget-label {
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}

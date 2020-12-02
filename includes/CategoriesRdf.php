@@ -25,25 +25,25 @@ class CategoriesRdf {
 	/**
 	 * Prefix used for Mediawiki ontology in the dump.
 	 */
-	const ONTOLOGY_PREFIX = 'mediawiki';
+	private const ONTOLOGY_PREFIX = 'mediawiki';
 	/**
 	 * Base URL for Mediawiki ontology.
 	 */
-	const ONTOLOGY_URL = 'https://www.mediawiki.org/ontology#';
+	private const ONTOLOGY_URL = 'https://www.mediawiki.org/ontology#';
 	/**
 	 * OWL description of the ontology.
 	 */
-	const OWL_URL = 'https://www.mediawiki.org/ontology/ontology.owl';
+	public const OWL_URL = 'https://www.mediawiki.org/ontology/ontology.owl';
 	/**
 	 * Current version of the dump format.
 	 */
-	const FORMAT_VERSION = "1.1";
+	public const FORMAT_VERSION = "1.1";
 	/**
 	 * Special page for Dump identification.
 	 * Used as head URI for each wiki's category dump, e.g.:
 	 * https://en.wikipedia.org/wiki/Special:CategoryDump
 	 */
-	const SPECIAL_DUMP = 'Special:CategoryDump';
+	private const SPECIAL_DUMP = 'Special:CategoryDump';
 	/**
 	 * @var RdfWriter
 	 */
@@ -85,6 +85,10 @@ class CategoriesRdf {
 	 * @param int $subcategories Subcategory count
 	 */
 	public function writeCategoryData( $categoryName, $isHidden, $pages, $subcategories ) {
+		if ( $pages < 0 ) {
+			// Bugfix for T201119
+			$pages = 0;
+		}
 		$title = Title::makeTitle( NS_CATEGORY, $categoryName );
 		$this->rdfWriter->about( $this->titleToUrl( $title ) )
 			->say( 'a' )

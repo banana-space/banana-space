@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Abstract class to support upload tests
  */
@@ -7,12 +9,11 @@ abstract class ApiUploadTestCase extends ApiTestCase {
 	/**
 	 * Fixture -- run before every test
 	 */
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setMwGlobals( [
 			'wgEnableUploads' => true,
-			'wgEnableAPI' => true,
 		] );
 
 		$this->clearFakeUploads();
@@ -27,16 +28,19 @@ abstract class ApiUploadTestCase extends ApiTestCase {
 	 */
 	public function deleteFileByTitle( $title ) {
 		if ( $title->exists() ) {
-			$file = wfFindFile( $title, [ 'ignoreRedirect' => true ] );
+			$file = MediaWikiServices::getInstance()->getRepoGroup()
+				->findFile( $title, [ 'ignoreRedirect' => true ] );
 			$noOldArchive = ""; // yes this really needs to be set this way
 			$comment = "removing for test";
 			$restrictDeletedVersions = false;
+			$user = $this->getTestSysop()->getUser();
 			$status = FileDeleteForm::doDelete(
 				$title,
 				$file,
 				$noOldArchive,
 				$comment,
-				$restrictDeletedVersions
+				$restrictDeletedVersions,
+				$user
 			);
 
 			if ( !$status->isGood() ) {
@@ -44,7 +48,7 @@ abstract class ApiUploadTestCase extends ApiTestCase {
 			}
 
 			$page = WikiPage::factory( $title );
-			$page->doDeleteArticle( "removing for test" );
+			$page->doDeleteArticleReal( "removing for test", $user );
 
 			// see if it now doesn't exist; reload
 			$title = Title::newFromText( $title->getText(), NS_FILE );
@@ -74,7 +78,7 @@ abstract class ApiUploadTestCase extends ApiTestCase {
 	 */
 	public function deleteFileByContent( $filePath ) {
 		$hash = FSFile::getSha1Base36FromPath( $filePath );
-		$dupes = RepoGroup::singleton()->findBySha1( $hash );
+		$dupes = MediaWikiServices::getInstance()->getRepoGroup()->findBySha1( $hash );
 		$success = true;
 		foreach ( $dupes as $dupe ) {
 			$success &= $this->deleteFileByTitle( $dupe->getTitle() );
@@ -95,7 +99,7 @@ abstract class ApiUploadTestCase extends ApiTestCase {
 	 * @throws Exception
 	 * @return bool
 	 */
-	function fakeUploadFile( $fieldName, $fileName, $type, $filePath ) {
+	protected function fakeUploadFile( $fieldName, $fileName, $type, $filePath ) {
 		$tmpName = $this->getNewTempFile();
 		if ( !file_exists( $filePath ) ) {
 			throw new Exception( "$filePath doesn't exist!" );
@@ -116,13 +120,13 @@ abstract class ApiUploadTestCase extends ApiTestCase {
 			'type' => $type,
 			'tmp_name' => $tmpName,
 			'size' => $size,
-			'error' => null
+			'error' => UPLOAD_ERR_OK,
 		];
 
 		return true;
 	}
 
-	function fakeUploadChunk( $fieldName, $fileName, $type, & $chunkData ) {
+	public function fakeUploadChunk( $fieldName, $fileName, $type, &$chunkData ) {
 		$tmpName = $this->getNewTempFile();
 		// copy the chunk data to temp location:
 		if ( !file_put_contents( $tmpName, $chunkData ) ) {
@@ -147,7 +151,7 @@ abstract class ApiUploadTestCase extends ApiTestCase {
 	/**
 	 * Remove traces of previous fake uploads
 	 */
-	function clearFakeUploads() {
+	public function clearFakeUploads() {
 		$_FILES = [];
 	}
 }

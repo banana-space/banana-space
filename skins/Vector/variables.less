@@ -1,43 +1,147 @@
-@import 'mediawiki.ui/variables';
+@import 'mediawiki.ui/variables.less';
 
-@html-font-size: 100%;
+@font-size-root: 100%;
+@font-size-browser: 16; // Assumed browser default of `16px`
 
-@font-family-serif: 'Linux Libertine', 'Georgia', 'Times', serif;
-@font-family-sans-serif: sans-serif;
+//
+// == Typography ==
+//
+// Detailed documentation of the font choices:
+// https://www.mediawiki.org/wiki/Wikimedia_User_Interface/Use_cases/Font_family_stack
+// Source of this font stack definition in WikimediaUI Base:
+// https://phabricator.wikimedia.org/source/wikimedia-ui-base/browse/master/wikimedia-ui-base.less$202
+// See T73240 for a related discussion concerning the serif font stack.
+// Note: Numbers in Georgia font are non-lining, the font-feature to change this is documented at:
+// https://www.mediawiki.org/wiki/Talk:Typography_refresh/Archive_2#Numbers_looks_weird_in_article_title
 
-// Page content
+@font-family-serif:
+	'Linux Libertine', // GNU+Linux, alternative to Times New Roman.
+	'Georgia',         // Windows, intended as a serif typeface that would appear elegant but
+	                   // legible printed small or on low-resolution screens.
+	'Times',           // Windows, very similar to Times New Roman with subtle differences.
+	serif;             // Platform default: 'Times New Roman' on Windows.
+
+//
+// Body content uses the user setting in browser / the system default sans-serif font:
+// Arial on Windows, Roboto on Android.
+// FIXME: Use WikimediaUI Base's OS specific default sans-serif fonts.
+
+@font-family-sans: sans-serif;
+
+// Fallback for headings, language: ja,he,ko. See T73240,T65817,T65843,T65844,T65827.
+@font-family-sans--fallback: sans-serif;
+
+//
+// == Page content ==
+//
+
+@background-color-base: #fff;
+@color-base: #202122;
+@color-base--emphasized: #000;
+@color-base--subtle: #54595d;
+@color-link: #0645ad;
+@color-link--visited: #0b0080;
+@color-link-new: #a55858;
+@color-link-selected: @color-base;
+
+// See oojs/ui/src/themes/wikimediaui/common.less.
+@background-color-frameless--hover: rgba( 0, 24, 73, 7/255 ); // equivalent to @wmui-color-base90 on white
+@color-primary: #36c; // wikimedia-ui-base.less
+
+@outline-color-base--focus: @color-primary;
+
+@font-size-base: unit( 14 / @font-size-browser, em ); // Equals `0.875em`.
+@font-size-reset: @font-size-root;
+@font-size-heading-1: 1.8em;
+@font-size-heading-2: 1.5em;
+@font-size-heading-3: 1.2em;
+@font-size-notification: 0.8em;
+@font-size-site-notice: 0.8em;
+@font-size-footer: unit( 12 / @font-size-browser, em );
+@line-height-base: 1.6;
+@line-height-heading: 1.3;
+@line-height-code: 1.3;
+@line-height-footer-info: 1.4;
+@line-height-footer-buttons: 2;
+
+@size-sidebar-button: unit( 44 / @font-size-browser, em ); // Equals `2.75em`.
 // FIXME: Use global variable since Echo and CentralNotice use this variable
-@content-border-color: #a7d7f9;
-// FIXME: Find an open font that works with this stack and is readable by Windows users
-@content-font-family: @font-family-sans-serif;
-@content-font-color: #222;
-@content-font-size: 0.875em;
-@pureBlack: #000;
-@content-line-height: 1.6;
-@content-padding: 1em;
-@content-heading-font-size: 1.8em;
-@content-heading-font-family: @font-family-serif;
-@content-heading-font-family-generic: sans-serif;
-@body-background-color: #fff;
-@heading-line-height: 1.3;
+@border-color-content: #a7d7f9;
+// Due to darker background gradient, border needs to be darkened for aligned visual perception.
+@border-color-content--tabs-inactive: darken( @border-color-content, 10% );
+@border-color-portal-heading: #c8ccd1;
+// Use `rgba()` notation for better Safari support, see T254489.
+@border-color-portal-heading-transparent: rgba( red( @border-color-portal-heading ), green( @border-color-portal-heading ), blue( @border-color-portal-heading ), 0 );
+@padding-content: 1em;
 
 // Navigation
-@menu-background-color: #f6f6f6;
+@background-color-secondary: #f6f6f6;
+@color-nav-subtle: #444;
+// Navigation `line-height` has to be set in `em`s due to a rendering calculation issue.
+@line-height-nav: 1.125em;
 
-// Common menu
-@menu-link-color: #0645ad;
+// Navigation: Main
+@font-size-nav-main: inherit;
 
-// Main menu
-@menu-main-font-size: inherit;
+@font-size-nav-main-heading: unit( 12 / @font-size-browser, em ); // Equals `0.75em`.
 
-@menu-main-heading-font-size: 0.75em;
-@menu-main-heading-color: #444;
+@font-size-nav-main-body: unit( 12 / @font-size-browser, em );
+@margin-start-nav-main-body: 0.5em;
 
-@menu-main-body-font-size: 0.75em;
-@menu-main-body-link-color: #0645ad;
-@menu-main-body-link-visited-color: #0b0080;
-@menu-main-body-margin-left: 0.5em;
-@menu-main-body-padding: 0.3em 0 0 0;
+// Navigation: Portal
+// Font size of the Portal links.
+@font-size-portal-list-item: @font-size-nav-main-body;
 
-// Personal menu
-@menu-personal-font-size: 0.75em;
+// Margin space from the start of the Portal (left edge in LTR
+// languages).
+@margin-start-portal: 0.7em;
+
+// Margin space from the end of the Portal (right edge in LTR
+// languages).
+@margin-end-portal: 0.6em;
+
+// Margin space from the start of the Portal body (left edge in LTR languages).
+@margin-start-portal-body: @margin-start-nav-main-body;
+
+// Navigation: Personal tools
+@background-position-nav-personal-icon: left ( 4 / @font-size-browser / @font-size-nav-personal );
+@background-size-nav-personal-icon: 14 / @font-size-browser / @font-size-nav-personal;
+@top-personal-tools: 6px;
+@font-size-nav-personal: 0.75em;
+// Using `unit()` without second parameter to achieve a unitless output for `line-height`.
+@line-height-nav-personal: unit( 14 / @font-size-browser / @font-size-nav-personal ); // Equals `1.667`.
+
+// Tabs
+@font-size-tabs: unit( 13 / @font-size-browser, em ); // Equals `0.8125em`.
+
+// Search
+@width-search-button: 24 / @font-size-browser / @font-size-search-input;
+@font-size-search-input: unit( 13 / @font-size-browser, em ); // Equals `0.8125em`.
+
+// Z-indices
+// See skinStyles/jquery.ui/jquery.ui.datepicker.css.
+// @z-index-ui-datepicker-cover: -1;
+@z-index-base: 0;
+@z-index-header: 1;
+@z-index-sidebar: 1;
+@z-index-menu-checkbox: 1;
+@z-index-search-button: 1;
+// Ensure that this is displayed on top of .mw-body-content and clickable.
+@z-index-indicators: 1;
+// See skinStyles/jquery.ui/jquery.ui.slider.css.
+// @z-index-ui-slider-range: 1;
+// Menus must overlap indicators (@z-index-indicators) and VisualEditor toolbar (z-index: 2).
+@z-index-menu: 2;
+// See skinStyles/jquery.ui/jquery.ui.slider.css.
+// @z-index-ui-slider-handle: 2;
+// Display on top of page tabs (T39158, T50078).
+@z-index-personal: 100;
+@z-index-sidebar-button: 101;
+// See skinStyles/jquery.ui/jquery.ui.selectable.css.
+// @z-index-ui-selectable-helper: 100;
+@z-index-overlay: 101;
+// See skinStyles/jquery.ui/jquery.ui.tooltip.css.
+// @z-index-ui-tooltip: 9999;
+
+// Transitions
+@transition-duration-base: 100ms;

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"DeRudySoulStorm"
+		]
+	},
+	"apiwarn-textextracts-sentences-and-html": "Parametr <var>$1sentences</var> może mieć nieoczekiwane wyniki, jeśli jest używany w trybie HTML.",
+	"apiwarn-textextracts-malformed-html": "HTML może być zniekształcony i/lub niezrównoważony i może ominąć obrazy śród-liniowe. Używaj na własne ryzyko. Znane problemy są wymienione na stronie https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:TextExtracts#Caveats."
+}

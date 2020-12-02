@@ -44,7 +44,7 @@ class ApiQueryCategories extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @param ApiPageSet $resultPageSet
+	 * @param ApiPageSet|null $resultPageSet
 	 */
 	private function run( $resultPageSet = null ) {
 		if ( $this->getPageSet()->getGoodTitleCount() == 0 ) {
@@ -82,11 +82,11 @@ class ApiQueryCategories extends ApiQueryGeneratorBase {
 			$this->addWhereFld( 'cl_to', $cats );
 		}
 
-		if ( !is_null( $params['continue'] ) ) {
+		if ( $params['continue'] !== null ) {
 			$cont = explode( '|', $params['continue'] );
 			$this->dieContinueUsageIf( count( $cont ) != 2 );
 			$op = $params['dir'] == 'descending' ? '<' : '>';
-			$clfrom = intval( $cont[0] );
+			$clfrom = (int)$cont[0];
 			$clto = $this->getDB()->addQuotes( $cont[1] );
 			$this->addWhere(
 				"cl_from $op $clfrom OR " .
@@ -127,11 +127,12 @@ class ApiQueryCategories extends ApiQueryGeneratorBase {
 				'cl_to' . $sort
 			] );
 		}
+		$this->addOption( 'LIMIT', $params['limit'] + 1 );
 
 		$res = $this->select( __METHOD__ );
 
 		$count = 0;
-		if ( is_null( $resultPageSet ) ) {
+		if ( $resultPageSet === null ) {
 			foreach ( $res as $row ) {
 				if ( ++$count > $params['limit'] ) {
 					// We've reached the one extra which shows that
@@ -151,7 +152,7 @@ class ApiQueryCategories extends ApiQueryGeneratorBase {
 					$vals['timestamp'] = wfTimestamp( TS_ISO_8601, $row->cl_timestamp );
 				}
 				if ( isset( $prop['hidden'] ) ) {
-					$vals['hidden'] = !is_null( $row->pp_propname );
+					$vals['hidden'] = $row->pp_propname !== null;
 				}
 
 				$fit = $this->addPageSubItem( $row->cl_from, $vals );

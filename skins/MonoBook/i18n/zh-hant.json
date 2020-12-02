@@ -1,11 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
-			"Cwlin0416"
+			"Cwlin0416",
+			"Kly",
+			"Winston Sung"
 		]
 	},
 	"skinname-monobook": "MonoBook",
-	"monobook-desc": "MediaWiki 自 2004 年以來的經典外觀，根據頁面背景的書本黑白照命名",
+	"monobook-desc": "MediaWiki 自 2004 年以來的經典佈景主題，根據頁面背景的書本黑白照命名",
 	"monobook.css": "/* 此 CSS 會影響使用 Monobook 介面外觀的使用者 */",
-	"monobook.js": "/* 此 JavaScript 會用於使用 Monobook 介面外觀的使用者 */"
+	"monobook.js": "/* 此 JavaScript 會用於使用 Monobook 介面外觀的使用者 */",
+	"monobook-jumptotop": "返回頂端",
+	"monobook-jumptopersonal": "使用者工具",
+	"monobook-jumptonavigation": "跳至導覽",
+	"monobook-jumptosearch": "跳至搜尋",
+	"monobook-more-actions": "更多",
+	"monobook-cactions-label": "頁面操作",
+	"monobook-notifications-link": "通知（$1）",
+	"monobook-notifications-link-none": "通知",
+	"monobook-responsive-label": "啟用響應式 MonoBook 設計"
 }

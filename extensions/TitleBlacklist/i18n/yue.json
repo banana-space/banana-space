@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Shinjiman",
-			"CRCHF"
+			"CRCHF",
+			"Shinjiman"
 		]
 	},
 	"titleblacklist-desc": "容許禁止開指定標題嘅版: [[MediaWiki:Titleblacklist]] 同 [[MediaWiki:Titlewhitelist]]",

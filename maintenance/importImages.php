@@ -34,6 +34,8 @@
 
 require_once __DIR__ . '/Maintenance.php';
 
+use MediaWiki\MediaWikiServices;
+
 class ImportImages extends Maintenance {
 
 	public function __construct() {
@@ -125,9 +127,11 @@ class ImportImages extends Maintenance {
 	public function execute() {
 		global $wgFileExtensions, $wgUser, $wgRestrictionLevels;
 
+		$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
+
 		$processed = $added = $ignored = $skipped = $overwritten = $failed = 0;
 
-		$this->output( "Import Images\n\n" );
+		$this->output( "Importing Files\n\n" );
 
 		$dir = $this->getArg( 0 );
 
@@ -185,6 +189,7 @@ class ImportImages extends Maintenance {
 		# Batch "upload" operation
 		$count = count( $files );
 		if ( $count > 0 ) {
+			$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 			foreach ( $files as $file ) {
 				if ( $sleep && ( $processed > 0 ) ) {
 					sleep( $sleep );
@@ -196,7 +201,8 @@ class ImportImages extends Maintenance {
 				$title = Title::makeTitleSafe( NS_FILE, $base );
 				if ( !is_object( $title ) ) {
 					$this->output(
-						"{$base} could not be imported; a valid title cannot be produced\n" );
+						"{$base} could not be imported; a valid title cannot be produced\n"
+					);
 					continue;
 				}
 
@@ -211,14 +217,18 @@ class ImportImages extends Maintenance {
 
 				if ( $checkUserBlock && ( ( $processed % $checkUserBlock ) == 0 ) ) {
 					$user->clearInstanceCache( 'name' ); // reload from DB!
-					if ( $user->isBlocked() ) {
-						$this->output( $user->getName() . " was blocked! Aborting.\n" );
-						break;
+					if ( $permissionManager->isBlockedFrom( $user, $title ) ) {
+						$this->output(
+							"{$user->getName()} is blocked from {$title->getPrefixedText()}! skipping.\n"
+						);
+						$skipped++;
+						continue;
 					}
 				}
 
 				# Check existence
-				$image = wfLocalFile( $title );
+				$image = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
+					->newFile( $title );
 				if ( $image->exists() ) {
 					if ( $this->hasOption( 'overwrite' ) ) {
 						$this->output( "{$base} exists, overwriting..." );
@@ -238,7 +248,8 @@ class ImportImages extends Maintenance {
 
 						if ( $dupes ) {
 							$this->output(
-								"{$base} already exists as {$dupes[0]->getName()}, skipping\n" );
+								"{$base} already exists as {$dupes[0]->getName()}, skipping\n"
+							);
 							$skipped++;
 							continue;
 						}
@@ -266,7 +277,8 @@ class ImportImages extends Maintenance {
 						if ( $wgUser === false ) {
 							# user does not exist in target wiki
 							$this->output(
-								"failed: user '$real_user' does not exist in target wiki." );
+								"failed: user '$real_user' does not exist in target wiki."
+							);
 							continue;
 						}
 					}
@@ -283,7 +295,8 @@ class ImportImages extends Maintenance {
 							$commentText = file_get_contents( $f );
 							if ( !$commentText ) {
 								$this->output(
-									" Failed to load comment file {$f}, using default comment. " );
+									" Failed to load comment file {$f}, using default comment. "
+								);
 							}
 						}
 					}
@@ -305,7 +318,7 @@ class ImportImages extends Maintenance {
 					$publishOptions = [];
 					$handler = MediaHandler::getHandler( $props['mime'] );
 					if ( $handler ) {
-						$metadata = Wikimedia\quietCall( 'unserialize', $props['metadata'] );
+						$metadata = \Wikimedia\AtEase\AtEase::quietCall( 'unserialize', $props['metadata'] );
 
 						$publishOptions['headers'] = $handler->getContentHeaders( $metadata );
 					} else {
@@ -314,7 +327,7 @@ class ImportImages extends Maintenance {
 					$archive = $image->publish( $file, $flags, $publishOptions );
 					if ( !$archive->isGood() ) {
 						$this->output( "failed. (" .
-							 $archive->getWikiText( false, false, 'en' ) .
+							 $archive->getMessage( false, false, 'en' )->text() .
 							 ")\n" );
 						$failed++;
 						continue;
@@ -335,7 +348,6 @@ class ImportImages extends Maintenance {
 					$props,
 					$timestamp
 				)->isOK() ) {
-					# We're done!
 					$this->output( "done.\n" );
 
 					$doProtect = false;
@@ -354,8 +366,8 @@ class ImportImages extends Maintenance {
 						# Protect the file
 						$this->output( "\nWaiting for replica DBs...\n" );
 						// Wait for replica DBs.
-						sleep( 2.0 ); # Why this sleep?
-						wfWaitForSlaves();
+						sleep( 2 ); # Why this sleep?
+						$lbFactory->waitForReplication();
 
 						$this->output( "\nSetting image restrictions ... " );
 
@@ -419,7 +431,7 @@ class ImportImages extends Maintenance {
 				$files = [];
 				while ( ( $file = readdir( $dhl ) ) !== false ) {
 					if ( is_file( $dir . '/' . $file ) ) {
-						list( /* $name */, $ext ) = $this->splitFilename( $dir . '/' . $file );
+						$ext = pathinfo( $file, PATHINFO_EXTENSION );
 						if ( array_search( strtolower( $ext ), $exts ) !== false ) {
 							$files[] = $dir . '/' . $file;
 						}
@@ -435,21 +447,6 @@ class ImportImages extends Maintenance {
 		} else {
 			return [];
 		}
-	}
-
-	/**
-	 * Split a filename into filename and extension
-	 *
-	 * @param string $filename
-	 * @return array
-	 */
-	private function splitFilename( $filename ) {
-		$parts = explode( '.', $filename );
-		$ext = $parts[count( $parts ) - 1];
-		unset( $parts[count( $parts ) - 1] );
-		$fname = implode( '.', $parts );
-
-		return [ $fname, $ext ];
 	}
 
 	/**
@@ -493,8 +490,15 @@ class ImportImages extends Maintenance {
 		return false;
 	}
 
-	# @todo FIXME: Access the api in a saner way and performing just one query
-	# (preferably batching files too).
+	/**
+	 * @todo FIXME: Access the api in a saner way and performing just one query
+	 * (preferably batching files too).
+	 *
+	 * @param string $wiki_host
+	 * @param string $file
+	 *
+	 * @return string|bool
+	 */
 	private function getFileCommentFromSourceWiki( $wiki_host, $file ) {
 		$url = $wiki_host . '/api.php?action=query&format=xml&titles=File:'
 			. rawurlencode( $file ) . '&prop=imageinfo&&iiprop=comment';

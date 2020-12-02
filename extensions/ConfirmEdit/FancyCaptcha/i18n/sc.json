@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"fancycaptcha-captcha": "Còmpudu de siguresa",
 	"fancycaptcha-imgcaptcha-ph": "Inseri su testu chi ses bidende in artu"
 }

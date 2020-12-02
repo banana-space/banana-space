@@ -9,8 +9,10 @@ namespace MediaWiki\Widget;
  * @license MIT
  */
 class NamespaceInputWidget extends \OOUI\DropdownInputWidget {
-
-	protected $includeAllValue = null;
+	/** @var string */
+	protected $includeAllValue;
+	/** @var int[] */
+	protected $exclude;
 
 	/**
 	 * @param array $config Configuration options
@@ -25,8 +27,8 @@ class NamespaceInputWidget extends \OOUI\DropdownInputWidget {
 		parent::__construct( $config );
 
 		// Properties
-		$this->includeAllValue = isset( $config['includeAllValue'] ) ? $config['includeAllValue'] : null;
-		$this->exclude = isset( $config['exclude'] ) ? $config['exclude'] : [];
+		$this->includeAllValue = $config['includeAllValue'] ?? null;
+		$this->exclude = $config['exclude'] ?? [];
 
 		// Initialization
 		$this->addClasses( [ 'mw-widget-namespaceInputWidget' ] );
@@ -34,8 +36,8 @@ class NamespaceInputWidget extends \OOUI\DropdownInputWidget {
 
 	protected function getNamespaceDropdownOptions( array $config ) {
 		$namespaceOptionsParams = [
-			'all' => isset( $config['includeAllValue'] ) ? $config['includeAllValue'] : null,
-			'exclude' => isset( $config['exclude'] ) ? $config['exclude'] : null
+			'all' => $config['includeAllValue'] ?? null,
+			'exclude' => $config['exclude'] ?? null
 		];
 		$namespaceOptions = \Html::namespaceSelectorOptions( $namespaceOptionsParams );
 

@@ -1,22 +1,30 @@
 {
 	"@metadata": {
 		"authors": [
+			"BadDog",
+			"Bugoslav",
 			"Ex13",
-			"Tivek",
-			"Bugoslav"
+			"MaGa",
+			"Neptune, the Mystic",
+			"Tivek"
 		]
 	},
 	"vector-skin-desc": "Osuvremenjena inačica MonoBooka s obnovljenim dizajnom i mnogim poboljšanjima u upotrebljivosti",
+	"prefs-vector-enable-vector-1-label": "Rabi stari (baštinjeni) izgled imena Vector",
+	"prefs-vector-enable-vector-1-help": "Tijekom nekoliko godina osvježavat će se izgled sučelja imena Vector. Baštinjeni Vector omogućit će Vam upotrebu pregleda starije inačice Vectora (do mjeseca prosinca 2019.). Ako želite saznati više o tehnološkome osuvremenjivanju posjetite naše [[mw:Reading/Web/Desktop_Improvements|stranice projekta na MedijaWikiju]].",
+	"vector-opt-out": "Prebaci na stari izgled",
 	"vector-action-addsection": "Dodaj temu",
 	"vector-action-delete": "Izbriši",
 	"vector-action-move": "Premjesti",
 	"vector-action-protect": "Zaštiti",
-	"vector-action-undelete": "Vrati",
+	"vector-action-undelete": "Vrati izbrisano",
 	"vector-action-unprotect": "Promijeni zaštitu",
-	"vector-view-create": "Započni",
+	"vector-view-create": "Stvori",
 	"vector-view-edit": "Uredi",
 	"vector-view-history": "Vidi povijest",
 	"vector-view-view": "Čitaj",
 	"vector-view-viewsource": "Vidi izvor",
+	"vector-jumptonavigation": "Prijeđi na navigaciju",
+	"vector-jumptosearch": "Prijeđi na pretraživanje",
 	"vector-more-actions": "Više"
 }

@@ -49,27 +49,6 @@ class SpecialChangeCredentials extends AuthManagerSpecialPage {
 		return $params;
 	}
 
-	public function onAuthChangeFormFields(
-		array $requests, array $fieldInfo, array &$formDescriptor, $action
-	) {
-		// This method is never called for remove actions.
-
-		$extraFields = [];
-		Hooks::run( 'ChangePasswordForm', [ &$extraFields ], '1.27' );
-		foreach ( $extraFields as $extra ) {
-			list( $name, $label, $type, $default ) = $extra;
-			$formDescriptor[$name] = [
-				'type' => $type,
-				'name' => $name,
-				'label-message' => $label,
-				'default' => $default,
-			];
-
-		}
-
-		return parent::onAuthChangeFormFields( $requests, $fieldInfo, $formDescriptor, $action );
-	}
-
 	public function execute( $subPage ) {
 		$this->setHeaders();
 		$this->outputHeader();
@@ -113,12 +92,16 @@ class SpecialChangeCredentials extends AuthManagerSpecialPage {
 	protected function loadAuth( $subPage, $authAction = null, $reset = false ) {
 		parent::loadAuth( $subPage, $authAction );
 		if ( $subPage ) {
-			$this->authRequests = array_filter( $this->authRequests, function ( $req ) use ( $subPage ) {
-				return $req->getUniqueId() === $subPage;
-			} );
-			if ( count( $this->authRequests ) > 1 ) {
+			$foundReqs = [];
+			foreach ( $this->authRequests as $req ) {
+				if ( $req->getUniqueId() === $subPage ) {
+					$foundReqs[] = $req;
+				}
+			}
+			if ( count( $foundReqs ) > 1 ) {
 				throw new LogicException( 'Multiple AuthenticationRequest objects with same ID!' );
 			}
+			$this->authRequests = $foundReqs;
 		}
 	}
 
@@ -141,9 +124,7 @@ class SpecialChangeCredentials extends AuthManagerSpecialPage {
 			}
 
 			if ( $any ) {
-				$this->getOutput()->addModules( [
-					'mediawiki.special.changecredentials.js'
-				] );
+				$this->getOutput()->addModules( 'mediawiki.misc-authed-ooui' );
 			}
 
 			return $descriptor;
@@ -157,9 +138,9 @@ class SpecialChangeCredentials extends AuthManagerSpecialPage {
 
 		$form->addPreText(
 			Html::openElement( 'dl' )
-			. Html::element( 'dt', [], wfMessage( 'credentialsform-provider' )->text() )
+			. Html::element( 'dt', [], $this->msg( 'credentialsform-provider' )->text() )
 			. Html::element( 'dd', [], $info['provider'] )
-			. Html::element( 'dt', [], wfMessage( 'credentialsform-account' )->text() )
+			. Html::element( 'dt', [], $this->msg( 'credentialsform-account' )->text() )
 			. Html::element( 'dd', [], $info['account'] )
 			. Html::closeElement( 'dl' )
 		);

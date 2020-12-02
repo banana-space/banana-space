@@ -16,7 +16,7 @@ class MultilineTextInputWidget extends TextInputWidget {
 
 	/**
 	 * @param array $config Configuration options
-	 * @param int $config['rows'] If multiline, number of visible lines in textarea
+	 *      - int $config['rows'] If multiline, number of visible lines in textarea
 	 */
 	public function __construct( array $config = [] ) {
 		// Config initialization
@@ -24,19 +24,25 @@ class MultilineTextInputWidget extends TextInputWidget {
 			'readOnly' => false,
 			'autofocus' => false,
 			'required' => false,
-			'multiline' => true,
 		], $config );
 
 		// Parent constructor
 		parent::__construct( $config );
+
+		if ( isset( $config['rows'] ) && $config['rows'] ) {
+			$this->input->setAttributes( [ 'rows' => $config['rows'] ] );
+		}
 	}
 
-	/**
-	 * Check if input supports multiple lines.
-	 *
-	 * @return bool
-	 */
-	public function isMultiline() {
-		return true;
+	protected function getInputElement( $config ) {
+		return new Tag( 'textarea' );
+	}
+
+	public function getConfig( &$config ) {
+		$rows = $this->input->getAttribute( 'rows' );
+		if ( $rows !== null ) {
+			$config['rows'] = $rows;
+		}
+		return parent::getConfig( $config );
 	}
 }

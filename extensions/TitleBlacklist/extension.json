@@ -10,7 +10,7 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "antispam",
 	"requires": {
-		"MediaWiki": ">= 1.29.0"
+		"MediaWiki": ">= 1.35.0"
 	},
 	"GroupPermissions": {
 		"sysop": {
@@ -33,6 +33,12 @@
 		"titleblacklist/*": "LogFormatter"
 	},
 	"GrantPermissions": {
+		"createaccount": {
+			"tboverride-account": true
+		},
+		"editprotected": {
+			"tboverride": true
+		},
 		"viewrestrictedlogs": {
 			"titleblacklistlog": true
 		}
@@ -42,7 +48,8 @@
 	},
 	"MessagesDirs": {
 		"TitleBlacklist": [
-			"i18n"
+			"i18n",
+			"i18n/api"
 		]
 	},
 	"AutoloadClasses": {
@@ -61,30 +68,37 @@
 				"mediawiki.api"
 			],
 			"targets": [ "desktop", "mobile" ]
+		},
+		"ext.titleblacklist.visualEditor": {
+			"scripts": "ve-titleblacklist/ve.init.mw.TitleBlacklistSaveErrorHandler.js",
+			"targets": [ "desktop", "mobile" ]
 		}
 	},
+	"VisualEditorPluginModules": [
+		"ext.titleblacklist.visualEditor"
+	],
 	"ResourceFileModulePaths": {
 		"localBasePath": "modules",
 		"remoteExtPath": "TitleBlacklist/modules"
 	},
 	"Hooks": {
 		"getUserPermissionsErrorsExpensive": [
-			"TitleBlacklistHooks::userCan"
+			"TitleBlacklistHooks::onUserCan"
 		],
 		"TitleGetEditNotices": [
-			"TitleBlacklistHooks::displayBlacklistOverrideNotice"
+			"TitleBlacklistHooks::onDisplayBlacklistOverrideNotice"
 		],
 		"MovePageCheckPermissions": [
 			"TitleBlacklistHooks::onMovePageCheckPermissions"
 		],
 		"EditFilter": [
-			"TitleBlacklistHooks::validateBlacklist"
+			"TitleBlacklistHooks::onValidateBlacklist"
 		],
 		"PageContentSaveComplete": [
-			"TitleBlacklistHooks::clearBlacklist"
+			"TitleBlacklistHooks::onClearBlacklist"
 		],
 		"ScribuntoExternalLibraries": [
-			"TitleBlacklistHooks::scribuntoExternalLibraries"
+			"TitleBlacklistHooks::onScribuntoExternalLibraries"
 		]
 	},
 	"config": {

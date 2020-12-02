@@ -29,7 +29,6 @@
  * @ingroup Extensions
  */
 class ApiSpamBlacklist extends ApiBase {
-
 	public function execute() {
 		$params = $this->extractRequestParams();
 		$matches = BaseBlacklist::getInstance( 'spam' )->filter( $params['url'], null, true );

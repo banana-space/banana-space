@@ -1,6 +1,6 @@
 <?php
 
-class ExternalStoreTest extends MediaWikiTestCase {
+class ExternalStoreTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @covers ExternalStore::fetchFromURL
@@ -8,7 +8,7 @@ class ExternalStoreTest extends MediaWikiTestCase {
 	public function testExternalFetchFromURL_noExternalStores() {
 		$this->setService(
 			'ExternalStoreFactory',
-			new ExternalStoreFactory( [] )
+			new ExternalStoreFactory( [], [], 'test-id' )
 		);
 
 		$this->assertFalse(
@@ -23,7 +23,7 @@ class ExternalStoreTest extends MediaWikiTestCase {
 	public function testExternalFetchFromURL_someExternalStore() {
 		$this->setService(
 			'ExternalStoreFactory',
-			new ExternalStoreFactory( [ 'ForTesting' ] )
+			new ExternalStoreFactory( [ 'ForTesting' ], [ 'ForTesting://cluster1' ], 'test-id' )
 		);
 
 		$this->assertEquals(

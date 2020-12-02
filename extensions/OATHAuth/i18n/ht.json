@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Schery19"
+		]
+	},
+	"oathauth-module-totp-label": "TOTP (one-time token)",
+	"oathauth-ui-manage": "Jere",
+	"oathauth-enable-generic": "Aktive",
+	"oathauth-disable-generic": "Dezaktive",
+	"oathauth-ui-available-modules": "Metòd disponib yo"
+}

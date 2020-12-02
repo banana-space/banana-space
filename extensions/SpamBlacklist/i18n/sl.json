@@ -6,9 +6,9 @@
 			"Yerpo"
 		]
 	},
-	"spam-blacklist": " # Zunanji URL-ji, ki se ujemajo s tem seznamom, bodo blokirani, ko bodo dodani na stran.\n # Seznam vpliva samo na ta wiki; oglejte si tudi globalni črni seznam.\n # Za dokumentacijo si oglejte https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- pustite to vrstico takšno, kot je --> <pre>\n#\n# Skladnja je sledeča:\n#   * Vse od znaka »#« do konca vrstice je pripomba\n#   * Vsaka neprazna vrstica je delec regularnega izraza, ki se bo ujemal samo z gostitelji v URL-jih\n\n #</pre> <!-- pustite to vrstico takšno, kot je -->",
+	"spam-blacklist": " #<!-- pustite to vrstico takšno, kot je --> <pre>\n# Zunanji URL-ji, ki se ujemajo s tem seznamom, bodo blokirani, ko bodo dodani na stran.\n# Seznam vpliva samo na ta wiki; oglejte si tudi globalni črni seznam.\n# Za dokumentacijo si oglejte https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SpamBlacklist\n#\n# Skladnja je sledeča:\n#   * Vse od znaka »#« do konca vrstice je pripomba\n#   * Vsaka neprazna vrstica je delec regularnega izraza, ki se bo ujemal samo z gostitelji v URL-jih\n\n #</pre> <!-- pustite to vrstico takšno, kot je -->",
 	"spam-whitelist": " #<!-- pustite to vrstico takšno, kot je --> <pre>\n# Zunanji URL-ji, ki se ujemajo s tem seznamom, *ne* bodo blokirani,\n# četudi bi bili blokirani z vnosi črnega seznama.\n#\n# Skladnja je sledeča:\n#   * Vse od znaka »#« do konca vrstice je pripomba\n#   * Vsaka neprazna vrstica je delec regularnega izraza, ki se bo ujemal samo z gostitelji v URL-jih\n\n #</pre> <!-- pustite to vrstico takšno, kot je -->",
-	"email-blacklist": "# Registracija in pošiljanje z e-poštnih naslovov, ki se ujemajo s spodnjim seznamom, bosta preprečena\n # Seznam vpliva samo na ta wiki; glejte tudi globalni črni seznam.\n # Za dokumentacijo glejte https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- to vrstico pustite natančno takšno, kakršna je --> <pre>\n#\n# Opis skladnje:\n#  * Vse od znaka \"#\" do konca vrstice je komentar  *\n# Vsaka neprazna vrstica je regularni izraz, ki se lahko ujema le z imeni gostiteljev v e-poštnih naslovih\n\n #</pre> <!-- to vrstico pustite natančno takšno, kakršna je -->",
+	"email-blacklist": " #<!-- to vrstico pustite natančno takšno, kakršna je --> <pre>\n# Registracija in pošiljanje z e-poštnih naslovov, ki se ujemajo s spodnjim seznamom, bosta preprečena\n# Seznam vpliva samo na ta wiki; glejte tudi globalni črni seznam.\n# Za dokumentacijo glejte https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:SpamBlacklist\n\n#\n# Opis skladnje:\n#  * Vse od znaka \"#\" do konca vrstice je komentar\n#  * Vsaka neprazna vrstica je regularni izraz, ki se lahko ujema le z imeni gostiteljev v e-poštnih naslovih\n\n #</pre> <!-- to vrstico pustite natančno takšno, kakršna je -->",
 	"email-whitelist": "#<!-- to vrstico pustite natančno takšno, kakršna je --> <pre>\n# E-poštni naslovi, ki se ujemajo s tem seznamom, *ne* bodo blokirani, tudi če bi\n# bili blokirani z vnosi na črnem seznamu.\n#\n #</pre> <!-- to vrstico pustite natančno takšno, kakršna je -->\n# Opis skladnje:\n#  * Vse od znaka \"#\" do konca vrstice je komentar\n#  * Vsaka neprazna vrstica je regularni izraz, ki se lahko ujema le z imenom gostitelja v e-poštnem naslovu",
 	"spam-blacklisted-email": "E-poštni naslov na črnem seznamu",
 	"spam-blacklisted-email-text": "Vaš e-poštni naslov je trenutno na črnem seznamu, zato ne morete pošiljati pošte drugim uporabnikom.",
@@ -19,8 +19,5 @@
 	"log-description-spamblacklist": "Ti dogodki sledijo zadetke črnega seznama smetja.",
 	"logentry-spamblacklist-hit": "$1 je povzročil zadetek na črnem seznamu smetja na strani $3 ob dodajanju povezave $4",
 	"right-spamblacklistlog": "Prikaz dnevnika črnega seznama smetja",
-	"action-spamblacklistlog": "ogled dnevnika s črnim seznamom smetja",
-	"apihelp-spamblacklist-description": "Ovrednoti enega ali več URL-jev s SpamBlacklist.",
-	"apihelp-spamblacklist-param-url": "URL-ji za primerjavo s črnim seznamom.",
-	"apihelp-spamblacklist-example-1": "Preveri dva URL-ja s črnim seznamom."
+	"action-spamblacklistlog": "ogled dnevnika s črnim seznamom smetja"
 }

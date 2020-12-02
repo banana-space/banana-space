@@ -35,10 +35,5 @@
 	"categorytree-no-pages": "няма старонак ці падкатэгорыяў",
 	"categorytree-not-found": "Катэгорыя <i>$1</i> ня знойдзена",
 	"categorytree-error": "Праблема загрузкі зьвестак.",
-	"categorytree-retry": "Калі ласка, пачакайце і паспрабуйце яшчэ раз.",
-	"apihelp-categorytree-description": "Унутраны модуль для пашырэньня CategoryTree.",
-	"apihelp-categorytree-summary": "Унутраны модуль для пашырэньня структуры катэгорыяў.",
-	"apihelp-categorytree-param-category": "Назва ў прасторы назваў катэгорыяў, прэфікс будзе ігнаравацца ў выпадку, калі будзе пададзены.",
-	"apihelp-categorytree-param-options": "Налады для канструктару CategoryTree як JSON-аб’екту. Парамэтар <var>depth</var> па змоўчаньні роўны <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "Варыянты мусяць быць слушнымі JSON-аб’ектамі."
+	"categorytree-retry": "Калі ласка, пачакайце і паспрабуйце яшчэ раз."
 }

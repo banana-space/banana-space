@@ -45,7 +45,7 @@ class ApiQueryAllCategories extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @param ApiPageSet $resultPageSet
+	 * @param ApiPageSet|null $resultPageSet
 	 */
 	private function run( $resultPageSet = null ) {
 		$db = $this->getDB();
@@ -54,7 +54,7 @@ class ApiQueryAllCategories extends ApiQueryGeneratorBase {
 		$this->addTables( 'category' );
 		$this->addFields( 'cat_title' );
 
-		if ( !is_null( $params['continue'] ) ) {
+		if ( $params['continue'] !== null ) {
 			$cont = explode( '|', $params['continue'] );
 			$this->dieContinueUsageIf( count( $cont ) != 1 );
 			$op = $params['dir'] == 'descending' ? '<' : '>';
@@ -120,16 +120,16 @@ class ApiQueryAllCategories extends ApiQueryGeneratorBase {
 
 			// Normalize titles
 			$titleObj = Title::makeTitle( NS_CATEGORY, $row->cat_title );
-			if ( !is_null( $resultPageSet ) ) {
+			if ( $resultPageSet !== null ) {
 				$pages[] = $titleObj;
 			} else {
 				$item = [];
 				ApiResult::setContentValue( $item, 'category', $titleObj->getText() );
 				if ( isset( $prop['size'] ) ) {
-					$item['size'] = intval( $row->cat_pages );
+					$item['size'] = (int)$row->cat_pages;
 					$item['pages'] = $row->cat_pages - $row->cat_subcats - $row->cat_files;
-					$item['files'] = intval( $row->cat_files );
-					$item['subcats'] = intval( $row->cat_subcats );
+					$item['files'] = (int)$row->cat_files;
+					$item['subcats'] = (int)$row->cat_subcats;
 				}
 				if ( isset( $prop['hidden'] ) ) {
 					$item['hidden'] = (bool)$row->cat_hidden;
@@ -142,7 +142,7 @@ class ApiQueryAllCategories extends ApiQueryGeneratorBase {
 			}
 		}
 
-		if ( is_null( $resultPageSet ) ) {
+		if ( $resultPageSet === null ) {
 			$result->addIndexedTagName( [ 'query', $this->getModuleName() ], 'c' );
 		} else {
 			$resultPageSet->populateFromTitles( $pages );

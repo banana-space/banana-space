@@ -1,22 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amire80",
-			"Sapral Mikail",
-			"Умар",
 			"Adam-Yourist",
-			"ElizaMag"
+			"Amire80",
+			"ElizaMag",
+			"Sapral Mikail",
+			"Умар"
 		]
 	},
+	"skinname-vector": "Вéктора",
 	"vector-action-addsection": "Тема тӀатоха",
-	"vector-action-delete": "ДӀадаккха",
+	"vector-action-delete": "ДӀаяккха",
 	"vector-action-move": "ЦӀи хувца",
-	"vector-action-protect": "Лораде",
+	"vector-action-protect": "Лорае",
 	"vector-action-undelete": "Хьаметтаоттаде",
-	"vector-action-unprotect": "Лорадар (гIо) хувца",
+	"vector-action-unprotect": "Лораяр хувца",
 	"vector-view-create": "Хьакхолла",
-	"vector-view-edit": "Нийсде",
-	"vector-view-history": "ОагӀон хувцамаш",
+	"vector-view-edit": "Тоаде",
+	"vector-view-history": "Хувцамаш",
 	"vector-view-view": "Де́ша",
 	"vector-view-viewsource": "Хьалххе бӀаргтохара разметкага хьажар",
 	"vector-more-actions": "Кхы а"

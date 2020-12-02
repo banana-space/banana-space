@@ -6,8 +6,6 @@
 		]
 	},
 	"timeless-desc": "Un tema senza tempo disegnato dopo il prototipo Winter da Brandon Harris, e vari stili della Wikimedia Foundation",
-	"timeless-search-placeholder": "Cerca su {{NUMBEROFARTICLES}} pagine",
-	"timeless-loggedin": "La tua utenza",
 	"timeless-anonymous": "Anonimo",
 	"timeless-loggedinas": "Accesso effettuato come '''$1'''",
 	"timeless-notloggedin": "Accesso non effettuato",
@@ -18,6 +16,8 @@
 	"timeless-sitetools": "Strumenti wiki",
 	"timeless-pageactions": "Strumenti pagine",
 	"timeless-userpagetools": "Strumenti pagina utente",
+	"timeless-action-addsection": "Nuovo argomento",
+	"timeless-view-view": "Leggi",
 	"timeless-pagemisc": "Altro",
 	"timeless-namespaces": "Namespace",
 	"timeless-pagetools": "Azioni sulla pagina",

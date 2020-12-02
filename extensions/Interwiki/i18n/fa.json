@@ -1,16 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alirezaaa",
 			"Armin1392",
+			"Dalba",
 			"Ebraminio",
 			"Hamid rostami",
 			"Huji",
+			"Ladsgroup",
 			"Mjbmr",
 			"Omidh",
-			"Reza1615",
-			"Dalba",
-			"Alirezaaa",
-			"Ladsgroup"
+			"Reza1615"
 		]
 	},
 	"interwiki": "نمایش و ویرایش اطلاعات میان‌ویکی",
@@ -38,12 +38,12 @@
 	"interwiki-cached": "اطلاعات ویکی داخلی ذخیره شده‌است. اصلاح ذخیره ممکن نیست.",
 	"interwiki_edit": "ویرایش",
 	"interwiki_reasonfield": "دلیل:",
-	"interwiki_delquestion": "حذف «$1»",
 	"interwiki_deleting": "شما در حال حذف کردن پیشوند «$1» هستید.",
 	"interwiki_deleted": "پیشوند «$1» از جدول میان‌ویکی حذف شد.",
 	"interwiki_delfailed": "پیشوند «$1» را نمی‌توان از جدول میان‌ویکی حذف کرد.",
 	"interwiki-logtext": "نمایش سیاهه",
 	"interwiki_addtext": "افزودن یک پیشوند میان‌ویکی یا زبان",
+	"interwiki-addtext-local": "افزودن یک میان‌ویکی محلی یا پیشوند زبان",
 	"interwiki_addintro": "شما در حال ویرایش یک پیشوند میان‌ویکی هستید.\nتوجه داشته باشید که این پیشوند نمی‌تواند شامل فاصله ( )، دو نقطه (:)، علامت آمپرساند (&) یا علامت مساوی (=) باشد.",
 	"interwiki_addbutton": "افزودن",
 	"interwiki_added": "پیشوند «$1» به جدول میان‌ویکی افزوده شد.",

@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek",
+			"BaRaN6161 TURK",
+			"Incelemeelemani"
+		]
+	},
+	"apihelp-spamblacklist-description": "Bu SpamBlacklist karşı bir veya daha fazla URL doğrula.",
+	"apihelp-spamblacklist-example-1": "Kara liste URL'lerini iki defa kontrol ediniz",
+	"apihelp-spamblacklist-param-url": "Kara liste URL'lerine yönelik doğrula.",
+	"apihelp-spamblacklist-summary": "SpamBlacklist'e karşı bir veya daha fazla URL'yi doğrulayın."
+}

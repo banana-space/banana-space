@@ -1,0 +1,65 @@
+@import '../../variables.less';
+@import 'mediawiki.mixins.less';
+
+/* Hide empty portlets */
+// This class has special magical powers. It can be removed by
+// mw.util.addPortletLink
+// in core:resources/src/mediawiki.util/util.js
+// When I93fb6c96df9f238d1c0281cb66512b135ca2afc2 has been merged
+// and is deployed this line of CSS should be removed or replaced
+// with the class ".vector-menu-empty"
+// See T253912.
+.emptyPortlet {
+	display: none;
+}
+
+/* Personal */
+.vector-menu,
+/* FIXME: Remove p-personal selector when cache has cleared. */
+#p-personal {
+	// Hidden by default, but displayed by certain menus
+	// e.g. MenuPortal
+	h3 {
+		display: none;
+	}
+
+	ul {
+		list-style: none none;
+		margin: 0;
+	}
+
+	li {
+		margin-left: 0.75em;
+		// `padding-top` instead of `margin-top` necessary for
+		// anonymous user icon position below
+		padding-top: 0.5em;
+		line-height: @line-height-nav-personal;
+	}
+}
+
+/* Icon for registered user names & anonymous message */
+#pt-anonuserpage,
+#pt-userpage a {
+	// SVG support using a transparent gradient to guarantee cross-browser
+	// compatibility (browsers able to understand gradient syntax support also SVG)
+	.background-image-svg( 'images/user-avatar.svg', 'images/user-avatar.png' );
+	background-position: @background-position-nav-personal-icon;
+	background-repeat: no-repeat;
+	background-size: @background-size-nav-personal-icon @background-size-nav-personal-icon;
+	// Same as `#p-personal li` above
+	padding-top: 0.5em !important; // stylelint-disable-line declaration-no-important
+	padding-left: 16px !important; // stylelint-disable-line declaration-no-important
+}
+
+#pt-userpage {
+	padding-top: 0 !important; // stylelint-disable-line declaration-no-important
+
+	a {
+		display: inline-block;
+	}
+}
+
+/* Show anonymous "Not logged in" text in gray */
+#pt-anonuserpage {
+	color: #54595d;
+}

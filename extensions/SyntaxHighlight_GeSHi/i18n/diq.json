@@ -2,14 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Aspar",
-			"Mirzali",
-			"Kumkumuk"
+			"Kumkumuk",
+			"Mirzali"
 		]
 	},
 	"syntaxhighlight-desc": "pê şuxulnayişê [http://pygments.org/ Pygments] i rêza <code>&lt;syntaxhighlight&gt;</code> i işaret beno",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Kod",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Zıwan",
-	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(çıniyo)",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(Çıniyo)",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "Xeta nımreyan bıasne",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-title": "Bloğê kodi",
 	"syntaxhighlight-error-unknown-language": "Nêzaniyaye zıwan \"$1\""

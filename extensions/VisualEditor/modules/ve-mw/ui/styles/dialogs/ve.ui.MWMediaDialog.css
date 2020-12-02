@@ -1,0 +1,84 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWMediaDialog styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwMediaDialog-panel-imageinfo {
+	padding-top: 2em;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-thumb {
+	text-align: center;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-loadingthumb img {
+	opacity: 0.8;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-info {
+	padding: 1em 2em;
+}
+
+@media ( max-width: 400px ) {
+	.ve-ui-mwMediaDialog-panel-imageinfo-info {
+		padding: 1em 0;
+	}
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-main {
+	margin-bottom: 1em;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-portrait .ve-ui-mwMediaDialog-panel-imageinfo-thumb img {
+	margin-bottom: 1em;
+	max-height: none;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-portrait .ve-ui-mwMediaDialog-panel-imageinfo-thumb,
+.ve-ui-mwMediaDialog-panel-imageinfo-portrait .ve-ui-mwMediaDialog-panel-imageinfo-info {
+	float: left;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-portrait .ve-ui-mwMediaDialog-panel-imageinfo-info {
+	padding-left: 2em;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-title {
+	font-size: 1.5em;
+	line-height: 1.5em;
+	margin-top: -0.2em;
+	margin-bottom: 0.5em;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-details {
+	color: #54595d;
+}
+
+.ve-ui-mwMediaDialog-panel-imageinfo-separator {
+	margin: 0 0.5em;
+	display: inline-block;
+}
+
+.ve-ui-mwMediaDialog-altText {
+	width: auto;
+}
+
+.mw-widget-mediaSearchWidget .oo-ui-searchWidget-results {
+	padding-right: 0;
+}
+
+/* HACK: Override ooui specific 2em top margin */
+.ve-ui-mwMediaDialog-caption-fieldset.oo-ui-labelElement.oo-ui-fieldsetLayout {
+	margin-top: 0;
+}
+
+.ve-ui-mwMediaDialog-description-link {
+	font-size: 75%;
+}

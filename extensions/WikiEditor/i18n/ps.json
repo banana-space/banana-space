@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ahmed-Najib-Biabani-Ibrahimkhel",
+			"Amjad Khan",
 			"Baloch Khan"
 		]
 	},
@@ -69,7 +70,7 @@
 	"wikieditor-toolbar-tool-ulist-example": "د گولۍ داره لړليک توکی",
 	"wikieditor-toolbar-tool-olist": "شمېرن لړليک",
 	"wikieditor-toolbar-tool-olist-example": "د گولۍ داره لړليک توکی",
-	"wikieditor-toolbar-tool-nowiki-example": "{{Wy/ps/ښه|Pagebanner default.jpg|1000px|}} '''{{Wy/ps/BASICPAGENAME}}''' د '''0000''' هيواد 1_1_1 ده، چې د 2_2_2 هيواد په 3_3_3 سيمه کې موقعیت لري.\n==مخته ولاړ سي==\n*[[Wy/ps/777|888]]\n*[[Wy/ps/777|888]]\n*[[Wy/ps/777|888]] \n==سرچینې==\n{{Wy/ps/نابشپړ}}[[Category:Wy/ps]] \n[[Category:Wy/ps/نور کار غواړي]] [[Category:Wy/ps/ښارونه]]",
+	"wikieditor-toolbar-tool-nowiki-example": "پټ متن دلته ورګډ کړي",
 	"wikieditor-toolbar-tool-redirect": "مخ گرځېدنه",
 	"wikieditor-toolbar-tool-redirect-example": "د هدفي مخ نوم",
 	"wikieditor-toolbar-tool-big": "لوی",

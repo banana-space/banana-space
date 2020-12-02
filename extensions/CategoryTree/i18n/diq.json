@@ -1,33 +1,34 @@
 {
 	"@metadata": {
 		"authors": [
+			"1917 Ekim Devrimi",
 			"Erdemaslancan",
+			"Gırd",
+			"Kumkumuk",
 			"Marmase",
 			"Mirzali",
-			"Xoser",
-			"Kumkumuk",
-			"1917 Ekim Devrimi",
-			"Gırd"
+			"Orbot707",
+			"Xoser"
 		]
 	},
 	"categorytree": "Dara Kategoriya",
-	"categorytree-portlet": "Kategoriyi",
+	"categorytree-portlet": "Kategoriy",
 	"categorytree-legend": "Dara kategori bımotné",
 	"categorytree-desc": "[[Special:CategoryTree|Babeta kategoriya]] dinamikey sera idare ke",
 	"categorytree-header": "Yew namey kategori bınuse kı zerrekê ey zey vıraştışê dare bıvêne. (Javaskript lazımo)",
-	"categorytree-category": "Kategoriye:",
-	"categorytree-go": "Bar ke",
+	"categorytree-category": "Kategori:",
+	"categorytree-go": "Darer bımocne",
 	"categorytree-parents": "Kategoriyê serêni",
 	"categorytree-mode-label": "Modê cı:",
 	"categorytree-mode-categories": "tenya kategoriy",
 	"categorytree-mode-pages": "Teyna pelan, dosyayan hesab meke",
 	"categorytree-mode-all": "peley pêro",
-	"categorytree-collapse": "teng kı",
-	"categorytree-expand": "Hera ke",
+	"categorytree-collapse": "teng ke",
+	"categorytree-expand": "hera kerê",
 	"categorytree-member-counts": "Tede {{PLURAL:$1|1 bınkategoriye|$1 bınkategoriy}}, {{PLURAL:$2|1 pele|$2 peli}} û {{PLURAL:$3|1 dosya|$3 dosyey}} estê",
-	"categorytree-num-categories": "$1 K",
-	"categorytree-num-pages": "$1 P",
-	"categorytree-num-files": "$1 D",
+	"categorytree-num-categories": "$1 Kategoriy",
+	"categorytree-num-pages": "$1 Peli",
+	"categorytree-num-files": "$1 Dosya",
 	"categorytree-num-empty": "'''Venga'''",
 	"categorytree-load": "Bar ke",
 	"categorytree-loading": "bar beno...",
@@ -37,9 +38,5 @@
 	"categorytree-no-pages": "peli ya zi bınkategoriy çıniyê",
 	"categorytree-not-found": "Kategoriya <i>$1</i> nêvêniye",
 	"categorytree-error": "Barkerdış de malumati dı problem esta.",
-	"categorytree-retry": "Şıma ra reca tenekê pıpawê, bahdo fına bıcerbnê.",
-	"apihelp-categorytree-description": "Derganiya zerre de Module Categorytree.",
-	"apihelp-categorytree-param-category": "Serekê canameya kategori,  verole grotış do nê gêriyeno",
-	"apihelp-categorytree-param-options": "İnşaya weçeneganê Categorytree JSON objeyan vıraziya.\nHesıbyaye xoriyeya weçena <kbd>1</kbd> a.",
-	"apierror-categorytree-invalidjson": "Weçenegê objeyê JSON'i ravêreno"
+	"categorytree-retry": "Şıma ra reca tenekê pıpawê, bahdo fına bıcerbnê."
 }

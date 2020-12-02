@@ -1,4 +1,5 @@
 <?php
+
 use MediaWiki\MediaWikiServices;
 
 /**
@@ -30,23 +31,23 @@ use MediaWiki\MediaWikiServices;
  *
  * @ingroup SpecialPage
  */
-class FileDuplicateSearchPage extends QueryPage {
+class SpecialFileDuplicateSearch extends QueryPage {
 	protected $hash = '', $filename = '';
 
 	/**
-	 * @var File $file selected reference file, if present
+	 * @var File selected reference file, if present
 	 */
 	protected $file = null;
 
-	function __construct( $name = 'FileDuplicateSearch' ) {
+	public function __construct( $name = 'FileDuplicateSearch' ) {
 		parent::__construct( $name );
 	}
 
-	function isSyndicated() {
+	public function isSyndicated() {
 		return false;
 	}
 
-	function isCacheable() {
+	public function isCacheable() {
 		return false;
 	}
 
@@ -54,7 +55,7 @@ class FileDuplicateSearchPage extends QueryPage {
 		return false;
 	}
 
-	function linkParameters() {
+	protected function linkParameters() {
 		return [ 'filename' => $this->filename ];
 	}
 
@@ -63,15 +64,14 @@ class FileDuplicateSearchPage extends QueryPage {
 	 *
 	 * @return array Array of File objects
 	 */
-	function getDupes() {
-		return RepoGroup::singleton()->findBySha1( $this->hash );
+	private function getDupes() {
+		return MediaWikiServices::getInstance()->getRepoGroup()->findBySha1( $this->hash );
 	}
 
 	/**
-	 *
 	 * @param array $dupes Array of File objects
 	 */
-	function showList( $dupes ) {
+	private function showList( $dupes ) {
 		$html = [];
 		$html[] = $this->openList( 0 );
 
@@ -103,12 +103,12 @@ class FileDuplicateSearchPage extends QueryPage {
 		$this->setHeaders();
 		$this->outputHeader();
 
-		$this->filename = $par !== null ? $par : $this->getRequest()->getText( 'filename' );
+		$this->filename = $par ?? $this->getRequest()->getText( 'filename' );
 		$this->file = null;
 		$this->hash = '';
 		$title = Title::newFromText( $this->filename, NS_FILE );
 		if ( $title && $title->getText() != '' ) {
-			$this->file = wfFindFile( $title );
+			$this->file = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $title );
 		}
 
 		$out = $this->getOutput();
@@ -121,7 +121,7 @@ class FileDuplicateSearchPage extends QueryPage {
 				'label-message' => 'fileduplicatesearch-filename',
 				'id' => 'filename',
 				'size' => 50,
-				'value' => $this->filename,
+				'default' => $this->filename,
 			],
 		];
 		$hiddenFields = [
@@ -131,7 +131,6 @@ class FileDuplicateSearchPage extends QueryPage {
 		$htmlForm->addHiddenFields( $hiddenFields );
 		$htmlForm->setAction( wfScript() );
 		$htmlForm->setMethod( 'get' );
-		$htmlForm->setSubmitProgressive();
 		$htmlForm->setSubmitTextMsg( $this->msg( 'fileduplicatesearch-submit' ) );
 
 		// The form should be visible always, even if it was submitted (e.g. to perform another action).
@@ -186,7 +185,7 @@ class FileDuplicateSearchPage extends QueryPage {
 		}
 	}
 
-	function doBatchLookups( $list ) {
+	private function doBatchLookups( $list ) {
 		$batch = new LinkBatch();
 		/** @var File $file */
 		foreach ( $list as $file ) {
@@ -202,20 +201,19 @@ class FileDuplicateSearchPage extends QueryPage {
 	}
 
 	/**
-	 *
 	 * @param Skin $skin
 	 * @param File $result
 	 * @return string HTML
 	 */
-	function formatResult( $skin, $result ) {
-		global $wgContLang;
-
+	public function formatResult( $skin, $result ) {
 		$linkRenderer = $this->getLinkRenderer();
 		$nt = $result->getTitle();
-		$text = $wgContLang->convert( $nt->getText() );
+		$text = MediaWikiServices::getInstance()->getContentLanguage()->convert(
+			htmlspecialchars( $nt->getText() )
+		);
 		$plink = $linkRenderer->makeLink(
 			$nt,
-			$text
+			new HtmlArmor( $text )
 		);
 
 		$userText = $result->getUser( 'text' );

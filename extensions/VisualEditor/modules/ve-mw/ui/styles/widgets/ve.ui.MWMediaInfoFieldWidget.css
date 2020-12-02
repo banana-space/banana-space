@@ -1,0 +1,48 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWMediaInfoFieldWidget styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwMediaInfoFieldWidget {
+	position: relative;
+}
+
+.ve-ui-mwMediaInfoFieldWidget.oo-ui-iconElement .ve-ui-mwMediaInfoFieldWidget-icon {
+	margin: 0.05em;
+	position: absolute;
+	top: auto;
+	opacity: 0.5;
+}
+
+.ve-ui-mwMediaInfoFieldWidget-text {
+	word-break: break-word;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	overflow: hidden;
+	-webkit-transition: max-height 0.5s ease-in;
+	-moz-transition: max-height 0.5s ease-in;
+	transition: max-height 0.5s ease-in;
+}
+
+.ve-ui-mwMediaInfoFieldWidget-readmore {
+	height: 2em;
+	width: 100%;
+	padding-top: 1em;
+	margin-top: -2em;
+	background: -webkit-linear-gradient( top, rgba( 255, 255, 255, 0 ) 0, #fff 50% );
+	background: linear-gradient( to bottom, rgba( 255, 255, 255, 0 ) 0, #fff 50% );
+}
+
+.ve-ui-mwMediaInfoFieldWidget.oo-ui-iconElement .oo-ui-labelElement-label {
+	display: block;
+	padding: 0.3em 0 0.1em 2.2em;
+	line-height: 1.25em;
+}
+
+.ve-ui-mwMediaInfoFieldWidget-description {
+	display: block;
+	line-height: 1.25em;
+	overflow-y: hidden;
+}

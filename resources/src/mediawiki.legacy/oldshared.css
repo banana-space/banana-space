@@ -1,8 +1,15 @@
 /**
  * oldshared.css
  * This file contains CSS settings common to Wikistandard, Nostalgia and
- * CologneBlue, the old pre-Monobook skins
+ * CologneBlue, the old pre-Monobook skins.
+ *
+ * This file and it's corresponding ResourceLoader module are deprecated,
+ * move it to the calling skin repo if necessary, see T242177.
+ * Both, Nostalgia and CologneBlue have already moved it to their own repos.
+ * Wikistandard is not available any more.
  */
+
+/* stylelint-disable selector-class-pattern */
 
 /* For clarity, explicitly state some recommendations from
  * https://www.w3.org/TR/CSS21/sample.html to make sure the editsection links scale right
@@ -67,11 +74,6 @@ div.floatleft {
 	margin: 0.3em 0.5em 0.5em 0;
 }
 
-/* @noflip */
-div.floatleft p {
-	font-style: italic;
-}
-
 /* table standards */
 table.rimage {
 	float: right;
@@ -96,7 +98,7 @@ div.thumbinner {
 	font-size: 94%;
 	text-align: center;
 	/* new block formatting context,
-	 * to clear background from floating content  */
+	 * to clear background from floating content */
 	overflow: hidden;
 }
 
@@ -128,7 +130,6 @@ div.magnify a {
 	height: 11px;
 	/* Use same SVG support hack as mediawiki.legacy's shared.css */
 	background: url( images/magnify-clip-ltr.png ) center center no-repeat;
-	/* @embed */
 	background-image: linear-gradient( transparent, transparent ), url( images/magnify-clip-ltr.svg );
 	/* Don't annoy people who copy-paste everything too much */
 	-moz-user-select: none;
@@ -158,7 +159,9 @@ img.thumbborder {
 
 /* Page history styling */
 /* the auto-generated edit comments */
-.autocomment {
+.autocomment,
+.autocomment a,
+.autocomment a:visited {
 	color: #4b4b4b;
 }
 
@@ -174,10 +177,6 @@ img {
 	text-align: center;
 	display: inline-block;
 	display: table;
-
-	/* IE7 and earlier */
-	zoom: 1;
-	*display: inline; /* stylelint-disable-line declaration-block-no-duplicate-properties */
 }
 
 /* CSS for backwards-compatibility with cached page renders and creative uses in wikitext */
@@ -214,28 +213,7 @@ table.toc td {
 	font-size: larger;
 }
 
-/* preference page with js-genrated toc */
-#preftoc {
-	float: left;
-	margin: 1em 1em 1em 1em;
-	width: 13em;
-}
-
-#preftoc li {
-	border: 1px solid #fff;
-}
-
-#preftoc li.selected {
-	background-color: #f9f9f9;
-	border: 1px dashed #aaa;
-}
-
-#preftoc a,
-#preftoc a:active {
-	display: block;
-	color: #005189;
-}
-
+/* Preference page with js-generated toc */
 .mw-prefs-buttons {
 	clear: left;
 	float: left;
@@ -304,21 +282,6 @@ span.comment {
 	color: #c00;
 }
 
-.editExternally {
-	border: 1px solid #808080;
-	background: #fff;
-	padding: 3px;
-	margin-top: 0.5em;
-	float: left;
-	font-size: small;
-	text-align: center;
-}
-
-.editExternallyHelp {
-	font-style: italic;
-	color: #808080;
-}
-
 li span.deleted {
 	text-decoration: line-through;
 	color: #888;
@@ -361,23 +324,6 @@ table.mw_metadata td.spacer {
 
 .visualClear {
 	clear: both;
-}
-
-/* Allmessages table */
-#allmessagestable th {
-	background-color: #b2b2ff;
-}
-
-#allmessagestable tr.orig {
-	background-color: #ffe2e2;
-}
-
-#allmessagestable tr.new {
-	background-color: #e2ffe2;
-}
-
-#allmessagestable tr.def {
-	background-color: #f0f0ff;
 }
 
 #jump-to-nav {

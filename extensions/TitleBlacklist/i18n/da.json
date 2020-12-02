@@ -3,6 +3,7 @@
 		"authors": [
 			"HenrikKbh",
 			"Hylle",
+			"Saederup92",
 			"Sarrus"
 		]
 	},
@@ -14,7 +15,7 @@
 	"titleblacklist-forbidden-upload": "Sidenavnet \"$2\" kan ikke oprettes<br />\nDet svarer til følgende sortlistepost: <code>$1</code>",
 	"titleblacklist-forbidden-new-account": "Brugernavnet \"$2\" kan ikke oprettes<br />\nDet svarer til følgende sortlistepost: <code>$1</code>",
 	"titleblacklist-invalid": "Følgende {{PLURAL:$1|linje|linjer}} i titelsortelisten er {{PLURAL:$1|ugyldig|ugyldige}}; korriger venligst {{PLURAL:$1|den|dem}} før du gemmer:",
-	"titleblacklist-override": "Ignorer sortlisten",
+	"titleblacklist-override": "Ignorer titel-sortlisten hvis den stemmer overens",
 	"right-tboverride": "Tilsidesæt titel- eller brugernavnsortlisten",
 	"right-tboverride-account": "Tilsidesæt brugernavn sortliste"
 }

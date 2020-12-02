@@ -1,8 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Aftab1995"
+			"Aftab1995",
+			"Aftabuzzaman",
+			"আফতাবুজ্জামান"
 		]
 	},
-	"skinname-monobook": "মনোবুক"
+	"skinname-monobook": "মনোবুক",
+	"monobook-jumptotop": "উপরে ফিরে যান",
+	"monobook-jumptopersonal": "ব্যবহারকারী সরঞ্জাম",
+	"monobook-jumptonavigation": "পরিভ্রমণে ঝাঁপ দিন",
+	"monobook-jumptosearch": "অনুসন্ধানে চলুন",
+	"monobook-more-actions": "আরও",
+	"monobook-notifications-link": "বিজ্ঞপ্তি ($1)",
+	"monobook-notifications-link-none": "বিজ্ঞপ্তি"
 }

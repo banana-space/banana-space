@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Krol111"
+			"Krol111",
+			"Uostofchuodnego"
 		]
 	},
 	"wikieditor": "Zaawansowano tajla edycyji wikitekstu",
-	"wikieditor-desc": "Dowo poszyrzalno tajla edycyji wikitekstu a wjela funkcyji uofyrowane bez moduły",
+	"wikieditor-desc": "Lifruje ulepszōny, rozszyrzalny interfejs edytowaniŏ wikitekstu",
 	"wikieditor-wikitext-tab": "Wikitext",
-	"wikieditor-loading": "Trwo ładowańy…"
+	"wikieditor-loading": "Trwo ładowańy…",
+	"wikieditor-toolbar-section-help": "Pōmoc"
 }

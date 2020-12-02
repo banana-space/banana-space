@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liuxinyu970226",
-			"LNDDYL",
 			"Cwlin0416",
-			"Kly"
+			"Kly",
+			"LNDDYL",
+			"Liuxinyu970226"
 		]
 	},
 	"codeeditor-desc": "支援 JavaScript 與 CSS 語法醒目標示編輯使用 [https://ace.c9.io/ Ace 編輯器]",

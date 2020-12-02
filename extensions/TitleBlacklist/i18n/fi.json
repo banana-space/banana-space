@@ -5,9 +5,9 @@
 			"Cimon Avaro",
 			"Crt",
 			"Nike",
+			"Pxos",
 			"Str4nd",
-			"Stryn",
-			"Pxos"
+			"Stryn"
 		]
 	},
 	"action-titleblacklistlog": "tarkastella nimien mustan listan lokia",
@@ -25,6 +25,5 @@
 	"titleblacklist-override": "Ohita mustan listan merkinnät",
 	"right-tboverride": "Ohittaa sivunimien tai käyttäjänimien musta lista",
 	"right-tboverride-account": "Ohittaa käyttäjänimien musta lista",
-	"right-titleblacklistlog": "Tarkastella nimien mustan listan lokia",
-	"apihelp-titleblacklist-example-2": "Tarkista, onko [[Bar]] on mustalla listalla muokkausta varten"
+	"right-titleblacklistlog": "Tarkastella nimien mustan listan lokia"
 }

@@ -22,13 +22,14 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @ingroup Dump Maintenance
+ * @ingroup Dump
+ * @ingroup Maintenance
  */
 
-require_once __DIR__ . '/backup.inc';
+require_once __DIR__ . '/includes/BackupDumper.php';
 
 class DumpBackup extends BackupDumper {
-	function __construct( $args = null ) {
+	public function __construct( $args = null ) {
 		parent::__construct();
 
 		$this->addDescription( <<<TEXT
@@ -64,6 +65,7 @@ TEXT
 		$this->addOption( 'stub', 'Don\'t perform old_text lookups; for 2-pass dump' );
 		$this->addOption( 'uploads', 'Include upload records without files' );
 		$this->addOption( 'include-files', 'Include files within the XML stream' );
+		$this->addOption( 'namespaces', 'Limit to this comma-separated list of namespace numbers' );
 
 		if ( $args ) {
 			$this->loadWithArgv( $args );
@@ -71,7 +73,7 @@ TEXT
 		}
 	}
 
-	function execute() {
+	public function execute() {
 		$this->processOptions();
 
 		$textMode = $this->hasOption( 'stub' ) ? WikiExporter::STUB : WikiExporter::TEXT;
@@ -91,7 +93,7 @@ TEXT
 		}
 	}
 
-	function processOptions() {
+	protected function processOptions() {
 		parent::processOptions();
 
 		// Evaluate options specific to this class
@@ -130,6 +132,11 @@ TEXT
 		$this->dumpUploads = $this->hasOption( 'uploads' );
 		$this->dumpUploadFileContents = $this->hasOption( 'include-files' );
 		$this->orderRevs = $this->hasOption( 'orderrevs' );
+		if ( $this->hasOption( 'namespaces' ) ) {
+			$this->limitNamespaces = explode( ',', $this->getOption( 'namespaces' ) );
+		} else {
+			$this->limitNamespaces = null;
+		}
 	}
 }
 

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Felipe L. Ewald"
+		]
+	},
+	"apihelp-spamblacklist-description": "Valide um ou mais URLs contra o SpamBlacklist.",
+	"apihelp-spamblacklist-example-1": "Verifique dois URLs contra a lista negra",
+	"apihelp-spamblacklist-param-url": "URLs para validar contra a lista negra.",
+	"apihelp-spamblacklist-summary": "Valide um ou mais URLs contra o SpamBlacklist."
+}

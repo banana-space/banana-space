@@ -2,15 +2,20 @@
 	"@metadata": {
 		"authors": [
 			"Minh Nguyen",
+			"Trần Nguyễn Minh Huy",
 			"Vinhtantran",
-			"Withoutaname",
-			"Trần Nguyễn Minh Huy"
+			"Withoutaname"
 		]
 	},
 	"skinname-vector": "Vectơ",
 	"vector-skin-desc": "Giao diện làm lại từ MonoBook có màu tươi và khả dụng hơn",
-	"vector.css": "/* Mã CSS đặt ở đây sẽ ảnh hưởng đến thành viên sử dụng giao diện Vectơ */",
-	"vector.js": "/* Mã JavaScript tại đây sẽ được tải khi người dùng sử dụng giao diện Vectơ */",
+	"prefs-vector-enable-vector-1-label": "Chế độ Vectơ cũ",
+	"prefs-vector-enable-vector-1-help": "Trong thời gian vài năm nữa, giao diện Vectơ sẽ được cập nhật từ từ. Chế độ Vectơ cũ cho phép bạn xem phiên bản giao diện Vectơ cũ (tính đến tháng 12 năm 2019). Tìm hiểu thêm về các thay đổi này tại [[mw:Reading/Web/Desktop_Improvements|trang dự án]].",
+	"vector-opt-out": "Chuyển sang giao diện cũ",
+	"vector-opt-out-tooltip": "Thay đổi tùy chọn để quay lại kiểu giao diện cũ (Vectơ cũ)",
+	"vector.css": "/* Tất cả mã CSS tại đây sẽ được tải khi người dùng sử dụng giao diện Vectơ */",
+	"vector.js": "/* Tất cả mã JavaScript tại đây sẽ được tải khi người dùng sử dụng giao diện Vectơ */",
+	"vector-action-toggle-sidebar": "Bật/tắt thanh bên",
 	"vector-action-addsection": "Thêm đề tài",
 	"vector-action-delete": "Xóa",
 	"vector-action-move": "Di chuyển",
@@ -22,5 +27,7 @@
 	"vector-view-history": "Xem lịch sử",
 	"vector-view-view": "Đọc",
 	"vector-view-viewsource": "Xem mã nguồn",
+	"vector-jumptonavigation": "Buớc tưới chuyển hướng",
+	"vector-jumptosearch": "Bước tới tìm kiếm",
 	"vector-more-actions": "Khác"
 }

@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.provider.Api', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'Api constructor sanity check', function ( assert ) {
@@ -35,8 +35,8 @@
 
 		api.get = this.sandbox.stub();
 		apiProvider.apiGetWithMaxAge( {} );
-		assert.ok( !( 'maxage' in api.get.getCall( 0 ).args[ 0 ] ), 'maxage is not set by default' );
-		assert.ok( !( 'smaxage' in api.get.getCall( 0 ).args[ 0 ] ), 'smaxage is not set by default' );
+		assert.strictEqual( 'maxage' in api.get.getCall( 0 ).args[ 0 ], false, 'maxage is not set by default' );
+		assert.strictEqual( 'smaxage' in api.get.getCall( 0 ).args[ 0 ], false, 'smaxage is not set by default' );
 
 		options = { maxage: 123 };
 		apiProvider = new mw.mmv.provider.Api( api, options );
@@ -53,8 +53,8 @@
 
 		api.get = this.sandbox.stub();
 		apiProvider.apiGetWithMaxAge( {}, null, null );
-		assert.ok( !( 'maxage' in api.get.getCall( 0 ).args[ 0 ] ), 'maxage can be overridden to unset' );
-		assert.ok( !( 'smaxage' in api.get.getCall( 0 ).args[ 0 ] ), 'smaxage can be overridden to unset' );
+		assert.strictEqual( 'maxage' in api.get.getCall( 0 ).args[ 0 ], false, 'maxage can be overridden to unset' );
+		assert.strictEqual( 'smaxage' in api.get.getCall( 0 ).args[ 0 ], false, 'smaxage can be overridden to unset' );
 	} );
 
 	QUnit.test( 'getCachedPromise success', function ( assert ) {
@@ -70,7 +70,7 @@
 
 		promiseSource = function ( result ) {
 			return function () {
-				assert.ok( !promiseShouldBeCached, 'promise was not cached' );
+				assert.strictEqual( promiseShouldBeCached, false, 'promise was not cached' );
 				return $.Deferred().resolve( result );
 			};
 		};
@@ -104,7 +104,7 @@
 
 		promiseSource = function ( result ) {
 			return function () {
-				assert.ok( !promiseShouldBeCached, 'promise was not cached' );
+				assert.strictEqual( promiseShouldBeCached, false, 'promise was not cached' );
 				return $.Deferred().reject( result );
 			};
 		};
@@ -267,4 +267,4 @@
 			done();
 		} );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

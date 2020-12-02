@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hosseinblue"
+		]
+	},
+	"apihelp-templatedata-description": "آوردن داده‌های ذخیره‌شده توسط افزونهٔ TemplateData.",
+	"apihelp-templatedata-example-1": "برگرداندن داده‌های [[Template:Stub]] و [[Template:Example]]"
+}

@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"01miki10",
+			"Pyscowicz"
+		]
+	},
+	"apihelp-query+gadgetcategories-description": "Antaa listan pienoisohjelmien luokista.",
+	"apihelp-query+gadgetcategories-summary": "Antaa listan pienoisohjelmien luokista.",
+	"apihelp-query+gadgetcategories-param-names": "Haettavien luokkien nimet.",
+	"apihelp-query+gadgetcategories-example-1": "Hanki lista olemassa olevista pienoisohjelmaluokista",
+	"apihelp-query+gadgets-description": "Antaa listan tässä wikissä käytetyistä pienoisohjelmista."
+}

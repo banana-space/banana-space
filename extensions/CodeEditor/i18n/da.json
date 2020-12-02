@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"BoBrandt",
 			"Christian List",
-			"Peter Alberti",
-			"BoBrandt"
+			"Peter Alberti"
 		]
 	},
 	"codeeditor-desc": "Syntaks-fremhævet redigering for JavaScript- og CSS-sider ved hjælp af [https://ace.c9.io/ Ace editor]",

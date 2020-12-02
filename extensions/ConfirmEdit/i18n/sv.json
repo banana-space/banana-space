@@ -3,16 +3,17 @@
 		"authors": [
 			"Ainali",
 			"Boivie",
+			"Jopparn",
+			"Josve05a",
 			"Lejonel",
+			"Lokal Profil",
 			"M.M.S.",
 			"MagnusA",
 			"Martinwiss",
 			"Per",
 			"Rotsee",
-			"WikiPhoenix",
-			"Lokal Profil",
-			"Jopparn",
-			"Josve05a"
+			"Skalman",
+			"WikiPhoenix"
 		]
 	},
 	"captcha-edit": "För att redigera den här sidan måste du först lösa följande uppgift och skriva svaret i rutan ([[Special:Captcha/help|mer information]]):",
@@ -37,8 +38,7 @@
 	"captchahelp-text": "Webbplatser som tillåter inlägg från allmänheten, som den här wikin gör, missbrukas ofta av spammare som använder automatiserade verktyg för att lägga till länkar på många webbplatser.\nÄven om dessa spamlänkar kan tas bort är de till stort besvär.\n\nIbland, speciellt då du lägger till nya externa länkar på en sida, visar wikin en bild på en färgad eller förvriden text och ber dig skriva in orden som visas.\nEftersom detta är en uppgiften som är svår att automatisera, låter den de flesta riktiga människor göra sina redigeringar medan spammare och andra robotattacker stoppas.\n\nTyvärr kan det här orsaka problem för användare med nedsatt syn eller som använder text- eller talbaserade webbläsare.\nFör nävarande finns inga ljudbaserade alternativ tillgängliga.\nVänligen kontakta [[Special:ListAdmins|webbplatsens administratörer]] för hjälp om det här hindrar dig från att göra legitima ändringar.\n\nTryck på bakåtknappen i din webbläsare för att gå tillbaks till sidredigeringsläget.",
 	"captcha-addurl-whitelist": " #<!-- lämna denna rad precis som den är --> <pre>\n# Syntaxen är följande:\n#   * Allting från ett \"#\"-tecken till slutet av en rad är en kommentar\n#   * Varje icke-tom rad är ett fragment av ett reguljärt uttryck som endast matchar domänen i en URL\n #</pre> <!-- lämna denna rad precis som den är -->",
 	"right-skipcaptcha": "Utföra CAPTCHA-utlösande handlingar utan att behöva gå igenom CAPTCHA",
-	"captcha-apihelp-param-captchaword": "Svar till CAPTCHA",
-	"captcha-apihelp-param-captchaid": "CAPTCHA-ID från föregående begäran",
+	"action-skipcaptcha": "utföra captcha-utlösande åtgärder utan att gå genom captchan",
 	"confirmedit-preview-line": "Radnummer",
 	"confirmedit-preview-content": "Innehåll",
 	"confirmedit-preview-validity": "Giltighet",

@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Sasan700",
-			"Умар",
-			"Исмаил Садуев"
+			"Исмаил Садуев",
+			"Умар"
 		]
 	},
 	"skinname-vector": "Векторан",
@@ -15,9 +15,11 @@
 	"vector-action-undelete": "МеттахӀоттае",
 	"vector-action-unprotect": "Ларъяр хийцар",
 	"vector-view-create": "Кхоллар",
-	"vector-view-edit": "Нисъе",
-	"vector-view-history": "АгӀона хийцамаш",
-	"vector-view-view": "Éшар",
+	"vector-view-edit": "Нисъе бӀаьра",
+	"vector-view-history": "АгӀонан хийцамаш",
+	"vector-view-view": "Ешар",
 	"vector-view-viewsource": "Билглонашка хьажа",
+	"vector-jumptonavigation": "Навигацин тӀегӀо",
+	"vector-jumptosearch": "Лахарна тӀегӀо",
 	"vector-more-actions": "Кхин"
 }

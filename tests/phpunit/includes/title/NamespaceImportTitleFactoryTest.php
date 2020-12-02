@@ -24,15 +24,12 @@
  *
  * @group Title
  */
-class NamespaceImportTitleFactoryTest extends MediaWikiTestCase {
+class NamespaceImportTitleFactoryTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
-		$this->setMwGlobals( [
-			'wgLanguageCode' => 'en',
-			'wgContLang' => Language::factory( 'en' ),
-		] );
+		$this->setContentLang( 'en' );
 	}
 
 	public function basicProvider() {

@@ -42,7 +42,7 @@ class ApiQueryIWBacklinks extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @param ApiPageSet $resultPageSet
+	 * @param ApiPageSet|null $resultPageSet
 	 * @return void
 	 */
 	public function run( $resultPageSet = null ) {
@@ -59,7 +59,7 @@ class ApiQueryIWBacklinks extends ApiQueryGeneratorBase {
 			);
 		}
 
-		if ( !is_null( $params['continue'] ) ) {
+		if ( $params['continue'] !== null ) {
 			$cont = explode( '|', $params['continue'] );
 			$this->dieContinueUsageIf( count( $cont ) != 3 );
 
@@ -67,7 +67,7 @@ class ApiQueryIWBacklinks extends ApiQueryGeneratorBase {
 			$op = $params['dir'] == 'descending' ? '<' : '>';
 			$prefix = $db->addQuotes( $cont[0] );
 			$title = $db->addQuotes( $cont[1] );
-			$from = intval( $cont[2] );
+			$from = (int)$cont[2];
 			$this->addWhere(
 				"iwl_prefix $op $prefix OR " .
 				"(iwl_prefix = $prefix AND " .
@@ -115,6 +115,11 @@ class ApiQueryIWBacklinks extends ApiQueryGeneratorBase {
 
 		$count = 0;
 		$result = $this->getResult();
+
+		if ( $resultPageSet === null ) {
+			$this->executeGenderCacheFromResultWrapper( $res, __METHOD__ );
+		}
+
 		foreach ( $res as $row ) {
 			if ( ++$count > $params['limit'] ) {
 				// We've reached the one extra which shows that there are
@@ -128,7 +133,7 @@ class ApiQueryIWBacklinks extends ApiQueryGeneratorBase {
 				break;
 			}
 
-			if ( !is_null( $resultPageSet ) ) {
+			if ( $resultPageSet !== null ) {
 				$pages[] = Title::newFromRow( $row );
 			} else {
 				$entry = [ 'pageid' => (int)$row->page_id ];
@@ -159,7 +164,7 @@ class ApiQueryIWBacklinks extends ApiQueryGeneratorBase {
 			}
 		}
 
-		if ( is_null( $resultPageSet ) ) {
+		if ( $resultPageSet === null ) {
 			$result->addIndexedTagName( [ 'query', $this->getModuleName() ], 'iw' );
 		} else {
 			$resultPageSet->populateFromTitles( $pages );

@@ -2,18 +2,25 @@
 
 namespace RemexHtml;
 
+use RemexHtml\Tokenizer\Tokenizer;
+
 /**
  * Generate HTMLData.php. This can be executed e.g. with
  *
- * echo 'RemexHtml\GenerateDataFiles::run()' | hhvm bin/test.php
+ * echo 'RemexHtml\GenerateDataFiles::run()' | php bin/test.php
+ *
+ * or, using the psysh shell from the project root directory:
+ *
+ * >>> require('vendor/autoload.php');
+ * >>> RemexHtml\GenerateDataFiles::run()
  */
 class GenerateDataFiles {
-	const NS_HTML = 'http://www.w3.org/1999/xhtml';
-	const NS_MATHML = 'http://www.w3.org/1998/Math/MathML';
-	const NS_SVG = 'http://www.w3.org/2000/svg';
-	const NS_XLINK = 'http://www.w3.org/1999/xlink';
-	const NS_XML = 'http://www.w3.org/XML/1998/namespace';
-	const NS_XMLNS = 'http://www.w3.org/2000/xmlns/';
+	private const NS_HTML = 'http://www.w3.org/1999/xhtml';
+	private const NS_MATHML = 'http://www.w3.org/1998/Math/MathML';
+	private const NS_SVG = 'http://www.w3.org/2000/svg';
+	private const NS_XLINK = 'http://www.w3.org/1999/xlink';
+	private const NS_XML = 'http://www.w3.org/XML/1998/namespace';
+	private const NS_XMLNS = 'http://www.w3.org/2000/xmlns/';
 
 	/**
 	 * The only public entry point
@@ -146,6 +153,12 @@ EOT;
 	private static $nameChar = 'NameStartChar | "-" | "." | [0-9] | #xB7 | [#x0300-#x036F] | [#x203F-#x2040]';
 	// @codingStandardsIgnoreEnd
 
+	/**
+	 * Build a regex alternation from an array of ampersand-prefixed entity
+	 * names.
+	 * @param string[] $array
+	 * @return string
+	 */
 	private function makeRegexAlternation( $array ) {
 		$regex = '';
 		foreach ( $array as $value ) {
@@ -231,7 +244,9 @@ EOT;
 	}
 
 	private function execute() {
-		$entitiesJson = file_get_contents( __DIR__ . '/entities.json' );
+		$filename = __DIR__ . '/entities.json';
+		$entitiesJson = file_exists( $filename ) ?
+			file_get_contents( $filename ) : false;
 
 		if ( $entitiesJson === false ) {
 			throw new \Exception( "Please download entities.json from " .
@@ -257,6 +272,9 @@ EOT;
 		} );
 
 		$entityRegex = $this->makeRegexAlternation( array_keys( $entities ) );
+		$charRefRegex = str_replace(
+			'{{NAMED_ENTITY_REGEX}}', $entityRegex, Tokenizer::CHARREF_REGEX
+		);
 
 		$matches = [];
 		preg_match_all( '/^0x([0-9A-F]+)\s+U\+([0-9A-F]+)/m',
@@ -278,6 +296,7 @@ EOT;
 			[ 'NameStartChar' => self::$nameStartChar ] );
 
 		$encEntityRegex = var_export( $entityRegex, true );
+		$encCharRefRegex = var_export( $charRefRegex, true );
 		$encTranslations = var_export( $entityTranslations, true );
 		$encLegacy = var_export( $legacyNumericEntities, true );
 		$encQuirkyRegex = var_export( $quirkyRegex, true );
@@ -292,6 +311,13 @@ EOT;
 		}
 		$encSpecial = var_export( $special, true );
 
+		$nsHtml = var_export( self::NS_HTML, true );
+		$nsMathML = var_export( self::NS_MATHML, true );
+		$nsSvg = var_export( self::NS_SVG, true );
+		$nsXlink = var_export( self::NS_XLINK, true );
+		$nsXml = var_export( self::NS_XML, true );
+		$nsXmlNs = var_export( self::NS_XMLNS, true );
+
 		$fileContents = '<' . <<<PHP
 ?php
 
@@ -302,15 +328,16 @@ EOT;
 namespace RemexHtml;
 
 class HTMLData {
-	const NS_HTML = 'http://www.w3.org/1999/xhtml';
-	const NS_MATHML = 'http://www.w3.org/1998/Math/MathML';
-	const NS_SVG = 'http://www.w3.org/2000/svg';
-	const NS_XLINK = 'http://www.w3.org/1999/xlink';
-	const NS_XML = 'http://www.w3.org/XML/1998/namespace';
-	const NS_XMLNS = 'http://www.w3.org/2000/xmlns/';
+	public const NS_HTML = $nsHtml;
+	public const NS_MATHML = $nsMathML;
+	public const NS_SVG = $nsSvg;
+	public const NS_XLINK = $nsXlink;
+	public const NS_XML = $nsXml;
+	public const NS_XMLNS = $nsXmlNs;
 
 	static public \$special = $encSpecial;
 	static public \$namedEntityRegex = $encEntityRegex;
+	static public \$charRefRegex = $encCharRefRegex;
 	static public \$namedEntityTranslations = $encTranslations;
 	static public \$legacyNumericEntities = $encLegacy;
 	static public \$quirkyPrefixRegex = $encQuirkyRegex;

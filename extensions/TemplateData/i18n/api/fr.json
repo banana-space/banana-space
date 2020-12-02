@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko",
+			"Wladek92"
+		]
+	},
+	"apihelp-templatedata-description": "Récupérer les données stockées via l’extension TemplateData.",
+	"apihelp-templatedata-summary": "Récupérer les données stockées par l’extension TemplateData.",
+	"apihelp-templatedata-example-1": "Renvoyer TemplateData pour [[Template:Stub]] et [[Template:Example]], avec des résultats si les modèles n’existent pas ou existent mais sans TemplateData",
+	"apihelp-templatedata-example-2": "Renvoyer TemplateData pour [[Template:Stub]] et [[Template:Example]], avec aucun résultat si les modèles n’existent pas ou n’ont pas de TemplateData",
+	"apihelp-templatedata-param-includeMissingTitles": "Renvoyer des données sur les titres même s’ils sont absents ou n’ont pas de TemplateData. Par défaut, les titres ne sont renvoyés que s’ils existent et ont un TemplateData.",
+	"apihelp-templatedata-param-doNotIgnoreMissingTitles": "Renvoyer les données sur les titres, même s’ils manquent ou n’ont pas de TemplateData. Par défaut (pour des raisons de compatibilité ascendante), les titres uniquement  retournés sont ceux qui existent et qui ont des TemplateData.",
+	"apihelp-templatedata-param-lang": "Renvoyer les valeurs localisées dans cette langue. Par défaut, toutes les traductions disponibles sont renvoyées.",
+	"apierror-templatedata-corrupt": "Le modèle de données de la page $1 contient des données invalides: $2",
+	"apiwarn-templatedata-deprecation-format": "Le format de sortie par défaut sera changé en <kbd>jsonfm</kbd> dans l'avenir. Veuillez spécifier <kbd>format=json</kbd> explicitement."
+}

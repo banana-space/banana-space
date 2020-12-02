@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Belkacem77"
+		]
+	},
+	"apihelp-visualeditor-description": "Ad d-yerr HTML5 n usebter seg umeẓlu Parsoid",
+	"apihelp-visualeditor-param-etag": "ETag ara tazneḍ",
+	"apihelp-visualeditor-param-format": "Amasal n tuffɣa.",
+	"apihelp-visualeditor-param-html": "HTML ara tazneḍ i Parsoid akken ad yettwaselket ar uḍris awiki.",
+	"apihelp-visualeditor-summary": "Ad d-yerr asebter HTML5 n umeẓlu Parsoid.",
+	"apihelp-visualeditoredit-description": "Sekles asebter HTML5 ar Mediawiki (yettwaselket ar uḍris awiki s umeẓlu Parsoid).",
+	"apihelp-visualeditoredit-summary": "Sekles asebter HTML5 ar Mediawiki (yettwaselket ar uḍris awiki s umeẓlu Parsoid)."
+}

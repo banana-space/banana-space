@@ -29,6 +29,10 @@
  * @ingroup Maintenance
  */
 
+use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
+
 require_once __DIR__ . '/Maintenance.php';
 
 /**
@@ -46,6 +50,12 @@ class RebuildLocalisationCache extends Maintenance {
 			false, true );
 		$this->addOption( 'lang', 'Only rebuild these languages, comma separated.',
 			false, true );
+		$this->addOption(
+			'store-class',
+			'Override the LC store class (normally $wgLocalisationCacheConf[\'storeClass\'])',
+			false,
+			true
+		);
 	}
 
 	public function finalSetup() {
@@ -58,7 +68,7 @@ class RebuildLocalisationCache extends Maintenance {
 	}
 
 	public function execute() {
-		global $wgLocalisationCacheConf;
+		global $wgLocalisationCacheConf, $wgCacheDirectory;
 
 		$force = $this->hasOption( 'force' );
 		$threads = $this->getOption( 'threads', 1 );
@@ -76,16 +86,36 @@ class RebuildLocalisationCache extends Maintenance {
 		}
 
 		$conf = $wgLocalisationCacheConf;
-		$conf['manualRecache'] = false; // Allow fallbacks to create CDB files
-		if ( $force ) {
-			$conf['forceRecache'] = true;
-		}
+		// Allow fallbacks to create CDB files
+		$conf['manualRecache'] = false;
+		$conf['forceRecache'] = $force || !empty( $conf['forceRecache'] );
 		if ( $this->hasOption( 'outdir' ) ) {
 			$conf['storeDirectory'] = $this->getOption( 'outdir' );
 		}
-		$lc = new LocalisationCacheBulkLoad( $conf );
 
-		$allCodes = array_keys( Language::fetchLanguageNames( null, 'mwfile' ) );
+		if ( $this->hasOption( 'store-class' ) ) {
+			$conf['storeClass'] = $this->getOption( 'store-class' );
+		}
+		// XXX Copy-pasted from ServiceWiring.php. Do we need a factory for this one caller?
+		$services = MediaWikiServices::getInstance();
+		$lc = new LocalisationCacheBulkLoad(
+			new ServiceOptions(
+				LocalisationCache::CONSTRUCTOR_OPTIONS,
+				$conf,
+				$services->getMainConfig()
+			),
+			LocalisationCache::getStoreFromConf( $conf, $wgCacheDirectory ),
+			LoggerFactory::getInstance( 'localisation' ),
+			[ function () use ( $services ) {
+				MessageBlobStore::clearGlobalCacheEntry( $services->getMainWANObjectCache() );
+			} ],
+			$services->getLanguageNameUtils(),
+			$services->getHookContainer()
+		);
+
+		$allCodes = array_keys( $services
+			->getLanguageNameUtils()
+			->getLanguageNames( null, 'mwfile' ) );
 		if ( $this->hasOption( 'lang' ) ) {
 			# Validate requested languages
 			$codes = array_intersect( $allCodes,
@@ -149,8 +179,8 @@ class RebuildLocalisationCache extends Maintenance {
 	/**
 	 * Helper function to rebuild list of languages codes. Prints the code
 	 * for each language which is rebuilt.
-	 * @param array $codes List of language codes to rebuild.
-	 * @param LocalisationCache $lc Instance of LocalisationCacheBulkLoad (?)
+	 * @param string[] $codes List of language codes to rebuild.
+	 * @param LocalisationCache $lc
 	 * @param bool $force Rebuild up-to-date languages
 	 * @return int Number of rebuilt languages
 	 */

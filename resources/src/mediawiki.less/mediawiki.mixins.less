@@ -1,7 +1,7 @@
-// Common Less mixin library for MediaWiki
+// Common LESS mixin library for MediaWiki
 //
-// By default the folder containing this file is included in $wgResourceLoaderLESSImportPaths,
-// which makes this file importable by all less files via `@import 'mediawiki.mixins';`.
+// By default the folder containing this file is included in the LESS import paths,
+// which makes this file importable by all less files via `@import 'mediawiki.mixins.less';`.
 //
 // The mixins included below are considered a public interface for MediaWiki extensions.
 // The signatures of parametrized mixins should be kept as stable as possible.
@@ -9,34 +9,37 @@
 // See <http://lesscss.org/#-mixins> for more information about how to write mixins.
 
 .background-image( @url ) {
-	background-image: e( '/* @embed */' ) url( @url );
+	background-image: url( @url );
 }
 
-// Deprecated in MW 1.27
-.background-size( @width, @height ) {
-	// Vendor prefix is added to support Android 2
-	-webkit-background-size: @width @height;
-	background-size: @width @height;
+.horizontal-gradient( @startColor: #808080, @endColor: #fff, @startPos: 0, @endPos: 100% ) {
+	background-color: average( @startColor, @endColor );
+	background-image: -webkit-gradient( linear, left top, right top, color-stop( @startPos, @startColor ), color-stop( @endPos, @endColor ) );
+	background-image: -webkit-linear-gradient( left, @startColor @startPos, @endColor @endPos );
+	background-image: -moz-linear-gradient( left, @startColor @startPos, @endColor @endPos );
+	background-image: linear-gradient( to right, @startColor @startPos, @endColor @endPos );
 }
 
-.vertical-gradient( @startColor: gray, @endColor: white, @startPos: 0, @endPos: 100% ) {
-	background-color: @endColor;
-	background-image: -webkit-linear-gradient( top, @startColor @startPos, @endColor @endPos ); // Safari 5.1+, Chrome 10+
-	background-image: -moz-linear-gradient( top, @startColor @startPos, @endColor @endPos ); // Firefox 3.6+
-	background-image: linear-gradient( @startColor @startPos, @endColor @endPos ); // Standard
+.vertical-gradient( @startColor: #808080, @endColor: #fff, @startPos: 0, @endPos: 100% ) {
+	background-color: average( @startColor, @endColor );
+	background-image: -webkit-gradient( linear, right top, right bottom, color-stop( @startPos, @startColor ), color-stop( @endPos, @endColor ) );
+	background-image: -webkit-linear-gradient( top, @startColor @startPos, @endColor @endPos );
+	background-image: -moz-linear-gradient( top, @startColor @startPos, @endColor @endPos );
+	background-image: linear-gradient( to bottom, @startColor @startPos, @endColor @endPos );
 }
 
+// Deprecated in MW 1.35, see T248062. To be removed in MW 1.36.
+// Use `background-image` property only with SVG without fallback instead.
+//
 // SVG support using a transparent gradient to guarantee cross-browser
 // compatibility (browsers able to understand gradient syntax support also SVG).
 // http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique
-//
-// We do not embed the fallback image on the assumption that the gain for old browsers
-// is not worth the harm done to modern ones.
 .background-image-svg( @svg, @fallback ) {
 	background-image: url( @fallback );
-	background-image: linear-gradient( transparent, transparent ), e( '/* @embed */' ) url( @svg );
+	background-image: linear-gradient( transparent, transparent ), url( @svg );
 }
 
+// Deprecated in MW 1.35, see T248047. To be removed in MW 1.36.
 // Shorthand for background-image-svg. Use if your PNG and SVG have the same name
 // and only if you cannot use ResourceLoaderImage module for some particular reason.
 .background-image-svg-quick( @url ) {
@@ -44,17 +47,11 @@
 }
 
 .list-style-image( @url ) {
-	list-style-image: e( '/* @embed */' ) url( @url );
-}
-
-.list-style-image-svg( @svg, @fallback ) {
-	list-style-image: e( '/* @embed */' ) url( @svg );
-	/* Fallback to PNG bullet for IE 8 and below using CSS hack */
-	list-style-image: e( '/* @embed */' ) url( @fallback ) e( '\9' );
+	list-style-image: url( @url );
 }
 
 .hyphens( @value: auto ) {
-	& when ( @value = auto ){
+	& when ( @value = auto ) {
 		// Legacy `word-wrap`; IE 6-11, Edge 12+, Firefox 3.5+, Chrome 4+, Safari 3.1+,
 		//   Opera 11.5+, iOS 3.2+, Android 2.1+
 		// `overflow-wrap` is W3 standard, but it doesn't seem as if browser vendors
@@ -72,10 +69,34 @@
 	hyphens: @value;         // Firefox 43+, Chrome 55+, Android 62+, UC Browser 11.8+, Samsung 6.2+
 }
 
+// Use to truncate overflow text with value of `ellipsis` (mixin default)
+// a custom string (Firefox 9+ only).
+// Recommended usage: `text-overflow( @visible: false )` for best readability.
+.text-overflow( @visible: false, @value: ellipsis ) {
+	& when ( @visible = true ) {
+		overflow: visible;
+		text-overflow: clip;
+		white-space: normal;
+	}
+	& when ( @visible = false ) {
+		overflow: hidden;
+		text-overflow: @value;
+		white-space: nowrap;
+	}
+}
+
 .transform( @value ) {
 	-webkit-transform: @value; // Safari 3.1-8.0, iOS 3.2-8.4, Android 2.1-4.4.4
 	-moz-transform: @value; // Firefox 3.5-15
+	-ms-transform: @value; // IE 9
 	transform: @value; // Chrome 36+, Firefox 16+, IE 10+, Safari 9+, Opera 23+, iOS 9.2+, Android 5+
+}
+
+.transform-origin( @value ) {
+	-webkit-transform-origin: @value; // Chrome 4-35, Safari 3.1-8.0, iOS 3.2-8.4, Op 15-22, Android 2.1-4.4.4
+	-moz-transform-origin: @value; // Firefox 3.5-15
+	-ms-transform-origin: @value; // IE 9
+	transform-origin: @value; // Chrome 36+, Firefox 16+, IE 10+, Safari 9+, Opera 23+, iOS 9.2+, Android 5+
 }
 
 .transition( @value ) {
@@ -92,7 +113,6 @@
 // and remaining parameters are additional transitions."
 .transition-transform( ... ) {
 	-webkit-backface-visibility: hidden; // Older Webkit browsers: Promote element to a composite layer & involve the GPU
-
 	-webkit-transition: -webkit-transform @arguments; // Safari 3.1-8, iOS 3.2-8.4, Android 2.1-4.4.4
 	-moz-transition: -moz-transform @arguments; // Firefox 4-15 for `-moz-transition`
 	transition: transform @arguments; // Chrome 36+, Firefox 16+, IE 10+, Safari 9+, Opera 12.1+, iOS 9.2+, Android 36+
@@ -153,14 +173,40 @@
 	-webkit-box-flex: @grow; // iOS 6-, Safari 3.1-6
 	-moz-box-flex: @grow; // Firefox 21-
 	width: @width; // Fallback for flex-basis
-
 	-ms-flex: @grow @shrink @width; // IE 10
 	flex: @grow @shrink @width;
-
 	-webkit-box-ordinal-group: @order; // iOS 6-, Safari 3.1-6
 	-moz-box-ordinal-group: @order; // Firefox 21-
 	-ms-flex-order: @order; // IE 10
 	order: @order;
+}
+
+// “Clearfix Reloaded” Mixin
+// The mixin is used on a container with floating children.
+// Margin collapsing is a feature, not a bug, hence relying on `display: block` as default.
+// With `.mixin-clearfix( @collapse: false; );` you call it to let `margin`s not collapse.
+// See https://www.cssmojo.com/the-very-latest-clearfix-reloaded/
+// In future we might replace the `&:after` pseudo-element with
+// `display: flow-root;` altogether.
+// Support: Firefox 3.5+, Safari 4+, Chrome, Opera 15+, IE 8+
+.mixin-clearfix( @collapse: true ) {
+	&:after {
+		clear: both;
+
+		// Margin collapsing as feature. Apply it.
+		& when ( @collapse ) {
+			content: '';
+			display: block;
+		}
+	}
+	// Margin collapsing as bug. Prevent it.
+	& when not ( @collapse ) {
+		&:before,
+		&:after {
+			content: '';
+			display: table;
+		}
+	}
 }
 
 /* stylelint-disable selector-no-vendor-prefix, at-rule-no-unknown */

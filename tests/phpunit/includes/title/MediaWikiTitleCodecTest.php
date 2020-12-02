@@ -19,6 +19,9 @@
  * @author Daniel Kinzler
  */
 
+use MediaWiki\Interwiki\InterwikiLookup;
+use MediaWiki\MediaWikiServices;
+
 /**
  * @covers MediaWikiTitleCodec
  *
@@ -26,9 +29,9 @@
  * @group Database
  *        ^--- needed because of global state in
  */
-class MediaWikiTitleCodecTest extends MediaWikiTestCase {
+class MediaWikiTitleCodecTest extends MediaWikiIntegrationTestCase {
 
-	public function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setMwGlobals( [
@@ -37,21 +40,6 @@ class MediaWikiTitleCodecTest extends MediaWikiTestCase {
 			'wgMetaNamespace' => 'Project',
 			'wgLocalInterwikis' => [ 'localtestiw' ],
 			'wgCapitalLinks' => true,
-
-			// NOTE: this is why global state is evil.
-			// TODO: refactor access to the interwiki codes so it can be injected.
-			'wgHooks' => [
-				'InterwikiLoadPrefix' => [
-					function ( $prefix, &$data ) {
-						if ( $prefix === 'localtestiw' ) {
-							$data = [ 'iw_url' => 'localtestiw' ];
-						} elseif ( $prefix === 'remotetestiw' ) {
-							$data = [ 'iw_url' => 'remotetestiw' ];
-						}
-						return false;
-					}
-				]
-			]
 		] );
 		$this->setUserLang( 'en' );
 		$this->setContentLang( 'en' );
@@ -77,12 +65,86 @@ class MediaWikiTitleCodecTest extends MediaWikiTestCase {
 		return $genderCache;
 	}
 
+	/**
+	 * Returns a mock InterwikiLookup that only has an isValidInterwiki() method, which recognizes
+	 * 'localtestiw' and 'remotetestiw'. All other methods throw.
+	 *
+	 * @return InterwikiLookup
+	 */
+	private function getInterwikiLookup() : InterwikiLookup {
+		$iwLookup = $this->createMock( InterwikiLookup::class );
+
+		$iwLookup->expects( $this->any() )
+			->method( 'isValidInterwiki' )
+			->will( $this->returnCallback( function ( $prefix ) {
+				return $prefix === 'localtestiw' || $prefix === 'remotetestiw';
+			} ) );
+
+		$iwLookup->expects( $this->never() )
+			->method( $this->callback( function ( $name ) {
+				return $name !== 'isValidInterwiki';
+			} ) );
+
+		return $iwLookup;
+	}
+
+	/**
+	 * Returns a mock NamespaceInfo that has only the following methods:
+	 *
+	 *  * exists()
+	 *  * getCanonicalName()
+	 *  * hasGenderDistinction()
+	 *  * isCapitalized()
+	 *
+	 * All other methods throw. The only namespaces that exist are NS_SPECIAL, NS_MAIN, NS_TALK,
+	 * NS_USER, and NS_USER_TALK. NS_USER and NS_USER_TALK have gender distinctions. All namespaces
+	 * are capitalized.
+	 *
+	 * @return NamespaceInfo
+	 */
+	private function getNamespaceInfo() : NamespaceInfo {
+		$canonicalNamespaces = [
+			NS_SPECIAL => 'Special',
+			NS_MAIN => '',
+			NS_TALK => 'Talk',
+			NS_USER => 'User',
+			NS_USER_TALK => 'User_talk',
+		];
+
+		$nsInfo = $this->createMock( NamespaceInfo::class );
+
+		$nsInfo->method( 'exists' )
+			->will( $this->returnCallback( function ( $ns ) use ( $canonicalNamespaces ) {
+				return isset( $canonicalNamespaces[$ns] );
+			} ) );
+
+		$nsInfo->method( 'getCanonicalName' )
+			->will( $this->returnCallback( function ( $ns ) use ( $canonicalNamespaces ) {
+				return $canonicalNamespaces[$ns] ?? false;
+			} ) );
+
+		$nsInfo->method( 'hasGenderDistinction' )
+			->will( $this->returnCallback( function ( $ns ) {
+				return $ns === NS_USER || $ns === NS_USER_TALK;
+			} ) );
+
+		$nsInfo->method( 'isCapitalized' )->willReturn( true );
+
+		$nsInfo->expects( $this->never() )->method( $this->anythingBut(
+			'exists', 'getCanonicalName', 'hasGenderDistinction', 'isCapitalized'
+		) );
+
+		return $nsInfo;
+	}
+
 	protected function makeCodec( $lang ) {
-		$gender = $this->getGenderCache();
-		$lang = Language::factory( $lang );
-		// language object can came from cache, which does not respect test settings
-		$lang->resetNamespaces();
-		return new MediaWikiTitleCodec( $lang, $gender );
+		return new MediaWikiTitleCodec(
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $lang ),
+			$this->getGenderCache(),
+			[ 'localtestiw' ],
+			$this->getInterwikiLookup(),
+			$this->getNamespaceInfo()
+		);
 	}
 
 	public static function provideFormat() {
@@ -164,7 +226,7 @@ class MediaWikiTitleCodecTest extends MediaWikiTestCase {
 			// getGenderCache() provides a mock that considers first
 			// names ending in "a" to be female.
 			[ NS_USER, 'Lisa_Müller', '', 'de', 'Benutzerin:Lisa Müller' ],
-			[ 1000000, 'Invalid_namespace', '', 'en', ':Invalid namespace' ],
+			[ 1000000, 'Invalid_namespace', '', 'en', 'Special:Badtitle/NS1000000:Invalid namespace' ],
 		];
 	}
 
@@ -195,7 +257,7 @@ class MediaWikiTitleCodecTest extends MediaWikiTestCase {
 			[ NS_MAIN, 'Remote_page', '', 'remotetestiw', 'en', 'remotetestiw:Remote_page' ],
 
 			// non-existent namespace
-			[ 10000000, 'Foobar', '', '', 'en', ':Foobar' ],
+			[ 10000000, 'Foobar', '', '', 'en', 'Special:Badtitle/NS10000000:Foobar' ],
 		];
 	}
 
@@ -298,7 +360,18 @@ class MediaWikiTitleCodecTest extends MediaWikiTestCase {
 				new TitleValue( NS_CATEGORY,
 					'X' . str_repeat( 'x', 247 ) ) ],
 			[ str_repeat( 'x', 252 ), NS_MAIN, 'en',
-				'X' . str_repeat( 'x', 251 ) ]
+				'X' . str_repeat( 'x', 251 ) ],
+			// Test decoding and normalization
+			[ '&quot;n&#x303;&#34;', NS_MAIN, 'en', new TitleValue( NS_MAIN, '"ñ"' ) ],
+			[ 'X#n&#x303;', NS_MAIN, 'en', new TitleValue( NS_MAIN, 'X', 'ñ' ) ],
+			// target section parsing
+			'empty fragment' => [ 'X#', NS_MAIN, 'en', new TitleValue( NS_MAIN, 'X' ) ],
+			'only fragment' => [ '#', NS_MAIN, 'en', new TitleValue( NS_MAIN, '' ) ],
+			'double hash' => [ 'X##', NS_MAIN, 'en', new TitleValue( NS_MAIN, 'X', '#' ) ],
+			'fragment with hash' => [ 'X#z#z', NS_MAIN, 'en', new TitleValue( NS_MAIN, 'X', 'z#z' ) ],
+			'fragment with space' => [ 'X#z z', NS_MAIN, 'en', new TitleValue( NS_MAIN, 'X', 'z z' ) ],
+			'fragment with percent' => [ 'X#z%z', NS_MAIN, 'en', new TitleValue( NS_MAIN, 'X', 'z%z' ) ],
+			'fragment with amp' => [ 'X#z&z', NS_MAIN, 'en', new TitleValue( NS_MAIN, 'X', 'z&z' ) ],
 		];
 	}
 
@@ -324,7 +397,7 @@ class MediaWikiTitleCodecTest extends MediaWikiTestCase {
 		// TODO: test unicode errors
 
 		return [
-			[ '#' ],
+			[ 'User:#' ],
 			[ '::' ],
 			[ '::xx' ],
 			[ '::##' ],
@@ -385,10 +458,375 @@ class MediaWikiTitleCodecTest extends MediaWikiTestCase {
 	 * @dataProvider provideParseTitle_invalid
 	 */
 	public function testParseTitle_invalid( $text ) {
-		$this->setExpectedException( MalformedTitleException::class );
+		$this->expectException( MalformedTitleException::class );
 
 		$codec = $this->makeCodec( 'en' );
 		$codec->parseTitle( $text, NS_MAIN );
+	}
+
+	/**
+	 * @dataProvider provideMakeTitleValueSafe
+	 * @covers IP::sanitizeIP
+	 */
+	public function testMakeTitleValueSafe(
+		$expected, $ns, $text, $fragment = '', $interwiki = '', $lang = 'en'
+	) {
+		$codec = $this->makeCodec( $lang );
+		$this->assertEquals( $expected,
+			$codec->makeTitleValueSafe( $ns, $text, $fragment, $interwiki ) );
+	}
+
+	/**
+	 * @dataProvider provideMakeTitleValueSafe
+	 * @covers Title::makeTitleSafe
+	 * @covers Title::makeName
+	 * @covers Title::secureAndSplit
+	 * @covers IP::sanitizeIP
+	 */
+	public function testMakeTitleSafe(
+		$expected, $ns, $text, $fragment = '', $interwiki = '', $lang = 'en'
+	) {
+		$codec = $this->makeCodec( $lang );
+		$this->setService( 'TitleParser', $codec );
+		$this->setService( 'TitleFormatter', $codec );
+
+		$actual = Title::makeTitleSafe( $ns, $text, $fragment, $interwiki );
+
+		if ( $expected ) {
+			$this->assertNotNull( $actual );
+			$this->assertTrue( Title::castFromLinkTarget( $expected )->equals( $actual ) );
+		} else {
+			$this->assertNull( $actual );
+		}
+	}
+
+	public static function provideMakeTitleValueSafe() {
+		$ret = [
+			'Nonexistent NS' => [ null, 942929, 'Test' ],
+			'Linebreak in title' => [ null, NS_MAIN, "Test\nthis" ],
+			'Pipe in title' => [ null, NS_MAIN, "Test|this" ],
+			'Simple page' => [ new TitleValue( NS_MAIN, 'Test' ), NS_MAIN, 'Test' ],
+
+			// Fragments
+			'Passed fragment' => [
+				new TitleValue( NS_MAIN, 'Test', 'Fragment' ),
+				NS_MAIN, 'Test', 'Fragment'
+			],
+			'Embedded fragment' => [
+				new TitleValue( NS_MAIN, 'Test', 'Fragment' ),
+				NS_MAIN, 'Test#Fragment'
+			],
+			'Passed fragment with spaces' => [
+				// XXX Leading space is okay in fragment?
+				new TitleValue( NS_MAIN, 'Test', ' Frag ment' ),
+				NS_MAIN, ' Test ', " Frag_ment "
+			],
+			'Embedded fragment with spaces' => [
+				// XXX Leading space is okay in fragment?
+				new TitleValue( NS_MAIN, 'Test', ' Frag ment' ),
+				NS_MAIN, " Test # Frag_ment "
+			],
+			// XXX Is it correct that these aren't normalized to spaces?
+			'Passed fragment with leading tab' => [ null, NS_MAIN, "\tTest\t", "\tFragment" ],
+			'Embedded fragment with leading tab' => [ null, NS_MAIN, "\tTest\t#\tFragment" ],
+			'Passed fragment with trailing tab' => [ null, NS_MAIN, "\tTest\t", "Fragment\t" ],
+			'Embedded fragment with trailing tab' => [ null, NS_MAIN, "\tTest\t#Fragment\t" ],
+			'Passed fragment with interior tab' => [ null, NS_MAIN, "\tTest\t", "Frag\tment" ],
+			'Embedded fragment with interior tab' => [ null, NS_MAIN, "\tTest\t#\tFrag\tment" ],
+
+			// Interwikis
+			'Passed local interwiki' => [
+				new TitleValue( NS_MAIN, 'Test' ),
+				NS_MAIN, 'Test', '', 'localtestiw'
+			],
+			'Embedded local interwiki' => [
+				new TitleValue( NS_MAIN, 'Test' ),
+				NS_MAIN, 'localtestiw:Test'
+			],
+			'Passed remote interwiki' => [
+				new TitleValue( NS_MAIN, 'Test', '', 'remotetestiw' ),
+				NS_MAIN, 'Test', '', 'remotetestiw'
+			],
+			'Embedded remote interwiki' => [
+				new TitleValue( NS_MAIN, 'Test', '', 'remotetestiw' ),
+				NS_MAIN, 'remotetestiw:Test'
+			],
+			// XXX Are these correct? Interwiki prefixes are case-sensitive?
+			'Passed local interwiki with different case' => [
+				new TitleValue( NS_MAIN, 'LocalTestIW:Test' ),
+				NS_MAIN, 'Test', '', 'LocalTestIW'
+			],
+			'Embedded local interwiki with different case' => [
+				new TitleValue( NS_MAIN, 'LocalTestIW:Test' ),
+				NS_MAIN, 'LocalTestIW:Test'
+			],
+			'Passed remote interwiki with different case' => [
+				new TitleValue( NS_MAIN, 'RemoteTestIW:Test' ),
+				NS_MAIN, 'Test', '', 'RemoteTestIW'
+			],
+			'Embedded remote interwiki with different case' => [
+				new TitleValue( NS_MAIN, 'RemoteTestIW:Test' ),
+				NS_MAIN, 'RemoteTestIW:Test'
+			],
+			'Passed local interwiki with lowercase page name' => [
+				new TitleValue( NS_MAIN, 'Test' ),
+				NS_MAIN, 'test', '', 'localtestiw'
+			],
+			'Embedded local interwiki with lowercase page name' => [
+				new TitleValue( NS_MAIN, 'Test' ),
+				NS_MAIN, 'localtestiw:test'
+			],
+			// For remote we don't auto-capitalize
+			'Passed remote interwiki with lowercase page name' => [
+				new TitleValue( NS_MAIN, 'test', '', 'remotetestiw' ),
+				NS_MAIN, 'test', '', 'remotetestiw'
+			],
+			'Embedded remote interwiki with lowercase page name' => [
+				new TitleValue( NS_MAIN, 'test', '', 'remotetestiw' ),
+				NS_MAIN, 'remotetestiw:test'
+			],
+
+			// Fragment and interwiki
+			'Fragment and local interwiki' => [
+				new TitleValue( NS_MAIN, 'Test', 'Fragment' ),
+				NS_MAIN, 'Test', 'Fragment', 'localtestiw'
+			],
+			'Fragment and remote interwiki' => [
+				new TitleValue( NS_MAIN, 'Test', 'Fragment', 'remotetestiw' ),
+				NS_MAIN, 'Test', 'Fragment', 'remotetestiw'
+			],
+			'Fragment and local interwiki and non-main namespace' => [
+				new TitleValue( NS_TALK, 'Test', 'Fragment' ),
+				NS_TALK, 'Test', 'Fragment', 'localtestiw'
+			],
+			// We don't know the foreign wiki's namespaces, so it will always be NS_MAIN
+			'Fragment and remote interwiki and non-main namespace' => [
+				new TitleValue( NS_MAIN, 'Talk:Test', 'Fragment', 'remotetestiw' ),
+				NS_TALK, 'Test', 'Fragment', 'remotetestiw'
+			],
+
+			// Whitespace normalization and Unicode stripping
+			'Name with space' => [
+				new TitleValue( NS_MAIN, 'Test_test' ),
+				NS_MAIN, 'Test test'
+			],
+			'Unicode bidi override characters' => [
+				new TitleValue( NS_MAIN, 'Test' ),
+				NS_MAIN, "\u{200E}T\u{200F}e\u{202A}s\u{202B}t\u{202C}\u{202D}\u{202E}"
+			],
+			'Invalid UTF-8 sequence' => [ null, NS_MAIN, "Te\x80\xf0st" ],
+			'Whitespace collapsing' => [
+				new TitleValue( NS_MAIN, 'Test_test' ),
+				NS_MAIN, "Test _\u{00A0}\u{1680}\u{180E}\u{2000}\u{2001}\u{2002}\u{2003}\u{2004}" .
+				"\u{2005}\u{2006}\u{2007}\u{2008}\u{2009}\u{200A}\u{2028}\u{2029}\u{202F}" .
+				"\u{205F}\u{3000}test"
+			],
+			'UTF8_REPLACEMENT' => [ null, NS_MAIN, UtfNormal\Constants::UTF8_REPLACEMENT ],
+
+			// Namespace prefixes
+			'Talk:Test' => [
+				new TitleValue( NS_TALK, 'Test' ),
+				NS_MAIN, 'Talk:Test'
+			],
+			'Test in talk NS' => [
+				new TitleValue( NS_TALK, 'Test' ),
+				NS_TALK, 'Test'
+			],
+			'Talkk:Test' => [
+				new TitleValue( NS_MAIN, 'Talkk:Test' ),
+				NS_MAIN, 'Talkk:Test'
+			],
+			'Talk:Talk:Test' => [ null, NS_MAIN, 'Talk:Talk:Test' ],
+			'Talk:User:Test' => [ null, NS_MAIN, 'Talk:User:Test' ],
+			'User:Talk:Test' => [
+				new TitleValue( NS_USER, 'Talk:Test' ),
+				NS_MAIN, 'User:Talk:Test'
+			],
+			'User:Test in talk NS' => [ null, NS_TALK, 'User:Test' ],
+			'Talk:Test in talk NS' => [ null, NS_TALK, 'Talk:Test' ],
+			'User:Test in user NS' => [
+				new TitleValue( NS_USER, 'User:Test' ),
+				NS_USER, 'User:Test'
+			],
+			'Talk:Test in user NS' => [
+				new TitleValue( NS_USER, 'Talk:Test' ),
+				NS_USER, 'Talk:Test'
+			],
+
+			// Initial colon
+			':Test' => [
+				new TitleValue( NS_MAIN, 'Test' ),
+				NS_MAIN, ':Test'
+			],
+			':Talk:Test' => [
+				new TitleValue( NS_TALK, 'Test' ),
+				NS_MAIN, ':Talk:Test'
+			],
+			':localtestiw:Test' => [
+				new TitleValue( NS_MAIN, 'Test' ),
+				NS_MAIN, ':localtestiw:Test'
+			],
+			':remotetestiw:Test' => [
+				new TitleValue( NS_MAIN, 'Test', '', 'remotetestiw' ),
+				NS_MAIN, ':remotetestiw:Test'
+			],
+			// XXX Is this correct? Why is it different from remote?
+			'localtestiw::Test' => [ null, NS_MAIN, 'localtestiw::Test' ],
+			'remotetestiw::Test' => [
+				new TitleValue( NS_MAIN, 'Test', '', 'remotetestiw' ),
+				NS_MAIN, 'remotetestiw::Test'
+			],
+			// XXX Is this correct? Why is it different from remote?
+			'localtestiw:: Test' => [ null, NS_MAIN, 'localtestiw:: Test' ],
+			'remotetestiw:: Test' => [
+				new TitleValue( NS_MAIN, 'Test', '', 'remotetestiw' ),
+				NS_MAIN, 'remotetestiw:: Test'
+			],
+
+			// Empty titles
+			'Empty title' => [ null, NS_MAIN, '' ],
+			'Empty title with namespace' => [ null, NS_USER, '' ],
+			'Local interwiki with empty page name' => [
+				new TitleValue( NS_MAIN, 'Main_Page' ),
+				NS_MAIN, 'localtestiw:'
+			],
+			'Remote interwiki with empty page name' => [
+				// XXX Is this correct? This is supposed to redirect to the main page remotely?
+				new TitleValue( NS_MAIN, '', '', 'remotetestiw' ),
+				NS_MAIN, 'remotetestiw:'
+			],
+
+			// Whitespace-only titles
+			'Whitespace-only title' => [ null, NS_MAIN, "\t\n" ],
+			'Whitespace-only title with namespace' => [ null, NS_USER, " _ " ],
+			'Local interwiki with whitespace-only page name' => [
+				// XXX Is whitespace-only really supposed to be different from empty?
+				null,
+				NS_MAIN, "localtestiw:_\t"
+			],
+			'Remote interwiki with whitespace-only page name' => [
+				// XXX Is whitespace-only really supposed to be different from empty?
+				null,
+				NS_MAIN, "remotetestiw:\t_\n\r"
+			],
+
+			// Namespace and interwiki
+			'Talk:localtestiw:Test' => [ null, NS_MAIN, 'Talk:localtestiw:Test' ],
+			'Talk:remotetestiw:Test' => [ null, NS_MAIN, 'Talk:remotetestiw:Test' ],
+			'User:localtestiw:Test' => [
+				new TitleValue( NS_USER, 'Localtestiw:Test' ),
+				NS_MAIN, 'User:localtestiw:Test'
+			],
+			'User:remotetestiw:Test' => [
+				new TitleValue( NS_USER, 'Remotetestiw:Test' ),
+				NS_MAIN, 'User:remotetestiw:Test'
+			],
+			'localtestiw:Test in user namespace' => [
+				new TitleValue( NS_USER, 'Localtestiw:Test' ),
+				NS_USER, 'localtestiw:Test'
+			],
+			'remotetestiw:Test in user namespace' => [
+				new TitleValue( NS_USER, 'Remotetestiw:Test' ),
+				NS_USER, 'remotetestiw:Test'
+			],
+			'localtestiw:talk:test' => [
+				new TitleValue( NS_TALK, 'Test' ),
+				NS_MAIN, 'localtestiw:talk:test'
+			],
+			'remotetestiw:talk:test' => [
+				new TitleValue( NS_MAIN, 'talk:test', '', 'remotetestiw' ),
+				NS_MAIN, 'remotetestiw:talk:test'
+			],
+
+			// Invalid chars
+			'Test[test' => [ null, NS_MAIN, 'Test[test' ],
+
+			// Long titles
+			'255 chars long' => [
+				new TitleValue( NS_MAIN, str_repeat( 'A', 255 ) ),
+				NS_MAIN, str_repeat( 'A', 255 )
+			],
+			'255 chars long in user NS' => [
+				new TitleValue( NS_USER, str_repeat( 'A', 255 ) ),
+				NS_USER, str_repeat( 'A', 255 )
+			],
+			'User:255 chars long' => [
+				new TitleValue( NS_USER, str_repeat( 'A', 255 ) ),
+				NS_MAIN, 'User:' . str_repeat( 'A', 255 )
+			],
+			'256 chars long' => [ null, NS_MAIN, str_repeat( 'A', 256 ) ],
+			'256 chars long in user NS' => [ null, NS_USER, str_repeat( 'A', 256 ) ],
+			'User:256 chars long' => [ null, NS_MAIN, 'User:' . str_repeat( 'A', 256 ) ],
+
+			'512 chars long in special NS' => [
+				new TitleValue( NS_SPECIAL, str_repeat( 'A', 512 ) ),
+				NS_SPECIAL, str_repeat( 'A', 512 )
+			],
+			'Special:512 chars long' => [
+				new TitleValue( NS_SPECIAL, str_repeat( 'A', 512 ) ),
+				NS_MAIN, 'Special:' . str_repeat( 'A', 512 )
+			],
+			'513 chars long in special NS' => [ null, NS_SPECIAL, str_repeat( 'A', 513 ) ],
+			'Special:513 chars long' => [ null, NS_MAIN, 'Special:' . str_repeat( 'A', 513 ) ],
+
+			// IP addresses
+			'User:000.000.000' => [
+				new TitleValue( NS_USER, '000.000.000' ),
+				NS_MAIN, 'User:000.000.000'
+			],
+			'User:000.000.000.000' => [
+				new TitleValue( NS_USER, '0.0.0.0' ),
+				NS_MAIN, 'User:000.000.000.000'
+			],
+			'000.000.000.000' => [
+				new TitleValue( NS_MAIN, '000.000.000.000' ),
+				NS_MAIN, '000.000.000.000'
+			],
+			'User:1.1.256.000' => [
+				new TitleValue( NS_USER, '1.1.256.000' ),
+				NS_MAIN, 'User:1.1.256.000'
+			],
+			'User:1.1.255.000' => [
+				new TitleValue( NS_USER, '1.1.255.0' ),
+				NS_MAIN, 'User:1.1.255.000'
+			],
+			// TODO More IP address sanitization tests
+		];
+
+		// Invalid and valid dots
+		foreach ( [ '.', '..', '...' ] as $dots ) {
+			foreach ( [ '?', '?/', '?/Test', 'Test/?/Test', '/?', 'Test/?', '?Test', 'Test?Test',
+			'Test?' ] as $pattern ) {
+				$test = str_replace( '?', $dots, $pattern );
+				if ( $dots === '...' || in_array( $pattern, [ '?Test', 'Test?Test', 'Test?' ] ) ) {
+					$expectedMain = new TitleValue( NS_MAIN, $test );
+					$expectedUser = new TitleValue( NS_USER, $test );
+				} else {
+					$expectedMain = $expectedUser = null;
+				}
+				$ret[$test] = [ $expectedMain, NS_MAIN, $test ];
+				$ret["$test in user NS"] = [ $expectedUser, NS_USER, $test ];
+				$ret["User:$test"] = [ $expectedUser, NS_MAIN, "User:$test" ];
+			}
+		}
+
+		// Invalid and valid tildes
+		foreach ( [ '~~', '~~~' ] as $tildes ) {
+			foreach ( [ '?', 'Test?', '?Test', 'Test?Test' ] as $pattern ) {
+				$test = str_replace( '?', $tildes, $pattern );
+				if ( $tildes === '~~' ) {
+					$expectedMain = new TitleValue( NS_MAIN, $test );
+					$expectedUser = new TitleValue( NS_USER, $test );
+				} else {
+					$expectedMain = $expectedUser = null;
+				}
+				$ret[$test] = [ $expectedMain, NS_MAIN, $test ];
+				$ret["$test in user NS"] = [ $expectedUser, NS_USER, $test ];
+				$ret["User:$test"] = [ $expectedUser, NS_MAIN, "User:$test" ];
+			}
+		}
+
+		return $ret;
 	}
 
 	public static function provideGetNamespaceName() {

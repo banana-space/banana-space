@@ -1,0 +1,135 @@
+!! version 2
+!! test
+Simple video element
+!! wikitext
+[[File:Video.ogv]]
+!! html/php+untidy
+<div class="mediaContainer" style="width:320px"><video id="mwe_player_1" poster="http://example.com/images/thumb/0/00/Video.ogv/320px--Video.ogv.jpg" controls="" preload="none" style="width:320px;height:240px" class="kskin" data-durationhint="4.3666666666667" data-startoffset="0" data-mwtitle="Video.ogv" data-mwprovider="local"><source src="http://example.com/images/0/00/Video.ogv" type="video/ogg; codecs=&quot;theora&quot;" data-title="Original Ogg file, 320 × 240 (590 kbps)" data-shorttitle="Ogg source" data-width="320" data-height="240" data-bandwidth="590013" data-framerate="30"/></video></div>
+!! html/php+tidy
+<div class="mediaContainer" style="width:320px"><video id="mwe_player_1" poster="http://example.com/images/thumb/0/00/Video.ogv/320px--Video.ogv.jpg" controls="" preload="none" style="width:320px;height:240px" class="kskin" data-durationhint="4.3666666666667" data-startoffset="0" data-mwtitle="Video.ogv" data-mwprovider="local"><source src="http://example.com/images/0/00/Video.ogv" type="video/ogg; codecs=&quot;theora&quot;" data-title="Original Ogg file, 320 × 240 (590 kbps)" data-shorttitle="Ogg source" data-width="320" data-height="240" data-bandwidth="590013" data-framerate="30" /></video></div>
+!! html/parsoid
+<p><figure-inline class="mw-default-size" typeof="mw:Video"><span><video poster="//example.com/images/thumb/0/00/Video.ogv/320px-Video.ogv.jpg" controls="" preload="none" height="240" width="320" resource="./File:Video.ogv"><source src="//example.com/images/0/00/Video.ogv" type="application/ogg" data-file-width="320" data-file-height="240"/></video></span></figure-inline></p>
+!! end
+
+!! test
+Simple thumbed video
+!! wikitext
+[[File:Video.ogv|thumb]]
+!! html/php+untidy
+<div class="thumb tright"><div class="thumbinner" style="width:182px;"><div id="mwe_player_1" class="PopUpMediaTransform" style="width:180px;" videopayload="&lt;div class=&quot;mediaContainer&quot; style=&quot;width:320px&quot;&gt;&lt;video id=&quot;mwe_player_2&quot; poster=&quot;http://example.com/images/thumb/0/00/Video.ogv/320px--Video.ogv.jpg&quot; controls=&quot;&quot; preload=&quot;none&quot; autoplay=&quot;&quot; style=&quot;width:320px;height:240px&quot; class=&quot;kskin&quot; data-durationhint=&quot;4.3666666666667&quot; data-startoffset=&quot;0&quot; data-mwtitle=&quot;Video.ogv&quot; data-mwprovider=&quot;local&quot;&gt;&lt;source src=&quot;http://example.com/images/0/00/Video.ogv&quot; type=&quot;video/ogg; codecs=&amp;quot;theora&amp;quot;&quot; data-title=&quot;Original Ogg file, 320 × 240 (590 kbps)&quot; data-shorttitle=&quot;Ogg source&quot; data-width=&quot;320&quot; data-height=&quot;240&quot; data-bandwidth=&quot;590013&quot; data-framerate=&quot;30&quot;/&gt;&lt;/video&gt;&lt;/div&gt;"><img alt="File:Video.ogv" style="width:180px;height:135px" src="http://example.com/images/thumb/0/00/Video.ogv/180px--Video.ogv.jpg"></img><a href="http://example.com/images/0/00/Video.ogv" title="Play media" target="new"><span class="play-btn-large"><span class="mw-tmh-playtext">Play media</span></span></a></div>  <div class="thumbcaption"><div class="magnify"><a href="/wiki/File:Video.ogv" class="internal" title="Enlarge"></a></div></div></div></div>
+!! html/php+tidy
+<div class="thumb tright"><div class="thumbinner" style="width:182px;"><div id="mwe_player_1" class="PopUpMediaTransform" style="width:180px;" videopayload="&lt;div class=&quot;mediaContainer&quot; style=&quot;width:320px&quot;&gt;&lt;video id=&quot;mwe_player_2&quot; poster=&quot;http://example.com/images/thumb/0/00/Video.ogv/320px--Video.ogv.jpg&quot; controls=&quot;&quot; preload=&quot;none&quot; autoplay=&quot;&quot; style=&quot;width:320px;height:240px&quot; class=&quot;kskin&quot; data-durationhint=&quot;4.3666666666667&quot; data-startoffset=&quot;0&quot; data-mwtitle=&quot;Video.ogv&quot; data-mwprovider=&quot;local&quot;&gt;&lt;source src=&quot;http://example.com/images/0/00/Video.ogv&quot; type=&quot;video/ogg; codecs=&amp;quot;theora&amp;quot;&quot; data-title=&quot;Original Ogg file, 320 × 240 (590 kbps)&quot; data-shorttitle=&quot;Ogg source&quot; data-width=&quot;320&quot; data-height=&quot;240&quot; data-bandwidth=&quot;590013&quot; data-framerate=&quot;30&quot;/&gt;&lt;/video&gt;&lt;/div&gt;"><img alt="File:Video.ogv" style="width:180px;height:135px" src="http://example.com/images/thumb/0/00/Video.ogv/180px--Video.ogv.jpg" /><a href="http://example.com/images/0/00/Video.ogv" title="Play media" target="new"><span class="play-btn-large"><span class="mw-tmh-playtext">Play media</span></span></a></div>  <div class="thumbcaption"><div class="magnify"><a href="/wiki/File:Video.ogv" class="internal" title="Enlarge"></a></div></div></div></div>
+!! html/parsoid
+<figure class="mw-default-size" typeof="mw:Video/Thumb"><span><video poster="//example.com/images/thumb/0/00/Video.ogv/220px-Video.ogv.jpg" controls="" preload="none" height="165" width="220" resource="./File:Video.ogv"><source src="//example.com/images/0/00/Video.ogv" type="application/ogg" data-file-width="320" data-file-height="240"/></video></span><figcaption></figcaption></figure>
+!! end
+
+!! test
+Video in a <gallery>
+!! wikitext
+<gallery>
+File:Video.ogv
+</gallery>
+!! html/php
+<ul class="gallery mw-gallery-traditional">
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:30px auto;"><div id="mwe_player_1" class="PopUpMediaTransform" style="width:120px;" videopayload="&lt;div class=&quot;mediaContainer&quot; style=&quot;width:320px&quot;&gt;&lt;video id=&quot;mwe_player_2&quot; poster=&quot;http://example.com/images/thumb/0/00/Video.ogv/320px--Video.ogv.jpg&quot; controls=&quot;&quot; preload=&quot;none&quot; autoplay=&quot;&quot; style=&quot;width:320px;height:240px&quot; class=&quot;kskin&quot; data-durationhint=&quot;4.3666666666667&quot; data-startoffset=&quot;0&quot; data-mwtitle=&quot;Video.ogv&quot; data-mwprovider=&quot;local&quot;&gt;&lt;source src=&quot;http://example.com/images/0/00/Video.ogv&quot; type=&quot;video/ogg; codecs=&amp;quot;theora&amp;quot;&quot; data-title=&quot;Original Ogg file, 320 × 240 (590 kbps)&quot; data-shorttitle=&quot;Ogg source&quot; data-width=&quot;320&quot; data-height=&quot;240&quot; data-bandwidth=&quot;590013&quot; data-framerate=&quot;30&quot;/&gt;&lt;/video&gt;&lt;/div&gt;"><img alt="File:Video.ogv" style="width:120px;height:90px" src="http://example.com/images/thumb/0/00/Video.ogv/120px--Video.ogv.jpg" /><a href="http://example.com/images/0/00/Video.ogv" title="Play media" target="new"><span class="play-btn-large"><span class="mw-tmh-playtext">Play media</span></span></a></div></div></div>
+			<div class="gallerytext">
+			</div>
+		</div></li>
+</ul>
+!! html/parsoid
+<ul class="gallery mw-gallery-traditional" typeof="mw:Extension/gallery" about="#mwt2" data-mw='{"name":"gallery","attrs":{},"body":{}}'>
+<li class="gallerybox" style="width: 155px;"><div class="thumb" style="width: 150px; height: 150px;"><figure-inline typeof="mw:Video"><span><video poster="//example.com/images/thumb/0/00/Video.ogv/120px-Video.ogv.jpg" controls="" preload="none" height="90" width="120" resource="./File:Video.ogv"><source src="//example.com/images/0/00/Video.ogv" type="application/ogg" data-file-width="320" data-file-height="240"/></video></span></figure-inline></div><div class="gallerytext"></div></li>
+</ul>
+!! end
+
+!! test
+Video with thumbtime=1:25
+!! wikitext
+[[File:Video.ogv|thumbtime=1:25]]
+!! html/php
+<div class="mediaContainer" style="width:320px"><video id="mwe_player_1" poster="http://example.com/images/thumb/0/00/Video.ogv/320px-seek%3D3.3666666666667-Video.ogv.jpg" controls="" preload="none" style="width:320px;height:240px" class="kskin" data-durationhint="4.3666666666667" data-startoffset="0" data-mwtitle="Video.ogv" data-mwprovider="local"><source src="http://example.com/images/0/00/Video.ogv" type="video/ogg; codecs=&quot;theora&quot;" data-title="Original Ogg file, 320 × 240 (590 kbps)" data-shorttitle="Ogg source" data-width="320" data-height="240" data-bandwidth="590013" data-framerate="30" /></video></div>
+!! html/parsoid
+<p><figure-inline class="mw-default-size" typeof="mw:Video" data-mw='{"attribs":[["thumbtime",{"txt":"1:25"}]]}'><span><video poster="//example.com/images/thumb/0/00/Video.ogv/320px-Video.ogv.jpg" controls="" preload="none" height="240" width="320" resource="./File:Video.ogv"><source src="//example.com/images/0/00/Video.ogv" type="application/ogg" data-file-width="320" data-file-height="240"/></video></span></figure-inline></p>
+!! end
+
+!! test
+Video with starttime offset
+!! wikitext
+[[File:Video.ogv|start=1:25]]
+!! html/php
+<div class="mediaContainer" style="width:320px"><video id="mwe_player_1" poster="http://example.com/images/thumb/0/00/Video.ogv/320px-seek%3D3.3666666666667-Video.ogv.jpg" controls="" preload="none" style="width:320px;height:240px" class="kskin" data-durationhint="4.3666666666667" data-startoffset="0" data-mwtitle="Video.ogv" data-mwprovider="local"><source src="http://example.com/images/0/00/Video.ogv#t=00:00:03.366" type="video/ogg; codecs=&quot;theora&quot;" data-title="Original Ogg file, 320 × 240 (590 kbps)" data-shorttitle="Ogg source" data-width="320" data-height="240" data-bandwidth="590013" data-framerate="30" /></video></div>
+!! html/parsoid
+<p><figure-inline class="mw-default-size" typeof="mw:Video" data-mw='{"attribs":[["starttime",{"txt":"1:25"}]]}'><span><video poster="//example.com/images/thumb/0/00/Video.ogv/320px-Video.ogv.jpg" controls="" preload="none" height="240" width="320" resource="./File:Video.ogv"><source src="//example.com/images/0/00/Video.ogv#t=85" type="application/ogg" data-file-width="320" data-file-height="240"/></video></span></figure-inline></p>
+!! end
+
+!! test
+Video with starttime and endtime offsets
+!! wikitext
+[[File:Video.ogv|start=1:25|end=1:35]]
+!! html/php
+<div class="mediaContainer" style="width:320px"><video id="mwe_player_1" poster="http://example.com/images/thumb/0/00/Video.ogv/320px-seek%3D3.3666666666667-Video.ogv.jpg" controls="" preload="none" style="width:320px;height:240px" class="kskin" data-durationhint="4.3666666666667" data-startoffset="0" data-mwtitle="Video.ogv" data-mwprovider="local"><source src="http://example.com/images/0/00/Video.ogv#t=00:00:03.366,00:00:03.366" type="video/ogg; codecs=&quot;theora&quot;" data-title="Original Ogg file, 320 × 240 (590 kbps)" data-shorttitle="Ogg source" data-width="320" data-height="240" data-bandwidth="590013" data-framerate="30" /></video></div>
+!! html/parsoid
+<p><figure-inline class="mw-default-size" typeof="mw:Video" data-mw='{"attribs":[["starttime",{"txt":"1:25"}],["endtime",{"txt":"1:35"}]]}'><span><video poster="//example.com/images/thumb/0/00/Video.ogv/320px-Video.ogv.jpg" controls="" preload="none" height="240" width="320" resource="./File:Video.ogv"><source src="//example.com/images/0/00/Video.ogv#t=85,95" type="application/ogg" data-file-width="320" data-file-height="240"/></video></span></figure-inline></p>
+!! end
+
+!! test
+Video with unsupported alt
+!! wikitext
+[[File:Video.ogv|alt=Test]]
+!! html/php
+<div class="mediaContainer" style="width:320px"><video id="mwe_player_1" poster="http://example.com/images/thumb/0/00/Video.ogv/320px--Video.ogv.jpg" controls="" preload="none" style="width:320px;height:240px" class="kskin" data-durationhint="4.3666666666667" data-startoffset="0" data-mwtitle="Video.ogv" data-mwprovider="local"><source src="http://example.com/images/0/00/Video.ogv" type="video/ogg; codecs=&quot;theora&quot;" data-title="Original Ogg file, 320 × 240 (590 kbps)" data-shorttitle="Ogg source" data-width="320" data-height="240" data-bandwidth="590013" data-framerate="30" /></video></div>
+!! html/parsoid
+<p><figure-inline class="mw-default-size" typeof="mw:Video" data-mw='{"attribs":[["alt",{"txt":"Test"}]]}'><span><video poster="//example.com/images/thumb/0/00/Video.ogv/320px-Video.ogv.jpg" controls="" preload="none" height="240" width="320" resource="./File:Video.ogv"><source src="//example.com/images/0/00/Video.ogv" type="application/ogg" data-file-width="320" data-file-height="240"/></video></span></figure-inline></p>
+!! end
+
+!! test
+Video with unsupported link
+!! wikitext
+[[File:Video.ogv|link=Example]]
+!! html/php
+<div class="mediaContainer" style="width:320px"><video id="mwe_player_1" poster="http://example.com/images/thumb/0/00/Video.ogv/320px--Video.ogv.jpg" controls="" preload="none" style="width:320px;height:240px" class="kskin" data-durationhint="4.3666666666667" data-startoffset="0" data-mwtitle="Video.ogv" data-mwprovider="local"><source src="http://example.com/images/0/00/Video.ogv" type="video/ogg; codecs=&quot;theora&quot;" data-title="Original Ogg file, 320 × 240 (590 kbps)" data-shorttitle="Ogg source" data-width="320" data-height="240" data-bandwidth="590013" data-framerate="30" /></video></div>
+!! html/parsoid
+<p><figure-inline class="mw-default-size" typeof="mw:Video" data-mw='{"attribs":[["link",{"txt":"Example"}]]}'><span><video poster="//example.com/images/thumb/0/00/Video.ogv/320px-Video.ogv.jpg" controls="" preload="none" height="240" width="320" resource="./File:Video.ogv"><source src="//example.com/images/0/00/Video.ogv" type="application/ogg" data-file-width="320" data-file-height="240"/></video></span></figure-inline></p>
+!! end
+
+!! test
+Video with different thumb image
+!! wikitext
+[[File:Video.ogv|thumbnail=Foobar.jpg]]
+!! html/php
+<div class="thumb tright"><div class="thumbinner" style="width:1943px;"><a href="/wiki/File:Video.ogv"><img alt="Video.ogv" src="http://example.com/images/3/3a/Foobar.jpg" decoding="async" width="1941" height="220" class="thumbimage" /></a>  <div class="thumbcaption"><div class="magnify"><a href="/wiki/File:Video.ogv" class="internal" title="Enlarge"></a></div></div></div></div>
+!! html/parsoid
+<figure class="mw-default-size" typeof="mw:Video/Thumb" data-mw='{"attribs":[["manualthumb",{"txt":"Foobar.jpg"}]]}'><span><video poster="//example.com/images/3/3a/Foobar.jpg" controls="" preload="none" height="240" width="320" resource="./File:Video.ogv"><source src="//example.com/images/0/00/Video.ogv" type="application/ogg" data-file-width="320" data-file-height="240"/></video></span><figcaption></figcaption></figure>
+!! end
+
+!! test
+Simple audio element
+!! wikitext
+[[File:Audio.oga]]
+!! html/php+untidy
+<div class="mediaContainer" style="width:180px"><audio id="mwe_player_1" controls="" preload="none" style="width:180px" class="kskin" data-durationhint="0.99875" data-startoffset="0" data-mwtitle="Audio.oga" data-mwprovider="local"><source src="http://example.com/images/4/41/Audio.oga" type="audio/ogg; codecs=&quot;vorbis&quot;" data-title="Original Ogg file (41 kbps)" data-shorttitle="Ogg source" data-width="0" data-height="0" data-bandwidth="41107"/></audio></div>
+!! html/php+tidy
+<div class="mediaContainer" style="width:180px"><audio id="mwe_player_1" controls="" preload="none" style="width:180px" class="kskin" data-durationhint="0.99875" data-startoffset="0" data-mwtitle="Audio.oga" data-mwprovider="local"><source src="http://example.com/images/4/41/Audio.oga" type="audio/ogg; codecs=&quot;vorbis&quot;" data-title="Original Ogg file (41 kbps)" data-shorttitle="Ogg source" data-width="0" data-height="0" data-bandwidth="41107" /></audio></div>
+!! html/parsoid
+<p><figure-inline class="mw-default-size mw-default-audio-height" typeof="mw:Audio"><span><audio controls="" preload="none" height="32" width="220" resource="./File:Audio.oga"><source src="//example.com/images/4/41/Audio.oga" type="application/ogg"/></audio></span></figure-inline></p>
+!! end
+
+## For backwards compatibility with content versions up to 1.7.0
+!! test
+Simple audio element, rendered as a video tag
+!! options
+parsoid=html2wt
+!! html/parsoid
+<p><figure-inline class="mw-default-size mw-default-audio-height" typeof="mw:Audio"><span><video poster="//example.com/images/w/resources/assets/file-type-icons/fileicon-ogg.png" controls="" preload="none" height="32" width="220" resource="./File:Audio.oga"><source src="//example.com/images/4/41/Audio.oga" type="application/ogg"/></video></span></figure-inline></p>
+!! wikitext
+[[File:Audio.oga]]
+!! end
+
+!! test
+Flag noplayer, noicon, and disablecontrols as bogus options
+!! wikitext
+[[File:Video.ogv|noplayer|noicon|disablecontrols=ok|These are bogus.]]
+!! html/parsoid
+<p><figure-inline class="mw-default-size" typeof="mw:Video" data-parsoid='{"optList":[{"ck":"bogus","ak":"noplayer"},{"ck":"bogus","ak":"noicon"},{"ck":"bogus","ak":"disablecontrols=ok"},{"ck":"caption","ak":"These are bogus."}]}' data-mw='{"caption":"These are bogus."}'><span><video poster="//example.com/images/thumb/0/00/Video.ogv/320px-Video.ogv.jpg" controls="" preload="none" height="240" width="320" resource="./File:Video.ogv"><source src="//example.com/images/0/00/Video.ogv" type="application/ogg" data-file-width="320" data-file-height="240"/></video></span></figure-inline></p>
+!! end

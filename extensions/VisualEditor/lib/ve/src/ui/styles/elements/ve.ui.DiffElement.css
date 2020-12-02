@@ -1,0 +1,226 @@
+/*!
+ * VisualEditor UserInterface DiffElement styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-diffElement {
+	position: relative;
+}
+
+.ve-ui-diffElement-hasMoves .ve-ui-diffElement-content {
+	margin-left: 15px;
+}
+
+.ve-ui-diffElement-hasDescriptions .ve-ui-diffElement-content {
+	margin-right: 16em;
+	padding-right: 1em;
+	border-right: 1px solid #c8ccd1;
+}
+
+@media ( max-width: 400px ) {
+	.ve-ui-diffElement-hasDescriptions .ve-ui-diffElement-content {
+		margin-right: 6em;
+	}
+}
+
+.ve-ui-diffElement-hasDescriptions .ve-ui-diffElement-sidebar {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 15em;
+}
+
+@media ( max-width: 400px ) {
+	.ve-ui-diffElement-hasDescriptions .ve-ui-diffElement-sidebar {
+		width: 5em;
+	}
+}
+
+.ve-ui-diffElement-overlays {
+	position: absolute;
+	opacity: 0.5;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.ve-ui-diffElement-warning {
+	font-style: italic;
+}
+
+.ve-ui-diffElement-warning > .oo-ui-iconWidget {
+	margin-right: 0.3em;
+}
+
+.ve-ui-changeDescriptionsSelectWidget > .oo-ui-optionWidget {
+	cursor: default;
+}
+
+.ve-ui-changeDescriptionsSelectWidget > .oo-ui-optionWidget-highlighted {
+	background: #b6d4fb; /* #6da9f7 at 50% opacity */
+}
+
+.ve-ui-diffElement-highlight {
+	position: absolute;
+	/* background: #6da9f7; */
+	outline: 3px solid #6da9f7;
+	padding: 2px;
+	margin: -2px 0 0 -2px;
+	pointer-events: none;
+}
+
+.ve-ui-diffElement-attributeChange {
+	color: #72777d;
+}
+
+.ve-ui-diffElement-attributeChange del,
+.ve-ui-diffElement-attributeChange ins {
+	text-decoration: none;
+}
+
+.ve-ui-diffElement-attributeChange del {
+	background-color: #f2c2bf;
+	box-shadow: 0 0 0 1px #f2c2bf;
+}
+
+.ve-ui-diffElement-attributeChange ins {
+	background-color: #c4ede4;
+	box-shadow: 0 0 0 1px #c4ede4;
+}
+
+.ve-ui-diffElement-attributeChange.oo-ui-labelElement .oo-ui-labelElement-label {
+	white-space: normal;
+	word-break: break-word;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+.ve-ui-diffElement-attributeChange.oo-ui-labelElement .oo-ui-labelElement-label ol,
+.ve-ui-diffElement-attributeChange.oo-ui-labelElement .oo-ui-labelElement-label ul {
+	margin-left: 1.8em;
+}
+
+[ data-diff-action='insert' ],
+[ data-diff-action='insert' ] > ins,
+[ data-diff-action='remove' ],
+[ data-diff-action='change-insert' ],
+[ data-diff-action='change-remove' ] {
+	text-decoration: inherit;
+}
+
+ins[ data-diff-action='insert' ],
+[ data-diff-action='insert' ] > ins,
+del[ data-diff-action='remove' ],
+[ data-diff-action='remove' ] > del {
+	white-space: pre-wrap;
+}
+
+[ data-diff-action='insert' ],
+/* elements using display:table-caption need separate backgrounds */
+table[ data-diff-action='insert' ] > caption,
+figure[ data-diff-action='insert' ] > figcaption {
+	background-color: #7fd7c4 !important; /* stylelint-disable-line declaration-no-important */
+	box-shadow: 0 0 0 1px #7fd7c4;
+}
+
+[ data-diff-action='remove' ],
+/* elements using display:table-caption need separate backgrounds */
+table[ data-diff-action='remove' ] > caption,
+figure[ data-diff-action='remove' ] > figcaption {
+	background-color: #e88e89 !important; /* stylelint-disable-line declaration-no-important */
+	box-shadow: 0 0 0 1px #e88e89;
+}
+
+[ data-diff-action='change' ],
+[ data-diff-action='change-insert' ] {
+	background-color: #b6d4fb !important; /* stylelint-disable-line declaration-no-important */
+	box-shadow: 0 0 0 1px #b6d4fb;
+}
+
+[ data-diff-action='change-remove' ] {
+	display: none;
+}
+
+del[ data-diff-action='remove' ],
+[ data-diff-action='remove' ] > del {
+	text-decoration: line-through;
+}
+
+del[ data-diff-action='remove' ]:hover,
+[ data-diff-action='remove' ]:hover > del {
+	text-decoration: none;
+}
+
+/* TODO: These sibling selectors still match when there is a text node in-between, should be fixed in JS */
+[ data-diff-action='remove' ] + [ data-diff-action='insert' ],
+[ data-diff-action='insert' ] + [ data-diff-action='remove' ],
+[ data-diff-action='remove' ] + [ data-diff-action='change-insert' ],
+[ data-diff-action='insert' ] + [ data-diff-action='change-remove' ] {
+	margin-left: 4px;
+}
+
+[ data-diff-action='none' ] {
+	opacity: 0.4;
+	/* opacity increases stacking order, so reduce it again */
+	z-index: -1;
+	position: relative;
+}
+
+[ data-diff-move='up' ],
+[ data-diff-move='down' ] {
+	position: relative;
+	opacity: 1;
+}
+
+[ data-diff-move='up' ]:before,
+[ data-diff-move='down' ]:before {
+	position: absolute;
+	left: -15px;
+	content: ' ';
+	top: 50%;
+	margin-top: -3px;
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	background: #fff;
+}
+
+[ data-diff-move='down' ]:before {
+	border-top: 6px solid #36c;
+}
+
+[ data-diff-move='up' ]:before {
+	border-bottom: 6px solid #36c;
+}
+
+li [ data-diff-move='up' ]:before,
+li [ data-diff-move='down' ]:before {
+	left: -30px;
+}
+
+[ data-diff-action='insert' ]:empty:before,
+[ data-diff-action='remove' ]:empty:before,
+[ data-diff-move='up' ]:empty:before,
+[ data-diff-move='down' ]:empty:before,
+[ data-diff-action='insert' ] *:empty:before,
+[ data-diff-action='remove' ] *:empty:before,
+[ data-diff-move='up' ] *:empty:before,
+[ data-diff-move='down' ] *:empty:before {
+	content: url( data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 );
+}
+
+.ve-ui-diffElement-no-changes {
+	color: #72777d;
+	font-style: italic;
+}
+
+.ve-ui-diffElement-spacer {
+	color: #72777d;
+	clear: both;
+}
+
+.ve-ui-diffElement-internalListSpacer {
+	list-style-type: none !important; /* stylelint-disable-line declaration-no-important */
+}

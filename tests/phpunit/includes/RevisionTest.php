@@ -1,12 +1,12 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\MutableRevisionRecord;
+use MediaWiki\Revision\RevisionAccessException;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\RevisionStore;
+use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Storage\BlobStoreFactory;
-use MediaWiki\Storage\MutableRevisionRecord;
-use MediaWiki\Storage\RevisionAccessException;
-use MediaWiki\Storage\RevisionRecord;
-use MediaWiki\Storage\RevisionStore;
-use MediaWiki\Storage\SlotRecord;
 use MediaWiki\Storage\SqlBlobStore;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LoadBalancer;
@@ -15,7 +15,17 @@ use Wikimedia\Rdbms\LoadBalancer;
  * Test cases in RevisionTest should not interact with the Database.
  * For test cases that need Database interaction see RevisionDbTestBase.
  */
-class RevisionTest extends MediaWikiTestCase {
+class RevisionTest extends MediaWikiIntegrationTestCase {
+
+	protected function setUp() : void {
+		parent::setUp();
+
+		// Rather than adding these to all of the individual tests
+		$this->hideDeprecated( 'Revision::getRevisionRecord' );
+		$this->hideDeprecated( 'Revision::getId' );
+		$this->hideDeprecated( 'Revision::getTitle' );
+		$this->hideDeprecated( 'Revision::getUser' );
+	}
 
 	public function provideConstructFromArray() {
 		yield 'with text' => [
@@ -63,9 +73,13 @@ class RevisionTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideConstructFromArray
 	 * @covers Revision::__construct
-	 * @covers \MediaWiki\Storage\RevisionStore::newMutableRevisionFromArray
+	 * @covers \MediaWiki\Revision\RevisionStore::newMutableRevisionFromArray
 	 */
 	public function testConstructFromArray( $rowArray ) {
+		$this->hideDeprecated( 'Revision::getContentModel' );
+		$this->hideDeprecated( 'Revision::getContent' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$rev = new Revision( $rowArray, 0, $this->getMockTitle() );
 		$this->assertNotNull( $rev->getContent(), 'no content object available' );
 		$this->assertEquals( CONTENT_MODEL_JAVASCRIPT, $rev->getContent()->getModel() );
@@ -74,16 +88,19 @@ class RevisionTest extends MediaWikiTestCase {
 
 	/**
 	 * @covers Revision::__construct
-	 * @covers \MediaWiki\Storage\RevisionStore::newMutableRevisionFromArray
+	 * @covers \MediaWiki\Revision\RevisionStore::newMutableRevisionFromArray
 	 */
 	public function testConstructFromEmptyArray() {
+		$this->hideDeprecated( 'Revision::getContent' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$rev = new Revision( [], 0, $this->getMockTitle() );
 		$this->assertNull( $rev->getContent(), 'no content object should be available' );
 	}
 
 	/**
 	 * @covers Revision::__construct
-	 * @covers \MediaWiki\Storage\RevisionStore::newMutableRevisionFromArray
+	 * @covers \MediaWiki\Revision\RevisionStore::newMutableRevisionFromArray
 	 */
 	public function testConstructFromArrayWithBadPageId() {
 		Wikimedia\suppressWarnings();
@@ -123,7 +140,7 @@ class RevisionTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideConstructFromArray_userSetAsExpected
 	 * @covers Revision::__construct
-	 * @covers \MediaWiki\Storage\RevisionStore::newMutableRevisionFromArray
+	 * @covers \MediaWiki\Revision\RevisionStore::newMutableRevisionFromArray
 	 *
 	 * @param array $rowArray
 	 * @param mixed $expectedUserId null to expect the current wgUser ID
@@ -134,6 +151,9 @@ class RevisionTest extends MediaWikiTestCase {
 		$expectedUserId,
 		$expectedUserName
 	) {
+		$this->hideDeprecated( 'Revision::getUserText' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$testUser = $this->getTestUser()->getUser();
 		$this->setMwGlobals( 'wgUser', $testUser );
 		if ( $expectedUserId === null ) {
@@ -154,16 +174,16 @@ class RevisionTest extends MediaWikiTestCase {
 				'content' => new WikitextContent( 'GOAT' ),
 				'text_id' => 'someid',
 			],
-			new MWException( "Text already stored in external store (id someid), " .
-				"can't serialize content object" )
+			new MWException( 'The text_id field can not be used in MediaWiki 1.35 and later' )
 		];
+
 		yield 'with bad content object (class)' => [
-			[ 'content' => new stdClass() ],
-			new MWException( 'content field must contain a Content object.' )
+			[ 'content' => (object)[] ],
+			new MWException( 'content field must contain a Content object' )
 		];
 		yield 'with bad content object (string)' => [
 			[ 'content' => 'ImAGoat' ],
-			new MWException( 'content field must contain a Content object.' )
+			new MWException( 'content field must contain a Content object' )
 		];
 		yield 'bad row format' => [
 			'imastring, not a row',
@@ -176,25 +196,25 @@ class RevisionTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideConstructFromArrayThrowsExceptions
 	 * @covers Revision::__construct
-	 * @covers \MediaWiki\Storage\RevisionStore::newMutableRevisionFromArray
+	 * @covers \MediaWiki\Revision\RevisionStore::newMutableRevisionFromArray
 	 */
 	public function testConstructFromArrayThrowsExceptions( $rowArray, Exception $expectedException ) {
-		$this->setExpectedException(
-			get_class( $expectedException ),
-			$expectedException->getMessage(),
-			$expectedException->getCode()
-		);
+		$this->hideDeprecated( 'Revision::__construct' );
+
+		$this->expectException( get_class( $expectedException ) );
+		$this->expectExceptionMessage( $expectedException->getMessage() );
+		$this->expectExceptionCode( $expectedException->getCode() );
 		new Revision( $rowArray, 0, $this->getMockTitle() );
 	}
 
 	/**
 	 * @covers Revision::__construct
-	 * @covers \MediaWiki\Storage\RevisionStore::newMutableRevisionFromArray
+	 * @covers \MediaWiki\Revision\RevisionStore::newMutableRevisionFromArray
 	 */
 	public function testConstructFromNothing() {
-		$this->setExpectedException(
-			InvalidArgumentException::class
-		);
+		$this->hideDeprecated( 'Revision::__construct' );
+
+		$this->expectException( InvalidArgumentException::class );
 		new Revision( [] );
 	}
 
@@ -203,7 +223,6 @@ class RevisionTest extends MediaWikiTestCase {
 			[
 				'rev_id' => '42',
 				'rev_page' => '23',
-				'rev_text_id' => '2',
 				'rev_timestamp' => '20171017114835',
 				'rev_user_text' => '127.0.0.1',
 				'rev_user' => '0',
@@ -215,13 +234,20 @@ class RevisionTest extends MediaWikiTestCase {
 				'rev_comment_text' => 'Goat Comment!',
 				'rev_comment_data' => null,
 				'rev_comment_cid' => null,
-				'rev_content_format' => 'GOATFORMAT',
-				'rev_content_model' => 'GOATMODEL',
 			],
 			function ( RevisionTest $testCase, Revision $rev ) {
+				$testCase->hideDeprecated( 'Revision::getSha1' );
+				$testCase->hideDeprecated( 'Revision::getUserText' );
+				$testCase->hideDeprecated( 'Revision::isMinor' );
+				$testCase->hideDeprecated( 'Revision::getParentId' );
+				$testCase->hideDeprecated( 'Revision::isDeleted' );
+				$testCase->hideDeprecated( 'Revision::getPage' );
+				$testCase->hideDeprecated( 'Revision::getComment' );
+				$testCase->hideDeprecated( 'Revision::getSize' );
+				$testCase->hideDeprecated( 'Revision::getTimestamp' );
+
 				$testCase->assertSame( 42, $rev->getId() );
 				$testCase->assertSame( 23, $rev->getPage() );
-				$testCase->assertSame( 2, $rev->getTextId() );
 				$testCase->assertSame( '20171017114835', $rev->getTimestamp() );
 				$testCase->assertSame( '127.0.0.1', $rev->getUserText() );
 				$testCase->assertSame( 0, $rev->getUser() );
@@ -231,15 +257,12 @@ class RevisionTest extends MediaWikiTestCase {
 				$testCase->assertSame( 1, $rev->getParentId() );
 				$testCase->assertSame( 'rdqbbzs3pkhihgbs8qf2q9jsvheag5z', $rev->getSha1() );
 				$testCase->assertSame( 'Goat Comment!', $rev->getComment() );
-				$testCase->assertSame( 'GOATFORMAT', $rev->getContentFormat() );
-				$testCase->assertSame( 'GOATMODEL', $rev->getContentModel() );
 			}
 		];
 		yield 'default field values' => [
 			[
 				'rev_id' => '42',
 				'rev_page' => '23',
-				'rev_text_id' => '2',
 				'rev_timestamp' => '20171017114835',
 				'rev_user_text' => '127.0.0.1',
 				'rev_user' => '0',
@@ -250,6 +273,13 @@ class RevisionTest extends MediaWikiTestCase {
 				'rev_comment_cid' => null,
 			],
 			function ( RevisionTest $testCase, Revision $rev ) {
+				$testCase->hideDeprecated( 'Revision::getUserText' );
+				$testCase->hideDeprecated( 'Revision::isMinor' );
+				$testCase->hideDeprecated( 'Revision::getParentId' );
+				$testCase->hideDeprecated( 'Revision::getVisibility' );
+				$testCase->hideDeprecated( 'Revision::getComment' );
+				$testCase->hideDeprecated( 'Revision::getTimestamp' );
+
 				// parent ID may be null
 				$testCase->assertSame( null, $rev->getParentId(), 'revision id' );
 
@@ -260,14 +290,6 @@ class RevisionTest extends MediaWikiTestCase {
 				$testCase->assertSame( $rev->getComment(), 'Goat Comment!' );
 				$testCase->assertSame( false, $rev->isMinor(), 'minor edit' );
 				$testCase->assertSame( 0, $rev->getVisibility(), 'visibility flags' );
-
-				// computed fields
-				$testCase->assertNotNull( $rev->getSize(), 'size' );
-				$testCase->assertNotNull( $rev->getSha1(), 'hash' );
-
-				// NOTE: model and format will be detected based on the namespace of the (mock) title
-				$testCase->assertSame( 'text/x-wiki', $rev->getContentFormat(), 'format' );
-				$testCase->assertSame( 'wikitext', $rev->getContentModel(), 'model' );
 			}
 		];
 	}
@@ -275,31 +297,10 @@ class RevisionTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideConstructFromRow
 	 * @covers Revision::__construct
-	 * @covers \MediaWiki\Storage\RevisionStore::newMutableRevisionFromArray
+	 * @covers \MediaWiki\Revision\RevisionStore::newMutableRevisionFromArray
 	 */
-	public function testConstructFromRow( array $arrayData, $assertions ) {
-		$data = 'Hello goat.'; // needs to match model and format
-
-		$blobStore = $this->getMockBuilder( SqlBlobStore::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$blobStore->method( 'getBlob' )
-			->will( $this->returnValue( $data ) );
-
-		$blobStore->method( 'getTextIdFromAddress' )
-			->will( $this->returnCallback(
-				function ( $address ) {
-					// Turn "tt:1234" into 12345.
-					// Note that this must be functional so we can test getTextId().
-					// Ideally, we'd un-mock getTextIdFromAddress and use its actual implementation.
-					$parts = explode( ':', $address );
-					return (int)array_pop( $parts );
-				}
-			) );
-
-		// Note override internal service, so RevisionStore uses it as well.
-		$this->setService( 'BlobStoreFactory', $this->mockBlobStoreFactory( $blobStore ) );
+	public function testConstructFromRow( array $arrayData, callable $assertions ) {
+		$this->hideDeprecated( 'Revision::__construct' );
 
 		$row = (object)$arrayData;
 		$rev = new Revision( $row, 0, $this->getMockTitle() );
@@ -308,25 +309,17 @@ class RevisionTest extends MediaWikiTestCase {
 
 	/**
 	 * @covers Revision::__construct
-	 * @covers \MediaWiki\Storage\RevisionStore::newMutableRevisionFromArray
+	 * @covers \MediaWiki\Revision\RevisionStore::newMutableRevisionFromArray
 	 */
 	public function testConstructFromRowWithBadPageId() {
-		$this->setMwGlobals( 'wgCommentTableSchemaMigrationStage', MIGRATION_OLD );
-		$this->overrideMwServices();
 		Wikimedia\suppressWarnings();
-		$rev = new Revision( (object)[ 'rev_page' => 77777777 ] );
+		$rev = new Revision( (object)[
+			'rev_page' => 77777777,
+			'rev_comment_text' => '',
+			'rev_comment_data' => null,
+		] );
 		$this->assertSame( 77777777, $rev->getPage() );
 		Wikimedia\restoreWarnings();
-	}
-
-	public function provideGetRevisionText() {
-		yield 'Generic test' => [
-			'This is a goat of revision text.',
-			[
-				'old_flags' => '',
-				'old_text' => 'This is a goat of revision text.',
-			],
-		];
 	}
 
 	public function provideGetId() {
@@ -345,6 +338,8 @@ class RevisionTest extends MediaWikiTestCase {
 	 * @covers Revision::getId
 	 */
 	public function testGetId( $rowArray, $expectedId ) {
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$rev = new Revision( $rowArray, 0, $this->getMockTitle() );
 		$this->assertEquals( $expectedId, $rev->getId() );
 	}
@@ -359,6 +354,9 @@ class RevisionTest extends MediaWikiTestCase {
 	 * @covers Revision::setId
 	 */
 	public function testSetId( $input, $expected ) {
+		$this->hideDeprecated( 'Revision::setId' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$rev = new Revision( [], 0, $this->getMockTitle() );
 		$rev->setId( $input );
 		$this->assertSame( $expected, $rev->getId() );
@@ -374,25 +372,14 @@ class RevisionTest extends MediaWikiTestCase {
 	 * @covers Revision::setUserIdAndName
 	 */
 	public function testSetUserIdAndName( $inputId, $expectedId, $name ) {
+		$this->hideDeprecated( 'Revision::setUserIdAndName' );
+		$this->hideDeprecated( 'Revision::getUserText' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$rev = new Revision( [], 0, $this->getMockTitle() );
 		$rev->setUserIdAndName( $inputId, $name );
 		$this->assertSame( $expectedId, $rev->getUser( Revision::RAW ) );
 		$this->assertEquals( $name, $rev->getUserText( Revision::RAW ) );
-	}
-
-	public function provideGetTextId() {
-		yield [ [], null ];
-		yield [ [ 'text_id' => '123' ], 123 ];
-		yield [ [ 'text_id' => 456 ], 456 ];
-	}
-
-	/**
-	 * @dataProvider provideGetTextId
-	 * @covers Revision::getTextId()
-	 */
-	public function testGetTextId( $rowArray, $expected ) {
-		$rev = new Revision( $rowArray, 0, $this->getMockTitle() );
-		$this->assertSame( $expected, $rev->getTextId() );
 	}
 
 	public function provideGetParentId() {
@@ -406,37 +393,11 @@ class RevisionTest extends MediaWikiTestCase {
 	 * @covers Revision::getParentId()
 	 */
 	public function testGetParentId( $rowArray, $expected ) {
+		$this->hideDeprecated( 'Revision::getParentId' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$rev = new Revision( $rowArray, 0, $this->getMockTitle() );
 		$this->assertSame( $expected, $rev->getParentId() );
-	}
-
-	/**
-	 * @covers Revision::getRevisionText
-	 * @dataProvider provideGetRevisionText
-	 */
-	public function testGetRevisionText( $expected, $rowData, $prefix = 'old_', $wiki = false ) {
-		$this->assertEquals(
-			$expected,
-			Revision::getRevisionText( (object)$rowData, $prefix, $wiki ) );
-	}
-
-	public function provideGetRevisionTextWithZlibExtension() {
-		yield 'Generic gzip test' => [
-			'This is a small goat of revision text.',
-			[
-				'old_flags' => 'gzip',
-				'old_text' => gzdeflate( 'This is a small goat of revision text.' ),
-			],
-		];
-	}
-
-	/**
-	 * @covers Revision::getRevisionText
-	 * @dataProvider provideGetRevisionTextWithZlibExtension
-	 */
-	public function testGetRevisionWithZlibExtension( $expected, $rowData ) {
-		$this->checkPHPExtension( 'zlib' );
-		$this->testGetRevisionText( $expected, $rowData );
 	}
 
 	private function getWANObjectCache() {
@@ -451,10 +412,11 @@ class RevisionTest extends MediaWikiTestCase {
 		$lb = $this->getMockBuilder( LoadBalancer::class )
 			->disableOriginalConstructor()
 			->getMock();
-
+		$access = MediaWikiServices::getInstance()->getExternalStoreAccess();
 		$cache = $this->getWANObjectCache();
 
-		$blobStore = new SqlBlobStore( $lb, $cache );
+		$blobStore = new SqlBlobStore( $lb, $access, $cache );
+
 		return $blobStore;
 	}
 
@@ -473,146 +435,67 @@ class RevisionTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return RevisionStore
-	 */
-	private function getRevisionStore() {
-		/** @var LoadBalancer $lb */
-		$lb = $this->getMockBuilder( LoadBalancer::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$cache = $this->getWANObjectCache();
-
-		$blobStore = new RevisionStore(
-			$lb,
-			$this->getBlobStore(),
-			$cache,
-			MediaWikiServices::getInstance()->getCommentStore(),
-			MediaWikiServices::getInstance()->getActorMigration()
-		);
-		return $blobStore;
-	}
-
-	public function provideGetRevisionTextWithLegacyEncoding() {
-		yield 'Utf8Native' => [
-			"Wiki est l'\xc3\xa9cole superieur !",
-			'fr',
-			'iso-8859-1',
-			[
-				'old_flags' => 'utf-8',
-				'old_text' => "Wiki est l'\xc3\xa9cole superieur !",
-			]
-		];
-		yield 'Utf8Legacy' => [
-			"Wiki est l'\xc3\xa9cole superieur !",
-			'fr',
-			'iso-8859-1',
-			[
-				'old_flags' => '',
-				'old_text' => "Wiki est l'\xe9cole superieur !",
-			]
-		];
-	}
-
-	/**
-	 * @covers Revision::getRevisionText
-	 * @dataProvider provideGetRevisionTextWithLegacyEncoding
-	 */
-	public function testGetRevisionWithLegacyEncoding( $expected, $lang, $encoding, $rowData ) {
-		$blobStore = $this->getBlobStore();
-		$blobStore->setLegacyEncoding( $encoding, Language::factory( $lang ) );
-		$this->setService( 'BlobStoreFactory', $this->mockBlobStoreFactory( $blobStore ) );
-
-		$this->testGetRevisionText( $expected, $rowData );
-	}
-
-	public function provideGetRevisionTextWithGzipAndLegacyEncoding() {
-		/**
-		 * WARNING!
-		 * Do not set the external flag!
-		 * Otherwise, getRevisionText will hit the live database (if ExternalStore is enabled)!
-		 */
-		yield 'Utf8NativeGzip' => [
-			"Wiki est l'\xc3\xa9cole superieur !",
-			'fr',
-			'iso-8859-1',
-			[
-				'old_flags' => 'gzip,utf-8',
-				'old_text' => gzdeflate( "Wiki est l'\xc3\xa9cole superieur !" ),
-			]
-		];
-		yield 'Utf8LegacyGzip' => [
-			"Wiki est l'\xc3\xa9cole superieur !",
-			'fr',
-			'iso-8859-1',
-			[
-				'old_flags' => 'gzip',
-				'old_text' => gzdeflate( "Wiki est l'\xe9cole superieur !" ),
-			]
-		];
-	}
-
-	/**
-	 * @covers Revision::getRevisionText
-	 * @dataProvider provideGetRevisionTextWithGzipAndLegacyEncoding
-	 */
-	public function testGetRevisionWithGzipAndLegacyEncoding( $expected, $lang, $encoding, $rowData ) {
-		$this->checkPHPExtension( 'zlib' );
-
-		$blobStore = $this->getBlobStore();
-		$blobStore->setLegacyEncoding( $encoding, Language::factory( $lang ) );
-		$this->setService( 'BlobStoreFactory', $this->mockBlobStoreFactory( $blobStore ) );
-
-		$this->testGetRevisionText( $expected, $rowData );
-	}
-
-	/**
 	 * @covers Revision::compressRevisionText
 	 */
 	public function testCompressRevisionTextUtf8() {
-		$row = new stdClass;
-		$row->old_text = "Wiki est l'\xc3\xa9cole superieur !";
+		$this->hideDeprecated( 'Revision::compressRevisionText' );
+		$this->hideDeprecated( 'Revision::decompressRevisionText' );
+
+		$row = (object)[ 'old_text' => "Wiki est l'\xc3\xa9cole superieur !" ];
 		$row->old_flags = Revision::compressRevisionText( $row->old_text );
-		$this->assertTrue( false !== strpos( $row->old_flags, 'utf-8' ),
+		$this->assertTrue( strpos( $row->old_flags, 'utf-8' ) !== false,
 			"Flags should contain 'utf-8'" );
-		$this->assertFalse( false !== strpos( $row->old_flags, 'gzip' ),
+		$this->assertFalse( strpos( $row->old_flags, 'gzip' ) !== false,
 			"Flags should not contain 'gzip'" );
 		$this->assertEquals( "Wiki est l'\xc3\xa9cole superieur !",
 			$row->old_text, "Direct check" );
+		$this->hideDeprecated( 'Revision::getRevisionText' );
 		$this->assertEquals( "Wiki est l'\xc3\xa9cole superieur !",
-			Revision::getRevisionText( $row ), "getRevisionText" );
+			Revision::decompressRevisionText( $row->old_text, explode( ',', $row->old_flags ) ),
+			"decompressRevisionText" );
 	}
 
 	/**
 	 * @covers Revision::compressRevisionText
 	 */
 	public function testCompressRevisionTextUtf8Gzip() {
+		$this->hideDeprecated( 'Revision::compressRevisionText' );
+		$this->hideDeprecated( 'Revision::decompressRevisionText' );
+
 		$this->checkPHPExtension( 'zlib' );
 
 		$blobStore = $this->getBlobStore();
 		$blobStore->setCompressBlobs( true );
 		$this->setService( 'BlobStoreFactory', $this->mockBlobStoreFactory( $blobStore ) );
 
-		$row = new stdClass;
-		$row->old_text = "Wiki est l'\xc3\xa9cole superieur !";
+		$row = (object)[ 'old_text' => "Wiki est l'\xc3\xa9cole superieur !" ];
 		$row->old_flags = Revision::compressRevisionText( $row->old_text );
-		$this->assertTrue( false !== strpos( $row->old_flags, 'utf-8' ),
+		$this->assertTrue( strpos( $row->old_flags, 'utf-8' ) !== false,
 			"Flags should contain 'utf-8'" );
-		$this->assertTrue( false !== strpos( $row->old_flags, 'gzip' ),
+		$this->assertTrue( strpos( $row->old_flags, 'gzip' ) !== false,
 			"Flags should contain 'gzip'" );
 		$this->assertEquals( "Wiki est l'\xc3\xa9cole superieur !",
 			gzinflate( $row->old_text ), "Direct check" );
+		$this->hideDeprecated( 'Revision::getRevisionText' );
 		$this->assertEquals( "Wiki est l'\xc3\xa9cole superieur !",
-			Revision::getRevisionText( $row ), "getRevisionText" );
+			Revision::decompressRevisionText( $row->old_text, explode( ',', $row->old_flags ) ),
+			"decompressRevisionText" );
 	}
 
 	/**
 	 * @covers Revision::loadFromTitle
 	 */
 	public function testLoadFromTitle() {
-		$this->setMwGlobals( 'wgCommentTableSchemaMigrationStage', MIGRATION_OLD );
-		$this->setMwGlobals( 'wgActorTableSchemaMigrationStage', MIGRATION_OLD );
-		$this->overrideMwServices();
+		$this->hideDeprecated( 'Revision::loadFromTitle' );
+		$this->hideDeprecated( 'Revision::getSha1' );
+		$this->hideDeprecated( 'Revision::getUserText' );
+		$this->hideDeprecated( 'Revision::getParentId' );
+		$this->hideDeprecated( 'Revision::getComment' );
+		$this->hideDeprecated( 'Revision::getSize' );
+		$this->hideDeprecated( 'Revision::getTimestamp' );
+		$this->hideDeprecated( 'Revision::__construct' );
+		$this->hideDeprecated( RevisionStore::class . '::loadRevisionFromTitle' );
+
 		$title = $this->getMockTitle();
 
 		$conditions = [
@@ -624,7 +507,6 @@ class RevisionTest extends MediaWikiTestCase {
 		$row = (object)[
 			'rev_id' => '42',
 			'rev_page' => $title->getArticleID(),
-			'rev_text_id' => '2',
 			'rev_timestamp' => '20171017114835',
 			'rev_user_text' => '127.0.0.1',
 			'rev_user' => '0',
@@ -640,14 +522,19 @@ class RevisionTest extends MediaWikiTestCase {
 			'rev_content_model' => 'GOATMODEL',
 		];
 
-		$db = $this->getMock( IDatabase::class );
+		$domain = MediaWikiServices::getInstance()->getDBLoadBalancer()->getLocalDomainID();
+		$db = $this->createMock( IDatabase::class );
 		$db->expects( $this->any() )
 			->method( 'getDomainId' )
-			->will( $this->returnValue( wfWikiID() ) );
+			->will( $this->returnValue( $domain ) );
 		$db->expects( $this->once() )
 			->method( 'selectRow' )
 			->with(
-				$this->equalTo( [ 'revision', 'page', 'user' ] ),
+				$this->equalTo( [
+					'revision', 'page', 'user',
+					'temp_rev_comment' => 'revision_comment_temp', 'comment_rev_comment' => 'comment',
+					'temp_rev_user' => 'revision_actor_temp', 'actor_rev_user' => 'actor',
+				] ),
 				// We don't really care about the fields are they come from the selectField methods
 				$this->isType( 'array' ),
 				$this->equalTo( $conditions ),
@@ -675,7 +562,7 @@ class RevisionTest extends MediaWikiTestCase {
 	public function provideDecompressRevisionText() {
 		yield '(no legacy encoding), false in false out' => [ false, false, [], false ];
 		yield '(no legacy encoding), empty in empty out' => [ false, '', [], '' ];
-		yield '(no legacy encoding), empty in empty out' => [ false, 'A', [], 'A' ];
+		yield '(no legacy encoding), empty in empty out 2' => [ false, 'A', [], 'A' ];
 		yield '(no legacy encoding), string in with gzip flag returns string' => [
 			// gzip string below generated with gzdeflate( 'AAAABBAAA' )
 			false, "sttttr\002\022\000", [ 'gzip' ], 'AAAABBAAA',
@@ -734,9 +621,11 @@ class RevisionTest extends MediaWikiTestCase {
 	 * @param mixed $expected
 	 */
 	public function testDecompressRevisionText( $legacyEncoding, $text, $flags, $expected ) {
+		$this->hideDeprecated( 'Revision::decompressRevisionText' );
+
 		$blobStore = $this->getBlobStore();
 		if ( $legacyEncoding ) {
-			$blobStore->setLegacyEncoding( $legacyEncoding, Language::factory( 'en' ) );
+			$blobStore->setLegacyEncoding( $legacyEncoding );
 		}
 
 		$this->setService( 'BlobStoreFactory', $this->mockBlobStoreFactory( $blobStore ) );
@@ -747,660 +636,12 @@ class RevisionTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @covers Revision::getRevisionText
-	 */
-	public function testGetRevisionText_returnsFalseWhenNoTextField() {
-		$this->assertFalse( Revision::getRevisionText( new stdClass() ) );
-	}
-
-	public function provideTestGetRevisionText_returnsDecompressedTextFieldWhenNotExternal() {
-		yield 'Just text' => [
-			(object)[ 'old_text' => 'SomeText' ],
-			'old_',
-			'SomeText'
-		];
-		// gzip string below generated with gzdeflate( 'AAAABBAAA' )
-		yield 'gzip text' => [
-			(object)[
-				'old_text' => "sttttr\002\022\000",
-				'old_flags' => 'gzip'
-			],
-			'old_',
-			'AAAABBAAA'
-		];
-		yield 'gzip text and different prefix' => [
-			(object)[
-				'jojo_text' => "sttttr\002\022\000",
-				'jojo_flags' => 'gzip'
-			],
-			'jojo_',
-			'AAAABBAAA'
-		];
-	}
-
-	/**
-	 * @dataProvider provideTestGetRevisionText_returnsDecompressedTextFieldWhenNotExternal
-	 * @covers Revision::getRevisionText
-	 */
-	public function testGetRevisionText_returnsDecompressedTextFieldWhenNotExternal(
-		$row,
-		$prefix,
-		$expected
-	) {
-		$this->assertSame( $expected, Revision::getRevisionText( $row, $prefix ) );
-	}
-
-	public function provideTestGetRevisionText_external_returnsFalseWhenNotEnoughUrlParts() {
-		yield 'Just some text' => [ 'someNonUrlText' ];
-		yield 'No second URL part' => [ 'someProtocol://' ];
-	}
-
-	/**
-	 * @dataProvider provideTestGetRevisionText_external_returnsFalseWhenNotEnoughUrlParts
-	 * @covers Revision::getRevisionText
-	 */
-	public function testGetRevisionText_external_returnsFalseWhenNotEnoughUrlParts(
-		$text
-	) {
-		$this->assertFalse(
-			Revision::getRevisionText(
-				(object)[
-					'old_text' => $text,
-					'old_flags' => 'external',
-				]
-			)
-		);
-	}
-
-	/**
-	 * @covers Revision::getRevisionText
-	 */
-	public function testGetRevisionText_external_noOldId() {
-		$this->setService(
-			'ExternalStoreFactory',
-			new ExternalStoreFactory( [ 'ForTesting' ] )
-		);
-		$this->assertSame(
-			'AAAABBAAA',
-			Revision::getRevisionText(
-				(object)[
-					'old_text' => 'ForTesting://cluster1/12345',
-					'old_flags' => 'external,gzip',
-				]
-			)
-		);
-	}
-
-	/**
-	 * @covers Revision::getRevisionText
-	 */
-	public function testGetRevisionText_external_oldId() {
-		$cache = $this->getWANObjectCache();
-		$this->setService( 'MainWANObjectCache', $cache );
-
-		$this->setService(
-			'ExternalStoreFactory',
-			new ExternalStoreFactory( [ 'ForTesting' ] )
-		);
-
-		$lb = $this->getMockBuilder( LoadBalancer::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$blobStore = new SqlBlobStore( $lb, $cache );
-		$this->setService( 'BlobStoreFactory', $this->mockBlobStoreFactory( $blobStore ) );
-
-		$this->assertSame(
-			'AAAABBAAA',
-			Revision::getRevisionText(
-				(object)[
-					'old_text' => 'ForTesting://cluster1/12345',
-					'old_flags' => 'external,gzip',
-					'old_id' => '7777',
-				]
-			)
-		);
-
-		$cacheKey = $cache->makeKey( 'revisiontext', 'textid', 'tt:7777' );
-		$this->assertSame( 'AAAABBAAA', $cache->get( $cacheKey ) );
-	}
-
-	/**
-	 * @covers Revision::userJoinCond
-	 */
-	public function testUserJoinCond() {
-		$this->hideDeprecated( 'Revision::userJoinCond' );
-		$this->setMwGlobals( 'wgActorTableSchemaMigrationStage', MIGRATION_OLD );
-		$this->overrideMwServices();
-		$this->assertEquals(
-			[ 'LEFT JOIN', [ 'rev_user != 0', 'user_id = rev_user' ] ],
-			Revision::userJoinCond()
-		);
-	}
-
-	/**
-	 * @covers Revision::pageJoinCond
-	 */
-	public function testPageJoinCond() {
-		$this->hideDeprecated( 'Revision::pageJoinCond' );
-		$this->assertEquals(
-			[ 'INNER JOIN', [ 'page_id = rev_page' ] ],
-			Revision::pageJoinCond()
-		);
-	}
-
-	private function overrideCommentStoreAndActorMigration() {
-		$mockStore = $this->getMockBuilder( CommentStore::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$mockStore->expects( $this->any() )
-			->method( 'getFields' )
-			->willReturn( [ 'commentstore' => 'fields' ] );
-		$mockStore->expects( $this->any() )
-			->method( 'getJoin' )
-			->willReturn( [
-				'tables' => [ 'commentstore' => 'table' ],
-				'fields' => [ 'commentstore' => 'field' ],
-				'joins' => [ 'commentstore' => 'join' ],
-			] );
-		$this->setService( 'CommentStore', $mockStore );
-
-		$mockStore = $this->getMockBuilder( ActorMigration::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$mockStore->expects( $this->any() )
-			->method( 'getJoin' )
-			->willReturnCallback( function ( $key ) {
-				$p = strtok( $key, '_' );
-				return [
-					'tables' => [ 'actormigration' => 'table' ],
-					'fields' => [
-						$p . '_user' => 'actormigration_user',
-						$p . '_user_text' => 'actormigration_user_text',
-						$p . '_actor' => 'actormigration_actor',
-					],
-					'joins' => [ 'actormigration' => 'join' ],
-				];
-			} );
-		$this->setService( 'ActorMigration', $mockStore );
-	}
-
-	public function provideSelectFields() {
-		yield [
-			true,
-			[
-				'rev_id',
-				'rev_page',
-				'rev_text_id',
-				'rev_timestamp',
-				'rev_user_text',
-				'rev_user',
-				'rev_actor' => 'NULL',
-				'rev_minor_edit',
-				'rev_deleted',
-				'rev_len',
-				'rev_parent_id',
-				'rev_sha1',
-				'commentstore' => 'fields',
-				'rev_content_format',
-				'rev_content_model',
-			]
-		];
-		yield [
-			false,
-			[
-				'rev_id',
-				'rev_page',
-				'rev_text_id',
-				'rev_timestamp',
-				'rev_user_text',
-				'rev_user',
-				'rev_actor' => 'NULL',
-				'rev_minor_edit',
-				'rev_deleted',
-				'rev_len',
-				'rev_parent_id',
-				'rev_sha1',
-				'commentstore' => 'fields',
-			]
-		];
-	}
-
-	/**
-	 * @dataProvider provideSelectFields
-	 * @covers Revision::selectFields
-	 */
-	public function testSelectFields( $contentHandlerUseDB, $expected ) {
-		$this->hideDeprecated( 'Revision::selectFields' );
-		$this->setMwGlobals( 'wgContentHandlerUseDB', $contentHandlerUseDB );
-		$this->setMwGlobals( 'wgActorTableSchemaMigrationStage', MIGRATION_OLD );
-		$this->overrideCommentStoreAndActorMigration();
-		$this->assertEquals( $expected, Revision::selectFields() );
-	}
-
-	public function provideSelectArchiveFields() {
-		yield [
-			true,
-			[
-				'ar_id',
-				'ar_page_id',
-				'ar_rev_id',
-				'ar_text_id',
-				'ar_timestamp',
-				'ar_user_text',
-				'ar_user',
-				'ar_actor' => 'NULL',
-				'ar_minor_edit',
-				'ar_deleted',
-				'ar_len',
-				'ar_parent_id',
-				'ar_sha1',
-				'commentstore' => 'fields',
-				'ar_content_format',
-				'ar_content_model',
-			]
-		];
-		yield [
-			false,
-			[
-				'ar_id',
-				'ar_page_id',
-				'ar_rev_id',
-				'ar_text_id',
-				'ar_timestamp',
-				'ar_user_text',
-				'ar_user',
-				'ar_actor' => 'NULL',
-				'ar_minor_edit',
-				'ar_deleted',
-				'ar_len',
-				'ar_parent_id',
-				'ar_sha1',
-				'commentstore' => 'fields',
-			]
-		];
-	}
-
-	/**
-	 * @dataProvider provideSelectArchiveFields
-	 * @covers Revision::selectArchiveFields
-	 */
-	public function testSelectArchiveFields( $contentHandlerUseDB, $expected ) {
-		$this->hideDeprecated( 'Revision::selectArchiveFields' );
-		$this->setMwGlobals( 'wgContentHandlerUseDB', $contentHandlerUseDB );
-		$this->setMwGlobals( 'wgActorTableSchemaMigrationStage', MIGRATION_OLD );
-		$this->overrideCommentStoreAndActorMigration();
-		$this->assertEquals( $expected, Revision::selectArchiveFields() );
-	}
-
-	/**
-	 * @covers Revision::selectTextFields
-	 */
-	public function testSelectTextFields() {
-		$this->hideDeprecated( 'Revision::selectTextFields' );
-		$this->assertEquals(
-			[
-				'old_text',
-				'old_flags',
-			],
-			Revision::selectTextFields()
-		);
-	}
-
-	/**
-	 * @covers Revision::selectPageFields
-	 */
-	public function testSelectPageFields() {
-		$this->hideDeprecated( 'Revision::selectPageFields' );
-		$this->assertEquals(
-			[
-				'page_namespace',
-				'page_title',
-				'page_id',
-				'page_latest',
-				'page_is_redirect',
-				'page_len',
-			],
-			Revision::selectPageFields()
-		);
-	}
-
-	/**
-	 * @covers Revision::selectUserFields
-	 */
-	public function testSelectUserFields() {
-		$this->hideDeprecated( 'Revision::selectUserFields' );
-		$this->assertEquals(
-			[
-				'user_name',
-			],
-			Revision::selectUserFields()
-		);
-	}
-
-	public function provideGetArchiveQueryInfo() {
-		yield 'wgContentHandlerUseDB false' => [
-			[
-				'wgContentHandlerUseDB' => false,
-			],
-			[
-				'tables' => [
-					'archive',
-					'commentstore' => 'table',
-					'actormigration' => 'table',
-				],
-				'fields' => [
-					'ar_id',
-					'ar_page_id',
-					'ar_namespace',
-					'ar_title',
-					'ar_rev_id',
-					'ar_text_id',
-					'ar_timestamp',
-					'ar_minor_edit',
-					'ar_deleted',
-					'ar_len',
-					'ar_parent_id',
-					'ar_sha1',
-					'commentstore' => 'field',
-					'ar_user' => 'actormigration_user',
-					'ar_user_text' => 'actormigration_user_text',
-					'ar_actor' => 'actormigration_actor',
-				],
-				'joins' => [ 'commentstore' => 'join', 'actormigration' => 'join' ],
-			]
-		];
-		yield 'wgContentHandlerUseDB true' => [
-			[
-				'wgContentHandlerUseDB' => true,
-			],
-			[
-				'tables' => [
-					'archive',
-					'commentstore' => 'table',
-					'actormigration' => 'table',
-				],
-				'fields' => [
-					'ar_id',
-					'ar_page_id',
-					'ar_namespace',
-					'ar_title',
-					'ar_rev_id',
-					'ar_text_id',
-					'ar_timestamp',
-					'ar_minor_edit',
-					'ar_deleted',
-					'ar_len',
-					'ar_parent_id',
-					'ar_sha1',
-					'commentstore' => 'field',
-					'ar_user' => 'actormigration_user',
-					'ar_user_text' => 'actormigration_user_text',
-					'ar_actor' => 'actormigration_actor',
-					'ar_content_format',
-					'ar_content_model',
-				],
-				'joins' => [ 'commentstore' => 'join', 'actormigration' => 'join' ],
-			]
-		];
-	}
-
-	/**
-	 * @covers Revision::getArchiveQueryInfo
-	 * @dataProvider provideGetArchiveQueryInfo
-	 */
-	public function testGetArchiveQueryInfo( $globals, $expected ) {
-		$this->setMwGlobals( $globals );
-		$this->overrideCommentStoreAndActorMigration();
-
-		$revisionStore = $this->getRevisionStore();
-		$revisionStore->setContentHandlerUseDB( $globals['wgContentHandlerUseDB'] );
-		$this->setService( 'RevisionStore', $revisionStore );
-		$this->assertEquals(
-			$expected,
-			Revision::getArchiveQueryInfo()
-		);
-	}
-
-	public function provideGetQueryInfo() {
-		yield 'wgContentHandlerUseDB false, opts none' => [
-			[
-				'wgContentHandlerUseDB' => false,
-			],
-			[],
-			[
-				'tables' => [ 'revision', 'commentstore' => 'table', 'actormigration' => 'table' ],
-				'fields' => [
-					'rev_id',
-					'rev_page',
-					'rev_text_id',
-					'rev_timestamp',
-					'rev_minor_edit',
-					'rev_deleted',
-					'rev_len',
-					'rev_parent_id',
-					'rev_sha1',
-					'commentstore' => 'field',
-					'rev_user' => 'actormigration_user',
-					'rev_user_text' => 'actormigration_user_text',
-					'rev_actor' => 'actormigration_actor',
-				],
-				'joins' => [ 'commentstore' => 'join', 'actormigration' => 'join' ],
-			],
-		];
-		yield 'wgContentHandlerUseDB false, opts page' => [
-			[
-				'wgContentHandlerUseDB' => false,
-			],
-			[ 'page' ],
-			[
-				'tables' => [ 'revision', 'commentstore' => 'table', 'actormigration' => 'table', 'page' ],
-				'fields' => [
-					'rev_id',
-					'rev_page',
-					'rev_text_id',
-					'rev_timestamp',
-					'rev_minor_edit',
-					'rev_deleted',
-					'rev_len',
-					'rev_parent_id',
-					'rev_sha1',
-					'commentstore' => 'field',
-					'rev_user' => 'actormigration_user',
-					'rev_user_text' => 'actormigration_user_text',
-					'rev_actor' => 'actormigration_actor',
-					'page_namespace',
-					'page_title',
-					'page_id',
-					'page_latest',
-					'page_is_redirect',
-					'page_len',
-				],
-				'joins' => [
-					'page' => [
-						'INNER JOIN',
-						[ 'page_id = rev_page' ],
-					],
-					'commentstore' => 'join',
-					'actormigration' => 'join',
-				],
-			],
-		];
-		yield 'wgContentHandlerUseDB false, opts user' => [
-			[
-				'wgContentHandlerUseDB' => false,
-			],
-			[ 'user' ],
-			[
-				'tables' => [ 'revision', 'commentstore' => 'table', 'actormigration' => 'table', 'user' ],
-				'fields' => [
-					'rev_id',
-					'rev_page',
-					'rev_text_id',
-					'rev_timestamp',
-					'rev_minor_edit',
-					'rev_deleted',
-					'rev_len',
-					'rev_parent_id',
-					'rev_sha1',
-					'commentstore' => 'field',
-					'rev_user' => 'actormigration_user',
-					'rev_user_text' => 'actormigration_user_text',
-					'rev_actor' => 'actormigration_actor',
-					'user_name',
-				],
-				'joins' => [
-					'user' => [
-						'LEFT JOIN',
-						[
-							'actormigration_user != 0',
-							'user_id = actormigration_user',
-						],
-					],
-					'commentstore' => 'join',
-					'actormigration' => 'join',
-				],
-			],
-		];
-		yield 'wgContentHandlerUseDB false, opts text' => [
-			[
-				'wgContentHandlerUseDB' => false,
-			],
-			[ 'text' ],
-			[
-				'tables' => [ 'revision', 'commentstore' => 'table', 'actormigration' => 'table', 'text' ],
-				'fields' => [
-					'rev_id',
-					'rev_page',
-					'rev_text_id',
-					'rev_timestamp',
-					'rev_minor_edit',
-					'rev_deleted',
-					'rev_len',
-					'rev_parent_id',
-					'rev_sha1',
-					'commentstore' => 'field',
-					'rev_user' => 'actormigration_user',
-					'rev_user_text' => 'actormigration_user_text',
-					'rev_actor' => 'actormigration_actor',
-					'old_text',
-					'old_flags',
-				],
-				'joins' => [
-					'text' => [
-						'INNER JOIN',
-						[ 'rev_text_id=old_id' ],
-					],
-					'commentstore' => 'join',
-					'actormigration' => 'join',
-				],
-			],
-		];
-		yield 'wgContentHandlerUseDB false, opts 3' => [
-			[
-				'wgContentHandlerUseDB' => false,
-			],
-			[ 'text', 'page', 'user' ],
-			[
-				'tables' => [
-					'revision', 'commentstore' => 'table', 'actormigration' => 'table', 'page', 'user', 'text'
-				],
-				'fields' => [
-					'rev_id',
-					'rev_page',
-					'rev_text_id',
-					'rev_timestamp',
-					'rev_minor_edit',
-					'rev_deleted',
-					'rev_len',
-					'rev_parent_id',
-					'rev_sha1',
-					'commentstore' => 'field',
-					'rev_user' => 'actormigration_user',
-					'rev_user_text' => 'actormigration_user_text',
-					'rev_actor' => 'actormigration_actor',
-					'page_namespace',
-					'page_title',
-					'page_id',
-					'page_latest',
-					'page_is_redirect',
-					'page_len',
-					'user_name',
-					'old_text',
-					'old_flags',
-				],
-				'joins' => [
-					'page' => [
-						'INNER JOIN',
-						[ 'page_id = rev_page' ],
-					],
-					'user' => [
-						'LEFT JOIN',
-						[
-							'actormigration_user != 0',
-							'user_id = actormigration_user',
-						],
-					],
-					'text' => [
-						'INNER JOIN',
-						[ 'rev_text_id=old_id' ],
-					],
-					'commentstore' => 'join',
-					'actormigration' => 'join',
-				],
-			],
-		];
-		yield 'wgContentHandlerUseDB true, opts none' => [
-			[
-				'wgContentHandlerUseDB' => true,
-			],
-			[],
-			[
-				'tables' => [ 'revision', 'commentstore' => 'table', 'actormigration' => 'table' ],
-				'fields' => [
-					'rev_id',
-					'rev_page',
-					'rev_text_id',
-					'rev_timestamp',
-					'rev_minor_edit',
-					'rev_deleted',
-					'rev_len',
-					'rev_parent_id',
-					'rev_sha1',
-					'commentstore' => 'field',
-					'rev_user' => 'actormigration_user',
-					'rev_user_text' => 'actormigration_user_text',
-					'rev_actor' => 'actormigration_actor',
-					'rev_content_format',
-					'rev_content_model',
-				],
-				'joins' => [ 'commentstore' => 'join', 'actormigration' => 'join' ],
-			],
-		];
-	}
-
-	/**
-	 * @covers Revision::getQueryInfo
-	 * @dataProvider provideGetQueryInfo
-	 */
-	public function testGetQueryInfo( $globals, $options, $expected ) {
-		$this->setMwGlobals( $globals );
-		$this->overrideCommentStoreAndActorMigration();
-
-		$revisionStore = $this->getRevisionStore();
-		$revisionStore->setContentHandlerUseDB( $globals['wgContentHandlerUseDB'] );
-		$this->setService( 'RevisionStore', $revisionStore );
-
-		$this->assertEquals(
-			$expected,
-			Revision::getQueryInfo( $options )
-		);
-	}
-
-	/**
 	 * @covers Revision::getSize
 	 */
 	public function testGetSize() {
+		$this->hideDeprecated( 'Revision::getSize' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$title = $this->getMockTitle();
 
 		$rec = new MutableRevisionRecord( $title );
@@ -1416,6 +657,9 @@ class RevisionTest extends MediaWikiTestCase {
 	 * @covers Revision::getSize
 	 */
 	public function testGetSize_failure() {
+		$this->hideDeprecated( 'Revision::getSize' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$title = $this->getMockTitle();
 
 		$rec = $this->getMockBuilder( RevisionRecord::class )
@@ -1433,6 +677,9 @@ class RevisionTest extends MediaWikiTestCase {
 	 * @covers Revision::getSha1
 	 */
 	public function testGetSha1() {
+		$this->hideDeprecated( 'Revision::getSha1' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$title = $this->getMockTitle();
 
 		$rec = new MutableRevisionRecord( $title );
@@ -1449,6 +696,9 @@ class RevisionTest extends MediaWikiTestCase {
 	 * @covers Revision::getSha1
 	 */
 	public function testGetSha1_failure() {
+		$this->hideDeprecated( 'Revision::getSha1' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$title = $this->getMockTitle();
 
 		$rec = $this->getMockBuilder( RevisionRecord::class )
@@ -1466,6 +716,9 @@ class RevisionTest extends MediaWikiTestCase {
 	 * @covers Revision::getContent
 	 */
 	public function testGetContent() {
+		$this->hideDeprecated( 'Revision::getContent' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$title = $this->getMockTitle();
 
 		$rec = new MutableRevisionRecord( $title );
@@ -1474,7 +727,7 @@ class RevisionTest extends MediaWikiTestCase {
 		$this->assertNull( $rev->getContent(), 'Content of no slots is null' );
 
 		$content = new TextContent( 'Hello Kittens!' );
-		$rec->setContent( 'main', $content );
+		$rec->setContent( SlotRecord::MAIN, $content );
 		$this->assertSame( $content, $rev->getContent() );
 	}
 
@@ -1482,6 +735,9 @@ class RevisionTest extends MediaWikiTestCase {
 	 * @covers Revision::getContent
 	 */
 	public function testGetContent_failure() {
+		$this->hideDeprecated( 'Revision::getContent' );
+		$this->hideDeprecated( 'Revision::__construct' );
+
 		$title = $this->getMockTitle();
 
 		$rec = $this->getMockBuilder( RevisionRecord::class )

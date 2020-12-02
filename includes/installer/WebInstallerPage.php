@@ -18,13 +18,13 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @ingroup Deployment
+ * @ingroup Installer
  */
 
 /**
  * Abstract class to define pages for the web installer.
  *
- * @ingroup Deployment
+ * @ingroup Installer
  * @since 1.17
  */
 abstract class WebInstallerPage {
@@ -145,7 +145,7 @@ abstract class WebInstallerPage {
 
 	/**
 	 * @param string $var
-	 * @param mixed $default
+	 * @param mixed|null $default
 	 *
 	 * @return mixed
 	 */

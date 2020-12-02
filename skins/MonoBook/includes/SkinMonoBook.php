@@ -37,17 +37,85 @@ class SkinMonoBook extends SkinTemplate {
 	/**
 	 * @param OutputPage $out
 	 */
-	function setupSkinUserCss( OutputPage $out ) {
+	public function setupSkinUserCss( OutputPage $out ) {
 		parent::setupSkinUserCss( $out );
 
+		if ( $out->getUser()->getOption( 'monobook-responsive' ) ) {
+			$out->addMeta( 'viewport',
+				'width=device-width, initial-scale=1.0, ' .
+				'user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0'
+			);
+			$styleModule = 'skins.monobook.responsive';
+			$out->addModules( [
+				'skins.monobook.mobile'
+			] );
+
+			if ( ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) && $out->getUser()->isLoggedIn() ) {
+				$out->addModules( [ 'skins.monobook.mobile.echohack' ] );
+			}
+			if ( ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' ) ) {
+				$out->addModules( [ 'skins.monobook.mobile.uls' ] );
+			}
+		} else {
+			$styleModule = 'skins.monobook.styles';
+		}
+
 		$out->addModuleStyles( [
-			'mediawiki.skinning.interface',
 			'mediawiki.skinning.content.externallinks',
-			'skins.monobook.styles'
+			$styleModule
 		] );
 
-		// TODO: Migrate all of these
-		$out->addStyle( $this->stylename . '/resources/IE60Fixes.css', 'screen', 'IE 6' );
-		$out->addStyle( $this->stylename . '/resources/IE70Fixes.css', 'screen', 'IE 7' );
+		// Force desktop styles in IE 8-; no support for @media widths
+		// FIXME: Remove conditional comment dependency.
+		$out->addStyle( $this->stylename . '/resources/screen-desktop.css', 'screen', 'lt IE 9' );
+	}
+
+	/**
+	 * @param User $user
+	 * @param array &$preferences
+	 */
+	public static function onGetPreferences( User $user, array &$preferences ) {
+		$preferences['monobook-responsive'] = [
+			'type' => 'toggle',
+			'label-message' => 'monobook-responsive-label',
+			'section' => 'rendering/skin/skin-prefs',
+			// Only show this section when the Monobook skin is checked. The JavaScript client also uses
+			// this state to determine whether to show or hide the whole section.
+			'hide-if' => [ '!==', 'wpskin', 'monobook' ],
+		];
+	}
+
+	/**
+	 * Handler for ResourceLoaderRegisterModules hook
+	 * Check if extensions are loaded
+	 *
+	 * @param ResourceLoader $resourceLoader
+	 */
+	public static function registerMobileExtensionStyles( ResourceLoader $resourceLoader ) {
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
+			$resourceLoader->register( 'skins.monobook.mobile.echohack', [
+				'localBasePath' => __DIR__ . '/..',
+				'remoteSkinPath' => 'MonoBook',
+
+				'targets' => [ 'desktop', 'mobile' ],
+				'scripts' => [ 'resources/mobile-echo.js' ],
+				'styles' => [ 'resources/mobile-echo.less' => [
+					'media' => 'screen and (max-width: 550px)'
+				] ],
+				'dependencies' => [ 'oojs-ui.styles.icons-alerts', 'mediawiki.util' ],
+				'messages' => [ 'monobook-notifications-link', 'monobook-notifications-link-none' ]
+			] );
+		}
+
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' ) ) {
+			$resourceLoader->register( 'skins.monobook.mobile.uls', [
+				'localBasePath' => __DIR__ . '/..',
+				'remoteSkinPath' => 'MonoBook',
+
+				'targets' => [ 'desktop' ],
+				'scripts' => [ 'resources/mobile-uls.js' ],
+				'dependencies' => [ 'ext.uls.interface' ],
+			] );
+		}
 	}
 }

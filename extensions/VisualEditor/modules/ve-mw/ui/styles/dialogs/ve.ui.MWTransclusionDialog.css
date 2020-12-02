@@ -1,0 +1,71 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWTransclusionDialog styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwTransclusionDialog-addTemplateFieldset > .oo-ui-widget {
+	display: inline-block;
+}
+
+.ve-ui-mwTransclusionDialog-addTemplateFieldset > .oo-ui-buttonElement-framed {
+	margin-left: 0.5em;
+}
+
+.ve-ui-mwTransclusionDialog-addTemplateFieldset .mw-widget-titleInputWidget {
+	min-width: 10em;
+}
+
+.ve-ui-mwTransclusionDialog-addParameterFieldset .ve-ui-mwParameterSearchWidget {
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 1em;
+}
+
+.ve-ui-mwTransclusionDialog-addParameterFieldset .oo-ui-searchWidget-results {
+	position: relative;
+	padding-bottom: 5em;
+}
+
+.ve-ui-mwTransclusionDialog-removeButton {
+	position: absolute;
+	top: 0.85714286em; /* Equals ≈`12px` */
+	right: 1.5em;
+}
+
+.ve-ui-mwTransclusionDialog-addButton {
+	white-space: nowrap;
+}
+
+.ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-iconElement-icon {
+	opacity: 0.51;
+}
+
+.ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-labelElement-label {
+	color: #72777d;
+}
+
+.ve-ui-mwTransclusionDialog .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
+	height: 1.5em;
+	overflow: hidden;
+}
+
+.ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-iconElement-icon,
+.ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label,
+.ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-removeButton,
+.ve-ui-mwTransclusionDialog-multiple .oo-ui-bookletLayout .ve-ui-mwTemplatePage-more,
+.ve-ui-mwTransclusionDialog-multiple .oo-ui-bookletLayout .ve-ui-mwParameterPage-more {
+	display: none;
+}
+
+.ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label,
+.ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-iconElement-icon,
+.ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-removeButton,
+.ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .ve-ui-mwTemplatePage-more,
+.ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .ve-ui-mwParameterPage-more,
+.ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout > .oo-ui-gridLayout > .oo-ui-panelLayout {
+	-webkit-transition: all 250ms ease-in-out;
+	-moz-transition: all 250ms ease-in-out;
+	transition: all 250ms ease-in-out;
+}

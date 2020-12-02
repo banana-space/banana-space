@@ -6,5 +6,7 @@
 		]
 	},
 	"pfunc_time_error": "خاتالىق: ئىناۋەتسىز ۋاقىت.",
+	"pfunc_expr_unrecognised_word": "ئىپادە خاتالىقى: تونۇيالمايدىغان سۆز \"$1\".",
+	"pfunc_expr_unrecognised_punctuation": "ئىپادە خاتالىقى: تونۇيالمايدىغان ئىپادە ھەرپى \"$1\".",
 	"pfunc_expr_division_by_zero": "نۆلگە بۆلۈنگەن."
 }

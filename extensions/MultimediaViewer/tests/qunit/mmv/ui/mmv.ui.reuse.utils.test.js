@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mw.mmv.ui.reuse.utils', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'Sanity test, object creation and UI construction', function ( assert ) {
@@ -65,7 +65,7 @@
 		mw.message = function ( messageKey ) {
 			assert.ok( messageKey.match( /^multimediaviewer-(small|medium|original|embed-dimensions)/ ), 'messageKey passed correctly.' );
 
-			return { text: $.noop };
+			return { text: function () {} };
 		};
 
 		utils.updateMenuOptions( sizes, options );
@@ -76,30 +76,42 @@
 	QUnit.test( 'getPossibleImageSizesForHtml()', function ( assert ) {
 		var utils = new mw.mmv.ui.Utils(),
 			exampleSizes = [
-				// Big wide image
 				{
+					test: 'Extra large wide image',
+					width: 6000, height: 4000,
+					expected: {
+						small: { width: 640, height: 427 },
+						medium: { width: 1080, height: 720 },
+						large: { width: 1620, height: 1080 },
+						xl: { width: 3240, height: 2160 },
+						original: { width: 6000, height: 4000 }
+					}
+				},
+
+				{
+					test: 'Big wide image',
 					width: 2048, height: 1536,
 					expected: {
-						small: { width: 193, height: 145 },
-						medium: { width: 640, height: 480 },
-						large: { width: 1200, height: 900 },
+						small: { width: 640, height: 480 },
+						medium: { width: 960, height: 720 },
+						large: { width: 1440, height: 1080 },
 						original: { width: 2048, height: 1536 }
 					}
 				},
 
-				// Big tall image
 				{
+					test: 'Big tall image',
 					width: 201, height: 1536,
 					expected: {
-						small: { width: 19, height: 145 },
-						medium: { width: 63, height: 480 },
-						large: { width: 118, height: 900 },
+						small: { width: 63, height: 480 },
+						medium: { width: 94, height: 720 },
+						large: { width: 141, height: 1080 },
 						original: { width: 201, height: 1536 }
 					}
 				},
 
-				// Very small image
 				{
+					test: 'Very small image',
 					width: 15, height: 20,
 					expected: {
 						original: { width: 15, height: 20 }
@@ -110,8 +122,8 @@
 		for ( i = 0; i < exampleSizes.length; i++ ) {
 			cursize = exampleSizes[ i ];
 			opts = utils.getPossibleImageSizesForHtml( cursize.width, cursize.height );
-			assert.deepEqual( opts, cursize.expected, 'We got the expected results out of the size calculation function.' );
+			assert.deepEqual( opts, cursize.expected, 'Size calculation for "' + cursize.test + '" gives expected results' );
 		}
 	} );
 
-}( mediaWiki, jQuery ) );
+}() );

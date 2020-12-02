@@ -3,8 +3,8 @@
 		"authors": [
 			"Danmichaelo",
 			"Event",
-			"Nghtwlkr",
-			"Jon Harald Søby"
+			"Jon Harald Søby",
+			"Nghtwlkr"
 		]
 	},
 	"skinname-vector": "Vector",
@@ -22,5 +22,7 @@
 	"vector-view-history": "Vis historikk",
 	"vector-view-view": "Les",
 	"vector-view-viewsource": "Vis kilden",
+	"vector-jumptonavigation": "Hopp til navigering",
+	"vector-jumptosearch": "Hopp til søk",
 	"vector-more-actions": "Mer"
 }

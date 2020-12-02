@@ -1,4 +1,4 @@
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.logging.AttributionLogger', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'log()', function ( assert ) {
@@ -19,4 +19,4 @@
 		logger.logAttribution( emptyImage );
 		assert.ok( true, 'logDimensions() did not throw errors for empty image' );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

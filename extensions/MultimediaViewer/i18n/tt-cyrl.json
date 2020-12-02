@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ерней",
 			"Ильнар"
 		]
 	},
-	"multimediaviewer-pref": "Медиа гизгеч",
 	"multimediaviewer-optin-pref": "<span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Медиа гизгечне]</span> куллану",
 	"multimediaviewer-repository-local": "Тулырак",
 	"multimediaviewer-datetime-created": "Ясалу: $1",
@@ -23,8 +23,8 @@
 	"multimediaviewer-permission-link": "хокукларны карау",
 	"multimediaviewer-permission-link-hide": "хокукларны яшерү",
 	"multimediaviewer-permission-viewmore": "Тулырак мәгълүмат",
-	"multimediaviewer-about-mmv": "Тасвирлама",
-	"multimediaviewer-discuss-mmv": "Бәхәс",
+	"multimediaviewer-about-mmv": "Бу интерфейс турында",
+	"multimediaviewer-discuss-mmv": "Фикер алышу",
 	"multimediaviewer-help-mmv": "Ярдәм",
 	"multimediaviewer-optout-mmv": "Медиа гизгечне ябу",
 	"multimediaviewer-optin-mmv": "Медиа гизгечне ачу",
@@ -32,16 +32,16 @@
 	"multimediaviewer-optin-pending-mmv": "Медиа гизгечне ачу",
 	"multimediaviewer-optin-help": "Рәсемнәрне курсәтү өчен медиа гизгеч кулланылачак",
 	"multimediaviewer-geolocation": "Географик урыны: $1",
-	"multimediaviewer-reuse-link": "Файлны өлү яисә бүлешү",
-	"multimediaviewer-reuse-loading-placeholder": "Йөкләү...",
-	"multimediaviewer-share-tab": "Бүлешү",
+	"multimediaviewer-reuse-link": "Бу файлны уртаклашу яки кертү",
+	"multimediaviewer-reuse-loading-placeholder": "Төяү бара…",
+	"multimediaviewer-share-tab": "Уртаклашу",
 	"multimediaviewer-embed-tab": "Кую",
-	"multimediaviewer-download-link": "Файлны йөкләү",
+	"multimediaviewer-download-link": "Бу файлны күчереп алу",
 	"multimediaviewer-download-preview-link-title": "Гизгечтә карау",
-	"multimediaviewer-download-original-button-name": "Төп файлны алу",
-	"multimediaviewer-download-small-button-name": "Кече зурлыкта алу",
-	"multimediaviewer-download-medium-button-name": "Уртача зурлыкта алу",
-	"multimediaviewer-download-large-button-name": "Зур зурлыкта алу",
+	"multimediaviewer-download-original-button-name": "Төп файлны күчереп алу",
+	"multimediaviewer-download-small-button-name": "Кече зурлыкта күчереп алу",
+	"multimediaviewer-download-medium-button-name": "Уртача зурлыкта күчереп алу",
+	"multimediaviewer-download-large-button-name": "Югары зурлыкта күчереп алу",
 	"multimediaviewer-embed-wt": "Викитекст",
 	"multimediaviewer-embed-html": "HTML",
 	"multimediaviewer-text-embed-credit-text-bl": "Автор: $1, $2, $3",
@@ -71,7 +71,7 @@
 	"multimediaviewer-options-text-body": "Кирәк чакта, сез аны файл турындагы мәгълүмат битендә куша аласыз.",
 	"multimediaviewer-options-learn-more": "Күбрәк белү",
 	"multimediaviewer-option-submit-button": "Медиа гизгечне ябу",
-	"multimediaviewer-option-cancel-button": "Баш тарту",
+	"multimediaviewer-option-cancel-button": "Кире алу",
 	"multimediaviewer-enable-dialog-header": "Медиа гизгечне ачу?",
 	"multimediaviewer-enable-submit-button": "Медиа гизгечне ачу"
 }

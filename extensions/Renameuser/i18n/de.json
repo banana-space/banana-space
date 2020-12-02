@@ -1,20 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
+			"J. 'mach' wust",
 			"Kghbln",
 			"Metalhead64",
 			"Purodha",
 			"Raimond Spekking",
 			"Spacebirdy",
 			"The Evil IP address",
-			"Umherirrender",
-			"J. 'mach' wust"
+			"Umherirrender"
 		]
 	},
 	"renameuser": "Benutzer umbenennen",
-	"renameuser-linkoncontribs": "Benutzer umbenennen",
-	"renameuser-linkoncontribs-text": "Diesen Benutzer umbenennen",
-	"renameuser-desc": "Eine [[Special:RenameUser|Spezialseite]] zum Ändern eines Benutzernamens",
+	"renameuser-linkoncontribs": "{{GENDER:$1|Benutzer|Benutzerin}} umbenennen",
+	"renameuser-linkoncontribs-text": "{{GENDER:$1|Diesen Benutzer|Diese Benutzerin}} umbenennen",
+	"renameuser-desc": "Erweitert das Wiki um eine [[Special:RenameUser|Spezialseite]] zum Ändern eines Benutzernamens",
 	"renameuserold": "Bisheriger Benutzername:",
 	"renameusernew": "Neuer Benutzername:",
 	"renameuserreason": "Grund:",

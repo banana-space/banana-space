@@ -1,4 +1,4 @@
-( function ( mw ) {
+( function () {
 
 	QUnit.module( 'mediawiki.visibleTimeout', QUnit.newMwEnvironment( {
 		setup: function () {
@@ -39,6 +39,39 @@
 			} ).bind( this ) );
 		}
 	} ) );
+
+	QUnit.test( 'visibleTimeoutId is always a positive integer', function ( assert ) {
+		var called = 0,
+			visibleTimeoutId = this.visibleTimeout.set( function () {
+				called++;
+			}, 0 );
+
+		// First value for visibleTimeoutId should be 1
+		assert.strictEqual( visibleTimeoutId, 1 );
+		this.visibleTimeout.clear( visibleTimeoutId );
+		assert.strictEqual( called, 0 );
+
+		visibleTimeoutId = this.visibleTimeout.set( function () {
+			called++;
+		}, 100 );
+		assert.strictEqual( visibleTimeoutId, 2 );
+		this.visibleTimeout.clear( visibleTimeoutId );
+		assert.strictEqual( called, 0 );
+
+		visibleTimeoutId = this.visibleTimeout.set( function () {
+			called++;
+		}, 0 );
+		assert.strictEqual( visibleTimeoutId, 3 );
+		assert.strictEqual( called, 0 );
+
+		// VisibleTimeoutId should still be incremented even when
+		// the previous value was not cleared
+		visibleTimeoutId = this.visibleTimeout.set( function () {
+			called++;
+		}, 0 );
+		assert.strictEqual( visibleTimeoutId, 4 );
+		assert.strictEqual( called, 0 );
+	} );
 
 	QUnit.test( 'basic usage', function ( assert ) {
 		var called = 0;
@@ -112,4 +145,4 @@
 		this.sandbox.clock.tick( 50 );
 		assert.strictEqual( called, 1 );
 	} );
-}( mediaWiki ) );
+}() );

@@ -21,20 +21,21 @@
  * @ingroup Database
  */
 use MediaWiki\MediaWikiServices;
+use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
 class CloneDatabase {
 	/** @var string Table prefix for cloning */
-	private $newTablePrefix = '';
+	private $newTablePrefix;
 
 	/** @var string Current table prefix */
-	private $oldTablePrefix = '';
+	private $oldTablePrefix;
 
 	/** @var array List of tables to be cloned */
-	private $tablesToClone = [];
+	private $tablesToClone;
 
 	/** @var bool Should we DROP tables containing the new names? */
-	private $dropCurrentTables = true;
+	private $dropCurrentTables;
 
 	/** @var bool Whether to use temporary tables or not */
 	private $useTemporaryTables = true;
@@ -46,16 +47,19 @@ class CloneDatabase {
 	 * @param IMaintainableDatabase $db A database subclass
 	 * @param array $tablesToClone An array of tables to clone, unprefixed
 	 * @param string $newTablePrefix Prefix to assign to the tables
-	 * @param string $oldTablePrefix Prefix on current tables, if not $wgDBprefix
+	 * @param string|null $oldTablePrefix Prefix on current tables, if not $wgDBprefix
 	 * @param bool $dropCurrentTables
 	 */
 	public function __construct( IMaintainableDatabase $db, array $tablesToClone,
 		$newTablePrefix, $oldTablePrefix = null, $dropCurrentTables = true
 	) {
+		if ( !$tablesToClone ) {
+			throw new InvalidArgumentException( 'Empty list of tables to clone' );
+		}
 		$this->db = $db;
 		$this->tablesToClone = $tablesToClone;
 		$this->newTablePrefix = $newTablePrefix;
-		$this->oldTablePrefix = $oldTablePrefix !== null ? $oldTablePrefix : $this->db->tablePrefix();
+		$this->oldTablePrefix = $oldTablePrefix ?? $this->db->tablePrefix();
 		$this->dropCurrentTables = $dropCurrentTables;
 	}
 
@@ -82,31 +86,29 @@ class CloneDatabase {
 			# works correctly across DB engines, we need to change the pre-
 			# fix back and forth so tableName() works right.
 
-			self::changePrefix( $this->oldTablePrefix );
+			$this->db->tablePrefix( $this->oldTablePrefix );
 			$oldTableName = $this->db->tableName( $tbl, 'raw' );
 
-			self::changePrefix( $this->newTablePrefix );
+			$this->db->tablePrefix( $this->newTablePrefix );
 			$newTableName = $this->db->tableName( $tbl, 'raw' );
 
 			// Postgres: Temp tables are automatically deleted upon end of session
 			//           Same Temp table name hides existing table for current session
-			if ( $this->dropCurrentTables
-				&& !in_array( $this->db->getType(), [ 'oracle' ] )
-			) {
+			if ( $this->dropCurrentTables ) {
 				if ( $oldTableName === $newTableName ) {
 					// Last ditch check to avoid data loss
 					throw new LogicException( "Not dropping new table, as '$newTableName'"
 						. " is name of both the old and the new table." );
 				}
 				$this->db->dropTable( $tbl, __METHOD__ );
-				wfDebug( __METHOD__ . " dropping {$newTableName}\n" );
+				wfDebug( __METHOD__ . " dropping {$newTableName}" );
 				// Dropping the oldTable because the prefix was changed
 			}
 
 			# Create new table
-			wfDebug( __METHOD__ . " duplicating $oldTableName to $newTableName\n" );
+			wfDebug( __METHOD__ . " duplicating $oldTableName to $newTableName" );
 			$this->db->duplicateTableStructure(
-				$oldTableName, $newTableName, $this->useTemporaryTables );
+				$oldTableName, $newTableName, $this->useTemporaryTables, __METHOD__ );
 		}
 	}
 
@@ -116,25 +118,34 @@ class CloneDatabase {
 	 */
 	public function destroy( $dropTables = false ) {
 		if ( $dropTables ) {
-			self::changePrefix( $this->newTablePrefix );
+			$this->db->tablePrefix( $this->newTablePrefix );
 			foreach ( $this->tablesToClone as $tbl ) {
-				$this->db->dropTable( $tbl );
+				$this->db->dropTable( $tbl, __METHOD__ );
 			}
 		}
-		self::changePrefix( $this->oldTablePrefix );
+		$this->db->tablePrefix( $this->oldTablePrefix );
 	}
 
 	/**
-	 * Change the table prefix on all open DB connections/
+	 * Change the table prefix on all open DB connections
 	 *
 	 * @param string $prefix
 	 * @return void
 	 */
 	public static function changePrefix( $prefix ) {
-		global $wgDBprefix;
+		global $wgDBprefix, $wgDBname;
 
 		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$lbFactory->setDomainPrefix( $prefix );
+		$lbFactory->setLocalDomainPrefix( $prefix );
+
+		$aliases = [
+			$wgDBname => $lbFactory->getLocalDomainID()
+		];
+		$lbFactory->setDomainAliases( $aliases );
+		$lbFactory->forEachLB( function ( ILoadBalancer $lb ) use ( $aliases ) {
+			$lb->setDomainAliases( $aliases );
+		} );
+
 		$wgDBprefix = $prefix;
 	}
 }

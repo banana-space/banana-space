@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.ui.TruncatableTextField', QUnit.newMwEnvironment() );
 
 	/**
@@ -25,7 +25,7 @@
 	 * @param {number} height
 	 * @param {jQuery} $qf fixture element
 	 * @param {Object} sandbox sinon instance
-	 * @return {TruncatableTextField}
+	 * @return {mw.mmv.ui.TruncatableTextField}
 	 */
 	function getField( width, height, $qf, sandbox ) {
 		var $container = $( '<div>' ).appendTo( $qf ),
@@ -61,4 +61,4 @@
 		ttf.set( 'abc' );
 		assert.strictEqual( ttf.$element.text(), 'abc', 'Text is set accurately.' );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

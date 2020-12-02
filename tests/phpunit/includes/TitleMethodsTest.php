@@ -1,5 +1,8 @@
 <?php
 
+use MediaWiki\Interwiki\InterwikiLookup;
+use MediaWiki\MediaWikiServices;
+
 /**
  * @group ContentHandler
  * @group Database
@@ -9,9 +12,7 @@
  */
 class TitleMethodsTest extends MediaWikiLangTestCase {
 
-	protected function setUp() {
-		global $wgContLang;
-
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->mergeMwGlobalArrayValue(
@@ -28,42 +29,6 @@ class TitleMethodsTest extends MediaWikiLangTestCase {
 				12302 => CONTENT_MODEL_JAVASCRIPT,
 			]
 		);
-
-		MWNamespace::clearCaches();
-		$wgContLang->resetNamespaces(); # reset namespace cache
-	}
-
-	protected function tearDown() {
-		global $wgContLang;
-
-		parent::tearDown();
-
-		MWNamespace::clearCaches();
-		$wgContLang->resetNamespaces(); # reset namespace cache
-	}
-
-	public static function provideEquals() {
-		return [
-			[ 'Main Page', 'Main Page', true ],
-			[ 'Main Page', 'Not The Main Page', false ],
-			[ 'Main Page', 'Project:Main Page', false ],
-			[ 'File:Example.png', 'Image:Example.png', true ],
-			[ 'Special:Version', 'Special:Version', true ],
-			[ 'Special:Version', 'Special:Recentchanges', false ],
-			[ 'Special:Version', 'Main Page', false ],
-		];
-	}
-
-	/**
-	 * @dataProvider provideEquals
-	 * @covers Title::equals
-	 */
-	public function testEquals( $titleA, $titleB, $expectedBool ) {
-		$titleA = Title::newFromText( $titleA );
-		$titleB = Title::newFromText( $titleB );
-
-		$this->assertEquals( $expectedBool, $titleA->equals( $titleB ) );
-		$this->assertEquals( $expectedBool, $titleB->equals( $titleA ) );
 	}
 
 	public static function provideInNamespace() {
@@ -342,7 +307,7 @@ class TitleMethodsTest extends MediaWikiLangTestCase {
 	 */
 	public function testGetOtherPage( $text, $expected ) {
 		if ( $expected === null ) {
-			$this->setExpectedException( MWException::class );
+			$this->expectException( MWException::class );
 		}
 
 		$title = Title::newFromText( $text );
@@ -353,7 +318,7 @@ class TitleMethodsTest extends MediaWikiLangTestCase {
 	 * @covers Title::clearCaches
 	 */
 	public function testClearCaches() {
-		$linkCache = LinkCache::singleton();
+		$linkCache = MediaWikiServices::getInstance()->getLinkCache();
 
 		$title1 = Title::newFromText( 'Foo' );
 		$linkCache->addGoodLinkObj( 23, $title1 );
@@ -362,6 +327,118 @@ class TitleMethodsTest extends MediaWikiLangTestCase {
 
 		$title2 = Title::newFromText( 'Foo' );
 		$this->assertNotSame( $title1, $title2, 'title cache should be empty' );
-		$this->assertEquals( 0, $linkCache->getGoodLinkID( 'Foo' ), 'link cache should be empty' );
+		$this->assertSame( 0, $linkCache->getGoodLinkID( 'Foo' ), 'link cache should be empty' );
+	}
+
+	public function provideGetLinkURL() {
+		yield 'Simple' => [
+			'/wiki/Goats',
+			NS_MAIN,
+			'Goats'
+		];
+
+		yield 'Fragment' => [
+			'/wiki/Goats#Goatificatiön',
+			NS_MAIN,
+			'Goats',
+			'Goatificatiön'
+		];
+
+		yield 'Unknown interwiki with fragment' => [
+			'https://xx.wiki.test/wiki/xyzzy:Goats#Goatificatiön',
+			NS_MAIN,
+			'Goats',
+			'Goatificatiön',
+			'xyzzy'
+		];
+
+		yield 'Interwiki with fragment' => [
+			'https://acme.test/Goats#Goatificati.C3.B6n',
+			NS_MAIN,
+			'Goats',
+			'Goatificatiön',
+			'acme'
+		];
+
+		yield 'Interwiki with query' => [
+			'https://acme.test/Goats?a=1&b=blank+blank#Goatificati.C3.B6n',
+			NS_MAIN,
+			'Goats',
+			'Goatificatiön',
+			'acme',
+			[
+				'a' => 1,
+				'b' => 'blank blank'
+			]
+		];
+
+		yield 'Local interwiki with fragment' => [
+			'https://yy.wiki.test/wiki/Goats#Goatificatiön',
+			NS_MAIN,
+			'Goats',
+			'Goatificatiön',
+			'yy'
+		];
+	}
+
+	/**
+	 * @dataProvider provideGetLinkURL
+	 *
+	 * @covers Title::getLinkURL
+	 * @covers Title::getFullURL
+	 * @covers Title::getLocalURL
+	 * @covers Title::getFragmentForURL
+	 */
+	public function testGetLinkURL(
+		$expected,
+		$ns,
+		$title,
+		$fragment = '',
+		$interwiki = '',
+		$query = '',
+		$query2 = false,
+		$proto = false
+	) {
+		$this->setMwGlobals( [
+			'wgServer' => 'https://xx.wiki.test',
+			'wgArticlePath' => '/wiki/$1',
+			'wgExternalInterwikiFragmentMode' => 'legacy',
+			'wgFragmentMode' => [ 'html5', 'legacy' ]
+		] );
+
+		$interwikiLookup = $this->createMock( InterwikiLookup::class );
+
+		$interwikiLookup->method( 'fetch' )
+			->willReturnCallback( function ( $interwiki ) {
+				switch ( $interwiki ) {
+					case '':
+						return null;
+					case 'acme':
+						return new Interwiki(
+							'acme',
+							'https://acme.test/$1'
+						);
+					case 'yy':
+						return new Interwiki(
+							'yy',
+							'https://yy.wiki.test/wiki/$1',
+							'/w/api.php',
+							'yywiki',
+							true
+						);
+					default:
+						return false;
+				}
+			} );
+
+		$this->setService( 'InterwikiLookup', $interwikiLookup );
+
+		$title = Title::makeTitle( $ns, $title, $fragment, $interwiki );
+		$this->assertSame( $expected, $title->getLinkURL( $query, $query2, $proto ) );
+	}
+
+	protected function tearDown() : void {
+		Title::clearCaches();
+		parent::tearDown();
 	}
 }

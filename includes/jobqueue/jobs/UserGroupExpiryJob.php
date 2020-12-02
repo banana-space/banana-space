@@ -1,4 +1,7 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+
 /**
  * Job that purges expired user group memberships.
  *
@@ -21,9 +24,9 @@
  * @ingroup JobQueue
  */
 
-class UserGroupExpiryJob extends Job {
-	public function __construct( $params = false ) {
-		parent::__construct( 'userGroupExpiry', Title::newMainPage(), $params );
+class UserGroupExpiryJob extends Job implements GenericParameterJob {
+	public function __construct( array $params ) {
+		parent::__construct( 'userGroupExpiry', $params );
 		$this->removeDuplicates = true;
 	}
 
@@ -32,8 +35,7 @@ class UserGroupExpiryJob extends Job {
 	 * @return bool Success
 	 */
 	public function run() {
-		UserGroupMembership::purgeExpired();
-
+		MediaWikiServices::getInstance()->getUserGroupManager()->purgeExpired();
 		return true;
 	}
 }

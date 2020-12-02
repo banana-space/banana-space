@@ -5,18 +5,19 @@
 	"descriptionmsg": "imagemap_desc",
 	"license-name": "GPL-2.0-or-later",
 	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.34.0"
+	},
 	"MessagesDirs": {
 		"ImageMap": [
 			"i18n"
 		]
 	},
 	"Hooks": {
-		"ParserFirstCallInit": [
-			"ImageMap::onParserFirstCallInit"
-		]
+		"ParserFirstCallInit": "MediaWiki\\Extensions\\ImageMap\\ImageMap::onParserFirstCallInit"
 	},
-	"AutoloadClasses": {
-		"ImageMap": "includes/ImageMap.php"
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extensions\\ImageMap\\": "includes/"
 	},
 	"manifest_version": 1
 }

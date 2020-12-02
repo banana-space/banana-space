@@ -4,10 +4,11 @@
 			"Beta16",
 			"BrokenArrow",
 			"Darth Kule",
-			"Melos",
-			"Nemo bis",
+			"Fringio",
 			"Lucas2",
-			"Matteocng"
+			"Matteocng",
+			"Melos",
+			"Nemo bis"
 		]
 	},
 	"action-titleblacklistlog": "vedere il registro dei titoli bloccati",
@@ -22,7 +23,7 @@
 	"titleblacklist-forbidden-upload": "La creazione di file con titolo \"$2\" è stata impedita. La voce corrispondente nell'elenco dei titoli non consentiti è la seguente: <code>$1</code>",
 	"titleblacklist-forbidden-new-account": "La creazione di utenti con nome \"$2\" è stata impedita. La voce corrispondente nell'elenco dei nomi non consentiti è la seguente: <code>$1</code>",
 	"titleblacklist-invalid": "{{PLURAL:$1|La seguente riga|Le seguenti righe}} dell'elenco dei titoli non consentiti {{PLURAL:$1|non è valida|non sono valide}}; si prega di correggere {{PLURAL:$1|l'errore|gli errori}} prima di salvare la pagina.",
-	"titleblacklist-override": "Ignora la blacklist",
+	"titleblacklist-override": "Ignora la blacklist dei titoli se corrisponde",
 	"titleblacklist-override-help": "Gli utenti con privilegi sufficienti possono impostare quest'opzione per ignorare i controlli di blacklist sul titolo.",
 	"titleblacklist-warning": "<strong>Attenzione: questa pagina può essere modificata solo dagli amministratori o dagli utenti con il diritto <code>tboverride</code> poiché corrisponde alla seguente voce della lista dei titoli bloccati:</strong><br /><code>$1</code>",
 	"right-tboverride": "Ignora la blacklist dei titoli o dei nome utente",

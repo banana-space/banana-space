@@ -6,21 +6,24 @@
 			"Zoranzoki21"
 		]
 	},
-	"timeless-desc": "Bezvremenski skin dizajniran po prototipu Winter koji je napravio Brendon Haris, te drugim stilovima Zadužbine Vikimedija",
-	"timeless-search-placeholder": "Pretraži {{NUMBEROFARTICLES}} {{PLURAL:{{NUMBEROFARTICLES}}|stranicu|stranice|stranica}}",
-	"timeless-loggedin": "Vaš nalog",
-	"timeless-anonymous": "Anonimno",
+	"skinname-timeless": "Bezvremensko",
+	"timeless-desc": "Bezvremenska tema dizajnirana po prototipu Winter koji je napravio Brendon Haris, te drugim stilovima Fondacije Vikimedija",
+	"timeless-anonymous": "Anoniman",
 	"timeless-loggedinas": "Prijavljeni ste kao '''$1'''",
 	"timeless-notloggedin": "Niste prijavljeni",
-	"timeless-userpage": "Stranica {{GENDER:$1|korisnika|korisnice|korisnika}}",
-	"timeless-talkpage": "Razgovor sa {{GENDER:$1|korisnikom|korisnicom|korisnikom}}",
-	"timeless-pagelog": "Dnevnici stranice",
+	"timeless-userpage": "Stranica {{GENDER:$1|korisnika|korisnice}}",
+	"timeless-talkpage": "Razgovor sa {{GENDER:$1|korisnikom|korisnicom}}",
+	"timeless-pagelog": "Evidencije stranice",
 	"timeless-more": "Više",
 	"timeless-sitetools": "Viki alatke",
 	"timeless-pageactions": "Alatke za stranicu",
 	"timeless-userpagetools": "Alatke za korisničku stranicu",
+	"timeless-action-addsection": "Nova tema",
+	"timeless-view-view": "Čitaj",
 	"timeless-pagemisc": "Više",
 	"timeless-namespaces": "Imenski prostori",
 	"timeless-pagetools": "Radnje za stranicu",
-	"timeless-languages": "Jezici"
+	"timeless-languages": "Jezici",
+	"timeless-projects": "Drugi projekti",
+	"timeless.js": "/* Javaskript postavljen ovde će se učitati za sve one koji koriste bezvremensku temu */"
 }

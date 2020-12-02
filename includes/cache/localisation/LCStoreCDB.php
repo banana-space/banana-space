@@ -22,9 +22,7 @@ use Cdb\Reader;
 use Cdb\Writer;
 
 /**
- * LCStore implementation which stores data as a collection of CDB files in the
- * directory given by $wgCacheDirectory. If $wgCacheDirectory is not set, this
- * will throw an exception.
+ * LCStore implementation which stores data as a collection of CDB files.
  *
  * Profiling indicates that on Linux, this implementation outperforms MySQL if
  * the directory is on a local filesystem and there is ample kernel cache
@@ -35,7 +33,7 @@ use Cdb\Writer;
  */
 class LCStoreCDB implements LCStore {
 
-	/** @var Reader[] */
+	/** @var Reader[]|false[] */
 	private $readers;
 
 	/** @var Writer */
@@ -44,17 +42,11 @@ class LCStoreCDB implements LCStore {
 	/** @var string Current language code */
 	private $currentLang;
 
-	/** @var bool|string Cache directory. False if not set */
+	/** @var string Cache directory */
 	private $directory;
 
-	function __construct( $conf = [] ) {
-		global $wgCacheDirectory;
-
-		if ( isset( $conf['directory'] ) ) {
-			$this->directory = $conf['directory'];
-		} else {
-			$this->directory = $wgCacheDirectory;
-		}
+	public function __construct( $conf = [] ) {
+		$this->directory = $conf['directory'];
 	}
 
 	public function get( $code, $key ) {
@@ -66,7 +58,7 @@ class LCStoreCDB implements LCStore {
 				try {
 					$this->readers[$code] = Reader::open( $fileName );
 				} catch ( Exception $e ) {
-					wfDebug( __METHOD__ . ": unable to open cdb file for reading\n" );
+					wfDebug( __METHOD__ . ": unable to open cdb file for reading" );
 				}
 			}
 		}
@@ -79,7 +71,7 @@ class LCStoreCDB implements LCStore {
 				$value = $this->readers[$code]->get( $key );
 			} catch ( Exception $e ) {
 				wfDebug( __METHOD__ . ": \Cdb\Exception caught, error message was "
-					. $e->getMessage() . "\n" );
+					. $e->getMessage() );
 			}
 			if ( $value === false ) {
 				return null;
@@ -90,11 +82,9 @@ class LCStoreCDB implements LCStore {
 	}
 
 	public function startWrite( $code ) {
-		if ( !file_exists( $this->directory ) ) {
-			if ( !wfMkdirParents( $this->directory, null, __METHOD__ ) ) {
-				throw new MWException( "Unable to create the localisation store " .
-					"directory \"{$this->directory}\"" );
-			}
+		if ( !file_exists( $this->directory ) && !wfMkdirParents( $this->directory, null, __METHOD__ ) ) {
+			throw new MWException( "Unable to create the localisation store " .
+				"directory \"{$this->directory}\"" );
 		}
 
 		// Close reader to stop permission errors on write
@@ -123,7 +113,7 @@ class LCStoreCDB implements LCStore {
 	}
 
 	public function set( $key, $value ) {
-		if ( is_null( $this->writer ) ) {
+		if ( $this->writer === null ) {
 			throw new MWException( __CLASS__ . ': must call startWrite() before calling set()' );
 		}
 		try {

@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	/**
 	 * Base class for API-based data providers.
 	 *
@@ -30,6 +30,7 @@
 	function Api( api, options ) {
 		/**
 		 * API object for dependency injection.
+		 *
 		 * @property {mw.Api}
 		 */
 		this.api = api;
@@ -37,12 +38,14 @@
 		/**
 		 * Options object; the exact format and meaning is unspecified and could be different
 		 * from subclass to subclass.
+		 *
 		 * @property {Object}
 		 */
 		this.options = options || {};
 
 		/**
 		 * API call cache.
+		 *
 		 * @property {Object.<string, jQuery.Promise>} cache
 		 * @protected
 		 */
@@ -176,6 +179,7 @@
 
 			// pages is an associative array indexed by pageid,
 			// we need to iterate through to find the right page
+			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( data.query.pages, function ( id, page ) {
 				if ( page.title === pageName ) {
 					pageData = page;
@@ -196,4 +200,4 @@
 
 	mw.mmv.provider = {};
 	mw.mmv.provider.Api = Api;
-}( mediaWiki, jQuery ) );
+}() );

@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, oo, $ ) {
+( function () {
 
 	/**
 	 * Gets file information.
@@ -38,7 +38,7 @@
 
 		mw.mmv.provider.Api.call( this, api, options );
 	}
-	oo.inheritClass( ImageInfo, mw.mmv.provider.Api );
+	OO.inheritClass( ImageInfo, mw.mmv.provider.Api );
 
 	/**
 	 * List of imageinfo API properties which are needed to construct an Image model.
@@ -114,4 +114,4 @@
 	};
 
 	mw.mmv.provider.ImageInfo = ImageInfo;
-}( mediaWiki, OO, jQuery ) );
+}() );

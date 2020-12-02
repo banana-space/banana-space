@@ -210,7 +210,7 @@ oop.inherits(FoldMode, BaseFoldMode);
             return;
 
         var startLevel = keywordLevels[token.value] || 0;
-        var stackDepth = 0
+        var stackDepth = 0;
         var endRow = row;
 
         while(token = stream.stepForward()) {
@@ -223,7 +223,7 @@ oop.inherits(FoldMode, BaseFoldMode);
                     endRow = stream.getCurrentTokenRow() - 1;
                 stackDepth += level == 9 ? 1 : - 1;
                 if (stackDepth < 0)
-                    break
+                    break;
             } else if (level >= startLevel)
                 break;
         }
@@ -269,7 +269,7 @@ oop.inherits(Mode, TextMode);
     
     this.getMatching = function(session, row, column) {
         if (row == undefined)
-            row = session.selection.lead
+            row = session.selection.lead;
         if (typeof row == "object") {
             column = row.column;
             row = row.row;
@@ -286,4 +286,11 @@ oop.inherits(Mode, TextMode);
 
 exports.Mode = Mode;
 
-});
+});                (function() {
+                    ace.require(["ace/mode/latex"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

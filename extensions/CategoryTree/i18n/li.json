@@ -33,10 +33,5 @@
 	"categorytree-no-pages": "Gein pazjena's of óngercategorië.",
 	"categorytree-not-found": "Categorie ''$1'' neet gevónje",
 	"categorytree-error": "Perbleem bie 't laje van de gegaeves.",
-	"categorytree-retry": "Wach estebleef effe en perbeer 't den opnuuj.",
-	"apihelp-categorytree-description": "Intern moduul veur de oetbreijing CategoryTree.",
-	"apihelp-categorytree-summary": "Intern moduul veur de oetbreijing CategoryTree.",
-	"apihelp-categorytree-param-category": "Naam in de categorienaamruumde, veurveugsel weurt genegeerd es opgegaove.",
-	"apihelp-categorytree-param-options": "Opties veur de constructeur van CategoryTree es e JSON-objectèk. De optie \"depth\" is standerd ingestèldj gewaore op <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "Opties mótten e geljig JSON-objèk zeen."
+	"categorytree-retry": "Wach estebleef effe en perbeer 't den opnuuj."
 }

@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../../FancyCaptcha/HTMLFancyCaptchaField.php';
-
 /**
  * @covers HTMLFancyCaptchaField
  */

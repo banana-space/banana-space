@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ravi Mundkur"
+		]
+	},
+	"oathauth-disable-for-user": "ಬಳಕೆದಾರೆನ ರಡ್ಡ್ ಅಂಶದ ನಿಜಾಪನೆನ್ ನಿಷ್ಕ್ರಿಯ ಮಲ್ಪುಲೆ",
+	"right-oathauth-disable-for-user": "ಬಳಕೆದಾರೆನ ರಡ್ಡ್ ಅಂಶದ ನಿಜಾಪನೆನ್ ನಿಷ್ಕ್ರಿಯ ಮಲ್ಪುಲೆ",
+	"oathauth-disable-intro": "ಮಲ್ಲ ಅಧಿಕಾರದೊಟ್ಟುಗು ಮಲ್ಲ ಜವಾಬ್ದಾರಿಲಾ ಬರ್ಪುಂಡು.",
+	"oathauth-enteruser": "ಬಳಕೆದಾರೆಪುದರು:"
+}

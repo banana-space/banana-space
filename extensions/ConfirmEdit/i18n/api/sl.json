@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334"
+		]
+	},
+	"captcha-apihelp-param-captchaword": "Odgovorite na CAPTCHA",
+	"captcha-apihelp-param-captchaid": "CAPTCHA ID iz prejšnje zahteve"
+}

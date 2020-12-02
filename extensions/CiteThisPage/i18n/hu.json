@@ -1,15 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bináris",
 			"Dani",
 			"Glanthor Reviol",
-			"Tgr",
-			"Tacsipacsi"
+			"Tacsipacsi",
+			"Tgr"
 		]
 	},
 	"citethispage": "Ezen lap idézése",
 	"citethispage-desc": "[[Special:Cite|Hivatkozás-készítő]] speciális lap és link az eszközdobozba",
-	"citethispage-link": "Hogyan hivatkozz erre a lapra",
+	"citethispage-link": "Hogyan hivatkozz erre a lapra?",
 	"tooltip-citethispage": "Információk a lap idézésével kapcsolatban",
 	"citethispage-change-submit": "Mehet",
 	"citethispage-change-target": "Lap neve:",

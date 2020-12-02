@@ -23,7 +23,6 @@
 	"interwiki_error": "Greška: tabela međuvikija je prazna, ili nešto drugo nije u redu.",
 	"interwiki_edit": "Izmeni",
 	"interwiki_reasonfield": "Razlog:",
-	"interwiki_delquestion": "Brišem „$1”",
 	"interwiki_deleting": "Vi brišete prefiks „$1“.",
 	"interwiki_deleted": "Prefiks „$1“ je uspešno obrisan iz tabele međuvikija.",
 	"interwiki_delfailed": "Prefiks „$1“ nije mogao biti obrisan iz tabele međuvikija.",

@@ -19,21 +19,19 @@
 	"nuke-multiplepeople": "מחיקה מרובה של דפים שנוספו לאחרונה",
 	"nuke-tools": "כלי זה מאפשר מחיקות המוניות של דפים שנוספו לאחרונה על־ידי משתמש או כתובת IP מסוימים.\nכתבו את שם המשתמש או כתובת ה־IP כדי לקבל את רשימת הדפים למחיקה, או השאירו את השדה ריק עבור כל המשתמשים.",
 	"nuke-submit-user": "קבלת רשימת דפים",
-	"nuke-toggleinvert": "הפיכה",
 	"nuke-submit-delete": "מחיקת הדפים שנבחרו",
 	"right-nuke": "מחיקה מרובה של דפים",
-	"nuke-select": "בחירה: $1",
 	"nuke-userorip": "שם משתמש, כתובת IP או ריק:",
 	"nuke-maxpages": "מספר מרבי של דפים:",
 	"nuke-editby": "נוצר על־ידי [[Special:Contributions/$1|$1]]",
 	"nuke-deleted": "הדף '''$1''' נמחק.",
 	"nuke-not-deleted": "'''לא ניתן''' למחוק את הדף [[:$1]].",
 	"nuke-delete-more": "[[Special:Nuke|למחוק עוד דפים]]",
-	"nuke-pattern": "תבנית עבור שם הדף:",
+	"nuke-pattern": "תבנית SQL LIKE (למשל %) עבור שם הדף:",
 	"nuke-nopages-global": "אין כותרות דפים שמתאימים לחיפוש שלך.",
 	"nuke-viewchanges": "הצגת שינויים",
 	"nuke-namespace": "להגביל למרחב השמות הבא:",
 	"nuke-linkoncontribs": "מחיקה מרובה",
 	"nuke-linkoncontribs-text": "מחיקת דפים רבים {{GENDER:$1|שהמשתמש הזה הוא הכותב היחיד|שהמשתמשת הזאת היא הכותבת היחידה}} שלהם",
-	"nuke-confirm": "{{GENDER:|אתה עומד|את עומדת}} למחוק {{PLURAL:$1|דף אחד|$1 דפים}}. האם {{GENDER:|אתה|את}} רוצה להמשיך?"
+	"nuke-confirm": "{{PLURAL:$1|דף אחד יימחק|$1 דפים יימחקו}}. האם ברצונך להמשיך?"
 }

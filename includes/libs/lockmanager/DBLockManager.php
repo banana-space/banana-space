@@ -22,8 +22,8 @@
  */
 
 use Wikimedia\Rdbms\Database;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBError;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Version of LockManager based on using named/row DB locks.
@@ -36,6 +36,7 @@ use Wikimedia\Rdbms\DBError;
  *
  * Caching is used to avoid hitting servers that are down.
  *
+ * @stable to extend
  * @ingroup LockManager
  * @since 1.19
  */
@@ -52,6 +53,7 @@ abstract class DBLockManager extends QuorumLockManager {
 
 	/**
 	 * Construct a new instance from configuration.
+	 * @stable to call
 	 *
 	 * @param array $config Parameters include:
 	 *   - dbServers   : Associative array of DB names to server configuration.
@@ -82,7 +84,7 @@ abstract class DBLockManager extends QuorumLockManager {
 			$this->lockExpiry = $config['lockExpiry'];
 		} else {
 			$met = ini_get( 'max_execution_time' );
-			$this->lockExpiry = $met ? $met : 60; // use some sane amount if 0
+			$this->lockExpiry = $met ?: 60; // use some sane amount if 0
 		}
 		$this->safeDelay = ( $this->lockExpiry <= 0 )
 			? 60 // pick a safe-ish number to match DB timeout default
@@ -90,13 +92,12 @@ abstract class DBLockManager extends QuorumLockManager {
 
 		// Tracks peers that couldn't be queried recently to avoid lengthy
 		// connection timeouts. This is useless if each bucket has one peer.
-		$this->statusCache = isset( $config['srvCache'] )
-			? $config['srvCache']
-			: new HashBagOStuff();
+		$this->statusCache = $config['srvCache'] ?? new HashBagOStuff();
 	}
 
 	/**
-	 * @TODO change this code to work in one batch
+	 * @todo change this code to work in one batch
+	 * @stable to override
 	 * @param string $lockSrv
 	 * @param array $pathsByType
 	 * @return StatusValue
@@ -112,6 +113,10 @@ abstract class DBLockManager extends QuorumLockManager {
 
 	abstract protected function doGetLocksOnServer( $lockSrv, array $paths, $type );
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	protected function freeLocksOnServer( $lockSrv, array $pathsByType ) {
 		return StatusValue::newGood();
 	}
@@ -152,12 +157,12 @@ abstract class DBLockManager extends QuorumLockManager {
 			} elseif ( is_array( $this->dbServers[$lockDb] ) ) {
 				// Parameters to construct a new database connection
 				$config = $this->dbServers[$lockDb];
+				$config['flags'] = ( $config['flags'] ?? 0 );
+				$config['flags'] &= ~( IDatabase::DBO_TRX | IDatabase::DBO_DEFAULT );
 				$db = Database::factory( $config['type'], $config );
 			} else {
 				throw new UnexpectedValueException( "No server called '$lockDb'." );
 			}
-
-			$db->clearFlag( DBO_TRX );
 			# If the connection drops, try to avoid letting the DB rollback
 			# and release the locks before the file operations are finished.
 			# This won't handle the case of DB server restarts however.
@@ -176,6 +181,7 @@ abstract class DBLockManager extends QuorumLockManager {
 
 	/**
 	 * Do additional initialization for new lock DB connection
+	 * @stable to override
 	 *
 	 * @param string $lockDb
 	 * @param IDatabase $db
@@ -222,10 +228,10 @@ abstract class DBLockManager extends QuorumLockManager {
 	/**
 	 * Make sure remaining locks get cleared for sanity
 	 */
-	function __destruct() {
+	public function __destruct() {
 		$this->releaseAllLocks();
 		foreach ( $this->conns as $db ) {
-			$db->close();
+			$db->close( __METHOD__ );
 		}
 	}
 }

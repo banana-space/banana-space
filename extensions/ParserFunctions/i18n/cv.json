@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Chavash"
+			"Chavash",
+			"Chuvash"
 		]
 	},
+	"pfunc_time_error": "Йăнăш: Тĕрĕс мар вăхăт.",
 	"pfunc_expr_unrecognised_word": "Ҫырнинчи йӑнӑш: Палласа илеймен сӑмах: \"$1\"",
-	"pfunc_expr_unrecognised_punctuation": "Ҫырнинчи йӑнӑш: Палласа илеймен паллӑ: $1"
+	"pfunc_expr_unrecognised_punctuation": "Йӑнăш çырни: Пĕлмен символ \"$1\"."
 }

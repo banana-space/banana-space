@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Artsiom91",
 			"Mikalai Udodau",
 			"Yury Tarasievich",
 			"Дзяніс Тутэйшы",
@@ -8,8 +9,10 @@
 		]
 	},
 	"vector-skin-desc": "Сучасная версія вокладкі Манабук, з абноўленым відам і шматлікімі зручнымі паляпшэннямі",
+	"prefs-vector-enable-vector-1-label": "Ужыць Legacy Vector",
+	"prefs-vector-enable-vector-1-help": "Цягам наступных некалькіх гадоў мы будзем паступова абнаўляць шаблон Vector. Legacy Vector дазволіць праглядаць старую версію Vector (станам на снежань 2019 года). Каб даведацца больш, перайдзіце на нашу [[mw:Reading/Web/Desktop_Improvements|старонку праекта]].",
 	"vector-action-addsection": "Дадаць тэму",
-	"vector-action-delete": "Сцерці",
+	"vector-action-delete": "Выдаліць",
 	"vector-action-move": "Перанесці",
 	"vector-action-protect": "Ахова",
 	"vector-action-undelete": "Аднавіць",

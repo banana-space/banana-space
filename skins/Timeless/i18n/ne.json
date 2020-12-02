@@ -2,8 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"जनक राज भट्ट",
+			"पर्वत सुबेदी",
 			"राम प्रसाद जोशी"
 		]
 	},
-	"timeless-userpagetools": "प्रयोकर्तापृष्ठ उपकरणहरू"
+	"timeless-notloggedin": "प्रवेश नगरिएको",
+	"timeless-userpagetools": "प्रयोकर्तापृष्ठ उपकरणहरू",
+	"timeless-languages": "भाषाहरू"
 }

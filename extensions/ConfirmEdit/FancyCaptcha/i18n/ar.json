@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abanima",
 			"Aiman titi",
 			"Asaifm",
-			"Meno25",
-			"Abanima",
-			"علاء",
 			"Hhaboh162002",
-			"أحمد"
+			"Meno25",
+			"أحمد",
+			"علاء"
 		]
 	},
 	"fancycaptcha-desc": "مولد فانسي كابتشا لConfirm Edit",
@@ -19,8 +19,5 @@
 	"fancycaptcha-edit": "لتعديل هذه الصفحة، من فضلك أدخل الكلمات التي تظهر بالأسفل في الصندوق\n([[Special:Captcha/help|مزيد من المعلومات]]):",
 	"fancycaptcha-imgcaptcha-ph": "أدخل النص الذي تراه في الصورة",
 	"fancycaptcha-sendemail": "للمساعدة في منع إنشاء حسابات بطريقة أوتوماتيكية، قم من فضلك بإدخال الكلمات التي تظهر أدناه في الصندوق ([[Special:Captcha/help|مزيد من المعلومات]]):",
-	"fancycaptcha-reload-text": "تحديث",
-	"apihelp-fancycaptchareload-description": "احصل على FancyCaptcha جديدة.",
-	"apihelp-fancycaptchareload-summary": "الحصول على FancyCaptcha جديدة.",
-	"apihelp-fancycaptchareload-example-1": "احصل على FancyCaptcha جديدة."
+	"fancycaptcha-reload-text": "تحديث"
 }

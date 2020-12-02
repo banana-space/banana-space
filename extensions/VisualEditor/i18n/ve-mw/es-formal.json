@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fitoschido",
+			"KATRINE1993"
+		]
+	},
+	"tooltip-ca-ve-edit": "Editar esta pagina",
+	"visualeditor-ca-editsource": "Editar codigo",
+	"visualeditor-ca-editsource-section": "editar código",
+	"visualeditor-linkinspector-invalid-external": "Escriba un URL completo; p. ej., https://ejemplo.org"
+}

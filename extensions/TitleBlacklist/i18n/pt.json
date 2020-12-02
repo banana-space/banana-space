@@ -4,11 +4,13 @@
 			"Cainamarques",
 			"Hamilton Abreu",
 			"Malafaya",
+			"Vitorvicentevalente",
 			"Waldir",
-			"555",
-			"Vitorvicentevalente"
+			555
 		]
 	},
+	"action-tboverride": "contornar a lista negra de títulos e nomes de utilizador",
+	"action-tboverride-account": "contornar a lista negra de nomes de utilizador",
 	"action-titleblacklistlog": "ver o registo da lista negra de títulos",
 	"log-name-titleblacklist": "Registo da lista negra de títulos",
 	"log-description-titleblacklist": "Estes eventos registam as correspondências com a lista negra de títulos.",
@@ -21,18 +23,10 @@
 	"titleblacklist-forbidden-upload": "Foi bloqueada a criação de ficheiros com o nome \"$2\".\nO nome corresponde à seguinte entrada da lista negra: <code>$1</code>",
 	"titleblacklist-forbidden-new-account": "Foi bloqueada a criação de utilizadores com o nome \"$2\".\nO nome corresponde à seguinte entrada da lista negra: <code>$1</code>",
 	"titleblacklist-invalid": "{{PLURAL:$1|A seguinte linha|As seguintes linhas}} da lista negra {{PLURAL:$1|é inválida|são inválidas}}. Por favor, {{PLURAL:$1|corrija-a|corrija-as}} antes de gravar:",
-	"titleblacklist-override": "Ignorar a lista negra",
+	"titleblacklist-override": "Ignorar a lista negra de títulos se houver coincidência",
 	"titleblacklist-override-help": "Os utilizadores com privilégios suficientes podem configurar isto para ignorar as verificações contra a lista negra de títulos.",
 	"titleblacklist-warning": "<strong>Aviso: Esta página só pode ser editada por administradores e outros utilizadores com o privilégio <code>tboverride</code>, pois o título corresponde com a seguinte entrada da lista negra de títulos:</strong><br /><code>$1</code>",
 	"right-tboverride": "Contornar a lista negra de títulos e nomes de utilizador",
 	"right-tboverride-account": "Contornar a lista negra de nomes de utilizador",
-	"right-titleblacklistlog": "Ver o registo da lista negra de títulos",
-	"apihelp-titleblacklist-description": "Validar um título de página, nome de ficheiro ou nome de utilizador contra a lista negra.",
-	"apihelp-titleblacklist-summary": "Validar um título de página, nome de ficheiro ou nome de utilizador contra a lista negra.",
-	"apihelp-titleblacklist-param-title": "O texto a validar contra a lista negra.",
-	"apihelp-titleblacklist-param-action": "A operação a verificar.",
-	"apihelp-titleblacklist-param-nooverride": "Não tentar contornar a lista negra de títulos.",
-	"apihelp-titleblacklist-example-1": "Verificar se [[Foo]] está na lista negra",
-	"apihelp-titleblacklist-example-2": "Verificar se [[Bar]] está na lista negra para edições",
-	"apihelp-createaccount-param-ignoretitleblacklist": "Ignorar as verificações de usurpação (''spoofing''). Requer um dos seguintes direitos: <code>tboverride</code> ou <code>tboverride-account</code>."
+	"right-titleblacklistlog": "Ver o registo da lista negra de títulos"
 }

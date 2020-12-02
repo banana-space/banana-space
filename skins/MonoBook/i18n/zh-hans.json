@@ -1,13 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
-			"Xiaomingyan",
 			"Cwek",
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"Xiaomingyan"
 		]
 	},
 	"skinname-monobook": "MonoBook",
 	"monobook-desc": "自2004年就出现的经典MediaWiki皮肤，命名依据一本书中某页面的黑白照片背景",
 	"monobook.css": "/* 这里放置的CSS将影响使用MonoBook皮肤的用户 */",
-	"monobook.js": "/* 这里的任何JavaScript将为使用MonoBook皮肤的用户加载 */"
+	"monobook.js": "/* 这里的任何JavaScript将为使用MonoBook皮肤的用户加载 */",
+	"monobook-jumptotop": "返回顶部",
+	"monobook-jumptopersonal": "用户工具",
+	"monobook-jumptonavigation": "跳到导航",
+	"monobook-jumptosearch": "跳到搜索",
+	"monobook-more-actions": "更多",
+	"monobook-cactions-label": "页面操作",
+	"monobook-notifications-link": "通知（$1）",
+	"monobook-notifications-link-none": "通知",
+	"monobook-responsive-label": "启用响应式MonoBook设计"
 }

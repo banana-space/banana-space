@@ -6,7 +6,7 @@
  *
  * See also ImagePage.php#makeMetadataTable (creates the HTML)
  */
-( function ( mw, $ ) {
+( function () {
 	$( function () {
 		var $tables = $( '.mw_metadata' );
 		if ( !$tables.find( '.mw-metadata-collapsible, .collapsable' ).length ) {
@@ -30,6 +30,7 @@
 						e.type === 'click' ||
 						e.type === 'keypress' && e.which === 13
 					) {
+						// eslint-disable-next-line no-jquery/no-class-state
 						if ( $table.hasClass( 'collapsed' ) ) {
 							// From collapsed to expanded. Button will now collapse.
 							$( this ).text( collapseText );
@@ -37,21 +38,16 @@
 							// From expanded to collapsed. Button will now expand.
 							$( this ).text( expandText );
 						}
+						// eslint-disable-next-line no-jquery/no-class-state
 						$table.toggleClass( 'collapsed' );
 					}
 				} );
 
 			$table.find( 'tbody' ).append(
-				$( '<tr class="mw-metadata-show-hide-extended"></tr>' ).append(
-					$( '<td colspan="2"></td>' ).append( $link )
+				$( '<tr>' ).addClass( 'mw-metadata-show-hide-extended' ).append(
+					$( '<td>' ).prop( 'colspan', 2 ).append( $link )
 				)
 			);
 		} );
-
-		// Initial collapsed state
-		// (For back-compat with cached HTML from before ImagePage.php
-		// did this by default)
-		$tables.addClass( 'collapsed' );
 	} );
-
-}( mediaWiki, jQuery ) );
+}() );

@@ -1,7 +1,5 @@
 <?php
 /**
- * Class encapsulating an image used in a ResourceLoaderImageModule.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -20,13 +18,17 @@
  * @file
  */
 
+use MediaWiki\Languages\LanguageFallback;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Shell\Shell;
+
 /**
  * Class encapsulating an image used in a ResourceLoaderImageModule.
  *
+ * @ingroup ResourceLoader
  * @since 1.25
  */
 class ResourceLoaderImage {
-
 	/**
 	 * Map of allowed file extensions to their MIME types.
 	 * @var array
@@ -38,20 +40,40 @@ class ResourceLoaderImage {
 		'jpg' => 'image/jpg',
 	];
 
+	/** @var string */
+	private $name;
+	/** @var string */
+	private $module;
+	/** @var string|array */
+	private $descriptor;
+	/** @var string */
+	private $basePath;
+	/** @var array */
+	private $variants;
+	/** @var string|null */
+	private $defaultColor;
+	/** @var string */
+	private $extension;
+
 	/**
-	 * @param string $name Image name
-	 * @param string $module Module name
+	 * @param string $name Self-name of the image as known to ResourceLoaderImageModule.
+	 * @param string $module Self-name of the module containing this image.
+	 *  Used to find the image in the registry e.g. through a load.php url.
 	 * @param string|array $descriptor Path to image file, or array structure containing paths
 	 * @param string $basePath Directory to which paths in descriptor refer
 	 * @param array $variants
+	 * @param string|null $defaultColor of the base variant
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $name, $module, $descriptor, $basePath, $variants ) {
+	public function __construct( $name, $module, $descriptor, $basePath, array $variants,
+		$defaultColor = null
+	) {
 		$this->name = $name;
 		$this->module = $module;
 		$this->descriptor = $descriptor;
 		$this->basePath = $basePath;
 		$this->variants = $variants;
+		$this->defaultColor = $defaultColor;
 
 		// Expand shorthands:
 		// [ "en,de,fr" => "foo.svg" ]
@@ -69,14 +91,14 @@ class ResourceLoaderImage {
 		}
 		// Remove 'deprecated' key
 		if ( is_array( $this->descriptor ) ) {
-			unset( $this->descriptor[ 'deprecated' ] );
+			unset( $this->descriptor['deprecated'] );
 		}
 
 		// Ensure that all files have common extension.
 		$extensions = [];
-		$descriptor = (array)$this->descriptor;
+		$descriptor = is_array( $this->descriptor ) ? $this->descriptor : [ $this->descriptor ];
 		array_walk_recursive( $descriptor, function ( $path ) use ( &$extensions ) {
-			$extensions[] = pathinfo( $path, PATHINFO_EXTENSION );
+			$extensions[] = pathinfo( $this->getLocalPath( $path ), PATHINFO_EXTENSION );
 		} );
 		$extensions = array_unique( $extensions );
 		if ( count( $extensions ) !== 1 ) {
@@ -116,8 +138,19 @@ class ResourceLoaderImage {
 	 *
 	 * @return string[]
 	 */
-	public function getVariants() {
+	public function getVariants() : array {
 		return array_keys( $this->variants );
+	}
+
+	/**
+	 * @internal For unit testing overrride
+	 * @param string $lang
+	 * @return string[]
+	 */
+	protected function getLangFallbacks( string $lang ) : array {
+		return MediaWikiServices::getInstance()
+			->getLanguageFallback()
+			->getAll( $lang, LanguageFallback::STRICT );
 	}
 
 	/**
@@ -125,32 +158,45 @@ class ResourceLoaderImage {
 	 *
 	 * @param ResourceLoaderContext $context Any context
 	 * @return string
+	 * @throws MWException If no matching path is found
 	 */
 	public function getPath( ResourceLoaderContext $context ) {
 		$desc = $this->descriptor;
-		if ( is_string( $desc ) ) {
-			return $this->basePath . '/' . $desc;
+		if ( !is_array( $desc ) ) {
+			return $this->getLocalPath( $desc );
 		}
 		if ( isset( $desc['lang'] ) ) {
 			$contextLang = $context->getLanguage();
 			if ( isset( $desc['lang'][$contextLang] ) ) {
-				return $this->basePath . '/' . $desc['lang'][$contextLang];
+				return $this->getLocalPath( $desc['lang'][$contextLang] );
 			}
-			$fallbacks = Language::getFallbacksFor( $contextLang );
+			$fallbacks = $this->getLangFallbacks( $contextLang );
 			foreach ( $fallbacks as $lang ) {
-				// Images will fallback to 'default' instead of 'en', except for 'en-*' variants
-				if (
-					( $lang !== 'en' || substr( $contextLang, 0, 3 ) === 'en-' ) &&
-					isset( $desc['lang'][$lang] )
-				) {
-					return $this->basePath . '/' . $desc['lang'][$lang];
+				if ( isset( $desc['lang'][$lang] ) ) {
+					return $this->getLocalPath( $desc['lang'][$lang] );
 				}
 			}
 		}
 		if ( isset( $desc[$context->getDirection()] ) ) {
-			return $this->basePath . '/' . $desc[$context->getDirection()];
+			return $this->getLocalPath( $desc[$context->getDirection()] );
 		}
-		return $this->basePath . '/' . $desc['default'];
+		if ( isset( $desc['default'] ) ) {
+			return $this->getLocalPath( $desc['default'] );
+		} else {
+			throw new MWException( 'No matching path found' );
+		}
+	}
+
+	/**
+	 * @param string|ResourceLoaderFilePath $path
+	 * @return string
+	 */
+	protected function getLocalPath( $path ) {
+		if ( $path instanceof ResourceLoaderFilePath ) {
+			return $path->getLocalPath();
+		}
+
+		return "{$this->basePath}/$path";
 	}
 
 	/**
@@ -184,7 +230,7 @@ class ResourceLoaderImage {
 	 * @param string $script URL to load.php
 	 * @param string|null $variant Variant to get the URL for
 	 * @param string $format Format to get the URL for, 'original' or 'rasterized'
-	 * @return string
+	 * @return string URL
 	 */
 	public function getUrl( ResourceLoaderContext $context, $script, $variant, $format ) {
 		$query = [
@@ -192,10 +238,14 @@ class ResourceLoaderImage {
 			'image' => $this->getName(),
 			'variant' => $variant,
 			'format' => $format,
-			'lang' => $context->getLanguage(),
-			'skin' => $context->getSkin(),
-			'version' => $context->getVersion(),
 		];
+		if ( $this->varyOnLanguage() ) {
+			$query['lang'] = $context->getLanguage();
+		}
+		// The following parameters are at the end to keep the original order of the parameters.
+		$query['skin'] = $context->getSkin();
+		$rl = $context->getResourceLoader();
+		$query['version'] = $rl->makeVersionQuery( $context, [ $this->getModule() ] );
 
 		return wfAppendQuery( $script, $query );
 	}
@@ -250,7 +300,10 @@ class ResourceLoaderImage {
 		if ( $variant && isset( $this->variants[$variant] ) ) {
 			$data = $this->variantize( $this->variants[$variant], $context );
 		} else {
-			$data = file_get_contents( $path );
+			$defaultColor = $this->defaultColor;
+			$data = $defaultColor ?
+				$this->variantize( [ 'color' => $defaultColor ], $context ) :
+				file_get_contents( $path );
 		}
 
 		if ( $format === 'rasterized' ) {
@@ -271,7 +324,7 @@ class ResourceLoaderImage {
 	 *
 	 * @param ResourceLoaderContext $context Image context
 	 */
-	public function sendResponseHeaders( ResourceLoaderContext $context ) {
+	public function sendResponseHeaders( ResourceLoaderContext $context ) : void {
 		$format = $context->getFormat();
 		$mime = $this->getMimeType( $format );
 		$filename = $this->getName() . '.' . $this->getExtension( $format );
@@ -288,13 +341,25 @@ class ResourceLoaderImage {
 	 * @param ResourceLoaderContext $context Image context
 	 * @return string New SVG file data
 	 */
-	protected function variantize( $variantConf, ResourceLoaderContext $context ) {
-		$dom = new DomDocument;
+	protected function variantize( array $variantConf, ResourceLoaderContext $context ) {
+		$dom = new DOMDocument;
 		$dom->loadXML( file_get_contents( $this->getPath( $context ) ) );
 		$root = $dom->documentElement;
-		$wrapper = $dom->createElement( 'g' );
+		$titleNode = null;
+		$wrapper = $dom->createElementNS( 'http://www.w3.org/2000/svg', 'g' );
+		// Reattach all direct children of the `<svg>` root node to the `<g>` wrapper
 		while ( $root->firstChild ) {
-			$wrapper->appendChild( $root->firstChild );
+			$node = $root->firstChild;
+			// @phan-suppress-next-line PhanUndeclaredProperty False positive
+			if ( !$titleNode && $node->nodeType === XML_ELEMENT_NODE && $node->tagName === 'title' ) {
+				// Remember the first encountered `<title>` node
+				$titleNode = $node;
+			}
+			$wrapper->appendChild( $node );
+		}
+		if ( $titleNode ) {
+			// Reattach the `<title>` node to the `<svg>` root node rather than the `<g>` wrapper
+			$root->appendChild( $titleNode );
 		}
 		$root->appendChild( $wrapper );
 		$wrapper->setAttribute( 'fill', $variantConf['color'] );
@@ -312,7 +377,7 @@ class ResourceLoaderImage {
 	 * @return string Massaged SVG image data
 	 */
 	protected function massageSvgPathdata( $svg ) {
-		$dom = new DomDocument;
+		$dom = new DOMDocument;
 		$dom->loadXML( $svg );
 		foreach ( $dom->getElementsByTagName( 'path' ) as $node ) {
 			$pathData = $node->getAttribute( 'd' );
@@ -333,25 +398,23 @@ class ResourceLoaderImage {
 	 * @return string|bool PNG image data, or false on failure
 	 */
 	protected function rasterize( $svg ) {
-		/**
-		 * This code should be factored out to a separate method on SvgHandler, or perhaps a separate
-		 * class, with a separate set of configuration settings.
-		 *
-		 * This is a distinct use case from regular SVG rasterization:
-		 * * We can skip many sanity and security checks (as the images come from a trusted source,
-		 *   rather than from the user).
-		 * * We need to provide extra options to some converters to achieve acceptable quality for very
-		 *   small images, which might cause performance issues in the general case.
-		 * * We want to directly pass image data to the converter, rather than a file path.
-		 *
-		 * See https://phabricator.wikimedia.org/T76473#801446 for examples of what happens with the
-		 * default settings.
-		 *
-		 * For now, we special-case rsvg (used in WMF production) and do a messy workaround for other
-		 * converters.
-		 */
-
 		global $wgSVGConverter, $wgSVGConverterPath;
+
+		// This code should be factored out to a separate method on SvgHandler, or perhaps a separate
+		// class, with a separate set of configuration settings.
+		//
+		// This is a distinct use case from regular SVG rasterization:
+		// * We can skip many sanity and security checks (as the images come from a trusted source,
+		//   rather than from the user).
+		// * We need to provide extra options to some converters to achieve acceptable quality for very
+		//   small images, which might cause performance issues in the general case.
+		// * We want to directly pass image data to the converter, rather than a file path.
+		//
+		// See https://phabricator.wikimedia.org/T76473#801446 for examples of what happens with the
+		// default settings.
+		//
+		// For now, we special-case rsvg (used in WMF production) and do a messy workaround for other
+		// converters.
 
 		$svg = $this->massageSvgPathdata( $svg );
 
@@ -359,7 +422,7 @@ class ResourceLoaderImage {
 		if ( strpos( $wgSVGConverter, 'rsvg' ) === 0 ) {
 			$command = 'rsvg-convert';
 			if ( $wgSVGConverterPath ) {
-				$command = wfEscapeShellArg( "$wgSVGConverterPath/" ) . $command;
+				$command = Shell::escape( "$wgSVGConverterPath/" ) . $command;
 			}
 
 			$process = proc_open(
@@ -386,7 +449,8 @@ class ResourceLoaderImage {
 
 			file_put_contents( $tempFilenameSvg, $svg );
 
-			$metadata = SVGMetadataExtractor::getMetadata( $tempFilenameSvg );
+			$svgReader = new SVGReader( $tempFilenameSvg );
+			$metadata = $svgReader->getMetadata();
 			if ( !isset( $metadata['width'] ) || !isset( $metadata['height'] ) ) {
 				unlink( $tempFilenameSvg );
 				return false;
@@ -409,5 +473,17 @@ class ResourceLoaderImage {
 
 			return $png ?: false;
 		}
+	}
+
+	/**
+	 * Check if the image depends on the language.
+	 *
+	 * @return bool
+	 */
+	private function varyOnLanguage() {
+		return is_array( $this->descriptor ) && (
+			isset( $this->descriptor['ltr'] ) ||
+			isset( $this->descriptor['rtl'] ) ||
+			isset( $this->descriptor['lang'] ) );
 	}
 }

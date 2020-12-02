@@ -5,6 +5,8 @@
 		]
 	},
 	"vector-skin-desc": "Version moderne de MonoBook con aspecto rejuvenescite e multe meliorationes de usabilitate.",
+	"prefs-vector-enable-vector-1-label": "Usar le version ancian de Vector",
+	"prefs-vector-enable-vector-1-help": "In le proxime annos nos va actualisar gradualmente le apparentia Vector. Il continua a esser possibile usar le version ancian de Vector (illo de decembre 2019). Pro leger plus sur le actualisationes, va a nostre [[mw:Reading/Web/Desktop_Improvements|pagina de projecto]].",
 	"vector.css": "/* Le CSS placiate hic afficera le usatores del apparentia Vector */",
 	"vector.js": "/* Omne JavaScript hic se executara pro le usatores del apparentia Vector */",
 	"vector-action-addsection": "Adder topico",
@@ -18,5 +20,7 @@
 	"vector-view-history": "Vider historia",
 	"vector-view-view": "Leger",
 	"vector-view-viewsource": "Vider texto fonte",
+	"vector-jumptonavigation": "Saltar al navigation",
+	"vector-jumptosearch": "Saltar al recerca",
 	"vector-more-actions": "Plus"
 }

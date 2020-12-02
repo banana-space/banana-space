@@ -17,9 +17,5 @@
 	"log-description-spamblacklist": "Disse hendelsene sporer treff på spamsvartelista.",
 	"logentry-spamblacklist-hit": "{{GENDER:$2|$1}} forårsaket et spamsvartelistetreff på $3 ved å prøve å legge til $4.",
 	"right-spamblacklistlog": "Vise spamfilterloggen",
-	"action-spamblacklistlog": "vise spamfilterloggen",
-	"apihelp-spamblacklist-description": "Valider én eller flere URL-er mot SpamBlacklist.",
-	"apihelp-spamblacklist-summary": "Valider én eller flere URL-er mot SpamBlacklist.",
-	"apihelp-spamblacklist-param-url": "URL-er som skal valideres mot svartelista.",
-	"apihelp-spamblacklist-example-1": "Sjekk to URL-er mot svartelista"
+	"action-spamblacklistlog": "vise spamfilterloggen"
 }

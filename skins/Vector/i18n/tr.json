@@ -2,25 +2,33 @@
 	"@metadata": {
 		"authors": [
 			"Arystanbek",
+			"BaRaN6161 TURK",
 			"Emperyan",
 			"Joseph",
-			"Stultiwikia",
-			"Vito Genovese",
+			"Kumkumuk",
 			"Rapsar",
-			"Kumkumuk"
+			"Stultiwikia",
+			"Vito Genovese"
 		]
 	},
-	"vector-skin-desc": "MonoBook Modern versiyonu ile taze bir görünüm ve iyi bir kullanım kolaylığı",
+	"vector-skin-desc": "MonoBook modern sürümünü ile taze bir görünüm ve iyi bir kullanım kolaylığı",
+	"prefs-vector-enable-vector-1-label": "Eski Vektörü Kullan",
+	"prefs-vector-enable-vector-1-help": "Önümüzdeki birkaç yıl içinde Vektör görünümünü kademeli olarak güncelleyeceğiz. Eski Vektörün eski sürümünü görüntülemenize izin verir (Aralık 2019 itibariyle). Güncellemeler hakkında daha fazla bilgi için [[mw:Reading/Web/Desktop_Improvements|proje sayfamıza]] gidin.",
+	"vector-opt-out": "Eski görünüme geç",
+	"vector-opt-out-tooltip": "Cildin eski görünümüne geri dönmek için ayarlarınızı değiştirin (eski Vektör)",
+	"vector-action-toggle-sidebar": "Kenar çubuğunu aç/kapat",
 	"vector-action-addsection": "Konu ekle",
 	"vector-action-delete": "Sil",
 	"vector-action-move": "Taşı",
 	"vector-action-protect": "Koru",
-	"vector-action-undelete": "Silinmeyi geri al",
+	"vector-action-undelete": "Geri al",
 	"vector-action-unprotect": "Korumayı değiştir",
 	"vector-view-create": "Oluştur",
 	"vector-view-edit": "Düzenle",
 	"vector-view-history": "Geçmişi gör",
 	"vector-view-view": "Oku",
 	"vector-view-viewsource": "Kaynağı gör",
-	"vector-more-actions": "Diğer"
+	"vector-jumptonavigation": "Gezinti kısmına atla",
+	"vector-jumptosearch": "Arama kısmına atla",
+	"vector-more-actions": "Daha fazla"
 }

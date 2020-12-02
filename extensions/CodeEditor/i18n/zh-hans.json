@@ -2,9 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Liangent",
-			"PhiLiP",
 			"Liuxinyu970226",
-			"Northteam"
+			"Northteam",
+			"PhiLiP"
 		]
 	},
 	"codeeditor-desc": "使用[https://ace.c9.io/ Ace编辑器]实现编辑JavaScript和CSS页面时的语法高亮功能",

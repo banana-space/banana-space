@@ -125,4 +125,11 @@ snippet kvt \n\
 ";
 exports.scope = "r";
 
-});
+});                (function() {
+                    ace.require(["ace/snippets/r"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

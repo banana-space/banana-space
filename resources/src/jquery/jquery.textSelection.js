@@ -2,7 +2,7 @@
  * These plugins provide extra functionality for interaction with textareas.
  *
  * - encapsulateSelection: Ported from skins/common/edit.js by Trevor Parscal
- *   © 2009 Wikimedia Foundation (GPLv2) - http://www.wikimedia.org
+ *   © 2009 Wikimedia Foundation (GPLv2) - https://www.wikimedia.org
  * - getCaretPosition, scrollToCaretPosition: Ported from Wikia's LinkSuggest extension
  *   https://github.com/Wikia/app/blob/c0cd8b763/extensions/wikia/LinkSuggest/js/jquery.wikia.linksuggest.js
  *   © 2010 Inez Korczyński (korczynski@gmail.com) & Jesús Martínez Novo (martineznovo@gmail.com) (GPLv2)
@@ -19,7 +19,7 @@
  *     $textbox.textSelection( 'encapsulateSelection', { pre: '<b>', post: '</b>' } );
  *     // Result: Textbox contains 'This is <b>bold</b>!', with cursor before the '!'
  */
-( function ( $ ) {
+( function () {
 	/**
 	 * Do things to the selection in a `<textarea>`, or a textarea-like editable element.
 	 *
@@ -41,10 +41,10 @@
 	 *  - {@link jQuery.plugin.textSelection#scrollToCaretPosition scrollToCaretPosition}
 	 *  - {@link jQuery.plugin.textSelection#register register}
 	 *  - {@link jQuery.plugin.textSelection#unregister unregister}
-	 * @param {Mixed} [options] Options to pass to the command
+	 * @param {Mixed} [commandOptions] Options to pass to the command
 	 * @return {Mixed} Depending on the command
 	 */
-	$.fn.textSelection = function ( command, options ) {
+	$.fn.textSelection = function ( command, commandOptions ) {
 		var fn,
 			alternateFn,
 			retval;
@@ -84,16 +84,16 @@
 			 * @return {string}
 			 */
 			getSelection: function () {
-				var retval,
+				var val,
 					el = this.get( 0 );
 
 				if ( !el ) {
-					retval = '';
+					val = '';
 				} else {
-					retval = el.value.substring( el.selectionStart, el.selectionEnd );
+					val = el.value.substring( el.selectionStart, el.selectionEnd );
 				}
 
-				return retval;
+				return val;
 			},
 
 			/**
@@ -154,8 +154,9 @@
 						post = options.post;
 
 					/**
-					 * @ignore
 					 * Check if the selected text is the same as the insert text
+					 *
+					 * @ignore
 					 */
 					function checkSelectedText() {
 						if ( !selText ) {
@@ -178,31 +179,31 @@
 					}
 
 					/**
-					 * @ignore
 					 * Do the splitlines stuff.
 					 *
 					 * Wrap each line of the selected text with pre and post
 					 *
-					 * @param {string} selText Selected text
-					 * @param {string} pre Text before
-					 * @param {string} post Text after
+					 * @ignore
+					 * @param {string} text Selected text
+					 * @param {string} preText Text before
+					 * @param {string} postText Text after
 					 * @return {string} Wrapped text
 					 */
-					function doSplitLines( selText, pre, post ) {
+					function doSplitLines( text, preText, postText ) {
 						var i,
-							insertText = '',
-							selTextArr = selText.split( '\n' );
+							insText = '',
+							selTextArr = text.split( '\n' );
 						for ( i = 0; i < selTextArr.length; i++ ) {
-							insertText += pre + selTextArr[ i ] + post;
+							insText += preText + selTextArr[ i ] + postText;
 							if ( i !== selTextArr.length - 1 ) {
-								insertText += '\n';
+								insText += '\n';
 							}
 						}
-						return insertText;
+						return insText;
 					}
 
 					isSample = false;
-					$( this ).focus();
+					$( this ).trigger( 'focus' );
 					if ( options.selectionStart !== undefined ) {
 						$( this ).textSelection( 'setSelection', { start: options.selectionStart, end: options.selectionEnd } );
 					}
@@ -386,7 +387,7 @@
 			// case 'getSelection': // no params
 			// case 'replaceSelection': // no params with defaults
 			case 'encapsulateSelection':
-				options = $.extend( {
+				commandOptions = $.extend( {
 					pre: '',
 					peri: '',
 					post: '',
@@ -396,32 +397,32 @@
 					splitlines: false,
 					selectionStart: undefined,
 					selectionEnd: undefined
-				}, options );
+				}, commandOptions );
 				break;
 			case 'getCaretPosition':
-				options = $.extend( {
+				commandOptions = $.extend( {
 					startAndEnd: false
-				}, options );
+				}, commandOptions );
 				break;
 			case 'setSelection':
-				options = $.extend( {
+				commandOptions = $.extend( {
 					start: undefined,
 					end: undefined
-				}, options );
-				if ( options.end === undefined ) {
-					options.end = options.start;
+				}, commandOptions );
+				if ( commandOptions.end === undefined ) {
+					commandOptions.end = commandOptions.start;
 				}
 				break;
 			case 'scrollToCaretPosition':
-				options = $.extend( {
+				commandOptions = $.extend( {
 					force: false
-				}, options );
+				}, commandOptions );
 				break;
 			case 'register':
 				if ( alternateFn ) {
 					throw new Error( 'Another textSelection API was already registered' );
 				}
-				$( this ).data( 'jquery.textSelection', options );
+				$( this ).data( 'jquery.textSelection', commandOptions );
 				// No need to update alternateFn as this command only stores the options.
 				// A command that uses it will set it again.
 				return;
@@ -430,7 +431,7 @@
 				return;
 		}
 
-		retval = ( alternateFn && alternateFn[ command ] || fn[ command ] ).call( this, options );
+		retval = ( alternateFn && alternateFn[ command ] || fn[ command ] ).call( this, commandOptions );
 
 		return retval;
 	};
@@ -443,4 +444,4 @@
 	 * @inheritdoc jQuery.plugin.textSelection#textSelection
 	 */
 
-}( jQuery ) );
+}() );

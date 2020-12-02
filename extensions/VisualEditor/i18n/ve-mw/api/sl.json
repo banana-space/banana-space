@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar",
+			"Janezdrilc",
+			"Pinky sl"
+		]
+	},
+	"apierror-visualeditor-difffailed": "Prikaz primerjalne strani je spodletel",
+	"apihelp-visualeditor-description": "Vrne HTML5 za stran iz storitve Parsoid.",
+	"apihelp-visualeditor-param-basetimestamp": "Pri shranjevanju, nastavite to časovnemu žigu urejene revizije. Uporablja se za odkrivanje konfliktov pri urejanju.",
+	"apihelp-visualeditor-param-cachekey": "Za serializacijo ali razliko uporabite rezultat predhodnega zahtevka serializeforchache s tem ključem. Povozi $1html.",
+	"apihelp-visualeditor-param-editintro": "Urejanje intra za dodajanje obvestil.",
+	"apihelp-visualeditor-param-etag": "ETag za pošiljanje.",
+	"apihelp-visualeditor-param-html": "HTML za pošiljanje Parsoidu za pretvorbo v wikibesedilo.",
+	"apihelp-visualeditor-param-oldid": "Številka redakcije za uporabo (po privzetem zadnja redakcija).",
+	"apihelp-visualeditor-param-paction": "Dejanje za izvedbo.",
+	"apihelp-visualeditor-param-page": "Stran, na kateri bodo dejanja izvedena.",
+	"apihelp-visualeditor-param-pst": "Pretvorjeno wikibesedilo pred pošiljanjem Parsoidu predhodno shranite (paction=parsefragment).",
+	"apihelp-visualeditor-param-section": "Razdelek, na katerem bo dejanje izvedeno.",
+	"apihelp-visualeditor-summary": "Vrne HTML5 za stran iz storitve Parsoid.",
+	"apihelp-visualeditoredit-param-etag": "ETag za pošiljanje.",
+	"apihelp-visualeditoredit-param-html": "HTML za pošiljanje Parsoidu za pretvorbo v wikibesedilo.",
+	"apihelp-visualeditoredit-param-minor": "Označba za manjše urejanje.",
+	"apihelp-visualeditoredit-param-paction": "Dejanje za izvedbo.",
+	"apihelp-visualeditoredit-param-page": "Stran, na kateri bodo dejanja izvedena.",
+	"apihelp-visualeditoredit-param-sectiontitle": "Naslov novega razdelka.",
+	"apihelp-visualeditoredit-param-summary": "Povzetek urejanja"
+}

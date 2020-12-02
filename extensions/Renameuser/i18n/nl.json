@@ -2,15 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Effeietsanders",
+			"Mainframe98",
 			"SPQRobin",
 			"Siebrand",
-			"Sjoerddebruin",
-			"Mainframe98"
+			"Sjoerddebruin"
 		]
 	},
 	"renameuser": "Gebruiker hernoemen",
-	"renameuser-linkoncontribs": "gebruiker hernoemen",
-	"renameuser-linkoncontribs-text": "Deze gebruiker hernoemen",
+	"renameuser-linkoncontribs": "{{GENDER:$1|gebruiker}} hernoemen",
+	"renameuser-linkoncontribs-text": "Deze {{GENDER:$1|gebruiker}} hernoemen",
 	"renameuser-desc": "Voegt een [[Special:RenameUser|speciale pagina]] toe om een gebruiker te hernoemen (u hebt hiervoor het recht ''renameuser'' nodig)",
 	"renameuserold": "Huidige gebruikersnaam:",
 	"renameusernew": "Nieuwe gebruikersnaam:",

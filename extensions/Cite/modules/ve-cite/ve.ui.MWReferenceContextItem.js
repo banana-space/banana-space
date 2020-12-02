@@ -66,6 +66,27 @@ ve.ui.MWReferenceContextItem.prototype.getRendering = function () {
 };
 
 /**
+ * Get a DOM rendering of a warning if this reference is reused.
+ *
+ * @private
+ * @return {jQuery|null}
+ */
+ve.ui.MWReferenceContextItem.prototype.getReuseWarning = function () {
+	var
+		refModel = ve.dm.MWReferenceModel.static.newFromReferenceNode( this.model ),
+		group = this.getFragment().getDocument().getInternalList()
+			.getNodeGroup( refModel.getListGroup() );
+	if ( ve.getProp( group, 'keyedNodes', refModel.getListKey(), 'length' ) > 1 ) {
+		return $( '<div>' )
+			.addClass( 've-ui-mwReferenceContextItem-muted' )
+			.text( mw.msg(
+				'cite-ve-dialog-reference-editing-reused',
+				group.keyedNodes[ refModel.getListKey() ].length
+			) );
+	}
+};
+
+/**
  * Get the reference node in the containing document (not the internal list document)
  *
  * @return {ve.dm.InternalItemNode|null} Reference item node
@@ -93,7 +114,7 @@ ve.ui.MWReferenceContextItem.prototype.getDescription = function () {
  * @inheritdoc
  */
 ve.ui.MWReferenceContextItem.prototype.renderBody = function () {
-	this.$body.empty().append( this.getRendering() );
+	this.$body.empty().append( this.getRendering(), this.getReuseWarning() );
 };
 
 /**

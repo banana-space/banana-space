@@ -2,12 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"DzWiki",
+			"Obsuser",
 			"Palapa",
-			"Srdjan m",
-			"Obsuser"
+			"Srdjan m"
 		]
 	},
-	"multimediaviewer-pref": "Preglednik medijskih datoteka",
 	"multimediaviewer-optin-pref": "Uključi <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Medijski preglednik]</span>",
 	"multimediaviewer-file-page": "Idi na odgovarajuću stranicu datoteke",
 	"multimediaviewer-repository-local": "Više detalja",

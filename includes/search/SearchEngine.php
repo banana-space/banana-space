@@ -25,13 +25,18 @@
  * @defgroup Search Search
  */
 
+use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\HookContainer\HookRunner;
 use MediaWiki\MediaWikiServices;
 
 /**
  * Contain a class for special pages
+ * @stable to extend
  * @ingroup Search
  */
 abstract class SearchEngine {
+	public const DEFAULT_SORT = 'relevance';
+
 	/** @var string */
 	public $prefix = '';
 
@@ -44,37 +49,63 @@ abstract class SearchEngine {
 	/** @var int */
 	protected $offset = 0;
 
-	/** @var array|string */
+	/**
+	 * @var string[]
+	 * @deprecated since 1.34
+	 */
 	protected $searchTerms = [];
 
 	/** @var bool */
 	protected $showSuggestion = true;
-	private $sort = 'relevance';
+	private $sort = self::DEFAULT_SORT;
 
 	/** @var array Feature values */
 	protected $features = [];
 
-	/** @const string profile type for completionSearch */
-	const COMPLETION_PROFILE_TYPE = 'completionSearchProfile';
+	/** @var HookContainer */
+	private $hookContainer;
 
-	/** @const string profile type for query independent ranking features */
-	const FT_QUERY_INDEP_PROFILE_TYPE = 'fulltextQueryIndepProfile';
+	/** @var HookRunner */
+	private $hookRunner;
 
-	/** @const int flag for legalSearchChars: includes all chars allowed in a search query */
-	const CHARS_ALL = 1;
+	/** Profile type for completionSearch */
+	public const COMPLETION_PROFILE_TYPE = 'completionSearchProfile';
 
-	/** @const int flag for legalSearchChars: includes all chars allowed in a search term */
-	const CHARS_NO_SYNTAX = 2;
+	/** Profile type for query independent ranking features */
+	public const FT_QUERY_INDEP_PROFILE_TYPE = 'fulltextQueryIndepProfile';
+
+	/** Integer flag for legalSearchChars: includes all chars allowed in a search query */
+	protected const CHARS_ALL = 1;
+
+	/** Integer flag for legalSearchChars: includes all chars allowed in a search term */
+	protected const CHARS_NO_SYNTAX = 2;
 
 	/**
 	 * Perform a full text search query and return a result set.
 	 * If full text searches are not supported or disabled, return null.
-	 * STUB
+	 *
+	 * @note As of 1.32 overriding this function is deprecated. It will
+	 * be converted to final in 1.34. Override self::doSearchText().
 	 *
 	 * @param string $term Raw search term
-	 * @return SearchResultSet|Status|null
+	 * @return ISearchResultSet|Status|null
 	 */
-	function searchText( $term ) {
+	public function searchText( $term ) {
+		return $this->maybePaginate( function () use ( $term ) {
+			return $this->doSearchText( $term );
+		} );
+	}
+
+	/**
+	 * Perform a full text search query and return a result set.
+	 *
+	 * @stable to override
+	 *
+	 * @param string $term Raw search term
+	 * @return ISearchResultSet|Status|null
+	 * @since 1.32
+	 */
+	protected function doSearchText( $term ) {
 		return null;
 	}
 
@@ -85,11 +116,27 @@ abstract class SearchEngine {
 	 * The results returned by this methods are only sugegstions and
 	 * may not end up being shown to the user.
 	 *
+	 * @note As of 1.32 overriding this function is deprecated. It will
+	 * be converted to final in 1.34. Override self::doSearchArchiveTitle().
+	 *
 	 * @param string $term Raw search term
-	 * @return Status<Title[]>
+	 * @return Status
 	 * @since 1.29
 	 */
-	function searchArchiveTitle( $term ) {
+	public function searchArchiveTitle( $term ) {
+		return $this->doSearchArchiveTitle( $term );
+	}
+
+	/**
+	 * Perform a title search in the article archive.
+	 *
+	 * @stable to override
+	 *
+	 * @param string $term Raw search term
+	 * @return Status
+	 * @since 1.32
+	 */
+	protected function doSearchArchiveTitle( $term ) {
 		return Status::newGood( [] );
 	}
 
@@ -98,15 +145,69 @@ abstract class SearchEngine {
 	 * If title searches are not supported or disabled, return null.
 	 * STUB
 	 *
+	 * @note As of 1.32 overriding this function is deprecated. It will
+	 * be converted to final in 1.34. Override self::doSearchTitle().
+	 *
 	 * @param string $term Raw search term
-	 * @return SearchResultSet|null
+	 * @return ISearchResultSet|null
 	 */
-	function searchTitle( $term ) {
+	public function searchTitle( $term ) {
+		return $this->maybePaginate( function () use ( $term ) {
+			return $this->doSearchTitle( $term );
+		} );
+	}
+
+	/**
+	 * Perform a title-only search query and return a result set.
+	 *
+	 * @stable to override
+	 *
+	 * @param string $term Raw search term
+	 * @return ISearchResultSet|null
+	 * @since 1.32
+	 */
+	protected function doSearchTitle( $term ) {
 		return null;
 	}
 
 	/**
+	 * Performs an overfetch and shrink operation to determine if
+	 * the next page is available for search engines that do not
+	 * explicitly implement their own pagination.
+	 *
+	 * @param Closure $fn Takes no arguments
+	 * @return ISearchResultSet|Status<ISearchResultSet>|null Result of calling $fn
+	 */
+	private function maybePaginate( Closure $fn ) {
+		if ( $this instanceof PaginatingSearchEngine ) {
+			return $fn();
+		}
+		$this->limit++;
+		try {
+			$resultSetOrStatus = $fn();
+		} finally {
+			$this->limit--;
+		}
+
+		$resultSet = null;
+		if ( $resultSetOrStatus instanceof ISearchResultSet ) {
+			$resultSet = $resultSetOrStatus;
+		} elseif ( $resultSetOrStatus instanceof Status &&
+			$resultSetOrStatus->getValue() instanceof ISearchResultSet
+		) {
+			$resultSet = $resultSetOrStatus->getValue();
+		}
+		if ( $resultSet ) {
+			$resultSet->shrink( $this->limit );
+		}
+
+		return $resultSetOrStatus;
+	}
+
+	/**
 	 * @since 1.18
+	 * @stable to override
+	 *
 	 * @param string $feature
 	 * @return bool
 	 */
@@ -138,10 +239,7 @@ abstract class SearchEngine {
 	 * @return mixed the feature value or null if unset
 	 */
 	public function getFeatureData( $feature ) {
-		if ( isset( $this->features[$feature] ) ) {
-			return $this->features[$feature];
-		}
-		return null;
+		return $this->features[$feature] ?? null;
 	}
 
 	/**
@@ -153,21 +251,8 @@ abstract class SearchEngine {
 	 * @return string
 	 */
 	public function normalizeText( $string ) {
-		global $wgContLang;
-
 		// Some languages such as Chinese require word segmentation
-		return $wgContLang->segmentByWord( $string );
-	}
-
-	/**
-	 * Transform search term in cases when parts of the query came as different
-	 * GET params (when supported), e.g. for prefix queries:
-	 * search=test&prefix=Main_Page/Archive -> test prefix:Main Page/Archive
-	 * @param string $term
-	 * @return string
-	 */
-	public function transformSearchTerm( $term ) {
-		return $term;
+		return MediaWikiServices::getInstance()->getContentLanguage()->segmentByWord( $string );
 	}
 
 	/**
@@ -176,8 +261,10 @@ abstract class SearchEngine {
 	 * @return SearchNearMatcher
 	 */
 	public function getNearMatcher( Config $config ) {
-		global $wgContLang;
-		return new SearchNearMatcher( $config, $wgContLang );
+		return new SearchNearMatcher( $config,
+			MediaWikiServices::getInstance()->getContentLanguage(),
+			$this->getHookContainer()
+		);
 	}
 
 	/**
@@ -185,40 +272,18 @@ abstract class SearchEngine {
 	 * @return SearchNearMatcher
 	 */
 	protected static function defaultNearMatcher() {
-		$config = MediaWikiServices::getInstance()->getMainConfig();
-		return MediaWikiServices::getInstance()->newSearchEngine()->getNearMatcher( $config );
-	}
-
-	/**
-	 * If an exact title match can be found, or a very slightly close match,
-	 * return the title. If no match, returns NULL.
-	 * @deprecated since 1.27; Use SearchEngine::getNearMatcher()
-	 * @param string $searchterm
-	 * @return Title
-	 */
-	public static function getNearMatch( $searchterm ) {
-		return static::defaultNearMatcher()->getNearMatch( $searchterm );
-	}
-
-	/**
-	 * Do a near match (see SearchEngine::getNearMatch) and wrap it into a
-	 * SearchResultSet.
-	 * @deprecated since 1.27; Use SearchEngine::getNearMatcher()
-	 * @param string $searchterm
-	 * @return SearchResultSet
-	 */
-	public static function getNearMatchResultSet( $searchterm ) {
-		return static::defaultNearMatcher()->getNearMatchResultSet( $searchterm );
+		$services = MediaWikiServices::getInstance();
+		$config = $services->getMainConfig();
+		return $services->newSearchEngine()->getNearMatcher( $config );
 	}
 
 	/**
 	 * Get chars legal for search
-	 * NOTE: usage as static is deprecated and preserved only as BC measure
 	 * @param int $type type of search chars (see self::CHARS_ALL
 	 * and self::CHARS_NO_SYNTAX). Defaults to CHARS_ALL
 	 * @return string
 	 */
-	public static function legalSearchChars( $type = self::CHARS_ALL ) {
+	public function legalSearchChars( $type = self::CHARS_ALL ) {
 		return "A-Za-z_'.0-9\\x80-\\xFF\\-";
 	}
 
@@ -229,7 +294,7 @@ abstract class SearchEngine {
 	 * @param int $limit
 	 * @param int $offset
 	 */
-	function setLimitOffset( $limit, $offset = 0 ) {
+	public function setLimitOffset( $limit, $offset = 0 ) {
 		$this->limit = intval( $limit );
 		$this->offset = intval( $offset );
 	}
@@ -240,10 +305,10 @@ abstract class SearchEngine {
 	 *
 	 * @param int[]|null $namespaces
 	 */
-	function setNamespaces( $namespaces ) {
+	public function setNamespaces( $namespaces ) {
 		if ( $namespaces ) {
 			// Filter namespaces to only keep valid ones
-			$validNs = $this->searchableNamespaces();
+			$validNs = MediaWikiServices::getInstance()->getSearchEngineConfig()->searchableNamespaces();
 			$namespaces = array_filter( $namespaces, function ( $ns ) use( $validNs ) {
 				return $ns < 0 || isset( $validNs[$ns] );
 			} );
@@ -260,19 +325,21 @@ abstract class SearchEngine {
 	 *
 	 * @param bool $showSuggestion Should the searcher try to build suggestions
 	 */
-	function setShowSuggestion( $showSuggestion ) {
+	public function setShowSuggestion( $showSuggestion ) {
 		$this->showSuggestion = $showSuggestion;
 	}
 
 	/**
 	 * Get the valid sort directions.  All search engines support 'relevance' but others
-	 * might support more. The default in all implementations should be 'relevance.'
+	 * might support more. The default in all implementations must be 'relevance.'
 	 *
 	 * @since 1.25
+	 * @stable to override
+	 *
 	 * @return string[] the valid sort directions for setSort
 	 */
 	public function getValidSorts() {
-		return [ 'relevance' ];
+		return [ self::DEFAULT_SORT ];
 	}
 
 	/**
@@ -306,16 +373,12 @@ abstract class SearchEngine {
 	 * or namespace names and set the list of namespaces
 	 * of this class accordingly.
 	 *
+	 * @deprecated since 1.32; should be handled internally by the search engine
 	 * @param string $query
 	 * @return string
 	 */
-	function replacePrefixes( $query ) {
-		$queryAndNs = self::parseNamespacePrefixes( $query );
-		if ( $queryAndNs === false ) {
-			return $query;
-		}
-		$this->namespaces = $queryAndNs[1];
-		return $queryAndNs[0];
+	public function replacePrefixes( $query ) {
+		return $query;
 	}
 
 	/**
@@ -323,37 +386,66 @@ abstract class SearchEngine {
 	 * or namespace names
 	 *
 	 * @param string $query
+	 * @param bool $withAllKeyword activate support of the "all:" keyword and its
+	 * translations to activate searching on all namespaces.
+	 * @param bool $withPrefixSearchExtractNamespaceHook call the PrefixSearchExtractNamespace hook
+	 *  if classic namespace identification did not match.
 	 * @return false|array false if no namespace was extracted, an array
 	 * with the parsed query at index 0 and an array of namespaces at index
 	 * 1 (or null for all namespaces).
+	 * @throws FatalError
+	 * @throws MWException
 	 */
-	public static function parseNamespacePrefixes( $query ) {
-		global $wgContLang;
-
+	public static function parseNamespacePrefixes(
+		$query,
+		$withAllKeyword = true,
+		$withPrefixSearchExtractNamespaceHook = false
+	) {
 		$parsed = $query;
 		if ( strpos( $query, ':' ) === false ) { // nothing to do
 			return false;
 		}
 		$extractedNamespace = null;
 
-		$allkeyword = wfMessage( 'searchall' )->inContentLanguage()->text() . ":";
-		if ( strncmp( $query, $allkeyword, strlen( $allkeyword ) ) == 0 ) {
-			$extractedNamespace = null;
-			$parsed = substr( $query, strlen( $allkeyword ) );
-		} elseif ( strpos( $query, ':' ) !== false ) {
-			// TODO: should we unify with PrefixSearch::extractNamespace ?
-			$prefix = str_replace( ' ', '_', substr( $query, 0, strpos( $query, ':' ) ) );
-			$index = $wgContLang->getNsIndex( $prefix );
-			if ( $index !== false ) {
-				$extractedNamespace = [ $index ];
-				$parsed = substr( $query, strlen( $prefix ) + 1 );
-			} else {
-				return false;
+		$allQuery = false;
+		if ( $withAllKeyword ) {
+			$allkeywords = [];
+
+			$allkeywords[] = wfMessage( 'searchall' )->inContentLanguage()->text() . ":";
+			// force all: so that we have a common syntax for all the wikis
+			if ( !in_array( 'all:', $allkeywords ) ) {
+				$allkeywords[] = 'all:';
+			}
+
+			foreach ( $allkeywords as $kw ) {
+				if ( strncmp( $query, $kw, strlen( $kw ) ) == 0 ) {
+					$extractedNamespace = null;
+					$parsed = substr( $query, strlen( $kw ) );
+					$allQuery = true;
+					break;
+				}
 			}
 		}
 
-		if ( trim( $parsed ) == '' ) {
-			$parsed = $query; // prefix was the whole query
+		if ( !$allQuery && strpos( $query, ':' ) !== false ) {
+			$prefix = str_replace( ' ', '_', substr( $query, 0, strpos( $query, ':' ) ) );
+			$index = MediaWikiServices::getInstance()->getContentLanguage()->getNsIndex( $prefix );
+			if ( $index !== false ) {
+				$extractedNamespace = [ $index ];
+				$parsed = substr( $query, strlen( $prefix ) + 1 );
+			} elseif ( $withPrefixSearchExtractNamespaceHook ) {
+				$hookNamespaces = [ NS_MAIN ];
+				$hookQuery = $query;
+				Hooks::runner()->onPrefixSearchExtractNamespace( $hookNamespaces, $hookQuery );
+				if ( $hookQuery !== $query ) {
+					$parsed = $hookQuery;
+					$extractedNamespace = $hookNamespaces;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
 		}
 
 		return [ $parsed, $extractedNamespace ];
@@ -362,10 +454,13 @@ abstract class SearchEngine {
 	/**
 	 * Find snippet highlight settings for all users
 	 * @return array Contextlines, contextchars
+	 * @deprecated in 1.34 use the SearchHighlighter constants directly
+	 * @see SearchHighlighter::DEFAULT_CONTEXT_CHARS
+	 * @see SearchHighlighter::DEFAULT_CONTEXT_LINES
 	 */
 	public static function userHighlightPrefs() {
-		$contextlines = 2; // Hardcode this. Old defaults sucked. :)
-		$contextchars = 75; // same as above.... :P
+		$contextlines = SearchHighlighter::DEFAULT_CONTEXT_LINES;
+		$contextchars = SearchHighlighter::DEFAULT_CONTEXT_CHARS;
 		return [ $contextlines, $contextchars ];
 	}
 
@@ -378,7 +473,7 @@ abstract class SearchEngine {
 	 * @param string $title
 	 * @param string $text
 	 */
-	function update( $id, $title, $text ) {
+	public function update( $id, $title, $text ) {
 		// no-op
 	}
 
@@ -390,7 +485,7 @@ abstract class SearchEngine {
 	 * @param int $id
 	 * @param string $title
 	 */
-	function updateTitle( $id, $title ) {
+	public function updateTitle( $id, $title ) {
 		// no-op
 	}
 
@@ -402,7 +497,7 @@ abstract class SearchEngine {
 	 * @param int $id Page id that was deleted
 	 * @param string $title Title of page that was deleted
 	 */
-	function delete( $id, $title ) {
+	public function delete( $id, $title ) {
 		// no-op
 	}
 
@@ -413,8 +508,9 @@ abstract class SearchEngine {
 	 *
 	 * @todo This isn't ideal, we'd really like to have content-specific handling here
 	 * @param Title $t Title we're indexing
-	 * @param Content $c Content of the page to index
+	 * @param Content|null $c Content of the page to index
 	 * @return string
+	 * @deprecated since 1.34 use Content::getTextForSearchIndex directly
 	 */
 	public function getTextFromContent( Title $t, Content $c = null ) {
 		return $c ? $c->getTextForSearchIndex() : '';
@@ -426,6 +522,7 @@ abstract class SearchEngine {
 	 * rather silly handling, it should return true here instead.
 	 *
 	 * @return bool
+	 * @deprecated since 1.34 no longer needed since getTextFromContent is being deprecated
 	 */
 	public function textAlreadyUpdatedForIndex() {
 		return false;
@@ -438,43 +535,37 @@ abstract class SearchEngine {
 	 * @return string Simplified search string
 	 */
 	protected function normalizeNamespaces( $search ) {
-		// Find a Title which is not an interwiki and is in NS_MAIN
-		$title = Title::newFromText( $search );
-		$ns = $this->namespaces;
-		if ( $title && !$title->isExternal() ) {
-			$ns = [ $title->getNamespace() ];
-			if ( $title->getNamespace() !== NS_MAIN ) {
-				$search = substr( $search, strpos( $search, ':' ) + 1 );
-			}
-			if ( $ns[0] == NS_MAIN ) {
-				$ns = $this->namespaces; // no explicit prefix, use default namespaces
-				Hooks::run( 'PrefixSearchExtractNamespace', [ &$ns, &$search ] );
-			}
-		} else {
-			$title = Title::newFromText( $search . 'Dummy' );
-			if ( $title && $title->getText() == 'Dummy'
-					&& $title->getNamespace() != NS_MAIN
-					&& !$title->isExternal()
-			) {
-				$ns = [ $title->getNamespace() ];
-				$search = '';
-			} else {
-				Hooks::run( 'PrefixSearchExtractNamespace', [ &$ns, &$search ] );
-			}
+		$queryAndNs = self::parseNamespacePrefixes( $search, false, true );
+		if ( $queryAndNs !== false ) {
+			$this->setNamespaces( $queryAndNs[1] );
+			return $queryAndNs[0];
 		}
-
-		$ns = array_map( function ( $space ) {
-			return $space == NS_MEDIA ? NS_FILE : $space;
-		}, $ns );
-
-		$this->setNamespaces( $ns );
 		return $search;
+	}
+
+	/**
+	 * Perform an overfetch of completion search results. This allows
+	 * determining if another page of results is available.
+	 *
+	 * @param string $search
+	 * @return SearchSuggestionSet
+	 */
+	protected function completionSearchBackendOverfetch( $search ) {
+		$this->limit++;
+		try {
+			return $this->completionSearchBackend( $search );
+		} finally {
+			$this->limit--;
+		}
 	}
 
 	/**
 	 * Perform a completion search.
 	 * Does not resolve namespaces and does not check variants.
 	 * Search engine implementations may want to override this function.
+	 *
+	 * @stable to override
+	 *
 	 * @param string $search
 	 * @return SearchSuggestionSet
 	 */
@@ -484,9 +575,9 @@ abstract class SearchEngine {
 		$search = trim( $search );
 
 		if ( !in_array( NS_SPECIAL, $this->namespaces ) && // We do not run hook on Special: search
-			 !Hooks::run( 'PrefixSearchBackend',
-				[ $this->namespaces, $search, $this->limit, &$results, $this->offset ]
-		) ) {
+			!$this->getHookRunner()->onPrefixSearchBackend(
+				$this->namespaces, $search, $this->limit, $results, $this->offset )
+		) {
 			// False means hook worked.
 			// FIXME: Yes, the API is weird. That's why it is going to be deprecated.
 
@@ -508,11 +599,14 @@ abstract class SearchEngine {
 			return SearchSuggestionSet::emptySuggestionSet(); // Return empty result
 		}
 		$search = $this->normalizeNamespaces( $search );
-		return $this->processCompletionResults( $search, $this->completionSearchBackend( $search ) );
+		$suggestions = $this->completionSearchBackendOverfetch( $search );
+		return $this->processCompletionResults( $search, $suggestions );
 	}
 
 	/**
 	 * Perform a completion search with variants.
+	 * @stable to override
+	 *
 	 * @param string $search
 	 * @return SearchSuggestionSet
 	 */
@@ -522,12 +616,11 @@ abstract class SearchEngine {
 		}
 		$search = $this->normalizeNamespaces( $search );
 
-		$results = $this->completionSearchBackend( $search );
-		$fallbackLimit = $this->limit - $results->getSize();
+		$results = $this->completionSearchBackendOverfetch( $search );
+		$fallbackLimit = 1 + $this->limit - $results->getSize();
 		if ( $fallbackLimit > 0 ) {
-			global $wgContLang;
-
-			$fallbackSearches = $wgContLang->autoConvertToAllVariants( $search );
+			$fallbackSearches = MediaWikiServices::getInstance()->getContentLanguage()->
+				autoConvertToAllVariants( $search );
 			$fallbackSearches = array_diff( array_unique( $fallbackSearches ), [ $search ] );
 
 			foreach ( $fallbackSearches as $fbs ) {
@@ -562,14 +655,25 @@ abstract class SearchEngine {
 	 * @return SearchSuggestionSet
 	 */
 	protected function processCompletionResults( $search, SearchSuggestionSet $suggestions ) {
+		// We over-fetched to determine pagination. Shrink back down if we have extra results
+		// and mark if pagination is possible
+		$suggestions->shrink( $this->limit );
+
 		$search = trim( $search );
 		// preload the titles with LinkBatch
-		$titles = $suggestions->map( function ( SearchSuggestion $sugg ) {
+		$lb = new LinkBatch( $suggestions->map( function ( SearchSuggestion $sugg ) {
 			return $sugg->getSuggestedTitle();
-		} );
-		$lb = new LinkBatch( $titles );
+		} ) );
 		$lb->setCaller( __METHOD__ );
 		$lb->execute();
+
+		$diff = $suggestions->filter( function ( SearchSuggestion $sugg ) {
+			return $sugg->getSuggestedTitle()->isKnown();
+		} );
+		if ( $diff > 0 ) {
+			MediaWikiServices::getInstance()->getStatsdDataFactory()
+				->updateCount( 'search.completion.missing', $diff );
+		}
 
 		$results = $suggestions->map( function ( SearchSuggestion $sugg ) {
 			return $sugg->getSuggestedTitle()->getPrefixedText();
@@ -636,67 +740,6 @@ abstract class SearchEngine {
 	}
 
 	/**
-	 * Make a list of searchable namespaces and their canonical names.
-	 * @deprecated since 1.27; use SearchEngineConfig::searchableNamespaces()
-	 * @return array
-	 */
-	public static function searchableNamespaces() {
-		return MediaWikiServices::getInstance()->getSearchEngineConfig()->searchableNamespaces();
-	}
-
-	/**
-	 * Extract default namespaces to search from the given user's
-	 * settings, returning a list of index numbers.
-	 * @deprecated since 1.27; use SearchEngineConfig::userNamespaces()
-	 * @param user $user
-	 * @return array
-	 */
-	public static function userNamespaces( $user ) {
-		return MediaWikiServices::getInstance()->getSearchEngineConfig()->userNamespaces( $user );
-	}
-
-	/**
-	 * An array of namespaces indexes to be searched by default
-	 * @deprecated since 1.27; use SearchEngineConfig::defaultNamespaces()
-	 * @return array
-	 */
-	public static function defaultNamespaces() {
-		return MediaWikiServices::getInstance()->getSearchEngineConfig()->defaultNamespaces();
-	}
-
-	/**
-	 * Get a list of namespace names useful for showing in tooltips
-	 * and preferences
-	 * @deprecated since 1.27; use SearchEngineConfig::namespacesAsText()
-	 * @param array $namespaces
-	 * @return array
-	 */
-	public static function namespacesAsText( $namespaces ) {
-		return MediaWikiServices::getInstance()->getSearchEngineConfig()->namespacesAsText( $namespaces );
-	}
-
-	/**
-	 * Load up the appropriate search engine class for the currently
-	 * active database backend, and return a configured instance.
-	 * @deprecated since 1.27; Use SearchEngineFactory::create
-	 * @param string $type Type of search backend, if not the default
-	 * @return SearchEngine
-	 */
-	public static function create( $type = null ) {
-		return MediaWikiServices::getInstance()->getSearchEngineFactory()->create( $type );
-	}
-
-	/**
-	 * Return the search engines we support. If only $wgSearchType
-	 * is set, it'll be an array of just that one item.
-	 * @deprecated since 1.27; use SearchEngineConfig::getSearchTypes()
-	 * @return array
-	 */
-	public static function getSearchTypes() {
-		return MediaWikiServices::getInstance()->getSearchEngineConfig()->getSearchTypes();
-	}
-
-	/**
 	 * Get a list of supported profiles.
 	 * Some search engine implementations may expose specific profiles to fine-tune
 	 * its behaviors.
@@ -707,9 +750,12 @@ abstract class SearchEngine {
 	 * - default: set to true if this profile is the default
 	 *
 	 * @since 1.28
+	 * @stable to override
+	 *
 	 * @param string $profileType the type of profiles
 	 * @param User|null $user the user requesting the list of profiles
 	 * @return array|null the list of profiles or null if none available
+	 * @phan-return null|array{name:string,desc-message:string,default?:bool}
 	 */
 	public function getProfiles( $profileType, User $user = null ) {
 		return null;
@@ -718,8 +764,10 @@ abstract class SearchEngine {
 	/**
 	 * Create a search field definition.
 	 * Specific search engines should override this method to create search fields.
+	 * @stable to override
+	 *
 	 * @param string $name
-	 * @param int $type One of the types in SearchIndexField::INDEX_TYPE_*
+	 * @param string $type One of the types in SearchIndexField::INDEX_TYPE_*
 	 * @return SearchIndexField
 	 * @since 1.28
 	 */
@@ -733,12 +781,14 @@ abstract class SearchEngine {
 	 * @return SearchIndexField[] Index field definitions for all content handlers
 	 */
 	public function getSearchIndexFields() {
-		$models = ContentHandler::getContentModels();
+		$models = MediaWikiServices::getInstance()->getContentHandlerFactory()->getContentModels();
 		$fields = [];
 		$seenHandlers = new SplObjectStorage();
 		foreach ( $models as $model ) {
 			try {
-				$handler = ContentHandler::getForModelID( $model );
+				$handler = MediaWikiServices::getInstance()
+					->getContentHandlerFactory()
+					->getContentHandler( $model );
 			}
 			catch ( MWUnknownContentModelException $e ) {
 				// If we can find no handler, ignore it
@@ -765,20 +815,19 @@ abstract class SearchEngine {
 			}
 		}
 		// Hook to allow extensions to produce search mapping fields
-		Hooks::run( 'SearchIndexFields', [ &$fields, $this ] );
+		$this->getHookRunner()->onSearchIndexFields( $fields, $this );
 		return $fields;
 	}
 
 	/**
 	 * Augment search results with extra data.
 	 *
-	 * @param SearchResultSet $resultSet
+	 * @param ISearchResultSet $resultSet
 	 */
-	public function augmentSearchResults( SearchResultSet $resultSet ) {
+	public function augmentSearchResults( ISearchResultSet $resultSet ) {
 		$setAugmentors = [];
 		$rowAugmentors = [];
-		Hooks::run( "SearchResultsAugment", [ &$setAugmentors, &$rowAugmentors ] );
-
+		$this->getHookRunner()->onSearchResultsAugment( $setAugmentors, $rowAugmentors );
 		if ( !$setAugmentors && !$rowAugmentors ) {
 			// We're done here
 			return;
@@ -792,6 +841,10 @@ abstract class SearchEngine {
 			$setAugmentors[$name] = new PerRowAugmentor( $row );
 		}
 
+		/**
+		 * @var string $name
+		 * @var ResultSetAugmentor $augmentor
+		 */
 		foreach ( $setAugmentors as $name => $augmentor ) {
 			$data = $augmentor->augmentAll( $resultSet );
 			if ( $data ) {
@@ -799,14 +852,43 @@ abstract class SearchEngine {
 			}
 		}
 	}
-}
 
-/**
- * Dummy class to be used when non-supported Database engine is present.
- * @todo FIXME: Dummy class should probably try something at least mildly useful,
- * such as a LIKE search through titles.
- * @ingroup Search
- */
-class SearchEngineDummy extends SearchEngine {
-	// no-op
+	/**
+	 * @since 1.35
+	 * @internal
+	 * @param HookContainer $hookContainer
+	 */
+	public function setHookContainer( HookContainer $hookContainer ) {
+		$this->hookContainer = $hookContainer;
+		$this->hookRunner = new HookRunner( $hookContainer );
+	}
+
+	/**
+	 * Get a HookContainer, for running extension hooks or for hook metadata.
+	 *
+	 * @since 1.35
+	 * @return HookContainer
+	 */
+	protected function getHookContainer() : HookContainer {
+		if ( !$this->hookContainer ) {
+			$this->hookContainer = MediaWikiServices::getInstance()->getHookContainer();
+		}
+		return $this->hookContainer;
+	}
+
+	/**
+	 * Get a HookRunner for running core hooks.
+	 *
+	 * @internal This is for use by core only. Hook interfaces may be removed
+	 *   without notice.
+	 * @since 1.35
+	 * @return HookRunner
+	 */
+	protected function getHookRunner() : HookRunner {
+		if ( !$this->hookRunner ) {
+			$this->hookRunner = new HookRunner( $this->getHookContainer() );
+		}
+		return $this->hookRunner;
+	}
+
 }

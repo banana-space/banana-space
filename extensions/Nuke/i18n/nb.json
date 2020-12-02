@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Event",
-			"Nghtwlkr",
 			"Danmichaelo",
+			"Event",
+			"Jon Harald Søby",
 			"Kingu",
-			"Jon Harald Søby"
+			"Nghtwlkr"
 		]
 	},
 	"nuke": "Massesletting",
@@ -18,17 +18,15 @@
 	"nuke-multiplepeople": "Massesletting av nylig opprettede sider",
 	"nuke-tools": "Dette verktøyet muliggjør massesletting av sider som nylig er opprettet av gitt bruker eller IP-adresse.\nSkriv et brukernavn eller en IP-adresse for å få en liste over sider som kan slettes, eller angi tomt for alle brukere.",
 	"nuke-submit-user": "List opp sider",
-	"nuke-toggleinvert": "Inverter",
 	"nuke-submit-delete": "Slett valgte",
 	"right-nuke": "Masseslette sider",
-	"nuke-select": "Velg: $1",
 	"nuke-userorip": "Brukernavn, IP-adresse eller tomt:",
 	"nuke-maxpages": "Maksimalt antall sider:",
 	"nuke-editby": "Opprettet av [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
 	"nuke-deleted": "Siden '''$1''' har blitt slettet.",
 	"nuke-not-deleted": "Siden [[:$1]] '''kunne ikke''' slettes.",
 	"nuke-delete-more": "[[Special:Nuke|Slett flere sider]]",
-	"nuke-pattern": "Mønster for sidenavnet:",
+	"nuke-pattern": "SQL-LIKE-mønster (f.eks. %) for sidenavnet:",
 	"nuke-nopages-global": "Det er ingen sidetitler som matcher søket ditt.",
 	"nuke-viewchanges": "vis endringer",
 	"nuke-namespace": "Begrens til navnerom:",

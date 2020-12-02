@@ -22,9 +22,13 @@
  */
 
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\RevisionStore;
+use Wikimedia\AtEase\AtEase;
 use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\IDatabase;
-use MediaWiki\MediaWikiServices;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Class to represent a local file in the wiki's own database
@@ -38,15 +42,24 @@ use MediaWiki\MediaWikiServices;
  *
  * RepoGroup::singleton()->getLocalRepo()->newFile( $title );
  *
- * The convenience functions wfLocalFile() and wfFindFile() should be sufficient
- * in most cases.
+ * Consider the services container below;
  *
+ * $services = MediaWikiServices::getInstance();
+ *
+ * The convenience services $services->getRepoGroup()->getLocalRepo()->newFile()
+ * and $services->getRepoGroup()->findFile() should be sufficient in most cases.
+ *
+ * @TODO: DI - Instead of using MediaWikiServices::getInstance(), a service should
+ * ideally accept a RepoGroup in its constructor and then, use $this->repoGroup->findFile()
+ * and $this->repoGroup->getLocalRepo()->newFile().
+ *
+ * @stable to extend
  * @ingroup FileAbstraction
  */
 class LocalFile extends File {
-	const VERSION = 11; // cache version
+	private const VERSION = 12; // cache version
 
-	const CACHE_FIELD_MAX_LEN = 1000;
+	private const CACHE_FIELD_MAX_LEN = 1000;
 
 	/** @var bool Does the file exist on disk? (loadFromXxx) */
 	protected $fileExists;
@@ -63,7 +76,7 @@ class LocalFile extends File {
 	/** @var string MEDIATYPE_xxx (bitmap, drawing, audio...) */
 	protected $media_type;
 
-	/** @var string MIME type, determined by MimeMagic::guessMimeType */
+	/** @var string MIME type, determined by MimeAnalyzer::guessMimeType */
 	protected $mime;
 
 	/** @var int Size in bytes (loadFromXxx) */
@@ -90,7 +103,7 @@ class LocalFile extends File {
 	/** @var int Number of line to return by nextHistoryLine() (constructor) */
 	private $historyLine;
 
-	/** @var int Result of the query for the file's history (nextHistoryLine) */
+	/** @var IResultWrapper|null Result of the query for the file's history (nextHistoryLine) */
 	private $historyRes;
 
 	/** @var string Major MIME type */
@@ -127,9 +140,9 @@ class LocalFile extends File {
 	private $missing;
 
 	// @note: higher than IDBAccessObject constants
-	const LOAD_ALL = 16; // integer; load all the lazy fields too (like metadata)
+	private const LOAD_ALL = 16; // integer; load all the lazy fields too (like metadata)
 
-	const ATOMIC_SECTION_LOCK = 'LocalFile::lockingTransaction';
+	private const ATOMIC_SECTION_LOCK = 'LocalFile::lockingTransaction';
 
 	/**
 	 * Create a LocalFile from a title
@@ -137,28 +150,32 @@ class LocalFile extends File {
 	 *
 	 * Note: $unused param is only here to avoid an E_STRICT
 	 *
+	 * @stable to override
+	 *
 	 * @param Title $title
 	 * @param FileRepo $repo
 	 * @param null $unused
 	 *
-	 * @return self
+	 * @return static
 	 */
-	static function newFromTitle( $title, $repo, $unused = null ) {
-		return new self( $title, $repo );
+	public static function newFromTitle( $title, $repo, $unused = null ) {
+		return new static( $title, $repo );
 	}
 
 	/**
 	 * Create a LocalFile from a title
 	 * Do not call this except from inside a repo class.
 	 *
+	 * @stable to override
+	 *
 	 * @param stdClass $row
 	 * @param FileRepo $repo
 	 *
-	 * @return self
+	 * @return static
 	 */
-	static function newFromRow( $row, $repo ) {
+	public static function newFromRow( $row, $repo ) {
 		$title = Title::makeTitle( NS_FILE, $row->img_name );
-		$file = new self( $title, $repo );
+		$file = new static( $title, $repo );
 		$file->loadFromRow( $row );
 
 		return $file;
@@ -168,12 +185,14 @@ class LocalFile extends File {
 	 * Create a LocalFile from a SHA-1 key
 	 * Do not call this except from inside a repo class.
 	 *
+	 * @stable to override
+	 *
 	 * @param string $sha1 Base-36 SHA-1
 	 * @param LocalRepo $repo
 	 * @param string|bool $timestamp MW_timestamp (optional)
 	 * @return bool|LocalFile
 	 */
-	static function newFromKey( $sha1, $repo, $timestamp = false ) {
+	public static function newFromKey( $sha1, $repo, $timestamp = false ) {
 		$dbr = $repo->getReplicaDB();
 
 		$conds = [ 'img_sha1' => $sha1 ];
@@ -181,58 +200,23 @@ class LocalFile extends File {
 			$conds['img_timestamp'] = $dbr->timestamp( $timestamp );
 		}
 
-		$fileQuery = self::getQueryInfo();
+		$fileQuery = static::getQueryInfo();
 		$row = $dbr->selectRow(
 			$fileQuery['tables'], $fileQuery['fields'], $conds, __METHOD__, [], $fileQuery['joins']
 		);
 		if ( $row ) {
-			return self::newFromRow( $row, $repo );
+			return static::newFromRow( $row, $repo );
 		} else {
 			return false;
 		}
 	}
 
 	/**
-	 * Fields in the image table
-	 * @deprecated since 1.31, use self::getQueryInfo() instead.
-	 * @return string[]
-	 */
-	static function selectFields() {
-		global $wgActorTableSchemaMigrationStage;
-
-		wfDeprecated( __METHOD__, '1.31' );
-		if ( $wgActorTableSchemaMigrationStage > MIGRATION_WRITE_BOTH ) {
-			// If code is using this instead of self::getQueryInfo(), there's a
-			// decent chance it's going to try to directly access
-			// $row->img_user or $row->img_user_text and we can't give it
-			// useful values here once those aren't being written anymore.
-			throw new BadMethodCallException(
-				'Cannot use ' . __METHOD__ . ' when $wgActorTableSchemaMigrationStage > MIGRATION_WRITE_BOTH'
-			);
-		}
-
-		return [
-			'img_name',
-			'img_size',
-			'img_width',
-			'img_height',
-			'img_metadata',
-			'img_bits',
-			'img_media_type',
-			'img_major_mime',
-			'img_minor_mime',
-			'img_user',
-			'img_user_text',
-			'img_actor' => $wgActorTableSchemaMigrationStage > MIGRATION_OLD ? 'img_actor' : 'NULL',
-			'img_timestamp',
-			'img_sha1',
-		] + CommentStore::getStore()->getFields( 'img_description' );
-	}
-
-	/**
 	 * Return the tables, fields, and join conditions to be selected to create
 	 * a new localfile object.
 	 * @since 1.31
+	 * @stable to override
+	 *
 	 * @param string[] $options
 	 *   - omit-lazy: Omit fields that are lazily cached.
 	 * @return array[] With three keys:
@@ -241,7 +225,7 @@ class LocalFile extends File {
 	 *   - joins: (array) to include in the `$join_conds` to `IDatabase->select()`
 	 */
 	public static function getQueryInfo( array $options = [] ) {
-		$commentQuery = CommentStore::getStore()->getJoin( 'img_description' );
+		$commentQuery = MediaWikiServices::getInstance()->getCommentStore()->getJoin( 'img_description' );
 		$actorQuery = ActorMigration::newMigration()->getJoin( 'img_user' );
 		$ret = [
 			'tables' => [ 'image' ] + $commentQuery['tables'] + $actorQuery['tables'],
@@ -275,10 +259,12 @@ class LocalFile extends File {
 
 	/**
 	 * Do not call this except from inside a repo class.
+	 * @stable to call
+	 *
 	 * @param Title $title
 	 * @param FileRepo $repo
 	 */
-	function __construct( $title, $repo ) {
+	public function __construct( $title, $repo ) {
 		parent::__construct( $title, $repo );
 
 		$this->metadata = '';
@@ -292,11 +278,19 @@ class LocalFile extends File {
 	}
 
 	/**
+	 * @return LocalRepo|bool
+	 */
+	public function getRepo() {
+		return $this->repo;
+	}
+
+	/**
 	 * Get the memcached key for the main data for this file, or false if
 	 * there is no access to the shared cache.
+	 * @stable to override
 	 * @return string|bool
 	 */
-	function getCacheKey() {
+	protected function getCacheKey() {
 		return $this->repo->getSharedCacheKey( 'file', sha1( $this->getName() ) );
 	}
 
@@ -323,7 +317,7 @@ class LocalFile extends File {
 			return;
 		}
 
-		$cache = ObjectCache::getMainWANInstance();
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 		$cachedValues = $cache->getWithSetCallback(
 			$key,
 			$cache::TTL_WEEK,
@@ -333,6 +327,7 @@ class LocalFile extends File {
 				$this->loadFromDB( self::READ_NORMAL );
 
 				$fields = $this->getCacheFields( '' );
+				$cacheVal = [];
 				$cacheVal['fileExists'] = $this->fileExists;
 				if ( $this->fileExists ) {
 					foreach ( $fields as $field ) {
@@ -388,7 +383,7 @@ class LocalFile extends File {
 
 		$this->repo->getMasterDB()->onTransactionPreCommitOrIdle(
 			function () use ( $key ) {
-				ObjectCache::getMainWANInstance()->delete( $key );
+				MediaWikiServices::getInstance()->getMainWANObjectCache()->delete( $key );
 			},
 			__METHOD__
 		);
@@ -397,13 +392,14 @@ class LocalFile extends File {
 	/**
 	 * Load metadata from the file itself
 	 */
-	function loadFromFile() {
+	protected function loadFromFile() {
 		$props = $this->repo->getFileProps( $this->getVirtualUrl() );
 		$this->setProps( $props );
 	}
 
 	/**
 	 * Returns the list of object properties that are included as-is in the cache.
+	 * @stable to override
 	 * @param string $prefix Must be the empty string
 	 * @return string[]
 	 * @since 1.31 No longer accepts a non-empty $prefix
@@ -443,9 +439,10 @@ class LocalFile extends File {
 
 	/**
 	 * Load file metadata from the DB
+	 * @stable to override
 	 * @param int $flags
 	 */
-	function loadFromDB( $flags = 0 ) {
+	protected function loadFromDB( $flags = 0 ) {
 		$fname = static::class . '::' . __FUNCTION__;
 
 		# Unconditionally set loaded=true, we don't want the accessors constantly rechecking
@@ -476,8 +473,13 @@ class LocalFile extends File {
 	/**
 	 * Load lazy file metadata from the DB.
 	 * This covers fields that are sometimes not cached.
+	 * @stable to override
 	 */
 	protected function loadExtraFromDB() {
+		if ( !$this->title ) {
+			return; // Avoid hard failure when the file does not exist. T221812
+		}
+
 		$fname = static::class . '::' . __FUNCTION__;
 
 		# Unconditionally set loaded=true, we don't want the accessors constantly rechecking
@@ -576,16 +578,16 @@ class LocalFile extends File {
 	 * @throws MWException
 	 * @return array
 	 */
-	function decodeRow( $row, $prefix = 'img_' ) {
+	private function decodeRow( $row, $prefix = 'img_' ) {
 		$decoded = $this->unprefixRow( $row, $prefix );
 
-		$decoded['description'] = CommentStore::getStore()
+		$decoded['description'] = MediaWikiServices::getInstance()->getCommentStore()
 			->getComment( 'description', (object)$decoded )->text;
 
 		$decoded['user'] = User::newFromAnyId(
-			isset( $decoded['user'] ) ? $decoded['user'] : null,
-			isset( $decoded['user_text'] ) ? $decoded['user_text'] : null,
-			isset( $decoded['actor'] ) ? $decoded['actor'] : null
+			$decoded['user'] ?? null,
+			$decoded['user_text'] ?? null,
+			$decoded['actor'] ?? null
 		);
 		unset( $decoded['user_text'], $decoded['actor'] );
 
@@ -618,11 +620,12 @@ class LocalFile extends File {
 
 	/**
 	 * Load file metadata from a DB result row
+	 * @stable to override
 	 *
 	 * @param object $row
 	 * @param string $prefix
 	 */
-	function loadFromRow( $row, $prefix = 'img_' ) {
+	public function loadFromRow( $row, $prefix = 'img_' ) {
 		$this->dataLoaded = true;
 		$this->extraDataLoaded = true;
 
@@ -633,14 +636,14 @@ class LocalFile extends File {
 		}
 
 		$this->fileExists = true;
-		$this->maybeUpgradeRow();
 	}
 
 	/**
 	 * Load file metadata from cache or DB, unless already loaded
+	 * @stable to override
 	 * @param int $flags
 	 */
-	function load( $flags = 0 ) {
+	public function load( $flags = 0 ) {
 		if ( !$this->dataLoaded ) {
 			if ( $flags & self::READ_LATEST ) {
 				$this->loadFromDB( $flags );
@@ -658,7 +661,7 @@ class LocalFile extends File {
 	/**
 	 * Upgrade a row if it needs it
 	 */
-	function maybeUpgradeRow() {
+	protected function maybeUpgradeRow() {
 		global $wgUpdateCompatibleMetadata;
 
 		if ( wfReadOnly() || $this->upgrading ) {
@@ -666,7 +669,7 @@ class LocalFile extends File {
 		}
 
 		$upgrade = false;
-		if ( is_null( $this->media_type ) || $this->mime == 'image/svg' ) {
+		if ( $this->media_type === null || $this->mime == 'image/svg' ) {
 			$upgrade = true;
 		} else {
 			$handler = $this->getHandler();
@@ -697,22 +700,23 @@ class LocalFile extends File {
 	/**
 	 * @return bool Whether upgradeRow() ran for this object
 	 */
-	function getUpgraded() {
+	public function getUpgraded() {
 		return $this->upgraded;
 	}
 
 	/**
 	 * Fix assorted version-related problems with the image row by reloading it from the file
+	 * @stable to override
 	 */
-	function upgradeRow() {
-		$this->lock(); // begin
+	public function upgradeRow() {
+		$this->lock();
 
 		$this->loadFromFile();
 
 		# Don't destroy file info of missing files
 		if ( !$this->fileExists ) {
 			$this->unlock();
-			wfDebug( __METHOD__ . ": file does not exist, aborting\n" );
+			wfDebug( __METHOD__ . ": file does not exist, aborting" );
 
 			return;
 		}
@@ -725,7 +729,7 @@ class LocalFile extends File {
 
 			return;
 		}
-		wfDebug( __METHOD__ . ': upgrading ' . $this->getName() . " to the current schema\n" );
+		wfDebug( __METHOD__ . ': upgrading ' . $this->getName() . " to the current schema" );
 
 		$dbw->update( 'image',
 			[
@@ -745,7 +749,7 @@ class LocalFile extends File {
 
 		$this->invalidateCache();
 
-		$this->unlock(); // done
+		$this->unlock();
 		$this->upgraded = true; // avoid rework/retries
 	}
 
@@ -757,9 +761,10 @@ class LocalFile extends File {
 	 * If 'mime' is given, it will be split into major_mime/minor_mime.
 	 * If major_mime/minor_mime are given, $this->mime will also be set.
 	 *
+	 * @stable to override
 	 * @param array $info
 	 */
-	function setProps( $info ) {
+	protected function setProps( $info ) {
 		$this->dataLoaded = true;
 		$fields = $this->getCacheFields( '' );
 		$fields[] = 'fileExists';
@@ -772,9 +777,9 @@ class LocalFile extends File {
 
 		if ( isset( $info['user'] ) || isset( $info['user_text'] ) || isset( $info['actor'] ) ) {
 			$this->user = User::newFromAnyId(
-				isset( $info['user'] ) ? $info['user'] : null,
-				isset( $info['user_text'] ) ? $info['user_text'] : null,
-				isset( $info['actor'] ) ? $info['actor'] : null
+				$info['user'] ?? null,
+				$info['user_text'] ?? null,
+				$info['actor'] ?? null
 			);
 		}
 
@@ -796,11 +801,15 @@ class LocalFile extends File {
 	/** isVisible inherited */
 
 	/**
+	 * Checks if this file exists in its parent repo, as referenced by its
+	 * virtual URL.
+	 * @stable to override
+	 *
 	 * @return bool
 	 */
-	function isMissing() {
+	public function isMissing() {
 		if ( $this->missing === null ) {
-			list( $fileExists ) = $this->repo->fileExists( $this->getVirtualUrl() );
+			$fileExists = $this->repo->fileExists( $this->getVirtualUrl() );
 			$this->missing = !$fileExists;
 		}
 
@@ -809,6 +818,7 @@ class LocalFile extends File {
 
 	/**
 	 * Return the width of the image
+	 * @stable to override
 	 *
 	 * @param int $page
 	 * @return int
@@ -841,6 +851,7 @@ class LocalFile extends File {
 
 	/**
 	 * Return the height of the image
+	 * @stable to override
 	 *
 	 * @param int $page
 	 * @return int
@@ -873,20 +884,33 @@ class LocalFile extends File {
 
 	/**
 	 * Returns user who uploaded the file
+	 * @stable to override
 	 *
 	 * @param string $type 'text', 'id', or 'object'
 	 * @return int|string|User
 	 * @since 1.31 Added 'object'
 	 */
-	function getUser( $type = 'text' ) {
+	public function getUser( $type = 'text' ) {
 		$this->load();
 
-		if ( $type === 'object' ) {
-			return $this->user;
-		} elseif ( $type === 'text' ) {
-			return $this->user->getName();
-		} elseif ( $type === 'id' ) {
-			return $this->user->getId();
+		if ( !$this->user ) {
+			// If the file does not exist, $this->user will be null, see T221812.
+			// Note: 'Unknown user' this is a reserved user name.
+			if ( $type === 'object' ) {
+				return User::newFromName( 'Unknown user', false );
+			} elseif ( $type === 'text' ) {
+				return 'Unknown user';
+			} elseif ( $type === 'id' ) {
+				return 0;
+			}
+		} else {
+			if ( $type === 'object' ) {
+				return $this->user;
+			} elseif ( $type === 'text' ) {
+				return $this->user->getName();
+			} elseif ( $type === 'id' ) {
+				return $this->user->getId();
+			}
 		}
 
 		throw new MWException( "Unknown type '$type'." );
@@ -894,15 +918,19 @@ class LocalFile extends File {
 
 	/**
 	 * Get short description URL for a file based on the page ID.
+	 * @stable to override
 	 *
 	 * @return string|null
-	 * @throws MWException
 	 * @since 1.27
 	 */
 	public function getDescriptionShortUrl() {
+		if ( !$this->title ) {
+			return null; // Avoid hard failure when the file does not exist. T221812
+		}
+
 		$pageId = $this->title->getArticleID();
 
-		if ( $pageId !== null ) {
+		if ( $pageId ) {
 			$url = $this->repo->makeUrl( [ 'curid' => $pageId ] );
 			if ( $url !== false ) {
 				return $url;
@@ -913,17 +941,19 @@ class LocalFile extends File {
 
 	/**
 	 * Get handler-specific metadata
+	 * @stable to override
 	 * @return string
 	 */
-	function getMetadata() {
+	public function getMetadata() {
 		$this->load( self::LOAD_ALL ); // large metadata is loaded in another step
 		return $this->metadata;
 	}
 
 	/**
+	 * @stable to override
 	 * @return int
 	 */
-	function getBitDepth() {
+	public function getBitDepth() {
 		$this->load();
 
 		return (int)$this->bits;
@@ -931,6 +961,7 @@ class LocalFile extends File {
 
 	/**
 	 * Returns the size of the image file, in bytes
+	 * @stable to override
 	 * @return int
 	 */
 	public function getSize() {
@@ -941,9 +972,10 @@ class LocalFile extends File {
 
 	/**
 	 * Returns the MIME type of the file.
+	 * @stable to override
 	 * @return string
 	 */
-	function getMimeType() {
+	public function getMimeType() {
 		$this->load();
 
 		return $this->mime;
@@ -952,9 +984,10 @@ class LocalFile extends File {
 	/**
 	 * Returns the type of the media in the file.
 	 * Use the value returned by this function with the MEDIATYPE_xxx constants.
+	 * @stable to override
 	 * @return string
 	 */
-	function getMediaType() {
+	public function getMediaType() {
 		$this->load();
 
 		return $this->media_type;
@@ -968,6 +1001,7 @@ class LocalFile extends File {
 
 	/**
 	 * Returns true if the file exists on disk.
+	 * @stable to override
 	 * @return bool Whether file exist on disk.
 	 */
 	public function exists() {
@@ -988,10 +1022,11 @@ class LocalFile extends File {
 
 	/**
 	 * Get all thumbnail names previously generated for this file
+	 * @stable to override
 	 * @param string|bool $archiveName Name of an archive file, default false
 	 * @return array First element is the base dir, then files in that base dir.
 	 */
-	function getThumbnails( $archiveName = false ) {
+	protected function getThumbnails( $archiveName = false ) {
 		if ( $archiveName ) {
 			$dir = $this->getArchiveThumbPath( $archiveName );
 		} else {
@@ -1002,8 +1037,10 @@ class LocalFile extends File {
 		$files = [ $dir ];
 		try {
 			$iterator = $backend->getFileList( [ 'dir' => $dir ] );
-			foreach ( $iterator as $file ) {
-				$files[] = $file;
+			if ( $iterator !== null ) {
+				foreach ( $iterator as $file ) {
+					$files[] = $file;
+				}
 			}
 		} catch ( FileBackendError $e ) {
 		} // suppress (T56674)
@@ -1014,41 +1051,47 @@ class LocalFile extends File {
 	/**
 	 * Refresh metadata in memcached, but don't touch thumbnails or CDN
 	 */
-	function purgeMetadataCache() {
+	private function purgeMetadataCache() {
 		$this->invalidateCache();
 	}
 
 	/**
 	 * Delete all previously generated thumbnails, refresh metadata in memcached and purge the CDN.
+	 * @stable to override
 	 *
 	 * @param array $options An array potentially with the key forThumbRefresh.
 	 *
 	 * @note This used to purge old thumbnails by default as well, but doesn't anymore.
 	 */
-	function purgeCache( $options = [] ) {
+	public function purgeCache( $options = [] ) {
 		// Refresh metadata cache
+		$this->maybeUpgradeRow();
 		$this->purgeMetadataCache();
 
 		// Delete thumbnails
 		$this->purgeThumbnails( $options );
 
 		// Purge CDN cache for this file
-		DeferredUpdates::addUpdate(
-			new CdnCacheUpdate( [ $this->getUrl() ] ),
-			DeferredUpdates::PRESEND
+		$hcu = MediaWikiServices::getInstance()->getHtmlCacheUpdater();
+		$hcu->purgeUrls(
+			$this->getUrl(),
+			!empty( $options['forThumbRefresh'] )
+				? $hcu::PURGE_PRESEND // just a manual purge
+				: $hcu::PURGE_INTENT_TXROUND_REFLECTED
 		);
 	}
 
 	/**
 	 * Delete cached transformed files for an archived version only.
+	 * @stable to override
 	 * @param string $archiveName Name of the archived file
 	 */
-	function purgeOldThumbnails( $archiveName ) {
+	public function purgeOldThumbnails( $archiveName ) {
 		// Get a list of old thumbnails and URLs
 		$files = $this->getThumbnails( $archiveName );
 
 		// Purge any custom thumbnail caches
-		Hooks::run( 'LocalFilePurgeThumbnails', [ $this, $archiveName ] );
+		$this->hookRunner->onLocalFilePurgeThumbnails( $this, $archiveName );
 
 		// Delete thumbnails
 		$dir = array_shift( $files );
@@ -1059,12 +1102,16 @@ class LocalFile extends File {
 		foreach ( $files as $file ) {
 			$urls[] = $this->getArchiveThumbUrl( $archiveName, $file );
 		}
-		DeferredUpdates::addUpdate( new CdnCacheUpdate( $urls ), DeferredUpdates::PRESEND );
+
+		$hcu = MediaWikiServices::getInstance()->getHtmlCacheUpdater();
+		$hcu->purgeUrls( $urls, $hcu::PURGE_PRESEND );
 	}
 
 	/**
 	 * Delete cached transformed files for the current version only.
+	 * @stable to override
 	 * @param array $options
+	 * @phan-param array{forThumbRefresh?:bool} $options
 	 */
 	public function purgeThumbnails( $options = [] ) {
 		$files = $this->getThumbnails();
@@ -1084,18 +1131,25 @@ class LocalFile extends File {
 		}
 
 		// Purge any custom thumbnail caches
-		Hooks::run( 'LocalFilePurgeThumbnails', [ $this, false ] );
+		$this->getHookRunner()->onLocalFilePurgeThumbnails( $this, false );
 
 		// Delete thumbnails
 		$dir = array_shift( $files );
 		$this->purgeThumbList( $dir, $files );
 
 		// Purge the CDN
-		DeferredUpdates::addUpdate( new CdnCacheUpdate( $urls ), DeferredUpdates::PRESEND );
+		$hcu = MediaWikiServices::getInstance()->getHtmlCacheUpdater();
+		$hcu->purgeUrls(
+			$urls,
+			!empty( $options['forThumbRefresh'] )
+				? $hcu::PURGE_PRESEND // just a manual purge
+				: $hcu::PURGE_INTENT_TXROUND_REFLECTED
+		);
 	}
 
 	/**
 	 * Prerenders a configurable set of thumbnails
+	 * @stable to override
 	 *
 	 * @since 1.28
 	 */
@@ -1123,6 +1177,7 @@ class LocalFile extends File {
 
 	/**
 	 * Delete a list of thumbnails visible at urls
+	 * @stable to override
 	 * @param string $dir Base dir of the files.
 	 * @param array $files Array of strings: relative filenames (to $dir)
 	 */
@@ -1131,7 +1186,7 @@ class LocalFile extends File {
 			var_export( $files, true ),
 			[ "\n" => '' ]
 		);
-		wfDebug( __METHOD__ . ": $fileListDebug\n" );
+		wfDebug( __METHOD__ . ": $fileListDebug" );
 
 		$purgeList = [];
 		foreach ( $files as $file ) {
@@ -1160,13 +1215,18 @@ class LocalFile extends File {
 	/** purgeEverything inherited */
 
 	/**
+	 * @stable to override
 	 * @param int|null $limit Optional: Limit to number of results
 	 * @param string|int|null $start Optional: Timestamp, start from
 	 * @param string|int|null $end Optional: Timestamp, end at
 	 * @param bool $inc
 	 * @return OldLocalFile[]
 	 */
-	function getHistory( $limit = null, $start = null, $end = null, $inc = true ) {
+	public function getHistory( $limit = null, $start = null, $end = null, $inc = true ) {
+		if ( !$this->exists() ) {
+			return []; // Avoid hard failure when the file does not exist. T221812
+		}
+
 		$dbr = $this->repo->getReplicaDB();
 		$oldFileQuery = OldLocalFile::getQueryInfo();
 
@@ -1194,10 +1254,8 @@ class LocalFile extends File {
 		$opts['ORDER BY'] = "oi_timestamp $order";
 		$opts['USE INDEX'] = [ 'oldimage' => 'oi_name_timestamp' ];
 
-		// Avoid PHP 7.1 warning from passing $this by reference
-		$localFile = $this;
-		Hooks::run( 'LocalFile::getHistory', [ &$localFile, &$tables, &$fields,
-			&$conds, &$opts, &$join_conds ] );
+		$this->getHookRunner()->onLocalFile__getHistory( $this, $tables, $fields,
+			$conds, $opts, $join_conds );
 
 		$res = $dbr->select( $tables, $fields, $conds, __METHOD__, $opts, $join_conds );
 		$r = [];
@@ -1220,9 +1278,14 @@ class LocalFile extends File {
 	 *  0      return line for current version
 	 *  1      query for old versions, return first one
 	 *  2, ... return next old version from above query
-	 * @return bool
+	 * @stable to override
+	 * @return stdClass|bool
 	 */
 	public function nextHistoryLine() {
+		if ( !$this->exists() ) {
+			return false; // Avoid hard failure when the file does not exist. T221812
+		}
+
 		# Polymorphic function name to distinguish foreign and local fetches
 		$fname = static::class . '::' . __FUNCTION__;
 
@@ -1241,7 +1304,7 @@ class LocalFile extends File {
 				$fileQuery['joins']
 			);
 
-			if ( 0 == $dbr->numRows( $this->historyRes ) ) {
+			if ( $dbr->numRows( $this->historyRes ) == 0 ) {
 				$this->historyRes = null;
 
 				return false;
@@ -1264,11 +1327,12 @@ class LocalFile extends File {
 
 	/**
 	 * Reset the history pointer to the first element of the history
+	 * @stable to override
 	 */
 	public function resetHistory() {
 		$this->historyLine = 0;
 
-		if ( !is_null( $this->historyRes ) ) {
+		if ( $this->historyRes !== null ) {
 			$this->historyRes = null;
 		}
 	}
@@ -1300,11 +1364,15 @@ class LocalFile extends File {
 	 * @param User|null $user User object or null to use $wgUser
 	 * @param string[] $tags Change tags to add to the log entry and page revision.
 	 *   (This doesn't check $user's permissions.)
+	 * @param bool $createNullRevision Set to false to avoid creation of a null revision on file
+	 *   upload, see T193621
+	 * @param bool $revert If this file upload is a revert
 	 * @return Status On success, the value member contains the
 	 *     archive name, or an empty string if it was a new file.
 	 */
-	function upload( $src, $comment, $pageText, $flags = 0, $props = false,
-		$timestamp = false, $user = null, $tags = []
+	public function upload( $src, $comment, $pageText, $flags = 0, $props = false,
+		$timestamp = false, $user = null, $tags = [],
+		$createNullRevision = true, $revert = false
 	) {
 		if ( $this->getRepo()->getReadOnlyReason() !== false ) {
 			return $this->readOnlyFatalStatus();
@@ -1316,12 +1384,12 @@ class LocalFile extends File {
 
 		$srcPath = ( $src instanceof FSFile ) ? $src->getPath() : $src;
 		if ( !$props ) {
-			if ( $this->repo->isVirtualUrl( $srcPath )
+			if ( FileRepo::isVirtualUrl( $srcPath )
 				|| FileBackend::isStoragePath( $srcPath )
 			) {
 				$props = $this->repo->getFileProps( $srcPath );
 			} else {
-				$mwProps = new MWFileProps( MediaWiki\MediaWikiServices::getInstance()->getMimeAnalyzer() );
+				$mwProps = new MWFileProps( MediaWikiServices::getInstance()->getMimeAnalyzer() );
 				$props = $mwProps->getPropsFromPath( $srcPath, true );
 			}
 		}
@@ -1329,7 +1397,7 @@ class LocalFile extends File {
 		$options = [];
 		$handler = MediaHandler::getHandler( $props['mime'] );
 		if ( $handler ) {
-			$metadata = Wikimedia\quietCall( 'unserialize', $props['metadata'] );
+			$metadata = AtEase::quietCall( 'unserialize', $props['metadata'] );
 
 			if ( !is_array( $metadata ) ) {
 				$metadata = [];
@@ -1343,7 +1411,7 @@ class LocalFile extends File {
 		// Trim spaces on user supplied text
 		$comment = trim( $comment );
 
-		$this->lock(); // begin
+		$this->lock();
 		$status = $this->publish( $src, $flags, $options );
 
 		if ( $status->successCount >= 2 ) {
@@ -1361,7 +1429,9 @@ class LocalFile extends File {
 				$props,
 				$timestamp,
 				$user,
-				$tags
+				$tags,
+				$createNullRevision,
+				$revert
 			);
 			if ( !$uploadStatus->isOK() ) {
 				if ( $uploadStatus->hasMessage( 'filenotfound' ) ) {
@@ -1373,13 +1443,13 @@ class LocalFile extends File {
 			}
 		}
 
-		$this->unlock(); // done
-
+		$this->unlock();
 		return $status;
 	}
 
 	/**
 	 * Record a file upload in the upload log and the image table
+	 * @deprecated since 1.35
 	 * @param string $oldver
 	 * @param string $desc
 	 * @param string $license
@@ -1390,8 +1460,9 @@ class LocalFile extends File {
 	 * @param User|null $user User object or null to use $wgUser
 	 * @return bool
 	 */
-	function recordUpload( $oldver, $desc, $license = '', $copyStatus = '', $source = '',
+	public function recordUpload( $oldver, $desc, $license = '', $copyStatus = '', $source = '',
 		$watch = false, $timestamp = false, User $user = null ) {
+		wfDeprecated( __METHOD__, '1.35' );
 		if ( !$user ) {
 			global $wgUser;
 			$user = $wgUser;
@@ -1412,6 +1483,7 @@ class LocalFile extends File {
 
 	/**
 	 * Record a file upload in the upload log and the image table
+	 * @deprecated since 1.35
 	 * @param string $oldver
 	 * @param string $comment
 	 * @param string $pageText
@@ -1419,18 +1491,54 @@ class LocalFile extends File {
 	 * @param string|bool $timestamp
 	 * @param null|User $user
 	 * @param string[] $tags
+	 * @param bool $createNullRevision Set to false to avoid creation of a null revision on file
+	 *   upload, see T193621
+	 * @param bool $revert If this file upload is a revert
 	 * @return Status
 	 */
-	function recordUpload2(
-		$oldver, $comment, $pageText, $props = false, $timestamp = false, $user = null, $tags = []
+	public function recordUpload2(
+		$oldver, $comment, $pageText, $props = false, $timestamp = false, $user = null, $tags = [],
+		$createNullRevision = true, $revert = false
 	) {
-		global $wgCommentTableSchemaMigrationStage, $wgActorTableSchemaMigrationStage;
-
-		if ( is_null( $user ) ) {
+		// TODO check all callers and hard deprecate
+		if ( $user === null ) {
 			global $wgUser;
 			$user = $wgUser;
 		}
+		return $this->recordUpload3(
+			$oldver, $comment, $pageText,
+			$user, $props, $timestamp, $tags,
+			$createNullRevision, $revert
+		);
+	}
 
+	/**
+	 * Record a file upload in the upload log and the image table (version 3)
+	 * @since 1.35
+	 * @stable to override
+	 * @param string $oldver
+	 * @param string $comment
+	 * @param string $pageText
+	 * @param User $user
+	 * @param bool|array $props
+	 * @param string|bool $timestamp
+	 * @param string[] $tags
+	 * @param bool $createNullRevision Set to false to avoid creation of a null revision on file
+	 *   upload, see T193621
+	 * @param bool $revert If this file upload is a revert
+	 * @return Status
+	 */
+	public function recordUpload3(
+		string $oldver,
+		string $comment,
+		string $pageText,
+		User $user,
+		$props = false,
+		$timestamp = false,
+		$tags = [],
+		bool $createNullRevision = true,
+		bool $revert = false
+	) : Status {
 		$dbw = $this->repo->getMasterDB();
 
 		# Imports or such might force a certain timestamp; otherwise we generate
@@ -1452,7 +1560,7 @@ class LocalFile extends File {
 
 		# Fail now if the file isn't there
 		if ( !$this->fileExists ) {
-			wfDebug( __METHOD__ . ": File " . $this->getRel() . " went missing!\n" );
+			wfDebug( __METHOD__ . ": File " . $this->getRel() . " went missing!" );
 
 			return Status::newFatal( 'filenotfound', $this->getRel() );
 		}
@@ -1462,9 +1570,8 @@ class LocalFile extends File {
 		# Test to see if the row exists using INSERT IGNORE
 		# This avoids race conditions by locking the row until the commit, and also
 		# doesn't deadlock. SELECT FOR UPDATE causes a deadlock for every race condition.
-		$commentStore = CommentStore::getStore();
-		list( $commentFields, $commentCallback ) =
-			$commentStore->insertWithTempTable( $dbw, 'img_description', $comment );
+		$commentStore = MediaWikiServices::getInstance()->getCommentStore();
+		$commentFields = $commentStore->insert( $dbw, 'img_description', $comment );
 		$actorMigration = ActorMigration::newMigration();
 		$actorFields = $actorMigration->getInsertValues( $dbw, 'img_user', $user );
 		$dbw->insert( 'image',
@@ -1482,7 +1589,7 @@ class LocalFile extends File {
 				'img_sha1' => $this->sha1
 			] + $commentFields + $actorFields,
 			__METHOD__,
-			'IGNORE'
+			[ 'IGNORE' ]
 		);
 		$reupload = ( $dbw->affectedRows() == 0 );
 
@@ -1497,7 +1604,7 @@ class LocalFile extends File {
 
 			if ( $row && $row->img_sha1 === $this->sha1 ) {
 				$dbw->endAtomic( __METHOD__ );
-				wfDebug( __METHOD__ . ": File " . $this->getRel() . " already exists!\n" );
+				wfDebug( __METHOD__ . ": File " . $this->getRel() . " already exists!" );
 				$title = Title::newFromText( $this->getName(), NS_FILE );
 				return Status::newFatal( 'fileexists-no-change', $title->getPrefixedText() );
 			}
@@ -1522,79 +1629,16 @@ class LocalFile extends File {
 				'oi_width' => 'img_width',
 				'oi_height' => 'img_height',
 				'oi_bits' => 'img_bits',
+				'oi_description_id' => 'img_description_id',
 				'oi_timestamp' => 'img_timestamp',
 				'oi_metadata' => 'img_metadata',
 				'oi_media_type' => 'img_media_type',
 				'oi_major_mime' => 'img_major_mime',
 				'oi_minor_mime' => 'img_minor_mime',
 				'oi_sha1' => 'img_sha1',
+				'oi_actor' => 'img_actor',
 			];
 			$joins = [];
-
-			if ( $wgCommentTableSchemaMigrationStage <= MIGRATION_WRITE_BOTH ) {
-				$fields['oi_description'] = 'img_description';
-			}
-			if ( $wgCommentTableSchemaMigrationStage >= MIGRATION_WRITE_BOTH ) {
-				$tables[] = 'image_comment_temp';
-				$fields['oi_description_id'] = 'imgcomment_description_id';
-				$joins['image_comment_temp'] = [
-					$wgCommentTableSchemaMigrationStage === MIGRATION_NEW ? 'JOIN' : 'LEFT JOIN',
-					[ 'imgcomment_name = img_name' ]
-				];
-			}
-
-			if ( $wgCommentTableSchemaMigrationStage !== MIGRATION_OLD &&
-				$wgCommentTableSchemaMigrationStage !== MIGRATION_NEW
-			) {
-				// Upgrade any rows that are still old-style. Otherwise an upgrade
-				// might be missed if a deletion happens while the migration script
-				// is running.
-				$res = $dbw->select(
-					[ 'image', 'image_comment_temp' ],
-					[ 'img_name', 'img_description' ],
-					[ 'img_name' => $this->getName(), 'imgcomment_name' => null ],
-					__METHOD__,
-					[],
-					[ 'image_comment_temp' => [ 'LEFT JOIN', [ 'imgcomment_name = img_name' ] ] ]
-				);
-				foreach ( $res as $row ) {
-					list( , $callback ) = $commentStore->insertWithTempTable(
-						$dbw, 'img_description', $row->img_description
-					);
-					$callback( $row->img_name );
-				}
-			}
-
-			if ( $wgActorTableSchemaMigrationStage <= MIGRATION_WRITE_BOTH ) {
-				$fields['oi_user'] = 'img_user';
-				$fields['oi_user_text'] = 'img_user_text';
-			}
-			if ( $wgActorTableSchemaMigrationStage >= MIGRATION_WRITE_BOTH ) {
-				$fields['oi_actor'] = 'img_actor';
-			}
-
-			if ( $wgActorTableSchemaMigrationStage !== MIGRATION_OLD &&
-				$wgActorTableSchemaMigrationStage !== MIGRATION_NEW
-			) {
-				// Upgrade any rows that are still old-style. Otherwise an upgrade
-				// might be missed if a deletion happens while the migration script
-				// is running.
-				$res = $dbw->select(
-					[ 'image' ],
-					[ 'img_name', 'img_user', 'img_user_text' ],
-					[ 'img_name' => $this->getName(), 'img_actor' => 0 ],
-					__METHOD__
-				);
-				foreach ( $res as $row ) {
-					$actorId = User::newFromAnyId( $row->img_user, $row->img_user_text, null )->getActorId( $dbw );
-					$dbw->update(
-						'image',
-						[ 'img_actor' => $actorId ],
-						[ 'img_name' => $row->img_name, 'img_actor' => 0 ],
-						__METHOD__
-					);
-				}
-			}
 
 			# (T36993) Note: $oldver can be empty here, if the previous
 			# version of the file was broken. Allow registration of the new
@@ -1622,20 +1666,23 @@ class LocalFile extends File {
 				[ 'img_name' => $this->getName() ],
 				__METHOD__
 			);
-			if ( $wgCommentTableSchemaMigrationStage > MIGRATION_OLD ) {
-				// So $commentCallback can insert the new row
-				$dbw->delete( 'image_comment_temp', [ 'imgcomment_name' => $this->getName() ], __METHOD__ );
-			}
 		}
-		$commentCallback( $this->getName() );
 
 		$descTitle = $this->getTitle();
 		$descId = $descTitle->getArticleID();
 		$wikiPage = new WikiFilePage( $descTitle );
 		$wikiPage->setFile( $this );
 
+		// Determine log action. If reupload is done by reverting, use a special log_action.
+		if ( $revert === true ) {
+			$logAction = 'revert';
+		} elseif ( $reupload === true ) {
+			$logAction = 'overwrite';
+		} else {
+			$logAction = 'upload';
+		}
 		// Add the log entry...
-		$logEntry = new ManualLogEntry( 'upload', $reupload ? 'overwrite' : 'upload' );
+		$logEntry = new ManualLogEntry( 'upload', $logAction );
 		$logEntry->setTimestamp( $this->timestamp );
 		$logEntry->setPerformer( $user );
 		$logEntry->setComment( $comment );
@@ -1657,27 +1704,49 @@ class LocalFile extends File {
 		$logId = $logEntry->insert();
 
 		if ( $descTitle->exists() ) {
-			// Use own context to get the action text in content language
-			$formatter = LogFormatter::newFromEntry( $logEntry );
-			$formatter->setContext( RequestContext::newExtraneousContext( $descTitle ) );
-			$editSummary = $formatter->getPlainActionText();
-
-			$nullRevision = Revision::newNullRevision(
-				$dbw,
-				$descId,
-				$editSummary,
-				false,
-				$user
-			);
-			if ( $nullRevision ) {
-				$nullRevision->insertOn( $dbw );
-				Hooks::run(
-					'NewRevisionFromEditComplete',
-					[ $wikiPage, $nullRevision, $nullRevision->getParentId(), $user ]
+			if ( $createNullRevision !== false ) {
+				$revStore = MediaWikiServices::getInstance()->getRevisionStore();
+				// Use own context to get the action text in content language
+				$formatter = LogFormatter::newFromEntry( $logEntry );
+				$formatter->setContext( RequestContext::newExtraneousContext( $descTitle ) );
+				$editSummary = $formatter->getPlainActionText();
+				$summary = CommentStoreComment::newUnsavedComment( $editSummary );
+				$nullRevRecord = $revStore->newNullRevision(
+					$dbw,
+					$descTitle,
+					$summary,
+					false,
+					$user
 				);
-				$wikiPage->updateRevisionOn( $dbw, $nullRevision );
-				// Associate null revision id
-				$logEntry->setAssociatedRevId( $nullRevision->getId() );
+
+				if ( $nullRevRecord ) {
+					$inserted = $revStore->insertRevisionOn( $nullRevRecord, $dbw );
+
+					$this->getHookRunner()->onRevisionFromEditComplete(
+						$wikiPage,
+						$inserted,
+						$inserted->getParentId(),
+						$user,
+						$tags
+					);
+
+					// Hook is hard deprecated since 1.35
+					if ( $this->getHookContainer()->isRegistered( 'NewRevisionFromEditComplete' ) ) {
+						// Only create the Revision object if needed
+						$nullRevision = new Revision( $inserted );
+						$this->getHookRunner()->onNewRevisionFromEditComplete(
+							$wikiPage,
+							$nullRevision,
+							$inserted->getParentId(),
+							$user,
+							$tags
+						);
+					}
+
+					$wikiPage->updateRevisionOn( $dbw, $inserted );
+					// Associate null revision id
+					$logEntry->setAssociatedRevId( $inserted->getId() );
+				}
 			}
 
 			$newPageContent = null;
@@ -1689,6 +1758,7 @@ class LocalFile extends File {
 		# Defer purges, page creation, and link updates in case they error out.
 		# The most important thing is that files and the DB registry stay synced.
 		$dbw->endAtomic( __METHOD__ );
+		$fname = __METHOD__;
 
 		# Do some cache purges after final commit so that:
 		# a) Changes are more likely to be seen post-purge
@@ -1697,9 +1767,10 @@ class LocalFile extends File {
 			new AutoCommitUpdate(
 				$dbw,
 				__METHOD__,
+				/** @suppress PhanTypeArraySuspiciousNullable False positives with $this->status->value */
 				function () use (
 					$reupload, $wikiPage, $newPageContent, $comment, $user,
-					$logEntry, $logId, $descId, $tags
+					$logEntry, $logId, $descId, $tags, $fname
 				) {
 					# Update memcache after the commit
 					$this->invalidateCache();
@@ -1717,23 +1788,25 @@ class LocalFile extends File {
 							$user
 						);
 
-						if ( isset( $status->value['revision'] ) ) {
-							/** @var Revision $rev */
-							$rev = $status->value['revision'];
+						if ( isset( $status->value['revision-record'] ) ) {
+							/** @var RevisionRecord $revRecord */
+							$revRecord = $status->value['revision-record'];
 							// Associate new page revision id
-							$logEntry->setAssociatedRevId( $rev->getId() );
+							$logEntry->setAssociatedRevId( $revRecord->getId() );
 						}
 						// This relies on the resetArticleID() call in WikiPage::insertOn(),
 						// which is triggered on $descTitle by doEditContent() above.
-						if ( isset( $status->value['revision'] ) ) {
-							/** @var Revision $rev */
-							$rev = $status->value['revision'];
-							$updateLogPage = $rev->getPage();
+						if ( isset( $status->value['revision-record'] ) ) {
+							/** @var RevisionRecord $revRecord */
+							$revRecord = $status->value['revision-record'];
+							$updateLogPage = $revRecord->getPageId();
 						}
 					} else {
 						# Existing file page: invalidate description page cache
-						$wikiPage->getTitle()->invalidateCache();
-						$wikiPage->getTitle()->purgeSquid();
+						$title = $wikiPage->getTitle();
+						$title->invalidateCache();
+						$hcu = MediaWikiServices::getInstance()->getHtmlCacheUpdater();
+						$hcu->purgeTitleUrls( $title, $hcu::PURGE_INTENT_TXROUND_REFLECTED );
 						# Allow the new file version to be patrolled from the page footer
 						Article::purgePatrolFooterCache( $descId );
 					}
@@ -1751,21 +1824,21 @@ class LocalFile extends File {
 						'logging',
 						$update,
 						[ 'log_id' => $logId ],
-						__METHOD__
+						$fname
 					);
 					$this->getRepo()->getMasterDB()->insert(
 						'log_search',
 						[
 							'ls_field' => 'associated_rev_id',
-							'ls_value' => $logEntry->getAssociatedRevId(),
+							'ls_value' => (string)$logEntry->getAssociatedRevId(),
 							'ls_log_id' => $logId,
 						],
-						__METHOD__
+						$fname
 					);
 
 					# Add change tags, if any
 					if ( $tags ) {
-						$logEntry->setTags( $tags );
+						$logEntry->addTags( $tags );
 					}
 
 					# Uploads can be patrolled
@@ -1775,16 +1848,14 @@ class LocalFile extends File {
 					$logEntry->publish( $logId );
 
 					# Run hook for other updates (typically more cache purging)
-					Hooks::run( 'FileUpload', [ $this, $reupload, !$newPageContent ] );
+					$this->getHookRunner()->onFileUpload( $this, $reupload, !$newPageContent );
 
 					if ( $reupload ) {
 						# Delete old thumbnails
 						$this->purgeThumbnails();
 						# Remove the old file from the CDN cache
-						DeferredUpdates::addUpdate(
-							new CdnCacheUpdate( [ $this->getUrl() ] ),
-							DeferredUpdates::PRESEND
-						);
+						$hcu = MediaWikiServices::getInstance()->getHtmlCacheUpdater();
+						$hcu->purgeUrls( $this->getUrl(), $hcu::PURGE_INTENT_TXROUND_REFLECTED );
 					} else {
 						# Update backlink pages pointing to this title if created
 						LinksUpdate::queueRecursiveJobsForTable(
@@ -1807,9 +1878,12 @@ class LocalFile extends File {
 		}
 
 		# Invalidate cache for all pages using this file
-		DeferredUpdates::addUpdate(
-			new HTMLCacheUpdate( $this->getTitle(), 'imagelinks', 'file-upload' )
+		$job = HTMLCacheUpdateJob::newForBacklinks(
+			$this->getTitle(),
+			'imagelinks',
+			[ 'causeAction' => 'file-upload', 'causeAgent' => $user->getName() ]
 		);
+		JobQueueGroup::singleton()->lazyPush( $job );
 
 		return Status::newGood();
 	}
@@ -1822,6 +1896,7 @@ class LocalFile extends File {
 	 * The archive name should be passed through to recordUpload for database
 	 * registration.
 	 *
+	 * @stable to override
 	 * @param string|FSFile $src Local filesystem path or virtual URL to the source image
 	 * @param int $flags A bitwise combination of:
 	 *     File::DELETE_SOURCE    Delete the source file, i.e. move rather than copy
@@ -1829,7 +1904,7 @@ class LocalFile extends File {
 	 * @return Status On success, the value member contains the
 	 *     archive name, or an empty string if it was a new file.
 	 */
-	function publish( $src, $flags = 0, array $options = [] ) {
+	public function publish( $src, $flags = 0, array $options = [] ) {
 		return $this->publishTo( $src, $this->getRel(), $flags, $options );
 	}
 
@@ -1840,6 +1915,7 @@ class LocalFile extends File {
 	 * The archive name should be passed through to recordUpload for database
 	 * registration.
 	 *
+	 * @stable to override
 	 * @param string|FSFile $src Local filesystem path or virtual URL to the source image
 	 * @param string $dstRel Target relative path
 	 * @param int $flags A bitwise combination of:
@@ -1848,7 +1924,7 @@ class LocalFile extends File {
 	 * @return Status On success, the value member contains the
 	 *     archive name, or an empty string if it was a new file.
 	 */
-	function publishTo( $src, $dstRel, $flags = 0, array $options = [] ) {
+	protected function publishTo( $src, $dstRel, $flags = 0, array $options = [] ) {
 		$srcPath = ( $src instanceof FSFile ) ? $src->getPath() : $src;
 
 		$repo = $this->getRepo();
@@ -1856,17 +1932,23 @@ class LocalFile extends File {
 			return $this->readOnlyFatalStatus();
 		}
 
-		$this->lock(); // begin
+		$this->lock();
 
-		$archiveName = wfTimestamp( TS_MW ) . '!' . $this->getName();
-		$archiveRel = 'archive/' . $this->getHashPath() . $archiveName;
+		if ( $this->isOld() ) {
+			$archiveRel = $dstRel;
+			$archiveName = basename( $archiveRel );
+		} else {
+			$archiveName = wfTimestamp( TS_MW ) . '!' . $this->getName();
+			$archiveRel = $this->getArchiveRel( $archiveName );
+		}
 
 		if ( $repo->hasSha1Storage() ) {
-			$sha1 = $repo->isVirtualUrl( $srcPath )
+			$sha1 = FileRepo::isVirtualUrl( $srcPath )
 				? $repo->getFileSha1( $srcPath )
 				: FSFile::getSha1Base36FromPath( $srcPath );
 			/** @var FileBackendDBRepoWrapper $wrapperBackend */
 			$wrapperBackend = $repo->getBackend();
+			'@phan-var FileBackendDBRepoWrapper $wrapperBackend';
 			$dst = $wrapperBackend->getPathForSHA1( $sha1 );
 			$status = $repo->quickImport( $src, $dst );
 			if ( $flags & File::DELETE_SOURCE ) {
@@ -1887,8 +1969,7 @@ class LocalFile extends File {
 			}
 		}
 
-		$this->unlock(); // done
-
+		$this->unlock();
 		return $status;
 	}
 
@@ -1906,10 +1987,12 @@ class LocalFile extends File {
 	 * Cache purging is done; checks for validity
 	 * and logging are caller's responsibility
 	 *
+	 * @stable to override
 	 * @param Title $target New file name
 	 * @return Status
 	 */
-	function move( $target ) {
+	public function move( $target ) {
+		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
 		if ( $this->getRepo()->getReadOnlyReason() !== false ) {
 			return $this->readOnlyFatalStatus();
 		}
@@ -1917,18 +2000,17 @@ class LocalFile extends File {
 		wfDebugLog( 'imagemove', "Got request to move {$this->name} to " . $target->getText() );
 		$batch = new LocalFileMoveBatch( $this, $target );
 
-		$this->lock(); // begin
+		$this->lock();
 		$batch->addCurrent();
 		$archiveNames = $batch->addOlds();
 		$status = $batch->execute();
-		$this->unlock(); // done
+		$this->unlock();
 
 		wfDebugLog( 'imagemove', "Finished moving {$this->name}" );
 
-		// Purge the source and target files...
-		$oldTitleFile = wfLocalFile( $this->title );
-		$newTitleFile = wfLocalFile( $target );
-		// To avoid slow purges in the transaction, move them outside...
+		// Purge the source and target files outside the transaction...
+		$oldTitleFile = $localRepo->newFile( $this->title );
+		$newTitleFile = $localRepo->newFile( $target );
 		DeferredUpdates::addUpdate(
 			new AutoCommitUpdate(
 				$this->getRepo()->getMasterDB(),
@@ -1936,6 +2018,8 @@ class LocalFile extends File {
 				function () use ( $oldTitleFile, $newTitleFile, $archiveNames ) {
 					$oldTitleFile->purgeEverything();
 					foreach ( $archiveNames as $archiveName ) {
+						/** @var OldLocalFile $oldTitleFile */
+						'@phan-var OldLocalFile $oldTitleFile';
 						$oldTitleFile->purgeOldThumbnails( $archiveName );
 					}
 					$newTitleFile->purgeEverything();
@@ -1948,8 +2032,8 @@ class LocalFile extends File {
 			// Now switch the object
 			$this->title = $target;
 			// Force regeneration of the name and hashpath
-			unset( $this->name );
-			unset( $this->hashPath );
+			$this->name = null;
+			$this->hashPath = null;
 		}
 
 		return $status;
@@ -1957,6 +2041,8 @@ class LocalFile extends File {
 
 	/**
 	 * Delete all versions of the file.
+	 *
+	 * @deprecated since 1.35, use deleteFile
 	 *
 	 * Moves the files into an archive directory (or deletes them)
 	 * and removes the database rows.
@@ -1968,19 +2054,44 @@ class LocalFile extends File {
 	 * @param User|null $user
 	 * @return Status
 	 */
-	function delete( $reason, $suppress = false, $user = null ) {
+	public function delete( $reason, $suppress = false, $user = null ) {
+		wfDeprecated( __METHOD__, '1.35' );
+		if ( $user === null ) {
+			global $wgUser;
+			$user = $wgUser;
+		}
+		return $this->deleteFile( $reason, $user, $suppress );
+	}
+
+	/**
+	 * Delete all versions of the file.
+	 *
+	 * @since 1.35
+	 *
+	 * Moves the files into an archive directory (or deletes them)
+	 * and removes the database rows.
+	 *
+	 * Cache purging is done; logging is caller's responsibility.
+	 * @stable to override
+	 *
+	 * @param string $reason
+	 * @param User $user
+	 * @param bool $suppress
+	 * @return Status
+	 */
+	public function deleteFile( $reason, User $user, $suppress = false ) {
 		if ( $this->getRepo()->getReadOnlyReason() !== false ) {
 			return $this->readOnlyFatalStatus();
 		}
 
-		$batch = new LocalFileDeleteBatch( $this, $reason, $suppress, $user );
+		$batch = new LocalFileDeleteBatch( $this, $user, $reason, $suppress );
 
-		$this->lock(); // begin
+		$this->lock();
 		$batch->addCurrent();
 		// Get old version relative paths
 		$archiveNames = $batch->addOlds();
 		$status = $batch->execute();
-		$this->unlock(); // done
+		$this->unlock();
 
 		if ( $status->isOK() ) {
 			DeferredUpdates::addUpdate( SiteStatsUpdate::factory( [ 'images' => -1 ] ) );
@@ -2006,13 +2117,17 @@ class LocalFile extends File {
 		foreach ( $archiveNames as $archiveName ) {
 			$purgeUrls[] = $this->getArchiveUrl( $archiveName );
 		}
-		DeferredUpdates::addUpdate( new CdnCacheUpdate( $purgeUrls ), DeferredUpdates::PRESEND );
+
+		$hcu = MediaWikiServices::getInstance()->getHtmlCacheUpdater();
+		$hcu->purgeUrls( $purgeUrls, $hcu::PURGE_INTENT_TXROUND_REFLECTED );
 
 		return $status;
 	}
 
 	/**
 	 * Delete an old version of the file.
+	 *
+	 * @deprecated since 1.35, use deleteOldFile
 	 *
 	 * Moves the file into an archive directory (or deletes it)
 	 * and removes the database row.
@@ -2026,27 +2141,53 @@ class LocalFile extends File {
 	 * @throws MWException Exception on database or file store failure
 	 * @return Status
 	 */
-	function deleteOld( $archiveName, $reason, $suppress = false, $user = null ) {
+	public function deleteOld( $archiveName, $reason, $suppress = false, $user = null ) {
+		wfDeprecated( __METHOD__, '1.35' );
+		if ( $user === null ) {
+			global $wgUser;
+			$user = $wgUser;
+		}
+		return $this->deleteOldFile( $archiveName, $reason, $user, $suppress );
+	}
+
+	/**
+	 * Delete an old version of the file.
+	 *
+	 * @since 1.35
+	 * @stable to override
+	 *
+	 * Moves the file into an archive directory (or deletes it)
+	 * and removes the database row.
+	 *
+	 * Cache purging is done; logging is caller's responsibility.
+	 *
+	 * @param string $archiveName
+	 * @param string $reason
+	 * @param User $user
+	 * @param bool $suppress
+	 * @throws MWException Exception on database or file store failure
+	 * @return Status
+	 */
+	public function deleteOldFile( $archiveName, $reason, User $user, $suppress = false ) {
 		if ( $this->getRepo()->getReadOnlyReason() !== false ) {
 			return $this->readOnlyFatalStatus();
 		}
 
-		$batch = new LocalFileDeleteBatch( $this, $reason, $suppress, $user );
+		$batch = new LocalFileDeleteBatch( $this, $user, $reason, $suppress );
 
-		$this->lock(); // begin
+		$this->lock();
 		$batch->addOld( $archiveName );
 		$status = $batch->execute();
-		$this->unlock(); // done
+		$this->unlock();
 
 		$this->purgeOldThumbnails( $archiveName );
 		if ( $status->isOK() ) {
 			$this->purgeDescription();
 		}
 
-		DeferredUpdates::addUpdate(
-			new CdnCacheUpdate( [ $this->getArchiveUrl( $archiveName ) ] ),
-			DeferredUpdates::PRESEND
-		);
+		$url = $this->getArchiveUrl( $archiveName );
+		$hcu = MediaWikiServices::getInstance()->getHtmlCacheUpdater();
+		$hcu->purgeUrls( $url, $hcu::PURGE_INTENT_TXROUND_REFLECTED );
 
 		return $status;
 	}
@@ -2056,20 +2197,21 @@ class LocalFile extends File {
 	 * Permissions and logging are left to the caller.
 	 *
 	 * May throw database exceptions on error.
+	 * @stable to override
 	 *
 	 * @param array $versions Set of record ids of deleted items to restore,
 	 *   or empty to restore all revisions.
 	 * @param bool $unsuppress
 	 * @return Status
 	 */
-	function restore( $versions = [], $unsuppress = false ) {
+	public function restore( $versions = [], $unsuppress = false ) {
 		if ( $this->getRepo()->getReadOnlyReason() !== false ) {
 			return $this->readOnlyFatalStatus();
 		}
 
 		$batch = new LocalFileRestoreBatch( $this, $unsuppress );
 
-		$this->lock(); // begin
+		$this->lock();
 		if ( !$versions ) {
 			$batch->addAll();
 		} else {
@@ -2082,8 +2224,8 @@ class LocalFile extends File {
 			$cleanupStatus->failCount = 0;
 			$status->merge( $cleanupStatus );
 		}
-		$this->unlock(); // done
 
+		$this->unlock();
 		return $status;
 	}
 
@@ -2094,9 +2236,14 @@ class LocalFile extends File {
 
 	/**
 	 * Get the URL of the file description page.
-	 * @return string
+	 * @stable to override
+	 * @return string|bool
 	 */
-	function getDescriptionUrl() {
+	public function getDescriptionUrl() {
+		if ( !$this->title ) {
+			return false; // Avoid hard failure when the file does not exist. T221812
+		}
+
 		return $this->title->getLocalURL();
 	}
 
@@ -2104,30 +2251,41 @@ class LocalFile extends File {
 	 * Get the HTML text of the description page
 	 * This is not used by ImagePage for local files, since (among other things)
 	 * it skips the parser cache.
+	 * @stable to override
 	 *
 	 * @param Language|null $lang What language to get description in (Optional)
 	 * @return string|false
 	 */
-	function getDescriptionText( $lang = null ) {
-		$revision = Revision::newFromTitle( $this->title, false, Revision::READ_NORMAL );
+	public function getDescriptionText( Language $lang = null ) {
+		if ( !$this->title ) {
+			return false; // Avoid hard failure when the file does not exist. T221812
+		}
+
+		$store = MediaWikiServices::getInstance()->getRevisionStore();
+		$revision = $store->getRevisionByTitle( $this->title, 0, RevisionStore::READ_NORMAL );
 		if ( !$revision ) {
 			return false;
 		}
-		$content = $revision->getContent();
-		if ( !$content ) {
+
+		$renderer = MediaWikiServices::getInstance()->getRevisionRenderer();
+		$rendered = $renderer->getRenderedRevision( $revision, new ParserOptions( null, $lang ) );
+
+		if ( !$rendered ) {
+			// audience check failed
 			return false;
 		}
-		$pout = $content->getParserOutput( $this->title, null, new ParserOptions( null, $lang ) );
 
+		$pout = $rendered->getRevisionParserOutput();
 		return $pout->getText();
 	}
 
 	/**
+	 * @stable to override
 	 * @param int $audience
 	 * @param User|null $user
 	 * @return string
 	 */
-	function getDescription( $audience = self::FOR_PUBLIC, User $user = null ) {
+	public function getDescription( $audience = self::FOR_PUBLIC, User $user = null ) {
 		$this->load();
 		if ( $audience == self::FOR_PUBLIC && $this->isDeleted( self::DELETED_COMMENT ) ) {
 			return '';
@@ -2141,18 +2299,24 @@ class LocalFile extends File {
 	}
 
 	/**
+	 * @stable to override
 	 * @return bool|string
 	 */
-	function getTimestamp() {
+	public function getTimestamp() {
 		$this->load();
 
 		return $this->timestamp;
 	}
 
 	/**
+	 * @stable to override
 	 * @return bool|string
 	 */
 	public function getDescriptionTouched() {
+		if ( !$this->exists() ) {
+			return false; // Avoid hard failure when the file does not exist. T221812
+		}
+
 		// The DB lookup might return false, e.g. if the file was just deleted, or the shared DB repo
 		// itself gets it from elsewhere. To avoid repeating the DB lookups in such a case, we
 		// need to differentiate between null (uninitialized) and false (failed to load).
@@ -2169,13 +2333,14 @@ class LocalFile extends File {
 	}
 
 	/**
+	 * @stable to override
 	 * @return string
 	 */
-	function getSha1() {
+	public function getSha1() {
 		$this->load();
 		// Initialise now if necessary
 		if ( $this->sha1 == '' && $this->fileExists ) {
-			$this->lock(); // begin
+			$this->lock();
 
 			$this->sha1 = $this->repo->getFileSha1( $this->getPath() );
 			if ( !wfReadOnly() && strval( $this->sha1 ) != '' ) {
@@ -2187,7 +2352,7 @@ class LocalFile extends File {
 				$this->invalidateCache();
 			}
 
-			$this->unlock(); // done
+			$this->unlock();
 		}
 
 		return $this->sha1;
@@ -2196,12 +2361,12 @@ class LocalFile extends File {
 	/**
 	 * @return bool Whether to cache in RepoGroup (this avoids OOMs)
 	 */
-	function isCacheable() {
+	public function isCacheable() {
 		$this->load();
 
 		// If extra data (metadata) was not loaded then it must have been large
 		return $this->extraDataLoaded
-		&& strlen( serialize( $this->metadata ) ) <= self::CACHE_FIELD_MAX_LEN;
+			&& strlen( serialize( $this->metadata ) ) <= self::CACHE_FIELD_MAX_LEN;
 	}
 
 	/**
@@ -2209,9 +2374,9 @@ class LocalFile extends File {
 	 * @since 1.28
 	 */
 	public function acquireFileLock() {
-		return $this->getRepo()->getBackend()->lockFiles(
+		return Status::wrap( $this->getRepo()->getBackend()->lockFiles(
 			[ $this->getPath() ], LockManager::LOCK_EX, 10
-		);
+		) );
 	}
 
 	/**
@@ -2219,9 +2384,9 @@ class LocalFile extends File {
 	 * @since 1.28
 	 */
 	public function releaseFileLock() {
-		return $this->getRepo()->getBackend()->unlockFiles(
+		return Status::wrap( $this->getRepo()->getBackend()->unlockFiles(
 			[ $this->getPath() ], LockManager::LOCK_EX
-		);
+		) );
 	}
 
 	/**
@@ -2300,1207 +2465,7 @@ class LocalFile extends File {
 	/**
 	 * Clean up any dangling locks
 	 */
-	function __destruct() {
+	public function __destruct() {
 		$this->unlock();
-	}
-} // LocalFile class
-
-# ------------------------------------------------------------------------------
-
-/**
- * Helper class for file deletion
- * @ingroup FileAbstraction
- */
-class LocalFileDeleteBatch {
-	/** @var LocalFile */
-	private $file;
-
-	/** @var string */
-	private $reason;
-
-	/** @var array */
-	private $srcRels = [];
-
-	/** @var array */
-	private $archiveUrls = [];
-
-	/** @var array Items to be processed in the deletion batch */
-	private $deletionBatch;
-
-	/** @var bool Whether to suppress all suppressable fields when deleting */
-	private $suppress;
-
-	/** @var Status */
-	private $status;
-
-	/** @var User */
-	private $user;
-
-	/**
-	 * @param File $file
-	 * @param string $reason
-	 * @param bool $suppress
-	 * @param User|null $user
-	 */
-	function __construct( File $file, $reason = '', $suppress = false, $user = null ) {
-		$this->file = $file;
-		$this->reason = $reason;
-		$this->suppress = $suppress;
-		if ( $user ) {
-			$this->user = $user;
-		} else {
-			global $wgUser;
-			$this->user = $wgUser;
-		}
-		$this->status = $file->repo->newGood();
-	}
-
-	public function addCurrent() {
-		$this->srcRels['.'] = $this->file->getRel();
-	}
-
-	/**
-	 * @param string $oldName
-	 */
-	public function addOld( $oldName ) {
-		$this->srcRels[$oldName] = $this->file->getArchiveRel( $oldName );
-		$this->archiveUrls[] = $this->file->getArchiveUrl( $oldName );
-	}
-
-	/**
-	 * Add the old versions of the image to the batch
-	 * @return string[] List of archive names from old versions
-	 */
-	public function addOlds() {
-		$archiveNames = [];
-
-		$dbw = $this->file->repo->getMasterDB();
-		$result = $dbw->select( 'oldimage',
-			[ 'oi_archive_name' ],
-			[ 'oi_name' => $this->file->getName() ],
-			__METHOD__
-		);
-
-		foreach ( $result as $row ) {
-			$this->addOld( $row->oi_archive_name );
-			$archiveNames[] = $row->oi_archive_name;
-		}
-
-		return $archiveNames;
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function getOldRels() {
-		if ( !isset( $this->srcRels['.'] ) ) {
-			$oldRels =& $this->srcRels;
-			$deleteCurrent = false;
-		} else {
-			$oldRels = $this->srcRels;
-			unset( $oldRels['.'] );
-			$deleteCurrent = true;
-		}
-
-		return [ $oldRels, $deleteCurrent ];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function getHashes() {
-		$hashes = [];
-		list( $oldRels, $deleteCurrent ) = $this->getOldRels();
-
-		if ( $deleteCurrent ) {
-			$hashes['.'] = $this->file->getSha1();
-		}
-
-		if ( count( $oldRels ) ) {
-			$dbw = $this->file->repo->getMasterDB();
-			$res = $dbw->select(
-				'oldimage',
-				[ 'oi_archive_name', 'oi_sha1' ],
-				[ 'oi_archive_name' => array_keys( $oldRels ),
-					'oi_name' => $this->file->getName() ], // performance
-				__METHOD__
-			);
-
-			foreach ( $res as $row ) {
-				if ( rtrim( $row->oi_sha1, "\0" ) === '' ) {
-					// Get the hash from the file
-					$oldUrl = $this->file->getArchiveVirtualUrl( $row->oi_archive_name );
-					$props = $this->file->repo->getFileProps( $oldUrl );
-
-					if ( $props['fileExists'] ) {
-						// Upgrade the oldimage row
-						$dbw->update( 'oldimage',
-							[ 'oi_sha1' => $props['sha1'] ],
-							[ 'oi_name' => $this->file->getName(), 'oi_archive_name' => $row->oi_archive_name ],
-							__METHOD__ );
-						$hashes[$row->oi_archive_name] = $props['sha1'];
-					} else {
-						$hashes[$row->oi_archive_name] = false;
-					}
-				} else {
-					$hashes[$row->oi_archive_name] = $row->oi_sha1;
-				}
-			}
-		}
-
-		$missing = array_diff_key( $this->srcRels, $hashes );
-
-		foreach ( $missing as $name => $rel ) {
-			$this->status->error( 'filedelete-old-unregistered', $name );
-		}
-
-		foreach ( $hashes as $name => $hash ) {
-			if ( !$hash ) {
-				$this->status->error( 'filedelete-missing', $this->srcRels[$name] );
-				unset( $hashes[$name] );
-			}
-		}
-
-		return $hashes;
-	}
-
-	protected function doDBInserts() {
-		global $wgCommentTableSchemaMigrationStage, $wgActorTableSchemaMigrationStage;
-
-		$now = time();
-		$dbw = $this->file->repo->getMasterDB();
-
-		$commentStore = CommentStore::getStore();
-		$actorMigration = ActorMigration::newMigration();
-
-		$encTimestamp = $dbw->addQuotes( $dbw->timestamp( $now ) );
-		$encUserId = $dbw->addQuotes( $this->user->getId() );
-		$encGroup = $dbw->addQuotes( 'deleted' );
-		$ext = $this->file->getExtension();
-		$dotExt = $ext === '' ? '' : ".$ext";
-		$encExt = $dbw->addQuotes( $dotExt );
-		list( $oldRels, $deleteCurrent ) = $this->getOldRels();
-
-		// Bitfields to further suppress the content
-		if ( $this->suppress ) {
-			$bitfield = Revision::SUPPRESSED_ALL;
-		} else {
-			$bitfield = 'oi_deleted';
-		}
-
-		if ( $deleteCurrent ) {
-			$tables = [ 'image' ];
-			$fields = [
-				'fa_storage_group' => $encGroup,
-				'fa_storage_key' => $dbw->conditional(
-					[ 'img_sha1' => '' ],
-					$dbw->addQuotes( '' ),
-					$dbw->buildConcat( [ "img_sha1", $encExt ] )
-				),
-				'fa_deleted_user' => $encUserId,
-				'fa_deleted_timestamp' => $encTimestamp,
-				'fa_deleted' => $this->suppress ? $bitfield : 0,
-				'fa_name' => 'img_name',
-				'fa_archive_name' => 'NULL',
-				'fa_size' => 'img_size',
-				'fa_width' => 'img_width',
-				'fa_height' => 'img_height',
-				'fa_metadata' => 'img_metadata',
-				'fa_bits' => 'img_bits',
-				'fa_media_type' => 'img_media_type',
-				'fa_major_mime' => 'img_major_mime',
-				'fa_minor_mime' => 'img_minor_mime',
-				'fa_timestamp' => 'img_timestamp',
-				'fa_sha1' => 'img_sha1'
-			];
-			$joins = [];
-
-			$fields += array_map(
-				[ $dbw, 'addQuotes' ],
-				$commentStore->insert( $dbw, 'fa_deleted_reason', $this->reason )
-			);
-
-			if ( $wgCommentTableSchemaMigrationStage <= MIGRATION_WRITE_BOTH ) {
-				$fields['fa_description'] = 'img_description';
-			}
-			if ( $wgCommentTableSchemaMigrationStage >= MIGRATION_WRITE_BOTH ) {
-				$tables[] = 'image_comment_temp';
-				$fields['fa_description_id'] = 'imgcomment_description_id';
-				$joins['image_comment_temp'] = [
-					$wgCommentTableSchemaMigrationStage === MIGRATION_NEW ? 'JOIN' : 'LEFT JOIN',
-					[ 'imgcomment_name = img_name' ]
-				];
-			}
-
-			if ( $wgCommentTableSchemaMigrationStage !== MIGRATION_OLD &&
-				$wgCommentTableSchemaMigrationStage !== MIGRATION_NEW
-			) {
-				// Upgrade any rows that are still old-style. Otherwise an upgrade
-				// might be missed if a deletion happens while the migration script
-				// is running.
-				$res = $dbw->select(
-					[ 'image', 'image_comment_temp' ],
-					[ 'img_name', 'img_description' ],
-					[ 'img_name' => $this->file->getName(), 'imgcomment_name' => null ],
-					__METHOD__,
-					[],
-					[ 'image_comment_temp' => [ 'LEFT JOIN', [ 'imgcomment_name = img_name' ] ] ]
-				);
-				foreach ( $res as $row ) {
-					list( , $callback ) = $commentStore->insertWithTempTable(
-						$dbw, 'img_description', $row->img_description
-					);
-					$callback( $row->img_name );
-				}
-			}
-
-			if ( $wgActorTableSchemaMigrationStage <= MIGRATION_WRITE_BOTH ) {
-				$fields['fa_user'] = 'img_user';
-				$fields['fa_user_text'] = 'img_user_text';
-			}
-			if ( $wgActorTableSchemaMigrationStage >= MIGRATION_WRITE_BOTH ) {
-				$fields['fa_actor'] = 'img_actor';
-			}
-
-			if ( $wgActorTableSchemaMigrationStage !== MIGRATION_OLD &&
-				$wgActorTableSchemaMigrationStage !== MIGRATION_NEW
-			) {
-				// Upgrade any rows that are still old-style. Otherwise an upgrade
-				// might be missed if a deletion happens while the migration script
-				// is running.
-				$res = $dbw->select(
-					[ 'image' ],
-					[ 'img_name', 'img_user', 'img_user_text' ],
-					[ 'img_name' => $this->file->getName(), 'img_actor' => 0 ],
-					__METHOD__
-				);
-				foreach ( $res as $row ) {
-					$actorId = User::newFromAnyId( $row->img_user, $row->img_user_text, null )->getActorId( $dbw );
-					$dbw->update(
-						'image',
-						[ 'img_actor' => $actorId ],
-						[ 'img_name' => $row->img_name, 'img_actor' => 0 ],
-						__METHOD__
-					);
-				}
-			}
-
-			$dbw->insertSelect( 'filearchive', $tables, $fields,
-				[ 'img_name' => $this->file->getName() ], __METHOD__, [], [], $joins );
-		}
-
-		if ( count( $oldRels ) ) {
-			$fileQuery = OldLocalFile::getQueryInfo();
-			$res = $dbw->select(
-				$fileQuery['tables'],
-				$fileQuery['fields'],
-				[
-					'oi_name' => $this->file->getName(),
-					'oi_archive_name' => array_keys( $oldRels )
-				],
-				__METHOD__,
-				[ 'FOR UPDATE' ],
-				$fileQuery['joins']
-			);
-			$rowsInsert = [];
-			if ( $res->numRows() ) {
-				$reason = $commentStore->createComment( $dbw, $this->reason );
-				foreach ( $res as $row ) {
-					$comment = $commentStore->getComment( 'oi_description', $row );
-					$user = User::newFromAnyId( $row->oi_user, $row->oi_user_text, $row->oi_actor );
-					$rowsInsert[] = [
-						// Deletion-specific fields
-						'fa_storage_group' => 'deleted',
-						'fa_storage_key' => ( $row->oi_sha1 === '' )
-						? ''
-						: "{$row->oi_sha1}{$dotExt}",
-						'fa_deleted_user' => $this->user->getId(),
-						'fa_deleted_timestamp' => $dbw->timestamp( $now ),
-						// Counterpart fields
-						'fa_deleted' => $this->suppress ? $bitfield : $row->oi_deleted,
-						'fa_name' => $row->oi_name,
-						'fa_archive_name' => $row->oi_archive_name,
-						'fa_size' => $row->oi_size,
-						'fa_width' => $row->oi_width,
-						'fa_height' => $row->oi_height,
-						'fa_metadata' => $row->oi_metadata,
-						'fa_bits' => $row->oi_bits,
-						'fa_media_type' => $row->oi_media_type,
-						'fa_major_mime' => $row->oi_major_mime,
-						'fa_minor_mime' => $row->oi_minor_mime,
-						'fa_timestamp' => $row->oi_timestamp,
-						'fa_sha1' => $row->oi_sha1
-					] + $commentStore->insert( $dbw, 'fa_deleted_reason', $reason )
-					+ $commentStore->insert( $dbw, 'fa_description', $comment )
-					+ $actorMigration->getInsertValues( $dbw, 'fa_user', $user );
-				}
-			}
-
-			$dbw->insert( 'filearchive', $rowsInsert, __METHOD__ );
-		}
-	}
-
-	function doDBDeletes() {
-		global $wgCommentTableSchemaMigrationStage;
-
-		$dbw = $this->file->repo->getMasterDB();
-		list( $oldRels, $deleteCurrent ) = $this->getOldRels();
-
-		if ( count( $oldRels ) ) {
-			$dbw->delete( 'oldimage',
-				[
-					'oi_name' => $this->file->getName(),
-					'oi_archive_name' => array_keys( $oldRels )
-				], __METHOD__ );
-		}
-
-		if ( $deleteCurrent ) {
-			$dbw->delete( 'image', [ 'img_name' => $this->file->getName() ], __METHOD__ );
-			if ( $wgCommentTableSchemaMigrationStage > MIGRATION_OLD ) {
-				$dbw->delete(
-					'image_comment_temp', [ 'imgcomment_name' => $this->file->getName() ], __METHOD__
-				);
-			}
-		}
-	}
-
-	/**
-	 * Run the transaction
-	 * @return Status
-	 */
-	public function execute() {
-		$repo = $this->file->getRepo();
-		$this->file->lock();
-
-		// Prepare deletion batch
-		$hashes = $this->getHashes();
-		$this->deletionBatch = [];
-		$ext = $this->file->getExtension();
-		$dotExt = $ext === '' ? '' : ".$ext";
-
-		foreach ( $this->srcRels as $name => $srcRel ) {
-			// Skip files that have no hash (e.g. missing DB record, or sha1 field and file source)
-			if ( isset( $hashes[$name] ) ) {
-				$hash = $hashes[$name];
-				$key = $hash . $dotExt;
-				$dstRel = $repo->getDeletedHashPath( $key ) . $key;
-				$this->deletionBatch[$name] = [ $srcRel, $dstRel ];
-			}
-		}
-
-		if ( !$repo->hasSha1Storage() ) {
-			// Removes non-existent file from the batch, so we don't get errors.
-			// This also handles files in the 'deleted' zone deleted via revision deletion.
-			$checkStatus = $this->removeNonexistentFiles( $this->deletionBatch );
-			if ( !$checkStatus->isGood() ) {
-				$this->status->merge( $checkStatus );
-				return $this->status;
-			}
-			$this->deletionBatch = $checkStatus->value;
-
-			// Execute the file deletion batch
-			$status = $this->file->repo->deleteBatch( $this->deletionBatch );
-			if ( !$status->isGood() ) {
-				$this->status->merge( $status );
-			}
-		}
-
-		if ( !$this->status->isOK() ) {
-			// Critical file deletion error; abort
-			$this->file->unlock();
-
-			return $this->status;
-		}
-
-		// Copy the image/oldimage rows to filearchive
-		$this->doDBInserts();
-		// Delete image/oldimage rows
-		$this->doDBDeletes();
-
-		// Commit and return
-		$this->file->unlock();
-
-		return $this->status;
-	}
-
-	/**
-	 * Removes non-existent files from a deletion batch.
-	 * @param array $batch
-	 * @return Status
-	 */
-	protected function removeNonexistentFiles( $batch ) {
-		$files = $newBatch = [];
-
-		foreach ( $batch as $batchItem ) {
-			list( $src, ) = $batchItem;
-			$files[$src] = $this->file->repo->getVirtualUrl( 'public' ) . '/' . rawurlencode( $src );
-		}
-
-		$result = $this->file->repo->fileExistsBatch( $files );
-		if ( in_array( null, $result, true ) ) {
-			return Status::newFatal( 'backend-fail-internal',
-				$this->file->repo->getBackend()->getName() );
-		}
-
-		foreach ( $batch as $batchItem ) {
-			if ( $result[$batchItem[0]] ) {
-				$newBatch[] = $batchItem;
-			}
-		}
-
-		return Status::newGood( $newBatch );
-	}
-}
-
-# ------------------------------------------------------------------------------
-
-/**
- * Helper class for file undeletion
- * @ingroup FileAbstraction
- */
-class LocalFileRestoreBatch {
-	/** @var LocalFile */
-	private $file;
-
-	/** @var string[] List of file IDs to restore */
-	private $cleanupBatch;
-
-	/** @var string[] List of file IDs to restore */
-	private $ids;
-
-	/** @var bool Add all revisions of the file */
-	private $all;
-
-	/** @var bool Whether to remove all settings for suppressed fields */
-	private $unsuppress = false;
-
-	/**
-	 * @param File $file
-	 * @param bool $unsuppress
-	 */
-	function __construct( File $file, $unsuppress = false ) {
-		$this->file = $file;
-		$this->cleanupBatch = [];
-		$this->ids = [];
-		$this->unsuppress = $unsuppress;
-	}
-
-	/**
-	 * Add a file by ID
-	 * @param int $fa_id
-	 */
-	public function addId( $fa_id ) {
-		$this->ids[] = $fa_id;
-	}
-
-	/**
-	 * Add a whole lot of files by ID
-	 * @param int[] $ids
-	 */
-	public function addIds( $ids ) {
-		$this->ids = array_merge( $this->ids, $ids );
-	}
-
-	/**
-	 * Add all revisions of the file
-	 */
-	public function addAll() {
-		$this->all = true;
-	}
-
-	/**
-	 * Run the transaction, except the cleanup batch.
-	 * The cleanup batch should be run in a separate transaction, because it locks different
-	 * rows and there's no need to keep the image row locked while it's acquiring those locks
-	 * The caller may have its own transaction open.
-	 * So we save the batch and let the caller call cleanup()
-	 * @return Status
-	 */
-	public function execute() {
-		/** @var Language */
-		global $wgLang;
-
-		$repo = $this->file->getRepo();
-		if ( !$this->all && !$this->ids ) {
-			// Do nothing
-			return $repo->newGood();
-		}
-
-		$lockOwnsTrx = $this->file->lock();
-
-		$dbw = $this->file->repo->getMasterDB();
-
-		$commentStore = CommentStore::getStore();
-		$actorMigration = ActorMigration::newMigration();
-
-		$status = $this->file->repo->newGood();
-
-		$exists = (bool)$dbw->selectField( 'image', '1',
-			[ 'img_name' => $this->file->getName() ],
-			__METHOD__,
-			// The lock() should already prevents changes, but this still may need
-			// to bypass any transaction snapshot. However, if lock() started the
-			// trx (which it probably did) then snapshot is post-lock and up-to-date.
-			$lockOwnsTrx ? [] : [ 'LOCK IN SHARE MODE' ]
-		);
-
-		// Fetch all or selected archived revisions for the file,
-		// sorted from the most recent to the oldest.
-		$conditions = [ 'fa_name' => $this->file->getName() ];
-
-		if ( !$this->all ) {
-			$conditions['fa_id'] = $this->ids;
-		}
-
-		$arFileQuery = ArchivedFile::getQueryInfo();
-		$result = $dbw->select(
-			$arFileQuery['tables'],
-			$arFileQuery['fields'],
-			$conditions,
-			__METHOD__,
-			[ 'ORDER BY' => 'fa_timestamp DESC' ],
-			$arFileQuery['joins']
-		);
-
-		$idsPresent = [];
-		$storeBatch = [];
-		$insertBatch = [];
-		$insertCurrent = false;
-		$deleteIds = [];
-		$first = true;
-		$archiveNames = [];
-
-		foreach ( $result as $row ) {
-			$idsPresent[] = $row->fa_id;
-
-			if ( $row->fa_name != $this->file->getName() ) {
-				$status->error( 'undelete-filename-mismatch', $wgLang->timeanddate( $row->fa_timestamp ) );
-				$status->failCount++;
-				continue;
-			}
-
-			if ( $row->fa_storage_key == '' ) {
-				// Revision was missing pre-deletion
-				$status->error( 'undelete-bad-store-key', $wgLang->timeanddate( $row->fa_timestamp ) );
-				$status->failCount++;
-				continue;
-			}
-
-			$deletedRel = $repo->getDeletedHashPath( $row->fa_storage_key ) .
-				$row->fa_storage_key;
-			$deletedUrl = $repo->getVirtualUrl() . '/deleted/' . $deletedRel;
-
-			if ( isset( $row->fa_sha1 ) ) {
-				$sha1 = $row->fa_sha1;
-			} else {
-				// old row, populate from key
-				$sha1 = LocalRepo::getHashFromKey( $row->fa_storage_key );
-			}
-
-			# Fix leading zero
-			if ( strlen( $sha1 ) == 32 && $sha1[0] == '0' ) {
-				$sha1 = substr( $sha1, 1 );
-			}
-
-			if ( is_null( $row->fa_major_mime ) || $row->fa_major_mime == 'unknown'
-				|| is_null( $row->fa_minor_mime ) || $row->fa_minor_mime == 'unknown'
-				|| is_null( $row->fa_media_type ) || $row->fa_media_type == 'UNKNOWN'
-				|| is_null( $row->fa_metadata )
-			) {
-				// Refresh our metadata
-				// Required for a new current revision; nice for older ones too. :)
-				$props = RepoGroup::singleton()->getFileProps( $deletedUrl );
-			} else {
-				$props = [
-					'minor_mime' => $row->fa_minor_mime,
-					'major_mime' => $row->fa_major_mime,
-					'media_type' => $row->fa_media_type,
-					'metadata' => $row->fa_metadata
-				];
-			}
-
-			$comment = $commentStore->getComment( 'fa_description', $row );
-			$user = User::newFromAnyId( $row->fa_user, $row->fa_user_text, $row->fa_actor );
-			if ( $first && !$exists ) {
-				// This revision will be published as the new current version
-				$destRel = $this->file->getRel();
-				list( $commentFields, $commentCallback ) =
-					$commentStore->insertWithTempTable( $dbw, 'img_description', $comment );
-				$actorFields = $actorMigration->getInsertValues( $dbw, 'img_user', $user );
-				$insertCurrent = [
-					'img_name' => $row->fa_name,
-					'img_size' => $row->fa_size,
-					'img_width' => $row->fa_width,
-					'img_height' => $row->fa_height,
-					'img_metadata' => $props['metadata'],
-					'img_bits' => $row->fa_bits,
-					'img_media_type' => $props['media_type'],
-					'img_major_mime' => $props['major_mime'],
-					'img_minor_mime' => $props['minor_mime'],
-					'img_timestamp' => $row->fa_timestamp,
-					'img_sha1' => $sha1
-				] + $commentFields + $actorFields;
-
-				// The live (current) version cannot be hidden!
-				if ( !$this->unsuppress && $row->fa_deleted ) {
-					$status->fatal( 'undeleterevdel' );
-					$this->file->unlock();
-					return $status;
-				}
-			} else {
-				$archiveName = $row->fa_archive_name;
-
-				if ( $archiveName == '' ) {
-					// This was originally a current version; we
-					// have to devise a new archive name for it.
-					// Format is <timestamp of archiving>!<name>
-					$timestamp = wfTimestamp( TS_UNIX, $row->fa_deleted_timestamp );
-
-					do {
-						$archiveName = wfTimestamp( TS_MW, $timestamp ) . '!' . $row->fa_name;
-						$timestamp++;
-					} while ( isset( $archiveNames[$archiveName] ) );
-				}
-
-				$archiveNames[$archiveName] = true;
-				$destRel = $this->file->getArchiveRel( $archiveName );
-				$insertBatch[] = [
-					'oi_name' => $row->fa_name,
-					'oi_archive_name' => $archiveName,
-					'oi_size' => $row->fa_size,
-					'oi_width' => $row->fa_width,
-					'oi_height' => $row->fa_height,
-					'oi_bits' => $row->fa_bits,
-					'oi_timestamp' => $row->fa_timestamp,
-					'oi_metadata' => $props['metadata'],
-					'oi_media_type' => $props['media_type'],
-					'oi_major_mime' => $props['major_mime'],
-					'oi_minor_mime' => $props['minor_mime'],
-					'oi_deleted' => $this->unsuppress ? 0 : $row->fa_deleted,
-					'oi_sha1' => $sha1
-				] + $commentStore->insert( $dbw, 'oi_description', $comment )
-				+ $actorMigration->getInsertValues( $dbw, 'oi_user', $user );
-			}
-
-			$deleteIds[] = $row->fa_id;
-
-			if ( !$this->unsuppress && $row->fa_deleted & File::DELETED_FILE ) {
-				// private files can stay where they are
-				$status->successCount++;
-			} else {
-				$storeBatch[] = [ $deletedUrl, 'public', $destRel ];
-				$this->cleanupBatch[] = $row->fa_storage_key;
-			}
-
-			$first = false;
-		}
-
-		unset( $result );
-
-		// Add a warning to the status object for missing IDs
-		$missingIds = array_diff( $this->ids, $idsPresent );
-
-		foreach ( $missingIds as $id ) {
-			$status->error( 'undelete-missing-filearchive', $id );
-		}
-
-		if ( !$repo->hasSha1Storage() ) {
-			// Remove missing files from batch, so we don't get errors when undeleting them
-			$checkStatus = $this->removeNonexistentFiles( $storeBatch );
-			if ( !$checkStatus->isGood() ) {
-				$status->merge( $checkStatus );
-				return $status;
-			}
-			$storeBatch = $checkStatus->value;
-
-			// Run the store batch
-			// Use the OVERWRITE_SAME flag to smooth over a common error
-			$storeStatus = $this->file->repo->storeBatch( $storeBatch, FileRepo::OVERWRITE_SAME );
-			$status->merge( $storeStatus );
-
-			if ( !$status->isGood() ) {
-				// Even if some files could be copied, fail entirely as that is the
-				// easiest thing to do without data loss
-				$this->cleanupFailedBatch( $storeStatus, $storeBatch );
-				$status->setOK( false );
-				$this->file->unlock();
-
-				return $status;
-			}
-		}
-
-		// Run the DB updates
-		// Because we have locked the image row, key conflicts should be rare.
-		// If they do occur, we can roll back the transaction at this time with
-		// no data loss, but leaving unregistered files scattered throughout the
-		// public zone.
-		// This is not ideal, which is why it's important to lock the image row.
-		if ( $insertCurrent ) {
-			$dbw->insert( 'image', $insertCurrent, __METHOD__ );
-			$commentCallback( $insertCurrent['img_name'] );
-		}
-
-		if ( $insertBatch ) {
-			$dbw->insert( 'oldimage', $insertBatch, __METHOD__ );
-		}
-
-		if ( $deleteIds ) {
-			$dbw->delete( 'filearchive',
-				[ 'fa_id' => $deleteIds ],
-				__METHOD__ );
-		}
-
-		// If store batch is empty (all files are missing), deletion is to be considered successful
-		if ( $status->successCount > 0 || !$storeBatch || $repo->hasSha1Storage() ) {
-			if ( !$exists ) {
-				wfDebug( __METHOD__ . " restored {$status->successCount} items, creating a new current\n" );
-
-				DeferredUpdates::addUpdate( SiteStatsUpdate::factory( [ 'images' => 1 ] ) );
-
-				$this->file->purgeEverything();
-			} else {
-				wfDebug( __METHOD__ . " restored {$status->successCount} as archived versions\n" );
-				$this->file->purgeDescription();
-			}
-		}
-
-		$this->file->unlock();
-
-		return $status;
-	}
-
-	/**
-	 * Removes non-existent files from a store batch.
-	 * @param array $triplets
-	 * @return Status
-	 */
-	protected function removeNonexistentFiles( $triplets ) {
-		$files = $filteredTriplets = [];
-		foreach ( $triplets as $file ) {
-			$files[$file[0]] = $file[0];
-		}
-
-		$result = $this->file->repo->fileExistsBatch( $files );
-		if ( in_array( null, $result, true ) ) {
-			return Status::newFatal( 'backend-fail-internal',
-				$this->file->repo->getBackend()->getName() );
-		}
-
-		foreach ( $triplets as $file ) {
-			if ( $result[$file[0]] ) {
-				$filteredTriplets[] = $file;
-			}
-		}
-
-		return Status::newGood( $filteredTriplets );
-	}
-
-	/**
-	 * Removes non-existent files from a cleanup batch.
-	 * @param string[] $batch
-	 * @return string[]
-	 */
-	protected function removeNonexistentFromCleanup( $batch ) {
-		$files = $newBatch = [];
-		$repo = $this->file->repo;
-
-		foreach ( $batch as $file ) {
-			$files[$file] = $repo->getVirtualUrl( 'deleted' ) . '/' .
-				rawurlencode( $repo->getDeletedHashPath( $file ) . $file );
-		}
-
-		$result = $repo->fileExistsBatch( $files );
-
-		foreach ( $batch as $file ) {
-			if ( $result[$file] ) {
-				$newBatch[] = $file;
-			}
-		}
-
-		return $newBatch;
-	}
-
-	/**
-	 * Delete unused files in the deleted zone.
-	 * This should be called from outside the transaction in which execute() was called.
-	 * @return Status
-	 */
-	public function cleanup() {
-		if ( !$this->cleanupBatch ) {
-			return $this->file->repo->newGood();
-		}
-
-		$this->cleanupBatch = $this->removeNonexistentFromCleanup( $this->cleanupBatch );
-
-		$status = $this->file->repo->cleanupDeletedBatch( $this->cleanupBatch );
-
-		return $status;
-	}
-
-	/**
-	 * Cleanup a failed batch. The batch was only partially successful, so
-	 * rollback by removing all items that were succesfully copied.
-	 *
-	 * @param Status $storeStatus
-	 * @param array[] $storeBatch
-	 */
-	protected function cleanupFailedBatch( $storeStatus, $storeBatch ) {
-		$cleanupBatch = [];
-
-		foreach ( $storeStatus->success as $i => $success ) {
-			// Check if this item of the batch was successfully copied
-			if ( $success ) {
-				// Item was successfully copied and needs to be removed again
-				// Extract ($dstZone, $dstRel) from the batch
-				$cleanupBatch[] = [ $storeBatch[$i][1], $storeBatch[$i][2] ];
-			}
-		}
-		$this->file->repo->cleanupBatch( $cleanupBatch );
-	}
-}
-
-# ------------------------------------------------------------------------------
-
-/**
- * Helper class for file movement
- * @ingroup FileAbstraction
- */
-class LocalFileMoveBatch {
-	/** @var LocalFile */
-	protected $file;
-
-	/** @var Title */
-	protected $target;
-
-	protected $cur;
-
-	protected $olds;
-
-	protected $oldCount;
-
-	protected $archive;
-
-	/** @var IDatabase */
-	protected $db;
-
-	/**
-	 * @param File $file
-	 * @param Title $target
-	 */
-	function __construct( File $file, Title $target ) {
-		$this->file = $file;
-		$this->target = $target;
-		$this->oldHash = $this->file->repo->getHashPath( $this->file->getName() );
-		$this->newHash = $this->file->repo->getHashPath( $this->target->getDBkey() );
-		$this->oldName = $this->file->getName();
-		$this->newName = $this->file->repo->getNameFromTitle( $this->target );
-		$this->oldRel = $this->oldHash . $this->oldName;
-		$this->newRel = $this->newHash . $this->newName;
-		$this->db = $file->getRepo()->getMasterDB();
-	}
-
-	/**
-	 * Add the current image to the batch
-	 */
-	public function addCurrent() {
-		$this->cur = [ $this->oldRel, $this->newRel ];
-	}
-
-	/**
-	 * Add the old versions of the image to the batch
-	 * @return string[] List of archive names from old versions
-	 */
-	public function addOlds() {
-		$archiveBase = 'archive';
-		$this->olds = [];
-		$this->oldCount = 0;
-		$archiveNames = [];
-
-		$result = $this->db->select( 'oldimage',
-			[ 'oi_archive_name', 'oi_deleted' ],
-			[ 'oi_name' => $this->oldName ],
-			__METHOD__,
-			[ 'LOCK IN SHARE MODE' ] // ignore snapshot
-		);
-
-		foreach ( $result as $row ) {
-			$archiveNames[] = $row->oi_archive_name;
-			$oldName = $row->oi_archive_name;
-			$bits = explode( '!', $oldName, 2 );
-
-			if ( count( $bits ) != 2 ) {
-				wfDebug( "Old file name missing !: '$oldName' \n" );
-				continue;
-			}
-
-			list( $timestamp, $filename ) = $bits;
-
-			if ( $this->oldName != $filename ) {
-				wfDebug( "Old file name doesn't match: '$oldName' \n" );
-				continue;
-			}
-
-			$this->oldCount++;
-
-			// Do we want to add those to oldCount?
-			if ( $row->oi_deleted & File::DELETED_FILE ) {
-				continue;
-			}
-
-			$this->olds[] = [
-				"{$archiveBase}/{$this->oldHash}{$oldName}",
-				"{$archiveBase}/{$this->newHash}{$timestamp}!{$this->newName}"
-			];
-		}
-
-		return $archiveNames;
-	}
-
-	/**
-	 * Perform the move.
-	 * @return Status
-	 */
-	public function execute() {
-		$repo = $this->file->repo;
-		$status = $repo->newGood();
-		$destFile = wfLocalFile( $this->target );
-
-		$this->file->lock(); // begin
-		$destFile->lock(); // quickly fail if destination is not available
-
-		$triplets = $this->getMoveTriplets();
-		$checkStatus = $this->removeNonexistentFiles( $triplets );
-		if ( !$checkStatus->isGood() ) {
-			$destFile->unlock();
-			$this->file->unlock();
-			$status->merge( $checkStatus ); // couldn't talk to file backend
-			return $status;
-		}
-		$triplets = $checkStatus->value;
-
-		// Verify the file versions metadata in the DB.
-		$statusDb = $this->verifyDBUpdates();
-		if ( !$statusDb->isGood() ) {
-			$destFile->unlock();
-			$this->file->unlock();
-			$statusDb->setOK( false );
-
-			return $statusDb;
-		}
-
-		if ( !$repo->hasSha1Storage() ) {
-			// Copy the files into their new location.
-			// If a prior process fataled copying or cleaning up files we tolerate any
-			// of the existing files if they are identical to the ones being stored.
-			$statusMove = $repo->storeBatch( $triplets, FileRepo::OVERWRITE_SAME );
-			wfDebugLog( 'imagemove', "Moved files for {$this->file->getName()}: " .
-				"{$statusMove->successCount} successes, {$statusMove->failCount} failures" );
-			if ( !$statusMove->isGood() ) {
-				// Delete any files copied over (while the destination is still locked)
-				$this->cleanupTarget( $triplets );
-				$destFile->unlock();
-				$this->file->unlock();
-				wfDebugLog( 'imagemove', "Error in moving files: "
-					. $statusMove->getWikiText( false, false, 'en' ) );
-				$statusMove->setOK( false );
-
-				return $statusMove;
-			}
-			$status->merge( $statusMove );
-		}
-
-		// Rename the file versions metadata in the DB.
-		$this->doDBUpdates();
-
-		wfDebugLog( 'imagemove', "Renamed {$this->file->getName()} in database: " .
-			"{$statusDb->successCount} successes, {$statusDb->failCount} failures" );
-
-		$destFile->unlock();
-		$this->file->unlock(); // done
-
-		// Everything went ok, remove the source files
-		$this->cleanupSource( $triplets );
-
-		$status->merge( $statusDb );
-
-		return $status;
-	}
-
-	/**
-	 * Verify the database updates and return a new Status indicating how
-	 * many rows would be updated.
-	 *
-	 * @return Status
-	 */
-	protected function verifyDBUpdates() {
-		$repo = $this->file->repo;
-		$status = $repo->newGood();
-		$dbw = $this->db;
-
-		$hasCurrent = $dbw->selectField(
-			'image',
-			'1',
-			[ 'img_name' => $this->oldName ],
-			__METHOD__,
-			[ 'FOR UPDATE' ]
-		);
-		$oldRowCount = $dbw->selectRowCount(
-			'oldimage',
-			'*',
-			[ 'oi_name' => $this->oldName ],
-			__METHOD__,
-			[ 'FOR UPDATE' ]
-		);
-
-		if ( $hasCurrent ) {
-			$status->successCount++;
-		} else {
-			$status->failCount++;
-		}
-		$status->successCount += $oldRowCount;
-		// T36934: oldCount is based on files that actually exist.
-		// There may be more DB rows than such files, in which case $affected
-		// can be greater than $total. We use max() to avoid negatives here.
-		$status->failCount += max( 0, $this->oldCount - $oldRowCount );
-		if ( $status->failCount ) {
-			$status->error( 'imageinvalidfilename' );
-		}
-
-		return $status;
-	}
-
-	/**
-	 * Do the database updates and return a new Status indicating how
-	 * many rows where updated.
-	 */
-	protected function doDBUpdates() {
-		global $wgCommentTableSchemaMigrationStage;
-
-		$dbw = $this->db;
-
-		// Update current image
-		$dbw->update(
-			'image',
-			[ 'img_name' => $this->newName ],
-			[ 'img_name' => $this->oldName ],
-			__METHOD__
-		);
-		if ( $wgCommentTableSchemaMigrationStage > MIGRATION_OLD ) {
-			$dbw->update(
-				'image_comment_temp',
-				[ 'imgcomment_name' => $this->newName ],
-				[ 'imgcomment_name' => $this->oldName ],
-				__METHOD__
-			);
-		}
-
-		// Update old images
-		$dbw->update(
-			'oldimage',
-			[
-				'oi_name' => $this->newName,
-				'oi_archive_name = ' . $dbw->strreplace( 'oi_archive_name',
-					$dbw->addQuotes( $this->oldName ), $dbw->addQuotes( $this->newName ) ),
-			],
-			[ 'oi_name' => $this->oldName ],
-			__METHOD__
-		);
-	}
-
-	/**
-	 * Generate triplets for FileRepo::storeBatch().
-	 * @return array[]
-	 */
-	protected function getMoveTriplets() {
-		$moves = array_merge( [ $this->cur ], $this->olds );
-		$triplets = []; // The format is: (srcUrl, destZone, destUrl)
-
-		foreach ( $moves as $move ) {
-			// $move: (oldRelativePath, newRelativePath)
-			$srcUrl = $this->file->repo->getVirtualUrl() . '/public/' . rawurlencode( $move[0] );
-			$triplets[] = [ $srcUrl, 'public', $move[1] ];
-			wfDebugLog(
-				'imagemove',
-				"Generated move triplet for {$this->file->getName()}: {$srcUrl} :: public :: {$move[1]}"
-			);
-		}
-
-		return $triplets;
-	}
-
-	/**
-	 * Removes non-existent files from move batch.
-	 * @param array $triplets
-	 * @return Status
-	 */
-	protected function removeNonexistentFiles( $triplets ) {
-		$files = [];
-
-		foreach ( $triplets as $file ) {
-			$files[$file[0]] = $file[0];
-		}
-
-		$result = $this->file->repo->fileExistsBatch( $files );
-		if ( in_array( null, $result, true ) ) {
-			return Status::newFatal( 'backend-fail-internal',
-				$this->file->repo->getBackend()->getName() );
-		}
-
-		$filteredTriplets = [];
-		foreach ( $triplets as $file ) {
-			if ( $result[$file[0]] ) {
-				$filteredTriplets[] = $file;
-			} else {
-				wfDebugLog( 'imagemove', "File {$file[0]} does not exist" );
-			}
-		}
-
-		return Status::newGood( $filteredTriplets );
-	}
-
-	/**
-	 * Cleanup a partially moved array of triplets by deleting the target
-	 * files. Called if something went wrong half way.
-	 * @param array[] $triplets
-	 */
-	protected function cleanupTarget( $triplets ) {
-		// Create dest pairs from the triplets
-		$pairs = [];
-		foreach ( $triplets as $triplet ) {
-			// $triplet: (old source virtual URL, dst zone, dest rel)
-			$pairs[] = [ $triplet[1], $triplet[2] ];
-		}
-
-		$this->file->repo->cleanupBatch( $pairs );
-	}
-
-	/**
-	 * Cleanup a fully moved array of triplets by deleting the source files.
-	 * Called at the end of the move process if everything else went ok.
-	 * @param array[] $triplets
-	 */
-	protected function cleanupSource( $triplets ) {
-		// Create source file names from the triplets
-		$files = [];
-		foreach ( $triplets as $triplet ) {
-			$files[] = $triplet[0];
-		}
-
-		$this->file->repo->cleanupBatch( $files );
-	}
-}
-
-class LocalFileLockError extends ErrorPageError {
-	public function __construct( Status $status ) {
-		parent::__construct(
-			'actionfailed',
-			$status->getMessage()
-		);
-	}
-
-	public function report() {
-		global $wgOut;
-		$wgOut->setStatusCode( 429 );
-		parent::report();
 	}
 }

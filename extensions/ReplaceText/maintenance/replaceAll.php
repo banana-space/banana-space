@@ -1,8 +1,7 @@
 #!/usr/bin/php
 <?php
 /**
- * Insert jobs into the job queue to replace text bits.
- * Or execute immediately... your choice.
+ * Replace text in pages or page titles.
  *
  * Copyright © 2014 NicheWork, LLC
  *
@@ -25,12 +24,12 @@
  * @category Maintenance
  * @package  ReplaceText
  * @author   Mark A. Hershberger <mah@nichework.com>
- * @license  http://www.gnu.org/copyleft/gpl.html GPL-2.0-or-later
+ * @license  GPL-2.0-or-later
  * @link     https://www.mediawiki.org/wiki/Extension:Replace_Text
  *
  */
 // @codingStandardsIgnoreStart
-$IP = getenv( "MW_INSTALL_PATH" ) ? getenv( "MW_INSTALL_PATH" ) : __DIR__ . "/../../..";
+$IP = getenv( "MW_INSTALL_PATH" ) ?: __DIR__ . "/../../..";
 if ( !is_readable( "$IP/maintenance/Maintenance.php" ) ) {
 	die( "MW_INSTALL_PATH needs to be set to your MediaWiki installation.\n" );
 }
@@ -55,11 +54,12 @@ class ReplaceAll extends Maintenance {
 	private $titles;
 	private $defaultContinue;
 	private $doAnnounce;
+	private $rename;
 
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "CLI utility to replace text wherever it is ".
-			"found in the wiki.";
+		$this->addDescription( "CLI utility to replace text wherever it is " .
+			"found in the wiki." );
 
 		$this->addArg( "target", "Target text to find.", false );
 		$this->addArg( "replace", "Text to replace.", false );
@@ -72,7 +72,7 @@ class ReplaceAll extends Maintenance {
 			false, true, 'u' );
 		$this->addOption( "yes", "Skip all prompts with an assumed 'yes'.",
 			false, false, 'y' );
-		$this->addOption( "summary", "Alternate edit summary. (%r is where to ".
+		$this->addOption( "summary", "Alternate edit summary. (%r is where to " .
 			" place the replacement text, %f the text to look for.)",
 			false, true, 's' );
 		$this->addOption( "nsall", "Search all canonical namespaces (false). " .
@@ -89,6 +89,8 @@ class ReplaceAll extends Maintenance {
 		$this->addOption( "debug", "Display replacements being made.", false, false );
 		$this->addOption( "listns", "List out the namespaces on this wiki.",
 			false, false );
+		$this->addOption( 'rename', "Rename page titles instead of replacing contents.",
+			false, false );
 
 		// MW 1.28
 		if ( method_exists( $this, 'requireExtension' ) ) {
@@ -104,8 +106,8 @@ class ReplaceAll extends Maintenance {
 			User::newFromName( $userReplacing );
 
 		if ( get_class( $user ) !== 'User' ) {
-			$this->error(
-				"Couldn't translate '$userReplacing' to a user.", true
+			$this->fatalError(
+				"Couldn't translate '$userReplacing' to a user."
 			);
 		}
 
@@ -115,7 +117,7 @@ class ReplaceAll extends Maintenance {
 	private function getTarget() {
 		$ret = $this->getArg( 0 );
 		if ( !$ret ) {
-			$this->error( "You have to specify a target.", true );
+			$this->fatalError( "You have to specify a target." );
 		}
 		return [ $ret ];
 	}
@@ -123,7 +125,7 @@ class ReplaceAll extends Maintenance {
 	private function getReplacement() {
 		$ret = $this->getArg( 1 );
 		if ( !$ret ) {
-			$this->error( "You have to specify replacement text.", true );
+			$this->fatalError( "You have to specify replacement text." );
 		}
 		return [ $ret ];
 	}
@@ -183,19 +185,19 @@ class ReplaceAll extends Maintenance {
 	}
 
 	private function listNamespaces() {
-		echo "Index\tNamespace\n";
+		$this->output( "Index\tNamespace\n" );
 		$nsList = MWNamespace::getCanonicalNamespaces();
 		ksort( $nsList );
 		foreach ( $nsList as $int => $val ) {
 			if ( $val == "" ) {
 				$val = "(main)";
 			}
-			echo " $int\t$val\n";
+			$this->output( " $int\t$val\n" );
 		}
 	}
 
 	private function showFileFormat() {
-echo <<<EOF
+		$text = <<<EOF
 
 The format of the replacements file is tab separated with three fields.
 Any line that does not have a tab is ignored and can be considered a comment.
@@ -215,6 +217,7 @@ regex(p*)	Count the Ps; \\1	true
 
 
 EOF;
+		$this->output( $text );
 	}
 
 	private function getNamespaces() {
@@ -251,57 +254,56 @@ EOF;
 	}
 
 	private function getCategory() {
-		$cat = null;
-		return $cat;
+		return null;
 	}
 
 	private function getPrefix() {
-		$prefix = null;
-		return $prefix;
+		return null;
 	}
 
 	private function useRegex() {
 		return [ $this->getOption( "regex" ) ];
 	}
 
-	private function getTitles( $res ) {
-		if ( !$this->titles || count( $this->titles ) == 0 ) {
-			$this->titles = [];
-			foreach ( $res as $row ) {
-				$this->titles[] = Title::makeTitleSafe(
-					$row->page_namespace,
-					$row->page_title
-				);
+	private function getRename() {
+		return $this->hasOption( 'rename' );
+	}
+
+	private function listTitles( $titles, $target, $replacement, $regex, $rename ) {
+		foreach ( $titles as $title ) {
+			if ( $rename ) {
+				$newTitle = ReplaceTextSearch::getReplacedTitle( $title, $target, $replacement, $regex );
+				// Implicit conversion of objects to strings
+				$this->output( "$title	->	$newTitle\n" );
+			} else {
+				$this->output( "$title\n" );
 			}
 		}
-		return $this->titles;
 	}
 
-	private function listTitles( $res ) {
-		$ret = false;
-		foreach ( $this->getTitles( $res ) as $title ) {
-			$ret = true;
-			echo "$title\n";
-		}
-		return $ret;
-	}
-
-	private function replaceTitles( $res, $target, $replacement, $useRegex ) {
-		foreach ( $this->getTitles( $res ) as $title ) {
-			$param = [
+	private function replaceTitles( $titles, $target, $replacement, $useRegex, $rename ) {
+		foreach ( $titles as $title ) {
+			$params = [
 				'target_str'      => $target,
 				'replacement_str' => $replacement,
 				'use_regex'       => $useRegex,
 				'user_id'         => $this->user->getId(),
 				'edit_summary'    => $this->getSummary( $target, $replacement ),
-				'doAnnounce'        => $this->doAnnounce
+				'doAnnounce'      => $this->doAnnounce
 			];
-			echo "Replacing on $title... ";
-			$job = new ReplaceTextJob( $title, $param );
+
+			if ( $rename ) {
+				$params[ 'move_page' ] = true;
+				$params[ 'create_redirect' ] = false;
+				$params[ 'watch_page' ] = false;
+			}
+
+			$this->output( "Replacing on $title... " );
+			$job = new ReplaceTextJob( $title, $params );
 			if ( $job->run() !== true ) {
 				$this->error( "Trouble on the page '$title'." );
 			}
-			echo "done.\n";
+			$this->output( "done.\n" );
 		}
 	}
 
@@ -327,7 +329,7 @@ EOF;
 			return false;
 		}
 		$this->user = $this->getUser();
-		if ( ! $this->getReplacements() ) {
+		if ( !$this->getReplacements() ) {
 			$this->target = $this->getTarget();
 			$this->replacement = $this->getReplacement();
 			$this->useRegex = $this->useRegex();
@@ -335,6 +337,8 @@ EOF;
 		$this->namespaces = $this->getNamespaces();
 		$this->category = $this->getCategory();
 		$this->prefix = $this->getPrefix();
+		$this->rename = $this->getRename();
+
 		return true;
 	}
 
@@ -346,60 +350,79 @@ EOF;
 		$wgShowExceptionDetails = true;
 
 		$this->doAnnounce = true;
-		if ( $this->localSetup() ) {
-			if ( $this->namespaces === [] ) {
-				$this->error( "No matching namespaces.", true );
+		if ( !$this->localSetup() ) {
+			return;
+		}
+
+		if ( $this->namespaces === [] ) {
+			$this->fatalError( "No matching namespaces." );
+		}
+
+		foreach ( array_keys( $this->target ) as $index ) {
+			$target = $this->target[$index];
+			$replacement = $this->replacement[$index];
+			$useRegex = $this->useRegex[$index];
+
+			if ( $this->getOption( "debug" ) ) {
+				$this->output( "Replacing '$target' with '$replacement'" );
+				if ( $useRegex ) {
+					$this->output( " as regular expression." );
+				}
+				$this->output( "\n" );
 			}
 
-			foreach ( array_keys( $this->target ) as $index ) {
-				$target = $this->target[$index];
-				$replacement = $this->replacement[$index];
-				$useRegex = $this->useRegex[$index];
+			if ( $this->rename ) {
+				$res = ReplaceTextSearch::getMatchingTitles(
+					$target,
+					$this->namespaces,
+					$this->category,
+					$this->prefix,
+					$useRegex
+				);
+			} else {
+				$res = ReplaceTextSearch::doSearchQuery(
+					$target,
+					$this->namespaces,
+					$this->category,
+					$this->prefix,
+					$useRegex
+				);
+			}
 
-				if ( $this->getOption( "debug" ) ) {
-					echo "Replacing '$target' with '$replacement'";
-					if ( $useRegex ) {
-						echo " as regular expression.";
-					}
-					echo "\n";
-				}
-				$res = ReplaceTextSearch::doSearchQuery( $target,
-					$this->namespaces, $this->category, $this->prefix,
-					$useRegex );
+			$titles = new TitleArrayFromResult( $res );
 
-				if ( $res->numRows() === 0 ) {
-					$this->error( "No targets found to replace.", true );
-				}
-				if ( $this->getOption( "dry-run" ) ) {
-					$this->listTitles( $res );
+			if ( count( $titles ) === 0 ) {
+				$this->fatalError( 'No targets found to replace.' );
+			}
+
+			if ( $this->getOption( "dry-run" ) ) {
+				$this->listTitles( $titles, $target, $replacement, $useRegex, $this->rename );
+				continue;
+			}
+
+			if ( !$this->shouldContinueByDefault() ) {
+				$this->listTitles( $titles, $target, $replacement, $useRegex, $this->rename );
+				if ( !$this->getReply( 'Replace instances on these pages?' ) ) {
 					return;
-				}
-				if ( !$this->shouldContinueByDefault() &&
-					 $this->listTitles( $res ) ) {
-					if ( !$this->getReply(
-						"Replace instances on these pages?"
-					) ) {
-						return;
-					}
-				}
-				$comment = "";
-				if ( $this->getOption( "user", null ) === null ) {
-					$comment = " (Use --user to override)";
-				}
-				if ( $this->getOption( "no-announce", false ) ) {
-					$this->doAnnounce = false;
-				}
-				if ( !$this->getReply(
-					"Attribute changes to the user '{$this->user}'?$comment"
-				) ) {
-					return;
-				}
-				if ( $res->numRows() > 0 ) {
-					$this->replaceTitles(
-						$res, $target, $replacement, $useRegex
-					);
 				}
 			}
+
+			$comment = "";
+			if ( $this->getOption( "user", null ) === null ) {
+				$comment = " (Use --user to override)";
+			}
+			if ( $this->getOption( "no-announce", false ) ) {
+				$this->doAnnounce = false;
+			}
+			if ( !$this->getReply(
+				"Attribute changes to the user '{$this->user}'?$comment"
+			) ) {
+				return;
+			}
+
+			$this->replaceTitles(
+				$titles, $target, $replacement, $useRegex, $this->rename
+			);
 		}
 	}
 }

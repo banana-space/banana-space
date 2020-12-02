@@ -94,7 +94,7 @@ $namespaceAliases = [
 	'Katejorije_Klaaf'	=> NS_CATEGORY_TALK,
 ];
 
-$separatorTransformTable = [ ',' => "\xc2\xa0", '.' => ',' ];
+$separatorTransformTable = [ ',' => "\u{00A0}", '.' => ',' ];
 $minimumGroupingDigits = 2;
 
 $linkTrail = '/^([äöüėëĳßəğåůæœça-z]+)(.*)$/sDu';
@@ -200,8 +200,4 @@ $magicWords = [
 	'img_left'                  => [ '1', 'links', 'lengks', 'lenks', 'left' ],
 	'language'                  => [ '0', '#SHPROOCH:', '#SPROCH:', '#SPRACHE:', '#LANGUAGE:' ],
 	'hiddencat'                 => [ '1', '__VERSHTOCHE_SAACHJRUPP__', '__VERSTECKTE_KATEGORIE__', '__WARTUNGSKATEGORIE__', '__HIDDENCAT__' ],
-];
-
-$imageFiles = [
-	'button-italic'   => 'ksh/button_italic.png',
 ];

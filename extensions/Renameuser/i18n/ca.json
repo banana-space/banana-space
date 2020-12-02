@@ -4,18 +4,19 @@
 			"Aleator",
 			"Arnaugir",
 			"El libre",
+			"Fitoschido",
 			"Juanpabl",
 			"Paucabot",
 			"Qllach",
 			"SMP",
+			"Ssola",
 			"Toniher",
-			"Vriullop",
-			"Ssola"
+			"Vriullop"
 		]
 	},
 	"renameuser": "Reanomena l'usuari",
-	"renameuser-linkoncontribs": "Reanomena l'usuari/a",
-	"renameuser-linkoncontribs-text": "Canvia el nom d'aquest usuari/a",
+	"renameuser-linkoncontribs": "canvia el nom de {{GENDER:$1|l’usuari|la usuària}}",
+	"renameuser-linkoncontribs-text": "Canvia el nom d’{{GENDER:$1|aquest usuari|aquesta usuària}}",
 	"renameuser-desc": "Reanomena un usuari (necessita drets de ''renameuser'')",
 	"renameuserold": "Nom d'usuari actual:",
 	"renameusernew": "Nou nom d'usuari:",

@@ -5,8 +5,6 @@
 		]
 	},
 	"timeless-desc": "Nadčasový vzhľad navrhnutý podľa prototypu Winter od Brandona Harrisa a ďalších štýlov vytvorených nadáciou Wikimedia.",
-	"timeless-search-placeholder": "Prehľadávať {{NUMBEROFARTICLES}} stránok",
-	"timeless-loggedin": "Váš účet",
 	"timeless-anonymous": "Anonym",
 	"timeless-loggedinas": "Ste {{GENDER:$1|prihlásený|prihlásená}} ako '''$1'''",
 	"timeless-notloggedin": "Neprihlásený/á",

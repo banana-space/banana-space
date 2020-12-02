@@ -17,7 +17,6 @@
 	"nuke-submit-user": "Pergi",
 	"nuke-submit-delete": "Hapus",
 	"right-nuke": "Menghapuskan laman secara pukal",
-	"nuke-select": "Pilih: $1",
 	"nuke-userorip": "Nama pengguna, alamat IP atau kosong:",
 	"nuke-maxpages": "Bilangan halaman maksimum:",
 	"nuke-editby": "Dibuat oleh [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",

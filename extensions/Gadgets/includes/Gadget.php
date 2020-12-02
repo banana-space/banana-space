@@ -18,9 +18,9 @@ class Gadget {
 	/**
 	 * Increment this when changing class structure
 	 */
-	const GADGET_CLASS_VERSION = 9;
+	public const GADGET_CLASS_VERSION = 9;
 
-	const CACHE_TTL = 86400;
+	public const CACHE_TTL = 86400;
 
 	private $scripts = [],
 			$styles = [],
@@ -164,16 +164,11 @@ class Gadget {
 	/**
 	 * Checks whether given user has permissions to use this gadget
 	 *
-	 * @param User $user user to check against
+	 * @param User $user The user to check against
 	 * @return bool
 	 */
-	public function isAllowed( $user ) {
-		return count( array_intersect( $this->requiredRights, $user->getRights() ) ) ==
-			count( $this->requiredRights )
-			&& ( $this->requiredSkins === true
-				|| !count( $this->requiredSkins )
-				|| in_array( $user->getOption( 'skin' ), $this->requiredSkins )
-			);
+	public function isAllowed( User $user ) {
+		return $user->isAllowedAll( ...$this->requiredRights );
 	}
 
 	/**
@@ -192,6 +187,18 @@ class Gadget {
 	}
 
 	/**
+	 * Check if this gadget is compatible with a skin
+	 *
+	 * @param Skin $skin The skin to check against
+	 * @return bool
+	 */
+	public function isSkinSupported( Skin $skin ) {
+		return ( count( $this->requiredSkins ) === 0
+				|| in_array( $skin->getSkinName(), $this->requiredSkins )
+			);
+	}
+
+	/**
 	 * @return bool Whether all of this gadget's JS components support ResourceLoader
 	 */
 	public function supportsResourceLoader() {
@@ -199,7 +206,7 @@ class Gadget {
 	}
 
 	/**
-	 * @return bool Whether this gadget has resources that can be loaded via ResourceLoaderb
+	 * @return bool Whether this gadget has resources that can be loaded via ResourceLoader
 	 */
 	public function hasModule() {
 		return count( $this->styles )
@@ -244,7 +251,7 @@ class Gadget {
 
 	/**
 	 * Returns list of scripts that don't support ResourceLoader
-	 * @return Array
+	 * @return string[]
 	 */
 	public function getLegacyScripts() {
 		if ( $this->supportsResourceLoader() ) {
@@ -255,7 +262,7 @@ class Gadget {
 
 	/**
 	 * Returns names of resources this gadget depends on
-	 * @return Array
+	 * @return string[]
 	 */
 	public function getDependencies() {
 		return $this->dependencies;
@@ -268,7 +275,7 @@ class Gadget {
 	 * a (usually, hidden) styles-type module to be applied to the page. Dependencies
 	 * don't work for this use case as those would not be part of page rendering.
 	 *
-	 * @return Array
+	 * @return string[]
 	 */
 	public function getPeers() {
 		return $this->peers;
@@ -283,7 +290,7 @@ class Gadget {
 
 	/**
 	 * Returns array of permissions required by this gadget
-	 * @return Array
+	 * @return string[]
 	 */
 	public function getRequiredRights() {
 		return $this->requiredRights;
@@ -291,7 +298,7 @@ class Gadget {
 
 	/**
 	 * Returns array of skins where this gadget works
-	 * @return Array
+	 * @return string[]
 	 */
 	public function getRequiredSkins() {
 		return $this->requiredSkins;

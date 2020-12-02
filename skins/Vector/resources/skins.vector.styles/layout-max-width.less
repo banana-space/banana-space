@@ -1,0 +1,212 @@
+@import '../../variables.less';
+@import 'mediawiki.mixins.less';
+
+// Putting a `skin-vector-max-width` class on the body and wrapping the rules
+// herein enables the ability to feature flag the max-width design. This is
+// listed in the acceptance criteria of T246420. In other words, if this class
+// is present, the max-width design will appear. Without this class, max-width
+// design will not appear. In either case, the appearance should not be broken.
+.skin-vector-max-width {
+	@background-color-secondary--modern: #f8f9fa;
+	@min-width-page-container: 600px;
+	@max-width-page-container: 1650px;
+	@padding-horizontal-page-container: 30px;
+	@min-width-page-container--padded: @max-width-page-container + ( 2 * @padding-horizontal-page-container );
+	@background-color-page-container: @background-color-base;
+	@max-width-workspace-container: 1440px;
+	@max-width-content-container: 960px;
+	// TODO: Remove @padding-content in variables.less when the max-width layout
+	// becomes the default layout since the value is different between legacy and
+	// latest.
+	@padding-content: 1.25em 0.5em 1.5em 0.5em;
+	// We want ~60px of space between the end of the sidebar and the start of the
+	// content container for aesthetic reasons. The sidebar is already displaced
+	// -30px so we simply add 30px of space to the width of the sidebar.
+	@margin-start-content: @width-grid-column-one + unit( 30px / @font-size-browser, em );
+	// Page container's total horizontal padding in em units.
+	@padding-horizontal-page-container-total: 2 * unit( @padding-horizontal-page-container / @font-size-browser, em );
+	// Equivalent to 1432px. This determines the maximum width breakpoint at which
+	// the content will have a fixed start margin applied to it when the sidebar
+	// is open. The content can shift its position when the sidebar is open/closed
+	// at or below this breakpoint and will maintain its position above this
+	// breakpoint.
+	@max-width-margin-start-content: ( 2 * @margin-start-content ) + @padding-horizontal-page-container-total + ( unit( @max-width-content-container / @font-size-browser, em ) );
+	@border-color-sidebar: @background-color-secondary--modern;
+
+	// Style overrides for existing elements. Mostly overrides layout.less rules.
+	background-color: @background-color-secondary--modern;
+
+	.mw-body {
+		border-left: 0;
+		border-bottom: 0;
+		padding: @padding-content;
+	}
+
+	.parsoid-body {
+		padding: @padding-content;
+	}
+
+	.mw-header {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.mw-body,
+	#mw-data-after-content,
+	#left-navigation,
+	.mw-footer {
+		margin-left: 0;
+	}
+
+	#mw-head {
+		width: auto;
+		left: 0;
+		right: 0;
+	}
+
+	#left-navigation {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	#right-navigation {
+		margin-top: 0;
+	}
+
+	#p-personal {
+		right: 0;
+	}
+
+	#p-search {
+		margin-right: 0;
+	}
+
+	#p-namespaces {
+		background-image: none;
+		padding-left: 0;
+	}
+
+	#mw-panel {
+		background-image: linear-gradient( to bottom, @background-color-base 0%, @background-color-secondary--modern 10%, @background-color-secondary--modern 90%, @background-color-base 100% );
+		// Sidebar is displaced from the workspace container so that the
+		// sidebar is flush with the edge of the screen at small widths.
+		left: -@padding-horizontal-page-container;
+		margin-top: 0;
+		// To avoid the white part of the gradient colliding with the sidebar links
+		// we apply top and bottom padding.
+		padding-top: 8px;
+		padding-bottom: 40px;
+	}
+
+	.mw-footer {
+		border-top: @border-base;
+		padding: 32px 0 0 0;
+	}
+
+	// Container logic.
+	.mw-page-container {
+		min-width: @min-width-page-container;
+		max-width: @max-width-page-container;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0 @padding-horizontal-page-container;
+		background-color: @background-color-page-container;
+	}
+
+	// Used as a container for absolutely positioned elements.
+	.mw-page-container-inner {
+		position: relative;
+	}
+
+	.mw-workspace-container {
+		max-width: @max-width-workspace-container;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.mw-content-container {
+		max-width: @max-width-content-container;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.mw-article-toolbar-container {
+		margin-top: @height-header;
+		// Clear the floats on #left-navigation and #right-navigation.
+		.mixin-clearfix();
+	}
+
+	.mw-sidebar-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.mw-footer-container {
+		padding-top: 50px;
+		padding-bottom: 82px;
+	}
+
+	// For container logic specific to special pages and history pages.
+	&.action-history,
+	&.ns-special {
+		// Allow the max-width of content on history/special pages to be wider than
+		// the max-width of content on article pages.
+		.mw-content-container {
+			max-width: none;
+		}
+
+		// We want to keep the max-width of the article-toolbar-container the
+		// same max-width as the article page's content container in order to
+		// prevent it from moving when going from an article page to a
+		// history/special page.
+		.mw-article-toolbar-container {
+			max-width: @max-width-content-container;
+		}
+
+		// Adjusts the content when sidebar is open regardless of the viewport width.
+		.mw-checkbox-hack-checkbox:checked ~ .mw-workspace-container .mw-content-container {
+			margin-left: @margin-start-content;
+		}
+	}
+
+	// We want it to appear like the sidebar is going into/coming out of
+	// `.mw-page-container`, but we can't use `overflow: hidden` on
+	// `.mw-page-container` because that will cut off the sidebar. Therefore, we
+	// calculate the maximum distance from the start of `mw-page-container` to the
+	// start of the sidebar.
+	#mw-sidebar-checkbox:not( :checked ) ~ .mw-header .mw-sidebar {
+		.transform( translateX( -( @max-width-page-container - @max-width-workspace-container ) / 2 ) );
+	}
+
+	// Responsive overrides.
+	@media ( min-width: @min-width-page-container--padded ) {
+		@border-color: @border-color-sidebar;
+
+		.mw-page-container {
+			border-left: 1px solid @border-color;
+			border-right: 1px solid @border-color;
+		}
+	}
+
+	@media ( max-width: @max-width-margin-start-content ) {
+		// Adjusts the content and mw-article-toolbar-container.
+		.mw-checkbox-hack-checkbox:checked ~ .mw-workspace-container .mw-content-container,
+		.mw-checkbox-hack-checkbox:checked ~ #mw-navigation .mw-content-container {
+			margin-left: @margin-start-content;
+		}
+
+		.mw-sidebar {
+			// Remove sidebar transition at smaller widths.
+			.transition( none );
+		}
+	}
+
+	@media ( min-width: ( @max-width-workspace-container + ( 2 * @padding-horizontal-page-container ) ) ) {
+		#mw-panel {
+			background: @background-color-page-container;
+			border-right: 1px solid @border-color-sidebar;
+		}
+	}
+}

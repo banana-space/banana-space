@@ -30,6 +30,7 @@
 
 require_once __DIR__ . '/Maintenance.php';
 
+use MediaWiki\MediaWikiServices;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**
@@ -52,8 +53,6 @@ class Orphans extends Maintenance {
 	public function execute() {
 		$this->checkOrphans( $this->hasOption( 'fix' ) );
 		$this->checkSeparation( $this->hasOption( 'fix' ) );
-		# Does not work yet, do not use
-		# $this->checkWidows( $this->hasOption( 'fix' ) );
 	}
 
 	/**
@@ -66,7 +65,7 @@ class Orphans extends Maintenance {
 		if ( $extraTable ) {
 			$tbls = array_merge( $tbls, $extraTable );
 		}
-		$db->lockTables( [], $tbls, __METHOD__, false );
+		$db->lockTables( [], $tbls, __METHOD__ );
 	}
 
 	/**
@@ -97,27 +96,33 @@ class Orphans extends Maintenance {
 		);
 		$orphans = $result->numRows();
 		if ( $orphans > 0 ) {
-			global $wgContLang;
-
 			$this->output( "$orphans orphan revisions...\n" );
 			$this->output( sprintf(
 				"%10s %10s %14s %20s %s\n",
 				'rev_id', 'rev_page', 'rev_timestamp', 'rev_user_text', 'rev_comment'
 			) );
 
+			$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 			foreach ( $result as $row ) {
 				$comment = $commentStore->getComment( 'rev_comment', $row )->text;
 				if ( $comment !== '' ) {
-					$comment = '(' . $wgContLang->truncate( $comment, 40 ) . ')';
+					$comment = '(' . $contLang->truncateForVisual( $comment, 40 ) . ')';
 				}
-				$this->output( sprintf( "%10d %10d %14s %20s %s\n",
+				$rev_user_text = $contLang->truncateForVisual( $row->rev_user_text, 20 );
+				# pad $rev_user_text to 20 characters.  Note that this may
+				# yield poor results if $rev_user_text contains combining
+				# or half-width characters.  Alas.
+				if ( mb_strlen( $rev_user_text ) < 20 ) {
+					$rev_user_text = str_repeat( ' ', 20 - mb_strlen( $rev_user_text ) );
+				}
+				$this->output( sprintf( "%10d %10d %14s %s %s\n",
 					$row->rev_id,
 					$row->rev_page,
 					$row->rev_timestamp,
-					$wgContLang->truncate( $row->rev_user_text, 17 ),
+					$rev_user_text,
 					$comment ) );
 				if ( $fix ) {
-					$dbw->delete( 'revision', [ 'rev_id' => $row->rev_id ] );
+					$dbw->delete( 'revision', [ 'rev_id' => $row->rev_id ], __METHOD__ );
 				}
 			}
 			if ( !$fix ) {
@@ -125,54 +130,6 @@ class Orphans extends Maintenance {
 			}
 		} else {
 			$this->output( "No orphans! Yay!\n" );
-		}
-
-		if ( $fix ) {
-			$dbw->unlockTables( __METHOD__ );
-		}
-	}
-
-	/**
-	 * @param bool $fix
-	 * @todo DON'T USE THIS YET! It will remove entries which have children,
-	 *       but which aren't properly attached (eg if page_latest is bogus
-	 *       but valid revisions do exist)
-	 */
-	private function checkWidows( $fix ) {
-		$dbw = $this->getDB( DB_MASTER );
-		$page = $dbw->tableName( 'page' );
-		$revision = $dbw->tableName( 'revision' );
-
-		if ( $fix ) {
-			$this->lockTables( $dbw );
-		}
-
-		$this->output( "\nChecking for childless page table entries... "
-			. "(this may take a while on a large wiki)\n" );
-		$result = $dbw->query( "
-			SELECT *
-			FROM $page LEFT OUTER JOIN $revision ON page_latest=rev_id
-			WHERE rev_id IS NULL
-		" );
-		$widows = $result->numRows();
-		if ( $widows > 0 ) {
-			$this->output( "$widows childless pages...\n" );
-			$this->output( sprintf( "%10s %11s %2s %s\n", 'page_id', 'page_latest', 'ns', 'page_title' ) );
-			foreach ( $result as $row ) {
-				printf( "%10d %11d %2d %s\n",
-					$row->page_id,
-					$row->page_latest,
-					$row->page_namespace,
-					$row->page_title );
-				if ( $fix ) {
-					$dbw->delete( 'page', [ 'page_id' => $row->page_id ] );
-				}
-			}
-			if ( !$fix ) {
-				$this->output( "Run again with --fix to remove these entries automatically.\n" );
-			}
-		} else {
-			$this->output( "No childless pages! Yay!\n" );
 		}
 
 		if ( $fix ) {
@@ -197,14 +154,16 @@ class Orphans extends Maintenance {
 			. "(this may take a while on a large wiki)\n" );
 		$result = $dbw->query( "
 			SELECT *
-			FROM $page LEFT OUTER JOIN $revision ON page_latest=rev_id
-		" );
+			FROM $page LEFT JOIN $revision ON page_latest=rev_id
+		", __METHOD__ );
 		$found = 0;
+		$revLookup = MediaWikiServices::getInstance()->getRevisionLookup();
 		foreach ( $result as $row ) {
 			$result2 = $dbw->query( "
 				SELECT MAX(rev_timestamp) as max_timestamp
 				FROM $revision
-				WHERE rev_page=" . (int)( $row->page_id )
+				WHERE rev_page=" . (int)( $row->page_id ),
+				__METHOD__
 			);
 			$row2 = $dbw->fetchObject( $result2 );
 			if ( $row2 ) {
@@ -226,9 +185,12 @@ class Orphans extends Maintenance {
 							'rev_id',
 							[
 								'rev_page' => $row->page_id,
-								'rev_timestamp' => $row2->max_timestamp ] );
+								'rev_timestamp' => $row2->max_timestamp
+							],
+							__METHOD__
+						);
 						$this->output( "... updating to revision $maxId\n" );
-						$maxRev = Revision::newFromId( $maxId );
+						$maxRev = $revLookup->getRevisionById( $maxId );
 						$title = Title::makeTitle( $row->page_namespace, $row->page_title );
 						$article = WikiPage::factory( $title );
 						$article->updateRevisionOn( $dbw, $maxRev );

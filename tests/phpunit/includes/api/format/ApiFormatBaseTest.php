@@ -10,7 +10,20 @@ class ApiFormatBaseTest extends ApiFormatTestBase {
 
 	protected $printerName = 'mockbase';
 
-	public function getMockFormatter( ApiMain $main = null, $format, $methods = [] ) {
+	protected function setUp() : void {
+		parent::setUp();
+		$this->setMwGlobals( [
+			'wgServer' => 'http://example.org'
+		] );
+	}
+
+	/**
+	 * @param ApiMain|null $main
+	 * @param string $format
+	 * @param array $methods
+	 * @return ApiFormatBase|\PHPUnit\Framework\MockObject\MockObject
+	 */
+	public function getMockFormatter( ?ApiMain $main, $format, $methods = [] ) {
 		if ( $main === null ) {
 			$context = new RequestContext;
 			$context->setRequest( new FauxRequest( [], true ) );
@@ -53,13 +66,14 @@ class ApiFormatBaseTest extends ApiFormatTestBase {
 		] );
 
 		$ret = parent::encodeData( $params, $data, $options );
-		$printer = TestingAccessWrapper::newFromObject( $ret['printer'] );
+		/** @var ApiFormatBase $printer */
+		$printer = $ret['printer'];
 		$text = $ret['text'];
 
 		if ( $options['name'] !== 'mockfm' ) {
 			$ct = 'text/x-mock';
 			$file = 'api-result.mock';
-			$status = isset( $options['status'] ) ? $options['status'] : null;
+			$status = $options['status'] ?? null;
 		} elseif ( isset( $params['wrappedhtml'] ) ) {
 			$ct = 'text/mediawiki-api-prettyprint-wrapped';
 			$file = 'api-result-wrapped.json';
@@ -333,6 +347,7 @@ class ApiFormatBaseTest extends ApiFormatTestBase {
 	}
 
 	public function testGetExamplesMessages() {
+		/** @var ApiFormatBase $printer */
 		$printer = TestingAccessWrapper::newFromObject( $this->getMockFormatter( null, 'mock' ) );
 		$this->assertSame( [
 			'action=query&meta=siteinfo&siprop=namespaces&format=mock'
@@ -352,19 +367,25 @@ class ApiFormatBaseTest extends ApiFormatTestBase {
 	public function testHtmlHeader( $post, $registerNonHtml, $expect ) {
 		$context = new RequestContext;
 		$request = new FauxRequest( [ 'a' => 1, 'b' => 2 ], $post );
-		$request->setRequestURL( 'http://example.org/wx/api.php' );
+		$request->setRequestURL( '/wx/api.php' );
 		$context->setRequest( $request );
 		$context->setLanguage( 'qqx' );
 		$main = new ApiMain( $context );
 		$printer = $this->getMockFormatter( $main, 'mockfm' );
 		$mm = $printer->getMain()->getModuleManager();
-		$mm->addModule( 'mockfm', 'format', ApiFormatBase::class, function () {
-			return $mock;
-		} );
-		if ( $registerNonHtml ) {
-			$mm->addModule( 'mock', 'format', ApiFormatBase::class, function () {
+		$mm->addModule( 'mockfm', 'format', [
+			'class' => ApiFormatBase::class,
+			'factory' => function () {
 				return $mock;
-			} );
+			}
+		] );
+		if ( $registerNonHtml ) {
+			$mm->addModule( 'mock', 'format', [
+				'class' => ApiFormatBase::class,
+				'factory' => function () {
+					return $mock;
+				}
+			] );
 		}
 
 		$printer->initPrinter();
@@ -372,7 +393,7 @@ class ApiFormatBaseTest extends ApiFormatTestBase {
 		ob_start();
 		$printer->closePrinter();
 		$text = ob_get_clean();
-		$this->assertContains( $expect, $text );
+		$this->assertStringContainsString( $expect, $text );
 	}
 
 	public static function provideHtmlHeader() {

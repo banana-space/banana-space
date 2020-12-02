@@ -1,13 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Eleassar",
-			"Dbc334"
+			"Dbc334",
+			"Eleassar"
 		]
 	},
 	"timeless-desc": "Brezčasna koža, oblikovana po prototipu Winter Brandona Harrisa in po različnih slogih Fundacije Wikimedia.",
-	"timeless-search-placeholder": "Preiščite {{NUMBEROFARTICLES}} strani",
-	"timeless-loggedin": "Vaš račun",
 	"timeless-anonymous": "Brezimen",
 	"timeless-loggedinas": "Prijavljeni ste kot '''$1'''",
 	"timeless-notloggedin": "Niste prijavljeni",

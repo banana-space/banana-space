@@ -21,6 +21,8 @@
  * @ingroup Upload
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Implements uploading from previously stored file.
  *
@@ -40,30 +42,27 @@ class UploadFromStash extends UploadBase {
 	private $repo;
 
 	/**
-	 * @param User|bool $user Default: false
+	 * @param User|bool $user Default: false Sometimes this won't exist, as when running from cron.
 	 * @param UploadStash|bool $stash Default: false
 	 * @param FileRepo|bool $repo Default: false
 	 */
 	public function __construct( $user = false, $stash = false, $repo = false ) {
-		// user object. sometimes this won't exist, as when running from cron.
-		$this->user = $user;
-
 		if ( $repo ) {
 			$this->repo = $repo;
 		} else {
-			$this->repo = RepoGroup::singleton()->getLocalRepo();
+			$this->repo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
 		}
 
 		if ( $stash ) {
 			$this->stash = $stash;
 		} else {
 			if ( $user ) {
-				wfDebug( __METHOD__ . " creating new UploadStash instance for " . $user->getId() . "\n" );
+				wfDebug( __METHOD__ . " creating new UploadStash instance for " . $user->getId() );
 			} else {
-				wfDebug( __METHOD__ . " creating new UploadStash instance with no user\n" );
+				wfDebug( __METHOD__ . " creating new UploadStash instance with no user" );
 			}
 
-			$this->stash = new UploadStash( $this->repo, $this->user );
+			$this->stash = new UploadStash( $this->repo, $user );
 		}
 	}
 

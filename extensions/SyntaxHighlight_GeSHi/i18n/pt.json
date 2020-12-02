@@ -2,12 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Hamilton Abreu",
+			"He7d3r",
 			"Malafaya",
-			"Vitorvicentevalente",
-			"He7d3r"
+			"Vitorvicentevalente"
 		]
 	},
-	"syntaxhighlight-desc": "Permite o realce sintático de código fonte, através do elemento <code>&lt;syntaxhighlight&gt;</code>, usando o [http://pygments.org/ realçador de sintaxe Pygments - Python]",
+	"syntaxhighlight-desc": "Permite o realce sintático de código-fonte, através do elemento <code>&lt;syntaxhighlight&gt;</code>, usando o [http://pygments.org/ realçador de sintaxe Pygments - Python]",
 	"syntaxhighlight-error-category": "Páginas com erros no destaque de sintaxe",
 	"syntaxhighlight-error-category-desc": "Ocorreu um erro ao tentar realçar o código incluído na página.",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Código",

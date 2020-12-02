@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Athena in Wonderland",
+			"MokaAkashiyaPT"
+		]
+	},
+	"tooltip-ca-createsource": "Criar l código-fuonte desta páigina",
+	"tooltip-ca-ve-edit": "Eiditar esta páigina",
+	"visualeditor-ca-createlocaldescriptionsource": "Poner fuonte de la çcriçon de l lhocal",
+	"visualeditor-ca-createsource": "Criar código-fuonte",
+	"visualeditor-ca-editsource": "Eiditar código-fuonte",
+	"visualeditor-ca-editsource-section": "eiditar código-fuonte",
+	"visualeditor-descriptionpagelink": "Project:Eiditor Bisual",
+	"visualeditor-dialog-media-info-audiofile": "Fexeiro de áudio",
+	"visualeditor-dialog-transclusion-param-example": "eisemplo: $1",
+	"visualeditor-dialogbutton-media-tooltip": "Multimédia",
+	"visualeditor-formatdropdown-format-mw-heading2": "Cabeçalho",
+	"visualeditor-magiclinknodeinspector-title-isbn": "Lhigaçon ISBN",
+	"visualeditor-preference-betatempdisable": "Zabelitar temporariamente l Eiditor Bisual anquanto stá an fase de testes",
+	"visualeditor-preference-newwikitexteditor-description": "Atibe l nuobo modo de testo wiki drento de l'eiditor bisual. El ten muitas de las ferramientas persentes ne l'eiditor bisual, ten un zeinho semelhante, i permite ua melhor altarnáncia antre ls dous.",
+	"visualeditor-preference-newwikitexteditor-label": "Nuobo modo de testo wiki",
+	"visualeditor-section-body-placeholder": "Nuobo cacho"
+}

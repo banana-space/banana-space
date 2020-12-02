@@ -1,7 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"NoiX180"
+			"Diki Ananta",
+			"NoiX180",
+			"Sumbukompor"
 		]
 	},
 	"specialpages-group-oath": "Otèntifikasi rong faktor",
@@ -14,7 +16,7 @@
 	"oathauth-disabledoath": "Patèni otèntifikasi rong faktor.",
 	"oathauth-prefs-label": "Otèntifikasi rong faktor:",
 	"oathauth-step1": "Lampah 1: Undhuh program otèntifikasi rong faktor",
-	"oathauth-step2alt": "Utawa isinen wadiné kanthi manual:",
+	"oathauth-step2alt": "Utawa isinen kunci sandiné kanthi manual:",
 	"oathauth-step3": "Lampah 3: Tulisen kodhe rèngrèngan",
 	"oathauth-step4": "Lampah 5: Vèrifikasi",
 	"oathauth-entertoken": "Isinen kodhe saka piranti otèntifikasi kanggo vèrifikasi:",
@@ -27,14 +29,5 @@
 	"oathauth-describe-provider": "Otèntifikasi rong faktor (OATH).",
 	"grant-group-authentication": "Ayahi tumindak otèntifikasi kanggo panjenengan dhéwé lan liyan",
 	"grant-oath": "Aksès informasi otèntifikasi rong faktor (OATH) kanggo panjenengan dhéwé lan liyan",
-	"action-oathauth-api-all": "priksa status OATH",
-	"apihelp-query+oath-description": "Priksa yèn otèntifikasi rong faktor (OATH) wis murub tumrap panganggo.",
-	"apihelp-query+oath-param-user": "Panganggo sing informasiné arep digolèki. Modhe gawan ya iku marang panganggo saiki.",
-	"apihelp-query+oath-example-1": "Golèk informasi ngenani panganggo saiki",
-	"apihelp-query+oath-example-2": "Golèk informasi ngenani panganggo <kbd>Conto</kbd>",
-	"apihelp-oathvalidate-description": "Validhasi token otèntifikasi rong faktor (OATH).",
-	"apihelp-oathvalidate-param-user": "Panganggo sing tokené arep divalidhasi. Modhe gawan ya iku marang panganggo saiki.",
-	"apihelp-oathvalidate-param-totp": "Token otèntifikasi rong faktor (OATH).",
-	"apihelp-oathvalidate-example-1": "Validhasi token kanggo panganggo saiki",
-	"apihelp-oathvalidate-example-2": "Validhasi token kanggo panganggo <kbd>Conto</kbd>"
+	"action-oathauth-api-all": "priksa status OATH"
 }

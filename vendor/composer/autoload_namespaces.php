@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = $vendorDir;
 
 return array(
-    'PEAR' => array($vendorDir . '/pear/pear_exception'),
     'Net' => array($vendorDir . '/pear/net_smtp', $vendorDir . '/pear/net_socket'),
     'Mail' => array($vendorDir . '/pear/mail', $vendorDir . '/pear/mail_mime'),
     'Liuggio' => array($vendorDir . '/liuggio/statsd-php-client/src'),

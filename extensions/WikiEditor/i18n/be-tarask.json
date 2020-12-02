@@ -3,11 +3,11 @@
 		"authors": [
 			"EugeneZelenko",
 			"Jim-by",
+			"Macofe",
+			"Red Winged Duck",
 			"Renessaince",
 			"Wizardist",
-			"Zedlik",
-			"Macofe",
-			"Red Winged Duck"
+			"Zedlik"
 		]
 	},
 	"wikieditor": "Пашыраны інтэрфэйс рэдагаваньня вікі-тэксту",
@@ -49,7 +49,7 @@
 	"wikieditor-toolbar-tool-link-lookslikeinternal-int": "Унутраная спасылка",
 	"wikieditor-toolbar-tool-link-lookslikeinternal-ext": "Вонкавая спасылка",
 	"wikieditor-toolbar-tool-link-empty": "Вы не ўвялі адрас спасылкі.",
-	"wikieditor-toolbar-tool-file": "Укладзены файл",
+	"wikieditor-toolbar-tool-file": "Выявы і мультымэдыі",
 	"wikieditor-toolbar-tool-file-example": "Прыклад.jpg",
 	"wikieditor-toolbar-tool-file-title": "Уставіць файл",
 	"wikieditor-toolbar-file-target": "Назва файла:",

@@ -18,9 +18,5 @@
 	"log-description-spamblacklist": "Estos socesos rexistren les coincidencies cola llista prieta de spam.",
 	"logentry-spamblacklist-hit": "$1 provocó una activación de la llista prieta de spam en $3 al intentar amestar $4.",
 	"right-spamblacklistlog": "Ver el rexistru de la llista prieta de spam",
-	"action-spamblacklistlog": "ver el rexistru de la llista prieta de spam",
-	"apihelp-spamblacklist-description": "Validar una o más URLs escontra SpamBlacklist.",
-	"apihelp-spamblacklist-summary": "Validar una o más URLs escontra SpamBlacklist.",
-	"apihelp-spamblacklist-param-url": "URLs a validar escontra la llista prieta.",
-	"apihelp-spamblacklist-example-1": "Comprobar dos URLs escontra la llista prieta"
+	"action-spamblacklistlog": "ver el rexistru de la llista prieta de spam"
 }

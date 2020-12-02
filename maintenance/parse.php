@@ -1,4 +1,7 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+
 /**
  * Parse some wikitext.
  *
@@ -46,7 +49,7 @@
  * @file
  * @ingroup Maintenance
  * @author Antoine Musso <hashar at free dot fr>
- * @license GNU General Public License 2.0 or later
+ * @license GPL-2.0-or-later
  */
 
 require_once __DIR__ . '/Maintenance.php';
@@ -68,7 +71,6 @@ class CLIParser extends Maintenance {
 			false,
 			true
 		);
-		$this->addOption( 'tidy', 'Tidy the output' );
 		$this->addArg( 'file', 'File containing wikitext (Default: stdin)', false );
 	}
 
@@ -82,7 +84,7 @@ class CLIParser extends Maintenance {
 	 * @return string HTML Rendering
 	 */
 	public function render( $wikitext ) {
-		return $this->parse( $wikitext )->getText();
+		return $this->parse( $wikitext )->getText( [ 'wrapperDivClass' => '' ] );
 	}
 
 	/**
@@ -103,9 +105,7 @@ class CLIParser extends Maintenance {
 	}
 
 	protected function initParser() {
-		global $wgParserConf;
-		$parserClass = $wgParserConf['class'];
-		$this->parser = new $parserClass();
+		$this->parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 	}
 
 	/**
@@ -116,9 +116,7 @@ class CLIParser extends Maintenance {
 	 * @return Title
 	 */
 	protected function getTitle() {
-		$title = $this->getOption( 'title' )
-			? $this->getOption( 'title' )
-			: 'CLIParser';
+		$title = $this->getOption( 'title' ) ?: 'CLIParser';
 
 		return Title::newFromText( $title );
 	}
@@ -128,10 +126,8 @@ class CLIParser extends Maintenance {
 	 * @return ParserOutput
 	 */
 	protected function parse( $wikitext ) {
-		$options = new ParserOptions;
-		if ( $this->getOption( 'tidy' ) ) {
-			$options->setTidy( true );
-		}
+		$options = ParserOptions::newCanonical( 'canonical' );
+		$options->setOption( 'enableLimitReport', false );
 		return $this->parser->parse(
 			$wikitext,
 			$this->getTitle(),

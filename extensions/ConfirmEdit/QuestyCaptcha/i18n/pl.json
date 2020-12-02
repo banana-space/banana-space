@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Rail",
 			"Sp5uhe",
-			"WTM",
-			"Tsca"
+			"Tsca",
+			"WTM"
 		]
 	},
+	"questycaptcha-desc": "Generator Questy CAPTCHA do rozszerzenia ConfirmEdit",
 	"questycaptcha-addurl": "Wprowadzony przez Ciebie tekst zawiera nowe linki zewnętrzne. Ochrona przed zautomatyzowanym spamem wymaga odpowiedzi na poniższe pytanie ([[Special:Captcha/help|więcej informacji]])",
 	"questycaptcha-badlogin": "Ochrona przed zautomatyzowanym łamaniem haseł wymaga odpowiedzi na poniższe pytanie ([[Special:Captcha/help|więcej informacji]])",
 	"questycaptcha-createaccount": "Ochrona przed zautomatyzowanym tworzeniem kont wymaga odpowiedzi na poniższe pytanie ([[Special:Captcha/help|więcej informacji]])",

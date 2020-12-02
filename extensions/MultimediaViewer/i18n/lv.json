@@ -1,11 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Papuass",
-			"Edgars2007"
+			"Edgars2007",
+			"Papuass"
 		]
 	},
-	"multimediaviewer-pref": "Multimediju skatīklis",
 	"multimediaviewer-file-page": "Doties uz atbilstošo faila lapu",
 	"multimediaviewer-repository-local": "Vairāk informācijas",
 	"multimediaviewer-datetime-created": "Izveidots: $1",
@@ -20,7 +19,7 @@
 	"multimediaviewer-permission-title": "Atļauju detaļas",
 	"multimediaviewer-permission-link": "skatīt noteikumus",
 	"multimediaviewer-permission-viewmore": "Skatīt vairāk",
-	"multimediaviewer-about-mmv": "Par",
+	"multimediaviewer-about-mmv": "Par šo saskarni",
 	"multimediaviewer-discuss-mmv": "Diskusija",
 	"multimediaviewer-help-mmv": "Palīdzība",
 	"multimediaviewer-optout-mmv": "Deaktivizēt Media Viewer",

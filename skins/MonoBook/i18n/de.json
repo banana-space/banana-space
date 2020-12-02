@@ -2,12 +2,21 @@
 	"@metadata": {
 		"authors": [
 			"Geitost",
-			"Metalhead64",
-			"Kghbln"
+			"Kghbln",
+			"Metalhead64"
 		]
 	},
 	"skinname-monobook": "MonoBook",
 	"monobook-desc": "Stellt eine klassische Benutzeroberfläche bereit",
 	"monobook.css": "/* Das folgende CSS wird für Benutzer der Benutzeroberfläche MonoBook geladen */",
-	"monobook.js": "/* Das folgende JavaScript wird für Benutzer der Benutzeroberfläche MonoBook geladen. */"
+	"monobook.js": "/* Das folgende JavaScript wird für Benutzer der Benutzeroberfläche MonoBook geladen. */",
+	"monobook-jumptotop": "Zurück nach oben",
+	"monobook-jumptopersonal": "Benutzerwerkzeuge",
+	"monobook-jumptonavigation": "Zur Navigation springen",
+	"monobook-jumptosearch": "Zur Suche springen",
+	"monobook-more-actions": "Mehr",
+	"monobook-cactions-label": "Seitenaktionen",
+	"monobook-notifications-link": "Benachrichtigungen ($1)",
+	"monobook-notifications-link-none": "Benachrichtigungen",
+	"monobook-responsive-label": "Responsives Monobook-Design aktivieren"
 }

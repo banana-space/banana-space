@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sebranik",
+			"Игорь Бродский"
+		]
+	},
+	"tooltip-ca-ve-edit": "Sab redaktiruida necidä lehtpol't.",
+	"visualeditor-ca-createsource": "Säta purde",
+	"visualeditor-ca-editsource": "Redaktiruida purde",
+	"visualeditor-ca-editsource-section": "redaktiruida purde",
+	"visualeditor-descriptionpagelink": "Project:Vizualine redaktor",
+	"visualeditor-dialog-meta-languages-label": "Keled",
+	"visualeditor-dialog-meta-languages-section": "Keled",
+	"visualeditor-languages-tool": "Keled"
+}

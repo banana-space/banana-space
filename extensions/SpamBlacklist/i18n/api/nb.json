@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"apihelp-spamblacklist-description": "Valider én eller flere URL-er mot SpamBlacklist.",
+	"apihelp-spamblacklist-example-1": "Sjekk to URL-er mot svartelista",
+	"apihelp-spamblacklist-param-url": "URL-er som skal valideres mot svartelista.",
+	"apihelp-spamblacklist-summary": "Valider én eller flere URL-er mot SpamBlacklist."
+}

@@ -25,6 +25,7 @@ use MediaWiki\MediaWikiServices;
  * but allow individual pieces of context to be changed locally
  * eg: A ContextSource that can inherit from the main RequestContext but have
  *     a different Title instance set on it.
+ * @newable
  * @since 1.19
  */
 class DerivativeContext extends ContextSource implements MutableContext {
@@ -74,6 +75,7 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	private $timing;
 
 	/**
+	 * @stable to call
 	 * @param IContextSource $context Context to inherit from
 	 */
 	public function __construct( IContextSource $context ) {
@@ -91,11 +93,7 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	 * @return Config
 	 */
 	public function getConfig() {
-		if ( !is_null( $this->config ) ) {
-			return $this->config;
-		} else {
-			return $this->getContext()->getConfig();
-		}
+		return $this->config ?: $this->getContext()->getConfig();
 	}
 
 	/**
@@ -111,11 +109,7 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	 * @return Timing
 	 */
 	public function getTiming() {
-		if ( !is_null( $this->timing ) ) {
-			return $this->timing;
-		} else {
-			return $this->getContext()->getTiming();
-		}
+		return $this->timing ?: $this->getContext()->getTiming();
 	}
 
 	/**
@@ -129,11 +123,7 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	 * @return WebRequest
 	 */
 	public function getRequest() {
-		if ( !is_null( $this->request ) ) {
-			return $this->request;
-		} else {
-			return $this->getContext()->getRequest();
-		}
+		return $this->request ?: $this->getContext()->getRequest();
 	}
 
 	/**
@@ -147,11 +137,7 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	 * @return Title|null
 	 */
 	public function getTitle() {
-		if ( !is_null( $this->title ) ) {
-			return $this->title;
-		} else {
-			return $this->getContext()->getTitle();
-		}
+		return $this->title ?: $this->getContext()->getTitle();
 	}
 
 	/**
@@ -165,11 +151,13 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	public function canUseWikiPage() {
 		if ( $this->wikipage !== null ) {
 			return true;
-		} elseif ( $this->title !== null ) {
-			return $this->title->canExist();
-		} else {
-			return $this->getContext()->canUseWikiPage();
 		}
+
+		if ( $this->title !== null ) {
+			return $this->title->canExist();
+		}
+
+		return $this->getContext()->canUseWikiPage();
 	}
 
 	/**
@@ -190,11 +178,7 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	 * @return WikiPage
 	 */
 	public function getWikiPage() {
-		if ( !is_null( $this->wikipage ) ) {
-			return $this->wikipage;
-		} else {
-			return $this->getContext()->getWikiPage();
-		}
+		return $this->wikipage ?: $this->getContext()->getWikiPage();
 	}
 
 	/**
@@ -208,11 +192,7 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	 * @return OutputPage
 	 */
 	public function getOutput() {
-		if ( !is_null( $this->output ) ) {
-			return $this->output;
-		} else {
-			return $this->getContext()->getOutput();
-		}
+		return $this->output ?: $this->getContext()->getOutput();
 	}
 
 	/**
@@ -226,11 +206,7 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	 * @return User
 	 */
 	public function getUser() {
-		if ( !is_null( $this->user ) ) {
-			return $this->user;
-		} else {
-			return $this->getContext()->getUser();
-		}
+		return $this->user ?: $this->getContext()->getUser();
 	}
 
 	/**
@@ -243,7 +219,7 @@ class DerivativeContext extends ContextSource implements MutableContext {
 			$this->lang = $language;
 		} elseif ( is_string( $language ) ) {
 			$language = RequestContext::sanitizeLangCode( $language );
-			$obj = Language::factory( $language );
+			$obj = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $language );
 			$this->lang = $obj;
 		} else {
 			throw new MWException( __METHOD__ . " was passed an invalid type of data." );
@@ -255,11 +231,7 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	 * @since 1.19
 	 */
 	public function getLanguage() {
-		if ( !is_null( $this->lang ) ) {
-			return $this->lang;
-		} else {
-			return $this->getContext()->getLanguage();
-		}
+		return $this->lang ?: $this->getContext()->getLanguage();
 	}
 
 	/**
@@ -274,11 +246,7 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	 * @return Skin
 	 */
 	public function getSkin() {
-		if ( !is_null( $this->skin ) ) {
-			return $this->skin;
-		} else {
-			return $this->getContext()->getSkin();
-		}
+		return $this->skin ?: $this->getContext()->getSkin();
 	}
 
 	/**
@@ -290,12 +258,11 @@ class DerivativeContext extends ContextSource implements MutableContext {
 	 *
 	 * @param string|string[]|MessageSpecifier $key Message key, or array of keys,
 	 *   or a MessageSpecifier.
-	 * @param mixed $args,... Arguments to wfMessage
+	 * @param mixed ...$params
 	 * @return Message
 	 */
-	public function msg( $key ) {
-		$args = func_get_args();
-
-		return call_user_func_array( 'wfMessage', $args )->setContext( $this );
+	public function msg( $key, ...$params ) {
+		// phpcs:ignore MediaWiki.Usage.ExtendClassUsage.FunctionVarUsage
+		return wfMessage( $key, ...$params )->setContext( $this );
 	}
 }

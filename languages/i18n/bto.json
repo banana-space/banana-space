@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"DannyS712",
 			"Filipinayzd",
 			"Rinconada"
 		]
@@ -11,7 +12,6 @@
 	"tog-extendwatchlist": "Ibuka a lista ka binabantayan para maipabayad a ngamin na pagribay, buku sana a pinakabago",
 	"tog-usenewrc": "Igrupo a mga pagribay por pahina sa mga bagong pagribay anggan binabantayan",
 	"tog-numberheadings": "Automatikong bilangun a mga titulo",
-	"tog-showtoolbar": "Ipabayad a gamit sa pagbalyow",
 	"tog-editondblclick": "Balyowan a mga pahina sa dobleng click",
 	"tog-watchcreations": "Irugang a mga pahinang kanakong ginibo anggan mga file na isinangat sa kanakong binabantayan",
 	"tog-watchdefault": "Irugang a mga pahinang anggan mga file na binabalyowan ko sa kanakong binabantayan",
@@ -302,7 +302,6 @@
 	"passwordreset-email": "Email address:",
 	"changeemail": "Ribayan a email adres",
 	"changeemail-none": "(uda)",
-	"extlink_sample": "http://www.example.com titulo kan link",
 	"watchthis": "Silungon ading pahina",
 	"blockednoreason": "udang binutang na rason",
 	"nosuchsectiontitle": "diri maturakan a seksyon",
@@ -331,7 +330,7 @@
 	"histfirst": "pinakaluma",
 	"histlast": "pinakabago",
 	"historysize": "({{PLURAL:$1|1 byte|$1 mga byte}})",
-	"historyempty": "(uda loog)",
+	"historyempty": "uda loog",
 	"history-feed-item-nocomment": "$1 sa $2",
 	"rev-showdeleted": "ipabayad",
 	"revdelete-show-file-submit": "Amo",
@@ -468,7 +467,6 @@
 	"emailccme": "Padarhi ako sa kopya ku kanakong mensahe",
 	"emailsenttext": "A kanimong email naipadara na.",
 	"watchlistfor2": "Para sa $1 $2",
-	"wlshowlast": "Ipabayad a huring $1 mga oras $2 mga aldow",
 	"delete-confirm": "Puraon a $1",
 	"deleteotherreason": "Iba/rugang na rason:",
 	"protect-otherreason": "Iba/rugang na rason:",
@@ -493,10 +491,9 @@
 	"contributions": "Mga ambag ka {{GENDER:$1|User}}",
 	"mycontris": "Mga ambag",
 	"contribsub2": "Para sa {{GENDER:$3|$1}} ($2)",
-	"uctop": "(nguwan)",
+	"uctop": "nguwan",
 	"month": "Poon bulan (anggan nauna):",
 	"year": "Poon taon (anggan nauna):",
-	"sp-contributions-newbies-sub": "Para sa mga bagong account",
 	"sp-contributions-deleted": "napurang mga ambag ka user",
 	"sp-contributions-uploads": "mga karga",
 	"sp-contributions-logs": "mga loog",
@@ -523,10 +520,6 @@
 	"pageinfo-protect-cascading-yes": "Amo",
 	"ilsubmit": "Pag-anapon",
 	"yesterday-at": "Suhapon ku $1",
-	"exif-worldregiondest": "Ipinababayad na rehiyon ka kinaban",
-	"exif-countrycodedest": "Koda para sa ipinababayad na nasyon",
-	"exif-citydest": "Ipinababayad na syudad",
-	"exif-gaincontrol-0": "Uda",
 	"monthsall": "ngamin",
 	"confirm-watch-top": "Muya mong irugang ading pahina sa kanimong binabantayan?",
 	"table_pager_limit": "Ipabayad a $1 na items kada pahina",

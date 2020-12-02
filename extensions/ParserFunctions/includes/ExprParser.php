@@ -16,7 +16,11 @@
  *
  */
 
+namespace MediaWiki\Extensions\ParserFunctions;
+
 use UtfNormal\Validator;
+
+// @codeCoverageIgnoreStart
 
 // Character classes
 define( 'EXPR_WHITE_CLASS', " \t\r\n" );
@@ -61,6 +65,8 @@ define( 'EXPR_POW', 35 );
 define( 'EXPR_PI', 36 );
 define( 'EXPR_FMOD', 37 );
 define( 'EXPR_SQRT', 38 );
+
+// @codeCoverageIgnoreEnd
 
 class ExprParser {
 	public $maxStackSize = 100;
@@ -173,8 +179,8 @@ class ExprParser {
 	 * http://montcs.bloomu.edu/~bobmon/Information/RPN/infix2rpn.shtml
 	 * It's essentially the same as Dijkstra's shunting yard algorithm.
 	 * @param string $expr
-	 * @throws ExprError
 	 * @return string
+	 * @throws ExprError
 	 */
 	public function doExpression( $expr ) {
 		$operands = [];
@@ -202,10 +208,12 @@ class ExprParser {
 
 			// First the unlimited length classes
 
+			// @phan-suppress-next-line PhanParamSuspiciousOrder false positive
 			if ( false !== strpos( EXPR_WHITE_CLASS, $char ) ) {
 				// Whitespace
 				$p += strspn( $expr, EXPR_WHITE_CLASS, $p );
 				continue;
+				// @phan-suppress-next-line PhanParamSuspiciousOrder false positive
 			} elseif ( false !== strpos( EXPR_NUMBER_CLASS, $char ) ) {
 				// Number
 				if ( $expecting !== 'expression' ) {
@@ -667,7 +675,9 @@ class ExprParser {
 				break;
 			default:
 				// Should be impossible to reach here.
+				// @codeCoverageIgnoreStart
 				throw new ExprError( 'unknown_error' );
+				// @codeCoverageIgnoreEnd
 		}
 	}
 }

@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"fancycaptcha-captcha": "Sicherheitsprüfung",
 	"fancycaptcha-imgcaptcha-ph": "Geb den Text ren, den wo du uwe siehst."
 }

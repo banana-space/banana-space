@@ -1,4 +1,4 @@
-( function ( $, mw ) {
+( function () {
 
 	/**
 	 * DateTimeInputWidgets can be used to input a date, a time, or a date and
@@ -10,7 +10,7 @@
 	 *     @example
 	 *     // Example of a text input widget
 	 *     var dateTimeInput = new mw.widgets.datetime.DateTimeInputWidget( {} )
-	 *     $( 'body' ).append( dateTimeInput.$element );
+	 *     $( document.body ).append( dateTimeInput.$element );
 	 *
 	 * [1]: https://www.mediawiki.org/wiki/OOUI/Widgets/Inputs
 	 *
@@ -19,6 +19,7 @@
 	 * @mixins OO.ui.mixin.IconElement
 	 * @mixins OO.ui.mixin.IndicatorElement
 	 * @mixins OO.ui.mixin.PendingElement
+	 * @mixins OO.ui.mixin.FlaggedElement
 	 *
 	 * @constructor
 	 * @param {Object} [config] Configuration options
@@ -64,12 +65,13 @@
 		this.type = config.type;
 
 		// Parent constructor
-		mw.widgets.datetime.DateTimeInputWidget[ 'super' ].call( this, config );
+		mw.widgets.datetime.DateTimeInputWidget.super.call( this, config );
 
 		// Mixin constructors
 		OO.ui.mixin.IconElement.call( this, config );
 		OO.ui.mixin.IndicatorElement.call( this, config );
 		OO.ui.mixin.PendingElement.call( this, config );
+		OO.ui.mixin.FlaggedElement.call( this, config );
 
 		// Properties
 		this.$handle = $( '<span>' );
@@ -174,6 +176,7 @@
 	OO.mixinClass( mw.widgets.datetime.DateTimeInputWidget, OO.ui.mixin.IconElement );
 	OO.mixinClass( mw.widgets.datetime.DateTimeInputWidget, OO.ui.mixin.IndicatorElement );
 	OO.mixinClass( mw.widgets.datetime.DateTimeInputWidget, OO.ui.mixin.PendingElement );
+	OO.mixinClass( mw.widgets.datetime.DateTimeInputWidget, OO.ui.mixin.FlaggedElement );
 
 	/* Static properties */
 
@@ -353,7 +356,7 @@
 				sz = ( spec.size * 1.15 ) + 'ch';
 			} else {
 				// Add a little for padding
-				sz = ( spec.size * 1.15 ) + 'ch';
+				sz = ( spec.size * 1.25 ) + 'ch';
 			}
 			if ( spec.editable && spec.type !== 'static' ) {
 				if ( spec.type === 'boolean' || spec.type === 'toggleLocal' ) {
@@ -373,6 +376,7 @@
 				} else {
 					maxlength = spec.size;
 					if ( spec.intercalarySize ) {
+						// eslint-disable-next-line no-jquery/no-each-util
 						$.each( spec.intercalarySize, reduceFunc );
 					}
 					$field = $( '<input>' ).attr( 'type', 'text' )
@@ -422,7 +426,7 @@
 			this.clearButton = new OO.ui.ButtonWidget( {
 				classes: [ 'mw-widgets-datetime-dateTimeInputWidget-field', 'mw-widgets-datetime-dateTimeInputWidget-clearButton' ],
 				framed: false,
-				icon: 'trash',
+				icon: 'clear',
 				disabled: disabled
 			} ).connect( this, {
 				click: 'onClearClick'
@@ -626,8 +630,8 @@
 								e.keyCode === OO.ui.Keys.UP ? -1 : 1, 'wrap' )
 						);
 					}
-					if ( $field.is( ':input' ) ) {
-						$field.select();
+					if ( $field.is( 'input' ) ) {
+						$field.trigger( 'select' );
 					}
 					return false;
 			}
@@ -648,8 +652,8 @@
 			if ( this.getValueAsDate() === null ) {
 				this.setValue( this.formatter.getDefaultDate() );
 			}
-			if ( $field.is( ':input' ) ) {
-				$field.select();
+			if ( $field.is( 'input' ) ) {
+				$field.trigger( 'select' );
 			}
 
 			if ( this.calendar ) {
@@ -794,7 +798,7 @@
 	 * @inheritdoc
 	 */
 	mw.widgets.datetime.DateTimeInputWidget.prototype.setDisabled = function ( disabled ) {
-		mw.widgets.datetime.DateTimeInputWidget[ 'super' ].prototype.setDisabled.call( this, disabled );
+		mw.widgets.datetime.DateTimeInputWidget.super.prototype.setDisabled.call( this, disabled );
 
 		// Flag all our fields as disabled
 		if ( this.$fields ) {
@@ -814,7 +818,7 @@
 	 */
 	mw.widgets.datetime.DateTimeInputWidget.prototype.focus = function () {
 		if ( !this.getFocusedField().length ) {
-			this.$fields.find( '.mw-widgets-datetime-dateTimeInputWidget-editField' ).first().focus();
+			this.$fields.find( '.mw-widgets-datetime-dateTimeInputWidget-editField' ).first().trigger( 'focus' );
 		}
 		return this;
 	};
@@ -834,4 +838,4 @@
 		this.focus();
 	};
 
-}( jQuery, mediaWiki ) );
+}() );

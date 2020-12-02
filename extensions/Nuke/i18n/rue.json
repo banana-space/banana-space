@@ -15,7 +15,6 @@
 	"nuke-submit-user": "Выконати",
 	"nuke-submit-delete": "Змазати выбдарны",
 	"right-nuke": "Масове вылучіня сторінок",
-	"nuke-select": "Выбрати: $1",
 	"nuke-userorip": "Імя хоснователя, IP адреса або зохабте порожнє:",
 	"nuke-maxpages": "Максімалне чісло сторінок:",
 	"nuke-editby": "{{gender:$1|Створивl|Створила|Створив}} [[Special:Contributions/$1|$1]]",

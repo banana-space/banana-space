@@ -1,0 +1,11 @@
+{
+	"--title": "TemplateData - Documentation",
+	"--processes": "0",
+	"--warnings-exit-nonzero": true,
+	"--external": "OO.*",
+	"--output": "docs",
+	"--": [
+		"jsduck.external.js",
+		"modules"
+	]
+}

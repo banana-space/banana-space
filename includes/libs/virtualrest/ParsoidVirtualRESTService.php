@@ -35,8 +35,6 @@ class ParsoidVirtualRESTService extends VirtualRESTService {
 	 *   * $title is optional
 	 *   * $revision is optional
 	 *
-	 * There are also deprecated "v1" requests; see onParsoid1Request
-	 * for details.
 	 * @param array $params Key/value map
 	 *   - url            : Parsoid server URL
 	 *   - domain         : Wiki domain to use
@@ -49,15 +47,19 @@ class ParsoidVirtualRESTService extends VirtualRESTService {
 	public function __construct( array $params ) {
 		// for backwards compatibility:
 		if ( isset( $params['URL'] ) ) {
+			wfDeprecatedMsg(
+				'Using all-caps URL parameter to $wgVirtualRestConfig ' .
+				'was deprecated in MediaWiki 1.35', '1.35'
+			);
 			$params['url'] = $params['URL'];
 			unset( $params['URL'] );
 		}
 		// set up defaults and merge them with the given params
+		$defaultURL = wfExpandUrl( wfScript( 'rest' ), PROTO_CANONICAL );
 		$mparams = array_merge( [
 			'name' => 'parsoid',
-			'url' => 'http://localhost:8000/',
-			'prefix' => 'localhost',
-			'domain' => 'localhost',
+			'url' => $defaultURL,
+			'domain' => wfParseUrl( $defaultURL )['host'] ?? 'localhost',
 			'timeout' => null,
 			'forwardCookies' => false,
 			'HTTPProxy' => null,
@@ -70,13 +72,17 @@ class ParsoidVirtualRESTService extends VirtualRESTService {
 		// and trailing slash if present.  This lets us use
 		// $wgCanonicalServer as a default value, which is very convenient.
 		$mparams['domain'] = preg_replace(
-			'/^(https?:\/\/)?([^\/:]+?)(:\d+)?\/?$/',
-			'$2',
+			'/^((https?:)?\/\/)?([^\/:]+?)(:\d+)?\/?$/',
+			'$3',
 			$mparams['domain']
 		);
 		parent::__construct( $mparams );
 	}
 
+	/**
+	 * @inheritDoc
+	 * @phan-param array[] $reqs
+	 */
 	public function onRequests( array $reqs, Closure $idGeneratorFunc ) {
 		$result = [];
 		foreach ( $reqs as $key => $req ) {
@@ -98,8 +104,7 @@ class ParsoidVirtualRESTService extends VirtualRESTService {
 				# Map RESTBase v1 API to Parsoid v3 API (pretty easy)
 				$req['url'] = preg_replace( '#^local/v1/#', 'local/v3/', $req['url'] );
 			} elseif ( $version !== 'v3' ) {
-				$result[$key] = $this->onParsoid1Request( $req, $idGeneratorFunc );
-				continue;
+				throw new Exception( "Only Parsoid v3 API is supported." );
 			}
 			if ( $targetWiki !== 'local' ) {
 				throw new Exception( "Only 'local' target wiki is currently supported" );
@@ -107,8 +112,8 @@ class ParsoidVirtualRESTService extends VirtualRESTService {
 			if ( $reqType !== 'page' && $reqType !== 'transform' ) {
 				throw new Exception( "Request action must be either 'page' or 'transform'" );
 			}
-			if ( $format !== 'html' && $format !== 'wikitext' ) {
-				throw new Exception( "Request format must be either 'html' or 'wt'" );
+			if ( $format !== 'html' && $format !== 'wikitext' && $format !== 'lint' ) {
+				throw new Exception( "Request format must be 'html', 'wt' or 'lint'" );
 			}
 			// replace /local/ with the current domain
 			$req['url'] = preg_replace( '#^local/#', $this->params['domain'] . '/', $req['url'] );
@@ -124,104 +129,13 @@ class ParsoidVirtualRESTService extends VirtualRESTService {
 			if ( $this->params['forwardCookies'] ) {
 				$req['headers']['Cookie'] = $this->params['forwardCookies'];
 			}
+			// Parsoid/PHP is a MW instance, so it needs the Host header set,
+			// otherwise the server replies with a 404, so apply it unconditionally
+			// to all requests
+			$req['headers']['Host'] = $this->params['domain'];
 			$result[$key] = $req;
 		}
 		return $result;
-	}
-
-	/**
-	 * Remap a Parsoid v1 request to a Parsoid v3 request.
-	 *
-	 * Example Parsoid v1 requests:
-	 *  GET /local/v1/page/$title/html/$oldid
-	 *   * $oldid is optional
-	 *  POST /local/v1/transform/html/to/wikitext/$title/$oldid
-	 *   * body: array( 'html' => ... )
-	 *   * $title and $oldid are optional
-	 *  POST /local/v1/transform/wikitext/to/html/$title
-	 *   * body: array( 'wikitext' => ... ) or array( 'wikitext' => ..., 'body' => true/false )
-	 *   * $title is optional
-	 *
-	 * NOTE: the POST APIs aren't "real" Parsoid v1 APIs, they are just what
-	 * Visual Editor "pretends" the V1 API is like.  A previous version of
-	 * ParsoidVirtualRESTService translated these to the "real" Parsoid v1
-	 * API.  We now translate these to the "real" Parsoid v3 API.
-	 * @param array $req
-	 * @param Closure $idGeneratorFunc
-	 * @return array
-	 * @throws Exception
-	 */
-	public function onParsoid1Request( array $req, Closure $idGeneratorFunc ) {
-		$parts = explode( '/', $req['url'] );
-		list(
-			$targetWiki, // 'local'
-			$version, // 'v1'
-			$reqType // 'page' or 'transform'
-		) = $parts;
-		if ( $targetWiki !== 'local' ) {
-			throw new Exception( "Only 'local' target wiki is currently supported" );
-		} elseif ( $version !== 'v1' ) {
-			throw new Exception( "Only v1 and v3 are supported." );
-		} elseif ( $reqType !== 'page' && $reqType !== 'transform' ) {
-			throw new Exception( "Request type must be either 'page' or 'transform'" );
-		}
-		$req['url'] = $this->params['url'] . $this->params['domain'] . '/v3/';
-		if ( $reqType === 'page' ) {
-			$title = $parts[3];
-			if ( $parts[4] !== 'html' ) {
-				throw new Exception( "Only 'html' output format is currently supported" );
-			}
-			$req['url'] .= 'page/html/' . $title;
-			if ( isset( $parts[5] ) ) {
-				$req['url'] .= '/' . $parts[5];
-			} elseif ( isset( $req['query']['oldid'] ) && $req['query']['oldid'] ) {
-				$req['url'] .= '/' . $req['query']['oldid'];
-				unset( $req['query']['oldid'] );
-			}
-		} elseif ( $reqType === 'transform' ) {
-			$req['url'] .= 'transform/'. $parts[3] . '/to/' . $parts[5];
-			// the title
-			if ( isset( $parts[6] ) ) {
-				$req['url'] .= '/' . $parts[6];
-			}
-			// revision id
-			if ( isset( $parts[7] ) ) {
-				$req['url'] .= '/' . $parts[7];
-			} elseif ( isset( $req['body']['oldid'] ) && $req['body']['oldid'] ) {
-				$req['url'] .= '/' . $req['body']['oldid'];
-				unset( $req['body']['oldid'] );
-			}
-			if ( $parts[4] !== 'to' ) {
-				throw new Exception( "Part index 4 is not 'to'" );
-			}
-			if ( $parts[3] === 'html' && $parts[5] === 'wikitext' ) {
-				if ( !isset( $req['body']['html'] ) ) {
-					throw new Exception( "You must set an 'html' body key for this request" );
-				}
-			} elseif ( $parts[3] == 'wikitext' && $parts[5] == 'html' ) {
-				if ( !isset( $req['body']['wikitext'] ) ) {
-					throw new Exception( "You must set a 'wikitext' body key for this request" );
-				}
-				if ( isset( $req['body']['body'] ) ) {
-					$req['body']['body_only'] = $req['body']['body'];
-					unset( $req['body']['body'] );
-				}
-			} else {
-				throw new Exception( "Transformation unsupported" );
-			}
-		}
-		// set the appropriate proxy, timeout and headers
-		if ( $this->params['HTTPProxy'] ) {
-			$req['proxy'] = $this->params['HTTPProxy'];
-		}
-		if ( $this->params['timeout'] != null ) {
-			$req['reqTimeout'] = $this->params['timeout'];
-		}
-		if ( $this->params['forwardCookies'] ) {
-			$req['headers']['Cookie'] = $this->params['forwardCookies'];
-		}
-
-		return $req;
 	}
 
 }

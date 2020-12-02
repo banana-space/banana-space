@@ -4,8 +4,13 @@
 	},
 	"skinname-vector": "Vector",
 	"vector-skin-desc": "Modern version of MonoBook with fresh look and many usability improvements",
-	"vector.css": "/* CSS placed here will affect users of the Vector skin */",
-	"vector.js": "/* Any JavaScript here will be loaded for users using the Vector skin */",
+	"prefs-vector-enable-vector-1-label": "Use Legacy Vector",
+	"prefs-vector-enable-vector-1-help": "Over the next few years, we will be gradually updating the Vector skin. Legacy Vector will allow you to view the old version of Vector (as of December 2019). To learn more about the updates, go to our [[mw:Reading/Web/Desktop_Improvements|project page]].",
+	"vector-opt-out": "Switch to old look",
+	"vector-opt-out-tooltip": "Change your settings to go back to the old look of the skin (legacy Vector)",
+	"vector.css": "/* All CSS here will be loaded for users of the Vector skin */",
+	"vector.js": "/* All JavaScript here will be loaded for users of the Vector skin */",
+	"vector-action-toggle-sidebar": "Toggle sidebar",
 	"vector-action-addsection": "Add topic",
 	"vector-action-delete": "Delete",
 	"vector-action-move": "Move",
@@ -17,5 +22,7 @@
 	"vector-view-history": "View history",
 	"vector-view-view": "Read",
 	"vector-view-viewsource": "View source",
+	"vector-jumptonavigation": "Jump to navigation",
+	"vector-jumptosearch": "Jump to search",
 	"vector-more-actions": "More"
 }

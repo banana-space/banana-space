@@ -15,12 +15,12 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.ui.StripeButtons', QUnit.newMwEnvironment() );
 
 	function createStripeButtons() {
-		var fixture = $( '#qunit-fixture' );
-		return new mw.mmv.ui.StripeButtons( fixture );
+		var $fixture = $( '#qunit-fixture' );
+		return new mw.mmv.ui.StripeButtons( $fixture );
 	}
 
 	QUnit.test( 'Sanity test, object creation and UI construction', function ( assert ) {
@@ -57,20 +57,20 @@
 	QUnit.test( 'Description page button', function ( assert ) {
 		var $qf = $( '#qunit-fixture' ),
 			buttons = new mw.mmv.ui.StripeButtons( $qf ),
-			button = buttons.buttons.$descriptionPage,
+			$button = buttons.buttons.$descriptionPage,
 			descriptionUrl = 'http://example.com/desc',
 			imageInfo = { descriptionUrl: descriptionUrl },
 			repoInfo = { isCommons: function () { return false; } };
 
 		buttons.setDescriptionPageButton( imageInfo, repoInfo );
 
-		assert.ok( !button.hasClass( 'mw-mmv-repo-button-commons' ), 'Button does not have commons class non-Commons files' );
-		assert.strictEqual( button.find( 'a' ).addBack().filter( 'a' ).attr( 'href' ), descriptionUrl, 'Description page link is correct' );
+		assert.strictEqual( $button.hasClass( 'mw-mmv-repo-button-commons' ), false, 'Button does not have commons class non-Commons files' );
+		assert.strictEqual( $button.find( 'a' ).addBack().filter( 'a' ).attr( 'href' ), descriptionUrl, 'Description page link is correct' );
 
 		repoInfo.isCommons = function () { return true; };
 		buttons.setDescriptionPageButton( imageInfo, repoInfo );
 
-		assert.ok( button.hasClass( 'mw-mmv-repo-button-commons' ), 'Button commons class for Commons files' );
+		assert.strictEqual( $button.hasClass( 'mw-mmv-repo-button-commons' ), true, 'Button commons class for Commons files' );
 	} );
 
-}( mediaWiki, jQuery ) );
+}() );

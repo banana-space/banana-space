@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"AiseluRB",
+			"Amire80",
+			"Assele",
+			"Haqmar",
+			"Sagan",
+			"Рустам Нурыев",
+			"Янмурза Баки"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Күҙләгес мөхәррир]]",
+	"tag-visualeditor-description": "Төҙәтеү [[{{MediaWiki:visualeditor-descriptionpagelink}}|Күҙләгес мөхәррир]] ҡулланып башҡарылған",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Күҙләгес мөхәррир: Тикшереү]]",
+	"tag-visualeditor-needcheck-description": "Система асыҡлауынса[[{{MediaWiki:visualeditor-descriptionpagelink}}|Күҙләгес мөхәррир]]был һылтанма ҡулланып төҙәтеү эшләгәндә викитекста осраҡлы үҙгәртеүҙәр булыуын асыҡланы.",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Күҙләгес мөхәррир: Тикшереү]]",
+	"tag-visualeditor-switched-description": "Ҡатнашыусы күҙләткес мөхәррир ярҙамында мөхәррирләй башланы, ә викитест мөхәрриргә күсте",
+	"visualeditor-feedback-link": "Project:VisualEditor/Баһалау",
+	"visualeditor-feedback-tool": "Программа үтәлешенә баһа биреп ҡалдырырға",
+	"visualeditor-help-label": "Күрһәтмәләрҙе уҡығыҙ",
+	"visualeditor-help-title": "Күҙләгес мөхәррирҙе файҙаланыу ҡулланмаһы",
+	"visualeditor-welcomedialog-action": "Үҙгәртеүҙе башлау",
+	"visualeditor-welcomedialog-content": "Һәр кем мөхәррирләй ала һәм бөтә үҙгәртеүҙәр файҙалы",
+	"visualeditor-welcomedialog-content-thanks": "Рәхмәт, һеҙҙең ярҙам донъя менән күберәк таныштыра",
+	"visualeditor-welcomedialog-switch": "Баштағы кодтың мөхәррирләүенә күсергә",
+	"visualeditor-welcomedialog-title": "$2-се биткә {{GENDER:$1|рәхим итегеҙ}}"
+}

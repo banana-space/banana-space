@@ -1,0 +1,41 @@
+@import '../../variables.less';
+@import 'mediawiki.mixins.less';
+
+.mw-logo {
+	.flex-display();
+	// If icon is not configured, ensure that the logo still takes up available
+	// space allocated by layout.
+	height: 100%;
+	// Center vertically.
+	align-items: center;
+}
+
+.mw-logo-icon {
+	// For browsers which do not support flexbox we float left.
+	// This will be ignored in flexbox browsers.
+	float: left;
+	margin-right: 10px;
+}
+
+.mw-logo-container {
+	// For browsers which do not support flexbox we float left.
+	// This will be ignored in flexbox browsers.
+	// The two children `div`s will lay out in a row.
+	float: left;
+}
+
+// Note for 3rd parties where no wgLogos['wordmark'] is defined
+// the site title is not clipped. We may need to revisit this later
+// for projects with long site titles.
+.mw-logo-wordmark {
+	display: block;
+	margin: 0 auto;
+	font-size: 1.4em;
+}
+
+.mw-logo-tagline {
+	// For browsers which do not support flexbox.
+	display: block;
+	margin: 5px auto 0;
+	font-size: 0.7em;
+}

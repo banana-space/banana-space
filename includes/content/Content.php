@@ -30,6 +30,7 @@
  * Base interface for content objects.
  *
  * @ingroup Content
+ * @unstable for implementation, extensions should extend AbstractContent instead.
  */
 interface Content {
 
@@ -76,6 +77,9 @@ interface Content {
 	 * the data model used, as given by getDataModel().
 	 *
 	 * @since 1.21
+	 *
+	 * @deprecated since 1.33 use getText() for TextContent instances.
+	 *             For other content models, use specialized getters.
 	 *
 	 * @return mixed The native representation of the content. Could be a
 	 *    string, a nested array structure, an object, a binary blob...
@@ -162,7 +166,7 @@ interface Content {
 	 *
 	 * @since 1.21
 	 *
-	 * @param string $format The desired serialization format, or null for the default format.
+	 * @param string|null $format The desired serialization format, or null for the default format.
 	 *
 	 * @return string Serialized form of this Content object.
 	 */
@@ -199,9 +203,11 @@ interface Content {
 	 *
 	 * - Will return false if $that is null.
 	 * - Will return true if $that === $this.
-	 * - Will return false if $that->getModel() != $this->getModel().
-	 * - Will return false if $that->getNativeData() is not equal to $this->getNativeData(),
-	 *   where the meaning of "equal" depends on the actual data model.
+	 * - Will return false if $that->getModel() !== $this->getModel().
+	 * - Will return false if get_class( $that ) !== get_class( $this )
+	 * - Should return false if $that->getModel() == $this->getModel() and
+	 *     $that is not semantically equivalent to $this, according to
+	 *     the data model defined by $this->getModel().
 	 *
 	 * Implementations should be careful to make equals() transitive and reflexive:
 	 *
@@ -210,7 +216,7 @@ interface Content {
 	 *
 	 * @since 1.21
 	 *
-	 * @param Content $that The Content object to compare to.
+	 * @param Content|null $that The Content object to compare to.
 	 *
 	 * @return bool True if this Content object is equal to $that, false otherwise.
 	 */
@@ -241,6 +247,8 @@ interface Content {
 	 * that it's also in a countable location (e.g. a current revision in the
 	 * main namespace).
 	 *
+	 * @see SlotRoleHandler::supportsArticleCount
+	 *
 	 * @since 1.21
 	 *
 	 * @param bool|null $hasLinks If it is known whether this content contains
@@ -262,8 +270,9 @@ interface Content {
 	 *       may call ParserOutput::recordOption() on the output object.
 	 *
 	 * @param Title $title The page title to use as a context for rendering.
-	 * @param int $revId Optional revision ID being rendered.
-	 * @param ParserOptions $options Any parser options.
+	 * @param int|null $revId ID of the revision being rendered.
+	 *  See Parser::parse() for the ramifications. (default: null)
+	 * @param ParserOptions|null $options Any parser options.
 	 * @param bool $generateHtml Whether to generate HTML (default: true). If false,
 	 *        the result of calling getText() on the ParserOutput object returned by
 	 *        this method is undefined.
@@ -284,24 +293,19 @@ interface Content {
 	 * made to replace information about the old content with information about
 	 * the new content.
 	 *
-	 * This default implementation calls
-	 * $this->getParserOutput( $content, $title, null, null, false ),
-	 * and then calls getSecondaryDataUpdates( $title, $recursive ) on the
-	 * resulting ParserOutput object.
-	 *
-	 * Subclasses may implement this to determine the necessary updates more
-	 * efficiently, or make use of information about the old content.
+	 * @deprecated since 1.32, call and override
+	 *   ContentHandler::getSecondaryDataUpdates instead.
 	 *
 	 * @note Implementations should call the SecondaryDataUpdates hook, like
 	 *   AbstractContent does.
 	 *
 	 * @param Title $title The context for determining the necessary updates
-	 * @param Content $old An optional Content object representing the
+	 * @param Content|null $old An optional Content object representing the
 	 *    previous content, i.e. the content being replaced by this Content
 	 *    object.
 	 * @param bool $recursive Whether to include recursive updates (default:
 	 *    false).
-	 * @param ParserOutput $parserOutput Optional ParserOutput object.
+	 * @param ParserOutput|null $parserOutput Optional ParserOutput object.
 	 *    Provide if you have one handy, to avoid re-parsing of the content.
 	 *
 	 * @return DataUpdate[] A list of DataUpdate objects for putting information
@@ -357,6 +361,8 @@ interface Content {
 	 * Returns whether this Content represents a redirect.
 	 * Shorthand for getRedirectTarget() !== null.
 	 *
+	 * @see SlotRoleHandler::supportsRedirects
+	 *
 	 * @since 1.21
 	 *
 	 * @return bool
@@ -402,7 +408,7 @@ interface Content {
 	 * @param Content $with New content of the section
 	 * @param string $sectionTitle New section's subject, only if $section is 'new'
 	 *
-	 * @return string|null Complete article text, or null if error
+	 * @return Content|null New content of the entire page, or null if error
 	 */
 	public function replaceSection( $sectionId, Content $with, $sectionTitle = '' );
 
@@ -481,8 +487,10 @@ interface Content {
 	 * the current state of the database.
 	 *
 	 * @since 1.21
+	 * @deprecated since 1.32, call and override
+	 *   ContentHandler::getDeletionUpdates instead.
 	 *
-	 * @param WikiPage $page The deleted page
+	 * @param WikiPage $page The page the content was deleted from.
 	 * @param ParserOutput|null $parserOutput Optional parser output object
 	 *    for efficient access to meta-information about the content object.
 	 *    Provide if you have one handy.
@@ -517,6 +525,7 @@ interface Content {
 	 * that conversion is not supported.
 	 */
 	public function convert( $toModel, $lossy = '' );
+
 	// @todo ImagePage and CategoryPage interfere with per-content action handlers
 	// @todo nice&sane integration of GeSHi syntax highlighting
 	//   [11:59] <vvv> Hooks are ugly; make CodeHighlighter interface and a

@@ -19,8 +19,8 @@
  *
  * @file
  * @author Ævar Arnfjörð Bjarmason <avarab@gmail.com>
- * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @license http://www.gnu.org/copyleft/fdl.html GNU Free Documentation License
+ * @license GPL-2.0-or-later
+ * @license GFDL-1.3-or-later
  * @ingroup Language
  */
 
@@ -28,7 +28,7 @@
  * Belarusian in Taraškievica orthography (Беларуская тарашкевіца)
  *
  * @ingroup Language
- * @see http://be-x-old.wikipedia.org/wiki/Project_talk:LanguageBe_tarask.php
+ * @see https://be-tarask.wikipedia.org/wiki/Project_talk:LanguageBe_tarask.php
  */
 // phpcs:ignore Squiz.Classes.ValidClassName.NotCamelCaps
 class LanguageBe_tarask extends Language {
@@ -42,7 +42,7 @@ class LanguageBe_tarask extends Language {
 	 *
 	 * @return string
 	 */
-	function normalizeForSearch( $string ) {
+	public function normalizeForSearch( $string ) {
 		# MySQL fulltext index doesn't grok utf-8, so we
 		# need to fold cases and convert to hex
 

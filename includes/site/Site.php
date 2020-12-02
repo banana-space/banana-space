@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Represents a single site.
  *
@@ -23,21 +25,21 @@
  * @file
  * @ingroup Site
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class Site implements Serializable {
-	const TYPE_UNKNOWN = 'unknown';
-	const TYPE_MEDIAWIKI = 'mediawiki';
+	public const TYPE_UNKNOWN = 'unknown';
+	public const TYPE_MEDIAWIKI = 'mediawiki';
 
-	const GROUP_NONE = 'none';
+	public const GROUP_NONE = 'none';
 
-	const ID_INTERWIKI = 'interwiki';
-	const ID_EQUIVALENT = 'equivalent';
+	public const ID_INTERWIKI = 'interwiki';
+	public const ID_EQUIVALENT = 'equivalent';
 
-	const SOURCE_LOCAL = 'local';
+	public const SOURCE_LOCAL = 'local';
 
-	const PATH_LINK = 'link';
+	public const PATH_LINK = 'link';
 
 	/**
 	 * A version ID that identifies the serialization structure used by getSerializationData()
@@ -46,7 +48,7 @@ class Site implements Serializable {
 	 *
 	 * @var string A string uniquely identifying the version of the serialization structure.
 	 */
-	const SERIAL_VERSION_ID = '2013-01-23';
+	public const SERIAL_VERSION_ID = '2013-01-23';
 
 	/**
 	 * @since 1.21
@@ -89,7 +91,7 @@ class Site implements Serializable {
 	 *
 	 * @since 1.21
 	 *
-	 * @var array[]
+	 * @var array[]|false
 	 */
 	protected $localIds = [];
 
@@ -354,7 +356,7 @@ class Site implements Serializable {
 
 	/**
 	 * Returns the full URL for the given page on the site.
-	 * Or false if the needed information is not known.
+	 * Or null if the needed information is not known.
 	 *
 	 * This generated URL is usually based upon the path returned by getLinkPath(),
 	 * but this is not a requirement.
@@ -365,13 +367,13 @@ class Site implements Serializable {
 	 *
 	 * @param bool|string $pageName
 	 *
-	 * @return string|bool
+	 * @return string|null
 	 */
 	public function getPageUrl( $pageName = false ) {
 		$url = $this->getLinkPath();
 
-		if ( $url === false ) {
-			return false;
+		if ( $url === null ) {
+			return null;
 		}
 
 		if ( $pageName !== false ) {
@@ -460,10 +462,14 @@ class Site implements Serializable {
 	 *
 	 * @since 1.21
 	 *
-	 * @param string $languageCode
+	 * @param string|null $languageCode
 	 */
 	public function setLanguageCode( $languageCode ) {
-		if ( !Language::isValidCode( $languageCode ) ) {
+		if ( $languageCode !== null
+			&& !MediaWikiServices::getInstance()
+				->getLanguageNameUtils()
+				->isValidCode( $languageCode )
+		) {
 			throw new InvalidArgumentException( "$languageCode is not a valid language code." );
 		}
 		$this->languageCode = $languageCode;

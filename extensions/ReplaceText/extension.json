@@ -9,6 +9,9 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:Replace_Text",
 	"descriptionmsg": "replacetext-desc",
 	"license-name": "GPL-2.0-or-later",
+	"requires": {
+		"MediaWiki": ">= 1.32.0"
+	},
 	"type": "specialpage",
 	"GroupPermissions": {
 		"sysop": {
@@ -33,11 +36,19 @@
 		"ext.ReplaceText": {
 			"scripts": [
 				"ext.ReplaceText.js"
+			],
+			"styles": [
+				"ext.ReplaceText.css"
+			],
+			"messages": [
+				"powersearch-togglelabel",
+				"powersearch-toggleall",
+				"powersearch-togglenone"
 			]
 		},
 		"ext.ReplaceTextStyles": {
 			"styles": [
-				"ext.ReplaceText.css"
+				"ext.ReplaceTextStyles.css"
 			]
 		}
 	},
@@ -67,6 +78,7 @@
 		]
 	},
 	"config": {
+		"ReplaceTextResultsLimit": 250,
 		"ReplaceTextUser": null
 	},
 	"manifest_version": 1

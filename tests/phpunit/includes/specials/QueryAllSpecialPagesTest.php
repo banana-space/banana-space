@@ -7,11 +7,13 @@
  * @author Antoine Musso
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * @group Database
  * @covers QueryPage<extended>
  */
-class QueryAllSpecialPagesTest extends MediaWikiTestCase {
+class QueryAllSpecialPagesTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var SpecialPage[]
@@ -20,30 +22,30 @@ class QueryAllSpecialPagesTest extends MediaWikiTestCase {
 
 	/** List query pages that can not be tested automatically */
 	protected $manualTest = [
-		LinkSearchPage::class
+		SpecialLinkSearch::class
 	];
 
 	/**
-	 * Pages whose query use the same DB table more than once.
+	 * Names of pages whose query use the same DB table more than once.
 	 * This is used to skip testing those pages when run against a MySQL backend
-	 * which does not support reopening a temporary table. See upstream bug:
-	 * https://bugs.mysql.com/bug.php?id=10327
+	 * which does not support reopening a temporary table.
+	 * For more info, see https://phabricator.wikimedia.org/T256006
 	 */
 	protected $reopensTempTable = [
-		BrokenRedirects::class,
+		'BrokenRedirects',
 	];
 
 	/**
 	 * Initialize all query page objects
 	 */
-	function __construct() {
-		parent::__construct();
+	protected function setUp() : void {
+		parent::setUp();
 
 		foreach ( QueryPage::getPages() as $page ) {
-			$class = $page[0];
-			$name = $page[1];
+			list( $class, $name ) = $page;
 			if ( !in_array( $class, $this->manualTest ) ) {
-				$this->queryPages[$class] = SpecialPageFactory::getPage( $name );
+				$this->queryPages[$class] =
+					MediaWikiServices::getInstance()->getSpecialPageFactory()->getPage( $name );
 			}
 		}
 	}

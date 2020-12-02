@@ -1,0 +1,29 @@
+{
+	"--title": "VisualEditor - Documentation",
+	"--output": "docs",
+	"--categories": ".jsduck/categories.json",
+	"--eg-iframe": ".jsduck/eg-iframe.html",
+	"--tags": ".jsduck/CustomTags.rb",
+	"--processes": "0",
+	"--warnings-exit-nonzero": true,
+	"--builtin-classes": true,
+	"--external": "HTMLDocument,HTMLBodyElement,HTMLHtmlElement,Window,Node,Text,Set,Range,Selection,ClientRect,File,FileList,Blob,DataTransfer,DataTransferItem,KeyboardEvent,MouseEvent,Promise,Storage",
+	"--warnings": ["-nodoc(class,public)", "-global"],
+	"--exclude": [
+		"lib/ve/rebaser/src/dm/"
+	],
+	"--": [
+		".jsduck/external.js",
+		"lib/ve/.jsduck/external.js",
+		"lib/ve/lib/oojs-ui/oojs-ui-core.js",
+		"lib/ve/lib/oojs-ui/oojs-ui-widgets.js",
+		"lib/ve/lib/oojs-ui/oojs-ui-toolbars.js",
+		"lib/ve/lib/oojs-ui/oojs-ui-windows.js",
+		"lib/ve/lib/oojs-ui/oojs-ui-wikimediaui.js",
+		"lib/ve/lib/oojs-ui/oojs-ui-apex.js",
+		"lib/ve/lib/unicodejs/unicodejs.js",
+		"lib/ve/lib/treeDiffer/treeDiffer-dist.js",
+		"lib/ve/src",
+		"modules/ve-mw"
+	]
+}

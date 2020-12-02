@@ -13,17 +13,22 @@
 	},
 	"MessagesDirs": {
 		"FancyCaptcha": [
-			"i18n"
+			"i18n",
+			"i18n/api"
 		]
 	},
 	"AutoloadClasses": {
-		"FancyCaptcha": "FancyCaptcha.class.php",
-		"HTMLFancyCaptchaField": "HTMLFancyCaptchaField.php",
-		"ApiFancyCaptchaReload": "ApiFancyCaptchaReload.php"
+		"FancyCaptcha": "includes/FancyCaptcha.php",
+		"HTMLFancyCaptchaField": "includes/HTMLFancyCaptchaField.php",
+		"ApiFancyCaptchaReload": "includes/ApiFancyCaptchaReload.php"
 	},
 	"ResourceModules": {
 		"ext.confirmEdit.fancyCaptcha.styles": {
-			"styles": "ext.confirmEdit.fancyCaptcha.css"
+			"styles": "ext.confirmEdit.fancyCaptcha.less",
+			"targets": [
+				"mobile",
+				"desktop"
+			]
 		},
 		"ext.confirmEdit.fancyCaptcha": {
 			"scripts": "ext.confirmEdit.fancyCaptcha.js",
@@ -48,12 +53,24 @@
 	},
 	"callback": "ConfirmEditHooks::onFancyCaptchaSetup",
 	"config": {
-		"CaptchaClass": "FancyCaptcha",
-		"CaptchaFileBackend": "",
-		"CaptchaDirectory": false,
-		"CaptchaDirectoryLevels": 0,
-		"CaptchaSecret": "CHANGE_THIS_SECRET!",
-		"CaptchaDeleteOnSolve": false
+		"CaptchaClass": {
+			"value": "FancyCaptcha"
+		},
+		"CaptchaFileBackend": {
+			"value": ""
+		},
+		"CaptchaDirectory": {
+			"value": false
+		},
+		"CaptchaDirectoryLevels": {
+			"value": 0
+		},
+		"CaptchaSecret": {
+			"value": "CHANGE_THIS_SECRET!"
+		},
+		"CaptchaDeleteOnSolve": {
+			"value": false
+		}
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }

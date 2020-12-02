@@ -1,16 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Malafaya",
-			"Wyvernoid",
-			"Robin van der Vliet",
+			"Joao Xavier",
 			"Lakaoso",
-			"Joao Xavier"
+			"Malafaya",
+			"Robin van der Vliet",
+			"Wyvernoid"
 		]
 	},
 	"renameuser": "Rinomar uzero",
 	"renameuserold": "Aktuala uzantonomo:",
 	"renameusernew": "Nova uzantonomo:",
+	"renameuserreason": "Motivo:",
 	"renameuserwarnings": "Averti:",
 	"renameuserconfirm": "Yes, rinomez l'uzanto",
 	"renameusererrordoesnotexist": "L'uzanto \"<nowiki>$1</nowiki>\" ne existas.",

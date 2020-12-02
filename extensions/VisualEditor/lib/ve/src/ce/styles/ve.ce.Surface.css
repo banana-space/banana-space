@@ -1,0 +1,147 @@
+/*!
+ * VisualEditor ContentEditable Surface styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ce-surface {
+	/* Create a new stacking context for elements inside the surface */
+	position: relative;
+	z-index: 0;
+	/*
+	Remember, don't set font-size here.
+	Should be inherited from the VE target container.
+	*/
+}
+
+/* @noflip */
+.ve-ce-surface-deactivatedSelection {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.ve-ce-surface-deactivatedSelection-showAsDeactivated {
+	opacity: 0.15;
+}
+
+.ve-ce-surface-deactivatedSelection > div {
+	position: absolute;
+	background: #6da9f7;
+	margin-top: -0.15em;
+	padding: 0.15em 0;
+}
+
+.ve-ce-surface-deactivatedSelection-showAsDeactivated > div {
+	background: #000;
+}
+
+.ve-ce-surface-deactivatedSelection-collapsed {
+	opacity: 1;
+	/* Color is matched to font in ve.ce.Surface.js */
+}
+
+/* Support: IE, Edge */
+/* Set opacity directly on the highlights, rather than their containers,
+   otherwise the opacity isn't applied at all */
+.ve-init-target-ie-or-edge .ve-ce-surface-deactivatedSelection > div {
+	opacity: 0.5;
+}
+
+.ve-init-target-ie-or-edge .ve-ce-surface-deactivatedSelection-showAsDeactivated > div {
+	opacity: 0.15;
+}
+
+.ve-ce-surface-dropMarker {
+	height: 1px;
+	background: #72777d;
+	pointer-events: none;
+	position: absolute;
+}
+
+.ve-ce-surface-highlights-user-selections {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.ve-ce-surface-highlights-user-cursors {
+	pointer-events: none;
+}
+
+.ve-ce-surface-highlights-user-selection {
+	position: absolute;
+	background: #faa;
+	box-shadow: inset 0 0 0 1px #a66;
+}
+
+.ve-ce-surface-highlights-user-cursor {
+	position: absolute;
+	background: #a66;
+	width: 2px;
+}
+
+.ve-ce-surface-highlights-user-cursor-label {
+	position: absolute;
+	font-size: 0.7em;
+	background: #a66;
+	color: #fff;
+	text-shadow: 0 0 1px rgba( 0, 0, 0, 0.5 );
+	padding: 0.2em;
+	top: -1.4em;
+	height: 1em;
+	line-height: 1;
+	white-space: nowrap;
+	max-width: 10em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.ve-ce-surface-highlights-user-cursor-inactive,
+.ve-ce-surface-highlights-user-selection-inactive {
+	opacity: 0.5;
+}
+
+.ve-ce-surface-paused {
+	opacity: 0.5;
+}
+
+.ve-ce-surface-paste {
+	position: fixed;
+	/* FIXME T126024: Stop the viewport scrolling when the paste target is typed into */
+	top: 3em;
+	left: 0;
+	/* Try to avoid wrapping by not setting a width because of https://code.google.com/p/chromium/issues/detail?id=318925 */
+	height: 1px;
+	opacity: 0;
+	overflow: hidden;
+}
+
+.ve-ce-surface-paste * {
+	height: 1px !important; /* stylelint-disable-line declaration-no-important */
+}
+
+/* Support: IE */
+/* Prevent IE from wrapping link text in <u> and <font color> tags */
+.ve-init-target-ie-or-edge .ve-ce-surface-paste a {
+	color: #36c;
+	text-decoration: underline !important; /* stylelint-disable-line declaration-no-important */
+}
+
+.ve-ce-cursorHolder {
+	position: absolute;
+	width: 0;
+	height: 0;
+}
+
+.ve-ce-cursorHolder-img {
+	width: 0;
+	height: 0;
+}
+
+.ve-ce-cursorHolder-debug {
+	width: 2px;
+	height: 1em;
+	border: 1px solid #d33;
+}

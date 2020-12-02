@@ -3,13 +3,14 @@
 		"authors": [
 			"Fryed-peach",
 			"Hamilton Abreu",
-			"Purodha",
-			"Shirayuki",
 			"Liuxinyu970226",
+			"Purodha",
+			"Raymond",
+			"Shirayuki",
 			"Umherirrender"
 		]
 	},
-	"fancycaptcha-desc": "{{Optional}}\n{{desc|name=FancyCaptcha|url=https://www.mediawiki.org/wiki/Extension:ConfirmEdit}}",
+	"fancycaptcha-desc": "{{desc|name=FancyCaptcha|url=https://www.mediawiki.org/wiki/Extension:ConfirmEdit}}",
 	"fancycaptcha-addurl": "{{Related|ConfirmEdit-addurl}}",
 	"fancycaptcha-badlogin": "{{Related|ConfirmEdit-badlogin}}",
 	"fancycaptcha-captcha": "Brief label for image CAPTCHA input field",
@@ -18,8 +19,5 @@
 	"fancycaptcha-edit": "{{Related|ConfirmEdit-edit}}",
 	"fancycaptcha-imgcaptcha-ph": "Placeholder text for image CAPTCHA input field.",
 	"fancycaptcha-sendemail": "{{Related|ConfirmEdit-sendemail}}",
-	"fancycaptcha-reload-text": "Prompts a click to get a new FancyCaptcha image.\n{{Identical|Refresh}}",
-	"apihelp-fancycaptchareload-description": "{{doc-apihelp-description|fancycaptchareload}}",
-	"apihelp-fancycaptchareload-summary": "{{doc-apihelp-summary|fancycaptchareload}}",
-	"apihelp-fancycaptchareload-example-1": "{{doc-apihelp-example|fancycaptchareload}}"
+	"fancycaptcha-reload-text": "Prompts a click to get a new FancyCaptcha image.\n{{Identical|Refresh}}"
 }

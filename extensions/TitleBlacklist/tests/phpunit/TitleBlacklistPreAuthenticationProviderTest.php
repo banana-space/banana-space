@@ -1,26 +1,19 @@
 <?php
+
 use MediaWiki\Auth\AuthManager;
+use MediaWiki\MediaWikiServices;
 
 /**
  * @group Database
  * @covers TitleBlacklistPreAuthenticationProvider
  */
 class TitleBlacklistPreAuthenticationProviderTest extends MediaWikiTestCase {
-	public function setUp() {
-		global $wgDisableAuthManager;
-		if ( !class_exists( AuthManager::class ) || $wgDisableAuthManager ) {
-			$this->markTestSkipped( 'AuthManager is disabled' );
-		}
-
-		parent::setUp();
-	}
-
 	/**
 	 * @dataProvider provideGetAuthenticationRequests
 	 */
 	public function testGetAuthenticationRequests( $action, $username, $expectedReqs ) {
 		$provider = new TitleBlacklistPreAuthenticationProvider();
-		$provider->setManager( AuthManager::singleton() );
+		$provider->setManager( MediaWikiServices::getInstance()->getAuthManager() );
 		$reqs = $provider->getAuthenticationRequests( $action, [ 'username' => $username ] );
 		$this->assertEquals( $expectedReqs, $reqs );
 	}

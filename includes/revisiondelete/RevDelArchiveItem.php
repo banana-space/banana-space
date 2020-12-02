@@ -19,14 +19,24 @@
  * @ingroup RevisionDelete
  */
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionFactory;
+
 /**
  * Item class for a archive table row
  */
 class RevDelArchiveItem extends RevDelRevisionItem {
-	public function __construct( $list, $row ) {
-		RevDelItem::__construct( $list, $row );
-		$this->revision = Revision::newFromArchiveRow( $row,
-			[ 'page' => $this->list->title->getArticleID() ] );
+	protected static function initRevisionRecord( $list, $row ) {
+		$revRecord = MediaWikiServices::getInstance()
+			->getRevisionFactory()
+			->newRevisionFromArchiveRow(
+				$row,
+				RevisionFactory::READ_NORMAL,
+				null,
+				[ 'page_id' => $list->title->getArticleID() ]
+			);
+
+		return $revRecord;
 	}
 
 	public function getIdField() {
@@ -51,7 +61,7 @@ class RevDelArchiveItem extends RevDelRevisionItem {
 
 	public function getId() {
 		# Convert DB timestamp to MW timestamp
-		return $this->revision->getTimestamp();
+		return $this->revisionRecord->getTimestamp();
 	}
 
 	public function setBits( $bits ) {
@@ -73,7 +83,7 @@ class RevDelArchiveItem extends RevDelRevisionItem {
 
 	protected function getRevisionLink() {
 		$date = $this->list->getLanguage()->userTimeAndDate(
-			$this->revision->getTimestamp(), $this->list->getUser() );
+			$this->revisionRecord->getTimestamp(), $this->list->getUser() );
 
 		if ( $this->isDeleted() && !$this->canViewContent() ) {
 			return htmlspecialchars( $date );
@@ -85,7 +95,7 @@ class RevDelArchiveItem extends RevDelRevisionItem {
 			[],
 			[
 				'target' => $this->list->title->getPrefixedText(),
-				'timestamp' => $this->revision->getTimestamp()
+				'timestamp' => $this->revisionRecord->getTimestamp()
 			]
 		);
 	}
@@ -102,7 +112,7 @@ class RevDelArchiveItem extends RevDelRevisionItem {
 			[
 				'target' => $this->list->title->getPrefixedText(),
 				'diff' => 'prev',
-				'timestamp' => $this->revision->getTimestamp()
+				'timestamp' => $this->revisionRecord->getTimestamp()
 			]
 		);
 	}

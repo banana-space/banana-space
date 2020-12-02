@@ -45,10 +45,11 @@ class ExtensionProcessor implements Processor {
 		'MediaHandlers',
 		'PasswordPolicy',
 		'RateLimits',
+		'RawHtmlMessages',
+		'ReauthenticateTime',
 		'RecentChangesFlags',
 		'RemoveCredentialsBlacklist',
 		'RemoveGroups',
-		'ResourceLoaderLESSVars',
 		'ResourceLoaderSources',
 		'RevokePermissions',
 		'SessionProviders',
@@ -61,8 +62,11 @@ class ExtensionProcessor implements Processor {
 	 *
 	 * @var string[]
 	 */
-	protected static $coreAttributes = [
+	protected const CORE_ATTRIBS = [
+		'ParsoidModules',
+		'RestRoutes',
 		'SkinOOUIThemes',
+		'SearchMappings',
 		'TrackingCategories',
 	];
 
@@ -73,10 +77,9 @@ class ExtensionProcessor implements Processor {
 	 * @see getExtractedInfo
 	 * @var array
 	 */
-	protected static $mergeStrategies = [
+	protected const MERGE_STRATEGIES = [
 		'wgAuthManagerAutoConfig' => 'array_plus_2d',
 		'wgCapitalLinkOverrides' => 'array_plus',
-		'wgExtensionCredits' => 'array_merge_recursive',
 		'wgExtraGenderNamespaces' => 'array_plus',
 		'wgGrantPermissions' => 'array_plus_2d',
 		'wgGroupPermissions' => 'array_plus_2d',
@@ -94,40 +97,44 @@ class ExtensionProcessor implements Processor {
 	 *
 	 * @var array
 	 */
-	protected static $creditsAttributes = [
-		'name',
-		'namemsg',
+	protected const CREDIT_ATTRIBS = [
+		'type',
 		'author',
-		'version',
-		'url',
 		'description',
 		'descriptionmsg',
 		'license-name',
+		'name',
+		'namemsg',
+		'url',
+		'version',
 	];
 
 	/**
-	 * Things that are not 'attributes', but are not in
-	 * $globalSettings or $creditsAttributes.
+	 * Things that are not 'attributes', and are not in
+	 * $globalSettings or CREDIT_ATTRIBS.
 	 *
 	 * @var array
 	 */
-	protected static $notAttributes = [
+	protected const NOT_ATTRIBS = [
 		'callback',
-		'Hooks',
-		'namespaces',
-		'ResourceFileModulePaths',
-		'ResourceModules',
-		'ResourceModuleSkinStyles',
-		'ExtensionMessagesFiles',
-		'MessagesDirs',
-		'type',
 		'config',
 		'config_prefix',
-		'ServiceWiringFiles',
-		'ParserTestFiles',
-		'AutoloadClasses',
-		'manifest_version',
 		'load_composer_autoloader',
+		'manifest_version',
+		'namespaces',
+		'requires',
+		'AutoloadClasses',
+		'ExtensionMessagesFiles',
+		'Hooks',
+		'MessagePosterModule',
+		'MessagesDirs',
+		'OOUIThemePaths',
+		'ParserTestFiles',
+		'QUnitTestModule',
+		'ResourceFileModulePaths',
+		'ResourceModuleSkinStyles',
+		'ResourceModules',
+		'ServiceWiringFiles',
 	];
 
 	/**
@@ -163,6 +170,11 @@ class ExtensionProcessor implements Processor {
 	protected $credits = [];
 
 	/**
+	 * @var array
+	 */
+	protected $config = [];
+
+	/**
 	 * Any thing else in the $info that hasn't
 	 * already been processed
 	 *
@@ -182,11 +194,10 @@ class ExtensionProcessor implements Processor {
 	 * @param string $path
 	 * @param array $info
 	 * @param int $version manifest_version for info
-	 * @return array
 	 */
 	public function extractInfo( $path, array $info, $version ) {
 		$dir = dirname( $path );
-		$this->extractHooks( $info );
+		$this->extractHooks( $info, $path );
 		$this->extractExtensionMessagesFiles( $dir, $info );
 		$this->extractMessagesDirs( $dir, $info );
 		$this->extractNamespaces( $info );
@@ -219,6 +230,13 @@ class ExtensionProcessor implements Processor {
 			$this->extractConfig1( $info );
 		}
 
+		// Record the extension name in the ParsoidModules property
+		if ( isset( $info['ParsoidModules'] ) ) {
+			foreach ( $info['ParsoidModules'] as &$module ) {
+				$module['name'] = $name;
+			}
+		}
+
 		if ( $version === 2 ) {
 			$this->extractAttributes( $path, $info );
 		}
@@ -226,7 +244,7 @@ class ExtensionProcessor implements Processor {
 		foreach ( $info as $key => $val ) {
 			// If it's a global setting,
 			if ( in_array( $key, self::$globalSettings ) ) {
-				$this->storeToArray( $path, "wg$key", $val, $this->globals );
+				$this->storeToArrayRecursive( $path, "wg$key", $val, $this->globals );
 				continue;
 			}
 			// Ignore anything that starts with a @
@@ -236,19 +254,18 @@ class ExtensionProcessor implements Processor {
 
 			if ( $version === 2 ) {
 				// Only whitelisted attributes are set
-				if ( in_array( $key, self::$coreAttributes ) ) {
+				if ( in_array( $key, self::CORE_ATTRIBS ) ) {
 					$this->storeToArray( $path, $key, $val, $this->attributes );
 				}
 			} else {
 				// version === 1
-				if ( !in_array( $key, self::$notAttributes )
-					&& !in_array( $key, self::$creditsAttributes )
+				if ( !in_array( $key, self::NOT_ATTRIBS )
+					&& !in_array( $key, self::CREDIT_ATTRIBS )
 				) {
 					// If it's not blacklisted, it's an attribute
-					$this->storeToArray( $path, $key, $val, $this->attributes );
+					$this->storeToArrayRecursive( $path, $key, $val, $this->attributes );
 				}
 			}
-
 		}
 	}
 
@@ -259,7 +276,7 @@ class ExtensionProcessor implements Processor {
 	protected function extractAttributes( $path, array $info ) {
 		if ( isset( $info['attributes'] ) ) {
 			foreach ( $info['attributes'] as $extName => $value ) {
-				$this->storeToArray( $path, $extName, $value, $this->extAttributes );
+				$this->storeToArrayRecursive( $path, $extName, $value, $this->extAttributes );
 			}
 		}
 	}
@@ -267,8 +284,8 @@ class ExtensionProcessor implements Processor {
 	public function getExtractedInfo() {
 		// Make sure the merge strategies are set
 		foreach ( $this->globals as $key => $val ) {
-			if ( isset( self::$mergeStrategies[$key] ) ) {
-				$this->globals[$key][ExtensionRegistry::MERGE_STRATEGY] = self::$mergeStrategies[$key];
+			if ( isset( self::MERGE_STRATEGIES[$key] ) ) {
+				$this->globals[$key][ExtensionRegistry::MERGE_STRATEGY] = self::MERGE_STRATEGIES[$key];
 			}
 		}
 
@@ -277,7 +294,7 @@ class ExtensionProcessor implements Processor {
 			// Only set the attribute if $extName is loaded (and hence present in credits)
 			if ( isset( $this->credits[$extName] ) ) {
 				foreach ( $value as $attrName => $attrValue ) {
-					$this->storeToArray(
+					$this->storeToArrayRecursive(
 						'', // Don't provide a path since it's impossible to generate an error here
 						$extName . $attrName,
 						$attrValue,
@@ -290,6 +307,7 @@ class ExtensionProcessor implements Processor {
 
 		return [
 			'globals' => $this->globals,
+			'config' => $this->config,
 			'defines' => $this->defines,
 			'callbacks' => $this->callbacks,
 			'credits' => $this->credits,
@@ -297,20 +315,180 @@ class ExtensionProcessor implements Processor {
 		];
 	}
 
-	public function getRequirements( array $info ) {
-		return isset( $info['requires'] ) ? $info['requires'] : [];
+	public function getRequirements( array $info, $includeDev ) {
+		// Quick shortcuts
+		if ( !$includeDev || !isset( $info['dev-requires'] ) ) {
+			return $info['requires'] ?? [];
+		}
+
+		if ( !isset( $info['requires'] ) ) {
+			return $info['dev-requires'] ?? [];
+		}
+
+		// OK, we actually have to merge everything
+		$merged = [];
+
+		// Helper that combines version requirements by
+		// picking the non-null if one is, or combines
+		// the two. Note that it is not possible for
+		// both inputs to be null.
+		$pick = function ( $a, $b ) {
+			if ( $a === null ) {
+				return $b;
+			} elseif ( $b === null ) {
+				return $a;
+			} else {
+				return "$a $b";
+			}
+		};
+
+		$req = $info['requires'];
+		$dev = $info['dev-requires'];
+		if ( isset( $req['MediaWiki'] ) || isset( $dev['MediaWiki'] ) ) {
+			$merged['MediaWiki'] = $pick(
+				$req['MediaWiki'] ?? null,
+				$dev['MediaWiki'] ?? null
+			);
+		}
+
+		$platform = array_merge(
+			array_keys( $req['platform'] ?? [] ),
+			array_keys( $dev['platform'] ?? [] )
+		);
+		if ( $platform ) {
+			foreach ( $platform as $pkey ) {
+				if ( $pkey === 'php' ) {
+					$value = $pick(
+						$req['platform']['php'] ?? null,
+						$dev['platform']['php'] ?? null
+					);
+				} else {
+					// Prefer dev value, but these should be constant
+					// anyways (ext-* and ability-*)
+					$value = $dev['platform'][$pkey] ?? $req['platform'][$pkey];
+				}
+				$merged['platform'][$pkey] = $value;
+			}
+		}
+
+		foreach ( [ 'extensions', 'skins' ] as $thing ) {
+			$things = array_merge(
+				array_keys( $req[$thing] ?? [] ),
+				array_keys( $dev[$thing] ?? [] )
+			);
+			foreach ( $things as $name ) {
+				$merged[$thing][$name] = $pick(
+					$req[$thing][$name] ?? null,
+					$dev[$thing][$name] ?? null
+				);
+			}
+		}
+		return $merged;
 	}
 
-	protected function extractHooks( array $info ) {
-		if ( isset( $info['Hooks'] ) ) {
-			foreach ( $info['Hooks'] as $name => $value ) {
-				if ( is_array( $value ) ) {
-					foreach ( $value as $callback ) {
-						$this->globals['wgHooks'][$name][] = $callback;
+	/**
+	 * When handler value is an array, set $wgHooks or Hooks attribute
+	 * Could be legacy hook e.g. 'GlobalFunctionName' or non-legacy hook
+	 * referencing a handler definition from 'HookHandler' attribute
+	 *
+	 * @param array $callback Handler
+	 * @param array $hookHandlersAttr handler definitions from 'HookHandler' attribute
+	 * @param string $name
+	 * @param string $path extension.json file path
+	 * @throws UnexpectedValueException
+	 */
+	private function setArrayHookHandler(
+		array $callback,
+		array $hookHandlersAttr,
+		string $name,
+		string $path
+	) {
+		if ( isset( $callback['handler'] ) ) {
+			$handlerName = $callback['handler'];
+			$handlerDefinition = $hookHandlersAttr[$handlerName] ?? false;
+			if ( !$handlerDefinition ) {
+				throw new UnexpectedValueException(
+					"Missing handler definition for $name in HookHandlers attribute in $path"
+				);
+			}
+			$callback['handler'] = $handlerDefinition;
+			$callback['extensionPath'] = $path;
+			$this->attributes['Hooks'][$name][] = $callback;
+		} else {
+			foreach ( $callback as $callable ) {
+				if ( is_array( $callable ) ) {
+					if ( isset( $callable['handler'] ) ) { // Non-legacy style handler
+						$this->setArrayHookHandler( $callable, $hookHandlersAttr, $name, $path );
+					} else { // Legacy style handler array
+						$this->globals['wgHooks'][$name][] = $callable;
 					}
-				} else {
-					$this->globals['wgHooks'][$name][] = $value;
+				} elseif ( is_string( $callable ) ) {
+					$this->setStringHookHandler( $callable, $hookHandlersAttr, $name, $path );
 				}
+			}
+		}
+	}
+
+	/**
+	 * When handler value is a string, set $wgHooks or Hooks attribute.
+	 * Could be legacy hook e.g. 'GlobalFunctionName' or non-legacy hook
+	 * referencing a handler definition from 'HookHandler' attribute
+	 *
+	 * @param string $callback Handler
+	 * @param array $hookHandlersAttr handler definitions from 'HookHandler' attribute
+	 * @param string $name
+	 * @param string $path
+	 */
+	private function setStringHookHandler(
+		string $callback,
+		array $hookHandlersAttr,
+		string $name,
+		string $path
+	) {
+		if ( isset( $hookHandlersAttr[$callback] ) ) {
+			$handler = [
+				'handler' => $hookHandlersAttr[$callback],
+				'extensionPath' => $path
+			];
+			$this->attributes['Hooks'][$name][] = $handler;
+		} else { // legacy style handler
+			$this->globals['wgHooks'][$name][] = $callback;
+		}
+	}
+
+	/**
+	 * Extract hook information from Hooks and HookHandler attributes.
+	 * Store hook in $wgHooks if a legacy style handler or the 'Hooks' attribute if
+	 * a non-legacy handler
+	 *
+	 * @param array $info attributes and associated values from extension.json
+	 * @param string $path path to extension.json
+	 */
+	protected function extractHooks( array $info, string $path ) {
+		$extName = $info['name'];
+		if ( isset( $info['Hooks'] ) ) {
+			$hookHandlersAttr = [];
+			foreach ( $info['HookHandlers'] ?? [] as $name => $def ) {
+				$hookHandlersAttr[$name] = [ 'name' => "$extName-$name" ] + $def;
+			}
+			foreach ( $info['Hooks'] as $name => $callback ) {
+				if ( is_string( $callback ) ) {
+					$this->setStringHookHandler( $callback, $hookHandlersAttr, $name, $path );
+				} elseif ( is_array( $callback ) ) {
+					$this->setArrayHookHandler( $callback, $hookHandlersAttr, $name, $path );
+				}
+			}
+		}
+		if ( isset( $info['DeprecatedHooks'] ) ) {
+			$deprecatedHooks = [];
+			foreach ( $info['DeprecatedHooks'] as $name => $deprecatedHookInfo ) {
+				$deprecatedHookInfo += [ 'component' => $extName ];
+				$deprecatedHooks[$name] = $deprecatedHookInfo;
+			}
+			if ( isset( $this->attributes['DeprecatedHooks'] ) ) {
+				$this->attributes['DeprecatedHooks'] += $deprecatedHooks;
+			} else {
+				$this->attributes['DeprecatedHooks'] = $deprecatedHooks;
 			}
 		}
 	}
@@ -329,8 +507,8 @@ class ExtensionProcessor implements Processor {
 					$id = constant( $ns['constant'] );
 				} else {
 					$id = $ns['id'];
-					$this->defines[ $ns['constant'] ] = $id;
 				}
+				$this->defines[ $ns['constant'] ] = $id;
 
 				if ( !( isset( $ns['conditional'] ) && $ns['conditional'] ) ) {
 					// If it is not conditional, register it
@@ -359,9 +537,7 @@ class ExtensionProcessor implements Processor {
 	}
 
 	protected function extractResourceLoaderModules( $dir, array $info ) {
-		$defaultPaths = isset( $info['ResourceFileModulePaths'] )
-			? $info['ResourceFileModulePaths']
-			: false;
+		$defaultPaths = $info['ResourceFileModulePaths'] ?? false;
 		if ( isset( $defaultPaths['localBasePath'] ) ) {
 			if ( $defaultPaths['localBasePath'] === '' ) {
 				// Avoid double slashes (e.g. /extensions/Example//path)
@@ -371,7 +547,7 @@ class ExtensionProcessor implements Processor {
 			}
 		}
 
-		foreach ( [ 'ResourceModules', 'ResourceModuleSkinStyles' ] as $setting ) {
+		foreach ( [ 'ResourceModules', 'ResourceModuleSkinStyles', 'OOUIThemePaths' ] as $setting ) {
 			if ( isset( $info[$setting] ) ) {
 				foreach ( $info[$setting] as $name => $data ) {
 					if ( isset( $data['localBasePath'] ) ) {
@@ -385,8 +561,33 @@ class ExtensionProcessor implements Processor {
 					if ( $defaultPaths ) {
 						$data += $defaultPaths;
 					}
-					$this->globals["wg$setting"][$name] = $data;
+					$this->attributes[$setting][$name] = $data;
 				}
+			}
+		}
+
+		if ( isset( $info['QUnitTestModule'] ) ) {
+			$data = $info['QUnitTestModule'];
+			if ( isset( $data['localBasePath'] ) ) {
+				if ( $data['localBasePath'] === '' ) {
+					// Avoid double slashes (e.g. /extensions/Example//path)
+					$data['localBasePath'] = $dir;
+				} else {
+					$data['localBasePath'] = "$dir/{$data['localBasePath']}";
+				}
+			}
+			$this->attributes['QUnitTestModules']["test.{$info['name']}"] = $data;
+		}
+
+		if ( isset( $info['MessagePosterModule'] ) ) {
+			$data = $info['MessagePosterModule'];
+			$basePath = $data['localBasePath'] ?? '';
+			$baseDir = $basePath === '' ? $dir : "$dir/$basePath";
+			foreach ( $data['scripts'] ?? [] as $scripts ) {
+				$this->attributes['MessagePosterModule']['scripts'][] = "$baseDir/$scripts";
+			}
+			foreach ( $data['dependencies'] ?? [] as $dependency ) {
+				$this->attributes['MessagePosterModule']['dependencies'][] = $dependency;
 			}
 		}
 	}
@@ -426,9 +627,9 @@ class ExtensionProcessor implements Processor {
 	protected function extractCredits( $path, array $info ) {
 		$credits = [
 			'path' => $path,
-			'type' => isset( $info['type'] ) ? $info['type'] : 'other',
+			'type' => 'other',
 		];
-		foreach ( self::$creditsAttributes as $attr ) {
+		foreach ( self::CREDIT_ATTRIBS as $attr ) {
 			if ( isset( $info[$attr] ) ) {
 				$credits[$attr] = $info[$attr];
 			}
@@ -445,7 +646,6 @@ class ExtensionProcessor implements Processor {
 		}
 
 		$this->credits[$name] = $credits;
-		$this->globals['wgExtensionCredits'][$credits['type']][] = $credits;
 
 		return $name;
 	}
@@ -480,21 +680,29 @@ class ExtensionProcessor implements Processor {
 	 * @param string $dir
 	 */
 	protected function extractConfig2( array $info, $dir ) {
-		if ( isset( $info['config_prefix'] ) ) {
-			$prefix = $info['config_prefix'];
-		} else {
-			$prefix = 'wg';
-		}
+		$prefix = $info['config_prefix'] ?? 'wg';
 		if ( isset( $info['config'] ) ) {
 			foreach ( $info['config'] as $key => $data ) {
 				$value = $data['value'];
+				if ( isset( $data['path'] ) && $data['path'] ) {
+					$callback = function ( $value ) use ( $dir ) {
+						return "$dir/$value";
+					};
+					if ( is_array( $value ) ) {
+						$value = array_map( $callback, $value );
+					} else {
+						$value = $callback( $value );
+					}
+				}
 				if ( isset( $data['merge_strategy'] ) ) {
 					$value[ExtensionRegistry::MERGE_STRATEGY] = $data['merge_strategy'];
 				}
-				if ( isset( $data['path'] ) && $data['path'] ) {
-					$value = "$dir/$value";
-				}
 				$this->addConfigGlobal( "$prefix$key", $value, $info['name'] );
+				$data['providedby'] = $info['name'];
+				if ( isset( $info['ConfigRegistry'][0] ) ) {
+					$data['configregistry'] = array_keys( $info['ConfigRegistry'] )[0];
+				}
+				$this->config[$key] = $data;
 			}
 		}
 	}
@@ -522,6 +730,28 @@ class ExtensionProcessor implements Processor {
 	}
 
 	/**
+	 * Stores $value to $array; using array_merge_recursive() if $array already contains $name
+	 *
+	 * @param string $path
+	 * @param string $name
+	 * @param array $value
+	 * @param array &$array
+	 * @throws InvalidArgumentException
+	 */
+	protected function storeToArrayRecursive( $path, $name, $value, &$array ) {
+		if ( !is_array( $value ) ) {
+			throw new InvalidArgumentException( "The value for '$name' should be an array (from $path)" );
+		}
+		if ( isset( $array[$name] ) ) {
+			$array[$name] = array_merge_recursive( $array[$name], $value );
+		} else {
+			$array[$name] = $value;
+		}
+	}
+
+	/**
+	 * Stores $value to $array; using array_merge() if $array already contains $name
+	 *
 	 * @param string $path
 	 * @param string $name
 	 * @param array $value
@@ -533,7 +763,7 @@ class ExtensionProcessor implements Processor {
 			throw new InvalidArgumentException( "The value for '$name' should be an array (from $path)" );
 		}
 		if ( isset( $array[$name] ) ) {
-			$array[$name] = array_merge_recursive( $array[$name], $value );
+			$array[$name] = array_merge( $array[$name], $value );
 		} else {
 			$array[$name] = $value;
 		}

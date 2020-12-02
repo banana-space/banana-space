@@ -1,0 +1,22 @@
+/*!
+ * VisualEditor progress bar widget Apex theme styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-init-mw-progressBarWidget {
+	border: 1px solid #ccc;
+	background: #fff;
+	border-radius: 0.25em;
+	box-shadow: 0 0.1em 0.5em rgba( 0, 0, 0, 0.15 );
+}
+
+.ve-init-mw-progressBarWidget-bar {
+	border-right: 1px solid #ccc;
+	background: #cde7f4;
+	background-image: -webkit-gradient( linear, right top, right bottom, color-stop( 0%, #eaf4fa ), color-stop( 100%, #b0d9ee ) );
+	background-image: -webkit-linear-gradient( top, #eaf4fa 0%, #b0d9ee 100% );
+	background-image: -moz-linear-gradient( top, #eaf4fa 0%, #b0d9ee 100% );
+	background-image: linear-gradient( to bottom, #eaf4fa 0%, #b0d9ee 100% );
+}

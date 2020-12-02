@@ -1,16 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ninonino",
 			"Gloria sah",
-			"Mondschein"
+			"Mondschein",
+			"Ninonino"
 		]
 	},
 	"cite-ve-dialog-reference-options-group-label": "Dòpra chèl grupo ché",
 	"cite-ve-dialog-reference-options-name-label": "Tùrna a doprà chèl nòm ché",
 	"cite-ve-dialog-reference-options-section": "Upsiù",
 	"cite-ve-dialog-reference-title": "Riferimènt",
-	"cite-ve-dialog-reference-useexisting-label": "Dòpra 'n riferimènt che gh'è zamò",
 	"cite-ve-dialog-referenceslist-title": "Lìsta dei riferimèncc",
 	"cite-ve-dialogbutton-reference-tooltip": "Riferimènt",
 	"cite-ve-dialogbutton-referenceslist-tooltip": "Lìsta dei riferimèncc",

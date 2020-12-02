@@ -2,11 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Danny B.",
-			"Mormegil"
+			"Dvorapa",
+			"Mormegil",
+			"Patriccck",
+			"Tchoř"
 		]
 	},
 	"interwiki": "Zobrazit a upravovat interwiki",
-	"interwiki-title-norights": "Zobrazit interwiki",
+	"interwiki-title-norights": "Zobrazit mezijazykové odkazy",
 	"interwiki-desc": "Přidává [[Special:Interwiki|speciální stránku]], na které lze prohlížet a editovat tabulku interwiki",
 	"interwiki_intro": "Toto je přehled tabulky interwiki odkazů, která definuje prefixy používané k jednoduchému odkazování na další wiki a jiné externí stránky. Doporučené použití je popsáno v [//www.mediawiki.org/wiki/Extension:Interwiki příručce na MediaWiki.org].",
 	"interwiki-legend-label": "Legenda",
@@ -25,10 +28,9 @@
 	"interwiki_1": "ano",
 	"interwiki_0": "ne",
 	"interwiki_error": "CHYBA: Interwiki tabulka je prázdná anebo se pokazilo něco jiného.",
-	"interwiki-cached": "Data interwiki pocházejí z cache. Změna cache není možná.",
+	"interwiki-cached": "Data interwiki pocházejí z cache. Změny v cache nejsou možné.",
 	"interwiki_edit": "Editovat",
 	"interwiki_reasonfield": "Důvod:",
-	"interwiki_delquestion": "Mazání „$1“",
 	"interwiki_deleting": "Mažete prefix „$1“.",
 	"interwiki_deleted": "Prefix „$1“ byl úspěšně odstraněn z tabulky interwiki.",
 	"interwiki_delfailed": "Prefix „$1“ nebylo možné odstranit z tabulky interwiki.",

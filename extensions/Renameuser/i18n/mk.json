@@ -3,12 +3,13 @@
 		"authors": [
 			"Bjankuloski06",
 			"Brest",
-			"Misos"
+			"Misos",
+			"Vlad5250"
 		]
 	},
 	"renameuser": "Преименувај корисник",
-	"renameuser-linkoncontribs": "преименувај корисник",
-	"renameuser-linkoncontribs-text": "Преименувај го корисников",
+	"renameuser-linkoncontribs": "преименувај {{GENDER:$1|корисник}}",
+	"renameuser-linkoncontribs-text": "Преименувај го овој {{GENDER:$1|корисник}}",
 	"renameuser-desc": "Додава [[Special:RenameUser|службена страница]] за преименување на корисник (бара право на ''renameuser'')",
 	"renameuserold": "Сегашно корисничко име:",
 	"renameusernew": "Ново корисничко име:",
@@ -35,6 +36,6 @@
 	"logentry-renameuser-renameuser-legacier": "$1 го преименуваше корисникот $4 во {{GENDER:$7|$5}}",
 	"renameuser-move-log": "Автоматски преместена страница при преименување на {{GENDER:$2|корисникот}} „[[User:$1|$1]]“ во „[[User:$2|$2]]“",
 	"action-renameuser": "преименување на корисници",
-	"right-renameuser": "Преименување корисници",
+	"right-renameuser": "Преименување на корисници",
 	"renameuser-renamed-notice": "Овој корисник е преименуван.\nПодолу е приложен дневникот на преименување за споредба."
 }

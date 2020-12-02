@@ -18,17 +18,17 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @ingroup Deployment
+ * @ingroup Installer
  */
 
 use Wikimedia\Rdbms\Database;
-use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\DBConnectionError;
+use Wikimedia\Rdbms\DBQueryError;
 
 /**
  * Class for setting up the MediaWiki database using MySQL.
  *
- * @ingroup Deployment
+ * @ingroup Installer
  * @since 1.17
  */
 class MysqlInstaller extends DatabaseInstaller {
@@ -48,10 +48,10 @@ class MysqlInstaller extends DatabaseInstaller {
 		'_InstallUser' => 'root',
 	];
 
-	public $supportedEngines = [ 'InnoDB', 'MyISAM' ];
+	public $supportedEngines = [ 'InnoDB' ];
 
 	public static $minimumVersion = '5.5.8';
-	protected static $notMiniumumVerisonMessage = 'config-mysql-old';
+	protected static $notMinimumVersionMessage = 'config-mysql-old';
 
 	public $webUserPrivs = [
 		'DELETE',
@@ -128,9 +128,10 @@ class MysqlInstaller extends DatabaseInstaller {
 			return $status;
 		}
 		/**
-		 * @var $conn Database
+		 * @var Database $conn
 		 */
 		$conn = $status->value;
+		'@phan-var Database $conn';
 
 		// Check version
 		return static::meetsMinimumRequirement( $conn->getServerVersion() );
@@ -142,6 +143,7 @@ class MysqlInstaller extends DatabaseInstaller {
 	public function openConnection() {
 		$status = Status::newGood();
 		try {
+			/** @var DatabaseMysqlBase $db */
 			$db = Database::factory( 'mysql', [
 				'host' => $this->getVar( 'wgDBserver' ),
 				'user' => $this->getVar( '_InstallUser' ),
@@ -162,12 +164,12 @@ class MysqlInstaller extends DatabaseInstaller {
 
 		$status = $this->getConnection();
 		if ( !$status->isOK() ) {
-			$this->parent->showStatusError( $status );
+			$this->parent->showStatusMessage( $status );
 
 			return;
 		}
 		/**
-		 * @var $conn Database
+		 * @var Database $conn
 		 */
 		$conn = $status->value;
 		$conn->selectDB( $this->getVar( 'wgDBname' ) );
@@ -192,11 +194,7 @@ class MysqlInstaller extends DatabaseInstaller {
 					$existingSchema = false;
 					$this->parent->showMessage( 'config-unknown-collation' );
 				}
-				if ( isset( $row->Engine ) ) {
-					$existingEngine = $row->Engine;
-				} else {
-					$existingEngine = $row->Type;
-				}
+				$existingEngine = $row->Engine ?? $row->Type;
 			}
 		} else {
 			$existingSchema = false;
@@ -236,7 +234,7 @@ class MysqlInstaller extends DatabaseInstaller {
 		$status = $this->getConnection();
 
 		/**
-		 * @var $conn Database
+		 * @var Database $conn
 		 */
 		$conn = $status->value;
 
@@ -368,45 +366,6 @@ class MysqlInstaller extends DatabaseInstaller {
 			$this->setVar( '_MysqlEngine', reset( $engines ) );
 		}
 
-		$s .= Xml::openElement( 'div', [
-			'id' => 'dbMyisamWarning'
-		] );
-		$myisamWarning = 'config-mysql-myisam-dep';
-		if ( count( $engines ) === 1 ) {
-			$myisamWarning = 'config-mysql-only-myisam-dep';
-		}
-		$s .= $this->parent->getWarningBox( wfMessage( $myisamWarning )->text() );
-		$s .= Xml::closeElement( 'div' );
-
-		if ( $this->getVar( '_MysqlEngine' ) != 'MyISAM' ) {
-			$s .= Xml::openElement( 'script' );
-			$s .= '$(\'#dbMyisamWarning\').hide();';
-			$s .= Xml::closeElement( 'script' );
-		}
-
-		if ( count( $engines ) >= 2 ) {
-			// getRadioSet() builds a set of labeled radio buttons.
-			// For grep: The following messages are used as the item labels:
-			// config-mysql-innodb, config-mysql-myisam
-			$s .= $this->getRadioSet( [
-				'var' => '_MysqlEngine',
-				'label' => 'config-mysql-engine',
-				'itemLabelPrefix' => 'config-mysql-',
-				'values' => $engines,
-				'itemAttribs' => [
-					'MyISAM' => [
-						'class' => 'showHideRadio',
-						'rel' => 'dbMyisamWarning'
-					],
-					'InnoDB' => [
-						'class' => 'hideShowRadio',
-						'rel' => 'dbMyisamWarning'
-					]
-				]
-			] );
-			$s .= $this->parent->getHelpBox( 'config-mysql-engine-help' );
-		}
-
 		// If the current default charset is not supported, use a charset that is
 		$charsets = $this->getCharsets();
 		if ( !in_array( $this->getVar( '_MysqlCharset' ), $charsets ) ) {
@@ -485,16 +444,30 @@ class MysqlInstaller extends DatabaseInstaller {
 		/** @var Database $conn */
 		$conn = $status->value;
 		$dbName = $this->getVar( 'wgDBname' );
-		if ( !$conn->selectDB( $dbName ) ) {
+		if ( !$this->databaseExists( $dbName ) ) {
 			$conn->query(
 				"CREATE DATABASE " . $conn->addIdentifierQuotes( $dbName ) . "CHARACTER SET utf8",
 				__METHOD__
 			);
-			$conn->selectDB( $dbName );
 		}
+		$conn->selectDB( $dbName );
 		$this->setupSchemaVars();
 
 		return $status;
+	}
+
+	/**
+	 * Try to see if a given database exists
+	 * @param string $dbName Database name to check
+	 * @return bool
+	 */
+	private function databaseExists( $dbName ) {
+		$encDatabase = $this->db->addQuotes( $dbName );
+
+		return $this->db->query(
+			"SELECT 1 FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = $encDatabase",
+			__METHOD__
+		)->numRows() > 0;
 	}
 
 	/**

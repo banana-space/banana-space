@@ -35,7 +35,5 @@
 	"categorytree-no-pages": "engar síður eða undirflokkar",
 	"categorytree-not-found": "Flokkurinn <i>$1</i> fannst ekki",
 	"categorytree-error": "Villa við hleðslu gagna.",
-	"categorytree-retry": "Gjörðu svo vel og reyndu síðar.",
-	"apihelp-categorytree-description": "Innri kerfiseining fyrir CategoryTree-viðbótina.",
-	"apihelp-categorytree-summary": "Innri kerfiseining fyrir CategoryTree-viðbótina."
+	"categorytree-retry": "Gjörðu svo vel og reyndu síðar."
 }

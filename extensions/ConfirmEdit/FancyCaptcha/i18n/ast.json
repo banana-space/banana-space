@@ -5,6 +5,7 @@
 			"Xuacu"
 		]
 	},
+	"fancycaptcha-desc": "Xenerador Fancy CAPTCHA pa Confirmar Edición",
 	"fancycaptcha-addurl": "La so edición incluye nuevos enllaces esternos. Pa protexer la wiki escontra'l spam automatizáu, pidimos-y qu'escriba nel caxellu les pallabres qu'apaecen embaxo ([[Special:Captcha/help|más información]]):",
 	"fancycaptcha-badlogin": "Pa protexer la wiki escontra'l descifráu automáticu de claves, pidimos-y qu'escriba nel caxellu les pallabres qu'apaecen embaxo ([[Special:Captcha/help|más información]]):",
 	"fancycaptcha-captcha": "Comprobación de seguridá",
@@ -13,8 +14,5 @@
 	"fancycaptcha-edit": "Pa editar la páxina, por favor escribi nel caxellu les pallabres qu'apaecen embaxo ([[Special:Captcha/help|más información]]):",
 	"fancycaptcha-imgcaptcha-ph": "Escribe'l testu que ves na imaxe",
 	"fancycaptcha-sendemail": "Pa protexer la wiki escontra'l corréu puxarra automáticu, pidimos-y qu'escriba nel caxellu les pallabres qu'apaecen embaxo ([[Special:Captcha/help|más información]]):",
-	"fancycaptcha-reload-text": "Refrescar",
-	"apihelp-fancycaptchareload-description": "Solicitar un FancyCaptcha nuevu.",
-	"apihelp-fancycaptchareload-summary": "Solicitar un FancyCaptcha nuevu.",
-	"apihelp-fancycaptchareload-example-1": "Solicitar un FancyCaptcha nuevu"
+	"fancycaptcha-reload-text": "Refrescar"
 }

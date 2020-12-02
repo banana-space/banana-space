@@ -2,9 +2,12 @@
 
 /**
  * Radio checkbox fields.
+ *
+ * @stable to extend
  */
 class HTMLRadioField extends HTMLFormField {
 	/**
+	 * @stable to call
 	 * @param array $params
 	 *   In adition to the usual HTMLFormField parameters, this can take the following fields:
 	 *   - flatlist: If given, the options will be displayed on a single line (wrapping to following
@@ -92,7 +95,7 @@ class HTMLRadioField extends HTMLFormField {
 					$classes[] = 'mw-ui-radio';
 				}
 				$radio = Xml::radio( $this->mName, $info, $info === $value, $attribs + [ 'id' => $id ] );
-				$radio .= '&#160;' . call_user_func( $elementFunc, 'label', [ 'for' => $id ], $label );
+				$radio .= "\u{00A0}" . call_user_func( $elementFunc, 'label', [ 'for' => $id ], $label );
 
 				$html .= ' ' . Html::rawElement(
 					'div',

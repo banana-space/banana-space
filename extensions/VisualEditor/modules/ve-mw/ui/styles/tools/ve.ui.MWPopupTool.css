@@ -1,0 +1,57 @@
+/*!
+ * VisualEditor MediaWiki UserInterface popup tool styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwPopupTool {
+	white-space: normal;
+}
+
+.ve-ui-mwPopupTool .oo-ui-popupWidget-head {
+	font-weight: bold;
+}
+
+.ve-ui-mwNoticesPopupTool-items,
+.ve-ui-mwHelpPopupTool-items {
+	padding: 0.5em 1em;
+	line-height: 1.6em;
+}
+
+.ve-ui-mwNoticesPopupTool-items > div:not( :first-child ),
+.ve-ui-mwHelpPopupTool-item:not( :first-child ) {
+	border-top: 1px solid #c8ccd1;
+	padding-top: 0.8em;
+	margin-top: 0.8em;
+}
+
+.ve-ui-mwHelpPopupTool-item > .oo-ui-buttonElement-frameless.oo-ui-labelElement.oo-ui-iconElement {
+	display: block;
+	margin: 0.5em 0;
+}
+
+.ve-ui-mwHelpPopupTool-item > .oo-ui-buttonElement-frameless.oo-ui-labelElement.oo-ui-iconElement:first-child {
+	margin-top: 0;
+}
+
+.ve-ui-mwHelpPopupTool-item > .oo-ui-buttonElement > .oo-ui-buttonElement-button {
+	/* These labels can be very long, so allow them to wrap (T190796) */
+	white-space: normal;
+}
+
+.ve-ui-mwHelpPopupTool-version-label,
+.ve-ui-mwHelpPopupTool-version-link,
+.ve-ui-mwHelpPopupTool-version-date {
+	font-size: 0.9em;
+	color: #54595d;
+}
+
+/*
+ * Bidi-isolate the version number,
+ * so it won't mess up the date after it.
+ * T70688
+ */
+.ve-ui-mwHelpPopupTool-version-link {
+	unicode-bidi: embed;
+}

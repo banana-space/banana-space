@@ -4,8 +4,6 @@
 	},
 	"skinname-timeless": "Timeless",
 	"timeless-desc": "A timeless skin designed after the Winter prototype by Brandon Harris, and various styles by the Wikimedia Foundation",
-	"timeless-search-placeholder": "Search {{NUMBEROFARTICLES}} pages",
-	"timeless-loggedin": "Your account",
 	"timeless-anonymous": "Anonymous",
 	"timeless-loggedinas": "Logged in as '''$1'''",
 	"timeless-notloggedin": "Not logged in",
@@ -16,11 +14,14 @@
 	"timeless-sitetools": "Wiki tools",
 	"timeless-pageactions": "Page tools",
 	"timeless-userpagetools": "Userpage tools",
+	"timeless-action-addsection": "New topic",
+	"timeless-view-view": "Read",
 	"timeless-pagemisc": "More",
 	"timeless-namespaces": "Namespaces",
 	"timeless-pagetools": "Page actions",
 	"timeless-languages": "Languages",
-	"timeless-sitetitle": "{{MediaWiki:Sitetitle}}",
-	"timeless.css": "/* CSS placed here will affect users of the Timeless skin */",
-	"timeless.js": "/* Any JavaScript here will be loaded for users using the Timeless skin */"
+	"timeless-projects": "Other projects",
+	"timeless-sitetitle": "{{int:Sitetitle}}",
+	"timeless.css": "/* All CSS here will be loaded for users of the Timeless skin */",
+	"timeless.js": "/* All JavaScript here will be loaded for users of the Timeless skin */"
 }

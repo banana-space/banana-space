@@ -9,8 +9,8 @@
 		]
 	},
 	"renameuser": "Kasutajanime muutmine",
-	"renameuser-linkoncontribs": "kasutaja ümbernimetamine",
-	"renameuser-linkoncontribs-text": "Nimeta see kasutaja ümber",
+	"renameuser-linkoncontribs": "{{GENDER:$1|kasutaja}} ümbernimetamine",
+	"renameuser-linkoncontribs-text": "Nimeta see {{GENDER:$1|kasutaja}} ümber",
 	"renameuser-desc": "Lisab kasutajanime muutmise [[Special:RenameUser|erilehekülje]] (vajab ''renameuser''-õigust).",
 	"renameuserold": "Praegune kasutajanimi:",
 	"renameusernew": "Uus kasutajanimi:",

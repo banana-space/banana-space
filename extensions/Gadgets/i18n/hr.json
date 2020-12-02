@@ -5,13 +5,14 @@
 			"Dalibor Bosits",
 			"Ex13",
 			"MaGa",
+			"Neptune, the Mystic",
 			"Roberta F.",
 			"SpeedyGonsales"
 		]
 	},
 	"gadgets-desc": "Omogućava suradnicama biranje osobnih [[Special:Gadgets|CSS i JavaScript dodataka]] u svojim [[Special:Preferences#mw-prefsection-gadgets|postavkama]]",
 	"prefs-gadgets": "Dodatci",
-	"gadgets-prefstext": "Slijedi popis posebnih dodataka koje možete omogućiti.\nVećinom su napisani u JavaScriptu, stoga JavaScript mora biti omogućen u vašem internetskom pregledniku da bi radili.\nNijedan dodatak nema učinka na ovu stranicu s postavkama.\n\nOvi posebni dodatci nisu dio MediaWiki softvera, najčešće ih razvijaju i održavaju suradnici na lokalnom wikiju.\nLokalni administratori mogu uređivati dostupne dodatke putem [[MediaWiki:Gadgets-definition|definicija]] i [[Special:Gadgets|opisa]]. Broj korisnika dodataka možete vidjeti na stranici  [[Special:GadgetUsage|Statistika uporabe dodataka]].",
+	"gadgets-prefstext": "Slijedi popis posebnih dodataka koje možete omogućiti.\nVećinom su napisani u JavaScriptu, stoga JavaScript mora biti omogućen u vašem internetskom pregledniku da bi radili.\nNijedan dodatak nema učinka na ovu stranicu s postavkama.\n\nOvi posebni dodatci nisu dio MediaWiki softvera, najčešće ih razvijaju i održavaju suradnici na lokalnom wikiju.\nLokalni administratori sučelja mogu uređivati dostupne dodatke putem [[MediaWiki:Gadgets-definition|definicija]], dok lokalni administratori mogu uređivati njihove [[Special:Gadgets|opise]]. Broj korisnika dodataka možete vidjeti na stranici  [[Special:GadgetUsage|Statistika uporabe dodataka]].",
 	"gadgets": "Dodatci",
 	"gadgetusage": "Statistika uporabe dodataka",
 	"gadgetusage-gadget": "Dodatak",

@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Albertas"
+		]
+	},
+	"apihelp-spamblacklist-description": "Patikrinti vieną arba daugiau URL nuorodų ar jos nėra SpamBlacklist.",
+	"apihelp-spamblacklist-example-1": "Patikrinti dvi URL nuorodas, ar nėra juodajame sąraše",
+	"apihelp-spamblacklist-param-url": "URL nuorodos, kurias patikrinti, ar nėra juodajame sąraše."
+}

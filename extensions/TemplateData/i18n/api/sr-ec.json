@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"BadDog"
+		]
+	},
+	"apihelp-templatedata-description": "Добављање података које је сместио додатак „Подаци о шаблону” (TemplateData).",
+	"apihelp-templatedata-summary": "Добављање података које је ускладиштио додатак „Подаци о шаблону”.",
+	"apihelp-templatedata-example-1": "Врати податке о шаблону за шаблоне [[Template:Stub]] и [[Template:Example]], са резултатима ако шаблони не постоје или постоје, али немају податке",
+	"apihelp-templatedata-example-2": "Врати податке о шаблону за шаблоне [[Template:Stub]] и [[Template:Example]], без резултата ако шаблони не постоје или постоје, али немају податке",
+	"apihelp-templatedata-param-doNotIgnoreMissingTitles": "Врати податке о насловима чак и ако недостају или немају податке о шаблону. Подразумевано (за компатибилност) наслови су се само враћају ако постоје и имају податке о шаблону.",
+	"apierror-templatedata-corrupt": "Подаци о шаблону на страници #$1 садрже неважеће податке: $2"
+}

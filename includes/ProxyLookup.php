@@ -58,7 +58,7 @@ class ProxyLookup {
 	 */
 	public function isConfiguredProxy( $ip ) {
 		// Quick check of known singular proxy servers
-		if ( in_array( $ip, $this->proxyServers ) ) {
+		if ( in_array( $ip, $this->proxyServers, true ) ) {
 			return true;
 		}
 
@@ -79,7 +79,7 @@ class ProxyLookup {
 	 */
 	public function isTrustedProxy( $ip ) {
 		$trusted = $this->isConfiguredProxy( $ip );
-		Hooks::run( 'IsTrustedProxy', [ &$ip, &$trusted ] );
+		Hooks::runner()->onIsTrustedProxy( $ip, $trusted );
 		return $trusted;
 	}
 }

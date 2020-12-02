@@ -5,7 +5,7 @@
 			"Vinhtantran"
 		]
 	},
-	"cite-desc": "Thêm các thẻ <nowiki><ref[ name=id]></nowiki> và <nowiki><references/></nowiki> để ghi chú thích hoặc nguồn tham khảo",
+	"cite-desc": "Thêm các thẻ <code>&lt;ref[ name=id]&gt;</code> và <code>&lt;references/&gt;</code> để ghi chú thích hoặc nguồn tham khảo",
 	"cite_error": "Lỗi chú thích: $1",
 	"cite_error_ref_numeric_key": "Thẻ <code>&lt;ref&gt;</code> sai; tên không thể chỉ là số nguyên, hãy dùng tựa đề có tính miêu tả",
 	"cite_error_ref_no_key": "Thẻ mở <code>&lt;ref&gt;</code> bị hỏng hoặc có tên sai",
@@ -13,8 +13,8 @@
 	"cite_error_ref_no_input": "Mã <code>&lt;ref&gt;</code> sai; thẻ ref không có tên thì phải có nội dung",
 	"cite_error_references_duplicate_key": "Thẻ <code>&lt;ref&gt;</code> không hợp lệ: tên “$1” được định rõ nhiều lần, mỗi lần có nội dung khác",
 	"cite_error_references_invalid_parameters": "Thông số không hợp lệ trong thẻ <code>&lt;references&gt;</code>",
-	"cite_error_references_no_backlink_label": "Đã dùng hết nhãn tham khảo chung.\nHãy định nghĩa thêm ở thông điệp <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
-	"cite_error_no_link_label_group": "Thiếu nhãn liên kết tùy biến cho nhóm “$1”. Hãy định rõ thêm nhãn trong thông điệp <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_backlink_label": "Đã dùng hết nhãn tham khảo chung. Hãy định nghĩa thêm ở thông điệp [[MediaWiki:Cite references link many format backlink labels]]",
+	"cite_error_no_link_label_group": "Thiếu nhãn liên kết tùy biến cho nhóm “$1”. Hãy định rõ thêm nhãn trong thông điệp [[MediaWiki:$2]].",
 	"cite_error_references_no_text": "Thẻ <code>&lt;ref&gt;</code> sai; không có nội dung trong thẻ ref có tên <code>$1</code>",
 	"cite_error_included_ref": "Không có <code>&lt;/ref&gt;</code> để đóng thẻ <code>&lt;ref&gt;</code>",
 	"cite_error_group_refs_without_references": "Đã tìm thấy thẻ <code>&lt;ref&gt;</code> với tên nhóm “$1”, nhưng không tìm thấy thẻ tương ứng <code>&lt;references group=\"$1\"/&gt;</code> tương ứng, hoặc thẻ đóng <code>&lt;/ref&gt;</code> bị thiếu",

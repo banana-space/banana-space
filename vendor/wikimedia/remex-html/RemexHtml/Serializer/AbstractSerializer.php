@@ -9,5 +9,5 @@ interface AbstractSerializer extends TreeHandler {
 	 *
 	 * @return string
 	 */
-	function getResult();
+	public function getResult();
 }

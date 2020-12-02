@@ -4,5 +4,7 @@
 			"פוילישער"
 		]
 	},
-	"oathauth-account": "קאנטע נאמען:"
+	"oathauth-account": "קאנטע נאמען:",
+	"oathauth-enable-generic": "אַקטיווירן",
+	"oathauth-disable-generic": "אָפאַקטיוויזירן"
 }

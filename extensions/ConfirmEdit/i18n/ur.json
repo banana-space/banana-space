@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"عثمان خان شاہ",
-			"Muhammad Shuaib"
+			"Muhammad Shuaib",
+			"عثمان خان شاہ"
 		]
 	},
 	"captcha-edit": "اس صفحہ میں ترمیم کرنے کے لیے ذیل میں موجود سوال کو حل کریں اور اس کا جواب تحریر کریں ([[Special:Captcha/help|مزید تفصیل]]):",
@@ -22,7 +22,6 @@
 	"captchahelp-title": "معاونت کیپچا",
 	"captchahelp-cookies-needed": "اسے انجام دینے کے لیے آپ کو اپنے براؤزر کے کوکیز فعال کرنا ہوگا۔",
 	"right-skipcaptcha": " کیپچا سے گزرے بغیر  کیپچا فعال کرنے والے اقدمات کی انجام دہی",
-	"captcha-apihelp-param-captchaword": "کیپچا کا جواب دیں",
 	"confirmedit-preview-line": "سطر نمبر",
 	"confirmedit-preview-content": "مندرجات",
 	"confirmedit-preview-validity": "معتبریت",

@@ -29,7 +29,7 @@
 
 /**
  * @copyright Copyright © 2006, Niklas Laxström
- * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
+ * @license GPL-2.0-or-later
  */
 
 $linkTrail = '/^([a-zA-ZĀāČčĒēĢģĪīĶķĻļŅņŠšŪūŽž]+)(.*)$/sDu';
@@ -63,7 +63,7 @@ $namespaceGenderAliases = [
 	NS_USER_TALK => [ 'male' => 'Dalībnieka_diskusija', 'female' => 'Dalībnieces_diskusija' ]
 ];
 
-$separatorTransformTable = [ ',' => "\xc2\xa0", '.' => ',' ];
+$separatorTransformTable = [ ',' => "\u{00A0}", '.' => ',' ];
 
 /**
  * A list of date format preference keys, which can be selected in user

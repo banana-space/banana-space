@@ -1,17 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dgstranz",
+			"Fitoschido",
 			"Locos epraix",
+			"Macofe",
 			"Muro de Aguas",
 			"Ralgis",
 			"Remember the dot",
 			"Sanbec",
 			"Spacebirdy",
-			"Vivaelcelta",
-			"Fitoschido",
 			"Themasterriot",
-			"Macofe",
-			"Dgstranz"
+			"Vivaelcelta"
 		]
 	},
 	"categorytree": "Árbol de categorías",
@@ -43,10 +43,5 @@
 	"categorytree-no-pages": "sin páginas ni subcategorías",
 	"categorytree-not-found": "Categoría <i>$1</i> no encontrada",
 	"categorytree-error": "Error al cargar los datos.",
-	"categorytree-retry": "Espera un momento y vuelve a intentarlo.",
-	"apihelp-categorytree-description": "Módulo interno para la extensión CategoryTree.",
-	"apihelp-categorytree-summary": "Módulo interno para la extensión CategoryTree.",
-	"apihelp-categorytree-param-category": "Título en el espacio de nombres Categoría; el prefijo, en caso de indicarse, se ignorará.",
-	"apihelp-categorytree-param-options": "Opciones para el constructor CategoryTree como objeto JSON. La opción <var>depth</var> por defecto toma el valor <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "Las opciones deben ser un objeto JSON válido."
+	"categorytree-retry": "Espera un momento y vuelve a intentarlo."
 }

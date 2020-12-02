@@ -23,14 +23,16 @@ namespace MediaWiki\Edit;
 use Content;
 use ParserOptions;
 use ParserOutput;
+use RuntimeException;
 
 /**
  * Represents information returned by WikiPage::prepareContentForEdit()
  *
+ * @deprecated since 1.32, use DerivedPageDataUpdater instead.
+ *
  * @since 1.30
  */
 class PreparedEdit {
-
 	/**
 	 * Time this prepared edit was made
 	 *
@@ -71,7 +73,7 @@ class PreparedEdit {
 	 *
 	 * @var ParserOutput|null
 	 */
-	public $output;
+	private $canonicalOutput;
 
 	/**
 	 * Content that is being saved (before PST)
@@ -87,4 +89,36 @@ class PreparedEdit {
 	 */
 	public $oldContent;
 
+	/**
+	 * Lazy-loading callback to get canonical ParserOutput object
+	 *
+	 * @var callable
+	 */
+	public $parserOutputCallback;
+
+	/**
+	 * @return ParserOutput Canonical parser output
+	 */
+	public function getOutput() {
+		if ( !$this->canonicalOutput ) {
+			$this->canonicalOutput = call_user_func( $this->parserOutputCallback );
+		}
+
+		return $this->canonicalOutput;
+	}
+
+	/**
+	 * Fetch the ParserOutput via a lazy-loaded callback (for backwards compatibility).
+	 *
+	 * @deprecated since 1.33
+	 * @param string $name
+	 * @return mixed
+	 */
+	public function __get( $name ) {
+		if ( $name === 'output' ) {
+			return $this->getOutput();
+		}
+
+		throw new RuntimeException( "Undefined field $name." );
+	}
 }

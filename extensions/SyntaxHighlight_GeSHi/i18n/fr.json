@@ -1,20 +1,26 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dcausse",
+			"Gomoko",
 			"Grondin",
-			"Sherbrooke",
-			"Verdy p",
 			"Macofe",
 			"Mattho69",
-			"Dcausse",
 			"Orlodrim",
-			"Wladek92",
-			"Gomoko"
+			"Pols12",
+			"Sherbrooke",
+			"Thibaut120094",
+			"Verdy p",
+			"Wladek92"
 		]
 	},
 	"syntaxhighlight-desc": "Fournit la mise en valeur de la syntaxe par la balise <code>&lt;syntaxhighlight&gt;</code> en utilisant [http://pygments.org/ Pygments - coloration syntaxique Python]",
 	"syntaxhighlight-error-category": "Pages avec des erreurs de coloration syntaxique",
 	"syntaxhighlight-error-category-desc": "Il y a eu une erreur lors de la tentative de mise en valeur du code inclus sur la page.",
+	"syntaxhighlight-enclose-category": "Pages utilisant des attributs enclose obsolètes",
+	"syntaxhighlight-enclose-category-desc": "La coloration syntaxique sur la page utilise une syntaxe incluse obsolète.",
+	"syntaxhighlight-source-category": "Pages utilisant des balises source obsolètes",
+	"syntaxhighlight-source-category-desc": "La coloration syntaxique sur la page utilise des balises source obsolètes.",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Code",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Langage",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(aucun)",

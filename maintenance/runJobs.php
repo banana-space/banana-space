@@ -21,12 +21,15 @@
  * @ingroup Maintenance
  */
 
+if ( !defined( 'MEDIAWIKI' ) ) {
+	// So extensions (and other code) can check whether they're running in job mode.
+	// This is not defined if this script is included from installer/updater or phpunit.
+	define( 'MEDIAWIKI_JOB_RUNNER', true );
+}
+
 require_once __DIR__ . '/Maintenance.php';
 
-use MediaWiki\Logger\LoggerFactory;
-
-// So extensions (and other code) can check whether they're running in job mode
-define( 'MEDIAWIKI_JOB_RUNNER', true );
+use MediaWiki\MediaWikiServices;
 
 /**
  * Maintenance script that runs pending jobs.
@@ -71,7 +74,7 @@ class RunJobs extends Maintenance {
 		$outputJSON = ( $this->getOption( 'result' ) === 'json' );
 		$wait = $this->hasOption( 'wait' );
 
-		$runner = new JobRunner( LoggerFactory::getInstance( 'runJobs' ) );
+		$runner = MediaWikiServices::getInstance()->getJobRunner();
 		if ( !$outputJSON ) {
 			$runner->setDebugHandler( [ $this, 'debugInternal' ] );
 		}
@@ -99,6 +102,10 @@ class RunJobs extends Maintenance {
 				$response['reached'] === 'job-limit' ||
 				$response['reached'] === 'memory-limit'
 			) {
+				// If job queue is empty, output it
+				if ( !$outputJSON && $response['jobs'] === [] ) {
+					$this->output( "Job queue is empty.\n" );
+				}
 				break;
 			}
 

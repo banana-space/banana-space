@@ -1,10 +1,15 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": [
+			"Mapoza2"
+		]
+	},
 	"categorytree": "Lenane le Mekga",
 	"categorytree-category": "Mokga:",
 	"categorytree-go": "Mpontshe lenane",
 	"categorytree-mode-categories": "mekga feela",
 	"categorytree-mode-pages": "maqephe ntle le ditshwantsho",
+	"categorytree-mode-all": "maqephe ohle",
 	"categorytree-collapse": "Nyenyefatsa",
 	"categorytree-expand": "Hodisa",
 	"categorytree-load": "jara",

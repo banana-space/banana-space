@@ -1,0 +1,24 @@
+{{!
+ See @typedef SearchData
+}}
+<div id="p-search" role="search">
+	<h3 {{{html-userlangattributes}}}>
+		<label for="searchInput">{{msg-search}}</label>
+	</h3>
+	<form action="{{form-action}}" id="searchform">
+		<div id="simpleSearch">
+			{{{html-input}}}
+			<input type="hidden" name="title" value="{{page-title}}">
+			{{!	We construct two buttons (for 'go' and 'fulltext' search modes), but only one will be
+					visible and actionable at a time (they are overlaid on top of each other in CSS).
+					* Browsers will use the 'fulltext' one by default (as it's the first in tree-order),
+						which is desirable when they are unable to show search suggestions (either due to being
+						broken or having JavaScript turned off).
+					* The mediawiki.searchSuggest module, after doing tests for the broken browsers, removes
+						the 'fulltext' button and handles 'fulltext' search itself; this will reveal the 'go'
+						button and cause it to be used.	!}}
+			{{{html-button-search-fallback}}}
+			{{{html-button-search}}}
+		</div>
+	</form>
+</div>

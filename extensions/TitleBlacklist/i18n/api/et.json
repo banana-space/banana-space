@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pikne"
+		]
+	},
+	"apihelp-titleblacklist-description": "Lehekülje pealkirja, failinime või kasutajanime valideerimine pealkirjade musta nimekirja vastu.",
+	"apihelp-titleblacklist-param-title": "Sõne, mida musta nimekirja vastu valideerida.",
+	"apihelp-titleblacklist-param-action": "Toiming, mida kontrollida.",
+	"apihelp-titleblacklist-param-nooverride": "Ära ürita pealkirjade musta nimekirja ümber kehtestada.",
+	"apihelp-titleblacklist-example-1": "Kontrolli, kas [[Foo]] on mustas nimekirjas",
+	"apihelp-titleblacklist-example-2": "Kontrolli, kas [[Bar]] on mustas nimekirjas redigeerimise keelamisega"
+}

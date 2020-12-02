@@ -1,21 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abbedabb",
 			"Ainali",
+			"Bengtsson96",
+			"Hangsna",
 			"Jopparn",
 			"Lokal Profil",
 			"NH",
-			"WikiPhoenix",
 			"Stens51",
-			"Abbedabb",
 			"Warrakkk",
-			"Hangsna",
-			"Bengtsson96"
+			"WikiPhoenix"
 		]
 	},
 	"multimediaviewer-desc": "Expandera miniatyrer i en större storlek i fulkskärmsgränssnitt.",
-	"multimediaviewer-pref": "Mediavisare",
-	"multimediaviewer-pref-desc": "Förbättra din multimediaupplevelse med detta nya verktyg. Det visar bilder i större storlek på sidor som har miniatyrer. Bilder visas i ett trevligare fullskärmsöverlägg, och kan också ses i full storlek.",
 	"multimediaviewer-optin-pref": "Aktivera <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Mediavisaren]</span>",
 	"multimediaviewer-file-page": "Gå till motsvarande filsida",
 	"multimediaviewer-repository-local": "Mer detaljer",
@@ -39,7 +37,7 @@
 	"multimediaviewer-permission-link-hide": "dölj villkor",
 	"multimediaviewer-permission-viewmore": "Visa mer",
 	"multimediaviewer-restriction-trademarked": "Denna bild innehåller material som kan vara föremål för varumärkesrättsliga lagar.",
-	"multimediaviewer-about-mmv": "Om",
+	"multimediaviewer-about-mmv": "Om detta gränssnitt",
 	"multimediaviewer-discuss-mmv": "Diskussion",
 	"multimediaviewer-help-mmv": "Hjälp",
 	"multimediaviewer-optout-mmv": "Inaktivera Mediavisaren",

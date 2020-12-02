@@ -82,10 +82,16 @@ QUnit.test( 'newFromDocumentInsertion with references', function ( assert ) {
 			removalOps = tx.getOperations();
 		}
 
-		assert.deepEqualWithDomElements( removalOps, cases[ i ].removalOps, cases[ i ].msg + ': removal' );
+		assert.deepEqualWithDomElements(
+			removalOps, cases[ i ].removalOps, cases[ i ].msg + ': removal'
+		);
 
-		tx = ve.dm.TransactionBuilder.static.newFromDocumentInsertion( doc, cases[ i ].offset, doc2 );
-		assert.deepEqualWithDomElements( tx.getOperations(), cases[ i ].expectedOps, cases[ i ].msg + ': transaction' );
+		tx = ve.dm.TransactionBuilder.static.newFromDocumentInsertion(
+			doc, cases[ i ].offset, doc2
+		);
+		assert.deepEqualWithDomElements(
+			tx.getOperations(), cases[ i ].expectedOps, cases[ i ].msg + ': transaction'
+		);
 
 		actualStoreItems = [];
 		expectedStoreItems = cases[ i ].expectedStoreItems || [];

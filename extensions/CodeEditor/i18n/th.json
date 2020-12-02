@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aefgh39622"
+		]
+	},
+	"codeeditor-toolbar-toggle": "เปิด/ปิดตัวแก้ไขโค้ด",
+	"codeeditor-gotoline-placeholder": "บรรทัด[:คอลัมน์]"
+}

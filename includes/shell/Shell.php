@@ -44,24 +44,12 @@ use MediaWiki\MediaWikiServices;
 class Shell {
 
 	/**
-	 * Apply a default set of restrictions for improved
-	 * security out of the box.
-	 *
-	 * Equal to NO_ROOT | SECCOMP | PRIVATE_DEV | NO_LOCALSETTINGS
-	 *
-	 * @note This value will change over time to provide increased security
-	 *       by default, and is not guaranteed to be backwards-compatible.
-	 * @since 1.31
-	 */
-	const RESTRICT_DEFAULT = 39;
-
-	/**
 	 * Disallow any root access. Any setuid binaries
 	 * will be run without elevated access.
 	 *
 	 * @since 1.31
 	 */
-	const NO_ROOT = 1;
+	public const NO_ROOT = 1;
 
 	/**
 	 * Use seccomp to block dangerous syscalls
@@ -69,14 +57,14 @@ class Shell {
 	 *
 	 * @since 1.31
 	 */
-	const SECCOMP = 2;
+	public const SECCOMP = 2;
 
 	/**
 	 * Create a private /dev
 	 *
 	 * @since 1.31
 	 */
-	const PRIVATE_DEV = 4;
+	public const PRIVATE_DEV = 4;
 
 	/**
 	 * Restrict the request to have no
@@ -84,7 +72,7 @@ class Shell {
 	 *
 	 * @since 1.31
 	 */
-	const NO_NETWORK = 8;
+	public const NO_NETWORK = 8;
 
 	/**
 	 * Deny execve syscall with seccomp
@@ -92,42 +80,53 @@ class Shell {
 	 *
 	 * @since 1.31
 	 */
-	const NO_EXECVE = 16;
+	public const NO_EXECVE = 16;
 
 	/**
 	 * Deny access to LocalSettings.php (MW_CONFIG_FILE)
 	 *
 	 * @since 1.31
 	 */
-	const NO_LOCALSETTINGS = 32;
+	public const NO_LOCALSETTINGS = 32;
+
+	/**
+	 * Apply a default set of restrictions for improved
+	 * security out of the box.
+	 *
+	 * @note This value will change over time to provide increased security
+	 *       by default, and is not guaranteed to be backwards-compatible.
+	 * @since 1.31
+	 */
+	public const RESTRICT_DEFAULT = self::NO_ROOT | self::SECCOMP | self::PRIVATE_DEV |
+									self::NO_LOCALSETTINGS;
 
 	/**
 	 * Don't apply any restrictions
 	 *
 	 * @since 1.31
 	 */
-	const RESTRICT_NONE = 0;
+	public const RESTRICT_NONE = 0;
 
 	/**
 	 * Returns a new instance of Command class
 	 *
-	 * @param string|string[] $command String or array of strings representing the command to
+	 * @note You should check Shell::isDisabled() before calling this
+	 * @param string|string[] ...$commands String or array of strings representing the command to
 	 * be executed, each value will be escaped.
 	 *   Example:   [ 'convert', '-font', 'font name' ] would produce "'convert' '-font' 'font name'"
 	 * @return Command
 	 */
-	public static function command( $command ) {
-		$args = func_get_args();
-		if ( count( $args ) === 1 && is_array( reset( $args ) ) ) {
+	public static function command( ...$commands ): Command {
+		if ( count( $commands ) === 1 && is_array( reset( $commands ) ) ) {
 			// If only one argument has been passed, and that argument is an array,
 			// treat it as a list of arguments
-			$args = reset( $args );
+			$commands = reset( $commands );
 		}
 		$command = MediaWikiServices::getInstance()
 			->getShellCommandFactory()
 			->create();
 
-		return $command->params( $args );
+		return $command->params( $commands );
 	}
 
 	/**
@@ -135,12 +134,12 @@ class Shell {
 	 *
 	 * @return bool
 	 */
-	public static function isDisabled() {
+	public static function isDisabled(): bool {
 		static $disabled = null;
 
-		if ( is_null( $disabled ) ) {
+		if ( $disabled === null ) {
 			if ( !function_exists( 'proc_open' ) ) {
-				wfDebug( "proc_open() is disabled\n" );
+				wfDebug( "proc_open() is disabled" );
 				$disabled = true;
 			} else {
 				$disabled = false;
@@ -157,12 +156,11 @@ class Shell {
 	 * (https://bugs.php.net/bug.php?id=26285) and the locale problems on Linux in
 	 * PHP 5.2.6+ (bug backported to earlier distro releases of PHP).
 	 *
-	 * @param string $args,... strings to escape and glue together, or a single array of
-	 *     strings parameter. Null values are ignored.
+	 * @param string|string[] ...$args strings to escape and glue together, or a single
+	 *     array of strings parameter. Null values are ignored.
 	 * @return string
 	 */
-	public static function escape( /* ... */ ) {
-		$args = func_get_args();
+	public static function escape( ...$args ): string {
 		if ( count( $args ) === 1 && is_array( reset( $args ) ) ) {
 			// If only one argument has been passed, and that argument is an array,
 			// treat it as a list of arguments
@@ -226,19 +224,23 @@ class Shell {
 	 * Note that $parameters should be a flat array and an option with an argument
 	 * should consist of two consecutive items in the array (do not use "--option value").
 	 *
+	 * @note You should check Shell::isDisabled() before calling this
 	 * @param string $script MediaWiki CLI script with full path
 	 * @param string[] $parameters Arguments and options to the script
 	 * @param array $options Associative array of options:
 	 *     'php': The path to the php executable
 	 *     'wrapper': Path to a PHP wrapper to handle the maintenance script
+	 * @phan-param array{php?:string,wrapper?:string} $options
 	 * @return Command
 	 */
-	public static function makeScriptCommand( $script, $parameters, $options = [] ) {
+	public static function makeScriptCommand(
+		string $script, array $parameters, $options = []
+	): Command {
 		global $wgPhpCli;
 		// Give site config file a chance to run the script in a wrapper.
 		// The caller may likely want to call wfBasename() on $script.
-		Hooks::run( 'wfShellWikiCmd', [ &$script, &$parameters, &$options ] );
-		$cmd = isset( $options['php'] ) ? [ $options['php'] ] : [ $wgPhpCli ];
+		Hooks::runner()->onWfShellWikiCmd( $script, $parameters, $options );
+		$cmd = [ $options['php'] ?? $wgPhpCli ];
 		if ( isset( $options['wrapper'] ) ) {
 			$cmd[] = $options['wrapper'];
 		}

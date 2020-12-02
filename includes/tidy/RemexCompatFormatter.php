@@ -18,9 +18,9 @@ class RemexCompatFormatter extends HtmlFormatter {
 
 	public function __construct( $options = [] ) {
 		parent::__construct( $options );
-		$this->attributeEscapes["\xc2\xa0"] = '&#160;';
+		$this->attributeEscapes["\u{00A0}"] = '&#160;';
 		unset( $this->attributeEscapes["&"] );
-		$this->textEscapes["\xc2\xa0"] = '&#160;';
+		$this->textEscapes["\u{00A0}"] = '&#160;';
 		unset( $this->textEscapes["&"] );
 	}
 
@@ -40,10 +40,10 @@ class RemexCompatFormatter extends HtmlFormatter {
 
 		$name = $node->name;
 		$attrs = $node->attrs;
-		if ( isset( self::$markedEmptyElements[$name] ) && $attrs->count() === 0 ) {
-			if ( strspn( $contents, "\t\n\f\r " ) === strlen( $contents ) ) {
-				return "<{$name} class=\"mw-empty-elt\">$contents</{$name}>";
-			}
+		if ( isset( self::$markedEmptyElements[$name] ) && $attrs->count() === 0
+			&& strspn( $contents, "\t\n\f\r " ) === strlen( $contents )
+		) {
+			return "<{$name} class=\"mw-empty-elt\">$contents</{$name}>";
 		}
 
 		$s = "<$name";

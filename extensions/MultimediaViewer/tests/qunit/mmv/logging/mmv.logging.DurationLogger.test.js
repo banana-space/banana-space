@@ -1,4 +1,4 @@
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.logging.DurationLogger', QUnit.newMwEnvironment( {
 		setup: function () {
 			this.clock = this.sandbox.useFakeTimers();
@@ -26,7 +26,7 @@
 		} catch ( e ) {
 			assert.ok( true, 'Exception raised when calling start() without parameters' );
 		}
-		assert.ok( $.isEmptyObject( durationLogger.starts ), 'No events saved by DurationLogger' );
+		assert.strictEqual( $.isEmptyObject( durationLogger.starts ), true, 'No events saved by DurationLogger' );
 
 		durationLogger.start( 'foo' );
 		assert.strictEqual( durationLogger.starts.foo, 0, 'Event start saved' );
@@ -96,7 +96,7 @@
 		durationLogger.stop( 'bar' );
 		durationLogger.record( 'bar' );
 
-		assert.ok( !fakeEventLog.logEvent.called, 'Event queued if dependencies not loaded' );
+		assert.strictEqual( fakeEventLog.logEvent.called, false, 'Event queued if dependencies not loaded' );
 
 		// Queue a second item
 
@@ -105,7 +105,7 @@
 		durationLogger.stop( 'bob' );
 		durationLogger.record( 'bob' );
 
-		assert.ok( !fakeEventLog.logEvent.called, 'Event queued if dependencies not loaded' );
+		assert.strictEqual( fakeEventLog.logEvent.called, false, 'Event queued if dependencies not loaded' );
 
 		dependenciesDeferred.resolve();
 		this.clock.tick( 10 );
@@ -149,7 +149,7 @@
 		assert.strictEqual( durationLogger.starts.bar, undefined, 'Start value deleted after record' );
 		assert.strictEqual( durationLogger.stops.bar, undefined, 'Stop value deleted after record' );
 
-		durationLogger.stop( 'fooz', $.now() - 9000 );
+		durationLogger.stop( 'fooz', ( new Date() ).getTime() - 9000 );
 		durationLogger.record( 'fooz' );
 		this.clock.tick( 10 );
 
@@ -186,7 +186,7 @@
 
 		this.sandbox.stub( mw.loader, 'using' );
 
-		mw.loader.using.withArgs( [ 'ext.eventLogging', 'schema.MultimediaViewerDuration' ] ).throwsException( 'EventLogging is missing' );
+		mw.loader.using.withArgs( 'ext.eventLogging' ).throwsException( 'EventLogging is missing' );
 
 		promise = durationLogger.loadDependencies();
 		this.clock.tick( 10 );
@@ -197,7 +197,7 @@
 		mw.loader.using.restore();
 		this.sandbox.stub( mw.loader, 'using' );
 
-		mw.loader.using.withArgs( [ 'ext.eventLogging', 'schema.MultimediaViewerDuration' ] ).throwsException( 'EventLogging is missing' );
+		mw.loader.using.withArgs( 'ext.eventLogging' ).throwsException( 'EventLogging is missing' );
 
 		promise = durationLogger.loadDependencies();
 		this.clock.tick( 10 );
@@ -208,11 +208,11 @@
 		mw.loader.using.restore();
 		this.sandbox.stub( mw.loader, 'using' );
 
-		mw.loader.using.withArgs( [ 'ext.eventLogging', 'schema.MultimediaViewerDuration' ] ).callsArg( 1 );
+		mw.loader.using.withArgs( 'ext.eventLogging' ).callsArg( 1 );
 
 		promise = durationLogger.loadDependencies();
 		this.clock.tick( 10 );
 
 		assert.strictEqual( promise.state(), 'resolved', 'Promise is resolved' );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

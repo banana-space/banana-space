@@ -3,8 +3,8 @@
  * @author Santhosh Thottingal
  */
 
-mediaWiki.language.convertGrammar = function ( word, form ) {
-	var grammarForms = mediaWiki.language.getData( 'os', 'grammarForms' ),
+mw.language.convertGrammar = function ( word, form ) {
+	var grammarForms = mw.language.getData( 'os', 'grammarForms' ),
 		// Ending for allative case
 		endAllative = 'мæ',
 		// Variable for 'j' beetwen vowels
@@ -26,7 +26,7 @@ mediaWiki.language.convertGrammar = function ( word, form ) {
 		// Checking if word ends on one of the vowels: е, ё, и, о, ы, э, ю, я.
 		jot = 'й';
 	} else if ( word.match( /у$/i ) ) {
-		// Checking if word ends on 'у'. 'У' can be either consonant 'W' or vowel 'U' in cyrillic Ossetic.
+		// Checking if word ends on 'у'. 'У' can be either consonant 'W' or vowel 'U' in Cyrillic Ossetic.
 		// Examples: {{grammar:genitive|аунеу}} = аунеуы, {{grammar:genitive|лæппу}} = лæппуйы.
 
 		if ( !word.slice( -2, -1 ).match( /[аæеёиоыэюя]$/i ) ) {

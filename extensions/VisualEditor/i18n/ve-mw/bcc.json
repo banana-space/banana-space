@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Baloch Afghanistan",
+			"Sultanselim baloch"
+		]
+	},
+	"visualeditor-beta-warning": "گیندوکین ویرایشگر  هنون «بتا» اینت و ممکن اینت گون ساپٹ ایرین مشکلان دیم په دیم به ایت و مه توانیت موچین کیسمتانا صپحه ییا گون آیی ویرایش کنیت. شوتین په کدِ ویرایش یا چارینتینا بی موچین وختا بغیر شه دست داتینا وتی تغیراتانی، جهلگ رَووکین مینوا «{{int:visualeditor-toolbar-savedialog}}» و «{{int:visualeditor-mweditmodesource-tool}}»  انتخاب کنیت.",
+	"visualeditor-dialog-media-change-image": "مختلیپین اکسی انتخاب کورتین",
+	"visualeditor-dialog-meta-categories-category": "تهر",
+	"visualeditor-dialog-meta-categories-input-placeholder": "یک تهرِ اڈ کورتین",
+	"visualeditor-dialog-meta-languages-name-label": "زبان",
+	"visualeditor-dialog-meta-languages-section": "زبانان",
+	"visualeditor-dialog-meta-settings-displaytitle": "سرگالء سۏج",
+	"visualeditor-dialog-meta-settings-displaytitle-enable": "پئال کورتین نمایشی ئنوانی",
+	"visualeditor-dialog-template-title": "تراشوان",
+	"visualeditor-dialog-transclusion-add-template": "تراشوانِ اڈ کورتین",
+	"visualeditor-dialog-transclusion-placeholder": "یک تراشوانِ اڈ کورتین",
+	"visualeditor-dialog-transclusion-remove-template": "تراشوانِ پاک کورتین",
+	"visualeditor-dialogbutton-template-tooltip": "تراشوان",
+	"visualeditor-linkinspector-button-link-external": "ڈنی سایت"
+}

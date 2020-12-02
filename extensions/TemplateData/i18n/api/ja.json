@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"2nd-player",
+			"Otokoume",
+			"Yusuke1109"
+		]
+	},
+	"apihelp-templatedata-description": "TemplateData 拡張機能によって保存されたデータを取得します。",
+	"apihelp-templatedata-example-1": "[[Template:Stub]]と[[Template:Example]]のTemplateDataを返します。テンプレートが存在しないか存在してもTemplateDataがない場合は結果が返されます。",
+	"apihelp-templatedata-param-lang": "この言語に地域化された値を返します。既定では、すべてのサポートされている翻訳が返されます。"
+}

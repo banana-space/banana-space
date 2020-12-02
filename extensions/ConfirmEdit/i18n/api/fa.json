@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Reza1615"
+		]
+	},
+	"captcha-apihelp-param-captchaword": "پاسخ کپچا را بدهید",
+	"captcha-apihelp-param-captchaid": "شناسهٔ کپچا از درخواست قبلی"
+}

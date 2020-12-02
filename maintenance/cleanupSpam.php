@@ -21,6 +21,10 @@
  * @ingroup Maintenance
  */
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
+
 require_once __DIR__ . '/Maintenance.php';
 
 /**
@@ -45,33 +49,48 @@ class CleanupSpam extends Maintenance {
 		global $IP, $wgLocalDatabases, $wgUser;
 
 		$username = wfMessage( 'spambot_username' )->text();
-		$wgUser = User::newSystemUser( $username );
-		if ( !$wgUser ) {
+		$user = User::newSystemUser( $username );
+		if ( !$user ) {
 			$this->fatalError( "Invalid username specified in 'spambot_username' message: $username" );
 		}
 		// Hack: Grant bot rights so we don't flood RecentChanges
-		$wgUser->addGroup( 'bot' );
+		$user->addGroup( 'bot' );
+		$wgUser = $user;
 
-		$spec = $this->getArg();
-		$like = LinkFilter::makeLikeArray( $spec );
-		if ( !$like ) {
-			$this->fatalError( "Not a valid hostname specification: $spec" );
+		$spec = $this->getArg( 0 );
+
+		$protConds = [];
+		foreach ( [ 'http://', 'https://' ] as $prot ) {
+			$conds = LinkFilter::getQueryConditions( $spec, [ 'protocol' => $prot ] );
+			if ( !$conds ) {
+				$this->fatalError( "Not a valid hostname specification: $spec" );
+			}
+			$protConds[$prot] = $conds;
 		}
 
 		if ( $this->hasOption( 'all' ) ) {
 			// Clean up spam on all wikis
 			$this->output( "Finding spam on " . count( $wgLocalDatabases ) . " wikis\n" );
 			$found = false;
-			foreach ( $wgLocalDatabases as $wikiID ) {
-				$dbr = $this->getDB( DB_REPLICA, [], $wikiID );
+			foreach ( $wgLocalDatabases as $wikiId ) {
+				/** @var Database $dbr */
+				$dbr = $this->getDB( DB_REPLICA, [], $wikiId );
 
-				$count = $dbr->selectField( 'externallinks', 'COUNT(*)',
-					[ 'el_index' . $dbr->buildLike( $like ) ], __METHOD__ );
-				if ( $count ) {
-					$found = true;
-					$cmd = wfShellWikiCmd( "$IP/maintenance/cleanupSpam.php",
-						[ '--wiki', $wikiID, $spec ] );
-					passthru( "$cmd | sed 's/^/$wikiID:  /'" );
+				foreach ( $protConds as $conds ) {
+					$count = $dbr->selectField(
+						'externallinks',
+						'COUNT(*)',
+						$conds,
+						__METHOD__
+					);
+					if ( $count ) {
+						$found = true;
+						$cmd = wfShellWikiCmd(
+							"$IP/maintenance/cleanupSpam.php",
+							[ '--wiki', $wikiId, $spec ]
+						);
+						passthru( "$cmd | sed 's/^/$wikiId:  /'" );
+					}
 				}
 			}
 			if ( $found ) {
@@ -82,13 +101,26 @@ class CleanupSpam extends Maintenance {
 		} else {
 			// Clean up spam on this wiki
 
+			$count = 0;
+			/** @var Database $dbr */
 			$dbr = $this->getDB( DB_REPLICA );
-			$res = $dbr->select( 'externallinks', [ 'DISTINCT el_from' ],
-				[ 'el_index' . $dbr->buildLike( $like ) ], __METHOD__ );
-			$count = $dbr->numRows( $res );
-			$this->output( "Found $count articles containing $spec\n" );
-			foreach ( $res as $row ) {
-				$this->cleanupArticle( $row->el_from, $spec );
+			foreach ( $protConds as $prot => $conds ) {
+				$res = $dbr->select(
+					'externallinks',
+					[ 'DISTINCT el_from' ],
+					$conds,
+					__METHOD__
+				);
+				$count = $dbr->numRows( $res );
+				$this->output( "Found $count articles containing $spec\n" );
+				foreach ( $res as $row ) {
+					$this->cleanupArticle(
+						$row->el_from,
+						$spec,
+						$prot,
+						$wgUser
+					);
+				}
 			}
 			if ( $count ) {
 				$this->output( "Done\n" );
@@ -96,7 +128,14 @@ class CleanupSpam extends Maintenance {
 		}
 	}
 
-	private function cleanupArticle( $id, $domain ) {
+	/**
+	 * @param int $id
+	 * @param string $domain
+	 * @param string $protocol
+	 * @param User $deleter
+	 * @throws MWException
+	 */
+	private function cleanupArticle( $id, $domain, $protocol, User $deleter ) {
 		$title = Title::newFromID( $id );
 		if ( !$title ) {
 			$this->error( "Internal error: no page for ID $id" );
@@ -105,13 +144,19 @@ class CleanupSpam extends Maintenance {
 		}
 
 		$this->output( $title->getPrefixedDBkey() . " ..." );
-		$rev = Revision::newFromTitle( $title );
+
+		$revLookup = MediaWikiServices::getInstance()->getRevisionLookup();
+		$rev = $revLookup->getRevisionByTitle( $title );
 		$currentRevId = $rev->getId();
 
-		while ( $rev && ( $rev->isDeleted( Revision::DELETED_TEXT )
-			|| LinkFilter::matchEntry( $rev->getContent( Revision::RAW ), $domain ) )
+		while ( $rev && ( $rev->isDeleted( RevisionRecord::DELETED_TEXT ) ||
+			LinkFilter::matchEntry(
+				$rev->getContent( SlotRecord::MAIN, RevisionRecord::RAW ),
+				$domain,
+				$protocol
+			) )
 		) {
-			$rev = $rev->getPrevious();
+			$rev = $revLookup->getPreviousRevision( $rev );
 		}
 
 		if ( $rev && $rev->getId() == $currentRevId ) {
@@ -124,7 +169,7 @@ class CleanupSpam extends Maintenance {
 			$page = WikiPage::factory( $title );
 			if ( $rev ) {
 				// Revert to this revision
-				$content = $rev->getContent( Revision::RAW );
+				$content = $rev->getContent( SlotRecord::MAIN, RevisionRecord::RAW );
 
 				$this->output( "reverting\n" );
 				$page->doEditContent(
@@ -136,12 +181,15 @@ class CleanupSpam extends Maintenance {
 			} elseif ( $this->hasOption( 'delete' ) ) {
 				// Didn't find a non-spammy revision, blank the page
 				$this->output( "deleting\n" );
-				$page->doDeleteArticle(
-					wfMessage( 'spam_deleting', $domain )->inContentLanguage()->text()
+				$page->doDeleteArticleReal(
+					wfMessage( 'spam_deleting', $domain )->inContentLanguage()->text(),
+					$deleter
 				);
 			} else {
 				// Didn't find a non-spammy revision, blank the page
-				$handler = ContentHandler::getForTitle( $title );
+				$handler = MediaWikiServices::getInstance()
+					->getContentHandlerFactory()
+					->getContentHandler( $title->getContentModel() );
 				$content = $handler->makeEmptyContent();
 
 				$this->output( "blanking\n" );

@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Agusbou2015"
+		]
+	},
+	"fancycaptcha-accountcreate": "Para proteger el wiki contra la creación automática de cuentas, escriba en el recuadro las palabras que se muestran debajo ([[Special:Captcha/help|más información]]):"
+}

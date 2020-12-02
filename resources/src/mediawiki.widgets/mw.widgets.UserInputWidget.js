@@ -4,7 +4,7 @@
  * @copyright 2011-2015 MediaWiki Widgets Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-( function ( $, mw ) {
+( function () {
 
 	/**
 	 * Creates a mw.widgets.UserInputWidget object.
@@ -43,9 +43,11 @@
 	/* Methods */
 
 	/**
-	 * @inheritdoc
+	 * Handle menu item 'choose' event, updating the text input value to the value of the clicked item.
+	 *
+	 * @param {OO.ui.MenuOptionWidget} item Selected item
 	 */
-	mw.widgets.UserInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
+	mw.widgets.UserInputWidget.prototype.onLookupMenuChoose = function ( item ) {
 		this.closeLookupMenu();
 		this.setLookupsDisabled( true );
 		this.setValue( item.getData() );
@@ -117,4 +119,4 @@
 		return items;
 	};
 
-}( jQuery, mediaWiki ) );
+}() );

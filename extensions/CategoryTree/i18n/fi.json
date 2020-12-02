@@ -1,14 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"01miki10",
 			"Agony",
 			"Crt",
 			"Linnea",
 			"Nedergard",
 			"Nike",
-			"Str4nd",
-			"01miki10",
-			"Pyscowicz"
+			"Pyscowicz",
+			"Str4nd"
 		]
 	},
 	"categorytree": "Luokkapuu",
@@ -38,8 +38,5 @@
 	"categorytree-no-pages": "ei sivuja eikä alaluokkia",
 	"categorytree-not-found": "Luokkaa <i>$1</i> ei löytynyt",
 	"categorytree-error": "Ongelma tietojen latauksessa.",
-	"categorytree-retry": "Odota hetki ja yritä uudelleen.",
-	"apihelp-categorytree-description": "Sisäinen moduuli CategoryTree-laajennukselle.",
-	"apihelp-categorytree-summary": "Sisäinen moduuli CategoryTree-laajennukselle.",
-	"apihelp-categorytree-param-category": "Otsikko luokkanimiavaruudessa, etuliitettä ei huomioida, jos se on annettu."
+	"categorytree-retry": "Odota hetki ja yritä uudelleen."
 }

@@ -1,15 +1,23 @@
 'use strict';
-const Page = require( './page' );
+
+const Page = require( 'wdio-mediawiki/Page' );
 
 class EditPage extends Page {
+	get content() { return $( '#wpTextbox1' ); }
+	get conflictingContent() { return $( '#wpTextbox2' ); }
+	get displayedContent() { return $( '#mw-content-text .mw-parser-output' ); }
+	get heading() { return $( '.firstHeading' ); }
+	get save() { return $( '#wpSave' ); }
+	get previewButton() { return $( '#wpPreview' ); }
 
-	get content() { return browser.element( '#wpTextbox1' ); }
-	get displayedContent() { return browser.element( '#mw-content-text' ); }
-	get heading() { return browser.element( '#firstHeading' ); }
-	get save() { return browser.element( '#wpSave' ); }
+	openForEditing( title ) {
+		super.openTitle( title, { action: 'edit', vehidebetadialog: 1, hidewelcomedialog: 1 } );
+	}
 
-	openForEditing( name ) {
-		super.open( name + '&action=edit' );
+	preview( name, content ) {
+		this.openForEditing( name );
+		this.content.setValue( content );
+		this.previewButton.click();
 	}
 
 	edit( name, content ) {
@@ -17,23 +25,6 @@ class EditPage extends Page {
 		this.content.setValue( content );
 		this.save.click();
 	}
-
-	apiEdit( name, content ) {
-
-		const MWBot = require( 'mwbot' ), // https://github.com/Fannon/mwbot
-			Promise = require( 'bluebird' );
-		let bot = new MWBot();
-
-		return Promise.coroutine( function* () {
-			yield bot.loginGetEditToken( {
-				apiUrl: `${browser.options.baseUrl}/api.php`,
-				username: browser.options.username,
-				password: browser.options.password
-			} );
-			yield bot.edit( name, content, `Created page with "${content}"` );
-		} ).call( this );
-
-	}
-
 }
+
 module.exports = new EditPage();

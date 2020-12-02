@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"categorytree": "Sanat butaqtarı",
 	"categorytree-header": "Sanat mazmunıñ butaqtar türde körw üşin atawın engiziñiz.\nAñğarpta: Bul iske JavaScript quralınıñ AJAX degen keñeýtilgen qabileti qajet boladı.\nEger şolğışıñız öte eski, nemese JavaScript öşirilgen bolsa, bul iske asırılmaýdı.",
 	"categorytree-category": "Sanat:",

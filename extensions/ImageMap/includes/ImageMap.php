@@ -18,6 +18,19 @@
  * Coordinates are relative to the source image, not the thumbnail.
  */
 
+namespace MediaWiki\Extensions\ImageMap;
+
+use ConfigFactory;
+use DOMDocument;
+use DOMElement;
+use DOMXPath;
+use MediaWiki\MediaWikiServices;
+use OutputPage;
+use Parser;
+use Sanitizer;
+use Title;
+use Xml;
+
 class ImageMap {
 	public static $id = 0;
 
@@ -28,10 +41,10 @@ class ImageMap {
 	const NONE = 4;
 
 	/**
-	 * @param Parser &$parser
+	 * @param Parser $parser
 	 */
-	public static function onParserFirstCallInit( Parser &$parser ) {
-		$parser->setHook( 'imagemap', [ 'ImageMap', 'render' ] );
+	public static function onParserFirstCallInit( Parser $parser ) {
+		$parser->setHook( 'imagemap', [ self::class, 'render' ] );
 	}
 
 	/**
@@ -47,6 +60,12 @@ class ImageMap {
 		$lines = explode( "\n", $input );
 
 		$first = true;
+		$scale = 1;
+		$imageNode = null;
+		$domDoc = null;
+		$thumbWidth = 0;
+		$thumbHeight = 0;
+		$imageTitle = null;
 		$lineNum = 0;
 		$mapHTML = '';
 		$links = [];
@@ -57,6 +76,9 @@ class ImageMap {
 		$defaultLinkAttribs = false;
 		$realmap = true;
 		$extLinks = [];
+		$services = MediaWikiServices::getInstance();
+		$repoGroup = $services->getRepoGroup();
+		$badFileLookup = $services->getBadFileLookup();
 		foreach ( $lines as $line ) {
 			++$lineNum;
 			$externLink = false;
@@ -82,20 +104,20 @@ class ImageMap {
 				if ( !$imageTitle || !$imageTitle->inNamespace( NS_FILE ) ) {
 					return self::error( 'imagemap_no_image' );
 				}
-				if ( wfIsBadImage( $imageTitle->getDBkey(), $parser->mTitle ) ) {
+				if ( $badFileLookup->isBadFile( $imageTitle->getDBkey(), $parser->getTitle() ) ) {
 					return self::error( 'imagemap_bad_image' );
 				}
 				// Parse the options so we can use links and the like in the caption
 				$parsedOptions = $parser->recursiveTagParse( $options );
 				$imageHTML = $parser->makeImage( $imageTitle, $parsedOptions );
 				$parser->replaceLinkHolders( $imageHTML );
-				$imageHTML = $parser->mStripState->unstripBoth( $imageHTML );
+				$imageHTML = $parser->getStripState()->unstripBoth( $imageHTML );
 				$imageHTML = Sanitizer::normalizeCharReferences( $imageHTML );
 
 				$domDoc = new DOMDocument();
-				wfSuppressWarnings();
+				\Wikimedia\suppressWarnings();
 				$ok = $domDoc->loadXML( $imageHTML );
-				wfRestoreWarnings();
+				\Wikimedia\restoreWarnings();
 				if ( !$ok ) {
 					return self::error( 'imagemap_invalid_image' );
 				}
@@ -108,7 +130,7 @@ class ImageMap {
 				$thumbWidth = $imageNode->getAttribute( 'width' );
 				$thumbHeight = $imageNode->getAttribute( 'height' );
 
-				$imageObj = wfFindFile( $imageTitle );
+				$imageObj = $repoGroup->findFile( $imageTitle );
 				if ( !$imageObj || !$imageObj->exists() ) {
 					return self::error( 'imagemap_invalid_image' );
 				}
@@ -147,6 +169,7 @@ class ImageMap {
 			}
 
 			$title = false;
+			$alt = '';
 			// Find the link
 			$link = trim( strstr( $line, '[' ) );
 			$m = [];
@@ -155,7 +178,7 @@ class ImageMap {
 				$alt = trim( $m[2] );
 			} elseif ( preg_match( '/^ \[\[  ([^\]]*+) \]\] \w* $ /x', $link, $m ) ) {
 				$title = Title::newFromText( $m[1] );
-				if ( is_null( $title ) ) {
+				if ( $title === null ) {
 					return self::error( 'imagemap_invalid_title', $lineNum );
 				}
 				$alt = $title->getFullText();
@@ -186,26 +209,21 @@ class ImageMap {
 					$coords = [];
 					break;
 				case 'rect':
-					$coords = self::tokenizeCoords( 4, $lineNum );
+					$coords = self::tokenizeCoords( $lineNum, 4 );
 					if ( !is_array( $coords ) ) {
 						return $coords;
 					}
 					break;
 				case 'circle':
-					$coords = self::tokenizeCoords( 3, $lineNum );
+					$coords = self::tokenizeCoords( $lineNum, 3 );
 					if ( !is_array( $coords ) ) {
 						return $coords;
 					}
 					break;
 				case 'poly':
-					$coords = [];
-					$coord = strtok( " \t" );
-					while ( $coord !== false ) {
-						$coords[] = $coord;
-						$coord = strtok( " \t" );
-					}
-					if ( !count( $coords ) ) {
-						return self::error( 'imagemap_missing_coord', $lineNum );
+					$coords = self::tokenizeCoords( $lineNum, 1, true );
+					if ( !is_array( $coords ) ) {
+						return $coords;
 					}
 					if ( count( $coords ) % 2 !== 0 ) {
 						return self::error( 'imagemap_poly_odd', $lineNum );
@@ -217,7 +235,7 @@ class ImageMap {
 
 			// Scale the coords using the size of the source image
 			foreach ( $coords as $i => $c ) {
-				$coords[$i] = intval( round( $c * $scale ) );
+				$coords[$i] = (int)round( $c * $scale );
 			}
 
 			// Construct the area tag
@@ -250,6 +268,7 @@ class ImageMap {
 			if ( $shape == 'default' ) {
 				$defaultLinkAttribs = $attribs;
 			} else {
+				// @phan-suppress-next-line SecurityCheck-DoubleEscaped
 				$mapHTML .= Xml::element( 'area', $attribs ) . "\n";
 			}
 			if ( $externLink ) {
@@ -259,7 +278,7 @@ class ImageMap {
 			}
 		}
 
-		if ( $first ) {
+		if ( $first || !$imageNode || !$domDoc ) {
 			return self::error( 'imagemap_no_image' );
 		}
 
@@ -270,9 +289,11 @@ class ImageMap {
 
 		if ( $realmap ) {
 			// Construct the map
-			// Add random number to avoid breaking cached HTML fragments that are
-			// later joined together on the one page (bug 16471)
-			$mapName = "ImageMap_" . ++self::$id . '_' . mt_rand( 0, 0x7fffffff );
+			// Add a hash of the map HTML to avoid breaking cached HTML fragments that are
+			// later joined together on the one page (T18471).
+			// The only way these hashes can clash is if the map is identical, in which
+			// case it wouldn't matter that the "wrong" map was used.
+			$mapName = 'ImageMap_' . substr( md5( $mapHTML ), 0, 16 );
 			$mapHTML = "<map name=\"$mapName\">\n$mapHTML</map>\n";
 
 			// Alter the image tag
@@ -342,7 +363,7 @@ class ImageMap {
 				'alt',
 				wfMessage( 'imagemap_description' )->inContentLanguage()->text()
 			);
-			$url = $config->get( 'ExtensionAssetsPath' ) . '/ImageMap/desc-20.png';
+			$url = $config->get( 'ExtensionAssetsPath' ) . '/ImageMap/resources/desc-20.png';
 			$descImg->setAttribute(
 				'src',
 				OutputPage::transformResourcePath( $config, $url )
@@ -361,14 +382,14 @@ class ImageMap {
 				// Don't register special or interwiki links...
 			} elseif ( $title->getNamespace() == NS_MEDIA ) {
 				// Regular Media: links are recorded as image usages
-				$parser->mOutput->addImage( $title->getDBkey() );
+				$parser->getOutput()->addImage( $title->getDBkey() );
 			} else {
 				// Plain ol' link
-				$parser->mOutput->addLink( $title );
+				$parser->getOutput()->addLink( $title );
 			}
 		}
 		foreach ( $extLinks as $title ) {
-			$parser->mOutput->addExternalLink( $title );
+			$parser->getOutput()->addExternalLink( $title );
 		}
 		// Armour output against broken parser
 		$output = str_replace( "\n", '', $output );
@@ -376,21 +397,24 @@ class ImageMap {
 	}
 
 	/**
-	 * @param int $count
-	 * @param int|string $lineNum
+	 * @param int|string $lineNum Line number, for error reporting
+	 * @param int $minCount Minimum token count
+	 * @param bool $allowNegative
 	 * @return array|string String with error (HTML), or array of coordinates
 	 */
-	static function tokenizeCoords( $count, $lineNum ) {
+	private static function tokenizeCoords( $lineNum, $minCount = 0, $allowNegative = false ) {
 		$coords = [];
-		for ( $i = 0; $i < $count; $i++ ) {
-			$coord = strtok( " \t" );
-			if ( $coord === false ) {
-				return self::error( 'imagemap_missing_coord', $lineNum );
-			}
-			if ( !is_numeric( $coord ) || $coord > 1e9 || $coord < 0 ) {
+		$coord = strtok( " \t" );
+		while ( $coord !== false ) {
+			if ( !is_numeric( $coord ) || $coord > 1e9 || ( !$allowNegative && $coord < 0 ) ) {
 				return self::error( 'imagemap_invalid_coord', $lineNum );
 			}
-			$coords[$i] = $coord;
+			$coords[] = $coord;
+			$coord = strtok( " \t" );
+		}
+		if ( count( $coords ) < $minCount ) {
+			// TODO: Should this also check there aren't too many coords?
+			return self::error( 'imagemap_missing_coord', $lineNum );
 		}
 		return $coords;
 	}
@@ -400,7 +424,7 @@ class ImageMap {
 	 * @param string|int|bool $line
 	 * @return string HTML
 	 */
-	static function error( $name, $line = false ) {
+	private static function error( $name, $line = false ) {
 		return '<p class="error">' . wfMessage( $name, $line )->parse() . '</p>';
 	}
 }

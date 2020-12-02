@@ -16,8 +16,9 @@ class ActionFieldLayout extends FieldLayout {
 
 	/**
 	 * @param Widget $fieldWidget Field widget
-	 * @param ButtonWidget $buttonWidget Field widget
+	 * @param ButtonWidget|ButtonInputWidget $buttonWidget Field widget
 	 * @param array $config Configuration options
+	 * @suppress PhanTypeMismatchDefault Overloaded method
 	 */
 	public function __construct( $fieldWidget, $buttonWidget = false, array $config = [] ) {
 		// Allow passing positional parameters inside the config array

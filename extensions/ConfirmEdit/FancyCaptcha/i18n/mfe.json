@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"fancycaptcha-captcha": "Security check",
 	"fancycaptcha-imgcaptcha-ph": "Ekrir text ki ou pe truve en-ba"
 }

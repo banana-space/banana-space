@@ -1,5 +1,8 @@
 <?php
 
+use MediaWiki\Block\DatabaseBlock;
+use MediaWiki\MediaWikiServices;
+
 /**
  * @group API
  * @group Database
@@ -8,6 +11,15 @@
  * @covers ApiUserrights
  */
 class ApiUserrightsTest extends ApiTestCase {
+
+	protected function setUp() : void {
+		parent::setUp();
+		$this->tablesUsed = array_merge(
+			$this->tablesUsed,
+			[ 'change_tag', 'change_tag_def', 'logging' ]
+		);
+	}
+
 	/**
 	 * Unsets $wgGroupPermissions['bureaucrat']['userrights'], and sets
 	 * $wgAddGroups['bureaucrat'] and $wgRemoveGroups['bureaucrat'] to the
@@ -17,17 +29,13 @@ class ApiUserrightsTest extends ApiTestCase {
 	 * @param array|bool $remove Groups bureaucrats should be allowed to remove, true for all
 	 */
 	protected function setPermissions( $add = [], $remove = [] ) {
-		global $wgAddGroups, $wgRemoveGroups;
-
 		$this->setGroupPermissions( 'bureaucrat', 'userrights', false );
 
 		if ( $add ) {
-			$this->stashMwGlobals( 'wgAddGroups' );
-			$wgAddGroups['bureaucrat'] = $add;
+			$this->mergeMwGlobalArrayValue( 'wgAddGroups', [ 'bureaucrat' => $add ] );
 		}
 		if ( $remove ) {
-			$this->stashMwGlobals( 'wgRemoveGroups' );
-			$wgRemoveGroups['bureaucrat'] = $remove;
+			$this->mergeMwGlobalArrayValue( 'wgRemoveGroups', [ 'bureaucrat' => $remove ] );
 		}
 	}
 
@@ -68,6 +76,7 @@ class ApiUserrightsTest extends ApiTestCase {
 		$res = $this->doApiRequestWithToken( $params );
 
 		$user->clearInstanceCache();
+		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache();
 		$this->assertSame( $expectedGroups, $user->getGroups() );
 
 		$this->assertArrayNotHasKey( 'warnings', $res[0] );
@@ -87,7 +96,8 @@ class ApiUserrightsTest extends ApiTestCase {
 	) {
 		$params['action'] = 'userrights';
 
-		$this->setExpectedException( ApiUsageException::class, $expectedException );
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage( $expectedException );
 
 		if ( !$user ) {
 			// If 'user' or 'userid' is specified and $user was not specified,
@@ -123,7 +133,7 @@ class ApiUserrightsTest extends ApiTestCase {
 	public function testBlockedWithUserrights() {
 		global $wgUser;
 
-		$block = new Block( [ 'address' => $wgUser, 'by' => $wgUser->getId(), ] );
+		$block = new DatabaseBlock( [ 'address' => $wgUser, 'by' => $wgUser->getId(), ] );
 		$block->insert();
 
 		try {
@@ -139,7 +149,7 @@ class ApiUserrightsTest extends ApiTestCase {
 
 		$this->setPermissions( true, true );
 
-		$block = new Block( [ 'address' => $user, 'by' => $user->getId() ] );
+		$block = new DatabaseBlock( [ 'address' => $user, 'by' => $user->getId() ] );
 		$block->insert();
 
 		try {
@@ -193,25 +203,23 @@ class ApiUserrightsTest extends ApiTestCase {
 		$this->assertSame(
 			'custom tag',
 			$dbr->selectField(
-				[ 'change_tag', 'logging' ],
-				'ct_tag',
+				[ 'change_tag', 'logging', 'change_tag_def' ],
+				'ctd_name',
 				[
 					'ct_log_id = log_id',
 					'log_namespace' => NS_USER,
 					'log_title' => strtr( $user->getName(), ' ', '_' )
 				],
-				__METHOD__
+				__METHOD__,
+				[ 'change_tag_def' => [ 'JOIN', 'ctd_id = ct_tag_id' ] ]
 			)
 		);
 	}
 
 	public function testWithoutTagPermission() {
-		global $wgGroupPermissions;
-
 		ChangeTags::defineTag( 'custom tag' );
 
-		$this->stashMwGlobals( 'wgGroupPermissions' );
-		$wgGroupPermissions['user']['applychangetags'] = false;
+		$this->setGroupPermissions( 'user', 'applychangetags', false );
 
 		$this->doFailedRightsChange(
 			'You do not have permission to apply change tags along with your changes.',
@@ -298,7 +306,7 @@ class ApiUserrightsTest extends ApiTestCase {
 	 * @param array $expectedGroups Array of expected groups
 	 */
 	public function testAddAndRemoveGroups(
-		array $permissions = null, array $groupsToChange, array $expectedGroups
+		?array $permissions, array $groupsToChange, array $expectedGroups
 	) {
 		if ( $permissions !== null ) {
 			$this->setPermissions( $permissions[0], $permissions[1] );

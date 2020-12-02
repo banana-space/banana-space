@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ardzun",
 			"Iwan Novirion"
 		]
 	},
-	"fancycaptcha-captcha": "Pamarisoan kaamanan",
+	"fancycaptcha-captcha": "Pamaresoan kaamanan",
 	"fancycaptcha-accountcreate": "Untuak palinduangan tahadok pambuek akun otomatis, tolong masuakan kato di bawah ko ka kotak nan tasadio ([[Special:Captcha/help|info labiah lanjuik]]):",
-	"fancycaptcha-imgcaptcha-ph": "Masuakan teks nan Sanak caliak di ateh"
+	"fancycaptcha-imgcaptcha-ph": "Masuakan teks nan Sanak caliak dalam gambar",
+	"fancycaptcha-reload-text": "Pabaharui"
 }

@@ -2,6 +2,13 @@ ace.define("ace/snippets/kotlin",["require","exports","module"], function(requir
 "use strict";
 
 exports.snippetText =undefined;
-exports.scope = "";
+exports.scope = "kotlin";
 
-});
+});                (function() {
+                    ace.require(["ace/snippets/kotlin"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

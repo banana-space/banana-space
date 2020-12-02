@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shirayuki",
+			"SkyDaisy9",
+			"Yusuke1109"
+		]
+	},
+	"apihelp-query+gadgetcategories-description": "ガジェットのカテゴリの一覧を返します。",
+	"apihelp-query+gadgetcategories-summary": "ガジェットのカテゴリの一覧を返します。",
+	"apihelp-query+gadgetcategories-param-prop": "ガジェットのカテゴリのどの情報を取得するかです:\n;name:内部カテゴリ名です。\n;title:カテゴリ名です。\n;members:カテゴリ内のガジェット数です。",
+	"apihelp-query+gadgetcategories-param-names": "取得するカテゴリの名前です。",
+	"apihelp-query+gadgetcategories-example-1": "既存のガジェットのカテゴリの一覧を取得",
+	"apihelp-query+gadgetcategories-example-2": "「foo」および「bar」という名前のカテゴリについてすべての情報を取得",
+	"apihelp-query+gadgets-description": "このウィキで使用されているガジェットの一覧を返します。",
+	"apihelp-query+gadgets-summary": "このウィキで使用されているガジェットの一覧を返します。",
+	"apihelp-query+gadgets-param-prop": "ガジェットのどの情報を取得するかです:\n;id:内部ガジェット ID です。\n;metadata:ガジェットのメタデータです。\n;desc:ガジェットの説明を HTML 形式に変換したものです (時間がかかる場合があるため、本当に必要な場合のみ使用してください)。",
+	"apihelp-query+gadgets-param-categories": "どのカテゴリからガジェットを取得するかです。",
+	"apihelp-query+gadgets-param-ids": "取得するガジェットの ID です。",
+	"apihelp-query+gadgets-param-allowedonly": "現在の利用者が使用できるガジェットのみを列挙します。",
+	"apihelp-query+gadgets-param-enabledonly": "現在の利用者が有効にしているガジェットのみを列挙します。",
+	"apihelp-query+gadgets-example-1": "ガジェットの一覧を、各ガジェットの説明も含めて取得",
+	"apihelp-query+gadgets-example-2": "ガジェットの一覧を、すべてのプロパティを含めて取得",
+	"apihelp-query+gadgets-example-3": "カテゴリ「foo」に属するガジェットの一覧を取得",
+	"apihelp-query+gadgets-example-4": "ガジェット「foo」および「bar」についての情報を取得",
+	"apihelp-query+gadgets-example-5": "現在の利用者が有効にしているガジェットの一覧を取得"
+}

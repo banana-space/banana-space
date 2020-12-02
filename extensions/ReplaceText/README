@@ -24,7 +24,7 @@ performed the replacement appearing as the user and an edit summary that
 looks like "Text replacement: 'search string' to 'replacement string'".
 
 For more information, see the extension homepage at:
-http://www.mediawiki.org/wiki/Extension:Replace_Text
+https://www.mediawiki.org/wiki/Extension:Replace_Text
 
 == Requirements ==
 
@@ -32,12 +32,11 @@ This version of the Replace Text extension requires MediaWiki 1.23 or higher.
 
 == Installation ==
 
-To install the extension, place the entire 'ReplaceText' directory
-within your MediaWiki 'extensions' directory, then add either of the
-following lines to your 'LocalSettings.php' file:
+To install the extension, place the entire 'ReplaceText' directory within
+your MediaWiki 'extensions' directory, then add the following line to your
+'LocalSettings.php' file:
 
      wfLoadExtension( 'ReplaceText' );
-     require_once( "$IP/extensions/ReplaceText/ReplaceText.php" );
 
 In order to perform replacements, you must have the 'replacetext' permssion;
 if you are an administrator on your wiki, the easiest way to do this is to

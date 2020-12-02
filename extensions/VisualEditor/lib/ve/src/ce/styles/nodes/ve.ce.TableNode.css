@@ -1,0 +1,78 @@
+/*!
+ * VisualEditor ContentEditable TableNode styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ce-tableNode {
+	border-spacing: 0;
+	border-collapse: collapse;
+	cursor: default;
+}
+
+.ve-ce-tableCaptionNode {
+	cursor: text;
+}
+
+.ve-ce-tableNode-active .ve-ce-tableCaptionNode,
+.ve-ce-tableCaptionNode.ve-ce-activeNode-active {
+	border: 1px dotted #c8ccd1;
+	border-bottom: 0;
+	margin-top: -1px;
+}
+
+.ve-ce-tableNodeOverlay {
+	position: absolute;
+	pointer-events: none;
+}
+
+.ve-ce-tableNodeOverlay .ve-ui-tableLineContext {
+	pointer-events: auto;
+}
+
+.ve-ce-tableNodeOverlay-selection-box {
+	position: absolute;
+	background: rgba( 109, 169, 247, 0.3 ); /* #6da9f7 */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	opacity: 0.6;
+}
+
+.ve-ce-tableNodeOverlay-deactivated .ve-ce-tableNodeOverlay-selection-box {
+	background: rgba( 0, 0, 0, 0.3 );
+	opacity: 0.3;
+}
+
+.ve-ce-tableNodeOverlay-selection-box-notEditable {
+	background-image: -webkit-repeating-linear-gradient( -45deg, transparent 0 transparent 5px, #95d14f 5px, #95d14f 10px );
+	background-image: -moz-repeating-linear-gradient( -45deg, transparent 0, transparent 5px, #95d14f 5px, #95d14f 10px );
+	background-image: repeating-linear-gradient( -45deg, transparent 0, transparent 5px, #95d14f 5px, #95d14f 10px );
+}
+
+.ve-ce-tableNodeOverlay-selection-box-anchor {
+	position: absolute;
+	border: solid 1px #6da9f7;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.ve-ce-tableNodeOverlay-deactivated .ve-ce-tableNodeOverlay-selection-box-anchor {
+	border: solid 1px rgba( 0, 0, 0, 0.3 );
+}
+
+.ve-ce-tableNodeOverlay-editing .ve-ce-tableNodeOverlay-selection-box {
+	background: transparent;
+}
+
+.ve-ce-tableNode-missingCell {
+	border: 0 !important; /* stylelint-disable-line declaration-no-important */
+	padding: 0 !important; /* stylelint-disable-line declaration-no-important */
+}
+
+.ve-ce-tableNode-missingCell > .oo-ui-buttonWidget > .oo-ui-buttonElement-button {
+	/* Remove minimal dimensions, as they are larger than empty table cells */
+	padding-top: 0;
+	padding-left: 0;
+}

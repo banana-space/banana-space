@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Xuacu"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "Solicitar un FancyCaptcha nuevu.",
+	"apihelp-fancycaptchareload-summary": "Solicitar un FancyCaptcha nuevu.",
+	"apihelp-fancycaptchareload-example-1": "Solicitar un FancyCaptcha nuevu"
+}

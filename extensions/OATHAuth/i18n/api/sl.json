@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334",
+			"Janezdrilc"
+		]
+	},
+	"apihelp-query+oath-description": "Preveri, ali ima uporabnik vključeno dvostopenjsko preverjanje pristnosti (OATH).",
+	"apihelp-query+oath-summary": "Preveri, ali ima uporabnik vključeno dvostopenjsko preverjanje pristnosti (OATH).",
+	"apihelp-query+oath-param-user": "Uporabnik, katerega informacije so prikazane. Predpostavljen je trenutni uporabnik.",
+	"apihelp-query+oath-example-1": "Prikaži informacije o trenutnem uporabniku",
+	"apihelp-query+oath-example-2": "Prikaži informacije o uporabniku <kbd>Example</kbd>",
+	"apihelp-oathvalidate-description": "Potrdi žeton dvostopenjskega preverjanja pristnosti (OATH).",
+	"apihelp-oathvalidate-summary": "Potrdi žeton dvostopenjskega preverjanja pristnosti (OATH).",
+	"apihelp-oathvalidate-param-user": "Uporabnik, katerega žeton se potrjuje. Predpostavljen je trenutni uporabnik.",
+	"apihelp-oathvalidate-param-totp": "Žeton dvostopenjskega preverjanja pristnosti (OATH). Zastarelo; namesto tega uporabite parameter »data«",
+	"apihelp-oathvalidate-example-1": "Potrdi žeton za trenutnega uporabnika",
+	"apihelp-oathvalidate-example-2": "Potrdi žeton za uporabnika <kbd>Example</kbd>"
+}

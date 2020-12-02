@@ -32,11 +32,19 @@ use Wikimedia\Rdbms\IResultWrapper;
  * @ingroup SpecialPage
  */
 class SpecialGadgetUsage extends QueryPage {
-	function __construct( $name = 'GadgetUsage' ) {
+	public function __construct( $name = 'GadgetUsage' ) {
 		parent::__construct( $name );
 		$this->limit = 1000; // Show all gadgets
 		$this->shownavigation = false;
 		$this->activeUsers = $this->getConfig()->get( 'SpecialGadgetUsageActiveUsers' );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function execute( $par ) {
+		parent::execute( $par );
+		$this->addHelpLink( 'Extension:Gadgets' );
 	}
 
 	/**
@@ -125,10 +133,12 @@ class SpecialGadgetUsage extends QueryPage {
 
 	/**
 	 * Output the start of the table
-	 * Including opening <table>, and first <tr> with column headers.
+	 * Including opening <table>, the thead element with column headers
+	 * and the opening <tbody>.
 	 */
 	protected function outputTableStart() {
 		$html = Html::openElement( 'table', [ 'class' => [ 'sortable', 'wikitable' ] ] );
+		$html .= Html::openElement( 'thead', [] );
 		$html .= Html::openElement( 'tr', [] );
 		$headers = [ 'gadgetusage-gadget', 'gadgetusage-usercount' ];
 		if ( $this->activeUsers ) {
@@ -143,7 +153,22 @@ class SpecialGadgetUsage extends QueryPage {
 			}
 		}
 		$html .= Html::closeElement( 'tr' );
+		$html .= Html::closeElement( 'thead' );
+		$html .= Html::openElement( 'tbody', [] );
 		$this->getOutput()->addHTML( $html );
+		$this->getOutput()->addModuleStyles( 'jquery.tablesorter.styles' );
+		$this->getOutput()->addModules( 'jquery.tablesorter' );
+	}
+
+	/**
+	 * Output the end of the table
+	 * </tbody></table>
+	 */
+	protected function outputTableEnd() {
+		$this->getOutput()->addHTML(
+			Html::closeElement( 'tbody' ) .
+			Html::closeElement( 'table' )
+		);
 	}
 
 	/**
@@ -217,9 +242,11 @@ class SpecialGadgetUsage extends QueryPage {
 			foreach ( $defaultGadgets as $default ) {
 				$html = Html::openElement( 'tr', [] );
 				$html .= Html::element( 'td', [], $default );
-				$html .= Html::element( 'td', [], $this->msg( 'gadgetusage-default' )->text() );
+				$html .= Html::element( 'td', [ 'data-sort-value' => 'Infinity' ],
+					$this->msg( 'gadgetusage-default' )->text() );
 				if ( $this->activeUsers ) {
-					$html .= Html::element( 'td', [], $this->msg( 'gadgetusage-default' )->text() );
+					$html .= Html::element( 'td', [ 'data-sort-value' => 'Infinity' ],
+						$this->msg( 'gadgetusage-default' )->text() );
 				}
 				$html .= Html::closeElement( 'tr' );
 				$out->addHTML( $html );
@@ -238,7 +265,7 @@ class SpecialGadgetUsage extends QueryPage {
 				}
 			}
 			// Close table element
-			$out->addHtml( Html::closeElement( 'table' ) );
+			$this->outputTableEnd();
 		} else {
 			$out->addHtml(
 				$this->msg( 'gadgetusage-noresults' )->parseAsBlock()

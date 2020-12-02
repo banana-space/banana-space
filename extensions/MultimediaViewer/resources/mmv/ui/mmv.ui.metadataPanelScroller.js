@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $, oo ) {
+( function () {
 	var MPSP;
 
 	/**
@@ -26,14 +26,14 @@
 	 * @constructor
 	 * @param {jQuery} $container The container for the panel (.mw-mmv-post-image).
 	 * @param {jQuery} $aboveFold The control bar element (.mw-mmv-above-fold).
-	 * @param {mw.storage} localStorage the localStorage object, for dependency injection
+	 * @param {mw.SafeStorage} localStorage the localStorage object, for dependency injection
 	 */
 	function MetadataPanelScroller( $container, $aboveFold, localStorage ) {
 		mw.mmv.ui.Element.call( this, $container );
 
 		this.$aboveFold = $aboveFold;
 
-		/** @property {mw.storage} localStorage */
+		/** @property {mw.SafeStorage} localStorage */
 		this.localStorage = localStorage;
 
 		/** @property {boolean} panelWasOpen state flag which will be used to detect open <-> closed transitions */
@@ -42,12 +42,14 @@
 		/**
 		 * Whether this user has ever opened the metadata panel.
 		 * Based on a localstorage flag; will be set to true if the client does not support localstorage.
+		 *
 		 * @type {boolean}
 		 */
 		this.hasOpenedMetadata = undefined;
 
 		/**
 		 * Whether we've already fired an animation for the metadata div in this lightbox session.
+		 *
 		 * @property {boolean}
 		 * @private
 		 */
@@ -55,7 +57,7 @@
 
 		this.initialize();
 	}
-	oo.inheritClass( MetadataPanelScroller, mw.mmv.ui.Element );
+	OO.inheritClass( MetadataPanelScroller, mw.mmv.ui.Element );
 	MPSP = MetadataPanelScroller.prototype;
 
 	MPSP.attach = function () {
@@ -112,6 +114,8 @@
 	MPSP.freezeHeight = function () {
 		var scrollTop, scrollTopWhenOpen;
 
+		// TODO: Store visibility in model
+		// eslint-disable-next-line no-jquery/no-sizzle
 		if ( !this.$container.is( ':visible' ) ) {
 			return;
 		}
@@ -124,6 +128,8 @@
 	};
 
 	MPSP.unfreezeHeight = function () {
+		// TODO: Store visibility in model
+		// eslint-disable-next-line no-jquery/no-sizzle
 		if ( !this.$container.is( ':visible' ) ) {
 			return;
 		}
@@ -189,6 +195,7 @@
 				this.$container.trigger( 'mmv-metadata-reveal-truncated-text' );
 				scrollTopTarget = this.getScrollTopWhenOpen();
 			}
+			// eslint-disable-next-line no-jquery/no-global-selector
 			return $( 'html, body' ).animate( { scrollTop: scrollTopTarget }, 'fast' ).promise();
 		}
 	};
@@ -244,4 +251,4 @@
 	};
 
 	mw.mmv.ui.MetadataPanelScroller = MetadataPanelScroller;
-}( mediaWiki, jQuery, OO ) );
+}() );

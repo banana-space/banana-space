@@ -1,14 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
+			"Chrumps",
 			"Matma Rex",
+			"Rail",
 			"Sp5uhe"
 		]
 	},
 	"skinname-vector": "Wektor",
 	"vector-skin-desc": "Odświeżona wersja skórki Książka, z nowym wyglądem i usprawnieniami",
+	"prefs-vector-enable-vector-1-label": "Użyj starego Wektora",
+	"prefs-vector-enable-vector-1-help": "W ciągu najbliższych kilku lat będziemy stopniowo aktualizować skórkę Wektor. Stary Wektor umożliwi ci używanie poprzedniej wersji skórki (na grudzień 2019). Aby dowiedzieć się więcej o aktualizacjach przejdź do naszej [[mw:Reading/Web/Desktop_Improvements|strony projektu]].",
+	"vector-opt-out": "Przełącz na stary widok",
+	"vector-opt-out-tooltip": "Zmień ustawienia, aby powrócić do starego wyglądu skórki (stary Wektor)",
 	"vector.css": "/* Umieszczony tutaj kod CSS wpłynie na wygląd skórki Wektor */",
 	"vector.js": "/* Umieszczony tutaj kod JavaScript zostanie załadowany wyłącznie przez użytkowników korzystających ze skórki Wektor */",
+	"vector-action-toggle-sidebar": "Przełącz panel boczny",
 	"vector-action-addsection": "Dodaj temat",
 	"vector-action-delete": "Usuń",
 	"vector-action-move": "Przenieś",
@@ -20,5 +27,7 @@
 	"vector-view-history": "Wyświetl historię",
 	"vector-view-view": "Czytaj",
 	"vector-view-viewsource": "Tekst źródłowy",
+	"vector-jumptonavigation": "Przejdź do nawigacji",
+	"vector-jumptosearch": "Przejdź do wyszukiwania",
 	"vector-more-actions": "Więcej"
 }

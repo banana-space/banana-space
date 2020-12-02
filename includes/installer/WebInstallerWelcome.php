@@ -16,7 +16,7 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @ingroup Deployment
+ * @ingroup Installer
  */
 
 class WebInstallerWelcome extends WebInstallerPage {
@@ -25,18 +25,20 @@ class WebInstallerWelcome extends WebInstallerPage {
 	 * @return string
 	 */
 	public function execute() {
-		if ( $this->parent->request->wasPosted() ) {
-			if ( $this->getVar( '_Environment' ) ) {
-				return 'continue';
-			}
+		if ( $this->parent->request->wasPosted() && $this->getVar( '_Environment' ) ) {
+			return 'continue';
 		}
-		$this->parent->output->addWikiText( wfMessage( 'config-welcome' )->plain() );
+		$this->parent->output->addWikiTextAsInterface( wfMessage( 'config-welcome' )->plain() );
 		$status = $this->parent->doEnvironmentChecks();
 		if ( $status->isGood() ) {
 			$this->parent->output->addHTML( '<span class="success-message">' .
 				wfMessage( 'config-env-good' )->escaped() . '</span>' );
-			$this->parent->output->addWikiText( wfMessage( 'config-copyright',
-				SpecialVersion::getCopyrightAndAuthorList() )->plain() );
+			$this->parent->output->addWikiTextAsInterface(
+				wfMessage( 'config-welcome-section-copyright',
+					SpecialVersion::getCopyrightAndAuthorList(),
+					wfExpandUrl( $this->parent->getDocUrl( 'Copying' ) )
+				)->plain()
+			);
 			$this->startForm();
 			$this->endForm();
 		} else {

@@ -1,0 +1,126 @@
+/*!
+ * VisualEditor MediaWiki DesktopArticleTarget init styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/* stylelint-disable selector-max-id */
+
+/*!
+ * State                | <html> classes
+ * - mw.DesktopArticleTarget.init.css is loaded
+ * Reading              | ve-available
+ * Loading editor       | ve-available ve-activated ve-loading
+ * - mw.DesktopArticleTarget.css is loaded
+ * Activate editor      | ve-available ve-activated ve-loading ve-activating
+ * Active               | ve-available ve-activated ve-active
+ * Deactivate editor    | ve-available ve-deactivating
+ * Deactivated          | ve-available
+ */
+
+/* Only hide the #toc inside the original article, not generated ones in VE (T187636) */
+.ve-activated .ve-init-mw-desktopArticleTarget-editableContent #toc,
+.ve-activated #siteNotice,
+.ve-activated .mw-indicators,
+.ve-activated #t-print,
+.ve-activated #t-permalink,
+.ve-activated #p-coll-print_export,
+.ve-activated #t-cite,
+.ve-deactivating .ve-ui-surface,
+.ve-active .ve-init-mw-desktopArticleTarget-editableContent,
+.ve-active .ve-init-mw-tempWikitextEditorWidget {
+	display: none;
+}
+
+/* The surface needs to be measurable but not visible while
+   being setup as some nodes render based on their dimensions,
+   e.g. ve.ce.FocusableNode#updateInvisibleIcon */
+.ve-activating .ve-ui-surface {
+	height: 0;
+	padding: 0 !important; /* stylelint-disable-line declaration-no-important */
+	overflow: hidden;
+}
+
+/* While loading, everything except the progress bar */
+.ve-loading #content > :not( .ve-init-mw-desktopArticleTarget-loading-overlay ),
+/* Once activated, all uneditable content except catlinks */
+.ve-activated .ve-init-mw-desktopArticleTarget-uneditableContent {
+	pointer-events: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	opacity: 0.5;
+}
+
+.ve-activated #firstHeading {
+	/* Override the styles above to allow the heading to be selected, for copy-pasting */
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+	pointer-events: auto;
+	cursor: text;
+}
+
+.ve-activated #firstHeading a {
+	/* Re-disable any gadget-added links inside the heading, e.g. section 0 edit links */
+	pointer-events: none;
+}
+
+.ve-activated #catlinks {
+	cursor: pointer;
+}
+
+.ve-activated #catlinks a {
+	opacity: 1;
+}
+
+.ve-activated #content {
+	position: relative;
+}
+/* stylelint-enable selector-max-id */
+
+.ve-init-mw-desktopArticleTarget-loading-overlay {
+	position: absolute;
+	top: 1.25em;
+	left: 0;
+	right: 0;
+	z-index: 1;
+	margin-top: -0.5em;
+}
+
+.ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
+	transition: height 250ms ease;
+	height: 0;
+	/* Toolbar placeholder is styled in theme files */
+}
+
+/* OOUI may not have loaded yet */
+.oo-ui-element-hidden {
+	display: none !important; /* stylelint-disable-line declaration-no-important */
+}
+
+/* Section edit links */
+
+/* stylelint-disable no-descending-specificity */
+.mw-editsection {
+	/* bidi isolation: */
+	unicode-bidi: -moz-isolate;
+	unicode-bidi: -webkit-isolate;
+	unicode-bidi: isolate;
+}
+
+.mw-editsection:before {
+	content: '\200B';
+}
+
+.mw-editsection a {
+	white-space: nowrap;
+}
+
+.mw-editsection-divider {
+	color: #54595d;
+}
+/* stylelint-enable no-descending-specificity */

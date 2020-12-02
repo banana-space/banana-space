@@ -8,7 +8,7 @@
 	"categorytree-portlet": "Kategori",
 	"categorytree-legend": "Tunjuakan pohon kategori",
 	"categorytree-desc": "Manavigasi sacaro dinamih [[Special:CategoryTree|struktur kategori]]",
-	"categorytree-header": "Masuakan suatu kategori untuak mancaliak isinyo dalam bantuak sruktur pohon.\nParalu diparatian koq fitur ko haruih ado dukuangan JavaScript tingkek lanjuik nan dikenal sabagai AJAX.\nJikok Sanak manggunoan paramban web versi lamo, atau mamatian fungsi JavaScript, fitur ko indak dapek bajalan.",
+	"categorytree-header": "Masuakan namo kategori untuak maliek isinyo sabagai struktur pohon. (Mambutuahkan JavaScript.)",
 	"categorytree-category": "Kategori:",
 	"categorytree-go": "Tunjuakan",
 	"categorytree-mode-label": "Mode:",

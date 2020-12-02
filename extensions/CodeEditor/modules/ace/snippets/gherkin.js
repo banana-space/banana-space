@@ -4,4 +4,11 @@ ace.define("ace/snippets/gherkin",["require","exports","module"], function(requi
 exports.snippetText =undefined;
 exports.scope = "gherkin";
 
-});
+});                (function() {
+                    ace.require(["ace/snippets/gherkin"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

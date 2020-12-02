@@ -20,6 +20,7 @@
  * @file
  */
 use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\Revision\RevisionRecord;
 
 class RCCacheEntryFactory {
 
@@ -55,7 +56,6 @@ class RCCacheEntryFactory {
 	 */
 	public function newFromRecentChange( RecentChange $baseRC, $watched ) {
 		$user = $this->context->getUser();
-		$counter = $baseRC->counter;
 
 		$cacheEntry = RCCacheEntry::newFromParent( $baseRC );
 
@@ -64,6 +64,7 @@ class RCCacheEntryFactory {
 
 		$cacheEntry->watched = $cacheEntry->mAttribs['rc_type'] == RC_LOG ? false : $watched;
 		$cacheEntry->numberofWatchingusers = $baseRC->numberofWatchingusers;
+		$cacheEntry->watchlistExpiry = $baseRC->watchlistExpiry;
 
 		$cacheEntry->link = $this->buildCLink( $cacheEntry );
 		$cacheEntry->timestamp = $this->buildTimestamp( $cacheEntry );
@@ -72,17 +73,25 @@ class RCCacheEntryFactory {
 		// called too many times (50% of CPU time on RecentChanges!).
 		$showDiffLinks = $this->showDiffLinks( $cacheEntry, $user );
 
-		$cacheEntry->difflink = $this->buildDiffLink( $cacheEntry, $showDiffLinks, $counter );
-		$cacheEntry->curlink = $this->buildCurLink( $cacheEntry, $showDiffLinks, $counter );
+		$cacheEntry->difflink = $this->buildDiffLink( $cacheEntry, $showDiffLinks );
+		$cacheEntry->curlink = $this->buildCurLink( $cacheEntry, $showDiffLinks );
 		$cacheEntry->lastlink = $this->buildLastLink( $cacheEntry, $showDiffLinks );
 
 		// Make user links
 		$cacheEntry->userlink = $this->getUserLink( $cacheEntry );
 
-		if ( !ChangesList::isDeleted( $cacheEntry, Revision::DELETED_USER ) ) {
+		if ( !ChangesList::isDeleted( $cacheEntry, RevisionRecord::DELETED_USER ) ) {
 			$cacheEntry->usertalklink = Linker::userToolLinks(
 				$cacheEntry->mAttribs['rc_user'],
-				$cacheEntry->mAttribs['rc_user_text']
+				$cacheEntry->mAttribs['rc_user_text'],
+				// Should the contributions link be red if the user has no edits (using default)
+				false,
+				// Customisation flags (using default 0)
+				0,
+				// User edit count (using default )
+				null,
+				// do not wrap the message in parentheses
+				false
 			);
 		}
 
@@ -96,15 +105,15 @@ class RCCacheEntryFactory {
 	 * @return bool
 	 */
 	private function showDiffLinks( RecentChange $cacheEntry, User $user ) {
-		return ChangesList::userCan( $cacheEntry, Revision::DELETED_TEXT, $user );
+		return ChangesList::userCan( $cacheEntry, RevisionRecord::DELETED_TEXT, $user );
 	}
 
 	/**
-	 * @param RecentChange $cacheEntry
+	 * @param RCCacheEntry $cacheEntry
 	 *
 	 * @return string
 	 */
-	private function buildCLink( RecentChange $cacheEntry ) {
+	private function buildCLink( RCCacheEntry $cacheEntry ) {
 		$type = $cacheEntry->mAttribs['rc_type'];
 
 		// New unpatrolled pages
@@ -173,11 +182,10 @@ class RCCacheEntryFactory {
 	/**
 	 * @param RecentChange $cacheEntry
 	 * @param bool $showDiffLinks
-	 * @param int $counter
 	 *
 	 * @return string
 	 */
-	private function buildCurLink( RecentChange $cacheEntry, $showDiffLinks, $counter ) {
+	private function buildCurLink( RecentChange $cacheEntry, $showDiffLinks ) {
 		$queryParams = $this->buildCurQueryParams( $cacheEntry );
 		$curMessage = $this->getMessage( 'cur' );
 		$logTypes = [ RC_LOG ];
@@ -208,11 +216,10 @@ class RCCacheEntryFactory {
 	/**
 	 * @param RecentChange $cacheEntry
 	 * @param bool $showDiffLinks
-	 * @param int $counter
 	 *
 	 * @return string
 	 */
-	private function buildDiffLink( RecentChange $cacheEntry, $showDiffLinks, $counter ) {
+	private function buildDiffLink( RecentChange $cacheEntry, $showDiffLinks ) {
 		$queryParams = $this->buildDiffQueryParams( $cacheEntry );
 		$diffMessage = $this->getMessage( 'diff' );
 		$logTypes = [ RC_NEW, RC_LOG ];
@@ -273,13 +280,14 @@ class RCCacheEntryFactory {
 	 * @return string
 	 */
 	private function getUserLink( RecentChange $cacheEntry ) {
-		if ( ChangesList::isDeleted( $cacheEntry, Revision::DELETED_USER ) ) {
+		if ( ChangesList::isDeleted( $cacheEntry, RevisionRecord::DELETED_USER ) ) {
 			$userLink = ' <span class="history-deleted">' .
 				$this->context->msg( 'rev-deleted-user' )->escaped() . '</span>';
 		} else {
 			$userLink = Linker::userLink(
 				$cacheEntry->mAttribs['rc_user'],
-				$cacheEntry->mAttribs['rc_user_text']
+				$cacheEntry->mAttribs['rc_user_text'],
+				ExternalUserNames::getLocal( $cacheEntry->mAttribs['rc_user_text'] )
 			);
 		}
 

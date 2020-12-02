@@ -1,4 +1,13 @@
 {
-	"@metadata": [],
-	"vector-view-edit": "Tshintsha"
+	"@metadata": {
+		"authors": [
+			"Nomden"
+		]
+	},
+	"vector-action-addsection": "Faka isihloko",
+	"vector-action-move": "Susa",
+	"vector-view-edit": "Tshintsha",
+	"vector-view-history": "Khawujonge imbali yeli phepha",
+	"vector-view-view": "Funda",
+	"vector-more-actions": "Veza ezinye iinkcukacha"
 }

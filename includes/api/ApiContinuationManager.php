@@ -29,6 +29,7 @@ class ApiContinuationManager {
 	private $allModules = [];
 	private $generatedModules = [];
 
+	/** @var array[] */
 	private $continuationData = [];
 	private $generatorContinuationData = [];
 	private $generatorNonContinuationData = [];

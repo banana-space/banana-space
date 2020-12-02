@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="264" height="162" viewBox="0 0 264 162">
+	<defs>
+		<clipPath id="jagged-edge">
+			<path d="M0 0v152l12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10V0z"/>
+		</clipPath>
+	</defs>
+	<g id="screenshot" clip-path="url(#jagged-edge)" fill="#eaecf0">
+		<path id="background" fill="#fff" d="M0 0h264v162H0"/>
+		<path id="article" d="M252 162V29H48v133z"/>
+		<path id="logo" d="M11 22c0-8 6-14 14-14s14 6 14 14-6 14-14 14-14-6-14-14m27 23v-5H13v5h25"/>
+		<path id="sidebar" d="M38 163V58H13v106h25"/>
+		<path id="personal-tools" d="M233 5h26v6h-26V5zm-24 0h22v6h-22zm-24 0h22v6h-22zm-23 0h13v6h-13zm15 0h6v6h-6zm-23 0h6v6h-6z"/>
+		<path id="search-input" d="M258 16v4h-92v-4h92m1-1h-94v6h94v-6z"/>
+		<path id="search-icon" d="M168 17h2v2h-2z"/>
+		<path id="border" d="M0 0v162h264V0zm1 1h262v150.533l-11 9.166-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-11-9z"/>
+		<path fill="#c8ccd1" d="M59 39h54v6H59z"/>
+		<g fill="#7fd7c4" transform="translate(0 -20)">
+			<path d="M240 70.334h-39v30h39zm-26.348 13.043h1.403l8.7 8.604 4.725-2.833 7.117 5.943v.025H204.45z"/>
+		</g>
+		<path fill="#c8ccd1" d="M59 56h134v3H59zm0 10h134v3H59zm0 10h39v3H59z"/>
+		<path fill="#7fd7c4" d="M84 55h26v5H84z"/>
+		<path fill="#e88e89" d="M68 55h16v5H68zm-9 33h181v5H59zm0 10h181v5H59z"/>
+		<path fill="#7fd7c4" d="M59 124h181v5H59zm0 10h181v5H59z"/>
+		<path fill="#e88e89" d="M59 108h51v5H59z"/>
+		<path fill="#7fd7c4" d="M59 144h101v5H59z"/>
+		<path fill="#e88e89" d="M59 90h23v1H59z"/>
+	</g>
+</svg>

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Candalua"
+		]
+	},
+	"apihelp-templatedata-description": "Serca tra i dati memorixà da l'estension TemplateData.",
+	"apihelp-templatedata-example-1": "Mostra i dati par [[Template:Stub]] e [[Template:Example]]"
+}

@@ -19,7 +19,6 @@
 	"interwiki_0": "არა",
 	"interwiki_edit": "რედაქტირება",
 	"interwiki_reasonfield": "მიზეზი:",
-	"interwiki_delquestion": "იშლება „$1“",
 	"interwiki_deleting": "თქვენ შლით სინტაქსს „$1“.",
 	"interwiki_deleted": "პრეფიქსი „$1“ წარმატებით წაიშალა ინტერვიკების ცხრილიდან.",
 	"interwiki_delfailed": "პრეფიქსის „$1“ წაშლა ინტერვიკების ცხრილიდან შეუძლებელია.",

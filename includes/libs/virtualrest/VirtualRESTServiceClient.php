@@ -48,7 +48,7 @@ class VirtualRESTServiceClient {
 	/** @var array Map of (prefix => VirtualRESTService|array) */
 	private $instances = [];
 
-	const VALID_MOUNT_REGEX = '#^/[0-9a-z]+/([0-9a-z]+/)*$#';
+	private const VALID_MOUNT_REGEX = '#^/[0-9a-z]+/([0-9a-z]+/)*$#';
 
 	/**
 	 * @param MultiHttpClient $http
@@ -105,10 +105,7 @@ class VirtualRESTServiceClient {
 		$cmpFunc = function ( $a, $b ) {
 			$al = substr_count( $a, '/' );
 			$bl = substr_count( $b, '/' );
-			if ( $al === $bl ) {
-				return 0; // should not actually happen
-			}
-			return ( $al < $bl ) ? 1 : -1; // largest prefix first
+			return $bl <=> $al; // largest prefix first
 		};
 
 		$matches = []; // matching prefixes (mount points)
@@ -120,6 +117,7 @@ class VirtualRESTServiceClient {
 		usort( $matches, $cmpFunc );
 
 		// Return the most specific prefix and corresponding service
+		// @phan-suppress-next-line PhanRedundantCondition
 		return $matches
 			? [ $matches[0], $this->getInstance( $matches[0] ) ]
 			: [ null, null ];
@@ -159,7 +157,7 @@ class VirtualRESTServiceClient {
 	 *     list( $rcode, $rdesc, $rhdrs, $rbody, $rerr ) = $responses[0];
 	 * @endcode
 	 *
-	 * @param array $reqs Map of Virtual HTTP request maps
+	 * @param array[] $reqs Map of Virtual HTTP request maps
 	 * @return array $reqs Map of corresponding response values with the same keys/order
 	 * @throws Exception
 	 */
@@ -245,6 +243,14 @@ class VirtualRESTServiceClient {
 					$checkReqIndexesByPrefix[$prefix][$index] = 1;
 				}
 			}
+
+			// Expand protocol-relative URLs
+			foreach ( $executeReqs as $index => &$req ) {
+				if ( preg_match( '#^//#', $req['url'] ) ) {
+					$req['url'] = wfExpandUrl( $req['url'], PROTO_CURRENT );
+				}
+			}
+
 			// Run the actual work HTTP requests
 			foreach ( $this->http->runMulti( $executeReqs ) as $index => $ranReq ) {
 				$doneReqs[$index] = $ranReq;

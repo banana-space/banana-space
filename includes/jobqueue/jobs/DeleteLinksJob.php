@@ -32,13 +32,13 @@ use MediaWiki\MediaWikiServices;
  * @since 1.27
  */
 class DeleteLinksJob extends Job {
-	function __construct( Title $title, array $params ) {
+	public function __construct( Title $title, array $params ) {
 		parent::__construct( 'deleteLinks', $title, $params );
 		$this->removeDuplicates = true;
 	}
 
-	function run() {
-		if ( is_null( $this->title ) ) {
+	public function run() {
+		if ( $this->title === null ) {
 			$this->setLastError( "deleteLinks: Invalid title" );
 			return false;
 		}
@@ -47,6 +47,10 @@ class DeleteLinksJob extends Job {
 
 		// Serialize links updates by page ID so they see each others' changes
 		$scopedLock = LinksUpdate::acquirePageLock( wfGetDB( DB_MASTER ), $pageId, 'job' );
+		if ( $scopedLock === null ) {
+			$this->setLastError( 'LinksUpdate already running for this page, try again later.' );
+			return false;
+		}
 
 		if ( WikiPage::newFromID( $pageId, WikiPage::READ_LATEST ) ) {
 			// The page was restored somehow or something went wrong
@@ -55,7 +59,7 @@ class DeleteLinksJob extends Job {
 		}
 
 		$factory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$timestamp = isset( $this->params['timestamp'] ) ? $this->params['timestamp'] : null;
+		$timestamp = $this->params['timestamp'] ?? null;
 		$page = WikiPage::factory( $this->title ); // title when deleted
 
 		$update = new LinksDeletionUpdate( $page, $pageId, $timestamp );

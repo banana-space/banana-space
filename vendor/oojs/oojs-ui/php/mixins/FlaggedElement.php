@@ -14,7 +14,8 @@ trait FlaggedElement {
 	/**
 	 * Flags.
 	 *
-	 * @var string[]
+	 * @var bool[]
+	 * @phan-var array<string,bool>
 	 */
 	protected $flags = [];
 
@@ -25,15 +26,15 @@ trait FlaggedElement {
 
 	/**
 	 * @param array $config Configuration options
-	 * @param string|string[] $config['flags'] Flags describing importance and functionality, e.g.
-	 *   'primary', 'safe', 'progressive', or 'destructive'.
+	 *      - string|string[] $config['flags'] Flags describing importance and functionality, e.g.
+	 *          'primary', 'safe', 'progressive', or 'destructive'.
 	 */
 	public function initializeFlaggedElement( array $config = [] ) {
 		// Properties
-		$this->flagged = isset( $config['flagged'] ) ? $config['flagged'] : $this;
+		$this->flagged = $config['flagged'] ?? $this;
 
 		// Initialization
-		$this->setFlags( isset( $config['flags'] ) ? $config['flags'] : null );
+		$this->setFlags( $config['flags'] ?? null );
 
 		$this->registerConfigCallback( function ( &$config ) {
 			if ( !empty( $this->flags ) ) {
@@ -70,7 +71,7 @@ trait FlaggedElement {
 		$remove = [];
 		$classPrefix = 'oo-ui-flaggedElement-';
 
-		foreach ( $this->flags as $flag ) {
+		foreach ( $this->flags as $flag => $value ) {
 			$remove[] = $classPrefix . $flag;
 		}
 

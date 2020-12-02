@@ -10,9 +10,7 @@
  *
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MediaWikiVersionFetcherTest extends PHPUnit\Framework\TestCase {
-
-	use MediaWikiCoversValidator;
+class MediaWikiVersionFetcherTest extends \MediaWikiIntegrationTestCase {
 
 	public function testReturnsResult() {
 		$versionFetcher = new MediaWikiVersionFetcher();

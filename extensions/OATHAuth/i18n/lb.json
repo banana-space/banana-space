@@ -13,10 +13,11 @@
 	"oathauth-step1": "Schrëtt 1: Den Zwee-Facteur-Authentifikatiounsprogramm eroflueden",
 	"oathauth-step2": "Schrëtt 2: De QR-Code scannen",
 	"oathauth-step4": "Schrëtt 4: Verificatioun",
+	"oathauth-enteruser": "Benotzernumm:",
+	"oathauth-enterverifyreason": "Grond fir Nozekucken",
 	"grant-group-authentication": "Authentifikatiouns-Aktioune fir sech selwer a fir Anerer maachen",
 	"action-oathauth-api-all": "OATH-Status nokucken",
-	"apihelp-query+oath-param-user": "Benotzer vun deem d'Informatioun gefrot gëtt. Standard ass et den aktuelle Benotzer.",
-	"apihelp-query+oath-example-1": "Informatiounen iwwer den aktuelle Benotzer kréien",
-	"apihelp-query+oath-example-2": "Informatiounen iwwer de Benotzer <kbd>Beispill</kbd> kréien",
-	"apihelp-oathvalidate-example-1": "En Token fir den aktuelle Benotzer validéieren"
+	"oathauth-enable-generic": "Aschalten",
+	"oathauth-disable-generic": "Ausschalten",
+	"oathauth-invalidrequest": "Net-valabel Ufro"
 }

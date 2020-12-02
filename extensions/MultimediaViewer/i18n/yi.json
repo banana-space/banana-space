@@ -1,11 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"פוילישער",
-			"Har-wradim"
+			"Har-wradim",
+			"פוילישער"
 		]
 	},
-	"multimediaviewer-pref": "מעדיע־ווייזער",
 	"multimediaviewer-repository-local": "מער פּרטים",
 	"multimediaviewer-datetime-created": "געשאפן: $1",
 	"multimediaviewer-datetime-uploaded": "ארויפגעלאדן: $1",
@@ -13,7 +12,7 @@
 	"multimediaviewer-multiple-authors": "נאך {{PLURAL:$1|איין|$1}} שאפער",
 	"multimediaviewer-multiple-authors-combine": "$1 און $2",
 	"multimediaviewer-thumbnail-error": "אנטשולדיקט, מען קען נישט ווייזן די טעקע",
-	"multimediaviewer-thumbnail-error-description": "עס זעט אויס אז ס׳איז פֿאראן א טעכנישער פראבלעם. איר קענט $1 אדער $3 טאמער עס האלט זיך אן ווייטער. פֿעלער: $2",
+	"multimediaviewer-thumbnail-error-description": "עס זעט אויס אז ס׳איז פֿאראן א טעכנישער פראבלעם. איר קענט $1 טאמער עס האלט זיך אן ווייטער. פֿעלער: $2",
 	"multimediaviewer-thumbnail-error-retry": "פרובירן ווידער",
 	"multimediaviewer-thumbnail-error-report": "מעלדן דעם פראבלעם",
 	"multimediaviewer-license-default": "באקוקן ליצענץ",
@@ -21,7 +20,7 @@
 	"multimediaviewer-permission-link": "באקוקן טערמינען",
 	"multimediaviewer-permission-link-hide": "באהאלטן באדינגונגען",
 	"multimediaviewer-permission-viewmore": "ווײזן נאך",
-	"multimediaviewer-about-mmv": "וועגן",
+	"multimediaviewer-about-mmv": "וועגן דעם אייבערפֿלאך",
 	"multimediaviewer-discuss-mmv": "שמועס",
 	"multimediaviewer-help-mmv": "הילף",
 	"multimediaviewer-optin-mmv": "אקטיווירן מעדיע־ווייזער",

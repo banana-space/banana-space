@@ -3,23 +3,22 @@
 		"authors": [
 			"DzWiki",
 			"KWiki",
-			"Srdjan m",
-			"Semso98"
+			"Semso98",
+			"Srdjan m"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Knjiga",
 	"visualeditor-cite-tool-name-journal": "Časopis",
 	"visualeditor-cite-tool-name-news": "Vijesti",
 	"visualeditor-cite-tool-name-web": "Veb-sajt",
-	"cite-ve-dialog-reference-editing-reused": "Ova referenca koristi se već $1 {{PLURAL:$1|put|puta}} na ovoj stranici.",
+	"cite-ve-dialog-reference-editing-reused": "Ova referenca koristi se {{PLURAL:$1|1=jednom|2=dvaput|$1 put|$1 puta}} na stranici.",
 	"cite-ve-dialog-reference-options-group-label": "Koristi ovu grupu",
 	"cite-ve-dialog-reference-options-group-placeholder": "Opće reference",
 	"cite-ve-dialog-reference-options-name-label": "Ponovo koristi pod ovim imenom",
+	"cite-ve-dialog-reference-options-responsive-label": "Koristi prilagodljivi raspored kolona",
 	"cite-ve-dialog-reference-options-section": "Opcije",
 	"cite-ve-dialog-reference-placeholder": "Ovdje napišite ili prekopirajte referencu, ili umetnite šablon za reference.",
 	"cite-ve-dialog-reference-title": "Referenca",
-	"cite-ve-dialog-reference-useexisting-full-label": "Ponovo koristi referencu koja već postoji na ovoj stranici",
-	"cite-ve-dialog-reference-useexisting-label": "Koristi postojeću referencu",
 	"cite-ve-dialog-reference-useexisting-tool": "Ponovno korištenje",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Spisak općih referenci",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "Spisak referenci grupe \"$1\"",

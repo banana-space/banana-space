@@ -3,11 +3,12 @@
 		"authors": [
 			"Hwangjy9",
 			"Yearning",
+			"Ykhwong",
 			"아라"
 		]
 	},
 	"renocaptcha-edit": "자동 편집 스팸으로부터 위키를 보호하기 위해, 다음 CAPTCHA를 풀어주세요:",
-	"renocaptcha-addurl": "편집에 새로운 바깥 고리가 포함되어 있습니다. 자동 스팸으로부터 위키를 보호하기 위해, 다음 CAPTCHA를 풀어주세요:",
+	"renocaptcha-addurl": "편집에 새로운 외부 링크가 포함되어 있습니다. 자동 스팸으로부터 위키를 보호하기 위해, 다음 CAPTCHA를 풀어주세요:",
 	"renocaptcha-badlogin": "자동화된 비밀번호 깨기로부터 위키를 보호하기 위해, 다음 CAPTCHA를 풀어주세요:",
 	"renocaptcha-createaccount": "자동 계정 만들기로부터 위키를 보호하기 위해, 다음 CAPTCHA를 풀어주세요:",
 	"renocaptcha-createaccount-fail": "보안문자가 틀렸습니다.",

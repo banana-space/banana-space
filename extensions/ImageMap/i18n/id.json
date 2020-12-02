@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Gombang",
 			"IvanLanin",
-			"Rex",
-			"Gombang"
+			"Rex"
 		]
 	},
 	"imagemap_desc": "Menyediakan peta gambar yang dapat diklik dari klien dengan menggunakan tag <code>&lt;imagemap&gt;</code>",

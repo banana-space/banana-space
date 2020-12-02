@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"1917 Ekim Devrimi",
+			"Kumkumuk",
+			"Orbot707"
+		]
+	},
+	"apihelp-categorytree-description": "Derganiya zerre de Module Categorytree.",
+	"apihelp-categorytree-summary": "Seba derganiya CategoryTree rê modulê miyani",
+	"apihelp-categorytree-param-category": "Serekê canameya kategori,  verole grotış do nê gêriyeno",
+	"apihelp-categorytree-param-options": "İnşaya weçeneganê Categorytree JSON objeyan vıraziya.\nHesıbyaye xoriyeya weçena <kbd>1</kbd> a.",
+	"apierror-categorytree-invalidjson": "Weçenegê objeyê JSON'i ravêreno"
+}

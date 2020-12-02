@@ -1,4 +1,6 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"cite_error": "Bitlaen so error $1; $2"
 }

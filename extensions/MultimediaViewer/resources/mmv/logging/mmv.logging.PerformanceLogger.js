@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $, oo ) {
+( function () {
 	var PL;
 
 	/**
@@ -28,7 +28,7 @@
 	 */
 	function PerformanceLogger() {}
 
-	oo.inheritClass( PerformanceLogger, mw.mmv.logging.Logger );
+	OO.inheritClass( PerformanceLogger, mw.mmv.logging.Logger );
 
 	PL = PerformanceLogger.prototype;
 
@@ -87,7 +87,7 @@
 			};
 
 			request.onreadystatechange = function () {
-				var total = $.now() - start;
+				var total = ( new Date() ).getTime() - start;
 
 				if ( request.readyState === 4 ) {
 					deferred.notify( request.response, 100 );
@@ -96,7 +96,7 @@
 				}
 			};
 
-			start = $.now();
+			start = ( new Date() ).getTime();
 			request.open( 'GET', url, true );
 			request.send();
 		} catch ( e ) {
@@ -122,8 +122,8 @@
 		var matches,
 			logger = this,
 			stats = { type: type,
-				contentHost: window.location.host,
-				isHttps: window.location.protocol === 'https:',
+				contentHost: location.host,
+				isHttps: location.protocol === 'https:',
 				total: total },
 			connection = this.getNavigatorConnection();
 
@@ -206,6 +206,7 @@
 			stats.XCache = xcache;
 			varnishXCache = this.parseVarnishXCacheHeader( xcache );
 
+			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( varnishXCache, function ( key, value ) {
 				stats[ key ] = value;
 			} );
@@ -278,7 +279,7 @@
 	 *
 	 * @param {string} type the type of request to be measured
 	 * @param {number} total the total load time tracked with a basic technique
-	 * @param {jqXHR} jqxhr
+	 * @param {jQuery.jqXHR} jqxhr
 	 */
 	PL.recordJQueryEntry = function ( type, total, jqxhr ) {
 		var perf = this;
@@ -338,7 +339,7 @@
 	 *
 	 * @param {string} type the type of request to be measured
 	 * @param {number} total the total load time tracked with a basic technique
-	 * @param {jqXHR} jqxhr
+	 * @param {jQuery.jqXHR} jqxhr
 	 */
 	PL.recordJQueryEntryDelayed = function ( type, total, jqxhr ) {
 		var perf = this;
@@ -437,7 +438,7 @@
 			data.type === 'image' &&
 			data.imageWidth > 0 &&
 			data.total > 20 &&
-			$.inArray( data.imageWidth, trackedWidths ) !== -1
+			trackedWidths.indexOf( data.imageWidth ) !== -1
 		) {
 			mw.track( 'timing.media.thumbnail.client.' + data.imageWidth, data.total );
 		}
@@ -452,4 +453,4 @@
 
 	mw.mmv.logging.PerformanceLogger = PerformanceLogger;
 
-}( mediaWiki, jQuery, OO ) );
+}() );

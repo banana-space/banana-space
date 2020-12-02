@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abdullahi",
 			"Abshirdheere"
 		]
 	},
-	"questycaptcha-createaccount": "Si aad u caawiso dhowritaanka in la iska samaysto Akoon,Fadlan ka jawaan su'aalahaan hoos ku qoran ([[Special:Captcha/help|Macluumaad dheeraad ah]]):"
+	"questycaptcha-createaccount": "Si looga ilaaliyo wiki abuurka akoonada automaatiga ah, waxaa si naxariis leh kaaga codsaneenaa in aad ka jawaabto  suaasha ka muuqata hoos. ([[Special:Captcha/help|faahfaahin dheeraad]]):"
 }

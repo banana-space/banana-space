@@ -79,22 +79,22 @@ class Initial extends InsertionMode {
 			|| $public === '-/W3C/DTD HTML 4.0 Transitional/EN'
 			|| $public === 'HTML'
 			|| $system === 'http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd'
-			|| ( $system === null && preg_match( $quirksIfNoSystem, $public ) )
-			|| preg_match( HTMLData::$quirkyPrefixRegex, $public )
+			|| ( $system === null && preg_match( $quirksIfNoSystem, $public ?? '' ) )
+			|| preg_match( HTMLData::$quirkyPrefixRegex, $public ?? '' )
 		) {
 			$quirks = TreeBuilder::QUIRKS;
 		} elseif ( !$this->builder->isIframeSrcdoc
 			&& (
-				preg_match( $limitedQuirks, $public )
-				|| ( $system !== null && preg_match( $quirksIfNoSystem, $public ) )
+				preg_match( $limitedQuirks, $public ?? '' )
+				|| ( $system !== null && preg_match( $quirksIfNoSystem, $public ?? '' ) )
 			)
 		) {
 			$quirks = TreeBuilder::LIMITED_QUIRKS;
 		}
 
-		$name = $name === null ? '' : $name;
-		$public = $public === null ? '' : $public;
-		$system = $system === null ? '' : $system;
+		$name = $name ?? '';
+		$public = $public ?? '';
+		$system = $system ?? '';
 		$this->builder->doctype( $name, $public, $system, $quirks,
 			$sourceStart, $sourceLength );
 		$this->dispatcher->switchMode( Dispatcher::BEFORE_HTML );

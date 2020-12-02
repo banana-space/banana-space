@@ -37,7 +37,7 @@ class IPTC {
 	 * @param string $rawData The app13 block from jpeg containing iptc/iim data
 	 * @return array IPTC metadata array
 	 */
-	static function parse( $rawData ) {
+	public static function parse( $rawData ) {
 		$parsed = iptcparse( $rawData );
 		$data = [];
 		if ( !is_array( $parsed ) ) {
@@ -222,11 +222,7 @@ class IPTC {
 				case '2#055':
 					// Date created (not date digitized).
 					// Maps to exif DateTimeOriginal
-					if ( isset( $parsed['2#060'] ) ) {
-						$time = $parsed['2#060'];
-					} else {
-						$time = [];
-					}
+					$time = $parsed['2#060'] ?? [];
 					$timestamp = self::timeHelper( $val, $time, $c );
 					if ( $timestamp ) {
 						$data['DateTimeOriginal'] = $timestamp;
@@ -236,11 +232,7 @@ class IPTC {
 				case '2#062':
 					// Date converted to digital representation.
 					// Maps to exif DateTimeDigitized
-					if ( isset( $parsed['2#063'] ) ) {
-						$time = $parsed['2#063'];
-					} else {
-						$time = [];
-					}
+					$time = $parsed['2#063'] ?? [];
 					$timestamp = self::timeHelper( $val, $time, $c );
 					if ( $timestamp ) {
 						$data['DateTimeDigitized'] = $timestamp;
@@ -249,11 +241,7 @@ class IPTC {
 
 				case '2#030':
 					// Date released.
-					if ( isset( $parsed['2#035'] ) ) {
-						$time = $parsed['2#035'];
-					} else {
-						$time = [];
-					}
+					$time = $parsed['2#035'] ?? [];
 					$timestamp = self::timeHelper( $val, $time, $c );
 					if ( $timestamp ) {
 						$data['DateTimeReleased'] = $timestamp;
@@ -262,11 +250,7 @@ class IPTC {
 
 				case '2#037':
 					// Date expires.
-					if ( isset( $parsed['2#038'] ) ) {
-						$time = $parsed['2#038'];
-					} else {
-						$time = [];
-					}
+					$time = $parsed['2#038'] ?? [];
 					$timestamp = self::timeHelper( $val, $time, $c );
 					if ( $timestamp ) {
 						$data['DateTimeExpires'] = $timestamp;
@@ -475,7 +459,7 @@ class IPTC {
 	 * all iso 2022 escape codes. In practise, the code for utf-8 is the
 	 * only code that seems to have wide use. It does detect that code.
 	 */
-	static function getCharset( $tag ) {
+	public static function getCharset( $tag ) {
 		// According to iim standard, charset is defined by the tag 1:90.
 		// in which there are iso 2022 escape sequences to specify the character set.
 		// the iim standard seems to encourage that all necessary escape sequences are

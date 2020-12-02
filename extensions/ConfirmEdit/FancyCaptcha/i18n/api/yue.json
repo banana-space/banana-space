@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yueman"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "攞個新FancyCaptcha。",
+	"apihelp-fancycaptchareload-summary": "攞個新FancyCaptcha。",
+	"apihelp-fancycaptchareload-example-1": "攞個新FancyCaptcha。"
+}

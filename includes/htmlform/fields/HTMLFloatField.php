@@ -2,10 +2,12 @@
 
 /**
  * A field that will contain a numeric value
+ *
+ * @stable to extend
  */
 class HTMLFloatField extends HTMLTextField {
 	public function getSize() {
-		return isset( $this->mParams['size'] ) ? $this->mParams['size'] : 20;
+		return $this->mParams['size'] ?? 20;
 	}
 
 	public function validate( $value, $alldata ) {
@@ -42,5 +44,13 @@ class HTMLFloatField extends HTMLTextField {
 		}
 
 		return true;
+	}
+
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
+	protected function getInputWidget( $params ) {
+		return new OOUI\NumberInputWidget( $params );
 	}
 }

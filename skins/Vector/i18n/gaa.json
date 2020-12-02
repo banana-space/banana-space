@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"Flixtey",
+			"Gkbediako",
+			"Mybluberet"
+		]
+	},
+	"vector-action-addsection": "Kɛ mlijaa yitso afata he",
+	"vector-action-delete": "Jiemɔ",
+	"vector-action-move": "Tsi",
+	"vector-action-protect": "Yibaamɔ",
+	"vector-view-create": "Bɔɔ",
+	"vector-view-edit": "Tsakemɔ",
+	"vector-view-history": "Kwɛmɔ nibii ni eho",
+	"vector-view-view": "Kanemɔ",
+	"vector-more-actions": "Pii"
+}

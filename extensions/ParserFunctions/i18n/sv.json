@@ -6,8 +6,8 @@
 			"Lokal Profil",
 			"M.M.S.",
 			"Najami",
-			"WikiPhoenix",
-			"Skalman"
+			"Skalman",
+			"WikiPhoenix"
 		]
 	},
 	"pfunc_desc": "Lägger till logiska funktioner i parsern",

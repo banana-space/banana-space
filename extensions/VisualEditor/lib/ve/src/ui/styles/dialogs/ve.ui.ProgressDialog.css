@@ -1,0 +1,26 @@
+/*!
+ * VisualEditor UserInterface ProgressDialog styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-progressDialog-row {
+	display: table;
+	width: 100%;
+}
+
+.ve-ui-progressDialog-row:not( :last-child ) {
+	margin-bottom: 1em;
+}
+
+.ve-ui-progressDialog-row .oo-ui-fieldLayout {
+	display: table-cell;
+	padding-bottom: 0.45em;
+}
+
+.ve-ui-progressDialog-row .oo-ui-buttonWidget {
+	display: table-cell;
+	vertical-align: bottom;
+	width: 1.9em;
+	padding-left: 1em;
+}

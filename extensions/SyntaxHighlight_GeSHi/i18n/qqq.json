@@ -1,18 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
+			"Legoktm",
+			"Liuxinyu970226",
 			"Meno25",
+			"Robby",
 			"Shirayuki",
 			"The Evil IP address",
-			"Legoktm",
-			"Umherirrender",
-			"Liuxinyu970226",
-			"Robby"
+			"Umherirrender"
 		]
 	},
 	"syntaxhighlight-desc": "{{desc|name=Syntax Highlight GeSHi|url=https://www.mediawiki.org/wiki/Extension:SyntaxHighlight_GeSHi}}",
 	"syntaxhighlight-error-category": "Tracking category for pages with syntax highlighting errors",
 	"syntaxhighlight-error-category-desc": "Description on [[Special:TrackingCategories]] for the {{msg-mw|syntaxhighlight-error-category}} tracking category.",
+	"syntaxhighlight-enclose-category": "Tracking category for pages using the deprecated \"enclose\" attribute.\n\nDo not translate the word \"enclose\".",
+	"syntaxhighlight-enclose-category-desc": "Description on [[Special:TrackingCategories]] for the {{msg-mw|syntaxhighlight-enclose-category}} tracking category.\n\nDo not translate the word \"enclose\".",
+	"syntaxhighlight-source-category": "Tracking category for pages using the deprecated &lt;source&gt; tags.\n\nDo not translate the word \"source\".",
+	"syntaxhighlight-source-category-desc": "Description on [[Special:TrackingCategories]] for the {{msg-mw|syntaxhighlight-source-category}} tracking category.\n\nDo not translate the word \"source\".",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Label for the code input field\n{{Identical|Code}}",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Label for the language field\n{{Identical|Language}}",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "Label of the 'None' option in the language dropdown field\n{{Identical|None}}",

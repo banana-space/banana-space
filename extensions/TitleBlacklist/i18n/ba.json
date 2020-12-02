@@ -21,8 +21,5 @@
 	"titleblacklist-warning": "<strong>Иҫкәрмә:</strong> Был битте администраторҙар һәм хоҡуҡтары булған ҡатнашыусылар <code>tboverride</code> мөхәррирләй ала, сөнки ул киләһе «ҡара исемлек» атамаһы:<br /><code>$1</code> менән тап килеүе ихтимал",
 	"right-tboverride": " Атамалар йәки ҡатнашыусыларҙың ҡара исемлеге битенә ихтибар итмәҫкә.",
 	"right-tboverride-account": "Ҡатнашыусы исемдәре ҡара исемлеген иғтибарға алмау",
-	"right-titleblacklistlog": "Тыйылған исемдәр журналын ҡарау",
-	"apihelp-titleblacklist-param-action": "Тикшерерлергә тейеш эшмәкәрлек.",
-	"apihelp-titleblacklist-example-1": "Мәҡәлә [[Foo]] ҡара исемлекә индерелгәненлеген тикшерергә.",
-	"apihelp-titleblacklist-example-2": "Мәҡәлә[[Bar]] мөхәррирләү өсөн ҡара исемлеккә ингәнлеген тикшерергә."
+	"right-titleblacklistlog": "Тыйылған исемдәр журналын ҡарау"
 }

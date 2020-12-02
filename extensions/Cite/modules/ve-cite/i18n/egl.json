@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lévi",
-			"Gloria sah"
+			"Gloria sah",
+			"Lévi"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Léber",
@@ -13,7 +13,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Tōrna a druvê cól nòm ché",
 	"cite-ve-dialog-reference-options-section": "Siēlti",
 	"cite-ve-dialog-reference-title": "Riferimèint",
-	"cite-ve-dialog-reference-useexisting-label": "Drōva un riferimèint ch' al gh'é bèle",
 	"cite-ve-dialog-referenceslist-title": "Elèinch riferimèint",
 	"cite-ve-dialogbutton-reference-tooltip": "Fundamèint",
 	"cite-ve-dialogbutton-referenceslist-tooltip": "Elèinch riferimèint",

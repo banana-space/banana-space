@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ashok modhvadia",
-			"KartikMistry",
-			"The Discoverer",
 			"Arbhatt",
+			"Ashok modhvadia",
 			"Dsvyas",
+			"KartikMistry",
 			"NehalDaveND",
-			"Nisargjhaveri"
+			"Nisargjhaveri",
+			"The Discoverer"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "પુસ્તક",
@@ -19,7 +19,6 @@
 	"cite-ve-dialog-reference-options-name-label": "આ નામ વડે ફરી વાપરો",
 	"cite-ve-dialog-reference-options-section": "વિકલ્પો",
 	"cite-ve-dialog-reference-title": "સંદર્ભ",
-	"cite-ve-dialog-reference-useexisting-label": "હાજર રહેલ સંદર્ભ વાપરો",
 	"cite-ve-dialog-reference-useexisting-tool": "ફરી ઉપયોગ",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "સામાન્ય સંદર્ભોની યાદી",
 	"cite-ve-dialog-referenceslist-title": "સંદર્ભ યાદી",

@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
-			"IKhitron",
-			"Guycn2"
+			"Guycn2",
+			"IKhitron"
 		]
 	},
 	"codeeditor-desc": "עריכה עם צביעת קוד לדפים של JavaScript ושל CSS באמצעות [https://ace.c9.io/ עורך Ace]",

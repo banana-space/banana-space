@@ -1,24 +1,27 @@
-* Mark Holmquist <mtraceur@member.fsf.org>
+* Gergő Tisza <gtisza@wikimedia.org>
 * Gilles Dubuc <gdubuc@wikimedia.org>
-* Gergő Tisza <tgr.huwiki@gmail.com>
-* Aaron Arcos <aarcos.wiki@gmail.com>
-* Zeljko Filipin <zeljko.filipin@gmail.com>
+* Mark Holmquist <mtraceur@member.fsf.org>
 * Pau Giner <pau.giner@gmail.com>
-* theopolisme <theopolismewiki@gmail.com>
-* MatmaRex <matma.rex@gmail.com>
-* apsdehal <amanpreet.iitr2013@gmail.com>
-* vldandrew <vldandrew@gmail.com>
-* Ebrahim Byagowi <ebrahim@gnu.org>
-* Dereckson <dereckson@espace-win.org>
-* Brion VIBBER <brion@wikimedia.org>
-* Yuki Shira <shirayuking@gmail.com>
-* Yaroslav Melnychuk <yaroslavmelnuchuk@gmail.com>
-* tonythomas01 <01tonythomas@gmail.com>
-* raymond <raimond.spekking@gmail.com>
-* Kunal Mehta <legoktm@gmail.com>
-* Jeff Hall <jhall@wikimedia.org>
-* Christian Aistleitner <christian@quelltextlich.at>
-* Amir E. Aharoni <amir.aharoni@mail.huji.ac.il>
+* Željko Filipin <zeljko.filipin@gmail.com>
+* Kunal Mehta <legoktm@member.fsf.org>
+* Ed Sanders <esanders@wikimedia.org>
+* James D. Forrester <jforrester@wikimedia.org>
+* Aaron Arcos <aarcos.wiki@gmail.com>
+* Thiemo Kreuz <thiemo.kreuz@wikimedia.de>
+* Matthias Mullie <git@mullie.eu>
+* Volker E <volker.e@wikimedia.org>
+* fomafix <fomafix@googlemail.com>
+* Chris McMahon <cmcmahon@wikimedia.org>
+* Timo Tijhof <krinklemail@gmail.com>
+* Umherirrender <umherirrender_de.wp@web.de>
+* Simon Legner <Simon.Legner@gmail.com>
+* Geoffrey Mon <geofbot@gmail.com>
+* Bartosz Dziewoński <matma.rex@gmail.com>
+* Antoine Musso <hashar@free.fr>
+* Prateek Saxena <psaxena@wikimedia.org>
+* Brion Vibber <brion@wikimedia.org>
+* Namit <namit.ohri@gmail.com>
+* gladoscc <admin@glados.cc>
 
-Generated with git log --format='%aN <%aE>' | awk '{arr[$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d\  -f2-
-Manually pruned for bots and duplicates
+Generated with <code>git log --format='%aN <%aE>' | sort | uniq --count | sort --reverse --numeric-sort</code> using https://github.com/wikimedia/mediawiki/blob/master/.mailmap
+Manually pruned for bots and cutoff at 5 contributions.

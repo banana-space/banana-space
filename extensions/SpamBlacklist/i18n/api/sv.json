@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lokal Profil"
+		]
+	},
+	"apihelp-spamblacklist-description": "Validera en eller flera URL:er mot SpamBlacklist.",
+	"apihelp-spamblacklist-example-1": "Kontrollera två URL:er mot svartlistan",
+	"apihelp-spamblacklist-param-url": "URL:er att validera mot svartlistan."
+}

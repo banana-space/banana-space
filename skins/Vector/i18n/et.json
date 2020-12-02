@@ -8,7 +8,9 @@
 	},
 	"skinname-vector": "Vektor",
 	"vector-skin-desc": "MonoBooki uuem versioon värskema väljanägemise ja mitme kasutajasõbralikuma täiendusega",
-	"vector.css": "/* Siin asuv kaskaadilaadistik puudutab kõiki Vektori-kujunduse kasutajaid. */",
+	"prefs-vector-enable-vector-1-label": "Kasuta vana Vektorit",
+	"prefs-vector-enable-vector-1-help": "Tulevatel aastatel uuendame järk-järgult Vektori-kujundust. Vana Vektor võimaldab kuvada kujunduse vana versiooni (seisuga detsember 2019). Lisateavet uuenduste kohta leiad [[mw:Reading/Web/Desktop_Improvements|projekti lehelt]].",
+	"vector.css": "/* Siin asuv kaskaadilaadistik laaditakse kõigi Vektori-kujunduse kasutajate jaoks. */",
 	"vector.js": "/* Siin asuv JavaScript laaditakse kõigi Vektori-kujunduse kasutajate jaoks. */",
 	"vector-action-addsection": "Lisa teema",
 	"vector-action-delete": "Kustuta",
@@ -21,5 +23,7 @@
 	"vector-view-history": "Näita ajalugu",
 	"vector-view-view": "Vaata",
 	"vector-view-viewsource": "Vaata lähteteksti",
+	"vector-jumptonavigation": "Mine navigeerimisribale",
+	"vector-jumptosearch": "Mine otsikasti",
 	"vector-more-actions": "Veel"
 }

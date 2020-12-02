@@ -8,7 +8,6 @@ namespace OOUI;
  * @abstract
  */
 class InputWidget extends Widget {
-	use FlaggedElement;
 	use TabIndexedElement;
 	use TitledElement;
 	use AccessKeyedElement;
@@ -31,10 +30,10 @@ class InputWidget extends Widget {
 
 	/**
 	 * @param array $config Configuration options
-	 * @param string $config['name'] HTML input name (default: '')
-	 * @param string $config['value'] Input value (default: '')
-	 * @param string $config['dir'] The directionality of the input (ltr/rtl)
-	 * @param string $config['inputId'] The value of the input’s HTML `id` attribute.
+	 *      - string $config['name'] HTML input name (default: '')
+	 *      - string $config['value'] Input value (default: '')
+	 *      - string $config['dir'] The directionality of the input (ltr/rtl)
+	 *      - string $config['inputId'] The value of the input’s HTML `id` attribute.
 	 */
 	public function __construct( array $config = [] ) {
 		// Parent constructor
@@ -44,13 +43,15 @@ class InputWidget extends Widget {
 		$this->input = $this->getInputElement( $config );
 
 		// Traits
-		$this->initializeFlaggedElement( array_merge( $config, [ 'flagged' => $this ] ) );
 		$this->initializeTabIndexedElement(
-			array_merge( $config, [ 'tabIndexed' => $this->input ] ) );
+			array_merge( [ 'tabIndexed' => $this->input ], $config )
+		);
 		$this->initializeTitledElement(
-			array_merge( $config, [ 'titled' => $this->input ] ) );
+			array_merge( [ 'titled' => $this->input ], $config )
+		);
 		$this->initializeAccessKeyedElement(
-			array_merge( $config, [ 'accessKeyed' => $this->input ] ) );
+			array_merge( [ 'accessKeyed' => $this->input ], $config )
+		);
 
 		// Initialization
 		if ( isset( $config['name'] ) ) {
@@ -63,7 +64,7 @@ class InputWidget extends Widget {
 			->addClasses( [ 'oo-ui-inputWidget' ] )
 			->appendContent( $this->input );
 		$this->input->addClasses( [ 'oo-ui-inputWidget-input' ] );
-		$this->setValue( isset( $config['value'] ) ? $config['value'] : null );
+		$this->setValue( $config['value'] ?? null );
 		if ( isset( $config['dir'] ) ) {
 			$this->setDir( $config['dir'] );
 		}
@@ -160,6 +161,10 @@ class InputWidget extends Widget {
 		}
 		if ( $this->value !== '' ) {
 			$config['value'] = $this->value;
+		}
+		$dir = $this->input->getAttribute( 'dir' );
+		if ( $dir !== null ) {
+			$config['dir'] = $dir;
 		}
 		$id = $this->input->getAttribute( 'id' );
 		if ( $id !== null ) {

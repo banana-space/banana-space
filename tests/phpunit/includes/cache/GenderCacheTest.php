@@ -1,4 +1,5 @@
 <?php
+
 use MediaWiki\MediaWikiServices;
 
 /**
@@ -10,7 +11,7 @@ class GenderCacheTest extends MediaWikiLangTestCase {
 	/** @var string[] User key => username */
 	private static $nameMap;
 
-	function addDBDataOnce() {
+	public function addDBDataOnce() {
 		// ensure the correct default gender
 		$this->mergeMwGlobalArrayValue( 'wgDefaultUserOptions', [ 'gender' => 'unknown' ] );
 
@@ -41,7 +42,7 @@ class GenderCacheTest extends MediaWikiLangTestCase {
 	 */
 	public function testUserName( $userKey, $expectedGender ) {
 		$genderCache = MediaWikiServices::getInstance()->getGenderCache();
-		$username = isset( self::$nameMap[$userKey] ) ? self::$nameMap[$userKey] : $userKey;
+		$username = self::$nameMap[$userKey] ?? $userKey;
 		$gender = $genderCache->getGenderOf( $username );
 		$this->assertEquals( $gender, $expectedGender, "GenderCache normal" );
 	}
@@ -53,7 +54,7 @@ class GenderCacheTest extends MediaWikiLangTestCase {
 	 * @covers GenderCache::getGenderOf
 	 */
 	public function testUserObjects( $userKey, $expectedGender ) {
-		$username = isset( self::$nameMap[$userKey] ) ? self::$nameMap[$userKey] : $userKey;
+		$username = self::$nameMap[$userKey] ?? $userKey;
 		$genderCache = MediaWikiServices::getInstance()->getGenderCache();
 		$gender = $genderCache->getGenderOf( $username );
 		$this->assertEquals( $gender, $expectedGender, "GenderCache normal" );
@@ -79,9 +80,28 @@ class GenderCacheTest extends MediaWikiLangTestCase {
 	 * @covers GenderCache::getGenderOf
 	 */
 	public function testStripSubpages( $userKey, $expectedGender ) {
-		$username = isset( self::$nameMap[$userKey] ) ? self::$nameMap[$userKey] : $userKey;
+		$username = self::$nameMap[$userKey] ?? $userKey;
 		$genderCache = MediaWikiServices::getInstance()->getGenderCache();
 		$gender = $genderCache->getGenderOf( "$username/subpage" );
 		$this->assertEquals( $gender, $expectedGender, "GenderCache must strip of subpages" );
+	}
+
+	/**
+	 * GenderCache must work without database (like Installer)
+	 * @coversNothing
+	 */
+	public function testWithoutDB() {
+		self::overrideMwServices();
+
+		$services = MediaWikiServices::getInstance();
+		$services->disableService( 'DBLoadBalancer' );
+		$services->disableService( 'DBLoadBalancerFactory' );
+
+		// Make sure the disable works
+		$this->assertTrue( $services->isServiceDisabled( 'DBLoadBalancer' ) );
+
+		// Test, if it is possible to create the gender cache
+		$genderCache = $services->getGenderCache();
+		$this->assertInstanceOf( GenderCache::class, $genderCache );
 	}
 }

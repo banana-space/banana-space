@@ -32,8 +32,5 @@
 	"categorytree-no-pages": "nisciun-a paggina ni sottocategoria",
 	"categorytree-not-found": "Categoria <i>$1</i> non trovâ",
 	"categorytree-error": "Problema into caregamento di dæti.",
-	"categorytree-retry": "Pe piaxei attendi un momento e proeuva torna.",
-	"apihelp-categorytree-description": "Moddulo interno pe l'estenscion CategoryTree.",
-	"apihelp-categorytree-param-category": "Tittolo into namespace categoria, o prefisso o saiâ ignorou se dæto.",
-	"apihelp-categorytree-param-options": "Opçioin pe-o costrutô CategoryTree comme oggetto JSON. L'opçion <var>depth</var> predefinia a l'è <kbd>1</kbd>."
+	"categorytree-retry": "Pe piaxei attendi un momento e proeuva torna."
 }

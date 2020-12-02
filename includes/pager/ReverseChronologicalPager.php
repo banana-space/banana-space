@@ -23,14 +23,23 @@ use Wikimedia\Timestamp\TimestampException;
 /**
  * Efficient paging for SQL queries.
  * IndexPager with a formatted navigation bar.
+ * @stable to extend
  * @ingroup Pager
  */
 abstract class ReverseChronologicalPager extends IndexPager {
+	/** @var bool */
 	public $mDefaultDirection = IndexPager::DIR_DESCENDING;
+	/** @var int */
 	public $mYear;
+	/** @var int */
 	public $mMonth;
+	/** @var int */
 	public $mDay;
 
+	/**
+	 * @stable to override
+	 * @return string
+	 */
 	public function getNavigationBar() {
 		if ( !$this->isNavigationBarShown() ) {
 			return '';
@@ -65,6 +74,8 @@ abstract class ReverseChronologicalPager extends IndexPager {
 	 * Set and return the mOffset timestamp such that we can get all revisions with
 	 * a timestamp up to the specified parameters.
 	 *
+	 * @stable to override
+	 *
 	 * @param int $year Year up to which we want revisions
 	 * @param int $month Month up to which we want revisions
 	 * @param int $day [optional] Day up to which we want revisions. Default is end of month.
@@ -81,14 +92,16 @@ abstract class ReverseChronologicalPager extends IndexPager {
 			return null;
 		}
 
-		// Treat the given time in the wiki timezone and get a UTC timestamp for the database lookup
 		$timestamp = self::getOffsetDate( $year, $month, $day );
-		$timestamp->setTimezone( $this->getConfig()->get( 'Localtimezone' ) );
 
 		try {
-			$this->mYear = (int)$timestamp->format( 'Y' );
-			$this->mMonth = (int)$timestamp->format( 'm' );
-			$this->mDay = (int)$timestamp->format( 'd' );
+			// The timestamp used for DB queries is at midnight of the *next* day after the selected date.
+			$selectedDate = new DateTime( $timestamp->getTimestamp( TS_ISO_8601 ) );
+			$selectedDate = $selectedDate->modify( '-1 day' );
+
+			$this->mYear = (int)$selectedDate->format( 'Y' );
+			$this->mMonth = (int)$selectedDate->format( 'm' );
+			$this->mDay = (int)$selectedDate->format( 'd' );
 			$this->mOffset = $this->mDb->timestamp( $timestamp->getTimestamp() );
 		} catch ( TimestampException $e ) {
 			// Invalid user provided timestamp (T149257)

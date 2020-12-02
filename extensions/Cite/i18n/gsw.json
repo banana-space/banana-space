@@ -5,15 +5,15 @@
 			"The Evil IP address"
 		]
 	},
-	"cite-desc": "Ergänzt d <nowiki><ref[ name=id]></nowiki> un d <nowiki><references /></nowiki>-Tag fir Quällenochwyys",
+	"cite-desc": "Ergänzt d <code>&lt;ref[ name=id]&gt;</code> un d &lt;references /&gt;-Tag fir Quällenochwyys",
 	"cite_error": "Referänz-Fähler: $1",
 	"cite_error_ref_numeric_key": "Uugiltigi <tt>&lt;ref&gt;</tt>-Verwändig: „name“ derf kei reine Zahlewärt syy, verwänd e Name wu bschrybt.",
 	"cite_error_ref_no_key": "Uugiltigi <tt>&lt;ref&gt;</tt>-Verwändig: „ref“ ohni Inhalt muess e Name haa.",
 	"cite_error_ref_too_many_keys": "Uugiltigi <tt>&lt;ref&gt;</tt>-Verwändig: „name“ isch uugiltig oder z lang.",
 	"cite_error_ref_no_input": "Uugiltigi <tt>&lt;ref&gt;</tt>-Verwändig: „ref“ ohni Name muess e Inhalt haa.",
 	"cite_error_references_invalid_parameters": "Uugiltigi <tt>&lt;references&gt;</tt>-Verwändig: S sin kei zuesätzligi Parameter erlaubt, verwänd usschließli <tt><nowiki><references /></nowiki></tt>.",
-	"cite_error_references_no_backlink_label": "E Referenz mit dr Form <tt>&lt;ref name=\"...\"/&gt;</tt> wird meh brucht as es Buechstabe git. E Ammann muess  <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki> go wyteri Buechstabe/Zeiche ergänze.",
-	"cite_error_no_link_label_group": "Fir d Gruppe „$1“ sin kei benutzerdefinierti Linkbezeichnige me verfiegbar.\nDefinier meh unter Systemnochricht <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_backlink_label": "E Referenz mit dr Form <tt>&lt;ref name=\"...\"/&gt;</tt> wird meh brucht as es Buechstabe git. E Ammann muess  [[MediaWiki:Cite references link many format backlink labels]] go wyteri Buechstabe/Zeiche ergänze.",
+	"cite_error_no_link_label_group": "Fir d Gruppe „$1“ sin kei benutzerdefinierti Linkbezeichnige me verfiegbar. Definier meh unter Systemnochricht [[MediaWiki:$2]].",
 	"cite_error_references_no_text": "Uugiltige <tt>&lt;ref&gt;</tt>-Tag; s isch kei Täxt fir s Ref mit em Name <tt>$1</tt> aagee wore.",
 	"cite_error_included_ref": "S fählt s schließend <code>&lt;/ref&gt;</code>",
 	"cite_error_group_refs_without_references": "<code>&lt;ref&gt;</code>-Tag git s fir d Grupp „$1“, aber s isch kei dezue gherig <code>&lt;references group=„$1“/&gt;</code>-Tag gfunde wore",

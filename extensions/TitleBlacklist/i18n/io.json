@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joao Xavier"
+		]
+	},
+	"titleblacklist-override": "Ignorez la nigra listo, se ol existas",
+	"titleblacklist-warning": "<strong>Avizo: Ca pagino nur povas redaktesar da administreri o da altra personi qui havas yuro <code>tboverride</code>, pro ol konformigas la sequanta titulo de la nigra listo:</strong><br /><code>$1</code>"
+}

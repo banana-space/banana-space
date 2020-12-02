@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Krol111"
+			"Krol111",
+			"Uostofchuodnego"
 		]
 	},
-	"cite_error": "Feler rozszerzyńo ''cite'': $1"
+	"cite_error": "Feler cytatu: $1"
 }

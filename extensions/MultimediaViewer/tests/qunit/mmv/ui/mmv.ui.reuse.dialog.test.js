@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	function makeReuseDialog( sandbox ) {
 		var $fixture = $( '#qunit-fixture' ),
 			config = { getFromLocalStorage: sandbox.stub(), setInLocalStorage: sandbox.stub() };
@@ -63,15 +63,15 @@
 
 		// Share pane is selected
 		reuseDialog.handleTabSelection( { getData: function () { return 'share'; } } );
-		assert.ok( reuseDialog.tabs.share.$pane.hasClass( 'active' ), 'Share tab shown.' );
-		assert.ok( !reuseDialog.tabs.embed.$pane.hasClass( 'active' ), 'Embed tab hidden.' );
-		assert.ok( reuseDialog.config.setInLocalStorage.calledWith( 'mmv-lastUsedTab', 'share' ),
+		assert.strictEqual( reuseDialog.tabs.share.$pane.hasClass( 'active' ), true, 'Share tab shown.' );
+		assert.strictEqual( reuseDialog.tabs.embed.$pane.hasClass( 'active' ), false, 'Embed tab hidden.' );
+		assert.strictEqual( reuseDialog.config.setInLocalStorage.calledWith( 'mmv-lastUsedTab', 'share' ), true,
 			'Tab state saved in local storage.' );
 
 		// Embed pane is selected
 		reuseDialog.handleTabSelection( { getData: function () { return 'embed'; } } );
-		assert.ok( !reuseDialog.tabs.share.$pane.hasClass( 'active' ), 'Share tab hidden.' );
-		assert.ok( reuseDialog.tabs.embed.$pane.hasClass( 'active' ), 'Embed tab shown.' );
+		assert.strictEqual( reuseDialog.tabs.share.$pane.hasClass( 'active' ), false, 'Share tab hidden.' );
+		assert.strictEqual( reuseDialog.tabs.embed.$pane.hasClass( 'active' ), true, 'Embed tab shown.' );
 	} );
 
 	QUnit.test( 'default tab:', function ( assert ) {
@@ -152,19 +152,19 @@
 			var event;
 			reuseDialog.closeDialog = function () { assert.ok( false, 'Dialog is not affected by click' ); };
 			event = clickOutsideDialog();
-			assert.ok( !event.isDefaultPrevented(), 'Dialog does not affect click' );
-			assert.ok( !event.isPropagationStopped(), 'Dialog does not affect click propagation' );
+			assert.strictEqual( event.isDefaultPrevented(), false, 'Dialog does not affect click' );
+			assert.strictEqual( event.isPropagationStopped(), false, 'Dialog does not affect click propagation' );
 		}
 		function assertDialogCatchesOutsideClicksOnly() {
 			var event;
 			reuseDialog.closeDialog = function () { assert.ok( false, 'Dialog is not affected by inside click' ); };
 			event = clickInsideDialog();
-			assert.ok( !event.isDefaultPrevented(), 'Dialog does not affect inside click' );
-			assert.ok( !event.isPropagationStopped(), 'Dialog does not affect inside click propagation' );
+			assert.strictEqual( event.isDefaultPrevented(), false, 'Dialog does not affect inside click' );
+			assert.strictEqual( event.isPropagationStopped(), false, 'Dialog does not affect inside click propagation' );
 			reuseDialog.closeDialog = function () { assert.ok( true, 'Dialog is closed by outside click' ); };
 			event = clickOutsideDialog();
-			assert.ok( event.isDefaultPrevented(), 'Dialog catches outside click' );
-			assert.ok( event.isPropagationStopped(), 'Dialog stops outside click propagation' );
+			assert.strictEqual( event.isDefaultPrevented(), true, 'Dialog catches outside click' );
+			assert.strictEqual( event.isPropagationStopped(), true, 'Dialog stops outside click propagation' );
 		}
 
 		assertDialogDoesNotCatchClicks();
@@ -189,7 +189,11 @@
 				width: 100,
 				height: 80
 			},
-			embedFileInfo = new mw.mmv.model.EmbedFileInfo( title, src, url );
+			embedFileInfo = {
+				imageInfo: title,
+				repoInfo: src,
+				caption: url
+			};
 
 		reuseDialog.set( image, embedFileInfo );
 		reuseDialog.empty();
@@ -215,15 +219,15 @@
 
 		reuseDialog.set( image, repoInfo );
 
-		assert.ok( !reuseDialog.isOpen, 'Dialog closed by default.' );
+		assert.strictEqual( reuseDialog.isOpen, false, 'Dialog closed by default.' );
 
 		reuseDialog.openDialog();
 
-		assert.ok( reuseDialog.isOpen, 'Dialog open now.' );
+		assert.strictEqual( reuseDialog.isOpen, true, 'Dialog open now.' );
 
 		reuseDialog.closeDialog();
 
-		assert.ok( !reuseDialog.isOpen, 'Dialog closed now.' );
+		assert.strictEqual( reuseDialog.isOpen, false, 'Dialog closed now.' );
 	} );
 
 	QUnit.test( 'getImageWarnings():', function ( assert ) {
@@ -241,10 +245,10 @@
 			imageDeleted = $.extend( { deletionReason: 'deleted file test' }, image );
 
 		// Test that the lack of license is picked up
-		assert.equal( 1, reuseDialog.getImageWarnings( image ).length, 'Lack of license detected' );
+		assert.strictEqual( reuseDialog.getImageWarnings( image ).length, 1, 'Lack of license detected' );
 
 		// Test that deletion supersedes other warnings and only that one is reported
-		assert.equal( 1, reuseDialog.getImageWarnings( imageDeleted ).length, 'Deletion detected' );
+		assert.strictEqual( reuseDialog.getImageWarnings( imageDeleted ).length, 1, 'Deletion detected' );
 	} );
 
-}( mediaWiki, jQuery ) );
+}() );

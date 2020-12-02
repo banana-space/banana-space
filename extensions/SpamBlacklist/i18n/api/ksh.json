@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Purodha"
+		]
+	},
+	"apihelp-spamblacklist-description": "Donn <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"Uniform Ressource Locators\">URLs</i>  jähje de „schwazze Leß“ jähje der <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"in der Regel massenhaft übertragene unerwünschte Nachrichten\">SPAM</i> pröhve.",
+	"apihelp-spamblacklist-example-1": "Donn zwai <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"Uniform Ressource Locators\">URLs</i> jähje de „schwazze Leß“ pröhve.",
+	"apihelp-spamblacklist-param-url": "De <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"Uniform Ressource Locators\">URLs</i> zom Pröhve jähje de „schwazze Leß“."
+}

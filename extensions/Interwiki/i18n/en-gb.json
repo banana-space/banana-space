@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mdann52",
+			"Andibing",
 			"Chase me ladies, I'm the Cavalry",
-			"Andibing"
+			"Mdann52"
 		]
 	},
 	"interwiki": "View and edit interwiki data",
@@ -29,7 +29,6 @@
 	"interwiki-cached": "The interwiki data is cached. Modifying the cache is not possible.",
 	"interwiki_edit": "Edit",
 	"interwiki_reasonfield": "Reason:",
-	"interwiki_delquestion": "Deleting \"$1\"",
 	"interwiki_deleting": "You are deleting prefix \"$1\".",
 	"interwiki_deleted": "Prefix \"$1\" was removed from the interwiki table.",
 	"interwiki_delfailed": "Prefix \"$1\" could not be removed from the interwiki table.",

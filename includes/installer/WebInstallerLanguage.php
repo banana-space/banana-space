@@ -16,8 +16,10 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @ingroup Deployment
+ * @ingroup Installer
  */
+
+use MediaWiki\MediaWikiServices;
 
 class WebInstallerLanguage extends WebInstallerPage {
 
@@ -30,7 +32,9 @@ class WebInstallerLanguage extends WebInstallerPage {
 		$userLang = $r->getVal( 'uselang' );
 		$contLang = $r->getVal( 'ContLang' );
 
-		$languages = Language::fetchLanguageNames();
+		$languages = MediaWikiServices::getInstance()
+			->getLanguageNameUtils()
+			->getLanguageNames( null, 'mwfile' );
 		$lifetime = intval( ini_get( 'session.gc_maxlifetime' ) );
 		if ( !$lifetime ) {
 			$lifetime = 1440; // PHP default
@@ -98,21 +102,15 @@ class WebInstallerLanguage extends WebInstallerPage {
 	 * @return string
 	 */
 	public function getLanguageSelector( $name, $label, $selectedCode, $helpHtml = '' ) {
-		global $wgExtraLanguageCodes;
-
 		$output = $helpHtml;
 
 		$select = new XmlSelect( $name, $name, $selectedCode );
 		$select->setAttribute( 'tabindex', $this->parent->nextTabIndex() );
 
-		$unwantedLanguageCodes = $wgExtraLanguageCodes +
-			LanguageCode::getDeprecatedCodeMapping();
-		$languages = Language::fetchLanguageNames();
-		ksort( $languages );
+		$languages = MediaWikiServices::getInstance()
+			->getLanguageNameUtils()
+			->getLanguageNames( null, 'mwfile' );
 		foreach ( $languages as $code => $lang ) {
-			if ( isset( $unwantedLanguageCodes[$code] ) ) {
-				continue;
-			}
 			$select->addOption( "$code - $lang", $code );
 		}
 

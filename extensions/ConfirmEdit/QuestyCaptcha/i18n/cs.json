@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mormegil",
-			"Ilimanaq29"
+			"Ilimanaq29",
+			"Mormegil"
 		]
 	},
 	"questycaptcha-addurl": "Vaše editace obsahuje nové externí odkazy.\nV zájmu ochrany této wiki před automatickým spamováním vás prosíme o zodpovězení níže uvedené otázky ([[Special:Captcha/help|další informace]]):",

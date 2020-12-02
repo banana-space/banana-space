@@ -1,9 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Toliño",
 			"Banjo",
-			"Elisardojm"
+			"Elisardojm",
+			"Iváns",
+			"Toliño"
 		]
 	},
 	"wikieditor": "Interface avanzada de edición de texto wiki",
@@ -28,7 +29,7 @@
 	"wikieditor-toolbar-tool-link-int-target": "Título da páxina ou URL:",
 	"wikieditor-toolbar-tool-link-int-target-tooltip": "Título da páxina ou URL",
 	"wikieditor-toolbar-tool-link-int-text": "Texto da ligazón:",
-	"wikieditor-toolbar-tool-link-int-text-tooltip": "Insira o texto que se mostrará",
+	"wikieditor-toolbar-tool-link-int-text-tooltip": "Insira o texto que se amosará",
 	"wikieditor-toolbar-tool-link-ext": "Cara a unha páxina web externa",
 	"wikieditor-toolbar-tool-link-ext-target": "URL da ligazón:",
 	"wikieditor-toolbar-tool-link-ext-text": "Texto da ligazón:",
@@ -111,17 +112,17 @@
 	"wikieditor-toolbar-tool-table-toomany": "Non é posible inserir unha táboa con máis de $1 {{PLURAL:$1|cela|celas}} con este diálogo.",
 	"wikieditor-toolbar-tool-table-invalidnumber": "Non inseriu un número válido de fileiras ou columnas.",
 	"wikieditor-toolbar-tool-table-zero": "Non pode inserir unha táboa con cero fileiras ou columnas.",
-	"wikieditor-toolbar-tool-replace": "Buscar e substituír",
-	"wikieditor-toolbar-tool-replace-title": "Buscar e substituír",
-	"wikieditor-toolbar-tool-replace-search": "Buscar:",
+	"wikieditor-toolbar-tool-replace": "Procurar e substituír",
+	"wikieditor-toolbar-tool-replace-title": "Procurar e substituír",
+	"wikieditor-toolbar-tool-replace-search": "Procurar:",
 	"wikieditor-toolbar-tool-replace-replace": "Substituír por:",
 	"wikieditor-toolbar-tool-replace-case": "Facer coincidir as maiúsculas e as minúsculas",
-	"wikieditor-toolbar-tool-replace-regex": "Tratar a secuencia de busca como unha expresión regular",
+	"wikieditor-toolbar-tool-replace-regex": "Tratar a secuencia da procura coma unha expresión regular",
 	"wikieditor-toolbar-tool-replace-button-findnext": "Atopar o seguinte",
 	"wikieditor-toolbar-tool-replace-button-replace": "Substituír",
 	"wikieditor-toolbar-tool-replace-button-replaceall": "Substituír todos",
 	"wikieditor-toolbar-tool-replace-close": "Pechar",
-	"wikieditor-toolbar-tool-replace-nomatch": "A súa busca non atopou nada.",
+	"wikieditor-toolbar-tool-replace-nomatch": "A súa procura non atopou nada.",
 	"wikieditor-toolbar-tool-replace-success": "{{PLURAL:$1|Fíxose $1 substitución|Fixéronse $1 substitucións}}.",
 	"wikieditor-toolbar-tool-replace-emptysearch": "Non inseriu nada que procurar.",
 	"wikieditor-toolbar-tool-replace-invalidregex": "A expresión regular que inseriu non é válida: $1",
@@ -181,7 +182,7 @@
 	"wikieditor-toolbar-help-content-named-reference-result": "Texto da páxina.<sup><a href='#'>[2]</a></sup>",
 	"wikieditor-toolbar-help-content-rereference-description": "Uso adicional da mesma referencia",
 	"wikieditor-toolbar-help-content-rereference-result": "Texto da páxina<sup><a href='#'>[2]</a></sup>.",
-	"wikieditor-toolbar-help-content-showreferences-description": "Mostrar as referencias",
+	"wikieditor-toolbar-help-content-showreferences-description": "Amosar as referencias",
 	"wikieditor-toolbar-help-content-showreferences-result": "<ol class='references'><li id='cite_note-test-0'><b><a title='' href='#'>^</a></b> <a rel='nofollow' title='http://www.example.org' class='external text' href='#'>Texto da ligazón</a>, texto adicional.</li><li id='cite_note-test-1'><b><a title='' href='#'>^</a></b> <a rel='nofollow' title='http://www.example.org' class='external text' href='#'>Texto da ligazón</a></li></ol>",
 	"wikieditor-toolbar-help-content-signaturetimestamp-description": "Sinatura con data e hora",
 	"wikieditor-toolbar-help-content-signaturetimestamp-result": "--<a href='#' title='$1:Username'>Nome de usuario</a> (<a href='#' title='$2:Username'>conversa</a>) 10 de xuño de 2009 ás 15:54 (UTC)",

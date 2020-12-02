@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Huhbakker",
 			"Kippenvlees1",
-			"SPQRobin",
-			"Siebrand",
 			"Mainframe98",
-			"Huhbakker"
+			"SPQRobin",
+			"Siebrand"
 		]
 	},
 	"categorytree": "Categorieboom",
@@ -35,10 +35,5 @@
 	"categorytree-no-pages": "Geen pagina's of ondercategorieën.",
 	"categorytree-not-found": "Categorie <i>$1</i> is niet gevonden",
 	"categorytree-error": "Probleem bij het laden van de gegevens.",
-	"categorytree-retry": "Wacht even en probeer het dan opnieuw.",
-	"apihelp-categorytree-description": "Interne module voor de uitbreiding CategoryTree.",
-	"apihelp-categorytree-summary": "Interne module voor de uitbreiding CategoryTree.",
-	"apihelp-categorytree-param-category": "Naam in te categorienaamruimte, voorvoegsel wordt genegeerd als opgegeven.",
-	"apihelp-categorytree-param-options": "Opties voor de constructor van CategoryTree als een JSON-object. De optie \"depth\" is standaard ingesteld op <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "Opties moeten een geldig JSON-object zijn."
+	"categorytree-retry": "Wacht even en probeer het dan opnieuw."
 }

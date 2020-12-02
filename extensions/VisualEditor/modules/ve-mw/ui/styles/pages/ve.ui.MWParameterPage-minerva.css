@@ -1,0 +1,48 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWParameterPage styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwParameterPage-actions {
+	display: none;
+}
+
+.ve-ui-mwParameterPage-label {
+	display: inline-block;
+	font-weight: bold;
+}
+
+.ve-ui-mwParameterPage-statusIndicator {
+	display: inline-block;
+	opacity: 0.5;
+}
+
+.ve-ui-mwParameterPage-description-required,
+.ve-ui-mwParameterPage-description-deprecated {
+	font-style: italic;
+	color: #54595d;
+}
+
+.ve-ui-mwParameterPage-infoButton,
+.ve-ui-mwParameterPage-removeButton {
+	display: none;
+}
+
+.ve-ui-mwParameterPage-field {
+	padding-top: 0.25em;
+}
+
+.ve-ui-mwParameterPage .oo-ui-textInputWidget textarea {
+	height: 2.5em;
+}
+
+.ve-ui-mwParameterPage-more {
+	display: none;
+	margin: 1em 0 0.5em 0;
+}
+
+.ve-ui-mwParameterPage:last-child .ve-ui-mwParameterPage-more {
+	display: block;
+}

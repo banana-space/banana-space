@@ -1,7 +1,9 @@
 <?php
 
-class MediaWikiTest extends MediaWikiTestCase {
-	protected function setUp() {
+class MediaWikiTest extends MediaWikiIntegrationTestCase {
+	private $oldServer, $oldGet, $oldPost;
+
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setMwGlobals( [
@@ -11,6 +13,18 @@ class MediaWikiTest extends MediaWikiTestCase {
 			'wgArticlePath' => '/wiki/$1',
 			'wgActionPaths' => [],
 		] );
+
+		// phpcs:disable MediaWiki.Usage.SuperGlobalsUsage.SuperGlobals
+		$this->oldServer = $_SERVER;
+		$this->oldGet = $_GET;
+		$this->oldPost = $_POST;
+	}
+
+	protected function tearDown() : void {
+		parent::tearDown();
+		$_SERVER = $this->oldServer;
+		$_GET = $this->oldGet;
+		$_POST = $this->oldPost;
 	}
 
 	public static function provideTryNormaliseRedirect() {
@@ -113,6 +127,20 @@ class MediaWikiTest extends MediaWikiTestCase {
 				'title' => 'Foo_Bar',
 				'redirect' => false,
 			],
+			[
+				// Path with double slash prefix (T100782)
+				'url' => 'http://example.org//wiki/Double_slash',
+				'query' => [],
+				'title' => 'Double_slash',
+				'redirect' => false,
+			],
+			[
+				// View: Media namespace redirect (T203942)
+				'url' => 'http://example.org/w/index.php?title=Media:Foo_Bar',
+				'query' => [ 'title' => 'Foo_Bar' ],
+				'title' => 'File:Foo_Bar',
+				'redirect' => 'http://example.org/wiki/File:Foo_Bar',
+			],
 		];
 	}
 
@@ -122,11 +150,13 @@ class MediaWikiTest extends MediaWikiTestCase {
 	 */
 	public function testTryNormaliseRedirect( $url, $query, $title, $expectedRedirect = false ) {
 		// Set SERVER because interpolateTitle() doesn't use getRequestURL(),
-		// whereas tryNormaliseRedirect does().
+		// whereas tryNormaliseRedirect does(). Also, using WebRequest allows
+		// us to test some quirks in that class.
 		$_SERVER['REQUEST_URI'] = $url;
+		$_POST = [];
+		$_GET = $query;
+		$req = new WebRequest;
 
-		$req = new FauxRequest( $query );
-		$req->setRequestURL( $url );
 		// This adds a virtual 'title' query parameter. Normally called from Setup.php
 		$req->interpolateTitle();
 
@@ -157,6 +187,7 @@ class MediaWikiTest extends MediaWikiTestCase {
 
 	/**
 	 * Test a post-send job can not set cookies (T191537).
+	 * @coversNothing
 	 */
 	public function testPostSendJobDoesNotSetCookie() {
 		// Prevent updates from running

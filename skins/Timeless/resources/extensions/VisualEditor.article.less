@@ -2,24 +2,31 @@
 
 @media screen {
 	.client-js {
-		.mw-editsection a {
-			.background-image-svg( '../images/brackets-grey.svg', '../images/brackets-grey.png' );
-			margin-right: 1.25em;
-		}
-		.mw-editsection a.mw-editsection-visualeditor {
-			.background-image-svg( '../images/pencil-grey.svg', '../images/pencil-grey.png' );
-		}
 		.mw-editsection-divider {
 			display: none;
 		}
 
+		#ca-edit a {
+			.ca-icon( '../images/pencil-source-grey' );
+		}
+
+		#ca-ve-edit a {
+			.ca-icon( '../images/pencil-grey' );
+		}
+
 		@media ( max-width: @mobile-width ) {
 			#ca-ve-edit a {
-				.background-image-svg( '../images/pencil-grey.svg', '../images/pencil-grey.png' );
+				.ca-icon-only();
 			}
-			#ca-edit a {
-				.background-image-svg( '../images/brackets-grey.svg', '../images/brackets-grey.png' );
-			}
+		}
+	}
+
+	.client-nojs,
+	.ve-not-available {
+		.mw-editsection a {
+			// make the icon part of the link
+			padding-left: 20px;
+			margin-left: -20px;
 		}
 	}
 }

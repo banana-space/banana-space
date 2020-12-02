@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"CRCHF",
+			"Hello903hello",
 			"Horacewai2",
-			"Simon Shek",
-			"Waihorace",
-			"Xiaomingyan",
 			"LNDDYL",
 			"Macofe",
-			"CRCHF"
+			"Simon Shek",
+			"Waihorace",
+			"Xiaomingyan"
 		]
 	},
 	"wikieditor": "進階維基文字編輯界面",
@@ -47,7 +48,7 @@
 	"wikieditor-toolbar-tool-link-lookslikeinternal": "條URL應該係連去其他Wiki頁面嘅，你打唔打算做一個內部連結？",
 	"wikieditor-toolbar-tool-link-lookslikeinternal-int": "內部連結",
 	"wikieditor-toolbar-tool-link-lookslikeinternal-ext": "外部連結",
-	"wikieditor-toolbar-tool-link-empty": "你係連去邊個格到唔記得打野。",
+	"wikieditor-toolbar-tool-link-empty": "你未入連結對象。",
 	"wikieditor-toolbar-tool-file": "結合標題",
 	"wikieditor-toolbar-tool-file-example": "Example.jpg",
 	"wikieditor-toolbar-tool-reference": "參考",

@@ -24,14 +24,13 @@
  *
  * @group Title
  */
-class SubpageImportTitleFactoryTest extends MediaWikiTestCase {
+class SubpageImportTitleFactoryTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
+		$this->setContentLang( 'en' );
 		$this->setMwGlobals( [
-			'wgLanguageCode' => 'en',
-			'wgContLang' => Language::factory( 'en' ),
 			'wgNamespacesWithSubpages' => [ 0 => false, 2 => true ],
 		] );
 	}
@@ -80,7 +79,7 @@ class SubpageImportTitleFactoryTest extends MediaWikiTestCase {
 	 * @dataProvider failureProvider
 	 */
 	public function testFailures( Title $rootPage ) {
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 		new SubpageImportTitleFactory( $rootPage );
 	}
 }

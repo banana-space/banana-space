@@ -1,4 +1,5 @@
 <?php
+
 namespace MediaWiki\Interwiki;
 
 /**
@@ -24,13 +25,13 @@ namespace MediaWiki\Interwiki;
  * @since 1.29
  * @ingroup InterwikiLookup
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  */
 
 use Interwiki;
+use MediaWikiSite;
 use Site;
 use SiteLookup;
-use MediaWikiSite;
 
 class InterwikiLookupAdapter implements InterwikiLookup {
 
@@ -44,7 +45,7 @@ class InterwikiLookupAdapter implements InterwikiLookup {
 	 */
 	private $interwikiMap;
 
-	function __construct(
+	public function __construct(
 		SiteLookup $siteLookup,
 		array $interwikiMap = null
 	) {
@@ -79,6 +80,7 @@ class InterwikiLookupAdapter implements InterwikiLookup {
 			return false;
 		}
 
+		// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
 		return $this->interwikiMap[$prefix];
 	}
 

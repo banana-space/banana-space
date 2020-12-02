@@ -1,0 +1,15 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWParameterSearchWidget styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwParameterSearchWidget .oo-ui-selectWidget {
+	position: relative;
+	width: 100%;
+}
+
+.ve-ui-mwParameterSearchWidget .oo-ui-searchWidget-results {
+	overflow-y: hidden;
+}

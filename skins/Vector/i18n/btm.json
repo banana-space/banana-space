@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Apundung",
+			"Simartampua"
+		]
+	},
+	"vector-action-addsection": "Baen tema",
+	"vector-action-delete": "Apus",
+	"vector-action-move": "Pindah",
+	"vector-action-protect": "Jagoon",
+	"vector-view-create": "Baen",
+	"vector-view-edit": "Pature",
+	"vector-view-history": "Sise sejarah",
+	"vector-view-view": "Baca",
+	"vector-more-actions": "Lainna"
+}

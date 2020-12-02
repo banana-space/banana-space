@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "Obtenir un nouveau FancyCaptcha.",
+	"apihelp-fancycaptchareload-summary": "Obtenir un nouveau FancyCaptcha.",
+	"apihelp-fancycaptchareload-example-1": "Obtenir un nouveau FancyCaptcha"
+}

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "Жаңа FancyCaptcha алу.",
+	"apihelp-fancycaptchareload-example-1": "Жаңа FancyCaptcha алу"
+}

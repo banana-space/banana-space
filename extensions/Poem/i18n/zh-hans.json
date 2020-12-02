@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Liuxinyu970226",
 			"Shinjiman",
 			"Wmr89502270",
-			"Xiaomingyan",
-			"Liuxinyu970226"
+			"Xiaomingyan"
 		]
 	},
 	"poem-desc": "添加<code>&lt;poem&gt;</code>标签用于诗歌格式"

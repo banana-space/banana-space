@@ -9,14 +9,14 @@
 			"Glavkos",
 			"Kiriakos",
 			"MF-Warburg",
+			"Nikosgranturismogt",
 			"Omnipaedista",
-			"ZaDiak",
-			"Nikosgranturismogt"
+			"ZaDiak"
 		]
 	},
 	"renameuser": "Μετονομασία χρήστη",
 	"renameuser-linkoncontribs": "Μετονομασία χρήστη",
-	"renameuser-linkoncontribs-text": "Μετονομασία αυτού του χρήστη",
+	"renameuser-linkoncontribs-text": "Μετονομασία αυτού του {{GENDER:$1|χρήστη}}",
 	"renameuser-desc": "Προσθέτει μια [[Special:RenameUser|ειδική σελίδα]] για την μετονομασία ενός χρήστη (είναι απαραίτητο το δικαίωμα ''renameuser'')",
 	"renameuserold": "Τρέχον όνομα χρήστη:",
 	"renameusernew": "Νέο όνομα χρήστη:",

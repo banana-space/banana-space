@@ -1,23 +1,26 @@
 {
 	"@metadata": {
 		"authors": [
-			"Pikne",
-			"Cumbril"
+			"Cumbril",
+			"Pikne"
 		]
 	},
-	"cite-desc": "Lisab viitamiseks sildid <nowiki><ref[ name=id]></nowiki> ja <nowiki><references/></nowiki>.",
+	"cite-desc": "Lisab viitamiseks sildid <code>&lt;ref&gt;</code> ja <code>&lt;references&gt;</code>.",
 	"cite_error": "Viitamistõrge: $1",
-	"cite_error_ref_numeric_key": "Vigane <code>&lt;ref&gt;</code>-silt.\nNimeparameeter ei tohi olla numbriline. Kasuta kirjeldavat nime.",
+	"cite_error_ref_invalid_dir": "Vigane <code>dir=\"$1\"</code>, peab olema <code>ltr</code> või <code>rtl</code>",
+	"cite_error_ref_numeric_key": "Vigane <code>&lt;ref&gt;</code>-silt. Nimeparameeter ei tohi olla numbriline. Kasuta kirjeldavat nime.",
 	"cite_error_ref_no_key": "Algussilt <code>&lt;ref&gt;</code> on väärdunud või selle nimi on vigane.",
-	"cite_error_ref_too_many_keys": "Vigane <code>&lt;ref&gt;</code>-silt;\n\"name\" on vigane või liiga pikk.",
-	"cite_error_ref_no_input": "Vigane <code>&lt;ref&gt;</code>-silt.\nNimeta viitamissiltidel peab olema sisu.",
+	"cite_error_ref_too_many_keys": "Vigane <code>&lt;ref&gt;</code>-silt; \"name\" on vigane või liiga pikk.",
+	"cite_error_ref_nested_extends": "<code>&lt;ref&gt;</code>-siltide laiendamine ühest tasemest sügavamale pole lubatud",
+	"cite_error_ref_no_input": "Vigane <code>&lt;ref&gt;</code>-silt. Nimeta viitamissiltidel peab olema sisu.",
 	"cite_error_references_duplicate_key": "Vigane <code>&lt;ref&gt;</code>-silt; nime \"$1\" on määratud mitu korda erineva sisuga.",
 	"cite_error_references_invalid_parameters": "Sildi <code>&lt;references&gt;</code> vigane parameeter",
-	"cite_error_references_no_backlink_label": "Kohandatud tagasilinkide sildid said otsa.\nLisa neid sõnumisse <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>.",
-	"cite_error_no_link_label_group": "Rühma \"$1\" kohandatud linkide sildid said otsa.\nLisa neid sõnumisse <nowiki>[[MediaWiki:$2]]</nowiki>.",
-	"cite_error_references_no_text": "Vigane <code>&lt;ref&gt;</code>-silt.\nViite nimega <code>$1</code> tekst puudub.",
+	"cite_error_references_no_backlink_label": "Kohandatud tagasilinkide sildid said otsa. Lisa neid sõnumisse [[MediaWiki:Cite references link many format backlink labels]].",
+	"cite_error_no_link_label_group": "Rühma \"$1\" kohandatud linkide sildid said otsa. Lisa neid sõnumisse [[MediaWiki:$2]].",
+	"cite_error_references_no_text": "Vigane <code>&lt;ref&gt;</code>-silt. Viide nimega <code>$1</code> on ilma tekstita.",
 	"cite_error_included_ref": "Sulgemissilt <code>&lt;/ref&gt;</code> puudub.",
-	"cite_error_group_refs_without_references": "Olemas on <code>&lt;ref&gt;</code>-silt rühma \"$1\" jaoks, aga puudub vastav silt <code>&lt;references group=\"$1\"/&gt;</code> või lõpusilt <code>&lt;/ref&gt;</code>.",
+	"cite_error_included_references": "<code>&lt;references&gt;</code> ilma sulgemissildita",
+	"cite_error_group_refs_without_references": "Olemas on <code>&lt;ref&gt;</code>-silt rühma \"$1\" jaoks, aga puudub vastav silt <code>&lt;references group=\"$1\"/&gt;</code>.",
 	"cite_error_references_group_mismatch": "<code>&lt;references&gt;</code>-siltide vahel oleval <code>&lt;ref&gt;</code>-sildil on vastukäiv parameetri \"group\" väärtus \"$1\".",
 	"cite_error_references_missing_group": "<code>&lt;references&gt;</code>-sildis kirjeldatud <code>&lt;ref&gt;</code>-sildil on rühmatunnus \"$1\", mis puudub eelnevas tekstis.",
 	"cite_error_references_missing_key": "<code>&lt;references&gt;</code>-siltide vahel olevat <code>&lt;ref&gt;</code>-silti nimega \"$1\" ei kasutata eelnevas tekstis.",
@@ -27,5 +30,8 @@
 	"cite-tracking-category-cite-error-desc": "Selles kategoorias on leheküljed, kus viitamissilte on kasutatud valesti.",
 	"cite_references_link_accessibility_label": "Siirdu üles",
 	"cite_references_link_many_accessibility_label": "Siirdu üles asukohta:",
-	"cite_section_preview_references": "Viidete eelvaade"
+	"cite_references_link_accessibility_back_label": "Tagasi üles",
+	"cite_section_preview_references": "Viidete eelvaade",
+	"cite_warning": "Viitamishoiatus: $1",
+	"cite_warning_sectionpreview_no_text": "Silti <code>&lt;ref&gt;</code> nimega <code>$1</code> ei saa eelvaates näidata, sest see on määratletud väljaspool seda alaosa või sellise nimega silti polegi määratletud."
 }

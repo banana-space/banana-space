@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ziyaurr"
+		]
+	},
+	"apihelp-oathvalidate-description": "दो कारक प्रमाणीकरण (शपथ) की निशानी पोषण करें।",
+	"apihelp-oathvalidate-param-totp": "दो कारक प्रमाणीकरण (शपथ) की निशानी।",
+	"apihelp-oathvalidate-example-1": "वर्तमान उपयोगकर्ता के लिए एक टोकन पोषण करें।",
+	"apihelp-oathvalidate-example-2": "उपयोगकर्ता के लिए एक टोकन मंजूर करें<kbd>उदाहरण</kbd>"
+}

@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Artsiom91",
+			"Macofe",
 			"Maksim L.",
-			"Yury Tarasievich",
 			"Mikalai Udodau",
-			"Macofe"
+			"Yury Tarasievich"
 		]
 	},
 	"wikieditor": "Палепшаны інтэрфейс праўкі вікітэкста",
@@ -14,6 +15,7 @@
 	"wikieditor-toolbar": "Панэль інструментаў",
 	"wikieditor-toolbar-desc": "Панэль інструментаў з палепшанымі магчымасцямі",
 	"wikieditor-toolbar-preference": "Уключыць панэль інструментаў з палепшанымі магчымасцямі",
+	"wikieditor-toolbar-preference-help": "Часам яна называецца «рэдактар вікітэксту 2010».",
 	"wikieditor-toolbar-loading": "Загрузка…",
 	"wikieditor-toolbar-tool-bold": "Цёмны",
 	"wikieditor-toolbar-tool-bold-example": "Цёмны тэкст",
@@ -51,7 +53,7 @@
 	"wikieditor-toolbar-tool-file-title": "Уставіць файл",
 	"wikieditor-toolbar-file-target": "Назва файла:",
 	"wikieditor-toolbar-file-caption": "Подпіс:",
-	"wikieditor-toolbar-file-size": "Аб'ём:",
+	"wikieditor-toolbar-file-size": "Аб’ём:",
 	"wikieditor-toolbar-file-default": "(прадвызначана)",
 	"wikieditor-toolbar-file-format": "Фармат:",
 	"wikieditor-toolbar-file-format-none": "няма",
@@ -78,7 +80,7 @@
 	"wikieditor-toolbar-tool-olist-example": "Элемент нумараванага пераліку",
 	"wikieditor-toolbar-tool-nowiki": "Без вікі-фарматавання",
 	"wikieditor-toolbar-tool-nowiki-example": "Устаўце сюды нефарматаваны тэкст",
-	"wikieditor-toolbar-tool-redirect": "Redirect",
+	"wikieditor-toolbar-tool-redirect": "Перасылка",
 	"wikieditor-toolbar-tool-redirect-example": "Назва мэтавай старонкі",
 	"wikieditor-toolbar-tool-big": "Буйны",
 	"wikieditor-toolbar-tool-big-example": "Буйны тэкст",

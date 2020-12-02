@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vikassy",
-			"VASANTH S.N.",
+			"Ananth subray",
 			"Nayvik",
 			"Omshivaprakash",
-			"Yogesh",
 			"Shushruth",
-			"Ananth subray"
+			"VASANTH S.N.",
+			"Vikassy",
+			"Yogesh"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "ಪುಸ್ತಕ",
@@ -20,7 +20,6 @@
 	"cite-ve-dialog-reference-options-name-label": "ಈ ಹೆಸರಿನಿಂದ ಮತ್ತೆ ಬಳಸಿ",
 	"cite-ve-dialog-reference-options-section": "ಆಯ್ಕೆಗಳು",
 	"cite-ve-dialog-reference-title": "ಉಲ್ಲೇಖ",
-	"cite-ve-dialog-reference-useexisting-label": "ಈಗಾಗಲೇ ಇರುವ ಉಲ್ಲೇಖವನನ್ನು ಬಳಸಿರಿ",
 	"cite-ve-dialog-reference-useexisting-tool": "ಮತ್ತೆ ಬಳಸು",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "ಸಾಮಾನ್ಯ ಉಲ್ಲೇಖಗಳ ಪಟ್ಟಿ",
 	"cite-ve-dialog-referenceslist-title": "ಉಲ್ಲೇಖಗಳ ಪಟ್ಟಿ",

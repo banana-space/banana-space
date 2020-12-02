@@ -9,7 +9,7 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "specialpage",
 	"requires": {
-		"MediaWiki": ">= 1.30.0"
+		"MediaWiki": ">= 1.34.0"
 	},
 	"ExtensionMessagesFiles": {
 		"RenameuserAliases": "Renameuser.alias.php"
@@ -57,5 +57,5 @@
 		"RenameuserSQL": "includes/RenameuserSQL.php",
 		"SpecialRenameuser": "includes/SpecialRenameuser.php"
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }

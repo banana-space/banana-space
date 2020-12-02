@@ -25,9 +25,9 @@
 require_once __DIR__ . '/Maintenance.php';
 
 use MediaWiki\MediaWikiServices;
-use Wikimedia\Rdbms\ResultWrapper;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBQueryError;
+use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Maintenance script that sends SQL queries from the specified file to the database.
@@ -42,6 +42,8 @@ class MwSql extends Maintenance {
 		$this->addOption( 'query',
 			'Run a single query instead of running interactively', false, true );
 		$this->addOption( 'json', 'Output the results as JSON instead of PHP objects' );
+		$this->addOption( 'status', 'Return successful exit status only if the query succeeded '
+			. '(selected or altered rows), otherwise 1 for errors, 2 for no rows' );
 		$this->addOption( 'cluster', 'Use an external cluster by name', false, true );
 		$this->addOption( 'wikidb',
 			'The database wiki ID to use if not the current one', false, true );
@@ -62,10 +64,10 @@ class MwSql extends Maintenance {
 			$lb = $lbFactory->getMainLB( $wiki );
 		}
 		// Figure out which server to use
-		$replicaDB = $this->getOption( 'replicadb', $this->getOption( 'slave', '' ) );
+		$replicaDB = $this->getOption( 'replicadb', '' );
 		if ( $replicaDB === 'any' ) {
 			$index = DB_REPLICA;
-		} elseif ( $replicaDB != '' ) {
+		} elseif ( $replicaDB !== '' ) {
 			$index = null;
 			$serverCount = $lb->getServerCount();
 			for ( $i = 0; $i < $serverCount; ++$i ) {
@@ -74,15 +76,14 @@ class MwSql extends Maintenance {
 					break;
 				}
 			}
-			if ( $index === null ) {
+			if ( $index === null || $index === $lb->getWriterIndex() ) {
 				$this->fatalError( "No replica DB server configured with the name '$replicaDB'." );
 			}
 		} else {
 			$index = DB_MASTER;
 		}
 
-		/** @var IDatabase $db DB handle for the appropriate cluster/wiki */
-		$db = $lb->getConnection( $index, [], $wiki );
+		$db = $lb->getMaintenanceConnectionRef( $index, [], $wiki );
 		if ( $replicaDB != '' && $db->getLBInfo( 'master' ) !== null ) {
 			$this->fatalError( "The server selected ({$db->getServer()}) is not a replica DB." );
 		}
@@ -98,7 +99,7 @@ class MwSql extends Maintenance {
 				$this->fatalError( "Unable to open input file" );
 			}
 
-			$error = $db->sourceStream( $file, null, [ $this, 'sqlPrintResult' ] );
+			$error = $db->sourceStream( $file, null, [ $this, 'sqlPrintResult' ], __METHOD__ );
 			if ( $error !== true ) {
 				$this->fatalError( $error );
 			} else {
@@ -108,8 +109,11 @@ class MwSql extends Maintenance {
 
 		if ( $this->hasOption( 'query' ) ) {
 			$query = $this->getOption( 'query' );
-			$this->sqlDoQuery( $db, $query, /* dieOnError */ true );
-			wfWaitForSlaves();
+			$res = $this->sqlDoQuery( $db, $query, /* dieOnError */ true );
+			$lbFactory->waitForReplication();
+			if ( $this->hasOption( 'status' ) ) {
+				exit( $res ? 0 : 2 );
+			}
 			return;
 		}
 
@@ -128,6 +132,7 @@ class MwSql extends Maintenance {
 		$newPrompt = '> ';
 		$prompt = $newPrompt;
 		$doDie = !Maintenance::posix_isatty( 0 );
+		$res = 1;
 		while ( ( $line = Maintenance::readconsole( $prompt ) ) !== false ) {
 			if ( !$line ) {
 				# User simply pressed return key
@@ -148,48 +153,68 @@ class MwSql extends Maintenance {
 				readline_add_history( $wholeLine . ';' );
 				readline_write_history( $historyFile );
 			}
-			$this->sqlDoQuery( $db, $wholeLine, $doDie );
+			$res = $this->sqlDoQuery( $db, $wholeLine, $doDie );
 			$prompt = $newPrompt;
 			$wholeLine = '';
 		}
-		wfWaitForSlaves();
-	}
-
-	protected function sqlDoQuery( IDatabase $db, $line, $dieOnError ) {
-		try {
-			$res = $db->query( $line );
-			$this->sqlPrintResult( $res, $db );
-		} catch ( DBQueryError $e ) {
-			if ( $dieOnError ) {
-				$this->fatalError( $e );
-			} else {
-				$this->error( $e );
-			}
+		$lbFactory->waitForReplication();
+		if ( $this->hasOption( 'status' ) ) {
+			exit( $res ? 0 : 2 );
 		}
 	}
 
 	/**
-	 * Print the results, callback for $db->sourceStream()
-	 * @param ResultWrapper|bool $res
 	 * @param IDatabase $db
+	 * @param string $line The SQL text of the query
+	 * @param bool $dieOnError
+	 * @return int|null Number of rows selected or updated, or null if the query was unsuccessful.
+	 */
+	protected function sqlDoQuery( IDatabase $db, $line, $dieOnError ) {
+		try {
+			$res = $db->query( $line, __METHOD__ );
+			return $this->sqlPrintResult( $res, $db );
+		} catch ( DBQueryError $e ) {
+			if ( $dieOnError ) {
+				$this->fatalError( (string)$e );
+			} else {
+				$this->error( (string)$e );
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Print the results, callback for $db->sourceStream()
+	 * @param IResultWrapper|bool $res
+	 * @param IDatabase $db
+	 * @return int|null Number of rows selected or updated, or null if the query was unsuccessful.
 	 */
 	public function sqlPrintResult( $res, $db ) {
 		if ( !$res ) {
 			// Do nothing
-			return;
-		} elseif ( is_object( $res ) && $res->numRows() ) {
+			return null;
+		} elseif ( is_object( $res ) ) {
 			$out = '';
+			$rows = [];
 			foreach ( $res as $row ) {
 				$out .= print_r( $row, true );
 				$rows[] = $row;
 			}
 			if ( $this->hasOption( 'json' ) ) {
 				$out = json_encode( $rows, JSON_PRETTY_PRINT );
+			} elseif ( !$rows ) {
+				$out = 'Query OK, 0 row(s) affected';
 			}
 			$this->output( $out . "\n" );
+			return count( $rows );
 		} else {
 			$affected = $db->affectedRows();
-			$this->output( "Query OK, $affected row(s) affected\n" );
+			if ( $this->hasOption( 'json' ) ) {
+				$this->output( json_encode( [ 'affected' => $affected ], JSON_PRETTY_PRINT ) . "\n" );
+			} else {
+				$this->output( "Query OK, $affected row(s) affected\n" );
+			}
+			return $affected;
 		}
 	}
 

@@ -21,6 +21,8 @@
  * @ingroup Maintenance
  */
 
+use MediaWiki\MediaWikiServices;
+
 require_once __DIR__ . '/Maintenance.php';
 
 /**
@@ -75,8 +77,6 @@ class ConvertLinks extends Maintenance {
 			return;
 		}
 
-		global $wgContLang;
-
 		# counters etc
 		$numBadLinks = $curRowsRead = 0;
 
@@ -100,33 +100,33 @@ class ConvertLinks extends Maintenance {
 		# not used yet; highest row number from links table to process
 		# $finalRowOffset = 0;
 
+		$this->logPerformance = $this->hasOption( 'logperformance' );
+		$perfLogFilename = $this->getArg( 1, "convLinksPerf.txt" );
 		$overwriteLinksTable = !$this->hasOption( 'keep-links-table' );
 		$noKeys = $this->hasOption( 'noKeys' );
-		$this->logPerformance = $this->hasOption( 'logperformance' );
-		$perfLogFilename = $this->getArg( 'perfLogFilename', "convLinksPerf.txt" );
 
 		# --------------------------------------------------------------------
 
 		list( $cur, $links, $links_temp, $links_backup ) =
 			$dbw->tableNamesN( 'cur', 'links', 'links_temp', 'links_backup' );
 
-		if ( $dbw->tableExists( 'pagelinks' ) ) {
+		if ( $dbw->tableExists( 'pagelinks', __METHOD__ ) ) {
 			$this->output( "...have pagelinks; skipping old links table updates\n" );
 
 			return;
 		}
 
-		$res = $dbw->query( "SELECT l_from FROM $links LIMIT 1" );
+		$res = $dbw->query( "SELECT l_from FROM $links LIMIT 1", __METHOD__ );
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		if ( $dbw->fieldType( $res, 0 ) == "int" ) {
 			$this->output( "Schema already converted\n" );
 
 			return;
 		}
 
-		$res = $dbw->query( "SELECT COUNT(*) AS count FROM $links" );
+		$res = $dbw->query( "SELECT COUNT(*) AS count FROM $links", __METHOD__ );
 		$row = $dbw->fetchObject( $res );
 		$numRows = $row->count;
-		$dbw->freeResult( $res );
 
 		if ( $numRows == 0 ) {
 			$this->output( "Updating schema (no rows to convert)...\n" );
@@ -145,30 +145,35 @@ class ConvertLinks extends Maintenance {
 			$this->output( "Loading IDs from $cur table...\n" );
 			$this->performanceLog( $fh, "Reading $numRows rows from cur table...\n" );
 			$this->performanceLog( $fh, "rows read vs seconds elapsed:\n" );
+			$contentLang = MediaWikiServices::getInstance()->getContentLanguage();
 
-			$dbw->bufferResults( false );
-			$res = $dbw->query( "SELECT cur_namespace,cur_title,cur_id FROM $cur" );
 			$ids = [];
-
-			foreach ( $res as $row ) {
-				$title = $row->cur_title;
-				if ( $row->cur_namespace ) {
-					$title = $wgContLang->getNsText( $row->cur_namespace ) . ":$title";
-				}
-				$ids[$title] = $row->cur_id;
-				$curRowsRead++;
-				if ( $reportCurReadProgress ) {
-					if ( ( $curRowsRead % $curReadReportInterval ) == 0 ) {
-						$this->performanceLog(
-							$fh,
-							$curRowsRead . " " . ( microtime( true ) - $baseTime ) . "\n"
-						);
-						$this->output( "\t$curRowsRead rows of $cur table read.\n" );
+			$lastId = 0;
+			do {
+				$res = $dbw->query(
+					"SELECT cur_namespace,cur_title,cur_id FROM $cur " .
+					"WHERE cur_id > $lastId ORDER BY cur_id LIMIT 10000",
+					__METHOD__
+				);
+				foreach ( $res as $row ) {
+					$title = $row->cur_title;
+					if ( $row->cur_namespace ) {
+						$title = $contentLang->getNsText( $row->cur_namespace ) . ":$title";
 					}
+					$ids[$title] = $row->cur_id;
+					$curRowsRead++;
+					if ( $reportCurReadProgress ) {
+						if ( ( $curRowsRead % $curReadReportInterval ) == 0 ) {
+							$this->performanceLog(
+								$fh,
+								$curRowsRead . " " . ( microtime( true ) - $baseTime ) . "\n"
+							);
+							$this->output( "\t$curRowsRead rows of $cur table read.\n" );
+						}
+					}
+					$lastId = $row->cur_id;
 				}
-			}
-			$dbw->freeResult( $res );
-			$dbw->bufferResults( true );
+			} while ( $res->numRows() > 0 );
 			$this->output( "Finished loading IDs.\n\n" );
 			$this->performanceLog(
 				$fh,
@@ -191,7 +196,7 @@ class ConvertLinks extends Maintenance {
 			) {
 				$sqlRead = "SELECT * FROM $links ";
 				$sqlRead = $dbw->limitResult( $sqlRead, $linksConvInsertInterval, $rowOffset );
-				$res = $dbw->query( $sqlRead );
+				$res = $dbw->query( $sqlRead, __METHOD__ );
 				if ( $noKeys ) {
 					$sqlWrite = [ "INSERT INTO $links_temp (l_from,l_to) VALUES " ];
 				} else {
@@ -213,14 +218,13 @@ class ConvertLinks extends Maintenance {
 						$numBadLinks++;
 					}
 				}
-				$dbw->freeResult( $res );
 				# $this->output( "rowOffset: $rowOffset\ttuplesAdded: "
 				# 	. "$tuplesAdded\tnumBadLinks: $numBadLinks\n" );
 				if ( $tuplesAdded != 0 ) {
 					if ( $reportLinksConvProgress ) {
 						$this->output( "Inserting $tuplesAdded tuples into $links_temp..." );
 					}
-					$dbw->query( implode( "", $sqlWrite ) );
+					$dbw->query( implode( "", $sqlWrite ), __METHOD__ );
 					$totalTuplesInserted += $tuplesAdded;
 					if ( $reportLinksConvProgress ) {
 						$this->output( " done. Total $totalTuplesInserted tuples inserted.\n" );
@@ -277,20 +281,20 @@ class ConvertLinks extends Maintenance {
 		$links_temp = $dbConn->tableName( 'links_temp' );
 
 		$this->output( "Dropping temporary links table if it exists..." );
-		$dbConn->query( "DROP TABLE IF EXISTS $links_temp" );
+		$dbConn->query( "DROP TABLE IF EXISTS $links_temp", __METHOD__ );
 		$this->output( " done.\n" );
 
 		$this->output( "Creating temporary links table..." );
 		if ( $this->hasOption( 'noKeys' ) ) {
 			$dbConn->query( "CREATE TABLE $links_temp ( " .
 				"l_from int(8) unsigned NOT NULL default '0', " .
-				"l_to int(8) unsigned NOT NULL default '0')" );
+				"l_to int(8) unsigned NOT NULL default '0')", __METHOD__ );
 		} else {
 			$dbConn->query( "CREATE TABLE $links_temp ( " .
 				"l_from int(8) unsigned NOT NULL default '0', " .
 				"l_to int(8) unsigned NOT NULL default '0', " .
 				"UNIQUE KEY l_from(l_from,l_to), " .
-				"KEY (l_to))" );
+				"KEY (l_to))", __METHOD__ );
 		}
 		$this->output( " done.\n\n" );
 	}

@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Ansumang",
+			"Hindustanilanguage",
 			"Kaustubh",
 			"Mayur",
+			"Prong$31",
+			"Sfic",
 			"Shyam",
-			"Siddhartha Ghai",
-			"Hindustanilanguage",
-			"Sfic"
+			"Siddhartha Ghai"
 		]
 	},
 	"gadgets-desc": "सदस्यों को उनकी [[Special:Preferences#mw-prefsection-gadgets|वरीयताओं]] में से चुनिंदा [[Special:Gadgets|CSS और जावालिपि जुगत]] चुनने दो।",
@@ -32,15 +33,8 @@
 	"gadgets-export-text": "$1 उपकरण निर्यात करने के लिये \"{{int:gadgets-export-download}}\" बटन पर क्लिक करें, डाउनलोड की गई फ़ाइल सहेजें, लक्ष्य विकि पर Special:Import पर जाएँ और फ़ाइल अपलोड करें। तत्पश्चात MediaWiki:Gadgets-definition में निम्न पाठ जोड़ें:\n<pre>$2</pre>\nआपके पास लक्ष्य विकि पर उपयुक्त अधिकार होने चाहिये (जिसमें अंतरफल संदेशों को सम्पादित करने का अधिकार शामिल है) और विकि पर फ़ाइल द्वारा आयात सक्षम होना चाहिये।",
 	"gadgets-export-download": "डाउनलोड",
 	"gadgets-validate-notset": "गुण <code>$1</code> तय नहीं है।",
-	"apihelp-query+gadgetcategories-description": "गैजेट श्रेणियों की सूची परिणाम-स्वरूप लाती है",
-	"apihelp-query+gadgetcategories-param-names": "श्रेणियों के नाम जिन्हें निकालना है।",
-	"apihelp-query+gadgetcategories-example-1": "मौजूदा गैजेट श्रेणियों की सूची प्राप्त करें",
-	"apihelp-query+gadgetcategories-example-2": "\"foo\" और \"bar\" श्रेणियों के बारे में पूरी जानकारी प्राप्त करें",
-	"apihelp-query+gadgets-description": "परिणाम-स्वरूप इस विकि पर प्रयोग किए जाने वाले सभी गैजेटों की सूची प्राप्त करें।",
-	"apihelp-query+gadgets-param-categories": "किन श्रेणियों के गैजेट प्राप्त करें",
-	"apihelp-query+gadgets-param-ids": "प्राप्त करने के गैजेटों के आई०डी०।",
-	"apihelp-query+gadgets-param-allowedonly": "वर्तमान सदस्य को अनुमति-प्राप्त गैजेटों को सूचीबद्ध करें।",
-	"apihelp-query+gadgets-param-enabledonly": "वर्तमान सदस्य के लिए सक्रिय गैजेट सूची",
+	"right-gadgets-edit": "उपकरण का जावास्क्रिप्ट तथा सीएसएस पृष्ठ सम्पादित करें",
+	"action-gadgets-edit": "इस उपकरण का जावास्क्रिप्ट या सीएसएस पृष्ठ सम्पादित करें",
 	"right-gadgets-definition-edit": "गैजेट की परिभाषा लिखें",
 	"action-gadgets-definition-edit": "इस गैजेट की परिभाषा लिखें"
 }

@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"CERminator",
+			"Obsuser",
 			"Srdjan m"
 		]
 	},
@@ -22,7 +23,7 @@
 	"replacetext_editormove": "Morate odabrati najmanje jednu od opcija za zamjenu.",
 	"replacetext_choosepagesforedit": "Molimo odaberite {{PLURAL:$3|stranicu|stranice}} za {{PLURAL:$3|koju|koje}} želite zamijeniti '$1' sa '$2':",
 	"replacetext_choosepagesformove": "Zamjena \"$1\" sa \"$2\" u nazivu {{PLURAL:$3|slijedeće stranice|slijedećih stranica}}:",
-	"replacetext_cannotmove": "{{PLURAL:$1|Slijedeća stranica|Slijedeće stranice}} se ne mogu premjestiti:",
+	"replacetext_cannotmove": "{{PLURAL:$1|Sljedeća stranica|Sljedeće stranice}} se ne mogu premjestiti:",
 	"replacetext_formovedpages": "Za premještene stranice:",
 	"replacetext_savemovedpages": "Spremi stare naslove kao preusmjerenja na nove naslove",
 	"replacetext_watchmovedpages": "Prati ove stranice",

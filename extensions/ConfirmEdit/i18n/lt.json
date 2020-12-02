@@ -1,15 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Albertas",
 			"Eitvys200",
 			"Garas",
 			"Homo",
 			"Matasg",
-			"Albertas",
+			"Tomasdd",
 			"Zygimantus"
 		]
 	},
-	"captcha-edit": "Kad redaguotumėte šį straipsnį, apskaičiuokite šią paprastą sumą ir įveskite atsakymą į laukelį ([[Special:Captcha/help|daugiau informacijos]]):",
+	"captcha-edit": "Kad redaguotumėte šį straipsnį, išspręskite pateiktą užduotį ir įveskite atsakymą į laukelį ([[Special:Captcha/help|daugiau informacijos]]):",
 	"captcha-edit-fail": "Neteisingas arba nenurodytas patvirtinimo kodas.",
 	"captcha-desc": "Pateikia CAPTCHA metodikas, kaip apsisaugoti nuo brukalo ir slaptažodžių spėliojimo",
 	"captcha-label": "CAPTCHA",
@@ -31,8 +32,6 @@
 	"captchahelp-text": "Tinklapis, kuris priima įrašus iš viešumos, kaip šis vikis, yra dažnai išnaudojamas brukalių, kurie naudoja automatizuotus įrankius savo nuorodoms įrašyti į daugelį tinklapių. Nors šios brukalo nuorodos gali būti pašalintos, bet tai daryti yra labai nemalonu.\n\nKartais, ypač kai į puslapį įrašoma nauja internetinė nuoroda, vikis gali parodyti paveikslėlį su nuspalvintu ar sudarkytu tekstu ir paprašyti įvesti rodomus žodžius. Tai yra sunkiai automatizuojama užduotis, todėl dauguma tikrų žmonių galės pateikti įrašus, o dauguma brukalių ir kitų robotizuotų atakuotojų bus sustabdyti.\n\nDeja, tai gali sukelti sunkumų naudotojams, kurie prastai mato arba naudoja tekstu-grįstas arba kalba-grįstas naršykles.\nŠiuo metu negalime pasiūlyti audio alternatyvos.\nPrašome susisiekti su [[Special:ListAdmins|tinklapio administratoriais]] dėl pagalbos, jeigu tai netikėtai trukdo Jums atlikti teisėtus veiksmus.\n\nPaspauskite \"Atgal\" mygtuką savo naršyklėje, kad grįžtumėte į puslapio redaktorių.",
 	"captcha-addurl-whitelist": " #<!-- palikite šią eilutę tiksliai tokią, kokia ji yra --> <pre>\n# Sintaksė tokia:\n#   * Viskas nuo \"#\" simbolio iki eilutės pabaigos yra komentaras\n#   * Kiekviena netuščia eilutė yra reguliariosios išraiškos fragmentas, kuris atitinka tik serverių vardus esančius URL adresuose\n #</pre> <!-- palikite šią eilutę tiksliai tokią, kokia ji yra -->",
 	"right-skipcaptcha": "Atlikti apsaugos teksto reikalaujančius veiksmus, nereikalaujant nurodyti apsaugos teksto",
-	"captcha-apihelp-param-captchaword": "Atsakyti į CAPTCHA",
-	"captcha-apihelp-param-captchaid": "CAPTCHA ID iš prieš tai buvusios užklausos",
 	"confirmedit-preview-line": "Eilutės numeris",
 	"confirmedit-preview-content": "Turinys",
 	"confirmedit-preview-validity": "Galiojimas",

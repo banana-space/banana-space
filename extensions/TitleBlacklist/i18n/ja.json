@@ -1,19 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
+			"2nd-player",
 			"Aotake",
 			"Fryed-peach",
 			"Hosiryuhosi",
 			"JtFuruhata",
 			"Marine-Blue",
 			"Muttley",
-			"Shirayuki",
-			"青子守歌",
-			"Whym",
-			"Sujiniku",
-			"2nd-player",
+			"Omotecho",
 			"Otokoume",
-			"Yusuke1109"
+			"Shirayuki",
+			"Sujiniku",
+			"Takot",
+			"Whym",
+			"Yusuke1109",
+			"青子守歌"
 		]
 	},
 	"action-titleblacklistlog": "ページ名ブラックリストの記録の閲覧",
@@ -28,14 +30,9 @@
 	"titleblacklist-forbidden-upload": "「$2」という名前でのファイルのアップロードは禁止されています。\nこれは以下のブラックリスト項目に一致します: <code>$1</code>",
 	"titleblacklist-forbidden-new-account": "利用者名「$2」の作成は禁止されています。\nこれは以下のブラックリスト項目と一致します: <code>$1</code>",
 	"titleblacklist-invalid": "ページ名ブラックリスト内の以下の{{PLURAL:$1|行}}は無効{{PLURAL:$1|です}}。\n保存する前に{{PLURAL:$1|修正して}}ください:",
-	"titleblacklist-override": "ブラックリストを無視",
+	"titleblacklist-override": "照合した場合は題名のブラックリストを上書き",
 	"titleblacklist-warning": "<strong>警告: このページは下記のページ名ブラックリスト項目に一致しているため管理者と <code>tboverride</code> 権限のある利用者のみが編集できます:</strong><br /><code>$1</code>",
 	"right-tboverride": "ページ名/利用者名のブラックリストによる制限を受けない",
 	"right-tboverride-account": "利用者名ブラックリストを無視",
-	"right-titleblacklistlog": "ページ名ブラックリストの記録を閲覧",
-	"apihelp-titleblacklist-description": "TitleBllacklist に対してページ名、ファイル名、利用者名を検証します。",
-	"apihelp-titleblacklist-param-action": "確認対象の操作",
-	"apihelp-titleblacklist-param-nooverride": "titleblacklistを上書きしようとしないでください。",
-	"apihelp-titleblacklist-example-1": "[[Foo]]がブラックリストに載っているかどうかを確認する",
-	"apihelp-createaccount-param-ignoretitleblacklist": "なりすましチェックを無視する (<code>tboverride</code> または <code>tboverride-account</code> の権限が必要)。"
+	"right-titleblacklistlog": "ページ名ブラックリストの記録を閲覧"
 }

@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Avjoska",
-			"Pikne",
-			"Boxmein",
 			"Amire80",
+			"Avjoska",
+			"Boxmein",
+			"Pikne",
 			"Roland",
 			"Suwa"
 		]
@@ -23,6 +23,7 @@
 	"cite-ve-changedesc-reflist-responsive-unset": "Vahetatud viiteloendi kuva ainult ühe veeru vastu",
 	"cite-ve-changedesc-reflist-item-id": "Vahetatud viite indeks",
 	"cite-ve-dialog-reference-editing-reused": "Seda viidet on sellel leheküljel kasutatud {{PLURAL:$1|ühel korral|$1 korda}}.",
+	"cite-ve-dialog-reference-editing-reused-long": "Seda viidet on sellel leheküljel kasutatud {{PLURAL:$1|ühel korral|2=kaks korda|$1 korda}}. Siin tehtud muudatused rakenduvad igas kohas, kus seda viidet kasutatakse.",
 	"cite-ve-dialog-reference-options-group-label": "Viiterühm",
 	"cite-ve-dialog-reference-options-group-placeholder": "Üldviited",
 	"cite-ve-dialog-reference-options-name-label": "Korduvkasutusnimi",
@@ -30,8 +31,6 @@
 	"cite-ve-dialog-reference-options-section": "Suvandid",
 	"cite-ve-dialog-reference-placeholder": "Kirjuta või kleebi siia viide või lisa viitemall.",
 	"cite-ve-dialog-reference-title": "Viide",
-	"cite-ve-dialog-reference-useexisting-full-label": "Kasuta uuesti viidet, mis on sellel leheküljel juba olemas",
-	"cite-ve-dialog-reference-useexisting-label": "Kasuta olemasolevat viidet",
 	"cite-ve-dialog-reference-useexisting-tool": "Kasuta uuesti",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Üldviidete loend",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "Viiterühma \"$1\" liikmete loend",
@@ -46,6 +45,7 @@
 	"cite-ve-referenceslist-isempty": "Rühma \"$1\" viited, mida selles loendis näidata, puuduvad sellel leheküljel.",
 	"cite-ve-referenceslist-isempty-default": "Viited, mida selles loendis näidata, puuduvad sellel leheküljel.",
 	"cite-ve-referenceslist-missingref": "Selle viite kirjeldus on mallis või muul moel genereeritud plokis ning praegu saab seda redigeerida vaid lähteteksti režiimis.",
+	"cite-ve-referenceslist-missingref-in-list": "See viide on määratletud mallis või muus genereeritud plokis ning praegu saab seda eelvaadelda ainult lähteteksti režiimis.",
 	"cite-ve-referenceslist-missingreflist": "Selle viiteloendi tekitab mall ja praegu saab seda redigeerida ainult lähteteksti režiimis.",
 	"cite-ve-toolbar-group-label": "Viide",
 	"cite-ve-othergroup-item": "Viide: {{lc:$1}}",

@@ -24,19 +24,12 @@
  * used via RevDelRevisionList.
  */
 class RevDelArchivedRevisionItem extends RevDelArchiveItem {
-	public function __construct( $list, $row ) {
-		RevDelItem::__construct( $list, $row );
-
-		$this->revision = Revision::newFromArchiveRow( $row,
-			[ 'page' => $this->list->title->getArticleID() ] );
-	}
-
 	public function getIdField() {
 		return 'ar_rev_id';
 	}
 
 	public function getId() {
-		return $this->revision->getId();
+		return $this->getRevisionRecord()->getId();
 	}
 
 	public function setBits( $bits ) {

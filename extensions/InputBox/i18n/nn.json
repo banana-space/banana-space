@@ -11,5 +11,6 @@
 	"inputbox-error-bad-type": "Inntekstboks av typen «$1» vart ikkje gjenkjent.\nVer venleg og velg «create», «comment», «search», «search2», eller «fulltext».",
 	"inputbox-tryexact": "Prøv nøyaktig treff",
 	"inputbox-searchfulltext": "Søk i all tekst",
-	"inputbox-createarticle": "Lag side"
+	"inputbox-createarticle": "Lag side",
+	"inputbox-postcomment": "Ny bolk"
 }

@@ -1,0 +1,23 @@
+/*!
+ * VisualEditor MediaWiki DesktopArticleTarget Vector skin init styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-init-mw-desktopArticleTarget-toolbar,
+.ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
+	font-size: 0.875em;
+	/* 1/0.875 */
+	margin: -1.14em -1.14em 1.14em -1.14em;
+	/* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
+}
+
+@media screen and ( min-width: 982px ) {
+	/* stylelint-disable selector-class-pattern */
+	.skin-vector-legacy .ve-init-mw-desktopArticleTarget-toolbar,
+	.skin-vector-legacy .ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
+		/* 1.25/0.875, 1.5/0.875 */
+		margin: -1.43em -1.71em 1.43em -1.71em;
+	}
+}

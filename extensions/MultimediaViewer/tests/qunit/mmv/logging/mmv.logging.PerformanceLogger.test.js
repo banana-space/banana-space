@@ -15,20 +15,20 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.logging.PerformanceLogger', QUnit.newMwEnvironment() );
 
 	function createFakeXHR( response ) {
 		return {
 			readyState: 0,
-			open: $.noop,
+			open: function () {},
 			send: function () {
 				var xhr = this;
 
 				setTimeout( function () {
 					xhr.readyState = 4;
 					xhr.response = response;
-					if ( $.isFunction( xhr.onreadystatechange ) ) {
+					if ( typeof xhr.onreadystatechange === 'function' ) {
 						xhr.onreadystatechange();
 					}
 				}, 0 );
@@ -174,7 +174,7 @@
 			assert.strictEqual( fakeEventLog.logEvent.getCall( 0 ).args[ 1 ].XCache, xcache, 'XCache is correct' );
 			assert.strictEqual( fakeEventLog.logEvent.getCall( 0 ).args[ 1 ].age, parseInt( age, 10 ), 'age is correct' );
 			assert.strictEqual( fakeEventLog.logEvent.getCall( 0 ).args[ 1 ].contentLength, parseInt( contentLength, 10 ), 'contentLength is correct' );
-			assert.strictEqual( fakeEventLog.logEvent.getCall( 0 ).args[ 1 ].contentHost, window.location.host, 'contentHost is correct' );
+			assert.strictEqual( fakeEventLog.logEvent.getCall( 0 ).args[ 1 ].contentHost, location.host, 'contentHost is correct' );
 			assert.strictEqual( fakeEventLog.logEvent.getCall( 0 ).args[ 1 ].urlHost, urlHost, 'urlHost is correct' );
 			assert.strictEqual( fakeEventLog.logEvent.getCall( 0 ).args[ 1 ].timestamp, timestamp, 'timestamp is correct' );
 			assert.strictEqual( fakeEventLog.logEvent.getCall( 0 ).args[ 1 ].total, perfData.duration, 'total is correct' );
@@ -338,4 +338,4 @@
 		mw.mmv.logging.PerformanceLogger.prototype.recordJQueryEntryDelayed = oldRecord;
 		mw.Api.prototype.ajax = oldAjax;
 	} );
-}( mediaWiki, jQuery ) );
+}() );

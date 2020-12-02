@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"FriedhelmW",
 			"Kghbln",
 			"Purodha",
-			"Raimond Spekking",
-			"FriedhelmW"
+			"Raimond Spekking"
 		]
 	},
 	"poem-desc": "Fügt das Tag <code>&lt;poem&gt;</code> zur Formatierung von Gedichten hinzu"

@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Danmichaelo",
+			"Jon Harald Søby",
 			"Nghtwlkr",
-			"Reedy",
-			"Jon Harald Søby"
+			"Reedy"
 		]
 	},
+	"action-tboverride": "overstyre svartelistene for titler eller brukernavn",
+	"action-tboverride-account": "overstyre svartelista for brukernavn",
 	"action-titleblacklistlog": "se tittelsvartelisteloggen",
 	"log-name-titleblacklist": "Tittelsvartelistelogg",
 	"log-description-titleblacklist": "Disse hendelsene sporer treff på tittelsvartelista.",
@@ -19,18 +21,10 @@
 	"titleblacklist-forbidden-upload": "Filnavnet «$2» er blokkert for oppretting. Den tilsvarer følgende svartelisteelement: <code>$1</code>",
 	"titleblacklist-forbidden-new-account": "Brukernavnet «$2» kan ikke opprettes.\nDet tilsvarer følgende svartelisteelement: <code>$1</code>",
 	"titleblacklist-invalid": "Følgende {{PLURAL:$1|linje|linjer}} i tittelsvartelista er {{PLURAL:$1|ugyldig|ugyldige}}; vennligst korriger {{PLURAL:$1|den|dem}} før du lagrer:",
-	"titleblacklist-override": "Ignorer svartelista.",
+	"titleblacklist-override": "Overstyr tittelsvarteliste hvis det er treff",
 	"titleblacklist-override-help": "Brukere med tilstrekkelige rettigheter kan sette denne for å ignorere sjekker mot tittelsvartelista.",
 	"titleblacklist-warning": "<strong>Advarsel: Denne siden kan kun redigeres av administratorer og andre brukere med <code>tboverride</code>-rettigheter fordi den matcher følgende oppslag i tittelsvartelista:</strong><br /><code>$1</code>",
 	"right-tboverride": "Overkjøre svartelista for titler eller brukernavn",
 	"right-tboverride-account": "Overstyr svartelista for brukernavn",
-	"right-titleblacklistlog": "Vise tittelsvartelisteloggen",
-	"apihelp-titleblacklist-description": "Valider en sidetittel, et filnavn eller et brukernavn mot TitleBlacklist.",
-	"apihelp-titleblacklist-summary": "Valider en sidetittel, et filnavn eller et brukernavn mot TitleBlacklist.",
-	"apihelp-titleblacklist-param-title": "Strengen som skal valideres mot svartelista.",
-	"apihelp-titleblacklist-param-action": "Handlingen som skal sjekkes.",
-	"apihelp-titleblacklist-param-nooverride": "Ikke prøv å overstyre tittelsvartelista.",
-	"apihelp-titleblacklist-example-1": "Sjekk om [[Foo]] er svartelistet",
-	"apihelp-titleblacklist-example-2": "Sjekk om [[Bar]] er svartelistet for redigering",
-	"apihelp-createaccount-param-ignoretitleblacklist": "Ignorer spoofing-sjekker (krever en av følgende rettigheter: <code>tboverride</code>, <code>tboverride-account</code>)."
+	"right-titleblacklistlog": "Vise tittelsvartelisteloggen"
 }

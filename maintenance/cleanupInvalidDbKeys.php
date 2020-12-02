@@ -23,6 +23,8 @@
 
 require_once __DIR__ . '/Maintenance.php';
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Maintenance script that cleans up invalid titles in various tables.
  *
@@ -30,7 +32,7 @@ require_once __DIR__ . '/Maintenance.php';
  * @ingroup Maintenance
  */
 class CleanupInvalidDbKeys extends Maintenance {
-	/** @var array List of tables to clean up, and the field prefix for that table */
+	/** @var array[] List of tables to clean up, and the field prefix for that table */
 	protected static $tables = [
 		// Data tables
 		[ 'page', 'page' ],
@@ -87,7 +89,8 @@ TEXT
 
 		$this->outputStatus( 'Done!' );
 		if ( $this->hasOption( 'fix' ) ) {
-			$this->outputStatus( ' Cleaned up invalid DB keys on ' . wfWikiID() . "!\n" );
+			$dbDomain = WikiMap::getCurrentWikiDbDomain()->getId();
+			$this->outputStatus( " Cleaned up invalid DB keys on $dbDomain!\n" );
 		}
 	}
 
@@ -121,17 +124,10 @@ TEXT
 	 * @param array $tableParams A child array of self::$tables
 	 */
 	protected function cleanupTable( $tableParams ) {
-		$table = $tableParams[0];
-		$prefix = $tableParams[1];
-		$idField = isset( $tableParams['idField'] ) ?
-			$tableParams['idField'] :
-			"{$prefix}_id";
-		$nsField = isset( $tableParams['nsField'] ) ?
-			$tableParams['nsField'] :
-			"{$prefix}_namespace";
-		$titleField = isset( $tableParams['titleField'] ) ?
-			$tableParams['titleField'] :
-			"{$prefix}_title";
+		list( $table, $prefix ) = $tableParams;
+		$idField = $tableParams['idField'] ?? "{$prefix}_id";
+		$nsField = $tableParams['nsField'] ?? "{$prefix}_namespace";
+		$titleField = $tableParams['titleField'] ?? "{$prefix}_title";
 
 		$this->outputStatus( "Looking for invalid $titleField entries in $table...\n" );
 
@@ -143,7 +139,7 @@ TEXT
 		$dbr = $this->getDB( DB_REPLICA, 'vslow' );
 
 		// Find all TitleValue-invalid titles.
-		$percent = $dbr->anyString(); // DBMS-agnostic equivalent of '%' LIKE wildcard
+		$percent = $dbr->anyString();
 		$res = $dbr->select(
 			$table,
 			[
@@ -198,6 +194,8 @@ TEXT
 			return;
 		}
 
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+
 		// Fix the bad data, using different logic for the various tables
 		$dbw = $this->getDB( DB_MASTER );
 		switch ( $table ) {
@@ -235,7 +233,7 @@ TEXT
 						__METHOD__ );
 					$affectedRowCount += $dbw->affectedRows();
 				}
-				wfWaitForSlaves();
+				$lbFactory->waitForReplication();
 				$this->outputStatus( "Updated $affectedRowCount rows on $table.\n" );
 
 				break;
@@ -248,7 +246,7 @@ TEXT
 				// recently, so we can just remove these rows.
 				$this->outputStatus( "Deleting invalid $table rows...\n" );
 				$dbw->delete( $table, [ $idField => $ids ], __METHOD__ );
-				wfWaitForSlaves();
+				$lbFactory->waitForReplication();
 				$this->outputStatus( 'Deleted ' . $dbw->affectedRows() . " rows from $table.\n" );
 				break;
 
@@ -264,7 +262,7 @@ TEXT
 						__METHOD__ );
 					$affectedRowCount += $dbw->affectedRows();
 				}
-				wfWaitForSlaves();
+				$lbFactory->waitForReplication();
 				$this->outputStatus( "Deleted $affectedRowCount rows from $table.\n" );
 				break;
 
@@ -286,13 +284,12 @@ TEXT
 							__METHOD__ );
 					}
 				}
-				wfWaitForSlaves();
+				$lbFactory->waitForReplication();
 				$this->outputStatus( "Link update jobs have been added to the job queue.\n" );
 				break;
 		}
 
 		$this->outputStatus( "\n" );
-		return;
 	}
 
 	/**

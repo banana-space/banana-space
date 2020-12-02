@@ -4,6 +4,7 @@
 			"Liuxinyu970226"
 		]
 	},
+	"renocaptcha-desc": "{{Optional}}\n{{desc}}",
 	"renocaptcha-edit": "Message above the CAPTCHA for edit action.\n{{related|ConfirmEdit-edit}}",
 	"renocaptcha-addurl": "Message above the CAPTCHA for addurl (user added new external links to the page) action.\n{{related|ConfirmEdit-addurl}}",
 	"renocaptcha-badlogin": "Message above the CAPTCHA for badlogin action.\n{{related|ConfirmEdit-badlogin}}",
@@ -11,6 +12,5 @@
 	"renocaptcha-createaccount-fail": "Error message, when the CAPTCHA isn't solved correctly.\n{{related|ConfirmEdit-createaccount-fail}}",
 	"renocaptcha-create": "Message above the CAPTCHA for create (user creates a new page) action.\n{{related|ConfirmEdit-create}}",
 	"renocaptcha-noscript": "This messages is warning you have javascript disabled so you have to manualy input the text into the textbox.",
-	"renocaptcha-help": "Explanation of how to solve the CAPTCHA for API clients.",
-	"renocaptcha-apihelp-param-g-recaptcha-response": "{{doc-apihelp-param|description=the \"g-recaptcha-response\" parameter added by [[mw:Extension:ConfirmEdit]]|noseealso=1}}"
+	"renocaptcha-help": "Explanation of how to solve the CAPTCHA for API clients."
 }

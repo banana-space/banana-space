@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"OC Ripper",
+			"BadDog",
 			"Conquistador",
+			"OC Ripper",
 			"Srdjan m"
 		]
 	},
@@ -14,7 +15,7 @@
 	"vector-action-unprotect": "Promijeni zaštitu",
 	"vector-view-create": "Napravi",
 	"vector-view-edit": "Uredi",
-	"vector-view-history": "Vidi historiju",
+	"vector-view-history": "Historija/Историја",
 	"vector-view-view": "Čitaj",
 	"vector-view-viewsource": "Vidi izvor (source)",
 	"vector-more-actions": "Više"

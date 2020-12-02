@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pikne"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "Uue FancyCaptcha hankimine.",
+	"apihelp-fancycaptchareload-example-1": "Hangi uus FancyCaptcha"
+}

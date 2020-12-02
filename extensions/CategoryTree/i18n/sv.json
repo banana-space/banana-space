@@ -4,12 +4,13 @@
 			"Boivie",
 			"Diupwijk",
 			"Jon Harald Søby",
+			"Jopparn",
 			"Lejonel",
 			"Lokal Profil",
 			"M.M.S.",
 			"Sannab",
-			"WikiPhoenix",
-			"Jopparn"
+			"Sturban",
+			"WikiPhoenix"
 		]
 	},
 	"categorytree": "Kategoriträd",
@@ -25,7 +26,7 @@
 	"categorytree-mode-pages": "sidor utom filer",
 	"categorytree-mode-all": "alla sidor",
 	"categorytree-collapse": "göm",
-	"categorytree-expand": "expandera",
+	"categorytree-expand": "visa",
 	"categorytree-member-counts": "Innehåller {{PLURAL:$1|1 underkategori|$1 underkategorier}}, {{PLURAL:$2|1 sida|$2 sidor}}, och {{PLURAL:$3|1 fil|$3 filer}}",
 	"categorytree-num-categories": "$1 K",
 	"categorytree-num-pages": "$1 S",
@@ -39,10 +40,5 @@
 	"categorytree-no-pages": "inga artiklar eller underkategorier",
 	"categorytree-not-found": "Kategori ''$1'' hittades ej",
 	"categorytree-error": "Problem med att ladda data.",
-	"categorytree-retry": "Vänta en stund och försök igen.",
-	"apihelp-categorytree-description": "Intern modul för tillägget CategoryTree.",
-	"apihelp-categorytree-summary": "Intern modul för tillägget CategoryTree.",
-	"apihelp-categorytree-param-category": "Titel i kategorinamnrymden, prefix kommer att ignoreras om de anges.",
-	"apihelp-categorytree-param-options": "Alternativ för CategoryTree-konstruktören som ett JSON-objekt. Den <var>fördjupade</var> alternativa standardvärdet är <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "Alternativ måste vara ett giltigt JSON-objekt."
+	"categorytree-retry": "Vänta en stund och försök igen."
 }

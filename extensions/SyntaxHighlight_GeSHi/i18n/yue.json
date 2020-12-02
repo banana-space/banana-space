@@ -1,8 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Hello903hello",
 			"Shinjiman"
 		]
 	},
-	"syntaxhighlight-desc": "用[http://pygments.org/ Pygments]以<code>&lt;syntaxhighlight&gt;</code>提供醒目提示"
+	"syntaxhighlight-desc": "用[http://pygments.org/ Pygments]以<code>&lt;syntaxhighlight&gt;</code>提供醒目提示",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "程式碼",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "語言",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "（無）",
+	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-showlines": "顯示行數",
+	"syntaxhighlight-error-unknown-language": "不明語言「$1」"
 }

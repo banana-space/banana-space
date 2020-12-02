@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Andibing",
+			"Captaindogfish",
+			"Chase me ladies, I'm the Cavalry",
+			"Felicilijonas",
+			"Jdforrester",
+			"Pierpao",
+			"Shirayuki"
+		]
+	},
+	"tooltip-ca-ve-edit": "Edit this page",
+	"visualeditor-ca-editsource": "Edit source",
+	"visualeditor-ca-editsource-section": "edit source",
+	"visualeditor-dialog-media-alttext-section-help": "You can use this to write a text description for people who can't see the item. The description should be enough for them to understand the purpose and information given by the media item. This is vital for blind users and other people using screen-reader software or text-only browsers.",
+	"visualeditor-dialog-media-content-section-help": "You can use this to show a label that shows next to the item for all readers. This is often used to explain why the item is relevant to the context in which it is shown. It should be succinct and informative.",
+	"visualeditor-dialog-media-info-licenseshortname": "Licence",
+	"visualeditor-dialog-media-position-center": "Centre",
+	"visualeditor-dialog-media-position-checkbox-help": "You can make this media item appear in line with the text of the page instead of floating. You should do this sparingly, as it will break up the flow of the text if you uncheck this box.",
+	"visualeditor-dialog-media-position-section-help": "You can set where this media item appears on the page. This is sometimes used to break up a long line of images on one side of the page.",
+	"visualeditor-dialog-media-size-section-help": "You can set how large the media item appears on the page. This should almost always be the normal size, as a custom size will interfere with the layout of the page for readers and make the media  items seem inconsistent.",
+	"visualeditor-dialog-media-type-section-help": "You can set how the media item appears on the page. This should be the thumbnail format to be consistent with other pages in almost all cases.",
+	"visualeditor-dialog-meta-categories-defaultsort-help": "You can over-ride how this page is sorted when displayed within a category by setting a different index to sort with instead. This is often used to make pages about people show by last name, but be named with their first name shown first.",
+	"visualeditor-dialog-meta-settings-displaytitle-help": "You can over-ride how this page's title is displayed by setting a different label to show instead.",
+	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Language code"
+}

@@ -2,14 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"Meno25",
-			"زكريا",
 			"Mr. Ibrahem",
-			"ديفيد"
+			"Tala Ali",
+			"ديفيد",
+			"زكريا"
 		]
 	},
 	"syntaxhighlight-desc": "يوفر تمييزا لتركيب <code>&lt;syntaxhighlight&gt;</code> باستخدام [http://pygments.org/ Pygments - Python syntax highlighter]",
 	"syntaxhighlight-error-category": "صفحات بها أخطاء في تعليم الصيغة",
 	"syntaxhighlight-error-category-desc": "كان هناك خطأ عند محاولة لتسليط الضوء على الكود المدرجة في الصفحة.",
+	"syntaxhighlight-enclose-category": "الصفحات التي تستخدم سمات مغلقة مهجورة",
+	"syntaxhighlight-source-category": "الصفحات التي تستخدم علامات المصدر الموقوفة",
+	"syntaxhighlight-source-category-desc": "يستخدم تسليط الضوء على الصفحة علامات مصدر مهجورة",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "الكود",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "اللغة",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(لا شيء)",

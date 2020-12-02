@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Janezdrilc"
+		]
+	},
+	"apihelp-query+gadgetcategories-description": "Vrne seznam kategorij vtičnikov.",
+	"apihelp-query+gadgetcategories-summary": "Vrne seznam kategorij vtičnikov.",
+	"apihelp-query+gadgetcategories-example-1": "Prikaži seznam obstoječih kategorij vtičnikov",
+	"apihelp-query+gadgets-description": "Vrne seznam vtičnikov, ki so v uporabi na tem wikiju.",
+	"apihelp-query+gadgets-summary": "Vrne seznam vtičnikov, ki so v uporabi na tem wikiju.",
+	"apihelp-query+gadgets-param-allowedonly": "Izpiši samo vtičnike, ki so na voljo trenutnemu uporabniku.",
+	"apihelp-query+gadgets-param-enabledonly": "Izpiši samo vtičnike, ki jih ima trenutni uporabnik vključene.",
+	"apihelp-query+gadgets-example-1": "Prikaži seznam vtičnikov skupaj z njihovimi opisi",
+	"apihelp-query+gadgets-example-2": "Prikaži seznam vtičnikov z vsemi možnimi lastnostmi",
+	"apihelp-query+gadgets-example-5": "Prikaži seznam vtičnikov, ki jih ima trenutni uporabnik vključene."
+}

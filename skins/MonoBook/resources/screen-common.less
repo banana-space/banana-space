@@ -15,7 +15,7 @@
 ** Common styles across desktop and mobile
 */
 
-div#column-content {
+#column-content {
 	width: 100%;
 	margin: 0;
 	padding: 0;
@@ -40,17 +40,24 @@ div#column-content {
 
 /* Font size:
 ** We take advantage of keyword scaling- browsers won't go below 9px
+** See "Note 1" at https://www.w3.org/TR/CSS2/fonts.html#value-def-absolute-size
 ** More at http://www.w3.org/2003/07/30-font-size
 ** http://style.cleverchimp.com/font_size_intervals/altintervals.html
+** https://web.archive.org/web/20180201141931/http://style.cleverchimp.com/font_size_intervals/altintervals.html
+** This affects users whose browser font size setting is < 14.4px,
+** making #globalWrapper's font-size 11.43px at minimum.
+** Gadgets have their own monobook-specific css rule to set the font-size similar to #globalWrapper.
 */
-
 body {
-	font: x-small sans-serif;
-	background-color: @background;
-	// don't bother with a fallback; the jpg book won't work with these anyway
-	.background-image( 'images/headbg-gradient.svg' );
-	background-position: 0 0;
-	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: x-small; // Typical: 16px * 0.625 == 10px.
+	background: @background url( images/headbg.jpg ) 0 0 no-repeat;
+	// stylelint-disable value-list-comma-newline-after
+	/* @embed */
+	background: linear-gradient( transparent, transparent ),
+		url( images/headbg.svg ) 0 0 no-repeat,
+		@background url( images/headbg-gradient.svg ) 0 0 repeat-x;
+	// stylelint-enable value-list-comma-newline-after
 	color: @text-color;
 	margin: 0;
 	padding: 0;
@@ -59,11 +66,8 @@ body {
 }
 
 /* scale back up to a sane default */
-div#globalWrapper {
-	font-size: 127%;
-	.background-image-svg( 'images/headbg.svg', 'images/headbg.jpg' );
-	background-position: 0 0;
-	background-repeat: no-repeat;
+#globalWrapper {
+	font-size: 127%; // Typical: x-small * 127% == 12.7px;
 	width: 100%;
 	margin: 0;
 	padding: 0;
@@ -87,7 +91,7 @@ a.new,
 
 ul {
 	list-style-type: square;
-	.list-style-image-svg( 'images/bullet.svg', 'images/bullet.gif' );
+	.list-style-image( 'images/bullet.svg' );
 }
 
 pre,
@@ -95,7 +99,9 @@ pre,
 	line-height: 1.1em;
 }
 
-#firstHeading {
+.firstHeading {
+	margin-top: 0.4em;
+	margin-bottom: 0.1em;
 	padding-top: 0;
 	overflow: visible;
 }
@@ -109,8 +115,10 @@ pre,
 .mw-indicator {
 	display: -moz-inline-block;
 	display: inline-block;
-	zoom: 1;
-	*display: inline; /* stylelint-disable-line declaration-block-no-duplicate-properties */
+}
+
+.mw-jump-link:not( :focus ) {
+	.mixin-screen-reader-text;
 }
 
 /*
@@ -162,9 +170,7 @@ table.rimage {
 		background: transparent;
 		display: inline;
 		height: 1em;
-		text-transform: lowercase;
 		font-size: 91%;
-		font-weight: normal;
 		white-space: nowrap;
 	}
 
@@ -211,52 +217,15 @@ table.rimage {
 /*
 ** the personal toolbar
 */
-
-#p-personal h3 {
-	.hidden();
-
-	li {
-		color: #2f6fab;
-
-		a {
-			color: #005896;
-		}
-
-		&.active {
-			font-weight: bold;
-		}
-	}
-}
-
-/* Don't lowercase username */
-li#pt-userpage {
-	text-transform: none;
-}
-
 /* "Not logged in" text in gray */
 li#pt-anonuserpage {
 	color: @text-grey;
 }
 
 /*
-** the page-related actions- page/talk, edit etc
-*/
-
-#p-cactions h3 {
-	.hidden()
-}
-
-/* Override text-transform on languages where capitalization is significant */
-.capitalize-all-nouns .portlet h3,
-.capitalize-all-nouns #p-personal ul,
-.capitalize-all-nouns #p-cactions ul li a {
-	text-transform: none;
-}
-
-/*
 ** footer
 */
-#footer {
+.mw-footer {
 	background-color: @content-background;
 	border-top: 1px solid @orange-border;
 	border-bottom: 1px solid @orange-border;
@@ -302,21 +271,6 @@ div.patrollink {
 	font-style: italic;
 }
 
-.editExternally {
-	border: 1px solid @content-border;
-	background-color: @content-background;
-	padding: 3px;
-	margin-top: 0.5em;
-	float: left;
-	font-size: small;
-	text-align: center;
-}
-
-.editExternallyHelp {
-	font-style: italic;
-	color: @text-grey;
-}
-
 .toggle {
 	margin-left: 2em;
 	text-indent: -2em;
@@ -355,6 +309,7 @@ div.multipageimagenavbox {
 		margin-left: 2em;
 		margin-right: 2em;
 	}
+
 	hr {
 		margin: 6px;
 	}
@@ -400,11 +355,6 @@ div.mw-lag-warn-high {
 		vertical-align: middle;
 		font-size: 90%;
 	}
-}
-
-/* Sometimes people don't want personal tools to be lowercase! */
-.no-text-transform {
-	text-transform: none;
 }
 
 /* Tooltips are outside of the normal body code, so this helps make the size of the text sensible */

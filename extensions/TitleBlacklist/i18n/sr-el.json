@@ -5,10 +5,10 @@
 			"Milicevic01"
 		]
 	},
-	"action-titleblacklistlog": "pregledanje crnog spiska naslova",
-	"log-name-titleblacklist": "Dnevnik crnog spiska naslova",
-	"log-description-titleblacklist": "Ovaj dnevnik prikazuje pogotke u crnom spisku naslova.",
-	"titleblacklist-desc": "Dopušta zabranu stvaranja strana s određenim naslovima: [[MediaWiki:Titleblacklist|crna lista]] i [[MediaWiki:Titlewhitelist|bela lista]].",
+	"action-titleblacklistlog": "pregledate dnevnik crne liste naslova",
+	"log-name-titleblacklist": "Dnevnik crne liste naslova",
+	"log-description-titleblacklist": "Ovi događaji prate pogotke u crnoj listi naslova.",
+	"titleblacklist-desc": "Dopušta zabranu stvaranja stranica s određenim naslovima: [[MediaWiki:Titleblacklist|crna lista]] i [[MediaWiki:Titlewhitelist|bela lista]].",
 	"titleblacklist": "# Ovo je naslov crnog spiska. Naslovi koji sadrže regularni izraz iz ovog spiska ne mogu biti napravljeni.\n# Koristi „#“ za komentare.\n# Podrazumevano je neosetljiv na veličinu slova",
 	"titlewhitelist": "# Ovo je beli spisak naslova. Koristi \"#\" za komentare.\n# Podrazumevano je neosetljiv na veličinu slova",
 	"titleblacklist-forbidden-edit": "Naslov „$2“ nalazi se na crnom spisku.\nPoklapa se sa sledećim unosom na crnom spisku: <code>$1</code>",

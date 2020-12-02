@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bikarhêner",
+			"George Animal"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Guherrînera dîtbarî]]",
+	"tag-visualeditor-description": "Bi bikaranîna [[{{MediaWiki:visualeditor-descriptionpagelink}}|visual editor]]ê guherandinê bike",
+	"visualeditor-feedback-link": "Project:VisualEditor/Paşragihandin",
+	"visualeditor-help-label": "Rêberê bikarhêneran bixwîne",
+	"visualeditor-help-title": "Rêberek ji bo hînbûna bikaranîna edîtorê",
+	"visualeditor-welcomedialog-action": "Dest bi guherandinê bike",
+	"visualeditor-welcomedialog-content": "Her kes dikare biguherîne, û her başkirin alîkariyê dike.",
+	"visualeditor-welcomedialog-content-thanks": "Spas ji bo ku te ji dinyayê re bona zêdetir keşfan bû alîkar!",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bi xêr hatî}} $2ê"
+}

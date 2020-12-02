@@ -1,4 +1,4 @@
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.logging.DimensionLogger', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'log()', function ( assert ) {
@@ -14,4 +14,4 @@
 		logger.logDimensions( 640, 480, 200, 'resize' );
 		assert.ok( true, 'logDimensions() did not throw errors' );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

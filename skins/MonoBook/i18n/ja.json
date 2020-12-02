@@ -1,13 +1,26 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aefgh39622",
+			"Darklanlan",
 			"Fryed-peach",
-			"青子守歌",
-			"Takot"
+			"Otokoume",
+			"Takot",
+			"Yusuke1109",
+			"青子守歌"
 		]
 	},
 	"skinname-monobook": "モノブック",
 	"monobook-desc": "ページ背景にモノクロの本の写真があることから名付けられた、2004年以来のクラシックなMediaWiki外装。",
 	"monobook.css": "/* ここに記述したCSSはモノブック外装の利用者に影響します */",
-	"monobook.js": "/* ここにあるすべてのJavaScriptは、モノブック外装を使用している利用者に対して読み込まれます */"
+	"monobook.js": "/* ここにあるすべてのJavaScriptは、モノブック外装を使用している利用者に対して読み込まれます */",
+	"monobook-jumptotop": "トップに戻る",
+	"monobook-jumptopersonal": "利用者ツール",
+	"monobook-jumptonavigation": "ナビゲーションに移動",
+	"monobook-jumptosearch": "検索に移動",
+	"monobook-more-actions": "その他",
+	"monobook-cactions-label": "ページアクション",
+	"monobook-notifications-link": "通知 ($1件)",
+	"monobook-notifications-link-none": "通知",
+	"monobook-responsive-label": "レスポンシブデザインのモノブックを有効にする"
 }

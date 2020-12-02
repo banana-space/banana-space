@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Michaello",
-			"Milicevic01"
+			"Milicevic01",
+			"Zoranzoki21"
 		]
 	},
-	"pdf-desc": "Handler za pregled PDF fajlova kao slika",
+	"pdf-desc": "Rukovodilac za prikaz PDF fajlova u režimu za slike",
 	"pdf-file-page-warning": "PDF je složen format koji može predstavljati pretnju po vašu privatnost u neki slučajevima. Molimo Vas da vaš PDF pregledač podesite na bezbedan način.",
 	"pdf-file-page-warning-header": "Napomena u vezi privatnosti",
 	"pdf-file-page-warning-footer": "Ovo je generalno problem sa PDF formatom i nije specifičan za ovu konkretnu datoteku.",

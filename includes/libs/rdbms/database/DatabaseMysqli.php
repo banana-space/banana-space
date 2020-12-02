@@ -24,8 +24,9 @@ namespace Wikimedia\Rdbms;
 
 use mysqli;
 use mysqli_result;
-use IP;
 use stdClass;
+use Wikimedia\AtEase\AtEase;
+use Wikimedia\IPUtils;
 
 /**
  * Database abstraction object for PHP extension mysqli.
@@ -33,59 +34,62 @@ use stdClass;
  * @ingroup Database
  * @since 1.22
  * @see Database
+ * @phan-file-suppress PhanParamSignatureMismatch resource vs mysqli_result
  */
 class DatabaseMysqli extends DatabaseMysqlBase {
 	/**
 	 * @param string $sql
-	 * @return mysqli_result
+	 * @return mysqli_result|bool
 	 */
 	protected function doQuery( $sql ) {
-		$conn = $this->getBindingHandle();
+		AtEase::suppressWarnings();
+		$res = $this->getBindingHandle()->query( $sql );
+		AtEase::restoreWarnings();
 
-		if ( $this->bufferResults() ) {
-			$ret = $conn->query( $sql );
-		} else {
-			$ret = $conn->query( $sql, MYSQLI_USE_RESULT );
-		}
-
-		return $ret;
+		return $res;
 	}
 
 	/**
 	 * @param string $realServer
-	 * @return bool|mysqli
+	 * @param string|null $dbName
+	 * @return mysqli|null
 	 * @throws DBConnectionError
 	 */
-	protected function mysqlConnect( $realServer ) {
-		# Avoid suppressed fatal error, which is very hard to track down
+	protected function mysqlConnect( $realServer, $dbName ) {
 		if ( !function_exists( 'mysqli_init' ) ) {
-			throw new DBConnectionError( $this, "MySQLi functions missing,"
-				. " have you compiled PHP with the --with-mysqli option?\n" );
+			throw $this->newExceptionAfterConnectError(
+				"MySQLi functions missing, have you compiled PHP with the --with-mysqli option?"
+			);
 		}
 
-		// Other than mysql_connect, mysqli_real_connect expects an explicit port
-		// and socket parameters. So we need to parse the port and socket out of
-		// $realServer
+		// Other than mysql_connect, mysqli_real_connect expects an explicit port number
+		// e.g. "localhost:1234" or "127.0.0.1:1234"
+		// or Unix domain socket path
+		// e.g. "localhost:/socket_path" or "localhost:/foo/bar:bar:bar"
+		// colons are known to be used by Google AppEngine,
+		// see <https://cloud.google.com/sql/docs/mysql/connect-app-engine>
+		//
+		// We need to parse the port or socket path out of $realServer
 		$port = null;
 		$socket = null;
-		$hostAndPort = IP::splitHostAndPort( $realServer );
+		$hostAndPort = IPUtils::splitHostAndPort( $realServer );
 		if ( $hostAndPort ) {
 			$realServer = $hostAndPort[0];
 			if ( $hostAndPort[1] ) {
 				$port = $hostAndPort[1];
 			}
-		} elseif ( substr_count( $realServer, ':' ) == 1 ) {
-			// If we have a colon and something that's not a port number
-			// inside the hostname, assume it's the socket location
-			$hostAndSocket = explode( ':', $realServer );
-			$realServer = $hostAndSocket[0];
-			$socket = $hostAndSocket[1];
+		} elseif ( substr_count( $realServer, ':/' ) == 1 ) {
+			// If we have a colon slash instead of a colon and a port number
+			// after the ip or hostname, assume it's the Unix domain socket path
+			list( $realServer, $socket ) = explode( ':', $realServer, 2 );
 		}
 
 		$mysqli = mysqli_init();
-
-		$connFlags = 0;
-		if ( $this->flags & self::DBO_SSL ) {
+		// Make affectedRows() for UPDATE reflect the number of matching rows, regardless
+		// of whether any column values changed. This is what callers want to know and is
+		// consistent with what Postgres, SQLite, and SQL Server return.
+		$connFlags = MYSQLI_CLIENT_FOUND_ROWS;
+		if ( $this->getFlag( self::DBO_SSL ) ) {
 			$connFlags |= MYSQLI_CLIENT_SSL;
 			$mysqli->ssl_set(
 				$this->sslKeyPath,
@@ -95,10 +99,10 @@ class DatabaseMysqli extends DatabaseMysqlBase {
 				$this->sslCiphers
 			);
 		}
-		if ( $this->flags & self::DBO_COMPRESS ) {
+		if ( $this->getFlag( self::DBO_COMPRESS ) ) {
 			$connFlags |= MYSQLI_CLIENT_COMPRESS;
 		}
-		if ( $this->flags & self::DBO_PERSISTENT ) {
+		if ( $this->getFlag( self::DBO_PERSISTENT ) ) {
 			$realServer = 'p:' . $realServer;
 		}
 
@@ -111,32 +115,19 @@ class DatabaseMysqli extends DatabaseMysqlBase {
 		}
 		$mysqli->options( MYSQLI_OPT_CONNECT_TIMEOUT, 3 );
 
-		if ( $mysqli->real_connect( $realServer, $this->user,
-			$this->password, $this->dbName, $port, $socket, $connFlags )
-		) {
+		if ( $mysqli->real_connect(
+			$realServer,
+			$this->user,
+			$this->password,
+			$dbName,
+			$port,
+			$socket,
+			$connFlags
+		) ) {
 			return $mysqli;
 		}
 
-		return false;
-	}
-
-	protected function connectInitCharset() {
-		// already done in mysqlConnect()
-		return true;
-	}
-
-	/**
-	 * @param string $charset
-	 * @return bool
-	 */
-	protected function mysqlSetCharset( $charset ) {
-		$conn = $this->getBindingHandle();
-
-		if ( method_exists( $conn, 'set_charset' ) ) {
-			return $conn->set_charset( $charset );
-		} else {
-			return $this->query( 'SET NAMES ' . $charset, __METHOD__ );
-		}
+		return null;
 	}
 
 	/**
@@ -151,7 +142,7 @@ class DatabaseMysqli extends DatabaseMysqlBase {
 	/**
 	 * @return int
 	 */
-	function insertId() {
+	public function insertId() {
 		$conn = $this->getBindingHandle();
 
 		return (int)$conn->insert_id;
@@ -160,7 +151,7 @@ class DatabaseMysqli extends DatabaseMysqlBase {
 	/**
 	 * @return int
 	 */
-	function lastErrno() {
+	public function lastErrno() {
 		if ( $this->conn instanceof mysqli ) {
 			return $this->conn->errno;
 		} else {
@@ -175,18 +166,6 @@ class DatabaseMysqli extends DatabaseMysqlBase {
 		$conn = $this->getBindingHandle();
 
 		return $conn->affected_rows;
-	}
-
-	/**
-	 * @param string $db
-	 * @return bool
-	 */
-	function selectDB( $db ) {
-		$conn = $this->getBindingHandle();
-
-		$this->dbName = $db;
-
-		return $conn->select_db( $db );
 	}
 
 	/**
@@ -214,7 +193,7 @@ class DatabaseMysqli extends DatabaseMysqlBase {
 
 	/**
 	 * @param mysqli_result $res
-	 * @return bool
+	 * @return array|false
 	 */
 	protected function mysqlFetchArray( $res ) {
 		$array = $res->fetch_array();
@@ -296,7 +275,7 @@ class DatabaseMysqli extends DatabaseMysqlBase {
 	}
 
 	/**
-	 * @param mysqli $conn Optional connection object
+	 * @param mysqli|null $conn Optional connection object
 	 * @return string
 	 */
 	protected function mysqlError( $conn = null ) {
@@ -319,21 +298,6 @@ class DatabaseMysqli extends DatabaseMysqlBase {
 	}
 
 	/**
-	 * Give an id for the connection
-	 *
-	 * mysql driver used resource id, but mysqli objects cannot be cast to string.
-	 * @return string
-	 */
-	public function __toString() {
-		if ( $this->conn instanceof mysqli ) {
-			return (string)$this->conn->thread_id;
-		} else {
-			// mConn might be false or something.
-			return (string)$this->conn;
-		}
-	}
-
-	/**
 	 * @return mysqli
 	 */
 	protected function getBindingHandle() {
@@ -341,4 +305,7 @@ class DatabaseMysqli extends DatabaseMysqlBase {
 	}
 }
 
+/**
+ * @deprecated since 1.29
+ */
 class_alias( DatabaseMysqli::class, 'DatabaseMysqli' );

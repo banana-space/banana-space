@@ -4,9 +4,9 @@
 			"Eirik",
 			"Gunnernett",
 			"Harald Khan",
+			"Macofe",
 			"Nghtwlkr",
-			"Njardarlogar",
-			"Macofe"
+			"Njardarlogar"
 		]
 	},
 	"wikieditor": "Avansert grensesnitt for endring av wikitekst",
@@ -176,7 +176,7 @@
 	"wikieditor-toolbar-help-content-reference-description": "Referanse",
 	"wikieditor-toolbar-help-content-reference-syntax": "Sidetekst.&lt;ref&gt;[http://www.døme.org Lenkjetekst], ekstra lenkjetekst.&lt;/ref&gt;",
 	"wikieditor-toolbar-help-content-reference-result": "Sidetekst.<sup><a href='#'>[1]</a></sup>",
-	"wikieditor-toolbar-help-content-rereference-description": "Ytterlegare bruk av same referanse",
+	"wikieditor-toolbar-help-content-rereference-description": "Meir bruk av same referansen",
 	"wikieditor-toolbar-help-content-rereference-result": "Sidetekst.<sup><a href='#'>[2]</a></sup>",
 	"wikieditor-toolbar-help-content-showreferences-description": "Vis referansar",
 	"wikieditor-toolbar-help-content-showreferences-result": "<ol class='references'><li id='cite_note-test-0'><b><a title='' href='#'>^</a></b> <a rel='nofollow' title='http://www.døme.org' class='external text' href='#'>Lenkjetekst</a>, ekstra tekst.</li></ol>",

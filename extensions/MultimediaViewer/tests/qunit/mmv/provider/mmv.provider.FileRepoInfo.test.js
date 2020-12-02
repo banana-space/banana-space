@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.provider.FileRepoInfo', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'FileRepoInfo constructor sanity check', function ( assert ) {
@@ -123,4 +123,4 @@
 			done();
 		} );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

@@ -53,7 +53,7 @@ class CheckLess extends Maintenance {
 			define( 'MW_PHPUNIT_TEST', true );
 		}
 
-		$textUICommand = new PHPUnit_TextUI_Command();
+		$textUICommand = new \PHPUnit\TextUI\Command();
 		$argv = [
 			"$IP/tests/phpunit/phpunit.php",
 			"$IP/tests/phpunit/suites/LessTestSuite.php"

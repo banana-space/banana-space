@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ninonino"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor-description": "Mudìfica fada col [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: controlà]]",
+	"tag-visualeditor-needcheck-description": "Mudìfica fàda col [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] endóche 'l sistéma 'l g'ha troàt de le mudìfiche 'ndèl wikitest che fórse i éra mìa ülìde.",
+	"visualeditor-feedback-link": "Project:VisualEditor/Comèncc",
+	"visualeditor-feedback-tool": "Làsa 'n comènt",
+	"visualeditor-help-label": "Lès la guìda del ütènt",
+	"visualeditor-help-title": "Guìda ütènt per emparà a doprà l'editor"
+}

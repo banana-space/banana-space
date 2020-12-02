@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"SPQRobin",
-			"Siebrand",
-			"Southparkfan",
 			"Esketti",
 			"Mainframe98",
-			"McDutchie"
+			"McDutchie",
+			"SPQRobin",
+			"Siebrand",
+			"Southparkfan"
 		]
 	},
 	"codeeditor-desc": "Syntaxis-gemarkeerd bewerken voor JavaScript- en CSS-pagina's met behulp van de [https://ace.c9.io/ Ace-tekstverwerker]",
@@ -20,5 +20,6 @@
 	"codeeditor-gotoline-placeholder": "regel[:kolom]",
 	"codeeditor-gotoline-prompt": "Voer een regelnummer in",
 	"codeeditor-indent": "Inspringen",
-	"codeeditor-outdent": "Uitspringen"
+	"codeeditor-outdent": "Uitspringen",
+	"codeeditor-error-message": "CodeEditor vereist dat WikiEditor beschikbaar is."
 }

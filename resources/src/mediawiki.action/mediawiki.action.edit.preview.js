@@ -1,7 +1,7 @@
 /*!
  * Live edit preview.
  */
-( function ( mw, $ ) {
+( function () {
 
 	/**
 	 * @ignore
@@ -71,9 +71,7 @@
 			$spinner.show();
 		}
 
-		// Can't use fadeTo because it calls show(), and we might want to keep some elements hidden
-		// (e.g. empty #catlinks)
-		$copyElements.animate( { opacity: 0.4 }, 'fast' );
+		$copyElements.addClass( [ 'mw-preview-copyelements', 'mw-preview-copyelements-loading' ] );
 
 		api = new mw.Api();
 		postData = {
@@ -143,12 +141,12 @@
 				}
 				if ( response.parse.modules ) {
 					mw.loader.load( response.parse.modules.concat(
-						response.parse.modulescripts,
 						response.parse.modulestyles
 					) );
 				}
 
 				newList = [];
+				// eslint-disable-next-line no-jquery/no-each-util
 				$.each( response.parse.indicators, function ( name, indicator ) {
 					newList.push(
 						$( '<div>' )
@@ -165,12 +163,24 @@
 
 				if ( response.parse.displaytitle ) {
 					$displaytitle = $( $.parseHTML( response.parse.displaytitle ) );
+					// The following messages can be used here:
+					// * editconflict
+					// * editingcomment
+					// * editingsection
+					// * editing
+					// * creating
 					$( '#firstHeading' ).msg(
 						mw.config.get( 'wgEditMessage', 'editing' ),
 						$displaytitle
 					);
 					document.title = mw.msg(
 						'pagetitle',
+						// The following messages can be used here:
+						// * editconflict
+						// * editingcomment
+						// * editingsection
+						// * editing
+						// * creating
 						mw.msg(
 							mw.config.get( 'wgEditMessage', 'editing' ),
 							$displaytitle.text()
@@ -188,7 +198,7 @@
 							.append( $( '<a>' )
 								.attr( {
 									href: mw.util.getUrl( template.title ),
-									'class': ( template.exists ? '' : 'new' )
+									class: ( template.exists ? '' : 'new' )
 								} )
 								.text( template.title )
 							);
@@ -202,6 +212,7 @@
 				if ( response.parse.langlinks && mw.config.get( 'skin' ) === 'vector' ) {
 					newList = response.parse.langlinks.map( function ( langlink ) {
 						var bcp47 = mw.language.bcp47( langlink.lang );
+						// eslint-disable-next-line mediawiki/class-doc
 						return $( '<li>' )
 							.addClass( 'interlanguage-link interwiki-' + langlink.lang )
 							.append( $( '<a>' )
@@ -237,11 +248,10 @@
 		$.when( parseRequest, diffRequest ).done( function ( parseResp ) {
 			var parse = parseResp && parseResp[ 0 ].parse,
 				isSubject = ( section === 'new' ),
-				summaryMsg = isSubject ? 'subject-preview' : 'summary-preview',
 				$summaryPreview = $editform.find( '.mw-summary-preview' ).empty();
 			if ( parse && parse.parsedsummary ) {
 				$summaryPreview.append(
-					mw.message( summaryMsg ).parse(),
+					mw.message( isSubject ? 'subject-preview' : 'summary-preview' ).parse(),
 					' ',
 					$( '<span>' ).addClass( 'comment' ).html(
 						// There is no equivalent to rawParams
@@ -257,24 +267,14 @@
 			mw.hook( 'wikipage.editform' ).fire( $editform );
 		} ).always( function () {
 			$spinner.hide();
-			$copyElements.animate( {
-				opacity: 1
-			}, 'fast' );
+			$copyElements.removeClass( 'mw-preview-copyelements-loading' );
 		} ).fail( function ( code, result ) {
 			// This just shows the error for whatever request failed first
-			var errorMsg = 'API error: ' + code;
-			if ( code === 'http' ) {
-				errorMsg = 'HTTP error: ';
-				if ( result.exception ) {
-					errorMsg += result.exception;
-				} else {
-					errorMsg += result.textStatus;
-				}
-			}
+			var $errorMsg = api.getErrorMessage( result );
 			$errorBox = $( '<div>' )
 				.addClass( 'errorbox' )
-				.html( '<strong>' + mw.message( 'previewerrortext' ).escaped() + '</strong><br>' )
-				.append( document.createTextNode( errorMsg ) );
+				.append( $( '<strong>' ).text( mw.message( 'previewerrortext' ).text() ) )
+				.append( $errorMsg );
 			$wikiDiff.hide();
 			$wikiPreview.hide().before( $errorBox );
 		} );
@@ -294,9 +294,9 @@
 		// can change where they are output).
 
 		if ( !document.getElementById( 'p-lang' ) && document.getElementById( 'p-tb' ) && mw.config.get( 'skin' ) === 'vector' ) {
-			$( '.portal:last' ).after(
+			$( '.portal' ).last().after(
 				$( '<div>' ).attr( {
-					'class': 'portal',
+					class: 'portal',
 					id: 'p-lang',
 					role: 'navigation',
 					'aria-labelledby': 'p-lang-label'
@@ -317,8 +317,21 @@
 				$( '<div>' )
 					.hide()
 					.attr( 'id', 'wikiDiff' )
-					.html( '<table class="diff"><col class="diff-marker"/><col class="diff-content"/>' +
-						'<col class="diff-marker"/><col class="diff-content"/><tbody/></table>' )
+					// The following classes are used here:
+					// * diff-editfont-monospace
+					// * diff-editfont-sans-serif
+					// * diff-editfont-serif
+					.addClass( 'diff-editfont-' + mw.user.options.get( 'editfont' ) )
+					// TODO: Set diff-contentalign-* classes
+					.append(
+						$( '<table>' ).addClass( 'diff' ).append(
+							$( '<col>' ).addClass( 'diff-marker' ),
+							$( '<col>' ).addClass( 'diff-content' ),
+							$( '<col>' ).addClass( 'diff-marker' ),
+							$( '<col>' ).addClass( 'diff-content' ),
+							$( '<tbody>' )
+						)
+					)
 			);
 		}
 
@@ -328,4 +341,4 @@
 		$( document.body ).on( 'click', '#wpPreview, #wpDiff', doLivePreview );
 	} );
 
-}( mediaWiki, jQuery ) );
+}() );

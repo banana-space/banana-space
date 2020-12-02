@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"01miki10",
 			"Crt",
 			"Nike",
 			"Olli",
-			"Stryn",
-			"01miki10"
+			"Stryn"
 		]
 	},
 	"inputbox-desc": "Mahdollistaa ennalta määriteltyjen lomakkeiden sisällyttämisen sivuille.",

@@ -1,13 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mehtab ahmed",
 			"Aursani",
-			"Indus Asia"
+			"Indus Asia",
+			"Mehtab ahmed"
 		]
 	},
-	"timeless-search-placeholder": "{{NUMBEROFARTICLES}} صفحا ڳوليو",
-	"timeless-loggedin": "توهان جو کاتو",
 	"timeless-anonymous": "گمنام",
 	"timeless-userpage": "{{GENDER:$1|واپرائيندڙ}} جو صفحو",
 	"timeless-talkpage": "{{GENDER:$1|واپرائيندڙ سان}} ڳالھ",

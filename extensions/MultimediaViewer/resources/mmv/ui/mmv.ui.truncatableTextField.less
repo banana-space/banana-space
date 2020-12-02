@@ -1,6 +1,6 @@
-@import 'mediawiki.mixins';
-@import '../mmv.globals';
-@import '../mmv.mixins';
+@import 'mediawiki.mixins.less';
+@import '../mmv.variables.less';
+@import '../mmv.mixins.less';
 
 .mw-mmv-ttf-container {
 	position: relative;
@@ -52,6 +52,7 @@
 			/* @embed */
 			background-image: url( img/ellipsis_gray.svg );
 		}
+
 		// second rule + ordering needed for specificity
 		&:hover,
 		.mw-mmv-ttf-ellipsis-container &:hover {
@@ -62,7 +63,6 @@
 
 		&:before {
 			@fade-length: 2em;
-
 			display: block;
 			content: '';
 			height: 1.6em; // 1em would not cover high glyphs

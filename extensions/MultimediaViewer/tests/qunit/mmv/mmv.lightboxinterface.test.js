@@ -1,9 +1,9 @@
-( function ( mw, $ ) {
+( function () {
 	var oldScrollTo;
 
 	function stubScrollTo() {
 		oldScrollTo = $.scrollTo;
-		$.scrollTo = function () { return { scrollTop: $.noop, on: $.noop, off: $.noop }; };
+		$.scrollTo = function () { return { scrollTop: function () {}, on: function () {}, off: function () {} }; };
 	}
 
 	function restoreScrollTo() {
@@ -77,7 +77,7 @@
 		clock.restore();
 	} );
 
-	QUnit.test( 'Fullscreen mode', function ( assert ) {
+	QUnit.test( 'Fullscreen mode init', function ( assert ) {
 		var lightbox = new mw.mmv.LightboxInterface(),
 			oldFnEnterFullscreen = $.fn.enterFullscreen,
 			oldFnExitFullscreen = $.fn.exitFullscreen,
@@ -91,7 +91,7 @@
 
 		stubScrollTo();
 
-		lightbox.buttons.fadeOut = $.noop;
+		lightbox.buttons.fadeOut = function () {};
 
 		// Attach lightbox to testing fixture to avoid interference with other tests.
 		lightbox.attach( '#qunit-fixture' );
@@ -109,24 +109,24 @@
 			'Fullscreen button is visible when fullscreen mode is available' );
 
 		// Entering fullscreen
-		lightbox.$fullscreenButton.click();
+		lightbox.$fullscreenButton.trigger( 'click' );
 
 		assert.strictEqual( lightbox.$main.hasClass( 'jq-fullscreened' ), true,
 			'Fullscreened area has the fullscreen class' );
 		assert.strictEqual( lightbox.isFullscreen, true, 'Lightbox knows it\'s in fullscreen mode' );
 
 		// Exiting fullscreen
-		lightbox.$fullscreenButton.click();
+		lightbox.$fullscreenButton.trigger( 'click' );
 
 		assert.strictEqual( lightbox.$main.hasClass( 'jq-fullscreened' ), false,
 			'Fullscreened area doesn\'t have the fullscreen class anymore' );
 		assert.strictEqual( lightbox.isFullscreen, false, 'Lightbox knows it\'s not in fullscreen mode' );
 
 		// Entering fullscreen
-		lightbox.$fullscreenButton.click();
+		lightbox.$fullscreenButton.trigger( 'click' );
 
 		// Hard-exiting fullscreen
-		lightbox.$closeButton.click();
+		lightbox.$closeButton.trigger( 'click' );
 
 		// Re-attach after hard-exit
 		lightbox.attach( '#qunit-fixture' );
@@ -168,8 +168,8 @@
 		viewer.ui = lightbox;
 		viewer.ui = lightbox;
 
-		assert.ok( !lightbox.isFullscreen, 'Lightbox knows that it\'s not in fullscreen mode' );
-		assert.ok( lightbox.panel.$imageMetadata.is( ':visible' ), 'Image metadata is visible' );
+		assert.strictEqual( lightbox.isFullscreen, false, 'Lightbox knows that it\'s not in fullscreen mode' );
+		assert.strictEqual( lightbox.panel.$imageMetadata.is( ':visible' ), true, 'Image metadata is visible' );
 
 		lightbox.buttons.fadeOut = function () {
 			assert.ok( true, 'Opening fullscreen triggers a fadeout' );
@@ -180,9 +180,9 @@
 		lightbox.mousePosition = { x: buttonOffset.left, y: buttonOffset.top };
 
 		// Enter fullscreen
-		lightbox.buttons.$fullscreen.click();
+		lightbox.buttons.$fullscreen.trigger( 'click' );
 
-		lightbox.buttons.fadeOut = $.noop;
+		lightbox.buttons.fadeOut = function () {};
 		assert.ok( lightbox.isFullscreen, 'Lightbox knows that it\'s in fullscreen mode' );
 
 		oldRevealButtonsAndFadeIfNeeded = lightbox.buttons.revealAndFade;
@@ -196,11 +196,11 @@
 		// Pretend that the mouse cursor moved to the top-left corner
 		lightbox.mousemove( { pageX: 0, pageY: 0 } );
 
-		lightbox.buttons.revealAndFadeIfNeeded = $.noop;
+		lightbox.buttons.revealAndFadeIfNeeded = function () {};
 
 		panelBottom = $( '.mw-mmv-post-image' ).position().top + $( '.mw-mmv-post-image' ).height();
 
-		assert.ok( panelBottom === $( window ).height(), 'Image metadata does not extend beyond the viewport' );
+		assert.strictEqual( panelBottom, $( window ).height(), 'Image metadata does not extend beyond the viewport' );
 
 		lightbox.buttons.revealAndFade = function ( position ) {
 			assert.ok( true, 'Closing fullscreen triggers a reveal + fade' );
@@ -209,12 +209,12 @@
 		};
 
 		// Exiting fullscreen
-		lightbox.buttons.$fullscreen.click();
+		lightbox.buttons.$fullscreen.trigger( 'click' );
 
 		panelBottom = $( '.mw-mmv-post-image' ).position().top + $( '.mw-mmv-post-image' ).height();
 
 		assert.ok( panelBottom > $( window ).height(), 'Image metadata extends beyond the viewport' );
-		assert.ok( !lightbox.isFullscreen, 'Lightbox knows that it\'s not in fullscreen mode' );
+		assert.strictEqual( lightbox.isFullscreen, false, 'Lightbox knows that it\'s not in fullscreen mode' );
 
 		// Unattach lightbox from document
 		lightbox.unattach();
@@ -232,12 +232,12 @@
 		// Attach lightbox to testing fixture to avoid interference with other tests.
 		lightbox.attach( '#qunit-fixture' );
 
-		$.each( lightbox.buttons.$buttons, function ( idx, e ) {
-			var $e = $( e ),
-				offset = $e.show().offset(),
-				width = $e.width(),
-				height = $e.height(),
-				disabled = $e.hasClass( 'disabled' );
+		lightbox.buttons.$buttons.each( function () {
+			var $button = $( this ),
+				offset = $button.show().offset(),
+				width = $button.width(),
+				height = $button.height(),
+				disabled = $button.hasClass( 'disabled' );
 
 			assert.strictEqual( lightbox.buttons.isAnyActiveButtonHovered( offset.left, offset.top ),
 				!disabled,
@@ -303,4 +303,4 @@
 
 		viewer.cleanupEventHandlers();
 	} );
-}( mediaWiki, jQuery ) );
+}() );

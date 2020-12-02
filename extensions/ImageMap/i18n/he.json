@@ -2,8 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"IKhitron",
 			"Rotem Liss",
-			"IKhitron"
+			"Yona b"
 		]
 	},
 	"imagemap_desc": "אפשרות להוסיף תמונות ממופות בצד הלקוח באמצעות התג <code>&lt;imagemap&gt;</code>",
@@ -14,7 +15,7 @@
 	"imagemap_invalid_title": "שגיאה: כותרת שגויה בקישור בשורה $1",
 	"imagemap_missing_coord": "שגיאה: לא מספיק קוארדינאטות לצורה בשורה $1",
 	"imagemap_unrecognised_shape": "שגיאה: צורה בלתי מזוהה בשורה $1, כל שורה חייבת להתחיל עם אחת האפשרויות הבאות: <code>default</code>, <code>rect</code>, <code>circle</code> or <code>poly</code>",
-	"imagemap_invalid_coord": "שגיאה: קוארדינאטה שגויה בשורה $1, היא חייבת להיות מספר",
+	"imagemap_invalid_coord": "שגיאה: קואורדינטה שגויה בשורה $1, היא חייבת להיות מספר",
 	"imagemap_invalid_desc": "שגיאה: הגדרת פרמטר desc שגויה, צריך להיות אחד מהבאים: $1",
 	"imagemap_description": "אודות התמונה",
 	"imagemap_poly_odd": "שגיאה: איזור poly עם מספר אי־זוגי של קואורדינטות בשורה $1"

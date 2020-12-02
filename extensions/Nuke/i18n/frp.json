@@ -16,7 +16,6 @@
 	"nuke-submit-user": "Validar",
 	"nuke-submit-delete": "Suprimar lo chouèx",
 	"right-nuke": "Suprimar des pâges en massa",
-	"nuke-select": "Chouèsésséd : $1",
 	"nuke-userorip": "Nom d’usanciér, adrèce IP ou ben vouedo :",
 	"nuke-maxpages": "Nombro lo ples grant de pâges :",
 	"nuke-editby": "Fêt per [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",

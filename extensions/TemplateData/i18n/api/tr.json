@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"BaRaN6161 TURK",
+			"Sadrettin"
+		]
+	},
+	"apihelp-templatedata-description": "TemplateData uzantısı tarafından depolanan verileri alın.",
+	"apihelp-templatedata-summary": "TemplateData uzantısı tarafından depolanan verileri alın.",
+	"apihelp-templatedata-example-1": "[[Template:Stub]] ve [[Template:Example]] belgelemelerine geri dön.",
+	"apihelp-templatedata-example-2": "Şablonlar mevcut değilse veya yoksa ama TemplateData yoksa, [[Template:Stub]] ve [[Template:Example]] için TemplateData öğesini döndürün.",
+	"apihelp-templatedata-param-includeMissingTitles": "Eksik veya TemplateData olmasa bile başlıklar hakkındaki verileri döndür. Varsayılan olarak, başlıklar yalnızca varsa ve TemplateData kullanıyorsa döndürülür.",
+	"apihelp-templatedata-param-doNotIgnoreMissingTitles": "Eksik veya TemplateData olmasa bile başlıklar hakkındaki verileri döndür. Varsayılan olarak (geriye dönük uyumluluk için) başlıklar yalnızca varsa ve TemplateData varsa döndürülür.",
+	"apihelp-templatedata-param-lang": "Bu dilde yerelleştirilmiş değerleri döndür. Varsayılan olarak mevcut tüm çeviriler döndürülür.",
+	"apierror-templatedata-corrupt": "Sayfa #$1 şablon verisi geçersiz veriler içeriyor: $2",
+	"apiwarn-templatedata-deprecation-format": "Varsayılan çıkış formatı gelecekte <kbd>jsonfm</kbd> olarak değişecektir. Lütfen açıkça <kbd>format=json</kbd>'ı belirtin."
+}

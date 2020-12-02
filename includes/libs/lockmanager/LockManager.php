@@ -4,6 +4,7 @@
  * @ingroup FileBackend
  */
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikimedia\WaitConditionLoop;
 
 /**
@@ -40,6 +41,7 @@ use Wikimedia\WaitConditionLoop;
  *
  * Subclasses should avoid throwing exceptions at all costs.
  *
+ * @stable to extend
  * @ingroup LockManager
  * @since 1.19
  */
@@ -64,15 +66,16 @@ abstract class LockManager {
 	protected $session;
 
 	/** Lock types; stronger locks have higher values */
-	const LOCK_SH = 1; // shared lock (for reads)
-	const LOCK_UW = 2; // shared lock (for reads used to write elsewhere)
-	const LOCK_EX = 3; // exclusive lock (for writes)
+	public const LOCK_SH = 1; // shared lock (for reads)
+	public const LOCK_UW = 2; // shared lock (for reads used to write elsewhere)
+	public const LOCK_EX = 3; // exclusive lock (for writes)
 
 	/** @var int Max expected lock expiry in any context */
-	const MAX_LOCK_TTL = 7200; // 2 hours
+	protected const MAX_LOCK_TTL = 7200; // 2 hours
 
 	/**
 	 * Construct a new instance from configuration
+	 * @stable to call
 	 *
 	 * @param array $config Parameters include:
 	 *   - domain  : Domain (usually wiki ID) that all resources are relative to [optional]
@@ -80,7 +83,7 @@ abstract class LockManager {
 	 *               This only applies if locks are not tied to a connection/process.
 	 */
 	public function __construct( array $config ) {
-		$this->domain = isset( $config['domain'] ) ? $config['domain'] : 'global';
+		$this->domain = $config['domain'] ?? 'global';
 		if ( isset( $config['lockTTL'] ) ) {
 			$this->lockTTL = max( 5, $config['lockTTL'] );
 		} elseif ( PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg' ) {
@@ -101,7 +104,7 @@ abstract class LockManager {
 		}
 		$this->session = md5( implode( '-', $random ) );
 
-		$this->logger = isset( $config['logger'] ) ? $config['logger'] : new \Psr\Log\NullLogger();
+		$this->logger = $config['logger'] ?? new NullLogger();
 	}
 
 	/**
@@ -201,6 +204,11 @@ abstract class LockManager {
 	final protected function normalizePathsByType( array $pathsByType ) {
 		$res = [];
 		foreach ( $pathsByType as $type => $paths ) {
+			foreach ( $paths as $path ) {
+				if ( (string)$path === '' ) {
+					throw new InvalidArgumentException( __METHOD__ . ": got empty path." );
+				}
+			}
 			$res[$this->lockTypeMap[$type]] = array_unique( $paths );
 		}
 
@@ -209,6 +217,7 @@ abstract class LockManager {
 
 	/**
 	 * @see LockManager::lockByType()
+	 * @stable to override
 	 * @param array $pathsByType Map of LockManager::LOCK_* constants to lists of paths
 	 * @return StatusValue
 	 * @since 1.22
@@ -243,6 +252,7 @@ abstract class LockManager {
 
 	/**
 	 * @see LockManager::unlockByType()
+	 * @stable to override
 	 * @param array $pathsByType Map of LockManager::LOCK_* constants to lists of paths
 	 * @return StatusValue
 	 * @since 1.22

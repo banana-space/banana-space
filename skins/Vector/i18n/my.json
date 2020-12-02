@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dr Lotus Black",
 			"Lionslayer",
 			"Myanmars",
 			"Ninjastrikers",
@@ -18,5 +19,7 @@
 	"vector-view-history": "ရာဇဝင်ကြည့်ရန်",
 	"vector-view-view": "ဖတ်ရန်",
 	"vector-view-viewsource": "ရင်းမြစ်ကို ကြည့်ရန်",
+	"vector-jumptonavigation": "အ​ညွှန်း​သို့ ခုန်ကူးရန်",
+	"vector-jumptosearch": "ရှာဖွေရန် ခုန်ကူးမည်",
 	"vector-more-actions": "ပို၍"
 }

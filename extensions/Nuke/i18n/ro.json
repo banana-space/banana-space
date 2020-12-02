@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Andrei Stroe",
 			"Cin",
 			"Firilacroco",
 			"KlaudiuMihaila",
+			"Matrafox",
 			"Mihai",
 			"Minisarm",
 			"Stelistcristi",
-			"Strainu",
-			"Matrafox"
+			"Strainu"
 		]
 	},
 	"nuke": "Ștergere în masă",
@@ -23,13 +24,12 @@
 	"nuke-submit-user": "Arată paginile",
 	"nuke-submit-delete": "Șterge ce e marcat",
 	"right-nuke": "șterge pagini în masă",
-	"nuke-select": "Alegeți: $1",
 	"nuke-userorip": "Nume de utilizator, adresă IP sau necompletare:",
 	"nuke-maxpages": "Număr maxim de pagini:",
 	"nuke-editby": "Creat de [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
 	"nuke-deleted": "Pagina '''$1''' a fost ștearsă.",
 	"nuke-not-deleted": "Pagina [[:$1]] '''nu a putut''' fi ștearsă.",
-	"nuke-pattern": "Model pentru numele paginii:",
+	"nuke-pattern": "Pattern de SQL LIKE (de ex. %) pentru numele paginii:",
 	"nuke-nopages-global": "Nu există titluri de pagină care să corespundă căutării dvs.",
 	"nuke-viewchanges": "vizualizează modificările"
 }

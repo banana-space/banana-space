@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Garam",
+			"Hwangjy9",
 			"Klutzy",
 			"Kwj2772",
 			"Yknok29",
-			"아라",
-			"Hwangjy9",
-			"Garam"
+			"아라"
 		]
 	},
 	"imagemap_desc": "<code>&lt;imagemap&gt;</code> 태그로 클라이언트 측에서 클릭할 수 있는 영상 지도를 사용할 수 있습니다",

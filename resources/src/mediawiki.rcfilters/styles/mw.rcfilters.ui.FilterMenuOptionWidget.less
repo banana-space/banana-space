@@ -1,10 +1,11 @@
-@import 'mediawiki.mixins';
-@import 'mediawiki.ui/variables';
-@import 'mw.rcfilters.variables';
+@import 'mediawiki.mixins.less';
+@import 'mediawiki.ui/variables.less';
+@import 'mw.rcfilters.variables.less';
 
 .mw-rcfilters-ui-filterMenuOptionWidget {
 	.mw-rcfilters-ui-filterMenuSectionOptionWidget ~ & {
 		padding-left: 12 / @font-size-system-ui / @font-size-vector;
+		padding-right: 12 / @font-size-system-ui / @font-size-vector;
 	}
 
 	&.oo-ui-flaggedElement-muted {

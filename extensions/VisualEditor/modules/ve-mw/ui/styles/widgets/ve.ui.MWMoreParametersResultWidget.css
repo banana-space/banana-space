@@ -1,0 +1,29 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWMoreParametersResultWidget styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwMoreParametersResultWidget {
+	padding-right: 0.25em;
+}
+
+.ve-ui-mwMoreParametersResultWidget.oo-ui-optionWidget-highlighted {
+	background-color: #e1f3ff;
+}
+
+.ve-ui-mwMoreParametersResultWidget .oo-ui-optionWidget-icon {
+	top: 0.25em;
+	margin-top: 0;
+}
+
+.ve-ui-mwMoreParametersResultWidget-label {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	/* HACK: Based on the expected width of this widget, using % produces unreliable results */
+	max-width: 33em;
+	font-weight: bold;
+	float: left;
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="264" height="162" viewBox="0 0 264 162">
+	<defs>
+		<clipPath id="jagged-edge">
+			<path d="M0 0v152l12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10V0z"/>
+		</clipPath>
+	</defs>
+	<g fill="#eaecf0" clip-path="url(#jagged-edge)">
+		<path id="background" fill="#fff" d="M0 0h264v162H0"/>
+		<path id="logo" d="M11 22c0-8 6-14 14-14s14 6 14 14-6 14-14 14-14-6-14-14M38 45v-5H13v5h25"/>
+		<path id="sidebar" d="M38 163V58H13v106h25"/>
+		<path id="personal-tools" d="M233 5h26v6h-26V5zm-24 0h22v6h-22zm-24 0h22v6h-22zm-23 0h13v6h-13zm15 0h6v6h-6zm-23 0h6v6h-6z"/>
+		<path id="search-input" d="M258 16v4h-92v-4h92m1-1h-94v6h94v-6z"/>
+		<path id="search-icon" d="M168 17h2v2h-2z"/>
+		<path id="article" d="M252 162V29H48v133z"/>
+		<path id="border" d="M0 0v162h264V0zm1 1h262v150.533l-11 9.166-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-11-9.167z"/>
+		<path fill="#36c" d="M48.083 29h204.084v20.75H48.083z"/>
+		<path fill="#c8ccd1" d="M59 58.333h54v6H59z"/>
+		<path fill="#a2a9b1" d="M240 70.334h-39v30h39zm-26.348 13.043h1.403l8.7 8.604 4.725-2.833 7.117 5.943v.025H204.45z" opacity=".412"/>
+		<path fill="#c8ccd1" d="M59 109.334h181v3H59zm0 20h104v3H59zm0-54h134v3H59zm0 10h134v3H59zm0 10h39v3H59z"/>
+		<path fill="#fff" d="M59 34.333h25v10H59v-10zm33.5 0h10v10h-10zm17 0h10v10h-10z"/>
+		<path fill="#36c" d="M100.012 90.834v2h1.457v7h-1.49v2h4.916v-2h-1.427v-7h1.458v-2z"/>
+		<path fill="#c8ccd1" d="M59 119.334h181v3H59z"/>
+	</g>
+</svg>

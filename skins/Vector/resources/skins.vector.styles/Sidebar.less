@@ -1,0 +1,88 @@
+@import '../../variables.less';
+@import 'mediawiki.mixins.less';
+@import './layout.less';
+@import 'legacy/Sidebar.less';
+@import 'checkboxHack.less';
+
+@margin-horizontal-sidebar-button-icon: 12px;
+
+.mw-sidebar-action {
+	// Align with the portal heading/links
+	// `.portal` + `.portal .body`
+	margin: 8px @margin-end-portal 8px @margin-start-portal + @margin-start-portal-body;
+}
+
+.mw-sidebar-action-link {
+	font-size: @font-size-portal-list-item;
+	font-weight: bold;
+}
+
+#mw-sidebar-button {
+	// Override minimum dimensions set by mw-ui-icon.mw-ui-icon-element.
+	min-width: @size-sidebar-button;
+	min-height: @size-sidebar-button;
+	width: @size-sidebar-button;
+	height: @size-sidebar-button;
+	border: 1px solid transparent;
+	border-radius: @border-radius-base;
+	margin-left: -@margin-horizontal-sidebar-button-icon;
+	margin-right: @margin-horizontal-sidebar-button-icon; // Accidentally the same.
+
+	&:before {
+		// FIXME: the icon itself is supposed to be 20px. mediawiki.ui uses 24px.
+		// As soon as mediawiki.ui is standardized, remove this override. See T191021.
+		min-width: 20px;
+		min-height: 20px;
+		height: 100%;
+		// Center it horizontally.
+		margin: 0 @margin-horizontal-sidebar-button-icon;
+		// Equals `#555`, closest to `#54595d` on background-color `#fff`.
+		opacity: 0.67;
+	}
+
+	&:hover {
+		background-color: @background-color-frameless--hover;
+
+		&:before {
+			opacity: 1;
+		}
+	}
+
+	&:focus {
+		// Next three rules from OOUI, frameless, icon-only button widget.
+		outline: 0;
+		border-color: @color-primary;
+		.box-shadow( inset 0 0 0 1px @color-primary );
+	}
+}
+
+// Use the MediaWiki checkbox hack class from checkboxHack.less. This class exists on the
+// checkbox input for the menu panel.
+#mw-sidebar-checkbox:not( :checked ) ~ .mw-header .mw-sidebar {
+	// Turn off presentation so that screen readers get the same effect as visually hiding.
+	// Visibility and opacity can be animated. If animation is unnecessary, use `display: none`
+	// instead to avoid hidden rendering.
+	visibility: hidden;
+	opacity: 0;
+	.transform( translateX( -100% ) );
+}
+
+// Disable transitions on page load. No-JS users will unfortunately miss out. A similar pattern is
+// used in Minerva's DropDownList. See enableCssAnimations() in skin.vector.js/index.js for context
+// and additional details on how this class is added.
+.vector-animations-ready {
+	// Enable transition on all widths by default.
+	.mw-sidebar {
+		@timing: @transition-duration-base ease-out;
+		.transition( transform @timing, opacity @timing, visibility @timing; );
+	}
+
+	// Enable sidebar button transitions.
+	#mw-sidebar-button {
+		.transition(
+			background-color @transition-duration-base,
+			border-color @transition-duration-base,
+			box-shadow @transition-duration-base;
+		);
+	}
+}

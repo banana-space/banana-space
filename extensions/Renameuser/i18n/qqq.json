@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Beta16",
 			"EugeneZelenko",
+			"Freddy2001",
 			"Jon Harald Søby",
 			"Meno25",
+			"Metalhead64",
 			"Nemo bis",
 			"Nike",
 			"SPQRobin",
@@ -11,14 +14,12 @@
 			"Siebrand",
 			"Tacsipacsi",
 			"The Evil IP address",
-			"Umherirrender",
-			"Freddy2001",
-			"Metalhead64"
+			"Umherirrender"
 		]
 	},
 	"renameuser": "{{doc-special|RenameUser}}\n{{Identical|Rename user}}",
-	"renameuser-linkoncontribs": "Link description used on [[Special:Contributions]] and [[Special:DeletedContributions]]. Only added if a user has rights to rename users.\n{{Identical|Rename user}}",
-	"renameuser-linkoncontribs-text": "Tooltip for {{msg-mw|renameuser-linkoncontribs}}.",
+	"renameuser-linkoncontribs": "Link description used on [[Special:Contributions]] and [[Special:DeletedContributions]]. Only added if a user has rights to rename users. Parameters:\n* $1 - username, can be used for GENDER\n{{Identical|Rename user}}",
+	"renameuser-linkoncontribs-text": "Tooltip for {{msg-mw|renameuser-linkoncontribs}}. Parameters:\n* $1 - username, can be used for GENDER",
 	"renameuser-desc": "{{desc|name=Rename user|url=https://www.mediawiki.org/wiki/Extension:Renameuser}}",
 	"renameuser-summary": "{{notranslate}}",
 	"renameuserold": "Used as label for the \"Old username\" input box in [[Special:RenameUser]].\n\nSee also:\n* {{msg-mw|Renameusernew}}",
@@ -47,6 +48,6 @@
 	"logentry-renameuser-renameuser-legaciest": "Used in [[Special:Log/renameuser]]. {{logentry}}\nNote that only user name is included in this legacy log entry, everything else is hardcoded into log comment.",
 	"renameuser-move-log": "Reason for a page move when a page is moved because of a user rename. Parameters:\n* $1 - the old username\n* $2 - the new username, can be used for GENDER",
 	"action-renameuser": "{{Doc-action|renameuser}}\n{{Identical|Rename user}}",
-	"right-renameuser": "{{doc-right|renameuser}}\n{{Identical|Rename user}}",
+	"right-renameuser": "Message for renameuser right\n{{Doc-right|renameuser}}",
 	"renameuser-renamed-notice": "Parameters:\n* $1 - (Optional) username, for GENDER support"
 }

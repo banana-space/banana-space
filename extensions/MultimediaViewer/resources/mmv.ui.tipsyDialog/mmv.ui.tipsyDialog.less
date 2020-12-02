@@ -1,0 +1,55 @@
+@import '../mmv/mmv.variables.less';
+@import '../mmv/mmv.mixins.less';
+
+.mw-mmv-tipsy-dialog {
+	@arrow-height: 8px;
+	@background-color: #eaecf0;
+	@border-color: #a2a9b1;
+	@padding: 20px; // must be larger than @arrow-height / sqrt(2), otherwise the arrow overlaps the text
+	padding-bottom: @arrow-height; // the actual arrow height is @arrow-height / sqrt(2)
+
+	.tipsy-inner {
+		max-width: 400px;
+		background-color: @background-color;
+		border: 1px solid @border-color;
+		border-radius: @border-radius;
+		padding: @padding;
+		color: #54595d;
+
+		.mw-mmv-tipsy-dialog-title {
+			color: @color-base;
+			margin-bottom: 1em;
+			font-size: 130%;
+		}
+	}
+
+	.tipsy-arrow {
+		width: 2 * @arrow-height;
+		height: 2 * @arrow-height;
+		position: absolute;
+		bottom: 0;
+		left: 10px + @arrow-height;
+		background: @background-color;
+		border: 1px solid @border-color;
+		border-width: 0 0 1px 1px;
+		.rotate( -45deg );
+	}
+
+	.mw-mmv-tipsy-dialog-disable {
+		@distanceFromBorder: 8px;
+		@topRightMargin: @distanceFromBorder - @padding;
+		width: 15px;
+		height: 15px;
+		float: right;
+		margin: @topRightMargin @topRightMargin @padding @padding;
+		cursor: pointer;
+		/* @embed */
+		background-image: url( ../mmv/ui/img/x_gray.svg );
+		background-repeat: no-repeat;
+		opacity: 0.75;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+}

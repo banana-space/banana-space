@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"BadDog",
 			"Milicevic01",
 			"Millosh",
+			"Obsuser",
 			"Rancher",
 			"Sasa Stefanovic",
 			"Slaven Kosanovic",
 			"Михајло Анђелковић",
-			"Сербијана",
-			"BadDog"
+			"Сербијана"
 		]
 	},
 	"categorytree": "Стабло категорија",
@@ -23,9 +24,9 @@
 	"categorytree-mode-categories": "само категорије",
 	"categorytree-mode-pages": "странице изузевши датотеке",
 	"categorytree-mode-all": "све странице",
-	"categorytree-collapse": "скупи",
-	"categorytree-expand": "прикажи",
-	"categorytree-member-counts": "садржи {{PLURAL:$1|једну поткатегорију|$1 поткатегорије|$1 поткатегорија}}, {{PLURAL:$2|једну страницу|$2 странице|$2 страница}} и {{PLURAL:$3|једну датотеку|$3 датотеке|$3 датотека}}",
+	"categorytree-collapse": "сакриј",
+	"categorytree-expand": "проширите",
+	"categorytree-member-counts": "Садржи {{PLURAL:$1|једну поткатегорију|$1 поткатегорије|$1 поткатегорија}}, {{PLURAL:$2|једну страницу|$2 странице|$2 страница}} и {{PLURAL:$3|једну датотеку|$3 датотеке|$3 датотека}}",
 	"categorytree-num-categories": "$1 К",
 	"categorytree-num-pages": "$1 С",
 	"categorytree-num-files": "$1 Д",

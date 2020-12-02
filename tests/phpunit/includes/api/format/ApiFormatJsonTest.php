@@ -9,14 +9,20 @@ class ApiFormatJsonTest extends ApiFormatTestBase {
 	protected $printerName = 'json';
 
 	private static function addFormatVersion( $format, $arr ) {
-		foreach ( $arr as &$p ) {
-			if ( !isset( $p[2] ) ) {
-				$p[2] = [ 'formatversion' => $format ];
-			} else {
-				$p[2]['formatversion'] = $format;
+		$ret = [];
+		foreach ( $arr as $val ) {
+			if ( !isset( $val[2] ) ) {
+				$val[2] = [];
+			}
+			$val[2]['formatversion'] = $format;
+			$ret[] = $val;
+			if ( $format === 2 ) {
+				// Add a test for 'latest' as well
+				$val[2]['formatversion'] = 'latest';
+				$ret[] = $val;
 			}
 		}
-		return $arr;
+		return $ret;
 	}
 
 	public static function provideGeneralEncoding() {
@@ -122,7 +128,39 @@ class ApiFormatJsonTest extends ApiFormatTestBase {
 
 				// Cross-domain mangling
 				[ [ '< Cross-Domain-Policy >' ], '["\u003C Cross-Domain-Policy >"]' ],
+
+				// Invalid UTF-8: bytes 192, 193, and 245-255 are off-limits
+				[
+					[ 'foo' => "\xFF" ],
+					"{\"foo\":\"\u{FFFD}\"}", // Mangled when validated (T210548)
+				],
+				[
+					[ 'foo' => "\xFF" ],
+					new MWException(
+						'Internal error in ApiFormatJson::execute: ' .
+						'Unable to encode API result as JSON'
+					),
+					[],
+					[ 'flags' => ApiResult::NO_VALIDATE ],
+				],
+				// NaN is also not allowed
+				[
+					[ 'foo' => NAN ],
+					new InvalidArgumentException(
+						'Cannot add non-finite floats to ApiResult'
+					),
+				],
+				[
+					[ 'foo' => NAN ],
+					new MWException(
+						'Internal error in ApiFormatJson::execute: ' .
+						'Unable to encode API result as JSON'
+					),
+					[],
+					[ 'flags' => ApiResult::NO_VALIDATE ],
+				],
 			] )
+			// @todo Test rawfm
 		);
 	}
 

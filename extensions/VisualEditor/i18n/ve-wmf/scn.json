@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gazeb",
+			"Gmelfi",
+			"HalanTul",
+			"Pippinu",
+			"Sarvaturi"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor-description": "Canciamentu fattu usannu [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: cuntrullari]]",
+	"tag-visualeditor-needcheck-description": "Canciamentu fattu usannu [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] unni lu sistema rilivau pussibbili canciamenti nun vulutu ntô wikitestu.",
+	"visualeditor-feedback-link": "Project:VisualEditor/Cummenta",
+	"visualeditor-feedback-tool": "Lassa nu cummentu",
+	"visualeditor-help-label": "Si liggissi la guida utenti",
+	"visualeditor-help-title": "Guida pi comu s'adòpira l'editor",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bimminutu|Bimminuta|Bimminutu/a}} nta $2"
+}

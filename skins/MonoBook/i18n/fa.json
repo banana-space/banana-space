@@ -1,11 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alireza Ivaz",
+			"Ladsgroup",
 			"Reza1615"
 		]
 	},
 	"skinname-monobook": "مونوبوک",
-	"monobook-desc": "پوسته کلاسیک مدیاویکی از سال ۲۰۰۴ از عکس سیاه و سفید در زمینه صفحه  کتاب نام گرفت",
+	"monobook-desc": "پوسته کلاسیک مدیاویکی از سال ۲۰۰۴، از نگارهٔ سیاه و سفید در زمینهٔ برگهٔ نسک نام گرفت",
 	"monobook.css": "/* دستورات این بخش کاربرانی را که از پوستهٔ مونوبوک استفاده کنند تحت تاثیر قرار می‌دهند. */",
-	"monobook.js": "/ * کدهای جاوااسکریپتی که در اینجا قرار می‌گیرند برای کاربران پوستهٔ منوبوک بارگیری می‌شود * /"
+	"monobook.js": "/ * کدهای جاوااسکریپتی که در اینجا قرار می‌گیرند برای کاربران پوستهٔ منوبوک بارگیری می‌شود * /",
+	"monobook-jumptotop": "برگشت به بالا",
+	"monobook-jumptopersonal": "ابزارهای کاربر",
+	"monobook-jumptonavigation": "پرش به ناوبری",
+	"monobook-jumptosearch": "پرش به جستجو",
+	"monobook-more-actions": "بیشتر",
+	"monobook-cactions-label": "کنش‌های صفحه",
+	"monobook-notifications-link": "آگاه‌سازی‌ها ($1)",
+	"monobook-notifications-link-none": "آگاه‌سازی‌ها",
+	"monobook-responsive-label": "فعال‌سازی طرح واکنش‌گرای مونوبوک"
 }

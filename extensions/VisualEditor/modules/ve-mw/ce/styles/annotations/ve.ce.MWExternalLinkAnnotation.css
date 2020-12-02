@@ -1,0 +1,28 @@
+/*!
+ * VisualEditor ContentEditable MWExternalLinkAnnotation styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+/* stylelint-disable-next-line selector-class-pattern */
+.plainlinks a.ve-ce-linkAnnotation.ve-ce-annotation-active.external {
+	/*
+	 * plainlinks is a MW core class which tries to suppress the normal
+	 * external-link appearance; we don't want it to also suppress the
+	 * active-link styling that VE apples.
+	 * This is applying the same values as ve.ce.LinkAnnotation in VE core.
+	 */
+	background-color: #e6f1ff !important; /* stylelint-disable-line declaration-no-important */
+	padding: 2px !important; /* stylelint-disable-line declaration-no-important */
+}
+
+/*
+ * .ve-ce-linkAnnotation.ve-ce-annotation-active has as higher specificity
+ * than .external, so we need to re-override right padding
+ */
+/* stylelint-disable-next-line selector-class-pattern */
+.ve-ce-linkAnnotation.ve-ce-annotation-active.external {
+	padding-right: 13px;
+	/* Reset -2px from VE-core */
+	margin-right: 0;
+}

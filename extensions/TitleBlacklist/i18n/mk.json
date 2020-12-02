@@ -4,6 +4,8 @@
 			"Bjankuloski06"
 		]
 	},
+	"action-tboverride": "занемарување на црниот список на наслови или корисници",
+	"action-tboverride-account": "занемарување на црниот список на корисници",
 	"action-titleblacklistlog": "преглед на дневникот на наслови на црниот список",
 	"log-name-titleblacklist": "Дневник на наслови на црниот список",
 	"log-description-titleblacklist": "Овие настани следат наидувања на наслови на црниот список.",
@@ -16,18 +18,10 @@
 	"titleblacklist-forbidden-upload": "Податотеката по име „$2“ е забранета за создавање.\nСе совпаѓа со следнава ставка на црниот список: <code>$1</code>",
 	"titleblacklist-forbidden-new-account": "Корисничкото име „$2“ е забрането за создавање.\nСе совпаѓа со следнава ставка на црниот список: <code>$1</code>",
 	"titleblacklist-invalid": "{{PLURAL:$1|Следниов ред|Следниве редови}} во црниот список на наслови {{PLURAL:$1|е|се}} неважечки;\nпоправете {{PLURAL:$1|го|ги}} пред да зачувате:",
-	"titleblacklist-override": "Занемари го црниот список",
+	"titleblacklist-override": "Презапиши врз црниот список ако се совпаѓа",
 	"titleblacklist-override-help": "Корисниците се доволно привилегии можат да одберат да го занемарат проверувањето на наслови во црниот список.",
 	"titleblacklist-warning": "<strong>Предупредување: Страницава можат да ја уредуваат само администратори и други корисници со правото <code>tboverride</code> бидејќи се совпаѓа со следниов наслов на црниот список:</strong><br /><code>$1</code>",
 	"right-tboverride": "Занемарување на црниот список на наслови или корисници",
 	"right-tboverride-account": "Потиснување на црниот список на кориснички имиња",
-	"right-titleblacklistlog": "Преглед на дневникот на наслови на црниот список",
-	"apihelp-titleblacklist-description": "Провери наслов на статија, име на податотека или корисничко име во Црниот список.",
-	"apihelp-titleblacklist-summary": "Провери наслов на статија, име на податотека или корисничко име во Црниот список.",
-	"apihelp-titleblacklist-param-title": "Низата што треба да се провери во црниот список.",
-	"apihelp-titleblacklist-param-action": "Дејството што треба да се провери.",
-	"apihelp-titleblacklist-param-nooverride": "Не се обидувај да наметнеш врз titleblacklist.",
-	"apihelp-titleblacklist-example-1": "Провери дали [[Foo]] е на црниот список",
-	"apihelp-titleblacklist-example-2": "Провери дали [[Bar]] е на црниот список за уредување",
-	"apihelp-createaccount-param-ignoretitleblacklist": "Занемари ги проверките за слични имиња (бара едно од следниве права: <code>tboverride</code>, <code>tboverride-account</code>)."
+	"right-titleblacklistlog": "Преглед на дневникот на наслови на црниот список"
 }

@@ -5,7 +5,6 @@
 .cite-accessibility-label {
 	/* Workaround a Webkit/Blink bug about positioning within columns as many wikis format references with several columns */
 	top: -99999px;
-	clip: rect( 1px 1px 1px 1px ); /* IE6, IE7 */
 	clip: rect( 1px, 1px, 1px, 1px );
 	/* stylelint-disable declaration-no-important */
 	position: absolute !important;

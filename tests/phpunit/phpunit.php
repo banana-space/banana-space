@@ -14,34 +14,9 @@ define( 'MW_PHPUNIT_TEST', true );
 require_once dirname( dirname( __DIR__ ) ) . "/maintenance/Maintenance.php";
 
 class PHPUnitMaintClass extends Maintenance {
-
-	public static $additionalOptions = [
-		'file' => false,
-		'use-filebackend' => false,
-		'use-bagostuff' => false,
-		'use-jobqueue' => false,
-		'use-normal-tables' => false,
-		'mwdebug' => false,
-		'reuse-db' => false,
-		'wiki' => false,
-		'profiler' => false,
-	];
-
 	public function __construct() {
 		parent::__construct();
-		$this->addOption(
-			'with-phpunitclass',
-			'Class name of the PHPUnit entry point to use',
-			false,
-			true
-		);
-		$this->addOption(
-			'debug-tests',
-			'Log testing activity to the PHPUnitCommand log channel.',
-			false, # not required
-			false # no arg needed
-		);
-		$this->addOption( 'file', 'File describing parser tests.', false, true );
+		$this->setAllowUnregisteredOptions( true );
 		$this->addOption( 'use-filebackend', 'Use filebackend', false, true );
 		$this->addOption( 'use-bagostuff', 'Use bagostuff', false, true );
 		$this->addOption( 'use-jobqueue', 'Use jobqueue', false, true );
@@ -53,6 +28,13 @@ class PHPUnitMaintClass extends Maintenance {
 		);
 	}
 
+	public function setup() {
+		parent::setup();
+
+		require_once __DIR__ . '/../common/TestSetup.php';
+		TestSetup::snapshotGlobals();
+	}
+
 	public function finalSetup() {
 		parent::finalSetup();
 
@@ -60,11 +42,11 @@ class PHPUnitMaintClass extends Maintenance {
 		self::requireTestsAutoloader();
 
 		TestSetup::applyInitialConfig();
+
+		ExtensionRegistry::getInstance()->setLoadTestClassesAndNamespaces( true );
 	}
 
 	public function execute() {
-		global $IP;
-
 		// Deregister handler from MWExceptionHandler::installHandle so that PHPUnit's own handler
 		// stays in tact.
 		// Has to in execute() instead of finalSetup(), because finalSetup() runs before
@@ -73,54 +55,9 @@ class PHPUnitMaintClass extends Maintenance {
 
 		$this->forceFormatServerArgv();
 
-		# Make sure we have --configuration or PHPUnit might complain
-		if ( !in_array( '--configuration', $_SERVER['argv'] ) ) {
-			// Hack to eliminate the need to use the Makefile (which sucks ATM)
-			array_splice( $_SERVER['argv'], 1, 0,
-				[ '--configuration', $IP . '/tests/phpunit/suite.xml' ] );
-		}
-
-		$phpUnitClass = PHPUnit_TextUI_Command::class;
-
-		if ( $this->hasOption( 'with-phpunitclass' ) ) {
-			$phpUnitClass = $this->getOption( 'with-phpunitclass' );
-
-			# Cleanup $args array so the option and its value do not
-			# pollute PHPUnit
-			$key = array_search( '--with-phpunitclass', $_SERVER['argv'] );
-			unset( $_SERVER['argv'][$key] ); // the option
-			unset( $_SERVER['argv'][$key + 1] ); // its value
-			$_SERVER['argv'] = array_values( $_SERVER['argv'] );
-		}
-
-		$key = array_search( '--debug-tests', $_SERVER['argv'] );
-		if ( $key !== false && array_search( '--printer', $_SERVER['argv'] ) === false ) {
-			unset( $_SERVER['argv'][$key] );
-			array_splice( $_SERVER['argv'], 1, 0, 'MediaWikiPHPUnitTestListener' );
-			array_splice( $_SERVER['argv'], 1, 0, '--printer' );
-		}
-
-		foreach ( self::$additionalOptions as $option => $default ) {
-			$key = array_search( '--' . $option, $_SERVER['argv'] );
-			if ( $key !== false ) {
-				unset( $_SERVER['argv'][$key] );
-				if ( $this->mParams[$option]['withArg'] ) {
-					self::$additionalOptions[$option] = $_SERVER['argv'][$key + 1];
-					unset( $_SERVER['argv'][$key + 1] );
-				} else {
-					self::$additionalOptions[$option] = true;
-				}
-			}
-		}
-
 		if ( !class_exists( 'PHPUnit\\Framework\\TestCase' ) ) {
 			echo "PHPUnit not found. Please install it and other dev dependencies by
 		running `composer install` in MediaWiki root directory.\n";
-			exit( 1 );
-		}
-		if ( !class_exists( $phpUnitClass ) ) {
-			echo "PHPUnit entry point '" . $phpUnitClass . "' not found. Please make sure you installed
-		the containing component and check the spelling of the class name.\n";
 			exit( 1 );
 		}
 
@@ -128,14 +65,14 @@ class PHPUnitMaintClass extends Maintenance {
 		// data providers, etc. (T206476)
 		ob_start();
 
-		fwrite( STDERR, defined( 'HHVM_VERSION' ) ?
-			'Using HHVM ' . HHVM_VERSION . ' (' . PHP_VERSION . ")\n" :
-			'Using PHP ' . PHP_VERSION . "\n" );
+		fwrite( STDERR, 'Using PHP ' . PHP_VERSION . "\n" );
 
-		// Prepare global services for unit tests.
-		MediaWikiTestCase::prepareServices( new GlobalVarConfig() );
+		foreach ( MediaWikiCliOptions::$additionalOptions as $option => $default ) {
+			MediaWikiCliOptions::$additionalOptions[$option] = $this->getOption( $option );
+		}
 
-		$phpUnitClass::main();
+		$command = new MediaWikiPHPUnitCommand();
+		$command->run( $_SERVER['argv'], true );
 	}
 
 	public function getDbType() {
@@ -157,21 +94,41 @@ class PHPUnitMaintClass extends Maintenance {
 	 */
 	private function forceFormatServerArgv() {
 		$argv = [];
-		foreach ( $_SERVER['argv'] as $key => $arg ) {
+		for ( $key = 0; $key < count( $_SERVER['argv'] ); $key++ ) {
+			$arg = $_SERVER['argv'][$key];
+
 			if ( $key === 0 ) {
 				$argv[0] = $arg;
-			} elseif ( strstr( $arg, '=' ) ) {
-				foreach ( explode( '=', $arg, 2 ) as $argPart ) {
-					$argv[] = $argPart;
-				}
-			} else {
-				$argv[] = $arg;
+				continue;
 			}
+
+			if ( preg_match( '/^--(.*)$/', $arg, $match ) ) {
+				$opt = $match[1];
+				$parts = explode( '=', $opt, 2 );
+				$opt = $parts[0];
+
+				// Avoid confusing PHPUnit with MediaWiki-specific parameters
+				if ( isset( $this->mParams[$opt] ) ) {
+					if ( $this->mParams[$opt]['withArg'] && !isset( $parts[1] ) ) {
+						// skip the value after the option name as well
+						$key++;
+					}
+					continue;
+				}
+			}
+
+			$argv[] = $arg;
 		}
 		$_SERVER['argv'] = $argv;
 	}
 
+	protected function showHelp() {
+		parent::showHelp();
+		$this->output( "PHPUnit options are also accepted:\n\n" );
+		$command = new MediaWikiPHPUnitCommand();
+		$command->publicShowHelp();
+	}
 }
 
-$maintClass = 'PHPUnitMaintClass';
+$maintClass = PHPUnitMaintClass::class;
 require RUN_MAINTENANCE_IF_MAIN;

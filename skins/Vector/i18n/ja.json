@@ -3,17 +3,21 @@
 		"authors": [
 			"Fryed-peach",
 			"Marine-Blue",
+			"Otokoume",
 			"Penn Station",
 			"Shirayuki",
+			"Takot",
+			"Tmv",
 			"Whym",
-			"青子守歌",
-			"Takot"
+			"青子守歌"
 		]
 	},
 	"skinname-vector": "ベクター",
 	"vector-skin-desc": "新しい見た目でユーザビリティが改善された、モダンバージョンのMonobook。",
+	"vector-opt-out": "以前の外観に切り替え",
 	"vector.css": "/* ここに記述したCSSはベクター外装の利用者に影響します */",
 	"vector.js": "/* ここにあるすべてのJavaScriptは、ベクター外装を使用している利用者に対して読み込まれます */",
+	"vector-action-toggle-sidebar": "サイドバーの切り替え",
 	"vector-action-addsection": "話題追加",
 	"vector-action-delete": "削除",
 	"vector-action-move": "移動",
@@ -25,5 +29,7 @@
 	"vector-view-history": "履歴表示",
 	"vector-view-view": "閲覧",
 	"vector-view-viewsource": "ソースを閲覧",
+	"vector-jumptonavigation": "ナビゲーションに移動",
+	"vector-jumptosearch": "検索に移動",
 	"vector-more-actions": "その他"
 }

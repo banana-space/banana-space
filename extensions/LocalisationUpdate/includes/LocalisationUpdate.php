@@ -1,5 +1,11 @@
 <?php
 
+namespace LocalisationUpdate;
+
+use FileDependency;
+use FormatJson;
+use LocalisationCache;
+
 /**
  * Class for localization update hooks and static methods.
  */
@@ -9,12 +15,11 @@ class LocalisationUpdate {
 	 * @param LocalisationCache $lc
 	 * @param string $code
 	 * @param array &$cache
-	 * @return true
 	 */
 	public static function onRecacheFallback( LocalisationCache $lc, $code, array &$cache ) {
 		$dir = self::getDirectory();
 		if ( !$dir ) {
-			return true;
+			return;
 		}
 
 		$fileName = "$dir/" . self::getFilename( $code );
@@ -22,8 +27,6 @@ class LocalisationUpdate {
 			$data = FormatJson::decode( file_get_contents( $fileName ), true );
 			$cache['messages'] = array_merge( $cache['messages'], $data );
 		}
-
-		return true;
 	}
 
 	/**
@@ -31,12 +34,11 @@ class LocalisationUpdate {
 	 * @param LocalisationCache $lc
 	 * @param string $code
 	 * @param array &$cache
-	 * @return true
 	 */
 	public static function onRecache( LocalisationCache $lc, $code, array &$cache ) {
 		$dir = self::getDirectory();
 		if ( !$dir ) {
-			return true;
+			return;
 		}
 
 		$codeSequence = array_merge( [ $code ], $cache['fallbackSequence'] );
@@ -44,8 +46,6 @@ class LocalisationUpdate {
 			$fileName = "$dir/" . self::getFilename( $csCode );
 			$cache['deps'][] = new FileDependency( $fileName );
 		}
-
-		return true;
 	}
 
 	/**

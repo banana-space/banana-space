@@ -5,8 +5,8 @@
 			"Mogoeilor"
 		]
 	},
-	"cite-desc": " <nowiki><ref[ name=id]></nowiki> و <nowiki><سرچشمه یا/></nowiki> tags,و تگیا نه د گوتنیا اضاف بکید",
-	"cite_error": "خطا جاگه:$1",
+	"cite-desc": " <code>&lt;ref[ name=id]&gt;</code> و &lt;سرچشمه یا/&gt; tags,و تگیا نه د گوتنیا اضاف بکید",
+	"cite_error": "خٱتا جاگٱ:$1",
 	"cite_error_ref_no_key": "نامعتور<code>&lt;ref&gt;</code> سردیس;\nهیچ مینونه ای که واس نومش دیار با دش نئ",
 	"cite_error_ref_too_many_keys": "نامعتور<code>&lt;ref&gt;</code> سردیس؛\nنومیا نامعتور، همچنو فره ئه",
 	"cite_error_ref_no_input": "نامعتور<code>&lt;ref&gt;</code> سردیس;\nهیچ مینونه ای که واس نومش دیار با دش نئ",

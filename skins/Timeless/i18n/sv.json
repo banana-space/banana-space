@@ -1,16 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"WikiPhoenix",
-			"Lokal Profil",
 			"Fader",
-			"Jopparn"
+			"Jopparn",
+			"Lokal Profil",
+			"WikiPhoenix"
 		]
 	},
 	"skinname-timeless": "Timeless",
 	"timeless-desc": "Ett tidlöst utseende designat efter prototypen Winter av Brandon Harris och diverse stilar av Wikimedia Foundation.",
-	"timeless-search-placeholder": "Sök på {{NUMBEROFARTICLES}} sidor",
-	"timeless-loggedin": "Ditt konto",
 	"timeless-anonymous": "Anonym",
 	"timeless-loggedinas": "Inloggad som '''$1'''",
 	"timeless-notloggedin": "Inte inloggad",
@@ -21,10 +19,13 @@
 	"timeless-sitetools": "Wikiverktyg",
 	"timeless-pageactions": "Sidverktyg",
 	"timeless-userpagetools": "Verktyg för användarsidan",
+	"timeless-action-addsection": "Nytt ämne",
+	"timeless-view-view": "Läs",
 	"timeless-pagemisc": "Mer",
 	"timeless-namespaces": "Namnrymder",
 	"timeless-pagetools": "Sidåtgärder",
 	"timeless-languages": "Språk",
+	"timeless-projects": "Andra projekt",
 	"timeless.css": "/* CSS som skrivs här kommer att påverka alla användare av utseendet Timeless */",
-	"timeless.js": "/* JavaScript här kommer att laddas för dem som använder utseendet Timeless */"
+	"timeless.js": "/* All JavaScript här kommer att laddas för dem som använder utseendet Timeless */"
 }

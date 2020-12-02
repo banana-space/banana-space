@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Nullzero",
-			"Horus"
+			"Horus",
+			"Nullzero"
 		]
 	},
 	"nuke": "การลบเป็นกลุ่ม",
@@ -15,10 +15,8 @@
 	"nuke-multiplepeople": "การลบหน้าที่เพิ่งเพิ่มเป็นกลุ่ม",
 	"nuke-tools": "เครื่องมือนี้จะลบหน้าที่เพิ่งเพิ่มโดยผู้ใช้หรือเลขที่อยู่ไอพีที่กำหนดเป็นกลุ่ม\nกรอกชื่อผู้ใช้หรือเลขที่อยู่ไอพีเพื่อลบ หรือปล่อยว่างไว้สำหรับผู้ใช้ทุกคน",
 	"nuke-submit-user": "ไป",
-	"nuke-toggleinvert": "ย้อน",
 	"nuke-submit-delete": "ลบรายการที่เลือก",
 	"right-nuke": "ลบหน้าเป็นกลุ่ม",
-	"nuke-select": "เลือก: $1",
 	"nuke-userorip": "ชื่อผู้ใช้ เลขที่อยู่ไอพีหรือว่าง:",
 	"nuke-maxpages": "จำนวนหน้าสูงสุด:",
 	"nuke-editby": "สร้างโดย [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",

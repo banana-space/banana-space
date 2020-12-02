@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"OIS",
 			"Stavanger7"
 		]
 	},
+	"fancycaptcha-captcha": "Control de securitá",
 	"fancycaptcha-imgcaptcha-ph": "Provide li textu quo vu vide sur li image",
 	"fancycaptcha-reload-text": "Actualisar"
 }

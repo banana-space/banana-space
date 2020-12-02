@@ -17,8 +17,5 @@
 	"log-description-spamblacklist": "Sti evente se pigliassero e cuntrullasero 'e click dint'a l'elenco niro d' 'o spam.",
 	"logentry-spamblacklist-hit": "{{GENDER:$2|$1}} causaje na trasuta dint'a l'elenco niro dint'a $3 pe' pruvà 'e s'azzeccà $4.",
 	"right-spamblacklistlog": "Vide 'o riggistro d' 'a lista nira",
-	"action-spamblacklistlog": "vide 'o riggistro d' 'a lista nira",
-	"apihelp-spamblacklist-description": "Valida uno o cchiù URL annanz' 'o SpamBlackList.",
-	"apihelp-spamblacklist-param-url": "URL pe' validà annanz' 'a lista nira.",
-	"apihelp-spamblacklist-example-1": "Cuntrolla ddoje URL nfacci' 'a lista nira"
+	"action-spamblacklistlog": "vide 'o riggistro d' 'a lista nira"
 }

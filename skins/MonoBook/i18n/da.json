@@ -1,12 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
+			"Christian List",
 			"Peter Alberti",
-			"Christian List"
+			"Saederup92"
 		]
 	},
 	"skinname-monobook": "MonoBook",
-	"monobook-desc": "Den klassiske MediaWiki hud siden 2004, opkaldt efter det sort-hvide foto af en bog i baggrunden af siderne",
+	"monobook-desc": "Det klassiske MediaWiki udseende siden 2004, opkaldt efter det sort-hvide foto af en bog i baggrunden af siderne",
 	"monobook.css": "/** CSS inkluderet her vil være aktivt for brugere af Monobook-temaet . */",
-	"monobook.js": "/* JavaScript i denne fil vil indlæses for brugere af udseendet MonoBook */"
+	"monobook.js": "/* JavaScript i denne fil vil indlæses for brugere af udseendet MonoBook */",
+	"monobook-jumptotop": "tilbage til toppen",
+	"monobook-jumptopersonal": "brugerværktøj",
+	"monobook-jumptonavigation": "Spring til navigation",
+	"monobook-jumptosearch": "Spring til søgning",
+	"monobook-more-actions": "Mere",
+	"monobook-cactions-label": "Sidehandlinger",
+	"monobook-notifications-link": "Notifikationer ($1)",
+	"monobook-notifications-link-none": "Notifikationer",
+	"monobook-responsive-label": "Aktiver responsivt MonoBook-design"
 }

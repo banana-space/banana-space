@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"wikieditor-toolbar-tool-heading-1": "Livellu 1",
 	"wikieditor-toolbar-tool-heading-2": "Livellu 2",
 	"wikieditor-toolbar-tool-heading-3": "Livellu 3",

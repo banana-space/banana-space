@@ -27,8 +27,10 @@
  * @file
  * @ingroup FileBackend
  */
+use MediaWiki\FileBackend\FSFile\TempFSFileFactory;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikimedia\ScopedCallback;
 
 /**
@@ -86,6 +88,10 @@ use Wikimedia\ScopedCallback;
  * Methods of subclasses should avoid throwing exceptions at all costs.
  * As a corollary, external dependencies should be kept to a minimum.
  *
+ * See [the architecture doc](@ref filebackendarch) for more information.
+ *
+ * @stable to extend
+ *
  * @ingroup FileBackend
  * @since 1.19
  */
@@ -105,8 +111,8 @@ abstract class FileBackend implements LoggerAwareInterface {
 	/** @var int How many operations can be done in parallel */
 	protected $concurrency;
 
-	/** @var string Temporary file directory */
-	protected $tmpDirectory;
+	/** @var TempFSFileFactory */
+	protected $tmpFileFactory;
 
 	/** @var LockManager */
 	protected $lockManager;
@@ -114,7 +120,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	protected $fileJournal;
 	/** @var LoggerInterface */
 	protected $logger;
-	/** @var object|string Class name or object With profileIn/profileOut methods */
+	/** @var callable|null */
 	protected $profiler;
 
 	/** @var callable */
@@ -125,13 +131,37 @@ abstract class FileBackend implements LoggerAwareInterface {
 	protected $statusWrapper;
 
 	/** Bitfield flags for supported features */
-	const ATTR_HEADERS = 1; // files can be tagged with standard HTTP headers
-	const ATTR_METADATA = 2; // files can be stored with metadata key/values
-	const ATTR_UNICODE_PATHS = 4; // files can have Unicode paths (not just ASCII)
+	public const ATTR_HEADERS = 1; // files can be tagged with standard HTTP headers
+	public const ATTR_METADATA = 2; // files can be stored with metadata key/values
+	public const ATTR_UNICODE_PATHS = 4; // files can have Unicode paths (not just ASCII)
+
+	/** @var false Idiom for "no info; non-existant file" (since 1.34) */
+	protected const STAT_ABSENT = false;
+
+	/** @var null Idiom for "no info; I/O errors" (since 1.34) */
+	public const STAT_ERROR = null;
+	/** @var null Idiom for "no file/directory list; I/O errors" (since 1.34) */
+	public const LIST_ERROR = null;
+	/** @var null Idiom for "no temp URL; not supported or I/O errors" (since 1.34) */
+	public const TEMPURL_ERROR = null;
+	/** @var null Idiom for "existence unknown; I/O errors" (since 1.34) */
+	public const EXISTENCE_ERROR = null;
+
+	/** @var false Idiom for "no timestamp; missing file or I/O errors" (since 1.34) */
+	public const TIMESTAMP_FAIL = false;
+	/** @var false Idiom for "no content; missing file or I/O errors" (since 1.34) */
+	public const CONTENT_FAIL = false;
+	/** @var false Idiom for "no metadata; missing file or I/O errors" (since 1.34) */
+	public const XATTRS_FAIL = false;
+	/** @var false Idiom for "no size; missing file or I/O errors" (since 1.34) */
+	public const SIZE_FAIL = false;
+	/** @var false Idiom for "no SHA1 hash; missing file or I/O errors" (since 1.34) */
+	public const SHA1_FAIL = false;
 
 	/**
 	 * Create a new backend instance from configuration.
 	 * This should only be called from within FileBackendGroup.
+	 * @stable to call
 	 *
 	 * @param array $config Parameters include:
 	 *   - name : The unique name of this backend.
@@ -151,31 +181,35 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *   - parallelize : When to do file operations in parallel (when possible).
 	 *      Allowed values are "implicit", "explicit" and "off".
 	 *   - concurrency : How many file operations can be done in parallel.
-	 *   - tmpDirectory : Directory to use for temporary files. If this is not set or null,
-	 *      then the backend will try to discover a usable temporary directory.
+	 *   - tmpDirectory : Directory to use for temporary files.
+	 *   - tmpFileFactory : Optional TempFSFileFactory object. Only has an effect if
+	 *      tmpDirectory is not set. If both are unset or null, then the backend will
+	 *      try to discover a usable temporary directory.
 	 *   - obResetFunc : alternative callback to clear the output buffer
 	 *   - streamMimeFunc : alternative method to determine the content type from the path
 	 *   - logger : Optional PSR logger object.
-	 *   - profiler : Optional class name or object With profileIn/profileOut methods.
+	 *   - profiler : Optional callback that takes a section name argument and returns
+	 *      a ScopedCallback instance that ends the profile section in its destructor.
+	 *   - statusWrapper : Optional callback that is used to wrap returned StatusValues
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $config ) {
+		if ( !array_key_exists( 'name', $config ) ) {
+			throw new InvalidArgumentException( 'Backend name not specified.' );
+		}
 		$this->name = $config['name'];
-		$this->domainId = isset( $config['domainId'] )
-			? $config['domainId'] // e.g. "my_wiki-en_"
-			: $config['wikiId']; // b/c alias
+		$this->domainId = $config['domainId'] // e.g. "my_wiki-en_"
+			?? $config['wikiId'] // b/c alias
+			?? null;
 		if ( !preg_match( '!^[a-zA-Z0-9-_]{1,255}$!', $this->name ) ) {
 			throw new InvalidArgumentException( "Backend name '{$this->name}' is invalid." );
-		} elseif ( !is_string( $this->domainId ) ) {
+		}
+		if ( !is_string( $this->domainId ) ) {
 			throw new InvalidArgumentException(
 				"Backend domain ID not provided for '{$this->name}'." );
 		}
-		$this->lockManager = isset( $config['lockManager'] )
-			? $config['lockManager']
-			: new NullLockManager( [] );
-		$this->fileJournal = isset( $config['fileJournal'] )
-			? $config['fileJournal']
-			: FileJournal::factory( [ 'class' => NullFileJournal::class ], $this->name );
+		$this->lockManager = $config['lockManager'] ?? new NullLockManager( [] );
+		$this->fileJournal = $config['fileJournal'] ?? new NullFileJournal;
 		$this->readOnly = isset( $config['readOnly'] )
 			? (string)$config['readOnly']
 			: '';
@@ -185,18 +219,21 @@ abstract class FileBackend implements LoggerAwareInterface {
 		$this->concurrency = isset( $config['concurrency'] )
 			? (int)$config['concurrency']
 			: 50;
-		$this->obResetFunc = isset( $config['obResetFunc'] )
-			? $config['obResetFunc']
-			: [ $this, 'resetOutputBuffer' ];
-		$this->streamMimeFunc = isset( $config['streamMimeFunc'] )
-			? $config['streamMimeFunc']
-			: null;
-		$this->statusWrapper = isset( $config['statusWrapper'] ) ? $config['statusWrapper'] : null;
+		$this->obResetFunc = $config['obResetFunc'] ?? [ $this, 'resetOutputBuffer' ];
+		$this->streamMimeFunc = $config['streamMimeFunc'] ?? null;
 
-		$this->profiler = isset( $config['profiler'] ) ? $config['profiler'] : null;
-		$this->logger = isset( $config['logger'] ) ? $config['logger'] : new \Psr\Log\NullLogger();
-		$this->statusWrapper = isset( $config['statusWrapper'] ) ? $config['statusWrapper'] : null;
-		$this->tmpDirectory = isset( $config['tmpDirectory'] ) ? $config['tmpDirectory'] : null;
+		$this->profiler = $config['profiler'] ?? null;
+		if ( !is_callable( $this->profiler ) ) {
+			$this->profiler = null;
+		}
+		$this->logger = $config['logger'] ?? new NullLogger();
+		$this->statusWrapper = $config['statusWrapper'] ?? null;
+		// tmpDirectory gets precedence for backward compatibility
+		if ( isset( $config['tmpDirectory'] ) ) {
+			$this->tmpFileFactory = new TempFSFileFactory( $config['tmpDirectory'] );
+		} else {
+			$this->tmpFileFactory = $config['tmpFileFactory'] ?? new TempFSFileFactory();
+		}
 	}
 
 	public function setLogger( LoggerInterface $logger ) {
@@ -204,7 +241,8 @@ abstract class FileBackend implements LoggerAwareInterface {
 	}
 
 	/**
-	 * Get the unique backend name.
+	 * Get the unique backend name
+	 *
 	 * We may have multiple different backends of the same type.
 	 * For example, we can have two Swift backends using different proxies.
 	 *
@@ -226,8 +264,10 @@ abstract class FileBackend implements LoggerAwareInterface {
 
 	/**
 	 * Alias to getDomainId()
+	 *
 	 * @return string
 	 * @since 1.20
+	 * @deprecated Since 1.34 Use getDomainId()
 	 */
 	final public function getWikiId() {
 		return $this->getDomainId();
@@ -253,6 +293,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 
 	/**
 	 * Get the a bitfield of extra features supported by the backend medium
+	 * @stable to override
 	 *
 	 * @return int Bitfield of FileBackend::ATTR_* flags
 	 * @since 1.23
@@ -401,7 +442,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *                           This should only be used if all entries in the process
 	 *                           cache were added after the files were already locked. (since 1.20)
 	 *
-	 * @remarks Remarks on locking:
+	 * @note Remarks on locking:
 	 * File system paths given to operations should refer to files that are
 	 * already locked or otherwise safe from modification from other processes.
 	 * Normally these files will be new temp files, which should be adequate.
@@ -414,17 +455,21 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *
 	 * The StatusValue will be "OK" unless:
 	 *   - a) unexpected operation errors occurred (network partitions, disk full...)
-	 *   - b) significant operation errors occurred and 'force' was not set
+	 *   - b) predicted operation errors occurred and 'force' was not set
 	 *
-	 * @param array $ops List of operations to execute in order
+	 * @param array[] $ops List of operations to execute in order
+	 * @codingStandardsIgnoreStart
+	 * @phan-param array<int,array{ignoreMissingSource?:bool,overwrite?:bool,overwriteSame?:bool,headers?:bool}> $ops
 	 * @param array $opts Batch operation options
+	 * @phan-param array{force?:bool,nonLocking?:bool,nonJournaled?:bool,parallelize?:bool,bypassReadOnly?:bool,preserveCache?:bool} $opts
+	 * @codingStandardsIgnoreEnd
 	 * @return StatusValue
 	 */
 	final public function doOperations( array $ops, array $opts = [] ) {
 		if ( empty( $opts['bypassReadOnly'] ) && $this->isReadOnly() ) {
 			return $this->newStatus( 'backend-fail-readonly', $this->name, $this->readOnly );
 		}
-		if ( !count( $ops ) ) {
+		if ( $ops === [] ) {
 			return $this->newStatus(); // nothing to do
 		}
 
@@ -434,7 +479,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 		}
 
 		/** @noinspection PhpUnusedLocalVariableInspection */
-		$scope = $this->getScopedPHPBehaviorForOps(); // try to ignore client aborts
+		$scope = ScopedCallback::newScopedIgnoreUserAbort(); // try to ignore client aborts
 
 		return $this->doOperationsInternal( $ops, $opts );
 	}
@@ -443,6 +488,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @see FileBackend::doOperations()
 	 * @param array $ops
 	 * @param array $opts
+	 * @return StatusValue
 	 */
 	abstract protected function doOperationsInternal( array $ops, array $opts );
 
@@ -654,7 +700,11 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * considered "OK" as long as no fatal errors occurred.
 	 *
 	 * @param array $ops Set of operations to execute
+	 * @codingStandardsIgnoreStart
+	 * @phan-param list<array{op:?string,src?:string,dst?:string,ignoreMissingSource?:bool,headers?:array}> $ops
+	 * @codingStandardsIgnoreEnd
 	 * @param array $opts Batch operation options
+	 * @phan-param array{bypassReadOnly?:bool} $opts
 	 * @return StatusValue
 	 * @since 1.20
 	 */
@@ -662,7 +712,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 		if ( empty( $opts['bypassReadOnly'] ) && $this->isReadOnly() ) {
 			return $this->newStatus( 'backend-fail-readonly', $this->name, $this->readOnly );
 		}
-		if ( !count( $ops ) ) {
+		if ( $ops === [] ) {
 			return $this->newStatus(); // nothing to do
 		}
 
@@ -672,17 +722,19 @@ abstract class FileBackend implements LoggerAwareInterface {
 		}
 
 		/** @noinspection PhpUnusedLocalVariableInspection */
-		$scope = $this->getScopedPHPBehaviorForOps(); // try to ignore client aborts
+		$scope = ScopedCallback::newScopedIgnoreUserAbort(); // try to ignore client aborts
 
-		return $this->doQuickOperationsInternal( $ops );
+		return $this->doQuickOperationsInternal( $ops, $opts );
 	}
 
 	/**
 	 * @see FileBackend::doQuickOperations()
 	 * @param array $ops
+	 * @param array $opts
+	 * @return StatusValue
 	 * @since 1.20
 	 */
-	abstract protected function doQuickOperationsInternal( array $ops );
+	abstract protected function doQuickOperationsInternal( array $ops, array $opts );
 
 	/**
 	 * Same as doQuickOperations() except it takes a single operation.
@@ -691,11 +743,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @see FileBackend::doQuickOperations()
 	 *
 	 * @param array $op Operation
+	 * @param array $opts Batch operation options
 	 * @return StatusValue
 	 * @since 1.20
 	 */
-	final public function doQuickOperation( array $op ) {
-		return $this->doQuickOperations( [ $op ] );
+	final public function doQuickOperation( array $op, array $opts = [] ) {
+		return $this->doQuickOperations( [ $op ], $opts );
 	}
 
 	/**
@@ -705,11 +758,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @see FileBackend::doQuickOperation()
 	 *
 	 * @param array $params Operation parameters
+	 * @param array $opts Operation options
 	 * @return StatusValue
 	 * @since 1.20
 	 */
-	final public function quickCreate( array $params ) {
-		return $this->doQuickOperation( [ 'op' => 'create' ] + $params );
+	final public function quickCreate( array $params, array $opts = [] ) {
+		return $this->doQuickOperation( [ 'op' => 'create' ] + $params, $opts );
 	}
 
 	/**
@@ -719,11 +773,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @see FileBackend::doQuickOperation()
 	 *
 	 * @param array $params Operation parameters
+	 * @param array $opts Operation options
 	 * @return StatusValue
 	 * @since 1.20
 	 */
-	final public function quickStore( array $params ) {
-		return $this->doQuickOperation( [ 'op' => 'store' ] + $params );
+	final public function quickStore( array $params, array $opts = [] ) {
+		return $this->doQuickOperation( [ 'op' => 'store' ] + $params, $opts );
 	}
 
 	/**
@@ -733,11 +788,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @see FileBackend::doQuickOperation()
 	 *
 	 * @param array $params Operation parameters
+	 * @param array $opts Operation options
 	 * @return StatusValue
 	 * @since 1.20
 	 */
-	final public function quickCopy( array $params ) {
-		return $this->doQuickOperation( [ 'op' => 'copy' ] + $params );
+	final public function quickCopy( array $params, array $opts = [] ) {
+		return $this->doQuickOperation( [ 'op' => 'copy' ] + $params, $opts );
 	}
 
 	/**
@@ -747,11 +803,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @see FileBackend::doQuickOperation()
 	 *
 	 * @param array $params Operation parameters
+	 * @param array $opts Operation options
 	 * @return StatusValue
 	 * @since 1.20
 	 */
-	final public function quickMove( array $params ) {
-		return $this->doQuickOperation( [ 'op' => 'move' ] + $params );
+	final public function quickMove( array $params, array $opts = [] ) {
+		return $this->doQuickOperation( [ 'op' => 'move' ] + $params, $opts );
 	}
 
 	/**
@@ -761,11 +818,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @see FileBackend::doQuickOperation()
 	 *
 	 * @param array $params Operation parameters
+	 * @param array $opts Operation options
 	 * @return StatusValue
 	 * @since 1.20
 	 */
-	final public function quickDelete( array $params ) {
-		return $this->doQuickOperation( [ 'op' => 'delete' ] + $params );
+	final public function quickDelete( array $params, array $opts = [] ) {
+		return $this->doQuickOperation( [ 'op' => 'delete' ] + $params, $opts );
 	}
 
 	/**
@@ -775,11 +833,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @see FileBackend::doQuickOperation()
 	 *
 	 * @param array $params Operation parameters
+	 * @param array $opts Operation options
 	 * @return StatusValue
 	 * @since 1.21
 	 */
-	final public function quickDescribe( array $params ) {
-		return $this->doQuickOperation( [ 'op' => 'describe' ] + $params );
+	final public function quickDescribe( array $params, array $opts = [] ) {
+		return $this->doQuickOperation( [ 'op' => 'describe' ] + $params, $opts );
 	}
 
 	/**
@@ -819,13 +878,14 @@ abstract class FileBackend implements LoggerAwareInterface {
 			return $this->newStatus( 'backend-fail-readonly', $this->name, $this->readOnly );
 		}
 		/** @noinspection PhpUnusedLocalVariableInspection */
-		$scope = $this->getScopedPHPBehaviorForOps(); // try to ignore client aborts
+		$scope = ScopedCallback::newScopedIgnoreUserAbort(); // try to ignore client aborts
 		return $this->doPrepare( $params );
 	}
 
 	/**
 	 * @see FileBackend::prepare()
 	 * @param array $params
+	 * @return StatusValue
 	 */
 	abstract protected function doPrepare( array $params );
 
@@ -835,7 +895,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * files whereas key/value store backends might revoke container
 	 * access to the storage user representing end-users in web requests.
 	 *
-	 * This is not guaranteed to actually make files or listings publically hidden.
+	 * This is not guaranteed to actually make files or listings publicly hidden.
 	 * Additional server configuration may be needed to achieve the desired effect.
 	 *
 	 * @param array $params Parameters include:
@@ -850,13 +910,14 @@ abstract class FileBackend implements LoggerAwareInterface {
 			return $this->newStatus( 'backend-fail-readonly', $this->name, $this->readOnly );
 		}
 		/** @noinspection PhpUnusedLocalVariableInspection */
-		$scope = $this->getScopedPHPBehaviorForOps(); // try to ignore client aborts
+		$scope = ScopedCallback::newScopedIgnoreUserAbort(); // try to ignore client aborts
 		return $this->doSecure( $params );
 	}
 
 	/**
 	 * @see FileBackend::secure()
 	 * @param array $params
+	 * @return StatusValue
 	 */
 	abstract protected function doSecure( array $params );
 
@@ -867,7 +928,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * access to the storage user representing end-users in web requests.
 	 * This essentially can undo the result of secure() calls.
 	 *
-	 * This is not guaranteed to actually make files or listings publically viewable.
+	 * This is not guaranteed to actually make files or listings publicly viewable.
 	 * Additional server configuration may be needed to achieve the desired effect.
 	 *
 	 * @param array $params Parameters include:
@@ -883,13 +944,14 @@ abstract class FileBackend implements LoggerAwareInterface {
 			return $this->newStatus( 'backend-fail-readonly', $this->name, $this->readOnly );
 		}
 		/** @noinspection PhpUnusedLocalVariableInspection */
-		$scope = $this->getScopedPHPBehaviorForOps(); // try to ignore client aborts
+		$scope = ScopedCallback::newScopedIgnoreUserAbort(); // try to ignore client aborts
 		return $this->doPublish( $params );
 	}
 
 	/**
 	 * @see FileBackend::publish()
 	 * @param array $params
+	 * @return StatusValue
 	 */
 	abstract protected function doPublish( array $params );
 
@@ -909,52 +971,44 @@ abstract class FileBackend implements LoggerAwareInterface {
 			return $this->newStatus( 'backend-fail-readonly', $this->name, $this->readOnly );
 		}
 		/** @noinspection PhpUnusedLocalVariableInspection */
-		$scope = $this->getScopedPHPBehaviorForOps(); // try to ignore client aborts
+		$scope = ScopedCallback::newScopedIgnoreUserAbort(); // try to ignore client aborts
 		return $this->doClean( $params );
 	}
 
 	/**
 	 * @see FileBackend::clean()
 	 * @param array $params
+	 * @return StatusValue
 	 */
 	abstract protected function doClean( array $params );
-
-	/**
-	 * Enter file operation scope.
-	 * This just makes PHP ignore user aborts/disconnects until the return
-	 * value leaves scope. This returns null and does nothing in CLI mode.
-	 *
-	 * @return ScopedCallback|null
-	 */
-	final protected function getScopedPHPBehaviorForOps() {
-		if ( PHP_SAPI != 'cli' ) { // https://bugs.php.net/bug.php?id=47540
-			$old = ignore_user_abort( true ); // avoid half-finished operations
-			return new ScopedCallback( function () use ( $old ) {
-				ignore_user_abort( $old );
-			} );
-		}
-
-		return null;
-	}
 
 	/**
 	 * Check if a file exists at a storage path in the backend.
 	 * This returns false if only a directory exists at the path.
 	 *
+	 * Callers that only care if a file is readily accessible can use non-strict
+	 * comparisons on the result. If "does not exist" and "existence is unknown"
+	 * must be distinguished, then strict comparisons to true/null should be used.
+	 *
+	 * @see FileBackend::EXISTENCE_ERROR
+	 * @see FileBackend::directoryExists()
+	 *
 	 * @param array $params Parameters include:
 	 *   - src    : source storage path
 	 *   - latest : use the latest available data
-	 * @return bool|null Returns null on failure
+	 * @return bool|null Whether the file exists or null (I/O error)
 	 */
 	abstract public function fileExists( array $params );
 
 	/**
 	 * Get the last-modified timestamp of the file at a storage path.
 	 *
+	 * @see FileBackend::TIMESTAMP_FAIL
+	 *
 	 * @param array $params Parameters include:
 	 *   - src    : source storage path
 	 *   - latest : use the latest available data
-	 * @return string|bool TS_MW timestamp or false on failure
+	 * @return string|false TS_MW timestamp or false (missing file or I/O error)
 	 */
 	abstract public function getFileTimestamp( array $params );
 
@@ -962,22 +1016,22 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * Get the contents of a file at a storage path in the backend.
 	 * This should be avoided for potentially large files.
 	 *
+	 * @see FileBackend::CONTENT_FAIL
+	 *
 	 * @param array $params Parameters include:
 	 *   - src    : source storage path
 	 *   - latest : use the latest available data
-	 * @return string|bool Returns false on failure
+	 * @return string|false Content string or false (missing file or I/O error)
 	 */
 	final public function getFileContents( array $params ) {
-		$contents = $this->getFileContentsMulti(
-			[ 'srcs' => [ $params['src'] ] ] + $params );
+		$contents = $this->getFileContentsMulti( [ 'srcs' => [ $params['src'] ] ] + $params );
 
 		return $contents[$params['src']];
 	}
 
 	/**
 	 * Like getFileContents() except it takes an array of storage paths
-	 * and returns a map of storage paths to strings (or null on failure).
-	 * The map keys (paths) are in the same order as the provided list of paths.
+	 * and returns an order preserved map of storage paths to their content.
 	 *
 	 * @see FileBackend::getFileContents()
 	 *
@@ -985,7 +1039,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *   - srcs        : list of source storage paths
 	 *   - latest      : use the latest available data
 	 *   - parallelize : try to do operations in parallel when possible
-	 * @return array Map of (path name => string or false on failure)
+	 * @return string[]|false[] Map of (path name => file content or false on failure)
 	 * @since 1.20
 	 */
 	abstract public function getFileContentsMulti( array $params );
@@ -1001,11 +1055,13 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *
 	 * Use FileBackend::hasFeatures() to check how well this is supported.
 	 *
+	 * @see FileBackend::XATTRS_FAIL
+	 *
 	 * @param array $params
 	 * $params include:
 	 *   - src    : source storage path
 	 *   - latest : use the latest available data
-	 * @return array|bool Returns false on failure
+	 * @return array|false File metadata array or false (missing file or I/O error)
 	 * @since 1.23
 	 */
 	abstract public function getFileXAttributes( array $params );
@@ -1013,10 +1069,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	/**
 	 * Get the size (bytes) of a file at a storage path in the backend.
 	 *
+	 * @see FileBackend::SIZE_FAIL
+	 *
 	 * @param array $params Parameters include:
 	 *   - src    : source storage path
 	 *   - latest : use the latest available data
-	 * @return int|bool Returns false on failure
+	 * @return int|false File size in bytes or false (missing file or I/O error)
 	 */
 	abstract public function getFileSize( array $params );
 
@@ -1028,36 +1086,41 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *   - size   : the file size (bytes)
 	 * Additional values may be included for internal use only.
 	 *
-	 * @param array $params Parameters include:
-	 *   - src    : source storage path
-	 *   - latest : use the latest available data
-	 * @return array|bool|null Returns null on failure
-	 */
-	abstract public function getFileStat( array $params );
-
-	/**
-	 * Get a SHA-1 hash of the file at a storage path in the backend.
+	 * @see FileBackend::STAT_ABSENT
+	 * @see FileBackend::STAT_ERROR
 	 *
 	 * @param array $params Parameters include:
 	 *   - src    : source storage path
 	 *   - latest : use the latest available data
-	 * @return string|bool Hash string or false on failure
+	 * @return array|false|null Attribute map, false (missing file), or null (I/O error)
+	 */
+	abstract public function getFileStat( array $params );
+
+	/**
+	 * Get a SHA-1 hash of the content of the file at a storage path in the backend.
+	 *
+	 * @see FileBackend::SHA1_FAIL
+	 *
+	 * @param array $params Parameters include:
+	 *   - src    : source storage path
+	 *   - latest : use the latest available data
+	 * @return string|false Hash string or false (missing file or I/O error)
 	 */
 	abstract public function getFileSha1Base36( array $params );
 
 	/**
-	 * Get the properties of the file at a storage path in the backend.
+	 * Get the properties of the content of the file at a storage path in the backend.
 	 * This gives the result of FSFile::getProps() on a local copy of the file.
 	 *
 	 * @param array $params Parameters include:
 	 *   - src    : source storage path
 	 *   - latest : use the latest available data
-	 * @return array Returns FSFile::placeholderProps() on failure
+	 * @return array Properties map; FSFile::placeholderProps() if file missing or on I/O error
 	 */
 	abstract public function getFileProps( array $params );
 
 	/**
-	 * Stream the file at a storage path in the backend.
+	 * Stream the content of the file at a storage path in the backend.
 	 *
 	 * If the file does not exists, an HTTP 404 error will be given.
 	 * Appropriate HTTP headers (Status, Content-Type, Content-Length)
@@ -1078,34 +1141,36 @@ abstract class FileBackend implements LoggerAwareInterface {
 	abstract public function streamFile( array $params );
 
 	/**
-	 * Returns a file system file, identical to the file at a storage path.
+	 * Returns a file system file, identical in content to the file at a storage path.
 	 * The file returned is either:
-	 *   - a) A local copy of the file at a storage path in the backend.
+	 *   - a) A TempFSFile local copy of the file at a storage path in the backend.
 	 *        The temporary copy will have the same extension as the source.
-	 *   - b) An original of the file at a storage path in the backend.
-	 * Temporary files may be purged when the file object falls out of scope.
+	 *        Temporary files may be purged when the file object falls out of scope.
+	 *   - b) An FSFile pointing to the original file at a storage path in the backend.
+	 *        This is applicable for backends layered directly on top of file systems.
 	 *
-	 * Write operations should *never* be done on this file as some backends
-	 * may do internal tracking or may be instances of FileBackendMultiWrite.
-	 * In that latter case, there are copies of the file that must stay in sync.
-	 * Additionally, further calls to this function may return the same file.
+	 * Never modify the returned file since it might be the original, it might be shared
+	 * among multiple callers of this method, or the backend might internally keep FSFile
+	 * references for deferred operations.
 	 *
 	 * @param array $params Parameters include:
 	 *   - src    : source storage path
 	 *   - latest : use the latest available data
-	 * @return FSFile|null Returns null on failure
+	 * @return FSFile|null Local file copy or null (missing file or I/O error)
 	 */
 	final public function getLocalReference( array $params ) {
-		$fsFiles = $this->getLocalReferenceMulti(
-			[ 'srcs' => [ $params['src'] ] ] + $params );
+		$fsFiles = $this->getLocalReferenceMulti( [ 'srcs' => [ $params['src'] ] ] + $params );
 
 		return $fsFiles[$params['src']];
 	}
 
 	/**
-	 * Like getLocalReference() except it takes an array of storage paths
-	 * and returns a map of storage paths to FSFile objects (or null on failure).
-	 * The map keys (paths) are in the same order as the provided list of paths.
+	 * Like getLocalReference() except it takes an array of storage paths and
+	 * yields an order-preserved map of storage paths to temporary local file copies.
+	 *
+	 * Never modify the returned files since they might be originals, they might be shared
+	 * among multiple callers of this method, or the backend might internally keep FSFile
+	 * references for deferred operations.
 	 *
 	 * @see FileBackend::getLocalReference()
 	 *
@@ -1123,22 +1188,24 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * The temporary copy will have the same file extension as the source.
 	 * Temporary files may be purged when the file object falls out of scope.
 	 *
+	 * Multiple calls to this method for the same path will create new copies.
+	 *
 	 * @param array $params Parameters include:
 	 *   - src    : source storage path
 	 *   - latest : use the latest available data
-	 * @return TempFSFile|null Returns null on failure
+	 * @return TempFSFile|null Temporary local file copy or null (missing file or I/O error)
 	 */
 	final public function getLocalCopy( array $params ) {
-		$tmpFiles = $this->getLocalCopyMulti(
-			[ 'srcs' => [ $params['src'] ] ] + $params );
+		$tmpFiles = $this->getLocalCopyMulti( [ 'srcs' => [ $params['src'] ] ] + $params );
 
 		return $tmpFiles[$params['src']];
 	}
 
 	/**
-	 * Like getLocalCopy() except it takes an array of storage paths and
-	 * returns a map of storage paths to TempFSFile objects (or null on failure).
-	 * The map keys (paths) are in the same order as the provided list of paths.
+	 * Like getLocalCopy() except it takes an array of storage paths and yields
+	 * an order preserved-map of storage paths to temporary local file copies.
+	 *
+	 * Multiple calls to this method for the same path will create new copies.
 	 *
 	 * @see FileBackend::getLocalCopy()
 	 *
@@ -1161,30 +1228,46 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * Otherwise, one would need to use getLocalReference(), which involves loading
 	 * the entire file on to local disk.
 	 *
+	 * @see FileBackend::TEMPURL_ERROR
+	 *
 	 * @param array $params Parameters include:
 	 *   - src : source storage path
 	 *   - ttl : lifetime (seconds) if pre-authenticated; default is 1 day
-	 * @return string|null
+	 * @return string|null URL or null (not supported or I/O error)
 	 * @since 1.21
 	 */
 	abstract public function getFileHttpUrl( array $params );
 
 	/**
-	 * Check if a directory exists at a given storage path.
-	 * Backends using key/value stores will check if the path is a
-	 * virtual directory, meaning there are files under the given directory.
+	 * Check if a directory exists at a given storage path
+	 *
+	 * For backends using key/value stores, a directory is said to exist whenever
+	 * there exist any files with paths using the given directory path as a prefix
+	 * followed by a forward slash. For example, if there is a file called
+	 * "mwstore://backend/container/dir/path.svg" then directories are said to exist
+	 * at "mwstore://backend/container" and "mwstore://backend/container/dir". These
+	 * can be thought of as "virtual" directories.
+	 *
+	 * Backends that directly use a filesystem layer might enumerate empty directories.
+	 * The clean() method should always be used when files are deleted or moved if this
+	 * is a concern. This is a trade-off to avoid write amplication/contention on file
+	 * changes or read amplification when calling this method.
 	 *
 	 * Storage backends with eventual consistency might return stale data.
 	 *
+	 * @see FileBackend::EXISTENCE_ERROR
+	 * @see FileBackend::clean()
+	 *
 	 * @param array $params Parameters include:
 	 *   - dir : storage directory
-	 * @return bool|null Returns null on failure
+	 * @return bool|null Whether a directory exists or null (I/O error)
 	 * @since 1.20
 	 */
 	abstract public function directoryExists( array $params );
 
 	/**
-	 * Get an iterator to list *all* directories under a storage directory.
+	 * Get an iterator to list *all* directories under a storage directory
+	 *
 	 * If the directory is of the form "mwstore://backend/container",
 	 * then all directories in the container will be listed.
 	 * If the directory is of form "mwstore://backend/container/dir",
@@ -1195,10 +1278,13 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *
 	 * Failures during iteration can result in FileBackendError exceptions (since 1.22).
 	 *
+	 * @see FileBackend::LIST_ERROR
+	 * @see FileBackend::directoryExists()
+	 *
 	 * @param array $params Parameters include:
 	 *   - dir     : storage directory
 	 *   - topOnly : only return direct child dirs of the directory
-	 * @return Traversable|array|null Returns null on failure
+	 * @return Traversable|array|null Directory list enumerator or null (initial I/O error)
 	 * @since 1.20
 	 */
 	abstract public function getDirectoryList( array $params );
@@ -1211,9 +1297,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *
 	 * Failures during iteration can result in FileBackendError exceptions (since 1.22).
 	 *
+	 * @see FileBackend::LIST_ERROR
+	 * @see FileBackend::directoryExists()
+	 *
 	 * @param array $params Parameters include:
 	 *   - dir : storage directory
-	 * @return Traversable|array|null Returns null on failure
+	 * @return Traversable|array|null Directory list enumerator or null (initial I/O error)
 	 * @since 1.20
 	 */
 	final public function getTopDirectoryList( array $params ) {
@@ -1221,22 +1310,24 @@ abstract class FileBackend implements LoggerAwareInterface {
 	}
 
 	/**
-	 * Get an iterator to list *all* stored files under a storage directory.
-	 * If the directory is of the form "mwstore://backend/container",
-	 * then all files in the container will be listed.
-	 * If the directory is of form "mwstore://backend/container/dir",
-	 * then all files under that directory will be listed.
-	 * Results will be storage paths relative to the given directory.
+	 * Get an iterator to list *all* stored files under a storage directory
+	 *
+	 * If the directory is of the form "mwstore://backend/container", then all
+	 * files in the container will be listed. If the directory is of form
+	 * "mwstore://backend/container/dir", then all files under that directory will
+	 * be listed. Results will be storage paths relative to the given directory.
 	 *
 	 * Storage backends with eventual consistency might return stale data.
 	 *
 	 * Failures during iteration can result in FileBackendError exceptions (since 1.22).
 	 *
+	 * @see FileBackend::LIST_ERROR
+	 *
 	 * @param array $params Parameters include:
 	 *   - dir        : storage directory
 	 *   - topOnly    : only return direct child files of the directory (since 1.20)
 	 *   - adviseStat : set to true if stat requests will be made on the files (since 1.22)
-	 * @return Traversable|array|null Returns null on failure
+	 * @return Traversable|array|null File list enumerator or null (initial I/O error)
 	 */
 	abstract public function getFileList( array $params );
 
@@ -1248,10 +1339,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *
 	 * Failures during iteration can result in FileBackendError exceptions (since 1.22).
 	 *
+	 * @see FileBackend::LIST_ERROR
+	 *
 	 * @param array $params Parameters include:
 	 *   - dir        : storage directory
 	 *   - adviseStat : set to true if stat requests will be made on the files (since 1.22)
-	 * @return Traversable|array|null Returns null on failure
+	 * @return Traversable|array|null File list enumerator or null on failure
 	 * @since 1.20
 	 */
 	final public function getTopFileList( array $params ) {
@@ -1274,7 +1367,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *
 	 * @see FileBackend::getFileStat()
 	 *
-	 * @param array $paths Storage paths (optional)
+	 * @param array|null $paths Storage paths (optional)
 	 */
 	abstract public function clearCache( array $paths = null );
 
@@ -1289,7 +1382,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @param array $params Parameters include:
 	 *   - srcs        : list of source storage paths
 	 *   - latest      : use the latest available data
-	 * @return bool All requests proceeded without I/O errors (since 1.24)
+	 * @return bool Whether all requests proceeded without I/O errors (since 1.24)
 	 * @since 1.23
 	 */
 	abstract public function preloadFileStat( array $params );
@@ -1338,7 +1431,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @param int|string $type LockManager::LOCK_* constant or "mixed"
 	 * @param StatusValue $status StatusValue to update on lock/unlock
 	 * @param int $timeout Timeout in seconds (0 means non-blocking) (since 1.24)
-	 * @return ScopedLock|null Returns null on failure
+	 * @return ScopedLock|null RAII-style self-unlocking lock or null on failure
 	 */
 	final public function getScopedFileLocks(
 		array $paths, $type, StatusValue $status, $timeout = 0
@@ -1367,7 +1460,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *
 	 * @param array $ops List of file operations to FileBackend::doOperations()
 	 * @param StatusValue $status StatusValue to update on lock/unlock
-	 * @return ScopedLock|null
+	 * @return ScopedLock|null RAII-style self-unlocking lock or null on failure
 	 * @since 1.20
 	 */
 	abstract public function getScopedLocksForOps( array $ops, StatusValue $status );
@@ -1414,7 +1507,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 */
 	protected function resolveFSFileObjects( array $ops ) {
 		foreach ( $ops as &$op ) {
-			$src = isset( $op['src'] ) ? $op['src'] : null;
+			$src = $op['src'] ?? null;
 			if ( $src instanceof FSFile ) {
 				$op['srcRef'] = $src;
 				$op['src'] = $src->getPath();
@@ -1465,7 +1558,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * Returns null if the path is not of the format of a valid storage path.
 	 *
 	 * @param string $storagePath
-	 * @return string|null
+	 * @return string|null Normalized storage path or null on failure
 	 */
 	final public static function normalizeStoragePath( $storagePath ) {
 		list( $backend, $container, $relPath ) = self::splitStoragePath( $storagePath );
@@ -1487,9 +1580,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * "mwstore://backend/container/...", or null if there is no parent.
 	 *
 	 * @param string $storagePath
-	 * @return string|null
+	 * @return string|null Parent storage path or null on failure
 	 */
 	final public static function parentStoragePath( $storagePath ) {
+		// XXX dirname() depends on platform and locale! If nothing enforces that the storage path
+		// doesn't contain characters like '\', behavior can vary by platform. We should use
+		// explode() instead.
 		$storagePath = dirname( $storagePath );
 		list( , , $rel ) = self::splitStoragePath( $storagePath );
 
@@ -1504,6 +1600,8 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @return string
 	 */
 	final public static function extensionFromPath( $path, $case = 'lowercase' ) {
+		// This will treat a string starting with . as not having an extension, but store paths have
+		// to start with 'mwstore://', so "garbage in, garbage out".
 		$i = strrpos( $path, '.' );
 		$ext = $i ? substr( $path, $i + 1 ) : '';
 
@@ -1532,7 +1630,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *
 	 * @param string $type One of (attachment, inline)
 	 * @param string $filename Suggested file name (should not contain slashes)
-	 * @throws FileBackendError
+	 * @throws InvalidArgumentException
 	 * @return string
 	 * @since 1.20
 	 */
@@ -1560,7 +1658,7 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * This uses the same traversal protection as Title::secureAndSplit().
 	 *
 	 * @param string $path Storage path relative to a container
-	 * @return string|null
+	 * @return string|null Normalized container path or null on failure
 	 */
 	final protected static function normalizeContainerPath( $path ) {
 		// Normalize directory separators
@@ -1591,13 +1689,12 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 *   - StatusValue::newGood() if this method is called without parameters
 	 *   - StatusValue::newFatal() with all parameters to this method if passed in
 	 *
-	 * @param string $args,...
+	 * @param string ...$args
 	 * @return StatusValue
 	 */
-	final protected function newStatus() {
-		$args = func_get_args();
+	final protected function newStatus( ...$args ) {
 		if ( count( $args ) ) {
-			$sv = call_user_func_array( [ StatusValue::class, 'newFatal' ], $args );
+			$sv = StatusValue::newFatal( ...$args );
 		} else {
 			$sv = StatusValue::newGood();
 		}
@@ -1618,15 +1715,15 @@ abstract class FileBackend implements LoggerAwareInterface {
 	 * @return ScopedCallback|null
 	 */
 	protected function scopedProfileSection( $section ) {
-		if ( $this->profiler ) {
-			call_user_func( [ $this->profiler, 'profileIn' ], $section );
-			return new ScopedCallback( [ $this->profiler, 'profileOut' ], [ $section ] );
-		}
-
-		return null;
+		return $this->profiler ? ( $this->profiler )( $section ) : null;
 	}
 
+	/**
+	 * @codeCoverageIgnore Let's not reset output buffering during tests
+	 */
 	protected function resetOutputBuffer() {
+		// XXX According to documentation, ob_get_status() always returns a non-empty array and this
+		// condition will always be true
 		while ( ob_get_status() ) {
 			if ( !ob_end_clean() ) {
 				// Could not remove output buffer handler; abort now

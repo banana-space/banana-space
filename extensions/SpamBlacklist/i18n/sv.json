@@ -2,12 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Ainali",
+			"Hangsna",
 			"Lejonel",
 			"Lokal Profil",
+			"NH",
 			"Skalman",
-			"WikiPhoenix",
-			"Hangsna",
-			"NH"
+			"WikiPhoenix"
 		]
 	},
 	"spam-blacklist": " #<!-- ändra inte den här raden --> <pre>\n# Den här listan stoppar matchande externa URL:er från att läggas till på sidor.\n# Listan påverkar bara den här wikin; se även den globala svartlistan.\n# För dokumentation se https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# Syntaxen är följande:\n#   * All text från ett #-tecken till radens slut är en kommentar\n#   * Alla icke-tomma rader används som reguljära uttryck för att matcha domännamn i URL:er\n\n #</pre> <!-- ändra inte den här raden -->",
@@ -23,8 +23,5 @@
 	"log-description-spamblacklist": "Här visas händelser som utlöst spamfiltret",
 	"logentry-spamblacklist-hit": "{{GENDER:$2|$1}} utlöste spamfiltret vid redigering av $3 genom att försöka lägga till $4.",
 	"right-spamblacklistlog": "Visa svartlistningslogg för spam",
-	"action-spamblacklistlog": "visa svartlistningsloggen för spam",
-	"apihelp-spamblacklist-description": "Validera en eller flera URL:er mot SpamBlacklist.",
-	"apihelp-spamblacklist-param-url": "URL:er att validera mot svartlistan.",
-	"apihelp-spamblacklist-example-1": "Kontrollera två URL:er mot svartlistan"
+	"action-spamblacklistlog": "visa svartlistningsloggen för spam"
 }

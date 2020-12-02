@@ -1,0 +1,37 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWLinkAnnotationInspector styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwLinkAnnotationInspector .ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget {
+	position: relative;
+	min-height: 2.4em;
+}
+
+.ve-ui-mwLinkAnnotationInspector .ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-query {
+	position: static;
+	padding: 0;
+	height: auto;
+	border: 0;
+	box-shadow: none;
+}
+
+.ve-ui-mwLinkAnnotationInspector .ve-ui-linkAnnotationWidget .oo-ui-textInputWidget {
+	margin: 0;
+}
+
+.ve-ui-mwLinkAnnotationInspector .ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-results {
+	position: static;
+	top: 0;
+	padding: 0;
+}
+
+.ve-ui-mwLinkAnnotationInspector .ve-ui-linkAnnotationWidget .mw-widget-titleWidget-menu:not( :empty ) {
+	margin-top: 0.75em;
+}
+
+.ve-ui-mwLinkAnnotationInspector .oo-ui-tabSelectWidget-frameless {
+	margin: 0 0.75em;
+}

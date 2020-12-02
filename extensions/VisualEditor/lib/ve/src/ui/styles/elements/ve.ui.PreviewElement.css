@@ -1,0 +1,11 @@
+/*!
+ * VisualEditor UserInterface PreviewElement styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-previewElement .ve-ce-branchNode-slug,
+.ve-ui-previewElement .ve-ce-nail {
+	display: none;
+}

@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bennylin",
 			"Meursault2004",
-			"NoiX180",
-			"Bennylin"
+			"NoiX180"
 		]
 	},
 	"nuke": "Busak gedhèn-gedhèn",
@@ -16,10 +16,8 @@
 	"nuke-multiplepeople": "Busakan gedhèn-gedhèn kaca sing mentas kagawé",
 	"nuke-tools": "Piranti iki ngidinaké pambusak gedhèn-gedhèn kaca sing tembé digawé sawijining panganggo utawa digawé sawijining alamat IP.\nLebokaké jeneng panganggo utawa alamat IP saperlu ngéntukaké pratélan kaca sing arep kabusak gawéané panganggo utawa alamat IP mau, utawa kosongi waé kanggo ngéntukaké pratélan kaca gawéané kabèh panganggo.",
 	"nuke-submit-user": "Pratélan kaca",
-	"nuke-toggleinvert": "Balèkaké",
 	"nuke-submit-delete": "Busak sing kapilih",
 	"right-nuke": "Busak kaca gedhèn-gedhèn",
-	"nuke-select": "Pilih: $1",
 	"nuke-userorip": "Jeneng panganggo, alamat IP utawa kosong:",
 	"nuke-maxpages": "Cacahé kaca maksimal:",
 	"nuke-editby": "Garapané [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
@@ -29,7 +27,7 @@
 	"nuke-pattern": "Pola kanggo jeneng kaca:",
 	"nuke-nopages-global": "Ora ana sesirah kaca sing mathuk karo panggolèké panjenengan.",
 	"nuke-viewchanges": "deleng owah-owahan",
-	"nuke-namespace": "Watesan ing mandala-aran:",
+	"nuke-namespace": "Watesan ing mandhala aran:",
 	"nuke-linkoncontribs": "busak gedhèn-gedhèn",
 	"nuke-linkoncontribs-text": "Busak gedhèn-gedhèn kaca sing digawé {{GENDER:$1|panganggo iki}}",
 	"nuke-confirm": "Panjenengan arep mbusak {{PLURAL:$1|kaca siji|kaca $1}}. Apa panjenengan yakin arep mbusak?"

@@ -1,96 +1,117 @@
 {
 	"name": "OATHAuth",
-	"version": "0.2.2",
-	"author": "Ryan Lane",
+	"version": "0.4.4",
+	"author": [
+		"Ryan Lane",
+		"Robert Vogel <vogel@hallowelt.com>",
+		"Dejan Savuljesku <savuljesku@hallowelt.com>"
+	],
 	"url": "https://www.mediawiki.org/wiki/Extension:OATHAuth",
 	"descriptionmsg": "oathauth-desc",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.31.0"
+		"MediaWiki": ">= 1.32.0"
 	},
 	"license-name": "GPL-2.0-or-later AND GPL-3.0-or-later",
-	"AutoloadClasses": {
-		"ApiOATHValidate": "includes/api/ApiOATHValidate.php",
-		"ApiQueryOATH": "includes/api/ApiQueryOATH.php",
-		"OATHAuthHooks": "includes/OATHAuthHooks.php",
-		"OATHAuthKey": "includes/OATHAuthKey.php",
-		"OATHAuthUtils": "includes/OATHAuthUtils.php",
-		"OATHUserRepository": "includes/OATHUserRepository.php",
-		"HOTP": "includes/lib/hotp.php",
-		"HOTPResult": "includes/lib/hotp.php",
-		"Base32": "includes/lib/base32.php",
-		"OATHUser": "includes/OATHUser.php",
-		"SpecialOATH": "includes/special/SpecialOATH.php",
-		"SpecialOATHEnable": "includes/special/SpecialOATHEnable.php",
-		"SpecialOATHDisable": "includes/special/SpecialOATHDisable.php",
-		"ProxySpecialPage": "includes/special/ProxySpecialPage.php",
-		"TOTPAuthenticationRequest": "includes/auth/TOTPAuthenticationRequest.php",
-		"TOTPSecondaryAuthenticationProvider": "includes/auth/TOTPSecondaryAuthenticationProvider.php"
+	"attributes": {
+		"OATHAuth": {
+			"Modules": {
+				"totp": "\\MediaWiki\\Extension\\OATHAuth\\Module\\TOTP::factory"
+			}
+		}
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\OATHAuth\\": "src/"
+	},
+	"TestAutoloadNamespaces": {
+		"MediaWiki\\Extension\\OATHAuth\\Tests\\": "tests/phpunit/"
 	},
 	"AuthManagerAutoConfig": {
 		"secondaryauth": {
-			"TOTPSecondaryAuthenticationProvider":{
-				"class": "TOTPSecondaryAuthenticationProvider",
+			"OATHSecondaryAuthenticationProvider":{
+				"class": "\\MediaWiki\\Extension\\OATHAuth\\Auth\\SecondaryAuthenticationProvider",
 				"sort": 50
 			}
 		}
 	},
+	"ServiceWiringFiles": [
+		"ServiceWiring.php"
+	],
 	"ExtensionMessagesFiles": {
 		"OATHAuthAlias": "OATHAuth.alias.php"
 	},
 	"Hooks": {
-		"AuthChangeFormFields": [
-			"OATHAuthHooks::onAuthChangeFormFields"
-		],
-		"TwoFactorIsEnabled": [
-			"OATHAuthHooks::onTwoFactorIsEnabled"
-		],
-		"LoadExtensionSchemaUpdates": [
-			"OATHAuthHooks::onLoadExtensionSchemaUpdates"
-		],
-		"GetPreferences": [
-			"OATHAuthHooks::onGetPreferences"
-		]
+		"AuthChangeFormFields": "\\MediaWiki\\Extension\\OATHAuth\\Hook\\AuthChangeFormFields\\TOTPExtendTokenField::callback",
+		"TwoFactorIsEnabled": "\\MediaWiki\\Extension\\OATHAuth\\Hook\\TwoFactorIsEnabled\\SetIsEnabled::callback",
+		"LoadExtensionSchemaUpdates": "\\MediaWiki\\Extension\\OATHAuth\\Hook\\LoadExtensionSchemaUpdates\\UpdateTables::callback",
+		"GetPreferences": "\\MediaWiki\\Extension\\OATHAuth\\Hook\\GetPreferences\\AuthModule::callback",
+		"getUserPermissionsErrors": "\\MediaWiki\\Extension\\OATHAuth\\Hook\\GetUserPermissionsErrors\\CheckExclusiveRights::callback"
 	},
 	"MessagesDirs": {
 		"OATHAuth": [
-			"i18n"
+			"i18n",
+			"i18n/api"
 		]
 	},
 	"config": {
-		"OATHAuthWindowRadius": 4,
-		"OATHAuthDatabase": false,
-		"OATHAuthSecret": false,
-		"OATHAuthAccountPrefix": false
+		"OATHAuthWindowRadius": {
+			"value": 4
+		},
+		"OATHAuthDatabase": {
+			"value": false
+		},
+		"OATHAuthSecret": {
+			"value": false
+		},
+		"OATHAuthAccountPrefix": {
+			"value": false
+		},
+		"OATHExclusiveRights": {
+			"value": []
+		}
 	},
 	"ResourceModules": {
-		"ext.oath.showqrcode": {
+		"ext.oath.totp.showqrcode": {
 			"scripts": [
-				"jquery.qrcode.js",
-				"qrcode.js",
-				"ext.oath.showqrcode.js"
+				"totp/jquery.qrcode.js",
+				"totp/qrcode.js",
+				"totp/ext.oath.showqrcode.js"
 			]
 		},
-		"ext.oath.showqrcode.styles": {
+		"ext.oath.totp.showqrcode.styles": {
 			"styles": [
-				"ext.oath.showqrcode.styles.css"
+				"totp/ext.oath.showqrcode.styles.css"
 			]
 		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "modules",
-		"remoteExtPath": "OATHAuth"
+		"remoteExtPath": "OATHAuth/modules"
 	},
 	"SpecialPages": {
-		"OATH": "SpecialOATH"
+		"DisableOATHForUser": "\\MediaWiki\\Extension\\OATHAuth\\Special\\DisableOATHForUser",
+		"VerifyOATHForUser": "\\MediaWiki\\Extension\\OATHAuth\\Special\\VerifyOATHForUser",
+		"OATHManage": "\\MediaWiki\\Extension\\OATHAuth\\Special\\OATHManage"
 	},
 	"AvailableRights": [
 		"oathauth-enable",
-		"oathauth-api-all"
+		"oathauth-api-all",
+		"oathauth-disable-for-user",
+		"oathauth-verify-user",
+		"oathauth-view-log"
 	],
 	"GroupPermissions": {
 		"*": {
+			"oathauth-disable-for-user": false,
+			"oathauth-view-log": false
+		},
+		"user": {
 			"oathauth-enable": true
+		},
+		"sysop": {
+			"oathauth-disable-for-user": true,
+			"oathauth-verify-user": true,
+			"oathauth-view-log": true
 		}
 	},
 	"GrantPermissions": {
@@ -102,10 +123,10 @@
 		"oath": "authentication"
 	},
 	"APIModules": {
-		"oathvalidate": "ApiOATHValidate"
+		"oathvalidate": "\\MediaWiki\\Extension\\OATHAuth\\Api\\Module\\ApiOATHValidate"
 	},
 	"APIMetaModules": {
-		"oath": "ApiQueryOATH"
+		"oath": "\\MediaWiki\\Extension\\OATHAuth\\Api\\Module\\ApiQueryOATH"
 	},
 	"RateLimits": {
 		"badoath": {
@@ -114,5 +135,22 @@
 			"user-global": [ 10, 60 ]
 		}
 	},
-	"manifest_version": 1
+	"ReauthenticateTime":  {
+		"oathauth-enable": 60
+	},
+	"load_composer_autoloader": true,
+	"LogTypes": [ "oath" ],
+	"LogNames": {
+		"oath": "oath-log-name"
+	},
+	"LogHeaders": {
+		"oath": "oath-log-header"
+	},
+	"LogActionsHandlers": {
+		"oath/*": "LogFormatter"
+	},
+	"LogRestrictions": {
+		"oath": "oathauth-view-log"
+	},
+	"manifest_version": 2
 }

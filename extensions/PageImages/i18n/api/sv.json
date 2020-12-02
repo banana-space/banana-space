@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ainali",
+			"Lokal Profil",
+			"WikiPhoenix"
+		]
+	},
+	"apihelp-query+pageimages-description": "Returnerar information om bilder på sidan, så som miniatyrer och närvaro av fotografier.",
+	"apihelp-query+pageimages-param-prop": "Vilken information som ska returneras:\n;thumbnail:URL och dimensioner av bild associerad med sidan, om någon.\n;name:Bildtitel",
+	"apihelp-query+pageimages-param-thumbsize": "Maximala dimensioner för miniatyr.",
+	"apihelp-query+pageimages-param-limit": "Egenskaper av hur många sidor som ska returneras.",
+	"apihelp-query+pageimages-paramvalue-license-free": "endast fria bilder"
+}

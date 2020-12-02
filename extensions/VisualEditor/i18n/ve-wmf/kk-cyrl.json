@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek"
+		]
+	},
+	"tag-visualeditor": "<span style=\"background-color:#7FFFD4\">[[{{MediaWiki:visualeditor-descriptionpagelink}}|Көріп өңдеу]]</span>",
+	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Көріп өңдегіш]] қолданылып жасаған өңдеме.",
+	"tag-visualeditor-needcheck": "<span style=\"background-color:#7FFFD4\">[[{{MediaWiki:visualeditor-descriptionpagelink}}|Қарап өңдеу: Тексеру]]</span>",
+	"tag-visualeditor-switched": "<span style=\"background-color:#7FFFD4\">[[{{MediaWiki:visualeditor-descriptionpagelink}}|Көріп өңдеу: Ауысты]]</span>",
+	"tag-visualeditor-switched-description": "Қатысушы көріп өңдегіш қолданып өңдеуді бастады содан кейін уикимәтін өңдеу режиміне ауыстырды",
+	"visualeditor-feedback-link": "Project:VisualEditor/Пікірлер",
+	"visualeditor-feedback-tool": "Бұл бағдарлама туралы пікір қалдыру",
+	"visualeditor-help-label": "Қолдану нұсқаулығын оқыңыз",
+	"visualeditor-help-title": "Өңдеушіні қалай қолдану туралы нұсқаулық",
+	"visualeditor-welcomedialog-action": "Өңдеуді бастау",
+	"visualeditor-welcomedialog-content": "Әркім өңдей алатын және әрбір жетілдіруге көмектесе алады.",
+	"visualeditor-welcomedialog-content-thanks": "Әлемге көп білуге көмектескеніңіз үшін рахмет!",
+	"visualeditor-welcomedialog-title": "$2 жобасына {{GENDER:$1|қош келдіңіз}}"
+}

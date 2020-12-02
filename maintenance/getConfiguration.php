@@ -56,7 +56,7 @@ class GetConfiguration extends Maintenance {
 		$this->addOption( 'format', implode( ', ', self::$outFormats ), false, true );
 	}
 
-	protected function validateParamsAndArgs() {
+	public function validateParamsAndArgs() {
 		$error_out = false;
 
 		# Get the format and make sure it is set to a valid default value
@@ -91,7 +91,8 @@ class GetConfiguration extends Maintenance {
 		if ( $this->regex ) {
 			$this->regex = '/' . $this->regex . '/';
 			if ( $this->hasOption( 'iregex' ) ) {
-				$this->regex .= 'i'; # case insensitive regex
+				# case insensitive regex
+				$this->regex .= 'i';
 			}
 		}
 
@@ -165,7 +166,8 @@ class GetConfiguration extends Maintenance {
 	protected function formatVarDump( $res ) {
 		$ret = '';
 		foreach ( $res as $key => $value ) {
-			ob_start(); # intercept var_dump() output
+			# intercept var_dump() output
+			ob_start();
 			print "\${$key} = ";
 			var_dump( $value );
 			# grab var_dump() output and discard it from the output buffer

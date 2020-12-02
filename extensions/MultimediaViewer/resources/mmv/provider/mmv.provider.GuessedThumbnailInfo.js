@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	/**
 	 * This provider is similar to mw.mmv.provider.ThumbnailInfo, but instead of making an API call
 	 * to get the thumbnail URL, it tries to guess it. There are two failure modes:
@@ -35,6 +35,7 @@
 	/**
 	 * File extensions which are vector types (as opposed to bitmap).
 	 * Thumbnails of vector types can be larger than the original file.
+	 *
 	 * @property {Object.<string, number>}
 	 */
 	GuessedThumbnailInfo.prototype.vectorExtensions = {
@@ -44,6 +45,7 @@
 	/**
 	 * File extensions which can be displayed in the browser.
 	 * Other file types need to be thumbnailed even if the size of the original file would be right.
+	 *
 	 * @property {Object.<string, number>}
 	 */
 	GuessedThumbnailInfo.prototype.displayableExtensions = {
@@ -118,7 +120,7 @@
 	};
 
 	/**
-	 * True if the the original image needs to be used as a thumbnail.
+	 * True if the original image needs to be used as a thumbnail.
 	 *
 	 * @protected
 	 * @param {mw.Title} file
@@ -304,4 +306,4 @@
 	};
 
 	mw.mmv.provider.GuessedThumbnailInfo = GuessedThumbnailInfo;
-}( mediaWiki, jQuery ) );
+}() );

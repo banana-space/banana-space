@@ -5,15 +5,15 @@
 			"София"
 		]
 	},
-	"cite-desc": "Хос быһаарыы <nowiki><ref[ name=id]></nowiki> уонна <nowiki><references/></nowiki> тиэктэрин эбэр",
+	"cite-desc": "Хос быһаарыы <code>&lt;ref[ name=id]&gt;</code> уонна <code>&lt;references/&gt;</code> тиэктэрин эбэр",
 	"cite_error": "Цитата сыыһата: $1",
 	"cite_error_ref_numeric_key": "Неправильный вызов: ожидался нечисловой ключ",
 	"cite_error_ref_no_key": "<code>&lt;ref&gt;</code> тиэк алҕаһа: аата (күлүүһэ) ыйыллыбатах",
 	"cite_error_ref_too_many_keys": "<code>&lt;ref&gt;</code> тиэк алҕаһа (Неправильный вызов): аата сыыһа ыйыллыбыт, эбэтэр наһаа элбэх аат суруллубут",
 	"cite_error_ref_no_input": "<code>&lt;ref&gt;</code> тиэк алҕастаах (Неверный вызов): иһинээҕитэ сыыһа",
 	"cite_error_references_invalid_parameters": "Сыыһа параметрдар бэриллибиттэр; <code>&lt;references /&gt;</code> тиэккэ отой суох буолуохтаахтар",
-	"cite_error_references_no_backlink_label": "Төннөрөр сигэлэргэ бэлиэлэрэ тиийбэттэр.\n<nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki> диэн систиэмэ этиитин кэҥэтэн биэрэххэ наада",
-	"cite_error_no_link_label_group": "«$1» бөлөх кыттааччыларын сигэлэрин бэлиэлэрэ бүппүттэр.\nЭбии манна <nowiki>[[MediaWiki:$2]]</nowiki> оҥор.",
+	"cite_error_references_no_backlink_label": "Төннөрөр сигэлэргэ бэлиэлэрэ тиийбэттэр. [[MediaWiki:Cite references link many format backlink labels]] диэн систиэмэ этиитин кэҥэтэн биэрэххэ наада",
+	"cite_error_no_link_label_group": "«$1» бөлөх кыттааччыларын сигэлэрин бэлиэлэрэ бүппүттэр. Эбии манна [[MediaWiki:$2]] оҥор.",
 	"cite_error_references_no_text": "Сыыһа <code>&lt;ref&gt;</code> тиэк (тег);\n<code>$1</code> диэн хос быһаарыыларга аналлаах тиэкис суох",
 	"cite_error_included_ref": "<code>&lt;/ref&gt;</code> диэн сабар тиэк суох эбит",
 	"cite_error_group_refs_without_references": "\"$1\" бөлөх <code>&lt;ref&gt;</code> тиэгигэр сөп түбэһэр <code>&lt;references group=\"$1\"/&gt;</code> тиэк көстүбэтэ",

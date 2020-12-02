@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"titleblacklist": "# Bul atawlardıñ qara tizimi. Jüýeli aýtılımdarğa (regex) säýkes mındağı atawlar jaratılmaýdı.\nMändemeler üşin «#» nışanın qoldanıñız.",
 	"titlewhitelist": "# Bul atawlardıñ aq tizimi. Mändemeler üşin «#» nışanın qoldanıñız",
 	"titleblacklist-forbidden-edit": "«$2» degen ataw jaratwı qulıptalğan.  Bul qara tizimniñ jazbasına säýkes: <code>$1</code>",

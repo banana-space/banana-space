@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abdeaitali",
+			"SADIQUI"
+		]
+	},
+	"pfunc_time_error": "خطأ: زمن ما صحيحش",
+	"pfunc_expr_unrecognised_word": "خطأ في التعبير: كلمة ما معروفاش \"$1\"",
+	"pfunc_expr_unexpected_operator": "غلط فالتعبير: عامل $1 غير متوقع",
+	"pfunc_expr_missing_operand": "غلط في التعبير: معامل مفقود للعامل $1",
+	"pfunc_expr_unrecognised_punctuation": "خطأ في التعبير: علامة ترقيم ما معروفاش \"$1\"",
+	"pfunc_expr_division_by_zero": "القسمة على زيرو."
+}

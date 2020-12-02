@@ -1,14 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sfic",
-			"Innocentbunny"
+			"Innocentbunny",
+			"Sfic"
 		]
 	},
 	"skinname-timeless": "टाइमलेस",
 	"timeless-desc": "ब्रैंडन हैरिस द्वारा शीतकालीन प्रोटोटाइप के बाद तैयार की गई एक कालातीत त्वचा और विकिमीडिया संस्थान द्वारा विभिन्न शैलियों उपलब्ध",
-	"timeless-search-placeholder": "लगभग {{PLURAL:{{NUMBEROFARTICLES}}|पृष्ठ|पृष्ठों}} में अन्वेषण करें",
-	"timeless-loggedin": "आपका खाता",
 	"timeless-anonymous": "अनाम",
 	"timeless-loggedinas": "'''$1''' के रूप में प्रवेश किया",
 	"timeless-notloggedin": "लॉग इन नहीं किया है",

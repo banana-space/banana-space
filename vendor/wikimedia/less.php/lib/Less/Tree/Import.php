@@ -214,12 +214,15 @@ class Less_Tree_Import extends Less_Tree{
 
 			if( Less_Environment::isPathRelative($evald_path) ){
 				//if the path is relative, the file should be in the current directory
-				$import_dirs[ $this->currentFileInfo['currentDirectory'] ] = $this->currentFileInfo['uri_root'];
+				if ( $this->currentFileInfo ){
+					$import_dirs[ $this->currentFileInfo['currentDirectory'] ] = $this->currentFileInfo['uri_root'];
+				}
 
 			}else{
 				//otherwise, the file should be relative to the server root
-				$import_dirs[ $this->currentFileInfo['entryPath'] ] = $this->currentFileInfo['entryUri'];
-
+				if( $this->currentFileInfo ) {
+					$import_dirs[ $this->currentFileInfo['entryPath'] ] = $this->currentFileInfo['entryUri'];
+				}
 				//if the user supplied entryPath isn't the actual root
 				$import_dirs[ $_SERVER['DOCUMENT_ROOT'] ] = '';
 

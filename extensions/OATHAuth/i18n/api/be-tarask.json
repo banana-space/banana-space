@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Red Winged Duck",
+			"Renessaince"
+		]
+	},
+	"apihelp-query+oath-description": "Праверце, ці ўключаная для ўдзельніка двухфактарная аўтэнтыфікацыя (OATH).",
+	"apihelp-query+oath-summary": "Праверце, ці ўключаная для ўдзельніка двухфактарная аўтэнтыфікацыя (OATH).",
+	"apihelp-query+oath-param-user": "Удзельнік, пра якога трэба атрымаць інфармацыю. Дапомна — цяперашні ўдзельнік.",
+	"apihelp-query+oath-example-1": "Атрымаць інфармацыю пра цяперашняга ўдзельніка",
+	"apihelp-query+oath-example-2": "Атрымаць інфармацыю пра ўдзельніка <kbd>Прыклад</kbd>",
+	"apihelp-oathvalidate-description": "Праверыць токен двухфактарнай аўтэнтыфікацыі (OATH).",
+	"apihelp-oathvalidate-summary": "Праверыць токен двухфактарнай аўтэнтыфікацыі (OATH).",
+	"apihelp-oathvalidate-param-user": "Удзельнік, для якога трэба праверыць токен. Дапомна — цяперашні ўдзельнік.",
+	"apihelp-oathvalidate-param-totp": "Токен двухфактарнай аўтэнтыфікацыі (OATH). Замест можа выкарыстоўваць парамэтар «data»",
+	"apihelp-oathvalidate-example-1": "Праверыць токен для цяперашняга ўдзельніка",
+	"apihelp-oathvalidate-example-2": "Праверыць токен для ўдзельніка <kbd>Прыклад</kbd>"
+}

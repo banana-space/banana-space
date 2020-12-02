@@ -1,0 +1,127 @@
+/*!
+ * VisualEditor ContentEditable BranchNode styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+/* Prevent focus outline on editable sections */
+.ve-ce-branchNode:focus {
+	outline: 0;
+}
+
+.ve-ce-branchNode-blockSlug {
+	opacity: 0;
+	cursor: pointer;
+	-webkit-transition: opacity 200ms ease-out;
+	-moz-transition: opacity 200ms ease-out;
+	transition: opacity 200ms ease-out;
+	/* Create a block formatting context to avoid overlapping floated elements (T211844) */
+	overflow: hidden;
+}
+
+/* Don't draw selection highlight inside block slug after selecting across it */
+.ve-ce-branchNode-blockSlug .oo-ui-labelElement-label::selection {
+	background: transparent;
+}
+
+/* Must be in a separate block, because otherwise entire rule is ignored
+ * by browsers that don't know ::-moz-selection */
+/* stylelint-disable-next-line selector-no-vendor-prefix */
+.ve-ce-branchNode-blockSlug .oo-ui-labelElement-label::-moz-selection {
+	background: transparent;
+}
+
+.ve-ce-branchNode-blockSlug,
+.ve-ce-branchNode-newSlug {
+	margin: -0.3em 0 -0.1em 0;
+	outline: 1px dashed #c8ccd1;
+	/* rgba( #f1f7fb, 0.75 ) */
+	background-color: rgba( 241, 247, 251, 0.75 );
+}
+
+.ve-ce-surface-readOnly .ve-ce-branchNode-blockSlug,
+.ve-ce-surface-dragging .ve-ce-branchNode-blockSlug {
+	visibility: hidden;
+}
+
+.ve-ce-branchNode-blockSlug:hover,
+.ve-ce-branchNode-blockSlug.ve-ce-branchNode-blockSlug-focused {
+	opacity: 1;
+}
+
+.ve-ce-branchNode-newSlug-open {
+	margin: 1em 0;
+	background-color: transparent;
+	outline-color: transparent;
+	outline-offset: 1em;
+	-webkit-transition: all 400ms ease-out;
+	-moz-transition: all 400ms ease-out;
+	transition: all 400ms ease-out;
+}
+
+.ve-ce-branchNode-blockSlug > .oo-ui-buttonWidget {
+	opacity: 0.5;
+	display: block;
+}
+
+.ve-ce-branchNode-blockSlug > .oo-ui-buttonElement-frameless.oo-ui-iconElement:first-child {
+	/* We add a border, so cancel weird margin adjustment meant for frameless buttons */
+	margin-left: 0;
+}
+
+.ve-ce-branchNode-blockSlug > .oo-ui-buttonWidget > .oo-ui-buttonElement-button {
+	display: block;
+}
+
+.ve-ce-surface-dragging .ve-ce-branchNode-blockSlug > .oo-ui-buttonElement > .oo-ui-buttonElement-button {
+	/* -moz-user-select:none is applied in OOUI, but cases FF to create multi-range selections (T214976) */
+	-moz-user-select: text;
+}
+
+.ve-ce-chimera {
+	width: 0;
+	height: 0;
+}
+
+.ve-ce-chimera-webkit {
+	/* Cursor positioning tweak */
+	/*
+	 * Leaving width at 0 causes a small horizontal wobble, but using a
+	 * non-zero value can cause it to be visible on high-DPI devices (T218331)
+	 */
+	height: 1em;
+}
+
+.ve-ce-chimera-gecko {
+	/* Force height in empty branch */
+	border: 1px solid transparent;
+	/* Avoid interaction with absolutely positioned overlays like CodeMirror (T198278) */
+	margin-right: -2px;
+}
+
+.ve-ce-chimera-debug {
+	vertical-align: middle;
+	width: auto;
+	height: auto;
+}
+
+.ve-ce-unicorn:not( .ve-ce-unicorn-debug ) {
+	width: 0;
+	height: 0;
+}
+
+/* Pre-formatted node styling */
+
+pre.ve-ce-branchNode {
+	/* Support: Chrome, Safari */
+	/* Prevent silly wrapping on Safari and Chrome (https://bugs.webkit.org/show_bug.cgi?id=35935) */
+	word-wrap: normal;
+}
+
+/* Emulate the first paragraph in each list item being unwrapped */
+
+/* TODO use CSS class for wrapper paragraph */
+li.ve-ce-branchNode p.ve-ce-branchNode:first-child {
+	margin: 0;
+	padding: 0;
+}

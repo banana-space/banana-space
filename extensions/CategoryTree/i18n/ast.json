@@ -32,10 +32,5 @@
 	"categorytree-no-pages": "ensin páxines nin subcategoríes",
 	"categorytree-not-found": "Nun s'atopó la categoría <i>$1</i>",
 	"categorytree-error": "Hebo un problema al cargar los datos.",
-	"categorytree-retry": "Por favor, espera unos momentos y inténtalo otra vuelta.",
-	"apihelp-categorytree-description": "Módulu internu pa la estensión CategoryTree.",
-	"apihelp-categorytree-summary": "Módulu internu pa la estensión CategoryTree.",
-	"apihelp-categorytree-param-category": "Títulu nel espaciu de nomes de categoríes, inoraráse'l prefixu si se da.",
-	"apihelp-categorytree-param-options": "Opciones pal constructor de CategoryTree como oxetu JSON. La opción <var>depth</var> (fondura) tien el valor predetermináu de <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "Les opciones tienen de ser un oxetu JSON válidu."
+	"categorytree-retry": "Por favor, espera unos momentos y inténtalo otra vuelta."
 }

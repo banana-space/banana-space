@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aftab1995",
+			"Aftabuzzaman",
+			"Bellayet",
+			"Jayantanth",
+			"Nasir8891",
+			"Runab",
+			"Sayak Sarkar",
+			"আফতাবুজ্জামান"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|দৃশ্যমান সম্পাদনা]]",
+	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|দৃশ্যমান সম্পাদনা]] ব্যবহার করে সম্পাদিত",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|দৃশ্যমান সম্পাদনা: যাচাই করুন]]",
+	"tag-visualeditor-needcheck-description": "এই সম্পাদনাটি [[{{MediaWiki:visualeditor-descriptionpagelink}}|দৃশ্যমান সম্পাদনা]] ব্যবহার করে সম্পাদনা করা হয়েছে যেখানে সিস্টেম সনাক্ত করেছে উইকিপাঠ্যে সম্ভাব্য অনিচ্ছাকৃত পরিবর্তন ঘটেছে।",
+	"tag-visualeditor-wikitext": "২০১৭ উৎস সম্পাদনা",
+	"tag-visualeditor-wikitext-description": "২০১৭ উইকিটেক্সট সম্পাদক ব্যবহার করে সম্পাদনা করা হয়েছে",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|দৃশ্যমান সম্পাদনা: সুইচকৃত]]",
+	"tag-visualeditor-switched-description": "ব্যবহারকারী দৃশ্যমান সম্পাদনা ব্যবহার করে সম্পাদনা করতে শুরু করে, তারপর উইকিপাঠ্য সম্পাদকে পরিবর্তন করে।",
+	"visualeditor-feedback-link": "Project:ভিজ্যুয়ালএডিটর/প্রতিক্রিয়া",
+	"visualeditor-feedback-tool": "এই সফটওয়্যার সম্পর্কে আপনার প্রতিক্রিয়া জানান",
+	"visualeditor-help-label": "ব্যবহারকারী নির্দেশিকা পড়ুন",
+	"visualeditor-help-link": "mw:Help:VisualEditor/User guide/bn",
+	"visualeditor-help-title": "কিভাবে সম্পাদক ব্যবহার করতে হবে তার জন্য নির্দেশিকা",
+	"visualeditor-welcomedialog-action": "সম্পাদনা শুরু করুন",
+	"visualeditor-welcomedialog-content": "যে কেউ সম্পাদনা করতে পারেন ও প্রতিটি সম্পাদনা মান উন্নয়নে সাহায্য করে।",
+	"visualeditor-welcomedialog-content-thanks": "জ্ঞানের জগৎকে সমৃদ্ধ করতে সাহায্য করার জন্য আপনাকে ধন্যবাদ!",
+	"visualeditor-welcomedialog-switch": "উৎস সম্পাদকে যান",
+	"visualeditor-welcomedialog-switch-ve": "দৃশ্যমান সম্পাদনায় যান",
+	"visualeditor-welcomedialog-title": "$2-এ {{GENDER:$1|স্বাগতম}}"
+}

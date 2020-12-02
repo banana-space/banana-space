@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Robin van der Vliet",
 			"Yekrats"
 		]
 	},
@@ -11,6 +12,6 @@
 	"spam-blacklisted-email": "Retpoŝtadreso en nigra listo",
 	"spam-blacklisted-email-text": "Via retpoŝtadreso estas nune membro de nigralisto forbarita de sendante retpoŝtojn al aliaj uzantoj.",
 	"spam-blacklisted-email-signup": "Tiu retpoŝtadreso estas nune forbarita de uzado.",
-	"spam-invalid-lines": "La {{PLURAL:$1|jena linio|jenaj linioj}} de spama nigralisto estas {{PLURAL:$1|nevlidaj regularaj esprimoj|nevlidaj regularaj esprimoj}} kaj devas esti {{PLURAL:$1|korektigita|korektigitaj}} antaŭ savante la paĝon:",
+	"spam-invalid-lines": "La {{PLURAL:$1|jena linio|jenaj linioj}} de spama nigralisto estas {{PLURAL:$1|nevlidaj regulaj esprimoj|nevalidaj regulaj esprimoj}} kaj devas esti {{PLURAL:$1|korektita|korektitaj}} antaŭ savante la paĝon:",
 	"spam-blacklist-desc": "Regex-bazita kontraŭspamilo: [[MediaWiki:Spam-blacklist]] kaj [[MediaWiki:Spam-whitelist]]"
 }

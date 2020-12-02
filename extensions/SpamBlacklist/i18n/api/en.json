@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"apihelp-spamblacklist-description": "Validate one or more URLs against the SpamBlacklist.",
+	"apihelp-spamblacklist-example-1": "Check two URLs against the blacklist",
+	"apihelp-spamblacklist-param-url": "URLs to validate against the blacklist.",
+	"apihelp-spamblacklist-summary": "Validate one or more URLs against the SpamBlacklist."
+}

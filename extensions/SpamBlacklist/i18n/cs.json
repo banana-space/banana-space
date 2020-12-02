@@ -3,7 +3,9 @@
 		"authors": [
 			"Li-sung",
 			"Matěj Grabovský",
-			"Mormegil"
+			"Mormegil",
+			"Patriccck",
+			"Tchoř"
 		]
 	},
 	"spam-blacklist": " # Externí URL odpovídající tomuto seznamu budou zablokovány při pokusu přidat je na stránku.\n # Tento seznam ovlivňuje jen tuto wiki; podívejte se také na globální černou listinu.\n # Dokumentaci najdete na https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n #<!-- Nechte tento řádek přesně tak jak je --> <pre>\n#\n# Syntaxe je následující:\n#  * Všechno od znaku „#“ do konce řádku je komentář\n#  * Každý neprázdný řádek je část regulárního výrazu, kterému budou odpovídat pouze domény z URL\n\n #</pre> <!-- Nechte tento řádek přesně tak jak je -->",

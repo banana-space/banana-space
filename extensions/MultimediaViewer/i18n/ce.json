@@ -1,13 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Умар",
-			"Исмаил Садуев"
+			"Исмаил Садуев",
+			"Умар"
 		]
 	},
 	"multimediaviewer-desc": "Схьадосту суьрташ юьззина экран.",
-	"multimediaviewer-pref": "Медиа-хьожург",
-	"multimediaviewer-pref-desc": "Мультимедиа-файлашка хьажар хаза кечдина гойту.",
 	"multimediaviewer-optin-pref": "Латае <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Медиа-хьожург]</span>",
 	"multimediaviewer-file-page": "Йолуш йолу файлан агӀонга дехьавала",
 	"multimediaviewer-repository-local": "Ма-дарра",

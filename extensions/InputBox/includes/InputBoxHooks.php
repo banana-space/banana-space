@@ -13,10 +13,10 @@ class InputBoxHooks {
 
 	/**
 	 * Initialization
-	 * @param Parser &$parser
+	 * @param Parser $parser
 	 * @return true
 	 */
-	public static function register( Parser &$parser ) {
+	public static function register( Parser $parser ) {
 		// Register the hook with the parser
 		$parser->setHook( 'inputbox', [ 'InputBoxHooks', 'render' ] );
 

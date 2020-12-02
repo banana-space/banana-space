@@ -1,22 +1,33 @@
 {
 	"@metadata": {
 		"authors": [
+			"Msannakoval",
 			"OC Ripper",
-			"Msannakoval"
+			"Vlad5250"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Knjiga",
 	"visualeditor-cite-tool-name-journal": "Dnevnik",
 	"visualeditor-cite-tool-name-news": "Novosti",
 	"visualeditor-cite-tool-name-web": "Web-stranica",
-	"cite-ve-dialog-reference-editing-reused": "Ova referenca je korištena $1 {{PLURAL:$1|puta}} na ovoj stranici.",
+	"cite-ve-changedesc-ref-group-both": "Grupa referenci je smijenjena iz „$1” u „$2”",
+	"cite-ve-changedesc-ref-group-from": "Grupa referenci je smijenjena iz „$1” u opštu grupu",
+	"cite-ve-changedesc-ref-group-to": "Grupa referenci je smijenjena iz opšte grupe na „$1”",
+	"cite-ve-changedesc-reflist-group-both": "Grupa spisaka s referencijama je smijenjena iz „$1” u „$2”",
+	"cite-ve-changedesc-reflist-group-from": "Grupa spisaka s referencijama je smijenjena iz „$1” u opštu grupu",
+	"cite-ve-changedesc-reflist-group-to": "Grupa spisaka s referencijama je smijenjena iz opšte grupe u „$1”",
+	"cite-ve-changedesc-reflist-responsive-set": "Spisak referenci je izmijenjen za prikaz u odzivnim kolonama",
+	"cite-ve-changedesc-reflist-responsive-unset": "Spisak referenci je izmijenjen za prikaz u samo jednoj koloni",
+	"cite-ve-changedesc-reflist-item-id": "Indeks reference je izmijenjen",
+	"cite-ve-dialog-reference-editing-reused": "Ova referenca koristi se {{PLURAL:$1|jednom|2=dvaput|$1 puta}} u ovoj stranici.",
+	"cite-ve-dialog-reference-editing-reused-long": "Ova referenca koristi se {{PLURAL:$1|jednom|2=dvaput|$1 puta}} na ovoj stranici. Ovdje napravljene promjene utjecati će na sva područja njegove upotrebe.",
 	"cite-ve-dialog-reference-options-group-label": "Koristi ovu grupu",
 	"cite-ve-dialog-reference-options-group-placeholder": "Opće reference",
 	"cite-ve-dialog-reference-options-name-label": "Ponovno koristi pod ovim imenom",
+	"cite-ve-dialog-reference-options-responsive-label": "Koristi odzivan raspored kolona",
 	"cite-ve-dialog-reference-options-section": "Opcije",
+	"cite-ve-dialog-reference-placeholder": "Ovdje napišite ili prekopirajte referencu, ili pak umetnite šablon za reference.",
 	"cite-ve-dialog-reference-title": "Referentni broj",
-	"cite-ve-dialog-reference-useexisting-full-label": "Ponovno koristi citat koji već postoji na ovoj stranici",
-	"cite-ve-dialog-reference-useexisting-label": "Koristi postojeću referencu",
 	"cite-ve-dialog-reference-useexisting-tool": "Ponovno korištenje",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Lista općih referenci",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "Lista referenci za grupu \"$1\"",
@@ -31,5 +42,10 @@
 	"cite-ve-referenceslist-isempty": "Nema referenci u grupi \"$1\" na ovoj stranici.",
 	"cite-ve-referenceslist-isempty-default": "Nema referenci na ovoj stranici koje bi mogle biti uključene u ovaj popis.",
 	"cite-ve-referenceslist-missingref": "Ova referenca je definirana u šablonu ili drugom generiranom bloku i sada se može uređivati jedino u izvornom modu.",
-	"cite-ve-toolbar-group-label": "Citiraj"
+	"cite-ve-referenceslist-missingref-in-list": "Ova referenca zadaje se u šablonu ili drugom stvorenom bloku. Za sada može da se pregleda samo u izvornom režimu.",
+	"cite-ve-referenceslist-missingreflist": "Ovaj spisak s referencama je generisao šablon, i se za sada može uređivati samo u izvornom režimu.",
+	"cite-ve-toolbar-group-label": "Citiraj",
+	"cite-ve-othergroup-item": "$1 referenca",
+	"visualeditor-internal-list-diff-default-group-name-mwreference": "Reference",
+	"visualeditor-internal-list-diff-group-name-mwreference": "Ime grupe referenci: „$1”"
 }

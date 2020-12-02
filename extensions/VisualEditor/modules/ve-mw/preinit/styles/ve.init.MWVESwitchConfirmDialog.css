@@ -1,0 +1,16 @@
+/*!
+ * VisualEditor MediaWiki Initialization edit switching styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-init-mw-editSwitch {
+	float: right;
+}
+
+.ve-init-mw-editSwitch .oo-ui-toolbar-bar {
+	background: transparent;
+	box-shadow: none;
+	border: 0;
+}

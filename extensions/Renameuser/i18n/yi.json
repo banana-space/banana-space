@@ -5,8 +5,8 @@
 		]
 	},
 	"renameuser": "בײַטן באַניצער נאָמען",
-	"renameuser-linkoncontribs": "בײַטן באַניצער נאָמען",
-	"renameuser-linkoncontribs-text": "בײַטן נאָמען פֿון דעם באַניצער",
+	"renameuser-linkoncontribs": "בײַטן {{GENDER:$1|באַניצער}} נאָמען",
+	"renameuser-linkoncontribs-text": "בײַטן נאָמען פֿון דעם {{GENDER:$1|באַניצער}}",
 	"renameuser-desc": "לייגט צו א [[Special:RenameUser|באַזונדערן בלאַט]] צו בײַטן א באַניצער נאָמען (פֿאדערט ''renameuser'' רעכט)",
 	"renameuserold": "לויפיגער באַניצער-נאָמען:",
 	"renameusernew": "נײַער באַניצער-נאָמען:",

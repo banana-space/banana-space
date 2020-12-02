@@ -3,9 +3,9 @@
 		"authors": [
 			"Crazymadlover",
 			"Drini",
+			"Macofe",
 			"Remember the dot",
-			"Sanbec",
-			"Macofe"
+			"Sanbec"
 		]
 	},
 	"imagemap_desc": "Permite ''image-maps'' dinámicos usando la etiqueta <code>&lt;imagemap&gt;</code>",

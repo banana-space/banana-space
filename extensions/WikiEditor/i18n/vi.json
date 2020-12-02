@@ -1,20 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
-			"Minh Nguyen",
-			"Vinhtantran",
-			"පසිඳු කාවින්ද",
 			"Macofe",
-			"Nguyên Lê"
+			"Minh Nguyen",
+			"Nguyên Lê",
+			"Thienhau2003",
+			"Vinhtantran",
+			"පසිඳු කාවින්ද"
 		]
 	},
 	"wikieditor": "Giao diện sửa đổi mã wiki nâng cao",
-	"wikieditor-desc": "Cung cấp giao diện sửa đổi mã wiki có thể mở rộng, cũng như nhiều tính năng khác",
+	"wikieditor-desc": "Cung cấp giao diện sửa đổi mã wiki nâng cao có thể mở rộng",
 	"wikieditor-wikitext-tab": "Mã wiki",
 	"wikieditor-loading": "Đang tải",
 	"wikieditor-toolbar": "Thanh công cụ sửa đổi",
 	"wikieditor-toolbar-desc": "Thanh công cụ ở trang sửa đổi được cải tiến để dễ sử dụng hơn",
-	"wikieditor-toolbar-preference": "Sử dụng thanh công cụ sửa đổi nâng cao",
+	"wikieditor-toolbar-preference": "Kích hoạt thanh công cụ sửa đổi",
+	"wikieditor-toolbar-preference-help": "Tính năng này còn được gọi là 'trình soạn thảo wiki 2010'.",
 	"wikieditor-toolbar-loading": "Đang tải…",
 	"wikieditor-toolbar-tool-bold": "Đậm",
 	"wikieditor-toolbar-tool-bold-example": "Chữ đậm",
@@ -47,7 +49,7 @@
 	"wikieditor-toolbar-tool-link-lookslikeinternal-int": "Liên kết nội bộ",
 	"wikieditor-toolbar-tool-link-lookslikeinternal-ext": "Liên kết ngoài",
 	"wikieditor-toolbar-tool-link-empty": "Bạn chưa nhập nơi nào để cho liên kết dẫn tới.",
-	"wikieditor-toolbar-tool-file": "Chèn tập tin",
+	"wikieditor-toolbar-tool-file": "Ảnh và phương tiện",
 	"wikieditor-toolbar-tool-file-example": "Ví dụ.jpg",
 	"wikieditor-toolbar-tool-file-title": "Chèn tập tin",
 	"wikieditor-toolbar-file-target": "Tên tập tin:",
@@ -127,6 +129,7 @@
 	"wikieditor-toolbar-tool-replace-success": "Đã thực hiện $1 thay thế.",
 	"wikieditor-toolbar-tool-replace-emptysearch": "Bạn chưa nhập gì để tìm kiếm.",
 	"wikieditor-toolbar-tool-replace-invalidregex": "Biểu thức chính quy do bạn nhập vào không hợp lệ: $1",
+	"wikieditor-toolbar-tool-replace-word": "Đúng cả từ",
 	"wikieditor-toolbar-section-characters": "Ký tự đặc biệt",
 	"wikieditor-toolbar-section-help": "Trợ giúp",
 	"wikieditor-toolbar-help-heading-description": "Miêu tả",

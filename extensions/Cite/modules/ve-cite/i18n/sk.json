@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kusavica",
+			"Luky001",
 			"Mimarik",
-			"Teslaton",
 			"Sudo77(new)",
+			"Teslaton",
 			"TomášPolonec",
-			"Kusavica"
+			"Vlad5250"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Kniha",
@@ -18,8 +20,13 @@
 	"cite-ve-changedesc-reflist-group-both": "Skupina zoznamu referencií zmenená z „$1“ na „$2“",
 	"cite-ve-changedesc-reflist-group-from": "Skupina zoznamu referencií zmenená z „$1“ na všeobecnú",
 	"cite-ve-changedesc-reflist-group-to": "Skupina zoznamu referencií zmenená zo všeobecnej na „$1“",
+	"cite-ve-changedesc-reflist-responsive-set": "Zoznam referencií sa teraz zobrazuje v responzívnych stĺpcoch",
+	"cite-ve-changedesc-reflist-responsive-unset": "Zoznam referencií sa teraz zobrazuje len v jednom stĺpci",
 	"cite-ve-changedesc-reflist-item-id": "Číslo referencie zmenené",
-	"cite-ve-dialog-reference-editing-reused": "Tato referencia sa na tejto stránke používa $1 {{PLURAL:$1|krát}}.",
+	"cite-ve-citationneeded-button": "Pridať citáciu",
+	"cite-ve-citationneeded-title": "Bez citácie",
+	"cite-ve-dialog-reference-editing-reused": "Táto referencia sa na tejto stránke používa {{PLURAL:$1|raz|2=dvakrát|$1 krát}}.",
+	"cite-ve-dialog-reference-editing-reused-long": "Táto referencia sa na tejto stránke používa {{PLURAL:$1|raz|2=dvakrát|$1 krát}}. Zmeny vykonané tu sa prejavia na všetkých miestach, kde sa referencia používa.",
 	"cite-ve-dialog-reference-options-group-label": "Použiť túto skupinu",
 	"cite-ve-dialog-reference-options-group-placeholder": "Všeobecné referencie",
 	"cite-ve-dialog-reference-options-name-label": "Opakovane používať pod týmto názvom",
@@ -27,13 +34,11 @@
 	"cite-ve-dialog-reference-options-section": "Možnosti",
 	"cite-ve-dialog-reference-placeholder": "Sem napíšte alebo vložte referenciu alebo citačnú šablónu.",
 	"cite-ve-dialog-reference-title": "Referencia",
-	"cite-ve-dialog-reference-useexisting-full-label": "Opakovane použiť citáciu, ktorá už na stránke existuje",
-	"cite-ve-dialog-reference-useexisting-label": "Použiť existujúcu referenciu",
 	"cite-ve-dialog-reference-useexisting-tool": "Použiť existujúcu",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Zoznam všeobecných referencií",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "Zoznam referencií pre skupinu „$1“",
 	"cite-ve-dialog-referenceslist-title": "Zoznam referencií",
-	"cite-ve-dialogbutton-citation-educationpopup-text": "Skvalitnenie vášeho obsahu doplnením zdrojov informácií. Môžete citovať z kníh, novín alebo webových stránok.",
+	"cite-ve-dialogbutton-citation-educationpopup-text": "Skvalitňuje váš obsah doplnením zdrojov informácií. Môžete citovať z kníh, novín alebo webových stránok.",
 	"cite-ve-dialogbutton-citation-educationpopup-title": "Citácie",
 	"cite-ve-dialogbutton-reference-full-label": "Základná podoba",
 	"cite-ve-dialogbutton-reference-title": "Referencia",
@@ -43,6 +48,7 @@
 	"cite-ve-referenceslist-isempty": "Na tejto stránke neexistuje žiadna referencia v skupine „$1“.",
 	"cite-ve-referenceslist-isempty-default": "Na tejto stránke nie sú definované žiadne referencie, ktoré by bolo možné zobraziť v tomto zozname.",
 	"cite-ve-referenceslist-missingref": "Táto referencia je definovaná v šablóne alebo inej automaticky generovanej časti textu. Zatiľ je možné editovať ju len v režime zdrojového kódu.",
+	"cite-ve-referenceslist-missingref-in-list": "Táto referencia je definovaná v šablóne alebo inej generovanej časti textu a zatiaľ je možné editovať ju len v režime zdrojového kódu.",
 	"cite-ve-referenceslist-missingreflist": "Tento zoznam referencií je generovaný šablónou a zatiaľ ho je možné upravovať len v režime zdrojového textu.",
 	"cite-ve-toolbar-group-label": "Citácia",
 	"cite-ve-othergroup-item": "$1 referencia",

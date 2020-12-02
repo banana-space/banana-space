@@ -22,14 +22,15 @@ namespace MediaWiki\Preferences;
 
 use HTMLForm;
 use IContextSource;
+use PreferencesFormOOUI;
 use User;
 
 /**
  * A PreferencesFactory is a MediaWiki service that provides the definitions of preferences for a
  * given user. These definitions are in the form of an HTMLForm descriptor.
  *
- * PreferencesForm (a subclass of HTMLForm) is used to generate the Preferences form, and handles
- * generic submission, CSRF protection, layout and other logic in a reusable manner.
+ * PreferencesFormOOUI (a subclass of HTMLForm) is used to generate the Preferences form, and
+ * handles generic submission, CSRF protection, layout and other logic in a reusable manner.
  *
  * In order to generate the form, the HTMLForm object needs an array structure detailing the
  * form fields available, and that's what this implementations of this interface provide. Each
@@ -47,6 +48,8 @@ use User;
  *
  * Once fields have been retrieved and validated, submission logic is handed over to the
  * submitForm() method of this interface.
+ *
+ * @stable to implement
  */
 interface PreferencesFactory {
 
@@ -62,7 +65,7 @@ interface PreferencesFactory {
 	public function getForm(
 		User $user,
 		IContextSource $contextSource,
-		$formClass = \PreferencesForm::class,
+		$formClass = PreferencesFormOOUI::class,
 		array $remove = []
 	);
 

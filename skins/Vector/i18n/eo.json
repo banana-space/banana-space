@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"KuboF",
+			"Mirin",
 			"Objectivesea",
 			"Yekrats"
 		]
 	},
 	"skinname-vector": "Vektoro",
+	"vector-skin-desc": "Moderna versio de MonoBook kun freŝa aspekto kaj plibonigo de uzebleco",
 	"vector.css": "/* La jena CSS influos la paĝaspekton por uzantoj de la Vektora temo. */",
 	"vector.js": "/* La jena Ĝavaskripto ŝargiĝos por uzantoj de la Vektora temo. */",
 	"vector-action-addsection": "Aldoni temon",
@@ -20,5 +22,7 @@
 	"vector-view-history": "Vidi historion",
 	"vector-view-view": "Legi",
 	"vector-view-viewsource": "Vidi fonton",
+	"vector-jumptonavigation": "Salti al navigilo",
+	"vector-jumptosearch": "Salti al serĉilo",
 	"vector-more-actions": "Pli"
 }

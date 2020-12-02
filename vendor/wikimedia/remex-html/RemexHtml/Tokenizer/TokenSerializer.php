@@ -4,6 +4,11 @@ namespace RemexHtml\Tokenizer;
 
 /**
  * A simple serializer for the token stream, mostly meant for debugging.
+ *
+ * The main reason this shouldn't be used in production for modification of
+ * HTML documents is that element names are only determined by TreeBuilder
+ * and are not known here. The correct serialization for a text node depends
+ * on its parent element, including its namespace.
  */
 class TokenSerializer implements TokenHandler {
 	private $output;

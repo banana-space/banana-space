@@ -2,52 +2,69 @@
 
 namespace Wikimedia\Rdbms;
 
-use stdClass;
+use InvalidArgumentException;
 use RuntimeException;
+use stdClass;
 
 /**
  * Result wrapper for grabbing data queried from an IDatabase object
  *
+ * Only IDatabase-related classes should construct these. Other code may
+ * use the FakeResultWrapper class for convenience or compatibility shims.
+ *
  * Note that using the Iterator methods in combination with the non-Iterator
- * DB result iteration functions may cause rows to be skipped or repeated.
+ * IDatabase result iteration functions may cause rows to be skipped or repeated.
  *
  * By default, this will use the iteration methods of the IDatabase handle if provided.
  * Subclasses can override methods to make it solely work on the result resource instead.
- * If no database is provided, and the subclass does not override the DB iteration methods,
- * then a RuntimeException will be thrown when iteration is attempted.
- *
- * The result resource field should not be accessed from non-Database related classes.
- * It is database class specific and is stored here to associate iterators with queries.
  *
  * @ingroup Database
  */
 class ResultWrapper implements IResultWrapper {
-	/** @var resource|array|null Optional underlying result handle for subclass usage */
-	public $result;
-
-	/** @var IDatabase|null */
+	/** @var IDatabase */
 	protected $db;
+	/** @var mixed|null RDBMS driver-specific result resource */
+	protected $result;
 
 	/** @var int */
 	protected $pos = 0;
-	/** @var stdClass|null */
-	protected $currentRow = null;
+	/** @var stdClass|bool|null */
+	protected $currentRow;
 
 	/**
-	 * Create a row iterator from a result resource and an optional Database object
-	 *
-	 * Only Database-related classes should construct ResultWrapper. Other code may
-	 * use the FakeResultWrapper subclass for convenience or compatibility shims, however.
-	 *
-	 * @param IDatabase|null $db Optional database handle
-	 * @param ResultWrapper|array|resource $result Optional underlying result handle
+	 * @param IDatabase $db Database handle that the result comes from
+	 * @param self|mixed $result RDBMS driver-specific result resource
 	 */
-	public function __construct( IDatabase $db = null, $result ) {
+	public function __construct( IDatabase $db, $result ) {
 		$this->db = $db;
-		if ( $result instanceof ResultWrapper ) {
+		if ( $result instanceof self ) {
 			$this->result = $result->result;
-		} else {
+		} elseif ( $result !== null ) {
 			$this->result = $result;
+		} else {
+			throw new InvalidArgumentException( "Null result resource provided" );
+		}
+	}
+
+	/**
+	 * Get the underlying RDBMS driver-specific result resource
+	 *
+	 * The result resource field should not be accessed from non-Database related classes.
+	 * It is database class specific and is stored here to associate iterators with queries.
+	 *
+	 * @param self|mixed &$res
+	 * @return mixed
+	 * @since 1.34
+	 */
+	public static function &unwrap( &$res ) {
+		if ( $res instanceof self ) {
+			if ( $res->result === null ) {
+				throw new RuntimeException( "The result resource was already freed" );
+			}
+
+			return $res->result;
+		} else {
+			return $res;
 		}
 	}
 
@@ -63,16 +80,45 @@ class ResultWrapper implements IResultWrapper {
 		return $this->getDB()->fetchRow( $this );
 	}
 
-	public function seek( $row ) {
-		$this->getDB()->dataSeek( $this, $row );
+	public function seek( $pos ) {
+		$this->getDB()->dataSeek( $this, $pos );
+		$this->pos = $pos;
 	}
 
 	public function free() {
-		if ( $this->db ) {
-			$this->db->freeResult( $this );
-			$this->db = null;
-		}
+		$this->db = null;
 		$this->result = null;
+	}
+
+	public function rewind() {
+		if ( $this->numRows() ) {
+			$this->getDB()->dataSeek( $this, 0 );
+		}
+		$this->pos = 0;
+		$this->currentRow = null;
+	}
+
+	public function current() {
+		if ( $this->currentRow === null ) {
+			$this->currentRow = $this->fetchObject();
+		}
+
+		return $this->currentRow;
+	}
+
+	public function key() {
+		return $this->pos;
+	}
+
+	public function next() {
+		$this->pos++;
+		$this->currentRow = $this->fetchObject();
+
+		return $this->currentRow;
+	}
+
+	public function valid() {
+		return $this->current() !== false;
 	}
 
 	/**
@@ -81,42 +127,14 @@ class ResultWrapper implements IResultWrapper {
 	 */
 	private function getDB() {
 		if ( !$this->db ) {
-			throw new RuntimeException( static::class . ' needs a DB handle for iteration.' );
+			throw new RuntimeException( "Database handle was already freed" );
 		}
 
 		return $this->db;
 	}
-
-	function rewind() {
-		if ( $this->numRows() ) {
-			$this->getDB()->dataSeek( $this, 0 );
-		}
-		$this->pos = 0;
-		$this->currentRow = null;
-	}
-
-	function current() {
-		if ( is_null( $this->currentRow ) ) {
-			$this->next();
-		}
-
-		return $this->currentRow;
-	}
-
-	function key() {
-		return $this->pos;
-	}
-
-	function next() {
-		$this->pos++;
-		$this->currentRow = $this->fetchObject();
-
-		return $this->currentRow;
-	}
-
-	function valid() {
-		return $this->current() !== false;
-	}
 }
 
+/**
+ * @deprecated since 1.29
+ */
 class_alias( ResultWrapper::class, 'ResultWrapper' );

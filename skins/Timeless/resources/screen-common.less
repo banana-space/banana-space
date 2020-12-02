@@ -7,32 +7,45 @@ body {
 	margin: 0;
 	padding: 0;
 }
+
 body {
 	font-family: @fonts;
 	color: @text;
-	background: @background-dark;
+	background: @base30;
 	font-size: @font-size;
-	line-height: 1.4;
+	line-height: 1.5;
 }
 
 #mw-content {
 	.box;
 	background: @background;
 	padding: 1em @content-padding 3em;
-	position: relative;
 }
-#mw-content-container {
-	background: @background2;
+
+#bodyContentOuter {
+	/* Set a z-index for the content to group it away from any nav stuff (extensions) - T200148 */
+	position: relative;
+	z-index: 0;
+}
+
+.mw-body {
 	word-wrap: break-word;
 }
-#mw-footer-container {
-	border-top: solid 1px @background-dark2;
+
+.mw-footer-container {
+	border-top: solid 1px @base20;
 	box-shadow: inset 0 7px 2px -4px rgba( 0, 0, 0, 0.1 );
-	color: @text-inverse;
+	color: @base100;
 
 	a {
-		color: @text-inverse;
+		color: @blue-bright;
+
+		&:hover,
+		&:visited {
+			color: @base90;
+		}
 	}
+
 	ul {
 		margin: 0;
 	}
@@ -42,33 +55,30 @@ body {
 	text-align: center;
 	margin: auto;
 }
-.mw-wiki-logo {
-	display: block;
-	content: '';
-	width: 11em;
-	height: 11em;
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-	margin: 0.75em auto 0;
-}
+
 #p-logo-text {
-	width: @column-left-size;
+	max-width: @column-left-size;
 	text-align: center;
 	line-height: 1;
 
 	a {
-		padding: 0.2em 1em;
+		padding: 0.1em 1em 0.2em;
 		color: @text;
 		font-family: @fonts-secondary;
 		font-variant: small-caps;
-		font-size: 1.75em;
+		font-size: 1.85em;
 		display: block;
 
 		/* 13+ character names */
 		&.long {
-			font-size: 1.45em;
+			font-size: 1.5em;
 			padding: 0 0.75em 0 0;
 			line-height: 0.8;
+		}
+
+		/* images */
+		&.wordmark {
+			padding: 0 0.5em 0 0;
 		}
 	}
 }
@@ -79,8 +89,9 @@ body {
 	box-shadow: inset 0 2px 4px 0 rgba( 0, 0, 0, 0.05 );
 	background: @background;
 	position: relative;
-	border: solid 1px @grey;
+	border: solid 1px @base70;
 }
+
 #searchInput {
 	border: 0;
 	margin: 0;
@@ -90,17 +101,22 @@ body {
 	background: transparent;
 	width: 100%;
 	min-height: 0;
+	font-family: inherit;
 }
+
 #searchButton,
 #mw-searchButton {
 	position: absolute;
 	top: 0;
+	margin: 0;
+	padding: 0;
 	right: 1.5em;
 	width: 2.5em;
 	height: 2.5em;
 	.icon;
 	.background-image-svg( 'images/search-ltr.svg', 'images/search-ltr.png' );
-	background-position: 50% 40%;
+	/* @noflip */
+	background-position: center 40%;
 	box-shadow: none;
 }
 
@@ -110,52 +126,26 @@ body {
 
 	.suggestions-special {
 		background-color: @background;
-		border: 1px solid @grey;
+		border: 1px solid @base70;
 		border-bottom-width: @border;
 		padding: 0.75em 2em;
 	}
+
 	.suggestions-results {
 		background-color: @background;
-		border: 1px solid @grey;
+		border: 1px solid @base70;
 		border-bottom-width: @border;
 	}
+
 	.suggestions-result {
 		color: @text;
 		padding: 0.65em 2em 0.35em;
 	}
+
 	.suggestions-result-current {
 		background-color: @blue;
 		color: @background;
 	}
-}
-div.suggestions {
-	position: fixed;
-	top: 2.75em !important; // Override js-provided value to account for fixed header
-}
-
-/* Dropdown stuff */
-
-.pokey,
-.pokey:after {
-	border-bottom: 10px solid @grey-bright;
-	border-left: 10px solid transparent;
-	border-right: 10px solid transparent;
-	content: '';
-	height: 0;
-	position: absolute;
-	transform: rotate( 360deg ); // to force some smoothing in annoying browsers
-	width: 0;
-	z-index: 4;
-}
-.pokey {
-	top: 1.85em;
-	right: 1px;
-	display: none;
-}
-.pokey:after {
-	border-bottom-color: #fff;
-	right: -10px;
-	top: 2px;
 }
 
 .dropdown-toggle {
@@ -164,7 +154,7 @@ div.suggestions {
 
 /* Footer */
 
-#mw-footer {
+.mw-footer {
 	padding-top: 0.5em;
 	padding-bottom: 1em;
 
@@ -174,6 +164,7 @@ div.suggestions {
 		list-style: none;
 		padding: 0;
 	}
+
 	.footer-icons {
 		float: right;
 		margin: 0 0 0 1em;
@@ -182,11 +173,15 @@ div.suggestions {
 			margin: 0 0 1em 0;
 		}
 	}
+
 	.footer-places li {
 		display: inline;
 		padding-right: 1em;
 	}
-	#lastmod {
+
+	#lastmod,
+	#credits,
+	#copyright {
 		display: block;
 	}
 }
@@ -194,9 +189,17 @@ div.suggestions {
 /* Content */
 
 #mw-content-container {
+	background: @base80;
 	border-bottom: solid 4px @green;
+
+	/* Background image (default cat) */
+	background-image: @backdrop-image;
+	background-repeat: no-repeat;
+	background-position: center 10em;
 }
-#mw-page-header-links {
+
+.tools-inline,
+.tools-inline & {
 	div,
 	ul,
 	li {
@@ -205,22 +208,29 @@ div.suggestions {
 		margin: 0;
 		padding: 0;
 	}
-	li {
-		margin: 0.25em 0 1em;
-		border-bottom: solid 3px transparent;
+}
 
-		&:hover {
-			border-bottom-color: @grey;
-		}
-		&.selected {
-			border-bottom-color: @blue;
+.tools-inline li {
+	margin: 0.25em 0 1em;
+	border-bottom: solid 3px transparent;
 
-			a {
-				color: @text;
-			}
+	&:hover {
+		border-bottom-color: @base70;
+	}
+
+	&.selected {
+		border-bottom-color: @blue;
+
+		a {
+			color: @text;
 		}
 	}
+
+	a {
+		.ca-icon( 'images/page-misc-grey' );
+	}
 }
+
 #p-namespaces {
 	float: left;
 
@@ -228,7 +238,9 @@ div.suggestions {
 		margin-right: 1em;
 	}
 }
-#p-views {
+
+#p-views,
+#p-more {
 	float: right;
 
 	li {
@@ -237,65 +249,151 @@ div.suggestions {
 }
 
 #ca-watch a {
-	.ca-icon();
-	.background-image-svg( 'images/star.svg', 'images/star.png' );
+	.ca-icon( 'images/star' );
+	.ca-icon-only();
 }
+
 #ca-unwatch a {
-	.ca-icon();
-	.background-image-svg( 'images/star-filled.svg', 'images/star-filled.png' );
+	.ca-icon( 'images/star-filled' );
+	.ca-icon-only();
+}
+
+#ca-edit a {
+	.ca-icon( 'images/pencil-grey' );
+}
+
+#ca-history a {
+	.ca-icon( 'images/clock-grey' );
+}
+
+#ca-talk a {
+	.ca-icon( 'images/talk-grey' );
+}
+
+#t-contributions a {
+	.ca-icon( 'images/puzzle-grey' );
+}
+
+#ca-addsection a {
+	.ca-icon( 'images/plus-grey' );
+}
+
+#ca-viewsource a {
+	.ca-icon( 'images/brackets-grey' );
+}
+
+#ca-view {
+	.hidden();
+
+	/* Let's give anyone who forcibly brings it back a creepy eyeball */
+	a {
+		.ca-icon( 'images/eyeball-grey' );
+	}
+}
+
+.tools-inline li[ id^='ca-nstab-' ] a {
+	.ca-icon( 'images/page-grey' );
+}
+
+#siteNotice {
+	font-size: 95%;
+	margin: 0.5em auto 1.5em;
+}
+
+#localNotice {
+	.box();
+	padding: 0;
+	text-align: center;
+
+	p {
+		margin-left: 1em;
+		margin-right: 1em;
+	}
 }
 
 /* Misc */
 
 a {
 	text-decoration: none;
-	color: @blue;
+	color: @link;
 
 	&:hover,
 	&:visited {
-		color: @blue-dark;
+		color: @link-visited;
 	}
 }
+
 a.new,
 .new a {
-	color: @red;
+	color: @link-red;
 
 	&:hover,
 	&:visited {
-		color: @red-dark;
+		color: @link-red-visited;
 	}
+}
+
+a.mw-selflink {
+	color: inherit;
+	font-weight: bold;
+	text-decoration: inherit;
 }
 
 .mw-editsection {
 	font-family: @fonts;
+	.background-image-svg( 'images/pencil-grey.svg', 'images/pencil-grey.png' );
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	padding-left: 20px;
+	padding-top: 0.5em;
 
 	a {
-		.background-image-svg( 'images/pencil-grey.svg', 'images/pencil-grey.png' );
-		background-repeat: no-repeat;
-		background-position: 0 0;
 		display: inline-block;
-		padding: 0.5em 0 0.25em 1.75em;
+		padding: 0.5em 0 0.25em;
+		margin-right: 1em;
+
+		&:first-of-type {
+			/* make the icon part of the first link */
+			padding-left: 20px;
+			margin-left: -20px;
+		}
 	}
 }
+
 .mw-editsection-bracket {
 	display: none;
 }
+
 .visual-clear {
 	clear: both;
 }
+
 .mw-indicators {
 	float: right;
-	margin: 0.25em 0 0 1em;
+	margin: 0.75em 0 0 1em;
 }
+
 .mw-indicator {
 	display: inline-block;
 }
+
+div.magnify a {
+	display: block;
+	text-indent: 20px;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 20px;
+	height: 20px;
+	margin: 0 0 0.5em 0.5em;
+	.background-image-svg( 'images/magnify-ltr.svg', 'images/magnify-ltr.png' );
+}
+
 /* Subtitle area
  * @see https://phabricator.wikimedia.org/T173951
  */
 #contentSub {
 	font-size: 84%;
-	color: @grey-dark;
+	color: @base20;
 
 	/* This forces "redirect page" (on a redirect page) etc. on a new line */
 	.subpages {
@@ -307,25 +405,36 @@ a.new,
  * /resources/src/mediawiki.skinning/elements.css and modified a bit
  * @see https://phabricator.wikimedia.org/T177142
  */
-code {
+
+.screenplay,
+code,
+tt,
+kbd,
+pre,
+samp {
+	font-family: @fonts-mono;
+}
+
+code,
+pre,
+.mw-code {
 	color: #000;
-	background-color: @grey-bright;
-	border: 1px solid @grey-dark;
-	border-radius: 2px;
+	background-color: @base90;
+	border: 1px solid @base70;
+}
+
+code {
 	padding: 1px 4px;
 }
 
 pre,
 .mw-code {
-	color: #000;
-	background-color: @grey-bright;
-	border: 1px solid @grey-dark;
 	padding: 1em;
 	/* Wrap lines in overflow. T2260, T103780 */
 	white-space: pre-wrap;
 }
 
-#mw-content {
+.mw-body {
 	h1,
 	h2,
 	h3,
@@ -335,56 +444,107 @@ pre,
 	dt {
 		font-weight: normal;
 		font-family: @fonts-secondary;
-		line-height: 1.25;
-		margin: 1.5em 0 0.5em;
+		line-height: 1.125;
+		margin: 1.25em 0 0.5em;
 	}
+
+	dt {
+		font-weight: bold;
+		font-family: @fonts-secondary;
+		line-height: 1.125;
+		margin: 1.5em 0 0.5em;
+		margin-bottom: 0.1em;
+	}
+
+	dl {
+		margin-top: 0.2em;
+		margin-bottom: 0.5em;
+	}
+
 	form dt {
 		margin: 0 0.5em 0 0;
 	}
 
-	h1,
-	h2 {
-		border-bottom: solid 2px @blue;
-		overflow: hidden;
-	}
-
 	h1.firstHeading {
 		margin: 0.25em 0 0.5em;
-		border-bottom: solid 4px @red;
+		border-bottom: solid 4px @blue;
 	}
 
 	h1 {
 		font-size: 2em;
+		border-bottom: solid 3px @base70;
 	}
+
 	h2 {
-		font-size: 1.7em;
+		font-size: 1.8em;
+		border-bottom: solid 2px @base70;
 	}
+
 	h3 {
-		font-size: 1.5em;
+		font-size: 1.6em;
 	}
+
 	h4 {
-		font-size: 1.35em;
+		font-size: 1.4em;
 	}
+
 	h5 {
 		font-size: 1.25em;
 	}
+
 	h6 {
 		font-size: 1.2em;
 	}
+
 	dt {
 		margin-top: 1em;
 	}
+
 	dd {
 		margin-bottom: 1em;
 	}
+
+	.mw-changeslist-legend dt {
+		margin: 0 0.5em 0 0;
+	}
+
 	.mw-changeslist-legend dd {
 		margin-bottom: 0;
 	}
+
+	/* overflow:hidden on the header itself breaks tall scripts, but we need to hide
+	 * overflow on the border itself in output for proper thumb handling. Too weird to
+	 * change this everywhere, so we'll just do it for parser output for now.
+	 */
+	.mw-parser-output {
+		h1,
+		h2 {
+			border-bottom: 0;
+
+			&:after {
+				content: '';
+				display: block;
+				border-bottom: solid 2px @base70;
+				overflow: hidden;
+			}
+		}
+
+		h1:after {
+			border-bottom-width: 3px;
+		}
+	}
+}
+
+#siteSub {
+	margin: -0.5em 0 0.5em 0;
+	font-style: italic;
+	font-family: @fonts-secondary;
+	display: none;
 }
 
 hr {
 	border-width: 1px;
-	border-color: @grey;
+	border-color: @base70;
 	border-style: solid none solid none;
 	margin: 0.5em 0;
 }
@@ -392,106 +552,184 @@ hr {
 pre {
 	overflow: auto;
 	white-space: pre-wrap;
-	font-family: @fonts-monospace;
 }
 
 p {
-	margin: 0.9em 0 0.8em;
+	margin: 1em 0;
 }
 
-.center,
-.center * {
+ul {
+	padding: 0;
+	margin: 0.3em 0 0 1.6em;
+}
+
+.mw-empty-elt {
+	display: none;
+}
+
+.center {
 	margin: auto;
 	text-align: center;
 }
 
 /* Thumbnails */
 /* @noflip */
+.floatright,
 .tright {
 	margin: 0 0 0.5em 0.5em;
 	padding: 0 0 1em 1.5em;
 }
+
 /* @noflip */
+.floatleft,
 .tleft {
 	margin: 0 0.5em 0.5em 0;
 	padding: 0 1.5em 1em 0;
-
 }
+
 .thumbinner {
 	.box;
 	padding: 0.75em;
+	/* Properly center framed thumbnail images (T219717) */
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
 }
+
 .thumbcaption {
 	font-size: 95%;
-	padding: 0.5em 1em;
+	padding: 0.5em 0 0;
+	/* For the magnify link on empty captions */
+	min-height: 1em;
 }
-.thumbinner .thumbimage {
-	border: solid 1px @grey-bright;
+
+.thumbinner .thumbimage,
+.thumbborder {
+	border: solid 1px @base80;
 }
-#mw-content li.gallerybox div.thumb {
+
+.mw-body li.gallerybox div.thumb {
 	.box;
 	padding: 0;
 }
 
 /* Tables of contents */
 ul#filetoc,
-#toc,
 .toc,
 .mw-warning {
-	display: inline-block;
+	display: table;
 	.box;
 	padding: 1.25em 1.75em;
-	margin: 1em 0;
+	margin-top: 1em;
+	margin-bottom: 1em;
 	min-width: 15em;
 }
+
+.toc {
+	line-height: 1.2;
+
+	ul {
+		margin: 1em 0 0;
+		list-style: none;
+		text-align: left;
+	}
+
+	li {
+		margin: 0.3em 0;
+
+		&:last-child {
+			margin-bottom: 0.5em;
+		}
+	}
+}
+
 ul#filetoc {
 	display: block;
-	border: 0;
+	margin-bottom: 2em;
 }
-#toc ul,
-.toc ul {
-	margin: 1em 0 0;
-	list-style: none;
+
+.mw-body .toctitle {
+	border-bottom: solid 2px @base70;
+
+	h2 {
+		font-size: 1em;
+		font-family: @fonts;
+		margin: 0;
+		display: inline;
+
+		&:after {
+			display: none;
+		}
+	}
 }
-#mw-content .toc h2 {
-	font-size: 1.2em;
-	font-family: @fonts;
-	margin: 0;
-	display: inline-block;
-	border-bottom-color: @grey;
+
+.toctogglespan {
+	float: right;
 }
-.toctoggle {
-	color: @background3;
+
+/* Remove brackets around the show/hide button of the TOC
+The selectors have a higher specifity than in core */
+body :not( :checked ) > .toctogglespan:before,
+body :not( :checked ) > .toctogglespan:after {
+	content: '';
 }
-#toc li:last-child {
-	margin-bottom: 0.5em;
+
+.toctogglelabel {
+	padding-left: 0; /* Overwrite label { padding-left: 0.5em; } from forms.less */
+	margin-left: 0.5em; /* Create new distance to the TOC title without increasing the focus ring */
 }
+
 .toclevel-1 {
 	margin-bottom: 0.25em;
 }
+
+.tocnumber {
+	color: @base20;
+}
+
+.skin-timeless .mw-body .oo-ui-tagMultiselectWidget-handle,
+.skin-timeless .mw-body .oo-ui-capsuleMultiselectWidget-handle {
+	margin: 0; /* wat */
+}
+
+.mw-body .mw-rcfilters-ui-changesListWrapperWidget .mw-changeslist-legend, /* wat */
 .mw-changeslist-legend,
-#mw-content .mw-search-profile-tabs,
-#mw-content fieldset#mw-searchoptions,
-table.wikitable {
-	border: 0;
+.mw-body .mw-search-profile-tabs,
+.mw-body fieldset#mw-searchoptions,
+.wikitable,
+.mw-datatable {
 	color: @text;
 	.box;
 }
-#mw-content .mw-search-profile-tabs {
+
+.mw-body .mw-search-profile-tabs {
 	padding: 0.5em;
 }
 
-table.wikitable > tr > th,
-table.wikitable > tr > td,
-table.wikitable > * > tr > th,
-table.wikitable > * > tr > td {
-	border: 1px solid @grey-bright;
-	padding: 0.5em;
+.mw-datatable,
+.wikitable {
+	border-color: @base70;
+
+	> tr > th,
+	> tr > td,
+	> * > tr > th,
+	> * > tr > td {
+		border: 1px solid @base70;
+		padding: 0.4em 0.5em;
+	}
+
+	> tr > th,
+	> * > tr > th {
+		border-bottom-width: 2px;
+	}
 }
 
-table.wikitable > tr > th,
-table.wikitable > * > tr > th {
-	border: 0;
+.mw-datatable th {
+	background: @blue-bright;
+}
+
+.wikitable th {
+	background: @base80;
 }
 
 /* Color bars */
@@ -499,12 +737,14 @@ table.wikitable > * > tr > th {
 .color-bar {
 	width: 100%;
 }
+
 .color-left {
 	height: @color-height;
 	background: @red-dark;
 	width: 50%;
 	float: left;
 }
+
 .color-right {
 	display: inline-block;
 	height: @color-height;
@@ -512,11 +752,13 @@ table.wikitable > * > tr > th {
 	width: 50%;
 	float: right;
 }
+
 .color-middle-container {
 	max-width: @content-width;
 	margin: 0 auto -@color-height;
 	position: relative;
 }
+
 .color-middle {
 	height: @color-height;
 	background: @blue-dark;
@@ -525,9 +767,11 @@ table.wikitable > * > tr > th {
 }
 
 /* Portlets */
-.emptyPortlet {
+.emptyPortlet,
+#mw-page-header-links .emptyPortlet {
 	display: none;
 }
+
 #p-lang.emptyPortlet {
 	display: inherit;
 }
@@ -536,6 +780,7 @@ table.wikitable > * > tr > th {
 
 #p-namespaces h3,
 #p-views h3,
+#p-more h3,
 #p-search h3 {
 	.hidden;
 }

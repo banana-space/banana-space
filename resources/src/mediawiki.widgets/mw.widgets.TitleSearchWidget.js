@@ -4,7 +4,7 @@
  * @copyright 2011-2015 MediaWiki Widgets Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-( function ( mw ) {
+( function () {
 
 	/**
 	 * Creates an mw.widgets.TitleSearchWidget object.
@@ -77,6 +77,11 @@
 		var widget = this;
 
 		this.getRequestData().done( function ( data ) {
+			if ( widget.query.isReadOnly() ) {
+				// The request object is always abortable, so just
+				// prevent the results from displaying
+				return;
+			}
 			// Parent method
 			mw.widgets.TitleSearchWidget.parent.prototype.onQueryChange.call( widget );
 			widget.results.addItems( widget.getOptionsFromData( data ) );
@@ -102,4 +107,29 @@
 		return response.query || {};
 	};
 
-}( mediaWiki ) );
+	/**
+	 * Check if the widget is read-only.
+	 *
+	 * @return {boolean}
+	 */
+	mw.widgets.TitleSearchWidget.prototype.isReadOnly = function () {
+		return this.query.isReadOnly();
+	};
+
+	/**
+	 * Set the read-only state of the widget.
+	 *
+	 * @param {boolean} readOnly Make input read-only
+	 * @chainable
+	 * @return {mw.widgets.TitleSearchWidget} The widget, for chaining
+	 */
+	mw.widgets.TitleSearchWidget.prototype.setReadOnly = function ( readOnly ) {
+		this.query.setReadOnly( readOnly );
+		if ( readOnly ) {
+			// Hide results
+			this.results.clearItems();
+		}
+		return this;
+	};
+
+}() );

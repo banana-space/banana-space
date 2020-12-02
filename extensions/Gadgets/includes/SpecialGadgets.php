@@ -9,14 +9,15 @@
  * @license GPL-2.0-or-later
  */
 
+use MediaWiki\MediaWikiServices;
+
 class SpecialGadgets extends SpecialPage {
 	public function __construct() {
 		parent::__construct( 'Gadgets', '', true );
 	}
 
 	/**
-	 * Main execution function
-	 * @param string $par Parameters passed to the page
+	 * @param string|null $par Parameters passed to the page
 	 */
 	public function execute( $par ) {
 		$parts = explode( '/', $par );
@@ -29,17 +30,16 @@ class SpecialGadgets extends SpecialPage {
 	}
 
 	private function makeAnchor( $gadgetName ) {
-		return 'gadget-' . Sanitizer::escapeId( $gadgetName, [ 'noninitial' ] );
+		return 'gadget-' . Sanitizer::escapeIdForAttribute( $gadgetName );
 	}
 
 	/**
 	 * Displays form showing the list of installed gadgets
 	 */
 	public function showMainForm() {
-		global $wgContLang;
-
 		$output = $this->getOutput();
 		$this->setHeaders();
+		$this->addHelpLink( 'Extension:Gadgets' );
 		$output->setPageTitle( $this->msg( 'gadgets-title' ) );
 		$output->addWikiMsg( 'gadgets-pagetext' );
 
@@ -51,7 +51,7 @@ class SpecialGadgets extends SpecialPage {
 		$output->disallowUserJs();
 		$lang = $this->getLanguage();
 		$langSuffix = "";
-		if ( $lang->getCode() != $wgContLang->getCode() ) {
+		if ( !$lang->equals( MediaWikiServices::getInstance()->getContentLanguage() ) ) {
 			$langSuffix = "/" . $lang->getCode();
 		}
 
@@ -103,22 +103,32 @@ class SpecialGadgets extends SpecialPage {
 					$this->msg( 'gadgets-export' )->text()
 				);
 
-				$ttext = $this->msg( "gadget-{$name}" )->parse();
+				$nameHtml = $this->msg( "gadget-{$name}" )->parse();
 
 				if ( !$listOpen ) {
 					$listOpen = true;
-					$output->addHTML( Xml::openElement( 'ul' ) );
+					$output->addHTML( Html::openElement( 'ul' ) );
 				}
 
-				$actions = '&#160;&#160;' .
+				$actionsHtml = '&#160;&#160;' .
 					$this->msg( 'parentheses' )->rawParams( $lang->pipeList( $links ) )->escaped();
 				$output->addHTML(
-					Xml::openElement( 'li', [ 'id' => $this->makeAnchor( $name ) ] ) .
-						$ttext . $actions . "<br />" .
-						$this->msg( 'gadgets-uses' )->escaped() .
-						$this->msg( 'colon-separator' )->escaped()
+					Html::openElement( 'li', [ 'id' => $this->makeAnchor( $name ) ] ) .
+						$nameHtml . $actionsHtml
 				);
+				// Whether the next portion of the list item contents needs
+				// a line break between it and the next portion.
+				// This is set to false after lists, but true after lines of text.
+				$needLineBreakAfter = true;
 
+				// Portion: Show files, dependencies, speers
+				if ( $needLineBreakAfter ) {
+					$output->addHTML( '<br />' );
+				}
+				$output->addHTML(
+					$this->msg( 'gadgets-uses' )->escaped() .
+					$this->msg( 'colon-separator' )->escaped()
+				);
 				$lnk = [];
 				foreach ( $gadget->getPeers() as $peer ) {
 					$lnk[] = Html::element(
@@ -129,34 +139,48 @@ class SpecialGadgets extends SpecialPage {
 				}
 				foreach ( $gadget->getScriptsAndStyles() as $codePage ) {
 					$t = Title::newFromText( $codePage );
-
 					if ( !$t ) {
 						continue;
 					}
-
 					$lnk[] = $linkRenderer->makeLink( $t, $t->getText() );
 				}
 				$output->addHTML( $lang->commaList( $lnk ) );
+
+				// Portion: Legacy scripts
 				if ( $gadget->getLegacyScripts() ) {
-					$output->addHTML( '<br />' . Html::rawElement(
+					if ( $needLineBreakAfter ) {
+						$output->addHTML( '<br />' );
+					}
+					$output->addHTML( Html::rawElement(
 						'span',
 						[ 'class' => 'mw-gadget-legacy errorbox' ],
 						$this->msg( 'gadgets-legacy' )->parse()
 					) );
+					$needLineBreakAfter = true;
 				}
 
+				// Portion: Show required rights (optional)
 				$rights = [];
 				foreach ( $gadget->getRequiredRights() as $right ) {
-					$rights[] = '* ' . $this->msg( "right-$right" )->plain();
-				}
-				if ( count( $rights ) ) {
-					$output->addHTML( '<br />' .
-							$this->msg( 'gadgets-required-rights', implode( "\n", $rights ), count( $rights ) )->parse()
+					$rights[] = '* ' . Html::element(
+						'code',
+						[ 'title' => $this->msg( "right-$right" )->plain() ],
+						$right
 					);
 				}
+				if ( $rights ) {
+					if ( $needLineBreakAfter ) {
+						$output->addHTML( '<br />' );
+					}
+					$output->addHTML(
+						$this->msg( 'gadgets-required-rights', implode( "\n", $rights ), count( $rights ) )->parse()
+					);
+					$needLineBreakAfter = false;
+				}
 
+				// Portion: Show required skins (optional)
 				$requiredSkins = $gadget->getRequiredSkins();
-				// $requiredSkins can be an array or true (if all skins are supported)
+				// $requiredSkins can be an array, or true (if all skins are supported)
 				if ( is_array( $requiredSkins ) ) {
 					$skins = [];
 					$validskins = Skin::getSkinNames();
@@ -167,25 +191,33 @@ class SpecialGadgets extends SpecialPage {
 							$skins[] = $skinid;
 						}
 					}
-					if ( count( $skins ) ) {
+					if ( $skins ) {
+						if ( $needLineBreakAfter ) {
+							$output->addHTML( '<br />' );
+						}
 						$output->addHTML(
-							'<br />' .
 							$this->msg( 'gadgets-required-skins', $lang->commaList( $skins ) )
 								->numParams( count( $skins ) )->parse()
 						);
+						$needLineBreakAfter = true;
 					}
 				}
 
+				// Portion: Show on by default (optional)
 				if ( $gadget->isOnByDefault() ) {
-					$output->addHTML( '<br />' . $this->msg( 'gadgets-default' )->parse() );
+					if ( $needLineBreakAfter ) {
+						$output->addHTML( '<br />' );
+					}
+					$output->addHTML( $this->msg( 'gadgets-default' )->parse() );
+					$needLineBreakAfter = true;
 				}
 
-				$output->addHTML( Xml::closeElement( 'li' ) . "\n" );
+				$output->addHTML( Html::closeElement( 'li' ) . "\n" );
 			}
 		}
 
 		if ( $listOpen ) {
-			$output->addHTML( Xml::closeElement( 'ul' ) . "\n" );
+			$output->addHTML( Html::closeElement( 'ul' ) . "\n" );
 		}
 	}
 
@@ -196,6 +228,7 @@ class SpecialGadgets extends SpecialPage {
 	public function showExportForm( $gadget ) {
 		global $wgScript;
 
+		$this->addHelpLink( 'Extension:Gadgets' );
 		$output = $this->getOutput();
 		try {
 			$g = GadgetRepo::singleton()->getGadget( $gadget );

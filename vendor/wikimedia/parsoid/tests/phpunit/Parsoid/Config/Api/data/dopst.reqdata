@@ -1,0 +1,2 @@
+{"action":"parse","title":"Foobar","text":"Foobar.{{cn}} {{subst:unsigned|Example}} ~~~~~","contentmodel":"wikitext","onlypst":1}
+{"parse":{"text":"Foobar.{{cn}} <!-- Template:Unsigned --><small class=\"autosigned\">—&nbsp;Preceding [[Wikipedia:Signatures|unsigned]] comment added by [[User:Example|Example]] ([[User talk:Example#top|talk]] • [[Special:Contributions/Example|contribs]]) </small> 15:43, 26 March 2019 (UTC)"}}

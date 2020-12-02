@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"KuboF",
 			"Tlustulimu",
-			"Yekrats",
-			"KuboF"
+			"Yekrats"
 		]
 	},
 	"codeeditor-desc": "Ebligas la redaktadon de JavaScript-aj kaj CSS-aj paĝoj kun sintaksa emfazo uzante [https://ace.c9.io/ Ace redaktilon]",

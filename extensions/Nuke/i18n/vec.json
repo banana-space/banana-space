@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Candalua"
+			"Candalua",
+			"Fierodelveneto"
 		]
 	},
 	"nuke": "Scancelazion de massa",
@@ -12,5 +13,5 @@
 	"nuke-tools": "Sto strumento el permete la scancelazion in massa de le pagine creà de recente da un determinato utente o IP. Inserissi el nome utente o l'IP par la lista de le pagine da scancelar:",
 	"nuke-submit-user": "Và",
 	"nuke-submit-delete": "Scancela la selezion",
-	"right-nuke": "Scancelassion de massa de le pagine"
+	"right-nuke": "Descançełasion de pàjine de masa"
 }

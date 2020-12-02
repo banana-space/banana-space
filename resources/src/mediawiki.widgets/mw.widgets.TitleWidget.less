@@ -4,7 +4,7 @@
  * @copyright 2011-2015 MediaWiki Widgets Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-@import 'mediawiki.mixins';
+@import 'mediawiki.mixins.less';
 
 .mw-widget-titleWidget-menu {
 	.mw-widget-titleOptionWidget {
@@ -37,10 +37,13 @@
 					width: 3.75em;
 					height: 3.75em;
 					left: 0;
+
 					&:not( .mw-widget-titleOptionWidget-hasImage ) {
+						background-size: 80%;
 						background-color: #c8ccd1;
 						opacity: 0.4;
 					}
+
 					&.mw-widget-titleOptionWidget-hasImage {
 						border: 0;
 						background-size: cover;
@@ -73,36 +76,10 @@
 		}
 	}
 
-	&:not( &-withDescriptions ) {
+	/* TODO: Should be able to use :not( &-withDescriptions ) but LESS version is buggy (T204816) */
+	&:not( .mw-widget-titleWidget-menu-withDescriptions ) {
 		.mw-widget-titleOptionWidget-description {
 			display: none;
 		}
 	}
-}
-
-/* Icons */
-
-.oo-ui-icon-page-disambiguation {
-	/* @embed */
-	background-image: url( images/page-disambiguation-ltr.svg );
-}
-
-.oo-ui-icon-page-existing {
-	/* @embed */
-	background-image: url( images/page-existing-ltr.svg );
-}
-
-.oo-ui-icon-page-not-found {
-	/* @embed */
-	background-image: url( images/page-not-found-ltr.svg );
-}
-
-.oo-ui-icon-page-not-found:lang( he ) {
-	/* @embed */
-	background-image: url( images/page-not-found-he-yi.svg );
-}
-
-.oo-ui-icon-page-redirect {
-	/* @embed */
-	background-image: url( images/page-redirect-ltr.svg );
 }

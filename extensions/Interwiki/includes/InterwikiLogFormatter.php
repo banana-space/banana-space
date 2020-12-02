@@ -6,6 +6,7 @@
 class InterwikiLogFormatter extends LogFormatter {
 	/**
 	 * @return array
+	 * @suppress SecurityCheck-DoubleEscaped taint-check bug
 	 */
 	protected function getMessageParameters() {
 		$params = parent::getMessageParameters();

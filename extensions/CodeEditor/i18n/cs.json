@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Matěj Suchánek",
 			"Mormegil",
-			"Matěj Suchánek"
+			"Patriccck"
 		]
 	},
 	"codeeditor-desc": "Editace stránek s JavaScriptem a CSS se zvýrazňováním syntaxe prostřednictvím [https://ace.c9.io/ editoru Ace]",
@@ -18,5 +19,5 @@
 	"codeeditor-indent": "Odsadit",
 	"codeeditor-outdent": "Zmenšit odsazení",
 	"codeeditor-error-title": "Nevyplněná závislost",
-	"codeeditor-error-message": "CodeEditor vyžaduje, aby byl načten WikiEditor."
+	"codeeditor-error-message": "Editor zdrojového kódu vyžaduje, aby byl načten wiki editor."
 }

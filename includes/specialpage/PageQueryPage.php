@@ -21,12 +21,13 @@
  * @ingroup SpecialPage
  */
 
-use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Variant of QueryPage which formats the result as a simple link to the page
  *
+ * @stable to extend
  * @ingroup SpecialPage
  */
 abstract class PageQueryPage extends QueryPage {
@@ -34,6 +35,8 @@ abstract class PageQueryPage extends QueryPage {
 	 * Run a LinkBatch to pre-cache LinkCache information,
 	 * like page existence and information for stub color and redirect hints.
 	 * This should be done for live data and cached data.
+	 *
+	 * @stable to override
 	 *
 	 * @param IDatabase $db
 	 * @param IResultWrapper $res
@@ -45,18 +48,18 @@ abstract class PageQueryPage extends QueryPage {
 	/**
 	 * Format the result as a simple link to the page
 	 *
+	 * @stable to override
+	 *
 	 * @param Skin $skin
 	 * @param object $row Result row
 	 * @return string
 	 */
 	public function formatResult( $skin, $row ) {
-		global $wgContLang;
-
 		$title = Title::makeTitleSafe( $row->namespace, $row->title );
-
 		if ( $title instanceof Title ) {
-			$text = $wgContLang->convert( $title->getPrefixedText() );
-			return $this->getLinkRenderer()->makeLink( $title, $text );
+
+			$text = $this->getLanguageConverter()->convertHtml( $title->getPrefixedText() );
+			return $this->getLinkRenderer()->makeLink( $title, new HtmlArmor( $text ) );
 		} else {
 			return Html::element( 'span', [ 'class' => 'mw-invalidtitle' ],
 				Linker::getInvalidTitleDescription( $this->getContext(), $row->namespace, $row->title ) );

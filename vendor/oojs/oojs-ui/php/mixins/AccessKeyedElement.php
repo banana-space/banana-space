@@ -3,9 +3,9 @@
 namespace OOUI;
 
 /**
- * Element with an accesskey.
+ * Element with an access key.
  *
- * Accesskeys allow an user to go to a specific element by using
+ * Access keys allow an user to go to a specific element by using
  * a shortcut combination of a browser specific keys + the key
  * set to the field.
  *
@@ -14,9 +14,9 @@ namespace OOUI;
 trait AccessKeyedElement {
 
 	/**
-	 * Accesskey
+	 * Access key
 	 *
-	 * @var string
+	 * @var ?string
 	 */
 	protected $accessKey = null;
 
@@ -27,16 +27,14 @@ trait AccessKeyedElement {
 
 	/**
 	 * @param array $config Configuration options
-	 * @param string $config['accessKey'] AccessKey. If not provided, no accesskey will be added
+	 *      - string $config['accessKey'] Access key. If not provided, no access key will be added
 	 */
 	public function initializeAccessKeyedElement( array $config = [] ) {
 		// Properties
-		$this->accessKeyed = isset( $config['accessKeyed'] ) ? $config['accessKeyed'] : $element;
+		$this->accessKeyed = $config['accessKeyed'] ?? $this;
 
 		// Initialization
-		$this->setAccessKey(
-			isset( $config['accessKey'] ) ? $config['accessKey'] : null
-		);
+		$this->setAccessKey( $config['accessKey'] ?? null );
 		$this->registerConfigCallback( function ( &$config ) {
 			if ( $this->accessKey !== null ) {
 				$config['accessKey'] = $this->accessKey;
@@ -71,9 +69,9 @@ trait AccessKeyedElement {
 	}
 
 	/**
-	 * Get AccessKey.
+	 * Get access key.
 	 *
-	 * @return string Accesskey string
+	 * @return string Access key string
 	 */
 	public function getAccessKey() {
 		return $this->accessKey;

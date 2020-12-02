@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"KuboF",
 			"Michawiki",
-			"Yekrats",
-			"KuboF"
+			"Yekrats"
 		]
 	},
 	"interwiki": "Rigardi kaj redakti intervikiajn datenojn",
@@ -21,7 +21,6 @@
 	"interwiki_error": "ERARO: La intervikia tabelo estas malplena, aŭ iel misfunkciis.",
 	"interwiki_edit": "Redakti",
 	"interwiki_reasonfield": "Kialo:",
-	"interwiki_delquestion": "Forigante \"$1\"",
 	"interwiki_deleting": "Vi forigas prefikson \"$1\".",
 	"interwiki_deleted": "Prefikso \"$1\" estis sukcese forigita de la intervikia tabelo.",
 	"interwiki_delfailed": "Prefikso \"$1\" ne eblis esti forigita el la intervikia tabelo.",

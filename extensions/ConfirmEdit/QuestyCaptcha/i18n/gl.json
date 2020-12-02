@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Iváns",
 			"Toliño"
 		]
 	},
@@ -11,5 +12,5 @@
 	"questycaptcha-create": "Para crear a páxina, conteste a pregunta que aparece a continuación ([[Special:Captcha/help|máis información]]):",
 	"questycaptcha-edit": "Para editar esta páxina, conteste a pregunta que aparece a continuación ([[Special:Captcha/help|máis información]]):",
 	"questycaptcha-sendemail": "Para protexer o wiki contra o spam automático, conteste a pregunta que aparece a continuación ([[Special:Captcha/help|máis información]]):",
-	"questycaptchahelp-text": "Os sitios web que aceptan publicar as contribucións dos usuarios, coma este wiki, sofren, con frecuencia, o abuso por parte de spammers que usan ferramentas que automatizan a inclusión de lixo en forma de ligazóns publicitarias, nunha chea de páxinas, en pouco tempo.\nMentres as devanditas ligazóns non son eliminadas supoñen unha molestia e unha perda de tempo.\n\nEn ocasións, en particular cando engada algunha nova ligazón externa, o wiki pode pedirlle que conteste unha pregunta.\nComo esta tarefa é difícil de automatizar, permite distinguir entre persoas e robots e dificulta os ataques automatizados dos spammers.\n\nPor favor, póñase en contacto cun [[Special:ListAdmins|administrador do sitio]] para solicitar axuda se o sistema lle impide rexistrarse para facer contribucións lexítimas.\n\nPrema no botón \"Atrás\" do seu navegador para volver á páxina de edición."
+	"questycaptchahelp-text": "Os sitios web que aceptan publicar as contribucións dos usuarios, coma este wiki, sofren, con frecuencia, o abuso por parte de spammers que empregan ferramentas que automatizan a inclusión de lixo en forma de ligazóns publicitarias, nunha chea de páxinas, en pouco tempo.\nMentres as devanditas ligazóns non son eliminadas supoñen unha molestia e unha perda de tempo.\n\nEn ocasións, en particular cando engadas algunha nova ligazón externa, a wiki pode pedirche que contestes unha pregunta.\nComo esta tarefa é difícil de automatizar, permite distinguir entre persoas e robots e dificulta os ataques automatizados dos spammers.\n\nPor favor, ponte en contacto cun [[Special:ListAdmins|administrador do sitio]] para solicitar axuda se o sistema che impide rexistrarte para facer contribucións lexítimas.\n\nPreme no botón \"Atrás\" do teu navegador para voltar á páxina de edición."
 }

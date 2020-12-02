@@ -1,21 +1,27 @@
 {
 	"@metadata": {
 		"authors": [
+			"!Silent",
 			"Cainamarques",
 			"Diego Queiroz",
-			"Giro720",
-			"Helder.wiki",
-			555,
-			"He7d3r",
-			"!Silent",
+			"Eduardo Addad de Oliveira",
 			"Felipe L. Ewald",
-			"Opraco"
+			"Giro720",
+			"He7d3r",
+			"Helder.wiki",
+			"Opraco",
+			555
 		]
 	},
 	"skinname-vector": "Vector",
 	"vector-skin-desc": "Versão moderna do MonoBook com um visual limpo e várias melhorias de usabilidade",
+	"prefs-vector-enable-vector-1-label": "Usar vetor legado",
+	"prefs-vector-enable-vector-1-help": "Nos próximos anos, atualizaremos gradualmente a capa Vector. O Vetor legado permitirá que você visualize a versão antiga do Vector (a partir de dezembro de 2019). Para saber mais sobre as atualizações, acesse nosso [[mw:Reading/Web/Desktop_Improvements|project page]].",
+	"vector-opt-out": "Mudar para aparência antiga",
+	"vector-opt-out-tooltip": "Altere suas configurações para voltar à aparência antiga da pele (vetor herdado)",
 	"vector.css": "/* CSS colocado aqui irá afetar usuários do tema Vector */",
 	"vector.js": "/* Qualquer JavaScript aqui colocado será carregado para usuários usando o tema Vector */",
+	"vector-action-toggle-sidebar": "Alternar barra lateral",
 	"vector-action-addsection": "Adicionar tópico",
 	"vector-action-delete": "Excluir",
 	"vector-action-move": "Mover",
@@ -27,5 +33,7 @@
 	"vector-view-history": "Ver histórico",
 	"vector-view-view": "Ler",
 	"vector-view-viewsource": "Ver código-fonte",
+	"vector-jumptonavigation": "Ir para navegação",
+	"vector-jumptosearch": "Ir para pesquisar",
 	"vector-more-actions": "Mais"
 }

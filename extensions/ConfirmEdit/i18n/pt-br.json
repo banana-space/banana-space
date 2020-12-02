@@ -1,15 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dianakc",
+			"Eduardo Addad de Oliveira",
 			"Eduardo.mps",
+			"Felipe L. Ewald",
 			"Giro720",
+			"He7d3r",
 			"Helder.wiki",
 			"Jesielt",
-			"555",
-			"Dianakc",
-			"He7d3r",
-			"Eduardo Addad de Oliveira",
-			"Felipe L. Ewald"
+			555
 		]
 	},
 	"captcha-edit": "Para editar esta página, por favor, resolva a seguinte tarefa abaixo e insira a resposta na caixa ([[Special:Captcha/help|mais informações]]):",
@@ -33,9 +33,8 @@
 	"captchahelp-cookies-needed": "Você precisa ter cookies habilitados em seu navegador para que isso possa funcionar.",
 	"captchahelp-text": "Sites abertos a inserções públicas, como é o caso desta wiki, são vulneráveis a spammers que utilizam ferramentas automatizadas para inserir seus links em diversos locais.\nRemover tais ligações posteriormente pode ser um incômodo significativo.\n\nAlgumas vezes, especialmente ao adicionar novas ligações externas a uma página, o wiki exibirá uma imagem com um texto colorido ou distorcido e pedirá que você introduza as palavras exibidas.\nUma vez que essa é uma tarefa um tanto difícil de ser automatizada, ela possibilita que a maioria dos humanos faça as suas inserções ao mesmo tempo que inibe as que forem feitas por spammers e mecanismos automatizados.\n\nInfelizmente, isso pode ser um inconveniente para usuários com limitações visuais ou que naveguem através de mecanismos baseados em texto ou baseados em voz.\nNo momento, não está disponível uma alternativa em áudio.\nPor favor, contate os [[Special:ListAdmins|administradores do sítio]] em casos que seja necessária a assistência de alguém para que você possa fazer as suas inserções legítimas.\n\nPressione o botão 'voltar' de seu navegador para retornar à página de edição.",
 	"captcha-addurl-whitelist": "#<!-- deixe este linha exatamente como está --> <pre>\n# A sintaxe é a que se segue:\n# * Tudo desde o caractere \"#\" até ao fim da linha é um comentário\n# * Qualquer linha não vazia é um fragmento de regex que irá apenas verificar o servidor dentro das URLs\n #</pre> <!-- deixe este linha exatamente como está -->",
-	"right-skipcaptcha": "Executar ações disparadoras de captcha sem ter que passar pelo captcha",
-	"captcha-apihelp-param-captchaword": "Responder ao CAPTCHA",
-	"captcha-apihelp-param-captchaid": "CAPTCHA ID do pedido anterior",
+	"right-skipcaptcha": "Executar ações de acionamento do CAPTCHA sem precisar passar pelo CAPTCHA",
+	"action-skipcaptcha": "executar ações desencadeadoras de CAPTCHA sem ter que passar pelo CAPTCHA",
 	"confirmedit-preview-line": "Número de linha",
 	"confirmedit-preview-content": "Conteúdo",
 	"confirmedit-preview-validity": "Validade",

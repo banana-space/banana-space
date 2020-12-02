@@ -43,7 +43,7 @@ class FirejailCommand extends Command {
 	/**
 	 * @param string $firejail Path to firejail
 	 */
-	public function __construct( $firejail ) {
+	public function __construct( string $firejail ) {
 		parent::__construct();
 		$this->firejail = $firejail;
 	}
@@ -83,7 +83,7 @@ class FirejailCommand extends Command {
 	/**
 	 * @inheritDoc
 	 */
-	public function whitelistPaths( array $paths ) {
+	public function whitelistPaths( array $paths ): Command {
 		$this->whitelistedPaths = array_merge( $this->whitelistedPaths, $paths );
 		return $this;
 	}
@@ -91,13 +91,13 @@ class FirejailCommand extends Command {
 	/**
 	 * @inheritDoc
 	 */
-	protected function buildFinalCommand( $command ) {
+	protected function buildFinalCommand( string $command ): array {
 		// If there are no restrictions, don't use firejail
 		if ( $this->restrictions === 0 ) {
 			$splitCommand = explode( ' ', $command, 2 );
 			$this->logger->debug(
 				"firejail: Command {$splitCommand[0]} {params} has no restrictions",
-				[ 'params' => isset( $splitCommand[1] ) ? $splitCommand[1] : '' ]
+				[ 'params' => $splitCommand[1] ?? '' ]
 			);
 			return parent::buildFinalCommand( $command );
 		}

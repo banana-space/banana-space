@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"fancycaptcha-captcha": "Contròl de sigürèsa",
 	"fancycaptcha-imgcaptcha-ph": "Mèt dét el tèst che te èdet ché sura"
 }

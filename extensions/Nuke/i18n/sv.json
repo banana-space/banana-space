@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ainali",
 			"Cybjit",
 			"Hangsna",
 			"Lejonel",
 			"Martinwiss",
 			"Tobulos1",
-			"WikiPhoenix",
-			"Ainali"
+			"WikiPhoenix"
 		]
 	},
 	"nuke": "Massradering",
@@ -20,17 +20,15 @@
 	"nuke-multiplepeople": "Massradering av nyligen tillagda sidor",
 	"nuke-tools": "Det här verktyget gör det möjligt att massradera sidor som nyligen skapats av en viss användare eller IP-adress.\nAnge användarnamnet eller IP-adressen för att se en lista över sidor som kan tas bort, eller lämna tomt för alla användare.",
 	"nuke-submit-user": "Lista sidor",
-	"nuke-toggleinvert": "Invertera",
 	"nuke-submit-delete": "Ta bort valda",
 	"right-nuke": "Massradera sidor",
-	"nuke-select": "Välj: $1",
 	"nuke-userorip": "Användarnamn, IP-adress eller tomt:",
 	"nuke-maxpages": "Maximalt antal sidor:",
 	"nuke-editby": "Skapades av [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
 	"nuke-deleted": "Sidan '''$1''' har raderats.",
 	"nuke-not-deleted": "Sidan [[:$1]] '''kunde inte''' raderas.",
 	"nuke-delete-more": "[[Special:Nuke|Radera fler sidor]]",
-	"nuke-pattern": "Mönster för sidnamn:",
+	"nuke-pattern": "SQL LIKE-mönster (t.ex %) för sidnamnet:",
 	"nuke-nopages-global": "Det finns inga sidtitlar som matchar din sökning.",
 	"nuke-viewchanges": "visa ändringar",
 	"nuke-namespace": "Begränsa till namnrymd:",

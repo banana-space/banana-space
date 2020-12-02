@@ -26,7 +26,6 @@
 	"interwiki_error": "Error : la taula dels interwikis es voida o un processús s'es mal desenrotlat.",
 	"interwiki_edit": "Modificar",
 	"interwiki_reasonfield": "Motiu :",
-	"interwiki_delquestion": "Supression \"$1\"",
 	"interwiki_deleting": "Escafatz presentament lo prefix « $1 ».",
 	"interwiki_deleted": "Lo prefixe «$1» es estat levat de la taula interwiki.",
 	"interwiki_delfailed": "$1 a pas pogut èsser levat de la taula interwiki.",

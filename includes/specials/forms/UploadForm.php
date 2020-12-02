@@ -40,6 +40,7 @@ class UploadForm extends HTMLForm {
 
 	protected $mMaxFileSize = [];
 
+	/** @var array */
 	protected $mMaxUploadSize = [];
 
 	public function __construct( array $options = [], IContextSource $context = null,
@@ -55,31 +56,31 @@ class UploadForm extends HTMLForm {
 
 		$this->mWatch = !empty( $options['watch'] );
 		$this->mForReUpload = !empty( $options['forreupload'] );
-		$this->mSessionKey = isset( $options['sessionkey'] ) ? $options['sessionkey'] : '';
+		$this->mSessionKey = $options['sessionkey'] ?? '';
 		$this->mHideIgnoreWarning = !empty( $options['hideignorewarning'] );
 		$this->mDestWarningAck = !empty( $options['destwarningack'] );
-		$this->mDestFile = isset( $options['destfile'] ) ? $options['destfile'] : '';
+		$this->mDestFile = $options['destfile'] ?? '';
 
-		$this->mComment = isset( $options['description'] ) ?
-			$options['description'] : '';
+		$this->mComment = $options['description'] ?? '';
 
-		$this->mTextTop = isset( $options['texttop'] )
-			? $options['texttop'] : '';
+		$this->mTextTop = $options['texttop'] ?? '';
 
-		$this->mTextAfterSummary = isset( $options['textaftersummary'] )
-			? $options['textaftersummary'] : '';
+		$this->mTextAfterSummary = $options['textaftersummary'] ?? '';
 
 		$sourceDescriptor = $this->getSourceSection();
 		$descriptor = $sourceDescriptor
 			+ $this->getDescriptionSection()
 			+ $this->getOptionsSection();
 
-		Hooks::run( 'UploadFormInitDescriptor', [ &$descriptor ] );
+		$this->getHookRunner()->onUploadFormInitDescriptor( $descriptor );
 		parent::__construct( $descriptor, $context, 'upload' );
 
 		# Add a link to edit MediaWiki:Licenses
-		if ( $this->getUser()->isAllowed( 'editinterface' ) ) {
-			$this->getOutput()->addModuleStyles( 'mediawiki.special.upload.styles' );
+		if ( MediaWikiServices::getInstance()
+				->getPermissionManager()
+				->userHasRight( $this->getUser(), 'editinterface' )
+		) {
+			$this->getOutput()->addModuleStyles( 'mediawiki.special' );
 			$licensesLink = $linkRenderer->makeKnownLink(
 				$this->msg( 'licenses' )->inContentLanguage()->getTitle(),
 				$this->msg( 'licenses-edit' )->text(),
@@ -189,7 +190,8 @@ class UploadForm extends HTMLForm {
 				'checked' => $selectedSourceType == 'url',
 			];
 		}
-		Hooks::run( 'UploadFormSourceDescriptors', [ &$descriptor, &$radio, $selectedSourceType ] );
+		$this->getHookRunner()->onUploadFormSourceDescriptors(
+			$descriptor, $radio, $selectedSourceType );
 
 		$descriptor['Extensions'] = [
 			'type' => 'info',
@@ -256,19 +258,19 @@ class UploadForm extends HTMLForm {
 	protected function getDescriptionSection() {
 		$config = $this->getConfig();
 		if ( $this->mSessionKey ) {
-			$stash = RepoGroup::singleton()->getLocalRepo()->getUploadStash( $this->getUser() );
+			$stash = MediaWikiServices::getInstance()->getRepoGroup()
+				->getLocalRepo()->getUploadStash( $this->getUser() );
 			try {
 				$file = $stash->getFile( $this->mSessionKey );
 			} catch ( Exception $e ) {
 				$file = null;
 			}
 			if ( $file ) {
-				global $wgContLang;
-
 				$mto = $file->transform( [ 'width' => 120 ] );
 				if ( $mto ) {
 					$this->addHeaderText(
-						'<div class="thumb t' . $wgContLang->alignEnd() . '">' .
+						'<div class="thumb t' .
+						MediaWikiServices::getInstance()->getContentLanguage()->alignEnd() . '">' .
 						Html::element( 'img', [
 							'src' => $mto->getUrl(),
 							'class' => 'thumbimage',
@@ -394,10 +396,11 @@ class UploadForm extends HTMLForm {
 
 	/**
 	 * Add the upload JS and show the form.
+	 * @return bool|Status
 	 */
 	public function show() {
 		$this->addUploadJS();
-		parent::show();
+		return parent::show();
 	}
 
 	/**
@@ -406,14 +409,11 @@ class UploadForm extends HTMLForm {
 	protected function addUploadJS() {
 		$config = $this->getConfig();
 
-		$useAjaxDestCheck = $config->get( 'UseAjax' ) && $config->get( 'AjaxUploadDestCheck' );
-		$useAjaxLicensePreview = $config->get( 'UseAjax' ) &&
-			$config->get( 'AjaxLicensePreview' ) && $config->get( 'EnableAPI' );
 		$this->mMaxUploadSize['*'] = UploadBase::getMaxUploadSize();
 
 		$scriptVars = [
-			'wgAjaxUploadDestCheck' => $useAjaxDestCheck,
-			'wgAjaxLicensePreview' => $useAjaxLicensePreview,
+			'wgAjaxUploadDestCheck' => $config->get( 'AjaxUploadDestCheck' ),
+			'wgAjaxLicensePreview' => $config->get( 'AjaxLicensePreview' ),
 			'wgUploadAutoFill' => !$this->mForReUpload &&
 				// If we received mDestFile from the request, don't autofill
 				// the wpDestFile textbox
@@ -422,7 +422,8 @@ class UploadForm extends HTMLForm {
 			'wgCheckFileExtensions' => $config->get( 'CheckFileExtensions' ),
 			'wgStrictFileExtensions' => $config->get( 'StrictFileExtensions' ),
 			'wgFileExtensions' => array_values( array_unique( $config->get( 'FileExtensions' ) ) ),
-			'wgCapitalizeUploads' => MWNamespace::isCapitalized( NS_FILE ),
+			'wgCapitalizeUploads' => MediaWikiServices::getInstance()->getNamespaceInfo()->
+				isCapitalized( NS_FILE ),
 			'wgMaxUploadSize' => $this->mMaxUploadSize,
 			'wgFileCanRotate' => SpecialUpload::rotationEnabled(),
 		];
@@ -440,7 +441,7 @@ class UploadForm extends HTMLForm {
 	 *
 	 * @return bool False
 	 */
-	function trySubmit() {
+	public function trySubmit() {
 		return false;
 	}
 }

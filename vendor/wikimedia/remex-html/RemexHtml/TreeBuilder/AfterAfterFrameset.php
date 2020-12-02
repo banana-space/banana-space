@@ -14,7 +14,6 @@ class AfterAfterFrameset extends InsertionMode {
 
 	public function startTag( $name, Attributes $attrs, $selfClose, $sourceStart, $sourceLength ) {
 		$builder = $this->builder;
-		$stack = $builder->stack;
 		$dispatcher = $this->dispatcher;
 
 		switch ( $name ) {

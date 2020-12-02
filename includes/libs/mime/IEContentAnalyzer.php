@@ -311,8 +311,7 @@ class IEContentAnalyzer {
 	 */
 	protected $typeTable = [];
 
-	/** constructor */
-	function __construct() {
+	public function __construct() {
 		// Construct versioned type arrays from the base type array plus additions
 		$types = $this->baseTypeTable;
 		foreach ( $this->versions as $version ) {
@@ -500,13 +499,13 @@ class IEContentAnalyzer {
 			< ( $counters['ctrl'] + $counters['high'] ) * 16
 		) {
 			$kindOfBinary = true;
-			$type = $binaryType ? $binaryType : $textType;
+			$type = $binaryType ?: $textType;
 			if ( $type === false ) {
 				$type = 'application/octet-stream';
 			}
 		} else {
 			$kindOfBinary = false;
-			$type = $textType ? $textType : $binaryType;
+			$type = $textType ?: $binaryType;
 			if ( $type === false ) {
 				$type = 'text/plain';
 			}

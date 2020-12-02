@@ -2,9 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Crazymadlover",
+			"Macofe",
 			"Pertile",
 			"Sporeunai",
-			"Macofe"
+			"Tiberius1701"
 		]
 	},
 	"questycaptcha-addurl": "Tu edición incluye enlaces externos nuevos. \nPara proteger el wiki contra el spam automatizado, te pedimos que respondas la pregunta que aparece debajo ([[Special:Captcha/help|más información]]):",
@@ -13,5 +14,5 @@
 	"questycaptcha-create": "Para crear la página, por favor responde la pregunta que aparece abajo ([[Special:Captcha/help|más información]]):",
 	"questycaptcha-edit": "Para editar esta página, responde la pregunta que aparece abajo ([[Special:Captcha/help|más información]]):",
 	"questycaptcha-sendemail": "Para proteger el wiki contra el spam automatizado, te pedimos que respondas la pregunta que aparece debajo ([[Special:Captcha/help|más información]]):",
-	"questycaptchahelp-text": "Sitios Web que aceptan contribuciones del público, como este wiki, son constantemente abusadas por enviadores de spam quienes usan herramientas automáticas para agregar sus enlaces a muchos sitios.\nAsí estos enlaces spam puedan ser borrados, son una molestia significativa.\n\nA veces, especialmente cuando se agregan nuevos enlaces web a una página, el wiki puede pedirte que respondas a una pregunta.\nYa que esta es una tarea que es difícil de automatizar, eso permitirá que más seres humanos reales hagan sus contribuciones mientras detiene a la mayor parte de enviadores de spam y otros atacantes robóticos.\n\nPor favor contacta a los [[Special:ListAdmins|administradores del sitio]] para asistencia si esto está impidiéndote hacer contribuciones legítimas.\n\nHaz click en el botón 'atrás' en tu navegador para regresar al editor de página."
+	"questycaptchahelp-text": "Los sitios web que aceptan contribuciones del público, como esta wiki, son constantemente acosadas por spammers que usan herramientas automatizadas para agregar sus enlaces a muchos sitios.\nSi bien estos enlaces de spam se pueden eliminar, son una molestia importante.\n\nA veces, especialmente cuando se agregan nuevos enlaces web a una página, el wiki puede pedirte que respondas a una pregunta.\nDado que esta es una tarea difícil de automatizar, permitirá que la mayoría de los seres humanos realicen sus contribuciones mientras detienen a la mayoría de los spammers y otros atacantes robóticos.\n\nPonte en contacto con con los [[Special:ListAdmins|administradores del sitio]] para obtener ayuda si esto te impide realizar contribuciones legítimas.\n\nHaz click en el botón 'atrás' en tu navegador para regresar al editor de páginas."
 }

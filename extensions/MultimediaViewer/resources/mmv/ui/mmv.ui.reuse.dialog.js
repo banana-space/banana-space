@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $, oo ) {
+( function () {
 	// Shortcut for prototype later
 	var DP;
 
@@ -48,19 +48,22 @@
 		this.eventPrefix = 'use-this-file';
 	}
 
-	oo.inheritClass( Dialog, mw.mmv.ui.Dialog );
+	OO.inheritClass( Dialog, mw.mmv.ui.Dialog );
 	DP = Dialog.prototype;
 
 	// FIXME this should happen outside the dialog and the tabs, but we need to improve
 	DP.initTabs = function () {
 		function makeTab( type ) {
-			return new oo.ui.MenuOptionWidget( {
+			return new OO.ui.MenuOptionWidget( {
 				data: type,
+				// The following messages are used here:
+				// * multimediaviewer-embed-tab
+				// * multimediaviewer-share-tab
 				label: mw.message( 'multimediaviewer-' + type + '-tab' ).text()
 			} );
 		}
 
-		this.reuseTabs = new oo.ui.MenuSelectWidget( {
+		this.reuseTabs = new OO.ui.MenuSelectWidget( {
 			autoHide: false,
 			classes: [ 'mw-mmv-reuse-tabs' ]
 		} );
@@ -83,12 +86,12 @@
 
 		// MenuSelectWidget has a nasty tendency to hide itself, maybe we're not using it right?
 		this.reuseTabs.toggle( true );
-		this.reuseTabs.toggle = $.noop;
+		this.reuseTabs.toggle = function () {};
 
 		this.selectedTab = this.getLastUsedTab();
 
 		// In case nothing is saved in localStorage or it contains junk
-		if ( !this.tabs.hasOwnProperty( this.selectedTab ) ) {
+		if ( !Object.prototype.hasOwnProperty.call( this.tabs, this.selectedTab ) ) {
 			this.selectedTab = 'share';
 		}
 
@@ -147,10 +150,10 @@
 	 * Registers listeners.
 	 */
 	DP.attach = function () {
-		this.handleEvent( 'mmv-reuse-open', $.proxy( this.handleOpenCloseClick, this ) );
+		this.handleEvent( 'mmv-reuse-open', this.handleOpenCloseClick.bind( this ) );
 
-		this.handleEvent( 'mmv-download-open', $.proxy( this.closeDialog, this ) );
-		this.handleEvent( 'mmv-options-open', $.proxy( this.closeDialog, this ) );
+		this.handleEvent( 'mmv-download-open', this.closeDialog.bind( this ) );
+		this.handleEvent( 'mmv-options-open', this.closeDialog.bind( this ) );
 
 		this.attachDependencies();
 	};
@@ -163,7 +166,7 @@
 
 		if ( this.reuseTabs && this.tabs ) {
 			// This is a delayed attach() for the elements we've just created on demand
-			this.reuseTabs.on( 'select', $.proxy( dialog.handleTabSelection, dialog ) );
+			this.reuseTabs.on( 'select', dialog.handleTabSelection.bind( dialog ) );
 
 			for ( tab in this.tabs ) {
 				this.tabs[ tab ].attach();
@@ -261,4 +264,4 @@
 	};
 
 	mw.mmv.ui.reuse.Dialog = Dialog;
-}( mediaWiki, jQuery, OO ) );
+}() );

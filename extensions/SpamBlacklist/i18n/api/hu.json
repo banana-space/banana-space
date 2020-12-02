@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tacsipacsi"
+		]
+	},
+	"apihelp-spamblacklist-description": "Egy vagy több URL ellenőrzése a SpamBlacklisttel.",
+	"apihelp-spamblacklist-example-1": "Két URL ellenőrzése a feketelistán",
+	"apihelp-spamblacklist-param-url": "Ellenőrzendő URL-ek"
+}

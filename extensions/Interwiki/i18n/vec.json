@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Candalua"
+			"Candalua",
+			"Fierodelveneto"
 		]
 	},
 	"interwiki": "Varda e modìfega i dati interwiki",
 	"interwiki-title-norights": "Varda i dati interwiki",
 	"interwiki_intro": "Sta qua la xe na panoramica de la tabèla dei interwiki.",
+	"interwiki-legend-label": "Lejenda",
 	"interwiki_prefix": "Prefisso",
 	"interwiki-prefix-label": "Prefisso:",
 	"interwiki_local": "Avanti",
@@ -18,7 +20,6 @@
 	"interwiki_error": "ERÓR: La tabèla dei interwiki la xe voda, o ghe xe qualche altro erór.",
 	"interwiki_edit": "Modìfega",
 	"interwiki_reasonfield": "Motivassion:",
-	"interwiki_delquestion": "Scancelassion de \"$1\"",
 	"interwiki_deleting": "Te sì drio scancelar el prefisso \"$1\"",
 	"interwiki_deleted": "El prefisso \"$1\" el xe stà scancelà da la tabèla dei interwiki.",
 	"interwiki_delfailed": "No s'à podesto cavar el prefisso \"$1\" da la tabèla dei interwiki.",

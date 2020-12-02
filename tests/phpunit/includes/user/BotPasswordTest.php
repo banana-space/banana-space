@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Session\SessionManager;
 use Wikimedia\ScopedCallback;
 use Wikimedia\TestingAccessWrapper;
@@ -8,7 +9,7 @@ use Wikimedia\TestingAccessWrapper;
  * @covers BotPassword
  * @group Database
  */
-class BotPasswordTest extends MediaWikiTestCase {
+class BotPasswordTest extends MediaWikiIntegrationTestCase {
 
 	/** @var TestUser */
 	private $testUser;
@@ -16,7 +17,7 @@ class BotPasswordTest extends MediaWikiTestCase {
 	/** @var string */
 	private $testUserName;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setMwGlobals( [
@@ -59,8 +60,7 @@ class BotPasswordTest extends MediaWikiTestCase {
 	}
 
 	public function addDBData() {
-		$passwordFactory = new \PasswordFactory();
-		$passwordFactory->init( \RequestContext::getMain()->getConfig() );
+		$passwordFactory = MediaWikiServices::getInstance()->getPasswordFactory();
 		$passwordHash = $passwordFactory->newFromPlaintext( 'foobaz' );
 
 		$dbw = wfGetDB( DB_MASTER );
@@ -184,11 +184,12 @@ class BotPasswordTest extends MediaWikiTestCase {
 	}
 
 	public function testGetPassword() {
+		/** @var BotPassword $bp */
 		$bp = TestingAccessWrapper::newFromObject( BotPassword::newFromCentralId( 42, 'BotPassword' ) );
 
 		$password = $bp->getPassword();
 		$this->assertInstanceOf( Password::class, $password );
-		$this->assertTrue( $password->equals( 'foobaz' ) );
+		$this->assertTrue( $password->verify( 'foobaz' ) );
 
 		$bp->centralId = 44;
 		$password = $bp->getPassword();
@@ -248,13 +249,13 @@ class BotPasswordTest extends MediaWikiTestCase {
 			[ 'user', 'abc@def', false ],
 			[ 'legacy@user', 'pass', false ],
 			[ 'user@bot', '12345678901234567890123456789012',
-				[ 'user@bot', '12345678901234567890123456789012', true ] ],
+				[ 'user@bot', '12345678901234567890123456789012' ] ],
 			[ 'user', 'bot@12345678901234567890123456789012',
-				[ 'user@bot', '12345678901234567890123456789012', true ] ],
+				[ 'user@bot', '12345678901234567890123456789012' ] ],
 			[ 'user', 'bot@12345678901234567890123456789012345',
-				[ 'user@bot', '12345678901234567890123456789012345', true ] ],
+				[ 'user@bot', '12345678901234567890123456789012345' ] ],
 			[ 'user', 'bot@x@12345678901234567890123456789012',
-				[ 'user@bot@x', '12345678901234567890123456789012', true ] ],
+				[ 'user@bot@x', '12345678901234567890123456789012' ] ],
 		];
 	}
 
@@ -350,8 +351,7 @@ class BotPasswordTest extends MediaWikiTestCase {
 	 * @param string|null $password
 	 */
 	public function testSave( $password ) {
-		$passwordFactory = new \PasswordFactory();
-		$passwordFactory->init( \RequestContext::getMain()->getConfig() );
+		$passwordFactory = MediaWikiServices::getInstance()->getPasswordFactory();
 
 		$bp = BotPassword::newUnsaved( [
 			'centralId' => 42,
@@ -374,11 +374,12 @@ class BotPasswordTest extends MediaWikiTestCase {
 		$this->assertEquals( $bp->getToken(), $bp2->getToken() );
 		$this->assertEquals( $bp->getRestrictions(), $bp2->getRestrictions() );
 		$this->assertEquals( $bp->getGrants(), $bp2->getGrants() );
+		/** @var Password $pw */
 		$pw = TestingAccessWrapper::newFromObject( $bp )->getPassword();
 		if ( $password === null ) {
 			$this->assertInstanceOf( InvalidPassword::class, $pw );
 		} else {
-			$this->assertTrue( $pw->equals( $password ) );
+			$this->assertTrue( $pw->verify( $password ) );
 		}
 
 		$token = $bp->getToken();
@@ -390,19 +391,21 @@ class BotPasswordTest extends MediaWikiTestCase {
 		$bp2 = BotPassword::newFromCentralId( 42, 'TestSave', BotPassword::READ_LATEST );
 		$this->assertInstanceOf( BotPassword::class, $bp2 );
 		$this->assertEquals( $bp->getToken(), $bp2->getToken() );
+		/** @var Password $pw */
 		$pw = TestingAccessWrapper::newFromObject( $bp )->getPassword();
 		if ( $password === null ) {
 			$this->assertInstanceOf( InvalidPassword::class, $pw );
 		} else {
-			$this->assertTrue( $pw->equals( $password ) );
+			$this->assertTrue( $pw->verify( $password ) );
 		}
 
 		$passwordHash = $passwordFactory->newFromPlaintext( 'XXX' );
 		$token = $bp->getToken();
 		$this->assertTrue( $bp->save( 'update', $passwordHash ) );
 		$this->assertNotEquals( $token, $bp->getToken() );
+		/** @var Password $pw */
 		$pw = TestingAccessWrapper::newFromObject( $bp )->getPassword();
-		$this->assertTrue( $pw->equals( 'XXX' ) );
+		$this->assertTrue( $pw->verify( 'XXX' ) );
 
 		$this->assertTrue( $bp->delete() );
 		$this->assertFalse( $bp->isSaved() );

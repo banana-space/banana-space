@@ -1,9 +1,5 @@
 <?php
 /**
- * action=edit handler
- *
- * Copyright © 2012 Timo Tijhof
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -20,42 +16,57 @@
  *
  * @file
  * @ingroup Actions
- * @author Timo Tijhof
  */
 
 /**
- * Page edition handler
+ * Page edition handler (action=edit)
  *
  * This is a wrapper that will call the EditPage class or a custom editor from an extension.
  *
+ * @stable for subclasssing
  * @ingroup Actions
  */
 class EditAction extends FormlessAction {
 
+	/**
+	 * @stable to override
+	 * @return string
+	 */
 	public function getName() {
 		return 'edit';
 	}
 
+	/**
+	 * @stable to override
+	 * @return string|null
+	 */
 	public function onView() {
 		return null;
 	}
 
+	/**
+	 * @stable to override
+	 */
 	public function show() {
 		$this->useTransactionalTimeLimit();
 
 		$out = $this->getOutput();
 		$out->setRobotPolicy( 'noindex,nofollow' );
+
+		// The editor should always see the latest content when starting their edit.
+		// Also to ensure cookie blocks can be set (T152462).
+		$out->enableClientCache( false );
+
 		if ( $this->getContext()->getConfig()->get( 'UseMediaWikiUIEverywhere' ) ) {
 			$out->addModuleStyles( [
 				'mediawiki.ui.input',
 				'mediawiki.ui.checkbox',
 			] );
 		}
-		$page = $this->page;
-		$user = $this->getUser();
 
-		if ( Hooks::run( 'CustomEditor', [ $page, $user ] ) ) {
-			$editor = new EditPage( $page );
+		$article = $this->getArticle();
+		if ( $this->getHookRunner()->onCustomEditor( $article, $this->getUser() ) ) {
+			$editor = new EditPage( $article );
 			$editor->setContextTitle( $this->getTitle() );
 			$editor->edit();
 		}

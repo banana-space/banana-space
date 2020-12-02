@@ -4,4 +4,11 @@ ace.define("ace/snippets/typescript",["require","exports","module"], function(re
 exports.snippetText =undefined;
 exports.scope = "typescript";
 
-});
+});                (function() {
+                    ace.require(["ace/snippets/typescript"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

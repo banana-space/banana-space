@@ -18,8 +18,9 @@
  * @file
  */
 
-use Psr\Log\LoggerInterface;
+use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
 /**
@@ -30,7 +31,7 @@ use Psr\Log\NullLogger;
  * PHP's HTTP extension.
  */
 abstract class MWHttpRequest implements LoggerAwareInterface {
-	const SUPPORTS_FILE_POSTS = false;
+	public const SUPPORTS_FILE_POSTS = false;
 
 	/**
 	 * @var int|string
@@ -46,6 +47,7 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 	protected $sslVerifyCert = true;
 	protected $caInfo = null;
 	protected $method = "GET";
+	/** @var array */
 	protected $reqHeaders = [];
 	protected $url;
 	protected $parsedUrl;
@@ -63,6 +65,7 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 	protected $headerList = [];
 	protected $respVersion = "0.9";
 	protected $respStatus = "200 Ok";
+	/** @var string[][] */
 	protected $respHeaders = [];
 
 	/** @var StatusValue */
@@ -85,25 +88,23 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 
 	/**
 	 * @param string $url Url to use. If protocol-relative, will be expanded to an http:// URL
-	 * @param array $options (optional) extra params to pass (see Http::request())
+	 * @param array $options (optional) extra params to pass (see HttpRequestFactory::create())
+	 * @codingStandardsIgnoreStart
+	 * @phan-param array{timeout?:int|string,connectTimeout?:int|string,postData?:array,proxy?:string,noProxy?:bool,sslVerifyHost?:bool,sslVerifyCert?:bool,caInfo?:string,maxRedirects?:int,followRedirects?:bool,userAgent?:string,logger?:LoggerInterface,username?:string,password?:string,originalRequest?:WebRequest|array{ip:string,userAgent:string},method?:string} $options
+	 * @codingStandardsIgnoreEnd
 	 * @param string $caller The method making this request, for profiling
-	 * @param Profiler $profiler An instance of the profiler for profiling, or null
+	 * @param Profiler|null $profiler An instance of the profiler for profiling, or null
+	 * @throws Exception
 	 */
 	public function __construct(
-		$url, array $options = [], $caller = __METHOD__, $profiler = null
+		$url, array $options = [], $caller = __METHOD__, Profiler $profiler = null
 	) {
-		global $wgHTTPTimeout, $wgHTTPConnectTimeout;
-
 		$this->url = wfExpandUrl( $url, PROTO_HTTP );
 		$this->parsedUrl = wfParseUrl( $this->url );
 
-		if ( isset( $options['logger'] ) ) {
-			$this->logger = $options['logger'];
-		} else {
-			$this->logger = new NullLogger();
-		}
+		$this->logger = $options['logger'] ?? new NullLogger();
 
-		if ( !$this->parsedUrl || !Http::isValidURI( $this->url ) ) {
+		if ( !$this->parsedUrl || !self::isValidURI( $this->url ) ) {
 			$this->status = StatusValue::newFatal( 'http-invalid-url', $url );
 		} else {
 			$this->status = StatusValue::newGood( 100 ); // continue
@@ -112,11 +113,19 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 		if ( isset( $options['timeout'] ) && $options['timeout'] != 'default' ) {
 			$this->timeout = $options['timeout'];
 		} else {
+			// The timeout should always be set by HttpRequestFactory, so this
+			// should only happen if the class was directly constructed
+			wfDeprecated( __METHOD__ . ' without the timeout option', '1.35' );
+			global $wgHTTPTimeout;
 			$this->timeout = $wgHTTPTimeout;
 		}
 		if ( isset( $options['connectTimeout'] ) && $options['connectTimeout'] != 'default' ) {
 			$this->connectTimeout = $options['connectTimeout'];
 		} else {
+			// The timeout should always be set by HttpRequestFactory, so this
+			// should only happen if the class was directly constructed
+			wfDeprecated( __METHOD__ . ' without the connectTimeout option', '1.35' );
+			global $wgHTTPConnectTimeout;
 			$this->connectTimeout = $wgHTTPConnectTimeout;
 		}
 		if ( isset( $options['userAgent'] ) ) {
@@ -131,6 +140,8 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 		if ( isset( $options['originalRequest'] ) ) {
 			$this->setOriginalRequest( $options['originalRequest'] );
 		}
+
+		$this->setHeader( 'X-Request-Id', WebRequest::getRequestId() );
 
 		$members = [ "postData", "proxy", "noProxy", "sslVerifyHost", "caInfo",
 				"method", "followRedirects", "maxRedirects", "sslVerifyCert", "callback" ];
@@ -173,9 +184,9 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 
 	/**
 	 * Generate a new request object
-	 * Deprecated: @see HttpRequestFactory::create
+	 * @deprecated since 1.34, use HttpRequestFactory instead
 	 * @param string $url Url to use
-	 * @param array|null $options (optional) extra params to pass (see Http::request())
+	 * @param array|null $options (optional) extra params to pass (see HttpRequestFactory::create())
 	 * @param string $caller The method making this request, for profiling
 	 * @throws DomainException
 	 * @return MWHttpRequest
@@ -185,8 +196,7 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 		if ( $options === null ) {
 			$options = [];
 		}
-		return \MediaWiki\MediaWikiServices::getInstance()
-			->getHttpRequestFactory()
+		return MediaWikiServices::getInstance()->getHttpRequestFactory()
 			->create( $url, $options, $caller );
 	}
 
@@ -205,7 +215,7 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 	 * @param array $args
 	 * @todo overload the args param
 	 */
-	public function setData( $args ) {
+	public function setData( array $args ) {
 		$this->postData = $args;
 	}
 
@@ -225,7 +235,8 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 		if ( self::isLocalURL( $this->url ) || $this->noProxy ) {
 			$this->proxy = '';
 		} else {
-			$this->proxy = Http::getProxy();
+			global $wgHTTPProxy;
+			$this->proxy = (string)$wgHTTPProxy;
 		}
 	}
 
@@ -329,9 +340,21 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 	 * @throws InvalidArgumentException
 	 */
 	public function setCallback( $callback ) {
-		if ( is_null( $callback ) ) {
+		$this->doSetCallback( $callback );
+	}
+
+	/**
+	 * Worker function for setting callbacks.  Calls can originate both internally and externally
+	 * via setCallback).  Defaults to the internal read callback if $callback is null.
+	 *
+	 * @param callable|null $callback
+	 * @throws InvalidArgumentException
+	 */
+	protected function doSetCallback( $callback ) {
+		if ( $callback === null ) {
 			$callback = [ $this, 'read' ];
 		} elseif ( !is_callable( $callback ) ) {
+			$this->status->fatal( 'http-internal-error' );
 			throw new InvalidArgumentException( __METHOD__ . ': invalid callback' );
 		}
 		$this->callback = $callback;
@@ -354,7 +377,7 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 	/**
 	 * Take care of whatever is necessary to perform the URI request.
 	 *
-	 * @return StatusValue
+	 * @return Status
 	 * @note currently returns Status for B/C
 	 */
 	public function execute() {
@@ -371,11 +394,12 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 		$this->proxySetup(); // set up any proxy as needed
 
 		if ( !$this->callback ) {
-			$this->setCallback( null );
+			$this->doSetCallback( null );
 		}
 
 		if ( !isset( $this->reqHeaders['User-Agent'] ) ) {
-			$this->setUserAgent( Http::userAgent() );
+			$http = MediaWikiServices::getInstance()->getHttpRequestFactory();
+			$this->setUserAgent( $http->getUserAgent() );
 		}
 	}
 
@@ -386,6 +410,11 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 	 */
 	protected function parseHeader() {
 		$lastname = "";
+
+		// Failure without (valid) headers gets a response status of zero
+		if ( !$this->status->isOK() ) {
+			$this->respStatus = '0 Error';
+		}
 
 		foreach ( $this->headerList as $header ) {
 			if ( preg_match( "#^HTTP/([0-9.]+) (.*)#", $header, $match ) ) {
@@ -406,18 +435,20 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 	/**
 	 * Sets HTTPRequest status member to a fatal value with the error
 	 * message if the returned integer value of the status code was
-	 * not successful (< 300) or a redirect (>=300 and < 400).  (see
-	 * RFC2616, section 10,
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html for a
-	 * list of status codes.)
+	 * not successful (1-299) or a redirect (300-399).
+	 * See RFC2616, section 10, http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+	 * for a list of status codes.
 	 */
 	protected function setStatus() {
 		if ( !$this->respHeaders ) {
 			$this->parseHeader();
 		}
 
-		if ( (int)$this->respStatus > 399 ) {
+		if ( ( (int)$this->respStatus > 0 && (int)$this->respStatus < 400 ) ) {
+			$this->status->setResult( true, (int)$this->respStatus );
+		} else {
 			list( $code, $message ) = explode( " ", $this->respStatus, 2 );
+			$this->status->setResult( false, (int)$this->respStatus );
 			$this->status->fatal( "http-bad-status", $code, $message );
 		}
 	}
@@ -461,6 +492,7 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 	 * request has been executed.  Because some headers
 	 * (e.g. Set-Cookie) can appear more than once the, each value of
 	 * the associative array is an array of the values given.
+	 * Header names are always in lowercase.
 	 *
 	 * @return array
 	 */
@@ -475,7 +507,7 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 	/**
 	 * Returns the value of the given response header.
 	 *
-	 * @param string $header
+	 * @param string $header case-insensitive
 	 * @return string|null
 	 */
 	public function getResponseHeader( $header ) {
@@ -498,7 +530,7 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 	 *
 	 * @param CookieJar $jar
 	 */
-	public function setCookieJar( $jar ) {
+	public function setCookieJar( CookieJar $jar ) {
 		$this->cookieJar = $jar;
 	}
 
@@ -524,7 +556,7 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 	 * @param string $value
 	 * @param array $attr
 	 */
-	public function setCookie( $name, $value, $attr = [] ) {
+	public function setCookie( $name, $value, array $attr = [] ) {
 		if ( !$this->cookieJar ) {
 			$this->cookieJar = new CookieJar;
 		}
@@ -642,5 +674,28 @@ abstract class MWHttpRequest implements LoggerAwareInterface {
 
 		$this->reqHeaders['X-Forwarded-For'] = $originalRequest['ip'];
 		$this->reqHeaders['X-Original-User-Agent'] = $originalRequest['userAgent'];
+	}
+
+	/**
+	 * Check that the given URI is a valid one.
+	 *
+	 * This hardcodes a small set of protocols only, because we want to
+	 * deterministically reject protocols not supported by all HTTP-transport
+	 * methods.
+	 *
+	 * "file://" specifically must not be allowed, for security reasons
+	 * (see <https://www.mediawiki.org/wiki/Special:Code/MediaWiki/r67684>).
+	 *
+	 * @todo FIXME this is wildly inaccurate and fails to actually check most stuff
+	 *
+	 * @since 1.34
+	 * @param string $uri URI to check for validity
+	 * @return bool
+	 */
+	public static function isValidURI( $uri ) {
+		return (bool)preg_match(
+			'/^https?:\/\/[^\/\s]\S*$/D',
+			$uri
+		);
 	}
 }

@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Fitoschido",
 			"Macofe",
+			"Toniher",
 			"Vriullop"
 		]
 	},
 	"timeless-desc": "Una aparença atemporal dissenyada a partir del prototip Winter de Brandon Harris i diversos estils de la Fundació Wikimedia",
-	"timeless-search-placeholder": "Cerca entre {{NUMBEROFARTICLES}} pàgines aproximadament",
-	"timeless-loggedin": "Compte d'usuari",
 	"timeless-anonymous": "Anònim",
 	"timeless-loggedinas": "Registrat com a '''$1'''",
 	"timeless-notloggedin": "Sense sessió iniciada",
@@ -18,8 +18,11 @@
 	"timeless-sitetools": "Eines wiki",
 	"timeless-pageactions": "Eines de pàgina",
 	"timeless-userpagetools": "Eines de pàgina d'usuari",
+	"timeless-action-addsection": "Tema nou",
 	"timeless-pagemisc": "Més",
 	"timeless-namespaces": "Espais de noms",
 	"timeless-pagetools": "Accions de pàgina",
-	"timeless-languages": "Llengües"
+	"timeless-languages": "Llengües",
+	"timeless-projects": "Altres projectes",
+	"timeless.js": "/* Qualsevol codi JavaScript afegit aquí es carregarà per als usuaris que utilitzin l'aprença Timeless */"
 }

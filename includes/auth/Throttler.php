@@ -40,7 +40,7 @@ class Throttler implements LoggerAwareInterface {
 	/**
 	 * See documentation of $wgPasswordAttemptThrottle for format. Old (pre-1.27) format is not
 	 * allowed here.
-	 * @var array
+	 * @var array[]
 	 * @see https://www.mediawiki.org/wiki/Manual:$wgPasswordAttemptThrottle
 	 */
 	protected $conditions;
@@ -52,7 +52,7 @@ class Throttler implements LoggerAwareInterface {
 	protected $warningLimit;
 
 	/**
-	 * @param array $conditions An array of arrays describing throttling conditions.
+	 * @param array|null $conditions An array of arrays describing throttling conditions.
 	 *     Defaults to $wgPasswordAttemptThrottle. See documentation of that variable for format.
 	 * @param array $params Parameters (all optional):
 	 *   - type: throttle type, used as a namespace for counters,
@@ -127,18 +127,20 @@ class Throttler implements LoggerAwareInterface {
 				continue;
 			}
 
-			$throttleKey = $this->cache->makeGlobalKey( 'throttler', $this->type, $index, $ipKey, $userKey );
+			$throttleKey = $this->cache->makeGlobalKey(
+				'throttler',
+				$this->type,
+				$index,
+				$ipKey,
+				$userKey
+			);
 			$throttleCount = $this->cache->get( $throttleKey );
-
-			if ( !$throttleCount ) { // counter not started yet
-				$this->cache->add( $throttleKey, 1, $expiry );
-			} elseif ( $throttleCount < $count ) { // throttle limited not yet reached
-				$this->cache->incr( $throttleKey );
-			} else { // throttled
+			if ( $throttleCount && $throttleCount >= $count ) {
+				// Throttle limited reached
 				$this->logRejection( [
 					'throttle' => $this->type,
 					'index' => $index,
-					'ip' => $ipKey,
+					'ipKey' => $ipKey,
 					'username' => $username,
 					'count' => $count,
 					'expiry' => $expiry,
@@ -147,13 +149,12 @@ class Throttler implements LoggerAwareInterface {
 					// @codeCoverageIgnoreEnd
 				] );
 
-				return [
-					'throttleIndex' => $index,
-					'count' => $count,
-					'wait' => $expiry,
-				];
+				return [ 'throttleIndex' => $index, 'count' => $count, 'wait' => $expiry ];
+			} else {
+				$this->cache->incrWithInit( $throttleKey, $expiry, 1 );
 			}
 		}
+
 		return false;
 	}
 
@@ -178,7 +179,7 @@ class Throttler implements LoggerAwareInterface {
 	/**
 	 * Handles B/C for $wgPasswordAttemptThrottle.
 	 * @param array $throttleConditions
-	 * @return array
+	 * @return array[]
 	 * @see $wgPasswordAttemptThrottle for structure
 	 */
 	protected static function normalizeThrottleConditions( $throttleConditions ) {
@@ -193,7 +194,7 @@ class Throttler implements LoggerAwareInterface {
 
 	protected function logRejection( array $context ) {
 		$logMsg = 'Throttle {throttle} hit, throttled for {expiry} seconds due to {count} attempts '
-			. 'from username {username} and IP {ip}';
+			. 'from username {username} and IP {ipKey}';
 
 		// If we are hitting a throttle for >= warningLimit attempts, it is much more likely to be
 		// an attack than someone simply forgetting their password, so log it at a higher level.

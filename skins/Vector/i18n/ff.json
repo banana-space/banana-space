@@ -5,10 +5,13 @@
 		]
 	},
 	"vector-action-addsection": "Ɓeydi toɓɓere",
+	"vector-action-delete": "Momtu",
 	"vector-action-move": "Dirtin",
+	"vector-action-protect": "Hisnu",
 	"vector-view-create": "Sos",
 	"vector-view-edit": "Taƴto",
 	"vector-view-history": "Yiyto aslol",
 	"vector-view-view": "Tar",
-	"vector-view-viewsource": "Yiyto ɗaɗol"
+	"vector-view-viewsource": "Yiyto ɗaɗol",
+	"vector-more-actions": "Ɓeydu"
 }

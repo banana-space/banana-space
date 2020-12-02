@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vlad5250"
+		]
+	},
+	"apihelp-query+oath-description": "Provjera je li dvočiniteljska potvrda (OATH) omogućena za određenog korisnika.",
+	"apihelp-query+oath-summary": "Provjera je li dvočiniteljska potvrda (OATH) omogućena za određenog korisnika.",
+	"apihelp-query+oath-param-user": "Za koji korisnik treba pružiti informacije. Po podrazumevanom: trenutni korisnik.",
+	"apihelp-query+oath-example-1": "Daj informacije za trenutnog korisnika.",
+	"apihelp-query+oath-example-2": "Daj informacije za korisnika <kbd>Primjer</kbd>",
+	"apihelp-oathvalidate-description": "Provjeri žeton za dvočiniteljsku potvrdu (OATH).",
+	"apihelp-oathvalidate-summary": "Provjeri žeton za dvočiniteljsku potvrdu (OATH).",
+	"apihelp-oathvalidate-param-user": "Korisnik čiji bi žeton trebao biti potvrđen. Po podrazumevanom: trenutni korisnik.",
+	"apihelp-oathvalidate-param-totp": "Žeton za dvočiniteljsku potvrdu (OATH).",
+	"apihelp-oathvalidate-example-1": "Provjeri žeton za trenutnog korisnika",
+	"apihelp-oathvalidate-example-2": "Provjeri žeton za korisnika <kbd>Primjer</kbd>",
+	"apihelp-oathvalidate-example-3": "Provjera JSON-podataka za korisnika <kbd>Primjer</kbd>",
+	"apihelp-oathvalidate-param-data": "Podatke šifrirani u JSONu očekivani iz modula trenutno aktivirani za korisnika što se provjerava"
+}

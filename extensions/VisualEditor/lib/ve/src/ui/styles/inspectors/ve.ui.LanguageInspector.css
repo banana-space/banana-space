@@ -1,0 +1,13 @@
+/*!
+ * VisualEditor UserInterface LanguageInspector styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-languageInspector-languageField.oo-ui-fieldLayout-align-left.oo-ui-labelElement > .oo-ui-fieldLayout-body > .oo-ui-fieldLayout-header {
+	width: 7em;
+}
+
+.ve-ui-languageInspector-languageField.oo-ui-labelElement.oo-ui-fieldLayout-align-left > .oo-ui-fieldLayout-body > .oo-ui-fieldLayout-field {
+	width: auto;
+}

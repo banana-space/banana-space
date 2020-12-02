@@ -1,0 +1,160 @@
+@import '../../variables.less';
+@import 'mediawiki.mixins.less';
+
+/* Variants and Actions */
+.vector-menu-dropdown {
+	direction: ltr;
+	float: left;
+	cursor: pointer;
+	position: relative;
+	line-height: 1.125em;
+
+	h3 {
+		color: @color-base--subtle;
+		position: relative;
+		display: block;
+		.box-sizing( border-box );
+		// `padding-top` needs to scale with font-size.
+		padding-top: 1.25em;
+		padding-left: 8px;
+		padding-right: unit( 24 / @font-size-tabs / @font-size-browser, em );
+		font-size: @font-size-tabs;
+		font-weight: normal;
+
+		&:after {
+			content: '';
+			.background-image-svg( 'images/arrow-down.svg', 'images/arrow-down.png' );
+			background-position: 100% 50%;
+			background-repeat: no-repeat;
+			position: absolute;
+			top: unit( 10 / @font-size-tabs / @font-size-browser, em );
+			right: 8px;
+			bottom: 0;
+			width: unit( 16 / @font-size-tabs / @font-size-browser, em );
+			// Modify the color of the image from the default #202122 to approx. #404244 to match the text.
+			opacity: 0.84;
+		}
+
+		&:hover,
+		&:focus {
+			color: @color-base;
+
+			&:after {
+				opacity: 1;
+			}
+		}
+	}
+
+	// The menu itself.
+	.vector-menu-content-list {
+		background-color: @background-color-base;
+		list-style: none none;
+		// Match the width of the dropdown "heading" (the tab)
+		min-width: 100%;
+		position: absolute;
+		top: 2.5em;
+		left: -@border-width-base;
+		margin: 0;
+		border: @border-width-base @border-style-base @border-color-base;
+		border-top-width: 0;
+		padding: 0;
+		box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
+		text-align: left;
+		opacity: 0;
+		visibility: hidden;
+		.transition( opacity 100ms );
+		z-index: @z-index-menu;
+	}
+
+	&:hover .vector-menu-content-list {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	// This is in a separate block, so that browsers supporting :hover but not :checked still apply the rule above
+	// Support: IE8
+	.vector-menu-checkbox:checked ~ .vector-menu-content .vector-menu-content-list {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	li {
+		padding: 0;
+		margin: 0;
+		text-align: left;
+		line-height: 1em;
+
+		a {
+			color: @color-link;
+			display: block;
+			padding: 0.625em;
+			white-space: nowrap;
+			cursor: pointer;
+			font-size: @font-size-tabs;
+		}
+	}
+
+	.selected a,
+	.selected a:visited {
+		color: @color-link-selected;
+		text-decoration: none;
+	}
+}
+
+#mw-head .vector-menu-dropdown h3 {
+	// Tab separator: Outer end (right in LTR) border of "Actions" menu.
+	background-position: right bottom;
+	float: left;
+	height: unit( 40 / @font-size-tabs / @font-size-browser, em );
+	margin: 0 -@border-width-base 0 0;
+	// `padding-right` >= `1px` effectively moves the "background border" outside of the element to
+	// act like a real border. It is necessary for `.vector-menu-dropdown .vector-menu-content-list` dropdown to align well.
+	// 0.5em equals `8px` at computed `font-size` of `14px` as visually harmonically with
+	// `padding-left` in `.vector-menu-dropdown h3 a`
+	padding-right: unit( 24 / @font-size-tabs / @font-size-browser, em );
+}
+
+// Tab Separators
+// `.vectorTabs`: Outer start border (left in LTR) of tab row.
+// `.vectorTabs a`: Border between tabs and outer end (right in LTR) border.
+// `#mw-head .vector-menu-dropdown h3`: // Outer end (right in LTR) border of "Actions" menu.
+.vector-menu-tabs,
+.vector-menu-tabs a,
+#mw-head .vector-menu-dropdown h3 {
+	background-image: url( images/tab-separator.png );
+	background-image: linear-gradient( to bottom, rgba( 167, 215, 249, 0 ) 0, @border-color-content 100% );
+	background-repeat: no-repeat;
+	// Contain gradient to 1px × 100% size and draw from top to bottom-left or -right corner.
+	background-size: @border-width-base 100%;
+}
+
+// Invisible checkbox covering the dropdown menu handle
+.vector-menu-checkbox {
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: @z-index-menu-checkbox;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	// Hide the checkbox completely in browsers that don't support :checked
+	display: none;
+
+	:not( :checked ) > & {
+		// When the browser supports :checked, display it
+		display: block;
+	}
+
+	&:checked + h3:after {
+		transform: scaleY( -1 );
+	}
+
+	&:focus + h3 {
+		// Simulate browser focus ring
+		outline: dotted 1px; // Firefox style
+		outline: auto -webkit-focus-ring-color; // Webkit style
+	}
+}

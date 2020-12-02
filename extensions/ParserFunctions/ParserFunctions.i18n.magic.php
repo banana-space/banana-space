@@ -101,6 +101,18 @@ $magicWords['ce'] = [
 	'replace' => [ 0, 'хийцарна', 'замена' ],
 ];
 
+/** Sorani Kurdish (کوردی) */
+$magicWords['ckb'] = [
+	'default' => [ 0, 'بنچینەیی' ],
+	'expr' => [ 0, 'دەربڕین' ],
+	'if' => [ 0, 'ئەگەر' ],
+	'iferror' => [ 0, 'ئەگەر_ھەڵە' ],
+	'ifexist' => [ 0, 'ئەگەر_ھەبوو' ],
+	'ifexpr' => [ 0, 'ئەگەر_دەربڕین' ],
+	'switch' => [ 0, 'گۆڕینەوە' ],
+	'time' => [ 0, 'کات' ],
+];
+
 /** Czech (čeština) */
 $magicWords['cs'] = [
 	'expr' => [ 0, 'výraz' ],

@@ -20,10 +20,10 @@
 
 namespace MediaWiki\Logger;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Psr\Log\LogLevel;
 
-class LegacyLoggerTest extends MediaWikiTestCase {
+class LegacyLoggerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @covers MediaWiki\Logger\LegacyLogger::interpolate
@@ -37,6 +37,7 @@ class LegacyLoggerTest extends MediaWikiTestCase {
 	public function provideInterpolate() {
 		$e = new \Exception( 'boom!' );
 		$d = new \DateTime();
+		$err = new \Error( 'Test error' );
 		return [
 			[
 				'no-op',
@@ -120,6 +121,15 @@ class LegacyLoggerTest extends MediaWikiTestCase {
 					'object' => new \stdClass,
 				],
 				'[Object stdClass]',
+			],
+			[
+				'{exception}',
+				[
+					'exception' => $err,
+				],
+				'[Error ' . get_class( $err ) . '( ' .
+					$err->getFile() . ':' . $err->getLine() . ') ' .
+					$err->getMessage() . ']',
 			],
 		];
 	}

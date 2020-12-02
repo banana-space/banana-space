@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko",
+			"Wladek92"
+		]
+	},
+	"apihelp-titleblacklist-description": "Valider un titre de page, un nom de fichier, ou un nom d’utilisateur, d’après TitleBlacklist.",
+	"apihelp-titleblacklist-summary": "Valider un titre de page, un nom de fichier ou un nom d’utilisateur d’après TitleBlacklist.",
+	"apihelp-titleblacklist-param-title": "La chaîne à valider d’après la liste noire.",
+	"apihelp-titleblacklist-param-action": "L’action à vérifier.",
+	"apihelp-titleblacklist-param-nooverride": "N’essayez pas d’écraser la liste noire des titres.",
+	"apihelp-titleblacklist-example-1": "Vérifier si [[Foo]] est en liste noire",
+	"apihelp-titleblacklist-example-2": "Vérifier si [[Bar]] est en liste noire pour modification",
+	"apihelp-createaccount-param-ignoretitleblacklist": "Ignorer les contrôles d’usurpation (nécessite un des droits suivants : <code>tboverride</code>, <code>tboverride-account</code>)."
+}

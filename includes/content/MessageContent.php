@@ -42,7 +42,7 @@ class MessageContent extends AbstractContent {
 
 	/**
 	 * @param Message|string $msg A Message object, or a message key.
-	 * @param string[] $params An optional array of message parameters.
+	 * @param string[]|null $params An optional array of message parameters.
 	 */
 	public function __construct( $msg, $params = null ) {
 		# XXX: messages may be wikitext, html or plain text! and maybe even something else entirely.
@@ -80,9 +80,22 @@ class MessageContent extends AbstractContent {
 	/**
 	 * Returns the message object, with any parameters already substituted.
 	 *
+	 * @deprecated since 1.33 use getMessage() instead.
+	 *
 	 * @return Message The message object.
 	 */
 	public function getNativeData() {
+		return $this->getMessage();
+	}
+
+	/**
+	 * Returns the message object, with any parameters already substituted.
+	 *
+	 * @since 1.33
+	 *
+	 * @return Message The message object.
+	 */
+	public function getMessage() {
 		// NOTE: Message objects are mutable. Cloning here makes MessageContent immutable.
 		return clone $this->mMessage;
 	}
@@ -131,7 +144,8 @@ class MessageContent extends AbstractContent {
 	 * @see Content::copy
 	 */
 	public function copy() {
-		// MessageContent is immutable (because getNativeData() returns a clone of the Message object)
+		// MessageContent is immutable (because getNativeData() and getMessage()
+		//   returns a clone of the Message object)
 		return $this;
 	}
 
@@ -148,8 +162,8 @@ class MessageContent extends AbstractContent {
 
 	/**
 	 * @param Title $title Unused.
-	 * @param int $revId Unused.
-	 * @param ParserOptions $options Unused.
+	 * @param int|null $revId Unused.
+	 * @param ParserOptions|null $options Unused.
 	 * @param bool $generateHtml Whether to generate HTML (default: true).
 	 *
 	 * @return ParserOutput

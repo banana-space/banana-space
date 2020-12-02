@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Revision\SlotRecord;
+
 /**
  * @since 1.31
  */
@@ -49,9 +51,23 @@ interface ImportableOldRevision {
 
 	/**
 	 * @since 1.31
+	 * @param string $role
 	 * @return Content
 	 */
-	public function getContent();
+	public function getContent( $role = SlotRecord::MAIN );
+
+	/**
+	 * @since 1.35
+	 * @param string $role
+	 * @return SlotRecord
+	 */
+	public function getSlot( $role );
+
+	/**
+	 * @since 1.35
+	 * @return string[]
+	 */
+	public function getSlotRoles();
 
 	/**
 	 * @since 1.31
@@ -64,5 +80,11 @@ interface ImportableOldRevision {
 	 * @return bool|string
 	 */
 	public function getSha1Base36();
+
+	/**
+	 * @since 1.34
+	 * @return string[]
+	 */
+	public function getTags();
 
 }

@@ -22,6 +22,7 @@
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Shell\Shell;
 use UtfNormal\Validator;
+use Wikimedia\XMPReader\Reader as XMPReader;
 
 /**
  * inspired by djvuimage from Brion Vibber
@@ -38,7 +39,7 @@ class PdfImage {
 	/**
 	 * @param string $filename
 	 */
-	function __construct( $filename ) {
+	public function __construct( $filename ) {
 		$this->mFilename = $filename;
 	}
 
@@ -310,11 +311,9 @@ class PdfImage {
 		}
 		$meta->addMetadata( $items, 'native' );
 
-		if ( isset( $data['xmp'] ) && function_exists( 'xml_parser_create_ns' ) ) {
-			// func exists verifies that the xml extension required for XMPReader
-			// is present (Almost always is present)
+		if ( isset( $data['xmp'] ) && XMPReader::isSupported() ) {
 			// @todo: This only handles generic xmp properties. Would be improved
-			// by handling pdf xmp properties (pdf and pdfx) via XMPInfo hook.
+			// by handling pdf xmp properties (pdf and pdfx) via a hook.
 			$xmp = new XMPReader( LoggerFactory::getInstance( 'XMP' ) );
 			$xmp->parse( $data['xmp'] );
 			$xmpRes = $xmp->getResults();

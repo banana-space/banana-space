@@ -18,17 +18,18 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @ingroup Deployment
+ * @ingroup Installer
  */
 
 use Wikimedia\Rdbms\Database;
-use Wikimedia\Rdbms\DBQueryError;
+use Wikimedia\Rdbms\DatabasePostgres;
 use Wikimedia\Rdbms\DBConnectionError;
+use Wikimedia\Rdbms\DBQueryError;
 
 /**
  * Class for setting up the MediaWiki database using Postgres.
  *
- * @ingroup Deployment
+ * @ingroup Installer
  * @since 1.17
  */
 class PostgresInstaller extends DatabaseInstaller {
@@ -47,12 +48,12 @@ class PostgresInstaller extends DatabaseInstaller {
 	];
 
 	public static $minimumVersion = '9.2';
-	protected static $notMiniumumVerisonMessage = 'config-postgres-old';
+	protected static $notMinimumVersionMessage = 'config-postgres-old';
 	public $maxRoleSearchDepth = 5;
 
 	protected $pgConns = [];
 
-	function getName() {
+	public function getName() {
 		return 'postgres';
 	}
 
@@ -60,7 +61,7 @@ class PostgresInstaller extends DatabaseInstaller {
 		return self::checkExtension( 'pgsql' );
 	}
 
-	function getConnectForm() {
+	public function getConnectForm() {
 		return $this->getTextBox(
 			'wgDBserver',
 			'config-db-host',
@@ -86,7 +87,7 @@ class PostgresInstaller extends DatabaseInstaller {
 			$this->getInstallUserBox();
 	}
 
-	function submitConnectForm() {
+	public function submitConnectForm() {
 		// Get variables from the request
 		$newValues = $this->setVarsFromRequest( [
 			'wgDBserver',
@@ -119,13 +120,13 @@ class PostgresInstaller extends DatabaseInstaller {
 			return $status;
 		}
 		/**
-		 * @var $conn Database
+		 * @var Database $conn
 		 */
 		$conn = $status->value;
 
 		// Check version
 		$version = $conn->getServerVersion();
-		$status = static::meetsMinimumRequirement( $conn->getServerVersion() );
+		$status = static::meetsMinimumRequirement( $version );
 		if ( !$status->isOK() ) {
 			return $status;
 		}
@@ -190,7 +191,7 @@ class PostgresInstaller extends DatabaseInstaller {
 
 		if ( $status->isOK() ) {
 			/**
-			 * @var $conn Database
+			 * @var Database $conn
 			 */
 			$conn = $status->value;
 			$conn->clearFlag( DBO_TRX );
@@ -242,11 +243,11 @@ class PostgresInstaller extends DatabaseInstaller {
 				$status = $this->openPgConnection( 'create-schema' );
 				if ( $status->isOK() ) {
 					/**
-					 * @var $conn Database
+					 * @var Database $conn
 					 */
 					$conn = $status->value;
 					$safeRole = $conn->addIdentifierQuotes( $this->getVar( 'wgDBuser' ) );
-					$conn->query( "SET ROLE $safeRole" );
+					$conn->query( "SET ROLE $safeRole", __METHOD__ );
 				}
 
 				return $status;
@@ -269,6 +270,7 @@ class PostgresInstaller extends DatabaseInstaller {
 			try {
 				$p = [
 					'host' => $this->getVar( 'wgDBserver' ),
+					'port' => $this->getVar( 'wgDBport' ),
 					'user' => $user,
 					'password' => $password,
 					'dbname' => $db
@@ -296,7 +298,7 @@ class PostgresInstaller extends DatabaseInstaller {
 			return false;
 		}
 		/**
-		 * @var $conn Database
+		 * @var Database $conn
 		 */
 		$conn = $status->value;
 		$superuser = $this->getVar( '_InstallUser' );
@@ -353,6 +355,7 @@ class PostgresInstaller extends DatabaseInstaller {
 			if ( !$status->isOK() ) {
 				return $status;
 			}
+			// @phan-suppress-next-line PhanUndeclaredMethod
 			$exists = $status->value->roleExists( $this->getVar( 'wgDBuser' ) );
 		}
 
@@ -443,11 +446,11 @@ class PostgresInstaller extends DatabaseInstaller {
 			}
 			// Recursively search each member of the group to see if the target
 			// is a member of it, up to the given maximum depth.
-			if ( $maxDepth > 0 ) {
-				if ( $this->isRoleMember( $conn, $targetMember, $row->member, $maxDepth - 1 ) ) {
-					// Found member of member
-					return true;
-				}
+			if ( $maxDepth > 0 &&
+				$this->isRoleMember( $conn, $targetMember, $row->member, $maxDepth - 1 )
+			) {
+				// Found member of member
+				return true;
 			}
 		}
 
@@ -480,7 +483,7 @@ class PostgresInstaller extends DatabaseInstaller {
 		$this->parent->addInstallStep( $schemaCB, 'database' );
 	}
 
-	function setupDatabase() {
+	public function setupDatabase() {
 		$status = $this->getPgConnection( 'create-db' );
 		if ( !$status->isOK() ) {
 			return $status;
@@ -499,13 +502,15 @@ class PostgresInstaller extends DatabaseInstaller {
 		return Status::newGood();
 	}
 
-	function setupSchema() {
+	public function setupSchema() {
 		// Get a connection to the target database
 		$status = $this->getPgConnection( 'create-schema' );
 		if ( !$status->isOK() ) {
 			return $status;
 		}
+		/** @var DatabasePostgres $conn */
 		$conn = $status->value;
+		'@phan-var DatabasePostgres $conn';
 
 		// Create the schema if necessary
 		$schema = $this->getVar( 'wgDBmwschema' );
@@ -513,7 +518,7 @@ class PostgresInstaller extends DatabaseInstaller {
 		$safeuser = $conn->addIdentifierQuotes( $this->getVar( 'wgDBuser' ) );
 		if ( !$conn->schemaExists( $schema ) ) {
 			try {
-				$conn->query( "CREATE SCHEMA $safeschema AUTHORIZATION $safeuser" );
+				$conn->query( "CREATE SCHEMA $safeschema AUTHORIZATION $safeuser", __METHOD__ );
 			} catch ( DBQueryError $e ) {
 				return Status::newFatal( 'config-install-pg-schema-failed',
 					$this->getVar( '_InstallUser' ), $schema );
@@ -526,13 +531,13 @@ class PostgresInstaller extends DatabaseInstaller {
 		return Status::newGood();
 	}
 
-	function commitChanges() {
+	public function commitChanges() {
 		$this->db->commit( __METHOD__ );
 
 		return Status::newGood();
 	}
 
-	function setupUser() {
+	public function setupUser() {
 		if ( !$this->getVar( '_CreateDBAccount' ) ) {
 			return Status::newGood();
 		}
@@ -541,7 +546,9 @@ class PostgresInstaller extends DatabaseInstaller {
 		if ( !$status->isOK() ) {
 			return $status;
 		}
+		/** @var DatabasePostgres $conn */
 		$conn = $status->value;
+		'@phan-var DatabasePostgres $conn';
 
 		$safeuser = $conn->addIdentifierQuotes( $this->getVar( 'wgDBuser' ) );
 		$safepass = $conn->addQuotes( $this->getVar( 'wgDBpassword' ) );
@@ -570,7 +577,7 @@ class PostgresInstaller extends DatabaseInstaller {
 		return Status::newGood();
 	}
 
-	function getLocalSettings() {
+	public function getLocalSettings() {
 		$port = $this->getVar( 'wgDBport' );
 		$schema = $this->getVar( 'wgDBmwschema' );
 
@@ -598,8 +605,9 @@ class PostgresInstaller extends DatabaseInstaller {
 
 		/** @var DatabasePostgres $conn */
 		$conn = $status->value;
+		'@phan-var DatabasePostgres $conn';
 
-		if ( $conn->tableExists( 'archive' ) ) {
+		if ( $conn->tableExists( 'archive', __METHOD__ ) ) {
 			$status->warning( 'config-install-tables-exist' );
 			$this->enableLB();
 
@@ -617,9 +625,16 @@ class PostgresInstaller extends DatabaseInstaller {
 		if ( $error !== true ) {
 			$conn->reportQueryError( $error, 0, '', __METHOD__ );
 			$conn->rollback( __METHOD__ );
-			$status->fatal( 'config-install-tables-failed', $error );
+			$status->fatal( 'config-install-tables-manual-failed', $error );
 		} else {
-			$conn->commit( __METHOD__ );
+			$error = $conn->sourceFile( $this->getGeneratedSchemaPath( $conn ) );
+			if ( $error !== true ) {
+				$conn->reportQueryError( $error, 0, '', __METHOD__ );
+				$conn->rollback( __METHOD__ );
+				$status->fatal( 'config-install-tables-failed', $error );
+			} else {
+				$conn->commit( __METHOD__ );
+			}
 		}
 		// Resume normal operations
 		if ( $status->isOK() ) {
@@ -645,11 +660,11 @@ class PostgresInstaller extends DatabaseInstaller {
 			return $status;
 		}
 		/**
-		 * @var $conn Database
+		 * @var Database $conn
 		 */
 		$conn = $status->value;
 
-		$exists = $conn->selectField( '"pg_catalog"."pg_language"', 1,
+		$exists = $conn->selectField( '"pg_catalog"."pg_language"', '1',
 			[ 'lanname' => 'plpgsql' ], __METHOD__ );
 		if ( $exists ) {
 			// Already exists, nothing to do
@@ -660,7 +675,7 @@ class PostgresInstaller extends DatabaseInstaller {
 		// should be able to create it
 		$exists = $conn->selectField(
 			[ '"pg_catalog"."pg_class"', '"pg_catalog"."pg_namespace"' ],
-			1,
+			'1',
 			[
 				'pg_namespace.oid=relnamespace',
 				'nspname' => 'pg_catalog',

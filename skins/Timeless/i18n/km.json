@@ -4,8 +4,6 @@
 			"គីមស៊្រុន"
 		]
 	},
-	"timeless-search-placeholder": "ស្វែងរកក្នុងទំព័រចំនួន {{NUMBEROFARTICLES}}",
-	"timeless-loggedin": "គណនីរបស់អ្នក",
 	"timeless-anonymous": "អនាមិក",
 	"timeless-loggedinas": "កំពុងកត់ឈ្មោះចូលជា​ '''$1'''",
 	"timeless-notloggedin": "មិនទាន់កត់ឈ្មោះចូលទេ",
@@ -16,8 +14,11 @@
 	"timeless-sitetools": "ឧបករណ៍វិគី",
 	"timeless-pageactions": "ឧបករណ៍ទំព័រ",
 	"timeless-userpagetools": "ឧបករណ៍ទំព័រអ្នកប្រើប្រាស់",
+	"timeless-action-addsection": "ប្រធានបទថ្មី",
+	"timeless-view-view": "អាន",
 	"timeless-pagemisc": "ផ្សេងទៀត",
 	"timeless-namespaces": "លំហឈ្មោះ",
 	"timeless-pagetools": "អំពើធ្វើលើទំព័រ",
-	"timeless-languages": "ភាសា"
+	"timeless-languages": "ភាសា",
+	"timeless-projects": "គម្រោងផ្សេងៗទៀត"
 }

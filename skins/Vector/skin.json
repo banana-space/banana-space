@@ -11,10 +11,7 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "skin",
 	"requires": {
-		"MediaWiki": ">= 1.29.0"
-	},
-	"ConfigRegistry": {
-		"vector": "GlobalVarConfig::newInstance"
+		"MediaWiki": ">= 1.35.0"
 	},
 	"ValidSkinNames": {
 		"vector": "Vector"
@@ -25,46 +22,83 @@
 		]
 	},
 	"AutoloadClasses": {
-		"Vector\\Hooks": "includes/Hooks.php",
 		"SkinVector": "includes/SkinVector.php",
-		"VectorTemplate": "includes/VectorTemplate.php",
-		"Vector\\ResourceLoaderLessModule": "includes/ResourceLoaderLessModule.php"
+		"VectorTemplate": "includes/VectorTemplate.php"
+	},
+	"AutoloadNamespaces": {
+		"Vector\\": "includes/"
+	},
+	"ConfigRegistry": {
+		"vector": "GlobalVarConfig::newInstance"
 	},
 	"Hooks": {
-		"BeforePageDisplayMobile": [
-			"Vector\\Hooks::onBeforePageDisplayMobile"
-		]
+		"BeforePageDisplay": "Vector\\Hooks::onBeforePageDisplay",
+		"GetPreferences": "Vector\\Hooks::onGetPreferences",
+		"PreferencesFormPreSave": "Vector\\Hooks::onPreferencesFormPreSave",
+		"SkinTemplateNavigation": "Vector\\Hooks::onSkinTemplateNavigation",
+		"LocalUserCreated": "Vector\\Hooks::onLocalUserCreated",
+		"OutputPageBodyAttributes": "Vector\\Hooks::onOutputPageBodyAttributes"
 	},
 	"@note": "When modifying skins.vector.styles definition, make sure the installer still works",
 	"ResourceModules": {
+		"skins.vector.styles.legacy": {
+			"class": "ResourceLoaderSkinModule",
+			"features": [ "normalize", "elements", "content", "interface", "logo", "legacy" ],
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"styles": [ "resources/skins.vector.styles/skin-legacy.less" ]
+		},
 		"skins.vector.styles": {
-			"class": "Vector\\ResourceLoaderLessModule",
-			"targets": [ "desktop", "mobile" ],
-			"styles": {
-				"screen.less": {
-					"media": "screen"
+			"class": "ResourceLoaderSkinModule",
+			"features": [ "normalize", "elements", "content", "interface", "legacy" ],
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"styles": [ "resources/skins.vector.styles/skin.less" ]
+		},
+		"skins.vector.icons": {
+			"class": "ResourceLoaderImageModule",
+			"selector": "{name}",
+			"images": {
+				"#mw-sidebar-button:before": {
+					"file": {
+						"ltr": "resources/skins.vector.icons/chevronHorizontal-ltr.svg",
+						"rtl": "resources/skins.vector.icons/chevronHorizontal-rtl.svg"
+					}
 				},
-				"screen-hd.less": {
-					"media": "screen and (min-width: 982px)"
-				},
-				"print.less": {}
+				"#mw-sidebar-checkbox:not( :checked ) ~ .mw-header #mw-sidebar-button:before": "resources/skins.vector.icons/menu.svg"
 			}
 		},
-
 		"skins.vector.styles.responsive": {
-			"targets": [ "desktop", "mobile" ],
-			"styles": [
-				"responsive.less"
-			]
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"styles": [ "resources/skins.vector.styles.responsive.less" ]
 		},
 		"skins.vector.js": {
-			"scripts": [
-				"collapsibleTabs.js",
-				"vector.js"
+			"packageFiles": [
+				"resources/skins.vector.js/skin.js",
+				"resources/skins.vector.js/sidebar.js",
+				"resources/skins.vector.legacy.js/collapsibleTabs.js",
+				"resources/skins.vector.legacy.js/vector.js"
 			],
 			"dependencies": [
-				"jquery.throttle-debounce",
-				"jquery.tabIndex"
+				"mediawiki.util",
+				"mediawiki.page.ready"
+			]
+		},
+		"skins.vector.legacy.js": {
+			"packageFiles": [
+				"resources/skins.vector.legacy.js/skin-legacy.js",
+				"resources/skins.vector.legacy.js/collapsibleTabs.js",
+				"resources/skins.vector.legacy.js/vector.js"
+			],
+			"dependencies": [
+				"mediawiki.util"
 			]
 		}
 	},
@@ -75,35 +109,65 @@
 	"ResourceModuleSkinStyles": {
 		"vector": {
 			"jquery.tipsy": "skinStyles/jquery.tipsy.less",
-			"jquery.ui.core": [
+			"jquery.ui": [
 				"skinStyles/jquery.ui/jquery.ui.core.css",
-				"skinStyles/jquery.ui/jquery.ui.theme.css"
+				"skinStyles/jquery.ui/jquery.ui.theme.css",
+				"skinStyles/jquery.ui/jquery.ui.accordion.css",
+				"skinStyles/jquery.ui/jquery.ui.autocomplete.css",
+				"skinStyles/jquery.ui/jquery.ui.button.css",
+				"skinStyles/jquery.ui/jquery.ui.datepicker.css",
+				"skinStyles/jquery.ui/jquery.ui.dialog.css",
+				"skinStyles/jquery.ui/jquery.ui.menu.css",
+				"skinStyles/jquery.ui/jquery.ui.progressbar.css",
+				"skinStyles/jquery.ui/jquery.ui.resizable.css",
+				"skinStyles/jquery.ui/jquery.ui.selectable.css",
+				"skinStyles/jquery.ui/jquery.ui.slider.css",
+				"skinStyles/jquery.ui/jquery.ui.tabs.css",
+				"skinStyles/jquery.ui/jquery.ui.tooltip.css"
 			],
-			"jquery.ui.accordion": "skinStyles/jquery.ui/jquery.ui.accordion.css",
-			"jquery.ui.autocomplete": "skinStyles/jquery.ui/jquery.ui.autocomplete.css",
-			"jquery.ui.button": "skinStyles/jquery.ui/jquery.ui.button.css",
-			"jquery.ui.datepicker": "skinStyles/jquery.ui/jquery.ui.datepicker.css",
-			"jquery.ui.dialog": "skinStyles/jquery.ui/jquery.ui.dialog.css",
-			"jquery.ui.menu": "skinStyles/jquery.ui/jquery.ui.menu.css",
-			"jquery.ui.progressbar": "skinStyles/jquery.ui/jquery.ui.progressbar.css",
-			"jquery.ui.resizable": "skinStyles/jquery.ui/jquery.ui.resizable.css",
-			"jquery.ui.selectable": "skinStyles/jquery.ui/jquery.ui.selectable.css",
-			"jquery.ui.slider": "skinStyles/jquery.ui/jquery.ui.slider.css",
-			"jquery.ui.spinner": "skinStyles/jquery.ui/jquery.ui.spinner.css",
-			"jquery.ui.tabs": "skinStyles/jquery.ui/jquery.ui.tabs.css",
-			"jquery.ui.tooltips": "skinStyles/jquery.ui/jquery.ui.tooltips.css",
 			"+mediawiki.action.view.redirectPage": "skinStyles/mediawiki.action.view.redirectPage.less",
 			"+mediawiki.notification": "skinStyles/mediawiki.notification.less",
 			"+oojs-ui-core.styles": "skinStyles/ooui.less",
 			"mediawiki.special": "skinStyles/mediawiki.special.less",
-			"+mediawiki.special.preferences.styles": "skinStyles/mediawiki.special.preferences.styles.less"
+			"+ext.relatedArticles.readMore": "skinStyles/ext.relatedArticles.readMore.less"
 		}
 	},
 	"config": {
-		"VectorUseSimpleSearch": true,
-		"VectorUseIconWatch": true,
-		"VectorResponsive": false,
-		"VectorPrintLogo": false
+		"VectorUseIconWatch": {
+			"value": true
+		},
+		"VectorResponsive": {
+			"value": false
+		},
+		"VectorShowSkinPreferences": {
+			"value": true,
+			"description": "@var boolean Show skin-specific user preferences on the Special:Preferences appearance tab when true and hide them otherwise."
+		},
+		"VectorDefaultSkinVersion": {
+			"value": "1",
+			"description": "@var string:['2'|'1'] The version ('2' for latest, '1' for legacy) of the Vector skin to use for anonymous users and as a fallback. The value is _not_ persisted."
+		},
+		"VectorDefaultSkinVersionForExistingAccounts": {
+			"value": "1",
+			"description": "@var string:['2'|'1'] The version ('2' for latest, '1' for legacy) of the Vector skin to use when an existing user has not specified a preference. This configuration is not used for new accounts (see VectorDefaultSkinVersionForNewAccounts) and is impermanent. In the future, this field may contains versions such as \"beta\" which when specified and the BetaFeatures extension is installed, and the user is enrolled, the latest version is used otherwise legacy. The value is _not_ persisted."
+		},
+		"VectorDefaultSkinVersionForNewAccounts": {
+			"value": "1",
+			"description": "@var string:['2'|'1'] The version ('2' for latest, '1' for legacy) of the Vector skin to **set** for newly created user accounts. **The value is persisted as a user preference.** This configuration is not used for preexisting accounts (see VectorDefaultSkinVersionForExistingAccounts) and only ever executed once at new account creation time."
+		},
+		"VectorDefaultSidebarVisibleForAuthorisedUser": {
+			"value": true
+		},
+		"VectorDefaultSidebarVisibleForAnonymousUser": {
+			"value": false
+		},
+		"VectorLayoutMaxWidth": {
+			"value": false,
+			"description": "@var boolean Enables the max-width layout for the latest version of Vector. This is intended to be a very short-lived feature flag whose sole purpose is to derisk the deployment of T246420. It should be removed (and made the default) as quickly as possible."
+		}
 	},
-	"manifest_version": 1
+	"ServiceWiringFiles": [
+		"includes/ServiceWiring.php"
+	],
+	"manifest_version": 2
 }

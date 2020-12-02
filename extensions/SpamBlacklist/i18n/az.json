@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toghrul Rahimli"
+		]
+	},
+	"log-name-spamblacklist": "Spam qara siyahısı qeydləri",
+	"log-description-spamblacklist": "Bu qeydlər spam qara siyahısı əməliyyatları izləyir."
+}

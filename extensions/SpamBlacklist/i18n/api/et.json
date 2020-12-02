@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pikne"
+		]
+	},
+	"apihelp-spamblacklist-description": "Ühe või enama internetiaadressi valideerimine rämpsposti musta nimekirja vastu.",
+	"apihelp-spamblacklist-example-1": "Kontrolli kaht internetiaadressi musta nimekirja vastu",
+	"apihelp-spamblacklist-param-url": "Internetiaadressid, mida musta nimekirja vastu valideerida."
+}

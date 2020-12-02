@@ -16,8 +16,5 @@
 	"gadgets-export": "Útflyt",
 	"gadgets-export-title": "Útflyt gadget",
 	"gadgets-not-found": "Gadget \"$1\" ikki funnin.",
-	"gadgets-export-download": "Tak niður",
-	"apihelp-query+gadgetcategories-param-names": "Nøvn á bólkum ið skulu heintast.",
-	"apihelp-query+gadgetcategories-example-1": "Fá eitt yvirlit yvir gadget bólkar",
-	"apihelp-query+gadgetcategories-example-2": "Fá kunning um allir bólkar nevndir \"foo\" og \"bar\""
+	"gadgets-export-download": "Tak niður"
 }

@@ -64,11 +64,17 @@ class CategoryTreeCategoryViewer extends CategoryViewer {
 		$this->children_start_char[] = $this->getSubcategorySortChar( $title, $sortkey );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function clearCategoryState() {
 		$this->child_cats = [];
 		parent::clearCategoryState();
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function finaliseCategoryState() {
 		if ( $this->flip ) {
 			$this->child_cats = array_reverse( $this->child_cats );

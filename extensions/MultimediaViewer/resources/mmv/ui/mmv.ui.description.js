@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $, oo ) {
+( function () {
 	/**
 	 * Description element in the UI.
 	 *
@@ -39,7 +39,7 @@
 			.appendTo( this.$imageDescDiv );
 	}
 
-	oo.inheritClass( Description, mw.mmv.ui.Element );
+	OO.inheritClass( Description, mw.mmv.ui.Element );
 
 	/**
 	 * Sets data on the element.
@@ -66,4 +66,4 @@
 	};
 
 	mw.mmv.ui.Description = Description;
-}( mediaWiki, jQuery, OO ) );
+}() );

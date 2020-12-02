@@ -5,5 +5,8 @@
 		]
 	},
 	"oathauth-account": "Paskyros vardas:",
-	"action-oathauth-api-all": "patikrinti OATH būseną"
+	"oathauth-auth-ui": "Prašome įvesti patvirtinimo kodą iš jūsų identifikacijos įrenginio.",
+	"action-oathauth-api-all": "patikrinti OATH būseną",
+	"oathauth-ui-not-enabled-modules": "Pakeisti į alternatyvų metodą",
+	"oathauth-disable-method-warning-button-label": "Patvirtinti ir tęsti"
 }

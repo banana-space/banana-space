@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jawadywn"
+			"Jawadywn",
+			"Masjawad99"
 		]
 	},
-	"categorytree-expand": "selék",
+	"categorytree-expand": "jéjérke",
+	"categorytree-member-counts": "punyo {{PLURAL:$1|$1 sub-bangso}}, {{PLURAL:$2|$2 karangan}}, samo {{PLURAL:$3|$3 berkas}}",
 	"categorytree-num-categories": "$1 B",
 	"categorytree-num-pages": "$1 L",
 	"categorytree-num-files": "$1 B"

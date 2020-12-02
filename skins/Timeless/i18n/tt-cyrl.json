@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Pacha Tchernof",
+			"Ерней",
 			"Ильнар"
 		]
 	},
-	"timeless-desc": "Timeless бизәлеше Брэндон Харрисның Winter прототипыннан һәм Викимедия Фондының башка төр стильләреннән чыгып ясалган.",
-	"timeless-search-placeholder": "Якынча {{NUMBEROFARTICLES}} бит аша эзләү",
-	"timeless-loggedin": "Хисап язмасы",
+	"timeless-desc": "Timeless бизәлеше Брэндон Харрисның Winter прототибыннан һәм Викимедиа Фондының башка төр стильләреннән чыгып ясалган",
 	"timeless-anonymous": "Аноним",
 	"timeless-loggedinas": "'''$1''' булып кергән",
 	"timeless-notloggedin": "Сез хисап язмагызга кермәгәнсез",
@@ -17,8 +17,11 @@
 	"timeless-sitetools": "Вики-кораллар",
 	"timeless-pageactions": "Бит очен кораллар",
 	"timeless-userpagetools": "Кулланучы бите кораллары",
+	"timeless-action-addsection": "Яңа тема",
+	"timeless-view-view": "Уку",
 	"timeless-pagemisc": "Тагын",
-	"timeless-namespaces": "Исемнәр мәйданы",
+	"timeless-namespaces": "Исемнәр киңлекләре",
 	"timeless-pagetools": "Биттәге гамәлләр",
-	"timeless-languages": "Телләр"
+	"timeless-languages": "Телләр",
+	"timeless-projects": "Башка проектлар"
 }

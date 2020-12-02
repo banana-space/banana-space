@@ -7,13 +7,10 @@
 
 namespace LocalisationUpdate;
 
-use PHPUnit4And6Compat;
-
 /**
  * @covers \LocalisationUpdate\Updater
  */
 class UpdaterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testIsDirectory() {
 		$updater = new Updater();
@@ -51,13 +48,13 @@ class UpdaterTest extends \PHPUnit\Framework\TestCase {
 		$input = [ 'file' => 'Hello World!' ];
 		$output = [ 'en' => [ 'key' => $input['file'] ] ];
 
-		$reader = $this->getMock( 'LocalisationUpdate\Reader' );
+		$reader = $this->createMock( 'LocalisationUpdate\Reader\Reader' );
 		$reader
 			->expects( $this->once() )
 			->method( 'parse' )
 			->will( $this->returnValue( $output ) );
 
-		$factory = $this->getMock( 'LocalisationUpdate\ReaderFactory' );
+		$factory = $this->createMock( 'LocalisationUpdate\Reader\ReaderFactory' );
 		$factory
 			->expects( $this->once() )
 			->method( 'getReader' )

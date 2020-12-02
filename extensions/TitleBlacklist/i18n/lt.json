@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Albertas",
 			"Eitvys200",
 			"Homo",
-			"Matasg",
-			"Albertas"
+			"Matasg"
 		]
 	},
 	"action-titleblacklistlog": "peržiūrėti pavadinimų juodojo sąrašo žurnalą",
@@ -23,12 +23,5 @@
 	"titleblacklist-warning": "<strong>Įspėjimas: Šį puslapį gali redaguoti tik administratoriai ir kiti naudotojai, turinys  <code>tboverride</code> teisę, nes jis atitinka šį pavadinimų juodojo sąrašo įrašą:</strong><br /><code>$1</code>",
 	"right-tboverride": "Nepaisyti pavadinimų arba naudotojų juodojo sąrašo",
 	"right-tboverride-account": "Nepaisyti naudotojų juodojo sąrašo",
-	"right-titleblacklistlog": "Peržiūrėti pavadinimų juodojo sąrašo žurnalą",
-	"apihelp-titleblacklist-description": "Patikrinti, ar straipsnio pavadinimas, failo vardas ar naudotojo vardas nėra įtrauktas į juodąjį sąrašą.",
-	"apihelp-titleblacklist-param-title": "Eilutė, kurią patikrinti juodajame sąraše.",
-	"apihelp-titleblacklist-param-action": "Veiksmas, kurį patikrinti.",
-	"apihelp-titleblacklist-param-nooverride": "Nebandykite perrašyti pavadinimų juodojo sąrašo.",
-	"apihelp-titleblacklist-example-1": "Patikrinti, ar [[Foo]] yra juodajame sąraše",
-	"apihelp-titleblacklist-example-2": "Patikrinti, ar [[Bar]] yra redagavimo juodajame sąraše",
-	"apihelp-createaccount-param-ignoretitleblacklist": "Ignoruoti pokštų patikras (reikalinga bent viena iš šių teisių: <code>tboverride</code>, <code>tboverride-account</code>)."
+	"right-titleblacklistlog": "Peržiūrėti pavadinimų juodojo sąrašo žurnalą"
 }

@@ -3,7 +3,7 @@
  *
  * @copyright 2011-2016 VisualEditor Team and others; see http://ve.mit-license.org
  */
-( function ( $, mw ) {
+( function () {
 
 	/**
 	 * API Results Queue object.
@@ -48,7 +48,7 @@
 	 *  are set up. Note: The promise must have an .abort() functionality.
 	 */
 	mw.widgets.APIResultsQueue.prototype.setup = function () {
-		return $.Deferred().resolve().promise( { abort: $.noop } );
+		return $.Deferred().resolve().promise( { abort: function () {} } );
 	};
 
 	/**
@@ -151,7 +151,7 @@
 		for ( i = 0, len = this.providerPromises.length; i < len; i++ ) {
 			this.providerPromises[ i ].abort();
 		}
-		// Change queries
+		// Reset options
 		for ( i = 0, len = this.providers.length; i < len; i++ ) {
 			this.providers[ i ].reset();
 		}
@@ -172,7 +172,12 @@
 	 * @param {mw.widgets.APIResultsProvider[]} providers An array of providers
 	 */
 	mw.widgets.APIResultsQueue.prototype.setProviders = function ( providers ) {
+		var i, len;
 		this.providers = providers;
+		for ( i = 0, len = this.providers.length; i < len; i++ ) {
+			this.providers[ i ].setUserParams( this.params );
+			this.providers[ i ].setLang( this.lang );
+		}
 	};
 
 	/**
@@ -182,6 +187,8 @@
 	 */
 	mw.widgets.APIResultsQueue.prototype.addProvider = function ( provider ) {
 		this.providers.push( provider );
+		provider.setUserParams( this.params );
+		provider.setLang( this.lang );
 	};
 
 	/**
@@ -221,4 +228,26 @@
 	mw.widgets.APIResultsQueue.prototype.getThreshold = function () {
 		return this.threshold;
 	};
-}( jQuery, mediaWiki ) );
+
+	/**
+	 * Set language for the query results
+	 *
+	 * @param {string|undefined} lang Language
+	 */
+	mw.widgets.APIResultsQueue.prototype.setLang = function ( lang ) {
+		var i, len;
+		this.lang = lang;
+		for ( i = 0, len = this.providers.length; i < len; i++ ) {
+			this.providers[ i ].setLang( this.lang );
+		}
+	};
+
+	/**
+	 * Get language for the query results
+	 *
+	 * @return {string|undefined} lang Language
+	 */
+	mw.widgets.APIResultsQueue.prototype.getLang = function () {
+		return this.lang;
+	};
+}() );

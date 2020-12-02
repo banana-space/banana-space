@@ -1,20 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alirezaaa",
 			"Ebraminio",
+			"Fatemi127",
 			"Huji",
 			"Leyth",
 			"Mjbmr",
-			"ZxxZxxZ",
-			"Alirezaaa",
-			"Rtemis"
+			"Rtemis",
+			"ZxxZxxZ"
 		]
 	},
 	"categorytree": "درخت رده",
 	"categorytree-portlet": "رده‌ها",
 	"categorytree-legend": "نمایش درخت رده",
 	"categorytree-desc": "ناوبری فعال [[Special:CategoryTree|ساختار رده‌ای]]",
-	"categorytree-header": "نام رده‌ای را وارد کنید تا محتویات آن به صورت درختی نمایش یابد. (نیازمندم جاوااسکریپت)",
+	"categorytree-header": "نام رده‌ای را وارد کنید تا محتویات آن به صورت درختی نمایش یابد. (نیازمند جاوااسکریپت)",
 	"categorytree-category": "رده:",
 	"categorytree-go": "نمایش درخت",
 	"categorytree-parents": "والدین",
@@ -39,10 +40,5 @@
 	"categorytree-no-pages": "هیچ صفحه یا زیررده‌ای ندارد",
 	"categorytree-not-found": "ردهٔ <i>$1</i> یافت نشد",
 	"categorytree-error": "اشکال در دریافت اطلاعات.",
-	"categorytree-retry": "لطفاً کمی صبر کنید و دوباره امتحان کنید.",
-	"apihelp-categorytree-description": "پودمان داخلی برای افزونهٔ درخت رده",
-	"apihelp-categorytree-summary": "پودمان داخلی برای افزونهٔ درخت رده",
-	"apihelp-categorytree-param-category": "عنوان در فضای نام رده، پیشوند اگر ارائه شود نادیده گرفته می‌شود.",
-	"apihelp-categorytree-param-options": "گزینه‌هایی برای سازندهٔ درخت‌رده به صورت یک شیء جی‌سان. گزینهٔ <var>depth</var> به طور پیش‌فرض مقدار <kbd>1</kbd> دارد.",
-	"apierror-categorytree-invalidjson": "گزینه‌ها باید یک شیء جی‌سان معتبر باشد."
+	"categorytree-retry": "لطفاً کمی صبر کنید و دوباره امتحان کنید."
 }

@@ -1,19 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
+			"Athena in Wonderland",
 			"Giro720",
 			"Hamilton Abreu",
 			"Luckas",
 			"Malafaya",
 			"Opraco",
+			"Vitorvicentevalente",
 			"Waldir",
-			"555",
-			"Vitorvicentevalente"
+			555
 		]
 	},
 	"renameuser": "Alterar o nome do utilizador",
-	"renameuser-linkoncontribs": "alterar o nome do utilizador",
-	"renameuser-linkoncontribs-text": "Alterar o nome deste utilizador",
+	"renameuser-linkoncontribs": "alterar o nome {{GENDER:$1|do utilizador|da utilizadora}}",
+	"renameuser-linkoncontribs-text": "Alterar o nome {{GENDER:$1|deste utilizador|desta utilizadora}}",
 	"renameuser-desc": "[[Special:RenameUser|Página especial]] para alterar o nome de um utilizador (requer o privilégio ''renameuser'')",
 	"renameuserold": "Nome de utilizador atual:",
 	"renameusernew": "Novo nome de utilizador:",
@@ -26,7 +27,7 @@
 	"renameusersubmit": "Enviar",
 	"renameuser-submit-blocklog": "Mostrar o registo de bloqueios do utilizador",
 	"renameusererrordoesnotexist": "O utilizador \"<nowiki>$1</nowiki>\" não existe.",
-	"renameusererrorexists": "{{GENDER:$1|O utilizador|A utilizadora|O(a) utilizador(a)}} \"<nowiki>$1</nowiki>\" já existe.",
+	"renameusererrorexists": "{{GENDER:$1|O utilizador|A utilizadora}} \"<nowiki>$1</nowiki>\" já existe.",
 	"renameusererrorinvalid": "O nome de utilizador \"<nowiki>$1</nowiki>\" é inválido.",
 	"renameuser-error-request": "Houve um problema ao receber este pedido.\nVolte atrás e tente de novo, por favor.",
 	"renameuser-error-same-user": "Não é possível alterar o nome de um utilizador para o nome anterior.",

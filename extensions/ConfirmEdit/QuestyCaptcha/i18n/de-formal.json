@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Imre",
-			"Umherirrender",
-			"Kghbln"
+			"Kghbln",
+			"Umherirrender"
 		]
 	},
 	"questycaptcha-addurl": "Ihre Bearbeitung enthält neue externe Links.\nZum Schutz vor automatisiertem Spam beantworten Sie bitte die untenstehende Frage ([[Special:Captcha/help|weitere Informationen]]):",

@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334",
+			"Eleassar",
+			"Janezdrilc",
+			"Pinky sl",
+			"Yerpo"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualno urejanje]]",
+	"tag-visualeditor-description": "Urejanje, narejeno z [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualnim urejevalnikom]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualno urejanje: Preveri]]",
+	"tag-visualeditor-needcheck-description": "Urejanje, narejeno z [[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualnim urejevalnikom]], pri katerem je sistem zaznal, da ima wikibesedilo morda neželene spremembe.",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualno urejanje: Preklopljeno]]",
+	"tag-visualeditor-switched-description": "Uporabnik je začel urejati z VisualEditorjem, nato je preklopil na urejevalnik wikibesedila",
+	"visualeditor-feedback-link": "Project:VisualEditor/Povratne informacije",
+	"visualeditor-feedback-tool": "Pustite povratno informacijo o programju",
+	"visualeditor-help-label": "Preberite uporabniški priročnik",
+	"visualeditor-help-title": "Priročnik za uporabo urejevalnika",
+	"visualeditor-welcomedialog-action": "Začetek urejanja",
+	"visualeditor-welcomedialog-content": "Tu lahko ureja in izboljšuje vsebino vsak.",
+	"visualeditor-welcomedialog-content-thanks": "Hvala, ker pomagate svetu odkrivati novo znanje!",
+	"visualeditor-welcomedialog-switch": "Preklop na urejevalnik izvorne kode",
+	"visualeditor-welcomedialog-switch-ve": "Preklopi na vizualni urejevalnik",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Dobrodošli}} v {{GRAMMAR:dajalnik|$2}}"
+}

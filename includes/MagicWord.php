@@ -1,6 +1,6 @@
 <?php
 /**
- * See docs/magicword.txt.
+ * See docs/magicword.md.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,19 +21,17 @@
  * @ingroup Parser
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * This class encapsulates "magic words" such as "#redirect", __NOTOC__, etc.
  *
  * @par Usage:
  * @code
- *     if (MagicWord::get( 'redirect' )->match( $text ) ) {
+ *     if ( $magicWordFactory->get( 'redirect' )->match( $text ) ) {
  *       // some code
  *     }
  * @endcode
- *
- * Possible future improvements:
- *   * Simultaneous searching for a number of magic words
- *   * MagicWord::$mObjects in shared memory
  *
  * Please avoid reading the data out of one of these objects and then writing
  * special case code. If possible, add another match()-like function here.
@@ -51,13 +49,16 @@
  * ];
  * @endcode
  *
- * For magic words which are also Parser variables, add a MagicWordwgVariableIDs
+ * For magic words which name Parser double underscore names, add a
+ * GetDoubleUnderscoreIDs hook. Use string keys.
+ *
+ * For magic words which name Parser magic variables, add a GetMagicVariableIDs
  * hook. Use string keys.
  *
  * @ingroup Parser
  */
 class MagicWord {
-	/**#@-*/
+	/** #@- */
 
 	/** @var string */
 	public $mId;
@@ -92,252 +93,26 @@ class MagicWord {
 	/** @var bool */
 	private $mFound = false;
 
-	/** @var bool */
-	public static $mVariableIDsInitialised = false;
+	/** @var Language */
+	private $contLang;
 
-	/** @var string[] */
-	public static $mVariableIDs = [
-		'!',
-		'currentmonth',
-		'currentmonth1',
-		'currentmonthname',
-		'currentmonthnamegen',
-		'currentmonthabbrev',
-		'currentday',
-		'currentday2',
-		'currentdayname',
-		'currentyear',
-		'currenttime',
-		'currenthour',
-		'localmonth',
-		'localmonth1',
-		'localmonthname',
-		'localmonthnamegen',
-		'localmonthabbrev',
-		'localday',
-		'localday2',
-		'localdayname',
-		'localyear',
-		'localtime',
-		'localhour',
-		'numberofarticles',
-		'numberoffiles',
-		'numberofedits',
-		'articlepath',
-		'pageid',
-		'sitename',
-		'server',
-		'servername',
-		'scriptpath',
-		'stylepath',
-		'pagename',
-		'pagenamee',
-		'fullpagename',
-		'fullpagenamee',
-		'namespace',
-		'namespacee',
-		'namespacenumber',
-		'currentweek',
-		'currentdow',
-		'localweek',
-		'localdow',
-		'revisionid',
-		'revisionday',
-		'revisionday2',
-		'revisionmonth',
-		'revisionmonth1',
-		'revisionyear',
-		'revisiontimestamp',
-		'revisionuser',
-		'revisionsize',
-		'subpagename',
-		'subpagenamee',
-		'talkspace',
-		'talkspacee',
-		'subjectspace',
-		'subjectspacee',
-		'talkpagename',
-		'talkpagenamee',
-		'subjectpagename',
-		'subjectpagenamee',
-		'numberofusers',
-		'numberofactiveusers',
-		'numberofpages',
-		'currentversion',
-		'rootpagename',
-		'rootpagenamee',
-		'basepagename',
-		'basepagenamee',
-		'currenttimestamp',
-		'localtimestamp',
-		'directionmark',
-		'contentlanguage',
-		'pagelanguage',
-		'numberofadmins',
-		'cascadingsources',
-	];
-
-	/** Array of caching hints for ParserCache
-	 * @var array [ string => int ]
-	 */
-	public static $mCacheTTLs = [
-		'currentmonth' => 86400,
-		'currentmonth1' => 86400,
-		'currentmonthname' => 86400,
-		'currentmonthnamegen' => 86400,
-		'currentmonthabbrev' => 86400,
-		'currentday' => 3600,
-		'currentday2' => 3600,
-		'currentdayname' => 3600,
-		'currentyear' => 86400,
-		'currenttime' => 3600,
-		'currenthour' => 3600,
-		'localmonth' => 86400,
-		'localmonth1' => 86400,
-		'localmonthname' => 86400,
-		'localmonthnamegen' => 86400,
-		'localmonthabbrev' => 86400,
-		'localday' => 3600,
-		'localday2' => 3600,
-		'localdayname' => 3600,
-		'localyear' => 86400,
-		'localtime' => 3600,
-		'localhour' => 3600,
-		'numberofarticles' => 3600,
-		'numberoffiles' => 3600,
-		'numberofedits' => 3600,
-		'currentweek' => 3600,
-		'currentdow' => 3600,
-		'localweek' => 3600,
-		'localdow' => 3600,
-		'numberofusers' => 3600,
-		'numberofactiveusers' => 3600,
-		'numberofpages' => 3600,
-		'currentversion' => 86400,
-		'currenttimestamp' => 3600,
-		'localtimestamp' => 3600,
-		'pagesinnamespace' => 3600,
-		'numberofadmins' => 3600,
-		'numberingroup' => 3600,
-	];
-
-	/** @var string[] */
-	public static $mDoubleUnderscoreIDs = [
-		'notoc',
-		'nogallery',
-		'forcetoc',
-		'toc',
-		'noeditsection',
-		'newsectionlink',
-		'nonewsectionlink',
-		'hiddencat',
-		'index',
-		'noindex',
-		'staticredirect',
-		'notitleconvert',
-		'nocontentconvert',
-	];
-
-	/** @var string[] */
-	public static $mSubstIDs = [
-		'subst',
-		'safesubst',
-	];
-
-	/** @var array [ string => MagicWord ] */
-	public static $mObjects = [];
-
-	/** @var MagicWordArray */
-	public static $mDoubleUnderscoreArray = null;
-
-	/**#@-*/
+	/** #@- */
 
 	/**
 	 * Create a new MagicWord object
 	 *
-	 * Use factory instead: MagicWord::get
+	 * Use factory instead: MagicWordFactory::get
 	 *
-	 * @param string $id The internal name of the magic word
+	 * @param string|null $id The internal name of the magic word
 	 * @param string[]|string $syn synonyms for the magic word
 	 * @param bool $cs If magic word is case sensitive
+	 * @param Language|null $contLang Content language
 	 */
-	public function __construct( $id = null, $syn = [], $cs = false ) {
+	public function __construct( $id = null, $syn = [], $cs = false, Language $contLang = null ) {
 		$this->mId = $id;
 		$this->mSynonyms = (array)$syn;
 		$this->mCaseSensitive = $cs;
-	}
-
-	/**
-	 * Factory: creates an object representing an ID
-	 *
-	 * @param string $id The internal name of the magic word
-	 *
-	 * @return MagicWord
-	 */
-	public static function &get( $id ) {
-		if ( !isset( self::$mObjects[$id] ) ) {
-			$mw = new MagicWord();
-			$mw->load( $id );
-			self::$mObjects[$id] = $mw;
-		}
-		return self::$mObjects[$id];
-	}
-
-	/**
-	 * Get an array of parser variable IDs
-	 *
-	 * @return string[]
-	 */
-	public static function getVariableIDs() {
-		if ( !self::$mVariableIDsInitialised ) {
-			# Get variable IDs
-			Hooks::run( 'MagicWordwgVariableIDs', [ &self::$mVariableIDs ] );
-			self::$mVariableIDsInitialised = true;
-		}
-		return self::$mVariableIDs;
-	}
-
-	/**
-	 * Get an array of parser substitution modifier IDs
-	 * @return string[]
-	 */
-	public static function getSubstIDs() {
-		return self::$mSubstIDs;
-	}
-
-	/**
-	 * Allow external reads of TTL array
-	 *
-	 * @param string $id
-	 * @return int
-	 */
-	public static function getCacheTTL( $id ) {
-		if ( array_key_exists( $id, self::$mCacheTTLs ) ) {
-			return self::$mCacheTTLs[$id];
-		} else {
-			return -1;
-		}
-	}
-
-	/**
-	 * Get a MagicWordArray of double-underscore entities
-	 *
-	 * @return MagicWordArray
-	 */
-	public static function getDoubleUnderscoreArray() {
-		if ( is_null( self::$mDoubleUnderscoreArray ) ) {
-			Hooks::run( 'GetDoubleUnderscoreIDs', [ &self::$mDoubleUnderscoreIDs ] );
-			self::$mDoubleUnderscoreArray = new MagicWordArray( self::$mDoubleUnderscoreIDs );
-		}
-		return self::$mDoubleUnderscoreArray;
-	}
-
-	/**
-	 * Clear the self::$mObjects variable
-	 * For use in parser tests
-	 */
-	public static function clearCache() {
-		self::$mObjects = [];
+		$this->contLang = $contLang ?: MediaWikiServices::getInstance()->getContentLanguage();
 	}
 
 	/**
@@ -347,9 +122,8 @@ class MagicWord {
 	 * @throws MWException
 	 */
 	public function load( $id ) {
-		global $wgContLang;
 		$this->mId = $id;
-		$wgContLang->getMagic( $this );
+		$this->contLang->getMagic( $this );
 		if ( !$this->mSynonyms ) {
 			$this->mSynonyms = [ 'brionmademeputthishere' ];
 			throw new MWException( "Error: invalid magic word '$id'" );
@@ -358,7 +132,7 @@ class MagicWord {
 
 	/**
 	 * Preliminary initialisation
-	 * @private
+	 * @internal
 	 */
 	public function initRegex() {
 		// Sort the synonyms by length, descending, so that the longest synonym
@@ -395,13 +169,7 @@ class MagicWord {
 	public function compareStringLength( $s1, $s2 ) {
 		$l1 = strlen( $s1 );
 		$l2 = strlen( $s2 );
-		if ( $l1 < $l2 ) {
-			return 1;
-		} elseif ( $l1 > $l2 ) {
-			return -1;
-		} else {
-			return 0;
-		}
+		return $l2 <=> $l1; // descending
 	}
 
 	/**
@@ -673,9 +441,8 @@ class MagicWord {
 	 * @param string $value
 	 */
 	public function addToArray( &$array, $value ) {
-		global $wgContLang;
 		foreach ( $this->mSynonyms as $syn ) {
-			$array[$wgContLang->lc( $syn )] = $value;
+			$array[$this->contLang->lc( $syn )] = $value;
 		}
 	}
 

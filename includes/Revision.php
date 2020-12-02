@@ -20,62 +20,67 @@
  * @file
  */
 
-use MediaWiki\Storage\MutableRevisionRecord;
-use MediaWiki\Storage\RevisionAccessException;
-use MediaWiki\Storage\RevisionFactory;
-use MediaWiki\Storage\RevisionLookup;
-use MediaWiki\Storage\RevisionRecord;
-use MediaWiki\Storage\RevisionStore;
-use MediaWiki\Storage\RevisionStoreRecord;
-use MediaWiki\Storage\SlotRecord;
-use MediaWiki\Storage\SqlBlobStore;
-use Wikimedia\Rdbms\IDatabase;
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
-use Wikimedia\Rdbms\ResultWrapper;
-use Wikimedia\Rdbms\FakeResultWrapper;
+use MediaWiki\Revision\MutableRevisionRecord;
+use MediaWiki\Revision\RevisionAccessException;
+use MediaWiki\Revision\RevisionFactory;
+use MediaWiki\Revision\RevisionLookup;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\RevisionStore;
+use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Storage\SqlBlobStore;
+use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @deprecated since 1.31, use RevisionRecord, RevisionStore, and BlobStore instead.
+ * Hard deprecated since 1.35
  */
 class Revision implements IDBAccessObject {
 
 	/** @var RevisionRecord */
-	protected $mRecord;
+	private $mRecord;
 
 	// Revision deletion constants
-	const DELETED_TEXT = RevisionRecord::DELETED_TEXT;
-	const DELETED_COMMENT = RevisionRecord::DELETED_COMMENT;
-	const DELETED_USER = RevisionRecord::DELETED_USER;
-	const DELETED_RESTRICTED = RevisionRecord::DELETED_RESTRICTED;
-	const SUPPRESSED_USER = RevisionRecord::SUPPRESSED_USER;
-	const SUPPRESSED_ALL = RevisionRecord::SUPPRESSED_ALL;
+	public const DELETED_TEXT = RevisionRecord::DELETED_TEXT;
+	public const DELETED_COMMENT = RevisionRecord::DELETED_COMMENT;
+	public const DELETED_USER = RevisionRecord::DELETED_USER;
+	public const DELETED_RESTRICTED = RevisionRecord::DELETED_RESTRICTED;
+	public const SUPPRESSED_USER = RevisionRecord::SUPPRESSED_USER;
+	public const SUPPRESSED_ALL = RevisionRecord::SUPPRESSED_ALL;
 
 	// Audience options for accessors
-	const FOR_PUBLIC = RevisionRecord::FOR_PUBLIC;
-	const FOR_THIS_USER = RevisionRecord::FOR_THIS_USER;
-	const RAW = RevisionRecord::RAW;
+	public const FOR_PUBLIC = RevisionRecord::FOR_PUBLIC;
+	public const FOR_THIS_USER = RevisionRecord::FOR_THIS_USER;
+	public const RAW = RevisionRecord::RAW;
 
-	const TEXT_CACHE_GROUP = SqlBlobStore::TEXT_CACHE_GROUP;
+	public const TEXT_CACHE_GROUP = SqlBlobStore::TEXT_CACHE_GROUP;
 
 	/**
+	 * @param string|false $wiki
 	 * @return RevisionStore
 	 */
-	protected static function getRevisionStore() {
-		return MediaWikiServices::getInstance()->getRevisionStore();
+	private static function getRevisionStore( $wiki = false ) {
+		if ( $wiki ) {
+			return MediaWikiServices::getInstance()->getRevisionStoreFactory()
+				->getRevisionStore( $wiki );
+		} else {
+			return MediaWikiServices::getInstance()->getRevisionStore();
+		}
 	}
 
 	/**
 	 * @return RevisionLookup
 	 */
-	protected static function getRevisionLookup() {
+	private static function getRevisionLookup() {
 		return MediaWikiServices::getInstance()->getRevisionLookup();
 	}
 
 	/**
 	 * @return RevisionFactory
 	 */
-	protected static function getRevisionFactory() {
+	private static function getRevisionFactory() {
 		return MediaWikiServices::getInstance()->getRevisionFactory();
 	}
 
@@ -84,7 +89,7 @@ class Revision implements IDBAccessObject {
 	 *
 	 * @return SqlBlobStore
 	 */
-	protected static function getBlobStore( $wiki = false ) {
+	private static function getBlobStore( $wiki = false ) {
 		$store = MediaWikiServices::getInstance()
 			->getBlobStoreFactory()
 			->newSqlBlobStore( $wiki );
@@ -103,6 +108,8 @@ class Revision implements IDBAccessObject {
 	 * Load a page revision from a given revision ID number.
 	 * Returns null if no such revision can be found.
 	 *
+	 * @deprecated since 1.31 together with the class. Hard deprecated since 1.35
+	 *
 	 * $flags include:
 	 *      Revision::READ_LATEST  : Select the data from the master
 	 *      Revision::READ_LOCKING : Select & lock the data from the master
@@ -112,14 +119,17 @@ class Revision implements IDBAccessObject {
 	 * @return Revision|null
 	 */
 	public static function newFromId( $id, $flags = 0 ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		$rec = self::getRevisionLookup()->getRevisionById( $id, $flags );
-		return $rec === null ? null : new Revision( $rec, $flags );
+		return $rec ? new Revision( $rec, $flags ) : null;
 	}
 
 	/**
 	 * Load either the current, or a specified, revision
 	 * that's attached to a given link target. If not attached
 	 * to that link target, will return null.
+	 *
+	 * @deprecated since 1.31 together with the class. Hard deprecated since 1.35
 	 *
 	 * $flags include:
 	 *      Revision::READ_LATEST  : Select the data from the master
@@ -131,8 +141,9 @@ class Revision implements IDBAccessObject {
 	 * @return Revision|null
 	 */
 	public static function newFromTitle( LinkTarget $linkTarget, $id = 0, $flags = 0 ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		$rec = self::getRevisionLookup()->getRevisionByTitle( $linkTarget, $id, $flags );
-		return $rec === null ? null : new Revision( $rec, $flags );
+		return $rec ? new Revision( $rec, $flags ) : null;
 	}
 
 	/**
@@ -144,19 +155,24 @@ class Revision implements IDBAccessObject {
 	 *      Revision::READ_LATEST  : Select the data from the master (since 1.20)
 	 *      Revision::READ_LOCKING : Select & lock the data from the master
 	 *
+	 * @deprecated since 1.31 together with the class. Hard deprecated since 1.35
+	 *
 	 * @param int $pageId
 	 * @param int $revId (optional)
 	 * @param int $flags Bitfield (optional)
 	 * @return Revision|null
 	 */
 	public static function newFromPageId( $pageId, $revId = 0, $flags = 0 ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		$rec = self::getRevisionLookup()->getRevisionByPageId( $pageId, $revId, $flags );
-		return $rec === null ? null : new Revision( $rec, $flags );
+		return $rec ? new Revision( $rec, $flags ) : null;
 	}
 
 	/**
 	 * Make a fake revision object from an archive table row. This is queried
 	 * for permissions or even inserted (as in Special:Undelete)
+	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
 	 *
 	 * @param object $row
 	 * @param array $overrides
@@ -165,6 +181,8 @@ class Revision implements IDBAccessObject {
 	 * @return Revision
 	 */
 	public static function newFromArchiveRow( $row, $overrides = [] ) {
+		wfDeprecated( __METHOD__, '1.31' );
+
 		/**
 		 * MCR Migration: https://phabricator.wikimedia.org/T183564
 		 * This method used to overwrite attributes, then passed to Revision::__construct
@@ -212,10 +230,12 @@ class Revision implements IDBAccessObject {
 	 * RevisionStore::newMutableRevisionFromArray() can be used as a temporary replacement,
 	 * but should be avoided.
 	 *
+	 * @deprecated since 1.31 together with the Revision class. Hard deprecated since 1.35
 	 * @param object|array $row
 	 * @return Revision
 	 */
 	public static function newFromRow( $row ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		if ( is_array( $row ) ) {
 			$rec = self::getRevisionFactory()->newMutableRevisionFromArray( $row );
 		} else {
@@ -226,27 +246,12 @@ class Revision implements IDBAccessObject {
 	}
 
 	/**
-	 * Load a page revision from a given revision ID number.
-	 * Returns null if no such revision can be found.
-	 *
-	 * @deprecated since 1.31, use RevisionStore::getRevisionById() instead.
-	 *
-	 * @param IDatabase $db
-	 * @param int $id
-	 * @return Revision|null
-	 */
-	public static function loadFromId( $db, $id ) {
-		wfDeprecated( __METHOD__, '1.31' ); // no known callers
-		$rec = self::getRevisionStore()->loadRevisionFromId( $db, $id );
-		return $rec === null ? null : new Revision( $rec );
-	}
-
-	/**
 	 * Load either the current, or a specified, revision
 	 * that's attached to a given page. If not attached
 	 * to that page, will return null.
 	 *
 	 * @deprecated since 1.31, use RevisionStore::getRevisionByPageId() instead.
+	 * Hard deprecated since 1.35
 	 *
 	 * @param IDatabase $db
 	 * @param int $pageid
@@ -254,8 +259,9 @@ class Revision implements IDBAccessObject {
 	 * @return Revision|null
 	 */
 	public static function loadFromPageId( $db, $pageid, $id = 0 ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		$rec = self::getRevisionStore()->loadRevisionFromPageId( $db, $pageid, $id );
-		return $rec === null ? null : new Revision( $rec );
+		return $rec ? new Revision( $rec ) : null;
 	}
 
 	/**
@@ -264,6 +270,7 @@ class Revision implements IDBAccessObject {
 	 * to that page, will return null.
 	 *
 	 * @deprecated since 1.31, use RevisionStore::getRevisionByTitle() instead.
+	 * Hard deprecated in 1.35
 	 *
 	 * @param IDatabase $db
 	 * @param Title $title
@@ -271,8 +278,9 @@ class Revision implements IDBAccessObject {
 	 * @return Revision|null
 	 */
 	public static function loadFromTitle( $db, $title, $id = 0 ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		$rec = self::getRevisionStore()->loadRevisionFromTitle( $db, $title, $id );
-		return $rec === null ? null : new Revision( $rec );
+		return $rec ? new Revision( $rec ) : null;
 	}
 
 	/**
@@ -281,7 +289,7 @@ class Revision implements IDBAccessObject {
 	 * so this isn't the best key to use.
 	 *
 	 * @deprecated since 1.31, use RevisionStore::getRevisionByTimestamp()
-	 *   or RevisionStore::loadRevisionFromTimestamp() instead.
+	 *   or RevisionStore::loadRevisionFromTimestamp() instead. Hard deprecated since 1.35
 	 *
 	 * @param IDatabase $db
 	 * @param Title $title
@@ -289,197 +297,16 @@ class Revision implements IDBAccessObject {
 	 * @return Revision|null
 	 */
 	public static function loadFromTimestamp( $db, $title, $timestamp ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		$rec = self::getRevisionStore()->loadRevisionFromTimestamp( $db, $title, $timestamp );
-		return $rec === null ? null : new Revision( $rec );
-	}
-
-	/**
-	 * Return a wrapper for a series of database rows to
-	 * fetch all of a given page's revisions in turn.
-	 * Each row can be fed to the constructor to get objects.
-	 *
-	 * @param LinkTarget $title
-	 * @return ResultWrapper
-	 * @deprecated Since 1.28, no callers in core nor in known extensions. No-op since 1.31.
-	 */
-	public static function fetchRevision( LinkTarget $title ) {
-		wfDeprecated( __METHOD__, '1.31' );
-		return new FakeResultWrapper( [] );
-	}
-
-	/**
-	 * Return the value of a select() JOIN conds array for the user table.
-	 * This will get user table rows for logged-in users.
-	 * @since 1.19
-	 * @deprecated since 1.31, use RevisionStore::getQueryInfo( [ 'user' ] ) instead.
-	 * @return array
-	 */
-	public static function userJoinCond() {
-		global $wgActorTableSchemaMigrationStage;
-
-		wfDeprecated( __METHOD__, '1.31' );
-		if ( $wgActorTableSchemaMigrationStage > MIGRATION_WRITE_BOTH ) {
-			// If code is using this instead of self::getQueryInfo(), there's
-			// no way the join it's trying to do can work once the old fields
-			// aren't being written anymore.
-			throw new BadMethodCallException(
-				'Cannot use ' . __METHOD__ . ' when $wgActorTableSchemaMigrationStage > MIGRATION_WRITE_BOTH'
-			);
-		}
-
-		return [ 'LEFT JOIN', [ 'rev_user != 0', 'user_id = rev_user' ] ];
-	}
-
-	/**
-	 * Return the value of a select() page conds array for the page table.
-	 * This will assure that the revision(s) are not orphaned from live pages.
-	 * @since 1.19
-	 * @deprecated since 1.31, use RevisionStore::getQueryInfo( [ 'page' ] ) instead.
-	 * @return array
-	 */
-	public static function pageJoinCond() {
-		wfDeprecated( __METHOD__, '1.31' );
-		return [ 'INNER JOIN', [ 'page_id = rev_page' ] ];
-	}
-
-	/**
-	 * Return the list of revision fields that should be selected to create
-	 * a new revision.
-	 * @deprecated since 1.31, use RevisionStore::getQueryInfo() instead.
-	 * @return array
-	 */
-	public static function selectFields() {
-		global $wgContentHandlerUseDB, $wgActorTableSchemaMigrationStage;
-
-		if ( $wgActorTableSchemaMigrationStage > MIGRATION_WRITE_BOTH ) {
-			// If code is using this instead of self::getQueryInfo(), there's a
-			// decent chance it's going to try to directly access
-			// $row->rev_user or $row->rev_user_text and we can't give it
-			// useful values here once those aren't being written anymore.
-			throw new BadMethodCallException(
-				'Cannot use ' . __METHOD__ . ' when $wgActorTableSchemaMigrationStage > MIGRATION_WRITE_BOTH'
-			);
-		}
-
-		wfDeprecated( __METHOD__, '1.31' );
-
-		$fields = [
-			'rev_id',
-			'rev_page',
-			'rev_text_id',
-			'rev_timestamp',
-			'rev_user_text',
-			'rev_user',
-			'rev_actor' => 'NULL',
-			'rev_minor_edit',
-			'rev_deleted',
-			'rev_len',
-			'rev_parent_id',
-			'rev_sha1',
-		];
-
-		$fields += CommentStore::getStore()->getFields( 'rev_comment' );
-
-		if ( $wgContentHandlerUseDB ) {
-			$fields[] = 'rev_content_format';
-			$fields[] = 'rev_content_model';
-		}
-
-		return $fields;
-	}
-
-	/**
-	 * Return the list of revision fields that should be selected to create
-	 * a new revision from an archive row.
-	 * @deprecated since 1.31, use RevisionStore::getArchiveQueryInfo() instead.
-	 * @return array
-	 */
-	public static function selectArchiveFields() {
-		global $wgContentHandlerUseDB, $wgActorTableSchemaMigrationStage;
-
-		if ( $wgActorTableSchemaMigrationStage > MIGRATION_WRITE_BOTH ) {
-			// If code is using this instead of self::getQueryInfo(), there's a
-			// decent chance it's going to try to directly access
-			// $row->ar_user or $row->ar_user_text and we can't give it
-			// useful values here once those aren't being written anymore.
-			throw new BadMethodCallException(
-				'Cannot use ' . __METHOD__ . ' when $wgActorTableSchemaMigrationStage > MIGRATION_WRITE_BOTH'
-			);
-		}
-
-		wfDeprecated( __METHOD__, '1.31' );
-
-		$fields = [
-			'ar_id',
-			'ar_page_id',
-			'ar_rev_id',
-			'ar_text_id',
-			'ar_timestamp',
-			'ar_user_text',
-			'ar_user',
-			'ar_actor' => 'NULL',
-			'ar_minor_edit',
-			'ar_deleted',
-			'ar_len',
-			'ar_parent_id',
-			'ar_sha1',
-		];
-
-		$fields += CommentStore::getStore()->getFields( 'ar_comment' );
-
-		if ( $wgContentHandlerUseDB ) {
-			$fields[] = 'ar_content_format';
-			$fields[] = 'ar_content_model';
-		}
-		return $fields;
-	}
-
-	/**
-	 * Return the list of text fields that should be selected to read the
-	 * revision text
-	 * @deprecated since 1.31, use RevisionStore::getQueryInfo( [ 'text' ] ) instead.
-	 * @return array
-	 */
-	public static function selectTextFields() {
-		wfDeprecated( __METHOD__, '1.31' );
-		return [
-			'old_text',
-			'old_flags'
-		];
-	}
-
-	/**
-	 * Return the list of page fields that should be selected from page table
-	 * @deprecated since 1.31, use RevisionStore::getQueryInfo( [ 'page' ] ) instead.
-	 * @return array
-	 */
-	public static function selectPageFields() {
-		wfDeprecated( __METHOD__, '1.31' );
-		return [
-			'page_namespace',
-			'page_title',
-			'page_id',
-			'page_latest',
-			'page_is_redirect',
-			'page_len',
-		];
-	}
-
-	/**
-	 * Return the list of user fields that should be selected from user table
-	 * @deprecated since 1.31, use RevisionStore::getQueryInfo( [ 'user' ] ) instead.
-	 * @return array
-	 */
-	public static function selectUserFields() {
-		wfDeprecated( __METHOD__, '1.31' );
-		return [ 'user_name' ];
+		return $rec ? new Revision( $rec ) : null;
 	}
 
 	/**
 	 * Return the tables, fields, and join conditions to be selected to create
 	 * a new revision object.
 	 * @since 1.31
-	 * @deprecated since 1.31, use RevisionStore::getQueryInfo() instead.
+	 * @deprecated since 1.31 (soft), 1.35 (hard), use RevisionStore::getQueryInfo() instead.
 	 * @param array $options Any combination of the following strings
 	 *  - 'page': Join with the page table, and select fields to identify the page
 	 *  - 'user': Join with the user table, and select the user name
@@ -490,6 +317,7 @@ class Revision implements IDBAccessObject {
 	 *   - joins: (array) to include in the `$join_conds` to `IDatabase->select()`
 	 */
 	public static function getQueryInfo( $options = [] ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		return self::getRevisionStore()->getQueryInfo( $options );
 	}
 
@@ -497,13 +325,15 @@ class Revision implements IDBAccessObject {
 	 * Return the tables, fields, and join conditions to be selected to create
 	 * a new archived revision object.
 	 * @since 1.31
-	 * @deprecated since 1.31, use RevisionStore::getArchiveQueryInfo() instead.
+	 * @deprecated since 1.31 (soft), 1.35 (hard), use RevisionStore::getArchiveQueryInfo()
+	 *   instead.
 	 * @return array With three keys:
 	 *   - tables: (string[]) to include in the `$table` to `IDatabase->select()`
 	 *   - fields: (string[]) to include in the `$vars` to `IDatabase->select()`
 	 *   - joins: (array) to include in the `$join_conds` to `IDatabase->select()`
 	 */
 	public static function getArchiveQueryInfo() {
+		wfDeprecated( __METHOD__, '1.31' );
 		return self::getRevisionStore()->getArchiveQueryInfo();
 	}
 
@@ -511,13 +341,15 @@ class Revision implements IDBAccessObject {
 	 * Do a batched query to get the parent revision lengths
 	 *
 	 * @deprecated in 1.31, use RevisionStore::getRevisionSizes instead.
+	 * Hard deprecated since 1.35.
 	 *
 	 * @param IDatabase $db
 	 * @param array $revIds
 	 * @return array
 	 */
 	public static function getParentLengths( $db, array $revIds ) {
-		return self::getRevisionStore()->listRevisionSizes( $db, $revIds );
+		wfDeprecated( __METHOD__, '1.31' );
+		return self::getRevisionStore()->getRevisionSizes( $revIds );
 	}
 
 	/**
@@ -525,9 +357,14 @@ class Revision implements IDBAccessObject {
 	 * @param int $queryFlags
 	 * @param Title|null $title
 	 *
-	 * @access private
+	 * Since 1.35, constructing with anything other than a RevisionRecord is hard deprecated
+	 * (since 1.31 the entire class is deprecated)
+	 *
+	 * @internal
 	 */
-	function __construct( $row, $queryFlags = 0, Title $title = null ) {
+	public function __construct( $row, $queryFlags = 0, Title $title = null ) {
+		wfDeprecated( __METHOD__, '1.31' );
+
 		global $wgUser;
 
 		if ( $row instanceof RevisionRecord ) {
@@ -555,6 +392,8 @@ class Revision implements IDBAccessObject {
 				'$row must be a row object, an associative array, or a RevisionRecord'
 			);
 		}
+
+		Assert::postcondition( $this->mRecord !== null, 'Failed to construct a RevisionRecord' );
 	}
 
 	/**
@@ -581,11 +420,11 @@ class Revision implements IDBAccessObject {
 				return $row['title'];
 			}
 
-			$pageId = isset( $row['page'] ) ? $row['page'] : 0;
-			$revId = isset( $row['id'] ) ? $row['id'] : 0;
+			$pageId = $row['page'] ?? 0;
+			$revId = $row['id'] ?? 0;
 		} else {
-			$pageId = isset( $row->rev_page ) ? $row->rev_page : 0;
-			$revId = isset( $row->rev_id ) ? $row->rev_id : 0;
+			$pageId = $row->rev_page ?? 0;
+			$revId = $row->rev_id ?? 0;
 		}
 
 		try {
@@ -603,18 +442,23 @@ class Revision implements IDBAccessObject {
 	}
 
 	/**
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
 	 * @return RevisionRecord
 	 */
 	public function getRevisionRecord() {
+		wfDeprecated( __METHOD__, '1.31' );
 		return $this->mRecord;
 	}
 
 	/**
 	 * Get revision ID
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @return int|null
 	 */
 	public function getId() {
+		wfDeprecated( __METHOD__, '1.31' );
 		return $this->mRecord->getId();
 	}
 
@@ -626,11 +470,13 @@ class Revision implements IDBAccessObject {
 	 * @note Only supported on Revisions that were constructed based on associative arrays,
 	 *       since they are mutable.
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
 	 * @since 1.19
 	 * @param int|string $id
 	 * @throws MWException
 	 */
 	public function setId( $id ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		if ( $this->mRecord instanceof MutableRevisionRecord ) {
 			$this->mRecord->setId( intval( $id ) );
 		} else {
@@ -647,12 +493,13 @@ class Revision implements IDBAccessObject {
 	 *       since they are mutable.
 	 *
 	 * @since 1.28
-	 * @deprecated since 1.31, please reuse old Revision object
+	 * @deprecated since 1.31 (soft), 1.35 (hard), please reuse old Revision object
 	 * @param int $id User ID
 	 * @param string $name User name
 	 * @throws MWException
 	 */
 	public function setUserIdAndName( $id, $name ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		if ( $this->mRecord instanceof MutableRevisionRecord ) {
 			$user = User::newFromAnyId( intval( $id ), $name, null );
 			$this->mRecord->setUser( $user );
@@ -662,10 +509,14 @@ class Revision implements IDBAccessObject {
 	}
 
 	/**
-	 * @return SlotRecord
+	 * @return SlotRecord|null
 	 */
 	private function getMainSlotRaw() {
-		return $this->mRecord->getSlot( 'main', RevisionRecord::RAW );
+		if ( !$this->mRecord->hasSlot( SlotRecord::MAIN ) ) {
+			return null;
+		}
+
+		return $this->mRecord->getSlot( SlotRecord::MAIN, RevisionRecord::RAW );
 	}
 
 	/**
@@ -674,15 +525,17 @@ class Revision implements IDBAccessObject {
 	 *
 	 * If the content is stored elsewhere, this returns null.
 	 *
-	 * @deprecated since 1.31, use RevisionRecord()->getSlot()->getContentAddress() to
+	 * @deprecated since 1.31 (soft), 1.35 (hard), use
+	 * RevisionRecord()->getSlot()->getContentAddress() to
 	 * get that actual address that can be used with BlobStore::getBlob(); or use
 	 * RevisionRecord::hasSameContent() to check if two revisions have the same content.
 	 *
 	 * @return int|null
 	 */
 	public function getTextId() {
+		wfDeprecated( __METHOD__, '1.31' );
 		$slot = $this->getMainSlotRaw();
-		return $slot->hasAddress()
+		return $slot && $slot->hasAddress()
 			? self::getBlobStore()->getTextIdFromAddress( $slot->getAddress() )
 			: null;
 	}
@@ -690,19 +543,25 @@ class Revision implements IDBAccessObject {
 	/**
 	 * Get parent revision ID (the original previous page revision)
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @return int|null The ID of the parent revision. 0 indicates that there is no
 	 * parent revision. Null indicates that the parent revision is not known.
 	 */
 	public function getParentId() {
+		wfDeprecated( __METHOD__, '1.31' );
 		return $this->mRecord->getParentId();
 	}
 
 	/**
 	 * Returns the length of the text in this revision, or null if unknown.
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @return int|null
 	 */
 	public function getSize() {
+		wfDeprecated( __METHOD__, '1.31' );
 		try {
 			return $this->mRecord->getSize();
 		} catch ( RevisionAccessException $ex ) {
@@ -713,9 +572,12 @@ class Revision implements IDBAccessObject {
 	/**
 	 * Returns the base36 sha1 of the content in this revision, or null if unknown.
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @return string|null
 	 */
 	public function getSha1() {
+		wfDeprecated( __METHOD__, '1.31' );
 		try {
 			return $this->mRecord->getSha1();
 		} catch ( RevisionAccessException $ex ) {
@@ -727,11 +589,14 @@ class Revision implements IDBAccessObject {
 	 * Returns the title of the page associated with this entry.
 	 * Since 1.31, this will never return null.
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * Will do a query, when title is not set and id is given.
 	 *
 	 * @return Title
 	 */
 	public function getTitle() {
+		wfDeprecated( __METHOD__, '1.31' );
 		$linkTarget = $this->mRecord->getPageAsLinkTarget();
 		return Title::newFromLinkTarget( $linkTarget );
 	}
@@ -739,11 +604,13 @@ class Revision implements IDBAccessObject {
 	/**
 	 * Set the title of the revision
 	 *
-	 * @deprecated: since 1.31, this is now a noop. Pass the Title to the constructor instead.
+	 * @deprecated since 1.31, this is now a noop. Pass the Title to the constructor instead.
+	 * hard deprecated since 1.35
 	 *
 	 * @param Title $title
 	 */
 	public function setTitle( $title ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		if ( !$title->equals( $this->getTitle() ) ) {
 			throw new InvalidArgumentException(
 				$title->getPrefixedText()
@@ -756,9 +623,12 @@ class Revision implements IDBAccessObject {
 	/**
 	 * Get the page ID
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @return int|null
 	 */
 	public function getPage() {
+		wfDeprecated( __METHOD__, '1.31' );
 		return $this->mRecord->getPageId();
 	}
 
@@ -767,18 +637,20 @@ class Revision implements IDBAccessObject {
 	 * If the specified audience does not have access to it, zero will be
 	 * returned.
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @param int $audience One of:
 	 *   Revision::FOR_PUBLIC       to be displayed to all users
 	 *   Revision::FOR_THIS_USER    to be displayed to the given user
 	 *   Revision::RAW              get the ID regardless of permissions
 	 * @param User|null $user User object to check for, only if FOR_THIS_USER is passed
-	 *   to the $audience parameter
+	 *   to the $audience parameter (not passing for FOR_THIS_USER is deprecated since 1.35)
 	 * @return int
 	 */
 	public function getUser( $audience = self::FOR_PUBLIC, User $user = null ) {
-		global $wgUser;
-
+		wfDeprecated( __METHOD__, '1.31' );
 		if ( $audience === self::FOR_THIS_USER && !$user ) {
+			global $wgUser;
 			$user = $wgUser;
 		}
 
@@ -787,33 +659,24 @@ class Revision implements IDBAccessObject {
 	}
 
 	/**
-	 * Fetch revision's user id without regard for the current user's permissions
-	 *
-	 * @return int
-	 * @deprecated since 1.25, use getUser( Revision::RAW )
-	 */
-	public function getRawUser() {
-		wfDeprecated( __METHOD__, '1.25' );
-		return $this->getUser( self::RAW );
-	}
-
-	/**
 	 * Fetch revision's username if it's available to the specified audience.
 	 * If the specified audience does not have access to the username, an
 	 * empty string will be returned.
+	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
 	 *
 	 * @param int $audience One of:
 	 *   Revision::FOR_PUBLIC       to be displayed to all users
 	 *   Revision::FOR_THIS_USER    to be displayed to the given user
 	 *   Revision::RAW              get the text regardless of permissions
 	 * @param User|null $user User object to check for, only if FOR_THIS_USER is passed
-	 *   to the $audience parameter
+	 *   to the $audience parameter (not passing for FOR_THIS_USER is deprecated since 1.35)
 	 * @return string
 	 */
 	public function getUserText( $audience = self::FOR_PUBLIC, User $user = null ) {
-		global $wgUser;
-
+		wfDeprecated( __METHOD__, '1.31' );
 		if ( $audience === self::FOR_THIS_USER && !$user ) {
+			global $wgUser;
 			$user = $wgUser;
 		}
 
@@ -822,33 +685,22 @@ class Revision implements IDBAccessObject {
 	}
 
 	/**
-	 * Fetch revision's username without regard for view restrictions
-	 *
-	 * @return string
-	 * @deprecated since 1.25, use getUserText( Revision::RAW )
-	 */
-	public function getRawUserText() {
-		wfDeprecated( __METHOD__, '1.25' );
-		return $this->getUserText( self::RAW );
-	}
-
-	/**
-	 * Fetch revision comment if it's available to the specified audience.
-	 * If the specified audience does not have access to the comment, an
-	 * empty string will be returned.
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
 	 *
 	 * @param int $audience One of:
 	 *   Revision::FOR_PUBLIC       to be displayed to all users
 	 *   Revision::FOR_THIS_USER    to be displayed to the given user
 	 *   Revision::RAW              get the text regardless of permissions
 	 * @param User|null $user User object to check for, only if FOR_THIS_USER is passed
-	 *   to the $audience parameter
-	 * @return string
+	 *   to the $audience parameter (not passing for FOR_THIS_USER is deprecated since 1.35)
+	 *
+	 * @return string|null Returns null if the specified audience does not have access to the
+	 *  comment.
 	 */
-	function getComment( $audience = self::FOR_PUBLIC, User $user = null ) {
-		global $wgUser;
-
+	public function getComment( $audience = self::FOR_PUBLIC, User $user = null ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		if ( $audience === self::FOR_THIS_USER && !$user ) {
+			global $wgUser;
 			$user = $wgUser;
 		}
 
@@ -857,32 +709,28 @@ class Revision implements IDBAccessObject {
 	}
 
 	/**
-	 * Fetch revision comment without regard for the current user's permissions
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
 	 *
-	 * @return string
-	 * @deprecated since 1.25, use getComment( Revision::RAW )
-	 */
-	public function getRawComment() {
-		wfDeprecated( __METHOD__, '1.25' );
-		return $this->getComment( self::RAW );
-	}
-
-	/**
 	 * @return bool
 	 */
 	public function isMinor() {
+		wfDeprecated( __METHOD__, '1.31' );
 		return $this->mRecord->isMinor();
 	}
 
 	/**
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
 	 * @return int Rcid of the unpatrolled row, zero if there isn't one
 	 */
 	public function isUnpatrolled() {
+		wfDeprecated( __METHOD__, '1.31' );
 		return self::getRevisionStore()->getRcIdIfUnpatrolled( $this->mRecord );
 	}
 
 	/**
 	 * Get the RC object belonging to the current revision, if there's one
+	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
 	 *
 	 * @param int $flags (optional) $flags include:
 	 *      Revision::READ_LATEST  : Select the data from the master
@@ -891,24 +739,31 @@ class Revision implements IDBAccessObject {
 	 * @return RecentChange|null
 	 */
 	public function getRecentChange( $flags = 0 ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		return self::getRevisionStore()->getRecentChange( $this->mRecord, $flags );
 	}
 
 	/**
 	 * @param int $field One of DELETED_* bitfield constants
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @return bool
 	 */
 	public function isDeleted( $field ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		return $this->mRecord->isDeleted( $field );
 	}
 
 	/**
 	 * Get the deletion bitfield of the revision
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @return int
 	 */
 	public function getVisibility() {
+		wfDeprecated( __METHOD__, '1.31' );
 		return $this->mRecord->getVisibility();
 	}
 
@@ -917,16 +772,20 @@ class Revision implements IDBAccessObject {
 	 * If the specified audience does not have the ability to view this
 	 * revision, or the content could not be loaded, null will be returned.
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @param int $audience One of:
 	 *   Revision::FOR_PUBLIC       to be displayed to all users
 	 *   Revision::FOR_THIS_USER    to be displayed to $user
 	 *   Revision::RAW              get the text regardless of permissions
-	 * @param User $user User object to check for, only if FOR_THIS_USER is passed
+	 * @param User|null $user User object to check for, only if FOR_THIS_USER is passed
 	 *   to the $audience parameter
 	 * @since 1.21
 	 * @return Content|null
 	 */
 	public function getContent( $audience = self::FOR_PUBLIC, User $user = null ) {
+		wfDeprecated( __METHOD__, '1.31' );
+
 		global $wgUser;
 
 		if ( $audience === self::FOR_THIS_USER && !$user ) {
@@ -934,7 +793,7 @@ class Revision implements IDBAccessObject {
 		}
 
 		try {
-			return $this->mRecord->getContent( 'main', $audience, $user );
+			return $this->mRecord->getContent( SlotRecord::MAIN, $audience, $user );
 		}
 		catch ( RevisionAccessException $e ) {
 			return null;
@@ -945,13 +804,14 @@ class Revision implements IDBAccessObject {
 	 * Get original serialized data (without checking view restrictions)
 	 *
 	 * @since 1.21
-	 * @deprecated since 1.31, use BlobStore::getBlob instead.
+	 * @deprecated since 1.31 (soft), 1.35 (hard), use BlobStore::getBlob instead.
 	 *
 	 * @return string
 	 */
 	public function getSerializedData() {
+		wfDeprecated( __METHOD__, '1.31' );
 		$slot = $this->getMainSlotRaw();
-		return $slot->getContent()->serialize();
+		return $slot ? $slot->getContent()->serialize() : '';
 	}
 
 	/**
@@ -961,13 +821,23 @@ class Revision implements IDBAccessObject {
 	 * used to determine the content model to use. If no title is know, CONTENT_MODEL_WIKITEXT
 	 * is used as a last resort.
 	 *
-	 * @todo: drop this, with MCR, there no longer is a single model associated with a revision.
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
 	 *
 	 * @return string The content model id associated with this revision,
 	 *     see the CONTENT_MODEL_XXX constants.
 	 */
 	public function getContentModel() {
-		return $this->getMainSlotRaw()->getModel();
+		wfDeprecated( __METHOD__, '1.31' );
+
+		$slot = $this->getMainSlotRaw();
+
+		if ( $slot ) {
+			return $slot->getModel();
+		} else {
+			$slotRoleRegistry = MediaWikiServices::getInstance()->getSlotRoleRegistry();
+			$slotRoleHandler = $slotRoleRegistry->getRoleHandler( SlotRecord::MAIN );
+			return $slotRoleHandler->getDefaultModel( $this->getTitle() );
+		}
 	}
 
 	/**
@@ -976,13 +846,16 @@ class Revision implements IDBAccessObject {
 	 * If no content format was stored in the database, the default format for this
 	 * revision's content model is returned.
 	 *
-	 * @todo: drop this, the format is irrelevant to the revision!
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
 	 *
 	 * @return string The content format id associated with this revision,
 	 *     see the CONTENT_FORMAT_XXX constants.
 	 */
 	public function getContentFormat() {
-		$format = $this->getMainSlotRaw()->getFormat();
+		wfDeprecated( __METHOD__, '1.31' );
+
+		$slot = $this->getMainSlotRaw();
+		$format = $slot ? $this->getMainSlotRaw()->getFormat() : null;
 
 		if ( $format === null ) {
 			// if no format was stored along with the blob, fall back to default format
@@ -995,82 +868,109 @@ class Revision implements IDBAccessObject {
 	/**
 	 * Returns the content handler appropriate for this revision's content model.
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @throws MWException
 	 * @return ContentHandler
 	 */
 	public function getContentHandler() {
-		return ContentHandler::getForModelID( $this->getContentModel() );
+		wfDeprecated( __METHOD__, '1.31' );
+
+		return MediaWikiServices::getInstance()
+			->getContentHandlerFactory()
+			->getContentHandler( $this->getContentModel() );
 	}
 
 	/**
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @return string
 	 */
 	public function getTimestamp() {
+		wfDeprecated( __METHOD__, '1.31' );
 		return $this->mRecord->getTimestamp();
 	}
 
 	/**
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @return bool
 	 */
 	public function isCurrent() {
-		return ( $this->mRecord instanceof RevisionStoreRecord ) && $this->mRecord->isCurrent();
+		wfDeprecated( __METHOD__, '1.31' );
+		return $this->mRecord->isCurrent();
 	}
 
 	/**
 	 * Get previous revision for this title
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @return Revision|null
 	 */
 	public function getPrevious() {
-		$title = $this->getTitle();
-		$rec = self::getRevisionLookup()->getPreviousRevision( $this->mRecord, $title );
-		return $rec === null ? null : new Revision( $rec, self::READ_NORMAL, $title );
+		wfDeprecated( __METHOD__, '1.31' );
+		$rec = self::getRevisionLookup()->getPreviousRevision( $this->mRecord );
+		return $rec ? new Revision( $rec, self::READ_NORMAL, $this->getTitle() ) : null;
 	}
 
 	/**
 	 * Get next revision for this title
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard), use RevisionLookup::getNextRevision instead
+	 *
 	 * @return Revision|null
 	 */
 	public function getNext() {
-		$title = $this->getTitle();
-		$rec = self::getRevisionLookup()->getNextRevision( $this->mRecord, $title );
-		return $rec === null ? null : new Revision( $rec, self::READ_NORMAL, $title );
+		wfDeprecated( __METHOD__, '1.31' );
+		$rec = self::getRevisionLookup()->getNextRevision( $this->mRecord );
+		return $rec ? new Revision( $rec, self::READ_NORMAL, $this->getTitle() ) : null;
 	}
 
 	/**
 	 * Get revision text associated with an old or archive row
 	 *
-	 * Both the flags and the text field must be included. Including the old_id
+	 * If the text field is not included, this uses RevisionStore to load the appropriate slot
+	 * and return its serialized content. This is the default backwards-compatibility behavior
+	 * when reading from the MCR aware database schema is enabled. For this to work, either
+	 * the revision ID or the page ID must be included in the row.
+	 *
+	 * When using the old text field, the flags field must also be set. Including the old_id
 	 * field will activate cache usage as long as the $wiki parameter is not set.
 	 *
-	 * @param stdClass $row The text data
+	 * @deprecated since 1.32, use RevisionStore::newRevisionFromRow instead.
+	 *
+	 * @param stdClass $row The text data. If a falsy value is passed instead, false is returned.
 	 * @param string $prefix Table prefix (default 'old_')
 	 * @param string|bool $wiki The name of the wiki to load the revision text from
-	 *   (same as the the wiki $row was loaded from) or false to indicate the local
+	 *   (same as the wiki $row was loaded from) or false to indicate the local
 	 *   wiki (this is the default). Otherwise, it must be a symbolic wiki database
 	 *   identifier as understood by the LoadBalancer class.
 	 * @return string|false Text the text requested or false on failure
 	 */
 	public static function getRevisionText( $row, $prefix = 'old_', $wiki = false ) {
-		$textField = $prefix . 'text';
-		$flagsField = $prefix . 'flags';
+		wfDeprecated( __METHOD__, '1.32' );
 
-		if ( isset( $row->$flagsField ) ) {
-			$flags = explode( ',', $row->$flagsField );
-		} else {
-			$flags = [];
-		}
-
-		if ( isset( $row->$textField ) ) {
-			$text = $row->$textField;
-		} else {
+		if ( !$row ) {
 			return false;
 		}
 
-		$cacheKey = isset( $row->old_id ) ? ( 'tt:' . $row->old_id ) : null;
+		$textField = $prefix . 'text';
 
-		return self::getBlobStore( $wiki )->expandBlob( $text, $flags, $cacheKey );
+		if ( isset( $row->$textField ) ) {
+			throw new LogicException(
+				'Cannot use ' . __METHOD__ . ' with the ' . $textField . ' field since 1.35.'
+			);
+		}
+
+		// Missing text field, we are probably looking at the MCR-enabled DB schema.
+		$store = self::getRevisionStore( $wiki );
+		$rev = $prefix === 'ar_'
+			? $store->newRevisionFromArchiveRow( $row )
+			: $store->newRevisionFromRow( $row );
+
+		$content = $rev->getContent( SlotRecord::MAIN );
+		return $content ? $content->serialize() : false;
 	}
 
 	/**
@@ -1080,21 +980,32 @@ class Revision implements IDBAccessObject {
 	 * data is compressed, and 'utf-8' if we're saving in UTF-8
 	 * mode.
 	 *
-	 * @param mixed &$text Reference to a text
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
+	 * @param string &$text
 	 * @return string
 	 */
 	public static function compressRevisionText( &$text ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		return self::getBlobStore()->compressData( $text );
 	}
 
 	/**
 	 * Re-converts revision text according to it's flags.
 	 *
-	 * @param mixed $text Reference to a text
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
+	 * @param string|false $text
 	 * @param array $flags Compression flags
 	 * @return string|bool Decompressed text, or false on failure
 	 */
 	public static function decompressRevisionText( $text, $flags ) {
+		wfDeprecated( __METHOD__, '1.31' );
+		if ( $text === false ) {
+			// Text failed to be fetched; nothing to do
+			return false;
+		}
+
 		return self::getBlobStore()->decompressData( $text, $flags );
 	}
 
@@ -1102,11 +1013,15 @@ class Revision implements IDBAccessObject {
 	 * Insert a new revision into the database, returning the new revision ID
 	 * number on success and dies horribly on failure.
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @param IDatabase $dbw (master connection)
 	 * @throws MWException
 	 * @return int The revision ID
 	 */
 	public function insertOn( $dbw ) {
+		wfDeprecated( __METHOD__, '1.31' );
+
 		global $wgUser;
 
 		// Note that $this->mRecord->getId() will typically return null here, but not always,
@@ -1123,21 +1038,19 @@ class Revision implements IDBAccessObject {
 		$rec = self::getRevisionStore()->insertRevisionOn( $this->mRecord, $dbw );
 
 		$this->mRecord = $rec;
-
-		// Avoid PHP 7.1 warning of passing $this by reference
-		$revision = $this;
-		// TODO: hard-deprecate in 1.32 (or even 1.31?)
-		Hooks::run( 'RevisionInsertComplete', [ &$revision, null, null ] );
+		Assert::postcondition( $this->mRecord !== null, 'Failed to acquire a RevisionRecord' );
 
 		return $rec->getId();
 	}
 
 	/**
 	 * Get the base 36 SHA-1 value for a string of text
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
 	 * @param string $text
 	 * @return string
 	 */
 	public static function base36Sha1( $text ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		return SlotRecord::base36Sha1( $text );
 	}
 
@@ -1149,6 +1062,8 @@ class Revision implements IDBAccessObject {
 	 * Such revisions can for instance identify page rename
 	 * operations and other such meta-modifications.
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @param IDatabase $dbw
 	 * @param int $pageId ID number of the page to read from
 	 * @param string $summary Revision's summary
@@ -1157,35 +1072,44 @@ class Revision implements IDBAccessObject {
 	 * @return Revision|null Revision or null on error
 	 */
 	public static function newNullRevision( $dbw, $pageId, $summary, $minor, $user = null ) {
-		global $wgUser;
+		wfDeprecated( __METHOD__, '1.35' );
+
 		if ( !$user ) {
+			global $wgUser;
 			$user = $wgUser;
 		}
 
 		$comment = CommentStoreComment::newUnsavedComment( $summary, null );
 
-		$title = Title::newFromID( $pageId, Title::GAID_FOR_UPDATE );
+		$title = Title::newFromID( $pageId, Title::READ_LATEST );
 		if ( $title === null ) {
 			return null;
 		}
 
 		$rec = self::getRevisionStore()->newNullRevision( $dbw, $title, $comment, $minor, $user );
 
-		return new Revision( $rec );
+		return $rec ? new Revision( $rec ) : null;
 	}
 
 	/**
 	 * Determine if the current user is allowed to view a particular
 	 * field of this revision, if it's marked as deleted.
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @param int $field One of self::DELETED_TEXT,
 	 *                              self::DELETED_COMMENT,
 	 *                              self::DELETED_USER
-	 * @param User|null $user User object to check, or null to use $wgUser
+	 * @param User|null $user User object to check, or null to use $wgUser (deprecated since 1.35)
 	 * @return bool
 	 */
 	public function userCan( $field, User $user = null ) {
-		return self::userCanBitfield( $this->getVisibility(), $field, $user );
+		wfDeprecated( __METHOD__, '1.31' );
+		if ( !$user ) {
+			global $wgUser;
+			$user = $wgUser;
+		}
+		return RevisionRecord::userCanBitfield( $this->mRecord->getVisibility(), $field, $user );
 	}
 
 	/**
@@ -1205,9 +1129,9 @@ class Revision implements IDBAccessObject {
 	public static function userCanBitfield( $bitfield, $field, User $user = null,
 		Title $title = null
 	) {
-		global $wgUser;
-
+		wfDeprecated( __METHOD__, '1.31' );
 		if ( !$user ) {
+			global $wgUser;
 			$user = $wgUser;
 		}
 
@@ -1217,34 +1141,43 @@ class Revision implements IDBAccessObject {
 	/**
 	 * Get rev_timestamp from rev_id, without loading the rest of the row
 	 *
-	 * @param Title $title
+	 * @deprecated since 1.35
+	 *
+	 * @param Title $title (ignored since 1.34)
 	 * @param int $id
 	 * @param int $flags
 	 * @return string|bool False if not found
 	 */
-	static function getTimestampFromId( $title, $id, $flags = 0 ) {
-		return self::getRevisionStore()->getTimestampFromId( $title, $id, $flags );
+	public static function getTimestampFromId( $title, $id, $flags = 0 ) {
+		wfDeprecated( __METHOD__, '1.35' );
+		return self::getRevisionStore()->getTimestampFromId( $id, $flags );
 	}
 
 	/**
 	 * Get count of revisions per page...not very efficient
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @param IDatabase $db
 	 * @param int $id Page id
 	 * @return int
 	 */
-	static function countByPageId( $db, $id ) {
+	public static function countByPageId( $db, $id ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		return self::getRevisionStore()->countRevisionsByPageId( $db, $id );
 	}
 
 	/**
 	 * Get count of revisions per page...not very efficient
 	 *
+	 * @deprecated since 1.31 (soft), 1.35 (hard)
+	 *
 	 * @param IDatabase $db
 	 * @param Title $title
 	 * @return int
 	 */
-	static function countByTitle( $db, $title ) {
+	public static function countByTitle( $db, $title ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		return self::getRevisionStore()->countRevisionsByTitle( $db, $title );
 	}
 
@@ -1254,7 +1187,7 @@ class Revision implements IDBAccessObject {
 	 * 50 revisions for the sake of performance.
 	 *
 	 * @since 1.20
-	 * @deprecated since 1.24
+	 * @deprecated since 1.24 (soft), 1.35 (hard)
 	 *
 	 * @param IDatabase|int $db The Database to perform the check on. May be given as a
 	 *        Database object or a database identifier usable with wfGetDB.
@@ -1265,6 +1198,7 @@ class Revision implements IDBAccessObject {
 	 * @return bool True if the given user was the only one to edit since the given timestamp
 	 */
 	public static function userWasLastToEdit( $db, $pageId, $userId, $since ) {
+		wfDeprecated( __METHOD__, '1.24' );
 		if ( is_int( $db ) ) {
 			$db = wfGetDB( $db );
 		}
@@ -1284,8 +1218,10 @@ class Revision implements IDBAccessObject {
 	 * @param int $revId Known current revision of this page. Determined automatically if not given.
 	 * @return Revision|bool Returns false if missing
 	 * @since 1.28
+	 * @deprecated since 1.31 and hard deprecated since 1.35
 	 */
 	public static function newKnownCurrent( IDatabase $db, $pageIdOrTitle, $revId = 0 ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		$title = $pageIdOrTitle instanceof Title
 			? $pageIdOrTitle
 			: Title::newFromID( $pageIdOrTitle );

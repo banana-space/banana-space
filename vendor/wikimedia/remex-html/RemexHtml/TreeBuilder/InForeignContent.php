@@ -15,7 +15,7 @@ class InForeignContent extends InsertionMode {
 	/**
 	 * The list of tag names which unconditionally generate a parse error when
 	 * seen in foreign content.
-	 * @var bool[string]
+	 * @var array<string,bool>
 	 */
 	private static $notAllowed = [
 		'b' => true,
@@ -183,9 +183,7 @@ class InForeignContent extends InsertionMode {
 			$attrs = new ForeignAttributes( $attrs, 'math' );
 		} elseif ( $acnNs === HTMLData::NS_SVG ) {
 			$attrs = new ForeignAttributes( $attrs, 'svg' );
-			if ( isset( self::$svgElementCase[$name] ) ) {
-				$name = self::$svgElementCase[$name];
-			}
+			$name = self::$svgElementCase[$name] ?? $name;
 		} else {
 			$attrs = new ForeignAttributes( $attrs, 'other' );
 		}

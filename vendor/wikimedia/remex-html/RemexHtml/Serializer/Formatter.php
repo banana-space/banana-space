@@ -19,7 +19,7 @@ interface Formatter {
 	 * @param string|null $fragmentName
 	 * @return string
 	 */
-	function startDocument( $fragmentNamespace, $fragmentName );
+	public function startDocument( $fragmentNamespace, $fragmentName );
 
 	/**
 	 * Encode the given character substring
@@ -30,7 +30,7 @@ interface Formatter {
 	 * @param int $length The number of bytes within $text
 	 * @return string
 	 */
-	function characters( SerializerNode $parent, $text, $start, $length );
+	public function characters( SerializerNode $parent, $text, $start, $length );
 
 	/**
 	 * Encode the given element
@@ -42,7 +42,7 @@ interface Formatter {
 	 *   tags.
 	 * @return string
 	 */
-	function element( SerializerNode $parent, SerializerNode $node, $contents );
+	public function element( SerializerNode $parent, SerializerNode $node, $contents );
 
 	/**
 	 * Encode a comment
@@ -50,7 +50,7 @@ interface Formatter {
 	 * @param string $text The inner text of the comment
 	 * @return string
 	 */
-	function comment( SerializerNode $parent, $text );
+	public function comment( SerializerNode $parent, $text );
 
 	/**
 	 * Encode a doctype. This event occurs when the source document has a doctype,
@@ -61,5 +61,5 @@ interface Formatter {
 	 * @param string $system The SYSTEM identifier
 	 * @return string
 	 */
-	function doctype( $name, $public, $system );
+	public function doctype( $name, $public, $system );
 }

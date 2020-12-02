@@ -10,7 +10,7 @@
 	"type": "antispam",
 	"license-name": "GPL-2.0-or-later",
 	"requires": {
-		"MediaWiki": ">= 1.31.0"
+		"MediaWiki": ">= 1.34.0"
 	},
 	"GroupPermissions": {
 		"user": {
@@ -39,7 +39,8 @@
 	},
 	"MessagesDirs": {
 		"SpamBlackList": [
-			"i18n"
+			"i18n",
+			"i18n/api"
 		]
 	},
 	"AutoloadClasses": {
@@ -51,6 +52,19 @@
 		"SpamBlacklistLogFormatter": "includes/SpamBlacklistLogFormatter.php",
 		"SpamRegexBatch": "includes/SpamRegexBatch.php",
 		"SpamBlacklistPreAuthenticationProvider": "includes/SpamBlacklistPreAuthenticationProvider.php"
+	},
+	"ResourceModules": {
+		"ext.spamBlacklist.visualEditor": {
+			"scripts": "ve-spamblacklist/ve.init.mw.SpamBlacklistSaveErrorHandler.js",
+			"targets": [ "desktop", "mobile" ]
+		}
+	},
+	"VisualEditorPluginModules": [
+		"ext.spamBlacklist.visualEditor"
+	],
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "SpamBlacklist/modules"
 	},
 	"Hooks": {
 		"EditFilterMergedContent": [
@@ -70,9 +84,7 @@
 		],
 		"UploadVerifyUpload": [
 			"SpamBlacklistHooks::onUploadVerifyUpload"
-		],
-		"ArticleDelete": "SpamBlacklistHooks::onArticleDelete",
-		"ArticleDeleteComplete": "SpamBlacklistHooks::onArticleDeleteComplete"
+		]
 	},
 	"config": {
 		"BlacklistSettings": {
@@ -81,8 +93,7 @@
 			},
 			"_merge_strategy": "array_plus_2d"
 		},
-		"LogSpamBlacklistHits": false,
-		"SpamBlacklistEventLogging": false
+		"LogSpamBlacklistHits": false
 	},
 	"AuthManagerAutoConfig": {
 		"preauth": {

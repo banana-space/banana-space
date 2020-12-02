@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw ) {
+( function () {
 
 	/**
 	 * Represents an image on the page.
@@ -43,7 +43,7 @@
 		/** @property {number} index What number this image is in the array of indexed images */
 		this.index = index;
 
-		/** @property {HTMLImageElement} thumbnail The <img> element that holds the already-loaded thumbnail of the image*/
+		/** @property {HTMLImageElement} thumbnail The <img> element that holds the already-loaded thumbnail of the image */
 		this.thumbnail = thumb;
 
 		/** @property {string} caption The caption of the image, if any */
@@ -60,4 +60,4 @@
 	}
 
 	mw.mmv.LightboxImage = LightboxImage;
-}( mediaWiki, jQuery ) );
+}() );

@@ -4,7 +4,7 @@
  * @copyright 2011-2016 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-( function ( $, mw ) {
+( function () {
 
 	/**
 	 * Creates an mw.widgets.MediaResultWidget object.
@@ -44,6 +44,7 @@
 
 		this.$thumb = $( '<img>' )
 			.addClass( 'mw-widget-mediaResultWidget-thumbnail' )
+			.attr( 'alt', '' )
 			.on( {
 				load: this.onThumbnailLoad.bind( this ),
 				error: this.onThumbnailError.bind( this )
@@ -52,10 +53,6 @@
 			.addClass( 'mw-widget-mediaResultWidget-overlay' );
 
 		this.calculateSizing( this.data );
-
-		// Get wiki default thumbnail size
-		this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
-			.defaultUserOptions.defaultthumbsize;
 
 		// Initialization
 		this.setLabel( new mw.Title( this.data.title ).getNameText() );
@@ -271,4 +268,4 @@
 	mw.widgets.MediaResultWidget.prototype.hasSrc = function () {
 		return !!this.src;
 	};
-}( jQuery, mediaWiki ) );
+}() );

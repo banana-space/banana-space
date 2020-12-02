@@ -1,14 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Beta16",
 			"BrokenArrow",
 			"Macofe",
-			"Beta16"
+			"Pierpao"
 		]
 	},
 	"syntaxhighlight-desc": "Evidenzia la sintassi dei linguaggi di programmazione <code>&lt;syntaxhighlight&gt;</code> tramite [http://pygments.org/ Pygments - evidenziatore della sintassi Python]",
 	"syntaxhighlight-error-category": "Pagine con errori nell'evidenziazione della sintassi",
 	"syntaxhighlight-error-category-desc": "Si è verificato un errore durante il tentativo di evidenziare il codice incluso nella pagina.",
+	"syntaxhighlight-enclose-category": "Pagine che utilizzano tag enclose deprecati",
+	"syntaxhighlight-source-category": "Pagine che utilizzano tag source deprecati",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-code": "Codice",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-language": "Linguaggio",
 	"syntaxhighlight-visualeditor-mwsyntaxhighlightinspector-none": "(nessuno)",

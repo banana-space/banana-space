@@ -1,16 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Beau",
+			"Nemo bis",
 			"Purodha",
 			"Shirayuki",
 			"The Evil IP address",
 			"Umherirrender",
-			"Yekrats",
-			"Amire80",
-			"Nemo bis"
+			"Yekrats"
 		]
 	},
+	"action-tboverride": "{{doc-action|tboverride}}",
+	"action-tboverride-account": "{{doc-action|tboverride-account}}",
 	"action-titleblacklistlog": "{{doc-action|titleblacklistlog}}",
 	"log-name-titleblacklist": "Name of log that appears on [[Special:Log]].",
 	"log-description-titleblacklist": "Description of title blacklist log",
@@ -28,13 +30,5 @@
 	"titleblacklist-warning": "Displayed when a user is editing a page that only administrators (or custom user groups with the tboverride right) can edit due to the title blacklist. Parameters:\n* $1 - blacklist entry",
 	"right-tboverride": "{{doc-right|tboverride}}",
 	"right-tboverride-account": "{{doc-right|tboverride-account}}",
-	"right-titleblacklistlog": "{{doc-right|titleblacklistlog}}",
-	"apihelp-titleblacklist-description": "{{doc-apihelp-description|titleblacklist}}",
-	"apihelp-titleblacklist-summary": "{{doc-apihelp-summary|titleblacklist}}",
-	"apihelp-titleblacklist-param-title": "{{doc-apihelp-param|titleblacklist|title}}",
-	"apihelp-titleblacklist-param-action": "{{doc-apihelp-param|titleblacklist|action}}",
-	"apihelp-titleblacklist-param-nooverride": "{{doc-apihelp-param|titleblacklist|nooverride}}",
-	"apihelp-titleblacklist-example-1": "{{doc-apihelp-example|titleblacklist}}",
-	"apihelp-titleblacklist-example-2": "Replace \"Bar\" with any example string suitable for your language, for instance the translation of \"Example\".\n----\n{{doc-apihelp-example|titleblacklist}}",
-	"apihelp-createaccount-param-ignoretitleblacklist": "{{doc-apihelp-param|createaccount|ignoretitleblacklist}}"
+	"right-titleblacklistlog": "{{doc-right|titleblacklistlog}}"
 }

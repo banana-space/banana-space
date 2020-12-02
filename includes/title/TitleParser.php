@@ -32,8 +32,7 @@
  */
 interface TitleParser {
 	/**
-	 * Parses the given text and constructs a TitleValue. Normalization
-	 * is applied according to the rules appropriate for the form specified by $form.
+	 * Parses the given text and constructs a TitleValue.
 	 *
 	 * @note this only parses local page links, interwiki-prefixes etc. are not considered!
 	 *
@@ -43,5 +42,17 @@ interface TitleParser {
 	 * @throws MalformedTitleException If the text is not a valid representation of a page title.
 	 * @return TitleValue
 	 */
-	public function parseTitle( $text, $defaultNamespace );
+	public function parseTitle( $text, $defaultNamespace = NS_MAIN );
+
+	/**
+	 * Given a namespace and title, return a TitleValue if valid, or null if invalid.
+	 *
+	 * @param int $namespace
+	 * @param string $text
+	 * @param string $fragment
+	 * @param string $interwiki
+	 *
+	 * @return TitleValue|null
+	 */
+	public function makeTitleValueSafe( $namespace, $text, $fragment = '', $interwiki = '' );
 }

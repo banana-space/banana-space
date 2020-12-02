@@ -1,6 +1,9 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Session\SessionManager;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Util\Test;
 
 abstract class ApiTestCase extends MediaWikiLangTestCase {
 	protected static $apiUrl;
@@ -12,7 +15,7 @@ abstract class ApiTestCase extends MediaWikiLangTestCase {
 	 */
 	protected $apiContext;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		global $wgServer;
 
 		parent::setUp();
@@ -26,7 +29,6 @@ abstract class ApiTestCase extends MediaWikiLangTestCase {
 		];
 
 		$this->setMwGlobals( [
-			'wgAuth' => new MediaWiki\Auth\AuthManagerAuthPlugin,
 			'wgRequest' => new FauxRequest( [] ),
 			'wgUser' => self::$users['sysop']->getUser(),
 		] );
@@ -34,48 +36,11 @@ abstract class ApiTestCase extends MediaWikiLangTestCase {
 		$this->apiContext = new ApiTestContext();
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		// Avoid leaking session over tests
 		MediaWiki\Session\SessionManager::getGlobalSession()->clear();
 
 		parent::tearDown();
-	}
-
-	/**
-	 * Edits or creates a page/revision
-	 * @param string $pageName Page title
-	 * @param string $text Content of the page
-	 * @param string $summary Optional summary string for the revision
-	 * @param int $defaultNs Optional namespace id
-	 * @return array Array as returned by WikiPage::doEditContent()
-	 */
-	protected function editPage( $pageName, $text, $summary = '', $defaultNs = NS_MAIN ) {
-		$title = Title::newFromText( $pageName, $defaultNs );
-		$page = WikiPage::factory( $title );
-
-		return $page->doEditContent( ContentHandler::makeContent( $text, $title ), $summary );
-	}
-
-	/**
-	 * Revision-deletes a revision.
-	 *
-	 * @param Revision|int $rev Revision to delete
-	 * @param array $value Keys are Revision::DELETED_* flags.  Values are 1 to set the bit, 0 to
-	 *   clear, -1 to leave alone.  (All other values also clear the bit.)
-	 * @param string $comment Deletion comment
-	 */
-	protected function revisionDelete(
-		$rev, array $value = [ Revision::DELETED_TEXT => 1 ], $comment = ''
-	) {
-		if ( is_int( $rev ) ) {
-			$rev = Revision::newFromId( $rev );
-		}
-		RevisionDeleter::createList(
-			'revision', RequestContext::getMain(), $rev->getTitle(), [ $rev->getId() ]
-		)->setVisibility( [
-			'value' => $value,
-			'comment' => $comment,
-		] );
 	}
 
 	/**
@@ -102,7 +67,7 @@ abstract class ApiTestCase extends MediaWikiLangTestCase {
 	) {
 		global $wgRequest, $wgUser;
 
-		if ( is_null( $session ) ) {
+		if ( $session === null ) {
 			// re-use existing global session by default
 			$session = $wgRequest->getSessionArray();
 		}
@@ -184,6 +149,7 @@ abstract class ApiTestCase extends MediaWikiLangTestCase {
 	 * @deprecated since 1.31
 	 */
 	protected function doLogin( $testUser = null ) {
+		wfDeprecated( __METHOD__, '1.31' );
 		global $wgUser;
 
 		if ( $testUser === null ) {
@@ -215,7 +181,7 @@ abstract class ApiTestCase extends MediaWikiLangTestCase {
 		if ( self::$errorFormatter === null ) {
 			self::$errorFormatter = new ApiErrorFormatter(
 				new ApiResult( false ),
-				Language::factory( 'en' ),
+				MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 				'none'
 			);
 		}
@@ -235,8 +201,8 @@ abstract class ApiTestCase extends MediaWikiLangTestCase {
 	 * @coversNothing
 	 */
 	public function testApiTestGroup() {
-		$groups = PHPUnit_Util_Test::getGroups( static::class );
-		$constraint = PHPUnit_Framework_Assert::logicalOr(
+		$groups = Test::getGroups( static::class );
+		$constraint = Assert::logicalOr(
 			$this->contains( 'medium' ),
 			$this->contains( 'large' )
 		);
@@ -250,11 +216,16 @@ abstract class ApiTestCase extends MediaWikiLangTestCase {
 	 * ApiUsageException::newWithMessage()'s parameters.  This allows checking for an exception
 	 * whose text is given by a message key instead of text, so as not to hard-code the message's
 	 * text into test code.
+	 * @param string $msg
+	 * @param string|null $code
+	 * @param array|null $data
+	 * @param int $httpCode
 	 */
 	protected function setExpectedApiException(
 		$msg, $code = null, array $data = null, $httpCode = 0
 	) {
 		$expected = ApiUsageException::newWithMessage( null, $msg, $code, $data, $httpCode );
-		$this->setExpectedException( ApiUsageException::class, $expected->getMessage() );
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage( $expected->getMessage() );
 	}
 }

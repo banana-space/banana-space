@@ -6,7 +6,7 @@ use InvalidArgumentException;
 
 /**
  * @group AuthManager
- * @covers MediaWiki\Auth\ConfirmLinkAuthenticationRequest
+ * @covers \MediaWiki\Auth\ConfirmLinkAuthenticationRequest
  */
 class ConfirmLinkAuthenticationRequestTest extends AuthenticationRequestTestCase {
 
@@ -14,11 +14,9 @@ class ConfirmLinkAuthenticationRequestTest extends AuthenticationRequestTestCase
 		return new ConfirmLinkAuthenticationRequest( $this->getLinkRequests() );
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 * @expectedExceptionMessage $linkRequests must not be empty
-	 */
 	public function testConstructorException() {
+		$this->expectException( InvalidArgumentException::class );
+		$this->expectExceptionMessage( '$linkRequests must not be empty' );
 		new ConfirmLinkAuthenticationRequest( [] );
 	}
 

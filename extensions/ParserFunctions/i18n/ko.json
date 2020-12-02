@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"IRTC1015",
 			"Klutzy",
 			"Kwj2772",
 			"ToePeu",
 			"Yknok29",
-			"아라",
-			"IRTC1015"
+			"아라"
 		]
 	},
 	"pfunc_desc": "파서에 논리 함수를 추가합니다",

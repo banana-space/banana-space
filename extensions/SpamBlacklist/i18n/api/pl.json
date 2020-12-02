@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rail",
+			"Railfail536",
+			"Woytecr"
+		]
+	},
+	"apihelp-spamblacklist-description": "Sprawdź jeden lub wiele URL pod kątem obecności na czarnej liście spamu.",
+	"apihelp-spamblacklist-example-1": "Sprawdź dwa URL pod kątem obecności na czarnej liście",
+	"apihelp-spamblacklist-param-url": "URLe do sprawdzenia pod kątem obecności na czarnej liście.",
+	"apihelp-spamblacklist-summary": "Sprawdź jeden lub więcej adresów URL pod kątem obecności na liście spamu."
+}

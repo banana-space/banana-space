@@ -8,11 +8,11 @@ CREATE TABLE oathauth_users (
 	-- User ID
 	id INTEGER NOT NULL PRIMARY KEY DEFAULT nextval('oathauth_users_id_seq'),
 
-	-- Secret key
-	secret TEXT NULL,
+	-- Module selected by the user
+	module TEXT NULL,
 
-	-- Scratch tokens
-	scratch_tokens TEXT NULL
+	-- Module data
+	data BYTEA NULL
 
 );
 

@@ -154,8 +154,8 @@ ve.ce.MWReferencesListNode.prototype.onListNodeUpdate = function () {
  * Update the references list.
  */
 ve.ce.MWReferencesListNode.prototype.update = function () {
-	var i, j, iLen, jLen, index, firstNode, key, keyedNodes, modelNode, viewNode,
-		$li, $refSpan, $link, internalList, refGroup, listGroup, nodes,
+	var i, iLen, index, firstNode, key, keyedNodes, modelNode, refPreview,
+		$li, internalList, refGroup, listGroup, nodes,
 		model = this.getModel();
 
 	// Check the node hasn't been destroyed, as this method is debounced.
@@ -177,28 +177,6 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 		) );
 		this.$element.append( this.$originalRefList );
 		return;
-	}
-
-	function updateGeneratedContent( viewNode, $li ) {
-		// HACK: PHP parser doesn't wrap single lines in a paragraph
-		if (
-			viewNode.$element.children().length === 1 &&
-			viewNode.$element.children( 'p' ).length === 1
-		) {
-			// unwrap inner
-			viewNode.$element.children().replaceWith(
-				viewNode.$element.children().contents()
-			);
-		}
-		$li.append(
-			$( '<span>' )
-				.addClass( 'reference-text' )
-				.append( viewNode.$element )
-		);
-
-		// Since this is running after content generation has finished, it's
-		// safe to destroy the view.
-		viewNode.destroy();
 	}
 
 	if ( this.$originalRefList ) {
@@ -234,11 +212,12 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 					return false;
 				}
 				// Exclude references defined inside the references list node
-				while ( ( node = node.parent ) && node !== null ) {
+				do {
+					node = node.parent;
 					if ( node instanceof ve.dm.MWReferencesListNode ) {
 						return false;
 					}
-				}
+				} while ( node );
 				return true;
 			} );
 
@@ -246,48 +225,18 @@ ve.ce.MWReferencesListNode.prototype.update = function () {
 				continue;
 			}
 
-			$li = $( '<li>' );
-
-			if ( keyedNodes.length > 1 ) {
-				$refSpan = $( '<span>' ).attr( 'rel', 'mw:referencedBy' );
-				for ( j = 0, jLen = keyedNodes.length; j < jLen; j++ ) {
-					$link = $( '<a>' ).append(
-						$( '<span>' ).addClass( 'mw-linkback-text' )
-							.text( ( j + 1 ) + ' ' )
-					);
-					if ( refGroup !== '' ) {
-						$link.attr( 'data-mw-group', refGroup );
-					}
-					$refSpan.append( $link );
-				}
-				$li.append( $refSpan );
-			} else {
-				$link = $( '<a>' ).attr( 'rel', 'mw:referencedBy' ).append(
-					$( '<span>' ).addClass( 'mw-linkback-text' )
-						.text( '↑ ' )
-				);
-				if ( refGroup !== '' ) {
-					$link.attr( 'data-mw-group', refGroup );
-				}
-				$li.append( $link );
-			}
+			$li = $( '<li>' )
+				.append( this.renderBacklinks( keyedNodes, refGroup ) );
 
 			// Generate reference HTML from first item in key
 			modelNode = internalList.getItemNode( firstNode.getAttribute( 'listIndex' ) );
 			if ( modelNode && modelNode.length ) {
-				viewNode = new ve.ce.InternalItemNode( modelNode );
-
-				// Use 'done' instead of 'then' so content is updated synchronously
-				// if possible, for clipboard conversion.
-				ve.ce.GeneratedContentNode.static.awaitGeneratedContent( viewNode )
-					.done( updateGeneratedContent.bind( this, viewNode, $li ) );
-
-				// Because this update runs a number of times when using the
-				// basic dialog, disconnect the model here rather than waiting
-				// for when it's destroyed after the generated content is
-				// finished. Failing to do this causes teardown errors with
-				// basic citations.
-				modelNode.disconnect( viewNode );
+				refPreview = new ve.ui.MWPreviewElement( modelNode, { useView: true } );
+				$li.append(
+					$( '<span>' )
+						.addClass( 'reference-text' )
+						.append( refPreview.$element )
+				);
 			} else {
 				$li.append(
 					$( '<span>' )
@@ -314,6 +263,43 @@ ve.ce.MWReferencesListNode.prototype.updateClasses = function () {
 	this.$element
 		.toggleClass( 'mw-references-wrap', isResponsive )
 		.toggleClass( 'mw-references-columns', isResponsive && this.$reflist.children().length > 10 );
+};
+
+/**
+ * Build markers for backlinks
+ *
+ * @param {ve.dm.Node[]} keyedNodes A list of ref nodes linked to a reference list item
+ * @param {string} refGroup Reference group name
+ * @return {jQuery} Element containing backlinks
+ */
+ve.ce.MWReferencesListNode.prototype.renderBacklinks = function ( keyedNodes, refGroup ) {
+	var j, jLen, $link, $refSpan;
+
+	if ( keyedNodes.length > 1 ) {
+		// named reference with multiple usages
+		$refSpan = $( '<span>' ).attr( 'rel', 'mw:referencedBy' );
+		for ( j = 0, jLen = keyedNodes.length; j < jLen; j++ ) {
+			$link = $( '<a>' ).append(
+				$( '<span>' ).addClass( 'mw-linkback-text' )
+					.text( ( j + 1 ) + ' ' )
+			);
+			if ( refGroup !== '' ) {
+				$link.attr( 'data-mw-group', refGroup );
+			}
+			$refSpan.append( $link );
+		}
+		return $refSpan;
+	} else {
+		// solo reference
+		$link = $( '<a>' ).attr( 'rel', 'mw:referencedBy' ).append(
+			$( '<span>' ).addClass( 'mw-linkback-text' )
+				.text( '↑ ' )
+		);
+		if ( refGroup !== '' ) {
+			$link.attr( 'data-mw-group', refGroup );
+		}
+		return $link;
+	}
 };
 
 /* Registration */

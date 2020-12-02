@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Red Winged Duck"
+		]
+	},
+	"apihelp-spamblacklist-description": "Праверыць адзін ці некалькі URL-адрасоў праз чорны сьпіс спамэраў.",
+	"apihelp-spamblacklist-example-1": "Праверыць два URL-адрасы паводле чорнага сьпісу",
+	"apihelp-spamblacklist-param-url": "URL-адрасы для праверкі паводле чорнага сьпісу.",
+	"apihelp-spamblacklist-summary": "Праверыць адзін ці некалькі URL-адрасоў праз чорны сьпіс спамэраў."
+}

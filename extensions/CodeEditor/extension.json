@@ -10,29 +10,20 @@
 	"license-name": "GPL-2.0-or-later AND BSD-3-Clause",
 	"type": "editor",
 	"requires": {
-		"MediaWiki": ">= 1.29.0",
+		"MediaWiki": ">= 1.35.0",
 		"extensions": {
-			"WikiEditor": "*"
+			"WikiEditor": ">= 0.5.2"
 		}
 	},
 	"Hooks": {
-		"EditPage::showEditForm:initial": [
-			"CodeEditorHooks::editPageShowEditFormInitial"
-		],
-		"EditPage::showReadOnlyForm:initial": [
-			"CodeEditorHooks::editPageShowEditFormInitial"
-		],
-		"GetPreferences": [
-			"CodeEditorHooks::getPreferences"
-		]
+		"EditPage::showEditForm:initial": "CodeEditorHooks::editPageShowEditFormInitial",
+		"EditPage::showReadOnlyForm:initial": "CodeEditorHooks::editPageShowEditFormInitial",
+		"GetPreferences": "CodeEditorHooks::getPreferences"
 	},
 	"MessagesDirs": {
 		"CodeEditor": [
 			"i18n"
 		]
-	},
-	"config": {
-		"CodeEditorEnableCore": true
 	},
 	"DefaultUserOptions": {
 		"usecodeeditor": 1
@@ -51,9 +42,8 @@
 			"dependencies": [
 				"ext.wikiEditor",
 				"ext.codeEditor.ace",
-				"jquery.ui.resizable",
+				"jquery.ui",
 				"mediawiki.api",
-				"mediawiki.api.options",
 				"mediawiki.user",
 				"user.options",
 				"mediawiki.cookie",
@@ -142,5 +132,5 @@
 	"AutoloadClasses": {
 		"CodeEditorHooks": "includes/CodeEditorHooks.php"
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }

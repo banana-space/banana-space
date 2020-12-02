@@ -1,13 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Banjo",
+			"Elisardojm",
 			"Hamilton Abreu",
 			"Toliño"
 		]
 	},
 	"replacetext": "Substituír un texto",
 	"replacetext-desc": "Proporciona unha [[Special:ReplaceText|páxina especial]] para que os administradores poidan facer unha cadea global para atopar e substituír un texto no contido de todas as páxinas dun wiki",
-	"replacetext_docu": "Para substituír unha cadea de texto por outra en todas as páxinas regulares deste wiki, insira aquí as dúas pezas de texto e logo prema en \"{{int:replacetext_continue}}\".\nDespois mostraráselle unha lista das páxinas que conteñen o texto buscado e poderá elixir en cales quere substituílo.\nO seu nome aparecerá nos histotiais das páxinas como o usuario responsable de calquera cambio.",
+	"replacetext_docu": "Para substituír unha cadea de texto por outra en todas as páxinas regulares deste wiki, insira aquí as dúas pezas de texto e logo prema en \"{{int:replacetext_continue}}\".\nDespois amosaráselle unha lista das páxinas que conteñen o texto buscado e poderá elixir en cales quere substituílo.\nO seu nome aparecerá nos historiais das páxinas como o usuario responsable de calquera cambio.",
 	"replacetext_originaltext": "Texto orixinal:",
 	"replacetext_replacementtext": "Texto de substitución:",
 	"replacetext_useregex": "Usar expresións regulares",
@@ -36,7 +38,9 @@
 	"replacetext_warning": "'''Aviso:''' Hai {{PLURAL:$1|unha páxina|$1 páxinas}} que xa {{PLURAL:$1|contén|conteñen}} a cadea de substitución \"$2\". Se fai esta substitución non poderá distinguir as súas modificacións destas cadeas.",
 	"replacetext_blankwarning": "'''Atención:''' Debido a que a cadea de substitución está baleira, esta operación non será reversible.",
 	"replacetext_continue": "Continuar",
+	"replacetext_announce": "Anunciar estas edicións por medio de $1 e listas de vixiancia",
 	"replacetext_editsummary": "Substitución de texto: \"$1\" por \"$2\"",
 	"right-replacetext": "Facer substitucións de texto en todo o wiki",
-	"action-replacetext": "facer substitucións de texto en todo o wiki"
+	"action-replacetext": "facer substitucións de texto en todo o wiki",
+	"replacetext_reminder": "Para modificar tamén as ligazóns a esta páxina noutras páxinas, vaia a $1."
 }

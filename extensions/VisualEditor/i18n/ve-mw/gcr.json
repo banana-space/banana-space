@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"LeGuyanaisPure",
+			"Léon973"
+		]
+	},
+	"tooltip-ca-editsource": "Modifyé kodwiki-a di sa paj",
+	"tooltip-ca-ve-edit": "Modifyé sa paj",
+	"visualeditor-ca-createlocaldescriptionsource": "Ajouté roun dèskripsyon lokal (wikikod)",
+	"visualeditor-ca-createsource": "Kréyé wikikod",
+	"visualeditor-ca-editsource": "Modifyé wikikod",
+	"visualeditor-ca-editsource-section": "modifyé wikikod",
+	"visualeditor-descriptionpagelink": "Project:ÉditòVizwèl",
+	"visualeditor-dialog-meta-languages-label": "Lanng",
+	"visualeditor-dialog-meta-languages-section": "Lanng",
+	"visualeditor-languages-tool": "Lanng",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Lanng"
+}

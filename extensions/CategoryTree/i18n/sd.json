@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Mehtab ahmed",
 			"Sindhu",
-			"Mehtab ahmed"
+			"Tweety"
 		]
 	},
+	"categorytree": "زمرا شجرو",
 	"categorytree-mode-all": "سڀ صفحا",
 	"categorytree-expand": "ڦھلايو",
 	"categorytree-member-counts": "مشتمل آھي {{PLURAL:$1|ذيلي زمرو|$1 ذيلي زمرا}}، {{PLURAL:$2|صفحو|$2 صفحا}}، ۽ {{PLURAL:$3|هڪ فائيل| $3 فائيلَ}}",

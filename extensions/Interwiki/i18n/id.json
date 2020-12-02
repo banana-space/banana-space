@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ahdan",
 			"Bennylin",
 			"Farras",
 			"Irwangatot",
 			"IvanLanin",
 			"Kenrick95",
-			"Rex",
-			"Ahdan"
+			"Rex"
 		]
 	},
 	"interwiki": "Lihat dan sunting data interwiki",
@@ -32,7 +32,6 @@
 	"interwiki-cached": "Data interwiki ditembolokkan. Tidak mungkin memodifikasi tembolok.",
 	"interwiki_edit": "Sunting",
 	"interwiki_reasonfield": "Alasan:",
-	"interwiki_delquestion": "Menghapus \"$1\"",
 	"interwiki_deleting": "Anda menghapus prefiks \"$1\".",
 	"interwiki_deleted": "Prefiks \"$1\" berhasil dihapus dari tabel interwiki.",
 	"interwiki_delfailed": "Prefiks \"$1\" tidak dapat dihapuskan dari tabel interwiki.",

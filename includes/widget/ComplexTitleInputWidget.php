@@ -9,7 +9,8 @@ namespace MediaWiki\Widget;
  * @license MIT
  */
 class ComplexTitleInputWidget extends \OOUI\Widget {
-
+	/** @var array */
+	protected $config;
 	protected $namespace = null;
 	protected $title = null;
 
@@ -20,6 +21,7 @@ class ComplexTitleInputWidget extends \OOUI\Widget {
 	 *   - array $config['namespace'] Configuration for the NamespaceInputWidget dropdown
 	 *     with list of namespaces
 	 *   - array $config['title'] Configuration for the TitleInputWidget text field
+	 * @phan-param array{namespace?:array,title?:array} $config
 	 */
 	public function __construct( array $config = [] ) {
 		// Configuration initialization
@@ -40,9 +42,7 @@ class ComplexTitleInputWidget extends \OOUI\Widget {
 			$config['title'],
 			[
 				'relative' => true,
-				'namespace' => isset( $config['namespace']['value'] ) ?
-					$config['namespace']['value'] :
-					null,
+				'namespace' => $config['namespace']['value'] ?? null,
 			]
 		) );
 

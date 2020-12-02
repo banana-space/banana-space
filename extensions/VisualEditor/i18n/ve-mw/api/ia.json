@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"apierror-visualeditor-docserver-http-error": "Error de connexion al servitor Parsoid/RESTBase: $1",
+	"apierror-visualeditor-docserver-http": "Error de connexion al servitor Parsoid/RESTBase (HTTP $1)",
+	"apierror-visualeditor-docserver": "Error de connexion al servitor Parsoid/RESTBase (nulle responsa)",
+	"apihelp-visualeditor-description": "Retorna HTML pro un pagina ab le servicio Parsoid.",
+	"apihelp-visualeditor-param-basetimestamp": "Quando tu salveguarda, insere hic le data e hora del version que ha essite modificate. Isto es pro deteger conflictos de modification.",
+	"apihelp-visualeditor-param-badetag": "Si le consulta RESTBase retornava un ETag apparentemente invalide, passar lo hic pro inclusion in le registro.",
+	"apihelp-visualeditor-param-cachekey": "Pro serialisar o comparar le versiones, usar le resultato de un previe requesta \"serializeforcache\" con iste clave. Supplanta $1html.",
+	"apihelp-visualeditor-param-oldid": "Le numero del version a usar (predefinite le ultime version).",
+	"apihelp-visualeditor-param-paction": "Action a exequer.",
+	"apihelp-visualeditor-param-page": "Le pagina sur le qual exequer actiones."
+}

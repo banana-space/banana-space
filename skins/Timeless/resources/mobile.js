@@ -1,5 +1,7 @@
 /* Popout menus (header) */
 
+/* eslint-disable no-jquery/no-fade */
+
 $( function () {
 	var toggleTime = 200;
 

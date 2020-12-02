@@ -21,38 +21,22 @@
  * @ingroup FileAbstraction
  */
 
+use MediaWiki\MediaWikiServices;
 use Wikimedia\Rdbms\DBUnexpectedError;
 
+// @phan-file-suppress PhanTypeMissingReturn false positives
 /**
  * Foreign file with an accessible MediaWiki database
  *
  * @ingroup FileAbstraction
  */
 class ForeignDBFile extends LocalFile {
-	/**
-	 * @param Title $title
-	 * @param FileRepo $repo
-	 * @param null $unused
-	 * @return ForeignDBFile
-	 */
-	static function newFromTitle( $title, $repo, $unused = null ) {
-		return new self( $title, $repo );
-	}
 
 	/**
-	 * Create a ForeignDBFile from a title
-	 * Do not call this except from inside a repo class.
-	 *
-	 * @param stdClass $row
-	 * @param FileRepo $repo
-	 * @return ForeignDBFile
+	 * @return ForeignDBRepo|bool
 	 */
-	static function newFromRow( $row, $repo ) {
-		$title = Title::makeTitle( NS_FILE, $row->img_name );
-		$file = new self( $title, $repo );
-		$file->loadFromRow( $row );
-
-		return $file;
+	public function getRepo() {
+		return $this->repo;
 	}
 
 	/**
@@ -62,11 +46,12 @@ class ForeignDBFile extends LocalFile {
 	 * @return Status
 	 * @throws MWException
 	 */
-	function publish( $srcPath, $flags = 0, array $options = [] ) {
+	public function publish( $srcPath, $flags = 0, array $options = [] ) {
 		$this->readOnlyError();
 	}
 
 	/**
+	 * @deprecated since 1.35
 	 * @param string $oldver
 	 * @param string $desc
 	 * @param string $license
@@ -78,8 +63,9 @@ class ForeignDBFile extends LocalFile {
 	 * @return bool
 	 * @throws MWException
 	 */
-	function recordUpload( $oldver, $desc, $license = '', $copyStatus = '', $source = '',
+	public function recordUpload( $oldver, $desc, $license = '', $copyStatus = '', $source = '',
 		$watch = false, $timestamp = false, User $user = null ) {
+		wfDeprecated( __METHOD__, '1.35' );
 		$this->readOnlyError();
 	}
 
@@ -89,18 +75,31 @@ class ForeignDBFile extends LocalFile {
 	 * @return Status
 	 * @throws MWException
 	 */
-	function restore( $versions = [], $unsuppress = false ) {
+	public function restore( $versions = [], $unsuppress = false ) {
 		$this->readOnlyError();
 	}
 
 	/**
+	 * @deprecated since 1.35, use deleteFile instead
 	 * @param string $reason
 	 * @param bool $suppress
 	 * @param User|null $user
 	 * @return Status
 	 * @throws MWException
 	 */
-	function delete( $reason, $suppress = false, $user = null ) {
+	public function delete( $reason, $suppress = false, $user = null ) {
+		wfDeprecated( __METHOD__, '1.35' );
+		$this->readOnlyError();
+	}
+
+	/**
+	 * @param string $reason
+	 * @param User $user
+	 * @param bool $suppress
+	 * @return Status
+	 * @throws MWException
+	 */
+	public function deleteFile( $reason, User $user, $suppress = false ) {
 		$this->readOnlyError();
 	}
 
@@ -109,14 +108,14 @@ class ForeignDBFile extends LocalFile {
 	 * @return Status
 	 * @throws MWException
 	 */
-	function move( $target ) {
+	public function move( $target ) {
 		$this->readOnlyError();
 	}
 
 	/**
 	 * @return string
 	 */
-	function getDescriptionUrl() {
+	public function getDescriptionUrl() {
 		// Restore remote behavior
 		return File::getDescriptionUrl();
 	}
@@ -125,14 +124,14 @@ class ForeignDBFile extends LocalFile {
 	 * @param Language|null $lang Optional language to fetch description in.
 	 * @return string|false
 	 */
-	function getDescriptionText( $lang = null ) {
+	public function getDescriptionText( Language $lang = null ) {
 		global $wgLang;
 
 		if ( !$this->repo->fetchDescription ) {
 			return false;
 		}
 
-		$lang = $lang ?: $wgLang;
+		$lang = $lang ?? $wgLang;
 		$renderUrl = $this->repo->getDescriptionRenderUrl( $this->getName(), $lang->getCode() );
 		if ( !$renderUrl ) {
 			return false;
@@ -144,26 +143,28 @@ class ForeignDBFile extends LocalFile {
 			[
 				'page_namespace' => NS_FILE,
 				'page_title' => $this->title->getDBkey()
-			]
+			],
+			__METHOD__
 		);
 		if ( $touched === false ) {
 			return false; // no description page
 		}
 
-		$cache = ObjectCache::getMainWANInstance();
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$fname = __METHOD__;
 
 		return $cache->getWithSetCallback(
 			$this->repo->getLocalCacheKey(
-				'RemoteFileDescription',
-				'url',
+				'ForeignFileDescription',
 				$lang->getCode(),
-				$this->getName(),
+				md5( $this->getName() ),
 				$touched
 			),
 			$this->repo->descriptionCacheExpiry ?: $cache::TTL_UNCACHEABLE,
-			function ( $oldValue, &$ttl, array &$setOpts ) use ( $renderUrl ) {
-				wfDebug( "Fetching shared description from $renderUrl\n" );
-				$res = Http::get( $renderUrl, [], __METHOD__ );
+			function ( $oldValue, &$ttl, array &$setOpts ) use ( $renderUrl, $fname ) {
+				wfDebug( "Fetching shared description from $renderUrl" );
+				$res = MediaWikiServices::getInstance()->getHttpRequestFactory()->
+					get( $renderUrl, [], $fname );
 				if ( !$res ) {
 					$ttl = WANObjectCache::TTL_UNCACHEABLE;
 				}
@@ -188,7 +189,8 @@ class ForeignDBFile extends LocalFile {
 			[
 				'page_namespace' => NS_FILE,
 				'page_title' => $this->title->getDBkey()
-			]
+			],
+			__METHOD__
 		);
 
 		if ( $pageId !== false ) {

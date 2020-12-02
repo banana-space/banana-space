@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jagwar"
+		]
+	},
+	"apihelp-visualeditor-description": "Mamerina HTMLS ho ana pejy avy amin'ny servisy Parsoid.",
+	"apihelp-visualeditor-param-basetimestamp": "Rehefa mitahiry, dia ataovy eto ny ora aman-datin'ny versiôna voaovan'ilay pejy. Ampiasaina amin'ny fahitana fiovana mifandona.",
+	"apihelp-visualeditoredit-param-etag": "ETag ho alefa.",
+	"apihelp-visualeditoredit-param-minor": "Fimarihana ho fanovana madinika.",
+	"apihelp-visualeditoredit-param-summary": "Ambangovangon'ilay fiovàna."
+}

@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"C.R.",
 			"Chelin",
-			"C.R."
+			"Ruthven"
 		]
 	},
 	"categorytree": "Arvero d' 'e categurìe",
@@ -14,9 +15,9 @@
 	"categorytree-go": "Fà vedé ll'arvero",
 	"categorytree-parents": "Categurìe superiore",
 	"categorytree-mode-label": "Modalità:",
-	"categorytree-mode-categories": "mostra solo 'e categurìe",
+	"categorytree-mode-categories": "'e categurìe sulamente",
 	"categorytree-mode-pages": "tutte 'e paggene accettuanno l'immaggene",
-	"categorytree-mode-all": "Tutte 'e paggene",
+	"categorytree-mode-all": "Tutte 'e ppaggene",
 	"categorytree-collapse": "annascunne",
 	"categorytree-expand": "fa vede",
 	"categorytree-member-counts": "Cuntene {{PLURAL:$1|1 sottocategurìa|$1 sottocategurìe}}, {{PLURAL:$2|1 paggena|$2 paggene}} e {{PLURAL:$3|1 file|$3 file}}",
@@ -32,8 +33,5 @@
 	"categorytree-no-pages": "nisciuna paggena ne sottocategurìa",
 	"categorytree-not-found": "Categurìa  ''$1'' nun truvata",
 	"categorytree-error": "Probblema c' 'o caricamento d' 'e date.",
-	"categorytree-retry": "Aspetta nu mumento e prova n'ata vota.",
-	"apihelp-categorytree-description": "Modulo nterno pe' ne ffà n'estensione CategoryTree",
-	"apihelp-categorytree-param-category": "Titolo dint' 'o namespace categurìa, 'o prefisso sarrà gnurato si dato.",
-	"apihelp-categorytree-param-options": "Opziune p' 'o costruttore comm'a n'uggetto JSON.\nL'opziona <var>depth</var> è determinata a <kbd>1</kbd>."
+	"categorytree-retry": "Aspetta nu mumento e prova n'ata vota."
 }

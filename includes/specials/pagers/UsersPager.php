@@ -23,6 +23,8 @@
  * @ingroup Pager
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * This class is used to get a list of user. The ones with specials
  * rights (sysop, bureaucrat, developer) will have them displayed
@@ -37,19 +39,37 @@ class UsersPager extends AlphabeticPager {
 	 */
 	protected $userGroupCache;
 
+	/** @var string */
+	public $requestedGroup;
+
+	/** @var bool */
+	protected $editsOnly;
+
+	/** @var bool */
+	protected $temporaryGroupsOnly;
+
+	/** @var bool */
+	protected $creationSort;
+
+	/** @var bool|null */
+	protected $including;
+
+	/** @var string */
+	protected $requestedUser;
+
 	/**
-	 * @param IContextSource $context
-	 * @param array $par (Default null)
-	 * @param bool $including Whether this page is being transcluded in
+	 * @param IContextSource|null $context
+	 * @param array|null $par (Default null)
+	 * @param bool|null $including Whether this page is being transcluded in
 	 * another page
 	 */
-	function __construct( IContextSource $context = null, $par = null, $including = null ) {
+	public function __construct( IContextSource $context = null, $par = null, $including = null ) {
 		if ( $context ) {
 			$this->setContext( $context );
 		}
 
 		$request = $this->getRequest();
-		$par = ( $par !== null ) ? $par : '';
+		$par = $par ?? '';
 		$parms = explode( '/', $par );
 		$symsForAll = [ '*', 'user' ];
 
@@ -70,6 +90,7 @@ class UsersPager extends AlphabeticPager {
 			$this->requestedGroup = '';
 		}
 		$this->editsOnly = $request->getBool( 'editsOnly' );
+		$this->temporaryGroupsOnly = $request->getBool( 'temporaryGroupsOnly' );
 		$this->creationSort = $request->getBool( 'creationSort' );
 		$this->including = $including;
 		$this->mDefaultDirection = $request->getBool( 'desc' )
@@ -81,7 +102,7 @@ class UsersPager extends AlphabeticPager {
 		if ( $un != '' ) {
 			$username = Title::makeTitleSafe( NS_USER, $un );
 
-			if ( !is_null( $username ) ) {
+			if ( $username !== null ) {
 				$this->requestedUser = $username->getText();
 			}
 		}
@@ -92,27 +113,34 @@ class UsersPager extends AlphabeticPager {
 	/**
 	 * @return string
 	 */
-	function getIndexField() {
+	public function getIndexField() {
 		return $this->creationSort ? 'user_id' : 'user_name';
 	}
 
 	/**
 	 * @return array
 	 */
-	function getQueryInfo() {
+	public function getQueryInfo() {
 		$dbr = wfGetDB( DB_REPLICA );
 		$conds = [];
 
 		// Don't show hidden names
-		if ( !$this->getUser()->isAllowed( 'hideuser' ) ) {
+		if ( !MediaWikiServices::getInstance()
+				->getPermissionManager()
+				->userHasRight( $this->getUser(), 'hideuser' )
+		) {
 			$conds[] = 'ipb_deleted IS NULL OR ipb_deleted = 0';
 		}
 
 		$options = [];
 
+		if ( $this->requestedGroup != '' || $this->temporaryGroupsOnly ) {
+			$conds[] = 'ug_expiry >= ' . $dbr->addQuotes( $dbr->timestamp() ) .
+			( !$this->temporaryGroupsOnly ? ' OR ug_expiry IS NULL' : '' );
+		}
+
 		if ( $this->requestedGroup != '' ) {
 			$conds['ug_group'] = $this->requestedGroup;
-			$conds[] = 'ug_expiry IS NULL OR ug_expiry >= ' . $dbr->addQuotes( $dbr->timestamp() );
 		}
 
 		if ( $this->requestedUser != '' ) {
@@ -137,7 +165,8 @@ class UsersPager extends AlphabeticPager {
 				'user_id' => $this->creationSort ? 'user_id' : 'MAX(user_id)',
 				'edits' => 'MAX(user_editcount)',
 				'creation' => 'MIN(user_registration)',
-				'ipb_deleted' => 'MAX(ipb_deleted)' // block/hide status
+				'ipb_deleted' => 'MAX(ipb_deleted)', // block/hide status
+				'ipb_sitewide' => 'MAX(ipb_sitewide)'
 			],
 			'options' => $options,
 			'join_conds' => [
@@ -152,7 +181,7 @@ class UsersPager extends AlphabeticPager {
 			'conds' => $conds
 		];
 
-		Hooks::run( 'SpecialListusersQueryInfo', [ $this, &$query ] );
+		$this->getHookRunner()->onSpecialListusersQueryInfo( $this, $query );
 
 		return $query;
 	}
@@ -161,7 +190,7 @@ class UsersPager extends AlphabeticPager {
 	 * @param stdClass $row
 	 * @return string
 	 */
-	function formatRow( $row ) {
+	public function formatRow( $row ) {
 		if ( $row->user_id == 0 ) { # T18487
 			return '';
 		}
@@ -172,7 +201,9 @@ class UsersPager extends AlphabeticPager {
 		$ulinks .= Linker::userToolLinksRedContribs(
 			$row->user_id,
 			$userName,
-			(int)$row->edits
+			(int)$row->edits,
+			// don't render parentheses in HTML markup (CSS will provide)
+			false
 		);
 
 		$lang = $this->getLanguage();
@@ -209,16 +240,17 @@ class UsersPager extends AlphabeticPager {
 			$created = $this->msg( 'usercreated', $d, $t, $row->user_name )->escaped();
 			$created = ' ' . $this->msg( 'parentheses' )->rawParams( $created )->escaped();
 		}
-		$blocked = !is_null( $row->ipb_deleted ) ?
+
+		$blocked = $row->ipb_deleted !== null && $row->ipb_sitewide === '1' ?
 			' ' . $this->msg( 'listusers-blocked', $userName )->escaped() :
 			'';
 
-		Hooks::run( 'SpecialListusersFormatRow', [ &$item, $row ] );
+		$this->getHookRunner()->onSpecialListusersFormatRow( $item, $row );
 
 		return Html::rawElement( 'li', [], "{$item}{$edits}{$created}{$blocked}" );
 	}
 
-	function doBatchLookups() {
+	protected function doBatchLookups() {
 		$batch = new LinkBatch();
 		$userIds = [];
 		# Give some pointers to make user links
@@ -230,16 +262,19 @@ class UsersPager extends AlphabeticPager {
 
 		// Lookup groups for all the users
 		$dbr = wfGetDB( DB_REPLICA );
+		$groupManager = MediaWikiServices::getInstance()->getUserGroupManager();
+		$groupsQueryInfo = $groupManager->getQueryInfo();
 		$groupRes = $dbr->select(
-			'user_groups',
-			UserGroupMembership::selectFields(),
+			$groupsQueryInfo['tables'],
+			$groupsQueryInfo['fields'],
 			[ 'ug_user' => $userIds ],
-			__METHOD__
+			__METHOD__,
+			$groupsQueryInfo['joins']
 		);
 		$cache = [];
 		$groups = [];
 		foreach ( $groupRes as $row ) {
-			$ugm = UserGroupMembership::newFromRow( $row );
+			$ugm = $groupManager->newGroupMembershipFromRow( $row );
 			if ( !$ugm->isExpired() ) {
 				$cache[$row->ug_user][$row->ug_group] = $ugm;
 				$groups[$row->ug_group] = true;
@@ -248,7 +283,7 @@ class UsersPager extends AlphabeticPager {
 
 		// Give extensions a chance to add things like global user group data
 		// into the cache array to ensure proper output later on
-		Hooks::run( 'UsersPagerDoBatchLookups', [ $dbr, $userIds, &$cache, &$groups ] );
+		$this->getHookRunner()->onUsersPagerDoBatchLookups( $dbr, $userIds, $cache, $groups );
 
 		$this->userGroupCache = $cache;
 
@@ -267,8 +302,8 @@ class UsersPager extends AlphabeticPager {
 	/**
 	 * @return string
 	 */
-	function getPageHeader() {
-		list( $self ) = explode( '/', $this->getTitle()->getPrefixedDBkey() );
+	public function getPageHeader() {
+		$self = explode( '/', $this->getTitle()->getPrefixedDBkey(), 2 )[0];
 
 		$groupOptions = [ $this->msg( 'group-all' )->text() => '' ];
 		foreach ( $this->getAllGroups() as $group => $groupText ) {
@@ -296,6 +331,13 @@ class UsersPager extends AlphabeticPager {
 				'id' => 'editsOnly',
 				'default' => $this->editsOnly
 			],
+			'temporaryGroupsOnly' => [
+				'type' => 'check',
+				'label' => $this->msg( 'listusers-temporarygroupsonly' )->text(),
+				'name' => 'temporaryGroupsOnly',
+				'id' => 'temporaryGroupsOnly',
+				'default' => $this->temporaryGroupsOnly
+			],
 			'creationSort' => [
 				'type' => 'check',
 				'label' => $this->msg( 'listusers-creationsort' )->text(),
@@ -318,7 +360,7 @@ class UsersPager extends AlphabeticPager {
 		];
 
 		$beforeSubmitButtonHookOut = '';
-		Hooks::run( 'SpecialListusersHeaderForm', [ $this, &$beforeSubmitButtonHookOut ] );
+		$this->getHookRunner()->onSpecialListusersHeaderForm( $this, $beforeSubmitButtonHookOut );
 
 		if ( $beforeSubmitButtonHookOut !== '' ) {
 			$formDescriptor[ 'beforeSubmitButtonHookOut' ] = [
@@ -334,7 +376,7 @@ class UsersPager extends AlphabeticPager {
 		];
 
 		$beforeClosingFieldsetHookOut = '';
-		Hooks::run( 'SpecialListusersHeader', [ $this, &$beforeClosingFieldsetHookOut ] );
+		$this->getHookRunner()->onSpecialListusersHeader( $this, $beforeClosingFieldsetHookOut );
 
 		if ( $beforeClosingFieldsetHookOut !== '' ) {
 			$formDescriptor[ 'beforeClosingFieldsetHookOut' ] = [
@@ -359,7 +401,7 @@ class UsersPager extends AlphabeticPager {
 	 * Get a list of all explicit groups
 	 * @return array
 	 */
-	function getAllGroups() {
+	private function getAllGroups() {
 		$result = [];
 		foreach ( User::getAllGroups() as $group ) {
 			$result[$group] = UserGroupMembership::getGroupName( $group );
@@ -373,7 +415,7 @@ class UsersPager extends AlphabeticPager {
 	 * Preserve group and username offset parameters when paging
 	 * @return array
 	 */
-	function getDefaultQuery() {
+	public function getDefaultQuery() {
 		$query = parent::getDefaultQuery();
 		if ( $this->requestedGroup != '' ) {
 			$query['group'] = $this->requestedGroup;
@@ -381,7 +423,7 @@ class UsersPager extends AlphabeticPager {
 		if ( $this->requestedUser != '' ) {
 			$query['username'] = $this->requestedUser;
 		}
-		Hooks::run( 'SpecialListusersDefaultQuery', [ $this, &$query ] );
+		$this->getHookRunner()->onSpecialListusersDefaultQuery( $this, $query );
 
 		return $query;
 	}
@@ -399,7 +441,7 @@ class UsersPager extends AlphabeticPager {
 			$user = User::newFromId( $uid );
 			return $user->getGroupMemberships();
 		} else {
-			return isset( $cache[$uid] ) ? $cache[$uid] : [];
+			return $cache[$uid] ?? [];
 		}
 	}
 

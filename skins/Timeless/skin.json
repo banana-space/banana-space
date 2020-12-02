@@ -1,12 +1,15 @@
 {
 	"name": "Timeless",
-	"version": "0.8.1",
+	"version": "0.8.9",
 	"author": "Isarra Yos",
 	"url": "https://www.mediawiki.org/wiki/Skin:Timeless",
 	"descriptionmsg": "timeless-desc",
 	"namemsg": "skinname-timeless",
 	"license-name": "GPL-2.0-or-later",
 	"type": "skin",
+	"requires": {
+		"MediaWiki": ">= 1.34.0"
+	},
 	"ValidSkinNames": {
 		"timeless": "Timeless"
 	},
@@ -15,10 +18,27 @@
 			"i18n"
 		]
 	},
+	"config": {
+		"TimelessBackdropImage": {
+			"value": "cat.svg",
+			"description": "Set it as you would $wgLogo to an appropriate background image. Recommendation is an svg set to 500-750px wide"
+		},
+		"TimelessLogo": {
+			"value": null,
+			"description": "Special logo rendering, allowing for custom logos for Timeless"
+		},
+		"TimelessWordmark": {
+			"value": null,
+			"description": "To use an image instead of the default Linux Libertine serif text for the header banner wordmark"
+		}
+	},
 	"ResourceModules": {
 		"skins.timeless": {
-			"targets": [ "desktop", "mobile" ],
-			"class": "ResourceLoaderSkinModule",
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"class": "TimelessVariablesModule",
 			"styles": {
 				"resources/libraries/normalise.css": {
 					"media": "screen"
@@ -44,26 +64,26 @@
 				"resources/screen-mobile.less": {
 					"media": "screen and (max-width: 850px)"
 				},
+				"0": "resources/screen-misc.less",
 				"resources/print.css": {
 					"media": "print"
 				}
 			},
 			"@NOTE": "Remember to also update variables.less if you change the width cutoffs here. screen-misc.less and mobile.js may also need updating."
 		},
-		"skins.timeless.misc": {
-			"targets": [ "desktop", "mobile" ],
-			"styles": [
-				"resources/screen-misc.less"
-			]
-		},
 		"skins.timeless.js": {
-			"targets": [ "desktop", "mobile" ],
+			"targets": [
+				"desktop"
+			],
 			"scripts": [
 				"resources/main.js"
 			]
 		},
 		"skins.timeless.mobile": {
-			"targets": [ "desktop", "mobile" ],
+			"targets": [
+				"desktop",
+				"mobile"
+			],
 			"scripts": [
 				"resources/mobile.js"
 			]
@@ -77,13 +97,20 @@
 		"timeless": {
 			"+oojs-ui-core.styles": "resources/ooui.less",
 			"+ext.echo.styles.badge": "resources/extensions/Echo.less",
+			"+ext.eventLogging.jsonSchema.styles": "resources/extensions/EventLogging.jsonSchema.less",
 			"+ext.visualEditor.core": "resources/extensions/VisualEditor.core.less",
-			"+ext.visualEditor.desktopArticleTarget.noscript": "resources/extensions/VisualEditor.article.less"
+			"+ext.visualEditor.desktopArticleTarget.noscript": "resources/extensions/VisualEditor.article.less",
+			"+ext.CodeMirror.visualEditor.init": "resources/extensions/VisualEditor.CodeMirror.less",
+			"+ext.dismissableSiteNotice.styles": "resources/extensions/DismissableSiteNotice.less",
+			"+ext.MWOAuth.AuthorizeForm": "resources/extensions/MWOAuth.AuthorizeForm.less",
+			"+ext.wikiLove.icon": "resources/extensions/WikiLove.icon.less",
+			"+ext.proofreadpage.page.navigation": "resources/extensions/Proofreadpage.page.navigation.less"
 		}
 	},
 	"AutoloadClasses": {
-		"SkinTimeless": "SkinTimeless.php",
-		"TimelessTemplate": "TimelessTemplate.php"
+		"SkinTimeless": "includes/SkinTimeless.php",
+		"TimelessTemplate": "includes/TimelessTemplate.php",
+		"TimelessVariablesModule": "includes/TimelessVariablesModule.php"
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }

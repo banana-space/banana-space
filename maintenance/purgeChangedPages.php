@@ -23,7 +23,8 @@
 
 require_once __DIR__ . '/Maintenance.php';
 
-use Wikimedia\Rdbms\ResultWrapper;
+use MediaWiki\MediaWikiServices;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Maintenance script that sends purge requests for pages edited in a date
@@ -52,7 +53,7 @@ class PurgeChangedPages extends Maintenance {
 		global $wgHTCPRouting;
 
 		if ( $this->hasOption( 'htcp-dest' ) ) {
-			$parts = explode( ':', $this->getOption( 'htcp-dest' ) );
+			$parts = explode( ':', $this->getOption( 'htcp-dest' ), 2 );
 			if ( count( $parts ) < 2 ) {
 				// Add default htcp port
 				$parts[] = '4827';
@@ -76,7 +77,7 @@ class PurgeChangedPages extends Maintenance {
 			$this->maybeHelp( true );
 		}
 
-		$stuckCount = 0; // loop breaker
+		$stuckCount = 0;
 		while ( true ) {
 			// Adjust bach size if we are stuck in a second that had many changes
 			$bSize = ( $stuckCount + 1 ) * $this->getBatchSize();
@@ -99,7 +100,7 @@ class PurgeChangedPages extends Maintenance {
 				__METHOD__,
 				[ 'ORDER BY' => 'rev_timestamp', 'LIMIT' => $bSize ],
 				[
-					'page' => [ 'INNER JOIN', 'rev_page=page_id' ],
+					'page' => [ 'JOIN', 'rev_page=page_id' ],
 				]
 			);
 
@@ -136,9 +137,9 @@ class PurgeChangedPages extends Maintenance {
 				}
 			}
 
-			// Send batch of purge requests out to squids
-			$squid = new CdnCacheUpdate( $urls, count( $urls ) );
-			$squid->doUpdate();
+			// Send batch of purge requests out to CDN servers
+			$hcu = MediaWikiServices::getInstance()->getHtmlCacheUpdater();
+			$hcu->purgeUrls( $urls, $hcu::PURGE_NAIVE );
 
 			if ( $this->hasOption( 'sleep-per-batch' ) ) {
 				// sleep-per-batch is milliseconds, usleep wants micro seconds.
@@ -163,30 +164,38 @@ class PurgeChangedPages extends Maintenance {
 	 *
 	 * @todo move this elsewhere
 	 *
-	 * @param ResultWrapper $res Query result sorted by $column (ascending)
+	 * @param IResultWrapper $res Query result sorted by $column (ascending)
 	 * @param string $column
 	 * @param int $limit
 	 * @return array (array of rows, string column value)
 	 */
-	protected function pageableSortedRows( ResultWrapper $res, $column, $limit ) {
+	protected function pageableSortedRows( IResultWrapper $res, $column, $limit ) {
 		$rows = iterator_to_array( $res, false );
-		$count = count( $rows );
-		if ( !$count ) {
-			return [ [], null ]; // nothing to do
-		} elseif ( $count < $limit ) {
-			return [ $rows, $rows[$count - 1]->$column ]; // no more rows left
+
+		// Nothing to do
+		if ( !$rows ) {
+			return [ [], null ];
 		}
-		$lastValue = $rows[$count - 1]->$column; // should be the highest
-		for ( $i = $count - 1; $i >= 0; --$i ) {
-			if ( $rows[$i]->$column === $lastValue ) {
-				unset( $rows[$i] );
-			} else {
+
+		$lastValue = end( $rows )->$column;
+		if ( count( $rows ) < $limit ) {
+			return [ $rows, $lastValue ];
+		}
+
+		for ( $i = count( $rows ) - 1; $i >= 0; --$i ) {
+			if ( $rows[$i]->$column !== $lastValue ) {
 				break;
 			}
-		}
-		$lastValueLeft = count( $rows ) ? $rows[count( $rows ) - 1]->$column : null;
 
-		return [ $rows, $lastValueLeft ];
+			unset( $rows[$i] );
+		}
+
+		// No more rows left
+		if ( !$rows ) {
+			return [ [], null ];
+		}
+
+		return [ $rows, end( $rows )->$column ];
 	}
 }
 

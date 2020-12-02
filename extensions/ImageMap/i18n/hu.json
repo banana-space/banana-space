@@ -3,8 +3,8 @@
 		"authors": [
 			"Dani",
 			"KossuthRad",
-			"Tgr",
-			"Tacsipacsi"
+			"Tacsipacsi",
+			"Tgr"
 		]
 	},
 	"imagemap_desc": "Lehetővé teszi kliensoldali imagemapek létrehozását az <code>&lt;imagemap&gt;</code> címke segítségével",

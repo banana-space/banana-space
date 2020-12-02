@@ -6,6 +6,11 @@
  * If all revisions contain spam, blanks the page
  */
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionLookup;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
+
 $IP = getenv( 'MW_INSTALL_PATH' );
 if ( $IP === false ) {
 	$IP = __DIR__ . '/../../..';
@@ -13,8 +18,16 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 class Cleanup extends Maintenance {
+	/** @var RevisionLookup */
+	private $revisionLookup;
+	/** @var TitleFormatter */
+	private $titleFormatter;
+
 	public function __construct() {
 		parent::__construct();
+		$this->revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
+		$this->titleFormatter = MediaWikiServices::getInstance()->getTitleFormatter();
+
 		$this->requireExtension( 'SpamBlacklist' );
 		$this->addOption( 'dry-run', 'Only do a dry run' );
 	}
@@ -43,14 +56,13 @@ class Cleanup extends Maintenance {
 			if ( $id % $reportingInterval == 0 ) {
 				printf( "%-8d  %-5.2f%%\r", $id, $id / $maxID * 100 );
 			}
-			$revision = Revision::loadFromPageId( $dbr, $id );
+			$revision = $this->revisionLookup->getRevisionByPageId( $id );
 			if ( $revision ) {
-				$text = ContentHandler::getContentText( $revision->getContent() );
+				$text = ContentHandler::getContentText( $revision->getContent( SlotRecord::MAIN ) );
 				if ( $text ) {
 					foreach ( $regexes as $regex ) {
 						if ( preg_match( $regex, $text, $matches ) ) {
-							$title = $revision->getTitle();
-							$titleText = $title->getPrefixedText();
+							$titleText = $this->titleFormatter->getPrefixedText( $revision->getPageAsLinkTarget() );
 							if ( $dryRun ) {
 								$this->output( "Found spam in [[$titleText]]\n" );
 							} else {
@@ -69,20 +81,20 @@ class Cleanup extends Maintenance {
 
 	/**
 	 * Find the latest revision of the article that does not contain spam and revert to it
-	 * @param Revision $rev
+	 * @param RevisionRecord $rev
 	 * @param array $regexes
-	 * @param array $match
+	 * @param string $match
 	 * @param User $user
 	 */
-	private function cleanupArticle( Revision $rev, $regexes, $match, User $user ) {
-		$title = $rev->getTitle();
+	private function cleanupArticle( RevisionRecord $rev, $regexes, $match, User $user ) {
+		$title = Title::newFromLinkTarget( $rev->getPageAsLinkTarget() );
 		while ( $rev ) {
 			$matches = false;
 			foreach ( $regexes as $regex ) {
 				$matches = $matches
 					|| preg_match(
 						$regex,
-						ContentHandler::getContentText( $rev->getContent() )
+						ContentHandler::getContentText( $rev->getContent( SlotRecord::MAIN ) )
 					);
 			}
 			if ( !$matches ) {
@@ -90,21 +102,22 @@ class Cleanup extends Maintenance {
 				break;
 			}
 
-			$rev = $rev->getPrevious();
+			$rev = $this->revisionLookup->getPreviousRevision( $rev );
 		}
 		if ( !$rev ) {
 			// Didn't find a non-spammy revision, blank the page
 			$this->output( "All revisions are spam, blanking...\n" );
-			$text = '';
+			$content = ContentHandler::makeContent( '', $title );
 			$comment = "All revisions matched the spam blacklist ($match), blanking";
 		} else {
 			// Revert to this revision
-			$text = ContentHandler::getContentText( $rev->getContent() );
+			$content = $rev->getContent( SlotRecord::MAIN ) ?:
+				ContentHandler::makeContent( '', $title );
 			$comment = "Cleaning up links to $match";
 		}
 		$wikiPage = new WikiPage( $title );
 		$wikiPage->doEditContent(
-			ContentHandler::makeContent( $text, $title ), $comment,
+			$content, $comment,
 			0, false, $user
 		);
 	}

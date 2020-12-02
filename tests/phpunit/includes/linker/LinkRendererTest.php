@@ -14,7 +14,7 @@ class LinkRendererTest extends MediaWikiLangTestCase {
 	 */
 	private $factory;
 
-	public function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		$this->setMwGlobals( [
 			'wgArticlePath' => '/wiki/$1',
@@ -51,11 +51,10 @@ class LinkRendererTest extends MediaWikiLangTestCase {
 
 		// Query added
 		$this->assertEquals(
-			'<a href="/w/index.php?title=Foobar&amp;foo=bar" '. 'title="Foobar">Foobar</a>',
+			'<a href="/w/index.php?title=Foobar&amp;foo=bar" title="Foobar">Foobar</a>',
 			$linkRenderer->makeKnownLink( $target, null, [], [ 'foo' => 'bar' ] )
 		);
 
-		// forcearticlepath
 		$linkRenderer->setForceArticlePath( true );
 		$this->assertEquals(
 			'<a href="/wiki/Foobar?foo=bar" title="Foobar">Foobar</a>',
@@ -131,12 +130,21 @@ class LinkRendererTest extends MediaWikiLangTestCase {
 			. '(page does not exist)"><script>evil()</script></a>',
 			$linkRenderer->makeLink( $foobar, new HtmlArmor( '<script>evil()</script>' ) )
 		);
+
+		$this->assertEquals(
+			'<a href="#fragment">fragment</a>',
+			$linkRenderer->makeLink( Title::newFromText( '#fragment' ) )
+		);
 	}
 
 	public function testGetLinkClasses() {
-		$wanCache = ObjectCache::getMainWANInstance();
-		$titleFormatter = MediaWikiServices::getInstance()->getTitleFormatter();
-		$linkCache = new LinkCache( $titleFormatter, $wanCache );
+		$services = MediaWikiServices::getInstance();
+		$wanCache = $services->getMainWANObjectCache();
+		$titleFormatter = $services->getTitleFormatter();
+		$nsInfo = $services->getNamespaceInfo();
+		$specialPageFactory = $services->getSpecialPageFactory();
+		$hookContainer = $services->getHookContainer();
+		$linkCache = new LinkCache( $titleFormatter, $wanCache, $nsInfo );
 		$foobarTitle = new TitleValue( NS_MAIN, 'FooBar' );
 		$redirectTitle = new TitleValue( NS_MAIN, 'Redirect' );
 		$userTitle = new TitleValue( NS_USER, 'Someuser' );
@@ -160,9 +168,10 @@ class LinkRendererTest extends MediaWikiLangTestCase {
 			0 // redir
 		);
 
-		$linkRenderer = new LinkRenderer( $titleFormatter, $linkCache );
+		$linkRenderer = new LinkRenderer( $titleFormatter, $linkCache,
+			$nsInfo, $specialPageFactory, $hookContainer );
 		$linkRenderer->setStubThreshold( 0 );
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$linkRenderer->getLinkClasses( $foobarTitle )
 		);
@@ -180,10 +189,14 @@ class LinkRendererTest extends MediaWikiLangTestCase {
 		);
 
 		$linkRenderer->setStubThreshold( 20 );
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$linkRenderer->getLinkClasses( $userTitle )
 		);
 	}
 
+	protected function tearDown() : void {
+		Title::clearCaches();
+		parent::tearDown();
+	}
 }

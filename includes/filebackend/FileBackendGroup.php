@@ -21,8 +21,12 @@
  * @ingroup FileBackend
  */
 
+use MediaWiki\Config\ServiceOptions;
+use MediaWiki\FileBackend\FSFile\TempFSFileFactory;
+use MediaWiki\FileBackend\LockManager\LockManagerGroupFactory;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use Wikimedia\ObjectFactory;
 
 /**
  * Class to handle file backend registration
@@ -31,46 +35,96 @@ use MediaWiki\MediaWikiServices;
  * @since 1.19
  */
 class FileBackendGroup {
-	/** @var FileBackendGroup */
-	protected static $instance = null;
-
-	/** @var array (name => ('class' => string, 'config' => array, 'instance' => object)) */
+	/**
+	 * @var array[] (name => ('class' => string, 'config' => array, 'instance' => object))
+	 * @phan-var array<string,array{class:class-string,config:array,instance:object}>
+	 */
 	protected $backends = [];
 
-	protected function __construct() {
-	}
+	/** @var ServiceOptions */
+	private $options;
+
+	/** @var BagOStuff */
+	private $srvCache;
+
+	/** @var WANObjectCache */
+	private $wanCache;
+
+	/** @var MimeAnalyzer */
+	private $mimeAnalyzer;
+
+	/** @var LockManagerGroupFactory */
+	private $lmgFactory;
+
+	/** @var TempFSFileFactory */
+	private $tmpFileFactory;
+
+	/** @var ObjectFactory */
+	private $objectFactory;
 
 	/**
+	 * @internal
+	 */
+	public const CONSTRUCTOR_OPTIONS = [
+		'DirectoryMode',
+		'FileBackends',
+		'ForeignFileRepos',
+		'LocalFileRepo',
+		'fallbackWikiId',
+	];
+
+	/**
+	 * @deprecated since 1.35, inject the service instead
 	 * @return FileBackendGroup
 	 */
-	public static function singleton() {
-		if ( self::$instance == null ) {
-			self::$instance = new self();
-			self::$instance->initFromGlobals();
-		}
-
-		return self::$instance;
+	public static function singleton() : FileBackendGroup {
+		return MediaWikiServices::getInstance()->getFileBackendGroup();
 	}
 
 	/**
 	 * Destroy the singleton instance
+	 *
+	 * @deprecated since 1.35, test framework should reset services between tests instead
 	 */
 	public static function destroySingleton() {
-		self::$instance = null;
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'FileBackendGroup' );
 	}
 
 	/**
-	 * Register file backends from the global variables
+	 * @param ServiceOptions $options
+	 * @param ConfiguredReadOnlyMode $configuredReadOnlyMode
+	 * @param BagOStuff $srvCache
+	 * @param WANObjectCache $wanCache
+	 * @param MimeAnalyzer $mimeAnalyzer
+	 * @param LockManagerGroupFactory $lmgFactory
+	 * @param TempFSFileFactory $tmpFileFactory
+	 * @param ObjectFactory $objectFactory
 	 */
-	protected function initFromGlobals() {
-		global $wgLocalFileRepo, $wgForeignFileRepos, $wgFileBackends, $wgDirectoryMode;
+	public function __construct(
+		ServiceOptions $options,
+		ConfiguredReadOnlyMode $configuredReadOnlyMode,
+		BagOStuff $srvCache,
+		WANObjectCache $wanCache,
+		MimeAnalyzer $mimeAnalyzer,
+		LockManagerGroupFactory $lmgFactory,
+		TempFSFileFactory $tmpFileFactory,
+		ObjectFactory $objectFactory
+	) {
+		$this->options = $options;
+		$this->srvCache = $srvCache;
+		$this->wanCache = $wanCache;
+		$this->mimeAnalyzer = $mimeAnalyzer;
+		$this->lmgFactory = $lmgFactory;
+		$this->tmpFileFactory = $tmpFileFactory;
+		$this->objectFactory = $objectFactory;
 
 		// Register explicitly defined backends
-		$this->register( $wgFileBackends, wfConfiguredReadOnlyReason() );
+		$this->register( $options->get( 'FileBackends' ), $configuredReadOnlyMode->getReason() );
 
 		$autoBackends = [];
 		// Automatically create b/c backends for file repos...
-		$repos = array_merge( $wgForeignFileRepos, [ $wgLocalFileRepo ] );
+		$repos = array_merge(
+			$options->get( 'ForeignFileRepos' ), [ $options->get( 'LocalFileRepo' ) ] );
 		foreach ( $repos as $info ) {
 			$backendName = $info['backend'];
 			if ( is_object( $backendName ) || isset( $this->backends[$backendName] ) ) {
@@ -79,15 +133,9 @@ class FileBackendGroup {
 			$repoName = $info['name'];
 			// Local vars that used to be FSRepo members...
 			$directory = $info['directory'];
-			$deletedDir = isset( $info['deletedDir'] )
-				? $info['deletedDir']
-				: false; // deletion disabled
-			$thumbDir = isset( $info['thumbDir'] )
-				? $info['thumbDir']
-				: "{$directory}/thumb";
-			$transcodedDir = isset( $info['transcodedDir'] )
-				? $info['transcodedDir']
-				: "{$directory}/transcoded";
+			$deletedDir = $info['deletedDir'] ?? false; // deletion disabled
+			$thumbDir = $info['thumbDir'] ?? "{$directory}/thumb";
+			$transcodedDir = $info['transcodedDir'] ?? "{$directory}/transcoded";
 			// Get the FS backend configuration
 			$autoBackends[] = [
 				'name' => $backendName,
@@ -100,13 +148,13 @@ class FileBackendGroup {
 					"{$repoName}-deleted" => $deletedDir,
 					"{$repoName}-temp" => "{$directory}/temp"
 				],
-				'fileMode' => isset( $info['fileMode'] ) ? $info['fileMode'] : 0644,
-				'directoryMode' => $wgDirectoryMode,
+				'fileMode' => $info['fileMode'] ?? 0644,
+				'directoryMode' => $options->get( 'DirectoryMode' ),
 			];
 		}
 
 		// Register implicitly defined backends
-		$this->register( $autoBackends, wfConfiguredReadOnlyReason() );
+		$this->register( $autoBackends, $configuredReadOnlyMode->getReason() );
 	}
 
 	/**
@@ -123,15 +171,15 @@ class FileBackendGroup {
 			}
 			$name = $config['name'];
 			if ( isset( $this->backends[$name] ) ) {
-				throw new LogicException( "Backend with name `{$name}` already registered." );
+				throw new LogicException( "Backend with name '$name' already registered." );
 			} elseif ( !isset( $config['class'] ) ) {
-				throw new InvalidArgumentException( "Backend with name `{$name}` has no class." );
+				throw new InvalidArgumentException( "Backend with name '$name' has no class." );
 			}
 			$class = $config['class'];
 
-			$config['readOnly'] = !empty( $config['readOnly'] )
-				? $config['readOnly']
-				: $readOnlyReason;
+			$config['domainId'] =
+				$config['domainId'] ?? $config['wikiId'] ?? $this->options->get( 'fallbackWikiId' );
+			$config['readOnly'] = $config['readOnly'] ?? $readOnlyReason;
 
 			unset( $config['class'] ); // backend won't need this
 			$this->backends[$name] = [
@@ -156,6 +204,7 @@ class FileBackendGroup {
 
 			$class = $config['class'];
 			if ( $class === FileBackendMultiWrite::class ) {
+				// @todo How can we test this? What's the intended use-case?
 				foreach ( $config['backends'] as $index => $beConfig ) {
 					if ( isset( $beConfig['template'] ) ) {
 						// Config is just a modified version of a registered backend's.
@@ -180,31 +229,41 @@ class FileBackendGroup {
 	 */
 	public function config( $name ) {
 		if ( !isset( $this->backends[$name] ) ) {
-			throw new InvalidArgumentException( "No backend defined with the name `$name`." );
+			throw new InvalidArgumentException( "No backend defined with the name '$name'." );
 		}
-		$class = $this->backends[$name]['class'];
 
 		$config = $this->backends[$name]['config'];
-		$config['class'] = $class;
-		$config += [ // set defaults
-			'wikiId' => wfWikiID(), // e.g. "my_wiki-en_"
-			'mimeCallback' => [ $this, 'guessMimeInternal' ],
-			'obResetFunc' => 'wfResetOutputBuffers',
-			'streamMimeFunc' => [ StreamFile::class, 'contentTypeFromPath' ],
-			'tmpDirectory' => wfTempDir(),
-			'statusWrapper' => [ Status::class, 'wrap' ],
-			'wanCache' => MediaWikiServices::getInstance()->getMainWANObjectCache(),
-			'srvCache' => ObjectCache::getLocalServerInstance( 'hash' ),
-			'logger' => LoggerFactory::getInstance( 'FileOperation' ),
-			'profiler' => Profiler::instance()
-		];
-		$config['lockManager'] =
-			LockManagerGroup::singleton( $config['wikiId'] )->get( $config['lockManager'] );
-		$config['fileJournal'] = isset( $config['fileJournal'] )
-			? FileJournal::factory( $config['fileJournal'], $name )
-			: FileJournal::factory( [ 'class' => NullFileJournal::class ], $name );
 
-		return $config;
+		return array_merge(
+			// Default backend parameters
+			[
+				'mimeCallback' => [ $this, 'guessMimeInternal' ],
+				'obResetFunc' => 'wfResetOutputBuffers',
+				'streamMimeFunc' => [ StreamFile::class, 'contentTypeFromPath' ],
+				'tmpFileFactory' => $this->tmpFileFactory,
+				'statusWrapper' => [ Status::class, 'wrap' ],
+				'wanCache' => $this->wanCache,
+				'srvCache' => $this->srvCache,
+				'logger' => LoggerFactory::getInstance( 'FileOperation' ),
+				'profiler' => function ( $section ) {
+					return Profiler::instance()->scopedProfileIn( $section );
+				}
+			],
+			// Configured backend parameters
+			$config,
+			// Resolved backend parameters
+			[
+				'class' => $this->backends[$name]['class'],
+				'lockManager' =>
+					$this->lmgFactory->getLockManagerGroup( $config['domainId'] )
+						->get( $config['lockManager'] ),
+				'fileJournal' => isset( $config['fileJournal'] )
+					? $this->objectFactory->createObject(
+						$config['fileJournal'] + [ 'backend' => $name ],
+						[ 'specIsArg' => true, 'assertClass' => FileJournal::class ] )
+					: new NullFileJournal
+			]
+		);
 	}
 
 	/**
@@ -230,17 +289,16 @@ class FileBackendGroup {
 	 * @since 1.27
 	 */
 	public function guessMimeInternal( $storagePath, $content, $fsPath ) {
-		$magic = MediaWiki\MediaWikiServices::getInstance()->getMimeAnalyzer();
 		// Trust the extension of the storage path (caller must validate)
 		$ext = FileBackend::extensionFromPath( $storagePath );
-		$type = $magic->guessTypesForExtension( $ext );
+		$type = $this->mimeAnalyzer->getMimeTypeFromExtensionOrNull( $ext );
 		// For files without a valid extension (or one at all), inspect the contents
 		if ( !$type && $fsPath ) {
-			$type = $magic->guessMimeType( $fsPath, false );
+			$type = $this->mimeAnalyzer->guessMimeType( $fsPath, false );
 		} elseif ( !$type && strlen( $content ) ) {
-			$tmpFile = TempFSFile::factory( 'mime_', '', wfTempDir() );
+			$tmpFile = $this->tmpFileFactory->newTempFSFile( 'mime_', '' );
 			file_put_contents( $tmpFile->getPath(), $content );
-			$type = $magic->guessMimeType( $tmpFile->getPath(), false );
+			$type = $this->mimeAnalyzer->guessMimeType( $tmpFile->getPath(), false );
 		}
 		return $type ?: 'unknown/unknown';
 	}

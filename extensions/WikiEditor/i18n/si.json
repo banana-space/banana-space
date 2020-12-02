@@ -3,13 +3,14 @@
 		"authors": [
 			"Budhajeewa",
 			"Calcey",
+			"Chathuri Jayaweera",
+			"Macofe",
 			"Pasanbhathiya2",
 			"Singhalawap",
 			"චතුනි අලහප්පෙරුම",
 			"තඹරු විජේසේකර",
 			"පසිඳු කාවින්ද",
-			"බිඟුවා",
-			"Macofe"
+			"බිඟුවා"
 		]
 	},
 	"wikieditor": "දියුණු කළ විකි පෙළ සංස්කරණය කිරීමේ අතුරු මුහුණත",
@@ -18,7 +19,7 @@
 	"wikieditor-loading": "ප්‍රවේශනය වෙමින් පවතී",
 	"wikieditor-toolbar": "සංස්කරණ මෙවලම් තීරුව",
 	"wikieditor-toolbar-desc": "වර්ධිත පරිශීලන හැකියාව සහිත සංස්කරණ පිටු මෙවලම් තීරුව",
-	"wikieditor-toolbar-preference": "වර්ධිත මෙවලම් තීරුව සක්‍රීය කරන්න",
+	"wikieditor-toolbar-preference": "සංස්කරණ මෙවලම් තීරුව සක්‍රීය කරන්න",
 	"wikieditor-toolbar-loading": "ප්‍රවේශනය වෙමින් පවතී...",
 	"wikieditor-toolbar-tool-bold": "තද පැහැ අකුරු",
 	"wikieditor-toolbar-tool-bold-example": "තද පැහැති අකුරු පෙළ",

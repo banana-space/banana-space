@@ -9,10 +9,10 @@
 			"Fitoschido",
 			"Imre",
 			"Locos epraix",
+			"Macofe",
 			"MarcoAurelio",
 			"Pertile",
-			"Translationista",
-			"Macofe"
+			"Translationista"
 		]
 	},
 	"replacetext": "Reemplazar texto",
@@ -42,7 +42,7 @@
 	"replacetext_noreplacement": "No se hallaron páginas que contengan la cadena de caracteres «$1».",
 	"replacetext_nomove": "No se hallaron páginas cuyos títulos contengan «$1».",
 	"replacetext_nosuchcategory": "No existen categorías con el nombre «$1».",
-	"replacetext_return": "Retornar al formulario.",
+	"replacetext_return": "Volver al formulario.",
 	"replacetext_warning": "'''Advertencia:''' hay {{PLURAL:$1|una página que ya contiene|$1 páginas que ya contienen}} la cadena de sustitución, \"$2\". Si realizas esta sustitución, no podrás separar tus sustituciones de estas cadenas.",
 	"replacetext_blankwarning": "'''Advertencia:''' como la cadena de reemplazo está vacía, esta operación no podrá revertirse.",
 	"replacetext_continue": "Continuar",

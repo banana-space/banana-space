@@ -13,7 +13,5 @@
 	"fancycaptcha-edit": "برای ویرایش این صفحه، لطفاً واژه‌ای را که در تصویر می‌بینید وارد کنید ([[Special:Captcha/help|اطلاعات بیشتر]]):",
 	"fancycaptcha-imgcaptcha-ph": "متنی را که در بالا می‌بینید، وارد کنید",
 	"fancycaptcha-sendemail": "برای کمک به محافظت در برابر هرزه‌نگاری خودکار، ما با احترام از شما می‌خواهیم واژه‌هایی را که در جعبهٔ زیر نمایش داده می‌شوند وارد کنید ([[Special:Captcha/help|اطلاعات بیشتر]]):",
-	"fancycaptcha-reload-text": "تازۀآ کِردِن",
-	"apihelp-fancycaptchareload-description": "یک FancyCaptcha جدید بیاور.",
-	"apihelp-fancycaptchareload-example-1": "یک FancyCaptcha جدید بیاور."
+	"fancycaptcha-reload-text": "تازۀآ کِردِن"
 }

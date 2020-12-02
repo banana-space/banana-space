@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"KATRINE1993"
+		]
+	},
+	"pfunc_expr_unrecognised_punctuation": "Error en expresión:  el carácter de puntuación $1'' no es reconocido."
+}

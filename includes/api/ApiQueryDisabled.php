@@ -40,15 +40,14 @@ class ApiQueryDisabled extends ApiQueryBase {
 		return [];
 	}
 
-	public function getDescriptionMessage() {
-		return 'apihelp-query+disabled-summary';
-	}
-
 	public function getSummaryMessage() {
 		return 'apihelp-query+disabled-summary';
 	}
 
 	public function getExtendedDescription() {
-		return 'apihelp-query+disabled-extended-description';
+		return [ [
+			'apihelp-query+disabled-extended-description',
+			'api-help-no-extended-description',
+		] ];
 	}
 }

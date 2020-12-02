@@ -78,7 +78,7 @@ class ApiRsd extends ApiBase {
 	 * in-production examples listing several blogging and micrblogging
 	 * APIs.
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	protected function getRsdApiList() {
 		$apis = [
@@ -100,7 +100,7 @@ class ApiRsd extends ApiBase {
 				]
 			],
 		];
-		Hooks::run( 'ApiRsdServiceApis', [ &$apis ] );
+		$this->getHookRunner()->onApiRsdServiceApis( $apis );
 
 		return $apis;
 	}
@@ -120,7 +120,7 @@ class ApiRsd extends ApiBase {
 				'name' => $name,
 				'preferred' => wfBoolToStr( $name == 'MediaWiki' ),
 				'apiLink' => $info['apiLink'],
-				'blogID' => isset( $info['blogID'] ) ? $info['blogID'] : '',
+				'blogID' => $info['blogID'] ?? '',
 			];
 			$settings = [];
 			if ( isset( $info['docs'] ) ) {
@@ -147,21 +147,5 @@ class ApiRsd extends ApiBase {
 		}
 
 		return $outputData;
-	}
-}
-
-class ApiFormatXmlRsd extends ApiFormatXml {
-	public function __construct( ApiMain $main, $format ) {
-		parent::__construct( $main, $format );
-		$this->setRootElement( 'rsd' );
-	}
-
-	public function getMimeType() {
-		return 'application/rsd+xml';
-	}
-
-	public static function recXmlPrint( $name, $value, $indent, $attributes = [] ) {
-		unset( $attributes['_idx'] );
-		return parent::recXmlPrint( $name, $value, $indent, $attributes );
 	}
 }

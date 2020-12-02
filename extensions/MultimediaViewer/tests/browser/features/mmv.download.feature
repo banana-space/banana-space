@@ -39,21 +39,29 @@ Feature: Download menu
       And the download size options appear
       And I click the small download size
       And the download size options disappears
-    Then the download image size label should be "193 × 145 px jpg"
-      And the download links should be the 193 thumbnail
+    Then the download image size label should be "640 × 480 px jpg"
+      And the download links should be the 640 thumbnail
 
   Scenario: The medium download option has the correct information
     When I open the download dropdown
     And the download size options appear
       And I click the medium download size
       And the download size options disappears
-    Then the download image size label should be "640 × 480 px jpg"
-      And the download links should be the 640 thumbnail
+    Then the download image size label should be "960 × 720 px jpg"
+      And the download links should be the 960 thumbnail
 
   Scenario: The large download option has the correct information
     When I open the download dropdown
     And the download size options appear
       And I click the large download size
       And the download size options disappears
-    Then the download image size label should be "1200 × 900 px jpg"
-      And the download links should be the 1200 thumbnail
+    Then the download image size label should be "1440 × 1080 px jpg"
+      And the download links should be the 1440 thumbnail
+
+  Scenario: The extra large download option has the correct information
+    When I open the download dropdown
+    And the download size options appear
+      And I click the extra large download size
+      And the download size options disappears
+    Then the download image size label should be "2880 × 2160 px jpg"
+      And the download links should be the 2880 thumbnail

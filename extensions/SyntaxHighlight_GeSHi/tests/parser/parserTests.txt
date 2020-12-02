@@ -1,16 +1,17 @@
+!! Version 2
+# Force the test runner to ensure the extension is loaded
 !! hooks
 source
 !! endhooks
 
 !! test
 Non-existent language
-!!input
+!! wikitext
 <source lang="doesnotexist">
 foobar
 </source>
-!! result
+!! html
 <div class="mw-highlight mw-content-ltr" dir="ltr"><pre>foobar</pre></div>
-
 !! end
 
 !! test
@@ -21,7 +22,6 @@ foo
 </source>
 !! html
 <div class="mw-highlight mw-content-ltr" dir="ltr"><pre>foo</pre></div>
-
 !! end
 
 !! test
@@ -33,12 +33,11 @@ bar
 </source>
 !! html
 <div class="mw-highlight mw-content-ltr" dir="ltr"><pre>bar</pre></div>
-
 !! end
 
 !! test
 XSS is escaped
-!!input
+!! wikitext
 <source lang="doesnotexist">
 <script>alert("pwnd")</script>
 <IMG SRC=`javascript:alert("RSnake says, 'XSS'")`>
@@ -49,21 +48,20 @@ SRC=&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#1
 </script><script>alert('XSS');</script>
 %253cscript%253ealert(document.cookie)%253c/script%253e
 </source>
-!! result
-<div class="mw-highlight mw-content-ltr" dir="ltr"><pre>&lt;script>alert("pwnd")&lt;/script>
-&lt;IMG SRC=`javascript:alert("RSnake says, 'XSS'")`>
+!! html
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre>&lt;script&gt;alert("pwnd")&lt;/script&gt;
+&lt;IMG SRC=`javascript:alert("RSnake says, 'XSS'")`&gt;
 &lt;IMG
 SRC=&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;
 &amp;#39;&amp;#88;&amp;#83;&amp;#83;&amp;#39;&amp;#41;
 \";alert('XSS');//
-&lt;/script>&lt;script>alert('XSS');&lt;/script>
+&lt;/script&gt;&lt;script&gt;alert('XSS');&lt;/script&gt;
 %253cscript%253ealert(document.cookie)%253c/script%253e</pre></div>
-
 !! end
 
 !! test
 XSS is escaped (inline)
-!!input
+!! wikitext
 <source lang="doesnotexist" inline>
 <script>alert("pwnd")</script>
 <IMG SRC=`javascript:alert("RSnake says, 'XSS'")`>
@@ -74,37 +72,35 @@ SRC=&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#1
 </script><script>alert('XSS');</script>
 %253cscript%253ealert(document.cookie)%253c/script%253e
 </source>
-!! result
-<p><code class="mw-highlight" dir="ltr">&lt;script&gt;alert("pwnd")&lt;/script&gt; &lt;IMG SRC=`javascript:alert("RSnake says, 'XSS'")`&gt; &lt;IMG SRC=&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40; &amp;#39;&amp;#88;&amp;#83;&amp;#83;&amp;#39;&amp;#41; \";alert('XSS');// &lt;/script&gt;&lt;script&gt;alert('XSS');&lt;/script&gt;&#160;%253cscript%253ealert(document.cookie)%253c/script%253e</code>
+!! html
+<p><code class="mw-highlight" dir="ltr">&lt;script&gt;alert("pwnd")&lt;/script&gt; &lt;IMG SRC=`javascript:alert("RSnake says, 'XSS'")`&gt; &lt;IMG SRC=&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40; &amp;#39;&amp;#88;&amp;#83;&amp;#83;&amp;#39;&amp;#41; \";alert('XSS');// &lt;/script&gt;&lt;script&gt;alert('XSS');&lt;/script&gt; %253cscript%253ealert(document.cookie)%253c/script%253e</code>
 </p>
 !! end
 
 !! test
 Default behaviour (inner is pre)
-!!input
+!! wikitext
 <source lang="javascript">
 var a;
 </source>
-!! result
-<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
+!! html
+<div class="mw-highlight mw-highlight-lang-javascript mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
 </pre></div>
-
 !! end
 
 !! test
 Multiline <source/> in lists
-!!input
+!! wikitext
 * <source>a
 b</source>
 
 * foo <source>a
 b</source>
-!! html
+!! html+untidy
 <ul><li><div class="mw-highlight mw-content-ltr" dir="ltr"><pre>a
 b</pre></div></li></ul>
 <ul><li>foo <div class="mw-highlight mw-content-ltr" dir="ltr"><pre>a
 b</pre></div></li></ul>
-
 !! html+tidy
 <ul><li><div class="mw-highlight mw-content-ltr" dir="ltr"><pre>a
 b</pre></div></li></ul>
@@ -114,55 +110,89 @@ b</pre></div></li></ul>
 
 !! test
 Custom attributes
-!!input
+!! wikitext
 <source lang="javascript" id="foo" class="bar" dir="rtl" style="font-size: larger;">var a;</source>
-!! result
-<div id="foo" class="bar mw-highlight mw-content-rtl" dir="rtl" style="font-size: larger;"><pre><span></span><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
+!! html
+<div id="foo" class="bar mw-highlight mw-highlight-lang-javascript mw-content-rtl" dir="rtl" style="font-size: larger;"><pre><span></span><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
 </pre></div>
-
 !! end
 
 !! test
 Inline attribute (inline code)
-!!input
+!! wikitext
 Text <source lang="javascript" inline>var a;</source>.
-!! result
-<p>Text <code class="mw-highlight" dir="ltr"><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span></code>.
+!! html
+<p>Text <code class="mw-highlight mw-highlight-lang-javascript" dir="ltr"><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span></code>.
 </p>
 !! end
 
 !! test
 Enclose none (inline code)
-!!input
+!! wikitext
 Text <source lang="javascript" enclose="none">var a;</source>.
-!! result
-<p>Text <code class="mw-highlight" dir="ltr"><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span></code>.
+!! html
+<p>Text <code class="mw-highlight mw-highlight-lang-javascript" dir="ltr"><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span></code>.
 </p>
 !! end
 
 !! test
 Enclose with nowiki
-!! input
+!! wikitext
 {{#tag:syntaxhighlight|<nowiki>foo</nowiki>|lang="text"|inline=none}}
-!! result
-<p><code class="mw-highlight" dir="ltr">foo</code>
+!! html
+<p><code class="mw-highlight mw-highlight-lang-text" dir="ltr">foo</code>
 </p>
 !! end
 
 !! test
 No code
-!! input
+!! wikitext
 <source lang="CSharp"></source>
-!! result
-<div class="mw-highlight mw-content-ltr" dir="ltr"></div>
-
+!! html
+<div class="mw-highlight mw-highlight-lang-csharp mw-content-ltr" dir="ltr"></div>
 !! end
 
 !! test
 Just whitespace
-!! input
+!! wikitext
 <source lang="CSharp"> </source>
-!! result
-<div class="mw-highlight mw-content-ltr" dir="ltr"></div>
+!! html
+<div class="mw-highlight mw-highlight-lang-csharp mw-content-ltr" dir="ltr"></div>
+!! end
 
+!! test
+tabs plus tidy (T32930, T59826)
+!! wikitext
+<syntaxhighlight lang="javascript" enclose="pre" highlight="2-3">
+function doSomething() {
+	var	foo,
+		bar;
+	if (baz) {
+</syntaxhighlight>
+!! html+tidy
+<div class="mw-highlight mw-highlight-lang-javascript mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">function</span> <span class="nx">doSomething</span><span class="p">()</span> <span class="p">{</span>
+<span class="hll">	<span class="kd">var</span>	<span class="nx">foo</span><span class="p">,</span>
+</span><span class="hll">		<span class="nx">bar</span><span class="p">;</span>
+</span>	<span class="k">if</span> <span class="p">(</span><span class="nx">baz</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>
+!! end
+
+!! test
+deprecated source tag adds tracking category
+!! options
+cat
+!! wikitext
+<source lang="python">print('Hi')</source>
+!! html+tidy
+cat=Pages_using_deprecated_source_tags sort=
+!! end
+
+!! test
+deprecated enclose option adds tracking category
+!! options
+cat
+!! wikitext
+<syntaxhighlight enclose="none" lang="python">print('Hi')</syntaxhighlight>
+!! html+tidy
+cat=Pages_using_deprecated_enclose_attributes sort=
 !! end

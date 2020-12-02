@@ -3,15 +3,21 @@
 		"authors": [
 			"Cwlin0416",
 			"Justincheng12345",
+			"Kly",
+			"LNDDYL",
 			"Liuxinyu970226",
-			"Mark85296341",
-			"LNDDYL"
+			"Mark85296341"
 		]
 	},
 	"skinname-vector": "Vector",
 	"vector-skin-desc": "現代版的 MonoBook，有著較新穎的外觀與許多使用性的改進",
+	"prefs-vector-enable-vector-1-label": "使用先前的 Vector",
+	"prefs-vector-enable-vector-1-help": "在接下來的幾年，我們會逐步更新 Vector 外觀。先前的 Vector 能讓您觀看舊版本 Vector（截至 2019 年 12 月）。要了解更多更新方面內容，請前往我們的[[mw:Reading/Web/Desktop_Improvements|專案頁面]]。",
+	"vector-opt-out": "切換成舊外觀",
+	"vector-opt-out-tooltip": "更改您的設定來回到舊模樣主題（舊版 Vector）",
 	"vector.css": "/* 此 CSS 會影響使用 Vector 介面外觀的使用者 */",
 	"vector.js": "/* 此 JavaScript 會用於使用 Vector 介面外觀的使用者 */",
+	"vector-action-toggle-sidebar": "切換側邊欄",
 	"vector-action-addsection": "新增話題",
 	"vector-action-delete": "刪除",
 	"vector-action-move": "移動",
@@ -23,5 +29,7 @@
 	"vector-view-history": "檢視歷史",
 	"vector-view-view": "閱讀",
 	"vector-view-viewsource": "檢視原始碼",
+	"vector-jumptonavigation": "跳至導覽",
+	"vector-jumptosearch": "跳至搜尋",
 	"vector-more-actions": "更多"
 }

@@ -4,8 +4,8 @@
 			"Fohanno",
 			"Fulup",
 			"Gwendal",
-			"Y-M D",
-			"Macofe"
+			"Macofe",
+			"Y-M D"
 		]
 	},
 	"wikieditor": "Etrefas kemmañ wikitestenn klokaet",
@@ -109,7 +109,7 @@
 	"wikieditor-toolbar-tool-table-preview": "Rakwelet",
 	"wikieditor-toolbar-tool-table-insert": "Ensoc'hañ",
 	"wikieditor-toolbar-tool-table-cancel": "Nullañ",
-	"wikieditor-toolbar-tool-table-toomany": "N'haller ket ensoc'hañ un daolenn enni muioc'h eget $1 kellig gant an ostilh-mañ.",
+	"wikieditor-toolbar-tool-table-toomany": "N'haller ket ensoc'hañ un daolenn enni muioc'h eget $1 {{PLURAL:$1|kellig}} gant an ostilh-mañ.",
 	"wikieditor-toolbar-tool-table-invalidnumber": "Merket hoc'h eus un niver a linennoù pe a vannoù direizh.",
 	"wikieditor-toolbar-tool-table-zero": "N'hallit ket ensoc'hañ un daolenn hep bann na linenn.",
 	"wikieditor-toolbar-tool-replace": "Klask hag erlec'hiañ",

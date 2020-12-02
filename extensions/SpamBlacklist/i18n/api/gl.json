@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Elisardojm"
+		]
+	},
+	"apihelp-spamblacklist-description": "Validar unha o máis URLs contra a lista negra de spam.",
+	"apihelp-spamblacklist-example-1": "Comprobar dúas URLs contra a lista negra.",
+	"apihelp-spamblacklist-param-url": "URLs a validar contra a lista negra.",
+	"apihelp-spamblacklist-summary": "Validar unha o máis URLs contra a lista negra de spam."
+}

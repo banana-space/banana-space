@@ -14,6 +14,7 @@
  *
  * The result is a formatted date.
  *
+ * @stable to extend
  * @note This widget is not likely to work well in non-OOUI forms.
  */
 class HTMLDateTimeField extends HTMLTextField {
@@ -25,6 +26,9 @@ class HTMLDateTimeField extends HTMLTextField {
 
 	protected $mType = 'datetime';
 
+	/*
+	 * @stable to call
+	 */
 	public function __construct( $params ) {
 		parent::__construct( $params );
 
@@ -171,11 +175,20 @@ class HTMLDateTimeField extends HTMLTextField {
 			}
 		}
 
-		return new MediaWiki\Widget\DateTimeInputWidget( $params );
+		if ( $this->mType === 'date' ) {
+			$this->mParent->getOutput()->addModuleStyles( 'mediawiki.widgets.DateInputWidget.styles' );
+			return new MediaWiki\Widget\DateInputWidget( $params );
+		} else {
+			return new MediaWiki\Widget\DateTimeInputWidget( $params );
+		}
 	}
 
 	protected function getOOUIModules() {
-		return [ 'mediawiki.widgets.datetime' ];
+		if ( $this->mType === 'date' ) {
+			return [ 'mediawiki.widgets.DateInputWidget' ];
+		} else {
+			return [ 'mediawiki.widgets.datetime' ];
+		}
 	}
 
 	protected function shouldInfuseOOUI() {

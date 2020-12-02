@@ -5,5 +5,6 @@
 		]
 	},
 	"codeeditor-desc": "Синтаксисан беснашца тадар JavaScript and CSSн [https://ace.c9.io/ Ace тадаран] гӀоьнца",
+	"codeeditor-toolbar-toggle": "Кодан редактор кхечутӀеерзор",
 	"codeeditor-save-with-errors": "Документан чохь гӀалаташ ду. Лаьий хьуна, и дӀаяздан?"
 }

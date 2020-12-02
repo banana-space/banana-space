@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ammartivari",
 			"Mikullovci11",
 			"Olsi",
-			"Vinie007",
-			"Ammartivari"
+			"Vinie007"
 		]
 	},
 	"gadgets-desc": "Lejin përdoruesit të zgjedhin [[Special:Gadgets|CSS dhe JavaScript gadgets]] në [[Special:Preferences#mw-prefsection-gadgets|preferencat]] e tyre",

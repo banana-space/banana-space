@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Toliño",
-			"Elisardojm",
 			"Banjo",
-			"McDutchie"
+			"Elisardojm",
+			"Iváns",
+			"McDutchie",
+			"Toliño"
 		]
 	},
 	"codeeditor-desc": "Edición de páxinas en JavaScript e CSS con realce sintáctico que emprega o [https://ace.c9.io/ editor Ace]",
@@ -13,7 +14,7 @@
 	"codeeditor-save-with-errors": "O documento contén varios erros. Está seguro de querer gardar o texto?",
 	"codeeditor-invisibleChars-toggle": "Amosar ou ocultar caracteres invisibles",
 	"codeeditor-lineWrapping-toggle": "Activar ou desactivar liñas envolventes",
-	"codeeditor-searchReplace-toggle": "Activar xanela de buscar e reemprazar",
+	"codeeditor-searchReplace-toggle": "Activar xanela de procurar e reemprazar",
 	"codeeditor-gotoline": "Ir á liña número...",
 	"codeeditor-gotoline-placeholder": "liña[:columna]",
 	"codeeditor-gotoline-prompt": "Introduce un número de liña",

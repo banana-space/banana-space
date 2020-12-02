@@ -1,17 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
+			"Lokal Profil",
 			"Martinwiss",
 			"Najami",
 			"Skalman",
-			"WikiPhoenix",
-			"Lokal Profil"
+			"Sturban",
+			"WikiPhoenix"
 		]
 	},
 	"skinname-vector": "Vector",
 	"vector-skin-desc": "Modern version av MonoBook med ett nytt utseende och flera användarvänlighetsförbättringar",
+	"prefs-vector-enable-vector-1-label": "Använd gamla Vector",
+	"prefs-vector-enable-vector-1-help": "Under de nästkommande åren kommer vi gradvis uppdatera utseendet Vector. Gamla Vector kommer låta dig se den gamla version av Vector (fr.o.m. december 2019). För att läsa mer om uppdateringarna, gå till vår [[mw:Reading/Web/Desktop_Improvements|projektsida]].",
+	"vector-opt-out": "Byt till gamla utseendet",
+	"vector-opt-out-tooltip": "Ändra dina inställningar för att återgå till utseendets gamla design (gamla Vector)",
 	"vector.css": "/* CSS som skrivs här kommer att påverka alla användare av utseendet Vector */",
 	"vector.js": "/* JavaScript här kommer att laddas för dem som använder utseendet Vector */",
+	"vector-action-toggle-sidebar": "Visa/dölj sidofält",
 	"vector-action-addsection": "Nytt ämne",
 	"vector-action-delete": "Radera",
 	"vector-action-move": "Flytta",
@@ -21,7 +27,9 @@
 	"vector-view-create": "Skapa",
 	"vector-view-edit": "Redigera",
 	"vector-view-history": "Visa historik",
-	"vector-view-view": "Visa",
+	"vector-view-view": "Läs",
 	"vector-view-viewsource": "Visa källa",
+	"vector-jumptonavigation": "Hoppa till navigering",
+	"vector-jumptosearch": "Hoppa till sök",
 	"vector-more-actions": "Mer"
 }

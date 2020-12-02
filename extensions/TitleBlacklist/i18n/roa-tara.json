@@ -4,6 +4,8 @@
 			"Joetaras"
 		]
 	},
+	"action-tboverride": "sovrascrive 'a lista gnore de le titole o de le utinde",
+	"action-tboverride-account": "sovrascrive 'a lista gnore de le utinde",
 	"action-titleblacklistlog": "'ndruche 'u titole de l'archivije de l'elenghe gnure",
 	"log-name-titleblacklist": "Archivije de le titole bloccate",
 	"log-description-titleblacklist": "Ste evende tracciane le trasute jndr'à l'elenghe gnure de le rummate.",
@@ -16,11 +18,10 @@
 	"titleblacklist-forbidden-upload": "'U nome d'u file \"$2\" ha state escluse da 'a ccreiazione.<br />\nJidde se combronde cu le vosce d'a lista gnore: <code>$1</code>",
 	"titleblacklist-forbidden-new-account": "'U nome de l'utende \"$2\" ha state escluse da 'a ccreiazione.<br />\nJidde se combronde cu le vosce d'a lista gnore: <code>$1</code>",
 	"titleblacklist-invalid": "{{PLURAL:$1|'A seguenda linèe|Le seguende linèe}} jndr'à lista gnore de le titele {{PLURAL:$1|jè|sonde}} invalide;\npe piacere corregge {{PLURAL:$1|jedde|lore}} apprime de reggistrà:",
-	"titleblacklist-override": "No scè penzanne 'a lista gnore",
+	"titleblacklist-override": "No scè penzanne 'a lista gnore ce s'accocchie",
 	"titleblacklist-override-help": "Le utinde cu le privilegge insufficiende ponne 'mbostà st'opzione pe cacà le condrolle de lista gnore sus a 'u titole.",
+	"titleblacklist-warning": "<strong>Iapre l'uecchie: sta pàgene pò essere cangiate sulamende da le amministrature o da le utinde cu 'u deritte <code>tboverride</code> purcé jè probbie 'a vôsce ca ste jndr'à l'elenghe de le tiole bloccate:</strong><br /><code>$1</code>",
 	"right-tboverride": "Sovrascrive 'a lista gnore de le titole o de le utinde",
 	"right-tboverride-account": "Sovrasrive 'a lista gnore de le utinde",
-	"right-titleblacklistlog": "'Ndruche l'archivije de le titole jndr'à l'elenghe gnure",
-	"apihelp-titleblacklist-param-action": "L'azione ha state verificate.",
-	"apihelp-titleblacklist-param-nooverride": "No pruvà a sovrascrivere l'elenghe de le titole da scettà."
+	"right-titleblacklistlog": "'Ndruche l'archivije de le titole jndr'à l'elenghe gnure"
 }

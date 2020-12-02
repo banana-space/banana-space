@@ -79,6 +79,7 @@ class GenerateJsonI18n extends Maintenance {
 			$dir_iterator = new RecursiveDirectoryIterator( dirname( $phpfile ) );
 			$iterator = new RecursiveIteratorIterator(
 				$dir_iterator, RecursiveIteratorIterator::LEAVES_ONLY );
+			/** @var SplFileInfo $fileObject */
 			foreach ( $iterator as $path => $fileObject ) {
 				if ( fnmatch( "*.i18n.php", $fileObject->getFilename() ) ) {
 					$this->output( "Converting $path.\n" );
@@ -112,6 +113,7 @@ class GenerateJsonI18n extends Maintenance {
 		include $phpfile;
 		$phpfileContents = file_get_contents( $phpfile );
 
+		// @phan-suppress-next-line PhanImpossibleCondition Set by include of php file
 		if ( !isset( $messages ) ) {
 			$this->fatalError( "PHP file $phpfile does not define \$messages array" );
 		}
@@ -182,7 +184,7 @@ class GenerateJsonI18n extends Maintenance {
 	/**
 	 * Get an array of author names from a documentation comment containing @author declarations.
 	 * @param string $comment Documentation comment
-	 * @return array Array of author names (strings)
+	 * @return string[] Array of author names
 	 */
 	protected function getAuthorsFromComment( $comment ) {
 		$matches = null;

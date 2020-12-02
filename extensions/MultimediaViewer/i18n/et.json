@@ -1,15 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Pikne",
-			"WikedKentaur",
+			"Macofe",
 			"Metsavend",
-			"Macofe"
+			"Pikne",
+			"WikedKentaur"
 		]
 	},
 	"multimediaviewer-desc": "Võimaldab vaadata pisipilte täisekraaniliideses.",
-	"multimediaviewer-pref": "Failivaatur",
-	"multimediaviewer-pref-desc": "Täienda meediafailide vaatamise võimalusi selle uue tööriistaga. See võimaldab kuvada pisipiltidega lehekülgedel pildid suuremana. Pilte saab näidata kenamas täisekraaniliideses ja ka täissuuruses.",
 	"multimediaviewer-optin-pref": "Kasuta <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About failivaaturit]</span>",
 	"multimediaviewer-file-page": "Mine failileheküljele",
 	"multimediaviewer-repository-local": "Rohkem üksikasju",
@@ -21,7 +19,7 @@
 	"multimediaviewer-multiple-authors-combine": "$1 ja $2",
 	"multimediaviewer-metadata-error": "Pildi üksikasju ei õnnestunud laadida (tõrge: $1)",
 	"multimediaviewer-thumbnail-error": "Failinime kahjuks ei õnnestu kuvada",
-	"multimediaviewer-thumbnail-error-description": "Paistab, et tegu on tehnilise probleemiga. Saad $1 või $3, kui see on püsiv. Tõrge: $2",
+	"multimediaviewer-thumbnail-error-description": "Paistab, et tegu on tehnilise probleemiga. Saad $1, kui see on püsiv. Tõrge: $2",
 	"multimediaviewer-thumbnail-error-retry": "uuesti proovida",
 	"multimediaviewer-thumbnail-error-report": "probleemist teatada",
 	"multimediaviewer-license-cc-pd": "Avalik omand",
@@ -36,7 +34,7 @@
 	"multimediaviewer-restriction-trademarked": "Sellel pildil on elemente, mille suhtes võidakse kohaldada kaubamärgiseadusi.",
 	"multimediaviewer-restriction-default": "Selle pildi kasutus võib olla piiratud õiguslike sätetega, mis ei tulene autoriõiguse seadusest. Üksikasjade kohta vaata pildi kirjeldusleheküljelt.",
 	"multimediaviewer-restriction-default-and-others": "Selle pildi kasutust võivad piirata ka õiguslikud sätted, mis ei tulene autoriõiguse seadusest. Üksikasjade kohta vaata pildi kirjeldusleheküljelt.",
-	"multimediaviewer-about-mmv": "Teave",
+	"multimediaviewer-about-mmv": "Sellest liidesest",
 	"multimediaviewer-discuss-mmv": "arutelu",
 	"multimediaviewer-help-mmv": "abi",
 	"multimediaviewer-optout-mmv": "Keela failivaatur",
@@ -79,7 +77,7 @@
 	"multimediaviewer-embed-dimensions-separated": "– $1",
 	"multimediaviewer-description-page-button-text": "Veel üksikasju selle faili kohta",
 	"multimediaviewer-description-page-popup-text": "Veel üksikasju selle faili kohta asukohas $1",
-	"multimediaviewer-commons-subtitle": "Vabade meediafailide varamu",
+	"multimediaviewer-commons-subtitle": "Vabade meediumifailide varamu",
 	"multimediaviewer-view-expanded": "Ava failivaaturis",
 	"multimediaviewer-view-config": "Häälestus",
 	"multimediaviewer-close-popup-text": "Sule see tööriist (Esc)",

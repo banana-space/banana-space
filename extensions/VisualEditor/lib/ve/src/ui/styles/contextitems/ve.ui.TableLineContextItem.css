@@ -1,0 +1,15 @@
+/*!
+ * VisualEditor UserInterface TableLineContextItem styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-tableLineContextItem-actionButton {
+	display: block;
+	margin-left: 0 !important; /* stylelint-disable-line declaration-no-important */
+}
+
+.ve-ui-tableLineContextItem-actionButton.oo-ui-labelElement.oo-ui-iconElement > .oo-ui-buttonElement-button {
+	display: block;
+	border: 0.2em solid transparent;
+}

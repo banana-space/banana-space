@@ -4,12 +4,12 @@
 			"Ch.Andrew",
 			"Cwlin0416",
 			"Justincheng12345",
+			"Kly",
+			"LNDDYL",
 			"Mark85296341",
 			"Roc michael",
 			"Sheepy",
-			"Wrightbus",
-			"LNDDYL",
-			"Kly"
+			"Wrightbus"
 		]
 	},
 	"replacetext": "取代文字",
@@ -43,7 +43,7 @@
 	"replacetext_warning": "'''警告：'''目前已有 $1 個頁面包含取代的字串 \"$2\"，若您進行取代將無法區別原本存在的字串以及取代的字串。",
 	"replacetext_blankwarning": "'''警告：'''因取代的字串為空白，此操作將無法還原。",
 	"replacetext_continue": "繼續",
-	"replacetext_announce": "透過 Special:RecentChanges 與監視清單來通知這些編輯。",
+	"replacetext_announce": "透過 $1 與監視清單來通知這些編輯。",
 	"replacetext_editsummary": "文字取代 - \"$1\" 取代為 \"$2\"",
 	"right-replacetext": "對整個 Wiki 進行字串取代。",
 	"action-replacetext": "對整個 Wiki 進行字串取代。",

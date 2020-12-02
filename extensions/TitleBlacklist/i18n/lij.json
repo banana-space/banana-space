@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Giromin Cangiaxo"
+		]
+	},
+	"action-tboverride": "ignorâ a lista neigra di tittoli ò di nommi utente",
+	"action-tboverride-account": "ignorâ a lista neigra di nommi utente",
+	"action-titleblacklistlog": "amiâ o registro da lista neigra di tittoli",
+	"log-name-titleblacklist": "Regristro da lista neigra di tittoli",
+	"log-description-titleblacklist": "Questi eventi tegnan traccia de attivassioin da lista neigra di tittoli.",
+	"logentry-titleblacklist-hit-username": "$1 {{GENDER:$2|o|a}} l'ha acaxonou l'attivassion da lista neigra di tittoli tentando de creâ l'utensa $3 ch'a corisponde a $4.",
+	"titleblacklist-desc": "A consente de proibî a creassion de paggine e utense in fonsion de 'na [[MediaWiki:Titleblacklist|lista neigra]] e de 'na [[MediaWiki:Titlewhitelist|lista gianca]]",
+	"titleblacklist": "# Questa a l'è 'na lista di tittoli proibii. Tittoli e utenti che corispondan a 'n esprescion regolâ contegnua chie no poean ese creæ.\n# Adoeuvia \"#\" pe-i commenti.\n# Pe impostassion predefinia a no consciddera a diferensa tra maiuscole e miuscole",
+	"titlewhitelist": "# Sta chie a l'è 'na lista di tittoli consentii. Adoeuvia \"#\" pe-i commenti.\n# Pe impostassion predefinia o scistema o no fa diferensa tra minuscole e maiuscole.",
+	"titleblacklist-forbidden-edit": "A creassion de paggine co-o tittolo \"$2\" a l'è proibia percose a corisponde a questa voxe da lista neigra: <code>$1</code>",
+	"titleblacklist-forbidden-move": "A paggina \"$2\" a no poeu vese mesciâ a \"$3\" percose a so creassion a l'è proibia. A corisponde a-a seguente voxe da lista neigra: <code>$1</code>",
+	"titleblacklist-forbidden-upload": "A creassion de 'n file co-o tittolo \"$2\" a l'è proibia percose o corisponde a questa voxe da lista neigra: <code>$1</code>",
+	"titleblacklist-forbidden-new-account": "A creassion de 'n utensa ciamâ \"$2\" a l'è proibia percose a corisponde a questa voxe da lista neigra: <code>$1</code>",
+	"titleblacklist-invalid": "{{PLURAL:$1|Questa riga|Queste righe}} da lista neigra {{PLURAL:$1|a no l'è vallida|no son vallide}};\nse prega de {{PLURAL:$1|corezila|corezile}} primma de sarvâ:",
+	"titleblacklist-override": "Ignora a lista neigra di tittoli se ghe foise 'na corispondensa",
+	"titleblacklist-override-help": "I utenti con assæ privileggi poeuan impostâ quest'opsion pe ignorâ i controlli da lista neigra in sciô tittolo.",
+	"titleblacklist-warning": "<strong>Atension: sta paggina chie a poeu vese modificâ soo che da-i aministratoî ò da-i utenti con drito  de <code>tboverride</code> percose a corisponde a-a seguente voxe da lista di tittoli blocæ:</strong><br /><code>$1</code>",
+	"right-tboverride": "Ignora a lista neigra di tittoli ò di nommi utente",
+	"right-tboverride-account": "Ignora a lista neigra di nommi utente",
+	"right-titleblacklistlog": "Amia o registro da lista neigra di tittoli"
+}

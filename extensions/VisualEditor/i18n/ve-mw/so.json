@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abdullahi",
+			"Abshirdheere"
+		]
+	},
+	"tooltip-ca-createsource": "Sameey xogta furaha ee boggaan",
+	"tooltip-ca-editsource": "Wax ka bedel xofta fura ee boggaan",
+	"tooltip-ca-ve-edit": "Wax ka badal boggaan",
+	"visualeditor-beta-warning": "VisualEditor wuxuu ku jiraa tijaabo. Waxaa laga yaabaa inaad kala kulanto mashaakil xagga borogaraamka, ama aad awoodi wayso wax ka bedelka qaybo ka mid ah bogga. Guji \"{{int:visualeditor-ca-editsource}}\" si uu unoqdo hab qoraal wiki – bedelka aan la kaydin wuu lumi doonaa.",
+	"visualeditor-browserwarning": "VisualEditor ma kaabayo boroserka aad adeegsato.",
+	"visualeditor-ca-createsource": "Abuur xogta",
+	"visualeditor-ca-editsource": "Wax ka badal xogta",
+	"visualeditor-ca-editsource-section": "wax ka badal xogta",
+	"visualeditor-ca-ve-create": "VisualEditor",
+	"visualeditor-ca-ve-edit": "VisualEditor",
+	"visualeditor-ca-ve-edit-section": "VisualEditor",
+	"visualeditor-categories-tool": "Qaybaha",
+	"visualeditor-desc": "Visual editor ee MediaWiki",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-editnotices-tool": "{{PLURAL:$1|ma jirto wargalin|hal wargalin|laba wargalinood|$1 wargalinno|$1 wargalin}}",
+	"visualeditor-preference-betatempdisable": "Iga jooji tifaftir-muuqaalka si ku meel gaar ah inta aan ku guda jiro beta."
+}

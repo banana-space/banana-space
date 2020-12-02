@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Belkacem77",
 			"Mmistmurt",
-			"Belkacem77"
+			"YouvaDjouadi"
 		]
 	},
 	"vector-skin-desc": "Lqem atrar n MonoBook s wudem ilemẓi akked ddeqs n usnerni ucbiḥ",
-	"vector-action-addsection": "Rnud ameggay",
+	"vector-action-addsection": "Rnu-d asentel",
 	"vector-action-delete": "Mḥu",
 	"vector-action-move": "Snifel isem",
 	"vector-action-protect": "Mmesten",
@@ -15,7 +16,7 @@
 	"vector-view-create": "Rnu",
 	"vector-view-edit": "Ẓreg",
 	"vector-view-history": "Wali amazray",
-	"vector-view-view": "Ɣer",
+	"vector-view-view": "Ɣeṛ",
 	"vector-view-viewsource": "Ẓer aɣbalu",
 	"vector-more-actions": "Ugar"
 }

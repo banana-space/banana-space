@@ -1,0 +1,53 @@
+{
+    "opts": {
+        "encoding": "utf8",
+        "destination": "docs",
+        "package": "package.json",
+        "readme": "README.md",
+        "recurse": true,
+        "template": "node_modules/jsdoc-wmf-theme",
+        "tutorials": "guides"
+    },
+    "plugins": [
+        "plugins/markdown",
+        "plugins/summarize",
+        "node_modules/jsdoc-wmf-theme/betterlinks"
+    ],
+    "recurseDepth": 10,
+    "source": {
+        "include": [ "lib" ],
+        "includePattern": ".+\\.js$",
+        "excludePattern": "/mediawiki\\.tokenizer(\\.rules)?\\.js$"
+    },
+    "tags": {
+        "allowUnknownTags": false,
+        "dictionaries": ["jsdoc","closure"]
+    },
+    "templates": {
+        "wmf": {
+            "maintitle": "Parsoid",
+            "repository": "https://github.com/wikimedia/parsoid",
+            "linkMap": {
+                "Array": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+                "Boolean": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+                "Document": "https://developer.mozilla.org/en-US/docs/Web/API/Document",
+                "Element": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+                "Error": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+                "EventEmitter": "https://nodejs.org/api/events.html#events_class_eventemitter",
+                "Function": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+                "Generator": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+                "Map": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+                "Node": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+                "Number": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+                "Object": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+                "Promise": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+                "RegExp": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+                "Request": "http://expressjs.com/en/api.html#req",
+                "Response": "http://expressjs.com/en/api.html#res",
+                "Set": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+                "String": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+                "TextNode": "https://developer.mozilla.org/en-US/docs/Web/API/Text"
+            }
+        }
+    }
+}

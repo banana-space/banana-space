@@ -6,7 +6,7 @@
  * @covers ReadOnlyMode
  * @covers ConfiguredReadOnlyMode
  */
-class ReadOnlyModeTest extends MediaWikiTestCase {
+class ReadOnlyModeTest extends MediaWikiIntegrationTestCase {
 	public function provider() {
 		$rawTests = [
 			'None of anything' => [
@@ -98,12 +98,7 @@ class ReadOnlyModeTest extends MediaWikiTestCase {
 	}
 
 	private function createMode( $params, $makeLB ) {
-		$config = new HashConfig( [
-			'ReadOnly' => $params['confMessage'],
-			'ReadOnlyFile' => $this->createFile( $params ),
-		] );
-
-		$rom = new ConfiguredReadOnlyMode( $config );
+		$rom = new ConfiguredReadOnlyMode( $params['confMessage'], $this->createFile( $params ) );
 
 		if ( $makeLB ) {
 			$lb = $this->createLB( $params );
@@ -166,29 +161,5 @@ class ReadOnlyModeTest extends MediaWikiTestCase {
 			true );
 		$rom->setReason( 'override' );
 		$this->assertSame( 'override', $rom->getReason() );
-	}
-
-	/**
-	 * @covers ReadOnlyMode::clearCache
-	 * @covers ConfiguredReadOnlyMode::clearCache
-	 */
-	public function testClearCache() {
-		$fileName = $this->getNewTempFile();
-		unlink( $fileName );
-		$config = new HashConfig( [
-			'ReadOnly' => null,
-			'ReadOnlyFile' => $fileName,
-		] );
-		$cro = new ConfiguredReadOnlyMode( $config );
-		$lb = $this->createLB( [ 'lbMessage' => false ] );
-		$rom = new ReadOnlyMode( $cro, $lb );
-
-		$this->assertSame( false, $rom->getReason(), 'initial' );
-
-		file_put_contents( $fileName, 'file' );
-		$this->assertSame( false, $rom->getReason(), 'stale' );
-
-		$rom->clearCache();
-		$this->assertSame( 'file', $rom->getReason(), 'fresh' );
 	}
 }

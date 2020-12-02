@@ -20,21 +20,22 @@
  * @file
  */
 
-use Wikimedia\Rdbms\IDatabase;
 use MediaWiki\MediaWikiServices;
+use Wikimedia\Assert\Assert;
+use Wikimedia\Assert\ParameterTypeException;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Represents a "user group membership" -- a specific instance of a user belonging
  * to a group. For example, the fact that user Mary belongs to the sysop group is a
  * user group membership.
  *
- * The class encapsulates rows in the user_groups table. The logic is low-level and
- * doesn't run any hooks. Often, you will want to call User::addGroup() or
- * User::removeGroup() instead.
+ * The class is a pure value object. Use UserGroupManager to modify user group memberships.
  *
  * @since 1.29
  */
 class UserGroupMembership {
+
 	/** @var int The ID of the user who belongs to the group */
 	private $userId;
 
@@ -44,15 +45,35 @@ class UserGroupMembership {
 	/** @var string|null Timestamp of expiry in TS_MW format, or null if no expiry */
 	private $expiry;
 
+	/** @var bool Expiration flag */
+	private $expired;
+
 	/**
 	 * @param int $userId The ID of the user who belongs to the group
-	 * @param string $group The internal group name
+	 * @param string|null $group The internal group name
 	 * @param string|null $expiry Timestamp of expiry in TS_MW format, or null if no expiry
 	 */
 	public function __construct( $userId = 0, $group = null, $expiry = null ) {
+		self::assertValidSpec( $userId, $group, $expiry );
 		$this->userId = (int)$userId;
-		$this->group = $group; // TODO throw on invalid group?
+		$this->group = $group;
 		$this->expiry = $expiry ?: null;
+		$this->expired = $expiry ? wfTimestampNow() > $expiry : false;
+	}
+
+	/**
+	 * Asserts that the given parameters could be used to construct a UserGroupMembership object
+	 *
+	 * @param int $userId
+	 * @param string|null $group
+	 * @param string|null $expiry
+	 *
+	 * @throws ParameterTypeException
+	 */
+	private static function assertValidSpec( $userId, $group, $expiry ) {
+		Assert::parameterType( 'integer', $userId, '$userId' );
+		Assert::parameterType( [ 'string', 'null' ], $group, '$group' );
+		Assert::parameterType( [ 'string', 'null' ], $expiry, '$expiry' );
 	}
 
 	/**
@@ -76,7 +97,12 @@ class UserGroupMembership {
 		return $this->expiry;
 	}
 
+	/**
+	 * @deprecated since 1.35
+	 * @param $row
+	 */
 	protected function initFromRow( $row ) {
+		wfDeprecated( __METHOD__, '1.35' );
 		$this->userId = (int)$row->ug_user;
 		$this->group = $row->ug_group;
 		$this->expiry = $row->ug_expiry === null ?
@@ -89,24 +115,28 @@ class UserGroupMembership {
 	 *
 	 * @param stdClass $row The row from the user_groups table
 	 * @return UserGroupMembership
+	 *
+	 * @deprecated since 1.35, use UserGroupMembership constructor instead
 	 */
 	public static function newFromRow( $row ) {
-		$ugm = new self;
-		$ugm->initFromRow( $row );
-		return $ugm;
+		wfDeprecated( __METHOD__, '1.35' );
+		return new self(
+			(int)$row->ug_user,
+			$row->ug_group,
+			$row->ug_expiry === null ? null : wfTimestamp( TS_MW, $row->ug_expiry )
+		);
 	}
 
 	/**
 	 * Returns the list of user_groups fields that should be selected to create
 	 * a new user group membership.
 	 * @return array
+	 *
+	 * @deprecated since 1.35, use UserGroupManager::getQueryInfo instead
 	 */
 	public static function selectFields() {
-		return [
-			'ug_user',
-			'ug_group',
-			'ug_expiry',
-		];
+		wfDeprecated( __METHOD__, '1.35' );
+		return MediaWikiServices::getInstance()->getUserGroupManager()->getQueryInfo()['fields'];
 	}
 
 	/**
@@ -115,32 +145,21 @@ class UserGroupMembership {
 	 * @throws MWException
 	 * @param IDatabase|null $dbw Optional master database connection to use
 	 * @return bool Whether or not anything was deleted
+	 *
+	 * @deprecated since 1.35, use UserGroupManager::removeUserFromGroup instead
 	 */
 	public function delete( IDatabase $dbw = null ) {
-		if ( wfReadOnly() ) {
-			return false;
-		}
-
-		if ( $dbw === null ) {
-			$dbw = wfGetDB( DB_MASTER );
-		}
-
-		$dbw->delete(
-			'user_groups',
-			[ 'ug_user' => $this->userId, 'ug_group' => $this->group ],
-			__METHOD__ );
-		if ( !$dbw->affectedRows() ) {
-			return false;
-		}
-
-		// Remember that the user was in this group
-		$dbw->insert(
-			'user_former_groups',
-			[ 'ufg_user' => $this->userId, 'ufg_group' => $this->group ],
-			__METHOD__,
-			[ 'IGNORE' ] );
-
-		return true;
+		wfDeprecated( __METHOD__, '1.35' );
+		return MediaWikiServices::getInstance()
+			->getUserGroupManager()
+			->removeUserFromGroup(
+				// TODO: we're forced to forge a User instance here because we don't have
+				// a username around to create an artificial UserIdentityValue
+				// and the username is being used down the tree. This will be gone once the
+				// deprecated method is removed
+				User::newFromId( $this->getUserId() ),
+				$this->group
+			);
 	}
 
 	/**
@@ -148,91 +167,36 @@ class UserGroupMembership {
 	 * the function fails if there is a conflicting membership entry (same user and
 	 * group) already in the table.
 	 *
-	 * @throws MWException
+	 * @throws UnexpectedValueException
 	 * @param bool $allowUpdate Whether to perform "upsert" instead of INSERT
 	 * @param IDatabase|null $dbw If you have one available
 	 * @return bool Whether or not anything was inserted
+	 *
+	 * @deprecated since 1.35, use UserGroupManager::addUserToGroup instead
 	 */
 	public function insert( $allowUpdate = false, IDatabase $dbw = null ) {
-		if ( $dbw === null ) {
-			$dbw = wfGetDB( DB_MASTER );
-		}
-
-		// Purge old, expired memberships from the DB
-		JobQueueGroup::singleton()->push( new UserGroupExpiryJob() );
-
-		// Check that the values make sense
-		if ( $this->group === null ) {
-			throw new UnexpectedValueException(
-				'Don\'t try inserting an uninitialized UserGroupMembership object' );
-		} elseif ( $this->userId <= 0 ) {
-			throw new UnexpectedValueException(
-				'UserGroupMembership::insert() needs a positive user ID. ' .
-				'Did you forget to add your User object to the database before calling addGroup()?' );
-		}
-
-		$row = $this->getDatabaseArray( $dbw );
-		$dbw->insert( 'user_groups', $row, __METHOD__, [ 'IGNORE' ] );
-		$affected = $dbw->affectedRows();
-
-		// Don't collide with expired user group memberships
-		// Do this after trying to insert, in order to avoid locking
-		if ( !$affected ) {
-			$conds = [
-				'ug_user' => $row['ug_user'],
-				'ug_group' => $row['ug_group'],
-			];
-			// if we're unconditionally updating, check that the expiry is not already the
-			// same as what we are trying to update it to; otherwise, only update if
-			// the expiry date is in the past
-			if ( $allowUpdate ) {
-				if ( $this->expiry ) {
-					$conds[] = 'ug_expiry IS NULL OR ug_expiry != ' .
-						$dbw->addQuotes( $dbw->timestamp( $this->expiry ) );
-				} else {
-					$conds[] = 'ug_expiry IS NOT NULL';
-				}
-			} else {
-				$conds[] = 'ug_expiry < ' . $dbw->addQuotes( $dbw->timestamp() );
-			}
-
-			$row = $dbw->selectRow( 'user_groups', $this::selectFields(), $conds, __METHOD__ );
-			if ( $row ) {
-				$dbw->update(
-					'user_groups',
-					[ 'ug_expiry' => $this->expiry ? $dbw->timestamp( $this->expiry ) : null ],
-					[ 'ug_user' => $row->ug_user, 'ug_group' => $row->ug_group ],
-					__METHOD__ );
-				$affected = $dbw->affectedRows();
-			}
-		}
-
-		return $affected > 0;
-	}
-
-	/**
-	 * Get an array suitable for passing to $dbw->insert() or $dbw->update()
-	 * @param IDatabase $db
-	 * @return array
-	 */
-	protected function getDatabaseArray( IDatabase $db ) {
-		return [
-			'ug_user' => $this->userId,
-			'ug_group' => $this->group,
-			'ug_expiry' => $this->expiry ? $db->timestamp( $this->expiry ) : null,
-		];
+		wfDeprecated( __METHOD__, '1.35' );
+		return MediaWikiServices::getInstance()
+			->getUserGroupManager()
+			->addUserToGroup(
+				// TODO: we're forced to forge a User instance here because we don't have
+				// a username around to create an artificial UserIdentityValue
+				// and the username is being used down the tree. This will be gone once the
+				// deprecated method is removed
+				User::newFromId( $this->getUserId() ),
+				$this->group,
+				$this->expiry,
+				$allowUpdate
+			);
 	}
 
 	/**
 	 * Has the membership expired?
+	 *
 	 * @return bool
 	 */
 	public function isExpired() {
-		if ( !$this->expiry ) {
-			return false;
-		} else {
-			return wfTimestampNow() > $this->expiry;
-		}
+		return $this->expired;
 	}
 
 	/**
@@ -240,63 +204,14 @@ class UserGroupMembership {
 	 *
 	 * @return int|bool false if purging wasn't attempted (e.g. because of
 	 *  readonly), the number of rows purged (might be 0) otherwise
+	 *
+	 * @deprecated since 1.35, use UserGroupManager::purgeExpired instead
 	 */
 	public static function purgeExpired() {
-		$services = MediaWikiServices::getInstance();
-		if ( $services->getReadOnlyMode()->isReadOnly() ) {
-			return false;
-		}
-
-		$lbFactory = $services->getDBLoadBalancerFactory();
-		$ticket = $lbFactory->getEmptyTransactionTicket( __METHOD__ );
-		$dbw = $services->getDBLoadBalancer()->getConnection( DB_MASTER );
-
-		$lockKey = $dbw->getDomainID() . ':usergroups-prune'; // specific to this wiki
-		$scopedLock = $dbw->getScopedLockAndFlush( $lockKey, __METHOD__, 0 );
-		if ( !$scopedLock ) {
-			return false; // already running
-		}
-
-		$now = time();
-		$purgedRows = 0;
-		do {
-			$dbw->startAtomic( __METHOD__ );
-
-			$res = $dbw->select(
-				'user_groups',
-				self::selectFields(),
-				[ 'ug_expiry < ' . $dbw->addQuotes( $dbw->timestamp( $now ) ) ],
-				__METHOD__,
-				[ 'FOR UPDATE', 'LIMIT' => 100 ]
-			);
-
-			if ( $res->numRows() > 0 ) {
-				$insertData = []; // array of users/groups to insert to user_former_groups
-				$deleteCond = []; // array for deleting the rows that are to be moved around
-				foreach ( $res as $row ) {
-					$insertData[] = [ 'ufg_user' => $row->ug_user, 'ufg_group' => $row->ug_group ];
-					$deleteCond[] = $dbw->makeList(
-						[ 'ug_user' => $row->ug_user, 'ug_group' => $row->ug_group ],
-						$dbw::LIST_AND
-					);
-				}
-				// Delete the rows we're about to move
-				$dbw->delete(
-					'user_groups',
-					$dbw->makeList( $deleteCond, $dbw::LIST_OR ),
-					__METHOD__
-				);
-				// Push the groups to user_former_groups
-				$dbw->insert( 'user_former_groups', $insertData, __METHOD__, [ 'IGNORE' ] );
-				// Count how many rows were purged
-				$purgedRows += $res->numRows();
-			}
-
-			$dbw->endAtomic( __METHOD__ );
-
-			$lbFactory->commitAndWaitForReplication( __METHOD__, $ticket );
-		} while ( $res->numRows() > 0 );
-		return $purgedRows;
+		wfDeprecated( __METHOD__, '1.35' );
+		return MediaWikiServices::getInstance()
+			->getUserGroupManager()
+			->purgeExpired();
 	}
 
 	/**
@@ -304,28 +219,22 @@ class UserGroupMembership {
 	 * belongs to.
 	 *
 	 * @param int $userId ID of the user to search for
-	 * @param IDatabase|null $db Optional database connection
+	 * @param IDatabase|null $db unused since 1.35
 	 * @return UserGroupMembership[] Associative array of (group name => UserGroupMembership object)
+	 *
+	 * @deprecated since 1.35, use UserGroupManager::getUserGroupMemberships instead
 	 */
 	public static function getMembershipsForUser( $userId, IDatabase $db = null ) {
-		if ( !$db ) {
-			$db = wfGetDB( DB_REPLICA );
-		}
-
-		$res = $db->select( 'user_groups',
-			self::selectFields(),
-			[ 'ug_user' => $userId ],
-			__METHOD__ );
-
-		$ugms = [];
-		foreach ( $res as $row ) {
-			$ugm = self::newFromRow( $row );
-			if ( !$ugm->isExpired() ) {
-				$ugms[$ugm->group] = $ugm;
-			}
-		}
-
-		return $ugms;
+		wfDeprecated( __METHOD__, '1.35' );
+		return MediaWikiServices::getInstance()
+			->getUserGroupManager()
+			->getUserGroupMemberships(
+				// TODO: we're forced to forge a User instance here because we don't have
+				// a username around to create an artificial UserIdentityValue
+				// and the username is being used down the tree. This will be gone once the
+				// deprecated method is removed
+				User::newFromId( $userId )
+			);
 	}
 
 	/**
@@ -335,28 +244,23 @@ class UserGroupMembership {
 	 *
 	 * @param int $userId ID of the user to search for
 	 * @param string $group User group name
-	 * @param IDatabase|null $db Optional database connection
+	 * @param IDatabase|null $db unused since 1.35
 	 * @return UserGroupMembership|false
+	 *
+	 * @deprecated since 1.35, use UserGroupManager::getUserGroupMemberships instead
 	 */
 	public static function getMembership( $userId, $group, IDatabase $db = null ) {
-		if ( !$db ) {
-			$db = wfGetDB( DB_REPLICA );
-		}
-
-		$row = $db->selectRow( 'user_groups',
-			self::selectFields(),
-			[ 'ug_user' => $userId, 'ug_group' => $group ],
-			__METHOD__ );
-		if ( !$row ) {
-			return false;
-		}
-
-		$ugm = self::newFromRow( $row );
-		if ( !$ugm->isExpired() ) {
-			return $ugm;
-		} else {
-			return false;
-		}
+		wfDeprecated( __METHOD__, '1.35' );
+		$ugms = MediaWikiServices::getInstance()
+			->getUserGroupManager()
+			->getUserGroupMemberships(
+				// TODO: we're forced to forge a User instance here because we don't have
+				// a username around to create an artificial UserIdentityValue
+				// and the username is being used down the tree. This will be gone once the
+				// deprecated method is removed
+				User::newFromId( $userId )
+			);
+		return $ugms[$group] ?? false;
 	}
 
 	/**
@@ -372,9 +276,7 @@ class UserGroupMembership {
 	 *   group name message ("Administrators"), omit this parameter.
 	 * @return string
 	 */
-	public static function getLink( $ugm, IContextSource $context, $format,
-		$userName = null
-	) {
+	public static function getLink( $ugm, IContextSource $context, $format, $userName = null ) {
 		if ( $format !== 'wiki' && $format !== 'html' ) {
 			throw new MWException( 'UserGroupMembership::getLink() $format parameter should be ' .
 				"'wiki' or 'html'" );
@@ -396,6 +298,7 @@ class UserGroupMembership {
 
 		// link to the group description page, if it exists
 		$linkTitle = self::getGroupPage( $group );
+		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 		if ( $format === 'wiki' ) {
 			if ( $linkTitle ) {
 				$linkPage = $linkTitle->getFullText();
@@ -405,7 +308,7 @@ class UserGroupMembership {
 			}
 		} else {
 			if ( $linkTitle ) {
-				$groupLink = Linker::link( $linkTitle, htmlspecialchars( $groupName ) );
+				$groupLink = $linkRenderer->makeLink( $linkTitle, $groupName );
 			} else {
 				$groupLink = htmlspecialchars( $groupName );
 			}
@@ -428,7 +331,6 @@ class UserGroupMembership {
 					->params( $groupLink, $expiryDT, $expiryD, $expiryT )->escaped();
 			}
 		}
-
 		return $groupLink;
 	}
 
@@ -474,4 +376,20 @@ class UserGroupMembership {
 		}
 		return false;
 	}
+
+	/**
+	 * Compares two pure value objects
+	 *
+	 * @param UserGroupMembership $ugm
+	 * @return bool
+	 *
+	 * @since 1.35
+	 */
+	public function equals( UserGroupMembership $ugm ) {
+		return (
+			$ugm->getUserId() === $this->userId
+			&& $ugm->getGroup() === $this->group
+		);
+	}
+
 }

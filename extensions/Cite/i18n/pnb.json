@@ -4,15 +4,15 @@
 			"Khalid Mahmood"
 		]
 	},
-	"cite-desc": "جوڑو <nowiki><ref[ name=id]></nowiki> تے <nowiki><references/></nowiki> ٹیگ اتے پتے لئی۔",
+	"cite-desc": "جوڑو <code>&lt;ref[ name=id]&gt;</code> تے <code>&lt;references/&gt;</code> ٹیگ اتے پتے لئی۔",
 	"cite_error": "سائیٹ غلطی:$1",
 	"cite_error_ref_numeric_key": "ناں منیا جان والا <code>&lt;ref&gt;</code> ٹیگ؛\nناں اک سادہ انٹیجر نئیں ہوسکدا۔ کوئی ہور دسن والا سرناواں دسو۔",
 	"cite_error_ref_no_key": "ناں منیا جان والا <code>&lt;ref&gt;</code> ٹیگ؛\nاتے پتے جیدے چ کوئی شے ناں ہووے لازمی ناں ہووے۔",
 	"cite_error_ref_too_many_keys": "ناں منیا جان والا <code>&lt;ref&gt;</code> ٹیگ؛\nناں منے جان والے ناں",
 	"cite_error_ref_no_input": "ناں منیا جان والا <code>&lt;ref&gt;</code> ٹیگ؛\nاتے پتے جیدے چ کوئی شے ناں ہووے لازمی ناں ہووے۔",
 	"cite_error_references_invalid_parameters": "ناں منیا جان والا <code>&lt;references&gt;</code> ٹیگ؛\nکسے پیرامیٹر دی اجازت نئیں۔\n<code>&lt;references /&gt;</code> ورتو",
-	"cite_error_references_no_backlink_label": "کسٹم پچھلے جزڑ نئیں رۓ۔\nہور دسو <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki> سنیعے چ۔",
-	"cite_error_no_link_label_group": "\"$1\" ٹولی لئی کسٹم لیبل جوڑ مک گۓ۔\nہور دسو <nowiki>[[MediaWiki:$2]]</nowiki> سنیعے چ۔",
+	"cite_error_references_no_backlink_label": "کسٹم پچھلے جزڑ نئیں رۓ۔\nہور دسو [[MediaWiki:Cite references link many format backlink labels]] سنیعے چ۔",
+	"cite_error_no_link_label_group": "\"$1\" ٹولی لئی کسٹم لیبل جوڑ مک گۓ۔\nہور دسو [[MediaWiki:$2]] سنیعے چ۔",
 	"cite_error_references_no_text": "ناں منیا جان والا <code>&lt;ref&gt;</code> ٹیگ\nکوئی لکھت نئیں دتی گئی اتے پتے <code>$1</code> لئی۔",
 	"cite_error_included_ref": "بند کردا &lt;/ref&gt ؛ &lt;ref&gt دا کعاٹا ٹیک",
 	"cite_error_group_refs_without_references": "<code>&lt;ref&gt;</code> ٹیگ اک ٹولی جیدا ناں \"$1\" اے ہیگے نیں، پر کوئی <code>&lt;references group=\"$1\"/&gt;</code> ٹیگ ناں لبیا۔",

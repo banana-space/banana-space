@@ -2,18 +2,19 @@
 	"@metadata": {
 		"authors": [
 			"Candalua",
+			"Conky77",
 			"GatoSelvadego"
 		]
 	},
 	"captcha-edit": "Par modificar la pagina te ghè da risòlvar sto senplice calcolo presentà de seguito e inserir el risultato ne la casela\n([[Special:Captcha/help|magiori informazion]]):",
 	"captcha-desc": "Fornise teniche CAPTCHA pa' ła protesion contro el spam e l'individuasion de łe password",
 	"captcha-label": "CAPTCHA",
-	"captcha-addurl": "Ła modifega dimandà xonta de i novi ligamenti foresti a ła pàjina; come mixura precausionałe contro 'l inserimento automatego de spam, se prega de risolvare el senplise calcoło prexentà de seguito e inserir el rexultà inte ła caxeła ([[Special:Captcha/help|come funsiona?]]):",
-	"captcha-badlogin": "Come misura precausionałe contro i tentativi de forzadura automatega de ła password, se prega de risolvare el senplise calcoło prexentà de seguito e inserir el rexultà inte ła caxeła ([[Special:Captcha/help|come funsiona?]]):",
-	"captcha-createaccount": "Come mixura precausionałe contro i tentativi de creasion automatega de i account, se prega de risolvare el senplise calcoło prexentà de seguito e inserir el rexultà inte ła caxeła ([[Special:Captcha/help|come funsiona?]]):",
+	"captcha-addurl": "Ƚa modifega dimandà xonta de i novi ligamenti foresti a ƚa pàgina; come mixura precausionaƚe contro 'l inserimento automatego de spam, se prega de risolvare el seguente calcoƚo prexentà de seguito e inserir el rexultà inte ƚa caxeƚa ([[Special:Captcha/help|come funsiona?]]):",
+	"captcha-badlogin": "Come misura precausionaƚe contro i tentativi de forzadura automatega de ła password, se prega de risolvare el calcoƚo prexentà de seguito e inserir el rexultà inte ƚa caxeƚa ([[Special:Captcha/help|come funsiona?]]):",
+	"captcha-createaccount": "Come mixura precausionałe contro i tentativi de creasion automatega de i account, se prega de risolvare el calcoƚo prexentà de seguito e inserir el rexultà inte ƚa caxeƚa ([[Special:Captcha/help|come funsiona?]]):",
 	"captcha-createaccount-fail": "Codice de verifica sbaglià o mancante.",
 	"captcha-create": "Per crear la pagina te ghè da risòlvar sto senplice calcolo presentà de seguito e inserir el risultato ne la casela ([[Special:Captcha/help|magiori informazion]]):",
-	"captcha-sendemail": "Come mixura precausionałe contro i mesaji de spam automatesi, se prega de risolvare el senplise calcoło prexentà de seguito e inserir el rexultà inte ła caxeła ([[Special:Captcha/help|come funsiona?]]):",
+	"captcha-sendemail": "Come mixura precausionaƚe contro i mesaji de spam automatesi, se prega de risolvare el calcoƚo prexentà de seguito e inserir el rexultà inte ƚa caxeƚa ([[Special:Captcha/help|come funsiona?]]):",
 	"captcha-sendemail-fail": "Codice de verifica sbaglià o mancante.",
 	"captcha-disabledinapi": "Sta azion la richiede un captcha, quindi no se pole farla tramite API.",
 	"captchahelp-title": "Coss'èlo sto captcha?",

@@ -1,15 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bugoslav",
 			"Dalibor Bosits",
 			"Dnik",
-			"Roberta F.",
-			"SpeedyGonsales",
 			"MaGa",
-			"Bugoslav"
+			"Neptune, the Mystic",
+			"Roberta F.",
+			"SpeedyGonsales"
 		]
 	},
-	"cite-desc": "Dodaje <nowiki><ref[ name=id]></nowiki> i <nowiki><references/></nowiki> oznake, za citiranje",
+	"cite-desc": "Dodaje <code>&lt;ref[ name=id]&gt;</code> i <code>&lt;references/&gt;</code> oznake, za citiranje",
 	"cite_error": "Pogrješka u citiranju: $1",
 	"cite_error_ref_numeric_key": "nevaljana <code>&lt;ref&gt;</code> oznaka; naziv ne smije biti jednostavni broj, koristite opisni naziv",
 	"cite_error_ref_no_key": "nevaljana <code>&lt;ref&gt;</code> oznaka; izvori bez sadržaja moraju imati naziv",
@@ -17,11 +18,11 @@
 	"cite_error_ref_no_input": "nevaljana <code>&lt;ref&gt;</code> oznaka; izvori bez imena moraju imati sadržaj",
 	"cite_error_references_duplicate_key": "nevaljala <code>&lt;ref&gt;</code> oznaka; ime \"$1\" definirano više puta s različitim sadržajem",
 	"cite_error_references_invalid_parameters": "nevaljana <code>&lt;references&gt;</code> oznaka; parametri nisu dozvoljeni, koristite <code>&lt;references /&gt;</code>",
-	"cite_error_references_no_backlink_label": "potrošene sve posebne oznake za poveznice unatrag, definirajte više u poruci <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
-	"cite_error_no_link_label_group": "nedovoljan broj proizvoljnih naslova poveznica za grupu \"$1\".\nDefinirajte više putem poruke <nowiki>[[MediaWiki:$2]]</nowiki>.",
-	"cite_error_references_no_text": "nije zadan tekst za izvor <code>$1</code>",
+	"cite_error_references_no_backlink_label": "potrošene sve posebne oznake za poveznice unatrag, definirajte više u poruci [[MediaWiki:Cite references link many format backlink labels]]",
+	"cite_error_no_link_label_group": "nedovoljan broj proizvoljnih naslova poveznica za grupu \"$1\". Definirajte više putem poruke [[MediaWiki:$2]].",
+	"cite_error_references_no_text": "Nevažeća <code>&lt;ref&gt;</code> oznaka; nije zadan tekst za izvor <code>$1</code>",
 	"cite_error_included_ref": "nedostaje zatvarajući <code>&lt;/ref&gt;</code> za <code>&lt;ref&gt;</code> oznaku",
-	"cite_error_group_refs_without_references": "oznake <code>&lt;ref&gt;</code> postoje za skupinu imenovanom \"$1\", ali nema pripadajuće oznake <code>&lt;references group=\"$1\"/&gt;</code>",
+	"cite_error_group_refs_without_references": "oznake <code>&lt;ref&gt;</code> postoje za skupinu \"$1\", ali nema pripadajuće oznake <code>&lt;references group=\"$1\"/&gt;</code>",
 	"cite_error_references_group_mismatch": "<code>&lt;ref&gt;</code> oznaka u <code>&lt;references&gt;</code> ima konfliktni grupni atribut  \"$1\".",
 	"cite_error_references_missing_group": "<code>&lt;ref&gt;</code> oznaka definirana u <code>&lt;references&gt;</code> ima grupni atribut \"$1\" koji se ne pojavljuje u ranijem tekstu.",
 	"cite_error_references_missing_key": "<code>&lt;ref&gt;</code> oznaka s imenom \"$1\" definirana u <code>&lt;references&gt;</code> nije prethodno rabljena u tekstu.",

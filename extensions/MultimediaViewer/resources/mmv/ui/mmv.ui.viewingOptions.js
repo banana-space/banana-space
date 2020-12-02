@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $, oo ) {
+( function () {
 	// Shortcut for prototype later
 	var ODP;
 
@@ -37,14 +37,14 @@
 		this.initPanel();
 	}
 
-	oo.inheritClass( OptionsDialog, mw.mmv.ui.Dialog );
+	OO.inheritClass( OptionsDialog, mw.mmv.ui.Dialog );
 	ODP = OptionsDialog.prototype;
 
 	ODP.attach = function () {
-		this.handleEvent( 'mmv-options-open', $.proxy( this.handleOpenCloseClick, this ) );
+		this.handleEvent( 'mmv-options-open', this.handleOpenCloseClick.bind( this ) );
 
-		this.handleEvent( 'mmv-reuse-open', $.proxy( this.closeDialog, this ) );
-		this.handleEvent( 'mmv-download-open', $.proxy( this.closeDialog, this ) );
+		this.handleEvent( 'mmv-reuse-open', this.closeDialog.bind( this ) );
+		this.handleEvent( 'mmv-download-open', this.closeDialog.bind( this ) );
 	};
 
 	/**
@@ -196,13 +196,16 @@
 	ODP.createConfirmationPane = function ( divClass, propName, msgs ) {
 		var dialog = this,
 			$div = $( '<div>' )
+				// The following classes are used here:
+				// * mw-mmv-enable-confirmation
+				// * mw-mmv-disable-confirmation
 				.addClass( divClass )
 				.appendTo( this.$dialog );
 
 		$( '<div>' )
 			.html( '&nbsp;' )
 			.addClass( 'mw-mmv-confirmation-close' )
-			.click( function () {
+			.on( 'click', function () {
 				dialog.closeDialog();
 			} )
 			.appendTo( $div );
@@ -223,6 +226,9 @@
 	 */
 	ODP.createActionPane = function ( divClass, propName, smsg, msgs, enabled ) {
 		var $div = $( '<div>' )
+			// The following classes are used here:
+			// * mw-mmv-options-enable
+			// * mw-mmv-options-disable
 			.addClass( divClass )
 			.appendTo( this.$dialog );
 
@@ -276,7 +282,7 @@
 			.addClass( 'mw-mmv-options-submit-button mw-ui-button mw-ui-progressive' )
 			.text( msg )
 			.appendTo( $submitDiv )
-			.click( function () {
+			.on( 'click', function () {
 				var $buttons = $( this ).closest( '.mw-mmv-options-submit' ).find( '.mw-mmv-options-submit-button, .mw-mmv-options-cancel-button' );
 				$buttons.prop( 'disabled', true );
 
@@ -309,7 +315,7 @@
 			.addClass( 'mw-mmv-options-cancel-button mw-ui-button mw-ui-quiet' )
 			.text( mw.message( 'multimediaviewer-option-cancel-button' ).text() )
 			.appendTo( $submitDiv )
-			.click( function () {
+			.on( 'click', function () {
 				dialog.closeDialog();
 				return false;
 			} );
@@ -380,7 +386,7 @@
 			.addClass( 'mw-mmv-project-info-link' )
 			.prop( 'href', mw.config.get( 'wgMultimediaViewer' ).helpLink )
 			.text( mw.message( 'multimediaviewer-options-learn-more' ) )
-			.click( function () { mw.mmv.actionLogger.log( eventName ); } )
+			.on( 'click', function () { mw.mmv.actionLogger.log( eventName ); } )
 			.appendTo( $div.find( '.mw-mmv-options-text' ) );
 	};
 
@@ -394,4 +400,4 @@
 	};
 
 	mw.mmv.ui.OptionsDialog = OptionsDialog;
-}( mediaWiki, jQuery, OO ) );
+}() );

@@ -1,16 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alexander Yukal",
 			"Ignatus",
 			"JenVan",
 			"Kaganer",
 			"Nemo bis",
 			"Okras",
+			"Ole Yves",
+			"Stjn",
 			"Александр Сигачёв"
 		]
 	},
 	"skinname-vector": "Векторное",
 	"vector-skin-desc": "Современная версия MonoBook с обновлённым оформлением и многими улучшениями в юзабилити",
+	"prefs-vector-enable-vector-1-label": "Использовать Устаревшее векторное",
+	"prefs-vector-enable-vector-1-help": "В течение следующих нескольких лет мы будем постепенно обновлять тему Векторное. Устаревшее векторное позволит вам просмотреть старую версию Векторное (по состоянию на декабрь 2019 года). Чтобы узнать больше об обновлениях, перейдите на нашу [[mw:Reading/Web/Desktop_Improvements|страницу проекта]].",
+	"vector-opt-out": "Переключиться на старый вид",
+	"vector-opt-out-tooltip": "Измените настройки, чтобы вернуться к старому виду темы (Устаревшее векторное)",
 	"vector.css": "/* Размещённый здесь CSS будет применяться к векторной теме оформления  */",
 	"vector.js": "/* Размещённый здесь код JavaScript будет загружаться пользователям, использующим тему оформления Vector */",
 	"vector-action-addsection": "Добавить тему",
@@ -24,5 +31,7 @@
 	"vector-view-history": "История",
 	"vector-view-view": "Читать",
 	"vector-view-viewsource": "Просмотр кода",
+	"vector-jumptonavigation": "Перейти к навигации",
+	"vector-jumptosearch": "Перейти к поиску",
 	"vector-more-actions": "Ещё"
 }

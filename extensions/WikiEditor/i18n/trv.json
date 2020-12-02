@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Iyuqciyang"
+		]
+	},
+	"wikieditor-toolbar-tool-bold-example": "patas qthur",
+	"wikieditor-toolbar-tool-italic-example": "atas gmisil",
+	"wikieditor-toolbar-tool-ilink": "mggaluk ruwan",
+	"wikieditor-toolbar-tool-ilink-example": "mggaluk pusu kari",
+	"wikieditor-toolbar-tool-xlink": "lipax mggaluk ( saw peeniq qsahur http:// pnrjingan)",
+	"wikieditor-toolbar-tool-xlink-example": "http://www.example.com mggaluk pusu kari",
+	"wikieditor-toolbar-tool-link-cancel": "Pkungat",
+	"wikieditor-toolbar-tool-file": "numal pusu patas",
+	"wikieditor-toolbar-tool-file-cancel": "Pkungat",
+	"wikieditor-toolbar-tool-reference-cancel": "Pkungat",
+	"wikieditor-toolbar-section-advanced": "Mtmay quri brah",
+	"wikieditor-toolbar-tool-nowiki-example": "maat kska aji smmalu iyax ptasan patas",
+	"wikieditor-toolbar-tool-table-cancel": "Pkungat",
+	"wikieditor-toolbar-section-help": "Pgkla"
+}

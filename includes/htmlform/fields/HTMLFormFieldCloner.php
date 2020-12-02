@@ -11,7 +11,7 @@
  *     of fields.
  *   required - If specified, at least one group of fields must be submitted.
  *   format - HTMLForm display format to use when displaying the subfields:
- *     'table', 'div', or 'raw'.
+ *     'table', 'div', or 'raw'. This is ignored when using OOUI.
  *   row-legend - If non-empty, each group of subfields will be enclosed in a
  *     fieldset. The value is the name of a message key to use as the legend.
  *   create-button-message - Message to use as the text of the button to
@@ -34,6 +34,7 @@
  * additional (string) keys present with other types of values.
  *
  * @since 1.23
+ * @stable to extend
  */
 class HTMLFormFieldCloner extends HTMLFormField {
 	private static $counter = 0;
@@ -45,6 +46,9 @@ class HTMLFormFieldCloner extends HTMLFormField {
 	 */
 	protected $uniqueId;
 
+	/*
+	 * @stable to call
+	 */
 	public function __construct( $params ) {
 		$this->uniqueId = static::class . ++self::$counter . 'x';
 		parent::__construct( $params );
@@ -54,6 +58,7 @@ class HTMLFormFieldCloner extends HTMLFormField {
 		}
 
 		// Make sure the delete button, if explicitly specified, is sane
+		// @phan-suppress-next-line PhanTypeMismatchDimFetch Phan is very confused
 		if ( isset( $this->mParams['fields']['delete'] ) ) {
 			$class = 'mw-htmlform-cloner-delete-button';
 			$info = $this->mParams['fields']['delete'] + [
@@ -211,6 +216,10 @@ class HTMLFormFieldCloner extends HTMLFormField {
 		return $ret;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @phan-param array[] $values
+	 */
 	public function cancelSubmit( $values, $alldata ) {
 		if ( isset( $values['nonjs'] ) ) {
 			return true;
@@ -231,6 +240,10 @@ class HTMLFormFieldCloner extends HTMLFormField {
 		return parent::cancelSubmit( $values, $alldata );
 	}
 
+	/**
+	 * @inheritDoc
+	 * @phan-param array[] $values
+	 */
 	public function validate( $values, $alldata ) {
 		if ( isset( $this->mParams['required'] )
 			&& $this->mParams['required'] !== false
@@ -273,9 +286,7 @@ class HTMLFormFieldCloner extends HTMLFormField {
 	 * @return string
 	 */
 	protected function getInputHTMLForKey( $key, array $values ) {
-		$displayFormat = isset( $this->mParams['format'] )
-			? $this->mParams['format']
-			: $this->mParent->getDisplayFormat();
+		$displayFormat = $this->mParams['format'] ?? $this->mParent->getDisplayFormat();
 
 		// Conveniently, PHP method names are case-insensitive.
 		$getFieldHtmlMethod = $displayFormat == 'table' ? 'getTableRow' : ( 'get' . $displayFormat );
@@ -298,31 +309,19 @@ class HTMLFormFieldCloner extends HTMLFormField {
 				$html .= $field->$getFieldHtmlMethod( $v );
 
 				$labelValue = trim( $field->getLabel() );
-				if ( $labelValue != '&#160;' && $labelValue !== '' ) {
+				if ( $labelValue !== "\u{00A0}" && $labelValue !== '&#160;' && $labelValue !== '' ) {
 					$hasLabel = true;
 				}
 			}
 		}
 
 		if ( !isset( $fields['delete'] ) ) {
-			$name = "{$this->mName}[$key][delete]";
-			$label = isset( $this->mParams['delete-button-message'] )
-				? $this->mParams['delete-button-message']
-				: 'htmlform-cloner-delete';
-			$field = HTMLForm::loadInputFromParameters( $name, [
-				'type' => 'submit',
-				'formnovalidate' => true,
-				'name' => $name,
-				'id' => Sanitizer::escapeIdForAttribute( "{$this->mID}--$key--delete" ),
-				'cssclass' => 'mw-htmlform-cloner-delete-button',
-				'default' => $this->getMessage( $label )->text(),
-			], $this->mParent );
-			$v = $field->getDefault();
+			$field = $this->getDeleteButtonHtml( $key );
 
 			if ( $displayFormat === 'table' ) {
-				$html .= $field->$getFieldHtmlMethod( $v );
+				$html .= $field->$getFieldHtmlMethod( $field->getDefault() );
 			} else {
-				$html .= $field->getInputHTML( $v );
+				$html .= $field->getInputHTML( $field->getDefault() );
 			}
 		}
 
@@ -358,6 +357,37 @@ class HTMLFormFieldCloner extends HTMLFormField {
 		return $html;
 	}
 
+	/**
+	 * @param string $key Array key indicating to which field the delete button belongs
+	 * @return HTMLFormField
+	 */
+	protected function getDeleteButtonHtml( $key ) : HTMLFormField {
+		$name = "{$this->mName}[$key][delete]";
+		$label = $this->mParams['delete-button-message'] ?? 'htmlform-cloner-delete';
+		$field = HTMLForm::loadInputFromParameters( $name, [
+			'type' => 'submit',
+			'formnovalidate' => true,
+			'name' => $name,
+			'id' => Sanitizer::escapeIdForAttribute( "{$this->mID}--$key--delete" ),
+			'cssclass' => 'mw-htmlform-cloner-delete-button',
+			'default' => $this->getMessage( $label )->text(),
+		], $this->mParent );
+		return $field;
+	}
+
+	protected function getCreateButtonHtml() : HTMLFormField {
+		$name = "{$this->mName}[create]";
+		$label = $this->mParams['create-button-message'] ?? 'htmlform-cloner-create';
+		return HTMLForm::loadInputFromParameters( $name, [
+			'type' => 'submit',
+			'formnovalidate' => true,
+			'name' => $name,
+			'id' => Sanitizer::escapeIdForAttribute( "{$this->mID}--create" ),
+			'cssclass' => 'mw-htmlform-cloner-create-button',
+			'default' => $this->getMessage( $label )->text(),
+		], $this->mParent );
+	}
+
 	public function getInputHTML( $values ) {
 		$html = '';
 
@@ -378,19 +408,91 @@ class HTMLFormFieldCloner extends HTMLFormField {
 			'data-unique-id' => $this->uniqueId,
 		], $html );
 
-		$name = "{$this->mName}[create]";
-		$label = isset( $this->mParams['create-button-message'] )
-			? $this->mParams['create-button-message']
-			: 'htmlform-cloner-create';
-		$field = HTMLForm::loadInputFromParameters( $name, [
-			'type' => 'submit',
-			'formnovalidate' => true,
-			'name' => $name,
-			'id' => Sanitizer::escapeIdForAttribute( "{$this->mID}--create" ),
-			'cssclass' => 'mw-htmlform-cloner-create-button',
-			'default' => $this->getMessage( $label )->text(),
-		], $this->mParent );
+		$field = $this->getCreateButtonHtml();
 		$html .= $field->getInputHTML( $field->getDefault() );
+
+		return $html;
+	}
+
+	/**
+	 * Get the input OOUI HTML for the specified key.
+	 *
+	 * @param string $key Array key under which the fields should be named
+	 * @param array $values
+	 * @return string
+	 */
+	protected function getInputOOUIForKey( $key, array $values ) {
+		$html = '';
+		$hidden = '';
+
+		$fields = $this->createFieldsForKey( $key );
+		foreach ( $fields as $fieldname => $field ) {
+			$v = array_key_exists( $fieldname, $values )
+				? $values[$fieldname]
+				: $field->getDefault();
+
+			if ( $field instanceof HTMLHiddenField ) {
+				// HTMLHiddenField doesn't generate its own HTML
+				list( $name, $value, $params ) = $field->getHiddenFieldData( $v );
+				$hidden .= Html::hidden( $name, $value, $params ) . "\n";
+			} else {
+				$html .= $field->getOOUI( $v );
+			}
+		}
+
+		if ( !isset( $fields['delete'] ) ) {
+			$field = $this->getDeleteButtonHtml( $key );
+			$fieldHtml = $field->getInputOOUI( $field->getDefault() );
+			$fieldHtml->setInfusable( true );
+
+			$html .= $fieldHtml;
+		}
+
+		$classes = [
+			'mw-htmlform-cloner-row',
+		];
+
+		$attribs = [
+			'class' => implode( ' ', $classes ),
+		];
+
+		$html = Html::rawElement( 'div', $attribs, "\n$html\n" );
+
+		$html .= $hidden;
+
+		if ( !empty( $this->mParams['row-legend'] ) ) {
+			$legend = $this->msg( $this->mParams['row-legend'] )->text();
+			$html = Xml::fieldset( $legend, $html );
+		}
+
+		return $html;
+	}
+
+	public function getInputOOUI( $values ) {
+		$html = '';
+
+		foreach ( (array)$values as $key => $value ) {
+			if ( $key === 'nonjs' ) {
+				continue;
+			}
+			$html .= Html::rawElement( 'li', [ 'class' => 'mw-htmlform-cloner-li' ],
+				$this->getInputOOUIForKey( $key, $value )
+			);
+		}
+
+		$template = $this->getInputOOUIForKey( $this->uniqueId, [] );
+		$html = Html::rawElement( 'ul', [
+			'id' => "mw-htmlform-cloner-list-{$this->mID}",
+			'class' => 'mw-htmlform-cloner-ul',
+			'data-template' => $template,
+			'data-unique-id' => $this->uniqueId,
+		], $html );
+
+		$field = $this->getCreateButtonHtml();
+		$fieldHtml = $field->getInputOOUI( $field->getDefault() );
+		$fieldHtml->setInfusable( true );
+
+		$html .= $fieldHtml;
 
 		return $html;
 	}

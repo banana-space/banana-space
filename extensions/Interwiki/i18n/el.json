@@ -1,15 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Badseed",
 			"Consta",
 			"Crazymadlover",
 			"Dead3y3",
 			"Evropi",
+			"Geraki",
 			"Omnipaedista",
 			"Protnet",
-			"ZaDiak",
-			"Geraki",
-			"Badseed"
+			"ZaDiak"
 		]
 	},
 	"interwiki": "Εμφάνιση και επεξεργασία δεδομένων interwiki",
@@ -35,7 +35,6 @@
 	"interwiki-cached": "Τα δεδομένα interwiki έχουν αποθηκευτεί στην προσωρινή μνήμη. Δεν είναι δυνατή η τροποποίησή της.",
 	"interwiki_edit": "Επεξεργασία",
 	"interwiki_reasonfield": "Αιτία:",
-	"interwiki_delquestion": "Διαγραφή του «$1»",
 	"interwiki_deleting": "Διαγράφετε το πρόθεμα «$1».",
 	"interwiki_deleted": "Το πρόθεμα «$1» αφαιρέθηκε με επιτυχία από τον πίνακα interwiki.",
 	"interwiki_delfailed": "Το πρόθεμα «$1» δεν μπορεί να καταργηθεί από τον πίνακα interwiki.",

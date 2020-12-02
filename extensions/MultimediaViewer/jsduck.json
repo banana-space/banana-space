@@ -7,6 +7,6 @@
 	"--output": "docs",
 	"--": [
 		"jsduck.external.js",
-		"resources/mmv"
+		"resources/"
 	]
 }

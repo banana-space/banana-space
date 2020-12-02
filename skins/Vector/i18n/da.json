@@ -3,7 +3,8 @@
 		"authors": [
 			"Byrial",
 			"Christian List",
-			"Peter Alberti"
+			"Peter Alberti",
+			"Saederup92"
 		]
 	},
 	"vector-skin-desc": "Moderne version af MonoBook med frisk udseende og mange forbedringer af brugervenligheden",
@@ -18,5 +19,7 @@
 	"vector-view-history": "Se historik",
 	"vector-view-view": "Læs",
 	"vector-view-viewsource": "Se kilden",
+	"vector-jumptonavigation": "Spring til navigation",
+	"vector-jumptosearch": "Spring til søgning",
 	"vector-more-actions": "Mere"
 }

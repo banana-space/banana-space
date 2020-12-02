@@ -8,5 +8,14 @@
 	"skinname-monobook": "MonoBook",
 	"monobook-desc": "A klasszikus MediaWiki-felület 2004 óta; egy könyv fekete-fehér fotója alapján kapta a nevét",
 	"monobook.css": "/* Az ide elhelyezett CSS hatással lesz a MonoBook felület használóira */",
-	"monobook.js": "/* A MonoBook felületet használó szerkesztők számára betöltendő JavaScriptek */"
+	"monobook.js": "/* A MonoBook felületet használó szerkesztők számára betöltendő JavaScriptek */",
+	"monobook-jumptotop": "Lap tetejére",
+	"monobook-jumptopersonal": "Felhasználói eszközök",
+	"monobook-jumptonavigation": "Ugrás a navigációhoz",
+	"monobook-jumptosearch": "Ugrás a kereséshez",
+	"monobook-more-actions": "Több",
+	"monobook-cactions-label": "Lapműveletek",
+	"monobook-notifications-link": "Értesítések ($1)",
+	"monobook-notifications-link-none": "Értesítések",
+	"monobook-responsive-label": "Alkalmazkodó MonoBook-megjelenés engedélyezése"
 }

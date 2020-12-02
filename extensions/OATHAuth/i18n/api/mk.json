@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"apihelp-query+oath-description": "Проверка дали двочинителската заверка (OATH) е овозможена за даден корисник.",
+	"apihelp-query+oath-summary": "Провери дали е овозможена двочинителската заверка (OATH) за даден корисник.",
+	"apihelp-query+oath-param-user": "За кој корисник да се дадат информации. По основно: тековниот корисник.",
+	"apihelp-query+oath-example-1": "Дај информации за тековниот корисник.",
+	"apihelp-query+oath-example-2": "Дај информации за корисникот <kbd>Пример</kbd>",
+	"apihelp-oathvalidate-description": "Провери шифра за двочинителска заверка (OATH).",
+	"apihelp-oathvalidate-summary": "Провери шифра за двочинителска заверка (OATH).",
+	"apihelp-oathvalidate-param-user": "Корисник чија шифра треба да се завери. По основно: тековниот корисник.",
+	"apihelp-oathvalidate-param-totp": "Шифра за двочинителска заверка (OATH). По старо, може да се употреби параметарот „data“.",
+	"apihelp-oathvalidate-example-1": "Провери шифра за тековниот корисник",
+	"apihelp-oathvalidate-example-2": "Провери шифра за корисникот <kbd>Пример</kbd>",
+	"apihelp-oathvalidate-example-3": "Проверка на JSON-податоци за корисникот <kbd>Пример</kbd>",
+	"apihelp-oathvalidate-param-data": "Податоците шифрирани во JSON очекувани од модулот тековно активирани за корисникот што се заверува"
+}

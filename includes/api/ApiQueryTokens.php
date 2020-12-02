@@ -23,6 +23,9 @@
  * @since 1.24
  */
 
+use MediaWiki\Api\ApiHookRunner;
+use MediaWiki\MediaWikiServices;
+
 /**
  * Module to fetch tokens via action=query&meta=tokens
  *
@@ -72,7 +75,9 @@ class ApiQueryTokens extends ApiQueryBase {
 				'login' => [ '', 'login' ],
 				'createaccount' => [ '', 'createaccount' ],
 			];
-			Hooks::run( 'ApiQueryTokensRegisterTypes', [ &$salts ] );
+			$hookContainer = MediaWikiServices::getInstance()->getHookContainer();
+			$hookRunner = new ApiHookRunner( $hookContainer );
+			$hookRunner->onApiQueryTokensRegisterTypes( $salts );
 			ksort( $salts );
 		}
 
@@ -94,7 +99,7 @@ class ApiQueryTokens extends ApiQueryBase {
 	public static function getToken( User $user, MediaWiki\Session\Session $session, $salt ) {
 		if ( is_array( $salt ) ) {
 			$session->persist();
-			return call_user_func_array( [ $session, 'getToken' ], $salt );
+			return $session->getToken( ...$salt );
 		} else {
 			return $user->getEditTokenObject( $salt, $session->getRequest() );
 		}

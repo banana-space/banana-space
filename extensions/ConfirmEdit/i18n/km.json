@@ -15,5 +15,6 @@
 	"captcha-createaccount-fail": "CAPTCHAបាត់ឬមិនត្រឹមត្រូវ។",
 	"captcha-create": "ដើម្បី​បង្កើត​ទំព័រ សូមដោះស្រាយ​ប្រមាណវិធីបូក​ខាងក្រោម​នេះរួច​បញ្ជូលចម្លើយ​ទៅក្នុង​ប្រអប់សិន([[Special:Captcha/help|ព័ត៌មាន​បន្ថែម]])៖",
 	"captcha-sendemail": "ដើម្បីការពារវិគីពីស្ប៉ាមស្វ័យប្រវត្តិ សូមដោះស្រាយចំណោទងាយៗខាងក្រោមរួចវាយបញ្ជូលចម្លើយទៅក្នុងប្រអប់ ([[Special:Captcha/help|ព័ត៌មានបន្ថែម]])៖",
-	"captchahelp-title": "ជំនួយអំពី Captcha"
+	"captchahelp-title": "ជំនួយអំពី Captcha",
+	"confirmedit-preview-line": "លេខ​បន្ទាត់"
 }

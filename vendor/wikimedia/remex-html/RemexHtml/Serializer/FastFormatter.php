@@ -7,10 +7,13 @@ namespace RemexHtml\Serializer;
  * in the Tokenizer.
  */
 class FastFormatter implements Formatter {
-	function __construct( $options = [] ) {
+	public function __construct( $options = [] ) {
 	}
 
-	function startDocument( $fragmentNamespace, $fragmentName ) {
+	/**
+	 * @inheritDoc
+	 */
+	public function startDocument( $fragmentNamespace, $fragmentName ) {
 		if ( $fragmentNamespace === null ) {
 			return "<!DOCTYPE html>\n";
 		} else {
@@ -18,14 +21,24 @@ class FastFormatter implements Formatter {
 		}
 	}
 
-	function doctype( $name, $public, $system ) {
+	/**
+	 * @inheritDoc
+	 */
+	public function doctype( $name, $public, $system ) {
+		return '';
 	}
 
-	function characters( SerializerNode $parent, $text, $start, $length ) {
+	/**
+	 * @inheritDoc
+	 */
+	public function characters( SerializerNode $parent, $text, $start, $length ) {
 		return substr( $text, $start, $length );
 	}
 
-	function element( SerializerNode $parent, SerializerNode $node, $contents ) {
+	/**
+	 * @inheritDoc
+	 */
+	public function element( SerializerNode $parent, SerializerNode $node, $contents ) {
 		$name = $node->name;
 		$ret = "<$name";
 		foreach ( $node->attrs->getValues() as $attrName => $value ) {
@@ -43,7 +56,10 @@ class FastFormatter implements Formatter {
 		return $ret;
 	}
 
-	function comment( SerializerNode $parent, $text ) {
+	/**
+	 * @inheritDoc
+	 */
+	public function comment( SerializerNode $parent, $text ) {
 		return "<!--$text-->";
 	}
 }

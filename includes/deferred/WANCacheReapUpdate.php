@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Linker\LinkTarget;
+use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Wikimedia\Rdbms\IDatabase;
 
@@ -10,7 +12,7 @@ use Wikimedia\Rdbms\IDatabase;
  * recentchanges table as a reliable stream to make certain keys reach consistency
  * as soon as the underlying replica database catches up. These means that critical
  * keys will not escape getting purged simply due to brief hiccups in the network,
- * which are more prone to happen accross datacenters.
+ * which are more prone to happen across datacenters.
  *
  * ----
  * "I was trying to cheat death. I was only trying to surmount for a little while the
@@ -36,9 +38,9 @@ class WANCacheReapUpdate implements DeferrableUpdate {
 		$this->logger = $logger;
 	}
 
-	function doUpdate() {
+	public function doUpdate() {
 		$reaper = new WANObjectCacheReaper(
-			ObjectCache::getMainWANInstance(),
+			MediaWikiServices::getInstance()->getMainWANObjectCache(),
 			ObjectCache::getLocalClusterInstance(),
 			[ $this, 'getTitleChangeEvents' ],
 			[ $this, 'getEventAffectedKeys' ],
@@ -77,7 +79,7 @@ class WANCacheReapUpdate implements DeferrableUpdate {
 				"rc_timestamp < $encEnd"
 			],
 			__METHOD__,
-			[ 'ORDER BY' => 'rc_timestamp ASC, rc_id ASC', 'LIMIT' => $limit ]
+			[ 'ORDER BY' => [ 'rc_timestamp ASC', 'rc_id ASC' ], 'LIMIT' => $limit ]
 		);
 
 		$events = [];
@@ -97,10 +99,10 @@ class WANCacheReapUpdate implements DeferrableUpdate {
 	 *
 	 * @see WANObjectCacheRepear
 	 * @param WANObjectCache $cache
-	 * @param TitleValue $t
+	 * @param LinkTarget $t
 	 * @return string[]
 	 */
-	public function getEventAffectedKeys( WANObjectCache $cache, TitleValue $t ) {
+	public function getEventAffectedKeys( WANObjectCache $cache, LinkTarget $t ) {
 		/** @var WikiPage[]|LocalFile[]|User[] $entities */
 		$entities = [];
 
@@ -108,11 +110,12 @@ class WANCacheReapUpdate implements DeferrableUpdate {
 		// namespaces, but special pages do appear in RC sometimes, e.g. for logs
 		// of AbuseFilter filter changes.
 		if ( $t->getNamespace() >= 0 ) {
-			$entities[] = WikiPage::factory( Title::newFromTitleValue( $t ) );
+			$entities[] = WikiPage::factory( Title::newFromLinkTarget( $t ) );
 		}
 
 		if ( $t->inNamespace( NS_FILE ) ) {
-			$entities[] = wfLocalFile( $t->getText() );
+			$entities[] = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
+				->newFile( $t->getText() );
 		}
 		if ( $t->inNamespace( NS_USER ) ) {
 			$entities[] = User::newFromName( $t->getText(), false );

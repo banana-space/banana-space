@@ -5,6 +5,7 @@
 			{
 				"name": "Base",
 				"classes": [
+					"mw.mmv",
 					"mw.mmv.Config",
 					"mw.mmv.EmbedFileFormatter",
 					"mw.mmv.HtmlUtils",
@@ -34,12 +35,6 @@
 				]
 			},
 			{
-				"name": "Routers",
-				"classes": [
-					"mw.mmv.routing.*"
-				]
-			},
-			{
 				"name": "Interface",
 				"classes": [
 					"mw.mmv.ui.*"
@@ -58,7 +53,7 @@
 					"jQuery.Promise",
 					"jQuery.Deferred",
 					"jQuery.Event",
-					"jqXHR"
+					"jQuery.jqXHR"
 				]
 			},
 			{
@@ -75,6 +70,12 @@
 				]
 			},
 			{
+				"name": "OOjs Router",
+				"classes": [
+					"OO.Router"
+				]
+			},
+			{
 				"name": "OOUI",
 				"classes": [
 					"OO.ui.*"
@@ -88,7 +89,9 @@
 					"mw.Title",
 					"mw.Map",
 					"mw.storage",
-					"mw.eventLog"
+					"mw.SafeStorage",
+					"mw.eventLog",
+					"mw.widgets.CopyTextLayout"
 				]
 			},
 			{

@@ -1,14 +1,14 @@
-( function ( mw, $ ) {
+( function () {
 	$( function () {
-		/*global confirm */
-
 		// Confirm nuke
+		// eslint-disable-next-line no-jquery/no-global-selector
 		$( 'form[name="nukelist"]' ).on( 'submit', function () {
-			var pages = $( this ).find( 'input[name="pages[]"][type="checkbox"]:checked' );
-			if ( pages.length ) {
-				return confirm( mw.msg( 'nuke-confirm', pages.length ) );
+			var $pages = $( this ).find( 'input[name="pages[]"][type="checkbox"]:checked' );
+			if ( $pages.length ) {
+				// eslint-disable-next-line no-alert
+				return confirm( mw.message( 'nuke-confirm', $pages.length ) );
 			}
 		} );
 
 	} );
-}( mediaWiki, jQuery ) );
+}() );

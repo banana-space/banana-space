@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"BeginaFelicysym",
-			"Sp5uhe",
-			"Woytecr",
 			"Chrumps",
+			"Rail",
+			"Railfail536",
+			"Sp5uhe",
 			"WTM",
-			"Railfail536"
+			"Woytecr"
 		]
 	},
 	"codeeditor-desc": "Edytowanie stron z kolorowaniem składni JavaScript oraz CSS z użyciem [https://ace.c9.io/ edytora Ace]",

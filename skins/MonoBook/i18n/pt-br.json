@@ -1,13 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
-			"Fabsouza1",
 			"Cainamarques",
+			"Eduardo Addad de Oliveira",
+			"Fabsouza1",
 			"Felipe L. Ewald"
 		]
 	},
 	"skinname-monobook": "MonoBook",
 	"monobook-desc": "O tema clássico do MediaWiki desde 2004, assim chamado pela imagem preto e branco de um livro que é colocada no plano de fundo da página",
 	"monobook.css": "/* CSS colocado aqui irá afetar usuários do tema MonoBook */",
-	"monobook.js": "/* Qualquer JavaScript aqui colocado será carregado para usuários usando o tema MonoBook */"
+	"monobook.js": "/* Qualquer JavaScript aqui colocado será carregado para usuários usando o tema MonoBook */",
+	"monobook-jumptotop": "voltar ao topo",
+	"monobook-jumptopersonal": "ferramentas de usuário",
+	"monobook-jumptonavigation": "Ir para navegação",
+	"monobook-jumptosearch": "Ir para pesquisar",
+	"monobook-more-actions": "Mais",
+	"monobook-cactions-label": "Ações da página",
+	"monobook-notifications-link": "Notificações ($1)",
+	"monobook-notifications-link-none": "Notificações",
+	"monobook-responsive-label": "Ativar o MonoBook de resposta rápida"
 }

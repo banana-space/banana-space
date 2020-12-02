@@ -30,8 +30,8 @@
  * @ingroup Maintenance
  */
 
-use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Logger\ConsoleSpi;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
 $optionsWithArgs = [ 'd' ];
@@ -77,11 +77,11 @@ while ( ( $__line = Maintenance::readconsole() ) !== false ) {
 	try {
 		$__val = eval( $__line . ";" );
 	} catch ( Exception $__e ) {
-		echo "Caught exception " . get_class( $__e ) .
-			": {$__e->getMessage()}\n" . $__e->getTraceAsString() . "\n";
+		fwrite( STDERR, "Caught exception " . get_class( $__e ) .
+			": {$__e->getMessage()}\n" . $__e->getTraceAsString() . "\n" );
 		continue;
 	}
-	if ( wfIsHHVM() || is_null( $__val ) ) {
+	if ( $__val === null ) {
 		echo "\n";
 	} elseif ( is_string( $__val ) || is_numeric( $__val ) ) {
 		echo "$__val\n";

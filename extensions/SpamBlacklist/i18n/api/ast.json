@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Xuacu"
+		]
+	},
+	"apihelp-spamblacklist-description": "Validar una o más URLs escontra SpamBlacklist.",
+	"apihelp-spamblacklist-example-1": "Comprobar dos URLs escontra la llista prieta",
+	"apihelp-spamblacklist-param-url": "URLs a validar escontra la llista prieta.",
+	"apihelp-spamblacklist-summary": "Validar una o más URLs escontra SpamBlacklist."
+}

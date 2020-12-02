@@ -1,7 +1,11 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * @group SpamBlacklist
+ * @group Database
+ * @covers SpamBlacklist
  */
 class SpamBlacklistTest extends MediaWikiTestCase {
 	/**
@@ -12,8 +16,8 @@ class SpamBlacklistTest extends MediaWikiTestCase {
 	/**
 	 * Spam blacklist regexes. Examples taken from:
 	 *
-	 * @see http://meta.wikimedia.org/wiki/Spam_blacklist
-	 * @see http://en.wikipedia.org/wiki/MediaWiki:Spam-blacklist
+	 * @see https://meta.wikimedia.org/wiki/Spam_blacklist
+	 * @see https://en.wikipedia.org/wiki/MediaWiki:Spam-blacklist
 	 *
 	 * via Flow extension
 	 *
@@ -24,7 +28,7 @@ class SpamBlacklistTest extends MediaWikiTestCase {
 	/**
 	 * Spam whitelist regexes. Examples taken from:
 	 *
-	 * @see http://en.wikipedia.org/wiki/MediaWiki:Spam-whitelist
+	 * @see https://en.wikipedia.org/wiki/MediaWiki:Spam-whitelist
 	 *
 	 * via Flow extension
 	 *
@@ -63,7 +67,7 @@ class SpamBlacklistTest extends MediaWikiTestCase {
 		$this->assertEquals( $expected, $returnValue );
 	}
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		// create spam filter
@@ -73,7 +77,7 @@ class SpamBlacklistTest extends MediaWikiTestCase {
 			'files' => [],
 		] );
 
-		\MessageCache::singleton()->enable();
+		MediaWikiServices::getInstance()->getMessageCache()->enable();
 		$this->insertPage( 'MediaWiki:Spam-blacklist', implode( "\n", $this->blacklist ) );
 		$this->insertPage( 'MediaWiki:Spam-whitelist', implode( "\n", $this->whitelist ) );
 
@@ -84,8 +88,8 @@ class SpamBlacklistTest extends MediaWikiTestCase {
 		$reflProp->setValue( $instance, false );
 	}
 
-	protected function tearDown() {
-		\MessageCache::singleton()->disable();
+	protected function tearDown() : void {
+		MediaWikiServices::getInstance()->getMessageCache()->disable();
 		parent::tearDown();
 	}
 }

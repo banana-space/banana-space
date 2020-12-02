@@ -1,0 +1,15 @@
+/*!
+ * VisualEditor MediaWiki Initialization WikitextSurface styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwWikitextSurface .ve-ce-attachedRootNode {
+	/* Inherit mw-editfont setting instead of default source mode setting */
+	font-family: inherit;
+}
+
+.ve-ui-mwWikitextSurface .ve-ce-paragraphNode {
+	line-height: 1.5em;
+}

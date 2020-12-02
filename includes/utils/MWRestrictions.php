@@ -19,6 +19,7 @@
  */
 
 use Wikimedia\IPSet;
+use Wikimedia\IPUtils;
 
 /**
  * A class to check request restrictions expressed as a JSON object
@@ -28,7 +29,7 @@ class MWRestrictions {
 	private $ipAddresses = [ '0.0.0.0/0', '::/0' ];
 
 	/**
-	 * @param array $restrictions
+	 * @param array|null $restrictions
 	 * @throws InvalidArgumentException
 	 */
 	protected function __construct( array $restrictions = null ) {
@@ -88,7 +89,7 @@ class MWRestrictions {
 			throw new InvalidArgumentException( 'IPAddresses is not an array' );
 		}
 		foreach ( $restrictions['IPAddresses'] as $ip ) {
-			if ( !\IP::isIPAddress( $ip ) ) {
+			if ( !IPUtils::isIPAddress( $ip ) ) {
 				throw new InvalidArgumentException( "Invalid IP address: $ip" );
 			}
 		}

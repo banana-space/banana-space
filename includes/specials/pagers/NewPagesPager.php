@@ -22,30 +22,35 @@
 /**
  * @ingroup Pager
  */
+use MediaWiki\MediaWikiServices;
+
 class NewPagesPager extends ReverseChronologicalPager {
 
-	// Stored opts
+	/**
+	 * @var FormOptions
+	 */
 	protected $opts;
 
 	/**
-	 * @var HTMLForm
+	 * @var SpecialNewpages
 	 */
 	protected $mForm;
 
-	function __construct( $form, FormOptions $opts ) {
+	/**
+	 * @param SpecialNewpages $form
+	 * @param FormOptions $opts
+	 */
+	public function __construct( $form, FormOptions $opts ) {
 		parent::__construct( $form->getContext() );
 		$this->mForm = $form;
 		$this->opts = $opts;
 	}
 
-	function getQueryInfo() {
+	public function getQueryInfo() {
 		$rcQuery = RecentChange::getQueryInfo();
 
 		$conds = [];
 		$conds['rc_new'] = 1;
-
-		$namespace = $this->opts->getValue( 'namespace' );
-		$namespace = ( $namespace === 'all' ) ? false : intval( $namespace );
 
 		$username = $this->opts->getValue( 'username' );
 		$user = Title::makeTitleSafe( NS_USER, $username );
@@ -59,26 +64,16 @@ class NewPagesPager extends ReverseChronologicalPager {
 			}
 		}
 
-		$rcIndexes = [];
-
-		if ( $namespace !== false ) {
-			if ( $this->opts->getValue( 'invert' ) ) {
-				$conds[] = 'rc_namespace != ' . $this->mDb->addQuotes( $namespace );
-			} else {
-				$conds['rc_namespace'] = $namespace;
-			}
-		}
-
 		if ( $user ) {
 			$conds[] = ActorMigration::newMigration()->getWhere(
 				$this->mDb, 'rc_user', User::newFromName( $user->getText(), false ), false
 			)['conds'];
-		} elseif ( User::groupHasPermission( '*', 'createpage' ) &&
-			$this->opts->getValue( 'hideliu' )
-		) {
+		} elseif ( $this->canAnonymousUsersCreatePages() && $this->opts->getValue( 'hideliu' ) ) {
 			# If anons cannot make new pages, don't "exclude logged in users"!
 			$conds[] = ActorMigration::newMigration()->isAnon( $rcQuery['fields']['rc_user'] );
 		}
+
+		$conds = array_merge( $conds, $this->getNamespaceCond() );
 
 		# If this user cannot see patrolled edits or they are off, don't do dumb queries!
 		if ( $this->opts->getValue( 'hidepatrolled' ) && $this->getUser()->useNPPatrol() ) {
@@ -96,26 +91,19 @@ class NewPagesPager extends ReverseChronologicalPager {
 		// Allow changes to the New Pages query
 		$tables = array_merge( $rcQuery['tables'], [ 'page' ] );
 		$fields = array_merge( $rcQuery['fields'], [
-			'length' => 'page_len', 'rev_id' => 'page_latest', 'page_namespace', 'page_title'
+			'length' => 'page_len', 'rev_id' => 'page_latest', 'page_namespace', 'page_title',
+			'page_content_model',
 		] );
-		$join_conds = [ 'page' => [ 'INNER JOIN', 'page_id=rc_cur_id' ] ] + $rcQuery['joins'];
+		$join_conds = [ 'page' => [ 'JOIN', 'page_id=rc_cur_id' ] ] + $rcQuery['joins'];
 
-		// Avoid PHP 7.1 warning from passing $this by reference
-		$pager = $this;
-		Hooks::run( 'SpecialNewpagesConditions',
-			[ &$pager, $this->opts, &$conds, &$tables, &$fields, &$join_conds ] );
-
-		$options = [];
-
-		if ( $rcIndexes ) {
-			$options = [ 'USE INDEX' => [ 'recentchanges' => $rcIndexes ] ];
-		}
+		$this->getHookRunner()->onSpecialNewpagesConditions(
+			$this, $this->opts, $conds, $tables, $fields, $join_conds );
 
 		$info = [
 			'tables' => $tables,
 			'fields' => $fields,
 			'conds' => $conds,
-			'options' => $options,
+			'options' => [],
 			'join_conds' => $join_conds
 		];
 
@@ -132,15 +120,56 @@ class NewPagesPager extends ReverseChronologicalPager {
 		return $info;
 	}
 
-	function getIndexField() {
+	private function canAnonymousUsersCreatePages() {
+		$pm = MediaWikiServices::getInstance()->getPermissionManager();
+		return ( $pm->groupHasPermission( '*', 'createpage' ) ||
+			$pm->groupHasPermission( '*', 'createtalk' )
+		);
+	}
+
+	// Based on ContribsPager.php
+	private function getNamespaceCond() {
+		$namespace = $this->opts->getValue( 'namespace' );
+		if ( $namespace === 'all' || $namespace === '' ) {
+			return [];
+		}
+
+		$namespace = intval( $namespace );
+		if ( $namespace < NS_MAIN ) {
+			// Negative namespaces are invalid
+			return [];
+		}
+
+		$invert = $this->opts->getValue( 'invert' );
+		$associated = $this->opts->getValue( 'associated' );
+
+		$eq_op = $invert ? '!=' : '=';
+		$bool_op = $invert ? 'AND' : 'OR';
+
+		$selectedNS = $this->mDb->addQuotes( $namespace );
+		if ( !$associated ) {
+			return [ "rc_namespace $eq_op $selectedNS" ];
+		}
+
+		$associatedNS = $this->mDb->addQuotes(
+			MediaWikiServices::getInstance()->getNamespaceInfo()->getAssociated( $namespace )
+		);
+		return [
+			"rc_namespace $eq_op $selectedNS " .
+			$bool_op .
+			" rc_namespace $eq_op $associatedNS"
+		];
+	}
+
+	public function getIndexField() {
 		return 'rc_timestamp';
 	}
 
-	function formatRow( $row ) {
+	public function formatRow( $row ) {
 		return $this->mForm->formatRow( $row );
 	}
 
-	function getStartBody() {
+	protected function getStartBody() {
 		# Do a batch existence check on pages
 		$linkBatch = new LinkBatch();
 		foreach ( $this->mResult as $row ) {
@@ -153,7 +182,7 @@ class NewPagesPager extends ReverseChronologicalPager {
 		return '<ul>';
 	}
 
-	function getEndBody() {
+	protected function getEndBody() {
 		return '</ul>';
 	}
 }

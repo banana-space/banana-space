@@ -27,6 +27,7 @@ use MediaWiki\Session\SessionProvider;
 /**
  * This is an authentication request added by AuthManager to show a "remember
  * me" checkbox. When checked, it will take more time for the authenticated session to expire.
+ * @stable to extend
  * @ingroup Auth
  * @since 1.27
  */
@@ -40,12 +41,20 @@ class RememberMeAuthenticationRequest extends AuthenticationRequest {
 	/** @var bool */
 	public $rememberMe = false;
 
+	/**
+	 * @stable to call
+	 */
 	public function __construct() {
 		/** @var SessionProvider $provider */
 		$provider = SessionManager::getGlobalSession()->getProvider();
+		'@phan-var SessionProvider $provider';
 		$this->expiration = $provider->getRememberUserDuration();
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function getFieldInfo() {
 		if ( !$this->expiration ) {
 			return [];

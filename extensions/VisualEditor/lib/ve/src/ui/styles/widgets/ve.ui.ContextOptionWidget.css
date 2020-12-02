@@ -1,0 +1,31 @@
+/*!
+ * VisualEditor UserInterface ContextOptionWidget styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-contextOptionWidget {
+	padding: 0.5em 1em 0.5em 3em;
+}
+
+.ve-ui-contextOptionWidget .oo-ui-labelElement-label {
+	color: #54595d;
+	/* Size required to match menu and inspector widths */
+	max-width: 19.4em;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.ve-ui-contextOptionWidget .oo-ui-iconElement-icon {
+	opacity: 0.8;
+}
+
+.ve-ui-contextOptionWidget.oo-ui-optionWidget-highlighted,
+.ve-ui-contextOptionWidget.oo-ui-optionWidget-selected,
+.ve-ui-contextOptionWidget.oo-ui-optionWidget-pressed {
+	background-color: transparent;
+}
+
+.ve-ui-contextOptionWidget.oo-ui-optionWidget-highlighted .oo-ui-iconElement-icon {
+	opacity: 1;
+}

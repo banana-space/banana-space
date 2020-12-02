@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"আফতাবুজ্জামান"
+		]
+	},
+	"apihelp-query+pageimages-description": "পাতায় থাকা চিত্র সম্পর্কে তথ্য প্রদান করে, যেমন থাম্বনেল এবং চিত্রের উপস্থিতি।",
+	"apihelp-query+pageimages-param-thumbsize": "সর্বোচ্চ থাম্বনেইলের মাত্রা।",
+	"apihelp-query+pageimages-paramvalue-license-free": "শুধু উন্মুক্ত চিত্রসমূহ"
+}

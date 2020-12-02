@@ -16,7 +16,15 @@
  *
  */
 
+namespace MediaWiki\Extensions\ParserFunctions;
+
+use Exception;
+use Message;
+
 class ExprError extends Exception {
+	/** @var Message */
+	private $mwMessage;
+
 	/**
 	 * @param string $msg
 	 * @param string $parameter
@@ -28,6 +36,16 @@ class ExprError extends Exception {
 		// pfunc_expr_unexpected_closing_bracket, pfunc_expr_unrecognised_punctuation,
 		// pfunc_expr_unclosed_bracket, pfunc_expr_division_by_zero, pfunc_expr_invalid_argument,
 		// pfunc_expr_invalid_argument_ln, pfunc_expr_unknown_error, pfunc_expr_not_a_number
-		$this->message = wfMessage( "pfunc_expr_$msg", $parameter )->inContentLanguage()->text();
+		$this->mwMessage = wfMessage( "pfunc_expr_$msg", $parameter );
+	}
+
+	/**
+	 * Replacement for getMessage() to prevent message parsing during tests which initializes
+	 * whole bloody MediaWiki.
+	 *
+	 * @return string Error message to be to be displayed to end users
+	 */
+	public function getUserFriendlyMessage() {
+		return $this->mwMessage->inContentLanguage()->text();
 	}
 }

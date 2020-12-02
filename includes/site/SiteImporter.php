@@ -2,7 +2,7 @@
 
 /**
  * Utility for importing site entries from XML.
- * For the expected format of the input, see docs/sitelist.txt and docs/sitelist-1.0.xsd.
+ * For the expected format of the input, see docs/sitelist.md and docs/sitelist-1.0.xsd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
  * @file
  * @ingroup Site
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SiteImporter {
@@ -171,6 +171,7 @@ class SiteImporter {
 		$pathTags = $siteElement->getElementsByTagName( 'path' );
 		for ( $i = 0; $i < $pathTags->length; $i++ ) {
 			$pathElement = $pathTags->item( $i );
+			'@phan-var DOMElement $pathElement';
 			$pathType = $this->getAttributeValue( $pathElement, 'type' );
 			$path = $pathElement->textContent;
 
@@ -180,6 +181,7 @@ class SiteImporter {
 		$idTags = $siteElement->getElementsByTagName( 'localid' );
 		for ( $i = 0; $i < $idTags->length; $i++ ) {
 			$idElement = $idTags->item( $i );
+			'@phan-var DOMElement $idElement';
 			$idType = $this->getAttributeValue( $idElement, 'type' );
 			$id = $idElement->textContent;
 

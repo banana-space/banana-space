@@ -19,7 +19,8 @@ class CiteThisPageHooks {
 			$nav_urls['citethispage'] = [
 				'text' => $skintemplate->msg( 'citethispage-link' )->text(),
 				'href' => SpecialPage::getTitleFor( 'CiteThisPage' )
-					->getLocalURL( [ 'page' => $title->getPrefixedDBkey(), 'id' => $revid ] ),
+					->getLocalURL( [ 'page' => $title->getPrefixedDBkey(), 'id' => $revid,
+					'wpFormIdentifier' => 'titleform' ] ),
 				'id' => 't-cite',
 				# Used message keys: 'tooltip-citethispage', 'accesskey-citethispage'
 				'single-id' => 'citethispage',

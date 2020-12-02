@@ -2,15 +2,17 @@
 	"@metadata": {
 		"authors": [
 			"Danny B.",
+			"Dvorapa",
 			"Li-sung",
 			"Martin Kozák",
 			"Matěj Grabovský",
+			"Matěj Suchánek",
 			"Mormegil"
 		]
 	},
 	"renameuser": "Přejmenovat uživatele",
-	"renameuser-linkoncontribs": "přejmenovat uživatele",
-	"renameuser-linkoncontribs-text": "Přejmenovat tohoto uživatele",
+	"renameuser-linkoncontribs": "přejmenovat {{GENDER:$1|uživatele|uživatelku}}",
+	"renameuser-linkoncontribs-text": "Přejmenovat {{GENDER:$1|tohoto uživatele|tuto uživatelku}}",
 	"renameuser-desc": "Přejmenování uživatele (vyžadováno oprávnění ''renameuser'')",
 	"renameuserold": "Stávající uživatelské jméno:",
 	"renameusernew": "Nové uživatelské jméno:",

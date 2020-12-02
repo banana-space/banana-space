@@ -1,8 +1,6 @@
 <?php
 
 /**
- * Tests for the SiteImporter class.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -29,10 +27,7 @@
  *
  * @author Daniel Kinzler
  */
-class SiteImporterTest extends PHPUnit\Framework\TestCase {
-
-	use MediaWikiCoversValidator;
-	use PHPUnit4And6Compat;
+class SiteImporterTest extends MediaWikiIntegrationTestCase {
 
 	private function newSiteImporter( array $expectedSites, $errorCount ) {
 		$store = $this->getMockBuilder( SiteStore::class )->getMock();
@@ -149,7 +144,7 @@ class SiteImporterTest extends PHPUnit\Framework\TestCase {
 	}
 
 	public function testImportFromXML_malformed() {
-		$this->setExpectedException( Exception::class );
+		$this->expectException( Exception::class );
 
 		$store = $this->getMockBuilder( SiteStore::class )->getMock();
 		$importer = new SiteImporter( $store );

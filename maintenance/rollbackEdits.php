@@ -71,7 +71,7 @@ class RollbackEdits extends Maintenance {
 		}
 
 		if ( !$titles ) {
-			$this->output( 'No suitable titles to be rolled back' );
+			$this->output( 'No suitable titles to be rolled back.' );
 
 			return;
 		}
@@ -82,9 +82,9 @@ class RollbackEdits extends Maintenance {
 			$page = WikiPage::factory( $t );
 			$this->output( 'Processing ' . $t->getPrefixedText() . '... ' );
 			if ( !$page->commitRollback( $user, $summary, $bot, $results, $doer ) ) {
-				$this->output( "done\n" );
+				$this->output( "Done!\n" );
 			} else {
-				$this->output( "failed\n" );
+				$this->output( "Failed!\n" );
 			}
 		}
 	}
@@ -99,18 +99,16 @@ class RollbackEdits extends Maintenance {
 		$titles = [];
 		$actorQuery = ActorMigration::newMigration()
 			->getWhere( $dbr, 'rev_user', User::newFromName( $user, false ) );
-		foreach ( $actorQuery['orconds'] as $cond ) {
-			$results = $dbr->select(
-				[ 'page', 'revision' ] + $actorQuery['tables'],
-				[ 'page_namespace', 'page_title' ],
-				[ $cond ],
-				__METHOD__,
-				[],
-				[ 'revision' => [ 'JOIN', 'page_latest = rev_id' ] ] + $actorQuery['joins']
-			);
-			foreach ( $results as $row ) {
-				$titles[] = Title::makeTitle( $row->page_namespace, $row->page_title );
-			}
+		$results = $dbr->select(
+			[ 'page', 'revision' ] + $actorQuery['tables'],
+			[ 'page_namespace', 'page_title' ],
+			$actorQuery['conds'],
+			__METHOD__,
+			[],
+			[ 'revision' => [ 'JOIN', 'page_latest = rev_id' ] ] + $actorQuery['joins']
+		);
+		foreach ( $results as $row ) {
+			$titles[] = Title::makeTitle( $row->page_namespace, $row->page_title );
 		}
 
 		return $titles;

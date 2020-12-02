@@ -1,14 +1,14 @@
 /*!
  * JavaScript for History action
  */
-jQuery( function ( $ ) {
-	var	$historyCompareForm = $( '#mw-history-compare' ),
+$( function () {
+	var $historyCompareForm = $( '#mw-history-compare' ),
 		$historySubmitter,
 		$lis = $( '#pagehistory > li' );
 
 	/**
 	 * @ignore
-	 * @context {Element} input
+	 * @this {Element} input
 	 * @param {jQuery.Event} e
 	 * @return {boolean} False to cancel the default event
 	 */
@@ -39,11 +39,17 @@ jQuery( function ( $ ) {
 				$li.addClass( 'selected after' );
 				nextState = 'after';
 			} else if ( $diffRadio.prop( 'checked' ) ) {
+				// The following classes are used here:
+				// * before
+				// * after
 				$li.addClass( 'selected ' + nextState );
 				nextState = 'between';
 			} else {
 				// This list item has neither checked
 				// apply the appropriate class following the previous item.
+				// The following classes are used here:
+				// * before
+				// * after
 				$li.addClass( nextState );
 			}
 		} );
@@ -51,7 +57,7 @@ jQuery( function ( $ ) {
 		return true;
 	}
 
-	$lis.find( 'input[name="diff"], input[name="oldid"]' ).click( updateDiffRadios );
+	$lis.find( 'input[name="diff"], input[name="oldid"]' ).on( 'click', updateDiffRadios );
 
 	// Set initial state
 	updateDiffRadios();
@@ -61,7 +67,7 @@ jQuery( function ( $ ) {
 
 	// Ideally we'd use e.target instead of $historySubmitter, but e.target points
 	// to the form element for submit actions, so.
-	$historyCompareForm.find( '.historysubmit' ).click( function () {
+	$historyCompareForm.find( '.historysubmit' ).on( 'click', function () {
 		$historySubmitter = $( this );
 	} );
 
@@ -71,8 +77,8 @@ jQuery( function ( $ ) {
 	// Without the cloning we'd be changing the real form, which is slower, could make
 	// the page look broken for a second in slow browsers and might show the form broken
 	// again when coming back from a "next" page.
-	$historyCompareForm.submit( function ( e ) {
-		var	$copyForm, $copyRadios, $copyAction;
+	$historyCompareForm.on( 'submit', function ( e ) {
+		var $copyForm, $copyRadios, $copyAction;
 
 		if ( $historySubmitter ) {
 			$copyForm = $historyCompareForm.clone();
@@ -80,26 +86,32 @@ jQuery( function ( $ ) {
 			$copyAction = $copyForm.find( '> [name="action"]' );
 
 			// Remove action=historysubmit and ids[..]=..
+			// eslint-disable-next-line no-jquery/no-class-state
 			if ( $historySubmitter.hasClass( 'mw-history-compareselectedversions-button' ) ) {
 				$copyAction.remove();
 				$copyForm.find( 'input[name^="ids["]:checked' ).prop( 'checked', false );
 
 			// Remove diff=&oldid=, change action=historysubmit to revisiondelete, remove revisiondelete
-			} else if ( $historySubmitter.hasClass( 'mw-history-revisiondelete-button' ) ||
-					$historySubmitter.hasClass( 'mw-history-editchangetags-button' ) ) {
+			} else if (
+				// eslint-disable-next-line no-jquery/no-class-state
+				$historySubmitter.hasClass( 'mw-history-revisiondelete-button' ) ||
+				// eslint-disable-next-line no-jquery/no-class-state
+				$historySubmitter.hasClass( 'mw-history-editchangetags-button' )
+			) {
 				$copyRadios.remove();
 				$copyAction.val( $historySubmitter.attr( 'name' ) );
+				// eslint-disable-next-line no-jquery/no-sizzle
 				$copyForm.find( ':submit' ).remove();
 			}
 
-			// IE7 doesn't do submission from an off-DOM clone, so insert hidden into document first
+			// Firefox requires the form to be attached, so insert hidden into document first
 			// Also remove potentially conflicting id attributes that we don't need anyway
 			$copyForm
 				.css( 'display', 'none' )
 				.find( '[id]' ).removeAttr( 'id' )
 				.end()
 				.insertAfter( $historyCompareForm )
-				.submit();
+				.trigger( 'submit' );
 
 			e.preventDefault();
 			return false; // Because the submit is special, return false as well.

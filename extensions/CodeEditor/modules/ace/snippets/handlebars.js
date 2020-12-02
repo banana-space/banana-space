@@ -4,4 +4,11 @@ ace.define("ace/snippets/handlebars",["require","exports","module"], function(re
 exports.snippetText =undefined;
 exports.scope = "handlebars";
 
-});
+});                (function() {
+                    ace.require(["ace/snippets/handlebars"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

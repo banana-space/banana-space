@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Maxí",
 			"S.Örvarr.S",
 			"Snævar",
-			"Maxí",
 			"Sveinn í Felli"
 		]
 	},
@@ -17,17 +17,15 @@
 	"nuke-multiplepeople": "Fjöldaeyðing nýjustu greina",
 	"nuke-tools": "Hér er hægt að fjöldaeyða síðum sem voru nýlega búnar til af notanda eða vistfangi.\nTilgreindu notendanafn eða vistfang til að fá lista yfir síður til að eyða, eða skildu reitinn eftir tóman til að fá lista yfir síður frá öllum notendum.",
 	"nuke-submit-user": "Lista síður",
-	"nuke-toggleinvert": "Umhverfa",
 	"nuke-submit-delete": "Eyða völdum síðum",
 	"right-nuke": "Fjöldaeyða síðum",
-	"nuke-select": "Velja: $1",
 	"nuke-userorip": "Notandanafn, vistfang eða tómt:",
 	"nuke-maxpages": "Hámarksfjöldi síðna:",
 	"nuke-editby": "Búnar til af [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",
 	"nuke-deleted": "'''$1''' hefur verið eytt.",
 	"nuke-not-deleted": "Mistök við eyðingu síðunnar [[:$1]].",
 	"nuke-delete-more": "[[Special:Nuke|Fjöldaeyða fleiri skrám]]",
-	"nuke-pattern": "Nafna mynstur:",
+	"nuke-pattern": "SQL-LÍKT mynstur (t.d. %) fyrir nafn á síðuna:",
 	"nuke-nopages-global": "Það eru engir síðutitlar sem samsvara leitinni þinni.",
 	"nuke-viewchanges": "skoða breytingar",
 	"nuke-linkoncontribs": "fjöldaeyða"

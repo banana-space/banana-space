@@ -4,7 +4,7 @@
  * @copyright 2011-2016 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-( function ( $, mw ) {
+( function () {
 
 	/**
 	 * Creates an mw.widgets.MediaSearchWidget object.
@@ -17,6 +17,8 @@
 	 * @param {number} [size] Vertical size of thumbnails
 	 */
 	mw.widgets.MediaSearchWidget = function MwWidgetsMediaSearchWidget( config ) {
+		var queueConfig;
+
 		// Configuration initialization
 		config = $.extend( {
 			placeholder: mw.msg( 'mw-widgets-mediasearch-input-placeholder' )
@@ -28,15 +30,18 @@
 		// Properties
 		this.providers = {};
 		this.lastQueryValue = '';
-		this.searchQueue = new mw.widgets.MediaSearchQueue( {
+
+		queueConfig = {
 			limit: this.constructor.static.limit,
 			threshold: this.constructor.static.threshold
-		} );
+		};
+		this.searchQueue = new mw.widgets.MediaSearchQueue( queueConfig );
+		this.userUploadsQueue = new mw.widgets.MediaUserUploadsQueue( queueConfig );
+		this.currentQueue = null;
 
 		this.queryTimeout = null;
 		this.itemCache = {};
 		this.promises = [];
-		this.lang = config.lang || 'en';
 		this.$panels = config.$panels;
 
 		this.externalLinkUrlProtocolsRegExp = new RegExp(
@@ -55,15 +60,19 @@
 
 		this.selected = null;
 
+		this.recentUploadsMessage = new OO.ui.LabelWidget( {
+			label: mw.msg( 'mw-widgets-mediasearch-recent-uploads', mw.user ),
+			classes: [ 'mw-widget-mediaSearchWidget-recentUploads' ]
+		} );
+		this.recentUploadsMessage.toggle( false );
 		this.noItemsMessage = new OO.ui.LabelWidget( {
 			label: mw.msg( 'mw-widgets-mediasearch-noresults' ),
-			classes: [ 'mw-widget-mediaSearchWidget-noresults' ]
+			classes: [ 'mw-widget-mediaSearchWidget-noResults' ]
 		} );
 		this.noItemsMessage.toggle( false );
 
 		// Events
 		this.$results.on( 'scroll', this.onResultsScroll.bind( this ) );
-		this.$query.append( this.noItemsMessage.$element );
 		this.results.connect( this, {
 			change: 'onResultsChange',
 			remove: 'onResultsRemove'
@@ -72,7 +81,12 @@
 		this.resizeHandler = OO.ui.debounce( this.afterResultsResize.bind( this ), 500 );
 
 		// Initialization
+		this.setLang( config.lang || 'en' );
+		this.$results.prepend( this.recentUploadsMessage.$element, this.noItemsMessage.$element );
 		this.$element.addClass( 'mw-widget-mediaSearchWidget' );
+
+		this.query.$input.attr( 'aria-label', mw.msg( 'mw-widgets-mediasearch-input-placeholder' ) );
+		this.results.$element.attr( 'aria-label', mw.msg( 'mw-widgets-mediasearch-results-aria-label' ) );
 	};
 
 	/* Inheritance */
@@ -140,14 +154,26 @@
 			value = this.getQueryValue();
 
 		if ( value === '' ) {
-			return;
+			if ( mw.user.isAnon() ) {
+				return;
+			} else {
+				if ( this.currentQueue !== this.userUploadsQueue ) {
+					this.userUploadsQueue.reset();
+				}
+				this.currentQueue = this.userUploadsQueue;
+				// TODO: use cached results?
+			}
+		} else {
+			this.currentQueue = this.searchQueue;
+			this.currentQueue.setSearchQuery( value );
 		}
+
+		this.recentUploadsMessage.toggle( this.currentQueue === this.userUploadsQueue );
 
 		this.query.pushPending();
 		search.noItemsMessage.toggle( false );
 
-		this.searchQueue.setSearchQuery( value );
-		this.searchQueue.get( this.constructor.static.limit )
+		this.currentQueue.get( this.constructor.static.limit )
 			.then( function ( items ) {
 				if ( items.length > 0 ) {
 					search.processQueueResults( items );
@@ -175,7 +201,10 @@
 			inputSearchQuery = this.getQueryValue(),
 			queueSearchQuery = this.searchQueue.getSearchQuery();
 
-		if ( inputSearchQuery === '' || queueSearchQuery !== inputSearchQuery ) {
+		if (
+			this.currentQueue === this.searchQueue &&
+			( inputSearchQuery === '' || queueSearchQuery !== inputSearchQuery )
+		) {
 			return;
 		}
 
@@ -233,6 +262,7 @@
 		this.itemCache = {};
 		this.currentItemCache = [];
 		this.resetRows();
+		this.recentUploadsMessage.toggle( false );
 
 		// Empty the results queue
 		this.layoutQueue = [];
@@ -431,6 +461,7 @@
 	mw.widgets.MediaSearchWidget.prototype.runLayoutQueue = function () {
 		var i, len;
 
+		// eslint-disable-next-line no-jquery/no-sizzle
 		if ( this.$element.is( ':visible' ) ) {
 			for ( i = 0, len = this.layoutQueue.length; i < len; i++ ) {
 				this.layoutQueue.pop()();
@@ -460,6 +491,7 @@
 	 */
 	mw.widgets.MediaSearchWidget.prototype.setLang = function ( lang ) {
 		this.lang = lang;
+		this.searchQueue.setLang( lang );
 	};
 
 	/**
@@ -470,4 +502,4 @@
 	mw.widgets.MediaSearchWidget.prototype.getLang = function () {
 		return this.lang;
 	};
-}( jQuery, mediaWiki ) );
+}() );

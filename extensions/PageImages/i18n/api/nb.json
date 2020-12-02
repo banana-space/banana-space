@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"apihelp-query+pageimages-description": "Returnerer informasjon om bilder på siden, som miniatyrbilde og tilstedeværelsen av bilder.",
+	"apihelp-query+pageimages-summary": "Returnerer informasjon om bildene på siden, som miniatyrbilder og tilstedeværelsen av bilder.",
+	"apihelp-query+pageimages-example-1": "Hent navn og <kbd>100</kbd>-piksels miniatyrbilde av en bilde på siden <kbd>Albert Einstein</kbd>.",
+	"apihelp-query+pageimages-param-prop": "Hvilken informasjon som skal returneres:\n;thumbnail:URL og dimensjonene til et eventuelt miniatyrbilde som er assosiert med en side.\n;original:URL og dimensjonene til et eventuelt bilde som er assosiert med en side.\n;name:Bildetittel.",
+	"apihelp-query+pageimages-param-thumbsize": "Maksimal bredde i piksler for miniatyrbilder.",
+	"apihelp-query+pageimages-param-limit": "Egenskaper for hvor mange sider som skal returneres.",
+	"apihelp-query+pageimages-param-license": "Begrens sidebilder til en bestemt lisenstype",
+	"apihelp-query+pageimages-paramvalue-license-free": "bare frie bilder",
+	"apihelp-query+pageimages-paramvalue-license-any": "beste bilde, enten fritt eller ufritt."
+}

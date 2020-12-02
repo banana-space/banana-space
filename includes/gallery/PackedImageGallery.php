@@ -21,18 +21,18 @@
  */
 
 class PackedImageGallery extends TraditionalImageGallery {
-	function __construct( $mode = 'traditional', IContextSource $context = null ) {
+	public function __construct( $mode = 'traditional', IContextSource $context = null ) {
 		parent::__construct( $mode, $context );
 		// Does not support per row option.
 		$this->mPerRow = 0;
 	}
 
 	/**
-	 * We artificially have 1.5 the resolution neccessary so that
+	 * We artificially have 1.5 the resolution necessary so that
 	 * we can scale it up by that much on the client side, without
 	 * worrying about requesting a new image.
 	 */
-	const SCALE_FACTOR = 1.5;
+	private const SCALE_FACTOR = 1.5;
 
 	protected function getVPad( $boxHeight, $thumbHeight ) {
 		return ( $this->getThumbPadding() + $boxHeight - $thumbHeight / self::SCALE_FACTOR ) / 2;
@@ -107,6 +107,5 @@ class PackedImageGallery extends TraditionalImageGallery {
 	 * @param int $num
 	 */
 	public function setPerRow( $num ) {
-		return;
 	}
 }

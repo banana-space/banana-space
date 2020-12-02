@@ -1,0 +1,15 @@
+/*!
+ * VisualEditor rebaser demo index page
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-demo-index {
+	margin-top: 5em;
+}
+
+.ve-demo-index .oo-ui-actionFieldLayout {
+	margin: 0 auto;
+	font-size: 1.25em;
+	width: 30em;
+}

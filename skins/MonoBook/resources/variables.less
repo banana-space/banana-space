@@ -14,9 +14,33 @@
 @link-visited: #5a3696;
 @link-new: #c20;
 
+// mobile objects
+@top-position: 5px;
+@block-size: 35px;
+
+.menu-button() {
+	display: block;
+	width: @block-size;
+	height: @block-size;
+	background: @content-background;
+	border: solid 1px @orange-border;
+	box-sizing: border-box;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	z-index: 4;
+}
+
 // To hide objects, but keep them accessible for screen-readers
 .hidden() {
 	position: absolute;
 	top: -9999px;
 	left: 0;
+}
+
+// The mobile icon cactions tabs
+.icon-tab() {
+	text-indent: -99999px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	width: 1em;
 }

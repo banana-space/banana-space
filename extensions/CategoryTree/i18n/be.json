@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Тест",
-			"Чаховіч Уладзіслаў",
+			"Artsiom91",
+			"Mechanizatar",
 			"Mikalai Udodau",
-			"Mechanizatar"
+			"Тест",
+			"Чаховіч Уладзіслаў"
 		]
 	},
 	"categorytree": "Дрэва катэгорый",
@@ -34,9 +35,5 @@
 	"categorytree-no-pages": "няма артыкулаў і падкатэгорый",
 	"categorytree-not-found": "Катэгорыя «$1» не знойдзена.",
 	"categorytree-error": "Памылка загрузкі даных.",
-	"categorytree-retry": "Калі ласка, пачакайце і паспрабуйце яшчэ раз.",
-	"apihelp-categorytree-description": "Унутраны модуль пашырэння CategoryTree.",
-	"apihelp-categorytree-param-category": "Назва ў прасторы імёнаў катэгорыяў. Прэфікс, калі будзе пададзены, будзе ігнаравацца.",
-	"apihelp-categorytree-param-options": "Налады для канструктару CategoryTree як JSON-аб’екту. Параметр глыбіні (<var>depth</var>) па змоўчанні роўны <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "Опцыі павінны быць дапушчальнымі JSON-аб’ектамі."
+	"categorytree-retry": "Калі ласка, пачакайце і паспрабуйце яшчэ раз."
 }

@@ -1,18 +1,25 @@
 {
 	"@metadata": {
 		"authors": [
-			"Leeheonjin"
+			"Jojit fb",
+			"Leeheonjin",
+			"Sky Harbor"
 		]
 	},
-	"timeless-loggedin": "Ang iyong akawnt",
-	"timeless-anonymous": "Di-nagpakilala (anonimo)",
+	"timeless-desc": "Isang pabalat na magpakailanman na ibinatay sa disenyo ng prototipong Winter ni Brandon Harris, at ang mga sari-saring estilo ng Pundasyong Wikimedia",
+	"timeless-anonymous": "Anonimo",
 	"timeless-loggedinas": "Nakalagda bilang si '''$1'''",
 	"timeless-notloggedin": "Hindi nakalagda",
-	"timeless-userpage": "Pahina ng tagagamit",
-	"timeless-talkpage": "Usapang pang-tagagamit",
+	"timeless-userpage": "Pahina ng {{GENDER:$1|tagagamit}}",
+	"timeless-talkpage": "Usapang {{GENDER:$1|tagagamit}}",
+	"timeless-pagelog": "Mga log ng pahina",
 	"timeless-more": "Higit pa",
 	"timeless-sitetools": "Mga kagamitang pangwiki",
-	"timeless-pageactions": "Mga kagamitang pang-pahina",
-	"timeless-userpagetools": "Mga kagamitang pang-tagagamit",
-	"timeless-languages": "Mga wika"
+	"timeless-pageactions": "Mga kagamitang pampahina",
+	"timeless-userpagetools": "Mga kagamitan para sa pahina ng tagagamit",
+	"timeless-pagemisc": "Higit pa",
+	"timeless-namespaces": "Mga ngalan-espasyo",
+	"timeless-pagetools": "Mga galaw ng pahina",
+	"timeless-languages": "Mga wika",
+	"timeless.js": "/* Ang anumang JavaScript dito ay ikakarga para sa mga tagagamit na gumagamit ng pabalat na Timeless */"
 }

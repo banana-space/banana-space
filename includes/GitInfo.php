@@ -24,7 +24,13 @@
  */
 
 use MediaWiki\Shell\Shell;
+use Wikimedia\AtEase\AtEase;
 
+/**
+ * @newable
+ * @note marked as newable in 1.35 for lack of a better alternative,
+ *       but should become a stateless service eventually.
+ */
 class GitInfo {
 
 	/**
@@ -58,6 +64,7 @@ class GitInfo {
 	private static $viewers = false;
 
 	/**
+	 * @stable to call
 	 * @param string $repoDir The root directory of the repo where .git can be found
 	 * @param bool $usePrecomputed Use precomputed information if available
 	 * @see precomputeValues
@@ -66,7 +73,7 @@ class GitInfo {
 		$this->repoDir = $repoDir;
 		$this->cacheFile = self::getCacheFilePath( $repoDir );
 		wfDebugLog( 'gitinfo',
-			"Computed cacheFile={$this->cacheFile} for {$repoDir}"
+			"Candidate cacheFile={$this->cacheFile} for {$repoDir}"
 		);
 		if ( $usePrecomputed &&
 			$this->cacheFile !== null &&
@@ -142,7 +149,7 @@ class GitInfo {
 	 * @return GitInfo
 	 */
 	public static function repo() {
-		if ( is_null( self::$repo ) ) {
+		if ( self::$repo === null ) {
 			global $IP;
 			self::$repo = new self( $IP );
 		}
@@ -156,7 +163,7 @@ class GitInfo {
 	 * @return bool Whether or not the string looks like a SHA1
 	 */
 	public static function isSHA1( $str ) {
-		return !!preg_match( '/^[0-9A-F]{40}$/i', $str );
+		return (bool)preg_match( '/^[0-9A-F]{40}$/i', $str );
 	}
 
 	/**
@@ -225,7 +232,10 @@ class GitInfo {
 
 		if ( !isset( $this->cache['headCommitDate'] ) ) {
 			$date = false;
-			if ( is_file( $wgGitBin ) &&
+
+			// Suppress warnings about any open_basedir restrictions affecting $wgGitBin (T74445).
+			$isFile = AtEase::quietCall( 'is_file', $wgGitBin );
+			if ( $isFile &&
 				is_executable( $wgGitBin ) &&
 				!Shell::isDisabled() &&
 				$this->getHead() !== false
@@ -418,7 +428,7 @@ class GitInfo {
 
 		if ( self::$viewers === false ) {
 			self::$viewers = $wgGitRepositoryViewers;
-			Hooks::run( 'GitViewers', [ &self::$viewers ] );
+			Hooks::runner()->onGitViewers( self::$viewers );
 		}
 
 		return self::$viewers;

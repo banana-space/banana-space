@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Fabulous",
 			"Hamilton Abreu",
 			"Malafaya",
-			"Vitorvicentevalente",
-			"Fabulous"
+			"Vitorvicentevalente"
 		]
 	},
 	"pdf-desc": "Controlador do visionamento de ficheiros PDF em modo de imagem",

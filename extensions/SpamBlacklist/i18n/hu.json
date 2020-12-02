@@ -3,8 +3,8 @@
 		"authors": [
 			"Dani",
 			"Dj",
-			"TK-999",
 			"Samat",
+			"TK-999",
 			"Tacsipacsi"
 		]
 	},
@@ -21,8 +21,5 @@
 	"log-description-spamblacklist": "Ezek az események nyomon követik, amikor valaki belefutott a spamfeketelistába.",
 	"logentry-spamblacklist-hit": "{{GENDER:$2|$1}} belefutott a spamfeketelistába a(z) $3 lapon a(z) $4 URL-lel.",
 	"right-spamblacklistlog": "címek feketelista-naplójának megtekintése",
-	"action-spamblacklistlog": "spamfeketelista megtekintése",
-	"apihelp-spamblacklist-description": "Egy vagy több URL ellenőrzése a SpamBlacklisttel.",
-	"apihelp-spamblacklist-param-url": "Ellenőrzendő URL-ek",
-	"apihelp-spamblacklist-example-1": "Két URL ellenőrzése a feketelistán"
+	"action-spamblacklistlog": "spamfeketelista megtekintése"
 }

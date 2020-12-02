@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Янмурза Баки"
+		]
+	},
+	"apihelp-titleblacklist-param-action": "Тикшерерлергә тейеш эшмәкәрлек.",
+	"apihelp-titleblacklist-example-1": "Мәҡәлә [[Foo]] ҡара исемлекә индерелгәненлеген тикшерергә.",
+	"apihelp-titleblacklist-example-2": "Мәҡәлә[[Bar]] мөхәррирләү өсөн ҡара исемлеккә ингәнлеген тикшерергә."
+}

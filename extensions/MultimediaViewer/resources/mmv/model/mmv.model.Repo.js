@@ -17,7 +17,7 @@
 
 /* eslint-disable no-use-before-define */
 
-( function ( mw, oo ) {
+( function () {
 	/**
 	 * Represents information about a single image repository
 	 *
@@ -82,11 +82,11 @@
 	};
 
 	/**
-	* Gets the article path for the repository.
-	*
-	* @param {boolean} absolute if true, the URL will be absolute (if false, it still might be)
-	* @return {string} Replace $1 with the page name you want to link to.
-	*/
+	 * Gets the article path for the repository.
+	 *
+	 * @param {boolean} absolute if true, the URL will be absolute (if false, it still might be)
+	 * @return {string} Replace $1 with the page name you want to link to.
+	 */
 	Repo.prototype.getArticlePath = function ( absolute ) {
 		var articlePath = mw.config.get( 'wgArticlePath' );
 		if ( absolute ) {
@@ -143,20 +143,20 @@
 		this.absoluteArticlePath = server + articlePath;
 	}
 
-	oo.inheritClass( ForeignApiRepo, Repo );
+	OO.inheritClass( ForeignApiRepo, Repo );
 
 	/**
-	* @override
-	* @inheritdoc
-	*/
+	 * @override
+	 * @inheritdoc
+	 */
 	ForeignApiRepo.prototype.getArticlePath = function () {
 		return this.absoluteArticlePath;
 	};
 
 	/**
-	* @override
-	* @inheritdoc
-	*/
+	 * @override
+	 * @inheritdoc
+	 */
 	ForeignApiRepo.prototype.isCommons = function () {
 		return /^(https?:)?\/\/commons.wikimedia.org/.test( this.server );
 	};
@@ -185,20 +185,20 @@
 		this.descBaseUrl = descBaseUrl;
 	}
 
-	oo.inheritClass( ForeignDbRepo, Repo );
+	OO.inheritClass( ForeignDbRepo, Repo );
 
 	/**
-	* @override
-	* @inheritdoc
-	*/
+	 * @override
+	 * @inheritdoc
+	 */
 	ForeignDbRepo.prototype.getArticlePath = function () {
 		return this.descBaseUrl.replace( /[^/:]*:$/, '$1' );
 	};
 
 	/**
-	* @override
-	* @inheritdoc
-	*/
+	 * @override
+	 * @inheritdoc
+	 */
 	ForeignDbRepo.prototype.isCommons = function () {
 		return /^(https?:)?\/\/commons.wikimedia.org/.test( this.descBaseUrl );
 	};
@@ -206,4 +206,4 @@
 	mw.mmv.model.Repo = Repo;
 	mw.mmv.model.ForeignApiRepo = ForeignApiRepo;
 	mw.mmv.model.ForeignDbRepo = ForeignDbRepo;
-}( mediaWiki, OO ) );
+}() );

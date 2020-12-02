@@ -2,14 +2,19 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
-			"Rotemliss",
-			"Guycn2"
+			"Guycn2",
+			"Rotemliss"
 		]
 	},
 	"skinname-vector": "וקטור",
 	"vector-skin-desc": "גרסה מודרנית של העיצוב \"מונובוק\" עם מראה רענן ושיפורי שמישות רבים",
+	"prefs-vector-enable-vector-1-label": "להשתמש בעיצוב וקטור הישן",
+	"prefs-vector-enable-vector-1-help": "בשנים הקרובות נעדכן בהדרגה את עיצוב וקטור. עיצוב וקטור הישן יאפשר לך לראות את הגרסה הישנה של וקטור (כפי שהיא הייתה בדצמבר 2019). למידע נוסף על העדכונים, ר' את [[mw:Reading/Web/Desktop_Improvements|דף הפרויקט שלנו]].",
+	"vector-opt-out": "מעבר למראה הישן",
+	"vector-opt-out-tooltip": "שינוי ההעדפות שלך וחזרה למראה הישן של העיצוב (וקטור ישן)",
 	"vector.css": "/* הסגנונות הנכתבים כאן ישפיעו על העיצוב \"וקטור\" בלבד */",
 	"vector.js": "/* כל הסקריפטים הנכתבים כאן ייטענו עבור מי שמשתמש בעיצוב \"וקטור\" בלבד */",
+	"vector-action-toggle-sidebar": "שינוי מצב סרגל צד",
 	"vector-action-addsection": "פסקה חדשה",
 	"vector-action-delete": "מחיקה",
 	"vector-action-move": "העברה",
@@ -21,5 +26,7 @@
 	"vector-view-history": "גרסאות קודמות",
 	"vector-view-view": "קריאה",
 	"vector-view-viewsource": "הצגת מקור",
+	"vector-jumptonavigation": "קפיצה לניווט",
+	"vector-jumptosearch": "קפיצה לחיפוש",
 	"vector-more-actions": "עוד"
 }

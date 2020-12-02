@@ -28,7 +28,7 @@ namespace MediaWiki\Diff;
 /**
  * Stores, escapes and formats the results of word-level diff
  *
- * @private
+ * @internal
  * @ingroup DifferenceEngine
  */
 class WordAccumulator {
@@ -66,7 +66,7 @@ class WordAccumulator {
 			array_push( $this->lines, $this->line );
 		} else {
 			# make empty lines visible by inserting an NBSP
-			array_push( $this->lines, '&#160;' );
+			array_push( $this->lines, "\u{00A0}" );
 		}
 		$this->line = '';
 	}
@@ -89,6 +89,8 @@ class WordAccumulator {
 				$this->flushLine( $tag );
 				$word = substr( $word, 1 );
 			}
+			// FIXME: Don't use assert()
+			// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions.assert
 			assert( !strstr( $word, "\n" ) );
 			$this->group .= $word;
 		}

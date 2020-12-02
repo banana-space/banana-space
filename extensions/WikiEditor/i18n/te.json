@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Veeven",
-			"Macofe"
+			"Macofe",
+			"Veeven"
 		]
 	},
 	"wikieditor": "ఉన్నత వికీపాఠ్య దిద్దుబాటు ముఖాంతరం",
@@ -97,6 +97,7 @@
 	"wikieditor-toolbar-tool-replace-nomatch": "మీ అన్వేషణ దేనికీ సరిపోలలేదు.",
 	"wikieditor-toolbar-tool-replace-success": "$1 మార్పిడి(లు) చేసాం.",
 	"wikieditor-toolbar-tool-replace-emptysearch": "వెతకడానికి ఏమీ ఇవ్వలేదు.",
+	"wikieditor-toolbar-tool-replace-word": "పూర్తి పదాన్ని పోల్చు",
 	"wikieditor-toolbar-section-characters": "ప్రత్యేక అక్షరాలు",
 	"wikieditor-toolbar-section-help": "సహాయం",
 	"wikieditor-toolbar-help-heading-description": "వివరణ",

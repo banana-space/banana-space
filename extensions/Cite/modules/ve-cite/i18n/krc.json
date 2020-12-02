@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Iltever",
-			"Ernác"
+			"Ernác",
+			"Iltever"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Китаб",
@@ -15,8 +15,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Бу ат бла джангыдан хайырландыр",
 	"cite-ve-dialog-reference-options-section": "Параметрле",
 	"cite-ve-dialog-reference-title": "Белгиле",
-	"cite-ve-dialog-reference-useexisting-full-label": "Бу бетде алгъадан болгъан къайнакъны джангыдан хайырландырыу",
-	"cite-ve-dialog-reference-useexisting-label": "Болгъан белгини хайырланыу",
 	"cite-ve-dialog-reference-useexisting-tool": "Джангыдан хайырландырыу",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Орта белгилени тизмеси",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "\"$1\" къауум ючюн белгилени тизмеси",

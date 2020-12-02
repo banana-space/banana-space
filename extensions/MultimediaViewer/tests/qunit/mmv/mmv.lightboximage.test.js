@@ -1,4 +1,4 @@
-( function ( mw ) {
+( function () {
 	QUnit.module( 'mmv.lightboximage', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'Sanity test, object creation', function ( assert ) {
@@ -7,4 +7,4 @@
 		assert.ok( lightboxImage, 'Object created !' );
 	} );
 
-}( mediaWiki, jQuery ) );
+}() );

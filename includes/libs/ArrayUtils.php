@@ -120,8 +120,8 @@ class ArrayUtils {
 		$max = $valueCount;
 		do {
 			$mid = $min + ( ( $max - $min ) >> 1 );
-			$item = call_user_func( $valueCallback, $mid );
-			$comparison = call_user_func( $comparisonCallback, $target, $item );
+			$item = $valueCallback( $mid );
+			$comparison = $comparisonCallback( $target, $item );
 			if ( $comparison > 0 ) {
 				$min = $mid;
 			} elseif ( $comparison == 0 ) {
@@ -133,8 +133,8 @@ class ArrayUtils {
 		} while ( $min < $max - 1 );
 
 		if ( $min == 0 ) {
-			$item = call_user_func( $valueCallback, $min );
-			$comparison = call_user_func( $comparisonCallback, $target, $item );
+			$item = $valueCallback( $min );
+			$comparison = $comparisonCallback( $target, $item );
 			if ( $comparison < 0 ) {
 				// Before the first item
 				return false;
@@ -151,13 +151,11 @@ class ArrayUtils {
 	 * @since 1.23
 	 *
 	 * @param array $array1 The array to compare from
-	 * @param array $array2,... More arrays to compare against
+	 * @param array ...$arrays More arrays to compare against
 	 * @return array An array containing all the values from array1
 	 *               that are not present in any of the other arrays.
 	 */
-	public static function arrayDiffAssocRecursive( $array1 ) {
-		$arrays = func_get_args();
-		array_shift( $arrays );
+	public static function arrayDiffAssocRecursive( $array1, ...$arrays ) {
 		$ret = [];
 
 		foreach ( $array1 as $key => $value ) {
@@ -168,7 +166,7 @@ class ArrayUtils {
 						$args[] = $array[$key];
 					}
 				}
-				$valueret = call_user_func_array( __METHOD__, $args );
+				$valueret = self::arrayDiffAssocRecursive( ...$args );
 				if ( count( $valueret ) ) {
 					$ret[$key] = $valueret;
 				}
@@ -204,7 +202,7 @@ class ArrayUtils {
 	 * pointers of the input arrays to keep track of the current position
 	 * without referring to the keys.
 	 *
-	 * @since 1.31.9
+	 * @since 1.35
 	 *
 	 * @param array ...$inputArrays
 	 * @return array

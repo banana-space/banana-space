@@ -238,6 +238,11 @@ $specialPageAliases['sr-ec'] = [
 	'ReplaceText' => [ 'ЗамениТекст', 'Замени_текст' ],
 ];
 
+/** Serbian (Latin script) (srpski (latinica)‎) */
+$specialPageAliases['sr-el'] = [
+	'ReplaceText' => [ 'ZameniTekst', 'Zameni_tekst' ],
+];
+
 /** Swedish (svenska) */
 $specialPageAliases['sv'] = [
 	'ReplaceText' => [ 'Ersätt_text' ],

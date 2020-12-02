@@ -25,6 +25,7 @@
 
 require_once __DIR__ . '/Maintenance.php';
 
+use MediaWiki\MediaWikiServices;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
@@ -32,7 +33,7 @@ use Wikimedia\Rdbms\IDatabase;
  *
  * @ingroup Maintenance
  */
-class BatchedQueryRunner extends Maintenance {
+class RunBatchedQuery extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->addDescription(
@@ -65,6 +66,7 @@ class BatchedQueryRunner extends Maintenance {
 
 		$selectConds = $where;
 		$prevEnd = false;
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 
 		$n = 1;
 		do {
@@ -103,7 +105,7 @@ class BatchedQueryRunner extends Maintenance {
 
 			$affected = $dbw->affectedRows();
 			$this->output( "$affected rows affected\n" );
-			wfWaitForSlaves();
+			$lbFactory->waitForReplication();
 		} while ( $res->numRows() );
 	}
 
@@ -112,5 +114,5 @@ class BatchedQueryRunner extends Maintenance {
 	}
 }
 
-$maintClass = BatchedQueryRunner::class;
+$maintClass = RunBatchedQuery::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

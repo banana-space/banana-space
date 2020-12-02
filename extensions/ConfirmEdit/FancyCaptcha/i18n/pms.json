@@ -14,7 +14,5 @@
 	"fancycaptcha-edit": "Për fe-ie dle modìfiche ansima a sta pàgina-sì, për piasì, ch'a l'arbata le paròle ch'a s-ciàira ambelessì sota ([[Special:Captcha/help|për savejne dë pì]]):",
 	"fancycaptcha-imgcaptcha-ph": "Ch'a anserissa ël test ch'a s-ciàira an sla figura",
 	"fancycaptcha-sendemail": "Për protege la wiki contra la rumenta automàtica, për piasì ch'a anserissa le paròle che as vëddo ant la casela sì-sota ([[Special:Captcha/help|për savèjne ëd pi]]):",
-	"fancycaptcha-reload-text": "Agiorné",
-	"apihelp-fancycaptchareload-description": "Oten-e un neuv FancyCaptcha.",
-	"apihelp-fancycaptchareload-example-1": "Oten-e un neuv FancyCaptcha"
+	"fancycaptcha-reload-text": "Agiorné"
 }

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Purodha"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "Maach en neu <i lang=\"en\" xml:lang=\"en\">FancyCaptcha</i>.",
+	"apihelp-fancycaptchareload-example-1": "Holl e neu <i lang=\"en\" xml:lang=\"en\">FancyCaptcha</i>"
+}

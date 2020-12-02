@@ -2,46 +2,42 @@
 
 namespace MediaWiki\Widget;
 
-use OOUI\MultilineTextInputWidget;
-
 /**
  * Widget to select multiple users.
  *
  * @copyright 2017 MediaWiki Widgets Team and others; see AUTHORS.txt
  * @license MIT
  */
-class UsersMultiselectWidget extends \OOUI\Widget {
+class UsersMultiselectWidget extends TagMultiselectWidget {
+	/** @var bool */
+	protected $ipAllowed;
 
-	protected $usersArray = [];
-	protected $inputName = null;
-	protected $inputPlaceholder = null;
+	/** @var bool */
+	protected $ipRangeAllowed;
+
+	/** @var array */
+	protected $ipRangeLimits;
 
 	/**
 	 * @param array $config Configuration options
-	 *   - array $config['users'] Array of usernames to use as preset data
-	 *   - array $config['placeholder'] Placeholder message for input
-	 *   - array $config['name'] Name attribute (used in forms)
+	 * - bool $config['ipAllowed'] Accept valid IP addresses
+	 * - bool $config['ipRangeAllowed'] Accept valid IP ranges
+	 * - array $config['ipRangeLimits'] Maximum allowed IP range sizes
 	 */
 	public function __construct( array $config = [] ) {
 		parent::__construct( $config );
 
-		// Properties
-		if ( isset( $config['default'] ) ) {
-			$this->usersArray = $config['default'];
-		}
-		if ( isset( $config['name'] ) ) {
-			$this->inputName = $config['name'];
-		}
-		if ( isset( $config['placeholder'] ) ) {
-			$this->inputPlaceholder = $config['placeholder'];
+		if ( isset( $config['ipAllowed'] ) ) {
+			$this->ipAllowed = $config['ipAllowed'];
 		}
 
-		$textarea = new MultilineTextInputWidget( [
-			'name' => $this->inputName,
-			'value' => implode( "\n", $this->usersArray ),
-			'rows' => 25,
-		] );
-		$this->prependContent( $textarea );
+		if ( isset( $config['ipRangeAllowed'] ) ) {
+			$this->ipRangeAllowed = $config['ipRangeAllowed'];
+		}
+
+		if ( isset( $config['ipRangeLimits'] ) ) {
+			$this->ipRangeLimits = $config['ipRangeLimits'];
+		}
 	}
 
 	protected function getJavaScriptClassName() {
@@ -49,17 +45,18 @@ class UsersMultiselectWidget extends \OOUI\Widget {
 	}
 
 	public function getConfig( &$config ) {
-		if ( $this->usersArray !== null ) {
-			$config['selected'] = $this->usersArray;
-		}
-		if ( $this->inputName !== null ) {
-			$config['name'] = $this->inputName;
-		}
-		if ( $this->inputPlaceholder !== null ) {
-			$config['placeholder'] = $this->inputPlaceholder;
+		if ( $this->ipAllowed !== null ) {
+			$config['ipAllowed'] = $this->ipAllowed;
 		}
 
-		$config['$overlay'] = true;
+		if ( $this->ipRangeAllowed !== null ) {
+			$config['ipRangeAllowed'] = $this->ipRangeAllowed;
+		}
+
+		if ( $this->ipRangeLimits !== null ) {
+			$config['ipRangeLimits'] = $this->ipRangeLimits;
+		}
+
 		return parent::getConfig( $config );
 	}
 

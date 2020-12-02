@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"ChrisPtDe"
+		]
+	},
+	"tooltip-ca-ve-edit": "Changiér cela pâge",
+	"visualeditor-ca-createlocaldescriptionsource": "Apondre na sôrsa de dèscripcion locâla",
+	"visualeditor-ca-createsource": "Fâre lo tèxto sôrsa",
+	"visualeditor-ca-editsource": "Changiér lo tèxto sôrsa",
+	"visualeditor-ca-editsource-section": "changiér lo tèxto sôrsa",
+	"visualeditor-ca-ve-create": "VisualEditor",
+	"visualeditor-ca-ve-edit": "VisualEditor",
+	"visualeditor-desc": "Èditor visuâl por MediaWiki",
+	"visualeditor-descriptionpagelink": "Project:ÈditorVisuâl",
+	"visualeditor-editnotices-tool": "$1 avèrtissement{{PLURAL:$1||s}}",
+	"visualeditor-mainnamespacepagelink": "Project:Èspâço de noms principâl",
+	"visualeditor-savedialog-label-create": "Fâre la pâge",
+	"visualeditor-savedialog-label-report": "Signalar un problèmo",
+	"visualeditor-savedialog-label-review-good": "Mè parêt justo",
+	"visualeditor-savedialog-title-review": "Revêre voutros changements",
+	"visualeditor-savedialog-title-save": "Encartar voutros changements",
+	"visualeditor-usernamespacepagelink": "Project:Èspâço de noms utilisator"
+}

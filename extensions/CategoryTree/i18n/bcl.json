@@ -1,15 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Brazal.dang",
 			"Filipinayzd",
-			"Geopoet"
+			"Geopoet",
+			"ShimunUfesoj"
 		]
 	},
 	"categorytree": "Kahoy nin Kategoriya",
 	"categorytree-portlet": "Mga Kategoriya",
 	"categorytree-legend": "Ipatanaw an kahoy nin kategoriya",
 	"categorytree-desc": "Dinamikong dumanan an [[Special:CategoryTree|estruktura nin kategoriya]]",
-	"categorytree-header": "Ikaag an sarong pangaran nin kategoriya tanganing mahiling an kalamnan kaini bilang sarong estruktura nin kahoy. Tandai na ini minahagad nin abantidong JavaScript na punksyonalidad na bisto bilang AJAX. Kun ika igwa nin grabe kagurang na pangilyaw, o pinag-untok an JavaScript, ini dae maandar.",
+	"categorytree-header": "Ikaag an sarong pangaran nin kategoriya tanganing mahiling an kalamnan kaini bilang sarong estruktura nin kahoy. (Kaipuhan JavaScript).",
 	"categorytree-category": "Kategoriya",
 	"categorytree-go": "Ipatanaw an kahoy",
 	"categorytree-parents": "Kamagurangan",
@@ -18,8 +20,8 @@
 	"categorytree-mode-pages": "mga pahina laen lang sa mga sagunson",
 	"categorytree-mode-all": "gabos na mga pahina",
 	"categorytree-collapse": "komyuson",
-	"categorytree-expand": "halawigon",
-	"categorytree-member-counts": "Minalaman nin {{PLURAL:$1|1 subkategoriya|$1 mga subkategoriya}},{{PLURAL:$2|1 pahina|$2 mga pahina}}, asin {{PLURAL:$3|1 sagunson|$3 mga sagunson}}",
+	"categorytree-expand": "Pahiwason",
+	"categorytree-member-counts": "Minalaog nin {{PLURAL:$1|1 subkategoriya|$1 mga subkategoriya}},{{PLURAL:$2|1 pahina|$2 mga pahina}}, asin {{PLURAL:$3|1 sagunson|$3 mga sagunson}}",
 	"categorytree-num-categories": "$1 C",
 	"categorytree-num-pages": "$1 P",
 	"categorytree-num-files": "$1 F",

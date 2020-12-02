@@ -3,12 +3,13 @@
 		"authors": [
 			"Helix84",
 			"Jkjk",
-			"KuboF"
+			"KuboF",
+			"Luky001"
 		]
 	},
 	"renameuser": "Premenovať používateľa",
-	"renameuser-linkoncontribs": "premenovať používateľa",
-	"renameuser-linkoncontribs-text": "Premenovať tohto používateľa",
+	"renameuser-linkoncontribs": "premenovať {{GENDER:$1|používateľa|používateľku}}",
+	"renameuser-linkoncontribs-text": "Premenovať {{GENDER:$1|tohto používateľa|túto používateľku}}",
 	"renameuser-desc": "Premenovať používateľa (vyžaduje právo ''renameuser'')",
 	"renameuserold": "Súčasné používateľské meno:",
 	"renameusernew": "Nové používateľské meno:",
@@ -21,20 +22,20 @@
 	"renameusersubmit": "Odoslať",
 	"renameuser-submit-blocklog": "Zobraziť záznam blokovaní používateľa",
 	"renameusererrordoesnotexist": "Používateľ „<nowiki>$1</nowiki>“  neexistuje",
-	"renameusererrorexists": "Používateľ „<nowiki>$1</nowiki>“ už existuje",
+	"renameusererrorexists": "{{GENDER:$1|Používateľ|Používateľka}} „<nowiki>$1</nowiki>“ už existuje.",
 	"renameusererrorinvalid": "Používateľské meno „<nowiki>$1</nowiki>“ je neplatné",
 	"renameuser-error-request": "Pri prijímaní vašej požiadavky nastal problém. Prosím, vráťte sa a skúste to znova.",
 	"renameuser-error-same-user": "Nemôžete premenovať používateľa na rovnaké meno ako mal predtým.",
-	"renameusersuccess": "Používateľ „<nowiki>$1</nowiki>“ bol premenovaný na „<nowiki>$2</nowiki>“",
+	"renameusersuccess": "{{GENDER:$2|Používateľ|Používateľka}} „<nowiki>$1</nowiki>“ {{GENDER:$2|bol premenovaný|bola premenovaná}} na „<nowiki>$2</nowiki>“.",
 	"renameuser-page-exists": "Stránka $1 už existuje a nie je možné ju automaticky prepísať.",
 	"renameuser-page-moved": "Stránka $1 bola presunutá na $2.",
 	"renameuser-page-unmoved": "Stránku $1 nebolo možné presunúť na $2.",
 	"log-name-renameuser": "Záznam premenovaní používateľov",
 	"log-description-renameuser": "Toto je záznam premenovaní používateľov",
-	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|premenoval|premenovala}} používateľa $4 ({{PLURAL:$6|$6 úprava|$6 úpravy|$6 úprav}}) na $5",
-	"logentry-renameuser-renameuser-legacier": "$1 premenoval používateľa $4 na $5",
-	"renameuser-move-log": "Automaticky presunutá stránka počas premenovania používateľa „[[User:$1|$1]]“ na „[[User:$2|$2]]“",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|premenoval|premenovala}} {{GENDER:$7|používateľa|používateľku}} $4 ({{PLURAL:$6|$6 úprava|$6 úpravy|$6 úprav}}) na $5",
+	"logentry-renameuser-renameuser-legacier": "$1 premenoval {{GENDER:$7|používateľa|používateľku}} $4 na $5",
+	"renameuser-move-log": "Automaticky presunutá stránka počas premenovania {{GENDER:$2|používateľa|používateľky}} „[[User:$1|$1]]“ na „[[User:$2|$2]]“",
 	"action-renameuser": "premenovať používateľov",
-	"right-renameuser": "Premenovávať používateľov",
+	"right-renameuser": "Premenovať používateľov",
 	"renameuser-renamed-notice": "Tento používateľ bol premenovaný.\nDolu nájdete záznam premenovaní."
 }

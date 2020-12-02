@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Hwboehm",
 			"Purodha"
 		]
 	},
@@ -14,5 +15,5 @@
 	"exif-pdf-producer": "Ömwandelongsprojramm",
 	"exif-pdf-version": "PDF-Fommaat-Väsjohn",
 	"exif-pdf-encrypted": "Verschlößelt",
-	"exif-pdf-pagesize": "Dä Sigg(e) ier Jrüüße <--\nhttps://translatewiki.net/wiki/Thread:Support/About_MediaWiki:Exif-pdf-pagesize/ksh\nhttps://translatewiki.net/wiki/Thread:Support/About_MediaWiki:Exif-pdf-pagesize\n-->"
+	"exif-pdf-pagesize": "Dä Sigg(e) ier Jrüüße"
 }

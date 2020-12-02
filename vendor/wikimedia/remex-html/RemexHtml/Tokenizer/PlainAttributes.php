@@ -25,20 +25,24 @@ class PlainAttributes implements Attributes {
 		return isset( $this->data[$key] );
 	}
 
-	public function offsetGet( $key ) {
+	public function &offsetGet( $key ) {
 		return $this->data[$key];
 	}
 
 	public function offsetSet( $key, $value ) {
 		$this->data[$key] = $value;
+		if ( $this->attrObjects !== null ) {
+			$this->attrObjects[$key] = new Attribute( $key, null, null, $key, $value );
+		}
 	}
 
 	public function offsetUnset( $key ) {
 		unset( $this->data[$key] );
+		unset( $this->attrObjects[$key] );
 	}
 
 	public function getIterator() {
-		return new ArrayIterator( $this->data );
+		return new \ArrayIterator( $this->data );
 	}
 
 	public function getValues() {

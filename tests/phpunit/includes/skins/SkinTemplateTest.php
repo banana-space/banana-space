@@ -7,12 +7,15 @@
  *
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class SkinTemplateTest extends MediaWikiTestCase {
+class SkinTemplateTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider makeListItemProvider
 	 */
-	public function testMakeListItem( $expected, $key, $item, $options, $message ) {
+	public function testMakeListItem( $expected, $key, array $item, array $options, $message ) {
 		$template = $this->getMockForAbstractClass( BaseTemplate::class );
+		$template->set( 'skin', new SkinFallback( [
+			'templateDirectory' => __DIR__,
+		] ) );
 
 		$this->assertEquals(
 			$expected,
@@ -40,62 +43,60 @@ class SkinTemplateTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return PHPUnit_Framework_MockObject_MockObject|OutputPage
+	 * @return OutputPage
 	 */
 	private function getMockOutputPage( $isSyndicated, $html ) {
-		$mock = $this->getMockBuilder( OutputPage::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( OutputPage::class );
 		$mock->expects( $this->once() )
 			->method( 'isSyndicated' )
-			->will( $this->returnValue( $isSyndicated ) );
-		$mock->expects( $this->once() )
+			->willReturn( $isSyndicated );
+		$mock->expects( $this->any() )
 			->method( 'getHTML' )
-			->will( $this->returnValue( $html ) );
+			->willReturn( $html );
 		return $mock;
 	}
 
-	public function provideSetupSkinUserCss() {
-		$defaultStyles = [
-			'mediawiki.legacy.shared',
-			'mediawiki.legacy.commonPrint',
-			'mediawiki.sectionAnchor',
-		];
-		$buttonStyle = 'mediawiki.ui.button';
-		$feedStyle = 'mediawiki.feedlink';
+	public function provideGetDefaultModules() {
 		return [
 			[
-				$this->getMockOutputPage( false, '' ),
-				$defaultStyles
+				false,
+				'',
+				[]
 			],
 			[
-				$this->getMockOutputPage( true, '' ),
-				array_merge( $defaultStyles, [ $feedStyle ] )
+				true,
+				'',
+				[ 'mediawiki.feedlink' ]
 			],
 			[
-				$this->getMockOutputPage( false, 'FOO mw-ui-button BAR' ),
-				array_merge( $defaultStyles, [ $buttonStyle ] )
+				false,
+				'FOO mw-ui-button BAR',
+				[ 'mediawiki.ui.button' ]
 			],
 			[
-				$this->getMockOutputPage( true, 'FOO mw-ui-button BAR' ),
-				array_merge( $defaultStyles, [ $feedStyle, $buttonStyle ] )
+				true,
+				'FOO mw-ui-button BAR',
+				[ 'mediawiki.ui.button', 'mediawiki.feedlink' ]
 			],
 		];
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_MockObject|OutputPage $outputPageMock
-	 * @param string[] $expectedModuleStyles
-	 *
-	 * @covers SkinTemplate::setupSkinUserCss
-	 * @dataProvider provideSetupSkinUserCss
+	 * @covers Skin::getDefaultModules
+	 * @dataProvider provideGetDefaultModules
 	 */
-	public function testSetupSkinUserCss( $outputPageMock, $expectedModuleStyles ) {
-		$outputPageMock->expects( $this->once() )
-			->method( 'addModuleStyles' )
-			->with( $expectedModuleStyles );
+	public function testgetDefaultModules( $isSyndicated, $html, array $expectedModuleStyles ) {
+		$skin = new SkinTemplate();
 
-		$skinTemplate = new SkinTemplate();
-		$skinTemplate->setupSkinUserCss( $outputPageMock );
+		$context = new DerivativeContext( $skin->getContext() );
+		$context->setOutput( $this->getMockOutputPage( $isSyndicated, $html ) );
+		$skin->setContext( $context );
+
+		$modules = $skin->getDefaultModules();
+
+		$actualStylesModule = array_merge( ...array_values( $modules['styles'] ) );
+		foreach ( $expectedModuleStyles as $expected ) {
+			$this->assertContains( $expected, $actualStylesModule );
+		}
 	}
 }

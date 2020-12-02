@@ -1,0 +1,42 @@
+/*!
+ * VisualEditor MediaWiki Initialization DesktopArticleTarget Apex skin styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/* stylelint-disable-next-line selector-class-pattern */
+.skin-apex .ve-ui-surface {
+	margin-top: 0.8em;
+}
+
+.ve-ui-overlay-global {
+	/* Match skin's font-size */
+	font-size: 0.8em;
+}
+
+.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder > * {
+	/* Fix margin overlap */
+	margin-top: 0;
+}
+
+.ve-init-mw-desktopArticleTarget-toolbar {
+	/* 3*(16/12.8) */
+	margin: -0.75em -3.75em 1em -3.75em;
+	position: relative;
+}
+
+@media screen and ( max-width: 700px ) {
+	/* 1.5*(16/12.8) */
+	.ve-init-mw-desktopArticleTarget-toolbar {
+		margin: -0.75em -1.875em 1em -1.875em;
+	}
+}
+
+.ve-init-mw-desktopArticleTarget-toolbar .oo-ui-toolbar-bar {
+	line-height: 1.5em;
+}
+
+.oo-ui-menuSelectWidget-item:hover {
+	background-color: #d5eaed;
+}

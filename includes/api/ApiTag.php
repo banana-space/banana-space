@@ -19,21 +19,32 @@
  * @file
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * @ingroup API
  * @since 1.25
  */
 class ApiTag extends ApiBase {
 
+	use ApiBlockInfoTrait;
+
+	/** @var \MediaWiki\Revision\RevisionStore */
+	private $revisionStore;
+
 	public function execute() {
+		$this->revisionStore = MediaWikiServices::getInstance()->getRevisionStore();
+
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
 		// make sure the user is allowed
 		$this->checkUserRightsAny( 'changetags' );
 
-		if ( $user->isBlocked() ) {
-			$this->dieBlocked( $user->getBlock() );
+		// Fail early if the user is sitewide blocked.
+		$block = $user->getBlock();
+		if ( $block && $block->isSitewide() ) {
+			$this->dieBlocked( $block );
 		}
 
 		// Check if user can add tags
@@ -75,6 +86,7 @@ class ApiTag extends ApiBase {
 	}
 
 	protected function processIndividual( $type, $params, $id ) {
+		$user = $this->getUser();
 		$idResult = [ $type => $id ];
 
 		// validate the ID
@@ -82,9 +94,32 @@ class ApiTag extends ApiBase {
 		switch ( $type ) {
 			case 'rcid':
 				$valid = RecentChange::newFromId( $id );
+				if ( $valid && $this->getPermissionManager()->isBlockedFrom( $user, $valid->getTitle() ) ) {
+					$idResult['status'] = 'error';
+					// @phan-suppress-next-line PhanTypeMismatchArgument
+					$idResult += $this->getErrorFormatter()->formatMessage( ApiMessage::create(
+						'apierror-blocked',
+						'blocked',
+						[ 'blockinfo' => $this->getBlockDetails( $user->getBlock() ) ]
+					) );
+					return $idResult;
+				}
 				break;
 			case 'revid':
-				$valid = Revision::newFromId( $id );
+				$valid = $this->revisionStore->getRevisionById( $id );
+				if (
+					$valid &&
+					$this->getPermissionManager()->isBlockedFrom( $user, $valid->getPageAsLinkTarget() )
+				) {
+					$idResult['status'] = 'error';
+					// @phan-suppress-next-line PhanTypeMismatchArgument
+					$idResult += $this->getErrorFormatter()->formatMessage( ApiMessage::create(
+							'apierror-blocked',
+							'blocked',
+							[ 'blockinfo' => $this->getBlockDetails( $user->getBlock() ) ]
+					) );
+					return $idResult;
+				}
 				break;
 			case 'logid':
 				$valid = self::validateLogId( $id );
@@ -116,7 +151,7 @@ class ApiTag extends ApiBase {
 			}
 		} else {
 			$idResult['status'] = 'success';
-			if ( is_null( $status->value->logId ) ) {
+			if ( $status->value->logId === null ) {
 				$idResult['noop'] = true;
 			} else {
 				$idResult['actionlogid'] = $status->value->logId;

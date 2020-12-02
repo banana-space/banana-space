@@ -53,7 +53,6 @@ abstract class Theme {
 	 * For elements with theme logic hooks, this should be called any time there's a state change.
 	 *
 	 * @param Element $element Element for which to update classes
-	 * @return array Categorized class names with `on` and `off` lists
 	 */
 	public function updateElementClasses( Element $element ) {
 		$classes = $this->getElementClasses( $element );

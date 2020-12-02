@@ -4,9 +4,9 @@ namespace MediaWiki\Auth;
 
 /**
  * @group AuthManager
- * @covers MediaWiki\Auth\AbstractPrimaryAuthenticationProvider
+ * @covers \MediaWiki\Auth\AbstractPrimaryAuthenticationProvider
  */
-class AbstractPrimaryAuthenticationProviderTest extends \MediaWikiTestCase {
+class AbstractPrimaryAuthenticationProviderTest extends \MediaWikiIntegrationTestCase {
 	public function testAbstractPrimaryAuthenticationProvider() {
 		$user = \User::newFromName( 'UTSysop' );
 

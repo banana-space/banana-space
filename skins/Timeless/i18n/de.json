@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kghbln",
 			"Metalhead64",
-			"Kghbln"
+			"Tobi 406",
+			"WikiBayer"
 		]
 	},
-	"timeless-desc": "Stellt eine zeitlose und an Wikimedia erinnernde Benutzeroberfläche bereit",
-	"timeless-search-placeholder": "{{NUMBEROFARTICLES}} Seiten durchsuchen",
-	"timeless-loggedin": "Dein Benutzerkonto",
+	"timeless-desc": "Stellt eine zeitlose Benutzeroberfläche bereit",
 	"timeless-anonymous": "Anonym",
 	"timeless-loggedinas": "Angemeldet als '''$1'''",
 	"timeless-notloggedin": "Nicht angemeldet",
@@ -18,9 +18,12 @@
 	"timeless-sitetools": "Wikiwerkzeuge",
 	"timeless-pageactions": "Seitenwerkzeuge",
 	"timeless-userpagetools": "Benutzerseitenwerkzeuge",
+	"timeless-action-addsection": "Neues Thema",
+	"timeless-view-view": "Lesen",
 	"timeless-pagemisc": "Mehr",
 	"timeless-namespaces": "Namensräume",
 	"timeless-pagetools": "Seitenaktionen",
 	"timeless-languages": "Sprachen",
+	"timeless-projects": "Weitere Projekte",
 	"timeless.js": "/* JavaScript an dieser Stelle wird für Benutzer geladen, die die Benutzeroberfläche „Timeless“ verwenden */"
 }

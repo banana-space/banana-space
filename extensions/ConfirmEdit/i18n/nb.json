@@ -4,10 +4,10 @@
 			"Audun",
 			"Danmichaelo",
 			"Event",
-			"Laaknor",
-			"Nghtwlkr",
 			"Haakon K",
-			"Jon Harald Søby"
+			"Jon Harald Søby",
+			"Laaknor",
+			"Nghtwlkr"
 		]
 	},
 	"captcha-edit": "Skriv inn summen i boksen nedenfor for å kunne redigere denne siden ([[Special:Captcha/help|mer informasjon]]):",
@@ -31,9 +31,8 @@
 	"captchahelp-cookies-needed": "Du må slå på informasjonskapsler for at dette skal fungere.",
 	"captchahelp-text": "Internettsider som kan redigeres av alle, som denne wikien, blir ofte misbrukt av spammere som bruker roboter for å poste massive antall lenker. Selv om slike spamlenker kan fjernes er de til stor irritasjon.\n\nNoen ganger, særlig hvis du vil legge til nye internettlenker til en side, kan wikien vise deg et bilde av en farge eller ujevn tekst og be deg skrive inn ordene som vises. Siden det er vanskelig å automatisere denne oppgaven, vil funksjonen slippe de fleste virkelige mennesker igjennom, men stoppe spammere.\n\nDessverre finnes det i øyeblikket ikke noe audioalternativ for brukere med begrenset syn som som bruker tekst- eller talebaserte nettlesere. Vennligst kontakt [[Special:ListAdmins|administratorene]] hvis denne funksjonen forhindrer deg i å foreta legitime endringer.\n\nTrykk på 'tilbake'-knappen for å komme tilbake til redigeringssiden.",
 	"captcha-addurl-whitelist": " #<!-- leave this line exactly as it is --> <pre>\n# Syntaksen er som følger:\n#  * Alle linjer som begynner med «#» er kommentarer\n#  * Alle linjer som ikke er blanke er fragmenter av regulære uttrykk som sjekker verter i URL-er\n  #</pre> <!-- leave this line exactly as it is -->",
-	"right-skipcaptcha": "Utføre handlinger som normalt krever «captcha»-bekreftelse uten å bruke «captcha»",
-	"captcha-apihelp-param-captchaword": "Svar på CAPTCHA-en",
-	"captcha-apihelp-param-captchaid": "CAPTCHA-ID fra forrige forespørsel",
+	"right-skipcaptcha": "Utføre handlinger som normalt krever CAPTCHA-bekreftelse uten å bruke CAPTCHA",
+	"action-skipcaptcha": "utføre handlinger som utløser CAPTCHA uten å gjennomføre CAPTCHA-en",
 	"confirmedit-preview-line": "Linjenummer",
 	"confirmedit-preview-content": "Innhold",
 	"confirmedit-preview-validity": "Gyldighet",

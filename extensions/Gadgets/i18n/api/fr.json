@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Djiboun",
+			"Gomoko",
+			"Lucky",
+			"Thibaut120094",
+			"Windes"
+		]
+	},
+	"apihelp-query+gadgetcategories-description": "Renvoie une liste de catégories de gadget.",
+	"apihelp-query+gadgetcategories-summary": "Renvoie une liste de catégories de gadget.",
+	"apihelp-query+gadgetcategories-param-prop": "Quelle information de catégorie de gadget obtenir :\n;name:Nom de catégorie interne.\n;title:Titre de la catégorie.\n;members:Nombre de gadgets dans la catégorie.",
+	"apihelp-query+gadgetcategories-param-names": "Noms des catégories à récupérer.",
+	"apihelp-query+gadgetcategories-example-1": "Fournit une liste des catégories de gadget existantes",
+	"apihelp-query+gadgetcategories-example-2": "Fournit toutes les informations sur les catégories \"foo\" et \"bar\"",
+	"apihelp-query+gadgets-description": "Renvoie une liste des gadgets utilisés sur ce wiki.",
+	"apihelp-query+gadgets-summary": "Renvoie une liste des gadgets utilisés sur ce wiki.",
+	"apihelp-query+gadgets-param-prop": "Quelle information de gadget obtenir :\n;id:ID interne du gadget.\n;metadata:Les métadonnées du gadget.\n;desc:Description du gadget transformée en HTML (peut être lent, à n’utiliser que si c’est vraiment nécessaire).",
+	"apihelp-query+gadgets-param-categories": "Gadgets depuis lesquels récupérer les catégories.",
+	"apihelp-query+gadgets-param-ids": "IDs des gadgets à récupérer.",
+	"apihelp-query+gadgets-param-allowedonly": "Lister seulement les gadgets autorisés pour l'utilisateur actuel",
+	"apihelp-query+gadgets-param-enabledonly": "Lister uniquement les gadgets activés par l’utilisateur actuel.",
+	"apihelp-query+gadgets-example-1": "Obtenir une liste de gadgets ainsi que leurs descriptions",
+	"apihelp-query+gadgets-example-2": "Obtenir une liste de gadgets avec toutes les propriétés possibles",
+	"apihelp-query+gadgets-example-3": "Obtenir une liste des gadgets appartenant à la catégorie « foo »",
+	"apihelp-query+gadgets-example-4": "Obtenir l’information sur les gadgets « foo » et « bar »",
+	"apihelp-query+gadgets-example-5": "Obtenir une liste des gadgets activés par l’utilisateur actuel"
+}

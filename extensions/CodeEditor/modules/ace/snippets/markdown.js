@@ -92,4 +92,11 @@ snippet pullquote\n\
 ";
 exports.scope = "markdown";
 
-});
+});                (function() {
+                    ace.require(["ace/snippets/markdown"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

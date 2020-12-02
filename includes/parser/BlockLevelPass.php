@@ -21,24 +21,25 @@
  *
  * @file
  * @ingroup Parser
+ * @internal
  */
 class BlockLevelPass {
 	private $DTopen = false;
 	private $inPre = false;
-	private $lastSection = '';
+	private $lastParagraph = '';
 	private $lineStart;
 	private $text;
 
 	# State constants for the definition list colon extraction
-	const COLON_STATE_TEXT = 0;
-	const COLON_STATE_TAG = 1;
-	const COLON_STATE_TAGSTART = 2;
-	const COLON_STATE_CLOSETAG = 3;
-	const COLON_STATE_TAGSLASH = 4;
-	const COLON_STATE_COMMENT = 5;
-	const COLON_STATE_COMMENTDASH = 6;
-	const COLON_STATE_COMMENTDASHDASH = 7;
-	const COLON_STATE_LC = 8;
+	private const COLON_STATE_TEXT = 0;
+	private const COLON_STATE_TAG = 1;
+	private const COLON_STATE_TAGSTART = 2;
+	private const COLON_STATE_CLOSETAG = 3;
+	private const COLON_STATE_TAGSLASH = 4;
+	private const COLON_STATE_COMMENT = 5;
+	private const COLON_STATE_COMMENTDASH = 6;
+	private const COLON_STATE_COMMENTDASHDASH = 7;
+	private const COLON_STATE_LC = 8;
 
 	/**
 	 * Make lists from lines starting with ':', '*', '#', etc.
@@ -46,6 +47,7 @@ class BlockLevelPass {
 	 * @param string $text
 	 * @param bool $lineStart Whether or not this is at the start of a line.
 	 * @return string The lists rendered as HTML
+	 * @internal
 	 */
 	public static function doBlockLevels( $text, $lineStart ) {
 		$pass = new self( $text, $lineStart );
@@ -53,7 +55,8 @@ class BlockLevelPass {
 	}
 
 	/**
-	 * Private constructor
+	 * @param string $text
+	 * @param bool $lineStart
 	 */
 	private function __construct( $text, $lineStart ) {
 		$this->text = $text;
@@ -61,17 +64,28 @@ class BlockLevelPass {
 	}
 
 	/**
+	 * @return bool
+	 */
+	private function hasOpenParagraph() {
+		return $this->lastParagraph !== '';
+	}
+
+	/**
 	 * If a pre or p is open, return the corresponding close tag and update
 	 * the state. If no tag is open, return an empty string.
+	 * @param bool $atTheEnd Omit trailing newline if we've reached the end.
 	 * @return string
 	 */
-	private function closeParagraph() {
+	private function closeParagraph( $atTheEnd = false ) {
 		$result = '';
-		if ( $this->lastSection !== '' ) {
-			$result = '</' . $this->lastSection . ">\n";
+		if ( $this->hasOpenParagraph() ) {
+			$result = '</' . $this->lastParagraph . '>';
+			if ( !$atTheEnd ) {
+				$result .= "\n";
+			}
 		}
 		$this->inPre = false;
-		$this->lastSection = '';
+		$this->lastParagraph = '';
 		return $result;
 	}
 
@@ -105,13 +119,13 @@ class BlockLevelPass {
 	private function openList( $char ) {
 		$result = $this->closeParagraph();
 
-		if ( '*' === $char ) {
+		if ( $char === '*' ) {
 			$result .= "<ul><li>";
-		} elseif ( '#' === $char ) {
+		} elseif ( $char === '#' ) {
 			$result .= "<ol><li>";
-		} elseif ( ':' === $char ) {
+		} elseif ( $char === ':' ) {
 			$result .= "<dl><dd>";
-		} elseif ( ';' === $char ) {
+		} elseif ( $char === ';' ) {
 			$result .= "<dl><dt>";
 			$this->DTopen = true;
 		} else {
@@ -128,14 +142,14 @@ class BlockLevelPass {
 	 * @return string
 	 */
 	private function nextItem( $char ) {
-		if ( '*' === $char || '#' === $char ) {
+		if ( $char === '*' || $char === '#' ) {
 			return "</li>\n<li>";
-		} elseif ( ':' === $char || ';' === $char ) {
+		} elseif ( $char === ':' || $char === ';' ) {
 			$close = "</dd>\n";
 			if ( $this->DTopen ) {
 				$close = "</dt>\n";
 			}
-			if ( ';' === $char ) {
+			if ( $char === ';' ) {
 				$this->DTopen = true;
 				return $close . '<dt>';
 			} else {
@@ -153,11 +167,11 @@ class BlockLevelPass {
 	 * @return string
 	 */
 	private function closeList( $char ) {
-		if ( '*' === $char ) {
+		if ( $char === '*' ) {
 			$text = "</li></ul>";
-		} elseif ( '#' === $char ) {
+		} elseif ( $char === '#' ) {
 			$text = "</li></ol>";
-		} elseif ( ':' === $char ) {
+		} elseif ( $char === ':' ) {
 			if ( $this->DTopen ) {
 				$this->DTopen = false;
 				$text = "</dt></dl>";
@@ -187,7 +201,11 @@ class BlockLevelPass {
 		$pendingPTag = false;
 		$inBlockquote = false;
 
-		foreach ( $textLines as $inputLine ) {
+		for ( $textLines->rewind(); $textLines->valid(); ) {
+			$inputLine = $textLines->current();
+			$textLines->next();
+			$notLastLine = $textLines->valid();
+
 			# Fix up $lineStart
 			if ( !$this->lineStart ) {
 				$output .= $inputLine;
@@ -249,6 +267,7 @@ class BlockLevelPass {
 
 				# Close all the prefixes which aren't shared.
 				while ( $commonPrefixLength < $lastPrefixLength ) {
+					// @phan-suppress-next-line PhanTypeInvalidDimOffset
 					$output .= $this->closeList( $lastPrefix[$lastPrefixLength - 1] );
 					--$lastPrefixLength;
 				}
@@ -271,7 +290,7 @@ class BlockLevelPass {
 					$char = $prefix[$commonPrefixLength];
 					$output .= $this->openList( $char );
 
-					if ( ';' === $char ) {
+					if ( $char === ';' ) {
 						# @todo FIXME: This is dupe of code above
 						if ( $this->findColonNoLinks( $t, $term, $t2 ) !== false ) {
 							$t = $t2;
@@ -288,21 +307,36 @@ class BlockLevelPass {
 			}
 
 			# If we have no prefixes, go to paragraph mode.
-			if ( 0 == $prefixLength ) {
+			if ( $prefixLength == 0 ) {
 				# No prefix (not in list)--go to paragraph mode
 				# @todo consider using a stack for nestable elements like span, table and div
+
+				// P-wrapping and indent-pre are suppressed inside, not outside
+				$blockElems = 'table|h1|h2|h3|h4|h5|h6|pre|p|ul|ol|dl';
+				// P-wrapping and indent-pre are suppressed outside, not inside
+				$antiBlockElems = 'td|th';
+
 				$openMatch = preg_match(
-					'/(?:<table|<h1|<h2|<h3|<h4|<h5|<h6|<pre|<tr|'
-						. '<p|<ul|<ol|<dl|<li|<\\/tr|<\\/td|<\\/th)\\b/iS',
+					'/<('
+						. "({$blockElems})|\\/({$antiBlockElems})|"
+						// Always suppresses
+						. '\\/?(tr|caption|dt|dd|li)'
+						. ')\\b/iS',
 					$t
 				);
 				$closeMatch = preg_match(
-					'/(?:<\\/table|<\\/h1|<\\/h2|<\\/h3|<\\/h4|<\\/h5|<\\/h6|'
-						. '<td|<th|<\\/?blockquote|<\\/?div|<hr|<\\/pre|<\\/p|<\\/mw:|'
-						. Parser::MARKER_PREFIX
-						. '-pre|<\\/li|<\\/ul|<\\/ol|<\\/dl|<\\/?center)\\b/iS',
+					'/<('
+						. "\\/({$blockElems})|({$antiBlockElems})|"
+						// Never suppresses
+						. '\\/?(center|blockquote|div|hr|mw:)'
+						. ')\\b/iS',
 					$t
 				);
+
+				// Any match closes the paragraph, but only when `!$closeMatch`
+				// do we enter block mode.  The oddities with table rows and
+				// cells are to avoid paragraph wrapping in interstitial spaces
+				// leading to fostered content.
 
 				if ( $openMatch || $closeMatch ) {
 					$pendingPTag = false;
@@ -324,15 +358,15 @@ class BlockLevelPass {
 					}
 					$inBlockElem = !$closeMatch;
 				} elseif ( !$inBlockElem && !$this->inPre ) {
-					if ( ' ' == substr( $t, 0, 1 )
-						&& ( $this->lastSection === 'pre' || trim( $t ) != '' )
+					if ( substr( $t, 0, 1 ) == ' '
+						&& ( $this->lastParagraph === 'pre' || trim( $t ) != '' )
 						&& !$inBlockquote
 					) {
 						# pre
-						if ( $this->lastSection !== 'pre' ) {
+						if ( $this->lastParagraph !== 'pre' ) {
 							$pendingPTag = false;
 							$output .= $this->closeParagraph() . '<pre>';
-							$this->lastSection = 'pre';
+							$this->lastParagraph = 'pre';
 						}
 						$t = substr( $t, 1 );
 					} elseif ( preg_match( '/^(?:<style\\b[^>]*>.*?<\\/style>\s*|<link\\b[^>]*>\s*)+$/iS', $t ) ) {
@@ -341,7 +375,6 @@ class BlockLevelPass {
 						if ( $pendingPTag ) {
 							$output .= $this->closeParagraph();
 							$pendingPTag = false;
-							$this->lastSection = '';
 						}
 					} else {
 						# paragraph
@@ -349,25 +382,20 @@ class BlockLevelPass {
 							if ( $pendingPTag ) {
 								$output .= $pendingPTag . '<br />';
 								$pendingPTag = false;
-								$this->lastSection = 'p';
+								$this->lastParagraph = 'p';
+							} elseif ( $this->lastParagraph !== 'p' ) {
+								$output .= $this->closeParagraph();
+								$pendingPTag = '<p>';
 							} else {
-								if ( $this->lastSection !== 'p' ) {
-									$output .= $this->closeParagraph();
-									$this->lastSection = '';
-									$pendingPTag = '<p>';
-								} else {
-									$pendingPTag = '</p><p>';
-								}
+								$pendingPTag = '</p><p>';
 							}
-						} else {
-							if ( $pendingPTag ) {
-								$output .= $pendingPTag;
-								$pendingPTag = false;
-								$this->lastSection = 'p';
-							} elseif ( $this->lastSection !== 'p' ) {
-								$output .= $this->closeParagraph() . '<p>';
-								$this->lastSection = 'p';
-							}
+						} elseif ( $pendingPTag ) {
+							$output .= $pendingPTag;
+							$pendingPTag = false;
+							$this->lastParagraph = 'p';
+						} elseif ( $this->lastParagraph !== 'p' ) {
+							$output .= $this->closeParagraph() . '<p>';
+							$this->lastParagraph = 'p';
 						}
 					}
 				}
@@ -379,7 +407,11 @@ class BlockLevelPass {
 			if ( $pendingPTag === false ) {
 				if ( $prefixLength === 0 ) {
 					$output .= $t;
-					$output .= "\n";
+					// Add a newline if there's an open paragraph
+					// or we've yet to reach the last line.
+					if ( $notLastLine || $this->hasOpenParagraph() ) {
+						$output .= "\n";
+					}
 				} else {
 					// Trim whitespace in list items
 					$output .= trim( $t );
@@ -389,15 +421,13 @@ class BlockLevelPass {
 		while ( $prefixLength ) {
 			$output .= $this->closeList( $prefix2[$prefixLength - 1] );
 			--$prefixLength;
-			if ( !$prefixLength ) {
+			// Note that a paragraph is only ever opened when `prefixLength`
+			// is zero, but we'll choose to be overly cautious.
+			if ( !$prefixLength && $this->hasOpenParagraph() ) {
 				$output .= "\n";
 			}
 		}
-		if ( $this->lastSection !== '' ) {
-			$output .= '</' . $this->lastSection . '>';
-			$this->lastSection = '';
-		}
-
+		$output .= $this->closeParagraph( true );
 		return $output;
 	}
 
@@ -409,7 +439,7 @@ class BlockLevelPass {
 	 * @param string &$before Set to everything before the ':'
 	 * @param string &$after Set to everything after the ':'
 	 * @throws MWException
-	 * @return string The position of the ':', or false if none found
+	 * @return string|false The position of the ':', or false if none found
 	 */
 	private function findColonNoLinks( $str, &$before, &$after ) {
 		if ( !preg_match( '/:|<|-\{/', $str, $m, PREG_OFFSET_CAPTURE ) ) {
@@ -523,7 +553,7 @@ class BlockLevelPass {
 						} else {
 							# ignore the excess close tag, but keep looking for
 							# colons. (This matches Parsoid behavior.)
-							wfDebug( __METHOD__ . ": Invalid input; too many close tags\n" );
+							wfDebug( __METHOD__ . ": Invalid input; too many close tags" );
 						}
 						$state = self::COLON_STATE_TEXT;
 					}
@@ -563,7 +593,7 @@ class BlockLevelPass {
 		if ( $ltLevel > 0 || $lcLevel > 0 ) {
 			wfDebug(
 				__METHOD__ . ": Invalid input; not enough close tags " .
-				"(level $ltLevel/$lcLevel, state $state)\n"
+				"(level $ltLevel/$lcLevel, state $state)"
 			);
 			return false;
 		}

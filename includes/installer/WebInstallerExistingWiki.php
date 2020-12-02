@@ -16,7 +16,7 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @ingroup Deployment
+ * @ingroup Installer
  */
 
 class WebInstallerExistingWiki extends WebInstallerPage {
@@ -154,16 +154,8 @@ class WebInstallerExistingWiki extends WebInstallerPage {
 			return $status;
 		}
 
-		if ( isset( $vars['wgDBadminuser'] ) ) {
-			$this->setVar( '_InstallUser', $vars['wgDBadminuser'] );
-		} else {
-			$this->setVar( '_InstallUser', $vars['wgDBuser'] );
-		}
-		if ( isset( $vars['wgDBadminpassword'] ) ) {
-			$this->setVar( '_InstallPassword', $vars['wgDBadminpassword'] );
-		} else {
-			$this->setVar( '_InstallPassword', $vars['wgDBpassword'] );
-		}
+		$this->setVar( '_InstallUser', $vars['wgDBadminuser'] ?? $vars['wgDBuser'] );
+		$this->setVar( '_InstallPassword', $vars['wgDBadminpassword'] ?? $vars['wgDBpassword'] );
 
 		// Test the database connection
 		$status = $installer->getConnection();
@@ -180,9 +172,7 @@ class WebInstallerExistingWiki extends WebInstallerPage {
 
 		// Copy $wgAuthenticationTokenVersion too, if it exists
 		$this->setVar( 'wgAuthenticationTokenVersion',
-			isset( $vars['wgAuthenticationTokenVersion'] )
-				? $vars['wgAuthenticationTokenVersion']
-				: null
+			$vars['wgAuthenticationTokenVersion'] ?? null
 		);
 
 		return $status;

@@ -1,13 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"MaGa",
-			"Bugoslav"
+			"Bugoslav",
+			"MaGa"
 		]
 	},
 	"multimediaviewer-desc": "Sličice u većoj veličini u prikazu preko cijelog zaslona.",
-	"multimediaviewer-pref": "Preglednik medijskih datoteka",
-	"multimediaviewer-pref-desc": "Poboljšajte svoje iskustvo pregledavajući multimedijske sadržaje uz pomoć ovog alata. Alat prikazuje slike u većoj veličini i u ljepšem Lightbox okviru. Slike se mogu vidjeti i u pravoj veličini.",
 	"multimediaviewer-optin-pref": "Omogući <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About preglednik multimedijskih datoteka]</span>",
 	"multimediaviewer-file-page": "Idi na odgovarajuću stranicu datoteke",
 	"multimediaviewer-repository-local": "Više pojedinosti",

@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * @group Editing
  *
@@ -11,34 +13,23 @@
  */
 class EditPageTest extends MediaWikiLangTestCase {
 
-	protected function setUp() {
-		global $wgExtraNamespaces, $wgNamespaceContentModels, $wgContentHandlers, $wgContLang;
-
+	protected function setUp() : void {
 		parent::setUp();
 
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
+		$this->setContentLang( $contLang );
+
 		$this->setMwGlobals( [
-			'wgExtraNamespaces' => $wgExtraNamespaces,
-			'wgNamespaceContentModels' => $wgNamespaceContentModels,
-			'wgContentHandlers' => $wgContentHandlers,
-			'wgContLang' => $wgContLang,
+			'wgExtraNamespaces' => [
+				12312 => 'Dummy',
+				12313 => 'Dummy_talk',
+			],
+			'wgNamespaceContentModels' => [ 12312 => 'testing' ],
 		] );
-
-		$wgExtraNamespaces[12312] = 'Dummy';
-		$wgExtraNamespaces[12313] = 'Dummy_talk';
-
-		$wgNamespaceContentModels[12312] = "testing";
-		$wgContentHandlers["testing"] = 'DummyContentHandlerForTesting';
-
-		MWNamespace::clearCaches();
-		$wgContLang->resetNamespaces(); # reset namespace cache
-	}
-
-	protected function tearDown() {
-		global $wgContLang;
-
-		MWNamespace::clearCaches();
-		$wgContLang->resetNamespaces(); # reset namespace cache
-		parent::tearDown();
+		$this->mergeMwGlobalArrayValue(
+			'wgContentHandlers',
+			[ 'testing' => 'DummyContentHandlerForTesting' ]
+		);
 	}
 
 	/**
@@ -110,6 +101,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 	 *              * wpEditToken: the edit token (will be inserted if not provided)
 	 *              * wpEdittime: timestamp of the edit's base revision (will be inserted
 	 *                if not provided)
+	 *              * editRevId: revision ID of the edit's base revision (optional)
 	 *              * wpStarttime: timestamp when the edit started (will be inserted if not provided)
 	 *              * wpSectionTitle: the section to edit
 	 *              * wpMinorEdit: mark as minor edit
@@ -122,7 +114,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 	 *
 	 * @return WikiPage The page that was just edited, useful for getting the edit's rev_id, etc.
 	 */
-	protected function assertEdit( $title, $baseText, $user = null, array $edit,
+	protected function assertEdit( $title, $baseText, $user, array $edit,
 		$expectedCode = null, $expectedText = null, $message = null
 	) {
 		if ( is_string( $title ) ) {
@@ -165,7 +157,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 			$edit['wpEditToken'] = $user->getEditToken();
 		}
 
-		if ( !isset( $edit['wpEdittime'] ) ) {
+		if ( !isset( $edit['wpEdittime'] ) && !isset( $edit['editRevId'] ) ) {
 			$edit['wpEdittime'] = $page->exists() ? $page->getTimestamp() : '';
 		}
 
@@ -181,6 +173,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 
 		$article = new Article( $title );
 		$article->getContext()->setTitle( $title );
+		$article->getContext()->setUser( $user );
 		$ep = new EditPage( $article );
 		$ep->setContextTitle( $title );
 		$ep->importFormData( $req );
@@ -284,6 +277,10 @@ class EditPageTest extends MediaWikiLangTestCase {
 	public function testCreatePage(
 		$desc, $pageTitle, $user, $editText, $expectedCode, $expectedText, $ignoreBlank = false
 	) {
+		$this->hideDeprecated( 'Revision::__construct' );
+		$this->hideDeprecated( 'PageContentInsertComplete hook' );
+		$this->hideDeprecated( 'PageContentSaveComplete hook' );
+
 		$checkId = null;
 
 		$this->setMwGlobals( 'wgHooks', [
@@ -298,7 +295,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 				$summary, $minor, $u1, $u2, &$flags, Revision $revision,
 				Status &$status, $baseRevId
 			) use ( &$checkId ) {
-				$checkId = $status->value['revision']->getId();
+				$checkId = $status->value['revision-record']->getId();
 				// types/refs checked
 			} ],
 		] );
@@ -312,7 +309,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 
 		if ( $expectedCode != EditPage::AS_BLANK_ARTICLE ) {
 			$latest = $page->getLatest();
-			$page->doDeleteArticleReal( $pageTitle );
+			$page->doDeleteArticleReal( $pageTitle, $this->getTestSysop()->getUser() );
 
 			$this->assertGreaterThan( 0, $latest, "Page revision ID updated in object" );
 			$this->assertEquals( $latest, $checkId, "Revision in Status for hook" );
@@ -326,6 +323,10 @@ class EditPageTest extends MediaWikiLangTestCase {
 	public function testCreatePageTrx(
 		$desc, $pageTitle, $user, $editText, $expectedCode, $expectedText, $ignoreBlank = false
 	) {
+		$this->hideDeprecated( 'Revision::__construct' );
+		$this->hideDeprecated( 'PageContentInsertComplete hook' );
+		$this->hideDeprecated( 'PageContentSaveComplete hook' );
+
 		$checkIds = [];
 		$this->setMwGlobals( 'wgHooks', [
 			'PageContentInsertComplete' => [ function (
@@ -339,7 +340,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 				$summary, $minor, $u1, $u2, &$flags, Revision $revision,
 				Status &$status, $baseRevId
 			) use ( &$checkIds ) {
-				$checkIds[] = $status->value['revision']->getId();
+				$checkIds[] = $status->value['revision-record']->getId();
 				// types/refs checked
 			} ],
 		] );
@@ -360,24 +361,31 @@ class EditPageTest extends MediaWikiLangTestCase {
 
 		wfGetDB( DB_MASTER )->commit( __METHOD__ );
 
-		$this->assertEquals( 0, DeferredUpdates::pendingUpdatesCount(), 'No deferred updates' );
+		$this->assertSame( 0, DeferredUpdates::pendingUpdatesCount(), 'No deferred updates' );
 
 		if ( $expectedCode != EditPage::AS_BLANK_ARTICLE ) {
 			$latest = $page->getLatest();
-			$page->doDeleteArticleReal( $pageTitle );
+			$page->doDeleteArticleReal( $pageTitle, $this->getTestSysop()->getUser() );
 
 			$this->assertGreaterThan( 0, $latest, "Page #1 revision ID updated in object" );
 			$this->assertEquals( $latest, $checkIds[0], "Revision #1 in Status for hook" );
 
 			$latest2 = $page2->getLatest();
-			$page2->doDeleteArticleReal( $pageTitle2 );
+			$page2->doDeleteArticleReal( $pageTitle2, $this->getTestSysop()->getUser() );
 
 			$this->assertGreaterThan( 0, $latest2, "Page #2 revision ID updated in object" );
 			$this->assertEquals( $latest2, $checkIds[1], "Revision #2 in Status for hook" );
 		}
 	}
 
+	/**
+	 * @covers EditPage
+	 */
 	public function testUpdatePage() {
+		$this->hideDeprecated( 'Revision::__construct' );
+		$this->hideDeprecated( 'PageContentInsertComplete hook' );
+		$this->hideDeprecated( 'PageContentSaveComplete hook' );
+
 		$checkIds = [];
 
 		$this->setMwGlobals( 'wgHooks', [
@@ -392,7 +400,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 				$summary, $minor, $u1, $u2, &$flags, Revision $revision,
 				Status &$status, $baseRevId
 			) use ( &$checkIds ) {
-				$checkIds[] = $status->value['revision']->getId();
+				$checkIds[] = $status->value['revision-record']->getId();
 				// types/refs checked
 			} ],
 		] );
@@ -405,7 +413,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 
 		$page = $this->assertEdit( 'EditPageTest_testUpdatePage', "zero", null, $edit,
 			EditPage::AS_SUCCESS_UPDATE, $text,
-			"expected successfull update with given text" );
+			"expected successful update with given text" );
 		$this->assertGreaterThan( 0, $checkIds[0], "First event rev ID set" );
 
 		$this->forceRevisionDate( $page, '20120101000000' );
@@ -418,12 +426,18 @@ class EditPageTest extends MediaWikiLangTestCase {
 
 		$this->assertEdit( 'EditPageTest_testUpdatePage', null, null, $edit,
 			EditPage::AS_SUCCESS_UPDATE, $text,
-			"expected successfull update with given text" );
+			"expected successful update with given text" );
 		$this->assertGreaterThan( 0, $checkIds[1], "Second edit hook rev ID set" );
 		$this->assertGreaterThan( $checkIds[0], $checkIds[1], "Second event rev ID is higher" );
 	}
 
+	/**
+	 * @covers EditPage
+	 */
 	public function testUpdatePageTrx() {
+		$this->hideDeprecated( 'Revision::__construct' );
+		$this->hideDeprecated( 'PageContentSaveComplete hook' );
+
 		$text = "one";
 		$edit = [
 			'wpTextbox1' => $text,
@@ -432,7 +446,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 
 		$page = $this->assertEdit( 'EditPageTest_testTrxUpdatePage', "zero", null, $edit,
 			EditPage::AS_SUCCESS_UPDATE, $text,
-			"expected successfull update with given text" );
+			"expected successful update with given text" );
 
 		$this->forceRevisionDate( $page, '20120101000000' );
 
@@ -443,7 +457,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 				$summary, $minor, $u1, $u2, &$flags, Revision $revision,
 				Status &$status, $baseRevId
 			) use ( &$checkIds ) {
-				$checkIds[] = $status->value['revision']->getId();
+				$checkIds[] = $status->value['revision-record']->getId();
 				// types/refs checked
 			} ],
 		] );
@@ -458,7 +472,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 
 		$this->assertEdit( 'EditPageTest_testTrxUpdatePage', null, null, $edit,
 			EditPage::AS_SUCCESS_UPDATE, $text,
-			"expected successfull update with given text" );
+			"expected successful update with given text" );
 
 		$text = "three";
 		$edit = [
@@ -468,7 +482,7 @@ class EditPageTest extends MediaWikiLangTestCase {
 
 		$this->assertEdit( 'EditPageTest_testTrxUpdatePage', null, null, $edit,
 			EditPage::AS_SUCCESS_UPDATE, $text,
-			"expected successfull update with given text" );
+			"expected successful update with given text" );
 
 		wfGetDB( DB_MASTER )->commit( __METHOD__ );
 
@@ -543,7 +557,108 @@ hello
 
 		$this->assertEdit( 'EditPageTest_testSectionEdit', $base, null, $edit,
 			EditPage::AS_SUCCESS_UPDATE, $expected,
-			"expected successfull update of section" );
+			"expected successful update of section" );
+	}
+
+	public static function provideConflictDetection() {
+		yield 'no conflict detected' => [
+			'Adam',
+			[
+				'wpEdittime' => 2, // use the second edit's time
+				'editRevId' => 2, // use the second edit's revision ID
+			],
+			EditPage::AS_SUCCESS_UPDATE,
+			'successful update expected'
+		];
+
+		yield 'conflict detected based on wpEdittime' => [
+			'Adam',
+			[
+				'wpEdittime' => 1, // use the first edit's time
+			],
+			EditPage::AS_CONFLICT_DETECTED,
+			'conflict expected'
+		];
+
+		yield 'conflict detected based on editRevId' => [
+			'Adam',
+			[
+				'editRevId' => 1, // use the first edit's revision ID
+			],
+			EditPage::AS_CONFLICT_DETECTED,
+			'conflict expected'
+		];
+
+		yield 'conflict based on wpEdittime ignored for same user' => [
+			'Berta',
+			[
+				'wpEdittime' => 1, // use the first edit's time
+			],
+			EditPage::AS_SUCCESS_UPDATE,
+			'successful update expected'
+		];
+
+		yield 'conflict detected based on editRevId even for same user' => [
+			'Berta',
+			[
+				'editRevId' => 1, // use the first edit's revision ID
+			],
+			EditPage::AS_CONFLICT_DETECTED,
+			'conflict expected'
+		];
+	}
+
+	/**
+	 * @dataProvider provideConflictDetection
+	 * @covers EditPage
+	 */
+	public function testConflictDetection( $editUser, $newEdit, $expectedCode, $message ) {
+		// create page
+		$ns = $this->getDefaultWikitextNS();
+		$title = Title::newFromText( __METHOD__, $ns );
+		$page = WikiPage::factory( $title );
+
+		if ( $page->exists() ) {
+			$page->doDeleteArticleReal(
+				"clean slate for testing",
+				$this->getTestSysop()->getUser()
+			);
+		}
+
+		$elmosEdit['wpTextbox1'] = 'Elmo\'s text';
+		$bertasEdit['wpTextbox1'] = 'Berta\'s text';
+		$newEdit['wpTextbox1'] = 'new text';
+
+		$elmosEdit['wpSummary'] = 'Elmo\'s edit';
+		$bertasEdit['wpSummary'] = 'Bertas\'s edit';
+		$newEdit['wpSummary'] = $newEdit['wpSummary'] ?? 'new edit';
+
+		// first edit: Elmo
+		$page = $this->assertEdit( __METHOD__, null, 'Elmo', $elmosEdit,
+			EditPage::AS_SUCCESS_NEW_ARTICLE, null, 'expected successful creation' );
+
+		$this->forceRevisionDate( $page, '20120101000000' );
+		$rev1 = $page->getRevisionRecord();
+
+		// second edit: Berta
+		$page = $this->assertEdit( __METHOD__, null, 'Berta', $bertasEdit,
+			EditPage::AS_SUCCESS_UPDATE, null, 'expected successful update' );
+
+		$this->forceRevisionDate( $page, '20120101111111' );
+		$rev2 = $page->getRevisionRecord();
+
+		if ( !empty( $newEdit['editRevId'] ) ) {
+			$newEdit['editRevId'] = $newEdit['editRevId'] === 1 ? $rev1->getId() : $rev2->getId();
+		}
+
+		if ( !empty( $newEdit['wpEdittime'] ) ) {
+			$newEdit['wpEdittime'] =
+				$newEdit['wpEdittime'] === 1 ? $rev1->getTimestamp() : $rev2->getTimestamp();
+		}
+
+		// third edit
+		$this->assertEdit( __METHOD__, null, $editUser, $newEdit,
+			$expectedCode, null, $message );
 	}
 
 	public static function provideAutoMerge() {
@@ -553,11 +668,9 @@ hello
 			"Elmo", # base edit user
 			"one\n\ntwo\n\nthree\n",
 			[ # adam's edit
-				'wpStarttime' => 1,
 				'wpTextbox1' => "ONE\n\ntwo\n\nthree\n",
 			],
 			[ # berta's edit
-				'wpStarttime' => 2,
 				'wpTextbox1' => "(one)\n\ntwo\n\nthree\n",
 			],
 			EditPage::AS_CONFLICT_DETECTED, # expected code
@@ -597,12 +710,10 @@ hello
 			"Elmo", # base edit user
 			$text,
 			[ # adam's edit
-				'wpStarttime' => 1,
 				'wpTextbox1' => str_replace( 'one', 'ONE', $section ),
 				'wpSection' => '1'
 			],
 			[ # berta's edit
-				'wpStarttime' => 2,
 				'wpTextbox1' => str_replace( 'three', 'THREE', $section ),
 				'wpSection' => '1'
 			],
@@ -640,7 +751,10 @@ hello
 		$page = WikiPage::factory( $title );
 
 		if ( $page->exists() ) {
-			$page->doDeleteArticle( "clean slate for testing" );
+			$page->doDeleteArticleReal(
+				"clean slate for testing",
+				$this->getTestSysop()->getUser()
+			);
 		}
 
 		$baseEdit = [
@@ -653,28 +767,7 @@ hello
 		$this->forceRevisionDate( $page, '20120101000000' );
 
 		$edittime = $page->getTimestamp();
-
-		// start timestamps for conflict detection
-		if ( !isset( $adamsEdit['wpStarttime'] ) ) {
-			$adamsEdit['wpStarttime'] = 1;
-		}
-
-		if ( !isset( $bertasEdit['wpStarttime'] ) ) {
-			$bertasEdit['wpStarttime'] = 2;
-		}
-
-		$starttime = wfTimestampNow();
-		$adamsTime = wfTimestamp(
-			TS_MW,
-			(int)wfTimestamp( TS_UNIX, $starttime ) + (int)$adamsEdit['wpStarttime']
-		);
-		$bertasTime = wfTimestamp(
-			TS_MW,
-			(int)wfTimestamp( TS_UNIX, $starttime ) + (int)$bertasEdit['wpStarttime']
-		);
-
-		$adamsEdit['wpStarttime'] = $adamsTime;
-		$bertasEdit['wpStarttime'] = $bertasTime;
+		$revId = $page->getLatest();
 
 		$adamsEdit['wpSummary'] = 'Adam\'s edit';
 		$bertasEdit['wpSummary'] = 'Bertas\'s edit';
@@ -682,9 +775,12 @@ hello
 		$adamsEdit['wpEdittime'] = $edittime;
 		$bertasEdit['wpEdittime'] = $edittime;
 
+		$adamsEdit['editRevId'] = $revId;
+		$bertasEdit['editRevId'] = $revId;
+
 		// first edit
 		$this->assertEdit( 'EditPageTest_testAutoMerge', null, 'Adam', $adamsEdit,
-			EditPage::AS_SUCCESS_UPDATE, null, "expected successfull update" );
+			EditPage::AS_SUCCESS_UPDATE, null, "expected successful update" );
 
 		// second edit
 		$this->assertEdit( 'EditPageTest_testAutoMerge', null, 'Berta', $bertasEdit,
@@ -693,35 +789,163 @@ hello
 
 	/**
 	 * @depends testAutoMerge
+	 * @covers EditPage
 	 */
 	public function testCheckDirectEditingDisallowed_forNonTextContent() {
-		$title = Title::newFromText( 'Dummy:NonTextPageForEditPage' );
-		$page = WikiPage::factory( $title );
-
-		$article = new Article( $title );
-		$article->getContext()->setTitle( $title );
-		$ep = new EditPage( $article );
-		$ep->setContextTitle( $title );
-
 		$user = $GLOBALS['wgUser'];
 
 		$edit = [
 			'wpTextbox1' => serialize( 'non-text content' ),
 			'wpEditToken' => $user->getEditToken(),
 			'wpEdittime' => '',
+			'editRevId' => 0,
 			'wpStarttime' => wfTimestampNow(),
 			'wpUnicodeCheck' => EditPage::UNICODE_CHECK,
 		];
 
+		$this->expectException( MWException::class );
+		$this->expectExceptionMessage( 'This content model is not supported: testing' );
+
+		$this->doEditDummyNonTextPage( $edit );
+	}
+
+	/** @covers EditPage */
+	public function testShouldPreventChangingContentModelWhenUserCannotChangeModelForTitle() {
+		$this->setTemporaryHook( 'getUserPermissionsErrors',
+			function ( Title $page, $user, $action, &$result ) {
+				if ( $action === 'editcontentmodel' &&
+					 $page->getContentModel() === CONTENT_MODEL_WIKITEXT ) {
+					$result = false;
+
+					return false;
+				}
+			} );
+
+		$user = $GLOBALS['wgUser'];
+
+		$status = $this->doEditDummyNonTextPage( [
+			'wpTextbox1' => 'some text',
+			'wpEditToken' => $user->getEditToken(),
+			'wpEdittime' => '',
+			'editRevId' => 0,
+			'wpStarttime' => wfTimestampNow(),
+			'wpUnicodeCheck' => EditPage::UNICODE_CHECK,
+			'model' => CONTENT_MODEL_WIKITEXT,
+			'format' => CONTENT_FORMAT_WIKITEXT,
+		] );
+
+		$this->assertFalse( $status->isOK() );
+		$this->assertEquals( EditPage::AS_NO_CHANGE_CONTENT_MODEL, $status->getValue() );
+	}
+
+	/** @covers EditPage */
+	public function testShouldPreventChangingContentModelWhenUserCannotEditTargetTitle() {
+		$this->setTemporaryHook( 'getUserPermissionsErrors',
+			function ( Title $page, $user, $action, &$result ) {
+				if ( $action === 'edit' && $page->getContentModel() === CONTENT_MODEL_WIKITEXT ) {
+					$result = false;
+					return false;
+				}
+			} );
+
+		$user = $GLOBALS['wgUser'];
+
+		$status = $this->doEditDummyNonTextPage( [
+			'wpTextbox1' => 'some text',
+			'wpEditToken' => $user->getEditToken(),
+			'wpEdittime' => '',
+			'editRevId' => 0,
+			'wpStarttime' => wfTimestampNow(),
+			'wpUnicodeCheck' => EditPage::UNICODE_CHECK,
+			'model' => CONTENT_MODEL_WIKITEXT,
+			'format' => CONTENT_FORMAT_WIKITEXT,
+		] );
+
+		$this->assertFalse( $status->isOK() );
+		$this->assertEquals( EditPage::AS_NO_CHANGE_CONTENT_MODEL, $status->getValue() );
+	}
+
+	private function doEditDummyNonTextPage( array $edit ): Status {
+		$title = Title::newFromText( 'Dummy:NonTextPageForEditPage' );
+
+		$article = new Article( $title );
+		$article->getContext()->setTitle( $title );
+		$ep = new EditPage( $article );
+		$ep->setContextTitle( $title );
+
 		$req = new FauxRequest( $edit, true );
 		$ep->importFormData( $req );
 
-		$this->setExpectedException(
-			MWException::class,
-			'This content model is not supported: testing'
-		);
-
-		$ep->internalAttemptSave( $result, false );
+		return $ep->internalAttemptSave( $result, false );
 	}
 
+	/**
+	 * The watchlist expiry field should select the entered value on preview, rather than the
+	 * calculated number of days till the expiry (as it shows on edit).
+	 * @covers EditPage::getCheckboxesDefinition()
+	 * @dataProvider provideWatchlistExpiry()
+	 */
+	public function testWatchlistExpiry( $existingExpiry, $postVal, $selected, $options ) {
+		// Set up config and fake current time.
+		$this->setMwGlobals( 'wgWatchlistExpiry', true );
+		MWTimestamp::setFakeTime( '20200505120000' );
+		$user = $this->getTestUser()->getUser();
+		$this->assertTrue( $user->isLoggedIn() );
+
+		// Create the EditPage.
+		$title = Title::newFromText( __METHOD__ );
+		$context = new RequestContext();
+		$context->setUser( $user );
+		$context->setTitle( $title );
+		$article = new Article( $title );
+		$article->setContext( $context );
+		$ep = new EditPage( $article );
+		WatchAction::doWatchOrUnwatch( (bool)$existingExpiry, $title, $user, $existingExpiry );
+
+		// Send the request.
+		$req = new FauxRequest( [ 'wpWatchlistExpiry' => $postVal ], true );
+		$context->setRequest( $req );
+		$req->getSession()->setUser( $user );
+		$ep->importFormData( $req );
+		$def = $ep->getCheckboxesDefinition( [ 'watch' => true ] )['wpWatchlistExpiry'];
+
+		// Test selected and available options.
+		$this->assertSame( $selected, $def['default'] );
+		$dropdownOptions = [];
+		foreach ( $def['options'] as $option ) {
+			// Reformat dropdown options for easier test comparison.
+			$dropdownOptions[] = $option['data'];
+		}
+		$this->assertSame( $options, $dropdownOptions );
+	}
+
+	public function provideWatchlistExpiry() {
+		$standardOptions = [ 'infinite', '1 week', '1 month', '3 months', '6 months' ];
+		return [
+			'not watched, request nothing' => [
+				'existingExpiry' => '',
+				'postVal' => '',
+				'selected' => 'infinite',
+				'options' => $standardOptions,
+			],
+			'not watched' => [
+				'existingExpiry' => '',
+				'postVal' => '1 month',
+				'result' => '1 month',
+				'options' => $standardOptions,
+			],
+			'watched with current selected' => [
+				'existingExpiry' => '2020-05-05T12:00:01Z',
+				'postVal' => '2020-05-05T12:00:01Z',
+				'result' => '2020-05-05T12:00:01Z',
+				'options' => array_merge( [ '2020-05-05T12:00:01Z' ], $standardOptions ),
+			],
+			'watched with 1 week selected' => [
+				'existingExpiry' => '2020-05-05T12:00:02Z',
+				'postVal' => '1 week',
+				'result' => '1 week',
+				'options' => array_merge( [ '2020-05-05T12:00:02Z' ], $standardOptions ),
+			],
+		];
+	}
 }

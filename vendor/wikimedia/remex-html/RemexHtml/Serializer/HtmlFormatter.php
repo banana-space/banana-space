@@ -2,9 +2,9 @@
 
 namespace RemexHtml\Serializer;
 
-use RemexHtml\HTMLData;
-use RemexHtml\DOM\DOMUtils;
 use RemexHtml\DOM\DOMFormatter;
+use RemexHtml\DOM\DOMUtils;
+use RemexHtml\HTMLData;
 
 /**
  * A formatter which follows the HTML 5 fragment serialization algorithm.
@@ -164,6 +164,7 @@ class HtmlFormatter implements Formatter, DOMFormatter {
 
 		switch ( $node->nodeType ) {
 		case XML_ELEMENT_NODE:
+			'@phan-var \DOMElement $node'; /** @var \DOMElement $node */
 			return $this->formatDOMElement( $node, $contents );
 
 		case XML_DOCUMENT_NODE:
@@ -177,6 +178,7 @@ class HtmlFormatter implements Formatter, DOMFormatter {
 			return $contents;
 
 		case XML_TEXT_NODE:
+			'@phan-var \DOMCharacterData $node'; /** @var \DOMCharacterData $node */
 			$text = $node->data;
 			$parent = $node->parentNode;
 			if ( $parent->namespaceURI !== HTMLData::NS_HTML
@@ -187,6 +189,7 @@ class HtmlFormatter implements Formatter, DOMFormatter {
 			return $text;
 
 		case XML_CDATA_SECTION_NODE:
+			'@phan-var \DOMCdataSection $node'; /** @var \DOMCdataSection $node */
 			$parent = $node->parentNode;
 			if ( $parent->namespaceURI === HTMLData::NS_HTML ) {
 				// CDATA is not allowed in HTML nodes
@@ -196,12 +199,15 @@ class HtmlFormatter implements Formatter, DOMFormatter {
 			}
 
 		case XML_PI_NODE:
+			'@phan-var \DOMProcessingInstruction $node'; /** @var \DOMProcessingInstruction $node */
 			return "<?{$node->target} {$node->data}>";
 
 		case XML_COMMENT_NODE:
+			'@phan-var \DOMComment $node'; /** @var \DOMComment $node */
 			return "<!--{$node->data}-->";
 
 		case XML_DOCUMENT_TYPE_NODE:
+			'@phan-var \DOMDocumentType $node'; /** @var \DOMDocumentType $node */
 			if ( $this->useSourceDoctype ) {
 				return "<!DOCTYPE {$node->name}>";
 			} else {

@@ -12,7 +12,5 @@
 	"fancycaptcha-edit": "Če želite urediti stran, prosimo vnesite spodnje besede v polje ([[Special:Captcha/help|več informacij]]):",
 	"fancycaptcha-imgcaptcha-ph": "Vnesite besedilo, ki ga vidite na sliki",
 	"fancycaptcha-sendemail": "Zaradi zaščite wikija pred samodejnim smetenjem vas prijazno naprošamo, da vnesete spodnje besede v polje ([[Special:Captcha/help|več informacij]]):",
-	"fancycaptcha-reload-text": "Osveži",
-	"apihelp-fancycaptchareload-description": "Pridobi novo FancyCaptcha.",
-	"apihelp-fancycaptchareload-example-1": "Pridobi novo FancyCaptcha"
+	"fancycaptcha-reload-text": "Osveži"
 }

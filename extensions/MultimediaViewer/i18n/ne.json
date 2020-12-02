@@ -1,12 +1,25 @@
 {
 	"@metadata": {
 		"authors": [
-			"NehalDaveND"
+			"NehalDaveND",
+			"पर्वत सुबेदी",
+			"सरोज कुमार ढकाल",
+			"हिमाल सुबेदी"
 		]
 	},
+	"multimediaviewer-repository-local": "अधिक जानकारी",
+	"multimediaviewer-thumbnail-error-retry": "पुनः प्रयास गर्नुहोस्",
+	"multimediaviewer-license-cc-pd": "सार्वजनिक डोमेन",
+	"multimediaviewer-license-default": "अनुमति पत्र हेर्नुहोस्",
+	"multimediaviewer-discuss-mmv": "छलफल",
 	"multimediaviewer-help-mmv": "सहायता",
-	"multimediaviewer-reuse-loading-placeholder": "लोड हुदैछ...",
+	"multimediaviewer-geoloc-north": "उ",
+	"multimediaviewer-geoloc-east": "पू",
+	"multimediaviewer-geoloc-south": "द",
+	"multimediaviewer-geoloc-west": "प",
+	"multimediaviewer-reuse-loading-placeholder": "खुल्दै छ…",
 	"multimediaviewer-share-tab": "बाड्ने",
+	"multimediaviewer-embed-wt": "विकी पृष्ठ",
 	"multimediaviewer-embed-html": "HTML",
 	"multimediaviewer-title-popup-text": "वर्णन",
 	"multimediaviewer-options-learn-more": "जाने थप",

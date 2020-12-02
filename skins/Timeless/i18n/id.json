@@ -1,12 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kenrick95"
+			"Kenrick95",
+			"William Surya Permana"
 		]
 	},
 	"timeless-desc": "Sebuah kulit tanpa batas waktu yang dirancang berdasarkan prototipe Winter oleh Brandon Harris, dan gaya-gaya lainnya oleh Wikimedia Foundation.",
-	"timeless-search-placeholder": "Cari {{NUMBEROFARTICLES}} halaman",
-	"timeless-loggedin": "Akun Anda",
 	"timeless-anonymous": "Anonim",
 	"timeless-loggedinas": "Telah masuk log sebagai '''$1'''",
 	"timeless-notloggedin": "Belum masuk log",
@@ -20,5 +19,6 @@
 	"timeless-pagemisc": "Selengkapnya",
 	"timeless-namespaces": "Ruang nama",
 	"timeless-pagetools": "Tindakan halaman",
-	"timeless-languages": "Bahasa"
+	"timeless-languages": "Bahasa",
+	"timeless.js": "/* Semua JavaScript di sini akan dimuatkan untuk para pengguna yang menggunakan kulit Timeless */"
 }

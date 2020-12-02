@@ -2,9 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Alma",
+			"Elisardojm",
 			"Prevert",
-			"Toliño",
-			"Elisardojm"
+			"Toliño"
 		]
 	},
 	"renameuser": "Mudar o nome do usuario",
@@ -20,7 +20,7 @@
 	"renameuserwarnings": "Avisos:",
 	"renameuserconfirm": "Si, renomear este usuario",
 	"renameusersubmit": "Enviar",
-	"renameuser-submit-blocklog": "Mostrar o rexistro de bloqueos do usuario",
+	"renameuser-submit-blocklog": "Amosar o rexistro de bloqueos do usuario",
 	"renameusererrordoesnotexist": "O usuario \"<nowiki>$1</nowiki>\" non existe.",
 	"renameusererrorexists": "{{GENDER:$1|O usuario|A usuaria}} \"<nowiki>$1</nowiki>\" xa existe.",
 	"renameusererrorinvalid": "O nome de usuario \"<nowiki>$1</nowiki>\" non é válido.",

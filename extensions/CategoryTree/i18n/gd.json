@@ -34,8 +34,5 @@
 	"categorytree-no-pages": "gun duilleag no fho-roinn-seòrsa",
 	"categorytree-not-found": "Cha deach an roinn-seòrsa <i>$1</i> a lorg",
 	"categorytree-error": "Duilgheadas le luchdadh an dàta.",
-	"categorytree-retry": "Fuirich greiseag 's feuch ris a-rithist.",
-	"apihelp-categorytree-description": "Mòideal inntearnail airson leudachan nan craobhan roinnean-seòrsa.",
-	"apihelp-categorytree-param-category": "Tiotal ann an ainm-spàs \"Roinn-seòrsa\", thèid an ro-leasachan a leigeil seachad ma chaidh e a chur ris.",
-	"apihelp-categorytree-param-options": "Roghainnean airson craobh nan roinnean-seòrsa gus oibseact JSON a thogail. Thèid doimhne dhe <kbd>1</kbd> a chleachdadh a ghnàth."
+	"categorytree-retry": "Fuirich greiseag 's feuch ris a-rithist."
 }

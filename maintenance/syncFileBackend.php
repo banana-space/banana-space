@@ -21,6 +21,8 @@
  * @ingroup Maintenance
  */
 
+use MediaWiki\MediaWikiServices;
+
 require_once __DIR__ . '/Maintenance.php';
 
 /**
@@ -46,10 +48,15 @@ class SyncFileBackend extends Maintenance {
 	}
 
 	public function execute() {
-		$src = FileBackendGroup::singleton()->get( $this->getOption( 'src' ) );
+		$backendGroup = MediaWikiServices::getInstance()->getFileBackendGroup();
+		$src = $backendGroup->get( $this->getOption( 'src' ) );
 
 		$posDir = $this->getOption( 'posdir' );
-		$posFile = $posDir ? $posDir . '/' . wfWikiID() : false;
+		if ( $posDir != '' ) {
+			$posFile = "$posDir/" . rawurlencode( $src->getDomainId() );
+		} else {
+			$posFile = false;
+		}
 
 		if ( $this->hasOption( 'posdump' ) ) {
 			// Just dump the current position into the specified position dir
@@ -78,7 +85,7 @@ class SyncFileBackend extends Maintenance {
 		if ( !$this->hasOption( 'dst' ) ) {
 			$this->fatalError( "Param dst required!" );
 		}
-		$dst = FileBackendGroup::singleton()->get( $this->getOption( 'dst' ) );
+		$dst = $backendGroup->get( $this->getOption( 'dst' ) );
 
 		$start = $this->getOption( 'start', 0 );
 		if ( !$start && $posFile && is_dir( $posDir ) ) {
@@ -254,7 +261,7 @@ class SyncFileBackend extends Maintenance {
 					'src' => $fsFile->getPath(), 'dst' => $dPath, 'overwrite' => 1 ];
 			} elseif ( $sExists === false ) { // does not exist in source
 				$ops[] = [ 'op' => 'delete', 'src' => $dPath, 'ignoreMissingSource' => 1 ];
-			} else { // error
+			} else {
 				$this->error( "Unable to sync '$dPath': could not stat file." );
 				$status->fatal( 'backend-fail-internal', $src->getName() );
 

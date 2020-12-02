@@ -33,4 +33,11 @@ snippet #set\n\
 exports.scope = "velocity";
 exports.includeScopes = ["html", "javascript", "css"];
 
-});
+});                (function() {
+                    ace.require(["ace/snippets/velocity"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

@@ -1,4 +1,4 @@
-( function ( mw, $ ) {
+( function () {
 	var MTH = {};
 
 	MTH.enterFullscreenMock = function () {
@@ -33,7 +33,7 @@
 	 * Creates an mw.storage-like object.
 	 *
 	 * @param {Object} storage localStorage stub with getItem, setItem, removeItem methods
-	 * @return {mw.storage} Local storage-like object
+	 * @return {mw.SafeStorage} Local storage-like object
 	 */
 	MTH.createLocalStorage = function ( storage ) {
 		return new ( Object.getPrototypeOf( mw.storage ) ).constructor( storage );
@@ -42,7 +42,7 @@
 	/**
 	 * Returns an mw.storage that mimicks lack of localStorage support.
 	 *
-	 * @return {mw.storage} Local storage-like object
+	 * @return {mw.SafeStorage} Local storage-like object
 	 */
 	MTH.getUnsupportedLocalStorage = function () {
 		return this.createLocalStorage( undefined );
@@ -51,7 +51,7 @@
 	/**
 	 * Returns an mw.storage that mimicks localStorage being disabled in browser.
 	 *
-	 * @return {mw.storage} Local storage-like object
+	 * @return {mw.SafeStorage} Local storage-like object
 	 */
 	MTH.getDisabledLocalStorage = function () {
 		var e = function () {
@@ -69,7 +69,7 @@
 	 * Returns a fake local storage which is not saved between reloads.
 	 *
 	 * @param {Object} [initialData]
-	 * @return {mw.storage} Local storage-like object
+	 * @return {mw.SafeStorage} Local storage-like object
 	 */
 	MTH.getFakeLocalStorage = function ( initialData ) {
 		var bag = new mw.Map();
@@ -85,13 +85,13 @@
 	/**
 	 * Returns a viewer object with all the appropriate placeholder functions.
 	 *
-	 * @return {mv.mmv.MultiMediaViewer} [description]
+	 * @return {mw.mmv.MultimediaViewer}
 	 */
 	MTH.getMultimediaViewer = function () {
 		return new mw.mmv.MultimediaViewer( {
-			imageQueryParameter: $.noop,
-			language: $.noop,
-			recordVirtualViewBeaconURI: $.noop,
+			imageQueryParameter: function () {},
+			language: function () {},
+			recordVirtualViewBeaconURI: function () {},
 			extensions: function () {
 				return { jpg: 'default' };
 			}
@@ -150,7 +150,7 @@
 	 * were created in functions upon which `asyncMethod` was called have
 	 * resolved.
 	 *
-	 * @return {$.Promise}
+	 * @return {jQuery.Promise}
 	 */
 	MTH.waitForAsync = function () {
 		var deferred = $.Deferred();
@@ -171,4 +171,4 @@
 	};
 
 	mw.mmv.testHelpers = MTH;
-}( mediaWiki, jQuery ) );
+}() );

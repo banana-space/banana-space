@@ -1,13 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alexander Yukal",
+			"Edward Chernenko",
+			"Kareyac",
+			"Movses",
 			"Okras",
 			"Redredsonia"
 		]
 	},
-	"timeless-desc": "Тема оформления Timeless создана после прототипа Winter Брэндона Харриса и различных стилей Фонда Викимедиа.",
-	"timeless-search-placeholder": "Поиск из {{NUMBEROFARTICLES}} страниц",
-	"timeless-loggedin": "Учётная запись",
+	"timeless-desc": "Тема оформления Timeless создана на основе прототипа Winter, созданного Брэндоном Харрисом, и различных стилей Фонда Викимедиа.",
 	"timeless-anonymous": "Аноним",
 	"timeless-loggedinas": "Вошёл как '''$1'''",
 	"timeless-notloggedin": "Вы не представились системе",
@@ -18,9 +20,12 @@
 	"timeless-sitetools": "Вики-инструменты",
 	"timeless-pageactions": "Инструменты для страниц",
 	"timeless-userpagetools": "Инструменты страницы участника",
+	"timeless-action-addsection": "Новая тема",
+	"timeless-view-view": "Читать",
 	"timeless-pagemisc": "Ещё",
 	"timeless-namespaces": "Пространства имён",
 	"timeless-pagetools": "Действия на странице",
 	"timeless-languages": "Языки",
-	"timeless.js": "/* Размещённый здесь код JavaScript будет загружаться пользователям, использующим тему оформления Timeless */"
+	"timeless-projects": "Другие проекты",
+	"timeless.js": "/* Размещённый здесь JavaScript код будет загружаться для пользователей, использующих тему оформления Timeless */"
 }

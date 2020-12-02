@@ -18,7 +18,6 @@
 	"nuke-submit-user": "Va",
 	"nuke-submit-delete": "Scansela le selessionà",
 	"right-nuke": "Scansela le pàgine a baron",
-	"nuke-select": "Selessioné: $1",
 	"nuke-userorip": "Nòm utent, adrëssa IP o gnente:",
 	"nuke-maxpages": "Màssim nùmer ëd pàgine:",
 	"nuke-editby": "Creà da [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",

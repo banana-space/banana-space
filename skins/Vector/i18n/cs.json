@@ -1,13 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mormegil"
+			"Dvorapa",
+			"Matěj Suchánek",
+			"Mormegil",
+			"Patriccck"
 		]
 	},
 	"skinname-vector": "Vektor",
-	"vector-skin-desc": "Moderní verze MonoBooku s novějším vzhledem a vylepšenou použitelností",
-	"vector.css": "/* Zde uvedené CSS bude ovlivňovat pouze styl „Vektor“ */",
-	"vector.js": "/* JavaScript pro uživatele používající vzhled „Vektor“ */",
+	"vector-skin-desc": "Moderní verze vzhledu Kniha s novějším vzhledem a vylepšenou použitelností",
+	"prefs-vector-enable-vector-1-label": "Použít starý Vektor",
+	"prefs-vector-enable-vector-1-help": "V následujících letech budeme postupně aktualizovat vzhled Vektor. Starý Vektor vám umožní používat starou verzi Vektoru z prosince 2019. Více o aktualizacích se dozvíte na naší [[mw:Reading/Web/Desktop_Improvements|projektové stránce]].",
+	"vector-opt-out": "Přepnout na starý vzhled",
+	"vector.css": "/* Veškeré zde uvedené CSS bude načítáno uživatelům vzhledu „Vektor“ */",
+	"vector.js": "/* Veškerý zde uvedený JavaScript bude načítán uživatelům vzhledu „Vektor“ */",
 	"vector-action-addsection": "Přidat téma",
 	"vector-action-delete": "Smazat",
 	"vector-action-move": "Přesunout",
@@ -19,5 +25,7 @@
 	"vector-view-history": "Zobrazit historii",
 	"vector-view-view": "Číst",
 	"vector-view-viewsource": "Zobrazit zdrojový kód",
+	"vector-jumptonavigation": "Skočit na navigaci",
+	"vector-jumptosearch": "Skočit na vyhledávání",
 	"vector-more-actions": "Další"
 }

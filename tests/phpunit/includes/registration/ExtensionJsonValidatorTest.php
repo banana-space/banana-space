@@ -21,7 +21,7 @@
 /**
  * @covers ExtensionJsonValidator
  */
-class ExtensionJsonValidatorTest extends MediaWikiTestCase {
+class ExtensionJsonValidatorTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider provideValidate
@@ -33,10 +33,8 @@ class ExtensionJsonValidatorTest extends MediaWikiTestCase {
 		} );
 
 		if ( is_string( $expected ) ) {
-			$this->setExpectedException(
-				ExtensionJsonValidationError::class,
-				$expected
-			);
+			$this->expectException( ExtensionJsonValidationError::class );
+			$this->expectExceptionMessage( $expected );
 		}
 
 		$dir = __DIR__ . '/../../data/registration/';
@@ -51,6 +49,10 @@ class ExtensionJsonValidatorTest extends MediaWikiTestCase {
 			[
 				'notjson.txt',
 				'notjson.txt is not valid JSON'
+			],
+			[
+				'duplicate_keys.json',
+				'Duplicate key: name'
 			],
 			[
 				'no_manifest_version.json',
@@ -78,6 +80,19 @@ class ExtensionJsonValidatorTest extends MediaWikiTestCase {
 				'good.json',
 				true
 			],
+			[
+				'good_with_license_expressions.json',
+				true
+			],
+			[
+				'bad_url.json', 'bad_url.json did not pass validation.
+[url] Should use HTTPS for www.mediawiki.org URLs'
+			],
+			[
+				'bad_url2.json', 'bad_url2.json did not pass validation.
+[url] Should use www.mediawiki.org domain
+[url] Should use HTTPS for www.mediawiki.org URLs'
+			]
 		];
 	}
 

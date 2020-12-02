@@ -39,7 +39,6 @@ class InHead extends InsertionMode {
 		$tokenizerState = null;
 		$textMode = null;
 		$mode = null;
-		$builder = $this->builder;
 		$dispatcher = $this->dispatcher;
 
 		switch ( $name ) {

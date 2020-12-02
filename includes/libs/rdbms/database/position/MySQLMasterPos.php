@@ -17,7 +17,7 @@ use UnexpectedValueException;
  * @see https://dev.mysql.com/doc/refman/5.6/en/replication-gtids-concepts.html
  */
 class MySQLMasterPos implements DBMasterPos {
-	/** @var int One of (BINARY_LOG, GTID_MYSQL, GTID_MARIA) */
+	/** @var string One of (BINARY_LOG, GTID_MYSQL, GTID_MARIA) */
 	private $style;
 	/** @var string|null Base name of all Binary Log files */
 	private $binLog;
@@ -34,14 +34,14 @@ class MySQLMasterPos implements DBMasterPos {
 	/** @var float UNIX timestamp */
 	private $asOfTime = 0.0;
 
-	const BINARY_LOG = 'binary-log';
-	const GTID_MARIA = 'gtid-maria';
-	const GTID_MYSQL = 'gtid-mysql';
+	private const BINARY_LOG = 'binary-log';
+	private const GTID_MARIA = 'gtid-maria';
+	private const GTID_MYSQL = 'gtid-mysql';
 
 	/** @var int Key name of the binary log index number of a position tuple */
-	const CORD_INDEX = 0;
+	public const CORD_INDEX = 0;
 	/** @var int Key name of the binary log event number of a position tuple */
-	const CORD_EVENT = 1;
+	public const CORD_EVENT = 1;
 
 	/**
 	 * @param string $position One of (comma separated GTID list, <binlog file>/<integer>)
@@ -178,6 +178,7 @@ class MySQLMasterPos implements DBMasterPos {
 	 * @since 1.31
 	 */
 	public function getLogFile() {
+		// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
 		return $this->gtids ? null : "{$this->binLog}.{$this->logPos[self::CORD_INDEX]}";
 	}
 
@@ -190,39 +191,69 @@ class MySQLMasterPos implements DBMasterPos {
 	}
 
 	/**
+	 * Set the GTID domain known to be used in new commits on a replication stream of interest
+	 *
+	 * This makes getRelevantActiveGTIDs() filter out GTIDs from other domains
+	 *
+	 * @see MySQLMasterPos::getRelevantActiveGTIDs()
+	 * @see https://mariadb.com/kb/en/library/gtid/#gtid_domain_id
+	 *
 	 * @param int|null $id @@gtid_domain_id of the active replication stream
+	 * @return MySQLMasterPos This instance (since 1.34)
 	 * @since 1.31
 	 */
 	public function setActiveDomain( $id ) {
 		$this->activeDomain = (int)$id;
+
+		return $this;
 	}
 
 	/**
+	 * Set the server ID known to be used in new commits on a replication stream of interest
+	 *
+	 * This makes getRelevantActiveGTIDs() filter out GTIDs from other origin servers
+	 *
+	 * @see MySQLMasterPos::getRelevantActiveGTIDs()
+	 *
 	 * @param int|null $id @@server_id of the server were writes originate
+	 * @return MySQLMasterPos This instance (since 1.34)
 	 * @since 1.31
 	 */
 	public function setActiveOriginServerId( $id ) {
 		$this->activeServerId = (int)$id;
+
+		return $this;
 	}
 
 	/**
+	 * Set the server UUID known to be used in new commits on a replication stream of interest
+	 *
+	 * This makes getRelevantActiveGTIDs() filter out GTIDs from other origin servers
+	 *
+	 * @see MySQLMasterPos::getRelevantActiveGTIDs()
+	 *
 	 * @param string|null $id @@server_uuid of the server were writes originate
+	 * @return MySQLMasterPos This instance (since 1.34)
 	 * @since 1.31
 	 */
 	public function setActiveOriginServerUUID( $id ) {
 		$this->activeServerUUID = $id;
+
+		return $this;
 	}
 
 	/**
 	 * @param MySQLMasterPos $pos
 	 * @param MySQLMasterPos $refPos
-	 * @return string[] List of GTIDs from $pos that have domains in $refPos
-	 * @since 1.31
+	 * @return string[] List of active GTIDs from $pos that have domains in $refPos
+	 * @since 1.34
 	 */
-	public static function getCommonDomainGTIDs( MySQLMasterPos $pos, MySQLMasterPos $refPos ) {
-		return array_values(
-			array_intersect_key( $pos->gtids, $refPos->getActiveGtidCoordinates() )
-		);
+	public static function getRelevantActiveGTIDs( MySQLMasterPos $pos, MySQLMasterPos $refPos ) {
+		return array_values( array_intersect_key(
+			$pos->gtids,
+			$pos->getActiveGtidCoordinates(),
+			$refPos->gtids
+		) );
 	}
 
 	/**
@@ -239,13 +270,13 @@ class MySQLMasterPos implements DBMasterPos {
 			$ignore = false;
 			// Filter out GTIDs from non-active replication domains
 			if ( $this->style === self::GTID_MARIA && $this->activeDomain !== null ) {
-				$ignore |= ( $domain !== $this->activeDomain );
+				$ignore = $ignore || ( $domain !== $this->activeDomain );
 			}
 			// Likewise for GTIDs from non-active replication origin servers
 			if ( $this->style === self::GTID_MARIA && $this->activeServerId !== null ) {
-				$ignore |= ( $server !== $this->activeServerId );
+				$ignore = $ignore || ( $server !== $this->activeServerId );
 			} elseif ( $this->style === self::GTID_MYSQL && $this->activeServerUUID !== null ) {
-				$ignore |= ( $server !== $this->activeServerUUID );
+				$ignore = $ignore || ( $server !== $this->activeServerUUID );
 			}
 
 			if ( !$ignore ) {
@@ -321,6 +352,7 @@ class MySQLMasterPos implements DBMasterPos {
 	public function __toString() {
 		return $this->gtids
 			? implode( ',', $this->gtids )
+			// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
 			: $this->getLogFile() . "/{$this->logPos[self::CORD_EVENT]}";
 	}
 }

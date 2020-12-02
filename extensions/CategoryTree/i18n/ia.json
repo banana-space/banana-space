@@ -32,10 +32,5 @@
 	"categorytree-no-pages": "nulle pagina o subcategoria",
 	"categorytree-not-found": "Categoria <i>$1</i> non trovate",
 	"categorytree-error": "Problema de cargamento de datos.",
-	"categorytree-retry": "Per favor attende un momento e reproba.",
-	"apihelp-categorytree-description": "Modulo interne pro le extension CategoryTree.",
-	"apihelp-categorytree-summary": "Modulo interne pro le extension CategoryTree.",
-	"apihelp-categorytree-param-category": "Titulo in le spatio de nomines Categoria. Le prefixo essera ignorate si fornite.",
-	"apihelp-categorytree-param-options": "Optiones pro le constructor CategoryTree como objecto JSON. Le option <var>depth</var> predefinite es <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "Le optiones debe esser un objecto JSON valide."
+	"categorytree-retry": "Per favor attende un momento e reproba."
 }

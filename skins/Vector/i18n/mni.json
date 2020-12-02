@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Awangba Mangang"
+		]
+	},
+	"vector-action-addsection": "ꯅꯩꯅꯕ ꯍꯤꯔꯝ ꯍꯥꯞꯆꯤꯟꯂꯨ",
+	"vector-action-delete": "ꯀꯛꯊꯠꯄꯥ",
+	"vector-action-move": "ꯂꯦꯡꯍꯟꯕꯥ",
+	"vector-action-protect": "ꯉꯥꯛꯊꯣꯛꯂꯕꯥ",
+	"vector-view-create": "ꯁꯥꯕꯥ",
+	"vector-view-edit": "ꯁꯦꯝꯒꯠꯄꯥ",
+	"vector-view-history": "ꯄꯨꯋꯥꯔꯤ ꯎꯨꯠꯂꯨ",
+	"vector-view-view": "ꯄꯥꯑꯣ",
+	"vector-more-actions": "ꯋꯥꯠꯂꯤ"
+}

@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Fitoschido",
 			"HanV",
-			"SPQRobin",
-			"Siebrand",
 			"Patio",
-			"Fitoschido"
+			"SPQRobin",
+			"Siebrand"
 		]
 	},
 	"replacetext": "Tekst vervangen",

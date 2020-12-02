@@ -23,6 +23,9 @@
  * @since 1.23
  */
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
+
 /**
  * A query module to show contributors to a page
  *
@@ -34,7 +37,7 @@ class ApiQueryContributors extends ApiQueryBase {
 	 * database pages too heavily), so only do the first MAX_PAGES input pages
 	 * in each API call (leaving the rest for continuation).
 	 */
-	const MAX_PAGES = 100;
+	private const MAX_PAGES = 100;
 
 	public function __construct( ApiQuery $query, $moduleName ) {
 		// "pc" is short for "page contributors", "co" was already taken by the
@@ -43,8 +46,6 @@ class ApiQueryContributors extends ApiQueryBase {
 	}
 
 	public function execute() {
-		global $wgActorTableSchemaMigrationStage;
-
 		$db = $this->getDB();
 		$params = $this->extractRequestParams();
 		$this->requireMaxOneParameter( $params, 'group', 'excludegroup', 'rights', 'excluderights' );
@@ -61,7 +62,7 @@ class ApiQueryContributors extends ApiQueryBase {
 				return $v >= $cont_page;
 			} );
 		}
-		if ( !count( $pages ) ) {
+		if ( $pages === [] ) {
 			// Nothing to do
 			return;
 		}
@@ -75,15 +76,12 @@ class ApiQueryContributors extends ApiQueryBase {
 		}
 
 		$result = $this->getResult();
-		$revQuery = Revision::getQueryInfo();
+		$revQuery = MediaWikiServices::getInstance()->getRevisionStore()->getQueryInfo();
 
-		// For MIGRATION_NEW, target indexes on the revision_actor_temp table.
-		// Otherwise, revision is fine because it'll have to check all revision rows anyway.
-		$pageField = $wgActorTableSchemaMigrationStage === MIGRATION_NEW ? 'revactor_page' : 'rev_page';
-		$idField = $wgActorTableSchemaMigrationStage === MIGRATION_NEW
-			? 'revactor_actor' : $revQuery['fields']['rev_user'];
-		$countField = $wgActorTableSchemaMigrationStage === MIGRATION_NEW
-			? 'revactor_actor' : $revQuery['fields']['rev_user_text'];
+		// Target indexes on the revision_actor_temp table.
+		$pageField = 'revactor_page';
+		$idField = 'revactor_actor';
+		$countField = 'revactor_actor';
 
 		// First, count anons
 		$this->addTables( $revQuery['tables'] );
@@ -94,7 +92,7 @@ class ApiQueryContributors extends ApiQueryBase {
 		] );
 		$this->addWhereFld( $pageField, $pages );
 		$this->addWhere( ActorMigration::newMigration()->isAnon( $revQuery['fields']['rev_user'] ) );
-		$this->addWhere( $db->bitAnd( 'rev_deleted', Revision::DELETED_USER ) . ' = 0' );
+		$this->addWhere( $db->bitAnd( 'rev_deleted', RevisionRecord::DELETED_USER ) . ' = 0' );
 		$this->addOption( 'GROUP BY', $pageField );
 		$res = $this->select( __METHOD__ );
 		foreach ( $res as $row ) {
@@ -106,7 +104,7 @@ class ApiQueryContributors extends ApiQueryBase {
 				// some other module used up all the space. Just set a dummy
 				// continue and hope it works next time.
 				$this->setContinueEnumParameter( 'continue',
-					$params['continue'] !== null ? $params['continue'] : '0|0'
+					$params['continue'] ?? '0|0'
 				);
 
 				return;
@@ -126,7 +124,7 @@ class ApiQueryContributors extends ApiQueryBase {
 		] );
 		$this->addWhereFld( $pageField, $pages );
 		$this->addWhere( ActorMigration::newMigration()->isNotAnon( $revQuery['fields']['rev_user'] ) );
-		$this->addWhere( $db->bitAnd( 'rev_deleted', Revision::DELETED_USER ) . ' = 0' );
+		$this->addWhere( $db->bitAnd( 'rev_deleted', RevisionRecord::DELETED_USER ) . ' = 0' );
 		$this->addOption( 'GROUP BY', [ $pageField, $idField ] );
 		$this->addOption( 'LIMIT', $params['limit'] + 1 );
 
@@ -148,7 +146,8 @@ class ApiQueryContributors extends ApiQueryBase {
 		} elseif ( $params['rights'] ) {
 			$excludeGroups = false;
 			foreach ( $params['rights'] as $r ) {
-				$limitGroups = array_merge( $limitGroups, User::getGroupsWithPermission( $r ) );
+				$limitGroups = array_merge( $limitGroups, $this->getPermissionManager()
+					->getGroupsWithPermission( $r ) );
 			}
 
 			// If no group has the rights requested, no need to query
@@ -164,7 +163,8 @@ class ApiQueryContributors extends ApiQueryBase {
 		} elseif ( $params['excluderights'] ) {
 			$excludeGroups = true;
 			foreach ( $params['excluderights'] as $r ) {
-				$limitGroups = array_merge( $limitGroups, User::getGroupsWithPermission( $r ) );
+				$limitGroups = array_merge( $limitGroups, $this->getPermissionManager()
+					->getGroupsWithPermission( $r ) );
 			}
 		}
 
@@ -172,7 +172,7 @@ class ApiQueryContributors extends ApiQueryBase {
 			$limitGroups = array_unique( $limitGroups );
 			$this->addTables( 'user_groups' );
 			$this->addJoinConds( [ 'user_groups' => [
-				$excludeGroups ? 'LEFT OUTER JOIN' : 'INNER JOIN',
+				$excludeGroups ? 'LEFT JOIN' : 'JOIN',
 				[
 					'ug_user=' . $revQuery['fields']['rev_user'],
 					'ug_group' => $limitGroups,
@@ -223,9 +223,13 @@ class ApiQueryContributors extends ApiQueryBase {
 		return 'public';
 	}
 
-	public function getAllowedParams() {
+	public function getAllowedParams( $flags = 0 ) {
 		$userGroups = User::getAllGroups();
-		$userRights = User::getAllRights();
+		$userRights = $this->getPermissionManager()->getAllPermissions();
+
+		if ( $flags & ApiBase::GET_VALUES_FOR_HELP ) {
+			sort( $userGroups );
+		}
 
 		return [
 			'group' => [

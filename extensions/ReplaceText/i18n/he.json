@@ -2,9 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"Guycn2",
 			"Rotemliss",
-			"YaronSh",
-			"Guycn2"
+			"YaronSh"
 		]
 	},
 	"replacetext": "החלפת טקסט",
@@ -38,7 +38,9 @@
 	"replacetext_warning": "'''אזהרה''': {{PLURAL:$1|ישנו עמוד אחד שכבר מכיל|ישנם $1 עמודים שכבר מכילים}} את מחרוזת ההחלפה, \"$2\". אם החלפה זו תבוצע לא תהיה באפשרותך להפריד את החלפותיך מ{{PLURAL:$1|מחרוזת זו|מחרוזות אלו}}.",
 	"replacetext_blankwarning": "כיוון שמחרוזת ההחלפה ריקה, לא ניתן יהיה לבטל פעולה זו; להמשיך?",
 	"replacetext_continue": "המשך",
+	"replacetext_announce": "להודיע את העריכות האלה דרך $1 ורשימות מעקב",
 	"replacetext_editsummary": "החלפת טקסט – \"$1\" ב־\"$2\"",
 	"right-replacetext": "ביצוע החלפת מחרוזות באתר הוויקי כולו",
-	"action-replacetext": "לבצע החלפת מחרוזות באתר הוויקי כולו"
+	"action-replacetext": "לבצע החלפת מחרוזות באתר הוויקי כולו",
+	"replacetext_reminder": "כדי לשנות גם את הקישורים לדף הזה ולדפים אחרים, ר' $1."
 }

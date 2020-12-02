@@ -11,8 +11,5 @@
 	"fancycaptcha-edit": "To edit this page, please enter the words that appear below in the box ([[Special:Captcha/help|more info]]):",
 	"fancycaptcha-imgcaptcha-ph": "Enter the text you see on the image",
 	"fancycaptcha-sendemail": "To protect the wiki against automated spamming, we kindly ask you to enter the words that appear below in the box ([[Special:Captcha/help|more info]]):",
-	"fancycaptcha-reload-text": "Refresh",
-	"apihelp-fancycaptchareload-description": "Get a new FancyCaptcha.",
-	"apihelp-fancycaptchareload-summary": "Get a new FancyCaptcha.",
-	"apihelp-fancycaptchareload-example-1": "Get a new FancyCaptcha"
+	"fancycaptcha-reload-text": "Refresh"
 }

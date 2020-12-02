@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lam-ang"
+		]
+	},
+	"apihelp-spamblacklist-description": "Pasingkedan ti maysa wenno ad-adu kadagiti URL iti SpamBlacklist.",
+	"apihelp-spamblacklist-example-1": "Kitaen dagiti dua nga URL iti blacklist",
+	"apihelp-spamblacklist-param-url": "Dagiti URL a mapasingkedan iti blacklist.",
+	"apihelp-spamblacklist-summary": "Pasingkedan ti maysa wenno ad-adu kadagiti URL iti SpamBlacklist."
+}

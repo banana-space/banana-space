@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ата",
-			"Piramidion"
+			"Piramidion",
+			"Ата"
 		]
 	},
+	"renocaptcha-desc": "Модуль reCAPTCHA NoCAPTCHA для Confirm Edit",
 	"renocaptcha-edit": "Щоб захистити вікі від автоматичного спаму в редагуваннях, ми уклінно просимо Вас ввести CAPTCHA:",
 	"renocaptcha-addurl": "Ваше редагування містить нові зовнішні посилання. Щоб захистити вікі від автоматичного спаму в редагуваннях, ми уклінно просимо Вас ввести CAPTCHA:",
 	"renocaptcha-badlogin": "Щоб захистити вікі від автоматичного зламування паролів, ми уклінно просимо Вас ввести CAPTCHA:",
@@ -12,6 +13,5 @@
 	"renocaptcha-createaccount-fail": "Схоже, Вам не вдалося ввести CAPTCHA.",
 	"renocaptcha-create": "Щоб захистити вікі від автоматичного створення сторінок, ми уклінно просимо Вас ввести CAPTCHA:",
 	"renocaptcha-noscript": "На жаль, Ви вимкнули JavaScript, і ми не можемо розпізнати автоматично, людина Ви чи ні. Будь ласка, введіть текст із CAPTCHA, що вгорі, у відповідне текстове поле:",
-	"renocaptcha-help": "Будь ласка, вирішіть завдання ReCaptcha NoCaptcha і введіть значення відповіді як captchaWord.",
-	"renocaptcha-apihelp-param-g-recaptcha-response": "Поле із віджета ReCaptcha."
+	"renocaptcha-help": "Будь ласка, вирішіть завдання ReCaptcha NoCaptcha і введіть значення відповіді як captchaWord."
 }

@@ -4,7 +4,7 @@
  * @copyright 2011-2015 MediaWiki Widgets Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-( function ( $, mw ) {
+( function () {
 
 	/**
 	 * Creates a mw.widgets.SearchInputWidget object.
@@ -14,8 +14,6 @@
 	 *
 	 * @constructor
 	 * @param {Object} [config] Configuration options
-	 * @cfg {boolean} [pushPending=false] Visually mark the input field as "pending", while
-	 *  requesting suggestions.
 	 * @cfg {boolean} [performSearchOnClick=true] If true, the script will start a search when-
 	 *  ever a user hits a suggestion. If false, the text of the suggestion is inserted into the
 	 *  text field only.
@@ -32,6 +30,7 @@
 		config = $.extend( {
 			icon: 'search',
 			maxLength: undefined,
+			showPendingRequest: false,
 			performSearchOnClick: true,
 			dataLocation: 'header'
 		}, config );
@@ -43,9 +42,6 @@
 		this.$element.addClass( 'mw-widget-searchInputWidget' );
 		this.lookupMenu.$element.addClass( 'mw-widget-searchWidget-menu' );
 		this.lastLookupItems = [];
-		if ( !config.pushPending ) {
-			this.pushPending = false;
-		}
 		if ( config.dataLocation ) {
 			this.dataLocation = config.dataLocation;
 		}
@@ -151,11 +147,12 @@
 			self = this;
 
 		// reuse the searchSuggest function from mw.searchSuggest
-		promise = mw.searchSuggest.request( api, this.getQueryValue(), $.noop, this.limit, this.getNamespace() );
+		promise = mw.searchSuggest.request( api, this.getQueryValue(), function () {}, this.limit, this.getNamespace() );
 
 		// tracking purposes
 		promise.done( function ( data, jqXHR ) {
 			self.requestType = jqXHR.getResponseHeader( 'X-OpenSearch-Type' );
+			self.searchId = jqXHR.getResponseHeader( 'X-Search-ID' );
 		} );
 
 		return promise;
@@ -173,10 +170,12 @@
 			data: response || {},
 			metadata: {
 				type: this.requestType || 'unknown',
+				searchId: this.searchId || null,
 				query: this.getQueryValue()
 			}
 		};
 		this.requestType = undefined;
+		this.searchId = undefined;
 
 		return resp;
 	};
@@ -191,6 +190,7 @@
 			urls = data.data[ 3 ],
 			self = this;
 
+		// eslint-disable-next-line no-jquery/no-each-util
 		$.each( titles, function ( i, result ) {
 			items.push( new mw.widgets.TitleOptionWidget(
 				self.getOptionWidgetData(
@@ -214,6 +214,7 @@
 			action: 'impression-results',
 			numberOfResults: items.length,
 			resultSetType: data.metadata.type,
+			searchId: data.metadata.searchId,
 			query: data.metadata.query,
 			inputLocation: this.dataLocation || 'header'
 		} );
@@ -224,11 +225,11 @@
 	/**
 	 * @inheritdoc
 	 */
-	mw.widgets.SearchInputWidget.prototype.onLookupMenuItemChoose = function () {
-		mw.widgets.SearchInputWidget.parent.prototype.onLookupMenuItemChoose.apply( this, arguments );
+	mw.widgets.SearchInputWidget.prototype.onLookupMenuChoose = function () {
+		mw.widgets.SearchInputWidget.parent.prototype.onLookupMenuChoose.apply( this, arguments );
 
 		if ( this.performSearchOnClick ) {
-			this.$element.closest( 'form' ).submit();
+			this.$element.closest( 'form' ).trigger( 'submit' );
 		}
 	};
 
@@ -247,4 +248,4 @@
 		return items;
 	};
 
-}( jQuery, mediaWiki ) );
+}() );

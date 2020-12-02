@@ -17,10 +17,9 @@
  *
  * @file
  * @ingroup Benchmark
- * @author Timo Tijhof
  */
 
-require_once __DIR__ . '/Benchmarker.php';
+require_once __DIR__ . '/../includes/Benchmarker.php';
 
 /**
  * Maintenance script that benchmarks JSMinPlus.

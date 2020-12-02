@@ -1,5 +1,5 @@
-@import 'mmv.globals';
-@import 'mmv.mixins';
+@import 'mmv.variables.less';
+@import 'mmv.mixins.less';
 
 .mw-mmv-wrapper {
 	top: 0;
@@ -52,7 +52,7 @@
 	width: 100%;
 	bottom: auto;
 	height: auto;
-	color: #222;
+	color: @color-base;
 	background-color: @panel-above-fold-background-color;
 	min-height: ( @metadatabar-above-fold-inner-height + 1 );
 	z-index: 1005;
@@ -87,19 +87,21 @@
 }
 
 .jq-fullscreened {
-	.mw-mmv-image-wrapper, // make the image occupy the whole screen
-	.mw-mmv-post-image { // make sure the panel fits in the screen and does not cause scrollbars to appear
+	// make the image occupy the whole screen
+	// make sure the panel fits in the screen and does not cause scrollbars to appear
+	.mw-mmv-image-wrapper,
+	.mw-mmv-post-image {
 		bottom: 0;
 	}
 
 	.mw-mmv-post-image {
 		position: fixed;
 		min-height: 0;
-		.opacity( 0 );
+		opacity: 0;
 		transition: opacity 0.25s;
 
 		&:hover {
-			.opacity( 1 );
+			opacity: 1;
 		}
 	}
 }

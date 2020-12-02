@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Derk-Jan Hartman",
 			"Purodha",
 			"Shirayuki",
-			"Derk-Jan Hartman",
-			"Umherirrender",
-			"Tacsipacsi"
+			"Tacsipacsi",
+			"Umherirrender"
 		]
 	},
 	"codeeditor-desc": "{{desc|name=Code Editor|url=https://www.mediawiki.org/wiki/Extension:CodeEditor}}",

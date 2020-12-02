@@ -25,13 +25,15 @@
 
 require_once __DIR__ . '/Maintenance.php';
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Maintenance script to create an account and grant it rights.
  *
  * @ingroup Maintenance
  */
 class CreateAndPromote extends Maintenance {
-	private static $permitRoles = [ 'sysop', 'bureaucrat', 'bot' ];
+	private static $permitRoles = [ 'sysop', 'bureaucrat', 'interface-admin', 'bot' ];
 
 	public function __construct() {
 		parent::__construct();
@@ -52,7 +54,7 @@ class CreateAndPromote extends Maintenance {
 		);
 
 		$this->addArg( "username", "Username of new user" );
-		$this->addArg( "password", "Password to set (not required if --force is used)", false );
+		$this->addArg( "password", "Password to set", false );
 	}
 
 	public function execute() {
@@ -66,7 +68,7 @@ class CreateAndPromote extends Maintenance {
 			$this->fatalError( "invalid username." );
 		}
 
-		$exists = ( 0 !== $user->idForName() );
+		$exists = ( $user->idForName() !== 0 );
 
 		if ( $exists && !$force ) {
 			$this->fatalError( "Account exists. Perhaps you want the --force option?" );
@@ -103,18 +105,26 @@ class CreateAndPromote extends Maintenance {
 
 			return;
 		} elseif ( count( $promotions ) !== 0 ) {
+			$dbDomain = WikiMap::getCurrentWikiDbDomain()->getId();
 			$promoText = "User:{$username} into " . implode( ', ', $promotions ) . "...\n";
 			if ( $exists ) {
-				$this->output( wfWikiID() . ": Promoting $promoText" );
+				$this->output( "$dbDomain: Promoting $promoText" );
 			} else {
-				$this->output( wfWikiID() . ": Creating and promoting $promoText" );
+				$this->output( "$dbDomain: Creating and promoting $promoText" );
 			}
 		}
 
 		if ( !$exists ) {
-			# Insert the account into the database
-			$user->addToDatabase();
-			$user->saveSettings();
+			// Create the user via AuthManager as there may be various side
+			// effects that are performed by the configured AuthManager chain.
+			$status = MediaWikiServices::getInstance()->getAuthManager()->autoCreateUser(
+				$user,
+				MediaWiki\Auth\AuthManager::AUTOCREATE_SOURCE_MAINT,
+				false
+			);
+			if ( !$status->isGood() ) {
+				$this->fatalError( $status->getMessage( false, false, 'en' )->text() );
+			}
 		}
 
 		if ( $password ) {
@@ -126,7 +136,7 @@ class CreateAndPromote extends Maintenance {
 					'retype' => $password,
 				] );
 				if ( !$status->isGood() ) {
-					throw new PasswordError( $status->getWikiText( null, null, 'en' ) );
+					throw new PasswordError( $status->getMessage( false, false, 'en' )->text() );
 				}
 				if ( $exists ) {
 					$this->output( "Password set.\n" );
@@ -142,7 +152,7 @@ class CreateAndPromote extends Maintenance {
 
 		if ( !$exists ) {
 			# Increment site_stats.ss_users
-			$ssu = new SiteStatsUpdate( 0, 0, 0, 0, 1 );
+			$ssu = SiteStatsUpdate::factory( [ 'users' => 1 ] );
 			$ssu->doUpdate();
 		}
 

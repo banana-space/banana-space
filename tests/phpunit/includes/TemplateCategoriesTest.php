@@ -15,7 +15,7 @@ class TemplateCategoriesTest extends MediaWikiLangTestCase {
 	 */
 	public function testTemplateCategories() {
 		$user = new User();
-		$user->mRights = [ 'createpage', 'edit', 'purge', 'delete' ];
+		$this->overrideUserPermissions( $user, [ 'createpage', 'edit', 'purge', 'delete' ] );
 
 		$title = Title::newFromText( "Categorized from template" );
 		$page = WikiPage::factory( $title );
@@ -79,8 +79,7 @@ class TemplateCategoriesTest extends MediaWikiLangTestCase {
 		);
 
 		// Now delete the template
-		$error = '';
-		$template->doDeleteArticleReal( 'Delete the template', false, 0, true, $error, $user );
+		$template->doDeleteArticleReal( 'Delete the template', $user );
 
 		// Run the job queue
 		JobQueueGroup::destroySingletons();

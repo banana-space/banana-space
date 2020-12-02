@@ -4,6 +4,6 @@
 			"Jagwar"
 		]
 	},
-	"cite-desc": "Mamnpy ny balizy <tt><nowiki><ref[ name=\"id\"]></nowiki></tt> et <tt><nowiki><references/></nowiki></tt> ho an'ny tsiahy.",
+	"cite-desc": "Mamnpy ny balizy <code>&lt;ref[ name=id]&gt;</code> et <tt><code>&lt;references/&gt;</code></tt> ho an'ny tsiahy.",
 	"cite_error": "Hadisoan-tsiahy: $1"
 }

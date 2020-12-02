@@ -21,14 +21,21 @@
 /**
  * An error page which can definitely be safely rendered using the OutputPage.
  *
+ * @newable
+ * @stable to extend
+ *
  * @since 1.7
  * @ingroup Exception
  */
 class ErrorPageError extends MWException implements ILocalizedException {
+	public const SEND_OUTPUT = 0;
+	public const STAGE_OUTPUT = 1;
 	public $title, $msg, $params;
 
 	/**
 	 * Note: these arguments are keys into wfMessage(), not text!
+	 *
+	 * @stable to call
 	 *
 	 * @param string|Message $title Message key (string) for page title, or a Message object
 	 * @param string|Message $msg Message key (string) for error text, or a Message object
@@ -60,13 +67,26 @@ class ErrorPageError extends MWException implements ILocalizedException {
 		return wfMessage( $this->msg, $this->params );
 	}
 
-	public function report() {
+	/**
+	 * @stable to override
+	 * @param int $action
+	 *
+	 * @throws FatalError
+	 * @throws MWException
+	 */
+	public function report( $action = self::SEND_OUTPUT ) {
 		if ( self::isCommandLine() || defined( 'MW_API' ) ) {
 			parent::report();
 		} else {
 			global $wgOut;
 			$wgOut->showErrorPage( $this->title, $this->msg, $this->params );
-			$wgOut->output();
+			// Allow skipping of the final output step, so that web-based page views
+			// from MediaWiki.php, can inspect the staged OutputPage state, and perform
+			// graceful shutdown via doPreOutputCommit first, just like for regular
+			// output when there isn't an error page.
+			if ( $action === self::SEND_OUTPUT ) {
+				$wgOut->output();
+			}
 		}
 	}
 }

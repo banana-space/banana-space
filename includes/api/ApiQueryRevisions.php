@@ -20,6 +20,11 @@
  * @file
  */
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\ParamValidator\TypeDef\UserDef;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Storage\NameTableAccessException;
+
 /**
  * A query action to enumerate revisions of a given page, or show top revisions
  * of multiple pages. Various pieces of information may be shown - flags,
@@ -58,7 +63,7 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 		$this->tokenFunctions = [
 			'rollback' => [ self::class, 'getRollbackToken' ]
 		];
-		Hooks::run( 'APIQueryRevisionsTokens', [ &$this->tokenFunctions ] );
+		$this->getHookRunner()->onAPIQueryRevisionsTokens( $this->tokenFunctions );
 
 		return $this->tokenFunctions;
 	}
@@ -67,12 +72,18 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 	 * @deprecated since 1.24
 	 * @param int $pageid
 	 * @param Title $title
-	 * @param Revision $rev
+	 * @param RevisionRecord|Revision $rev (passing a Revision hard deprecated since 1.35)
 	 * @return bool|string
 	 */
 	public static function getRollbackToken( $pageid, $title, $rev ) {
+		if ( $rev instanceof Revision ) {
+			// Don't actually need to use the Revision(Record), just emit warnings
+			wfDeprecated( __METHOD__ . ' with a Revision object', '1.35' );
+		}
+
 		global $wgUser;
-		if ( !$wgUser->isAllowed( 'rollback' ) ) {
+		if ( !MediaWikiServices::getInstance()->getPermissionManager()
+				->userHasRight( $wgUser, 'rollback' ) ) {
 			return false;
 		}
 
@@ -81,6 +92,7 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 
 	protected function run( ApiPageSet $resultPageSet = null ) {
 		$params = $this->extractRequestParams( false );
+		$revisionStore = MediaWikiServices::getInstance()->getRevisionStore();
 
 		// If any of those parameters are used, work in 'enumeration' mode.
 		// Enum mode can only be used when exactly one page is provided.
@@ -107,7 +119,7 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 
 		if ( $revCount > 0 && $enumRevMode ) {
 			$this->dieWithError(
-				[ 'apierror-revisions-nolist', $this->getModulePrefix() ], 'invalidparammix'
+				[ 'apierror-revisions-norevids', $this->getModulePrefix() ], 'invalidparammix'
 			);
 		}
 
@@ -126,20 +138,34 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 
 		$db = $this->getDB();
 
+		$idField = 'rev_id';
+		$tsField = 'rev_timestamp';
+		$pageField = 'rev_page';
+		if ( $params['user'] !== null ) {
+			// We're going to want to use the page_actor_timestamp index (on revision_actor_temp)
+			// so use that table's denormalized fields.
+			$idField = 'revactor_rev';
+			$tsField = 'revactor_timestamp';
+			$pageField = 'revactor_page';
+		}
+
 		if ( $resultPageSet === null ) {
 			$this->parseParameters( $params );
 			$this->token = $params['token'];
-			$opts = [];
-			if ( $this->token !== null || $pageCount > 0 ) {
-				$opts[] = 'page';
-			}
-			if ( $this->fetchContent ) {
-				$opts[] = 'text';
-			}
+			$opts = [ 'page' ];
 			if ( $this->fld_user ) {
 				$opts[] = 'user';
 			}
-			$revQuery = Revision::getQueryInfo( $opts );
+			$revQuery = $revisionStore->getQueryInfo( $opts );
+
+			if ( $idField !== 'rev_id' ) {
+				$aliasFields = [ 'rev_id' => $idField, 'rev_timestamp' => $tsField, 'rev_page' => $pageField ];
+				$revQuery['fields'] = array_merge(
+					$aliasFields,
+					array_diff( $revQuery['fields'], array_keys( $aliasFields ) )
+				);
+			}
+
 			$this->addTables( $revQuery['tables'] );
 			$this->addFields( $revQuery['fields'] );
 			$this->addJoinConds( $revQuery['joins'] );
@@ -148,34 +174,39 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 			// Always join 'page' so orphaned revisions are filtered out
 			$this->addTables( [ 'revision', 'page' ] );
 			$this->addJoinConds(
-				[ 'page' => [ 'INNER JOIN', [ 'page_id = rev_page' ] ] ]
+				[ 'page' => [ 'JOIN', [ 'page_id = rev_page' ] ] ]
 			);
-			$this->addFields( [ 'rev_id', 'rev_timestamp', 'rev_page' ] );
+			$this->addFields( [
+				'rev_id' => $idField, 'rev_timestamp' => $tsField, 'rev_page' => $pageField
+			] );
 		}
 
 		if ( $this->fld_tags ) {
-			$this->addTables( 'tag_summary' );
-			$this->addJoinConds(
-				[ 'tag_summary' => [ 'LEFT JOIN', [ 'rev_id=ts_rev_id' ] ] ]
-			);
-			$this->addFields( 'ts_tags' );
+			$this->addFields( [ 'ts_tags' => ChangeTags::makeTagSummarySubquery( 'revision' ) ] );
 		}
 
 		if ( $params['tag'] !== null ) {
 			$this->addTables( 'change_tag' );
 			$this->addJoinConds(
-				[ 'change_tag' => [ 'INNER JOIN', [ 'rev_id=ct_rev_id' ] ] ]
+				[ 'change_tag' => [ 'JOIN', [ 'rev_id=ct_rev_id' ] ] ]
 			);
-			$this->addWhereFld( 'ct_tag', $params['tag'] );
+			$changeTagDefStore = MediaWikiServices::getInstance()->getChangeTagDefStore();
+			try {
+				$this->addWhereFld( 'ct_tag_id', $changeTagDefStore->getId( $params['tag'] ) );
+			} catch ( NameTableAccessException $exception ) {
+				// Return nothing.
+				$this->addWhere( '1=0' );
+			}
 		}
 
 		if ( $resultPageSet === null && $this->fetchContent ) {
 			// For each page we will request, the user must have read rights for that page
-			$user = $this->getUser();
 			$status = Status::newGood();
+			$user = $this->getUser();
+
 			/** @var Title $title */
 			foreach ( $pageSet->getGoodTitles() as $title ) {
-				if ( !$title->userCan( 'read', $user ) ) {
+				if ( !$this->getPermissionManager()->userCan( 'read', $user, $title ) ) {
 					$status->fatal( ApiMessage::create(
 						[ 'apierror-cannotviewtitle', wfEscapeWikiText( $title->getPrefixedText() ) ],
 						'accessdenied'
@@ -190,6 +221,7 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 		if ( $enumRevMode ) {
 			// Indexes targeted:
 			//  page_timestamp if we don't have rvuser
+			//  page_actor_timestamp (on revision_actor_temp) if we have rvuser in READ_NEW mode
 			//  page_user_timestamp if we have a logged-in rvuser
 			//  page_timestamp or usertext_timestamp if we have an IP rvuser
 
@@ -205,9 +237,9 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 				$continueTimestamp = $db->addQuotes( $db->timestamp( $cont[0] ) );
 				$continueId = (int)$cont[1];
 				$this->dieContinueUsageIf( $continueId != $cont[1] );
-				$this->addWhere( "rev_timestamp $op $continueTimestamp OR " .
-					"(rev_timestamp = $continueTimestamp AND " .
-					"rev_id $op= $continueId)"
+				$this->addWhere( "$tsField $op $continueTimestamp OR " .
+					"($tsField = $continueTimestamp AND " .
+					"$idField $op= $continueId)"
 				);
 			}
 
@@ -234,7 +266,7 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 						[ 'ar_rev_id' => $revids ],
 						__METHOD__
 					),
-				], false );
+				], $db::UNION_DISTINCT );
 				$res = $db->query( $sql, __METHOD__ );
 				foreach ( $res as $row ) {
 					if ( (int)$row->id === (int)$params['startid'] ) {
@@ -257,24 +289,24 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 					$op = ( $params['dir'] === 'newer' ? '>' : '<' );
 					$ts = $db->addQuotes( $db->timestampOrNull( $params['start'] ) );
 					if ( $params['startid'] !== null ) {
-						$this->addWhere( "rev_timestamp $op $ts OR "
-							. "rev_timestamp = $ts AND rev_id $op= " . intval( $params['startid'] ) );
+						$this->addWhere( "$tsField $op $ts OR "
+							. "$tsField = $ts AND $idField $op= " . (int)$params['startid'] );
 					} else {
-						$this->addWhere( "rev_timestamp $op= $ts" );
+						$this->addWhere( "$tsField $op= $ts" );
 					}
 				}
 				if ( $params['end'] !== null ) {
 					$op = ( $params['dir'] === 'newer' ? '<' : '>' ); // Yes, opposite of the above
 					$ts = $db->addQuotes( $db->timestampOrNull( $params['end'] ) );
 					if ( $params['endid'] !== null ) {
-						$this->addWhere( "rev_timestamp $op $ts OR "
-							. "rev_timestamp = $ts AND rev_id $op= " . intval( $params['endid'] ) );
+						$this->addWhere( "$tsField $op $ts OR "
+							. "$tsField = $ts AND $idField $op= " . (int)$params['endid'] );
 					} else {
-						$this->addWhere( "rev_timestamp $op= $ts" );
+						$this->addWhere( "$tsField $op= $ts" );
 					}
 				}
 			} else {
-				$this->addTimestampWhereRange( 'rev_timestamp', $params['dir'],
+				$this->addTimestampWhereRange( $tsField, $params['dir'],
 					$params['start'], $params['end'] );
 			}
 
@@ -283,27 +315,29 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 
 			// There is only one ID, use it
 			$ids = array_keys( $pageSet->getGoodTitles() );
-			$this->addWhereFld( 'rev_page', reset( $ids ) );
+			$this->addWhereFld( $pageField, reset( $ids ) );
 
 			if ( $params['user'] !== null ) {
 				$actorQuery = ActorMigration::newMigration()
-					->getWhere( $db, 'rev_user', User::newFromName( $params['user'], false ) );
+					->getWhere( $db, 'rev_user', $params['user'] );
 				$this->addTables( $actorQuery['tables'] );
 				$this->addJoinConds( $actorQuery['joins'] );
 				$this->addWhere( $actorQuery['conds'] );
 			} elseif ( $params['excludeuser'] !== null ) {
 				$actorQuery = ActorMigration::newMigration()
-					->getWhere( $db, 'rev_user', User::newFromName( $params['excludeuser'], false ) );
+					->getWhere( $db, 'rev_user', $params['excludeuser'] );
 				$this->addTables( $actorQuery['tables'] );
 				$this->addJoinConds( $actorQuery['joins'] );
 				$this->addWhere( 'NOT(' . $actorQuery['conds'] . ')' );
 			}
 			if ( $params['user'] !== null || $params['excludeuser'] !== null ) {
 				// Paranoia: avoid brute force searches (T19342)
-				if ( !$this->getUser()->isAllowed( 'deletedhistory' ) ) {
-					$bitmask = Revision::DELETED_USER;
-				} elseif ( !$this->getUser()->isAllowedAny( 'suppressrevision', 'viewsuppressed' ) ) {
-					$bitmask = Revision::DELETED_USER | Revision::DELETED_RESTRICTED;
+				if ( !$this->getPermissionManager()->userHasRight( $this->getUser(), 'deletedhistory' ) ) {
+					$bitmask = RevisionRecord::DELETED_USER;
+				} elseif ( !$this->getPermissionManager()
+					->userHasAnyRight( $this->getUser(), 'suppressrevision', 'viewsuppressed' )
+				) {
+					$bitmask = RevisionRecord::DELETED_USER | RevisionRecord::DELETED_RESTRICTED;
 				} else {
 					$bitmask = 0;
 				}
@@ -320,7 +354,7 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 			$this->addWhereFld( 'rev_id', array_keys( $revs ) );
 
 			if ( $params['continue'] !== null ) {
-				$this->addWhere( 'rev_id >= ' . intval( $params['continue'] ) );
+				$this->addWhere( 'rev_id >= ' . (int)$params['continue'] );
 			}
 			$this->addOption( 'ORDER BY', 'rev_id' );
 		} elseif ( $pageCount > 0 ) {
@@ -340,8 +374,8 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 			if ( $params['continue'] !== null ) {
 				$cont = explode( '|', $params['continue'] );
 				$this->dieContinueUsageIf( count( $cont ) != 2 );
-				$pageid = intval( $cont[0] );
-				$revid = intval( $cont[1] );
+				$pageid = (int)$cont[0];
+				$revid = (int)$cont[1];
 				$this->addWhere(
 					"rev_page > $pageid OR " .
 					"(rev_page = $pageid AND " .
@@ -358,6 +392,10 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 
 		$this->addOption( 'LIMIT', $this->limit + 1 );
 
+		// T224017: `rev_timestamp` is never the correct index to use for this module, but
+		// MariaDB (10.1.37-39) sometimes insists on trying to use it anyway. Tell it not to.
+		$this->addOption( 'IGNORE INDEX', [ 'revision' => 'rev_timestamp' ] );
+
 		$count = 0;
 		$generated = [];
 		$hookData = [];
@@ -369,12 +407,12 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 				// additional pages to be had. Stop here...
 				if ( $enumRevMode ) {
 					$this->setContinueEnumParameter( 'continue',
-						$row->rev_timestamp . '|' . intval( $row->rev_id ) );
+						$row->rev_timestamp . '|' . (int)$row->rev_id );
 				} elseif ( $revCount > 0 ) {
-					$this->setContinueEnumParameter( 'continue', intval( $row->rev_id ) );
+					$this->setContinueEnumParameter( 'continue', (int)$row->rev_id );
 				} else {
-					$this->setContinueEnumParameter( 'continue', intval( $row->rev_page ) .
-						'|' . intval( $row->rev_id ) );
+					$this->setContinueEnumParameter( 'continue', (int)$row->rev_page .
+						'|' . (int)$row->rev_id );
 				}
 				break;
 			}
@@ -382,14 +420,31 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 			if ( $resultPageSet !== null ) {
 				$generated[] = $row->rev_id;
 			} else {
-				$revision = new Revision( $row );
+				$revision = $revisionStore->newRevisionFromRow( $row, 0, Title::newFromRow( $row ) );
 				$rev = $this->extractRevisionInfo( $revision, $row );
 
 				if ( $this->token !== null ) {
-					$title = $revision->getTitle();
+					$title = Title::newFromLinkTarget( $revision->getPageAsLinkTarget() );
 					$tokenFunctions = $this->getTokenFunctions();
 					foreach ( $this->token as $t ) {
-						$val = call_user_func( $tokenFunctions[$t], $title->getArticleID(), $title, $revision );
+						if ( $t === 'rollback' ) {
+							$val = call_user_func(
+								$tokenFunctions[$t],
+								$title->getArticleID(),
+								$title,
+								$revision
+							);
+						} else {
+							// Token function added via APIQueryRevisionsTokens,
+							// Hook is hard deprecated, so any use of
+							// Revision objects is okay
+							$val = call_user_func(
+								$tokenFunctions[$t],
+								$title->getArticleID(),
+								$title,
+								new Revision( $revision )
+							);
+						}
 						if ( $val === false ) {
 							$this->addWarning( [ 'apiwarn-tokennotallowed', $t ] );
 						} else {
@@ -403,12 +458,12 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 				if ( !$fit ) {
 					if ( $enumRevMode ) {
 						$this->setContinueEnumParameter( 'continue',
-							$row->rev_timestamp . '|' . intval( $row->rev_id ) );
+							$row->rev_timestamp . '|' . (int)$row->rev_id );
 					} elseif ( $revCount > 0 ) {
-						$this->setContinueEnumParameter( 'continue', intval( $row->rev_id ) );
+						$this->setContinueEnumParameter( 'continue', (int)$row->rev_id );
 					} else {
-						$this->setContinueEnumParameter( 'continue', intval( $row->rev_page ) .
-							'|' . intval( $row->rev_id ) );
+						$this->setContinueEnumParameter( 'continue', (int)$row->rev_page .
+							'|' . (int)$row->rev_id );
 					}
 					break;
 				}
@@ -456,10 +511,14 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 			],
 			'user' => [
 				ApiBase::PARAM_TYPE => 'user',
+				UserDef::PARAM_ALLOWED_USER_TYPES => [ 'name', 'ip', 'id', 'interwiki' ],
+				UserDef::PARAM_RETURN_OBJECT => true,
 				ApiBase::PARAM_HELP_MSG_INFO => [ [ 'singlepageonly' ] ],
 			],
 			'excludeuser' => [
 				ApiBase::PARAM_TYPE => 'user',
+				UserDef::PARAM_ALLOWED_USER_TYPES => [ 'name', 'ip', 'id', 'interwiki' ],
+				UserDef::PARAM_RETURN_OBJECT => true,
 				ApiBase::PARAM_HELP_MSG_INFO => [ [ 'singlepageonly' ] ],
 			],
 			'tag' => null,
@@ -481,7 +540,7 @@ class ApiQueryRevisions extends ApiQueryRevisionsBase {
 	protected function getExamplesMessages() {
 		return [
 			'action=query&prop=revisions&titles=API|Main%20Page&' .
-				'rvprop=timestamp|user|comment|content'
+				'rvslots=*&rvprop=timestamp|user|comment|content'
 				=> 'apihelp-query+revisions-example-content',
 			'action=query&prop=revisions&titles=Main%20Page&rvlimit=5&' .
 				'rvprop=timestamp|user|comment'

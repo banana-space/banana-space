@@ -9,10 +9,14 @@
 	"vector-action-delete": "Kadd",
 	"vector-action-move": "Zago bodol",
 	"vector-action-protect": "Rakh",
+	"vector-action-undelete": "Portun hadd",
+	"vector-action-unprotect": "Surokxechem sthor bodol",
 	"vector-view-create": "Roch",
 	"vector-view-edit": "Bodol",
 	"vector-view-history": "Itihas polloi",
 	"vector-view-view": "Vach",
 	"vector-view-viewsource": "Mull polloi",
+	"vector-jumptonavigation": "Dixa bodlunk uddki mar",
+	"vector-jumptosearch": "Soda khatir uddki mar",
 	"vector-more-actions": "Anik"
 }

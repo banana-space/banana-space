@@ -23,6 +23,8 @@
 
 require_once __DIR__ . '/Maintenance.php';
 
+use MediaWiki\Block\DatabaseBlock;
+
 /**
  * Maintenance script to clean up user blocks with user names not matching the
  * 'user' table.
@@ -39,9 +41,9 @@ class CleanupBlocks extends Maintenance {
 
 	public function execute() {
 		$db = $this->getDB( DB_MASTER );
-		$blockQuery = Block::getQueryInfo();
+		$blockQuery = DatabaseBlock::getQueryInfo();
 
-		$max = $db->selectField( 'ipblocks', 'MAX(ipb_user)' );
+		$max = $db->selectField( 'ipblocks', 'MAX(ipb_user)', [], __METHOD__ );
 
 		// Step 1: Clean up any duplicate user blocks
 		$batchSize = $this->getBatchSize();
@@ -55,7 +57,7 @@ class CleanupBlocks extends Maintenance {
 				'ipblocks',
 				[ 'ipb_user' ],
 				[
-					"ipb_user >= " . (int)$from,
+					"ipb_user >= " . $from,
 					"ipb_user <= " . (int)$to,
 				],
 				__METHOD__,
@@ -77,14 +79,14 @@ class CleanupBlocks extends Maintenance {
 					$blockQuery['joins']
 				);
 				foreach ( $res2 as $row2 ) {
-					$block = Block::newFromRow( $row2 );
+					$block = DatabaseBlock::newFromRow( $row2 );
 					if ( !$bestBlock ) {
 						$bestBlock = $block;
 						continue;
 					}
 
 					// Find the most-restrictive block. Can't use
-					// Block::chooseBlock because that's for IP blocks, not
+					// DatabaseBlock::chooseBlock because that's for IP blocks, not
 					// user blocks.
 					$keep = null;
 					if ( $keep === null && $block->getExpiry() !== $bestBlock->getExpiry() ) {
@@ -92,11 +94,12 @@ class CleanupBlocks extends Maintenance {
 						$keep = $block->getExpiry() > $bestBlock->getExpiry();
 					}
 					if ( $keep === null ) {
-						foreach ( [ 'createaccount', 'sendemail', 'editownusertalk' ] as $action ) {
-							if ( $block->prevents( $action ) xor $bestBlock->prevents( $action ) ) {
-								$keep = $block->prevents( $action );
-								break;
-							}
+						if ( $block->isCreateAccountBlocked() xor $bestBlock->isCreateAccountBlocked() ) {
+							$keep = $block->isCreateAccountBlocked();
+						} elseif ( $block->isEmailBlocked() xor $bestBlock->isEmailBlocked() ) {
+							$keep = $block->isEmailBlocked();
+						} elseif ( $block->isUsertalkEditAllowed() xor $bestBlock->isUsertalkEditAllowed() ) {
+							$keep = $block->isUsertalkEditAllowed();
 						}
 					}
 
@@ -128,7 +131,7 @@ class CleanupBlocks extends Maintenance {
 				[ 'ipb_id', 'user_name' ],
 				[
 					'ipb_user = user_id',
-					"ipb_user >= " . (int)$from,
+					"ipb_user >= " . $from,
 					"ipb_user <= " . (int)$to,
 					'ipb_address != user_name',
 				],

@@ -12,7 +12,7 @@
  *
  * @covers SpecialPreferences
  */
-class SpecialPreferencesTest extends MediaWikiTestCase {
+class SpecialPreferencesTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * Make sure a nickname which is longer than $wgMaxSigChars
@@ -21,10 +21,9 @@ class SpecialPreferencesTest extends MediaWikiTestCase {
 	 * Test specifications by Alexandre "ialex" Emsenhuber.
 	 * @todo give this test a real name explaining what is being tested here
 	 */
-	public function testBug41337() {
+	public function testT43337() {
 		// Set a low limit
 		$this->setMwGlobals( 'wgMaxSigChars', 2 );
-
 		$user = $this->createMock( User::class );
 		$user->expects( $this->any() )
 			->method( 'isAnon' )
@@ -42,6 +41,14 @@ class SpecialPreferencesTest extends MediaWikiTestCase {
 				[ 'nickname', null, false, 'superlongnickname' ],
 			]
 			) );
+
+		# Needs to return something
+		$user->method( 'getOptions' )
+			->willReturn( [] );
+
+		// isAnyAllowed used to return null from the mock,
+		// thus revoke it's permissions.
+		$this->overrideUserPermissions( $user, [] );
 
 		# Forge a request to call the special page
 		$context = new RequestContext();

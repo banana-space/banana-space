@@ -30,13 +30,15 @@ PYGMENTIZE_LAUNCHER = textwrap.dedent('''\
 print('Querying PyPI for the latest Pygments release...')
 pypi = xmlrpc.client.ServerProxy('https://pypi.python.org/pypi')
 latest_version = pypi.package_releases('Pygments')[0]
+url = None
 for release in pypi.release_urls('Pygments', latest_version):
     if (release['packagetype'] == 'bdist_wheel' and
-            release['python_version'].startswith('py2')):
+           'py3' in release['python_version']):
         url = release['url']
         md5_digest = release['md5_digest']
         break
-    else:
+
+if not url:
         raise RuntimeError('No suitable package found.')
 
 print('Retrieving version %s (%s)...' % (latest_version, url))

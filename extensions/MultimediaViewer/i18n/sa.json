@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Charunandan16",
 			"NehalDaveND"
 		]
 	},
 	"multimediaviewer-repository-local": "अधिकविवरणम्",
 	"multimediaviewer-multiple-authors-combine": "$1, $2 च",
+	"multimediaviewer-thumbnail-error-description": "तान्रिाःकः अयं दोषः।यदि अयम् अवशिष्यते तर्हि भवन्तः $1 त्रुटिः: $2",
 	"multimediaviewer-thumbnail-error-retry": "पुनःप्रयासः",
 	"multimediaviewer-help-mmv": "साहाय्यम्",
 	"multimediaviewer-reuse-loading-placeholder": "आरोपयति...",

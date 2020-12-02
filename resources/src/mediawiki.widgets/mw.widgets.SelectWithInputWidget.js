@@ -4,7 +4,7 @@
  * @copyright 2011-2017 MediaWiki Widgets Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-( function ( $, mw ) {
+( function () {
 
 	/**
 	 * Select with input widget. Displays an OO.ui.TextInputWidget along with
@@ -26,7 +26,7 @@
 	 *         }
 	 *       } );
 	 *
-	 *       $( 'body' ).append( swi.$element );
+	 *       $( document.body ).append( swi.$element );
 	 *     } );
 	 *
 	 * @class mw.widgets.SelectWithInputWidget
@@ -38,18 +38,23 @@
 	 * @cfg {Object} [textinput] Config for the text input
 	 * @cfg {boolean} [or=false] Config for whether the widget is dropdown AND input
 	 *                           or dropdown OR input
+	 * @cfg {boolean} [required=false] Config for whether input is required
 	 */
 	mw.widgets.SelectWithInputWidget = function MwWidgetsSelectWithInputWidget( config ) {
 		// Config initialization
-		config = $.extend( { or: false }, config );
+		config = $.extend( { or: false, required: false }, config );
 
 		// Properties
 		this.textinput = new OO.ui.TextInputWidget( config.textinput );
 		this.dropdowninput = new OO.ui.DropdownInputWidget( config.dropdowninput );
 		this.or = config.or;
+		this.required = config.required;
 
 		// Events
 		this.dropdowninput.on( 'change', this.onChange.bind( this ) );
+		this.textinput.on( 'change', function () {
+			this.emit( 'change', this.getValue() );
+		}.bind( this ) );
 
 		// Parent constructor
 		mw.widgets.SelectWithInputWidget.parent.call( this, config );
@@ -123,6 +128,52 @@
 		// is required. However, validity is not checked for disabled fields, as these are not
 		// submitted with the form. So we should also disable fields when hiding them.
 		this.textinput.setDisabled( textinputIsHidden || disabled );
+		// If the widget is required, set the text field as required, but only if the widget is visible.
+		if ( this.required ) {
+			this.textinput.setRequired( !this.textinput.isDisabled() );
+		}
+	};
+
+	/**
+	 * Set the value from outside.
+	 *
+	 * @param {string|undefined} value
+	 */
+	mw.widgets.SelectWithInputWidget.prototype.setValue = function ( value ) {
+		var selectable = false;
+
+		if ( this.or ) {
+			if ( value !== 'other' ) {
+				selectable = !!this.dropdowninput.dropdownWidget.getMenu().findItemFromData( value );
+			}
+
+			if ( selectable ) {
+				this.dropdowninput.setValue( value );
+				this.textinput.setValue( undefined );
+			} else {
+				this.dropdowninput.setValue( 'other' );
+				this.textinput.setValue( value );
+			}
+
+			this.emit( 'change', value );
+		}
+	};
+
+	/**
+	 * Get the value from outside.
+	 *
+	 * @return {string}
+	 */
+	mw.widgets.SelectWithInputWidget.prototype.getValue = function () {
+		if ( this.or ) {
+			if ( this.dropdowninput.getValue() !== 'other' ) {
+				return this.dropdowninput.getValue();
+			}
+
+			return this.textinput.getValue();
+		} else {
+			return '';
+		}
 	};
 
 	/**
@@ -140,6 +191,8 @@
 			// submitted with the form. So we should also disable fields when hiding them.
 			this.textinput.setDisabled( value !== 'other' || this.isDisabled() );
 		}
+
+		this.emit( 'change', this.getValue() );
 	};
 
-}( jQuery, mediaWiki ) );
+}() );

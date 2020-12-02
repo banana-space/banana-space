@@ -48,10 +48,11 @@ ve.dm.MWReferenceNode.static.allowedRdfaTypes = [ 'dc:references' ];
 
 ve.dm.MWReferenceNode.static.isContent = true;
 
-ve.dm.MWReferenceNode.static.blacklistedAnnotationTypes = [ 'link' ];
+ve.dm.MWReferenceNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 /**
  * Regular expression for parsing the listKey attribute
+ *
  * @static
  * @property {RegExp}
  * @inheritable
@@ -101,118 +102,124 @@ ve.dm.MWReferenceNode.static.toDataElement = function ( domElements, converter )
 };
 
 ve.dm.MWReferenceNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var itemNodeHtml, originalHtml, mwData, i, iLen, keyedNodes, setContents, contentsAlreadySet,
+	var itemNode, itemNodeRange, itemNodeHtml, originalHtml, mwData, i, iLen, keyedNodes, setContents, contentsAlreadySet,
 		originalMw, listKeyParts, name, group, $link,
 		isForClipboard = converter.isForClipboard(),
 		el = doc.createElement( 'sup' ),
 		itemNodeWrapper = doc.createElement( 'div' ),
-		originalHtmlWrapper = doc.createElement( 'div' ),
-		itemNode = converter.internalList.getItemNode( dataElement.attributes.listIndex ),
-		itemNodeRange = itemNode.getRange();
+		originalHtmlWrapper = doc.createElement( 'div' );
 
 	el.setAttribute( 'typeof', 'mw:Extension/ref' );
 
 	mwData = dataElement.attributes.mw ? ve.copy( dataElement.attributes.mw ) : {};
 	mwData.name = 'ref';
 
-	setContents = dataElement.attributes.contentsUsed;
+	if ( isForClipboard || converter.isForParser() ) {
+		setContents = dataElement.attributes.contentsUsed;
 
-	keyedNodes = converter.internalList
-		.getNodeGroup( dataElement.attributes.listGroup )
-		.keyedNodes[ dataElement.attributes.listKey ];
+		// This call rebuilds the document tree if it isn't built already (e.g. on a
+		// document slice), so only use when necessary (i.e. not in preview mode)
+		itemNode = converter.internalList.getItemNode( dataElement.attributes.listIndex );
+		itemNodeRange = itemNode.getRange();
 
-	if ( setContents ) {
-		// Check if a previous node has already set the content. If so, we don't overwrite this
-		// node's contents.
-		contentsAlreadySet = false;
-		if ( keyedNodes ) {
-			for ( i = 0, iLen = keyedNodes.length; i < iLen; i++ ) {
-				if ( keyedNodes[ i ].element === dataElement ) {
-					break;
-				}
-				if ( keyedNodes[ i ].element.attributes.contentsUsed ) {
-					contentsAlreadySet = true;
-					break;
-				}
-			}
-		}
-	} else {
-		// Check if any other nodes with this key provided content. If not
-		// then we attach the contents to the first reference with this key
+		keyedNodes = converter.internalList
+			.getNodeGroup( dataElement.attributes.listGroup )
+			.keyedNodes[ dataElement.attributes.listKey ];
 
-		// Check that this is the first reference with its key
-		if ( keyedNodes && dataElement === keyedNodes[ 0 ].element ) {
-			setContents = true;
-			// Check no other reference originally defined the contents
-			// As this is keyedNodes[0] we can start at 1
-			for ( i = 1, iLen = keyedNodes.length; i < iLen; i++ ) {
-				if ( keyedNodes[ i ].element.attributes.contentsUsed ) {
-					setContents = false;
-					break;
+		if ( setContents ) {
+			// Check if a previous node has already set the content. If so, we don't overwrite this
+			// node's contents.
+			contentsAlreadySet = false;
+			if ( keyedNodes ) {
+				for ( i = 0, iLen = keyedNodes.length; i < iLen; i++ ) {
+					if ( keyedNodes[ i ].element === dataElement ) {
+						break;
+					}
+					if ( keyedNodes[ i ].element.attributes.contentsUsed ) {
+						contentsAlreadySet = true;
+						break;
+					}
 				}
 			}
-		}
-	}
-
-	if ( setContents && !contentsAlreadySet ) {
-		converter.getDomSubtreeFromData(
-			itemNode.getDocument().getFullData( itemNodeRange, true ),
-			itemNodeWrapper
-		);
-		itemNodeHtml = itemNodeWrapper.innerHTML; // Returns '' if itemNodeWrapper is empty
-		originalHtml = ve.getProp( mwData, 'body', 'html' ) ||
-			( ve.getProp( mwData, 'body', 'id' ) !== undefined && itemNode.getAttribute( 'originalHtml' ) ) ||
-			'';
-		originalHtmlWrapper.innerHTML = originalHtml;
-		// Only set body.html if itemNodeHtml and originalHtml are actually different,
-		// or we are writing the clipboard for use in another VE instance
-		if ( isForClipboard || !originalHtmlWrapper.isEqualNode( itemNodeWrapper ) ) {
-			ve.setProp( mwData, 'body', 'html', itemNodeHtml );
-		}
-	}
-
-	// If we have no internal item data for this reference, don't let it get pasted into
-	// another VE document. T110479
-	if ( isForClipboard && itemNodeRange.isCollapsed() ) {
-		el.setAttribute( 'data-ve-ignore', 'true' );
-	}
-
-	// Generate name
-	listKeyParts = dataElement.attributes.listKey.match( this.listKeyRegex );
-	if ( listKeyParts[ 1 ] === 'auto' ) {
-		// Only render a name if this key was reused
-		if ( keyedNodes.length > 1 ) {
-			// Allocate a unique list key, then strip the 'literal/'' prefix
-			name = converter.internalList.getUniqueListKey(
-				dataElement.attributes.listGroup,
-				dataElement.attributes.listKey,
-				// Generate a name starting with ':' to distinguish it from normal names
-				'literal/:'
-			).slice( 'literal/'.length );
 		} else {
-			name = undefined;
-		}
-	} else {
-		// Use literal name
-		name = listKeyParts[ 2 ];
-	}
-	// Set name
-	if ( name !== undefined ) {
-		ve.setProp( mwData, 'attrs', 'name', name );
-	}
+			// Check if any other nodes with this key provided content. If not
+			// then we attach the contents to the first reference with this key
 
-	// Set or clear group
-	if ( dataElement.attributes.refGroup !== '' ) {
-		ve.setProp( mwData, 'attrs', 'group', dataElement.attributes.refGroup );
-	} else if ( mwData.attrs ) {
-		delete mwData.attrs.refGroup;
+			// Check that this is the first reference with its key
+			if ( keyedNodes && dataElement === keyedNodes[ 0 ].element ) {
+				setContents = true;
+				// Check no other reference originally defined the contents
+				// As this is keyedNodes[0] we can start at 1
+				for ( i = 1, iLen = keyedNodes.length; i < iLen; i++ ) {
+					if ( keyedNodes[ i ].element.attributes.contentsUsed ) {
+						setContents = false;
+						break;
+					}
+				}
+			}
+		}
+
+		// Add reference contents to data-mw.
+		if ( setContents && !contentsAlreadySet ) {
+			converter.getDomSubtreeFromData(
+				itemNode.getDocument().getFullData( itemNodeRange, 'roundTrip' ),
+				itemNodeWrapper
+			);
+			itemNodeHtml = itemNodeWrapper.innerHTML; // Returns '' if itemNodeWrapper is empty
+			originalHtml = ve.getProp( mwData, 'body', 'html' ) ||
+				( ve.getProp( mwData, 'body', 'id' ) !== undefined && itemNode.getAttribute( 'originalHtml' ) ) ||
+				'';
+			originalHtmlWrapper.innerHTML = originalHtml;
+			// Only set body.html if itemNodeHtml and originalHtml are actually different,
+			// or we are writing the clipboard for use in another VE instance
+			if ( isForClipboard || !originalHtmlWrapper.isEqualNode( itemNodeWrapper ) ) {
+				ve.setProp( mwData, 'body', 'html', itemNodeHtml );
+			}
+		}
+
+		// If we have no internal item data for this reference, don't let it get pasted into
+		// another VE document. T110479
+		if ( isForClipboard && itemNodeRange.isCollapsed() ) {
+			el.setAttribute( 'data-ve-ignore', 'true' );
+		}
+
+		// Generate name
+		listKeyParts = dataElement.attributes.listKey.match( this.listKeyRegex );
+		if ( listKeyParts[ 1 ] === 'auto' ) {
+			// Only render a name if this key was reused
+			if ( keyedNodes.length > 1 ) {
+				// Allocate a unique list key, then strip the 'literal/'' prefix
+				name = converter.internalList.getUniqueListKey(
+					dataElement.attributes.listGroup,
+					dataElement.attributes.listKey,
+					// Generate a name starting with ':' to distinguish it from normal names
+					'literal/:'
+				).slice( 'literal/'.length );
+			} else {
+				name = undefined;
+			}
+		} else {
+			// Use literal name
+			name = listKeyParts[ 2 ];
+		}
+		// Set name
+		if ( name !== undefined ) {
+			ve.setProp( mwData, 'attrs', 'name', name );
+		}
+
+		// Set or clear group
+		if ( dataElement.attributes.refGroup !== '' ) {
+			ve.setProp( mwData, 'attrs', 'group', dataElement.attributes.refGroup );
+		} else if ( mwData.attrs ) {
+			delete mwData.attrs.refGroup;
+		}
 	}
 
 	// If mwAttr and originalMw are the same, use originalMw to prevent reserialization,
 	// unless we are writing the clipboard for use in another VE instance
 	// Reserialization has the potential to reorder keys and so change the DOM unnecessarily
 	originalMw = dataElement.attributes.originalMw;
-	if ( !isForClipboard && originalMw && ve.compare( mwData, JSON.parse( originalMw ) ) ) {
+	if ( converter.isForParser() && originalMw && ve.compare( mwData, JSON.parse( originalMw ) ) ) {
 		el.setAttribute( 'data-mw', originalMw );
 
 		// Return the original DOM elements if possible
@@ -307,7 +314,8 @@ ve.dm.MWReferenceNode.static.getGroup = function ( dataElement ) {
  */
 ve.dm.MWReferenceNode.static.getIndexLabel = function ( dataElement, internalList ) {
 	var refGroup = dataElement.attributes.refGroup,
-		index = ve.dm.MWReferenceNode.static.getIndex( dataElement, internalList );
+		index = dataElement.attributes.placeholder ? '…' :
+			ve.dm.MWReferenceNode.static.getIndex( dataElement, internalList );
 
 	return '[' + ( refGroup ? refGroup + ' ' : '' ) + index + ']';
 };
@@ -328,14 +336,13 @@ ve.dm.MWReferenceNode.static.cloneElement = function () {
  */
 ve.dm.MWReferenceNode.static.describeChange = function ( key, change ) {
 	if ( key === 'refGroup' ) {
-		if ( change.from ) {
-			if ( change.to ) {
-				return ve.msg( 'cite-ve-changedesc-ref-group-both', change.from, change.to );
-			} else {
-				return ve.msg( 'cite-ve-changedesc-ref-group-from', change.from );
-			}
+		if ( !change.from ) {
+			return ve.htmlMsg( 'cite-ve-changedesc-ref-group-to', this.wrapText( 'ins', change.to ) );
+		} else if ( !change.to ) {
+			return ve.htmlMsg( 'cite-ve-changedesc-ref-group-from', this.wrapText( 'del', change.from ) );
+		} else {
+			return ve.htmlMsg( 'cite-ve-changedesc-ref-group-both', this.wrapText( 'del', change.from ), this.wrapText( 'ins', change.to ) );
 		}
-		return ve.msg( 'cite-ve-changedesc-ref-group-to', change.to );
 	}
 	if ( key === 'refListItemId' ) {
 		return ve.msg( 'cite-ve-changedesc-reflist-item-id' );

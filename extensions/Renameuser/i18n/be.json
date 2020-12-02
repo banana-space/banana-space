@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Artsiom91",
+			"Jarash"
+		]
+	},
+	"renameuser": "Перайменаваць удзельніка",
+	"renameuser-linkoncontribs": "перайменаваць удзельніка",
+	"renameuserconfirm": "Так, перайменаваць удзельніка",
+	"log-name-renameuser": "Журнал перайменавання ўдзельнікаў",
+	"log-description-renameuser": "Гэта журнал ажыццяўлёных перайменаванняў зарэгістраваных удзельнікаў.",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|перайменаваў удзельніка|перайменавала ўдзельніка}} $4 ({{PLURAL:$6|$6 праўка|$6 праўкі|$6 правак}}) у {{GENDER:$7|$5}}",
+	"logentry-renameuser-renameuser-legacier": "$1 перайменаваў удзельніка $4 у {{GENDER:$7|$5}}",
+	"action-renameuser": "перайменаваць удзельнікаў",
+	"right-renameuser": "Перайменаваць удзельнікаў"
+}

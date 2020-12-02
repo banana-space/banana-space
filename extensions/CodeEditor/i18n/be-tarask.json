@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"EugeneZelenko",
-			"Wizardist",
-			"Red Winged Duck"
+			"Red Winged Duck",
+			"Wizardist"
 		]
 	},
 	"codeeditor-desc": "Рэдагаваньне JavaScript- і CSS-коду на старонках з падсьветкай сынтаксісу ў [https://ace.c9.io/ рэдактары Ace]",

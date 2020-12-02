@@ -21,6 +21,8 @@
  * @ingroup Maintenance
  */
 
+use MediaWiki\MediaWikiServices;
+
 error_reporting( E_ALL );
 require_once __DIR__ . '/Maintenance.php';
 
@@ -29,7 +31,7 @@ require_once __DIR__ . '/Maintenance.php';
  *
  * @ingroup Maintenance
  */
-class TestFileOpPerformance extends Maintenance {
+class FileOpPerfTest extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->addDescription( 'Test fileop performance' );
@@ -42,11 +44,12 @@ class TestFileOpPerformance extends Maintenance {
 	}
 
 	public function execute() {
-		$backend = FileBackendGroup::singleton()->get( $this->getOption( 'b1' ) );
+		$backendGroup = MediaWikiServices::getInstance()->getFileBackendGroup();
+		$backend = $backendGroup->get( $this->getOption( 'b1' ) );
 		$this->doPerfTest( $backend );
 
 		if ( $this->getOption( 'b2' ) ) {
-			$backend = FileBackendGroup::singleton()->get( $this->getOption( 'b2' ) );
+			$backend = $backendGroup->get( $this->getOption( 'b2' ) );
 			$this->doPerfTest( $backend );
 		}
 	}
@@ -67,7 +70,7 @@ class TestFileOpPerformance extends Maintenance {
 			return;
 		}
 
-		while ( $dir && ( $file = readdir( $dir ) ) !== false ) {
+		while ( ( $file = readdir( $dir ) ) !== false ) {
 			if ( $file[0] != '.' ) {
 				$this->output( "Using '$dirname/$file' in operations.\n" );
 				$dst = $baseDir . '/' . wfBaseName( $file );
@@ -81,7 +84,7 @@ class TestFileOpPerformance extends Maintenance {
 				$ops5[] = [ 'op' => 'delete', 'src' => "$dst-2" ];
 			}
 			if ( count( $ops1 ) >= $this->getOption( 'maxfiles', 20 ) ) {
-				break; // enough
+				break;
 			}
 		}
 		closedir( $dir );
@@ -141,5 +144,5 @@ class TestFileOpPerformance extends Maintenance {
 	}
 }
 
-$maintClass = TestFileOpPerformance::class;
+$maintClass = FileOpPerfTest::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

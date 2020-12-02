@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gazeb",
-			"Gmelfi",
-			"HalanTul",
 			"Elitre",
 			"Elitre82",
+			"Gazeb",
 			"Gloria sah",
+			"Gmelfi",
+			"HalanTul",
 			"Pippinu",
 			"Sarvaturi"
 		]
@@ -16,7 +16,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Riutilizzari cu stu nomu",
 	"cite-ve-dialog-reference-options-section": "Opzioni",
 	"cite-ve-dialog-reference-title": "Rifirenza",
-	"cite-ve-dialog-reference-useexisting-label": "Usa nu rifirimentu esistenti",
 	"cite-ve-dialog-referenceslist-title": "Elencu rifirimenti",
 	"cite-ve-dialogbutton-reference-tooltip": "Sìmplici",
 	"cite-ve-dialogbutton-referenceslist-tooltip": "Elencu rifirimenti",

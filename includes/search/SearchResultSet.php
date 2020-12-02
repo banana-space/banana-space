@@ -24,21 +24,8 @@
 /**
  * @ingroup Search
  */
-class SearchResultSet {
-
-	/**
-	 * Types of interwiki results
-	 */
-	/**
-	 * Results that are displayed only together with existing main wiki results
-	 * @var int
-	 */
-	const SECONDARY_RESULTS = 0;
-	/**
-	 * Results that can displayed even if no existing main wiki results exist
-	 * @var int
-	 */
-	const INLINE_RESULTS = 1;
+class SearchResultSet extends BaseSearchResultSet {
+	use SearchResultSetTrait;
 
 	protected $containedSyntax = false;
 
@@ -54,34 +41,36 @@ class SearchResultSet {
 	 * as an array.
 	 * @var SearchResult[]
 	 */
-	private $results;
+	protected $results;
 
 	/**
-	 * Set of result's extra data, indexed per result id
-	 * and then per data item name.
-	 * The structure is:
-	 * PAGE_ID => [ augmentor name => data, ... ]
-	 * @var array[]
+	 * @var boolean True when there are more pages of search results available.
 	 */
-	protected $extraData = [];
+	private $hasMoreResults;
 
-	public function __construct( $containedSyntax = false ) {
+	/**
+	 * @param bool $containedSyntax True when query is not requesting a simple
+	 *  term match
+	 * @param bool $hasMoreResults True when there are more pages of search
+	 *  results available.
+	 */
+	public function __construct( $containedSyntax = false, $hasMoreResults = false ) {
+		if ( static::class === self::class ) {
+			// This class will eventually be abstract. SearchEngine implementations
+			// already have to extend this class anyways to provide the actual
+			// search results.
+			wfDeprecated( __METHOD__, '1.32' );
+		}
 		$this->containedSyntax = $containedSyntax;
+		$this->hasMoreResults = $hasMoreResults;
 	}
 
-	/**
-	 * Fetch an array of regular expression fragments for matching
-	 * the search terms as parsed by this engine in a text extract.
-	 * STUB
-	 *
-	 * @return array
-	 */
-	function termMatches() {
-		return [];
+	public function numRows() {
+		return $this->count();
 	}
 
-	function numRows() {
-		return 0;
+	final public function count() {
+		return count( $this->extractResults() );
 	}
 
 	/**
@@ -94,18 +83,18 @@ class SearchResultSet {
 	 *
 	 * @return int
 	 */
-	function getTotalHits() {
+	public function getTotalHits() {
 		return null;
 	}
 
 	/**
 	 * Some search modes will run an alternative query that it thinks gives
 	 * a better result than the provided search. Returns true if this has
-	 * occured.
+	 * occurred.
 	 *
 	 * @return bool
 	 */
-	function hasRewrittenQuery() {
+	public function hasRewrittenQuery() {
 		return false;
 	}
 
@@ -113,15 +102,16 @@ class SearchResultSet {
 	 * @return string|null The search the query was internally rewritten to,
 	 *  or null when the result of the original query was returned.
 	 */
-	function getQueryAfterRewrite() {
+	public function getQueryAfterRewrite() {
 		return null;
 	}
 
 	/**
-	 * @return string|null Same as self::getQueryAfterRewrite(), but in HTML
-	 *  and with changes highlighted. Null when the query was not rewritten.
+	 * @return HtmlArmor|string|null Same as self::getQueryAfterRewrite(), but
+	 *  with changes highlighted if HtmlArmor is returned. Null when the query
+	 *  was not rewritten.
 	 */
-	function getQueryAfterRewriteSnippet() {
+	public function getQueryAfterRewriteSnippet() {
 		return null;
 	}
 
@@ -131,21 +121,21 @@ class SearchResultSet {
 	 *
 	 * @return bool
 	 */
-	function hasSuggestion() {
+	public function hasSuggestion() {
 		return false;
 	}
 
 	/**
 	 * @return string|null Suggested query, null if none
 	 */
-	function getSuggestionQuery() {
+	public function getSuggestionQuery() {
 		return null;
 	}
 
 	/**
-	 * @return string HTML highlighted suggested query, '' if none
+	 * @return HtmlArmor|string HTML highlighted suggested query, '' if none
 	 */
-	function getSuggestionSnippet() {
+	public function getSuggestionSnippet() {
 		return '';
 	}
 
@@ -153,9 +143,9 @@ class SearchResultSet {
 	 * Return a result set of hits on other (multiple) wikis associated with this one
 	 *
 	 * @param int $type
-	 * @return SearchResultSet[]
+	 * @return ISearchResultSet[]
 	 */
-	function getInterwikiResults( $type = self::SECONDARY_RESULTS ) {
+	public function getInterwikiResults( $type = self::SECONDARY_RESULTS ) {
 		return null;
 	}
 
@@ -165,31 +155,8 @@ class SearchResultSet {
 	 * @param int $type
 	 * @return bool
 	 */
-	function hasInterwikiResults( $type = self::SECONDARY_RESULTS ) {
+	public function hasInterwikiResults( $type = self::SECONDARY_RESULTS ) {
 		return false;
-	}
-
-	/**
-	 * Fetches next search result, or false.
-	 * STUB
-	 * FIXME: refactor as iterator, so we could use nicer interfaces.
-	 * @return SearchResult|false
-	 */
-	function next() {
-		return false;
-	}
-
-	/**
-	 * Rewind result set back to beginning
-	 */
-	function rewind() {
-	}
-
-	/**
-	 * Frees the result set, if applicable.
-	 */
-	function free() {
-		// ...
 	}
 
 	/**
@@ -203,11 +170,40 @@ class SearchResultSet {
 	}
 
 	/**
+	 * @return bool True when there are more pages of search results available.
+	 */
+	public function hasMoreResults() {
+		return $this->hasMoreResults;
+	}
+
+	/**
+	 * @param int $limit Shrink result set to $limit and flag
+	 *  if more results are available.
+	 */
+	public function shrink( $limit ) {
+		if ( $this->count() > $limit ) {
+			$this->hasMoreResults = true;
+			// shrinking result set for implementations that
+			// have not implemented extractResults and use
+			// the default cache location. Other implementations
+			// must override this as well.
+			if ( is_array( $this->results ) ) {
+				$this->results = array_slice( $this->results, 0, $limit );
+				$this->titles = null;
+			} else {
+				throw new \UnexpectedValueException(
+					"When overriding result store extending classes must "
+					. " also override " . __METHOD__ );
+			}
+		}
+	}
+
+	/**
 	 * Extract all the results in the result set as array.
 	 * @return SearchResult[]
 	 */
 	public function extractResults() {
-		if ( is_null( $this->results ) ) {
+		if ( $this->results === null ) {
 			$this->results = [];
 			if ( $this->numRows() == 0 ) {
 				// Don't bother if we've got empty result
@@ -227,7 +223,7 @@ class SearchResultSet {
 	 * @return Title[]
 	 */
 	public function extractTitles() {
-		if ( is_null( $this->titles ) ) {
+		if ( $this->titles === null ) {
 			if ( $this->numRows() == 0 ) {
 				// Don't bother if we've got empty result
 				$this->titles = [];
@@ -240,40 +236,5 @@ class SearchResultSet {
 			}
 		}
 		return $this->titles;
-	}
-
-	/**
-	 * Sets augmented data for result set.
-	 * @param string $name Extra data item name
-	 * @param array[] $data Extra data as PAGEID => data
-	 */
-	public function setAugmentedData( $name, $data ) {
-		foreach ( $data as $id => $resultData ) {
-			$this->extraData[$id][$name] = $resultData;
-		}
-	}
-
-	/**
-	 * Returns extra data for specific result and store it in SearchResult object.
-	 * @param SearchResult $result
-	 * @return array|null List of data as name => value or null if none present.
-	 */
-	public function augmentResult( SearchResult $result ) {
-		$id = $result->getTitle()->getArticleID();
-		if ( !$id || !isset( $this->extraData[$id] ) ) {
-			return null;
-		}
-		$result->setExtensionData( $this->extraData[$id] );
-		return $this->extraData[$id];
-	}
-
-	/**
-	 * @return int|null The offset the current page starts at. Typically
-	 *  this should be null to allow the UI to decide on its own, but in
-	 *  special cases like interleaved AB tests specifying explicitly is
-	 *  necessary.
-	 */
-	public function getOffset() {
-		return null;
 	}
 }

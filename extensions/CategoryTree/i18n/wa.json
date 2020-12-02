@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Lucyin",
+			"Reptilien.19831209BE1",
 			"Srtxg"
 		]
 	},
@@ -9,6 +10,9 @@
 	"categorytree-portlet": "Categoreyes",
 	"categorytree-category": "Categoreye:",
 	"categorytree-parents": "Parints",
+	"categorytree-mode-label": "Môde&nbsp;:",
+	"categorytree-mode-categories": "Fok les categoreyes",
+	"categorytree-mode-pages": "les pådjes sins les fitchîs",
 	"categorytree-mode-all": "Totes les pådjes",
 	"categorytree-collapse": "erôler",
 	"categorytree-expand": "diswalper",
@@ -17,6 +21,7 @@
 	"categorytree-num-pages": "$1 p.",
 	"categorytree-num-files": "$1 fitch.",
 	"categorytree-num-empty": "vude",
+	"categorytree-load": "tcherdjî",
 	"categorytree-loading": "dji so k' eberwete...",
 	"categorytree-nothing-found": "rén trové",
 	"categorytree-no-subcategories": "Nole dizo-categoreye",

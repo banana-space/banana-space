@@ -2,9 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Alma",
+			"Elisardojm",
 			"Toliño",
-			"Xosé",
-			"Elisardojm"
+			"Xosé"
 		]
 	},
 	"interwiki": "Ver e modificar os datos interwiki",
@@ -32,7 +32,6 @@
 	"interwiki-cached": "Os datos sobre os interwikis almacénanse na caché. Non é posible modificar a caché.",
 	"interwiki_edit": "Editar",
 	"interwiki_reasonfield": "Motivo:",
-	"interwiki_delquestion": "Borrando \"$1\"",
 	"interwiki_deleting": "Está a piques de borrar o prefixo \"$1\".",
 	"interwiki_deleted": "Eliminouse o prefixo \"$1\" da táboa de interwikis.",
 	"interwiki_delfailed": "Non se puido eliminar o prefixo \"$1\" da táboa de interwikis.",

@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"AnakngAraw",
-			"Emem.calist"
+			"Emem.calist",
+			"Jojit fb"
 		]
 	},
-	"oathauth-desc": "Nagbibigay ng suporta ng pagpapatunay sa pamamagitan ng pang-isang ulit na mga hudyat na nakabatay sa HMAC",
+	"oathauth-desc": "Nagbibigay ng suporta ng pagpapatunay gamit ang pang-isang ulit na mga password na nakabatay sa HMAC",
 	"specialpages-group-oath": "Dalawang Salik na Pagpapatunay",
 	"oathauth-account": "Dalawang Salik na Pangalan ng Akawnt:",
 	"oathauth-secret": "Dalawang Salik na Susi ng Lihim:",
@@ -15,6 +16,5 @@
 	"oathauth-disable": "Huwag Paganahin ang Dalawang Salik na Pagpapatunay",
 	"oathauth-validatedoath": "Nakapagpatunay ng dalawang salik na mga katibayan. Isasakatuparan na ngayon ang dalawang salik na pagpapatunay.",
 	"oathauth-failedtovalidateoath": "Nabigo sa pagpapatunay ng dalawang salik na mga kredensiyal",
-	"oathauth-disabledoath": "Hindi na pinaaandar ang dalawang salik na pagpapatunay.",
-	"apihelp-query+oath-example-1": "Maghanap ng kaukulang impormasyon tungkol sa 'current user'"
+	"oathauth-disabledoath": "Hindi na pinaaandar ang dalawang salik na pagpapatunay."
 }

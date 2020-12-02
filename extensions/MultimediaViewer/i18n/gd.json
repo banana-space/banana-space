@@ -1,13 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"GunChleoc",
-			"Akerbeltz"
+			"Akerbeltz",
+			"GunChleoc"
 		]
 	},
 	"multimediaviewer-desc": "Thoir meud nas motha air dealbhagan air eadar-aghaidh làn-sgrìn.",
-	"multimediaviewer-pref": "Sealladair nam meadhanan",
-	"multimediaviewer-pref-desc": "Thoir piseach air sealladh air meadhanan leis an inneal ùr seo. Seallaidh e dealbhan as motha air duilleagan aig a bheil dealbhagan. Thèid dealbhan a shealltainn air tar-chòmhdachadh làn-sgrìn agus gabhaidh an sealltainn le làn-leud cuideachd.",
 	"multimediaviewer-optin-pref": "Cuir <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About sealladair nam headhanan]</span> an comas",
 	"multimediaviewer-file-page": "Rach gu dhuilleag an fhaidhle seo",
 	"multimediaviewer-repository-local": "Barrachd fiosrachaidh",

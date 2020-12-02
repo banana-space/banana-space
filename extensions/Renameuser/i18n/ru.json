@@ -10,13 +10,14 @@
 			"Innv",
 			"KPu3uC B Poccuu",
 			"Kaganer",
-			"Александр Сигачёв",
-			"Okras"
+			"Okras",
+			"Vlad5250",
+			"Александр Сигачёв"
 		]
 	},
 	"renameuser": "Переименовать участника",
-	"renameuser-linkoncontribs": "переименовать участника",
-	"renameuser-linkoncontribs-text": "Переименовать этого участника",
+	"renameuser-linkoncontribs": "переименовать {{GENDER:$1|участника|участницу}}",
+	"renameuser-linkoncontribs-text": "Переименовать {{GENDER:$1|этого участника|эту участницу}}",
 	"renameuser-desc": "Добавляет [[Special:RenameUser|возможность]] переименования пользователей (требуется право <code>renameuser</code>)",
 	"renameuserold": "Имя в настоящий момент:",
 	"renameusernew": "Новое имя:",
@@ -43,6 +44,6 @@
 	"logentry-renameuser-renameuser-legacier": "$1 переименовал {{GENDER:$7|участника|участницу}} $4 в $5",
 	"renameuser-move-log": "Автоматически переименованная страница в связи с переименованием учётной записи  {{GENDER:$2|участника|участницы}} «[[User:$1|$1]]» в «[[User:$2|$2]]»",
 	"action-renameuser": "переименование участников",
-	"right-renameuser": "переименование участников",
+	"right-renameuser": "Переименование участников",
 	"renameuser-renamed-notice": "Этот участник был переименован.\nНиже для справки приведён журнал переименований."
 }

@@ -1,7 +1,7 @@
 /*
  * Number-related utilities for mediawiki.language.
  */
-( function ( mw, $ ) {
+( function () {
 	/**
 	 * @class mw.language
 	 */
@@ -179,10 +179,8 @@
 		for ( i = 0; i < arguments.length; i++ ) {
 			table = arguments[ i ];
 			for ( key in table ) {
-				if ( table.hasOwnProperty( key ) ) {
-					// The thousand separator should be deleted
-					flipped[ table[ key ] ] = key === ',' ? '' : key;
-				}
+				// The thousand separator should be deleted
+				flipped[ table[ key ] ] = key === ',' ? '' : key;
 			}
 		}
 
@@ -234,7 +232,7 @@
 			if ( transformTable ) {
 				convertedNumber = '';
 				for ( i = 0; i < numberString.length; i++ ) {
-					if ( transformTable.hasOwnProperty( numberString[ i ] ) ) {
+					if ( Object.prototype.hasOwnProperty.call( transformTable, numberString[ i ] ) ) {
 						convertedNumber += transformTable[ numberString[ i ] ];
 					} else {
 						convertedNumber += numberString[ i ];
@@ -275,7 +273,7 @@
 		/**
 		 * Apply pattern to format value as a string.
 		 *
-		 * Using patterns from [Unicode TR35](http://www.unicode.org/reports/tr35/#Number_Format_Patterns).
+		 * Using patterns from [Unicode TR35](https://www.unicode.org/reports/tr35/#Number_Format_Patterns).
 		 *
 		 * @param {number} value
 		 * @param {string} pattern Pattern string as described by Unicode TR35
@@ -309,4 +307,4 @@
 
 	} );
 
-}( mediaWiki, jQuery ) );
+}() );

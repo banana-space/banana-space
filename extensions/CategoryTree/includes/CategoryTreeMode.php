@@ -27,12 +27,12 @@
  */
 class CategoryTreeMode {
 
-	const CATEGORIES = 0;
+	public const CATEGORIES = 0;
 
-	const PAGES = 10;
+	public const PAGES = 10;
 
-	const ALL = 20;
+	public const ALL = 20;
 
-	const PARENTS = 100;
+	public const PARENTS = 100;
 
 }

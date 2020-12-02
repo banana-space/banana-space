@@ -20,6 +20,8 @@
  * @file
  * @ingroup FileBackend
  */
+
+use Wikimedia\AtEase\AtEase;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
@@ -32,6 +34,7 @@ use Wikimedia\Timestamp\ConvertibleTimestamp;
  * such as storeInternal(), copyInternal(), deleteInternal() and the like.
  * This class is also responsible for path resolution and sanitization.
  *
+ * @stable to extend
  * @ingroup FileBackend
  * @since 1.19
  */
@@ -40,9 +43,9 @@ abstract class FileBackendStore extends FileBackend {
 	protected $memCache;
 	/** @var BagOStuff */
 	protected $srvCache;
-	/** @var ProcessCacheLRU Map of paths to small (RAM/disk) cache items */
+	/** @var MapCacheLRU Map of paths to small (RAM/disk) cache items */
 	protected $cheapCache;
-	/** @var ProcessCacheLRU Map of paths to large (RAM/disk) cache items */
+	/** @var MapCacheLRU Map of paths to large (RAM/disk) cache items */
 	protected $expensiveCache;
 
 	/** @var array Map of container names to sharding config */
@@ -53,9 +56,19 @@ abstract class FileBackendStore extends FileBackend {
 
 	protected $maxFileSize = 4294967296; // integer bytes (4GiB)
 
-	const CACHE_TTL = 10; // integer; TTL in seconds for process cache entries
-	const CACHE_CHEAP_SIZE = 500; // integer; max entries in "cheap cache"
-	const CACHE_EXPENSIVE_SIZE = 5; // integer; max entries in "expensive cache"
+	protected const CACHE_TTL = 10; // integer; TTL in seconds for process cache entries
+	protected const CACHE_CHEAP_SIZE = 500; // integer; max entries in "cheap cache"
+	protected const CACHE_EXPENSIVE_SIZE = 5; // integer; max entries in "expensive cache"
+
+	/** @var false Idiom for "no result due to missing file" (since 1.34) */
+	protected static $RES_ABSENT = false;
+	/** @var null Idiom for "no result due to I/O errors" (since 1.34) */
+	protected static $RES_ERROR = null;
+
+	/** @var string File does not exist according to a normal stat query */
+	protected static $ABSENT_NORMAL = 'FNE-N';
+	/** @var string File does not exist according to a "latest"-mode stat query */
+	protected static $ABSENT_LATEST = 'FNE-L';
 
 	/**
 	 * @see FileBackend::__construct()
@@ -66,17 +79,17 @@ abstract class FileBackendStore extends FileBackend {
 	 *                    returns the MIME type of the file or 'unknown/unknown'. The file
 	 *                    system path parameter should be used if the content one is null.
 	 *
+	 * @stable to call
+	 *
 	 * @param array $config
 	 */
 	public function __construct( array $config ) {
 		parent::__construct( $config );
-		$this->mimeCallback = isset( $config['mimeCallback'] )
-			? $config['mimeCallback']
-			: null;
+		$this->mimeCallback = $config['mimeCallback'] ?? null;
 		$this->srvCache = new EmptyBagOStuff(); // disabled by default
 		$this->memCache = WANObjectCache::newEmpty(); // disabled by default
-		$this->cheapCache = new ProcessCacheLRU( self::CACHE_CHEAP_SIZE );
-		$this->expensiveCache = new ProcessCacheLRU( self::CACHE_EXPENSIVE_SIZE );
+		$this->cheapCache = new MapCacheLRU( self::CACHE_CHEAP_SIZE );
+		$this->expensiveCache = new MapCacheLRU( self::CACHE_EXPENSIVE_SIZE );
 	}
 
 	/**
@@ -91,9 +104,10 @@ abstract class FileBackendStore extends FileBackend {
 	}
 
 	/**
-	 * Check if a file can be created or changed at a given storage path.
-	 * FS backends should check if the parent directory exists, files can be
-	 * written under it, and that any file already there is writable.
+	 * Check if a file can be created or changed at a given storage path in the backend
+	 *
+	 * FS backends should check that the parent directory exists, files can be written
+	 * under it, and that any file already there is both readable and writable.
 	 * Backends using key/value stores should check if the container exists.
 	 *
 	 * @param string $storagePath
@@ -120,14 +134,16 @@ abstract class FileBackendStore extends FileBackend {
 	 * @return StatusValue
 	 */
 	final public function createInternal( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
+
 		if ( strlen( $params['content'] ) > $this->maxFileSizeInternal() ) {
 			$status = $this->newStatus( 'backend-fail-maxsize',
 				$params['dst'], $this->maxFileSizeInternal() );
 		} else {
 			$status = $this->doCreateInternal( $params );
 			$this->clearCache( [ $params['dst'] ] );
-			if ( !isset( $params['dstExists'] ) || $params['dstExists'] ) {
+			if ( $params['dstExists'] ?? true ) {
 				$this->deleteFileCache( $params['dst'] ); // persistent cache
 			}
 		}
@@ -161,14 +177,16 @@ abstract class FileBackendStore extends FileBackend {
 	 * @return StatusValue
 	 */
 	final public function storeInternal( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
+
 		if ( filesize( $params['src'] ) > $this->maxFileSizeInternal() ) {
 			$status = $this->newStatus( 'backend-fail-maxsize',
 				$params['dst'], $this->maxFileSizeInternal() );
 		} else {
 			$status = $this->doStoreInternal( $params );
 			$this->clearCache( [ $params['dst'] ] );
-			if ( !isset( $params['dstExists'] ) || $params['dstExists'] ) {
+			if ( $params['dstExists'] ?? true ) {
 				$this->deleteFileCache( $params['dst'] ); // persistent cache
 			}
 		}
@@ -203,10 +221,12 @@ abstract class FileBackendStore extends FileBackend {
 	 * @return StatusValue
 	 */
 	final public function copyInternal( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
+
 		$status = $this->doCopyInternal( $params );
 		$this->clearCache( [ $params['dst'] ] );
-		if ( !isset( $params['dstExists'] ) || $params['dstExists'] ) {
+		if ( $params['dstExists'] ?? true ) {
 			$this->deleteFileCache( $params['dst'] ); // persistent cache
 		}
 
@@ -235,7 +255,9 @@ abstract class FileBackendStore extends FileBackend {
 	 * @return StatusValue
 	 */
 	final public function deleteInternal( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
+
 		$status = $this->doDeleteInternal( $params );
 		$this->clearCache( [ $params['src'] ] );
 		$this->deleteFileCache( $params['src'] ); // persistent cache
@@ -269,11 +291,13 @@ abstract class FileBackendStore extends FileBackend {
 	 * @return StatusValue
 	 */
 	final public function moveInternal( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
+
 		$status = $this->doMoveInternal( $params );
 		$this->clearCache( [ $params['src'], $params['dst'] ] );
 		$this->deleteFileCache( $params['src'] ); // persistent cache
-		if ( !isset( $params['dstExists'] ) || $params['dstExists'] ) {
+		if ( $params['dstExists'] ?? true ) {
 			$this->deleteFileCache( $params['dst'] ); // persistent cache
 		}
 
@@ -282,6 +306,7 @@ abstract class FileBackendStore extends FileBackend {
 
 	/**
 	 * @see FileBackendStore::moveInternal()
+	 * @stable to override
 	 * @param array $params
 	 * @return StatusValue
 	 */
@@ -315,7 +340,9 @@ abstract class FileBackendStore extends FileBackend {
 	 * @return StatusValue
 	 */
 	final public function describeInternal( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
+
 		if ( count( $params['headers'] ) ) {
 			$status = $this->doDescribeInternal( $params );
 			$this->clearCache( [ $params['src'] ] );
@@ -329,6 +356,7 @@ abstract class FileBackendStore extends FileBackend {
 
 	/**
 	 * @see FileBackendStore::describeInternal()
+	 * @stable to override
 	 * @param array $params
 	 * @return StatusValue
 	 */
@@ -348,10 +376,12 @@ abstract class FileBackendStore extends FileBackend {
 	}
 
 	final public function concatenate( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 		$status = $this->newStatus();
 
 		// Try to lock the source files for the scope of this function
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$scopeLockS = $this->getScopedFileLocks( $params['srcs'], LockManager::LOCK_UW, $status );
 		if ( $status->isOK() ) {
 			// Actually do the file concatenation...
@@ -369,6 +399,7 @@ abstract class FileBackendStore extends FileBackend {
 
 	/**
 	 * @see FileBackendStore::concatenate()
+	 * @stable to override
 	 * @param array $params
 	 * @return StatusValue
 	 */
@@ -378,9 +409,9 @@ abstract class FileBackendStore extends FileBackend {
 		unset( $params['latest'] ); // sanity
 
 		// Check that the specified temp file is valid...
-		Wikimedia\suppressWarnings();
+		AtEase::suppressWarnings();
 		$ok = ( is_file( $tmpPath ) && filesize( $tmpPath ) == 0 );
-		Wikimedia\restoreWarnings();
+		AtEase::restoreWarnings();
 		if ( !$ok ) { // not present or not empty
 			$status->fatal( 'backend-fail-opentemp', $tmpPath );
 
@@ -441,6 +472,7 @@ abstract class FileBackendStore extends FileBackend {
 	}
 
 	final protected function doPrepare( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 		$status = $this->newStatus();
 
@@ -454,7 +486,7 @@ abstract class FileBackendStore extends FileBackend {
 		if ( $shard !== null ) { // confined to a single container/shard
 			$status->merge( $this->doPrepareInternal( $fullCont, $dir, $params ) );
 		} else { // directory is on several shards
-			$this->logger->debug( __METHOD__ . ": iterating over all container shards.\n" );
+			$this->logger->debug( __METHOD__ . ": iterating over all container shards." );
 			list( , $shortCont, ) = self::splitStoragePath( $params['dir'] );
 			foreach ( $this->getContainerSuffixes( $shortCont ) as $suffix ) {
 				$status->merge( $this->doPrepareInternal( "{$fullCont}{$suffix}", $dir, $params ) );
@@ -466,6 +498,7 @@ abstract class FileBackendStore extends FileBackend {
 
 	/**
 	 * @see FileBackendStore::doPrepare()
+	 * @stable to override
 	 * @param string $container
 	 * @param string $dir
 	 * @param array $params
@@ -476,6 +509,7 @@ abstract class FileBackendStore extends FileBackend {
 	}
 
 	final protected function doSecure( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 		$status = $this->newStatus();
 
@@ -489,7 +523,7 @@ abstract class FileBackendStore extends FileBackend {
 		if ( $shard !== null ) { // confined to a single container/shard
 			$status->merge( $this->doSecureInternal( $fullCont, $dir, $params ) );
 		} else { // directory is on several shards
-			$this->logger->debug( __METHOD__ . ": iterating over all container shards.\n" );
+			$this->logger->debug( __METHOD__ . ": iterating over all container shards." );
 			list( , $shortCont, ) = self::splitStoragePath( $params['dir'] );
 			foreach ( $this->getContainerSuffixes( $shortCont ) as $suffix ) {
 				$status->merge( $this->doSecureInternal( "{$fullCont}{$suffix}", $dir, $params ) );
@@ -501,6 +535,7 @@ abstract class FileBackendStore extends FileBackend {
 
 	/**
 	 * @see FileBackendStore::doSecure()
+	 * @stable to override
 	 * @param string $container
 	 * @param string $dir
 	 * @param array $params
@@ -511,6 +546,7 @@ abstract class FileBackendStore extends FileBackend {
 	}
 
 	final protected function doPublish( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 		$status = $this->newStatus();
 
@@ -524,7 +560,7 @@ abstract class FileBackendStore extends FileBackend {
 		if ( $shard !== null ) { // confined to a single container/shard
 			$status->merge( $this->doPublishInternal( $fullCont, $dir, $params ) );
 		} else { // directory is on several shards
-			$this->logger->debug( __METHOD__ . ": iterating over all container shards.\n" );
+			$this->logger->debug( __METHOD__ . ": iterating over all container shards." );
 			list( , $shortCont, ) = self::splitStoragePath( $params['dir'] );
 			foreach ( $this->getContainerSuffixes( $shortCont ) as $suffix ) {
 				$status->merge( $this->doPublishInternal( "{$fullCont}{$suffix}", $dir, $params ) );
@@ -536,6 +572,7 @@ abstract class FileBackendStore extends FileBackend {
 
 	/**
 	 * @see FileBackendStore::doPublish()
+	 * @stable to override
 	 * @param string $container
 	 * @param string $dir
 	 * @param array $params
@@ -546,6 +583,7 @@ abstract class FileBackendStore extends FileBackend {
 	}
 
 	final protected function doClean( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 		$status = $this->newStatus();
 
@@ -570,6 +608,7 @@ abstract class FileBackendStore extends FileBackend {
 
 		// Attempt to lock this directory...
 		$filesLockEx = [ $params['dir'] ];
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$scopedLockE = $this->getScopedFileLocks( $filesLockEx, LockManager::LOCK_EX, $status );
 		if ( !$status->isOK() ) {
 			return $status; // abort
@@ -579,7 +618,7 @@ abstract class FileBackendStore extends FileBackend {
 			$status->merge( $this->doCleanInternal( $fullCont, $dir, $params ) );
 			$this->deleteContainerCache( $fullCont ); // purge cache
 		} else { // directory is on several shards
-			$this->logger->debug( __METHOD__ . ": iterating over all container shards.\n" );
+			$this->logger->debug( __METHOD__ . ": iterating over all container shards." );
 			list( , $shortCont, ) = self::splitStoragePath( $params['dir'] );
 			foreach ( $this->getContainerSuffixes( $shortCont ) as $suffix ) {
 				$status->merge( $this->doCleanInternal( "{$fullCont}{$suffix}", $dir, $params ) );
@@ -592,6 +631,7 @@ abstract class FileBackendStore extends FileBackend {
 
 	/**
 	 * @see FileBackendStore::doClean()
+	 * @stable to override
 	 * @param string $container
 	 * @param string $dir
 	 * @param array $params
@@ -602,75 +642,164 @@ abstract class FileBackendStore extends FileBackend {
 	}
 
 	final public function fileExists( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
-		$stat = $this->getFileStat( $params );
 
-		return ( $stat === null ) ? null : (bool)$stat; // null => failure
+		$stat = $this->getFileStat( $params );
+		if ( is_array( $stat ) ) {
+			return true;
+		}
+
+		return ( $stat === self::$RES_ABSENT ) ? false : self::EXISTENCE_ERROR;
 	}
 
 	final public function getFileTimestamp( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
-		$stat = $this->getFileStat( $params );
 
-		return $stat ? $stat['mtime'] : false;
+		$stat = $this->getFileStat( $params );
+		if ( is_array( $stat ) ) {
+			return $stat['mtime'];
+		}
+
+		return self::TIMESTAMP_FAIL; // all failure cases
 	}
 
 	final public function getFileSize( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
-		$stat = $this->getFileStat( $params );
 
-		return $stat ? $stat['size'] : false;
+		$stat = $this->getFileStat( $params );
+		if ( is_array( $stat ) ) {
+			return $stat['size'];
+		}
+
+		return self::SIZE_FAIL; // all failure cases
 	}
 
 	final public function getFileStat( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
+		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
+
 		$path = self::normalizeStoragePath( $params['src'] );
 		if ( $path === null ) {
-			return false; // invalid storage path
-		}
-		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
-		$latest = !empty( $params['latest'] ); // use latest data?
-		if ( !$latest && !$this->cheapCache->has( $path, 'stat', self::CACHE_TTL ) ) {
-			$this->primeFileCache( [ $path ] ); // check persistent cache
-		}
-		if ( $this->cheapCache->has( $path, 'stat', self::CACHE_TTL ) ) {
-			$stat = $this->cheapCache->get( $path, 'stat' );
-			// If we want the latest data, check that this cached
-			// value was in fact fetched with the latest available data.
-			if ( is_array( $stat ) ) {
-				if ( !$latest || $stat['latest'] ) {
-					return $stat;
-				}
-			} elseif ( in_array( $stat, [ 'NOT_EXIST', 'NOT_EXIST_LATEST' ] ) ) {
-				if ( !$latest || $stat === 'NOT_EXIST_LATEST' ) {
-					return false;
-				}
-			}
-		}
-		$stat = $this->doGetFileStat( $params );
-		if ( is_array( $stat ) ) { // file exists
-			// Strongly consistent backends can automatically set "latest"
-			$stat['latest'] = isset( $stat['latest'] ) ? $stat['latest'] : $latest;
-			$this->cheapCache->set( $path, 'stat', $stat );
-			$this->setFileCache( $path, $stat ); // update persistent cache
-			if ( isset( $stat['sha1'] ) ) { // some backends store SHA-1 as metadata
-				$this->cheapCache->set( $path, 'sha1',
-					[ 'hash' => $stat['sha1'], 'latest' => $latest ] );
-			}
-			if ( isset( $stat['xattr'] ) ) { // some backends store headers/metadata
-				$stat['xattr'] = self::normalizeXAttributes( $stat['xattr'] );
-				$this->cheapCache->set( $path, 'xattr',
-					[ 'map' => $stat['xattr'], 'latest' => $latest ] );
-			}
-		} elseif ( $stat === false ) { // file does not exist
-			$this->cheapCache->set( $path, 'stat', $latest ? 'NOT_EXIST_LATEST' : 'NOT_EXIST' );
-			$this->cheapCache->set( $path, 'xattr', [ 'map' => false, 'latest' => $latest ] );
-			$this->cheapCache->set( $path, 'sha1', [ 'hash' => false, 'latest' => $latest ] );
-			$this->logger->debug( __METHOD__ . ": File $path does not exist.\n" );
-		} else { // an error occurred
-			$this->logger->warning( __METHOD__ . ": Could not stat file $path.\n" );
+			return self::STAT_ERROR; // invalid storage path
 		}
 
-		return $stat;
+		// Whether to bypass cache except for process cache entries loaded directly from
+		// high consistency backend queries (caller handles any cache flushing and locking)
+		$latest = !empty( $params['latest'] );
+		// Whether to ignore cache entries missing the SHA-1 field for existing files
+		$requireSHA1 = !empty( $params['requireSHA1'] );
+
+		$stat = $this->cheapCache->getField( $path, 'stat', self::CACHE_TTL );
+		// Load the persistent stat cache into process cache if needed
+		if ( !$latest ) {
+			if (
+				// File stat is not in process cache
+				$stat === null ||
+				// Key/value store backends might opportunistically set file stat process
+				// cache entries from object listings that do not include the SHA-1. In that
+				// case, loading the persistent stat cache will likely yield the SHA-1.
+				( $requireSHA1 && is_array( $stat ) && !isset( $stat['sha1'] ) )
+			) {
+				$this->primeFileCache( [ $path ] );
+				// Get any newly process-cached entry
+				$stat = $this->cheapCache->getField( $path, 'stat', self::CACHE_TTL );
+			}
+		}
+
+		if ( is_array( $stat ) ) {
+			if (
+				( !$latest || $stat['latest'] ) &&
+				( !$requireSHA1 || isset( $stat['sha1'] ) )
+			) {
+				return $stat;
+			}
+		} elseif ( $stat === self::$ABSENT_LATEST ) {
+			return self::STAT_ABSENT;
+		} elseif ( $stat === self::$ABSENT_NORMAL ) {
+			if ( !$latest ) {
+				return self::STAT_ABSENT;
+			}
+		}
+
+		// Load the file stat from the backend and update caches
+		$stat = $this->doGetFileStat( $params );
+		$this->ingestFreshFileStats( [ $path => $stat ], $latest );
+
+		if ( is_array( $stat ) ) {
+			return $stat;
+		}
+
+		return ( $stat === self::$RES_ERROR ) ? self::STAT_ERROR : self::STAT_ABSENT;
+	}
+
+	/**
+	 * Ingest file stat entries that just came from querying the backend (not cache)
+	 *
+	 * @param array[]|bool[]|null[] $stats Map of (path => doGetFileStat() stype result)
+	 * @param bool $latest Whether doGetFileStat()/doGetFileStatMulti() had the 'latest' flag
+	 * @return bool Whether all files have non-error stat replies
+	 */
+	final protected function ingestFreshFileStats( array $stats, $latest ) {
+		$success = true;
+
+		foreach ( $stats as $path => $stat ) {
+			if ( is_array( $stat ) ) {
+				// Strongly consistent backends might automatically set this flag
+				$stat['latest'] = $stat['latest'] ?? $latest;
+
+				$this->cheapCache->setField( $path, 'stat', $stat );
+				if ( isset( $stat['sha1'] ) ) {
+					// Some backends store the SHA-1 hash as metadata
+					$this->cheapCache->setField(
+						$path,
+						'sha1',
+						[ 'hash' => $stat['sha1'], 'latest' => $latest ]
+					);
+				}
+				if ( isset( $stat['xattr'] ) ) {
+					// Some backends store custom headers/metadata
+					$stat['xattr'] = self::normalizeXAttributes( $stat['xattr'] );
+					$this->cheapCache->setField(
+						$path,
+						'xattr',
+						[ 'map' => $stat['xattr'], 'latest' => $latest ]
+					);
+				}
+				// Update persistent cache (@TODO: set all entries in one batch)
+				$this->setFileCache( $path, $stat );
+			} elseif ( $stat === self::$RES_ABSENT ) {
+				$this->cheapCache->setField(
+					$path,
+					'stat',
+					$latest ? self::$ABSENT_LATEST : self::$ABSENT_NORMAL
+				);
+				$this->cheapCache->setField(
+					$path,
+					'xattr',
+					[ 'map' => self::XATTRS_FAIL, 'latest' => $latest ]
+				);
+				$this->cheapCache->setField(
+					$path,
+					'sha1',
+					[ 'hash' => self::SHA1_FAIL, 'latest' => $latest ]
+				);
+				$this->logger->debug(
+					__METHOD__ . ': File {path} does not exist',
+					[ 'path' => $path ]
+				);
+			} else {
+				$success = false;
+				$this->logger->error(
+					__METHOD__ . ': Could not stat file {path}',
+					[ 'path' => $path ]
+				);
+			}
+		}
+
+		return $success;
 	}
 
 	/**
@@ -680,39 +809,55 @@ abstract class FileBackendStore extends FileBackend {
 	abstract protected function doGetFileStat( array $params );
 
 	public function getFileContentsMulti( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 
 		$params = $this->setConcurrencyFlags( $params );
 		$contents = $this->doGetFileContentsMulti( $params );
+		foreach ( $contents as $path => $content ) {
+			if ( !is_string( $content ) ) {
+				$contents[$path] = self::CONTENT_FAIL; // used for all failure cases
+			}
+		}
 
 		return $contents;
 	}
 
 	/**
 	 * @see FileBackendStore::getFileContentsMulti()
+	 * @stable to override
 	 * @param array $params
-	 * @return array
+	 * @return string[]|bool[]|null[] Map of (path => string, false (missing), or null (error))
 	 */
 	protected function doGetFileContentsMulti( array $params ) {
 		$contents = [];
 		foreach ( $this->doGetLocalReferenceMulti( $params ) as $path => $fsFile ) {
-			Wikimedia\suppressWarnings();
-			$contents[$path] = $fsFile ? file_get_contents( $fsFile->getPath() ) : false;
-			Wikimedia\restoreWarnings();
+			if ( $fsFile instanceof FSFile ) {
+				AtEase::suppressWarnings();
+				$content = file_get_contents( $fsFile->getPath() );
+				AtEase::restoreWarnings();
+				$contents[$path] = is_string( $content ) ? $content : self::$RES_ERROR;
+			} elseif ( $fsFile === self::$RES_ABSENT ) {
+				$contents[$path] = self::$RES_ABSENT;
+			} else {
+				$contents[$path] = self::$RES_ERROR;
+			}
 		}
 
 		return $contents;
 	}
 
 	final public function getFileXAttributes( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
+		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
+
 		$path = self::normalizeStoragePath( $params['src'] );
 		if ( $path === null ) {
-			return false; // invalid storage path
+			return self::XATTRS_FAIL; // invalid storage path
 		}
-		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 		$latest = !empty( $params['latest'] ); // use latest data?
-		if ( $this->cheapCache->has( $path, 'xattr', self::CACHE_TTL ) ) {
-			$stat = $this->cheapCache->get( $path, 'xattr' );
+		if ( $this->cheapCache->hasField( $path, 'xattr', self::CACHE_TTL ) ) {
+			$stat = $this->cheapCache->getField( $path, 'xattr' );
 			// If we want the latest data, check that this cached
 			// value was in fact fetched with the latest available data.
 			if ( !$latest || $stat['latest'] ) {
@@ -720,65 +865,101 @@ abstract class FileBackendStore extends FileBackend {
 			}
 		}
 		$fields = $this->doGetFileXAttributes( $params );
-		$fields = is_array( $fields ) ? self::normalizeXAttributes( $fields ) : false;
-		$this->cheapCache->set( $path, 'xattr', [ 'map' => $fields, 'latest' => $latest ] );
+		if ( is_array( $fields ) ) {
+			$fields = self::normalizeXAttributes( $fields );
+			$this->cheapCache->setField(
+				$path,
+				'xattr',
+				[ 'map' => $fields, 'latest' => $latest ]
+			);
+		} elseif ( $fields === self::$RES_ABSENT ) {
+			$this->cheapCache->setField(
+				$path,
+				'xattr',
+				[ 'map' => self::XATTRS_FAIL, 'latest' => $latest ]
+			);
+		} else {
+			$fields = self::XATTRS_FAIL; // used for all failure cases
+		}
 
 		return $fields;
 	}
 
 	/**
 	 * @see FileBackendStore::getFileXAttributes()
+	 * @stable to override
 	 * @param array $params
-	 * @return array[][]
+	 * @return array[][]|false|null Attributes, false (missing file), or null (error)
 	 */
 	protected function doGetFileXAttributes( array $params ) {
 		return [ 'headers' => [], 'metadata' => [] ]; // not supported
 	}
 
 	final public function getFileSha1Base36( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
+		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
+
 		$path = self::normalizeStoragePath( $params['src'] );
 		if ( $path === null ) {
-			return false; // invalid storage path
+			return self::SHA1_FAIL; // invalid storage path
 		}
-		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 		$latest = !empty( $params['latest'] ); // use latest data?
-		if ( $this->cheapCache->has( $path, 'sha1', self::CACHE_TTL ) ) {
-			$stat = $this->cheapCache->get( $path, 'sha1' );
+		if ( $this->cheapCache->hasField( $path, 'sha1', self::CACHE_TTL ) ) {
+			$stat = $this->cheapCache->getField( $path, 'sha1' );
 			// If we want the latest data, check that this cached
 			// value was in fact fetched with the latest available data.
 			if ( !$latest || $stat['latest'] ) {
 				return $stat['hash'];
 			}
 		}
-		$hash = $this->doGetFileSha1Base36( $params );
-		$this->cheapCache->set( $path, 'sha1', [ 'hash' => $hash, 'latest' => $latest ] );
+		$sha1 = $this->doGetFileSha1Base36( $params );
+		if ( is_string( $sha1 ) ) {
+			$this->cheapCache->setField(
+				$path,
+				'sha1',
+				[ 'hash' => $sha1, 'latest' => $latest ]
+			);
+		} elseif ( $sha1 === self::$RES_ABSENT ) {
+			$this->cheapCache->setField(
+				$path,
+				'sha1',
+				[ 'hash' => self::SHA1_FAIL, 'latest' => $latest ]
+			);
+		} else {
+			$sha1 = self::SHA1_FAIL; // used for all failure cases
+		}
 
-		return $hash;
+		return $sha1;
 	}
 
 	/**
 	 * @see FileBackendStore::getFileSha1Base36()
+	 * @stable to override
 	 * @param array $params
-	 * @return bool|string
+	 * @return bool|string|null SHA1, false (missing file), or null (error)
 	 */
 	protected function doGetFileSha1Base36( array $params ) {
 		$fsFile = $this->getLocalReference( $params );
-		if ( !$fsFile ) {
-			return false;
-		} else {
-			return $fsFile->getSha1Base36();
+		if ( $fsFile instanceof FSFile ) {
+			$sha1 = $fsFile->getSha1Base36();
+
+			return is_string( $sha1 ) ? $sha1 : self::$RES_ERROR;
 		}
+
+		return ( $fsFile === self::$RES_ERROR ) ? self::$RES_ERROR : self::$RES_ABSENT;
 	}
 
 	final public function getFileProps( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
-		$fsFile = $this->getLocalReference( $params );
-		$props = $fsFile ? $fsFile->getProps() : FSFile::placeholderProps();
 
-		return $props;
+		$fsFile = $this->getLocalReference( $params );
+
+		return $fsFile ? $fsFile->getProps() : FSFile::placeholderProps();
 	}
 
 	final public function getLocalReferenceMulti( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 
 		$params = $this->setConcurrencyFlags( $params );
@@ -790,8 +971,8 @@ abstract class FileBackendStore extends FileBackend {
 			$path = self::normalizeStoragePath( $src );
 			if ( $path === null ) {
 				$fsFiles[$src] = null; // invalid storage path
-			} elseif ( $this->expensiveCache->has( $path, 'localRef' ) ) {
-				$val = $this->expensiveCache->get( $path, 'localRef' );
+			} elseif ( $this->expensiveCache->hasField( $path, 'localRef' ) ) {
+				$val = $this->expensiveCache->getField( $path, 'localRef' );
 				// If we want the latest data, check that this cached
 				// value was in fact fetched with the latest available data.
 				if ( !$latest || $val['latest'] ) {
@@ -802,10 +983,15 @@ abstract class FileBackendStore extends FileBackend {
 		// Fetch local references of any remaning files...
 		$params['srcs'] = array_diff( $params['srcs'], array_keys( $fsFiles ) );
 		foreach ( $this->doGetLocalReferenceMulti( $params ) as $path => $fsFile ) {
-			$fsFiles[$path] = $fsFile;
-			if ( $fsFile ) { // update the process cache...
-				$this->expensiveCache->set( $path, 'localRef',
-					[ 'object' => $fsFile, 'latest' => $latest ] );
+			if ( $fsFile instanceof FSFile ) {
+				$fsFiles[$path] = $fsFile;
+				$this->expensiveCache->setField(
+					$path,
+					'localRef',
+					[ 'object' => $fsFile, 'latest' => $latest ]
+				);
+			} else {
+				$fsFiles[$path] = null; // used for all failure cases
 			}
 		}
 
@@ -814,18 +1000,25 @@ abstract class FileBackendStore extends FileBackend {
 
 	/**
 	 * @see FileBackendStore::getLocalReferenceMulti()
+	 * @stable to override
 	 * @param array $params
-	 * @return array
+	 * @return string[]|bool[]|null[] Map of (path => FSFile, false (missing), or null (error))
 	 */
 	protected function doGetLocalReferenceMulti( array $params ) {
 		return $this->doGetLocalCopyMulti( $params );
 	}
 
 	final public function getLocalCopyMulti( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 
 		$params = $this->setConcurrencyFlags( $params );
 		$tmpFiles = $this->doGetLocalCopyMulti( $params );
+		foreach ( $tmpFiles as $path => $tmpFile ) {
+			if ( !$tmpFile ) {
+				$tmpFiles[$path] = null; // used for all failure cases
+			}
+		}
 
 		return $tmpFiles;
 	}
@@ -833,26 +1026,28 @@ abstract class FileBackendStore extends FileBackend {
 	/**
 	 * @see FileBackendStore::getLocalCopyMulti()
 	 * @param array $params
-	 * @return array
+	 * @return string[]|bool[]|null[] Map of (path => TempFSFile, false (missing), or null (error))
 	 */
 	abstract protected function doGetLocalCopyMulti( array $params );
 
 	/**
 	 * @see FileBackend::getFileHttpUrl()
+	 * @stable to override
 	 * @param array $params
 	 * @return string|null
 	 */
 	public function getFileHttpUrl( array $params ) {
-		return null; // not supported
+		return self::TEMPURL_ERROR; // not supported
 	}
 
 	final public function streamFile( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 		$status = $this->newStatus();
 
 		// Always set some fields for subclass convenience
-		$params['options'] = isset( $params['options'] ) ? $params['options'] : [];
-		$params['headers'] = isset( $params['headers'] ) ? $params['headers'] : [];
+		$params['options'] = $params['options'] ?? [];
+		$params['headers'] = $params['headers'] ?? [];
 
 		// Don't stream it out as text/html if there was a PHP error
 		if ( ( empty( $params['headless'] ) || $params['headers'] ) && headers_sent() ) {
@@ -868,6 +1063,7 @@ abstract class FileBackendStore extends FileBackend {
 
 	/**
 	 * @see FileBackendStore::streamFile()
+	 * @stable to override
 	 * @param array $params
 	 * @return StatusValue
 	 */
@@ -903,21 +1099,21 @@ abstract class FileBackendStore extends FileBackend {
 	final public function directoryExists( array $params ) {
 		list( $fullCont, $dir, $shard ) = $this->resolveStoragePath( $params['dir'] );
 		if ( $dir === null ) {
-			return false; // invalid storage path
+			return self::EXISTENCE_ERROR; // invalid storage path
 		}
 		if ( $shard !== null ) { // confined to a single container/shard
 			return $this->doDirectoryExists( $fullCont, $dir, $params );
 		} else { // directory is on several shards
-			$this->logger->debug( __METHOD__ . ": iterating over all container shards.\n" );
+			$this->logger->debug( __METHOD__ . ": iterating over all container shards." );
 			list( , $shortCont, ) = self::splitStoragePath( $params['dir'] );
 			$res = false; // response
 			foreach ( $this->getContainerSuffixes( $shortCont ) as $suffix ) {
 				$exists = $this->doDirectoryExists( "{$fullCont}{$suffix}", $dir, $params );
-				if ( $exists ) {
+				if ( $exists === true ) {
 					$res = true;
 					break; // found one!
-				} elseif ( $exists === null ) { // error?
-					$res = null; // if we don't find anything, it is indeterminate
+				} elseif ( $exists === self::$RES_ERROR ) {
+					$res = self::EXISTENCE_ERROR;
 				}
 			}
 
@@ -937,14 +1133,14 @@ abstract class FileBackendStore extends FileBackend {
 
 	final public function getDirectoryList( array $params ) {
 		list( $fullCont, $dir, $shard ) = $this->resolveStoragePath( $params['dir'] );
-		if ( $dir === null ) { // invalid storage path
-			return null;
+		if ( $dir === null ) {
+			return self::EXISTENCE_ERROR; // invalid storage path
 		}
 		if ( $shard !== null ) {
 			// File listing is confined to a single container/shard
 			return $this->getDirectoryListInternal( $fullCont, $dir, $params );
 		} else {
-			$this->logger->debug( __METHOD__ . ": iterating over all container shards.\n" );
+			$this->logger->debug( __METHOD__ . ": iterating over all container shards." );
 			// File listing spans multiple containers/shards
 			list( , $shortCont, ) = self::splitStoragePath( $params['dir'] );
 
@@ -961,20 +1157,20 @@ abstract class FileBackendStore extends FileBackend {
 	 * @param string $container Resolved container name
 	 * @param string $dir Resolved path relative to container
 	 * @param array $params
-	 * @return Traversable|array|null Returns null on failure
+	 * @return Traversable|array|null Iterable list or null (error)
 	 */
 	abstract public function getDirectoryListInternal( $container, $dir, array $params );
 
 	final public function getFileList( array $params ) {
 		list( $fullCont, $dir, $shard ) = $this->resolveStoragePath( $params['dir'] );
-		if ( $dir === null ) { // invalid storage path
-			return null;
+		if ( $dir === null ) {
+			return self::LIST_ERROR; // invalid storage path
 		}
 		if ( $shard !== null ) {
 			// File listing is confined to a single container/shard
 			return $this->getFileListInternal( $fullCont, $dir, $params );
 		} else {
-			$this->logger->debug( __METHOD__ . ": iterating over all container shards.\n" );
+			$this->logger->debug( __METHOD__ . ": iterating over all container shards." );
 			// File listing spans multiple containers/shards
 			list( , $shortCont, ) = self::splitStoragePath( $params['dir'] );
 
@@ -991,7 +1187,7 @@ abstract class FileBackendStore extends FileBackend {
 	 * @param string $container Resolved container name
 	 * @param string $dir Resolved path relative to container
 	 * @param array $params
-	 * @return Traversable|array|null Returns null on failure
+	 * @return Traversable|string[]|null Iterable list or null (error)
 	 */
 	abstract public function getFileListInternal( $container, $dir, array $params );
 
@@ -1002,7 +1198,7 @@ abstract class FileBackendStore extends FileBackend {
 	 * The result must have the same number of items as the input.
 	 * An exception is thrown if an unsupported operation is requested.
 	 *
-	 * @param array $ops Same format as doOperations()
+	 * @param array[] $ops Same format as doOperations()
 	 * @return FileOp[] List of FileOp objects
 	 * @throws FileBackendError
 	 */
@@ -1042,8 +1238,8 @@ abstract class FileBackendStore extends FileBackend {
 	 * to a list of storage paths to be locked. All returned paths are
 	 * normalized.
 	 *
-	 * @param array $performOps List of FileOp objects
-	 * @return array (LockManager::LOCK_UW => path list, LockManager::LOCK_EX => path list)
+	 * @param FileOp[] $performOps List of FileOp objects
+	 * @return string[][] (LockManager::LOCK_UW => path list, LockManager::LOCK_EX => path list)
 	 */
 	final public function getPathsToLockForOpsInternal( array $performOps ) {
 		// Build up a list of files to lock...
@@ -1070,22 +1266,24 @@ abstract class FileBackendStore extends FileBackend {
 	}
 
 	final protected function doOperationsInternal( array $ops, array $opts ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 		$status = $this->newStatus();
 
-		// Fix up custom header name/value pairs...
+		// Fix up custom header name/value pairs
 		$ops = array_map( [ $this, 'sanitizeOpHeaders' ], $ops );
+		// Build up a list of FileOps and involved paths
+		$fileOps = $this->getOperationsInternal( $ops );
+		$pathsUsed = [];
+		foreach ( $fileOps as $fileOp ) {
+			$pathsUsed = array_merge( $pathsUsed, $fileOp->storagePathsReadOrChanged() );
+		}
 
-		// Build up a list of FileOps...
-		$performOps = $this->getOperationsInternal( $ops );
-
-		// Acquire any locks as needed...
+		// Acquire any locks as needed for the scope of this function
 		if ( empty( $opts['nonLocking'] ) ) {
-			// Build up a list of files to lock...
-			$paths = $this->getPathsToLockForOpsInternal( $performOps );
-			// Try to lock those files for the scope of this function...
-
-			$scopeLock = $this->getScopedFileLocks( $paths, 'mixed', $status );
+			$pathsByLockType = $this->getPathsToLockForOpsInternal( $fileOps );
+			/** @noinspection PhpUnusedLocalVariableInspection */
+			$scopeLock = $this->getScopedFileLocks( $pathsByLockType, 'mixed', $status );
 			if ( !$status->isOK() ) {
 				return $status; // abort
 			}
@@ -1093,30 +1291,23 @@ abstract class FileBackendStore extends FileBackend {
 
 		// Clear any file cache entries (after locks acquired)
 		if ( empty( $opts['preserveCache'] ) ) {
-			$this->clearCache();
-		}
-
-		// Build the list of paths involved
-		$paths = [];
-		foreach ( $performOps as $performOp ) {
-			$paths = array_merge( $paths, $performOp->storagePathsRead() );
-			$paths = array_merge( $paths, $performOp->storagePathsChanged() );
+			$this->clearCache( $pathsUsed );
 		}
 
 		// Enlarge the cache to fit the stat entries of these files
-		$this->cheapCache->resize( max( 2 * count( $paths ), self::CACHE_CHEAP_SIZE ) );
+		$this->cheapCache->setMaxSize( max( 2 * count( $pathsUsed ), self::CACHE_CHEAP_SIZE ) );
 
 		// Load from the persistent container caches
-		$this->primeContainerCache( $paths );
+		$this->primeContainerCache( $pathsUsed );
 		// Get the latest stat info for all the files (having locked them)
-		$ok = $this->preloadFileStat( [ 'srcs' => $paths, 'latest' => true ] );
+		$ok = $this->preloadFileStat( [ 'srcs' => $pathsUsed, 'latest' => true ] );
 
 		if ( $ok ) {
 			// Actually attempt the operation batch...
 			$opts = $this->setConcurrencyFlags( $opts );
-			$subStatus = FileOpBatch::attempt( $performOps, $opts, $this->fileJournal );
+			$subStatus = FileOpBatch::attempt( $fileOps, $opts, $this->fileJournal );
 		} else {
-			// If we could not even stat some files, then bail out...
+			// If we could not even stat some files, then bail out
 			$subStatus = $this->newStatus( 'backend-fail-internal', $this->name );
 			foreach ( $ops as $i => $op ) { // mark each op as failed
 				$subStatus->success[$i] = false;
@@ -1131,22 +1322,28 @@ abstract class FileBackendStore extends FileBackend {
 		$status->success = $subStatus->success; // not done in merge()
 
 		// Shrink the stat cache back to normal size
-		$this->cheapCache->resize( self::CACHE_CHEAP_SIZE );
+		$this->cheapCache->setMaxSize( self::CACHE_CHEAP_SIZE );
 
 		return $status;
 	}
 
-	final protected function doQuickOperationsInternal( array $ops ) {
+	final protected function doQuickOperationsInternal( array $ops, array $opts ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 		$status = $this->newStatus();
 
-		// Fix up custom header name/value pairs...
+		// Fix up custom header name/value pairs
 		$ops = array_map( [ $this, 'sanitizeOpHeaders' ], $ops );
+		// Build up a list of FileOps and involved paths
+		$fileOps = $this->getOperationsInternal( $ops );
+		$pathsUsed = [];
+		foreach ( $fileOps as $fileOp ) {
+			$pathsUsed = array_merge( $pathsUsed, $fileOp->storagePathsReadOrChanged() );
+		}
 
-		// Clear any file cache entries
-		$this->clearCache();
+		// Clear any file cache entries for involved paths
+		$this->clearCache( $pathsUsed );
 
-		$supportedOps = [ 'create', 'store', 'copy', 'move', 'delete', 'describe', 'null' ];
 		// Parallel ops may be disabled in config due to dependencies (e.g. needing popen())
 		$async = ( $this->parallelize === 'implicit' && count( $ops ) > 1 );
 		$maxConcurrency = $this->concurrency; // throttle
@@ -1155,12 +1352,10 @@ abstract class FileBackendStore extends FileBackend {
 		$fileOpHandles = []; // list of (index => handle) arrays
 		$curFileOpHandles = []; // current handle batch
 		// Perform the sync-only ops and build up op handles for the async ops...
-		foreach ( $ops as $index => $params ) {
-			if ( !in_array( $params['op'], $supportedOps ) ) {
-				throw new FileBackendError( "Operation '{$params['op']}' is not supported." );
-			}
-			$method = $params['op'] . 'Internal'; // e.g. "storeInternal"
-			$subStatus = $this->$method( [ 'async' => $async ] + $params );
+		foreach ( $fileOps as $index => $fileOp ) {
+			$subStatus = $async
+				? $fileOp->attemptAsyncQuick()
+				: $fileOp->attemptQuick();
 			if ( $subStatus->value instanceof FileBackendStoreOpHandle ) { // async
 				if ( count( $curFileOpHandles ) >= $maxConcurrency ) {
 					$fileOpHandles[] = $curFileOpHandles; // push this batch
@@ -1190,6 +1385,8 @@ abstract class FileBackendStore extends FileBackend {
 			}
 		}
 
+		$this->clearCache( $pathsUsed );
+
 		return $status;
 	}
 
@@ -1203,6 +1400,7 @@ abstract class FileBackendStore extends FileBackend {
 	 * @throws FileBackendError
 	 */
 	final public function executeOpHandlesInternal( array $fileOpHandles ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 
 		foreach ( $fileOpHandles as $fileOpHandle ) {
@@ -1213,16 +1411,17 @@ abstract class FileBackendStore extends FileBackend {
 			}
 		}
 
-		$res = $this->doExecuteOpHandlesInternal( $fileOpHandles );
+		$statuses = $this->doExecuteOpHandlesInternal( $fileOpHandles );
 		foreach ( $fileOpHandles as $fileOpHandle ) {
 			$fileOpHandle->closeResources();
 		}
 
-		return $res;
+		return $statuses;
 	}
 
 	/**
 	 * @see FileBackendStore::executeOpHandlesInternal()
+	 * @stable to override
 	 *
 	 * @param FileBackendStoreOpHandle[] $fileOpHandles
 	 *
@@ -1231,7 +1430,7 @@ abstract class FileBackendStore extends FileBackend {
 	 */
 	protected function doExecuteOpHandlesInternal( array $fileOpHandles ) {
 		if ( count( $fileOpHandles ) ) {
-			throw new LogicException( "Backend does not support asynchronous operations." );
+			throw new FileBackendError( "Backend does not support asynchronous operations." );
 		}
 
 		return [];
@@ -1257,7 +1456,10 @@ abstract class FileBackendStore extends FileBackend {
 				$name = strtolower( $name );
 				$maxHVLen = in_array( $name, $longs ) ? INF : 255;
 				if ( strlen( $name ) > 255 || strlen( $value ) > $maxHVLen ) {
-					trigger_error( "Header '$name: $value' is too long." );
+					$this->logger->error( "Header '{header}' is too long.", [
+						'filebackend' => $this->name,
+						'header' => "$name: $value",
+					] );
 				} else {
 					$newHeaders[$name] = strlen( $value ) ? $value : ''; // null/false => ""
 				}
@@ -1298,17 +1500,18 @@ abstract class FileBackendStore extends FileBackend {
 
 	/**
 	 * Clears any additional stat caches for storage paths
+	 * @stable to override
 	 *
 	 * @see FileBackend::clearCache()
 	 *
-	 * @param array $paths Storage paths (optional)
+	 * @param array|null $paths Storage paths (optional)
 	 */
 	protected function doClearCache( array $paths = null ) {
 	}
 
 	final public function preloadFileStat( array $params ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
-		$success = true; // no network errors
 
 		$params['concurrency'] = ( $this->parallelize !== 'off' ) ? $this->concurrency : 1;
 		$stats = $this->doGetFileStatMulti( $params );
@@ -1316,45 +1519,15 @@ abstract class FileBackendStore extends FileBackend {
 			return true; // not supported
 		}
 
-		$latest = !empty( $params['latest'] ); // use latest data?
-		foreach ( $stats as $path => $stat ) {
-			$path = FileBackend::normalizeStoragePath( $path );
-			if ( $path === null ) {
-				continue; // this shouldn't happen
-			}
-			if ( is_array( $stat ) ) { // file exists
-				// Strongly consistent backends can automatically set "latest"
-				$stat['latest'] = isset( $stat['latest'] ) ? $stat['latest'] : $latest;
-				$this->cheapCache->set( $path, 'stat', $stat );
-				$this->setFileCache( $path, $stat ); // update persistent cache
-				if ( isset( $stat['sha1'] ) ) { // some backends store SHA-1 as metadata
-					$this->cheapCache->set( $path, 'sha1',
-						[ 'hash' => $stat['sha1'], 'latest' => $latest ] );
-				}
-				if ( isset( $stat['xattr'] ) ) { // some backends store headers/metadata
-					$stat['xattr'] = self::normalizeXAttributes( $stat['xattr'] );
-					$this->cheapCache->set( $path, 'xattr',
-						[ 'map' => $stat['xattr'], 'latest' => $latest ] );
-				}
-			} elseif ( $stat === false ) { // file does not exist
-				$this->cheapCache->set( $path, 'stat',
-					$latest ? 'NOT_EXIST_LATEST' : 'NOT_EXIST' );
-				$this->cheapCache->set( $path, 'xattr',
-					[ 'map' => false, 'latest' => $latest ] );
-				$this->cheapCache->set( $path, 'sha1',
-					[ 'hash' => false, 'latest' => $latest ] );
-				$this->logger->debug( __METHOD__ . ": File $path does not exist.\n" );
-			} else { // an error occurred
-				$success = false;
-				$this->logger->warning( __METHOD__ . ": Could not stat file $path.\n" );
-			}
-		}
+		// Whether this queried the backend in high consistency mode
+		$latest = !empty( $params['latest'] );
 
-		return $success;
+		return $this->ingestFreshFileStats( $stats, $latest );
 	}
 
 	/**
 	 * Get file stat information (concurrently if possible) for several files
+	 * @stable to override
 	 *
 	 * @see FileBackend::getFileStat()
 	 *
@@ -1435,7 +1608,7 @@ abstract class FileBackendStore extends FileBackend {
 				// Validate and sanitize the relative path (backend-specific)
 				$relPath = $this->resolveContainerPath( $shortCont, $relPath );
 				if ( $relPath !== null ) {
-					// Prepend any wiki ID prefix to the container name
+					// Prepend any domain ID prefix to the container name
 					$container = $this->fullContainerName( $shortCont );
 					if ( self::isValidContainerName( $container ) ) {
 						// Validate and sanitize the container name (backend-specific)
@@ -1560,7 +1733,7 @@ abstract class FileBackendStore extends FileBackend {
 		$shards = [];
 		list( $digits, $base ) = $this->getContainerHashLevels( $container );
 		if ( $digits > 0 ) {
-			$numShards = pow( $base, $digits );
+			$numShards = $base ** $digits;
 			for ( $index = 0; $index < $numShards; $index++ ) {
 				$shards[] = '.' . Wikimedia\base_convert( $index, 10, $base, $digits );
 			}
@@ -1570,7 +1743,7 @@ abstract class FileBackendStore extends FileBackend {
 	}
 
 	/**
-	 * Get the full container name, including the wiki ID prefix
+	 * Get the full container name, including the domain ID prefix
 	 *
 	 * @param string $container
 	 * @return string
@@ -1587,6 +1760,7 @@ abstract class FileBackendStore extends FileBackend {
 	 * Resolve a container name, checking if it's allowed by the backend.
 	 * This is intended for internal use, such as encoding illegal chars.
 	 * Subclasses can override this to be more restrictive.
+	 * @stable to override
 	 *
 	 * @param string $container
 	 * @return string|null
@@ -1600,6 +1774,7 @@ abstract class FileBackendStore extends FileBackend {
 	 * This is intended for internal use, such as encoding illegal chars or perhaps
 	 * getting absolute paths (e.g. FS based backends). Note that the relative path
 	 * may be the empty string (e.g. the path is simply to the container).
+	 * @stable to override
 	 *
 	 * @param string $container Container name
 	 * @param string $relStoragePath Storage path relative to the container
@@ -1637,7 +1812,9 @@ abstract class FileBackendStore extends FileBackend {
 	 */
 	final protected function deleteContainerCache( $container ) {
 		if ( !$this->memCache->delete( $this->containerCacheKey( $container ), 300 ) ) {
-			trigger_error( "Unable to delete stat cache for container $container." );
+			$this->logger->warning( "Unable to delete stat cache for container {container}.",
+				[ 'filebackend' => $this->name, 'container' => $container ]
+			);
 		}
 	}
 
@@ -1649,6 +1826,7 @@ abstract class FileBackendStore extends FileBackend {
 	 * @param array $items
 	 */
 	final protected function primeContainerCache( array $items ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 
 		$paths = []; // list of storage paths
@@ -1684,6 +1862,7 @@ abstract class FileBackendStore extends FileBackend {
 	 * Fill the backend-specific process cache given an array of
 	 * resolved container names and their corresponding cached info.
 	 * Only containers that actually exist should appear in the map.
+	 * @stable to override
 	 *
 	 * @param array $containerInfo Map of resolved container names to cached info
 	 */
@@ -1734,7 +1913,9 @@ abstract class FileBackendStore extends FileBackend {
 			return; // invalid storage path
 		}
 		if ( !$this->memCache->delete( $this->fileCacheKey( $path ), 300 ) ) {
-			trigger_error( "Unable to delete stat cache for file $path." );
+			$this->logger->warning( "Unable to delete stat cache for file {path}.",
+				[ 'filebackend' => $this->name, 'path' => $path ]
+			);
 		}
 	}
 
@@ -1746,6 +1927,7 @@ abstract class FileBackendStore extends FileBackend {
 	 * @param array $items List of storage paths
 	 */
 	final protected function primeFileCache( array $items ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 
 		$paths = []; // list of storage paths
@@ -1756,7 +1938,7 @@ abstract class FileBackendStore extends FileBackend {
 				$paths[] = FileBackend::normalizeStoragePath( $item );
 			}
 		}
-		// Get rid of any paths that failed normalization...
+		// Get rid of any paths that failed normalization
 		$paths = array_filter( $paths, 'strlen' ); // remove nulls
 		// Get all the corresponding cache keys for paths...
 		foreach ( $paths as $path ) {
@@ -1765,22 +1947,33 @@ abstract class FileBackendStore extends FileBackend {
 				$pathNames[$this->fileCacheKey( $path )] = $path;
 			}
 		}
-		// Get all cache entries for these file cache keys...
+		// Get all cache entries for these file cache keys.
+		// Note that negatives are not cached by getFileStat()/preloadFileStat().
 		$values = $this->memCache->getMulti( array_keys( $pathNames ) );
-		foreach ( $values as $cacheKey => $val ) {
+		// Load all of the results into process cache...
+		foreach ( array_filter( $values, 'is_array' ) as $cacheKey => $stat ) {
 			$path = $pathNames[$cacheKey];
-			if ( is_array( $val ) ) {
-				$val['latest'] = false; // never completely trust cache
-				$this->cheapCache->set( $path, 'stat', $val );
-				if ( isset( $val['sha1'] ) ) { // some backends store SHA-1 as metadata
-					$this->cheapCache->set( $path, 'sha1',
-						[ 'hash' => $val['sha1'], 'latest' => false ] );
-				}
-				if ( isset( $val['xattr'] ) ) { // some backends store headers/metadata
-					$val['xattr'] = self::normalizeXAttributes( $val['xattr'] );
-					$this->cheapCache->set( $path, 'xattr',
-						[ 'map' => $val['xattr'], 'latest' => false ] );
-				}
+			// Sanity; this flag only applies to stat info loaded directly
+			// from a high consistency backend query to the process cache
+			unset( $stat['latest'] );
+
+			$this->cheapCache->setField( $path, 'stat', $stat );
+			if ( isset( $stat['sha1'] ) && strlen( $stat['sha1'] ) == 31 ) {
+				// Some backends store SHA-1 as metadata
+				$this->cheapCache->setField(
+					$path,
+					'sha1',
+					[ 'hash' => $stat['sha1'], 'latest' => false ]
+				);
+			}
+			if ( isset( $stat['xattr'] ) && is_array( $stat['xattr'] ) ) {
+				// Some backends store custom headers/metadata
+				$stat['xattr'] = self::normalizeXAttributes( $stat['xattr'] );
+				$this->cheapCache->setField(
+					$path,
+					'xattr',
+					[ 'map' => $stat['xattr'], 'latest' => false ]
+				);
 			}
 		}
 	}
@@ -1815,7 +2008,7 @@ abstract class FileBackendStore extends FileBackend {
 	final protected function setConcurrencyFlags( array $opts ) {
 		$opts['concurrency'] = 1; // off
 		if ( $this->parallelize === 'implicit' ) {
-			if ( !isset( $opts['parallelize'] ) || $opts['parallelize'] ) {
+			if ( $opts['parallelize'] ?? true ) {
 				$opts['concurrency'] = $this->concurrency;
 			}
 		} elseif ( $this->parallelize === 'explicit' ) {
@@ -1829,6 +2022,7 @@ abstract class FileBackendStore extends FileBackend {
 
 	/**
 	 * Get the content type to use in HEAD/GET requests for a file
+	 * @stable to override
 	 *
 	 * @param string $storagePath
 	 * @param string|null $content File data
@@ -1842,135 +2036,5 @@ abstract class FileBackendStore extends FileBackend {
 
 		$mime = ( $fsPath !== null ) ? mime_content_type( $fsPath ) : false;
 		return $mime ?: 'unknown/unknown';
-	}
-}
-
-/**
- * FileBackendStore helper class for performing asynchronous file operations.
- *
- * For example, calling FileBackendStore::createInternal() with the "async"
- * param flag may result in a StatusValue that contains this object as a value.
- * This class is largely backend-specific and is mostly just "magic" to be
- * passed to FileBackendStore::executeOpHandlesInternal().
- */
-abstract class FileBackendStoreOpHandle {
-	/** @var array */
-	public $params = []; // params to caller functions
-	/** @var FileBackendStore */
-	public $backend;
-	/** @var array */
-	public $resourcesToClose = [];
-
-	public $call; // string; name that identifies the function called
-
-	/**
-	 * Close all open file handles
-	 */
-	public function closeResources() {
-		array_map( 'fclose', $this->resourcesToClose );
-	}
-}
-
-/**
- * FileBackendStore helper function to handle listings that span container shards.
- * Do not use this class from places outside of FileBackendStore.
- *
- * @ingroup FileBackend
- */
-abstract class FileBackendStoreShardListIterator extends FilterIterator {
-	/** @var FileBackendStore */
-	protected $backend;
-
-	/** @var array */
-	protected $params;
-
-	/** @var string Full container name */
-	protected $container;
-
-	/** @var string Resolved relative path */
-	protected $directory;
-
-	/** @var array */
-	protected $multiShardPaths = []; // (rel path => 1)
-
-	/**
-	 * @param FileBackendStore $backend
-	 * @param string $container Full storage container name
-	 * @param string $dir Storage directory relative to container
-	 * @param array $suffixes List of container shard suffixes
-	 * @param array $params
-	 */
-	public function __construct(
-		FileBackendStore $backend, $container, $dir, array $suffixes, array $params
-	) {
-		$this->backend = $backend;
-		$this->container = $container;
-		$this->directory = $dir;
-		$this->params = $params;
-
-		$iter = new AppendIterator();
-		foreach ( $suffixes as $suffix ) {
-			$iter->append( $this->listFromShard( $this->container . $suffix ) );
-		}
-
-		parent::__construct( $iter );
-	}
-
-	public function accept() {
-		$rel = $this->getInnerIterator()->current(); // path relative to given directory
-		$path = $this->params['dir'] . "/{$rel}"; // full storage path
-		if ( $this->backend->isSingleShardPathInternal( $path ) ) {
-			return true; // path is only on one shard; no issue with duplicates
-		} elseif ( isset( $this->multiShardPaths[$rel] ) ) {
-			// Don't keep listing paths that are on multiple shards
-			return false;
-		} else {
-			$this->multiShardPaths[$rel] = 1;
-
-			return true;
-		}
-	}
-
-	public function rewind() {
-		parent::rewind();
-		$this->multiShardPaths = [];
-	}
-
-	/**
-	 * Get the list for a given container shard
-	 *
-	 * @param string $container Resolved container name
-	 * @return Iterator
-	 */
-	abstract protected function listFromShard( $container );
-}
-
-/**
- * Iterator for listing directories
- */
-class FileBackendStoreShardDirIterator extends FileBackendStoreShardListIterator {
-	protected function listFromShard( $container ) {
-		$list = $this->backend->getDirectoryListInternal(
-			$container, $this->directory, $this->params );
-		if ( $list === null ) {
-			return new ArrayIterator( [] );
-		} else {
-			return is_array( $list ) ? new ArrayIterator( $list ) : $list;
-		}
-	}
-}
-
-/**
- * Iterator for listing regular files
- */
-class FileBackendStoreShardFileIterator extends FileBackendStoreShardListIterator {
-	protected function listFromShard( $container ) {
-		$list = $this->backend->getFileListInternal(
-			$container, $this->directory, $this->params );
-		if ( $list === null ) {
-			return new ArrayIterator( [] );
-		} else {
-			return is_array( $list ) ? new ArrayIterator( $list ) : $list;
-		}
 	}
 }

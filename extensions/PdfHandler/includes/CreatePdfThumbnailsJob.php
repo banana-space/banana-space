@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class CreatePdfThumbnailsJob extends Job {
 	/**
 	 * Flags for thumbnail jobs
@@ -32,7 +34,8 @@ class CreatePdfThumbnailsJob extends Job {
 			return true; // no page set? that should never happen
 		}
 
-		$file = wfLocalFile( $this->title ); // we just want a local file
+		$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
+			->newFile( $this->title ); // we just want a local file
 		if ( !$file ) {
 			return true; // Just silently fail, perhaps the file was already deleted, don't bother
 		}
@@ -104,7 +107,7 @@ class CreatePdfThumbnailsJob extends Job {
 
 		$title = $upload->getTitle();
 		$uploadFile = $upload->getLocalFile();
-		if ( is_null( $uploadFile ) ) {
+		if ( $uploadFile === null ) {
 			wfDebugLog( 'thumbnails', '$uploadFile seems to be null, should never happen...' );
 			return true; // should never happen, but it's better to be secure
 		}

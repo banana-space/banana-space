@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Hwboehm",
 			"Imre",
 			"MichaelFrey",
 			"Umherirrender"
@@ -11,6 +12,6 @@
 	"fancycaptcha-accountcreate": "Zum Schutz vor automatisierter Anlage von Benutzerkonten geben Sie bitte das folgende Wort in das Feld unten ein ([[Special:Captcha/help|Fragen oder Probleme?]]):",
 	"fancycaptcha-create": "Zur Erstellung der Seite geben Sie das folgende Wort in das Feld unten ein [[Special:Captcha/help|(Fragen oder Probleme?)]].",
 	"fancycaptcha-edit": "Zur Bearbeitung der Seite geben Sie das folgende Wort in das Feld unten ein [[Special:Captcha/help|(Fragen oder Probleme?)]].",
-	"fancycaptcha-imgcaptcha-ph": "Geben Sie den Text ein, den Sie oben sehen.",
+	"fancycaptcha-imgcaptcha-ph": "Geben Sie den Text ein, den Sie auf dem Bild sehen.",
 	"fancycaptcha-sendemail": "Um gegen automatischen Spam vorzugehen, geben Sie bitte die Wörter unten in das Feld ein ([[Special:Captcha/help|mehr Informationen]]):"
 }

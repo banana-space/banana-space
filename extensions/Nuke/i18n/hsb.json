@@ -16,7 +16,6 @@
 	"nuke-submit-user": "W porjadku",
 	"nuke-submit-delete": "Wušmórnyć",
 	"right-nuke": "Masowe zničenje stronow",
-	"nuke-select": "Wubrać: $1",
 	"nuke-userorip": "Wužiwar, IP abo prózdny:",
 	"nuke-maxpages": "Maksimalna ličba stronow:",
 	"nuke-editby": "Wutworjeny wot [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",

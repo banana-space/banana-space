@@ -1,12 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Iltever",
-			"Ernác"
+			"Ernác",
+			"Iltever"
 		]
 	},
-	"multimediaviewer-pref": "Медиа-къаратыучу",
-	"multimediaviewer-pref-desc": "Мультимедиа-файллагъа къарауну джангы адыр бла игилендиреди. Суратны эскизи кёрюннген бетде эскизлени уллу суратлача кёргюзеди. Суратла андан да ариу толуэкранлы интерфейсде кёрюнедиле эмда оригинал разрешениесинде ачылыргъа боллукъдула.",
 	"multimediaviewer-optin-pref": "<span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Медиа-къараучуну]</span> джандыр",
 	"multimediaviewer-optout-mmv": "Медиа-къараучуну джукълатыу",
 	"multimediaviewer-optin-mmv": "Медиа-къараучуну джандыр",

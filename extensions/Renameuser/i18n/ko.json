@@ -5,14 +5,15 @@
 			"Ficell",
 			"Klutzy",
 			"Kwj2772",
+			"Revi",
 			"ToePeu",
-			"아라",
-			"Revi"
+			"Ykhwong",
+			"아라"
 		]
 	},
 	"renameuser": "사용자 이름 바꾸기",
-	"renameuser-linkoncontribs": "이름 바꾸기",
-	"renameuser-linkoncontribs-text": "이 사용자의 계정 이름을 바꿉니다",
+	"renameuser-linkoncontribs": "{{GENDER:$1|사용자}} 이름 바꾸기",
+	"renameuser-linkoncontribs-text": "이 {{GENDER:$1|사용자}}의 이름을 바꿉니다",
 	"renameuser-desc": "사용자 이름을 바꾸기 위한 [[Special:RenameUser|특수 문서]]를 추가합니다 ('''renameuser''' 권한 필요)",
 	"renameuserold": "기존 사용자 이름:",
 	"renameusernew": "새 사용자 이름:",

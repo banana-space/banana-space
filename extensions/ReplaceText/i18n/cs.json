@@ -3,12 +3,13 @@
 		"authors": [
 			"Chmee2",
 			"Hypothalamus",
+			"Ilimanaq29",
 			"Matěj Grabovský",
+			"Matěj Suchánek",
 			"Mormegil",
 			"Paxt",
-			"Vks",
-			"Ilimanaq29",
-			"Matěj Suchánek"
+			"Slepi",
+			"Vks"
 		]
 	},
 	"replacetext": "Nahradit text",
@@ -42,6 +43,7 @@
 	"replacetext_warning": "'''Upozornění:''' {{PLURAL:$1|Existuje jedna strana již obsahující|Existují $1 stránky již obsahující|Existuje $1 stránek již obsahujících}} náhradní řetězec „$2“. Pokud provedete toto nahrazení, nebudete moci rozlišit své náhradní řetězce od původních řetězců.",
 	"replacetext_blankwarning": "'''Upozornění:''' Protože náhradní řetězec je prázdný, tato operace nebude vratná.",
 	"replacetext_continue": "Pokračovat",
+	"replacetext_announce": "Zobrazit tyto editace na $1 a v seznamech sledovaných stránek",
 	"replacetext_editsummary": "Nahrazení textu „$1“ textem „$2“",
 	"right-replacetext": "Hledání a nahrazování textu na celé wiki",
 	"action-replacetext": "nahrazovat text na celé wiki",

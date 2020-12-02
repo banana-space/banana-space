@@ -12,9 +12,7 @@
 	"fancycaptcha-accountcreate": "Kanggo ngreksa wiki saka panggawé akun otomatis, tulung tembung sing katon ana ngisor iki panjenengan tulisaké ing kothak ngisor iki ([[Special:Captcha/help|katerangan candhaké]]):",
 	"fancycaptcha-create": "Suntingan panjenengan ngandhut pranala jaba anyar. Kanggo nggawé kaca iki, mangga isèkna tembung-tembung sing ana ing kothak iki ([[Special:Captcha/help|info jangkep]]):",
 	"fancycaptcha-edit": "Suntingan panjenengan ngandhut pranala jaba anyar. Kanggo nyunting kaca iki, mangga isèkna tembung-tembung sing ana ing kothak iki ([[Special:Captcha/help|info jangkep]]):",
-	"fancycaptcha-imgcaptcha-ph": "Isi tèks sing panjenengan deleng ing gambar",
+	"fancycaptcha-imgcaptcha-ph": "Lebokaké tulisan kang panjenengan deleng ing gambar",
 	"fancycaptcha-sendemail": "Kanggo ngreksa lawan spam otomatis, tulung lebokna ukara ing ngisor iki menyang sajroning kothak sing wis sumedya ([[Special:Captcha/help|info sabanjuré]]):",
-	"fancycaptcha-reload-text": "Anyarana",
-	"apihelp-fancycaptchareload-description": "Golèk FancyCaptcha anyar.",
-	"apihelp-fancycaptchareload-example-1": "Golèk FancyCaptcha anyar"
+	"fancycaptcha-reload-text": "Anyarana"
 }

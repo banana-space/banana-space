@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ammarpad",
 			"DonCamillo"
 		]
 	},
+	"vector-action-addsection": "Sabon sashe",
 	"vector-action-delete": "Soke",
 	"vector-action-move": "Gusarwa",
 	"vector-action-protect": "A kare",

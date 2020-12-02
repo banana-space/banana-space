@@ -1,7 +1,7 @@
 ace.define("ace/ext/statusbar",["require","exports","module","ace/lib/dom","ace/lib/lang"], function(require, exports, module) {
 "use strict";
-var dom = require("ace/lib/dom");
-var lang = require("ace/lib/lang");
+var dom = require("../lib/dom");
+var lang = require("../lib/lang");
 
 var StatusBar = function(editor, parentNode) {
     this.element = dom.createElement("div");
@@ -10,7 +10,7 @@ var StatusBar = function(editor, parentNode) {
     parentNode.appendChild(this.element);
 
     var statusUpdate = lang.delayedCall(function(){
-        this.updateStatus(editor)
+        this.updateStatus(editor);
     }.bind(this)).schedule.bind(null, 100);
     
     editor.on("changeStatus", statusUpdate);
@@ -46,8 +46,11 @@ var StatusBar = function(editor, parentNode) {
 
 exports.StatusBar = StatusBar;
 
-});
-                (function() {
-                    ace.require(["ace/ext/statusbar"], function() {});
+});                (function() {
+                    ace.require(["ace/ext/statusbar"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
                 })();
             

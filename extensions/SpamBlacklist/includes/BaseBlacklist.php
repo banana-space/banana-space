@@ -1,5 +1,8 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Storage\SlotRecord;
+
 /**
  * Base class for different kinds of blacklists
  */
@@ -57,7 +60,7 @@ abstract class BaseBlacklist {
 	 *
 	 * @param array $settings
 	 */
-	function __construct( $settings = [] ) {
+	public function __construct( $settings = [] ) {
 		foreach ( $settings as $name => $value ) {
 			$this->$name = $value;
 		}
@@ -65,11 +68,11 @@ abstract class BaseBlacklist {
 
 	/**
 	 * @param array $links
-	 * @param Title $title
+	 * @param ?Title $title
 	 * @param bool $preventLog
 	 * @return mixed
 	 */
-	abstract public function filter( array $links, Title $title, $preventLog = false );
+	abstract public function filter( array $links, ?Title $title, $preventLog = false );
 
 	/**
 	 * Adds a blacklist class to the registry
@@ -148,14 +151,12 @@ abstract class BaseBlacklist {
 	public static function isLocalSource( Title $title ) {
 		global $wgDBname, $wgBlacklistSettings;
 
-		if ( $title->getNamespace() == NS_MEDIAWIKI ) {
+		if ( $title->inNamespace( NS_MEDIAWIKI ) ) {
 			$sources = [];
 			foreach ( self::$blacklistTypes as $type => $class ) {
 				$type = ucfirst( $type );
-				$sources += [
-					"$type-blacklist",
-					"$type-whitelist"
-				];
+				$sources[] = "$type-blacklist";
+				$sources[] = "$type-whitelist";
 			}
 
 			if ( in_array( $title->getDBkey(), $sources ) ) {
@@ -176,8 +177,8 @@ abstract class BaseBlacklist {
 		foreach ( $files as $fileName ) {
 			$matches = [];
 			if ( preg_match( '/^DB: (\w*) (.*)$/', $fileName, $matches ) ) {
-				if ( $wgDBname == $matches[1] ) {
-					if ( $matches[2] == $title->getPrefixedDbKey() ) {
+				if ( $wgDBname === $matches[1] ) {
+					if ( $matches[2] === $title->getPrefixedDbKey() ) {
 						// Local DB fetch of this page...
 						return true;
 					}
@@ -199,10 +200,10 @@ abstract class BaseBlacklist {
 	 * @return bool|string
 	 */
 	public static function getTypeFromTitle( Title $title ) {
-		global $wgContLang;
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 
-		$types = array_map( [ $wgContLang, 'ucfirst' ], array_keys( self::$blacklistTypes ) );
-		$regex = '/(' . implode( '|', $types ).  ')-(?:blacklist|whitelist)/';
+		$types = array_map( [ $contLang, 'ucfirst' ], array_keys( self::$blacklistTypes ) );
+		$regex = '/(' . implode( '|', $types ) . ')-(?:blacklist|whitelist)/';
 
 		if ( preg_match( $regex, $title->getDBkey(), $m ) ) {
 			return strtolower( $m[1] );
@@ -216,11 +217,12 @@ abstract class BaseBlacklist {
 	 * Will be cached locally across multiple invocations.
 	 * @return array set of regular expressions, potentially empty.
 	 */
-	function getBlacklists() {
+	public function getBlacklists() {
 		if ( $this->regexes === false ) {
 			$this->regexes = array_merge(
 				$this->getLocalBlacklists(),
-				$this->getSharedBlacklists() );
+				$this->getSharedBlacklists()
+			);
 		}
 		return $this->regexes;
 	}
@@ -233,9 +235,10 @@ abstract class BaseBlacklist {
 	public function getLocalBlacklists() {
 		$that = $this;
 		$type = $this->getBlacklistType();
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 
-		return ObjectCache::getMainWANInstance()->getWithSetCallback(
-			wfMemcKey( 'spamblacklist', $type, 'blacklist-regex' ),
+		return $cache->getWithSetCallback(
+			$cache->makeKey( 'spamblacklist', $type, 'blacklist-regex' ),
 			$this->expiryTime,
 			function () use ( $that, $type ) {
 				return SpamRegexBatch::regexesFromMessage( "{$type}-blacklist", $that );
@@ -251,9 +254,10 @@ abstract class BaseBlacklist {
 	public function getWhitelists() {
 		$that = $this;
 		$type = $this->getBlacklistType();
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 
-		return ObjectCache::getMainWANInstance()->getWithSetCallback(
-			wfMemcKey( 'spamblacklist', $type, 'whitelist-regex' ),
+		return $cache->getWithSetCallback(
+			$cache->makeKey( 'spamblacklist', $type, 'whitelist-regex' ),
 			$this->expiryTime,
 			function () use ( $that, $type ) {
 				return SpamRegexBatch::regexesFromMessage( "{$type}-whitelist", $that );
@@ -265,12 +269,12 @@ abstract class BaseBlacklist {
 	 * Fetch (possibly cached) remote blacklists.
 	 * @return array
 	 */
-	function getSharedBlacklists() {
+	private function getSharedBlacklists() {
 		$listType = $this->getBlacklistType();
 
 		wfDebugLog( 'SpamBlacklist', "Loading $listType regex..." );
 
-		if ( count( $this->files ) == 0 ) {
+		if ( !$this->files ) {
 			# No lists
 			wfDebugLog( 'SpamBlacklist', "no files specified\n" );
 			return [];
@@ -279,10 +283,11 @@ abstract class BaseBlacklist {
 		$miss = false;
 
 		$that = $this;
-		$regexes = ObjectCache::getMainWANInstance()->getWithSetCallback(
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$regexes = $cache->getWithSetCallback(
 			// This used to be cached per-site, but that could be bad on a shared
 			// server where not all wikis have the same configuration.
-			wfMemcKey( 'spamblacklist', $listType, 'shared-blacklist-regex' ),
+			$cache->makeKey( 'spamblacklist', $listType, 'shared-blacklist-regex' ),
 			$this->expiryTime,
 			function () use ( $that, &$miss ) {
 				$miss = true;
@@ -299,21 +304,19 @@ abstract class BaseBlacklist {
 
 	/**
 	 * Clear all primary blacklist cache keys
-	 *
-	 * @note: this method is unused atm
 	 */
-	function clearCache() {
+	public function clearCache() {
 		$listType = $this->getBlacklistType();
 
-		$cache = ObjectCache::getMainWANInstance();
-		$cache->delete( wfMemcKey( 'spamblacklist', $listType, 'shared-blacklist-regex' ) );
-		$cache->delete( wfMemcKey( 'spamblacklist', $listType, 'blacklist-regex' ) );
-		$cache->delete( wfMemcKey( 'spamblacklist', $listType, 'whitelist-regex' ) );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$cache->delete( $cache->makeKey( 'spamblacklist', $listType, 'shared-blacklist-regex' ) );
+		$cache->delete( $cache->makeKey( 'spamblacklist', $listType, 'blacklist-regex' ) );
+		$cache->delete( $cache->makeKey( 'spamblacklist', $listType, 'whitelist-regex' ) );
 
 		wfDebugLog( 'SpamBlacklist', "$listType blacklist local cache cleared.\n" );
 	}
 
-	function buildSharedBlacklists() {
+	private function buildSharedBlacklists() {
 		$regexes = [];
 		$listType = $this->getBlacklistType();
 		# Load lists
@@ -329,33 +332,37 @@ abstract class BaseBlacklist {
 				wfDebugLog( 'SpamBlacklist', "got from file $fileName\n" );
 			}
 
-			// Build a separate batch of regexes from each source.
-			// While in theory we could squeeze a little efficiency
-			// out of combining multiple sources in one regex, if
-			// there's a bad line in one of them we'll gain more
-			// from only having to break that set into smaller pieces.
-			$regexes = array_merge( $regexes,
-				SpamRegexBatch::regexesFromText( $text, $this, $fileName ) );
+			if ( $text ) {
+				// Build a separate batch of regexes from each source.
+				// While in theory we could squeeze a little efficiency
+				// out of combining multiple sources in one regex, if
+				// there's a bad line in one of them we'll gain more
+				// from only having to break that set into smaller pieces.
+				$regexes = array_merge(
+					$regexes,
+					SpamRegexBatch::regexesFromText( $text, $this, $fileName )
+				);
+			}
 		}
 
 		return $regexes;
 	}
 
-	function getHttpText( $fileName ) {
-		global $wgDBname, $messageMemc;
-		$listType = $this->getBlacklistType();
+	private function getHttpText( $fileName ) {
+		global $wgMessageCacheType;
+		// FIXME: This is a hack to use Memcached where possible (incl. WMF),
+		// but have CACHE_DB as fallback (instead of no cache).
+		// This might be a good candidate for T248005.
+		$cache = ObjectCache::getInstance( $wgMessageCacheType );
 
-		# HTTP request
-		# To keep requests to a minimum, we save results into $messageMemc, which is
-		# similar to $wgMemc except almost certain to exist. By default, it is stored
-		# in the database
-		# There are two keys, when the warning key expires, a random thread will refresh
-		# the real key. This reduces the chance of multiple requests under high traffic
-		# conditions.
-		$key = "{$listType}_blacklist_file:$fileName";
-		$warningKey = "$wgDBname:{$listType}filewarning:$fileName";
-		$httpText = $messageMemc->get( $key );
-		$warning = $messageMemc->get( $warningKey );
+		$listType = $this->getBlacklistType();
+		// There are two keys, when the warning key expires, a random thread will refresh
+		// the real key. This reduces the chance of multiple requests under high traffic
+		// conditions.
+		$key = $cache->makeGlobalKey( "blacklist_file_{$listType}", $fileName );
+		$warningKey = $cache->makeKey( "filewarning_{$listType}", $fileName );
+		$httpText = $cache->get( $key );
+		$warning = $cache->get( $warningKey );
 
 		if ( !is_string( $httpText ) || ( !$warning && !mt_rand( 0, $this->warningChance ) ) ) {
 			wfDebugLog( 'SpamBlacklist', "Loading $listType blacklist from $fileName\n" );
@@ -363,8 +370,8 @@ abstract class BaseBlacklist {
 			if ( $httpText === false ) {
 				wfDebugLog( 'SpamBlacklist', "Error loading $listType blacklist from $fileName\n" );
 			}
-			$messageMemc->set( $warningKey, 1, $this->warningTime );
-			$messageMemc->set( $key, $httpText, $this->expiryTime );
+			$cache->set( $warningKey, 1, $this->warningTime );
+			$cache->set( $key, $httpText, $this->expiryTime );
 		} else {
 			wfDebugLog( 'SpamBlacklist', "Got $listType blacklist from HTTP cache for $fileName\n" );
 		}
@@ -373,50 +380,29 @@ abstract class BaseBlacklist {
 
 	/**
 	 * Fetch an article from this or another local MediaWiki database.
-	 * This is probably *very* fragile, and shouldn't be used perhaps.
 	 *
 	 * @param string $wiki
-	 * @param string $article
-	 * @return string
+	 * @param string $pagename
+	 * @return bool|string|null
 	 */
-	function getArticleText( $wiki, $article ) {
+	private function getArticleText( $wiki, $pagename ) {
 		wfDebugLog( 'SpamBlacklist',
-			"Fetching {$this->getBlacklistType()} blacklist from '$article' on '$wiki'...\n" );
+			"Fetching {$this->getBlacklistType()} blacklist from '$pagename' on '$wiki'...\n" );
 
-		$title = Title::newFromText( $article );
-		// Load all the relevant tables from the correct DB.
-		// This assumes that old_text is the actual text or
-		// that the external store system is at least unified.
-		if ( is_callable( [ Revision::class, 'getQueryInfo' ] ) ) {
-			$revQuery = Revision::getQueryInfo( [ 'page', 'text' ] );
-		} else {
-			$revQuery = [
-				'tables' => [ 'revision', 'page', 'text' ],
-				'fields' => array_merge(
-					Revision::selectFields(),
-					Revision::selectPageFields(),
-					Revision::selectTextFields()
-				),
-				'joins' => [
-					'text' => [ 'JOIN', 'old_id=rev_text_id' ]
-				],
-			];
+		$services = MediaWikiServices::getInstance();
+
+		// XXX: We do not know about custom namespaces on the target wiki here!
+		$title = $services->getTitleParser()->parseTitle( $pagename );
+		$store = $services->getRevisionStoreFactory()->getRevisionStore( $wiki );
+		$rev = $store->getRevisionByTitle( $title );
+
+		$content = $rev ? $rev->getContent( SlotRecord::MAIN ) : null;
+
+		if ( !( $content instanceof TextContent ) ) {
+			return false;
 		}
-		$row = wfGetDB( DB_REPLICA, [], $wiki )->selectRow(
-			$revQuery['tables'],
-			$revQuery['fields'],
-			[
-				'page_namespace' => $title->getNamespace(), // assume NS IDs match
-				'page_title' => $title->getDBkey(), // assume same case rules
-			],
-			__METHOD__,
-			[],
-			[ 'page' => [ 'JOIN', 'rev_id=page_latest' ] ] + $revQuery['joins']
-		);
 
-		return $row
-			? ContentHandler::getContentText( Revision::newFromRow( $row )->getContent() )
-			: false;
+		return $content->getText();
 	}
 
 	/**

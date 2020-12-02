@@ -3,9 +3,9 @@
 		"authors": [
 			"Eitvys200",
 			"Homo",
+			"Manvydasz",
 			"Matasg",
-			"Pofka",
-			"Manvydasz"
+			"Pofka"
 		]
 	},
 	"nuke": "Masinis trynimas",
@@ -16,10 +16,8 @@
 	"nuke-multiplepeople": "Masinis neseniai sukurtų puslapių trynimas",
 	"nuke-tools": "Šis įrankis leidžia masiškai ištrinti puslapius, neseniai sukurtus nurodyto naudotojo ar IP.\nĮrašykite naudotojo vardą ar IP adresą, kad gautumėte trintinų puslapių sąrašą.",
 	"nuke-submit-user": "Puslapių sąrašas",
-	"nuke-toggleinvert": "Invertuoti",
 	"nuke-submit-delete": "Ištrinti pasirinktus(ą)",
 	"right-nuke": "Masinis puslapių trynėjas",
-	"nuke-select": "Pasirinkite: $1",
 	"nuke-userorip": "Vartotojo vardas, IP adresas arba tuščia:",
 	"nuke-maxpages": "Didžiausias puslapių skaičius:",
 	"nuke-editby": "Sukūrė [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",

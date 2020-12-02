@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fohanno",
+			"Fulup",
+			"Gwenn-Ael",
+			"Y-M D"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Gwelaozer]]",
+	"tag-visualeditor-wikitext": "Aozer kod 2017",
+	"visualeditor-feedback-tool": "Ober un evezhiadenn",
+	"visualeditor-help-label": "Lenn sturlevr an implijer",
+	"visualeditor-help-title": "Sturlevr an implijer war an doare da implijout an embanner",
+	"visualeditor-welcomedialog-action": "Kregiñ da gemmañ",
+	"visualeditor-welcomedialog-content": "An holl a c'hall kemmañ traoù ha kement gwellaenn zo a zo pouezus.",
+	"visualeditor-welcomedialog-content-thanks": "Trugarez vras deoc'h da harpañ ar bed da c'houzout hiroc'h !",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Degemer mat}} e $2"
+}

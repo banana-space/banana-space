@@ -31,10 +31,10 @@ class ApiManageTags extends ApiBase {
 
 		// make sure the user is allowed
 		if ( $params['operation'] !== 'delete'
-			&& !$this->getUser()->isAllowed( 'managechangetags' )
+			&& !$this->getPermissionManager()->userHasRight( $user, 'managechangetags' )
 		) {
 			$this->dieWithError( 'tags-manage-no-permission', 'permissiondenied' );
-		} elseif ( !$this->getUser()->isAllowed( 'deletechangetags' ) ) {
+		} elseif ( !$this->getPermissionManager()->userHasRight( $user, 'deletechangetags' ) ) {
 			$this->dieWithError( 'tags-delete-no-permission', 'permissiondenied' );
 		}
 
@@ -47,15 +47,27 @@ class ApiManageTags extends ApiBase {
 		}
 
 		$result = $this->getResult();
-		$funcName = "{$params['operation']}TagWithChecks";
-		$status = ChangeTags::$funcName(
-			$params['tag'],
-			$params['reason'],
-			$user,
-			$params['ignorewarnings'],
-			$params['tags'] ?: []
-		);
-
+		$tag = $params['tag'];
+		$reason = $params['reason'];
+		$ignoreWarnings = $params['ignorewarnings'];
+		$tags = $params['tags'] ?: [];
+		switch ( $params['operation'] ) {
+			case 'create':
+				$status = ChangeTags::createTagWithChecks( $tag, $reason, $user, $ignoreWarnings, $tags );
+				break;
+			case 'delete':
+				$status = ChangeTags::deleteTagWithChecks( $tag, $reason, $user, $ignoreWarnings, $tags );
+				break;
+			case 'activate':
+				$status = ChangeTags::activateTagWithChecks( $tag, $reason, $user, $ignoreWarnings, $tags );
+				break;
+			case 'deactivate':
+				$status = ChangeTags::deactivateTagWithChecks( $tag, $reason, $user, $ignoreWarnings, $tags );
+				break;
+			default:
+				// unreachable
+				throw new \UnexpectedValueException( 'invalid operation' );
+		}
 		if ( !$status->isOK() ) {
 			$this->dieStatus( $status );
 		}

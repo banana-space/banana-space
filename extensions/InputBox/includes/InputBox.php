@@ -6,6 +6,8 @@
  * @ingroup Extensions
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * InputBox class
  */
@@ -40,6 +42,7 @@ class InputBox {
 	private $mDir = '';
 	private $mSearchFilter = '';
 	private $mTour = '';
+	private $mTextBoxAriaLabel = '';
 
 	/* Functions */
 
@@ -116,7 +119,7 @@ class InputBox {
 	 * Get common classes, that could be added and depend on, if
 	 * a line break between a button and an input field is added or not.
 	 *
-	 * @return String
+	 * @return string
 	 */
 	private function getLinebreakClasses() {
 		return strtolower( $this->mBR ) === '<br />' ? 'mw-inputbox-input ' : '';
@@ -128,7 +131,7 @@ class InputBox {
 	 * @return string HTML
 	 */
 	public function getSearchForm( $type ) {
-		global $wgContLang, $wgNamespaceAliases;
+		global $wgNamespaceAliases;
 
 		// Use button label fallbacks
 		if ( !$this->mButtonLabel ) {
@@ -160,17 +163,16 @@ class InputBox {
 				'action' => SpecialPage::getTitleFor( 'Search' )->getLocalUrl(),
 			] + $idArray
 		);
-		$htmlOut .= Xml::element( 'input',
-			[
-				'class' => $this->getLinebreakClasses() . 'searchboxInput mw-ui-input mw-ui-input-inline',
-				'name' => 'search',
-				'type' => $this->mHidden ? 'hidden' : 'text',
-				'value' => $this->mDefaultText,
-				'placeholder' => $this->mPlaceholderText,
-				'size' => $this->mWidth,
-				'dir' => $this->mDir,
-			]
-		);
+
+		$htmlOut .= $this->buildTextBox( [
+			'class' => $this->getLinebreakClasses() . 'searchboxInput mw-ui-input mw-ui-input-inline',
+			'name' => 'search',
+			'type' => $this->mHidden ? 'hidden' : 'text',
+			'value' => $this->mDefaultText,
+			'placeholder' => $this->mPlaceholderText,
+			'size' => $this->mWidth,
+			'dir' => $this->mDir
+		] );
 
 		if ( $this->mPrefix != '' ) {
 			$htmlOut .= Html::hidden( 'prefix', $this->mPrefix );
@@ -189,8 +191,9 @@ class InputBox {
 		// Determine namespace checkboxes
 		$namespacesArray = explode( ',', $this->mNamespaces );
 		if ( $this->mNamespaces ) {
-			$namespaces = $wgContLang->getNamespaces();
-			$nsAliases = array_merge( $wgContLang->getNamespaceAliases(), $wgNamespaceAliases );
+			$contLang = MediaWikiServices::getInstance()->getContentLanguage();
+			$namespaces = $contLang->getNamespaces();
+			$nsAliases = array_merge( $contLang->getNamespaceAliases(), $wgNamespaceAliases );
 			$showNamespaces = [];
 			$checkedNS = [];
 			// Check for valid namespaces
@@ -266,7 +269,7 @@ class InputBox {
 					'value' => $this->mButtonLabel
 				]
 			);
-			$htmlOut .= '&#160;';
+			$htmlOut .= "\u{00A0}";
 		}
 
 		// Search button
@@ -331,17 +334,18 @@ class InputBox {
 			]
 		);
 		$htmlOut .= $htmlLabel;
-		$htmlOut .= Xml::element( 'input',
-			[
-				'type' => $this->mHidden ? 'hidden' : 'text',
-				'name' => 'search',
-				'class' => 'mw-ui-input mw-ui-input-inline',
-				'size' => $this->mWidth,
-				'id' => 'bodySearchInput' . $id,
-				'dir' => $this->mDir,
-			]
-		);
-		$htmlOut .= '&#160;' . Xml::element( 'input',
+
+		$htmlOut .= $this->buildTextBox( [
+			'type' => $this->mHidden ? 'hidden' : 'text',
+			'name' => 'search',
+			'class' => 'mw-ui-input mw-ui-input-inline',
+			'size' => $this->mWidth,
+			'id' => 'bodySearchInput' . $id,
+			'dir' => $this->mDir,
+			'placeholder' => $this->mPlaceholderText
+		] );
+
+		$htmlOut .= "\u{00A0}" . Xml::element( 'input',
 			[
 				'type' => 'submit',
 				'name' => 'go',
@@ -430,18 +434,18 @@ class InputBox {
 		if ( $this->mType == 'comment' ) {
 			$htmlOut .= Html::hidden( 'section', 'new' );
 		}
-		$htmlOut .= Xml::openElement( 'input',
-			[
-				'type' => $this->mHidden ? 'hidden' : 'text',
-				'name' => 'title',
-				'class' => $this->getLinebreakClasses() .
-					'mw-ui-input mw-ui-input-inline createboxInput',
-				'value' => $this->mDefaultText,
-				'placeholder' => $this->mPlaceholderText,
-				'size' => $this->mWidth,
-				'dir' => $this->mDir,
-			]
-		);
+
+		$htmlOut .= $this->buildTextBox( [
+			'type' => $this->mHidden ? 'hidden' : 'text',
+			'name' => 'title',
+			'class' => $this->getLinebreakClasses() .
+				'mw-ui-input mw-ui-input-inline createboxInput',
+			'value' => $this->mDefaultText,
+			'placeholder' => $this->mPlaceholderText,
+			'size' => $this->mWidth,
+			'dir' => $this->mDir
+		] );
+
 		$htmlOut .= $this->mBR;
 		$htmlOut .= Xml::openElement( 'input',
 			[
@@ -489,17 +493,17 @@ class InputBox {
 			SpecialPage::getTitleFor( 'Movepage', $this->mPage )->getPrefixedText() );
 		$htmlOut .= Html::hidden( 'wpReason', $this->mSummary );
 		$htmlOut .= Html::hidden( 'prefix', $this->mPrefix );
-		$htmlOut .= Xml::openElement( 'input',
-			[
-				'type' => $this->mHidden ? 'hidden' : 'text',
-				'name' => 'wpNewTitle',
-				'class' => $this->getLinebreakClasses() . 'mw-moveboxInput mw-ui-input mw-ui-input-inline',
-				'value' => $this->mDefaultText,
-				'placeholder' => $this->mPlaceholderText,
-				'size' => $this->mWidth,
-				'dir' => $this->mDir,
-			]
-		);
+
+		$htmlOut .= $this->buildTextBox( [
+			'type' => $this->mHidden ? 'hidden' : 'text',
+			'name' => 'wpNewTitle',
+			'class' => $this->getLinebreakClasses() . 'mw-moveboxInput mw-ui-input mw-ui-input-inline',
+			'value' => $this->mDefaultText,
+			'placeholder' => $this->mPlaceholderText,
+			'size' => $this->mWidth,
+			'dir' => $this->mDir
+		] );
+
 		$htmlOut .= $this->mBR;
 		$htmlOut .= Xml::openElement( 'input',
 			[
@@ -555,17 +559,17 @@ class InputBox {
 		if ( $this->mEditIntro !== null ) {
 			$htmlOut .= Html::hidden( 'editintro', $this->mEditIntro );
 		}
-		$htmlOut .= Xml::openElement( 'input',
-			[
-				'type' => $this->mHidden ? 'hidden' : 'text',
-				'name' => 'preloadtitle',
-				'class' => $this->getLinebreakClasses() . 'commentboxInput mw-ui-input mw-ui-input-inline',
-				'value' => $this->mDefaultText,
-				'placeholder' => $this->mPlaceholderText,
-				'size' => $this->mWidth,
-				'dir' => $this->mDir,
-			]
-		);
+
+		$htmlOut .= $this->buildTextBox( [
+			'type' => $this->mHidden ? 'hidden' : 'text',
+			'name' => 'preloadtitle',
+			'class' => $this->getLinebreakClasses() . 'commentboxInput mw-ui-input mw-ui-input-inline',
+			'value' => $this->mDefaultText,
+			'placeholder' => $this->mPlaceholderText,
+			'size' => $this->mWidth,
+			'dir' => $this->mDir
+		] );
+
 		$htmlOut .= Html::hidden( 'section', 'new' );
 		$htmlOut .= Html::hidden( 'title', $this->mPage );
 		$htmlOut .= $this->mBR;
@@ -638,14 +642,16 @@ class InputBox {
 			'prefix' => 'mPrefix',
 			'dir' => 'mDir',
 			'searchfilter' => 'mSearchFilter',
-			'tour' => 'mTour'
+			'tour' => 'mTour',
+			'arialabel' => 'mTextBoxAriaLabel'
 		];
 		// Options we should maybe run through lang converter.
 		$convertOptions = [
 			'default' => true,
 			'buttonlabel' => true,
 			'searchbuttonlabel' => true,
-			'placeholder' => true
+			'placeholder' => true,
+			'arialabel' => true
 		];
 		foreach ( $options as $name => $var ) {
 			if ( isset( $values[$name] ) ) {
@@ -688,6 +694,19 @@ REGEX;
 		return (bool)preg_match( $regex, $color );
 	}
 
+	/**
+	 * Factory method to help build the textbox widget
+	 * @param array $defaultAttr
+	 * @return string
+	 */
+	private function buildTextBox( $defaultAttr ) {
+		if ( $this->mTextBoxAriaLabel ) {
+			$defaultAttr[ 'aria-label' ] = $this->mTextBoxAriaLabel;
+		}
+
+		return Xml::openElement( 'input', $defaultAttr );
+	}
+
 	private function bgColorStyle() {
 		if ( $this->mBGColor != 'transparent' ) {
 			return 'background-color: ' . $this->mBGColor . ';';
@@ -718,9 +737,11 @@ REGEX;
 	 * accidental behaviour.
 	 *
 	 * @see https://phabricator.wikimedia.org/T180485
+	 * @param string $text
+	 * @return string
 	 */
 	private function languageConvert( $text ) {
-		$lang = $this->mParser->getConverterLanguage();
+		$lang = $this->mParser->getTargetLanguage();
 		if ( $lang->hasVariants() && strpos( $text, '-{' ) !== false ) {
 			$text = $lang->convert( $text );
 		}

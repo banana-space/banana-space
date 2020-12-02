@@ -1,15 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sujiniku",
+			"Aefgh39622",
+			"Ochaochaocha3",
 			"Otokoume",
+			"Sujiniku",
 			"Whym",
 			"Yusuke1109"
 		]
 	},
-	"timeless-desc": "Brandon HarrisによるWinterプロトタイプの後にデザインされたTimelessテーマ。ウィキメディア財団のさまざまなスタイル。",
-	"timeless-search-placeholder": "{{NUMBEROFARTICLES}}件のページから検索",
-	"timeless-loggedin": "あなたのアカウント",
+	"timeless-desc": "Brandon Harris による Winter というプロトタイプやウィキメディア財団によるさまざまなスタイルを基にしてデザインされた不朽 (timeless) の外装。",
 	"timeless-anonymous": "匿名",
 	"timeless-loggedinas": "'''$1''' としてログインしています",
 	"timeless-notloggedin": "ログインしていません",
@@ -20,9 +20,12 @@
 	"timeless-sitetools": "ウィキツール",
 	"timeless-pageactions": "ページツール",
 	"timeless-userpagetools": "利用者ページツール",
+	"timeless-action-addsection": "新しい話題",
+	"timeless-view-view": "閲覧",
 	"timeless-pagemisc": "その他",
 	"timeless-namespaces": "名前空間",
 	"timeless-pagetools": "ページアクション",
 	"timeless-languages": "言語",
+	"timeless-projects": "他プロジェクト",
 	"timeless.js": "/* ここにあるすべてのJavaScriptは、Timeless外装を使用している利用者に対して読み込まれます */"
 }

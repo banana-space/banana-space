@@ -2,8 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Albinus",
+			"Fagunkoyel Hansdah",
 			"Manik Soren"
 		]
 	},
-	"cite_error": "ᱥᱟᱭᱤᱴ ᱵᱷᱩᱞ:$1"
+	"cite_error": "ᱛᱩᱢᱟᱹᱞ ᱦᱩᱲᱟᱹᱜ:$1",
+	"cite_warning": "ᱛᱩᱢᱟᱹᱞ ᱦᱩᱥᱭᱟᱹᱨ: $1"
 }

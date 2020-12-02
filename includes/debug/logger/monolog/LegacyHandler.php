@@ -27,7 +27,7 @@ use Monolog\Logger;
 use UnexpectedValueException;
 
 /**
- * Log handler that replicates the behavior of MediaWiki's wfErrorLog()
+ * Log handler that replicates the behavior of MediaWiki's former wfErrorLog()
  * logging service. Log output can be directed to a local file, a PHP stream,
  * or a udp2log server.
  *
@@ -50,39 +50,39 @@ class LegacyHandler extends AbstractProcessingHandler {
 
 	/**
 	 * Log sink descriptor
-	 * @var string $uri
+	 * @var string
 	 */
 	protected $uri;
 
 	/**
 	 * Filter log events using legacy rules
-	 * @var bool $useLegacyFilter
+	 * @var bool
 	 */
 	protected $useLegacyFilter;
 
 	/**
 	 * Log sink
-	 * @var resource $sink
+	 * @var resource
 	 */
 	protected $sink;
 
 	/**
-	 * @var string $error
+	 * @var string
 	 */
 	protected $error;
 
 	/**
-	 * @var string $host
+	 * @var string
 	 */
 	protected $host;
 
 	/**
-	 * @var int $port
+	 * @var int
 	 */
 	protected $port;
 
 	/**
-	 * @var string $prefix
+	 * @var string
 	 */
 	protected $prefix;
 

@@ -1,11 +1,13 @@
 <?php
 
+use Wikimedia\TestingAccessWrapper;
+
 /**
  * @group Media
  */
 class FormatMetadataTest extends MediaWikiMediaTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->checkPHPExtension( 'exif' );
@@ -31,7 +33,7 @@ class FormatMetadataTest extends MediaWikiMediaTestCase {
 			}
 		}
 		$this->assertNotNull( $dateIndex, 'Date entry exists in metadata' );
-		$this->assertEquals( '0000:01:00 00:02:27',
+		$this->assertSame( '0000:01:00 00:02:27',
 			$meta['visible'][$dateIndex]['value'],
 			'File with invalid date metadata (T31471)' );
 	}
@@ -126,10 +128,10 @@ class FormatMetadataTest extends MediaWikiMediaTestCase {
 			],
 			[
 				[ 'Software' => [ 'x-default' => 'paint.net 4.0.12', '_type' => 'lang' ] ],
-				[ 'Software' => '<ul class="metadata-langlist">'.
-						'<li class="mw-metadata-lang-default">'.
-							'<span class="mw-metadata-lang-value">paint.net 4.0.12</span>'.
-						"</li>\n".
+				[ 'Software' => '<ul class="metadata-langlist">' .
+						'<li class="mw-metadata-lang-default">' .
+							'<span class="mw-metadata-lang-value">paint.net 4.0.12</span>' .
+						"</li>\n" .
 					'</ul>'
 				],
 			],
@@ -138,6 +140,41 @@ class FormatMetadataTest extends MediaWikiMediaTestCase {
 				// WebMHandler.php turns both 'muxingapp' & 'writingapp' to 'Software'
 				[ 'Software' => [ [ 'Lavf57.25.100' ], [ 'Lavf57.25.100' ] ] ],
 				[ 'Software' => "<ul><li>Lavf57.25.100</li>\n<li>Lavf57.25.100</li></ul>" ],
+			],
+		];
+	}
+
+	/**
+	 * @covers FormatMetadata::getPriorityLanguages
+	 * @dataProvider provideGetPriorityLanguagesData
+	 * @param string $languageClass
+	 * @param string[] $expected
+	 */
+	public function testGetPriorityLanguagesInternal_language_expect(
+		string $languageClass,
+		array $expected
+	): void {
+		$formatMetadata = TestingAccessWrapper::newFromObject( new FormatMetadata() );
+		$context = $formatMetadata->getContext();
+		$context->setLanguage( new $languageClass() );
+
+		$x = $formatMetadata->getPriorityLanguages();
+		$this->assertSame( $expected, $x );
+	}
+
+	public function provideGetPriorityLanguagesData() {
+		return [
+			'LanguageMl' => [
+				LanguageMl::class,
+				[ 'ml', 'en' ],
+			],
+			'LanguageEn' => [
+				LanguageEn::class,
+				[ 'en', 'en' ],
+			],
+			'LanguageQqx' => [
+				LanguageQqx::class,
+				[ 'qqx', 'en' ],
 			],
 		];
 	}

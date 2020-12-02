@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Chris TR",
 			"Crazymadlover",
+			"Fitoschido",
+			"Macofe",
 			"Muro de Aguas",
 			"Remember the dot",
-			"Sanbec",
-			"Macofe",
-			"Chris TR",
-			"Fitoschido"
+			"Sanbec"
 		]
 	},
 	"syntaxhighlight-desc": "Permite resaltar el código fuente usando la etiqueta <code>&lt;syntaxhighlight&gt;</code>. Esta extensión usa [http://pygments.org/ Pygments - Resaltador de sintaxis en Python]",

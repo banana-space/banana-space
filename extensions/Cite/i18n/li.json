@@ -5,7 +5,7 @@
 			"Pahles"
 		]
 	},
-	"cite-desc": "Voeg <nowiki><ref[ name=id]></nowiki> en <nowiki><references/></nowiki> tags toe veur citate",
+	"cite-desc": "Voeg <code>&lt;ref[ name=id]&gt;</code> en <code>&lt;references/&gt;</code> tags toe veur citate",
 	"cite_error": "Citeerfout: $1",
 	"cite_error_ref_numeric_key": "Ónzjuuste tag <code>&lt;ref&gt;</code>; de naam kin gein simpele integer zeen, gebroek 'ne besjrievendje titel",
 	"cite_error_ref_no_key": "'t Äöpeningslabel <code>&lt;ref&gt;</code> is ónjuus opgemaak of haet 'ne verkieërde naam.",
@@ -13,8 +13,8 @@
 	"cite_error_ref_no_input": "Ónzjuuste tag <code>&lt;ref&gt;</code>; refs zónger naam mótte inhoud höbbe",
 	"cite_error_references_duplicate_key": "Óngeldig label <code>&lt;ref&gt;</code>; de naam \"$1\" weurt mieëder kieëre mit 'nen angeren inhawd gedefinieerd",
 	"cite_error_references_invalid_parameters": "Ónjuuste <code>&lt;references&gt;</code>-tag",
-	"cite_error_references_no_backlink_label": "'t Aantal besjikbare backlinklabels is opgebroek. Gaef meer labels op in 't berich <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
-	"cite_error_no_link_label_group": "'t Aantal aangepasde verwiezingslabels veure groep \"$1\" is oetgepöt.\nDoe kans d'r mier insjtelle in 't sysyeemberich <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_backlink_label": "'t Aantal besjikbare backlinklabels is opgebroek. Gaef meer labels op in 't berich [[MediaWiki:Cite references link many format backlink labels]]",
+	"cite_error_no_link_label_group": "'t Aantal aangepasde verwiezingslabels veure groep \"$1\" is oetgepöt. Doe kans d'r mier insjtelle in 't sysyeemberich [[MediaWiki:$2]].",
 	"cite_error_references_no_text": "Ónzjuuste tag <code>&lt;ref&gt;</code>; d'r is gein teks opgegaeve veur refs mit de naam <code>$1</code>",
 	"cite_error_included_ref": "Gein sjloetteike <code>&lt;/ref&gt;</code> veur de tag <code>&lt;ref&gt;</code>",
 	"cite_error_group_refs_without_references": "E label <code>&lt;ref&gt;</code> veur de groep \"$1\" besitet, meh gein biebehuuerend label <code>&lt;references group=\"$1\"/&gt;</code>  is gevónje of 'n aafsloetende  <code>&lt;/ref&gt;</code> is neet dao.",

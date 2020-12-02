@@ -2,14 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Maroen1990",
-			"محمد أحمد عبد الفتاح",
+			"Meno25",
 			"Mido",
-			"ديفيد"
+			"ديفيد",
+			"محمد أحمد عبد الفتاح"
 		]
 	},
-	"timeless-desc": "برنامج مساعد خالد صُمِّم بعد النموذج المبدئي الشتوي الذي صممه براندون هاريس، وأساليب متنوعة من قبل مؤسسة ويكيميديا",
-	"timeless-search-placeholder": "ابحث في حوالي {{NUMBEROFARTICLES}} صفحة",
-	"timeless-loggedin": "حساب المستخدم",
+	"skinname-timeless": "تايم ليس",
+	"timeless-desc": "واجهة خالدة صُمِّمت بوحي من النموذج المبدئي الشتوي الذي صممه براندون هاريس، وأساليب متنوعة من قبل مؤسسة ويكيميديا",
 	"timeless-anonymous": "مجهول",
 	"timeless-loggedinas": "الدخول مسجل باسم '''$1'''",
 	"timeless-notloggedin": "غير مسجل الدخول",
@@ -20,9 +20,13 @@
 	"timeless-sitetools": "ادوات ويكي",
 	"timeless-pageactions": "أدوات الصفحات",
 	"timeless-userpagetools": "ادوات صفحة المستخدم",
+	"timeless-action-addsection": "موضوع جديد",
+	"timeless-view-view": "اقرأ",
 	"timeless-pagemisc": "المزيد",
 	"timeless-namespaces": "أسماء النطاقات",
 	"timeless-pagetools": "إجراءات الصفحة",
 	"timeless-languages": "اللغات",
-	"timeless.js": "/ * سيتم تحميل أي جافا سكريبت هنا للمستخدمين باستخدام البرنامج المساعد الخالدة * /"
+	"timeless-projects": "مشاريع أخرى",
+	"timeless.css": "/* الأنماط المتراصة CSS المعروضة هنا ستؤثر على مستخدمي واجهة تايم ليس فقط */",
+	"timeless.js": "/ * سيتم تحميل كل جافا سكريبت هنا لمستخدمي واجهة تايم ليس * /"
 }

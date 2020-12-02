@@ -3,9 +3,9 @@
 		"authors": [
 			"Bencmq",
 			"Cwek",
-			"Mywood",
 			"Impersonator 1",
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"Mywood"
 		]
 	},
 	"fancycaptcha-desc": "用于确认编辑的扭曲验证码生成器",
@@ -17,8 +17,5 @@
 	"fancycaptcha-edit": "要编辑该页面，请输入下面方框中显示的文字（[[Special:Captcha/help|更多信息]]）：",
 	"fancycaptcha-imgcaptcha-ph": "请输入您在图片中看见的文字",
 	"fancycaptcha-sendemail": "为保护本wiki免受自动垃圾程序的破坏，我们恳请您输入下面方框中显示的文字（[[Special:Captcha/help|更多信息]]）：",
-	"fancycaptcha-reload-text": "刷新",
-	"apihelp-fancycaptchareload-description": "获得一个新的FancyCaptcha。",
-	"apihelp-fancycaptchareload-summary": "获得一个新的FancyCaptcha。",
-	"apihelp-fancycaptchareload-example-1": "获得一个新的FancyCaptcha"
+	"fancycaptcha-reload-text": "刷新"
 }

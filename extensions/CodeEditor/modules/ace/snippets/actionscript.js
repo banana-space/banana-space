@@ -161,4 +161,11 @@ snippet FlxSprite\n\
 ";
 exports.scope = "actionscript";
 
-});
+});                (function() {
+                    ace.require(["ace/snippets/actionscript"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

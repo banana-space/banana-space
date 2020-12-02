@@ -1,5 +1,9 @@
 <?php
 
+use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\HookContainer\HookRunner;
+use MediaWiki\MediaWikiServices;
+
 /**
  * Implementation of near match title search.
  * TODO: split into service/implementation.
@@ -16,9 +20,29 @@ class SearchNearMatcher {
 	 */
 	private $language;
 
-	public function __construct( Config $config, Language $lang ) {
+	/**
+	 * Current language converter
+	 * @var ILanguageConverter
+	 */
+	private $languageConverter;
+
+	/**
+	 * @var HookRunner
+	 */
+	private $hookRunner;
+
+	/**
+	 * SearchNearMatcher constructor.
+	 * @param Config $config
+	 * @param Language $lang
+	 * @param HookContainer $hookContainer
+	 */
+	public function __construct( Config $config, Language $lang, HookContainer $hookContainer ) {
 		$this->config = $config;
 		$this->language = $lang;
+		$this->languageConverter = MediaWikiServices::getInstance()->getLanguageConverterFactory()
+			->getLanguageConverter( $lang );
+		$this->hookRunner = new HookRunner( $hookContainer );
 	}
 
 	/**
@@ -31,16 +55,16 @@ class SearchNearMatcher {
 	public function getNearMatch( $searchterm ) {
 		$title = $this->getNearMatchInternal( $searchterm );
 
-		Hooks::run( 'SearchGetNearMatchComplete', [ $searchterm, &$title ] );
+		$this->hookRunner->onSearchGetNearMatchComplete( $searchterm, $title );
 		return $title;
 	}
 
 	/**
 	 * Do a near match (see SearchEngine::getNearMatch) and wrap it into a
-	 * SearchResultSet.
+	 * ISearchResultSet.
 	 *
 	 * @param string $searchterm
-	 * @return SearchResultSet
+	 * @return ISearchResultSet
 	 */
 	public function getNearMatchResultSet( $searchterm ) {
 		return new SearchNearMatchResultSet( $this->getNearMatch( $searchterm ) );
@@ -52,26 +76,31 @@ class SearchNearMatcher {
 	 * @return null|Title
 	 */
 	protected function getNearMatchInternal( $searchterm ) {
-		$lang = $this->language;
-
 		$allSearchTerms = [ $searchterm ];
 
-		if ( $lang->hasVariants() ) {
+		if ( $this->languageConverter->hasVariants() ) {
 			$allSearchTerms = array_unique( array_merge(
 				$allSearchTerms,
-				$lang->autoConvertToAllVariants( $searchterm )
+				$this->languageConverter->autoConvertToAllVariants( $searchterm )
 			) );
 		}
 
 		$titleResult = null;
-		if ( !Hooks::run( 'SearchGetNearMatchBefore', [ $allSearchTerms, &$titleResult ] ) ) {
+		if ( !$this->hookRunner->onSearchGetNearMatchBefore( $allSearchTerms, $titleResult ) ) {
 			return $titleResult;
+		}
+
+		// Most of our handling here deals with finding a valid title for the search term,
+		// but almost anything starting with '#' is "valid" and points to Main_Page#searchterm.
+		// Rather than doing something completely wrong, do nothing.
+		if ( $searchterm === '' || $searchterm[0] === '#' ) {
+			return null;
 		}
 
 		foreach ( $allSearchTerms as $term ) {
 			# Exact match? No need to look further.
 			$title = Title::newFromText( $term );
-			if ( is_null( $title ) ) {
+			if ( $title === null ) {
 				return null;
 			}
 
@@ -90,37 +119,37 @@ class SearchNearMatcher {
 				return $title;
 			}
 
-			if ( !Hooks::run( 'SearchAfterNoDirectMatch', [ $term, &$title ] ) ) {
+			if ( !$this->hookRunner->onSearchAfterNoDirectMatch( $term, $title ) ) {
 				return $title;
 			}
 
 			# Now try all lower case (i.e. first letter capitalized)
-			$title = Title::newFromText( $lang->lc( $term ) );
+			$title = Title::newFromText( $this->language->lc( $term ) );
 			if ( $title && $title->exists() ) {
 				return $title;
 			}
 
 			# Now try capitalized string
-			$title = Title::newFromText( $lang->ucwords( $term ) );
+			$title = Title::newFromText( $this->language->ucwords( $term ) );
 			if ( $title && $title->exists() ) {
 				return $title;
 			}
 
 			# Now try all upper case
-			$title = Title::newFromText( $lang->uc( $term ) );
+			$title = Title::newFromText( $this->language->uc( $term ) );
 			if ( $title && $title->exists() ) {
 				return $title;
 			}
 
 			# Now try Word-Caps-Breaking-At-Word-Breaks, for hyphenated names etc
-			$title = Title::newFromText( $lang->ucwordbreaks( $term ) );
+			$title = Title::newFromText( $this->language->ucwordbreaks( $term ) );
 			if ( $title && $title->exists() ) {
 				return $title;
 			}
 
 			// Give hooks a chance at better match variants
 			$title = null;
-			if ( !Hooks::run( 'SearchGetNearMatch', [ $term, &$title ] ) ) {
+			if ( !$this->hookRunner->onSearchGetNearMatch( $term, $title ) ) {
 				return $title;
 			}
 		}
@@ -144,7 +173,7 @@ class SearchNearMatcher {
 		# There may have been a funny upload, or it may be on a shared
 		# file repository such as Wikimedia Commons.
 		if ( $title->getNamespace() == NS_FILE ) {
-			$image = wfFindFile( $title );
+			$image = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $title );
 			if ( $image ) {
 				return $title;
 			}
@@ -153,13 +182,13 @@ class SearchNearMatcher {
 		# MediaWiki namespace? Page may be "implied" if not customized.
 		# Just return it, with caps forced as the message system likes it.
 		if ( $title->getNamespace() == NS_MEDIAWIKI ) {
-			return Title::makeTitle( NS_MEDIAWIKI, $lang->ucfirst( $title->getText() ) );
+			return Title::makeTitle( NS_MEDIAWIKI, $this->language->ucfirst( $title->getText() ) );
 		}
 
 		# Quoted term? Try without the quotes...
 		$matches = [];
 		if ( preg_match( '/^"([^"]+)"$/', $searchterm, $matches ) ) {
-			return self::getNearMatch( $matches[1] );
+			return $this->getNearMatch( $matches[1] );
 		}
 
 		return null;

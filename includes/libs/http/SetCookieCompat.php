@@ -4,7 +4,7 @@ namespace Wikimedia\Http;
 
 /**
  * @internal
- * @since 1.31.9
+ * @since 1.35
  */
 class SetCookieCompat {
 	/**
@@ -49,7 +49,6 @@ class SetCookieCompat {
 		$supportsAssoc = version_compare( PHP_VERSION, '7.3.0', '>=' );
 		if ( $supportsAssoc ) {
 			if ( $urlEncode ) {
-				// @phan-suppress-next-line PhanTypeMismatchArgumentInternal
 				return setcookie( $name, $value, $options );
 			} else {
 				// Phan has a new prototype for setcookie() but not yet for setrawcookie()

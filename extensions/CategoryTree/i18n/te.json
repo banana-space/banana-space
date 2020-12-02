@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"C.Chandra Kanth Rao",
+			"Chaduvari",
 			"Kiranmayee",
 			"Mpradeep",
 			"Ravichandra",
@@ -23,7 +24,7 @@
 	"categorytree-mode-all": "అన్ని పేజీలు",
 	"categorytree-collapse": "మూసివేయి",
 	"categorytree-expand": "విస్తరించు",
-	"categorytree-member-counts": "{{PLURAL:$1|1 ఉపవర్గం|$1 ఉపవర్గాలూ}}, {{PLURAL:$2|1 పేజీ|$2 పేజీలూ}}, మరియు {{PLURAL:$3|1 ఫైలూ|$3 ఫైళ్ళూ}} ఉన్నాయి",
+	"categorytree-member-counts": "{{PLURAL:$1|1 ఉపవర్గం|$1 ఉపవర్గాలు}}, {{PLURAL:$2|1 పేజీ|$2 పేజీలూ}}, {{PLURAL:$3|1 ఫైలూ|$3 ఫైళ్ళూ}} ఉన్నాయి",
 	"categorytree-num-categories": "$1 వ",
 	"categorytree-num-pages": "$1 పే",
 	"categorytree-num-files": "$1 ద",

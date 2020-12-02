@@ -4,10 +4,10 @@
 			"Servien"
 		]
 	},
-	"nuke": "Massaal vortdoon",
-	"nuke-desc": "Hiermee kunnen beheerders [[Special:Nuke|massaal ziejen vortdoon]]",
+	"nuke": "Massaal vordsmyten",
+	"nuke-desc": "Givt beheyrders de möägelikheid üm [[Special:Nuke|massaal syden vord te smyten]]",
 	"nuke-nopages": "Gien nieje ziejen van [[Special:Contributions/$1|{{GENDER:$1|$1}}]] in de leste wiezigingen.",
 	"nuke-defaultreason": "Massaal ziejen van [[Special:Contributions/$1|{{GENDER:$1|$1}}]] vortdoon",
-	"right-nuke": "Massaal ziejen vortdoon",
-	"nuke-linkoncontribs": "massaal vortdoon"
+	"right-nuke": "Massaal syden vordsmyten",
+	"nuke-linkoncontribs": "massaal vordsmyten"
 }

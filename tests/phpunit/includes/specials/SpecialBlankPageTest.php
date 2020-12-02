@@ -1,12 +1,17 @@
 <?php
 
 /**
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Addshore
  *
  * @covers SpecialBlankpage
  */
 class SpecialBlankPageTest extends SpecialPageTestBase {
+
+	protected function setUp() : void {
+		parent::setUp();
+		$this->setUserLang( 'qqx' );
+	}
 
 	/**
 	 * Returns a new instance of the special page under test.
@@ -19,7 +24,7 @@ class SpecialBlankPageTest extends SpecialPageTestBase {
 
 	public function testHasWikiMsg() {
 		list( $html, ) = $this->executeSpecialPage();
-		$this->assertContains( wfMessage( 'intentionallyblankpage' )->text(), $html );
+		$this->assertStringContainsString( '(intentionallyblankpage)', $html );
 	}
 
 }

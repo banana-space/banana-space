@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vlad5250"
+		]
+	},
+	"log-name-spamblacklist": "Evidencija crne liste neželjenog sadržaja",
+	"log-description-spamblacklist": "Ova evidencija prikazuje pogotke u crnom spisku spama.",
+	"right-spamblacklistlog": "Pregled evidencije crne liste neželjenog sadržaja",
+	"action-spamblacklistlog": "pregled evidencije crne liste neželjenog sadržaja"
+}

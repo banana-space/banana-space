@@ -3,13 +3,13 @@
 /**
  * @covers MigrateFileRepoLayout
  */
-class MigrateFileRepoLayoutTest extends MediaWikiTestCase {
+class MigrateFileRepoLayoutTest extends MediaWikiIntegrationTestCase {
 	protected $tmpPrefix;
 	protected $migratorMock;
 	protected $tmpFilepath;
 	protected $text = 'testing';
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$filename = 'Foo.png';
@@ -28,13 +28,14 @@ class MigrateFileRepoLayoutTest extends MediaWikiTestCase {
 			]
 		] );
 
-		$dbMock = $this->getMockBuilder( Wikimedia\Rdbms\DatabaseMysqli::class )
+		$dbMock = $this->getMockBuilder( Wikimedia\Rdbms\IDatabase::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$imageRow = new stdClass;
-		$imageRow->img_name = $filename;
-		$imageRow->img_sha1 = sha1( $this->text );
+		$imageRow = (object)[
+			'img_name' => $filename,
+			'img_sha1' => sha1( $this->text ),
+		];
 
 		$dbMock->expects( $this->any() )
 			->method( 'select' )
@@ -91,7 +92,7 @@ class MigrateFileRepoLayoutTest extends MediaWikiTestCase {
 		rmdir( $directory );
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		foreach ( glob( $this->tmpPrefix . '*' ) as $directory ) {
 			$this->deleteFilesRecursively( $directory );
 		}

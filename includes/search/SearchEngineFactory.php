@@ -1,6 +1,10 @@
 <?php
 
+use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\MediaWikiServices;
+use Wikimedia\ObjectFactory;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Factory class for SearchEngine.
@@ -13,51 +17,71 @@ class SearchEngineFactory {
 	 */
 	private $config;
 
-	public function __construct( SearchEngineConfig $config ) {
+	/** @var HookContainer */
+	private $hookContainer;
+
+	public function __construct( SearchEngineConfig $config, HookContainer $hookContainer ) {
 		$this->config = $config;
+		$this->hookContainer = $hookContainer;
 	}
 
 	/**
 	 * Create SearchEngine of the given type.
-	 * @param string $type
+	 *
+	 * @param string|null $type
 	 * @return SearchEngine
 	 */
 	public function create( $type = null ) {
-		$dbr = null;
+		$configuredClass = $this->config->getSearchType();
+		$alternativesClasses = $this->config->getSearchTypes();
 
-		$configType = $this->config->getSearchType();
-		$alternatives = $this->config->getSearchTypes();
-
-		if ( $type && in_array( $type, $alternatives ) ) {
+		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		if ( $type !== null && in_array( $type, $alternativesClasses ) ) {
 			$class = $type;
-		} elseif ( $configType !== null ) {
-			$class = $configType;
+		} elseif ( $configuredClass !== null ) {
+			$class = $configuredClass;
 		} else {
-			$dbr = wfGetDB( DB_REPLICA );
-			$class = self::getSearchEngineClass( $dbr );
+			$class = self::getSearchEngineClass( $lb );
 		}
 
-		$search = new $class( $dbr );
-		return $search;
+		$mappings = $this->config->getSearchMappings();
+
+		if ( isset( $mappings[$class] ) ) {
+			$spec = $mappings[$class];
+		} else {
+			// Convert non mapped classes to ObjectFactory spec
+			$spec = [ 'class' => $class ];
+		}
+
+		$args = [];
+
+		if ( isset( $spec['class'] ) && is_subclass_of( $spec['class'], SearchDatabase::class ) ) {
+			$args['extraArgs'][] = $lb;
+		}
+
+		/** @var SearchEngine $engine */
+		$engine = ObjectFactory::getObjectFromSpec( $spec, $args );
+		$engine->setHookContainer( $this->hookContainer );
+		return $engine;
 	}
 
 	/**
-	 * @param IDatabase $db
+	 * @param IDatabase|ILoadBalancer $dbOrLb
 	 * @return string SearchEngine subclass name
 	 * @since 1.28
 	 */
-	public static function getSearchEngineClass( IDatabase $db ) {
-		switch ( $db->getType() ) {
+	public static function getSearchEngineClass( $dbOrLb ) {
+		$type = ( $dbOrLb instanceof IDatabase )
+			? $dbOrLb->getType()
+			: $dbOrLb->getServerType( $dbOrLb->getWriterIndex() );
+
+		switch ( $type ) {
 			case 'sqlite':
 				return SearchSqlite::class;
 			case 'mysql':
 				return SearchMySQL::class;
 			case 'postgres':
 				return SearchPostgres::class;
-			case 'mssql':
-				return SearchMssql::class;
-			case 'oracle':
-				return SearchOracle::class;
 			default:
 				return SearchEngineDummy::class;
 		}

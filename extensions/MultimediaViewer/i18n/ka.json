@@ -1,13 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Otogi",
+			"Chavch",
 			"David1010",
 			"MIKHEIL",
-			"Chavch"
+			"Otogi"
 		]
 	},
-	"multimediaviewer-pref": "მედია დამთვალიერებელი",
 	"multimediaviewer-optin-pref": "<span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About მედია-მაყურებლის]</span> ჩართვა",
 	"multimediaviewer-repository-local": "დამატებითი ინფორმაცია",
 	"multimediaviewer-datetime-created": "შეიქმნა: $1",

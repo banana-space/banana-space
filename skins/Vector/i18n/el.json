@@ -4,13 +4,18 @@
 			"Calak",
 			"Crazymadlover",
 			"Evropi",
+			"Geraki",
+			"Nikosgranturismogt",
 			"Omnipaedista",
 			"Protnet",
 			"ZaDiak",
-			"Geraki"
+			"Αντιγόνη"
 		]
 	},
 	"vector-skin-desc": "Σύγχρονη έκδοση του MonoBook με φρέσκια ματιά και πολλές βελτιώσεις χρηστικότητας",
+	"prefs-vector-enable-vector-1-label": "Χρήση του Legacy Vector",
+	"prefs-vector-enable-vector-1-help": "Κατά τα επόμενα χρόνια, θα αναβαθμίζουμε σταδιακά το περιβάλλον Vector. Το Legacy Vector θα σας επιτρέψει να δείτε την παλιά έκδοση του Vector (ως τον Δεκέμβριο του 2019). Για να μάθετε περισσότερα σχετικά με τις αναβαθμίσεις, μεταβείτε στη [[mw:Reading/Web/Desktop_Improvements|σελίδα του έργου]] μας.",
+	"vector-opt-out": "Εναλλαγή στην παλιά εμφάνιση",
 	"vector.css": "/* Το τοποθετημένο εδώ CSS θα επηρεάσει χρήστες του Vector skin */",
 	"vector.js": "/* Οποιοσδήποτε κώδικας JavaScript εδώ θα φορτωθεί για χρήστες που χρησιμοποιούν το Vector skin */",
 	"vector-action-addsection": "Προσθήκη θέματος",
@@ -24,5 +29,7 @@
 	"vector-view-history": "Προβολή ιστορικού",
 	"vector-view-view": "Ανάγνωση",
 	"vector-view-viewsource": "Προβολή κώδικα",
+	"vector-jumptonavigation": "Μετάβαση στην πλοήγηση",
+	"vector-jumptosearch": "Πήδηση στην αναζήτηση",
 	"vector-more-actions": "Περισσότερα"
 }

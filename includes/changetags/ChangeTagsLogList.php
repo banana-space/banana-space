@@ -66,13 +66,12 @@ class ChangeTagsLogList extends ChangeTagsList {
 	 *
 	 * @param array $tagsToAdd
 	 * @param array $tagsToRemove
-	 * @param array $params
+	 * @param string|null $params
 	 * @param string $reason
 	 * @param User $user
 	 * @return Status
 	 */
 	public function updateChangeTagsOnAll( $tagsToAdd, $tagsToRemove, $params, $reason, $user ) {
-		// phpcs:ignore Generic.CodeAnalysis.ForLoopWithTestFunctionCall
 		for ( $this->reset(); $this->current(); $this->next() ) {
 			$item = $this->current();
 			$status = ChangeTags::updateTagsWithChecks( $tagsToAdd, $tagsToRemove,

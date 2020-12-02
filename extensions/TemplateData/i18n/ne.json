@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"NehalDaveND",
+			"Nirjal stha"
+		]
+	},
+	"templatedata-doc-param-default": "पूर्वनिर्धारित",
+	"templatedata-doc-param-example": "उदाहरण",
+	"templatedata-doc-param-desc": "विवरण",
+	"templatedata-doc-param-status": "स्थिति",
+	"templatedata-doc-param-status-optional": "वैकल्पिक",
+	"templatedata-doc-param-type": "प्रकार",
+	"templatedata-doc-param-type-date": "मिति",
+	"templatedata-doc-param-type-line": "पङ्क्ति",
+	"templatedata-doc-param-type-wiki-file-name": "फाइल",
+	"templatedata-doc-param-type-wiki-page-name": "पृष्ठ",
+	"templatedata-doc-param-type-wiki-user-name": "प्रयोगकर्ता",
+	"templatedata-modal-button-apply": "लागु गर्ने",
+	"templatedata-modal-button-back": "पछाडि",
+	"templatedata-modal-button-cancel": "रद्द गर्ने",
+	"templatedata-modal-button-changelang": "भाषा परिवर्तन गर्ने",
+	"templatedata-modal-button-saveparam": "संग्रह गर्ने",
+	"templatedata-modal-table-param-actions": "कार्यहरू",
+	"templatedata-modal-table-param-label": "नामपत्र $1",
+	"templatedata-modal-table-param-name": "नाम",
+	"templatedata-modal-table-param-type": "प्रकार",
+	"templatedata-modal-title-choose-language": "भाषा चुन्ने",
+	"templatedata-modal-title-language": "भाषा"
+}

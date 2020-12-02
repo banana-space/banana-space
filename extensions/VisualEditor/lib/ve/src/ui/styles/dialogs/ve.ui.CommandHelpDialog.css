@@ -1,0 +1,110 @@
+/*!
+ * VisualEditor UserInterface CommandHelpDialog styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-commandHelpDialog-container {
+	-moz-columns: 3 19.5em;
+	-webkit-columns: 3 19.5em;
+	columns: 3 19.5em;
+}
+
+.ve-ui-commandHelpDialog-section {
+	/*
+	 * Hack 1: Prevent splitting over columns. This should be done with
+	 * column-break-inside but it's not well supported yet.
+	 */
+	display: inline-block;
+	width: 100%;
+}
+
+.ve-ui-commandHelpDialog-section h3 {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+.ve-ui-commandHelpDialog-list {
+	margin: 0.5em 0 1.5em 0;
+}
+
+.ve-ui-commandHelpDialog-list dd {
+	display: inline-block;
+	vertical-align: top;
+	width: 45%;
+	margin: 0;
+}
+
+.ve-ui-commandHelpDialog-list dt {
+	display: inline-block;
+	vertical-align: top;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 55%;
+	padding-right: 1em;
+	text-align: right;
+}
+
+.ve-ui-commandHelpDialog-list dt kbd {
+	/* Support: Blink, Gecko, Webkit */
+	/* Specify a valid second value to fix size, see T176636 */
+	font-family: monospace, monospace;
+	font-size: 0.8125em;
+	font-weight: bold;
+	font-style: normal;
+}
+
+.ve-ui-commandHelpDialog-list dt > kbd {
+	display: block;
+	clear: right;
+}
+
+/* Enlarge vertical spacing in a list of shortcuts for one action */
+.ve-ui-commandHelpDialog-list dt kbd ~ kbd {
+	margin-top: 0.5em;
+}
+
+.ve-ui-commandHelpDialog-list dt kbd > kbd {
+	background-color: #f8f9fa;
+	color: #222;
+	font-size: 1em; /* Prevent double shrinking */
+	border: 1px solid #c8ccd1;
+	border-radius: 2px;
+	box-shadow: 0 1px 0 rgba( 0, 0, 0, 0.2 ), 0 0 0 2px #fff inset;
+	display: inline-block;
+	line-height: 1.4;
+	padding: 0.1em 0.4em;
+	margin: -0.1em 0.3em 0;
+	text-shadow: 0 1px 0 #fff;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.ve-ui-commandHelpDialog-list dt kbd[ data-label ]:before {
+	content: attr( data-label );
+	font-weight: normal;
+	font-style: italic;
+	padding-right: 3px;
+}
+
+.ve-ui-commandHelpDialog-sequence kbd:not( .ve-ui-commandHelpDialog-specialKey ) {
+	box-shadow: none;
+	text-transform: none;
+}
+
+.ve-ui-commandHelpDialog-sequence kbd:not( .ve-ui-commandHelpDialog-specialKey ) + kbd:not( .ve-ui-commandHelpDialog-specialKey ) {
+	margin-left: -0.5em;
+	padding-left: 0;
+	border-left: 0;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.ve-ui-commandHelpDialog-list dd,
+.ve-ui-commandHelpDialog-list dt {
+	line-height: 1.4;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}

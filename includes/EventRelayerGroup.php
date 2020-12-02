@@ -18,8 +18,6 @@
  * @file
  */
 
-use MediaWiki\MediaWikiServices;
-
 /**
  * Factory class for spawning EventRelayer objects using configuration
  *
@@ -37,14 +35,6 @@ class EventRelayerGroup {
 	 */
 	public function __construct( array $config ) {
 		$this->configByChannel = $config;
-	}
-
-	/**
-	 * @deprecated since 1.27 Use MediaWikiServices::getInstance()->getEventRelayerGroup()
-	 * @return EventRelayerGroup
-	 */
-	public static function singleton() {
-		return MediaWikiServices::getInstance()->getEventRelayerGroup();
 	}
 
 	/**

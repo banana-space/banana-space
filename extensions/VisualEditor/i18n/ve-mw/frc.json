@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hangmanwa7id"
+		]
+	},
+	"tooltip-ca-ve-edit": "Changer cette page",
+	"visualeditor-ca-createsource": "Créer le wikicode",
+	"visualeditor-ca-editsource": "Changer le wikicode",
+	"visualeditor-ca-editsource-section": "changer le wikicode",
+	"visualeditor-dialog-media-change-image": "Changer image",
+	"visualeditor-dialog-media-choose-image": "User cette image",
+	"visualeditor-dialog-media-content-filename": "Nom du fichier",
+	"visualeditor-dialog-media-goback": "Retourner",
+	"visualeditor-dialog-media-info-credit": "Crédit",
+	"visualeditor-dialog-media-info-imagedescription": "Description complète",
+	"visualeditor-dialog-media-info-moreinfo": "Plus informations",
+	"visualeditor-dialog-media-info-readmore": "Lire plus",
+	"visualeditor-dialog-media-searchselect": "Choisir"
+}

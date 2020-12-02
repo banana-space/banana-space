@@ -82,7 +82,7 @@ $namespaceAliases = [
 	'Bildediskusjon' => NS_FILE_TALK,
 ];
 
-$separatorTransformTable = [ ',' => "\xc2\xa0", '.' => ',' ];
+$separatorTransformTable = [ ',' => "\u{00A0}", '.' => ',' ];
 $linkTrail = '/^([æøåa-z]+)(.*)$/sDu';
 
 $datePreferenceMigrationMap = [
@@ -186,6 +186,7 @@ $specialPageAliases = [
 	'Specialpages'              => [ 'Spesialsider' ],
 	'Statistics'                => [ 'Statistikk' ],
 	'Tags'                      => [ 'Tagger' ],
+	'TrackingCategories'        => [ 'Sporingskategorier' ],
 	'Unblock'                   => [ 'Avblokker' ],
 	'Uncategorizedcategories'   => [ 'Ukategoriserte_kategorier' ],
 	'Uncategorizedimages'       => [ 'Ukategoriserte_filer', 'Ukategoriserte_bilder' ],

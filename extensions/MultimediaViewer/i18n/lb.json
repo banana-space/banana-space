@@ -4,7 +4,6 @@
 			"Robby"
 		]
 	},
-	"multimediaviewer-pref": "Media Viewer",
 	"multimediaviewer-optin-pref": "De <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Media Viewer]</span> aktivéieren",
 	"multimediaviewer-repository-local": "Méi Detailer",
 	"multimediaviewer-datetime-uploaded": "Eropgelueden: $1",
@@ -12,6 +11,8 @@
 	"multimediaviewer-multiple-authors": "{{PLURAL:$1|ee weideren Auteur|$1 weider Auteuren}}",
 	"multimediaviewer-multiple-authors-combine": "$1 a(n) $2",
 	"multimediaviewer-metadata-error": "Detailer vum Bild konten net geluede ginn (Feeler: $1)",
+	"multimediaviewer-thumbnail-error": "Leider kann de Fichier net gewise ginn",
+	"multimediaviewer-thumbnail-error-description": "ET schéngt en technesche Problem ze ginn. Dir kënnt et $1 wann et weider besteet. Feeler: $2",
 	"multimediaviewer-thumbnail-error-retry": "Nach eng Kéier probéieren",
 	"multimediaviewer-thumbnail-error-report": "de Problem mellen",
 	"multimediaviewer-license-cc-by-4.0": "CC BY 4.0",
@@ -26,7 +27,7 @@
 	"multimediaviewer-restriction-ihl": "Op dësem Bild si Symboler déi duerch dat internationaalt humanitärt Recht geschützt sinn.",
 	"multimediaviewer-restriction-insignia": "Op dësem Bild sinn offiziell Logoen déi eventuell den Objet vu rechtleche Limitatiounen si kéinten.",
 	"multimediaviewer-restriction-nazi": "Op dësem Bild si Nazi- oder aner faschistesch Symboler déi an eenzelne Länner kéinte verbuede sinn.",
-	"multimediaviewer-about-mmv": "Iwwer",
+	"multimediaviewer-about-mmv": "Iwwer dësen Interface",
 	"multimediaviewer-discuss-mmv": "Diskussioun",
 	"multimediaviewer-help-mmv": "Hëllef",
 	"multimediaviewer-optout-mmv": "Media Viewer ausschalten",
@@ -58,6 +59,7 @@
 	"multimediaviewer-embed-license": "Lizenzéiert ënner $1.",
 	"multimediaviewer-embed-via": "Iwwer $1.",
 	"multimediaviewer-original-embed-dimensions": "Originalfichier $1",
+	"multimediaviewer-xl-embed-dimensions": "Extra breet $1",
 	"multimediaviewer-large-embed-dimensions": "Grouss $1",
 	"multimediaviewer-medium-embed-dimensions": "Mëttel $1",
 	"multimediaviewer-small-embed-dimensions": "Kleng $1",

@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	var TWCP;
 
 	/**
@@ -45,6 +45,7 @@
 
 		/**
 		 * List of thumbnail width bucket sizes, in pixels.
+		 *
 		 * @property {number[]}
 		 */
 		this.widthBuckets = options.widthBuckets;
@@ -52,6 +53,7 @@
 
 		/**
 		 * Screen pixel count per CSS pixel.
+		 *
 		 * @property {number}
 		 */
 		this.devicePixelRatio = options.devicePixelRatio;
@@ -61,6 +63,7 @@
 
 	/**
 	 * The default list of image widths
+	 *
 	 * @static
 	 * @property {Object}
 	 */
@@ -77,7 +80,7 @@
 		],
 
 		// screen pixel per CSS pixel
-		devicePixelRatio: $.devicePixelRatio()
+		devicePixelRatio: window.devicePixelRatio || 1
 	};
 
 	/**
@@ -169,4 +172,4 @@
 	};
 
 	mw.mmv.ThumbnailWidthCalculator = ThumbnailWidthCalculator;
-}( mediaWiki, jQuery ) );
+}() );

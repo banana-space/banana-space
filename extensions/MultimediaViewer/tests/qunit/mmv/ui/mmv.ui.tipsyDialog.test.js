@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.ui.tipsyDialog', QUnit.newMwEnvironment( {
 		setup: function () {
 			// remove tipsy elements left behind by other tests so these tests don't find them by accident
@@ -29,11 +29,11 @@
 			$anchor = $( '<div>' ).appendTo( $qf ),
 			dialog = new mw.mmv.ui.TipsyDialog( $anchor );
 
-		assert.ok( !$( '.mw-mmv-tipsy-dialog' ).length, 'dialog is not shown' );
+		assert.notOk( $( '.mw-mmv-tipsy-dialog' ).length, 'dialog is not shown' );
 		dialog.open();
 		assert.ok( $( '.mw-mmv-tipsy-dialog' ).length, 'dialog is shown' );
 		dialog.close();
-		assert.ok( !$( '.mw-mmv-tipsy-dialog' ).length, 'dialog is not shown' );
+		assert.notOk( $( '.mw-mmv-tipsy-dialog' ).length, 'dialog is not shown' );
 	} );
 
 	QUnit.test( 'setContent', function ( assert ) {
@@ -57,12 +57,12 @@
 
 		dialog.open();
 		assert.ok( $( '.mw-mmv-tipsy-dialog' ).length, 'dialog is shown initially' );
-		dialog.getPopup().click();
+		dialog.getPopup().trigger( 'click' );
 		assert.ok( $( '.mw-mmv-tipsy-dialog' ).length, 'dialog is not hidden when clicked' );
-		dialog.getPopup().find( '.mw-mmv-tipsy-dialog-disable' ).click();
-		assert.ok( !$( '.mw-mmv-tipsy-dialog' ).length, 'dialog is hidden when close icon is clicked' );
+		dialog.getPopup().find( '.mw-mmv-tipsy-dialog-disable' ).trigger( 'click' );
+		assert.notOk( $( '.mw-mmv-tipsy-dialog' ).length, 'dialog is hidden when close icon is clicked' );
 		dialog.open();
-		$qf.click();
-		assert.ok( !$( '.mw-mmv-tipsy-dialog' ).length, 'dialog is hidden when clicked outside' );
+		$qf.trigger( 'click' );
+		assert.notOk( $( '.mw-mmv-tipsy-dialog' ).length, 'dialog is hidden when clicked outside' );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

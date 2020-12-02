@@ -13,7 +13,5 @@
 	"fancycaptcha-edit": "Selle lehekülje muutmiseks sisesta palun allpool olevas kastis kuvatud sõnad ([[Special:Captcha/help|lisateave]]):",
 	"fancycaptcha-imgcaptcha-ph": "Sisesta pildil nähtav tekst",
 	"fancycaptcha-sendemail": "Palun sisesta allpool olevas kastis kuvatud sõnad. Abinõu on kaitseks automaadistatud rämpsmuudatuste vastu ([[Special:Captcha/help|lisateave]]):",
-	"fancycaptcha-reload-text": "Vaheta",
-	"apihelp-fancycaptchareload-description": "Uue FancyCaptcha hankimine.",
-	"apihelp-fancycaptchareload-example-1": "Hangi uus FancyCaptcha"
+	"fancycaptcha-reload-text": "Vaheta"
 }

@@ -1,14 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alirezaaa",
 			"Armin1392",
 			"Ebraminio",
 			"Huji",
+			"Ladsgroup",
 			"Mjbmr",
 			"Reza1615",
-			"ZxxZxxZ",
-			"Alirezaaa",
-			"Ladsgroup"
+			"ZxxZxxZ"
 		]
 	},
 	"nuke": "حذف دسته‌جمعی",
@@ -21,10 +21,8 @@
 	"nuke-multiplepeople": "حذف توده‌ای صفحه‌های به‌تازگی افزوده‌شده",
 	"nuke-tools": "این ابزار امکان حذف دسته‌جمعی صفحه‌هایی که به تازگی توسط یک کاربر یا نشانی آی‌پی اضافه شده‌اند را فراهم می‌کند.\nنام کاربری یا نشانی آی‌پی موردنظر را وارد کنید، یا جعبه را خالی بگذارید تا تمام کاربرها در نظر گرفته شوند.",
 	"nuke-submit-user": "فهرست صفحات",
-	"nuke-toggleinvert": "معکوس",
 	"nuke-submit-delete": "حذف موارد انتخاب شده",
 	"right-nuke": "حذف دسته‌جمعی صفحات",
-	"nuke-select": "انتخاب: $1",
 	"nuke-userorip": "نام کاربری، نشانی آی‌پی یا خالی:",
 	"nuke-maxpages": "حداکثر تعداد صفحات:",
 	"nuke-editby": "ایجاد شده توسط [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",

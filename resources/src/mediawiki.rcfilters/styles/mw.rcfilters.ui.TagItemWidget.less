@@ -1,6 +1,9 @@
-@import 'mediawiki.ui/variables';
-@import 'mw.rcfilters.mixins';
-@import 'mw.rcfilters.variables';
+@import 'mediawiki.ui/variables.less';
+@import 'mw.rcfilters.mixins.less';
+@import 'mw.rcfilters.variables.less';
+
+@size-circle: 20 / @font-size-system-ui / @font-size-vector;
+@margin-circle: 5 / @font-size-system-ui / @font-size-vector;
 
 .mw-rcfilters-ui-tagItemWidget {
 	// Background and color of the capsule widget need a bit
@@ -11,8 +14,9 @@
 		border-color: @colorGray12;
 
 		.oo-ui-labelElement-label {
-			color: @colorGray7;
+			color: @color-base--subtle;
 		}
+
 		.oo-ui-buttonWidget {
 			opacity: @muted-opacity;
 		}
@@ -20,7 +24,9 @@
 
 	&.oo-ui-flaggedElement-invalid.oo-ui-tagItemWidget.oo-ui-widget-enabled {
 		.oo-ui-labelElement-label {
-			color: @colorDestructiveActive;
+			// Use `@color-destructive--active` due to TagitemWidget's grey background
+			// in order to stay iin WCAG 2.0 level AA contrast ratio requirement.
+			color: @color-destructive--active;
 		}
 	}
 
@@ -30,7 +36,7 @@
 	// and will be available in the next OOUI release.
 	.oo-ui-tagMultiselectWidget.oo-ui-widget-enabled.oo-ui-tagMultiselectWidget-outlined &-selected.oo-ui-tagItemWidget.oo-ui-widget-enabled {
 		background-color: @background-color-primary;
-		border-color: @colorProgressive;
+		border-color: @border-color-base--focus;
 	}
 
 	&-popup-content {
@@ -38,14 +44,14 @@
 		color: @colorGray5;
 	}
 
-	&.oo-ui-labelElement .oo-ui-labelElement-label {
+	&.oo-ui-labelElement:not( .oo-ui-tagItemWidget-fixed ) .oo-ui-labelElement-label {
 		cursor: pointer;
 	}
 
 	&-highlight {
 		display: none;
-		margin-right: 0.5em;
 		width: 10px;
+		margin-right: @margin-circle;
 
 		&-highlighted {
 			display: inline-block;
@@ -53,29 +59,30 @@
 
 		&:before {
 			content: '';
-			position: absolute;
 			display: block;
+			position: absolute;
 			top: 50%;
+			.mw-rcfilters-circle( 10px, 10px, ~'-5px 0.5em 0 0' );
 		}
 
 		&[ data-color='c1' ]:before {
-			.mw-rcfilters-mixin-circle( @highlight-c1, 10px, ~'-5px 0.5em 0 0' );
+			.mw-rcfilters-circle-color( @highlight-c1 );
 		}
 
 		&[ data-color='c2' ]:before {
-			.mw-rcfilters-mixin-circle( @highlight-c2, 10px, ~'-5px 0.5em 0 0' );
+			.mw-rcfilters-circle-color( @highlight-c2 );
 		}
 
 		&[ data-color='c3' ]:before {
-			.mw-rcfilters-mixin-circle( @highlight-c3, 10px, ~'-5px 0.5em 0 0' );
+			.mw-rcfilters-circle-color( @highlight-c3 );
 		}
 
 		&[ data-color='c4' ]:before {
-			.mw-rcfilters-mixin-circle( @highlight-c4, 10px, ~'-5px 0.5em 0 0' );
+			.mw-rcfilters-circle-color( @highlight-c4 );
 		}
 
 		&[ data-color='c5' ]:before {
-			.mw-rcfilters-mixin-circle( @highlight-c5, 10px, ~'-5px 0.5em 0 0' );
+			.mw-rcfilters-circle-color( @highlight-c5 );
 		}
 	}
 }

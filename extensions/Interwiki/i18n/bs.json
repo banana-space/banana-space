@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"CERminator",
-			"Kal-El",
 			"KWiki",
+			"Kal-El",
 			"Srdjan m"
 		]
 	},
@@ -30,7 +30,6 @@
 	"interwiki_error": "Greška: interwiki tabela je prazna ili je nešto drugo pogrešno.",
 	"interwiki_edit": "Uredi",
 	"interwiki_reasonfield": "Razlog:",
-	"interwiki_delquestion": "Briše se \"$1\"",
 	"interwiki_deleting": "Brišete prefiks \"$1\".",
 	"interwiki_deleted": "Prefiks \"$1\" je uklonjen iz interwiki tabele.",
 	"interwiki_delfailed": "Prefiks \"$1\" nije bilo moguće ukloniti iz interwiki tabele.",

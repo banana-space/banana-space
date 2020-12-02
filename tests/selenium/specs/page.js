@@ -1,141 +1,140 @@
 'use strict';
-const assert = require( 'assert' ),
-	DeletePage = require( '../pageobjects/delete.page' ),
-	RestorePage = require( '../pageobjects/restore.page' ),
-	EditPage = require( '../pageobjects/edit.page' ),
-	HistoryPage = require( '../pageobjects/history.page' ),
-	UserLoginPage = require( '../pageobjects/userlogin.page' );
+
+const assert = require( 'assert' );
+const Api = require( 'wdio-mediawiki/Api' );
+const DeletePage = require( '../pageobjects/delete.page' );
+const RestorePage = require( '../pageobjects/restore.page' );
+const EditPage = require( '../pageobjects/edit.page' );
+const HistoryPage = require( '../pageobjects/history.page' );
+const UndoPage = require( '../pageobjects/undo.page' );
+const UserLoginPage = require( 'wdio-mediawiki/LoginPage' );
+const Util = require( 'wdio-mediawiki/Util' );
 
 describe( 'Page', function () {
+	let content, name, bot;
 
-	var content,
-		name;
-
-	function getTestString() {
-		return Math.random().toString() + '-öäü-♠♣♥♦';
-	}
-
-	before( function () {
-		// disable VisualEditor welcome dialog
-		UserLoginPage.open();
-		browser.localStorage( 'POST', { key: 've-beta-welcome-dialog', value: '1' } );
+	before( async () => {
+		bot = await Api.bot();
 	} );
 
 	beforeEach( function () {
-		browser.deleteCookie();
-		content = getTestString();
-		name = getTestString();
+		browser.deleteAllCookies();
+		content = Util.getTestString( 'beforeEach-content-' );
+		name = Util.getTestString( 'BeforeEach-name-' );
 	} );
 
-	// Disable due to broken/flakiness (T247580)
-	it.skip( 'should be creatable', function () {
+	it( 'should be previewable', function () {
+		EditPage.preview( name, content );
 
+		assert.strictEqual( EditPage.heading.getText(), 'Creating ' + name );
+		assert.strictEqual( EditPage.displayedContent.getText(), content );
+		assert( EditPage.content.isDisplayed(), 'editor is still present' );
+		assert( !EditPage.conflictingContent.isDisplayed(), 'no edit conflict happened' );
+	} );
+
+	it( 'should be creatable', function () {
 		// create
 		EditPage.edit( name, content );
 
 		// check
-		assert.equal( EditPage.heading.getText(), name );
-		assert.equal( EditPage.displayedContent.getText(), content );
-
+		assert.strictEqual( EditPage.heading.getText(), name );
+		assert.strictEqual( EditPage.displayedContent.getText(), content );
 	} );
 
-	// Disable due to broken/flakiness (T247580)
-	it.skip( 'should be re-creatable', function () {
-		let initialContent = getTestString();
+	it( 'should be re-creatable', function () {
+		const initialContent = Util.getTestString( 'initialContent-' );
 
-		// create
-		browser.call( function () {
-			return EditPage.apiEdit( name, initialContent );
+		// create and delete
+		browser.call( async () => {
+			await bot.edit( name, initialContent, 'create for delete' );
+			await bot.delete( name, 'delete prior to recreate' );
 		} );
 
-		// delete
-		browser.call( function () {
-			return DeletePage.apiDelete( name, 'delete prior to recreate' );
-		} );
-
-		// create
+		// re-create
 		EditPage.edit( name, content );
 
 		// check
-		assert.equal( EditPage.heading.getText(), name );
-		assert.equal( EditPage.displayedContent.getText(), content );
-
+		assert.strictEqual( EditPage.heading.getText(), name );
+		assert.strictEqual( EditPage.displayedContent.getText(), content );
 	} );
 
-	// Disable due to broken/flakiness (T247580)
-	it.skip( 'should be editable', function () {
-
+	it( 'should be editable @daily', function () {
 		// create
-		browser.call( function () {
-			return EditPage.apiEdit( name, content );
+		browser.call( async () => {
+			await bot.edit( name, content, 'create for edit' );
 		} );
 
 		// edit
-		EditPage.edit( name, content );
+		const editContent = Util.getTestString( 'editContent-' );
+		EditPage.edit( name, editContent );
 
 		// check
-		assert.equal( EditPage.heading.getText(), name );
-		assert.equal( EditPage.displayedContent.getText(), content );
-
+		assert.strictEqual( EditPage.heading.getText(), name );
+		assert( EditPage.displayedContent.getText().includes( editContent ) );
 	} );
 
-	it( 'should have history', function () {
-
+	it( 'should have history @daily', function () {
 		// create
-		browser.call( function () {
-			return EditPage.apiEdit( name, content );
+		browser.call( async () => {
+			await bot.edit( name, content, `created with "${content}"` );
 		} );
 
 		// check
 		HistoryPage.open( name );
-		assert.equal( HistoryPage.comment.getText(), `(Created page with "${content}")` );
-
+		assert.strictEqual( HistoryPage.comment.getText(), `created with "${content}"` );
 	} );
 
-	// Disable due to broken/flakiness (T247580)
-	it.skip( 'should be deletable', function () {
+	it( 'should be deletable', function () {
+		// create
+		browser.call( async () => {
+			await bot.edit( name, content, 'create for delete' );
+		} );
 
 		// login
 		UserLoginPage.loginAdmin();
 
-		// create
-		browser.call( function () {
-			return EditPage.apiEdit( name, content );
-		} );
-
 		// delete
-		DeletePage.delete( name, content + '-deletereason' );
+		DeletePage.delete( name, 'delete reason' );
 
 		// check
-		assert.equal(
+		assert.strictEqual(
 			DeletePage.displayedContent.getText(),
 			'"' + name + '" has been deleted. See deletion log for a record of recent deletions.\nReturn to Main Page.'
 		);
-
 	} );
 
-	// Disable due to broken/flakiness (T247580)
-	it.skip( 'should be restorable', function () {
+	it( 'should be restorable', function () {
+		// create and delete
+		browser.call( async () => {
+			await bot.edit( name, content, 'create for delete' );
+			await bot.delete( name, 'delete for restore' );
+		} );
 
 		// login
 		UserLoginPage.loginAdmin();
 
-		// create
-		browser.call( function () {
-			return EditPage.apiEdit( name, content );
-		} );
-
-		// delete
-		browser.call( function () {
-			return DeletePage.apiDelete( name, content + '-deletereason' );
-		} );
-
 		// restore
-		RestorePage.restore( name, content + '-restorereason' );
+		RestorePage.restore( name, 'restore reason' );
 
 		// check
-		assert.equal( RestorePage.displayedContent.getText(), name + ' has been restored\nConsult the deletion log for a record of recent deletions and restorations.' );
+		assert.strictEqual( RestorePage.displayedContent.getText(), name + ' has been restored\nConsult the deletion log for a record of recent deletions and restorations.' );
+	} );
 
+	it( 'should be undoable', function () {
+		let previousRev, undoRev;
+		browser.call( async () => {
+			// create
+			await bot.edit( name, content, 'create to edit and undo' );
+
+			// edit
+			const response = await bot.edit( name, Util.getTestString( 'editContent-' ) );
+			previousRev = response.edit.oldrevid;
+			undoRev = response.edit.newrevid;
+		} );
+
+		UndoPage.undo( name, previousRev, undoRev );
+
+		assert.strictEqual( EditPage.displayedContent.getText(), content );
 	} );
 
 } );

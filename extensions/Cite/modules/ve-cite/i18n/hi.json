@@ -1,22 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ankita-ks",
 			"Ansumang",
 			"Devayon",
-			"Rajesh",
-			"Siddhartha Ghai",
+			"Goelujjwal",
+			"Hindustanilanguage",
+			"Kunalgrover05",
 			"Niharika29",
+			"Phoenix303",
+			"Rajesh",
+			"Sachinkatiyar",
+			"Sahilrathod",
+			"Sfic",
+			"Siddhartha Ghai",
 			"Venky2834",
 			"Wikiuser13",
-			"Goelujjwal",
-			"Kunalgrover05",
-			"संजीव कुमार",
-			"Phoenix303",
-			"Ankita-ks",
-			"Sahilrathod",
-			"Hindustanilanguage",
-			"Sfic",
-			"Sachinkatiyar"
+			"संजीव कुमार"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "पुस्तक",
@@ -29,8 +29,6 @@
 	"cite-ve-dialog-reference-options-name-label": "इस नाम से पुनः प्रयोग करें",
 	"cite-ve-dialog-reference-options-section": "विकल्प",
 	"cite-ve-dialog-reference-title": "संदर्भ",
-	"cite-ve-dialog-reference-useexisting-full-label": "पहले से इस पृष्ठ पर मौजूद उद्धरण का पुन: उपयोग करें",
-	"cite-ve-dialog-reference-useexisting-label": "मौजूदा सन्दर्भ का प्रयोग करें",
 	"cite-ve-dialog-reference-useexisting-tool": "पुन: उपयोग",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "सामान्य उद्धरणों की सूची",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "समूह \"$1\" के लिए उद्धरणों की सूची",

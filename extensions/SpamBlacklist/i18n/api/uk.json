@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Piramidion",
+			"Ата"
+		]
+	},
+	"apihelp-spamblacklist-description": "Перевірити одну або кілька URL-адрес через SpamBlacklist.",
+	"apihelp-spamblacklist-example-1": "Перевірка двох URL-адрес по чорному списку",
+	"apihelp-spamblacklist-param-url": "URL-адреса для перевірки у чорному списку.",
+	"apihelp-spamblacklist-summary": "Перевірити одну або кілька URL-адрес на наявність у SpamBlacklist."
+}

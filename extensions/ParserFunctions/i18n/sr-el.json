@@ -3,11 +3,12 @@
 		"authors": [
 			"Michaello",
 			"Milicevic01",
+			"Zoranzoki21",
 			"Сербијана"
 		]
 	},
 	"pfunc_desc": "obogati parser logičkim funkcijama",
-	"pfunc_time_error": "Greška: Pogrešno vreme.",
+	"pfunc_time_error": "Greška: nevažeće vreme.",
 	"pfunc_time_too_long": "Greška: previše #time poziva",
 	"pfunc_rel2abs_invalid_depth": "Greška: nepravilna dubina u putanji: „$1“ (pokušaj pristupa čvoru iznad korenskog (root)).",
 	"pfunc_expr_stack_exhausted": "Greška u izrazu: stek napunjen",

@@ -1,11 +1,13 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * @covers JobQueueMemory
  *
  * @group JobQueue
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class JobQueueMemoryTest extends PHPUnit\Framework\TestCase {
@@ -16,10 +18,13 @@ class JobQueueMemoryTest extends PHPUnit\Framework\TestCase {
 	 * @return JobQueueMemory
 	 */
 	private function newJobQueue() {
+		$services = MediaWikiServices::getInstance();
+
 		return JobQueue::factory( [
 			'class' => JobQueueMemory::class,
-			'wiki' => wfWikiID(),
+			'domain' => WikiMap::getCurrentWikiDbDomain()->getId(),
 			'type' => 'null',
+			'idGenerator' => $services->getGlobalIdGenerator(),
 		] );
 	}
 

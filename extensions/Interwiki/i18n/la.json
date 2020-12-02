@@ -13,7 +13,6 @@
 	"interwiki-prefix-label": "Praefixum:",
 	"interwiki_error": "ERROR: Tabula intervica est vacua, aut aerumna alia occurrit.",
 	"interwiki_reasonfield": "Causa:",
-	"interwiki_delquestion": "Removens \"$1\"",
 	"interwiki_deleting": "Delens praefixum \"$1\".",
 	"interwiki_deleted": "Praefixum \"$1\" prospere remotum est ex tabula intervica.",
 	"interwiki_delfailed": "Praefixum \"$1\" ex tabula intervica removeri non potuit.",

@@ -3,11 +3,11 @@
 		"authors": [
 			"Carla404",
 			"Dicionarista",
-			"Eduardo.mps",
-			"Rafael Vargas",
-			"555",
 			"Eduardo Addad de Oliveira",
-			"Felipe L. Ewald"
+			"Eduardo.mps",
+			"Felipe L. Ewald",
+			"Rafael Vargas",
+			555
 		]
 	},
 	"categorytree": "Árvore de categorias",
@@ -39,10 +39,5 @@
 	"categorytree-no-pages": "sem páginas nem subcategorias",
 	"categorytree-not-found": "A categoria <i>$1</i> não foi encontrada",
 	"categorytree-error": "Problema ao acessar os dados.",
-	"categorytree-retry": "Aguarde um momento e tente novamente.",
-	"apihelp-categorytree-description": "Módulo interno para a extensão \"Árvore de categorias\" (<i>CategoryTree</i>).",
-	"apihelp-categorytree-summary": "Módulo interno para a extensão \"Árvore de categorias\" (<i>CategoryTree</i>).",
-	"apihelp-categorytree-param-category": "Título no espaço nominal Categoria, o prefixo será ignorado se for fornecido.",
-	"apihelp-categorytree-param-options": "Opções para o construtor CategoryTree como objeto JSON. A opção <var>depth</var> tem o valor predefinido <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "As opções devem ser um objeto JSON válido."
+	"categorytree-retry": "Aguarde um momento e tente novamente."
 }

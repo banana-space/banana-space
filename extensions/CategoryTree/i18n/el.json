@@ -5,16 +5,17 @@
 			"Badseed",
 			"Consta",
 			"Dead3y3",
+			"Nikosgranturismogt",
 			"Protnet",
-			"ZaDiak",
-			"SucreRouge"
+			"SucreRouge",
+			"ZaDiak"
 		]
 	},
 	"categorytree": "Δέντρο κατηγορίας",
 	"categorytree-portlet": "Κατηγορίες",
 	"categorytree-legend": "Εμφάνιση δέντρου κατηγορίας",
 	"categorytree-desc": "Πλοηγηθείτε δυναμικά στη [[Special:CategoryTree|δομή της κατηγορίας]]",
-	"categorytree-header": "Εισαγάγετε όνομα κατηγορίας για να δείτε τα περιεχόμενά της ως δεντρική δομή.\nΣημειώστε ότι αυτό απαιτεί προηγμένη λειτουργικότητα JavaScript γνωστή ως AJAX.\nΑν έχετε πολύ παλιό περιηγητή, ή αν έχετε απενεργοποιημένο το JavaScript, δεν θα δουλέψει.",
+	"categorytree-header": "Εισαγάγετε όνομα κατηγορίας για να δείτε τα περιεχόμενά της ως δεντρική δομή. (απαιτεί JavaScript).",
 	"categorytree-category": "Κατηγορία:",
 	"categorytree-go": "Εμφάνιση δέντρου",
 	"categorytree-parents": "Γονείς",

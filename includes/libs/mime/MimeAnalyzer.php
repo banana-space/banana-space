@@ -21,6 +21,9 @@
  */
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
+use Wikimedia\Mime\MimeMap;
+use Wikimedia\Mime\MimeMapMinimal;
 
 /**
  * Implements functions related to MIME types such as detection and mapping to file extension
@@ -46,11 +49,13 @@ class MimeAnalyzer implements LoggerAwareInterface {
 	protected $mediaTypes = null;
 	/** @var array Map of MIME type aliases */
 	protected $mimeTypeAliases = null;
-	/** @var array Map of MIME types to file extensions (as a space separated list) */
-	protected $mimetoExt = null;
+	/** @var array<string,string[]> Map of MIME types to file extensions */
+	protected $mimeToExts = [];
+	/** @var array<string,string[]> Map of file extensions to MIME types */
+	protected $extToMimes = [];
 
 	/** @var array Map of file extensions types to MIME types (as a space separated list) */
-	public $mExtToMime = null; // legacy name; field accessed by hooks
+	public $mExtToMime = []; // legacy name; field accessed by hooks
 
 	/** @var IEContentAnalyzer */
 	protected $IEAnalyzer;
@@ -63,118 +68,8 @@ class MimeAnalyzer implements LoggerAwareInterface {
 	/** @var LoggerInterface */
 	private $logger;
 
-	/**
-	 * Defines a set of well known MIME types
-	 * This is used as a fallback to mime.types files.
-	 * An extensive list of well known MIME types is provided by
-	 * the file mime.types in the includes directory.
-	 *
-	 * This list concatenated with mime.types is used to create a MIME <-> ext
-	 * map. Each line contains a MIME type followed by a space separated list of
-	 * extensions. If multiple extensions for a single MIME type exist or if
-	 * multiple MIME types exist for a single extension then in most cases
-	 * MediaWiki assumes that the first extension following the MIME type is the
-	 * canonical extension, and the first time a MIME type appears for a certain
-	 * extension is considered the canonical MIME type.
-	 *
-	 * (Note that appending the type file list to the end of self::$wellKnownTypes
-	 * sucks because you can't redefine canonical types. This could be fixed by
-	 * appending self::$wellKnownTypes behind type file list, but who knows
-	 * what will break? In practice this probably isn't a problem anyway -- Bryan)
-	 */
-	protected static $wellKnownTypes = <<<EOT
-application/ogg ogx ogg ogm ogv oga spx opus
-application/pdf pdf
-application/vnd.oasis.opendocument.chart odc
-application/vnd.oasis.opendocument.chart-template otc
-application/vnd.oasis.opendocument.database odb
-application/vnd.oasis.opendocument.formula odf
-application/vnd.oasis.opendocument.formula-template otf
-application/vnd.oasis.opendocument.graphics odg
-application/vnd.oasis.opendocument.graphics-template otg
-application/vnd.oasis.opendocument.image odi
-application/vnd.oasis.opendocument.image-template oti
-application/vnd.oasis.opendocument.presentation odp
-application/vnd.oasis.opendocument.presentation-template otp
-application/vnd.oasis.opendocument.spreadsheet ods
-application/vnd.oasis.opendocument.spreadsheet-template ots
-application/vnd.oasis.opendocument.text odt
-application/vnd.oasis.opendocument.text-master otm
-application/vnd.oasis.opendocument.text-template ott
-application/vnd.oasis.opendocument.text-web oth
-application/javascript js
-application/x-shockwave-flash swf
-audio/midi mid midi kar
-audio/mpeg mpga mpa mp2 mp3
-audio/x-aiff aif aiff aifc
-audio/x-wav wav
-audio/ogg oga spx ogg opus
-audio/opus opus ogg oga ogg spx
-image/x-bmp bmp
-image/gif gif
-image/jpeg jpeg jpg jpe
-image/png png
-image/svg+xml svg
-image/svg svg
-image/tiff tiff tif
-image/vnd.djvu djvu
-image/x.djvu djvu
-image/x-djvu djvu
-image/x-portable-pixmap ppm
-image/x-xcf xcf
-text/plain txt
-text/html html htm
-video/ogg ogv ogm ogg
-video/mpeg mpg mpeg
-EOT;
-
-	/**
-	 * Defines a set of well known MIME info entries
-	 * This is used as a fallback to mime.info files.
-	 * An extensive list of well known MIME types is provided by
-	 * the file mime.info in the includes directory.
-	 */
-	protected static $wellKnownInfo = <<<EOT
-application/pdf [OFFICE]
-application/vnd.oasis.opendocument.chart [OFFICE]
-application/vnd.oasis.opendocument.chart-template [OFFICE]
-application/vnd.oasis.opendocument.database [OFFICE]
-application/vnd.oasis.opendocument.formula [OFFICE]
-application/vnd.oasis.opendocument.formula-template [OFFICE]
-application/vnd.oasis.opendocument.graphics [OFFICE]
-application/vnd.oasis.opendocument.graphics-template [OFFICE]
-application/vnd.oasis.opendocument.image [OFFICE]
-application/vnd.oasis.opendocument.image-template [OFFICE]
-application/vnd.oasis.opendocument.presentation [OFFICE]
-application/vnd.oasis.opendocument.presentation-template [OFFICE]
-application/vnd.oasis.opendocument.spreadsheet [OFFICE]
-application/vnd.oasis.opendocument.spreadsheet-template [OFFICE]
-application/vnd.oasis.opendocument.text [OFFICE]
-application/vnd.oasis.opendocument.text-template [OFFICE]
-application/vnd.oasis.opendocument.text-master [OFFICE]
-application/vnd.oasis.opendocument.text-web [OFFICE]
-application/javascript text/javascript application/x-javascript [EXECUTABLE]
-application/x-shockwave-flash [MULTIMEDIA]
-audio/midi [AUDIO]
-audio/x-aiff [AUDIO]
-audio/x-wav [AUDIO]
-audio/mp3 audio/mpeg [AUDIO]
-application/ogg audio/ogg video/ogg [MULTIMEDIA]
-image/x-bmp image/x-ms-bmp image/bmp [BITMAP]
-image/gif [BITMAP]
-image/jpeg [BITMAP]
-image/png [BITMAP]
-image/svg+xml [DRAWING]
-image/tiff [BITMAP]
-image/vnd.djvu [BITMAP]
-image/x-xcf [BITMAP]
-image/x-portable-pixmap [BITMAP]
-text/plain [TEXT]
-text/html [TEXT]
-video/ogg [VIDEO]
-video/mpeg [VIDEO]
-unknown/unknown application/octet-stream application/x-empty [UNKNOWN]
-EOT;
+	/** @var string Use the full, built-in MIME mapping rather than load from a file */
+	public const USE_INTERNAL = 'internal';
 
 	/**
 	 * @param array $params Configuration map, includes:
@@ -195,60 +90,70 @@ EOT;
 		$this->typeFile = $params['typeFile'];
 		$this->infoFile = $params['infoFile'];
 		$this->xmlTypes = $params['xmlTypes'];
-		$this->initCallback = isset( $params['initCallback'] )
-			? $params['initCallback']
-			: null;
-		$this->detectCallback = isset( $params['detectCallback'] )
-			? $params['detectCallback']
-			: null;
-		$this->guessCallback = isset( $params['guessCallback'] )
-			? $params['guessCallback']
-			: null;
-		$this->extCallback = isset( $params['extCallback'] )
-			? $params['extCallback']
-			: null;
-		$this->logger = isset( $params['logger'] )
-			? $params['logger']
-			: new \Psr\Log\NullLogger();
+		$this->initCallback = $params['initCallback'] ?? null;
+		$this->detectCallback = $params['detectCallback'] ?? null;
+		$this->guessCallback = $params['guessCallback'] ?? null;
+		$this->extCallback = $params['extCallback'] ?? null;
+		$this->logger = $params['logger'] ?? new NullLogger();
 
 		$this->loadFiles();
 	}
 
 	protected function loadFiles() {
-		/**
-		 *   --- load mime.types ---
-		 */
-
 		# Allow media handling extensions adding MIME-types and MIME-info
 		if ( $this->initCallback ) {
 			call_user_func( $this->initCallback, $this );
 		}
 
-		$types = self::$wellKnownTypes;
-
-		$mimeTypeFile = $this->typeFile;
-		if ( $mimeTypeFile ) {
-			if ( is_file( $mimeTypeFile ) && is_readable( $mimeTypeFile ) ) {
-				$this->logger->info( __METHOD__ . ": loading mime types from $mimeTypeFile\n" );
-				$types .= "\n";
-				$types .= file_get_contents( $mimeTypeFile );
-			} else {
-				$this->logger->info( __METHOD__ . ": can't load mime types from $mimeTypeFile\n" );
-			}
+		$rawTypes = $this->extraTypes;
+		if ( $this->typeFile === self::USE_INTERNAL ) {
+			$this->mimeToExts = MimeMap::MIME_EXTENSIONS;
 		} else {
-			$this->logger->info( __METHOD__ .
-				": no mime types file defined, using built-ins only.\n" );
+			$this->mimeToExts = MimeMapMinimal::MIME_EXTENSIONS;
+			if ( $this->typeFile ) {
+				$rawTypes = file_get_contents( $this->typeFile ) . "\n" . $this->extraTypes;
+			}
+		}
+		if ( $rawTypes ) {
+			$this->parseMimeTypes( $rawTypes );
 		}
 
-		$types .= "\n" . $this->extraTypes;
+		// Build the reverse mapping (extension => MIME type).
+		foreach ( $this->mimeToExts as $mime => $exts ) {
+			foreach ( $exts as $ext ) {
+				$this->extToMimes[$ext][] = $mime;
+			}
+		}
 
-		$types = str_replace( [ "\r\n", "\n\r", "\n\n", "\r\r", "\r" ], "\n", $types );
-		$types = str_replace( "\t", " ", $types );
+		// Migrate items from the legacy $this->mExtToMime field.
+		// TODO: Remove this when mExtToMime is finally removed.
+		foreach ( $this->mExtToMime as $ext => $mimes ) {
+			foreach ( explode( ' ', $mimes ) as $mime ) {
+				$this->extToMimes[$ext][] = $mime;
+			}
+		}
 
-		$this->mimetoExt = [];
-		$this->mExtToMime = [];
+		$rawInfo = $this->extraInfo;
+		if ( $this->infoFile === self::USE_INTERNAL ) {
+			$this->mimeTypeAliases = MimeMap::MIME_TYPE_ALIASES;
+			$this->mediaTypes = MimeMap::MEDIA_TYPES;
+		} else {
+			$this->mimeTypeAliases = MimeMapMinimal::MIME_TYPE_ALIASES;
+			$this->mediaTypes = MimeMapMinimal::MEDIA_TYPES;
+			if ( $this->infoFile ) {
+				$rawInfo = file_get_contents( $this->infoFile ) . "\n" . $this->extraInfo;
+			}
+		}
+		if ( $rawInfo ) {
+			$this->parseMimeInfo( $rawInfo );
+		}
+	}
 
-		$lines = explode( "\n", $types );
+	protected function parseMimeTypes( $rawMimeTypes ) {
+		$rawMimeTypes = str_replace( [ "\r\n", "\n\r", "\n\n", "\r\r", "\r" ], "\n", $rawMimeTypes );
+		$rawMimeTypes = str_replace( "\t", " ", $rawMimeTypes );
+
+		$lines = explode( "\n", $rawMimeTypes );
 		foreach ( $lines as $s ) {
 			$s = trim( $s );
 			if ( empty( $s ) ) {
@@ -272,58 +177,20 @@ EOT;
 				continue;
 			}
 
-			if ( !empty( $this->mimetoExt[$mime] ) ) {
-				$this->mimetoExt[$mime] .= ' ' . $ext;
-			} else {
-				$this->mimetoExt[$mime] = $ext;
-			}
-
-			$extensions = explode( ' ', $ext );
-
-			foreach ( $extensions as $e ) {
-				$e = trim( $e );
-				if ( empty( $e ) ) {
-					continue;
-				}
-
-				if ( !empty( $this->mExtToMime[$e] ) ) {
-					$this->mExtToMime[$e] .= ' ' . $mime;
-				} else {
-					$this->mExtToMime[$e] = $mime;
-				}
+			$tokens = preg_split( '/\s+/', $s, -1, PREG_SPLIT_NO_EMPTY );
+			if ( count( $tokens ) > 1 ) {
+				$mime = array_shift( $tokens );
+				$this->mimeToExts[$mime] = array_values( array_unique(
+					array_merge( $this->mimeToExts[$mime] ?? [], $tokens ) ) );
 			}
 		}
+	}
 
-		/**
-		 *   --- load mime.info ---
-		 */
+	protected function parseMimeInfo( $rawMimeInfo ) {
+		$rawMimeInfo = str_replace( [ "\r\n", "\n\r", "\n\n", "\r\r", "\r" ], "\n", $rawMimeInfo );
+		$rawMimeInfo = str_replace( "\t", " ", $rawMimeInfo );
 
-		$mimeInfoFile = $this->infoFile;
-
-		$info = self::$wellKnownInfo;
-
-		if ( $mimeInfoFile ) {
-			if ( is_file( $mimeInfoFile ) && is_readable( $mimeInfoFile ) ) {
-				$this->logger->info( __METHOD__ . ": loading mime info from $mimeInfoFile\n" );
-				$info .= "\n";
-				$info .= file_get_contents( $mimeInfoFile );
-			} else {
-				$this->logger->info( __METHOD__ . ": can't load mime info from $mimeInfoFile\n" );
-			}
-		} else {
-			$this->logger->info( __METHOD__ .
-				": no mime info file defined, using built-ins only.\n" );
-		}
-
-		$info .= "\n" . $this->extraInfo;
-
-		$info = str_replace( [ "\r\n", "\n\r", "\n\n", "\r\r", "\r" ], "\n", $info );
-		$info = str_replace( "\t", " ", $info );
-
-		$this->mimeTypeAliases = [];
-		$this->mediaTypes = [];
-
-		$lines = explode( "\n", $info );
+		$lines = explode( "\n", $rawMimeInfo );
 		foreach ( $lines as $s ) {
 			$s = trim( $s );
 			if ( empty( $s ) ) {
@@ -350,7 +217,7 @@ EOT;
 				$mtype = MEDIATYPE_UNKNOWN;
 			}
 
-			$m = explode( ' ', $s );
+			$m = preg_split( '/\s+/', $s, -1, PREG_SPLIT_NO_EMPTY );
 
 			if ( !isset( $this->mediaTypes[$mtype] ) ) {
 				$this->mediaTypes[$mtype] = [];
@@ -383,7 +250,7 @@ EOT;
 	/**
 	 * Adds to the list mapping MIME to file extensions.
 	 * As an extension author, you are encouraged to submit patches to
-	 * MediaWiki's core to add new MIME types to mime.types.
+	 * MediaWiki's core to add new MIME types to MimeMap.php.
 	 * @param string $types
 	 */
 	public function addExtraTypes( $types ) {
@@ -393,7 +260,7 @@ EOT;
 	/**
 	 * Adds to the list mapping MIME to media type.
 	 * As an extension author, you are encouraged to submit patches to
-	 * MediaWiki's core to add new MIME info to mime.info.
+	 * MediaWiki's core to add new MIME info to MimeMap.php.
 	 * @param string $info
 	 */
 	public function addExtraInfo( $info ) {
@@ -405,60 +272,95 @@ EOT;
 	 * separated string or null if the MIME type was unrecognized. Resolves
 	 * MIME type aliases.
 	 *
+	 * @deprecated since 1.35 Use getExtensionsFromMimeType() instead.
 	 * @param string $mime
 	 * @return string|null
 	 */
 	public function getExtensionsForType( $mime ) {
+		$exts = $this->getExtensionsFromMimeType( $mime );
+		return $exts ? implode( ' ', $exts ) : null;
+	}
+
+	/**
+	 * Returns an array of file extensions associated with a given MIME type.
+	 * The returned array is empty if the MIME type was unrecognized. Resolves
+	 * MIME type aliases.
+	 *
+	 * @since 1.35
+	 * @param string $mime
+	 * @return array
+	 */
+	public function getExtensionsFromMimeType( $mime ) {
 		$mime = strtolower( $mime );
-
-		// Check the mime-to-ext map
-		if ( isset( $this->mimetoExt[$mime] ) ) {
-			return $this->mimetoExt[$mime];
-		}
-
-		// Resolve the MIME type to the canonical type
-		if ( isset( $this->mimeTypeAliases[$mime] ) ) {
+		if ( !isset( $this->mimeToExts[$mime] ) && isset( $this->mimeTypeAliases[$mime] ) ) {
 			$mime = $this->mimeTypeAliases[$mime];
-			if ( isset( $this->mimetoExt[$mime] ) ) {
-				return $this->mimetoExt[$mime];
-			}
 		}
+		return $this->mimeToExts[$mime] ?? [];
+	}
 
-		return null;
+	/**
+	 * Returns an array of MIME types associated with a given file extension.
+	 * The returned array is empty if the file extension is not associated with
+	 * any MIME types.
+	 *
+	 * @since 1.35
+	 * @param string $ext
+	 * @return array
+	 */
+	public function getMimeTypesFromExtension( $ext ) {
+		$ext = strtolower( $ext );
+		return $this->extToMimes[$ext] ?? [];
+	}
+
+	/**
+	 * Returns a single MIME type for a given file extension or null if unknown.
+	 * This is always the first type from the list returned by getMimeTypesFromExtension($ext).
+	 *
+	 * @since 1.35
+	 * @param string $ext
+	 * @return string|null
+	 */
+	public function getMimeTypeFromExtensionOrNull( $ext ) {
+		$types = $this->getMimeTypesFromExtension( $ext );
+		return $types[0] ?? null;
+	}
+
+	/**
+	 * Returns a single file extension for a given MIME type or null if unknown.
+	 * This is always the first type from the list returned by getExtensionsFromMimeType($mime).
+	 *
+	 * @deprecated since 1.35 Use getMimeTypeFromExtensionOrNull() instead.
+	 * @param string $ext
+	 * @return string|null
+	 */
+	public function guessTypesForExtension( $ext ) {
+		return $this->getMimeTypeFromExtensionOrNull( $ext );
 	}
 
 	/**
 	 * Returns a list of MIME types for a given file extension as a space
 	 * separated string or null if the extension was unrecognized.
 	 *
+	 * @deprecated since 1.35 Use getMimeTypesFromExtension() instead.
 	 * @param string $ext
 	 * @return string|null
 	 */
 	public function getTypesForExtension( $ext ) {
-		$ext = strtolower( $ext );
-
-		$r = isset( $this->mExtToMime[$ext] ) ? $this->mExtToMime[$ext] : null;
-		return $r;
+		$types = $this->getMimeTypesFromExtension( $ext );
+		return $types ? implode( ' ', $types ) : null;
 	}
 
 	/**
-	 * Returns a single MIME type for a given file extension or null if unknown.
-	 * This is always the first type from the list returned by getTypesForExtension($ext).
+	 * Returns a single file extension for a given MIME type or null if unknown.
+	 * This is always the first type from the list returned by getExtensionsFromMimeType($mime).
 	 *
-	 * @param string $ext
+	 * @since 1.35
+	 * @param string $mime
 	 * @return string|null
 	 */
-	public function guessTypesForExtension( $ext ) {
-		$m = $this->getTypesForExtension( $ext );
-		if ( is_null( $m ) ) {
-			return null;
-		}
-
-		// TODO: Check if this is needed; strtok( $m, ' ' ) should be sufficient
-		$m = trim( $m );
-		$m = preg_replace( '/\s.*$/', '', $m );
-
-		return $m;
+	public function getExtensionFromMimeTypeOrNull( $mime ) {
+		$exts = $this->getExtensionsFromMimeType( $mime );
+		return $exts[0] ?? null;
 	}
 
 	/**
@@ -471,16 +373,13 @@ EOT;
 	 * @return bool|null
 	 */
 	public function isMatchingExtension( $extension, $mime ) {
-		$ext = $this->getExtensionsForType( $mime );
+		$exts = $this->getExtensionsFromMimeType( $mime );
 
-		if ( !$ext ) {
+		if ( !$exts ) {
 			return null; // Unknown MIME type
 		}
 
-		$ext = explode( ' ', $ext );
-
-		$extension = strtolower( $extension );
-		return in_array( $extension, $ext );
+		return in_array( strtolower( $extension ), $exts );
 	}
 
 	/**
@@ -518,7 +417,7 @@ EOT;
 	 * @param string $extension
 	 * @return bool
 	 */
-	function isRecognizableExtension( $extension ) {
+	public function isRecognizableExtension( $extension ) {
 		static $types = [
 			// Types recognized by getimagesize()
 			'gif', 'jpeg', 'jpg', 'png', 'swf', 'psd',
@@ -546,10 +445,13 @@ EOT;
 	 * by looking at the file extension. Typically, this method would be called on the
 	 * result of guessMimeType().
 	 *
+	 * XXX: Null-returning behavior is probably an accident and definitely confusing (T253483).
+	 *
 	 * @param string $mime The MIME type, typically guessed from a file's content.
 	 * @param string $ext The file extension, as taken from the file name
 	 *
-	 * @return string The MIME type
+	 * @return string|null The improved MIME type, or null if the MIME type is
+	 *   unknown/unknown and the extension is not recognized.
 	 */
 	public function improveTypeFromExtension( $mime, $ext ) {
 		if ( $mime === 'unknown/unknown' ) {
@@ -559,13 +461,13 @@ EOT;
 			} else {
 				// Not something we can detect, so simply
 				// trust the file extension
-				$mime = $this->guessTypesForExtension( $ext );
+				$mime = $this->getMimeTypeFromExtensionOrNull( $ext );
 			}
 		} elseif ( $mime === 'application/x-opc+zip' ) {
 			if ( $this->isMatchingExtension( $ext, $mime ) ) {
 				// A known file extension for an OPC file,
 				// find the proper MIME type for that file extension
-				$mime = $this->guessTypesForExtension( $ext );
+				$mime = $this->getMimeTypeFromExtensionOrNull( $ext );
 			} else {
 				$this->logger->info( __METHOD__ .
 					": refusing to guess better type for $mime file, " .
@@ -577,7 +479,7 @@ EOT;
 			// If detected as text/plain, and has an extension which is textual
 			// improve to the extension's type. For example, csv and json are often
 			// misdetected as text/plain.
-			$mime = $this->guessTypesForExtension( $ext );
+			$mime = $this->getMimeTypeFromExtensionOrNull( $ext );
 		}
 
 		# Media handling extensions can improve the MIME detected
@@ -663,7 +565,6 @@ EOT;
 				"Seeking $tailLength bytes from EOF failed in " . __METHOD__ );
 		}
 		$tail = $tailLength ? fread( $f, $tailLength ) : '';
-		fclose( $f );
 
 		$this->logger->info( __METHOD__ .
 			": analyzing head and tail of $file for magic numbers.\n" );
@@ -734,6 +635,12 @@ EOT;
 			return "image/webp";
 		}
 
+		/* Look for MS Compound Binary (OLE) files */
+		if ( strncmp( $head, "\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1", 8 ) == 0 ) {
+			$this->logger->info( __METHOD__ . ': recognized MS CFB (OLE) file' );
+			return $this->detectMicrosoftBinaryType( $f );
+		}
+
 		/**
 		 * Look for PHP.  Check for this before HTML/XML...  Warning: this is a
 		 * heuristic, and won't match a file with a lot of non-PHP before.  It
@@ -765,11 +672,7 @@ EOT;
 		Wikimedia\restoreWarnings();
 		if ( $xml->wellFormed ) {
 			$xmlTypes = $this->xmlTypes;
-			if ( isset( $xmlTypes[$xml->getRootElement()] ) ) {
-				return $xmlTypes[$xml->getRootElement()];
-			} else {
-				return 'application/xml';
-			}
+			return $xmlTypes[$xml->getRootElement()] ?? 'application/xml';
 		}
 
 		/**
@@ -813,9 +716,16 @@ EOT;
 		}
 
 		// Check for ZIP variants (before getimagesize)
-		if ( strpos( $tail, "PK\x05\x06" ) !== false ) {
-			$this->logger->info( __METHOD__ . ": ZIP header present in $file\n" );
-			return $this->detectZipType( $head, $tail, $ext );
+		$eocdrPos = strpos( $tail, "PK\x05\x06" );
+		if ( $eocdrPos !== false && $eocdrPos <= strlen( $tail ) - 22 ) {
+			$this->logger->info( __METHOD__ . ": ZIP signature present in $file\n" );
+			// Check if it really is a ZIP file, make sure the EOCDR is at the end (T40432)
+			$commentLength = unpack( "n", substr( $tail, $eocdrPos + 20 ) )[1];
+			if ( $eocdrPos + 22 + $commentLength !== strlen( $tail ) ) {
+				$this->logger->info( __METHOD__ . ": ZIP EOCDR not at end. Not a ZIP file." );
+			} else {
+				return $this->detectZipType( $head, $tail, $ext );
+			}
 		}
 
 		// Check for STL (3D) files
@@ -853,7 +763,7 @@ EOT;
 		$callback = $this->guessCallback;
 		if ( $callback ) {
 			$callback( $this, $head, $tail, $file, $mime /* by reference */ );
-		};
+		}
 
 		return $mime;
 	}
@@ -871,7 +781,7 @@ EOT;
 	 *
 	 * @return string
 	 */
-	function detectZipType( $header, $tail = null, $ext = false ) {
+	public function detectZipType( $header, $tail = null, $ext = false ) {
 		if ( $ext ) { # TODO: remove $ext param
 			$this->logger->info( __METHOD__ .
 				": WARNING: use of the \$ext parameter is deprecated. " .
@@ -880,6 +790,14 @@ EOT;
 
 		$mime = 'application/zip';
 		$opendocTypes = [
+			# In OASIS Open Document Format v1.2, Database front end document
+			# has a recommended MIME type of:
+			# application/vnd.oasis.opendocument.base
+			# Despite the type registered at the IANA being 'database' which is
+			# supposed to be normative.
+			# T35515
+			'base',
+
 			'chart-template',
 			'chart',
 			'formula-template',
@@ -897,7 +815,10 @@ EOT;
 			'text-web',
 			'text' ];
 
-		// https://lists.oasis-open.org/archives/office/200505/msg00006.html
+		// The list of document types is available in OASIS Open Document
+		// Format version 1.2 under Appendix C. It is not normative though,
+		// supposedly types registered at the IANA should be.
+		// http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html
 		$types = '(?:' . implode( '|', $opendocTypes ) . ')';
 		$opendocRegex = "/^mimetype(application\/vnd\.oasis\.opendocument\.$types)/";
 
@@ -918,7 +839,7 @@ EOT;
 					/* A known file extension for an OPC file,
 					 * find the proper mime type for that file extension
 					 */
-					$mime = $this->guessTypesForExtension( $ext );
+					$mime = $this->getMimeTypeFromExtensionOrNull( $ext );
 				} else {
 					$mime = "application/zip";
 				}
@@ -962,10 +883,30 @@ EOT;
 	}
 
 	/**
+	 * Detect the type of a Microsoft Compound Binary a.k.a. OLE file.
+	 * These are old style pre-ODF files such as .doc and .xls
+	 *
+	 * @param resource $handle An opened seekable file handle
+	 * @return string The detected MIME type
+	 */
+	private function detectMicrosoftBinaryType( $handle ) {
+		$info = MSCompoundFileReader::readHandle( $handle );
+		if ( !$info['valid'] ) {
+			$this->logger->info( __METHOD__ . ': invalid file format' );
+			return 'unknown/unknown';
+		}
+		if ( !$info['mime'] ) {
+			$this->logger->info( __METHOD__ . ": unrecognised document subtype" );
+			return 'unknown/unknown';
+		}
+		return $info['mime'];
+	}
+
+	/**
 	 * Internal MIME type detection. Detection is done using the fileinfo
 	 * extension if it is available. It can be overriden by callback, which could
 	 * use an external program, for example. If detection fails and $ext is not false,
-	 * the MIME type is guessed from the file extension, using guessTypesForExtension.
+	 * the MIME type is guessed from the file extension, using getMimeTypeFromExtensionOrNull.
 	 *
 	 * If the MIME type is still unknown, getimagesize is used to detect the
 	 * MIME type if the file is an image. If no MIME type can be determined,
@@ -1018,7 +959,7 @@ EOT;
 				$this->logger->info( __METHOD__ . ": refusing to guess mime type for .$ext file, "
 					. "we should have recognized it\n" );
 			} else {
-				$m = $this->guessTypesForExtension( $ext );
+				$m = $this->getMimeTypeFromExtensionOrNull( $ext );
 				if ( $m ) {
 					$this->logger->info( __METHOD__ . ": extension mime type of $file: $m\n" );
 					return $m;
@@ -1041,13 +982,13 @@ EOT;
 	 * @todo analyse file if need be
 	 * @todo look at multiple extension, separately and together.
 	 *
-	 * @param string $path Full path to the image file, in case we have to look at the contents
+	 * @param string|null $path Full path to the image file, in case we have to look at the contents
 	 *        (if null, only the MIME type is used to determine the media type code).
-	 * @param string $mime MIME type. If null it will be guessed using guessMimeType.
+	 * @param string|null $mime MIME type. If null it will be guessed using guessMimeType.
 	 *
 	 * @return string A value to be used with the MEDIATYPE_xxx constants.
 	 */
-	function getMediaType( $path = null, $mime = null ) {
+	public function getMediaType( $path = null, $mime = null ) {
 		if ( !$mime && !$path ) {
 			return MEDIATYPE_UNKNOWN;
 		}
@@ -1059,7 +1000,7 @@ EOT;
 
 		// Special code for ogg - detect if it's video (theora),
 		// else label it as sound.
-		if ( $mime == 'application/ogg' && file_exists( $path ) ) {
+		if ( $mime == 'application/ogg' && is_string( $path ) && file_exists( $path ) ) {
 			// Read a chunk of the file
 			$f = fopen( $path, "rt" );
 			if ( !$f ) {
@@ -1132,11 +1073,11 @@ EOT;
 	 * distinguish them from MIME types.
 	 *
 	 * This function relies on the mapping defined by $this->mMediaTypes
-	 * @access private
+	 * @internal
 	 * @param string $extMime
 	 * @return int|string
 	 */
-	function findMediaType( $extMime ) {
+	public function findMediaType( $extMime ) {
 		if ( strpos( $extMime, '.' ) === 0 ) {
 			// If it's an extension, look up the MIME types
 			$m = $this->getTypesForExtension( substr( $extMime, 1 ) );
@@ -1194,7 +1135,7 @@ EOT;
 	 * @return IEContentAnalyzer
 	 */
 	protected function getIEContentAnalyzer() {
-		if ( is_null( $this->IEAnalyzer ) ) {
+		if ( $this->IEAnalyzer === null ) {
 			$this->IEAnalyzer = new IEContentAnalyzer;
 		}
 		return $this->IEAnalyzer;

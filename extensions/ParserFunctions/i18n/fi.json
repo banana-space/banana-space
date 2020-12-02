@@ -5,6 +5,7 @@
 			"Cimon Avaro",
 			"Linnea",
 			"Nike",
+			"Valtlait",
 			"VezonThunder"
 		]
 	},
@@ -21,7 +22,7 @@
 	"pfunc_expr_unexpected_operator": "Virhe lausekkeessa: odottamaton $1-operaattori",
 	"pfunc_expr_missing_operand": "Virhe lausekkeessa: operaattorin $1 edellyttämä operandi puuttuu",
 	"pfunc_expr_unexpected_closing_bracket": "Virhe lausekkeessa: odottamaton sulkeva sulkumerkki",
-	"pfunc_expr_unrecognised_punctuation": "Virhe lausekkeessa: tunnistamaton välimerkki ”$1”",
+	"pfunc_expr_unrecognised_punctuation": "Virhe lausekkeessa: tunnistamaton välimerkki ”$1”.",
 	"pfunc_expr_unclosed_bracket": "Virhe ilmauksessa: sulkeva sulkumerkki puuttuu",
 	"pfunc_expr_division_by_zero": "Virhe: Jako nollalla",
 	"pfunc_expr_invalid_argument": "Virheellinen arvo $1: < -1 tai > 1",

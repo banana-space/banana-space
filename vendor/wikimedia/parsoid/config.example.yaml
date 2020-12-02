@@ -1,0 +1,111 @@
+# This is a sample configuration file
+#
+# Copy this file to config.yaml and edit that file to fit your needs.
+#
+# Also see:
+# - `npm start -- -h` for more information about passing config files via
+#   the commandline.
+# - lib/config/ParsoidConfig.js for all the properties that you can configure
+#   here. Not all properties are documented here.
+
+# The number of http workers (as opposed to `cpu_workers` below)
+#num_workers: 1
+
+worker_heartbeat_timeout: 300000
+
+logging:
+    level: info
+
+#metrics:
+#    type: log
+
+services:
+  - module: lib/index.js
+    entrypoint: apiServiceWorker
+    conf:
+        # For backwards compatibility, and to continue to support non-static
+        # configs for the time being, optionally provide a path to a
+        # localsettings.js file.  See localsettings.example.js
+        #localsettings: ./localsettings.js
+
+        # Set your own user-agent string
+        # Otherwise, defaults to:
+        #   'Parsoid/<current-version-defined-in-package.json>'
+        #userAgent: 'My-User-Agent-String'
+
+        # Configure Parsoid to point to your MediaWiki instances.
+        mwApis:
+        - # This is the only required parameter,
+          # the URL of you MediaWiki API endpoint.
+          uri: 'http://localhost/w/api.php'
+          # The "domain" is used for communication with Visual Editor
+          # and RESTBase.  It defaults to the hostname portion of
+          # the `uri` property above, but you can manually set it
+          # to an arbitrary string. It must match the "domain" set
+          # in $wgVirtualRestConfig.
+          domain: 'localhost'  # optional
+          # To specify a proxy (or proxy headers) specific to this prefix
+          # (which overrides defaultAPIProxyURI). Alternatively, set `proxy`
+          # to `null` to override and force no proxying when a default proxy
+          # has been set.
+          #proxy:
+          #    uri: 'http://my.proxy:1234/'
+          #    headers:  # optional
+          #        'X-Forwarded-Proto': 'https'
+          # See below, defaults to true.
+          #strictSSL: false
+
+        # Enable using compute workers to parse requests.
+        #useWorker: true
+        # The number of workers in the pool spawned by each http worker to
+        # call out for parsing.  Defaults to:
+        #   ceil(number of cpus / `num_workers`) + 1
+        #cpu_workers: 1
+
+        # We pre-define wikipedias as 'enwiki', 'dewiki' etc. Similarly
+        # for other projects: 'enwiktionary', 'enwikiquote', 'enwikibooks',
+        # 'enwikivoyage' etc.
+        # The default for this is false. Uncomment the line below if you want
+        # to load WMF's config for wikipedias, etc.
+        #loadWMF: true
+
+        # A default proxy to connect to the API endpoints.
+        # Default: undefined (no proxying).
+        # Overridden by per-wiki proxy config in setMwApi.
+        #defaultAPIProxyURI: 'http://proxy.example.org:8080'
+
+        # Enable debug mode (prints extra debugging messages)
+        #debug: true
+
+        # Use the PHP preprocessor to expand templates via the MW API (default true)
+        #usePHPPreProcessor: false
+
+        # Use selective serialization (default false)
+        #useSelser: true
+
+        # Allow cross-domain requests to the API (default '*')
+        # Sets Access-Control-Allow-Origin header
+        # disable:
+        #allowCORS: false
+        # restrict:
+        #allowCORS: 'some.domain.org'
+
+        # Allow override of port/interface:
+        #serverPort: 8000
+        #serverInterface: '127.0.0.1'
+
+        # Enable linting of some wikitext errors to the log
+        #linting: true
+        #linter:
+        #  sendAPI: false # Send lint errors to MW API instead of to the log
+        #  apiSampling: 10 # Sampling rate (1 / 10)
+
+        # Require SSL certificates to be valid (default true)
+        # Set to false when using self-signed SSL certificates
+        # Note that this can also be applied per wiki in the mwApis above
+        #strictSSL: false
+
+        # Use a different server for CSS style modules.
+        # Leaving it undefined (the default) will use the same URI as the MW API,
+        # changing api.php for load.php.
+        #modulesLoadURI: 'http://example.org/load.php'

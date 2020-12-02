@@ -40,6 +40,8 @@
  * @file
  * @ingroup Maintenance ExternalStorage
  */
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
 
 require_once __DIR__ . '/../Maintenance.php';
 
@@ -49,16 +51,6 @@ require_once __DIR__ . '/../Maintenance.php';
  * @ingroup Maintenance ExternalStorage
  */
 class CompressOld extends Maintenance {
-	/**
-	 * Option to load each revision individually.
-	 */
-	const LS_INDIVIDUAL = 0;
-
-	/**
-	 * Option to load revisions in chunks.
-	 */
-	const LS_CHUNKED = 1;
-
 	public function __construct() {
 		parent::__construct();
 		$this->addDescription( 'Compress the text of a wiki' );
@@ -104,7 +96,7 @@ class CompressOld extends Maintenance {
 		global $wgDBname;
 		if ( !function_exists( "gzdeflate" ) ) {
 			$this->fatalError( "You must enable zlib support in PHP to compress old revisions!\n" .
-				"Please see http://www.php.net/manual/en/ref.zlib.php\n" );
+				"Please see https://www.php.net/manual/en/ref.zlib.php\n" );
 		}
 
 		$type = $this->getOption( 'type', 'concat' );
@@ -184,8 +176,8 @@ class CompressOld extends Maintenance {
 	 * @return bool
 	 */
 	private function compressPage( $row, $extdb ) {
-		if ( false !== strpos( $row->old_flags, 'gzip' )
-			|| false !== strpos( $row->old_flags, 'object' )
+		if ( strpos( $row->old_flags, 'gzip' ) !== false
+			|| strpos( $row->old_flags, 'object' ) !== false
 		) {
 			# print "Already compressed row {$row->old_id}\n";
 			return false;
@@ -196,7 +188,9 @@ class CompressOld extends Maintenance {
 
 		# Store in external storage if required
 		if ( $extdb !== '' ) {
-			$storeObj = new ExternalStoreDB;
+			$esFactory = MediaWikiServices::getInstance()->getExternalStoreFactory();
+			/** @var ExternalStoreDB $storeObj */
+			$storeObj = $esFactory->getStore( 'DB' );
 			$compress = $storeObj->store( $extdb, $compress );
 			if ( $compress === false ) {
 				$this->error( "Unable to store object" );
@@ -233,15 +227,19 @@ class CompressOld extends Maintenance {
 	private function compressWithConcat( $startId, $maxChunkSize, $beginDate,
 		$endDate, $extdb = "", $maxPageId = false
 	) {
-		$loadStyle = self::LS_CHUNKED;
-
 		$dbr = $this->getDB( DB_REPLICA );
 		$dbw = $this->getDB( DB_MASTER );
 
 		# Set up external storage
 		if ( $extdb != '' ) {
-			$storeObj = new ExternalStoreDB;
+			$esFactory = MediaWikiServices::getInstance()->getExternalStoreFactory();
+			/** @var ExternalStoreDB $storeObj */
+			$storeObj = $esFactory->getStore( 'DB' );
 		}
+
+		$blobStore = MediaWikiServices::getInstance()
+			->getBlobStoreFactory()
+			->newSqlBlobStore();
 
 		# Get all articles by page_id
 		if ( !$maxPageId ) {
@@ -288,24 +286,29 @@ class CompressOld extends Maintenance {
 			}
 			$conds[] = "rev_timestamp<'" . $endDate . "'";
 		}
-		if ( $loadStyle == self::LS_CHUNKED ) {
-			$tables = [ 'revision', 'text' ];
-			$fields = [ 'rev_id', 'rev_text_id', 'old_flags', 'old_text' ];
-			$conds[] = 'rev_text_id=old_id';
-			$revLoadOptions = 'FOR UPDATE';
-		} else {
-			$tables = [ 'revision' ];
-			$fields = [ 'rev_id', 'rev_text_id' ];
-			$revLoadOptions = [];
-		}
+
+		$slotRoleStore = MediaWikiServices::getInstance()->getSlotRoleStore();
+		$tables = [ 'revision', 'slots', 'content', 'text' ];
+		$conds = array_merge( [
+			'rev_id=slot_revision_id',
+			'slot_role_id=' . $slotRoleStore->getId( SlotRecord::MAIN ),
+			'content_id=slot_content_id',
+			'SUBSTRING(content_address, 1, 3)=' . $dbr->addQuotes( 'tt:' ),
+			'SUBSTRING(content_address, 4)=old_id',
+		], $conds );
+
+		$fields = [ 'rev_id', 'old_id', 'old_flags', 'old_text' ];
+		$revLoadOptions = 'FOR UPDATE';
 
 		# Don't work with current revisions
 		# Don't lock the page table for update either -- TS 2006-04-04
 		# $tables[] = 'page';
 		# $conds[] = 'page_id=rev_page AND rev_id != page_latest';
 
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+
 		for ( $pageId = $startId; $pageId <= $maxPageId; $pageId++ ) {
-			wfWaitForSlaves();
+			$lbFactory->waitForReplication();
 
 			# Wake up
 			$dbr->ping();
@@ -359,25 +362,18 @@ class CompressOld extends Maintenance {
 				$stubs = [];
 				$this->beginTransaction( $dbw, __METHOD__ );
 				$usedChunk = false;
-				$primaryOldid = $revs[$i]->rev_text_id;
+				$primaryOldid = $revs[$i]->old_id;
 
 				# Get the text of each revision and add it to the object
-				// phpcs:ignore Generic.CodeAnalysis.ForLoopWithTestFunctionCall
 				for ( $j = 0; $j < $thisChunkSize && $chunk->isHappy(); $j++ ) {
-					$oldid = $revs[$i + $j]->rev_text_id;
+					$oldid = $revs[$i + $j]->old_id;
 
-					# Get text
-					if ( $loadStyle == self::LS_INDIVIDUAL ) {
-						$textRow = $dbw->selectRow( 'text',
-							[ 'old_flags', 'old_text' ],
-							[ 'old_id' => $oldid ],
-							__METHOD__,
-							'FOR UPDATE'
-						);
-						$text = Revision::getRevisionText( $textRow );
-					} else {
-						$text = Revision::getRevisionText( $revs[$i + $j] );
-					}
+					# Get text. We do not need the full `extractBlob` since the query is built
+					# to fetch non-externalstore blobs.
+					$text = $blobStore->decompressData(
+						$revs[$i + $j]->old_text,
+						explode( ',', $revs[$i + $j]->old_flags )
+					);
 
 					if ( $text === false ) {
 						$this->error( "\nError, unable to get text in old_id $oldid" );
@@ -428,7 +424,8 @@ class CompressOld extends Maintenance {
 									'old_flags' => 'external,utf-8',
 								], [ /* WHERE */
 									'old_id' => $stub->getReferrer(),
-								]
+								],
+								__METHOD__
 							);
 						}
 					} else {
@@ -439,20 +436,22 @@ class CompressOld extends Maintenance {
 								'old_flags' => 'object,utf-8',
 							], [ /* WHERE */
 								'old_id' => $primaryOldid
-							]
+							],
+							__METHOD__
 						);
 
 						# Store the stub objects
 						for ( $j = 1; $j < $thisChunkSize; $j++ ) {
 							# Skip if not compressing and don't overwrite the first revision
-							if ( $stubs[$j] !== false && $revs[$i + $j]->rev_text_id != $primaryOldid ) {
+							if ( $stubs[$j] !== false && $revs[$i + $j]->old_id != $primaryOldid ) {
 								$dbw->update( 'text',
 									[ /* SET */
 										'old_text' => serialize( $stubs[$j] ),
 										'old_flags' => 'object,utf-8',
 									], [ /* WHERE */
-										'old_id' => $revs[$i + $j]->rev_text_id
-									]
+										'old_id' => $revs[$i + $j]->old_id
+									],
+									__METHOD__
 								);
 							}
 						}

@@ -3,15 +3,16 @@
 		"authors": [
 			"Cekli829",
 			"PPerviz",
+			"Toghrul Rahimli",
 			"Vago",
 			"Vugar 1981",
 			"Wertuose"
 		]
 	},
-	"prefs-gadgets": "Qadjetlər",
+	"prefs-gadgets": "Qadcetlər",
 	"gadgets": "Qadcetlər",
-	"gadgetusage-gadget": "Qadcet",
-	"gadgets-title": "Qadjetlər",
+	"gadgetusage-gadget": "Qadjet",
+	"gadgets-title": "Qadcetlər",
 	"gadgets-uses": "İstifadə",
 	"gadgets-export": "İxrac",
 	"gadgets-export-title": "Qadjet ixracı",

@@ -54,7 +54,7 @@ class InCell extends InsertionMode {
 					$sourceStart );
 				return;
 			}
-			$builder->generateImpliedEndTags( null, $sourceStart );
+			$builder->generateImpliedEndTags( false, $sourceStart );
 			if ( $stack->current->htmlName !== $name ) {
 				$builder->error( "</$name> encountered when there are tags open " .
 					"which can't be closed automatically", $sourceStart );

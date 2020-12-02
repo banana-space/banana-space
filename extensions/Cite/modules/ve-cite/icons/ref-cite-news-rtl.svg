@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="2 2 20 20">
-    <path id="paper" d="M2 21h17c1 0 2-1 2-2V4H2v17zM19 6v12.278a.724.724 0 0 1-.722.722H3.998L4 6h15z"/>
-    <path id="banner" d="M17 8H6v3h11z"/>
-    <path id="text1" d="M11 12H6v2h5z"/>
-    <path id="text2" d="M17 12h-5v2h5z"/>
-    <path id="text3" d="M11 15H6v2h5z"/>
-    <path id="text4" d="M17 15h-5v2h5z"/>
-</svg>

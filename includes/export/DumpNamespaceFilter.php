@@ -35,10 +35,10 @@ class DumpNamespaceFilter extends DumpFilter {
 
 	/**
 	 * @param DumpOutput &$sink
-	 * @param array $param
+	 * @param string $param
 	 * @throws MWException
 	 */
-	function __construct( &$sink, $param ) {
+	public function __construct( &$sink, $param ) {
 		parent::__construct( $sink );
 
 		$constants = [
@@ -61,7 +61,7 @@ class DumpNamespaceFilter extends DumpFilter {
 			"NS_CATEGORY"       => NS_CATEGORY,
 			"NS_CATEGORY_TALK"  => NS_CATEGORY_TALK ];
 
-		if ( $param { 0 } == '!' ) {
+		if ( $param[0] == '!' ) {
 			$this->invert = true;
 			$param = substr( $param, 1 );
 		}
@@ -84,7 +84,7 @@ class DumpNamespaceFilter extends DumpFilter {
 	 * @param object $page
 	 * @return bool
 	 */
-	function pass( $page ) {
+	protected function pass( $page ) {
 		$match = isset( $this->namespaces[$page->page_namespace] );
 		return $this->invert xor $match;
 	}

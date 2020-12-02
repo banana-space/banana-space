@@ -12,8 +12,5 @@
 	"fancycaptcha-edit": "Pro modificar iste pagina, per favor entra le parolas que appare infra in le quadro ([[Special:Captcha/help|plus info]]):",
 	"fancycaptcha-imgcaptcha-ph": "Scribe le texto que tu vide sur le imagine",
 	"fancycaptcha-sendemail": "Pro adjutar a proteger le wiki contra le spam automatisate, per favor entra le parolas que appare infra in le quadro ([[Special:Captcha/help|plus info]]):",
-	"fancycaptcha-reload-text": "Refrescar",
-	"apihelp-fancycaptchareload-description": "Obtener un nove FancyCaptcha.",
-	"apihelp-fancycaptchareload-summary": "Obtener un nove FancyCaptcha.",
-	"apihelp-fancycaptchareload-example-1": "Obtener un nove FancyCaptcha"
+	"fancycaptcha-reload-text": "Refrescar"
 }

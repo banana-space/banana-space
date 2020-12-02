@@ -32,7 +32,7 @@
  */
 class FileOpBatch {
 	/* Timeout related parameters */
-	const MAX_BATCH_SIZE = 1000; // integer
+	private const MAX_BATCH_SIZE = 1000; // integer
 
 	/**
 	 * Attempt to perform a series of file operations.
@@ -46,7 +46,7 @@ class FileOpBatch {
 	 *
 	 * The resulting StatusValue will be "OK" unless:
 	 *   - a) unexpected operation errors occurred (network partitions, disk full...)
-	 *   - b) significant operation errors occurred and 'force' was not set
+	 *   - b) predicted operation errors occurred and 'force' was not set
 	 *
 	 * @param FileOp[] $performOps List of FileOp operations
 	 * @param array $opts Batch operation options
@@ -66,7 +66,7 @@ class FileOpBatch {
 		$batchId = $journal->getTimestampedUUID();
 		$ignoreErrors = !empty( $opts['force'] );
 		$journaled = empty( $opts['nonJournaled'] );
-		$maxConcurrency = isset( $opts['concurrency'] ) ? $opts['concurrency'] : 1;
+		$maxConcurrency = $opts['concurrency'] ?? 1;
 
 		$entries = []; // file journal entry list
 		$predicates = FileOp::newPredicates(); // account for previous ops in prechecks
@@ -142,20 +142,19 @@ class FileOpBatch {
 	 * within any given sub-batch do not depend on each other.
 	 * This will abort remaining ops on failure.
 	 *
-	 * @param array $pPerformOps Batches of file ops (batches use original indexes)
+	 * @param FileOp[][] $pPerformOps Batches of file ops (batches use original indexes)
 	 * @param StatusValue $status
 	 */
 	protected static function runParallelBatches( array $pPerformOps, StatusValue $status ) {
 		$aborted = false; // set to true on unexpected errors
 		foreach ( $pPerformOps as $performOpsBatch ) {
-			/** @var FileOp[] $performOpsBatch */
 			if ( $aborted ) { // check batch op abort flag...
 				// We can't continue (even with $ignoreErrors) as $predicates is wrong.
 				// Log the remaining ops as failed for recovery...
 				foreach ( $performOpsBatch as $i => $fileOp ) {
 					$status->success[$i] = false;
 					++$status->failCount;
-					$performOpsBatch[$i]->logFailure( 'attempt_aborted' );
+					$fileOp->logFailure( 'attempt_aborted' );
 				}
 				continue;
 			}

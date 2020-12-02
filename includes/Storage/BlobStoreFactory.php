@@ -20,10 +20,10 @@
 
 namespace MediaWiki\Storage;
 
-use Config;
-use Language;
+use ExternalStoreAccess;
+use MediaWiki\Config\ServiceOptions;
 use WANObjectCache;
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Service for instantiating BlobStores
@@ -35,9 +35,14 @@ use Wikimedia\Rdbms\LoadBalancer;
 class BlobStoreFactory {
 
 	/**
-	 * @var LoadBalancer
+	 * @var ILBFactory
 	 */
-	private $loadBalancer;
+	private $lbFactory;
+
+	/**
+	 * @var ExternalStoreAccess
+	 */
+	private $extStoreAccess;
 
 	/**
 	 * @var WANObjectCache
@@ -45,58 +50,68 @@ class BlobStoreFactory {
 	private $cache;
 
 	/**
-	 * @var Config
+	 * @var ServiceOptions
 	 */
-	private $config;
+	private $options;
 
 	/**
-	 * @var Language
+	 * @var array
+	 * @since 1.34
 	 */
-	private $contLang;
+	public const CONSTRUCTOR_OPTIONS = [
+		'CompressRevisions',
+		'DefaultExternalStore',
+		'LegacyEncoding',
+		'RevisionCacheExpiry',
+	];
 
 	public function __construct(
-		LoadBalancer $loadBalancer,
+		ILBFactory $lbFactory,
+		ExternalStoreAccess $extStoreAccess,
 		WANObjectCache $cache,
-		Config $mainConfig,
-		Language $contLang
+		ServiceOptions $options
 	) {
-		$this->loadBalancer = $loadBalancer;
+		$options->assertRequiredOptions( self::CONSTRUCTOR_OPTIONS );
+
+		$this->lbFactory = $lbFactory;
+		$this->extStoreAccess = $extStoreAccess;
 		$this->cache = $cache;
-		$this->config = $mainConfig;
-		$this->contLang = $contLang;
+		$this->options = $options;
 	}
 
 	/**
 	 * @since 1.31
 	 *
-	 * @param bool|string $wikiId The ID of the target wiki database. Use false for the local wiki.
+	 * @param bool|string $dbDomain The ID of the target wiki database. Use false for the local wiki.
 	 *
 	 * @return BlobStore
 	 */
-	public function newBlobStore( $wikiId = false ) {
-		return $this->newSqlBlobStore( $wikiId );
+	public function newBlobStore( $dbDomain = false ) {
+		return $this->newSqlBlobStore( $dbDomain );
 	}
 
 	/**
 	 * @internal Please call newBlobStore and use the BlobStore interface.
 	 *
-	 * @param bool|string $wikiId The ID of the target wiki database. Use false for the local wiki.
+	 * @param bool|string $dbDomain The ID of the target wiki database. Use false for the local wiki.
 	 *
 	 * @return SqlBlobStore
 	 */
-	public function newSqlBlobStore( $wikiId = false ) {
+	public function newSqlBlobStore( $dbDomain = false ) {
+		$lb = $this->lbFactory->getMainLB( $dbDomain );
 		$store = new SqlBlobStore(
-			$this->loadBalancer,
+			$lb,
+			$this->extStoreAccess,
 			$this->cache,
-			$wikiId
+			$dbDomain
 		);
 
-		$store->setCompressBlobs( $this->config->get( 'CompressRevisions' ) );
-		$store->setCacheExpiry( $this->config->get( 'RevisionCacheExpiry' ) );
-		$store->setUseExternalStore( $this->config->get( 'DefaultExternalStore' ) !== false );
+		$store->setCompressBlobs( $this->options->get( 'CompressRevisions' ) );
+		$store->setCacheExpiry( $this->options->get( 'RevisionCacheExpiry' ) );
+		$store->setUseExternalStore( $this->options->get( 'DefaultExternalStore' ) !== false );
 
-		if ( $this->config->get( 'LegacyEncoding' ) ) {
-			$store->setLegacyEncoding( $this->config->get( 'LegacyEncoding' ), $this->contLang );
+		if ( $this->options->get( 'LegacyEncoding' ) ) {
+			$store->setLegacyEncoding( $this->options->get( 'LegacyEncoding' ) );
 		}
 
 		return $store;

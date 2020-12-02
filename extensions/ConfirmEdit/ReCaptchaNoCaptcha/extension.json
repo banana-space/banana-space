@@ -1,20 +1,60 @@
 {
 	"name": "ReCaptchaNoCaptcha",
+	"author": [
+		"Florian Schmidt"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:ConfirmEdit#ReCaptcha_(NoCaptcha)",
+	"descriptionmsg": "renocaptcha-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "antispam",
 	"MessagesDirs": {
 		"ReCaptchaNoCaptcha": [
-			"i18n"
+			"i18n",
+			"i18n/api"
 		]
 	},
 	"AutoloadClasses": {
-		"ReCaptchaNoCaptcha": "ReCaptchaNoCaptcha.class.php",
-		"HTMLReCaptchaNoCaptchaField": "HTMLReCaptchaNoCaptchaField.php",
-		"ReCaptchaNoCaptchaAuthenticationRequest": "ReCaptchaNoCaptchaAuthenticationRequest.php"
+		"ReCaptchaNoCaptcha": "includes/ReCaptchaNoCaptcha.php",
+		"ReCaptchaNoCaptchaHooks": "includes/ReCaptchaNoCaptchaHooks.php",
+		"HTMLReCaptchaNoCaptchaField": "includes/HTMLReCaptchaNoCaptchaField.php",
+		"ReCaptchaNoCaptchaAuthenticationRequest": "includes/ReCaptchaNoCaptchaAuthenticationRequest.php"
 	},
 	"config": {
-		"CaptchaClass": "ReCaptchaNoCaptcha",
-		"ReCaptchaSiteKey": "",
-		"ReCaptchaSecretKey": "",
-		"ReCaptchaSendRemoteIP": false
+		"CaptchaClass": {
+			"value": "ReCaptchaNoCaptcha"
+		},
+		"ReCaptchaSiteKey": {
+			"value": ""
+		},
+		"ReCaptchaSecretKey": {
+			"value": ""
+		},
+		"ReCaptchaSendRemoteIP": {
+			"value": false
+		}
 	},
-	"manifest_version": 1
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "ConfirmEdit/ReCaptchaNoCaptcha/resources"
+	},
+	"ResourceModules": {
+		"ext.confirmEdit.reCaptchaNoCaptcha.visualEditor": {
+			"scripts": "ve-confirmedit-reCaptchaNoCaptcha/ve.init.mw.NoCaptchaReCaptchaSaveErrorHandler.js",
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		}
+	},
+	"Hooks": {
+		"ResourceLoaderGetConfigVars": "ReCaptchaNoCaptchaHooks::onResourceLoaderGetConfigVars"
+	},
+	"attributes": {
+		"VisualEditor": {
+			"PluginModules": [
+				"ext.confirmEdit.reCaptchaNoCaptcha.visualEditor"
+			]
+		}
+	},
+	"manifest_version": 2
 }

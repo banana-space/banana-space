@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Matěj Suchánek",
 			"Michawiki"
 		]
 	},
@@ -8,7 +9,7 @@
 	"action-nuke": "Boki z masami lašowaś",
 	"nuke-desc": "Zmóžnja admininistratoram boki [[Special:Nuke|z masami lašowaś]]",
 	"nuke-nopages": "Žedne nowe boki wót [[Special:Contributions/$1|{{GENDER:$1|$1}}]] w aktualnych změnach.",
-	"nuke-list": "Slědujuce boki su se nowo napórali wót [[Special:Contributions/$1|{{GENDER:$1$1}}]];\nzapódaj komentar a klikni na tłocašk, aby je lašował.",
+	"nuke-list": "Slědujuce boki su se nowo napórali wót [[Special:Contributions/$1|{{GENDER:$1|$1}}]];\nzapódaj komentar a klikni na tłocašk, aby je lašował.",
 	"nuke-list-multiple": "Slědujuce boki su se rowno napórali;\nzapódaj komentar a klikni na tłocašk, aby je wulašował.",
 	"nuke-defaultreason": "Masowe lašowanje bokow, kótarež [[Special:Contributions/$1|{{GENDER:$1|$1}}]] jo pśidał.",
 	"nuke-multiplepeople": "Masowe wulašowanje njedawno pśidanych bokow",
@@ -16,7 +17,6 @@
 	"nuke-submit-user": "W pórěźe",
 	"nuke-submit-delete": "Wubrane wulašowaś",
 	"right-nuke": "Boki z masami lašowaś",
-	"nuke-select": "Wubraś: $1",
 	"nuke-userorip": "Wužywarske mě, IP-adresa abo žedno pódaśe:",
 	"nuke-maxpages": "Maksimalna licba bokow:",
 	"nuke-editby": "Napórany wót [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",

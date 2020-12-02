@@ -19,6 +19,7 @@
  *
  * @file
  */
+use MediaWiki\MediaWikiServices;
 
 /**
  * CommentStoreComment represents a comment stored by CommentStore. The fields
@@ -40,7 +41,7 @@ class CommentStoreComment {
 	public $data;
 
 	/**
-	 * @private For use by CommentStore only. Use self::newUnsavedComment() instead.
+	 * @internal For use by CommentStore only. Use self::newUnsavedComment() instead.
 	 * @param int|null $id
 	 * @param string $text
 	 * @param Message|null $message
@@ -49,7 +50,7 @@ class CommentStoreComment {
 	public function __construct( $id, $text, Message $message = null, array $data = null ) {
 		$this->id = $id;
 		$this->text = $text;
-		$this->message = $message ?: new RawMessage( '$1', [ $text ] );
+		$this->message = $message ?: new RawMessage( '$1', [ Message::plaintextParam( $text ) ] );
 		$this->data = $data;
 	}
 
@@ -63,8 +64,6 @@ class CommentStoreComment {
 	 * @return CommentStoreComment
 	 */
 	public static function newUnsavedComment( $comment, array $data = null ) {
-		global $wgContLang;
-
 		if ( $comment instanceof CommentStoreComment ) {
 			return $comment;
 		}
@@ -79,7 +78,8 @@ class CommentStoreComment {
 
 		if ( $comment instanceof Message ) {
 			$message = clone $comment;
-			$text = $message->inLanguage( $wgContLang ) // Avoid $wgForceUIMsgAsContentMsg
+			// Avoid $wgForceUIMsgAsContentMsg
+			$text = $message->inLanguage( MediaWikiServices::getInstance()->getContentLanguage() )
 				->setInterfaceMessageFlag( true )
 				->text();
 			return new CommentStoreComment( null, $text, $message, $data );

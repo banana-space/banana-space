@@ -3,9 +3,10 @@
 		"authors": [
 			"Audun",
 			"Event",
-			"SuperPotato",
+			"Jeblad",
 			"Jon Harald Søby",
-			"Kingu"
+			"Kingu",
+			"SuperPotato"
 		]
 	},
 	"categorytree": "Kategoritre",
@@ -22,7 +23,7 @@
 	"categorytree-mode-all": "alle sider",
 	"categorytree-collapse": "skjul",
 	"categorytree-expand": "utvid",
-	"categorytree-member-counts": "Inneholder {{PLURAL:$1|én underkategori|$1 underkategorier}}, {{PLURAL:$2|én side|$2 sider}} og {{PLURAL:$3|én fil|$3 filer}}",
+	"categorytree-member-counts": "Inneholder {{PLURAL:$1|én underkategori|$1 underkategorier}}, {{PLURAL:$2|én side|$2 sider}}, og {{PLURAL:$3|én fil|$3 filer}}",
 	"categorytree-num-categories": "$1 K",
 	"categorytree-num-pages": "$1 S",
 	"categorytree-num-files": "$1 F",
@@ -35,10 +36,5 @@
 	"categorytree-no-pages": "ingen sider eller underkategorier",
 	"categorytree-not-found": "Kategorien <i>$1</i> ikke funnet",
 	"categorytree-error": "problem under datalasting.",
-	"categorytree-retry": "Vent en stund og prøv igjen.",
-	"apihelp-categorytree-description": "Intern modul for CategoryTree-utvidelsen.",
-	"apihelp-categorytree-summary": "Intern modul for CategoryTree-utvidelsen.",
-	"apihelp-categorytree-param-category": "Tittel i kategorinavnerommet, prefiks vil ignoreres om det oppgis.",
-	"apihelp-categorytree-param-options": "Valg for CategoryTree-konstruktøren som et JSON-objekt. Valget <var>depth</var> sin standardverdi er <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "Valg må være et gyldig JSON-objekt."
+	"categorytree-retry": "Vent en stund og prøv igjen."
 }

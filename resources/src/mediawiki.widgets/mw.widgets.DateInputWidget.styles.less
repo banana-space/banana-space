@@ -6,8 +6,9 @@
  */
 
 // Variables taken from OOUI's WikimediaUI theme
-@oo-ui-font-size-browser: 16; // assumed browser default of `16px`
-@oo-ui-font-size-base: 0.8em; // equals `12.8px` at browser default of `16px`
+@ooui-font-size-browser: 16; // assumed browser default of `16px`
+@ooui-font-size-base: 0.875em; // equals `14px` at browser default of `16px`
+@ooui-unit: em;
 
 @background-color-base: #fff;
 
@@ -18,17 +19,18 @@
 @border-color-input--hover: #72777d;
 @border-radius-base: 2px;
 
-@padding-input-text: @padding-top-base @padding-horizontal-input-text @padding-bottom-base;
-@padding-horizontal-input-text: 8 / @oo-ui-font-size-browser / @oo-ui-font-size-base;
-@padding-top-base: 8 / @oo-ui-font-size-browser / @oo-ui-font-size-base; // equals `0.625em`≈`8px`
-@padding-bottom-base: 7 / @oo-ui-font-size-browser / @oo-ui-font-size-base; // equals `0.547em`≈`7px`
+@padding-input-text: @padding-vertical-base @padding-horizontal-input-text;
+@padding-horizontal-input-text: 8px;
+@padding-vertical-base: 6px;
 
 @box-shadow-widget: inset 0 0 0 1px transparent;
 @box-shadow-widget--focus: inset 0 0 0 1px #36c;
 
-@line-height-widget-singleline: 1.172em; // Firefox needs a value, Chrome the unit; equals `15px` at base `font-size: 12.8px`
+// `line-height` has to be relative/in `em` to enable user override in browser settings.
+@line-height-widget-base: unit( 18 / @ooui-font-size-browser / @ooui-font-size-base, @ooui-unit ); // equals `18px` at base `font-size: 14px;
 
-@transition-ease-out-sine-medium: 200ms cubic-bezier( 0.39, 0.575, 0.565, 1 );
+@transition-ease-medium: @transition-duration-medium; // `ease` is the initial value
+@transition-duration-medium: 250ms;
 
 // Mixins taken from OOUI
 .oo-ui-box-sizing( @type: border-box ) {
@@ -56,12 +58,12 @@
 .mw-widget-dateInputWidget {
 	&.oo-ui-textInputWidget {
 		display: inline-block;
-		position: relative;
-		width: 21em;
-		margin-top: 0.25em;
+		max-width: 21em;
 		// .oo-ui-inline-spacing( 0.5em ); already inherited from `.oo-ui-inputWidget`
-		margin-bottom: 0.25em;
-		margin-left: 0;
+
+		.oo-ui-labelElement-label {
+			line-height: @line-height-widget-base;
+		}
 	}
 
 	// Note that this block applies to both the PHP widget and the JS widget
@@ -86,15 +88,15 @@
 		border: @border-base;
 		border-radius: @border-radius-base;
 		padding: @padding-input-text;
-		line-height: @line-height-widget-singleline;
+		line-height: @line-height-widget-base;
 	}
 
 	&.oo-ui-widget-enabled {
 		.mw-widget-dateInputWidget-handle {
 			box-shadow: @box-shadow-widget; // necessary for smooth transition
 			.oo-ui-transition(
-				border-color @transition-ease-out-sine-medium,
-				box-shadow @transition-ease-out-sine-medium
+				border-color @transition-ease-medium,
+				box-shadow @transition-ease-medium
 			);
 
 			&:hover {

@@ -31,9 +31,9 @@ class WikiTextStructure {
 		'audio', 'video',
 		// CSS stylesheets aren't content
 		'style',
-		// The [1] for references
+		// The [1] for references from Cite
 		'sup.reference',
-		// The ↑ next to references in the references section
+		// The ↑ next to references in the references section from Cite
 		'.mw-cite-backlink',
 		// Headings are already indexed in their own field.
 		'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
@@ -41,7 +41,9 @@ class WikiTextStructure {
 		'.autocollapse',
 		// Content explicitly decided to be not searchable by editors such
 		// as custom navigation templates.
-		'.navigation-not-searchable'
+		'.navigation-not-searchable',
+		// User-facing interface code prompting the user to act from WikibaseMediaInfo
+		'.wbmi-entityview-emptyCaption',
 	];
 
 	/**
@@ -145,14 +147,14 @@ class WikiTextStructure {
 	 * Extract parts of the text - opening, main and auxiliary.
 	 */
 	private function extractWikitextParts() {
-		if ( !is_null( $this->allText ) ) {
+		if ( $this->allText !== null ) {
 			return;
 		}
 		$text = $this->parserOutput->getText( [
 			'enableSectionEditTokens' => false,
 			'allowTOC' => false,
 		] );
-		if ( strlen( $text ) == 0 ) {
+		if ( $text === '' ) {
 			$this->allText = "";
 			// empty text - nothing to seek here
 			return;
@@ -160,10 +162,6 @@ class WikiTextStructure {
 		$opening = null;
 
 		$this->openingText = $this->extractHeadingBeforeFirstHeading( $text );
-
-		// Add extra spacing around break tags so text crammed together like<br>this
-		// doesn't make one word.
-		$text = str_replace( '<br', "\n<br", $text );
 
 		$formatter = new HtmlFormatter( $text );
 

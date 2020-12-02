@@ -4,5 +4,5 @@
 			"Ukabia"
 		]
 	},
-	"cite-desc": "Tikwá <nowiki><ref[ áhà=id]></nowiki> and <nowiki><references/></nowiki> ndö, maka ntabi okwu"
+	"cite-desc": "Tikwá <code>&lt;ref[ name=id]&gt;</code> and <code>&lt;references/&gt;</code> ndö, maka ntabi okwu"
 }

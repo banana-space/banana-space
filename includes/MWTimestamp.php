@@ -27,6 +27,8 @@ use Wikimedia\Timestamp\ConvertibleTimestamp;
  * Library for creating and parsing MW-style timestamps. Based on the JS
  * library that does the same thing.
  *
+ * @newable
+ *
  * @since 1.20
  */
 class MWTimestamp extends ConvertibleTimestamp {
@@ -93,9 +95,9 @@ class MWTimestamp extends ConvertibleTimestamp {
 			if ( $tz ) {
 				$this->timestamp->setTimezone( $tz );
 				return new DateInterval( 'P0Y' );
-			} else {
-				$data[0] = 'Offset';
 			}
+
+			$data[0] = 'Offset';
 		}
 
 		$diff = 0;
@@ -138,9 +140,9 @@ class MWTimestamp extends ConvertibleTimestamp {
 	 * Generate a purely relative timestamp, i.e., represent the time elapsed between
 	 * the given base timestamp and this object.
 	 *
-	 * @param MWTimestamp $relativeTo Relative base timestamp (defaults to now)
-	 * @param User $user Use to use offset for
-	 * @param Language $lang Language to use
+	 * @param MWTimestamp|null $relativeTo Relative base timestamp (defaults to now)
+	 * @param User|null $user Use to use offset for
+	 * @param Language|null $lang Language to use
 	 * @param array $chosenIntervals Intervals to use to represent it
 	 * @return string Relative timestamp
 	 */
@@ -162,10 +164,9 @@ class MWTimestamp extends ConvertibleTimestamp {
 
 		$ts = '';
 		$diff = $this->diff( $relativeTo );
-		if ( Hooks::run(
-			'GetRelativeTimestamp',
-			[ &$ts, &$diff, $this, $relativeTo, $user, $lang ]
-		) ) {
+		if ( Hooks::runner()->onGetRelativeTimestamp(
+			$ts, $diff, $this, $relativeTo, $user, $lang )
+		) {
 			$seconds = ( ( ( $diff->days * 24 + $diff->h ) * 60 + $diff->i ) * 60 + $diff->s );
 			$ts = wfMessage( 'ago', $lang->formatDuration( $seconds, $chosenIntervals ) )
 				->inLanguage( $lang )->text();
@@ -189,9 +190,9 @@ class MWTimestamp extends ConvertibleTimestamp {
 		$msg = wfMessage( $key );
 		if ( $msg->exists() ) {
 			return $msg;
-		} else {
-			return new RawMessage( $tzMsg );
 		}
+
+		return new RawMessage( $tzMsg );
 	}
 
 	/**

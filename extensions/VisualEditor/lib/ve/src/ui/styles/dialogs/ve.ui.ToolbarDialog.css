@@ -1,0 +1,82 @@
+/*!
+ * VisualEditor UserInterface ToolbarDialog styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-toolbarDialog-padded .oo-ui-window-body {
+	padding: 0.375em; /* 0.3em / 0.8 */
+}
+
+.ve-ui-toolbarDialog-position-above {
+	overflow-y: hidden;
+	max-height: 0;
+	-webkit-transition: max-height 250ms;
+	-moz-transition: max-height 250ms;
+	transition: max-height 250ms;
+}
+
+.oo-ui-toolbar-position-top .ve-ui-toolbarDialog-position-above {
+	border-top: 1px solid #c8ccd1;
+}
+
+.oo-ui-toolbar-position-bottom .ve-ui-toolbarDialog-position-above {
+	border-bottom: 1px solid #c8ccd1;
+}
+
+.ve-ui-toolbarDialog-position-above.oo-ui-window-ready {
+	/* approximate max height for transition */
+	max-height: 150px;
+}
+
+.ve-ui-toolbarDialog-position-side {
+	position: absolute;
+	right: 0;
+	background: #fff;
+	border-left: 1px solid #c8ccd1;
+	overflow-x: hidden;
+	width: 0;
+	margin-top: 1px;
+	-webkit-transition: width 250ms;
+	-moz-transition: width 250ms;
+	transition: width 250ms;
+}
+
+.ve-ui-surface-toolbarDialog-side {
+	-webkit-transition: margin 250ms, min-height 250ms;
+	-moz-transition: margin 250ms, min-height 250ms;
+	transition: margin 250ms, min-height 250ms;
+	min-height: 40em;
+}
+
+.ve-ui-toolbarDialog-shield {
+	display: none;
+}
+
+.ve-ui-toolbarDialog-disabled {
+	opacity: 0.2;
+}
+
+.ve-ui-toolbarDialog-disabled .ve-ui-toolbarDialog-shield {
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+/* Override ProcessDialog styles */
+.ve-ui-toolbarDialog .oo-ui-window-head {
+	height: 0;
+	outline: 0;
+}
+
+.ve-ui-toolbarDialog .oo-ui-window-body {
+	top: 0;
+}
+
+/* TODO: fix this upstream */
+.ve-ui-toolbarDialog .oo-ui-window-frame {
+	position: relative;
+}

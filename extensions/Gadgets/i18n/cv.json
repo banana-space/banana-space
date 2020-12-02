@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Chuvash",
 			"Chuvash2014"
 		]
 	},
-	"gadgets": "Гаджетсем"
+	"prefs-gadgets": "Гаджетсем",
+	"gadgets": "Гаджетсем",
+	"gadgets-title": "Гаджетсем",
+	"gadgets-not-found": "\"$1\" гаджечĕ тупăнмарĕ."
 }

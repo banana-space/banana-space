@@ -5,12 +5,12 @@
  */
 class QuestyCaptchaTest extends MediaWikiTestCase {
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		$this->mergeMwGlobalArrayValue(
 			'wgAutoloadClasses',
-			[ 'QuestyCaptcha' => __DIR__ . '/../../QuestyCaptcha/QuestyCaptcha.class.php' ]
+			[ 'QuestyCaptcha' => __DIR__ . '/../../QuestyCaptcha/includes/QuestyCaptcha.php' ]
 		);
 	}
 

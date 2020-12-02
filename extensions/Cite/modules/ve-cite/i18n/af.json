@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Fwolff",
 			"Naudefj",
 			"Neil P. Quinn",
-			"Oesjaar",
-			"Fwolff"
+			"Oesjaar"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Boek",
@@ -17,8 +17,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Hergebruik op die naam",
 	"cite-ve-dialog-reference-options-section": "Opsies",
 	"cite-ve-dialog-reference-title": "Verwysing",
-	"cite-ve-dialog-reference-useexisting-full-label": "Hergebruik 'n aanhaling wat reeds op dié bladsy bestaan",
-	"cite-ve-dialog-reference-useexisting-label": "Gebruik 'n bestaande verwysing",
 	"cite-ve-dialog-reference-useexisting-tool": "Hergebruik",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Lys van algemene bronne",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "Lys van bronne vir groep \"$1\"",

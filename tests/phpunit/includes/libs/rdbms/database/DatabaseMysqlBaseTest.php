@@ -23,17 +23,19 @@
  * @copyright © 2013 Wikimedia Foundation and contributors
  */
 
+use Wikimedia\Rdbms\DatabaseMysqli;
+use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IMaintainableDatabase;
 use Wikimedia\Rdbms\MySQLMasterPos;
 use Wikimedia\TestingAccessWrapper;
 
 class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 
 	use MediaWikiCoversValidator;
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider provideDiapers
-	 * @covers Wikimedia\Rdbms\DatabaseMysqlBase::addIdentifierQuotes
+	 * @covers \Wikimedia\Rdbms\DatabaseMysqlBase::addIdentifierQuotes
 	 */
 	public function testAddIdentifierQuotes( $expected, $in ) {
 		$db = $this->getMockBuilder( DatabaseMysqli::class )
@@ -41,6 +43,7 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 			->setMethods( null )
 			->getMock();
 
+		/** @var IDatabase $db */
 		$quoted = $db->addIdentifierQuotes( $in );
 		$this->assertEquals( $expected, $quoted );
 	}
@@ -79,12 +82,12 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 
 			// unicode chars
 			[
-				self::createUnicodeString( '`\u0001a\uFFFFb`' ),
-				self::createUnicodeString( '\u0001a\uFFFFb' )
+				"`\u{0001}a\u{FFFF}b`",
+				"\u{0001}a\u{FFFF}b"
 			],
 			[
-				self::createUnicodeString( '`\u0001\uFFFF`' ),
-				self::createUnicodeString( '\u0001\u0000\uFFFF\u0000' )
+				"`\u{0001}\u{FFFF}`",
+				"\u{0001}\u{0000}\u{FFFF}\u{0000}"
 			],
 			[ '`☃`', '☃' ],
 			[ '`メインページ`', 'メインページ' ],
@@ -97,14 +100,10 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 		];
 	}
 
-	private static function createUnicodeString( $str ) {
-		return json_decode( '"' . $str . '"' );
-	}
-
-	private function getMockForViews() {
+	private function getMockForViews() : IMaintainableDatabase {
 		$db = $this->getMockBuilder( DatabaseMysqli::class )
 			->disableOriginalConstructor()
-			->setMethods( [ 'fetchRow', 'query' ] )
+			->setMethods( [ 'fetchRow', 'query', 'getDBname' ] )
 			->getMock();
 
 		$db->method( 'query' )
@@ -114,12 +113,13 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 				(object)[ 'Tables_in_' => 'view2' ],
 				(object)[ 'Tables_in_' => 'myview' ]
 			] ) );
+		$db->method( 'getDBname' )->willReturn( '' );
 
 		return $db;
 	}
 
 	/**
-	 * @covers Wikimedia\Rdbms\DatabaseMysqlBase::listViews
+	 * @covers \Wikimedia\Rdbms\DatabaseMysqlBase::listViews
 	 */
 	public function testListviews() {
 		$db = $this->getMockForViews();
@@ -139,7 +139,7 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers Wikimedia\Rdbms\MySQLMasterPos
+	 * @covers \Wikimedia\Rdbms\MySQLMasterPos
 	 */
 	public function testBinLogName() {
 		$pos = new MySQLMasterPos( "db1052.2424/4643", 1 );
@@ -151,7 +151,7 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideComparePositions
-	 * @covers Wikimedia\Rdbms\MySQLMasterPos
+	 * @covers \Wikimedia\Rdbms\MySQLMasterPos
 	 */
 	public function testHasReached(
 		MySQLMasterPos $lowerPos, MySQLMasterPos $higherPos, $match, $hetero
@@ -278,7 +278,7 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideChannelPositions
-	 * @covers Wikimedia\Rdbms\MySQLMasterPos
+	 * @covers \Wikimedia\Rdbms\MySQLMasterPos
 	 */
 	public function testChannelsMatch( MySQLMasterPos $pos1, MySQLMasterPos $pos2, $matches ) {
 		$this->assertEquals( $matches, $pos1->channelsMatch( $pos2 ) );
@@ -317,10 +317,10 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideCommonDomainGTIDs
-	 * @covers Wikimedia\Rdbms\MySQLMasterPos
+	 * @covers \Wikimedia\Rdbms\MySQLMasterPos
 	 */
-	public function testCommonGtidDomains( MySQLMasterPos $pos, MySQLMasterPos $ref, $gtids ) {
-		$this->assertEquals( $gtids, MySQLMasterPos::getCommonDomainGTIDs( $pos, $ref ) );
+	public function testGetRelevantActiveGTIDs( MySQLMasterPos $pos, MySQLMasterPos $ref, $gtids ) {
+		$this->assertEquals( $gtids, MySQLMasterPos::getRelevantActiveGTIDs( $pos, $ref ) );
 	}
 
 	public static function provideCommonDomainGTIDs() {
@@ -329,6 +329,12 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 				new MySQLMasterPos( '255-13-99,256-12-50,257-14-50', 1 ),
 				new MySQLMasterPos( '255-11-1000', 1 ),
 				[ '255-13-99' ]
+			],
+			[
+				( new MySQLMasterPos( '255-13-99,256-12-50,257-14-50', 1 ) )
+					->setActiveDomain( 257 ),
+				new MySQLMasterPos( '255-11-1000,257-14-30', 1 ),
+				[ '257-14-50' ]
 			],
 			[
 				new MySQLMasterPos(
@@ -349,8 +355,8 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideLagAmounts
-	 * @covers Wikimedia\Rdbms\DatabaseMysqlBase::getLag
-	 * @covers Wikimedia\Rdbms\DatabaseMysqlBase::getLagFromPtHeartbeat
+	 * @covers \Wikimedia\Rdbms\DatabaseMysqlBase::getLag
+	 * @covers \Wikimedia\Rdbms\DatabaseMysqlBase::getLagFromPtHeartbeat
 	 */
 	public function testPtHeartbeat( $lag ) {
 		$db = $this->getMockBuilder( DatabaseMysqli::class )
@@ -364,6 +370,8 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 
 		$db->method( 'getMasterServerInfo' )
 			->willReturn( [ 'serverId' => 172, 'asOf' => time() ] );
+
+		$db->setLBInfo( 'replica', true );
 
 		// Fake the current time.
 		list( $nowSecFrac, $nowSec ) = explode( ' ', microtime() );
@@ -381,6 +389,7 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 			->with( [ 'server_id' => 172 ] )
 			->willReturn( [ $ptTimeISO, $now ] );
 
+		/** @var IDatabase $db */
 		$db->setLBInfo( 'clusterMasterHost', 'db1052' );
 		$lagEst = $db->getLag();
 
@@ -403,9 +412,9 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideGtidData
-	 * @covers Wikimedia\Rdbms\MySQLMasterPos
-	 * @covers Wikimedia\Rdbms\DatabaseMysqlBase::getReplicaPos
-	 * @covers Wikimedia\Rdbms\DatabaseMysqlBase::getMasterPos
+	 * @covers \Wikimedia\Rdbms\MySQLMasterPos
+	 * @covers \Wikimedia\Rdbms\DatabaseMysqlBase::getReplicaPos
+	 * @covers \Wikimedia\Rdbms\DatabaseMysqlBase::getMasterPos
 	 */
 	public function testServerGtidTable( $gtable, $rBLtable, $mBLtable, $rGTIDs, $mGTIDs ) {
 		$db = $this->getMockBuilder( DatabaseMysqli::class )
@@ -435,15 +444,16 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 		$db->method( 'getServerId' )->willReturn( 1 );
 		$db->method( 'getServerUUID' )->willReturn( '2E11FA47-71CA-11E1-9E33-C80AA9429562' );
 
+		/** @var DatabaseMysqlBase $db */
 		if ( is_array( $rGTIDs ) ) {
 			$this->assertEquals( $rGTIDs, $db->getReplicaPos()->getGTIDs() );
 		} else {
-			$this->assertEquals( false, $db->getReplicaPos() );
+			$this->assertFalse( $db->getReplicaPos() );
 		}
 		if ( is_array( $mGTIDs ) ) {
 			$this->assertEquals( $mGTIDs, $db->getMasterPos()->getGTIDs() );
 		} else {
-			$this->assertEquals( false, $db->getMasterPos() );
+			$this->assertFalse( $db->getMasterPos() );
 		}
 	}
 
@@ -556,7 +566,7 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers Wikimedia\Rdbms\MySQLMasterPos
+	 * @covers \Wikimedia\Rdbms\MySQLMasterPos
 	 */
 	public function testSerialize() {
 		$pos = new MySQLMasterPos( '3E11FA47-71CA-11E1-9E33-C80AA9429562:99', 53636363 );
@@ -571,7 +581,7 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers Wikimedia\Rdbms\DatabaseMysqlBase::isInsertSelectSafe
+	 * @covers \Wikimedia\Rdbms\DatabaseMysqlBase::isInsertSelectSafe
 	 * @dataProvider provideInsertSelectCases
 	 */
 	public function testInsertSelectIsSafe( $insertOpts, $selectOpts, $row, $safe ) {
@@ -582,6 +592,7 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 		$db->method( 'getReplicationSafetyInfo' )->willReturn( (object)$row );
 		$dbw = TestingAccessWrapper::newFromObject( $db );
 
+		/** @var Database $dbw */
 		$this->assertEquals( $safe, $dbw->isInsertSelectSafe( $insertOpts, $selectOpts ) );
 	}
 
@@ -671,17 +682,19 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->setMethods( null )
 			->getMock();
+
+		/** @var IDatabase $db */
 		$output = $db->buildIntegerCast( 'fieldName' );
 		$this->assertSame( 'CAST( fieldName AS SIGNED )', $output );
 	}
 
-	/*
-	 * @covers Wikimedia\Rdbms\Database::setIndexAliases
+	/**
+	 * @covers \Wikimedia\Rdbms\Database::setIndexAliases
 	 */
 	public function testIndexAliases() {
 		$db = $this->getMockBuilder( DatabaseMysqli::class )
 			->disableOriginalConstructor()
-			->setMethods( [ 'mysqlRealEscapeString' ] )
+			->setMethods( [ 'mysqlRealEscapeString', 'dbSchema', 'tablePrefix' ] )
 			->getMock();
 		$db->method( 'mysqlRealEscapeString' )->willReturnCallback(
 			function ( $s ) {
@@ -689,6 +702,7 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 			}
 		);
 
+		/** @var IDatabase $db */
 		$db->setIndexAliases( [ 'a_b_idx' => 'a_c_idx' ] );
 		$sql = $db->selectSQLText(
 			'zend', 'field', [ 'a' => 'x' ], __METHOD__, [ 'USE INDEX' => 'a_b_idx' ] );
@@ -709,12 +723,12 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers Wikimedia\Rdbms\Database::setTableAliases
+	 * @covers \Wikimedia\Rdbms\Database::setTableAliases
 	 */
 	public function testTableAliases() {
 		$db = $this->getMockBuilder( DatabaseMysqli::class )
 			->disableOriginalConstructor()
-			->setMethods( [ 'mysqlRealEscapeString' ] )
+			->setMethods( [ 'mysqlRealEscapeString', 'dbSchema', 'tablePrefix' ] )
 			->getMock();
 		$db->method( 'mysqlRealEscapeString' )->willReturnCallback(
 			function ( $s ) {
@@ -722,6 +736,7 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 			}
 		);
 
+		/** @var IDatabase $db */
 		$db->setTableAliases( [
 			'meow' => [ 'dbname' => 'feline', 'schema' => null, 'prefix' => 'cat_' ]
 		] );
@@ -739,5 +754,23 @@ class DatabaseMysqlBaseTest extends PHPUnit\Framework\TestCase {
 			"SELECT  field  FROM `meow`    WHERE a = 'x'  ",
 			$sql
 		);
+	}
+
+	/**
+	 * @covers \Wikimedia\Rdbms\Database::streamStatementEnd
+	 * @covers \Wikimedia\Rdbms\DatabaseMysqlBase::streamStatementEnd
+	 */
+	public function testStreamStatementEnd() {
+		/** @var DatabaseMysqlBase $db */
+		$db = $this->getMockForAbstractClass( DatabaseMysqlBase::class, [], '', false );
+		$sql = '';
+
+		$newLine = "delimiter\n!! ?";
+		$this->assertFalse( $db->streamStatementEnd( $sql, $newLine ) );
+		$this->assertSame( '', $newLine );
+
+		$newLine = 'JUST A TEST!!!';
+		$this->assertTrue( $db->streamStatementEnd( $sql, $newLine ) );
+		$this->assertSame( 'JUST A TEST!', $newLine );
 	}
 }

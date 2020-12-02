@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jaeminlovetaejoon",
+			"SawJaemin"
+		]
+	},
+	"categorytree-expand": "မၤအါထီၣ်",
+	"categorytree-member-counts": "အိၣ်ဒီး {{PLURAL:$1|1 subcategory|$1 subcategories}}, {{PLURAL:$2|1 page|$2 pages}}, and {{PLURAL:$3|1 file|$3 files}}",
+	"categorytree-num-categories": "$1 C",
+	"categorytree-num-pages": "$1 P",
+	"categorytree-num-files": "$1 F"
+}

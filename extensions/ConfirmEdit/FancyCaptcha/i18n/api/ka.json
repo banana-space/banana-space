@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"BRUTE"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "მიიღეთ ახალი FancyCaptcha.",
+	"apihelp-fancycaptchareload-example-1": "ახალი FancyCaptcha-ის მიღება"
+}

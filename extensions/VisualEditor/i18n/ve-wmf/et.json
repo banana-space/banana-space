@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Avjoska",
+			"Cumbril",
+			"Pikne"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalmuudatus]]",
+	"tag-visualeditor-description": "Muudatus tehtud [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuaaltoimetiga]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalmuudatus: Kontrollida]]",
+	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaaltoimetiga]] tehtud muudatus, mille tõttu võis vikitekst muutuda ettekavatsemata viisil.",
+	"tag-visualeditor-wikitext": "Lähteteksti muudatus (2017)",
+	"tag-visualeditor-wikitext-description": "Muudatus tehti lähteteksti redaktori 2017. aasta versiooniga.",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalmuudatus: Ümberlülitus]]",
+	"tag-visualeditor-switched-description": "Kasutaja alustas redigeerimist visuaaltoimetiga, aga läks seejärel üle vikiteksti redaktorile.",
+	"visualeditor-feedback-link": "Project:VisualEditor/Tagasiside",
+	"visualeditor-feedback-tool": "Anna selle tarkvara kohta tagasisidet",
+	"visualeditor-help-label": "Loe kasutusjuhendit",
+	"visualeditor-help-title": "Redaktori kasutusjuhend",
+	"visualeditor-welcomedialog-action": "Alusta redigeerimist",
+	"visualeditor-welcomedialog-content": "Redigeerida saab igaüks. Iga täiendus on tänuväärne.",
+	"visualeditor-welcomedialog-content-thanks": "Aitäh, et aitad teistel uusi asju avastada!",
+	"visualeditor-welcomedialog-switch": "Lülita ümber lähteteskti režiimi",
+	"visualeditor-welcomedialog-switch-ve": "Lülita ümber visuaaltoimeti režiimi",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Tere tulemast}} saidile $2"
+}

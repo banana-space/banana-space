@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.Config', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'Constructor sanity test', function ( assert ) {
@@ -200,4 +200,4 @@
 		config.setMediaViewerEnabledOnClick( false );
 		assert.strictEqual( config.shouldShowStatusInfo(), true, 'Status info is shown after MMV is disabled the first time #2' );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

@@ -22,87 +22,119 @@
  * @ingroup Skins
  */
 
+use MediaWiki\MediaWikiServices;
+use Vector\Constants;
+use Wikimedia\WrappedString;
+
 /**
  * Skin subclass for Vector
  * @ingroup Skins
+ * @final skins extending SkinVector are not supported
+ * @unstable
  */
 class SkinVector extends SkinTemplate {
-	public $skinname = 'vector';
+	public $skinname = Constants::SKIN_NAME;
 	public $stylename = 'Vector';
 	public $template = 'VectorTemplate';
-	/**
-	 * @var Config
-	 */
-	private $vectorConfig;
-	private $responsiveMode = false;
-
-	public function __construct() {
-		$this->vectorConfig = \MediaWiki\MediaWikiServices::getInstance()->getConfigFactory()
-			->makeConfig( 'vector' );
-	}
-
-	/** @inheritDoc */
-	public function getPageClasses( $title ) {
-		$className = parent::getPageClasses( $title );
-		return $className;
-	}
 
 	/**
-	 * Enables the responsive mode
+	 * @inheritDoc
+	 * @return array
 	 */
-	public function enableResponsiveMode() {
-		if ( !$this->responsiveMode ) {
-			$out = $this->getOutput();
-			$out->addMeta( 'viewport', 'width=device-width, initial-scale=1' );
-			$out->addModuleStyles( 'skins.vector.styles.responsive' );
-			$this->responsiveMode = true;
-		}
-	}
+	public function getDefaultModules() {
+		$modules = parent::getDefaultModules();
 
-	/**
-	 * Initializes output page and sets up skin-specific parameters
-	 * @param OutputPage $out Object to initialize
-	 */
-	public function initPage( OutputPage $out ) {
-		parent::initPage( $out );
-
-		if ( $this->vectorConfig->get( 'VectorResponsive' ) ) {
-			$this->enableResponsiveMode();
+		if ( $this->isLegacy() ) {
+			$modules['styles']['skin'][] = 'skins.vector.styles.legacy';
+			$modules[Constants::SKIN_NAME] = 'skins.vector.legacy.js';
+		} else {
+			$modules['styles'] = array_merge(
+				$modules['styles'],
+				[ 'skins.vector.styles', 'mediawiki.ui.icon', 'skins.vector.icons' ]
+			);
+			$modules[Constants::SKIN_NAME][] = 'skins.vector.js';
 		}
 
-		$out->addModules( 'skins.vector.js' );
+		return $modules;
 	}
 
 	/**
-	 * Loads skin and user CSS files.
-	 * @param OutputPage $out
-	 */
-	function setupSkinUserCss( OutputPage $out ) {
-		parent::setupSkinUserCss( $out );
-
-		$out->addModuleStyles( [
-			'mediawiki.skinning.interface',
-			'skins.vector.styles',
-		] );
-	}
-
-	/**
-	 * Override to pass our Config instance to it
+	 * Set up the VectorTemplate. Overrides the default behaviour of SkinTemplate allowing
+	 * the safe calling of constructor with additional arguments. If dropping this method
+	 * please ensure that VectorTemplate constructor arguments match those in SkinTemplate.
+	 *
+	 * @internal
 	 * @param string $classname
-	 * @param bool|string $repository
-	 * @param bool|string $cache_dir
-	 * @return QuickTemplate
+	 * @return VectorTemplate
 	 */
-	public function setupTemplate( $classname, $repository = false, $cache_dir = false ) {
-		return new $classname( $this->vectorConfig );
+	protected function setupTemplate( $classname ) {
+		$tp = new TemplateParser( __DIR__ . '/templates' );
+		return new VectorTemplate( $this->getConfig(), $tp, $this->isLegacy() );
 	}
 
 	/**
-	 * Whether the logo should be preloaded with an HTTP link header or not
-	 * @since 1.29
+	 * Whether or not the legacy version of the skin is being used.
+	 *
 	 * @return bool
 	 */
-	public function shouldPreloadLogo() {
-		return true;
+	private function isLegacy() : bool {
+		$isLatestSkinFeatureEnabled = MediaWikiServices::getInstance()
+			->getService( Constants::SERVICE_FEATURE_MANAGER )
+			->isFeatureEnabled( Constants::FEATURE_LATEST_SKIN );
+
+		return !$isLatestSkinFeatureEnabled;
+	}
+
+	/**
+	 * @internal only for use inside VectorTemplate
+	 * @return array of data for a Mustache template
+	 */
+	public function getTemplateData() {
+		$out = $this->getOutput();
+		$title = $out->getTitle();
+
+		$indicators = [];
+		foreach ( $out->getIndicators() as $id => $content ) {
+			$indicators[] = [
+				'id' => Sanitizer::escapeIdForAttribute( "mw-indicator-$id" ),
+				'class' => 'mw-indicator',
+				'html' => $content,
+			];
+		}
+
+		$printFooter = Html::rawElement(
+			'div',
+			[ 'class' => 'printfooter' ],
+			$this->printSource()
+		);
+
+		return [
+			// Data objects:
+			'array-indicators' => $indicators,
+			// HTML strings:
+			'html-printtail' => WrappedString::join( "\n", [
+				MWDebug::getHTMLDebugLog(),
+				MWDebug::getDebugHTML( $this->getContext() ),
+				$this->bottomScripts(),
+				wfReportTime( $out->getCSP()->getNonce() )
+			] ) . '</body></html>',
+			'html-site-notice' => $this->getSiteNotice(),
+			'html-userlangattributes' => $this->prepareUserLanguageAttributes(),
+			'html-subtitle' => $this->prepareSubtitle(),
+			// Always returns string, cast to null if empty.
+			'html-undelete-link' => $this->prepareUndeleteLink() ?: null,
+			// Result of OutputPage::addHTML calls
+			'html-body-content' => $this->wrapHTML( $title, $out->mBodytext )
+				. $printFooter,
+			'html-after-content' => $this->afterContentHook(),
+		];
+	}
+
+	/**
+	 * @internal only for use inside VectorTemplate
+	 * @return array
+	 */
+	public function getMenuProps() {
+		return $this->buildContentNavigationUrls();
 	}
 }

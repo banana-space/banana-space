@@ -1,12 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Balajijagadesh",
 			"TRYPPN",
 			"மதனாஹரன்"
 		]
 	},
 	"prefs-gadgets": "கருவிகள்",
 	"gadgets": "கருவிகள்",
+	"gadgetusage": "கருவிகள் பயன்பாடு புள்ளிவிவரங்கள்",
+	"gadgetusage-gadget": "கருவிகள்",
+	"gadgetusage-usercount": "பயனர்கள் எண்ணிக்கை",
+	"gadgetusage-default": "இயல்பிருப்பு",
 	"gadgets-title": "கருவிகள்",
 	"gadgets-uses": "பயன்பாடுகள்",
 	"gadgets-required-rights": "பின்வரும் {{PLURAL:$2|உரிமை|உரிமைகள்}} வேண்டப்படுகின்றன:\n\n$1",

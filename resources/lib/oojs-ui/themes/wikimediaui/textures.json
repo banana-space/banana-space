@@ -1,8 +1,0 @@
-{
-	"prefix": "oo-ui-texture",
-	"intro": "@import '../../../../src/styles/common';",
-	"images": {
-		"pending": { "file": "images/textures/pending.gif" },
-		"transparency": { "file": "images/textures/transparency.svg" }
-	}
-}

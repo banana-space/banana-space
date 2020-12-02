@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joao Xavier"
+		]
+	},
+	"templatedata-doc-desc-empty": "Nula deskripto.",
+	"templatedata-doc-param-default": "''Default''",
+	"templatedata-doc-param-desc": "Deskripto",
+	"templatedata-doc-param-desc-empty": "nula deskripto",
+	"templatedata-doc-param-type-boolean": "Hazardala",
+	"templatedata-doc-param-type-content": "Kontenajo",
+	"templatedata-doc-param-type-date": "Dato",
+	"templatedata-doc-param-type-line": "Lineo",
+	"templatedata-doc-param-type-number": "Nombro",
+	"templatedata-doc-param-type-string": "Grupo di literi o signi (''String'')",
+	"templatedata-doc-param-type-unbalanced-wikitext": "Senequilibra wikitexto",
+	"templatedata-doc-param-type-unknown": "Nekonocata",
+	"templatedata-doc-param-type-wiki-page-name": "Pagino",
+	"templatedata-editbutton": "Administrar Shablono pri Dati",
+	"templatedata-helplink": "Informi pri ShablonoDatumi (TemplateData)",
+	"templatedata-modal-button-cancel": "Anular",
+	"templatedata-modal-search-input-placeholder": "Serchar segun la nomo o kodexo di la linguo",
+	"templatedata-modal-table-param-description": "Deskripto ($1)",
+	"templatedata-modal-table-param-label": "Etiketo ($1)",
+	"templatedata-modal-title-language": "Linguo"
+}

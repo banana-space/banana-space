@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Helland",
-			"Nghtwlkr",
-			"Simny",
 			"Danmichaelo",
-			"Jon Harald Søby"
+			"Helland",
+			"Jon Harald Søby",
+			"Nghtwlkr",
+			"Simny"
 		]
 	},
+	"questycaptcha-desc": "Questy CAPTCHA-generator for Confirm Edit",
 	"questycaptcha-addurl": "Redigeringen din inneholder nye eksterne lenker. For å beskytte wikien mot automatisert spam, ber vi om at du svarer på spørsmålet som vises under ([[Special:Captcha/help|mer informasjon]]):",
 	"questycaptcha-badlogin": "For å hindre passordtyveri, ber vi deg å svare på spørsmålet under ([[Special:Captcha/help|mer informasjon]]):",
 	"questycaptcha-createaccount": "For å beskytte wikien mot automatisert spam, ber vi deg om å svare på spørsmålet som vises under ([[Special:Captcha/help|mer informasjon]]):",

@@ -3,9 +3,9 @@
 		"authors": [
 			"Calak",
 			"Muhammed taha",
-			"Serwan",
 			"Pirehelokan",
-			"Sarchia"
+			"Sarchia",
+			"Serwan"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "کتێب",
@@ -16,7 +16,6 @@
 	"cite-ve-dialog-reference-options-group-placeholder": "سەرچاوە گشتییەکان",
 	"cite-ve-dialog-reference-options-section": "ھەڵبژاردەکان",
 	"cite-ve-dialog-reference-title": "سەرچاوە",
-	"cite-ve-dialog-reference-useexisting-label": "بەکارھێنانی سەرچاوەیەکی ئامادە",
 	"cite-ve-dialog-reference-useexisting-tool": "بەکارھێنانەوە",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "پێڕستی سەرچاوە گشتییەکان",
 	"cite-ve-dialog-referenceslist-title": "پێرستی سەرچاوە",

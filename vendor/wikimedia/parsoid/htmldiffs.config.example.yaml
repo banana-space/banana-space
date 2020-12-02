@@ -1,0 +1,9 @@
+jsServer:
+    baseURI: http://localhost:8000
+
+phpServer:
+    baseURI: http://localhost/wiki/rest.php
+
+sampleRate: 0.05 # 5%
+
+outDir: /tmp/htmldiffs

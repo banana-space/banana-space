@@ -29,10 +29,10 @@
  * @ingroup SpecialPage
  */
 class UploadSourceAdapter {
-	/** @var array */
+	/** @var ImportSource[] */
 	public static $sourceRegistrations = [];
 
-	/** @var string */
+	/** @var ImportSource */
 	private $mSource;
 
 	/** @var string */
@@ -45,7 +45,7 @@ class UploadSourceAdapter {
 	 * @param ImportSource $source
 	 * @return string
 	 */
-	static function registerSource( ImportSource $source ) {
+	public static function registerSource( ImportSource $source ) {
 		$id = wfRandomString();
 
 		self::$sourceRegistrations[$id] = $source;
@@ -56,11 +56,11 @@ class UploadSourceAdapter {
 	/**
 	 * @param string $path
 	 * @param string $mode
-	 * @param array $options
+	 * @param int $options
 	 * @param string &$opened_path
 	 * @return bool
 	 */
-	function stream_open( $path, $mode, $options, &$opened_path ) {
+	public function stream_open( $path, $mode, $options, &$opened_path ) {
 		$url = parse_url( $path );
 		$id = $url['host'];
 
@@ -77,7 +77,7 @@ class UploadSourceAdapter {
 	 * @param int $count
 	 * @return string
 	 */
-	function stream_read( $count ) {
+	public function stream_read( $count ) {
 		$return = '';
 		$leave = false;
 
@@ -104,30 +104,30 @@ class UploadSourceAdapter {
 
 	/**
 	 * @param string $data
-	 * @return bool
+	 * @return false
 	 */
-	function stream_write( $data ) {
+	public function stream_write( $data ) {
 		return false;
 	}
 
 	/**
-	 * @return mixed
+	 * @return int
 	 */
-	function stream_tell() {
+	public function stream_tell() {
 		return $this->mPosition;
 	}
 
 	/**
 	 * @return bool
 	 */
-	function stream_eof() {
+	public function stream_eof() {
 		return $this->mSource->atEnd();
 	}
 
 	/**
-	 * @return array
+	 * @return int[]
 	 */
-	function url_stat() {
+	public function url_stat() {
 		$result = [];
 
 		$result['dev'] = $result[0] = 0;

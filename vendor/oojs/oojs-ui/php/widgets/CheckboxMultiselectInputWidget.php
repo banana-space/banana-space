@@ -4,6 +4,9 @@ namespace OOUI;
 
 /**
  * Multiple checkbox input widget. Intended to be used within a OO.ui.FormLayout.
+ *
+ * @phan-suppress-next-line PhanParamSignatureMismatch Parent returns a string
+ * @method string[] getValue()
  */
 class CheckboxMultiselectInputWidget extends InputWidget {
 
@@ -30,8 +33,8 @@ class CheckboxMultiselectInputWidget extends InputWidget {
 
 	/**
 	 * @param array $config Configuration options
-	 * @param array[] $config['options'] Array of menu options in the format
-	 *   `[ 'data' => …, 'label' => …, 'disabled' => … ]`
+	 *      - array[] $config['options'] Array of menu options in the format
+	 *          `[ 'data' => …, 'label' => …, 'disabled' => … ]`
 	 */
 	public function __construct( array $config = [] ) {
 		// Parent constructor
@@ -42,9 +45,9 @@ class CheckboxMultiselectInputWidget extends InputWidget {
 		}
 
 		// Initialization
-		$this->setOptions( isset( $config['options'] ) ? $config['options'] : [] );
+		$this->setOptions( $config['options'] ?? [] );
 		// Have to repeat this from parent, as we need options to be set up for this to make sense
-		$this->setValue( isset( $config['value'] ) ? $config['value'] : null );
+		$this->setValue( $config['value'] ?? null );
 		$this->addClasses( [ 'oo-ui-checkboxMultiselectInputWidget' ] );
 	}
 
@@ -58,6 +61,7 @@ class CheckboxMultiselectInputWidget extends InputWidget {
 	 *
 	 * @param string[] $value New value
 	 * @return $this
+	 * @suppress PhanParamSignatureMismatch Parent has string $value
 	 */
 	public function setValue( $value ) {
 		$this->value = $this->cleanUpValue( $value );
@@ -77,6 +81,7 @@ class CheckboxMultiselectInputWidget extends InputWidget {
 	 *
 	 * @param string[] $value Original value
 	 * @return string[] Cleaned up value
+	 * @suppress PhanParamSignatureMismatch Parent has 'string' instead of 'string[]'
 	 */
 	protected function cleanUpValue( $value ) {
 		$cleanValue = [];
@@ -109,7 +114,7 @@ class CheckboxMultiselectInputWidget extends InputWidget {
 		$name = $this->name;
 		foreach ( $options as $opt ) {
 			$optValue = parent::cleanUpValue( $opt['data'] );
-			$optDisabled = isset( $opt['disabled'] ) ? $opt['disabled'] : false;
+			$optDisabled = $opt['disabled'] ?? false;
 			$field = new FieldLayout(
 				new CheckboxInputWidget( [
 					'name' => $name,
@@ -117,7 +122,7 @@ class CheckboxMultiselectInputWidget extends InputWidget {
 					'disabled' => $this->isDisabled() || $optDisabled,
 				] ),
 				[
-					'label' => isset( $opt['label'] ) ? $opt['label'] : $optValue,
+					'label' => $opt['label'] ?? $optValue,
 					'align' => 'inline',
 				]
 			);

@@ -3,11 +3,11 @@
 		"authors": [
 			"Aleator",
 			"Alvaro Vidal-Abarca",
+			"Fitoschido",
 			"Paucabot",
 			"SMP",
 			"Toniher",
-			"Vriullop",
-			"Fitoschido"
+			"Vriullop"
 		]
 	},
 	"nuke": "Eliminació massiva",
@@ -22,7 +22,6 @@
 	"nuke-submit-user": "Vés-hi",
 	"nuke-submit-delete": "Esborra els seleccionats",
 	"right-nuke": "Esborrar pàgines de forma massiva",
-	"nuke-select": "Selecciona: $1",
 	"nuke-userorip": "Nom d'usuari, adreça IP o en blanc:",
 	"nuke-maxpages": "Nombre màxim de pàgines:",
 	"nuke-editby": "Creada per [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",

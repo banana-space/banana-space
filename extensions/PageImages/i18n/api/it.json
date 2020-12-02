@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Beta16",
+			"Gianfranco"
+		]
+	},
+	"apihelp-query+pageimages-description": "Fornisce informazioni sulle immagini nella pagina, ad esempio le anteprime e la presenza di foto.",
+	"apihelp-query+pageimages-summary": "Fornisce informazioni sulle immagini nella pagina, ad esempio le anteprime e la presenza di foto.",
+	"apihelp-query+pageimages-param-thumbsize": "Larghezza massima in pixel delle immagini in miniatura.",
+	"apihelp-query+pageimages-param-limit": "Proprietà di quante pagine da mostrare.",
+	"apihelp-query+pageimages-param-license": "Limita le immagini delle pagine a un certo tipo di licenza",
+	"apihelp-query+pageimages-paramvalue-license-free": "solo immagini libere",
+	"apihelp-query+pageimages-paramvalue-license-any": "immagine migliore, sia libera che non."
+}

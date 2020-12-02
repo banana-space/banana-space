@@ -1,29 +1,30 @@
 {
 	"@metadata": {
 		"authors": [
-			"Macofe",
-			"Vitorvicentevalente",
+			"Athena in Wonderland",
 			"Hamilton Abreu",
+			"Macofe",
 			"MokaAkashiyaPT",
-			"Athena in Wonderland"
+			"Vitorvicentevalente"
 		]
 	},
 	"timeless-desc": "Um tema intemporal, desenhado com base no protótipo Winter de Brandon Harris e em vários estilos da Wikimedia Foundation",
-	"timeless-search-placeholder": "Pesquisar em {{NUMBEROFARTICLES}} páginas",
-	"timeless-loggedin": "A sua conta",
 	"timeless-anonymous": "Anónimo",
 	"timeless-loggedinas": "Autenticado como '''$1'''",
 	"timeless-notloggedin": "Não autenticado",
 	"timeless-userpage": "Página {{GENDER:$1|do utilizador|da utilizadora|de utilizador}}",
-	"timeless-talkpage": "{{GENDER:$1|Utilizador|Utilizadora|Utilizador(a)}} Discussão",
+	"timeless-talkpage": "{{GENDER:$1|Utilizador|Utilizadora}} Discussão",
 	"timeless-pagelog": "Registos da página",
 	"timeless-more": "Mais",
 	"timeless-sitetools": "Ferramentas da wiki",
 	"timeless-pageactions": "Ferramentas de página",
 	"timeless-userpagetools": "Ferramentas da página de utilizador",
+	"timeless-action-addsection": "Tópico novo",
+	"timeless-view-view": "Ler",
 	"timeless-pagemisc": "Mais",
 	"timeless-namespaces": "Espaços nominais",
 	"timeless-pagetools": "Ações de página",
-	"timeless-languages": "Idiomas",
-	"timeless.js": "/* Qualquer código JavaScript colocado aqui será carregado para os utilizadores do tema Timeless */"
+	"timeless-languages": "Línguas",
+	"timeless-projects": "Outros projetos",
+	"timeless.js": "/* Todo o código JavaScript colocado aqui será carregado para os utilizadores do tema Timeless */"
 }

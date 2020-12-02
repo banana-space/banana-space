@@ -1,3 +1,5 @@
+@import 'mediawiki.mixins';
+
 /**
  * CSS for WikiEditor Dialogs jQuery plugin
  */
@@ -13,11 +15,7 @@
 		/* stylelint-enable declaration-no-important */
 
 		input[ type='text' ] {
-			-moz-box-sizing: border-box;
-			-ms-box-sizing: border-box;
-			-webkit-box-sizing: border-box;
-			-khtml-box-sizing: border-box;
-			box-sizing: border-box;
+			.box-sizing( border-box );
 		}
 
 		input {
@@ -53,8 +51,4 @@ body {
 .wikieditor-toolbar-floated-field-wrapper {
 	float: left;
 	margin-right: 2em;
-}
-
-.wikieditor-toolbar-dialog-hint {
-	color: #54595d;
 }

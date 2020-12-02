@@ -1,8 +1,8 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
- * Tests for the DBSiteStore class.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -29,7 +29,7 @@
  *
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DBSiteStoreTest extends MediaWikiTestCase {
+class DBSiteStoreTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @return DBSiteStore
@@ -37,7 +37,8 @@ class DBSiteStoreTest extends MediaWikiTestCase {
 	private function newDBSiteStore() {
 		// NOTE: Use the real DB load balancer for now. Eventually, the test framework should
 		// provide a LoadBalancer that is safe to use in unit tests.
-		return new DBSiteStore( wfGetLB() );
+		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		return new DBSiteStore( $lb );
 	}
 
 	/**
@@ -90,14 +91,14 @@ class DBSiteStoreTest extends MediaWikiTestCase {
 		$site = $store->getSite( 'ertrywuutr' );
 		$this->assertInstanceOf( Site::class, $site );
 		$this->assertEquals( 'en', $site->getLanguageCode() );
-		$this->assertTrue( is_int( $site->getInternalId() ) );
-		$this->assertTrue( $site->getInternalId() >= 0 );
+		$this->assertIsInt( $site->getInternalId() );
+		$this->assertGreaterThanOrEqual( 0, $site->getInternalId() );
 
 		$site = $store->getSite( 'sdfhxujgkfpth' );
 		$this->assertInstanceOf( Site::class, $site );
 		$this->assertEquals( 'nl', $site->getLanguageCode() );
-		$this->assertTrue( is_int( $site->getInternalId() ) );
-		$this->assertTrue( $site->getInternalId() >= 0 );
+		$this->assertIsInt( $site->getInternalId() );
+		$this->assertGreaterThanOrEqual( 0, $site->getInternalId() );
 	}
 
 	/**
@@ -137,7 +138,7 @@ class DBSiteStoreTest extends MediaWikiTestCase {
 		$this->assertNull( $site );
 
 		$sites = $store->getSites();
-		$this->assertEquals( 0, $sites->count() );
+		$this->assertSame( 0, $sites->count() );
 	}
 
 	/**

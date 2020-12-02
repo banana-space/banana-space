@@ -2,9 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Iwan Novirion",
+			"Macofe",
 			"Naval Scene",
-			"VoteITP",
-			"Macofe"
+			"VoteITP"
 		]
 	},
 	"wikieditor": "Antarmuko panyuntiangan teks wiki tingkek lanjuik",
@@ -104,7 +104,7 @@
 	"wikieditor-toolbar-tool-table-wikitable": "Model jo bingkai",
 	"wikieditor-toolbar-tool-table-sortable": "Buek tabel nan baurutan",
 	"wikieditor-toolbar-tool-table-example": "Contoh",
-	"wikieditor-toolbar-tool-table-preview": "Pratonton",
+	"wikieditor-toolbar-tool-table-preview": "Pratinjau",
 	"wikieditor-toolbar-tool-table-insert": "Masuakan",
 	"wikieditor-toolbar-tool-table-cancel": "Batalan",
 	"wikieditor-toolbar-tool-table-example-text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec purus diam. Sed aliquam imperdiet nunc quis lacinia. Donec rutrum consectetur placerat. Sed volutpat neque non purus faucibus id ultricies enim euismod.",

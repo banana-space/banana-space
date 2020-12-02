@@ -24,6 +24,9 @@
  * @ingroup Maintenance
  */
 
+use MediaWiki\Extension\OATHAuth\Hook\LoadExtensionSchemaUpdates\UpdateTables;
+use MediaWiki\MediaWikiServices;
+
 if ( getenv( 'MW_INSTALL_PATH' ) ) {
 	$IP = getenv( 'MW_INSTALL_PATH' );
 } else {
@@ -32,20 +35,24 @@ if ( getenv( 'MW_INSTALL_PATH' ) ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 class UpdateScratchTokenFormat extends Maintenance {
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
-		$this->mDescription = 'Script to update scratch_token column format';
+		$this->addDescription( 'Script to update scratch_token column format' );
 		$this->requireExtension( 'OATHAuth' );
 	}
 
 	public function execute() {
-		$dbw = $this->getDB( DB_MASTER );
-		if ( !OATHAuthHooks::schemaUpdateOldUsers( $dbw ) ) {
+		global $wgOATHAuthDatabase;
+		$lb = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
+			->getMainLB( $wgOATHAuthDatabase );
+		$dbw = $lb->getConnectionRef( DB_MASTER, [], $wgOATHAuthDatabase );
+
+		if ( !UpdateTables::schemaUpdateOldUsers( $dbw ) ) {
 			$this->error( "Failed to update scratch_token rows.\n", 1 );
 		}
 		$this->output( "Done.\n" );
 	}
 }
 
-$maintClass = "UpdateScratchTokenFormat";
+$maintClass = UpdateScratchTokenFormat::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

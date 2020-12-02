@@ -9,9 +9,16 @@ namespace RemexHtml\Tokenizer;
  * This should not be directly instantiated outside of Tokenizer.
  */
 class LazyAttributes implements Attributes {
-	private $tokenizer;
+	/** @var callable */
+	private $interpreter;
+
+	/** @var mixed */
 	private $data;
+
+	/** @var string[] */
 	private $attributes;
+
+	/** @var Attribute[] */
 	private $attrObjects;
 
 	public function __construct( $data, callable $interpreter ) {
@@ -19,11 +26,16 @@ class LazyAttributes implements Attributes {
 		$this->data = $data;
 	}
 
+	/**
+	 * Initialize the attributes array
+	 */
 	private function init() {
 		if ( $this->attributes === null ) {
 			$func = $this->interpreter;
 			$this->attributes = $func( $this->data );
+			// @phan-suppress-next-line PhanTypeMismatchProperty
 			$this->interpreter = null;
+			$this->data = null;
 		}
 	}
 
@@ -46,6 +58,9 @@ class LazyAttributes implements Attributes {
 			$this->init();
 		}
 		$this->attributes[$offset] = $value;
+		if ( $this->attrObjects !== null ) {
+			$this->attrObjects[$offset] = new Attribute( $offset, null, null, $offset, $value );
+		}
 	}
 
 	public function offsetUnset( $offset ) {
@@ -53,6 +68,7 @@ class LazyAttributes implements Attributes {
 			$this->init();
 		}
 		unset( $this->attributes[$offset] );
+		unset( $this->attrObjects[$offset] );
 	}
 
 	public function getValues() {
@@ -77,7 +93,10 @@ class LazyAttributes implements Attributes {
 	}
 
 	public function count() {
-		return is_object( $this->data ) ? $this->data->count() : count( $this->data );
+		if ( $this->attributes === null ) {
+			return count( $this->data );
+		}
+		return count( $this->attributes );
 	}
 
 	public function getIterator() {

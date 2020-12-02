@@ -1,16 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
+			"01miki10",
 			"Crt",
 			"Nedergard",
 			"Nike",
 			"Pxos",
+			"Pyscowicz",
 			"SuperPete"
 		]
 	},
+	"skinname-vector": "Vektori",
 	"vector-skin-desc": "Uudistettu versio MonoBookista raikkaalla ulkoasulla ja useilla käytettävyysparannuksilla",
-	"vector.css": "/* Tämä sivu sisältää Vector-ulkoasua muuttavia tyylejä. */",
-	"vector.js": "/* Tämän sivun JavaScript-koodi liitetään Vector-tyyliin */",
+	"prefs-vector-enable-vector-1-label": "Käytä vanhaa Vektoria",
+	"prefs-vector-enable-vector-1-help": "Seuraavien muutaman vuoden aikana päivitämme Vektori-ulkoasua vaiheittain. Vanha Vektori mahdollistaa Vektorin vanhan (joulukuu 2019) version käyttämisen. Saadaksesi lisätietoa päivityksistä katso [[mw:Reading/Web/Desktop_Improvements|projektisivumme]].",
+	"vector-opt-out": "Vaihda vanhaan ulkoasuun",
+	"vector-opt-out-tooltip": "Muuta asetuksiasi palataksesi ulkoasun vanhaan versioon (vanha Vektori)",
+	"vector.css": "/* Tämä sivu sisältää Vektori-ulkoasua muuttavia tyylejä. */",
+	"vector.js": "/* Tämän sivun JavaScript-koodi liitetään Vektori-tyyliin */",
+	"vector-action-toggle-sidebar": "Näytä/piilota sivupalkki",
 	"vector-action-addsection": "Lisää aihe",
 	"vector-action-delete": "Poista",
 	"vector-action-move": "Siirrä",
@@ -22,5 +30,7 @@
 	"vector-view-history": "Näytä historia",
 	"vector-view-view": "Lue",
 	"vector-view-viewsource": "Näytä lähdekoodi",
+	"vector-jumptonavigation": "Siirry navigaatioon",
+	"vector-jumptosearch": "Siirry hakuun",
 	"vector-more-actions": "Muut"
 }

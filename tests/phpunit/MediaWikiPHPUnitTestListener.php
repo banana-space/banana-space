@@ -1,24 +1,35 @@
 <?php
 
-class MediaWikiPHPUnitTestListener
-	extends PHPUnit_TextUI_ResultPrinter implements PHPUnit_Framework_TestListener {
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Test;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestListener;
+use PHPUnit\Framework\TestListenerDefaultImplementation;
+use PHPUnit\Framework\TestSuite;
+
+class MediaWikiPHPUnitTestListener implements TestListener {
+	use TestListenerDefaultImplementation;
 
 	/**
 	 * @var string
 	 */
 	protected $logChannel = 'PHPUnitCommand';
 
-	protected function getTestName( PHPUnit_Framework_Test $test ) {
+	/**
+	 * @param Test $test
+	 * @return string
+	 */
+	protected function getTestName( Test $test ) : string {
 		$name = get_class( $test );
 
-		if ( $test instanceof PHPUnit\Framework\TestCase ) {
+		if ( $test instanceof TestCase ) {
 			$name .= '::' . $test->getName( true );
 		}
 
 		return $name;
 	}
 
-	protected function getErrorName( Exception $exception ) {
+	protected function getErrorName( Throwable $exception ) : string {
 		$name = get_class( $exception );
 		$name = "[$name] " . $exception->getMessage();
 
@@ -28,12 +39,11 @@ class MediaWikiPHPUnitTestListener
 	/**
 	 * An error occurred.
 	 *
-	 * @param PHPUnit_Framework_Test $test
-	 * @param Exception $e
+	 * @param Test $test
+	 * @param Throwable $e
 	 * @param float $time
 	 */
-	public function addError( PHPUnit_Framework_Test $test, Exception $e, $time ) {
-		parent::addError( $test, $e, $time );
+	public function addError( Test $test, Throwable $e, float $time ) : void {
 		wfDebugLog(
 			$this->logChannel,
 			'ERROR in ' . $this->getTestName( $test ) . ': ' . $this->getErrorName( $e )
@@ -43,14 +53,11 @@ class MediaWikiPHPUnitTestListener
 	/**
 	 * A failure occurred.
 	 *
-	 * @param PHPUnit_Framework_Test $test
-	 * @param PHPUnit_Framework_AssertionFailedError $e
+	 * @param Test $test
+	 * @param AssertionFailedError $e
 	 * @param float $time
 	 */
-	public function addFailure( PHPUnit_Framework_Test $test,
-		PHPUnit_Framework_AssertionFailedError $e, $time
-	) {
-		parent::addFailure( $test, $e, $time );
+	public function addFailure( Test $test, AssertionFailedError $e, float $time ) : void {
 		wfDebugLog(
 			$this->logChannel,
 			'FAILURE in ' . $this->getTestName( $test ) . ': ' . $this->getErrorName( $e )
@@ -60,71 +67,67 @@ class MediaWikiPHPUnitTestListener
 	/**
 	 * Incomplete test.
 	 *
-	 * @param PHPUnit_Framework_Test $test
-	 * @param Exception $e
+	 * @param Test $test
+	 * @param Throwable $t
 	 * @param float $time
 	 */
-	public function addIncompleteTest( PHPUnit_Framework_Test $test, Exception $e, $time ) {
-		parent::addIncompleteTest( $test, $e, $time );
+	public function addIncompleteTest( Test $test, Throwable $t, float $time ) : void {
 		wfDebugLog(
 			$this->logChannel,
-			'Incomplete test ' . $this->getTestName( $test ) . ': ' . $this->getErrorName( $e )
+			'Incomplete test ' . $this->getTestName( $test ) . ': ' . $this->getErrorName( $t )
 		);
 	}
 
 	/**
 	 * Skipped test.
 	 *
-	 * @param PHPUnit_Framework_Test $test
-	 * @param Exception $e
+	 * @param Test $test
+	 * @param Throwable $t
 	 * @param float $time
 	 */
-	public function addSkippedTest( PHPUnit_Framework_Test $test, Exception $e, $time ) {
-		parent::addSkippedTest( $test, $e, $time );
+	public function addSkippedTest( Test $test, Throwable $t, float $time ) : void {
 		wfDebugLog(
 			$this->logChannel,
-			'Skipped test ' . $this->getTestName( $test ) . ': ' . $this->getErrorName( $e )
+			'Skipped test ' . $this->getTestName( $test ) . ': ' . $this->getErrorName( $t )
 		);
 	}
 
 	/**
 	 * A test suite started.
 	 *
-	 * @param PHPUnit_Framework_TestSuite $suite
+	 * @param TestSuite $suite
 	 */
-	public function startTestSuite( PHPUnit_Framework_TestSuite $suite ) {
-		parent::startTestSuite( $suite );
+	public function startTestSuite( TestSuite $suite ) : void {
 		wfDebugLog( $this->logChannel, 'START suite ' . $suite->getName() );
 	}
 
 	/**
 	 * A test suite ended.
 	 *
-	 * @param PHPUnit_Framework_TestSuite $suite
+	 * @param TestSuite $suite
 	 */
-	public function endTestSuite( PHPUnit_Framework_TestSuite $suite ) {
-		parent::endTestSuite( $suite );
+	public function endTestSuite( TestSuite $suite ) : void {
 		wfDebugLog( $this->logChannel, 'END suite ' . $suite->getName() );
 	}
 
 	/**
 	 * A test started.
 	 *
-	 * @param PHPUnit_Framework_Test $test
+	 * @param Test $test
 	 */
-	public function startTest( PHPUnit_Framework_Test $test ) {
-		parent::startTest( $test );
+	public function startTest( Test $test ) : void {
+		Hooks::runner()->onMediaWikiPHPUnitTest__startTest( $test );
 		wfDebugLog( $this->logChannel, 'Start test ' . $this->getTestName( $test ) );
 	}
 
 	/**
 	 * A test ended.
 	 *
-	 * @param PHPUnit_Framework_Test $test
+	 * @param Test $test
 	 * @param float $time
 	 */
-	public function endTest( PHPUnit_Framework_Test $test, $time ) {
-		parent::endTest( $test, $time );
+	public function endTest( Test $test, float $time ) : void {
+		Hooks::runner()->onMediaWikiPHPUnitTest__endTest( $test, $time );
 		wfDebugLog( $this->logChannel, 'End test ' . $this->getTestName( $test ) );
 	}
 }

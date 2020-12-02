@@ -1,15 +1,29 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ninjastrikers",
-			"9.sinistra"
+			"9.sinistra",
+			"Dr Lotus Black",
+			"Ninjastrikers"
 		]
 	},
+	"categorytree": "ကဏ္ဍ ဖွဲ့စည်းပုံ",
+	"categorytree-portlet": "ကဏ္ဍများ",
+	"categorytree-legend": "ကဏ္ဍ ဖွဲ့စည်းပုံကို ပြရန်",
 	"categorytree-category": "ကဏ္ဍ:",
+	"categorytree-mode-categories": "ကဏ္ဍများသာ",
+	"categorytree-mode-pages": "ဖိုင်များကလွဲ၍ စာမျက်နှာများ",
+	"categorytree-mode-all": "စာမျက်နှာအားလုံး",
+	"categorytree-collapse": "ချုံ့ရန်",
 	"categorytree-expand": "ချဲ့ကား",
 	"categorytree-member-counts": "{{PLURAL:$1|ကဏ္ဍခွဲ ၁ ခု|$1 ကဏ္ဍခွဲများ}}၊ {{PLURAL:$2|စာမျက်နှာ ၁ ခု| စာမျက်နှာ $2 ခု}}၊ နှင့် {{PLURAL:$3|ဖိုင် ၁ ခု| ဖိုင် $3 ခု }} ပါဝင်သည်",
 	"categorytree-num-categories": "$1 ကဏ္ဍ",
 	"categorytree-num-pages": "$1 စာမျက်နှာ",
 	"categorytree-num-files": "$1 ဖိုင်",
-	"categorytree-num-empty": "ဘာမှမရှိ"
+	"categorytree-num-empty": "ဘာမှမရှိ",
+	"categorytree-loading": "ဝန်ဆွဲတင်နေသည်...",
+	"categorytree-nothing-found": "ဘာတစ်ခုမှ မတွေ့ပါ",
+	"categorytree-no-subcategories": "ကဏ္ဍခွဲများ မရှိပါ",
+	"categorytree-no-parent-categories": "မိခင်ကဏ္ဍများ မတွေ့ပါ",
+	"categorytree-not-found": "ကဏ္ဍ <i>$1</i> မတွေ့ပါ",
+	"categorytree-retry": "ခေတ္တခဏစောင့်ဆိုင်းပြီး ထပ်မံကြိုးစားကြည့်ပါ။"
 }

@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Naudefj",
 			"Arnobarnard",
-			"Fwolff"
+			"Fwolff",
+			"Naudefj"
 		]
 	},
 	"fancycaptcha-addurl": "U Wysiging bevat nuwe eksterne skakels. Om die wiki teen geoutomatiseerde vandalisme te beskerm, tik asb. die woorde wat verskyn in die boksie onder ([[Special:Captcha/help|meer inligting]]):",

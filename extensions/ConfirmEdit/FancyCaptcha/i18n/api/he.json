@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "קבלת FancyCaptcha חדשה.",
+	"apihelp-fancycaptchareload-summary": "קבלת FancyCaptcha חדשה.",
+	"apihelp-fancycaptchareload-example-1": "קבלת FancyCaptcha חדשה"
+}

@@ -1,5 +1,7 @@
 <?php
 
+use OOUI\Widget;
+
 /**
  * <input> field.
  *
@@ -7,6 +9,8 @@
  * recognized:
  *   autocomplete - HTML autocomplete value (a boolean for on/off or a string according to
  *     https://html.spec.whatwg.org/multipage/forms.html#autofill )
+ *
+ * @stable to extend
  */
 class HTMLTextField extends HTMLFormField {
 	protected $mPlaceholder = '';
@@ -15,6 +19,8 @@ class HTMLTextField extends HTMLFormField {
 	protected $autocomplete;
 
 	/**
+	 * @stable to call
+	 *
 	 * @param array $params
 	 *   - type: HTML textfield type
 	 *   - size: field size in characters (defaults to 45)
@@ -37,12 +43,16 @@ class HTMLTextField extends HTMLFormField {
 		}
 	}
 
+	/**
+	 * @stable to override
+	 * @return int
+	 */
 	public function getSize() {
-		return isset( $this->mParams['size'] ) ? $this->mParams['size'] : 45;
+		return $this->mParams['size'] ?? 45;
 	}
 
 	public function getSpellCheck() {
-		$val = isset( $this->mParams['spellcheck'] ) ? $this->mParams['spellcheck'] : null;
+		$val = $this->mParams['spellcheck'] ?? null;
 		if ( is_bool( $val ) ) {
 			// "spellcheck" attribute literally requires "true" or "false" to work.
 			return $val === true ? 'true' : 'false';
@@ -58,6 +68,10 @@ class HTMLTextField extends HTMLFormField {
 		return !( isset( $this->mParams['type'] ) && $this->mParams['type'] === 'password' );
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function getInputHTML( $value ) {
 		if ( !$this->isPersistent() ) {
 			$value = '';
@@ -85,18 +99,19 @@ class HTMLTextField extends HTMLFormField {
 			'type',
 			'min',
 			'max',
-			'pattern',
-			'title',
 			'step',
-			'list',
+			'title',
 			'maxlength',
 			'tabindex',
 			'disabled',
 			'required',
 			'autofocus',
-			'multiple',
 			'readonly',
 			'autocomplete',
+			// Only used in HTML mode:
+			'pattern',
+			'list',
+			'multiple',
 		];
 
 		$attribs += $this->getAttributes( $allowedParams );
@@ -107,7 +122,7 @@ class HTMLTextField extends HTMLFormField {
 	}
 
 	protected function getType( &$attribs ) {
-		$type = isset( $attribs['type'] ) ? $attribs['type'] : 'text';
+		$type = $attribs['type'] ?? 'text';
 		unset( $attribs['type'] );
 
 		# Implement tiny differences between some field variants
@@ -117,6 +132,7 @@ class HTMLTextField extends HTMLFormField {
 			switch ( $this->mParams['type'] ) {
 				case 'int':
 					$type = 'number';
+					$attribs['step'] = 1;
 					break;
 				case 'float':
 					$type = 'number';
@@ -129,12 +145,19 @@ class HTMLTextField extends HTMLFormField {
 				case 'url':
 					$type = $this->mParams['type'];
 					break;
+				case 'textwithbutton':
+					$type = $this->mParams['inputtype'] ?? 'text';
+					break;
 			}
 		}
 
 		return $type;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function getInputOOUI( $value ) {
 		if ( !$this->isPersistent() ) {
 			$value = '';
@@ -152,17 +175,22 @@ class HTMLTextField extends HTMLFormField {
 		# @todo Enforce pattern, step, required, readonly on the server side as
 		# well
 		$allowedParams = [
-			'autofocus',
-			'autosize',
+			'type',
+			'min',
+			'max',
+			'step',
+			'title',
+			'maxlength',
+			'tabindex',
 			'disabled',
+			'required',
+			'autofocus',
+			'readonly',
+			'autocomplete',
+			// Only used in OOUI mode:
+			'autosize',
 			'flags',
 			'indicator',
-			'maxlength',
-			'readonly',
-			'required',
-			'tabindex',
-			'type',
-			'autocomplete',
 		];
 
 		$attribs += OOUI\Element::configFromHtmlAttributes(
@@ -181,6 +209,9 @@ class HTMLTextField extends HTMLFormField {
 		}
 
 		$type = $this->getType( $attribs );
+		if ( isset( $attribs['step'] ) && $attribs['step'] === 'any' ) {
+			$attribs['step'] = null;
+		}
 
 		return $this->getInputWidget( [
 			'id' => $this->mID,
@@ -191,12 +222,20 @@ class HTMLTextField extends HTMLFormField {
 		] + $attribs );
 	}
 
+	/**
+	 * @stable to override
+	 *
+	 * @param array $params
+	 *
+	 * @return Widget
+	 */
 	protected function getInputWidget( $params ) {
 		return new OOUI\TextInputWidget( $params );
 	}
 
 	/**
 	 * Returns an array of data-* attributes to add to the field.
+	 * @stable to override
 	 *
 	 * @return array
 	 */

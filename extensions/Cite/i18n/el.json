@@ -2,23 +2,24 @@
 	"@metadata": {
 		"authors": [
 			"Consta",
+			"Geraki",
+			"Nikosgranturismogt",
 			"Omnipaedista",
 			"Protnet",
-			"ZaDiak",
-			"Απεργός",
 			"Xaris333",
-			"Nikosgranturismogt"
+			"ZaDiak",
+			"Απεργός"
 		]
 	},
-	"cite-desc": "Προσθέτει τις ετικέτες <nowiki><ref[ name=αναγνωριστικό]></nowiki> και <nowiki><references/></nowiki>, για παραπομπές",
+	"cite-desc": "Προσθέτει τις ετικέτες <code>&lt;ref&gt;</code> και <code>&lt;references&gt;</code>, για παραπομπές",
 	"cite_error": "Σφάλμα παραπομπής: $1",
 	"cite_error_ref_numeric_key": "Μη έγκυρη ετικέτα <code>&lt;ref&gt;</code>·\nτο όνομα δεν μπορεί να είναι απλός ακέραιος. Χρησιμοποιήστε έναν περιγραφικό τίτλο",
 	"cite_error_ref_no_key": "Μη έγκυρη ετικέτα <code>&lt;ref&gt;</code>·\nπαραπομπές χωρίς περιεχόμενο πρέπει να έχουν όνομα",
 	"cite_error_ref_too_many_keys": "Μη έγκυρη ετικέτα <code>&lt;ref&gt;</code>·\nμη έγκυρα ονόματα, π.χ. πάρα πολλά",
 	"cite_error_ref_no_input": "Μη έγκυρη ετικέτα <code>&lt;ref&gt;</code>·\nοι παραπομπές χωρίς όνομα πρέπει να έχουν περιεχόμενο",
 	"cite_error_references_invalid_parameters": "Άκυρη παράμετρος στην <code>&lt;references&gt;</code> ετικέτα.",
-	"cite_error_references_no_backlink_label": "Εξαντλήθηκαν οι ειδικές ετικέτες συνδέσμων προς το κείμενο.\nΚαθορισμός περισσότερων στο μήνυμα <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>.",
-	"cite_error_no_link_label_group": "Εξαντλήθηκαν οι ειδικές ετικέτες συνδέσμων για την ομάδα «$1».\nΚαθορισμός περισσότερων στο μήνυμα <nowiki>[[MediaWiki:$2]]</nowiki>.",
+	"cite_error_references_no_backlink_label": "Εξαντλήθηκαν οι ειδικές ετικέτες συνδέσμων προς το κείμενο. Καθορισμός περισσότερων στο μήνυμα [[MediaWiki:Cite references link many format backlink labels]].",
+	"cite_error_no_link_label_group": "Εξαντλήθηκαν οι ειδικές ετικέτες συνδέσμων για την ομάδα «$1». Καθορισμός περισσότερων στο μήνυμα [[MediaWiki:$2]].",
 	"cite_error_references_no_text": "Μη έγκυρη ετικέτα <code>&lt;ref&gt;</code>·\nδεν δίνεται κείμενο για παραπομπές με όνομα <code>$1</code>",
 	"cite_error_included_ref": "Λείπει η ετικέτα κλεισίματος <code>&lt;/ref&gt;</code> για την ετικέτα <code>&lt;ref&gt;</code>",
 	"cite_error_group_refs_without_references": "Υπάρχουν ετικέτες <code>&lt;ref&gt;</code> για κάποια ομάδα με το όνομα «$1», αλλά δεν βρέθηκε καμία αντίστοιχη ετικέτα <code>&lt;references group=\"$1\"/&gt;</code>, ή λείπει η ετικέτα κλεισίματος <code>&lt;/ref&gt;</code>",

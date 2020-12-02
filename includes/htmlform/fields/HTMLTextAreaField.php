@@ -1,13 +1,18 @@
 <?php
 
+/*
+ * @stable to extend
+ */
 class HTMLTextAreaField extends HTMLFormField {
-	const DEFAULT_COLS = 80;
-	const DEFAULT_ROWS = 25;
+	protected const DEFAULT_COLS = 80;
+	protected const DEFAULT_ROWS = 25;
 
 	protected $mPlaceholder = '';
 	protected $mUseEditFont = false;
 
 	/**
+	 * @stable to call
+	 *
 	 * @param array $params
 	 *   - cols, rows: textarea size
 	 *   - placeholder/placeholder-message: set HTML placeholder attribute
@@ -29,15 +34,15 @@ class HTMLTextAreaField extends HTMLFormField {
 	}
 
 	public function getCols() {
-		return isset( $this->mParams['cols'] ) ? $this->mParams['cols'] : static::DEFAULT_COLS;
+		return $this->mParams['cols'] ?? static::DEFAULT_COLS;
 	}
 
 	public function getRows() {
-		return isset( $this->mParams['rows'] ) ? $this->mParams['rows'] : static::DEFAULT_ROWS;
+		return $this->mParams['rows'] ?? static::DEFAULT_ROWS;
 	}
 
 	public function getSpellCheck() {
-		$val = isset( $this->mParams['spellcheck'] ) ? $this->mParams['spellcheck'] : null;
+		$val = $this->mParams['spellcheck'] ?? null;
 		if ( is_bool( $val ) ) {
 			// "spellcheck" attribute literally requires "true" or "false" to work.
 			return $val === true ? 'true' : 'false';
@@ -45,6 +50,10 @@ class HTMLTextAreaField extends HTMLFormField {
 		return null;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function getInputHTML( $value ) {
 		$classes = [];
 
@@ -88,7 +97,11 @@ class HTMLTextAreaField extends HTMLFormField {
 		return Html::textarea( $this->mName, $value, $attribs );
 	}
 
-	function getInputOOUI( $value ) {
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
+	public function getInputOOUI( $value ) {
 		$classes = [];
 
 		if ( isset( $this->mParams['cols'] ) ) {

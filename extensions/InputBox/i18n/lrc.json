@@ -2,13 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Bonevarluri",
+			"Lorestani",
 			"Mogoeilor"
 		]
 	},
-	"inputbox-tryexact": "تلاش سی یکی کردن راستکی",
+	"inputbox-tryexact": "تٱفرٱ سی یٱکؽ کردن راسٱکی",
 	"inputbox-searchfulltext": "پی جوری متنی",
 	"inputbox-createarticle": "راس كردن بلگه",
-	"inputbox-movearticle": "بلگه نه جا وه جا کو",
+	"inputbox-movearticle": "بٱلگٱ ناْ جا ڤ جا کو",
 	"inputbox-postcomment": "بشه تازه",
 	"inputbox-postcommenttitle": "بشه تازه",
 	"inputbox-ns-main": "اصلی"

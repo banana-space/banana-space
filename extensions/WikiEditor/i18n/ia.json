@@ -1,17 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"McDutchie",
-			"Macofe"
+			"Macofe",
+			"McDutchie"
 		]
 	},
 	"wikieditor": "Interfacie avantiate de modification de wikitexto",
-	"wikieditor-desc": "Forni un interfacie de modification de wikitexto extensibile con multe modulos a functiones additional",
+	"wikieditor-desc": "Forni un interfacie avantiate e extensibile pro modificar wikitexto",
 	"wikieditor-wikitext-tab": "Wikitexto",
 	"wikieditor-loading": "Carga…",
 	"wikieditor-toolbar": "Instrumentario de modification",
 	"wikieditor-toolbar-desc": "Barra con instrumentos de modification con augmento de usabilitate",
-	"wikieditor-toolbar-preference": "Activar le instrumentario de modification meliorate",
+	"wikieditor-toolbar-preference": "Activar le instrumentario de modification",
 	"wikieditor-toolbar-loading": "Cargamento in curso…",
 	"wikieditor-toolbar-tool-bold": "Grasse",
 	"wikieditor-toolbar-tool-bold-example": "Texto grasse",
@@ -44,7 +44,7 @@
 	"wikieditor-toolbar-tool-link-lookslikeinternal-int": "Ligamine interne",
 	"wikieditor-toolbar-tool-link-lookslikeinternal-ext": "Ligamine externe",
 	"wikieditor-toolbar-tool-link-empty": "Tu ha entrate nihil a que ligar.",
-	"wikieditor-toolbar-tool-file": "File incastrate",
+	"wikieditor-toolbar-tool-file": "Imagines e multimedia",
 	"wikieditor-toolbar-tool-file-example": "Exemplo.jpg",
 	"wikieditor-toolbar-tool-file-title": "Inserer file",
 	"wikieditor-toolbar-file-target": "Nomine del file:",
@@ -123,6 +123,7 @@
 	"wikieditor-toolbar-tool-replace-success": "$1 {{PLURAL:$1|reimplaciamento|reimplaciamentos}} facite.",
 	"wikieditor-toolbar-tool-replace-emptysearch": "Tu non entrava texto a cercar.",
 	"wikieditor-toolbar-tool-replace-invalidregex": "Le expression regular que tu entrava es invalide: $1",
+	"wikieditor-toolbar-tool-replace-word": "Cercar parolas integre",
 	"wikieditor-toolbar-section-characters": "Characteres special",
 	"wikieditor-toolbar-section-help": "Adjuta",
 	"wikieditor-toolbar-help-heading-description": "Description",

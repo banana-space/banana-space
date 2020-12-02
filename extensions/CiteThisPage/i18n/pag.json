@@ -1,7 +1,11 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": [
+			"Lam-ang"
+		]
+	},
 	"citethispage": "Bitlaen",
-	"citethispage-link": "Bitlaen yan article",
+	"citethispage-link": "Bitlaen yan artikulo",
 	"citethispage-change-submit": "Bitlaen",
 	"citethispage-change-target": "Bolong:"
 }

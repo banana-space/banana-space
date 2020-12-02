@@ -1,9 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sindhu",
 			"Aursani",
-			"Mehtab ahmed"
+			"Mehtab ahmed",
+			"Sindhu",
+			"Tweety"
 		]
 	},
 	"vector-action-addsection": "عنوان ڏيو",
@@ -17,5 +18,6 @@
 	"vector-view-history": "سوانح ڏسو",
 	"vector-view-view": "پڙھو",
 	"vector-view-viewsource": "ڪوڊ ڏسو",
+	"vector-jumptosearch": "ڳولا ڏانهن هلو",
 	"vector-more-actions": "وڌيڪ"
 }

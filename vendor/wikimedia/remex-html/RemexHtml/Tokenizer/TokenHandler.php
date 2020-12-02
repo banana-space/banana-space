@@ -18,13 +18,13 @@ interface TokenHandler {
 	 * @param string|null $fragmentName The fragment tag name, or null to run
 	 *   in document mode.
 	 */
-	function startDocument( Tokenizer $tokenizer, $fragmentNamespace, $fragmentName );
+	public function startDocument( Tokenizer $tokenizer, $fragmentNamespace, $fragmentName );
 
 	/**
 	 * Called when the end of the input string is consumed
 	 * @param int $pos The input position (past the end)
 	 */
-	function endDocument( $pos );
+	public function endDocument( $pos );
 
 	/**
 	 * This is called for "parse errors" (as defined by the spec). The spec
@@ -35,7 +35,7 @@ interface TokenHandler {
 	 * @param string $text The error message
 	 * @param int $pos The input position
 	 */
-	function error( $text, $pos );
+	public function error( $text, $pos );
 
 	/**
 	 * A merged sequence of character tokens. We use the SAX-like convention of
@@ -49,7 +49,7 @@ interface TokenHandler {
 	 * @param int $sourceStart The input position
 	 * @param int $sourceLength The input length
 	 */
-	function characters( $text, $start, $length, $sourceStart, $sourceLength );
+	public function characters( $text, $start, $length, $sourceStart, $sourceLength );
 
 	/**
 	 * A start tag event. We call it a tag rather than an element since the
@@ -63,7 +63,7 @@ interface TokenHandler {
 	 * @param int $sourceStart The input position
 	 * @param int $sourceLength The input length
 	 */
-	function startTag( $name, Attributes $attrs, $selfClose, $sourceStart, $sourceLength );
+	public function startTag( $name, Attributes $attrs, $selfClose, $sourceStart, $sourceLength );
 
 	/**
 	 * An end tag event.
@@ -72,7 +72,7 @@ interface TokenHandler {
 	 * @param int $sourceStart The input position
 	 * @param int $sourceLength The input length
 	 */
-	function endTag( $name, $sourceStart, $sourceLength );
+	public function endTag( $name, $sourceStart, $sourceLength );
 
 	/**
 	 * A DOCTYPE declaration
@@ -84,7 +84,7 @@ interface TokenHandler {
 	 * @param int $sourceStart The input position
 	 * @param int $sourceLength The input length
 	 */
-	function doctype( $name, $public, $system, $quirks, $sourceStart, $sourceLength );
+	public function doctype( $name, $public, $system, $quirks, $sourceStart, $sourceLength );
 
 	/**
 	 * A comment.
@@ -93,5 +93,5 @@ interface TokenHandler {
 	 * @param int $sourceStart The input position
 	 * @param int $sourceLength The input length
 	 */
-	function comment( $text, $sourceStart, $sourceLength );
+	public function comment( $text, $sourceStart, $sourceLength );
 }

@@ -26,7 +26,6 @@
 	"interwiki_error": "خطأ: جدول الإنترويكى فارغ، أو حدث خطأ آخر.",
 	"interwiki_edit": "عدل",
 	"interwiki_reasonfield": "سبب:",
-	"interwiki_delquestion": "حذف \"$1\"",
 	"interwiki_deleting": "أنت تحذف البادئة \"$1\".",
 	"interwiki_deleted": "البادئة \"$1\" تمت إزالتها بنجاح من جدول الإنترويكى.",
 	"interwiki_delfailed": "البادئة \"$1\" لم يمكن إزالتها من جدول الإنترويكى.",

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joanmp17"
+		]
+	},
+	"vector-action-delete": "ሰርዝ",
+	"vector-action-move": "ኣንቀሳቕስ",
+	"vector-action-protect": "ተኸላኸለ",
+	"vector-view-create": "ፈጠረ",
+	"vector-view-edit": "ኣተዓራረየ",
+	"vector-view-history": "ታሪኽ ርኣይ",
+	"vector-view-view": "ኣንብብ",
+	"vector-more-actions": "ተወሳኺ"
+}

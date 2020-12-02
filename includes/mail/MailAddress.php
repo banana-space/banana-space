@@ -28,6 +28,8 @@
  * Stores a single person's name and email address.
  * These are passed in via the constructor, and will be returned in SMTP
  * header format when requested.
+ *
+ * @newable
  */
 class MailAddress {
 	/**
@@ -46,22 +48,16 @@ class MailAddress {
 	public $address;
 
 	/**
-	 * @param string $address String with an email address, or a User object
-	 * @param string $name Human-readable name if a string address is given
-	 * @param string $realName Human-readable real name if a string address is given
+	 * @stable to call
+	 *
+	 * @param string $address String with an email address
+	 * @param string|null $name Human-readable name if a string address is given
+	 * @param string|null $realName Human-readable real name if a string address is given
 	 */
-	function __construct( $address, $name = null, $realName = null ) {
-		if ( is_object( $address ) && $address instanceof User ) {
-			// Old calling format, now deprecated
-			wfDeprecated( __METHOD__ . ' with a User object', '1.24' );
-			$this->address = $address->getEmail();
-			$this->name = $address->getName();
-			$this->realName = $address->getRealName();
-		} else {
-			$this->address = strval( $address );
-			$this->name = strval( $name );
-			$this->realName = strval( $realName );
-		}
+	public function __construct( $address, $name = null, $realName = null ) {
+		$this->address = strval( $address );
+		$this->name = strval( $name );
+		$this->realName = strval( $realName );
 	}
 
 	/**
@@ -79,29 +75,30 @@ class MailAddress {
 	 * Return formatted and quoted address to insert into SMTP headers
 	 * @return string
 	 */
-	function toString() {
+	public function toString() {
+		if ( !$this->address ) {
+			return '';
+		}
+
 		# PHP's mail() implementation under Windows is somewhat shite, and
 		# can't handle "Joe Bloggs <joe@bloggs.com>" format email addresses,
 		# so don't bother generating them
-		if ( $this->address ) {
-			if ( $this->name != '' && !wfIsWindows() ) {
-				global $wgEnotifUseRealName;
-				$name = ( $wgEnotifUseRealName && $this->realName !== '' ) ? $this->realName : $this->name;
-				$quoted = UserMailer::quotedPrintable( $name );
-				// Must only be quoted if string does not use =? encoding (T191931)
-				if ( $quoted === $name ) {
-					$quoted = '"' . addslashes( $quoted ) . '"';
-				}
-				return "$quoted <{$this->address}>";
-			} else {
-				return $this->address;
-			}
-		} else {
-			return "";
+		if ( $this->name === '' || wfIsWindows() ) {
+			return $this->address;
 		}
+
+		global $wgEnotifUseRealName;
+		$name = ( $wgEnotifUseRealName && $this->realName !== '' ) ? $this->realName : $this->name;
+		$quoted = UserMailer::quotedPrintable( $name );
+		// Must only be quoted if string does not use =? encoding (T191931)
+		if ( $quoted === $name ) {
+			$quoted = '"' . addslashes( $quoted ) . '"';
+		}
+
+		return "$quoted <{$this->address}>";
 	}
 
-	function __toString() {
+	public function __toString() {
 		return $this->toString();
 	}
 }

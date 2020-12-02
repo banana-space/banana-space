@@ -7,6 +7,9 @@
 
 namespace LocalisationUpdate;
 
+use LocalisationUpdate\Fetcher\FetcherFactory;
+use LocalisationUpdate\Reader\ReaderFactory;
+
 /**
  * Executes the localisation update.
  */

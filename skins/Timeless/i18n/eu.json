@@ -1,15 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Subi",
 			"An13sa",
+			"Mikel Ibaiba",
 			"Sator",
-			"Mikel Ibaiba"
+			"Subi"
 		]
 	},
 	"timeless-desc": "Brandon Harris-en Winter prototipoaren ondoren diseinatutako larrua, epemugarik gabea eta Wikimedia Fundazioaren hainbat estilo",
-	"timeless-search-placeholder": "{{NUMBEROFARTICLES}} orriak bilatu",
-	"timeless-loggedin": "Zure kontua",
 	"timeless-anonymous": "Anonimoa",
 	"timeless-loggedinas": "'''$1''' bezala saioa hasita",
 	"timeless-notloggedin": "saioa hasi gabe",

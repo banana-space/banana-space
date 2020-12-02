@@ -3,6 +3,8 @@
 		"authors": [
 			"Aotake",
 			"Fryed-peach",
+			"Kkairri",
+			"Ochaochaocha3",
 			"Schu",
 			"Shirayuki",
 			"青子守歌"
@@ -39,7 +41,9 @@
 	"replacetext_warning": "'''警告:''' 置換後の文字列「$2」を含むページが既に {{PLURAL:$1|$1 件あります。}}この置換を実行すると、これらの文字列と実際に置換された箇所を区別できなくなります。",
 	"replacetext_blankwarning": "'''警告:''' 置換後文字列が空であるため、この操作は取り消せません。",
 	"replacetext_continue": "続行",
+	"replacetext_announce": "$1とウォッチリストでこれらの編集を知らせる",
 	"replacetext_editsummary": "文字列「$1」を「$2」に置換",
 	"right-replacetext": "ウィキ全体で文字列の置換を実行",
-	"action-replacetext": "ウィキ全体での文字列の置換の実行"
+	"action-replacetext": "ウィキ全体での文字列の置換の実行",
+	"replacetext_reminder": "他のページに存在するこのページへのリンクの修正も行う場合は、$1に進んでください。"
 }

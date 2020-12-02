@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"គីមស៊្រុន",
-			"Macofe"
+			"Macofe",
+			"គីមស៊្រុន"
 		]
 	},
 	"wikieditor": "អន្តរមុខសំរាប់កែប្រែអត្ថបទវិគីថ្នាក់ខ្ពស់",
@@ -10,7 +10,7 @@
 	"wikieditor-loading": "កំពុងផ្ទុក",
 	"wikieditor-toolbar": "របារឧបករណ៍កែប្រែ",
 	"wikieditor-toolbar-desc": "របារឧបរកណ៍កែប្រែទំព័រដែលកាន់តែស្រួលប្រើ",
-	"wikieditor-toolbar-preference": "ប្រើរបារឧបករណ៍កែប្រែទំនើប",
+	"wikieditor-toolbar-preference": "ប្រើរបារឧបករណ៍កែប្រែ",
 	"wikieditor-toolbar-loading": "កំពុងផ្ទុក…",
 	"wikieditor-toolbar-tool-bold": "អក្សរដិត",
 	"wikieditor-toolbar-tool-bold-example": "អត្ថបទជាអក្សរដិត",
@@ -43,7 +43,7 @@
 	"wikieditor-toolbar-tool-link-lookslikeinternal-int": "តំណភ្ជាប់​ខាងក្នុង",
 	"wikieditor-toolbar-tool-link-lookslikeinternal-ext": "តំណភ្ជាប់​ខាងក្រៅ",
 	"wikieditor-toolbar-tool-link-empty": "អ្នកមិនបានវាយបញ្ចូលពាក្យសំរាប់ដាក់តំណភ្ជាប់ទេ។",
-	"wikieditor-toolbar-tool-file": "រូបភាពបង្កប់",
+	"wikieditor-toolbar-tool-file": "រូបភាពនិងមេឌា",
 	"wikieditor-toolbar-tool-file-example": "ឧទាហរណ៍.jpg",
 	"wikieditor-toolbar-tool-file-title": "បញ្ចូលឯកសារ",
 	"wikieditor-toolbar-file-target": "ឈ្មោះឯកសារ​៖",
@@ -121,6 +121,7 @@
 	"wikieditor-toolbar-tool-replace-nomatch": "រកមិនឃើញអ្វីដែលអ្នកចង់រកទេ។",
 	"wikieditor-toolbar-tool-replace-success": "បានធ្វើ{{PLURAL:$1|ការជំនួស|ការជំនួស}}ចំនួន $1។",
 	"wikieditor-toolbar-tool-replace-emptysearch": "អ្នកមិនបានវាយបញ្ចូលពាក្យសំរាប់ស្វែងរកទេ។",
+	"wikieditor-toolbar-tool-replace-word": "ត្រូវគ្នានឹងពាក្យទាំងស្រុង",
 	"wikieditor-toolbar-section-characters": "តួអក្សរពិសេសៗ",
 	"wikieditor-toolbar-section-help": "ជំនួយ",
 	"wikieditor-toolbar-help-heading-description": "ការពិពណ៌នា",

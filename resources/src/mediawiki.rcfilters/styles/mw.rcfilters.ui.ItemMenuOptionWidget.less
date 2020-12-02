@@ -1,23 +1,23 @@
-@import 'mediawiki.mixins';
-@import 'mediawiki.ui/variables';
-@import 'mw.rcfilters.variables';
+@import 'mediawiki.mixins.less';
+@import 'mediawiki.ui/variables.less';
+@import 'mw.rcfilters.variables.less';
 
 .mw-rcfilters-ui-itemMenuOptionWidget {
-	min-height: 3.5em;
 	padding: 0 0.5em;
 	.box-sizing( border-box );
 
-	&:not( :last-child ) {
+	&:not( :last-child ):not( .mw-rcfilters-ui-itemMenuOptionWidget-identifier-talk ) {
 		border-bottom: 1px solid @colorGray14;
 	}
 
 	&-view-namespaces {
 		border-top: 4px solid @colorGray12;
+	}
 
-		&:first-child,
-		&.mw-rcfilters-ui-itemMenuOptionWidget-identifier-subject + &.mw-rcfilters-ui-itemMenuOptionWidget-identifier-talk {
-			border-top: 0;
-		}
+	// Don't show border for first namespace & hide for every 'talk' option in second selector
+	&-view-default + &-view-namespaces,
+	&-view-namespaces&.mw-rcfilters-ui-itemMenuOptionWidget-identifier-subject + &-view-namespaces.mw-rcfilters-ui-itemMenuOptionWidget-identifier-talk {
+		border-top: 0;
 	}
 
 	&:hover {
@@ -39,6 +39,7 @@
 			font-size: 1.15em;
 			color: @colorGray2;
 		}
+
 		&-desc {
 			color: @colorGray5;
 			white-space: normal;
@@ -53,11 +54,21 @@
 		.oo-ui-fieldLayout.oo-ui-fieldLayout-align-inline {
 			// Override margin-top and -bottom rules from FieldLayout
 			margin: 0 !important; /* stylelint-disable-line declaration-no-important */
+
+			.oo-ui-fieldLayout-body > .oo-ui-fieldLayout-field {
+				vertical-align: middle;
+			}
 		}
 
 		.oo-ui-checkboxInputWidget {
 			// Workaround for IE11 rendering issues. T162098
 			display: block;
+		}
+
+		label {
+			// Workaround for Chrome browser bug (T199932)
+			// Override padding rule from FieldLayout
+			padding-left: 0 !important; /* stylelint-disable-line declaration-no-important */
 		}
 	}
 

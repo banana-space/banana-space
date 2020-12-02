@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Malafaya",
+			"Joao Xavier",
 			"Lakaoso",
-			"Joao Xavier"
+			"Malafaya"
 		]
 	},
+	"prefs-vector-enable-vector-1-label": "Uzez 'Legacy Vector'",
+	"prefs-vector-enable-vector-1-help": "Dum la sequanta yari, ni gradope adoptos la vido-modelo ''Vector''. Legacy Vector permisos vu vidar l'anciena versiono di ''Vector'' (uzita til decembro 2019). Por savar pluse pri l'aktualigi, irez a [[mw:Reading/Web/Desktop_Improvements|nia pagino pri la projeto]].",
+	"vector-opt-out": "Chanjar al anciena ordino",
 	"vector-action-addsection": "Adjuntar topiko",
 	"vector-action-delete": "Efacar",
 	"vector-action-move": "Movar",
@@ -17,5 +20,6 @@
 	"vector-view-history": "Vidar versionaro",
 	"vector-view-view": "Lektar",
 	"vector-view-viewsource": "Vidar fonto",
+	"vector-jumptosearch": "Irez a serchilo",
 	"vector-more-actions": "Pluse"
 }

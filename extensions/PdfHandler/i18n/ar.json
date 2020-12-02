@@ -16,6 +16,6 @@
 	"pdf_page_error": "رقم الصفحة خارج عن النطاق",
 	"exif-pdf-producer": "برمجية التحويل",
 	"exif-pdf-version": "إصدارة صيغة PDF",
-	"exif-pdf-encrypted": "مُعمّى",
+	"exif-pdf-encrypted": "مشفر",
 	"exif-pdf-pagesize": "حجم الصفحة"
 }

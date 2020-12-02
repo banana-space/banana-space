@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Protostar"
+		]
+	},
+	"tooltip-ca-ve-edit": "Èdit dhis pej",
+	"visualeditor-ca-createsource": "Kreat sòrs",
+	"visualeditor-ca-editsource": "Èdit sòrs",
+	"visualeditor-ca-editsource-section": "èdit sòrs",
+	"visualeditor-dialog-media-position-center": "Sèntar",
+	"visualeditor-dialog-media-position-left": "Lèft",
+	"visualeditor-dialog-media-position-none": "Nòn pan dhèm",
+	"visualeditor-dialog-media-position-right": "Raiht",
+	"visualeditor-dialog-media-position-section": "Positio"
+}

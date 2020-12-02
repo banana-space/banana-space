@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sjoerddebruin",
-			"Mainframe98"
+			"Kippenvlees1",
+			"Mainframe98",
+			"RadioAzureus",
+			"Siebrand",
+			"Sjoerddebruin"
 		]
 	},
 	"timeless-desc": "Een tijdloze vormgeving, ontworpen naar het Winter-prototype door Brandon Harris en andere stijlen van de Wikimedia Foundation.",
-	"timeless-search-placeholder": "Doorzoek ongeveer {{NUMBEROFARTICLES}} pagina's",
-	"timeless-loggedin": "Uw account",
 	"timeless-anonymous": "Anonieme gebruiker",
 	"timeless-loggedinas": "Aangemeld als '''$1'''",
 	"timeless-notloggedin": "Niet aangemeld",
@@ -18,9 +19,12 @@
 	"timeless-sitetools": "Wikihulpmiddelen",
 	"timeless-pageactions": "Paginahulpmiddelen",
 	"timeless-userpagetools": "Gebruikerspagina-hulpmiddelen",
+	"timeless-action-addsection": "Nieuw onderwerp",
+	"timeless-view-view": "Lezen",
 	"timeless-pagemisc": "Meer",
 	"timeless-namespaces": "Naamruimten",
 	"timeless-pagetools": "Pagina-acties",
 	"timeless-languages": "Talen",
+	"timeless-projects": "Andere projecten",
 	"timeless.js": "/* JavaScript die hier wordt geplaatst heeft alleen invloed op gebruikers die het uiterlijk Timeless gebruiken */"
 }

@@ -1,16 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Arystanbek",
 			"BRUTE",
 			"David1010",
 			"Gleki",
 			"ITshnik",
 			"MIKHEIL",
 			"NoiX180",
-			"Pras",
-			"Tokoko",
 			"Otogi",
-			"Arystanbek"
+			"Pras",
+			"SHOTHA",
+			"Tokoko"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "წიგნი",
@@ -23,8 +24,6 @@
 	"cite-ve-dialog-reference-options-name-label": "ხელმეორედ გამოყენება ამ სახელით",
 	"cite-ve-dialog-reference-options-section": "პარამეტრები",
 	"cite-ve-dialog-reference-title": "სქოლიო",
-	"cite-ve-dialog-reference-useexisting-full-label": "გვერდზე უკვე არსებული წყაროს ხელმეორედ გამოყენება",
-	"cite-ve-dialog-reference-useexisting-label": "არსებული სქოლიოს გამოყენება",
 	"cite-ve-dialog-reference-useexisting-tool": "ხელახლა გამოყენება",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "მთავარი სქოლიოს სია",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "ჯგუფი „$1“-ის სქოლიოს სია",
@@ -39,5 +38,7 @@
 	"cite-ve-referenceslist-isempty": "ამ გვერდზე არ არის ბმულები ჯგუფისათვის „$1“ ამ სიაში ჩასართავად.",
 	"cite-ve-referenceslist-isempty-default": "ამ გვერდზე არ არის ბმულები ამ სიაში ჩასართავად.",
 	"cite-ve-referenceslist-missingref": "ეს სქოლიო განსაზღვრულია თარგში ან სხვა გენერირებად ბლოკში და ამჟამად მისი რედაქტირება მხოლოდ საწყისი ტექსტის რეჟიმში შეიძლება.",
-	"cite-ve-toolbar-group-label": "ციტირება"
+	"cite-ve-toolbar-group-label": "ციტირება",
+	"visualeditor-internal-list-diff-default-group-name-mwreference": "სქოლიო",
+	"visualeditor-internal-list-diff-group-name-mwreference": "სქოლიოს ჯგუფის სახელწოდება: \"$1\""
 }

@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Carma citrawati",
+			"NoiX180"
+		]
+	},
+	"categorytree-expand": "bétbét",
+	"categorytree-member-counts": "Madaging {{PLURAL:$1|$1 subkategori}}, {{PLURAL:$2|$2 kaca}}, miwah {{PLURAL:$3|$3 berkas}}",
+	"categorytree-num-categories": "$1 K",
+	"categorytree-num-pages": "$1 K",
+	"categorytree-num-files": "$1 B"
+}

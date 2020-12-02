@@ -4,8 +4,8 @@
 			"Aitolos",
 			"Dead3y3",
 			"Glavkos",
-			"ZaDiak",
-			"Protnet"
+			"Protnet",
+			"ZaDiak"
 		]
 	},
 	"nuke": "Μαζική διαγραφή",
@@ -19,7 +19,6 @@
 	"nuke-submit-user": "Μετάβαση",
 	"nuke-submit-delete": "Διαγραφή επιλεγμένων",
 	"right-nuke": "Μαζική διαγραφή σελίδων",
-	"nuke-select": "Επιλογή: $1",
 	"nuke-userorip": "Όνομα χρήστη, διεύθυνση IP ή κενό:",
 	"nuke-maxpages": "Μέγιστος αριθμός σελίδων:",
 	"nuke-editby": "Δημιουργήθηκε από [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",

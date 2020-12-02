@@ -1,25 +1,25 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abanima",
 			"Aiman titi",
 			"DRIHEM",
 			"Meno25",
 			"Mido",
 			"OsamaK",
-			"Abanima",
 			"ديفيد"
 		]
 	},
 	"renameuser": "إعادة تسمية مستخدم",
-	"renameuser-linkoncontribs": "أعد تسمية المستخدم",
-	"renameuser-linkoncontribs-text": "أعد تسمية هذا المستخدم",
+	"renameuser-linkoncontribs": "أعد تسمية {{GENDER:$1|المستخدم|المستخدمة}}",
+	"renameuser-linkoncontribs-text": "أعد تسمية {{GENDER:$1|هذا المستخدم|هذه المستخدمة}}",
 	"renameuser-desc": "يضيف [[Special:RenameUser|صفحة خاصة]] لإعادة تسمية مستخدم (يحتاج إلى صلاحية ''renameuser'')",
 	"renameuserold": "اسم المستخدم الحالي:",
 	"renameusernew": "الاسم الجديد:",
 	"renameuserreason": "السبب:",
 	"renameusermove": "انقل صفحات المستخدم ونقاشه (بالصفحات الفرعية) إلى الاسم الجديد",
 	"renameusersuppress": "لا تقم بإنشاء تحويلات إلى الاسم الجديد",
-	"renameuserreserve": "احفظ اسم المستخدم القديم ضد الاستخدام",
+	"renameuserreserve": "منع اسم المستخدم القديم من الاستخدام المستقبلي",
 	"renameuserwarnings": "التحذيرات:",
 	"renameuserconfirm": "نعم، أعد تسمية المستخدم",
 	"renameusersubmit": "إرسال",

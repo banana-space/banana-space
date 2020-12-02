@@ -1,5 +1,9 @@
 <?php
 
+use MediaWiki\Block\DatabaseBlock;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
+
 /**
  * @group API
  * @group Database
@@ -8,6 +12,20 @@
  * @covers ApiMove
  */
 class ApiMoveTest extends ApiTestCase {
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->tablesUsed = array_merge(
+			$this->tablesUsed,
+			[ 'watchlist', 'watchlist_expiry' ]
+		);
+
+		$this->setMwGlobals( [
+			'wgWatchlistExpiry' => true,
+		] );
+	}
+
 	/**
 	 * @param string $from Prefixed name of source
 	 * @param string $to Prefixed name of destination
@@ -17,6 +35,7 @@ class ApiMoveTest extends ApiTestCase {
 	protected function assertMoved( $from, $to, $id, $opts = null ) {
 		$opts = (array)$opts;
 
+		Title::clearCaches();
 		$fromTitle = Title::newFromText( $from );
 		$toTitle = Title::newFromText( $to );
 
@@ -32,11 +51,15 @@ class ApiMoveTest extends ApiTestCase {
 			$this->assertTrue( $fromTitle->isRedirect(),
 				"Source {$fromTitle->getPrefixedText()} is not a redirect" );
 
-			$target = Revision::newFromTitle( $fromTitle )->getContent()->getRedirectTarget();
+			$target = MediaWikiServices::getInstance()
+				->getRevisionLookup()
+				->getRevisionByTitle( $fromTitle )
+				->getContent( SlotRecord::MAIN )
+				->getRedirectTarget();
 			$this->assertSame( $toTitle->getPrefixedText(), $target->getPrefixedText() );
 		}
 
-		$this->assertSame( $id, $toTitle->getArticleId() );
+		$this->assertSame( $id, $toTitle->getArticleID() );
 	}
 
 	/**
@@ -46,12 +69,12 @@ class ApiMoveTest extends ApiTestCase {
 	 * @return int ID of created page
 	 */
 	protected function createPage( $name ) {
-		return $this->editPage( $name, 'Content' )->value['revision']->getPage();
+		return $this->editPage( $name, 'Content' )->value['revision-record']->getPageId();
 	}
 
 	public function testFromWithFromid() {
-		$this->setExpectedException( ApiUsageException::class,
-			'The parameters "from" and "fromid" can not be used together.' );
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage( 'The parameters "from" and "fromid" can not be used together.' );
 
 		$this->doApiRequestWithToken( [
 			'action' => 'move',
@@ -91,9 +114,57 @@ class ApiMoveTest extends ApiTestCase {
 		$this->assertArrayNotHasKey( 'warnings', $res[0] );
 	}
 
+	public function testMoveAndWatch(): void {
+		$name = ucfirst( __FUNCTION__ );
+		$this->createPage( $name );
+
+		$this->doApiRequestWithToken( [
+			'action' => 'move',
+			'from' => $name,
+			'to' => "$name 2",
+			'watchlist' => 'watch',
+			'watchlistexpiry' => '99990123000000',
+		] );
+
+		$title = Title::newFromText( $name );
+		$title2 = Title::newFromText( "$name 2" );
+		$this->assertTrue( $this->getTestSysop()->getUser()->isTempWatched( $title ) );
+		$this->assertTrue( $this->getTestSysop()->getUser()->isTempWatched( $title2 ) );
+	}
+
+	public function testMoveWithWatchUnchanged(): void {
+		$name = ucfirst( __FUNCTION__ );
+		$this->createPage( $name );
+		$title = Title::newFromText( $name );
+		$title2 = Title::newFromText( "$name 2" );
+		$user = $this->getTestSysop()->getUser();
+
+		// Temporarily watch the page.
+		$this->doApiRequestWithToken( [
+			'action' => 'watch',
+			'titles' => $name,
+			'expiry' => '99990123000000',
+		] );
+
+		// Fetched stored expiry (maximum duration may override '99990123000000').
+		$store = MediaWikiServices::getInstance()->getWatchedItemStore();
+		$expiry = $store->getWatchedItem( $user, $title )->getExpiry();
+
+		// Move to new location, without changing the watched state.
+		$this->doApiRequestWithToken( [
+			'action' => 'move',
+			'from' => $title->getDBkey(),
+			'to' => $title2->getDBkey(),
+		] );
+
+		// New page should have the same expiry.
+		$expiry2 = $store->getWatchedItem( $user, $title2 )->getExpiry();
+		$this->assertSame( wfTimestamp( TS_MW, $expiry ), $expiry2 );
+	}
+
 	public function testMoveNonexistent() {
-		$this->setExpectedException( ApiUsageException::class,
-			"The page you specified doesn't exist." );
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage( "The page you specified doesn't exist." );
 
 		$this->doApiRequestWithToken( [
 			'action' => 'move',
@@ -103,8 +174,8 @@ class ApiMoveTest extends ApiTestCase {
 	}
 
 	public function testMoveNonexistentId() {
-		$this->setExpectedException( ApiUsageException::class,
-			'There is no page with ID 2147483647.' );
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage( 'There is no page with ID 2147483647.' );
 
 		$this->doApiRequestWithToken( [
 			'action' => 'move',
@@ -114,7 +185,8 @@ class ApiMoveTest extends ApiTestCase {
 	}
 
 	public function testMoveToInvalidPageName() {
-		$this->setExpectedException( ApiUsageException::class, 'Bad title "[".' );
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage( 'Bad title "[".' );
 
 		$name = ucfirst( __FUNCTION__ );
 		$id = $this->createPage( $name );
@@ -126,24 +198,57 @@ class ApiMoveTest extends ApiTestCase {
 				'to' => '[',
 			] );
 		} finally {
-			$this->assertSame( $id, Title::newFromText( $name )->getArticleId() );
+			$this->assertSame( $id, Title::newFromText( $name )->getArticleID() );
+		}
+	}
+
+	public function testMoveWhileBlocked() {
+		$this->assertNull( DatabaseBlock::newFromTarget( '127.0.0.1' ), 'Sanity check' );
+
+		$block = new DatabaseBlock( [
+			'address' => self::$users['sysop']->getUser()->getName(),
+			'by' => self::$users['sysop']->getUser()->getId(),
+			'reason' => 'Capriciousness',
+			'timestamp' => '19370101000000',
+			'expiry' => 'infinity',
+			'enableAutoblock' => true,
+		] );
+		$block->insert();
+
+		$name = ucfirst( __FUNCTION__ );
+		$id = $this->createPage( $name );
+
+		try {
+			$this->doApiRequestWithToken( [
+				'action' => 'move',
+				'from' => $name,
+				'to' => "$name 2",
+			] );
+			$this->fail( 'Expected exception not thrown' );
+		} catch ( ApiUsageException $ex ) {
+			$this->assertSame( 'You have been blocked from editing.', $ex->getMessage() );
+			$this->assertNotNull( DatabaseBlock::newFromTarget( '127.0.0.1' ), 'Autoblock spread' );
+		} finally {
+			$block->delete();
+			self::$users['sysop']->getUser()->clearInstanceCache();
+			$this->assertSame( $id, Title::newFromText( $name )->getArticleID() );
 		}
 	}
 
 	// @todo File moving
 
 	public function testPingLimiter() {
-		global $wgRateLimits;
-
-		$this->setExpectedException( ApiUsageException::class,
-			"You've exceeded your rate limit. Please wait some time and try again." );
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage(
+			"You've exceeded your rate limit. Please wait some time and try again."
+		);
 
 		$name = ucfirst( __FUNCTION__ );
 
 		$this->setMwGlobals( 'wgMainCacheType', 'hash' );
 
-		$this->stashMwGlobals( 'wgRateLimits' );
-		$wgRateLimits['move'] = [ '&can-bypass' => false, 'user' => [ 1, 60 ] ];
+		$this->mergeMwGlobalArrayValue( 'wgRateLimits',
+			[ 'move' => [ '&can-bypass' => false, 'user' => [ 1, 60 ] ] ] );
 
 		$id = $this->createPage( $name );
 
@@ -163,15 +268,17 @@ class ApiMoveTest extends ApiTestCase {
 				'to' => "$name 3",
 			] );
 		} finally {
-			$this->assertSame( $id, Title::newFromText( "$name 2" )->getArticleId() );
+			$this->assertSame( $id, Title::newFromText( "$name 2" )->getArticleID() );
 			$this->assertFalse( Title::newFromText( "$name 3" )->exists(),
 				"\"$name 3\" should not exist" );
 		}
 	}
 
 	public function testTagsNoPermission() {
-		$this->setExpectedException( ApiUsageException::class,
-			'You do not have permission to apply change tags along with your changes.' );
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage(
+			'You do not have permission to apply change tags along with your changes.'
+		);
 
 		$name = ucfirst( __FUNCTION__ );
 
@@ -189,15 +296,15 @@ class ApiMoveTest extends ApiTestCase {
 				'tags' => 'custom tag',
 			] );
 		} finally {
-			$this->assertSame( $id, Title::newFromText( $name )->getArticleId() );
+			$this->assertSame( $id, Title::newFromText( $name )->getArticleID() );
 			$this->assertFalse( Title::newFromText( "$name 2" )->exists(),
 				"\"$name 2\" should not exist" );
 		}
 	}
 
 	public function testSelfMove() {
-		$this->setExpectedException( ApiUsageException::class,
-			'The title is the same; cannot move a page over itself.' );
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage( 'The title is the same; cannot move a page over itself.' );
 
 		$name = ucfirst( __FUNCTION__ );
 		$this->createPage( $name );
@@ -243,12 +350,12 @@ class ApiMoveTest extends ApiTestCase {
 		] );
 
 		$this->assertMoved( $name, "$name 2", $id );
-		$this->assertSame( $talkId, Title::newFromText( "Talk:$name" )->getArticleId() );
+		$this->assertSame( $talkId, Title::newFromText( "Talk:$name" )->getArticleID() );
 		$this->assertSame( $talkDestinationId,
-			Title::newFromText( "Talk:$name 2" )->getArticleId() );
+			Title::newFromText( "Talk:$name 2" )->getArticleID() );
 		$this->assertSame( [ [
 			'message' => 'articleexists',
-			'params' => [],
+			'params' => [ "Talk:$name 2" ],
 			'code' => 'articleexists',
 			'type' => 'error',
 		] ], $res[0]['move']['talkmove-errors'] );
@@ -257,12 +364,9 @@ class ApiMoveTest extends ApiTestCase {
 	}
 
 	public function testMoveSubpages() {
-		global $wgNamespacesWithSubpages;
-
 		$name = ucfirst( __FUNCTION__ );
 
-		$this->stashMwGlobals( 'wgNamespacesWithSubpages' );
-		$wgNamespacesWithSubpages[NS_MAIN] = true;
+		$this->mergeMwGlobalArrayValue( 'wgNamespacesWithSubpages', [ NS_MAIN => true ] );
 
 		$pages = [ $name, "$name/1", "$name/2", "Talk:$name", "Talk:$name/1", "Talk:$name/3" ];
 		$ids = [];
@@ -283,16 +387,16 @@ class ApiMoveTest extends ApiTestCase {
 		}
 
 		$this->assertSame( $ids["$name/error"],
-			Title::newFromText( "$name/error" )->getArticleId() );
+			Title::newFromText( "$name/error" )->getArticleID() );
 		$this->assertSame( $ids["$name 2/error"],
-			Title::newFromText( "$name 2/error" )->getArticleId() );
+			Title::newFromText( "$name 2/error" )->getArticleID() );
 
 		$results = array_merge( $res[0]['move']['subpages'], $res[0]['move']['subpages-talk'] );
 		foreach ( $results as $arr ) {
 			if ( $arr['from'] === "$name/error" ) {
 				$this->assertSame( [ [
 					'message' => 'articleexists',
-					'params' => [],
+					'params' => [ "$name 2/error" ],
 					'code' => 'articleexists',
 					'type' => 'error'
 				] ], $arr['errors'] );
@@ -306,8 +410,10 @@ class ApiMoveTest extends ApiTestCase {
 	}
 
 	public function testMoveNoPermission() {
-		$this->setExpectedException( ApiUsageException::class,
-			'You must be a registered user and [[Special:UserLogin|logged in]] to move a page.' );
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage(
+			'You must be a registered user and [[Special:UserLogin|logged in]] to move a page.'
+		);
 
 		$name = ucfirst( __FUNCTION__ );
 
@@ -322,7 +428,7 @@ class ApiMoveTest extends ApiTestCase {
 				'to' => "$name 2",
 			], null, $user );
 		} finally {
-			$this->assertSame( $id, Title::newFromText( "$name" )->getArticleId() );
+			$this->assertSame( $id, Title::newFromText( "$name" )->getArticleID() );
 			$this->assertFalse( Title::newFromText( "$name 2" )->exists(),
 				"\"$name 2\" should not exist" );
 		}
@@ -348,7 +454,6 @@ class ApiMoveTest extends ApiTestCase {
 		$name = ucfirst( __FUNCTION__ );
 
 		$this->setGroupPermissions( 'sysop', 'suppressredirect', false );
-
 		$id = $this->createPage( $name );
 
 		$res = $this->doApiRequestWithToken( [
@@ -377,7 +482,7 @@ class ApiMoveTest extends ApiTestCase {
 		] );
 
 		$this->assertMoved( "Talk:$name", $name, $idBase );
-		$this->assertSame( $idSub, Title::newFromText( "Talk:$name/1" )->getArticleId() );
+		$this->assertSame( $idSub, Title::newFromText( "Talk:$name/1" )->getArticleID() );
 		$this->assertFalse( Title::newFromText( "$name/1" )->exists(),
 			"\"$name/1\" should not exist" );
 

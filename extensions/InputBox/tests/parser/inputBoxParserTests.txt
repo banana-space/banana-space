@@ -1,3 +1,9 @@
+!! Version 2
+# Force the test runner to ensure the extension is loaded
+!! hooks
+inputbox
+!! endhooks
+
 !! test
 InputBox type=search
 !! wikitext
@@ -237,4 +243,15 @@ placeholder=-{sr-el: el; sr-ec: ec}-
 </inputbox>
 !! html+tidy
 <div class="mw-inputbox-centered" style=""><form name="createbox" class="createbox" action="/index.php" method="get"><input type="hidden" value="edit" name="action" /><input type="text" name="title" class="mw-inputbox-input mw-ui-input mw-ui-input-inline createboxInput" value="Some latin" placeholder="el" size="50" dir="ltr" /><br /><input type="submit" name="create" class="mw-ui-button mw-ui-progressive createboxButton" value="Направи страницу" /></form></div>
+!! end
+
+!! test
+InputBox type=search with aria label
+!! wikitext
+<inputbox>
+type=search
+arialabel=Search this wiki
+</inputbox>
+!! html+tidy
+<div class="mw-inputbox-centered" style=""><form name="searchbox" class="searchbox" action="/wiki/Special:Search"><input class="mw-inputbox-input searchboxInput mw-ui-input mw-ui-input-inline" name="search" type="text" value="" placeholder="" size="50" dir="ltr" aria-label="Search this wiki" /><br /><input type="submit" name="go" class="mw-ui-button" value="Try exact match" />&#160;<input type="submit" name="fulltext" class="mw-ui-button" value="Search full text" /></form></div>
 !! end

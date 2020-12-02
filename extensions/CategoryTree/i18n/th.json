@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aefgh39622",
 			"Horus",
 			"Manop",
 			"Octahedron80",
@@ -15,6 +16,7 @@
 	"categorytree-category": "หมวดหมู่",
 	"categorytree-go": "โหลด",
 	"categorytree-parents": "หมวดหมู่ใหญ่",
+	"categorytree-mode-label": "โหมด:",
 	"categorytree-mode-categories": "แสดงเฉพาะหมวดหมู่",
 	"categorytree-mode-pages": "หน้าต่างๆ ยกเว้นไฟล์",
 	"categorytree-mode-all": "หน้าทุกหน้า",

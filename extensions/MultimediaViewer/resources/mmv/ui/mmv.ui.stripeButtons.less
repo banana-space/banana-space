@@ -1,5 +1,5 @@
-@import '../mmv.globals';
-@import '../mmv.mixins';
+@import '../mmv.variables.less';
+@import '../mmv.mixins.less';
 
 @button-vertical-padding: 20px;
 @button-height: 25px;
@@ -11,10 +11,8 @@
 // full height.
 .mw-mmv-stripe-button {
 	@button-text-color: #888;
-
 	float: right;
 	margin-top: @metadatabar-above-fold-inner-height - ( @button-height + 2 * @button-vertical-padding );
-
 	.unselectable;
 	font-size: 1.25em;
 	color: @button-text-color;
@@ -29,20 +27,17 @@
 		display: inline-block;
 		width: 1em;
 		height: 1em;
-
 		// fix odd position caused by bottom of icon and bottom of SVG not being aligned
 		position: relative;
 		top: 0.1em;
-
 		background-size: 100% 100%;
 		content: ' ';
 		vertical-align: baseline;
-
 		/* @embed */
 		background-image: url( img/page.svg );
-
 		margin-right: 0.7em;
 	}
+
 	&.has-label:before {
 		margin-right: 0.25em;
 	}

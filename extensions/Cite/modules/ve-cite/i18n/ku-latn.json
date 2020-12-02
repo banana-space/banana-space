@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"George Animal",
-			"Purodha",
 			"Bikarhêner",
-			"Ghybu"
+			"George Animal",
+			"Ghybu",
+			"Purodha"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Pirtûk",
@@ -16,7 +16,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Di bin vî navî de dîsa bi kar bîne",
 	"cite-ve-dialog-reference-options-section": "Vebijark",
 	"cite-ve-dialog-reference-title": "Çavkanî",
-	"cite-ve-dialog-reference-useexisting-label": "Çavkaniyeka heye bi kar bîne",
 	"cite-ve-dialog-reference-useexisting-tool": "Dîsa bi kar bîne",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Lîsteya çavkaniyên giştî",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "Lîsteya çavkaniyan bo koma \"$1\"",

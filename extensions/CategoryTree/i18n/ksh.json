@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Als-Holder",
 			"Purodha"
 		]
 	},
@@ -18,7 +19,7 @@
 	"categorytree-mode-all": "alles: nomahl Sigge, Saachjroppe, un Mehdije",
 	"categorytree-collapse": "zosammefallde",
 	"categorytree-expand": "opfallde",
-	"categorytree-empty-bullet": "►<!-- https://phabricator.wikimedia.org/T141238 -->",
+	"categorytree-empty-bullet": "►",
 	"categorytree-member-counts": "do dren {{PLURAL:$1|{{PLURAL:$4|sin|es|es}} ein Ungerjrupp|sin $1 Ungerjruppe|es kein Ungerjrupp}}, {{PLURAL:$2|ein Sigg|$2 Sigge|kein Sigg}}, un {{PLURAL:$3|ein Datei|$3 Dateie|kein Dateie}}, zosamme {{PLURAL:$4|ein Saach|$4 Saache|och nix}}",
 	"categorytree-num-categories": "$1&nbsp;J",
 	"categorytree-num-pages": "$1&nbsp;S",
@@ -32,8 +33,5 @@
 	"categorytree-no-pages": "kein Sigge un kein Ungerjruppe",
 	"categorytree-not-found": "Han di Saachjropp „<strong>$1</strong>“ nit jefonge.",
 	"categorytree-error": "Problem beim Date Lade",
-	"categorytree-retry": "Bess_esu joot un donn et noh enem Moment norr_ens probeere",
-	"apihelp-categorytree-description": "Enträhne Moduhl för et Zohsazprojramm !!FUZZYY!!CategoryTree",
-	"apihelp-categorytree-param-category": "De Övverschreff, em Appachtemanng vun de Saachjroppe. Wann de Saachjropp aanjejovve es, övverjom_mer se.",
-	"apihelp-categorytree-param-options": "De Enschtällonge för der CategoryTree constructor. Dadd es e Objägg em <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"JavaScript Object Notation\">JSON</i>-Fommaht. Der Schtanndat för de Enschtällong „<var lang=\"en\" xml:lang=\"en\" dir=\"ltr\">depth</var>“ es „<kbd lang=\"en\" xml:lang=\"en\" dir=\"ltr\">1</kbd>“."
+	"categorytree-retry": "Bess_esu joot un donn et noh enem Moment norr_ens probeere"
 }

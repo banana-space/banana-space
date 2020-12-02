@@ -1,17 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
+			"A2093064",
 			"Bencmq",
 			"Fdcn",
 			"Hydra",
 			"Liangent",
+			"Liuxinyu970226",
 			"PhiLiP",
 			"Shinjiman",
 			"Xiaomingyan",
-			"乌拉跨氪",
-			"Liuxinyu970226"
+			"Xiplus",
+			"乌拉跨氪"
 		]
 	},
+	"action-tboverride": "忽略标题或用户名黑名单",
+	"action-tboverride-account": "忽略用户名黑名单",
 	"action-titleblacklistlog": "查看标题黑名单日志",
 	"log-name-titleblacklist": "标题黑名单日志",
 	"log-description-titleblacklist": "这些事件触发了标题黑名单。",
@@ -24,18 +28,10 @@
 	"titleblacklist-forbidden-upload": "文件名称“$2”已被禁止创建。\n其与以下黑名单项匹配：<code>$1</code>",
 	"titleblacklist-forbidden-new-account": "用户名“$2”已被禁止创建。\n其与以下黑名单项匹配：<code>$1</code>",
 	"titleblacklist-invalid": "标题黑名单中以下{{PLURAL:$1|一行|多行}}无效；请在保存前改正{{PLURAL:$1|它|它们}}：",
-	"titleblacklist-override": "忽略黑名单",
+	"titleblacklist-override": "若匹配标题黑名单则忽略它",
 	"titleblacklist-override-help": "有足够特权的用户可以将其设置为忽略标题黑名单检查。",
 	"titleblacklist-warning": "<strong>警告：此页面只能由管理员和其他拥有<code>tboverride</code>权限的用户编辑，因为它匹配以下标题黑名单：</strong><br /><code>$1</code>",
 	"right-tboverride": "覆盖标题或用户名黑名单",
 	"right-tboverride-account": "覆盖用户名黑名单",
-	"right-titleblacklistlog": "查看标题黑名单日志",
-	"apihelp-titleblacklist-description": "验证一个页面的标题、文件名或用户名是否触发标题黑名单。",
-	"apihelp-titleblacklist-summary": "验证一个页面的标题、文件名或用户名是否触发标题黑名单。",
-	"apihelp-titleblacklist-param-title": "验证是否触发黑名单的字符串。",
-	"apihelp-titleblacklist-param-action": "要检查的操作。",
-	"apihelp-titleblacklist-param-nooverride": "不要尝试绕开标题黑名单。",
-	"apihelp-titleblacklist-example-1": "检查[[Foo]]是否被列入黑名单",
-	"apihelp-titleblacklist-example-2": "检查[[Bar]]是否被列入禁止编辑的黑名单",
-	"apihelp-createaccount-param-ignoretitleblacklist": "忽略电子欺骗检查（需要以下权限之一：<code>tboverride</code>、<code>tboverride-account</code>）。"
+	"right-titleblacklistlog": "查看标题黑名单日志"
 }

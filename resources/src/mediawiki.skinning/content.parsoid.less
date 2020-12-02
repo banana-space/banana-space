@@ -2,6 +2,8 @@
  * Style Parsoid HTML+RDFa output consistent with wikitext from PHP parser.
  */
 
+/* stylelint-disable selector-class-pattern */
+
 /*
  * Auto-numbered external links
  * Parsoid renders those as link without content, and lets CSS do the
@@ -18,30 +20,6 @@
 }
 
 /**
- * References
- *
- * Parser and Extension:Cite output reference numbers for <sup>[1]</sup> for <ref> tags.
- *
- * Markup:
- * Cake is good<sup>[2]</sup>
- * The cake is a lie<span class="reference">[1]</span>
- *
- * Styleguide 1.1.
- */
-span.reference {
-	font-size: 80%;
-	line-height: 1;
-	vertical-align: super;
-	unicode-bidi: -moz-isolate;
-	unicode-bidi: isolate;
-}
-
-sup,
-sub {
-	line-height: 1;
-}
-
-/**
  * Block media items
  */
 figure[ typeof*='mw:Image' ],
@@ -55,7 +33,7 @@ figure[ typeof*='mw:Audio' ] {
 
 	&.mw-halign-right {
 		/* @noflip */
-		margin: 0.5em 0 1.3em 1.4em;
+		margin: 0 0 0.5em 0.5em;
 		/* @noflip */
 		clear: right;
 		/* @noflip */
@@ -64,7 +42,7 @@ figure[ typeof*='mw:Audio' ] {
 
 	&.mw-halign-left {
 		/* @noflip */
-		margin: 0.5em 1.4em 1.3em 0;
+		margin: 0 0.5em 0.5em 0;
 		/* @noflip */
 		clear: left;
 		/* @noflip */
@@ -116,6 +94,16 @@ figure[ typeof~='mw:Audio/Frame' ] {
 	clear: right;
 	float: right;
 
+	&.mw-halign-left {
+		/* @noflip */
+		margin: 0.5em 1.4em 1.3em 0;
+	}
+
+	&.mw-halign-right {
+		/* @noflip */
+		margin: 0.5em 0 1.3em 1.4em;
+	}
+
 	> *:first-child {
 		> img,
 		> video {
@@ -126,6 +114,7 @@ figure[ typeof~='mw:Audio/Frame' ] {
 
 	> figcaption {
 		display: block;
+		word-break: break-word;
 
 		/* In mw-core the font-size is duplicated, 94% in thumbiner
 		 * and again 94% in thumbcaption. 88.4% for font size of the
@@ -188,6 +177,7 @@ figure[ typeof*='mw:Audio/Thumb' ] {
 		display: inline-block;
 		height: 100%;
 	}
+
 	> * {
 		vertical-align: middle;
 		display: inline-block;
@@ -203,24 +193,31 @@ figure[ typeof*='mw:Audio/Thumb' ] {
 		.mw-valign-middle > & {
 			vertical-align: middle;
 		}
+
 		.mw-valign-baseline > & {
 			vertical-align: baseline;
 		}
+
 		.mw-valign-sub > & {
 			vertical-align: sub;
 		}
+
 		.mw-valign-super > & {
 			vertical-align: super;
 		}
+
 		.mw-valign-top > & {
 			vertical-align: top;
 		}
+
 		.mw-valign-text-top > & {
 			vertical-align: text-top;
 		}
+
 		.mw-valign-bottom > & {
 			vertical-align: bottom;
 		}
+
 		.mw-valign-text-bottom > & {
 			vertical-align: text-bottom;
 		}

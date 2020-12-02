@@ -34,8 +34,8 @@
  * @author Gergő Tisza <tgr.huwiki@gmail.com>
  */
 
-use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Logger\ConsoleSpi;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
 require_once __DIR__ . '/Maintenance.php';
@@ -67,8 +67,12 @@ class MediaWikiShell extends Maintenance {
 		// add this after initializing the code cleaner so all the default passes get added first
 		$traverser->addVisitor( new CodeCleanerGlobalsPass() );
 
-		$config = new \Psy\Configuration( [ 'codeCleaner' => $codeCleaner ] );
+		$config = new \Psy\Configuration();
+		$config->setCodeCleaner( $codeCleaner );
 		$config->setUpdateCheck( \Psy\VersionUpdater\Checker::NEVER );
+		// prevent https://github.com/bobthecow/psysh/issues/443 when using sudo -E
+		$config->setRuntimeDir( wfTempDir() );
+
 		$shell = new \Psy\Shell( $config );
 		if ( $this->hasOption( 'd' ) ) {
 			$this->setupLegacy();
@@ -89,8 +93,8 @@ class MediaWikiShell extends Maintenance {
 		}
 		if ( $d > 1 ) {
 			# Set DBO_DEBUG (equivalent of $wgDebugDumpSql)
-			wfGetDB( DB_MASTER )->setFlag( DBO_DEBUG );
-			wfGetDB( DB_REPLICA )->setFlag( DBO_DEBUG );
+			$this->getDB( DB_MASTER )->setFlag( DBO_DEBUG );
+			$this->getDB( DB_REPLICA )->setFlag( DBO_DEBUG );
 		}
 	}
 

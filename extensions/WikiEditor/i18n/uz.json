@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"CoderSI",
-			"Sociologist",
-			"Macofe"
+			"Macofe",
+			"Malikxan",
+			"Sociologist"
 		]
 	},
 	"wikieditor": "Vikimatnni tahrirlashning kengaytirilgan interfeysi",
 	"wikieditor-desc": "Vikimatnni tahrirlashning kengaytirilgan interfeysi va modullar tomonidan taqdim qilinadigan koʻpchilik amallar bilan taʼminlaydi",
 	"wikieditor-wikitext-tab": "Vikimatn",
-	"wikieditor-loading": "Yuklash...",
+	"wikieditor-loading": "Yuklanmoqda...",
 	"wikieditor-toolbar": "Tahrirlash darchasi",
 	"wikieditor-toolbar-desc": "Foydalanishga qulayroq boʻlgan tahrirlash darchasi",
 	"wikieditor-toolbar-preference": "Yaxshilangan tahrirlash darchasini yoqish",
@@ -56,7 +57,7 @@
 	"wikieditor-toolbar-file-format-none": "yoʻq",
 	"wikieditor-toolbar-tool-file-insert": "Qoʻyish",
 	"wikieditor-toolbar-tool-file-cancel": "Bekor qilish",
-	"wikieditor-toolbar-tool-reference": "Havola",
+	"wikieditor-toolbar-tool-reference": "Izoh",
 	"wikieditor-toolbar-tool-reference-example": "Havola matnini bu yerga qoʻying",
 	"wikieditor-toolbar-tool-reference-cancel": "Bekor qilish",
 	"wikieditor-toolbar-tool-reference-title": "Havola qoʻyish",

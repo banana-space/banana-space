@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.ui.Canvas', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'Constructor sanity check', function ( assert ) {
@@ -37,19 +37,19 @@
 		canvas.empty();
 
 		assert.strictEqual( canvas.$imageDiv.html(), '', 'Canvas is empty.' );
-		assert.ok( canvas.$imageDiv.hasClass( 'empty' ), 'Canvas is not visible.' );
+		assert.strictEqual( canvas.$imageDiv.hasClass( 'empty' ), true, 'Canvas is not visible.' );
 
 		canvas.set( imageRawMetadata, $imageElem );
 
 		assert.strictEqual( canvas.$image, $imageElem, 'Image element set correctly.' );
 		assert.strictEqual( canvas.imageRawMetadata, imageRawMetadata, 'Raw metadata set correctly.' );
 		assert.strictEqual( canvas.$imageDiv.html(), '<img>', 'Image added to container.' );
-		assert.ok( !canvas.$imageDiv.hasClass( 'empty' ), 'Canvas is visible.' );
+		assert.strictEqual( canvas.$imageDiv.hasClass( 'empty' ), false, 'Canvas is visible.' );
 
 		canvas.empty();
 
 		assert.strictEqual( canvas.$imageDiv.html(), '', 'Canvas is empty.' );
-		assert.ok( canvas.$imageDiv.hasClass( 'empty' ), 'Canvas is not visible.' );
+		assert.strictEqual( canvas.$imageDiv.hasClass( 'empty' ), true, 'Canvas is not visible.' );
 	} );
 
 	QUnit.test( 'setImageAndMaxDimensions()', function ( assert ) {
@@ -121,8 +121,8 @@
 
 		assert.strictEqual( $image.width(), 10, 'Placeholder width was not set to max' );
 		assert.strictEqual( $image.height(), 5, 'Placeholder height was not set to max' );
-		assert.ok( !$image.hasClass( 'blurred' ), 'Placeholder is not blurred' );
-		assert.ok( !blurredThumbnailShown, 'Placeholder state is correct' );
+		assert.strictEqual( $image.hasClass( 'blurred' ), false, 'Placeholder is not blurred' );
+		assert.strictEqual( blurredThumbnailShown, false, 'Placeholder state is correct' );
 	} );
 
 	QUnit.test( 'maybeDisplayPlaceholder: placeholder big enough that it doesn\'t need blurring, actual image bigger than the lightbox', function ( assert ) {
@@ -151,8 +151,8 @@
 
 		assert.strictEqual( $image.width(), 300, 'Placeholder has the right width' );
 		assert.strictEqual( $image.height(), 150, 'Placeholder has the right height' );
-		assert.ok( !$image.hasClass( 'blurred' ), 'Placeholder is not blurred' );
-		assert.ok( !blurredThumbnailShown, 'Placeholder state is correct' );
+		assert.strictEqual( $image.hasClass( 'blurred' ), false, 'Placeholder is not blurred' );
+		assert.strictEqual( blurredThumbnailShown, false, 'Placeholder state is correct' );
 	} );
 
 	QUnit.test( 'maybeDisplayPlaceholder: big-enough placeholder that needs blurring, actual image bigger than the lightbox', function ( assert ) {
@@ -181,8 +181,8 @@
 
 		assert.strictEqual( $image.width(), 300, 'Placeholder has the right width' );
 		assert.strictEqual( $image.height(), 150, 'Placeholder has the right height' );
-		assert.ok( $image.hasClass( 'blurred' ), 'Placeholder is blurred' );
-		assert.ok( blurredThumbnailShown, 'Placeholder state is correct' );
+		assert.strictEqual( $image.hasClass( 'blurred' ), true, 'Placeholder is blurred' );
+		assert.strictEqual( blurredThumbnailShown, true, 'Placeholder state is correct' );
 	} );
 
 	QUnit.test( 'maybeDisplayPlaceholder: big-enough placeholder that needs blurring, actual image smaller than the lightbox', function ( assert ) {
@@ -211,8 +211,8 @@
 
 		assert.strictEqual( $image.width(), 1000, 'Placeholder has the right width' );
 		assert.strictEqual( $image.height(), 500, 'Placeholder has the right height' );
-		assert.ok( $image.hasClass( 'blurred' ), 'Placeholder is blurred' );
-		assert.ok( blurredThumbnailShown, 'Placeholder state is correct' );
+		assert.strictEqual( $image.hasClass( 'blurred' ), true, 'Placeholder is blurred' );
+		assert.strictEqual( blurredThumbnailShown, true, 'Placeholder state is correct' );
 	} );
 
 	QUnit.test( 'maybeDisplayPlaceholder: placeholder too small to be displayed, actual image bigger than the lightbox', function ( assert ) {
@@ -241,26 +241,23 @@
 
 		assert.strictEqual( $image.width(), 10, 'Placeholder has the right width' );
 		assert.strictEqual( $image.height(), 5, 'Placeholder has the right height' );
-		assert.ok( !$image.hasClass( 'blurred' ), 'Placeholder is not blurred' );
-		assert.ok( !blurredThumbnailShown, 'Placeholder state is correct' );
+		assert.strictEqual( $image.hasClass( 'blurred' ), false, 'Placeholder is not blurred' );
+		assert.strictEqual( blurredThumbnailShown, false, 'Placeholder state is correct' );
 	} );
 
-	QUnit.test( 'Unblur', function ( assert ) {
+	QUnit.test( 'unblurWithAnimation', function ( assert ) {
 		var $qf = $( '#qunit-fixture' ),
 			canvas = new mw.mmv.ui.Canvas( $qf ),
 			oldAnimate = $.fn.animate;
 
 		$.fn.animate = function ( target, options ) {
-			var self = this,
-				lastValue;
-
-			$.each( target, function ( key, value ) {
-				lastValue = self.key = value;
-			} );
+			var key;
 
 			if ( options ) {
 				if ( options.step ) {
-					options.step.call( this, lastValue );
+					for ( key in target ) {
+						options.step.call( this, target[ key ] /* , tween object */ );
+					}
 				}
 
 				if ( options.complete ) {
@@ -279,9 +276,9 @@
 			'Image has no filter left' );
 		assert.strictEqual( parseInt( canvas.$image.css( 'opacity' ), 10 ), 1,
 			'Image is fully opaque' );
-		assert.ok( !canvas.$image.hasClass( 'blurred' ), 'Image has no "blurred" class' );
+		assert.strictEqual( canvas.$image.hasClass( 'blurred' ), false, 'Image has no "blurred" class' );
 
 		$.fn.animate = oldAnimate;
 	} );
 
-}( mediaWiki, jQuery ) );
+}() );

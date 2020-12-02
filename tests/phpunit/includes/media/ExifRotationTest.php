@@ -12,7 +12,7 @@ class ExifRotationTest extends MediaWikiMediaTestCase {
 	/** @var BitmapHandler */
 	private $handler;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		$this->checkPHPExtension( 'exif' );
 
@@ -61,7 +61,6 @@ class ExifRotationTest extends MediaWikiMediaTestCase {
 	}
 
 	/**
-	 *
 	 * @dataProvider provideFiles
 	 */
 	public function testRotationRendering( $name, $type, $info, $thumbs ) {
@@ -167,7 +166,6 @@ class ExifRotationTest extends MediaWikiMediaTestCase {
 	}
 
 	/**
-	 *
 	 * @dataProvider provideFilesNoAutoRotate
 	 */
 	public function testRotationRenderingNoAutoRotate( $name, $type, $info, $thumbs ) {
@@ -189,6 +187,11 @@ class ExifRotationTest extends MediaWikiMediaTestCase {
 
 			$file = $this->dataFile( $name, $type );
 			$thumb = $file->transform( $params, File::RENDER_NOW | File::RENDER_FORCE );
+
+			if ( $thumb->isError() ) {
+				/** @var MediaTransformError $thumb */
+				$this->fail( $thumb->toText() );
+			}
 
 			$this->assertEquals(
 				$out[0],
@@ -246,8 +249,8 @@ class ExifRotationTest extends MediaWikiMediaTestCase {
 		];
 	}
 
-	const TEST_WIDTH = 100;
-	const TEST_HEIGHT = 200;
+	private const TEST_WIDTH = 100;
+	private const TEST_HEIGHT = 200;
 
 	/**
 	 * @dataProvider provideBitmapExtractPreRotationDimensions

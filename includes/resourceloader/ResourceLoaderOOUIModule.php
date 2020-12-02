@@ -21,18 +21,20 @@
 /**
  * Convenience methods for dealing with OOUI themes and their relations to MW skins.
  *
- * @since 1.30
+ * @ingroup ResourceLoader
+ * @internal
  */
 trait ResourceLoaderOOUIModule {
 	protected static $knownScriptsModules = [ 'core' ];
 	protected static $knownStylesModules = [ 'core', 'widgets', 'toolbars', 'windows' ];
 	protected static $knownImagesModules = [
-		'indicators', 'textures',
+		'indicators',
 		// Extra icons
 		'icons-accessibility',
 		'icons-alerts',
 		'icons-content',
 		'icons-editing-advanced',
+		'icons-editing-citation',
 		'icons-editing-core',
 		'icons-editing-list',
 		'icons-editing-styling',
@@ -54,14 +56,14 @@ trait ResourceLoaderOOUIModule {
 	// Note that keys must be TitleCase.
 	protected static $builtinThemePaths = [
 		'WikimediaUI' => [
-			'scripts' => 'resources/lib/oojs-ui/oojs-ui-wikimediaui.js',
-			'styles' => 'resources/lib/oojs-ui/oojs-ui-{module}-wikimediaui.css',
-			'images' => 'resources/lib/oojs-ui/themes/wikimediaui/{module}.json',
+			'scripts' => 'resources/lib/ooui/oojs-ui-wikimediaui.js',
+			'styles' => 'resources/lib/ooui/oojs-ui-{module}-wikimediaui.css',
+			'images' => 'resources/lib/ooui/themes/wikimediaui/{module}.json',
 		],
 		'Apex' => [
-			'scripts' => 'resources/lib/oojs-ui/oojs-ui-apex.js',
-			'styles' => 'resources/lib/oojs-ui/oojs-ui-{module}-apex.css',
-			'images' => 'resources/lib/oojs-ui/themes/apex/{module}.json',
+			'scripts' => 'resources/lib/ooui/oojs-ui-apex.js',
+			'styles' => 'resources/lib/ooui/oojs-ui-{module}-apex.css',
+			'images' => 'resources/lib/ooui/themes/apex/{module}.json',
 		],
 	];
 
@@ -81,7 +83,7 @@ trait ResourceLoaderOOUIModule {
 	 * Return a map of theme names to lists of paths from which a given theme should be loaded.
 	 *
 	 * Keys are theme names, values are associative arrays. Keys of the inner array are 'scripts',
-	 * 'styles', or 'images', and values are string paths.
+	 * 'styles', or 'images', and values are paths. Paths may be strings or ResourceLoaderFilePaths.
 	 *
 	 * Additionally, the string '{module}' in paths represents the name of the module to load.
 	 *
@@ -89,29 +91,57 @@ trait ResourceLoaderOOUIModule {
 	 */
 	protected static function getThemePaths() {
 		$themePaths = self::$builtinThemePaths;
+		$themePaths += ExtensionRegistry::getInstance()->getAttribute( 'OOUIThemePaths' );
+
+		list( $defaultLocalBasePath, $defaultRemoteBasePath ) =
+			ResourceLoaderFileModule::extractBasePaths();
+
+		// Allow custom themes' paths to be relative to the skin/extension that defines them,
+		// like with ResourceModuleSkinStyles
+		foreach ( $themePaths as $theme => &$paths ) {
+			list( $localBasePath, $remoteBasePath ) =
+				ResourceLoaderFileModule::extractBasePaths( $paths );
+			if ( $localBasePath !== $defaultLocalBasePath || $remoteBasePath !== $defaultRemoteBasePath ) {
+				foreach ( $paths as &$path ) {
+					$path = new ResourceLoaderFilePath( $path, $localBasePath, $remoteBasePath );
+				}
+			}
+		}
+
 		return $themePaths;
 	}
 
 	/**
 	 * Return a path to load given module of given theme from.
 	 *
+	 * The file at this path may not exist. This should be handled by the caller (throwing an error or
+	 * falling back to default theme).
+	 *
 	 * @param string $theme OOUI theme name, for example 'WikimediaUI' or 'Apex'
 	 * @param string $kind Kind of the module: 'scripts', 'styles', or 'images'
 	 * @param string $module Module name, for valid values see $knownScriptsModules,
 	 *     $knownStylesModules, $knownImagesModules
-	 * @return string
+	 * @return string|ResourceLoaderFilePath
 	 */
 	protected function getThemePath( $theme, $kind, $module ) {
 		$paths = self::getThemePaths();
-		$path = $paths[ $theme ][ $kind ];
-		$path = str_replace( '{module}', $module, $path );
+		$path = $paths[$theme][$kind];
+		if ( $path instanceof ResourceLoaderFilePath ) {
+			$path = new ResourceLoaderFilePath(
+				str_replace( '{module}', $module, $path->getPath() ),
+				$path->getLocalBasePath(),
+				$path->getRemoteBasePath()
+			);
+		} else {
+			$path = str_replace( '{module}', $module, $path );
+		}
 		return $path;
 	}
 
 	/**
 	 * @param string $theme See getThemePath()
 	 * @param string $module See getThemePath()
-	 * @return string
+	 * @return string|ResourceLoaderFilePath
 	 */
 	protected function getThemeScriptsPath( $theme, $module ) {
 		if ( !in_array( $module, self::$knownScriptsModules ) ) {
@@ -123,7 +153,7 @@ trait ResourceLoaderOOUIModule {
 	/**
 	 * @param string $theme See getThemePath()
 	 * @param string $module See getThemePath()
-	 * @return string
+	 * @return string|ResourceLoaderFilePath
 	 */
 	protected function getThemeStylesPath( $theme, $module ) {
 		if ( !in_array( $module, self::$knownStylesModules ) ) {
@@ -135,7 +165,7 @@ trait ResourceLoaderOOUIModule {
 	/**
 	 * @param string $theme See getThemePath()
 	 * @param string $module See getThemePath()
-	 * @return string
+	 * @return string|ResourceLoaderFilePath
 	 */
 	protected function getThemeImagesPath( $theme, $module ) {
 		if ( !in_array( $module, self::$knownImagesModules ) ) {

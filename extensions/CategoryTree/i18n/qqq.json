@@ -9,6 +9,9 @@
 			"Malafaya",
 			"McDutchie",
 			"Meno25",
+			"Nemo bis",
+			"Patriot Kur",
+			"Purodha",
 			"Raimond Spekking",
 			"Raymond",
 			"Shirayuki",
@@ -17,9 +20,7 @@
 			"Umherirrender",
 			"Yekrats",
 			"Александр Сигачёв",
-			"פוילישער",
-			"Purodha",
-			"Nemo bis"
+			"פוילישער"
 		]
 	},
 	"categorytree": "{{doc-special|CategoryTree}}",
@@ -44,7 +45,7 @@
 	"categorytree-member-num": "{{notranslate}}\nHowever, if needed, you can localise the parentheses.\n\n(From https://www.mediawiki.org/wiki/Extension:CategoryTree#categorytree-member-num):\nBy default, when listing subcategories on a category page, each subcategory is followed by an integer indicating how many subcategories lie beneath it:\n<pre>\nMy category name (5)\n</pre>\nYou can change this behavior by overriding this system message. Parameters:\n* $1 - (Unused) number of subcategories\n* $2 - (Unused) number of articles (not including category pages or file pages)\n* $3 - (Unused) number of uploaded files\n* $4 - (Unused) total number of member pages, including category pages and file pages\n* $5 - (Varies depending on CategoryTree mode....Can someone describe it?)\n\nTip: Use the ParserFunctions extension (https://www.mediawiki.org/wiki/Help:Extension:ParserFunctions) to provide if/then/else logic to display different parts conditionally. For example:\n<pre>\n{{#ifeq:$1|0||$1 categories}}\n</pre>",
 	"categorytree-num-categories": "Number of sub-categories in a category. Appears in brackets after a name of an empty category.\n\nThe word \"categories\" should be abbreviated.\n\nParameters:\n* $1 - number of sub-categories. Can be used for PLURAL.\n{{Related|Categorytree-num}}",
 	"categorytree-num-pages": "Number of pages in a category. Appears in brackets after a name of an empty category.\n\nThe word \"pages\" should be abbreviated.\n\nParameters:\n* $1 - number of pages. Can be used for PLURAL.\n{{Related|Categorytree-num}}",
-	"categorytree-num-files": "Number of files in a category. Appears in brackets after a name of an empty category.\n\nThe word \"files\" should be abbreviated.\n\nParameters:\n* $1 - number of files. Can be used for PLURAL.\n{{Related|Categorytree-num}}",
+	"categorytree-num-files": "Number of files in a category. Appears in brackets after a name of a category.\n\nThe letter \"F\" refers to files. If the word \"File\" in your language begins with a different letter, use a different abbreviation.\n\nParameters:\n* $1 - number of files. Can be used for PLURAL.\n{{Related|Categorytree-num}}",
 	"categorytree-num-empty": "The word \"empty\", as in \"empty category\". Appears in brackets after a name of an empty category.\n{{Identical|Empty}}",
 	"categorytree-load": "Tooltip for the \"expand\" button, if the content was not yet loaded.\n{{Identical|Load}}",
 	"categorytree-loading": "Status message shown while loading content.\n{{Identical|Loading}}",
@@ -54,10 +55,5 @@
 	"categorytree-no-pages": "Indicates that there are no pages or subcategories to be shown",
 	"categorytree-not-found": "Indicates that the given category ($1) was not found. Parameters:\n* $1 - category name",
 	"categorytree-error": "Indicates that an error has occurred while loading the node's content",
-	"categorytree-retry": "Instruction to try again later",
-	"apihelp-categorytree-description": "{{doc-apihelp-description|categorytree}}",
-	"apihelp-categorytree-summary": "{{doc-apihelp-summary|categorytree}}",
-	"apihelp-categorytree-param-category": "{{doc-apihelp-param|categorytree|category}}",
-	"apihelp-categorytree-param-options": "{{doc-apihelp-param|categorytree|options}}",
-	"apierror-categorytree-invalidjson": "{{doc-apierror}}"
+	"categorytree-retry": "Instruction to try again later"
 }

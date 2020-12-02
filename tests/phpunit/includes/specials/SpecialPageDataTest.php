@@ -9,6 +9,12 @@
  */
 class SpecialPageDataTest extends SpecialPageTestBase {
 
+	protected function setUp() : void {
+		parent::setUp();
+
+		$this->setContentLang( 'qqx' );
+	}
+
 	protected function newSpecialPage() {
 		$page = new SpecialPageData();
 
@@ -120,7 +126,7 @@ class SpecialPageDataTest extends SpecialPageTestBase {
 			foreach ( $expHeaders as $name => $exp ) {
 				$value = $response->getHeader( $name );
 				$this->assertNotNull( $value, "header: $name" );
-				$this->assertInternalType( 'string', $value, "header: $name" );
+				$this->assertIsString( $value, "header: $name" );
 				$this->assertRegExp( $exp, $value, "header: $name" );
 			}
 		} catch ( HttpError $e ) {
@@ -130,17 +136,12 @@ class SpecialPageDataTest extends SpecialPageTestBase {
 	}
 
 	public function testSpecialPageWithoutParameters() {
-		$this->setContentLang( Language::factory( 'en' ) );
 		$request = new FauxRequest();
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertContains(
-			"Content negotiation applies based on your client's Accept header.",
-			$output,
-			"output"
-		);
+		$this->assertStringContainsString( '(pagedata-text)', $output );
 	}
 
 }

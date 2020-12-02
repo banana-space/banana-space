@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, oo, $ ) {
+( function () {
 
 	/**
 	 * Gets file repo information.
@@ -31,7 +31,7 @@
 	function FileRepoInfo( api, options ) {
 		mw.mmv.provider.Api.call( this, api, options );
 	}
-	oo.inheritClass( FileRepoInfo, mw.mmv.provider.Api );
+	OO.inheritClass( FileRepoInfo, mw.mmv.provider.Api );
 
 	/**
 	 * Runs an API GET request to get the repo info.
@@ -51,7 +51,7 @@
 				return provider.getQueryField( 'repos', data );
 			} ).then( function ( reposArray ) {
 				var reposHash = {};
-				$.each( reposArray, function ( i, repo ) {
+				reposArray.forEach( function ( repo ) {
 					reposHash[ repo.name ] = mw.mmv.model.Repo.newFromRepoInfo( repo );
 				} );
 				return reposHash;
@@ -60,4 +60,4 @@
 	};
 
 	mw.mmv.provider.FileRepoInfo = FileRepoInfo;
-}( mediaWiki, OO, jQuery ) );
+}() );

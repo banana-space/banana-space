@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lam-ang"
+		]
+	},
+	"apihelp-query+pageimages-description": "Mangisubli ti pakaammo a maipanggep kadagiti ladawan iti panid, kas ti thumbnail ken ti kaadda dagiti retrato.",
+	"apihelp-query+pageimages-param-prop": "Ania a pakaammo ti maisubli:\n;thumbnail:URL ken dagiti dimension ti ladawan a mainaig iti panid, no adda.\n;name:Titulo ti ladawan.",
+	"apihelp-query+pageimages-param-thumbsize": "Kadakkel a dimension ti thumbnail.",
+	"apihelp-query+pageimages-param-limit": "Tagtagikua no mano a pampanid ti maisubli."
+}

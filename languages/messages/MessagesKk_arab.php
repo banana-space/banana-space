@@ -17,21 +17,21 @@ $fallback = 'kk-cyrl';
 $rtl = true;
 
 $digitTransformTable = [
-	'0' => '۰', # &#x06f0;
-	'1' => '۱', # &#x06f1;
-	'2' => '۲', # &#x06f2;
-	'3' => '۳', # &#x06f3;
-	'4' => '۴', # &#x06f4;
-	'5' => '۵', # &#x06f5;
-	'6' => '۶', # &#x06f6;
-	'7' => '۷', # &#x06f7;
-	'8' => '۸', # &#x06f8;
-	'9' => '۹', # &#x06f9;
+	'0' => '۰', # U+06F0
+	'1' => '۱', # U+06F1
+	'2' => '۲', # U+06F2
+	'3' => '۳', # U+06F3
+	'4' => '۴', # U+06F4
+	'5' => '۵', # U+06F5
+	'6' => '۶', # U+06F6
+	'7' => '۷', # U+06F7
+	'8' => '۸', # U+06F8
+	'9' => '۹', # U+06F9
 ];
 
 $separatorTransformTable = [
-	'.' => '٫', # &#x066b;
-	',' => '٬', # &#x066c;
+	'.' => '٫', # U+066B
+	',' => '٬', # U+066C
 ];
 
 $fallback8bitEncoding = 'windows-1256';
@@ -162,8 +162,6 @@ $dateFormats = [
  *   Please include the English words as synonyms.  This allows people
  *   from other wikis to contribute more easily.
  *   Please don't remove deprecated values, them should be keeped for backward compatibility.
- *
- * This array can be modified at runtime with the LanguageGetMagic hook
  */
 $magicWords = [
 	'redirect'                  => [ '0', '#ايداۋ', '#АЙДАУ', '#REDIRECT' ],

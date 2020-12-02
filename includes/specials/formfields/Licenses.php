@@ -23,6 +23,8 @@
  * @copyright Copyright © 2005, Ævar Arnfjörð Bjarmason
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * A License class for use on Special:Upload
  */
@@ -38,7 +40,7 @@ class Licenses extends HTMLFormField {
 
 	/** @var string|null */
 	protected $selected;
-	/**#@-*/
+	/** #@- */
 
 	/**
 	 * @param array $params
@@ -57,9 +59,24 @@ class Licenses extends HTMLFormField {
 	 * @return string
 	 */
 	protected static function getMessageFromParams( $params ) {
-		return empty( $params['licenses'] )
-			? wfMessage( 'licenses' )->inContentLanguage()->plain()
-			: $params['licenses'];
+		if ( !empty( $params['licenses'] ) ) {
+			return $params['licenses'];
+		}
+
+		// If the licenses page is in $wgForceUIMsgAsContentMsg (which is the case
+		// on Commons), translations will be in the database, in subpages of this
+		// message (e.g. MediaWiki:Licenses/<lang>)
+		// If there is no such translation, the result will be '-' (the empty default
+		// in the i18n files), so we'll need to force it to look up the actual licenses
+		// in the default site language (= get the translation from MediaWiki:Licenses)
+		// Also see https://phabricator.wikimedia.org/T3495
+		$defaultMsg = wfMessage( 'licenses' )->inContentLanguage();
+		if ( !$defaultMsg->exists() || $defaultMsg->plain() === '-' ) {
+			$defaultMsg = wfMessage( 'licenses' )->inLanguage(
+				MediaWikiServices::getInstance()->getContentLanguage() );
+		}
+
+		return $defaultMsg->plain();
 	}
 
 	/**
@@ -71,7 +88,7 @@ class Licenses extends HTMLFormField {
 	}
 
 	/**
-	 * @private
+	 * @internal
 	 */
 	protected function makeLines() {
 		$levels = [];
@@ -170,11 +187,11 @@ class Licenses extends HTMLFormField {
 			$attribs['selected'] = 'selected';
 		}
 
-		$val = str_repeat( /* &nbsp */ "\xc2\xa0", $depth * 2 ) . $text;
+		$val = str_repeat( /* &nbsp */ "\u{00A0}", $depth * 2 ) . $text;
 		return str_repeat( "\t", $depth ) . Xml::element( 'option', $attribs, $val ) . "\n";
 	}
 
-	/**#@-*/
+	/** #@- */
 
 	/**
 	 * Accessor for $this->lines
@@ -197,7 +214,7 @@ class Licenses extends HTMLFormField {
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	public function getInputHTML( $value ) {
 		$this->selected = $value;

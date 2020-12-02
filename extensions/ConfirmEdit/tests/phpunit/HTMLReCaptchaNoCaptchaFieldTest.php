@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../../ReCaptchaNoCaptcha/HTMLReCaptchaNoCaptchaField.php';
-
 /**
  * @covers HTMLReCaptchaNoCaptchaField
  */

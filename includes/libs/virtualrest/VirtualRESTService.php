@@ -51,7 +51,7 @@ abstract class VirtualRESTService {
 	 * @return string The name of the service behind this VRS object.
 	 */
 	public function getName() {
-		return isset( $this->params['name'] ) ? $this->params['name'] : static::class;
+		return $this->params['name'] ?? static::class;
 	}
 
 	/**
@@ -72,9 +72,9 @@ abstract class VirtualRESTService {
 	 * must be added back (with the same key) in onRequests() or onResponses();
 	 * it's reponse may be filled in as with other requests.
 	 *
-	 * @param array $reqs Map of Virtual HTTP request arrays
+	 * @param array[] $reqs Map of Virtual HTTP request arrays
 	 * @param Closure $idGeneratorFunc Method to generate unique keys for new requests
-	 * @return array Modified HTTP request array map
+	 * @return array[] Modified HTTP request array map
 	 */
 	public function onRequests( array $reqs, Closure $idGeneratorFunc ) {
 		$result = [];

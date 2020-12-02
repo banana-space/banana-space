@@ -20,6 +20,10 @@
  * @file
  */
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\ParamValidator\TypeDef\UserDef;
+use MediaWiki\Storage\NameTableAccessException;
+
 /**
  * Query action to List the log events, with optional filtering by various parameters.
  *
@@ -27,6 +31,7 @@
  */
 class ApiQueryLogEvents extends ApiQueryBase {
 
+	/** @var CommentStore */
 	private $commentStore;
 
 	public function __construct( ApiQuery $query, $moduleName ) {
@@ -104,19 +109,23 @@ class ApiQueryLogEvents extends ApiQueryBase {
 		}
 
 		if ( $this->fld_tags ) {
-			$this->addTables( 'tag_summary' );
-			$this->addJoinConds( [ 'tag_summary' => [ 'LEFT JOIN', 'log_id=ts_log_id' ] ] );
-			$this->addFields( 'ts_tags' );
+			$this->addFields( [ 'ts_tags' => ChangeTags::makeTagSummarySubquery( 'logging' ) ] );
 		}
 
-		if ( !is_null( $params['tag'] ) ) {
+		if ( $params['tag'] !== null ) {
 			$this->addTables( 'change_tag' );
-			$this->addJoinConds( [ 'change_tag' => [ 'INNER JOIN',
+			$this->addJoinConds( [ 'change_tag' => [ 'JOIN',
 				[ 'log_id=ct_log_id' ] ] ] );
-			$this->addWhereFld( 'ct_tag', $params['tag'] );
+			$changeTagDefStore = MediaWikiServices::getInstance()->getChangeTagDefStore();
+			try {
+				$this->addWhereFld( 'ct_tag_id', $changeTagDefStore->getId( $params['tag'] ) );
+			} catch ( NameTableAccessException $exception ) {
+				// Return nothing.
+				$this->addWhere( '1=0' );
+			}
 		}
 
-		if ( !is_null( $params['action'] ) ) {
+		if ( $params['action'] !== null ) {
 			// Do validation of action param, list of allowed actions can contains wildcards
 			// Allow the param, when the actions is in the list or a wildcard version is listed.
 			$logAction = $params['action'];
@@ -139,7 +148,7 @@ class ApiQueryLogEvents extends ApiQueryBase {
 
 			$this->addWhereFld( 'log_type', $type );
 			$this->addWhereFld( 'log_action', $action );
-		} elseif ( !is_null( $params['type'] ) ) {
+		} elseif ( $params['type'] !== null ) {
 			$this->addWhereFld( 'log_type', $params['type'] );
 		}
 
@@ -152,7 +161,7 @@ class ApiQueryLogEvents extends ApiQueryBase {
 		// Include in ORDER BY for uniqueness
 		$this->addWhereRange( 'log_id', $params['dir'], null, null );
 
-		if ( !is_null( $params['continue'] ) ) {
+		if ( $params['continue'] !== null ) {
 			$cont = explode( '|', $params['continue'] );
 			$this->dieContinueUsageIf( count( $cont ) != 2 );
 			$op = ( $params['dir'] === 'newer' ? '>' : '<' );
@@ -169,19 +178,22 @@ class ApiQueryLogEvents extends ApiQueryBase {
 		$this->addOption( 'LIMIT', $limit + 1 );
 
 		$user = $params['user'];
-		if ( !is_null( $user ) ) {
+		if ( $user !== null ) {
 			// Note the joins in $q are the same as those from ->getJoin() above
 			// so we only need to add 'conds' here.
-			$q = $actorMigration->getWhere(
-				$db, 'log_user', User::newFromName( $params['user'], false )
-			);
+			$q = $actorMigration->getWhere( $db, 'log_user', $params['user'] );
 			$this->addWhere( $q['conds'] );
+
+			// T71222: MariaDB's optimizer, at least 10.1.37 and .38, likes to choose a wildly bad plan for
+			// some reason for this code path. Tell it not to use the wrong index it wants to pick.
+			// @phan-suppress-next-line PhanTypeMismatchArgument
+			$this->addOption( 'IGNORE INDEX', [ 'logging' => [ 'times' ] ] );
 		}
 
 		$title = $params['title'];
-		if ( !is_null( $title ) ) {
+		if ( $title !== null ) {
 			$titleObj = Title::newFromText( $title );
-			if ( is_null( $titleObj ) ) {
+			if ( $titleObj === null ) {
 				$this->dieWithError( [ 'apierror-invalidtitle', wfEscapeWikiText( $title ) ] );
 			}
 			$this->addWhereFld( 'log_namespace', $titleObj->getNamespace() );
@@ -194,13 +206,13 @@ class ApiQueryLogEvents extends ApiQueryBase {
 
 		$prefix = $params['prefix'];
 
-		if ( !is_null( $prefix ) ) {
+		if ( $prefix !== null ) {
 			if ( $this->getConfig()->get( 'MiserMode' ) ) {
 				$this->dieWithError( 'apierror-prefixsearchdisabled' );
 			}
 
 			$title = Title::newFromText( $prefix );
-			if ( is_null( $title ) ) {
+			if ( $title === null ) {
 				$this->dieWithError( [ 'apierror-invalidtitle', wfEscapeWikiText( $prefix ) ] );
 			}
 			$this->addWhereFld( 'log_namespace', $title->getNamespace() );
@@ -208,27 +220,42 @@ class ApiQueryLogEvents extends ApiQueryBase {
 		}
 
 		// Paranoia: avoid brute force searches (T19342)
-		if ( $params['namespace'] !== null || !is_null( $title ) || !is_null( $user ) ) {
-			if ( !$this->getUser()->isAllowed( 'deletedhistory' ) ) {
+		if ( $params['namespace'] !== null || $title !== null || $user !== null ) {
+			if ( !$this->getPermissionManager()->userHasRight( $this->getUser(), 'deletedhistory' ) ) {
 				$titleBits = LogPage::DELETED_ACTION;
 				$userBits = LogPage::DELETED_USER;
-			} elseif ( !$this->getUser()->isAllowedAny( 'suppressrevision', 'viewsuppressed' ) ) {
+			} elseif ( !$this->getPermissionManager()
+				->userHasAnyRight( $this->getUser(), 'suppressrevision', 'viewsuppressed' )
+			) {
 				$titleBits = LogPage::DELETED_ACTION | LogPage::DELETED_RESTRICTED;
 				$userBits = LogPage::DELETED_USER | LogPage::DELETED_RESTRICTED;
 			} else {
 				$titleBits = 0;
 				$userBits = 0;
 			}
-			if ( ( $params['namespace'] !== null || !is_null( $title ) ) && $titleBits ) {
+			if ( ( $params['namespace'] !== null || $title !== null ) && $titleBits ) {
 				$this->addWhere( $db->bitAnd( 'log_deleted', $titleBits ) . " != $titleBits" );
 			}
-			if ( !is_null( $user ) && $userBits ) {
+			if ( $user !== null && $userBits ) {
 				$this->addWhere( $db->bitAnd( 'log_deleted', $userBits ) . " != $userBits" );
 			}
 		}
 
+		// T220999: MySQL/MariaDB (10.1.37) can sometimes irrationally decide that querying `actor` before
+		// `logging` and filesorting is somehow better than querying $limit+1 rows from `logging`.
+		// Tell it not to reorder the query. But not when `letag` was used, as it seems as likely
+		// to be harmed as helped in that case.
+		if ( $params['tag'] === null ) {
+			$this->addOption( 'STRAIGHT_JOIN' );
+		}
+
 		$count = 0;
 		$res = $this->select( __METHOD__ );
+
+		if ( $this->fld_title ) {
+			$this->executeGenderCacheFromResultWrapper( $res, __METHOD__, 'log' );
+		}
+
 		$result = $this->getResult();
 		foreach ( $res as $row ) {
 			if ( ++$count > $limit ) {
@@ -248,32 +275,6 @@ class ApiQueryLogEvents extends ApiQueryBase {
 		$result->addIndexedTagName( [ 'query', $this->getModuleName() ], 'item' );
 	}
 
-	/**
-	 * @deprecated since 1.25 Use LogFormatter::formatParametersForApi instead
-	 * @param ApiResult $result
-	 * @param array &$vals
-	 * @param string $params
-	 * @param string $type
-	 * @param string $action
-	 * @param string $ts
-	 * @param bool $legacy
-	 * @return array
-	 */
-	public static function addLogParams( $result, &$vals, $params, $type,
-		$action, $ts, $legacy = false
-	) {
-		wfDeprecated( __METHOD__, '1.25' );
-
-		$entry = new ManualLogEntry( $type, $action );
-		$entry->setParameters( $params );
-		$entry->setTimestamp( $ts );
-		$entry->setLegacy( $legacy );
-		$formatter = LogFormatter::newFromEntry( $entry );
-		$vals['params'] = $formatter->formatParametersForApi();
-
-		return $vals;
-	}
-
 	private function extractRowInfo( $row ) {
 		$logEntry = DatabaseLogEntry::newFromRow( $row );
 		$vals = [
@@ -283,7 +284,7 @@ class ApiQueryLogEvents extends ApiQueryBase {
 		$user = $this->getUser();
 
 		if ( $this->fld_ids ) {
-			$vals['logid'] = intval( $row->log_id );
+			$vals['logid'] = (int)$row->log_id;
 		}
 
 		if ( $this->fld_title || $this->fld_parsedcomment ) {
@@ -300,8 +301,8 @@ class ApiQueryLogEvents extends ApiQueryBase {
 					ApiQueryBase::addTitleInfo( $vals, $title );
 				}
 				if ( $this->fld_ids ) {
-					$vals['pageid'] = intval( $row->page_id );
-					$vals['logpage'] = intval( $row->log_page );
+					$vals['pageid'] = (int)$row->page_id;
+					$vals['logpage'] = (int)$row->log_page;
 				}
 				if ( $this->fld_details ) {
 					$vals['params'] = LogFormatter::newFromEntry( $logEntry )->formatParametersForApi();
@@ -321,10 +322,10 @@ class ApiQueryLogEvents extends ApiQueryBase {
 			}
 			if ( LogEventsList::userCan( $row, LogPage::DELETED_USER, $user ) ) {
 				if ( $this->fld_user ) {
-					$vals['user'] = $row->user_name === null ? $row->log_user_text : $row->user_name;
+					$vals['user'] = $row->user_name ?? $row->log_user_text;
 				}
 				if ( $this->fld_userid ) {
-					$vals['userid'] = intval( $row->log_user );
+					$vals['userid'] = (int)$row->log_user;
 				}
 
 				if ( !$row->log_user ) {
@@ -385,7 +386,7 @@ class ApiQueryLogEvents extends ApiQueryBase {
 		if ( $this->userCanSeeRevDel() ) {
 			return 'private';
 		}
-		if ( !is_null( $params['prop'] ) && in_array( 'parsedcomment', $params['prop'] ) ) {
+		if ( $params['prop'] !== null && in_array( 'parsedcomment', $params['prop'] ) ) {
 			// formatComment() calls wfMessage() among other things
 			return 'anon-public-user-private';
 		} elseif ( LogEventsList::getExcludeClause( $this->getDB(), 'user', $this->getUser() )
@@ -399,6 +400,12 @@ class ApiQueryLogEvents extends ApiQueryBase {
 
 	public function getAllowedParams( $flags = 0 ) {
 		$config = $this->getConfig();
+		if ( $flags & ApiBase::GET_VALUES_FOR_HELP ) {
+			$logActions = $this->getAllowedLogActions();
+			sort( $logActions );
+		} else {
+			$logActions = null;
+		}
 		$ret = [
 			'prop' => [
 				ApiBase::PARAM_ISMULTI => true,
@@ -418,13 +425,11 @@ class ApiQueryLogEvents extends ApiQueryBase {
 				ApiBase::PARAM_HELP_MSG_PER_VALUE => [],
 			],
 			'type' => [
-				ApiBase::PARAM_TYPE => $config->get( 'LogTypes' )
+				ApiBase::PARAM_TYPE => LogPage::validTypes(),
 			],
 			'action' => [
 				// validation on request is done in execute()
-				ApiBase::PARAM_TYPE => ( $flags & ApiBase::GET_VALUES_FOR_HELP )
-					? $this->getAllowedLogActions()
-					: null
+				ApiBase::PARAM_TYPE => $logActions
 			],
 			'start' => [
 				ApiBase::PARAM_TYPE => 'timestamp'
@@ -442,6 +447,8 @@ class ApiQueryLogEvents extends ApiQueryBase {
 			],
 			'user' => [
 				ApiBase::PARAM_TYPE => 'user',
+				UserDef::PARAM_ALLOWED_USER_TYPES => [ 'name', 'ip', 'id', 'interwiki' ],
+				UserDef::PARAM_RETURN_OBJECT => true,
 			],
 			'title' => null,
 			'namespace' => [

@@ -5,6 +5,8 @@
  * (ie: the CSS classing built into the system), like the TOC.
  */
 
+/* stylelint-disable selector-class-pattern */
+
 /* Table of Contents */
 .toc,
 .mw-warning,
@@ -21,20 +23,9 @@
  *
  * We use display:table. Even though it should only contain other table-* display
  * elements, there are no known problems with using this.
- *
- * Because IE < 8 and other older browsers don't support display:table, we fallback to
- * using inline-block mode, which features at least intrinsic width, but won't clear preceding
- * inline elements. In practice inline elements surrounding the TOC are uncommon enough that
- * this is an acceptable sacrifice.
  */
 .toc {
-	display: inline-block;
 	display: table;
-
-	/* IE7 and earlier */
-	zoom: 1;
-	*display: inline; /* stylelint-disable declaration-block-no-duplicate-properties */
-
 	padding: 7px;
 }
 
@@ -73,23 +64,22 @@ table.toc td {
 }
 
 /* Separate columns for tocnumber and toctext */
-/* Ignored by IE7 and lower */
 .tocnumber,
 .toctext {
 	display: table-cell;
 	/*
-	Text decorations are not propagated to the contents of inline blocks and inline tables,
-	according to <https://www.w3.org/TR/css-text-decor-3/#line-decoration>, and 'display: table-cell'
-	generates an inline table when used without any parent table-rows and tables.
-	*/
+	 * Text decorations are not propagated to the contents of inline blocks and inline tables,
+	 * according to <https://www.w3.org/TR/css-text-decor-3/#line-decoration>, and 'display: table-cell'
+	 * generates an inline table when used without any parent table-rows and tables.
+	 */
 	text-decoration: inherit;
 }
 
 /* Space between the columns for tocnumber and toctext */
 .tocnumber {
+	color: #202122;
 	padding-left: 0;
 	padding-right: 0.5em;
-	color: #222;
 }
 /* @noflip */
 .mw-content-ltr .tocnumber {
@@ -117,18 +107,10 @@ table.floatright {
 	margin: 0 0 0.5em 0.5em;
 }
 
-div.floatright p {
-	font-style: italic;
-}
-
 /* @noflip */
 div.floatleft,
 table.floatleft {
 	margin: 0 0.5em 0.5em 0;
-}
-
-div.floatleft p {
-	font-style: italic;
 }
 
 /* Thumbnails */
@@ -145,7 +127,7 @@ div.thumbinner {
 	font-size: 94%;
 	text-align: center;
 	/* new block formatting context,
-	 * to clear background from floating content  */
+	 * to clear background from floating content */
 	overflow: hidden;
 }
 
@@ -163,13 +145,13 @@ html .thumbcaption {
 	text-align: left;
 }
 
-div.magnify {
+.magnify {
 	/* Default styles when there's no .mw-content-ltr or .mw-content-rtl, overridden below */
 	float: right;
 	margin-left: 3px;
 }
 
-div.magnify a {
+.magnify a {
 	display: block;
 	/* Hide the text… */
 	text-indent: 15px;
@@ -182,7 +164,6 @@ div.magnify a {
 
 	/* Use same SVG support hack as mediawiki.legacy's shared.css */
 	background-image: url( images/magnify-clip-ltr.png );
-	/* @embed */
 	background-image: linear-gradient( transparent, transparent ), url( images/magnify-clip-ltr.svg );
 	/* Don't annoy people who copy-paste everything too much */
 	-moz-user-select: none;
@@ -210,10 +191,9 @@ img.thumbborder {
 }
 
 /* @noflip */
-.mw-content-ltr div.magnify a {
+.mw-content-ltr .magnify a {
 	/* Use same SVG support hack as mediawiki.legacy's shared.css */
 	background-image: url( images/magnify-clip-ltr.png );
-	/* @embed */
 	background-image: linear-gradient( transparent, transparent ), url( images/magnify-clip-ltr.svg );
 }
 
@@ -230,10 +210,9 @@ img.thumbborder {
 }
 
 /* @noflip */
-.mw-content-rtl div.magnify a {
+.mw-content-rtl .magnify a {
 	/* Use same SVG support hack as mediawiki.legacy's shared.css */
 	background-image: url( images/magnify-clip-rtl.png );
-	/* @embed */
 	background-image: linear-gradient( transparent, transparent ), url( images/magnify-clip-rtl.svg );
 }
 

@@ -1,13 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Elisardojm",
-			"Banjo"
+			"Banjo",
+			"Elisardojm"
 		]
 	},
 	"timeless-desc": "Unha aparencia atemporal, deseñada por Brandon Harris en base ó prototipo Winter, e varios estilos da Fundación Wikimedia.",
-	"timeless-search-placeholder": "Buscar {{NUMBEROFARTICLES}} páxinas",
-	"timeless-loggedin": "A súa conta",
 	"timeless-anonymous": "Anónimo",
 	"timeless-loggedinas": "Conectado como '''$1'''",
 	"timeless-notloggedin": "Non conectado",

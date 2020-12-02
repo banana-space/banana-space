@@ -1,0 +1,137 @@
+/*
+ * Vector's common typography rules,
+ * including whitespace with `margin` & `padding` and list bullets
+ * as part of typographic styles. Iconography wouldn't belong here.
+ *
+ */
+
+@import '../../../variables.less';
+
+html {
+	font-size: @font-size-root;
+}
+
+html,
+body {
+	font-family: @font-family-sans;
+}
+
+ul {
+	// `list-style-image` sits on `ul` as it inherits and we don't need to worry about `ol`.
+	// No need for PNG fallback. Fallback is browser default (a smaller, also black, circle).
+	.list-style-image( 'images/bullet-icon.svg' );
+}
+
+pre,
+.mw-code {
+	line-height: @line-height-code;
+}
+
+.mw-jump-link:not( :focus ) {
+	.mixin-screen-reader-text;
+}
+
+/* Personal Menu */
+#p-personal li {
+	font-size: @font-size-nav-personal;
+}
+
+/* Allow edit sections outside of mw-body-content (T160269) */
+.mw-editsection,
+.mw-editsection-like {
+	font-family: @font-family-sans;
+}
+
+/* Main content area, including siteNotice, indicators, firstHeading and `.mw-body-content`. */
+.mw-body {
+	// h1's can exist outside of `.mw-body-content` so some heading styles
+	// therefore need to be defined in `.mw-body` as well.
+	& h1,
+	&-content h1,
+	&-content h2 {
+		margin-bottom: 0.25em;
+		padding: 0;
+		font-family: @font-family-serif;
+		line-height: @line-height-heading;
+
+		// Fallback heading font for scripts which render poorly in `@font-family-serif`.
+		// See T73240
+		&:lang( ja ), /* See T65817 */
+		&:lang( he ), /* See T65843 and T65844 */
+		&:lang( ko ) { /* See T65827 */
+			font-family: @font-family-sans--fallback;
+		}
+
+		/* Burmese (Myanmar) language headlines would be cropped with set `line-height` */
+		/* See T193270 */
+		&:lang( my ) {
+			line-height: normal;
+		}
+	}
+
+	& h1,
+	&-content h1 {
+		font-size: @font-size-heading-1;
+	}
+}
+
+.mw-body-content {
+	font-size: @font-size-base;
+	// Support IE 9-11, Trident cuts values 2 digits after decimal point.
+	// `calc` enables to set correct calculation in place again. See T102364.
+	font-size: calc( 1em ~'*' unit( @font-size-base ) );
+	line-height: @line-height-base;
+
+	h1 {
+		margin-top: 1em;
+	}
+
+	h2 {
+		margin-top: 1em;
+		font-size: @font-size-heading-2;
+	}
+
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin-top: 0.3em;
+		margin-bottom: 0;
+		padding-bottom: 0;
+		line-height: @line-height-base;
+	}
+
+	h3 {
+		font-size: @font-size-heading-3;
+	}
+
+	h3,
+	h4 {
+		font-weight: bold;
+	}
+
+	h4,
+	h5,
+	h6 {
+		font-size: @font-size-reset; // Reset.
+	}
+
+	.toc h2 {
+		font-family: @font-family-sans;
+		font-size: @font-size-reset; // Reset.
+	}
+
+	p {
+		margin: 0.5em 0;
+	}
+}
+
+// External links
+.mw-parser-output {
+	.external {
+		background-position: center right;
+		background-repeat: no-repeat;
+		.background-image-svg( 'images/external-link-ltr-icon.svg', 'images/external-link-ltr-icon.png' );
+		padding-right: 13px;
+	}
+}

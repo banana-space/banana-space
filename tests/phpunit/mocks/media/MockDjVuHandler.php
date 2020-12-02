@@ -22,11 +22,11 @@
  */
 
 class MockDjVuHandler extends DjVuHandler {
-	function isEnabled() {
+	public function isEnabled() {
 		return true;
 	}
 
-	function doTransform( $image, $dstPath, $dstUrl, $params, $flags = 0 ) {
+	public function doTransform( $image, $dstPath, $dstUrl, $params, $flags = 0 ) {
 		if ( !$this->normaliseParams( $image, $params ) ) {
 			return new TransformParameterError( $params );
 		}

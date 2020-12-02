@@ -1,7 +1,5 @@
 <?php
 /**
- * ResourceLoader module for user preference customizations.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -23,27 +21,24 @@
  */
 
 /**
- * Module for user preference customizations
+ * Module for per-user private data that is transmitted on all HTML web responses.
+ *
+ * It is send to the browser from the HTML <head>. See OutputPage.
+ *
+ * @ingroup ResourceLoader
+ * @internal
  */
 class ResourceLoaderUserOptionsModule extends ResourceLoaderModule {
-
 	protected $origin = self::ORIGIN_CORE_INDIVIDUAL;
 
 	protected $targets = [ 'desktop', 'mobile' ];
 
 	/**
-	 * @param ResourceLoaderContext $context
-	 * @return array List of module names as strings
+	 * @param ResourceLoaderContext|null $context
+	 * @return string[] List of module names
 	 */
 	public function getDependencies( ResourceLoaderContext $context = null ) {
 		return [ 'user.defaults' ];
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function enableModuleContentVersion() {
-		return true;
 	}
 
 	/**
@@ -51,12 +46,23 @@ class ResourceLoaderUserOptionsModule extends ResourceLoaderModule {
 	 * @return string JavaScript code
 	 */
 	public function getScript( ResourceLoaderContext $context ) {
+		$user = $context->getUserObj();
+
+		$tokens = [
+			'patrolToken' => $user->getEditToken( 'patrol' ),
+			'watchToken' => $user->getEditToken( 'watch' ),
+			'csrfToken' => $user->getEditToken(),
+		];
+		$script = 'mw.user.tokens.set(' . $context->encodeJson( $tokens ) . ');';
+
+		$options = $user->getOptions( User::GETOPTIONS_EXCLUDE_DEFAULTS );
+		// Optimisation: Only output this function call if the user has non-default settings.
+		if ( $options ) {
+			$script .= 'mw.user.options.set(' . $context->encodeJson( $options ) . ');';
+		}
+
 		// Use FILTER_NOMIN annotation to prevent needless minification and caching (T84960).
-		return ResourceLoader::FILTER_NOMIN . Xml::encodeJsCall(
-			'mw.user.options.set',
-			[ $context->getUserObj()->getOptions( User::GETOPTIONS_EXCLUDE_DEFAULTS ) ],
-			ResourceLoader::inDebugMode()
-		);
+		return ResourceLoader::FILTER_NOMIN . $script;
 	}
 
 	/**
@@ -64,14 +70,6 @@ class ResourceLoaderUserOptionsModule extends ResourceLoaderModule {
 	 */
 	public function supportsURLLoading() {
 		return false;
-	}
-
-	/**
-	 * @param ResourceLoaderContext $context
-	 * @return bool
-	 */
-	public function isKnownEmpty( ResourceLoaderContext $context ) {
-		return !$context->getUserObj()->getOptions( User::GETOPTIONS_EXCLUDE_DEFAULTS );
 	}
 
 	/**

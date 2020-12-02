@@ -20,6 +20,7 @@
  * @author Mark Holmquist <mtraceur@member.fsf.org>
  * @copyright Copyright © 2013, Mark Holmquist
  */
+use MediaWiki\MediaWikiServices;
 
 class MultimediaViewerHooks {
 	/** Link to more information about this module */
@@ -34,34 +35,16 @@ class MultimediaViewerHooks {
 	protected static $helpLink =
 		'https://mediawiki.org/wiki/Special:MyLanguage/Help:Extension:Media_Viewer';
 
-	public static function onUserGetDefaultOptions( &$defaultOptions ) {
+	/**
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UserGetDefaultOptions
+	 * @param array &$defaultOptions
+	 */
+	public static function onUserGetDefaultOptions( array &$defaultOptions ) {
 		global $wgMediaViewerEnableByDefault;
 
 		if ( $wgMediaViewerEnableByDefault ) {
 			$defaultOptions['multimediaviewer-enable'] = 1;
 		}
-
-		return true;
-	}
-
-	public static function onExtensionFunctions() {
-		global $wgResourceModules;
-
-		if ( isset( $wgResourceModules['ext.eventLogging'] ) ) {
-			$wgResourceModules['mmv.lightboxinterface']['dependencies'][] = 'ext.eventLogging';
-			$wgResourceModules['mmv']['dependencies'][] = 'ext.eventLogging';
-			$wgResourceModules['mmv.bootstrap.autostart']['dependencies'][] = 'ext.eventLogging';
-		}
-	}
-
-	public static function onEventLoggingRegisterSchemas( array &$schemas ) {
-		 $schemas += [
-			'MediaViewer' => 10867062,
-			'MultimediaViewerNetworkPerformance' => 15573630,
-			'MultimediaViewerDuration' => 10427980,
-			'MultimediaViewerAttribution' => 9758179,
-			'MultimediaViewerDimensions' => 10014238,
-		];
 	}
 
 	/**
@@ -69,13 +52,9 @@ class MultimediaViewerHooks {
 	 * @param User $user
 	 * @return bool
 	 */
-	protected static function shouldHandleClicks( $user ) {
-		global $wgMediaViewerIsInBeta, $wgMediaViewerEnableByDefaultForAnonymous,
+	protected static function shouldHandleClicks( User $user ) {
+		global $wgMediaViewerEnableByDefaultForAnonymous,
 			$wgMediaViewerEnableByDefault;
-
-		if ( $wgMediaViewerIsInBeta && class_exists( 'BetaFeatures' ) ) {
-			return BetaFeatures::isFeatureEnabled( $user, 'multimedia-viewer' );
-		}
 
 		if ( $wgMediaViewerEnableByDefaultForAnonymous === null ) {
 			$enableByDefaultForAnons = $wgMediaViewerEnableByDefault;
@@ -93,116 +72,85 @@ class MultimediaViewerHooks {
 	/**
 	 * Handler for all places where we add the modules
 	 * Could be on article pages or on Category pages
-	 * @param OutputPage &$out
-	 * @return bool
+	 * @param OutputPage $out
 	 */
-	protected static function getModules( &$out ) {
-		$out->addModules( [ 'mmv.head', 'mmv.bootstrap.autostart' ] );
-
-		return true;
+	protected static function getModules( OutputPage $out ) {
+		// The MobileFrontend extension provides its own implementation of MultimediaViewer.
+		// See https://phabricator.wikimedia.org/T65504 and subtasks for more details.
+		// To avoid loading MMV twice, we check the environment we are running in.
+		$isMobileFrontendView = ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) &&
+			MediaWikiServices::getInstance()->getService( 'MobileFrontend.Context' )
+				->shouldDisplayMobileView();
+		if ( !$isMobileFrontendView ) {
+			$out->addModules( [ 'mmv.head', 'mmv.bootstrap.autostart' ] );
+		}
 	}
 
 	/**
-	 * Handler for BeforePageDisplay hook
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
 	 * Add JavaScript to the page when an image is on it
-	 * and the user has enabled the feature if BetaFeatures is installed
-	 * @param OutputPage &$out
-	 * @param Skin &$skin
-	 * @return bool
+	 * and the user has enabled the feature
+	 * @param OutputPage $out
+	 * @param Skin $skin
 	 */
-	public static function getModulesForArticle( &$out, &$skin ) {
+	public static function onBeforePageDisplay( OutputPage $out, $skin ) {
 		$pageHasThumbnails = count( $out->getFileSearchOptions() ) > 0;
 		$pageIsFilePage = $out->getTitle()->inNamespace( NS_FILE );
+		// TODO: Have Flow work out if there are any images on the page
+		$pageIsFlowPage = ExtensionRegistry::getInstance()->isLoaded( 'Flow' ) &&
+			// CONTENT_MODEL_FLOW_BOARD
+			$out->getTitle()->getContentModel() === 'flow-board';
 		$fileRelatedSpecialPages = [ 'NewFiles', 'ListFiles', 'MostLinkedFiles',
 			'MostGloballyLinkedFiles', 'UncategorizedFiles', 'UnusedFiles', 'Search' ];
 		$pageIsFileRelatedSpecialPage = $out->getTitle()->inNamespace( NS_SPECIAL )
 			&& in_array( $out->getTitle()->getText(), $fileRelatedSpecialPages );
 
-		if ( $pageHasThumbnails || $pageIsFilePage || $pageIsFileRelatedSpecialPage ) {
-			return self::getModules( $out );
+		if ( $pageHasThumbnails || $pageIsFilePage || $pageIsFileRelatedSpecialPage || $pageIsFlowPage ) {
+			self::getModules( $out );
 		}
-
-		return true;
 	}
 
 	/**
-	 * Handler for CategoryPageView hook
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/CategoryPageView
 	 * Add JavaScript to the page if there are images in the category
-	 * @param CategoryPage &$catPage
-	 * @return bool
+	 * @param CategoryPage $catPage
 	 */
-	public static function getModulesForCategory( &$catPage ) {
+	public static function onCategoryPageView( CategoryPage $catPage ) {
 		$title = $catPage->getTitle();
 		$cat = Category::newFromTitle( $title );
 		if ( $cat->getFileCount() > 0 ) {
 			$out = $catPage->getContext()->getOutput();
-			return self::getModules( $out );
+			self::getModules( $out );
 		}
-
-		return true;
 	}
 
 	/**
-	 * Add a beta preference to gate the feature
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/GetPreferences
+	 * Adds a default-enabled preference to gate the feature
 	 * @param User $user
 	 * @param array &$prefs
-	 * @return true
 	 */
-	public static function getBetaPreferences( $user, &$prefs ) {
-		global $wgExtensionAssetsPath, $wgMediaViewerIsInBeta;
-
-		if ( !$wgMediaViewerIsInBeta ) {
-			return true;
-		}
-
-		$prefs['multimedia-viewer'] = [
-			'label-message' => 'multimediaviewer-pref',
-			'desc-message' => 'multimediaviewer-pref-desc',
-			'info-link' => self::$infoLink,
-			'discussion-link' => self::$discussionLink,
-			'help-link' => self::$helpLink,
-			'screenshot' => [
-				'ltr' => "$wgExtensionAssetsPath/MultimediaViewer/viewer-ltr.svg",
-				'rtl' => "$wgExtensionAssetsPath/MultimediaViewer/viewer-rtl.svg",
-			],
+	public static function onGetPreferences( $user, &$prefs ) {
+		$prefs['multimediaviewer-enable'] = [
+			'type' => 'toggle',
+			'label-message' => 'multimediaviewer-optin-pref',
+			'section' => 'rendering/files',
 		];
-
-		return true;
 	}
 
 	/**
-	 * Adds a default-enabled preference to gate the feature on non-beta sites
-	 * @param User $user
-	 * @param array &$prefs
-	 * @return true
-	 */
-	public static function getPreferences( $user, &$prefs ) {
-		global $wgMediaViewerIsInBeta;
-
-		if ( !$wgMediaViewerIsInBeta ) {
-			$prefs['multimediaviewer-enable'] = [
-				'type' => 'toggle',
-				'label-message' => 'multimediaviewer-optin-pref',
-				'section' => 'rendering/files',
-			];
-		}
-
-		return true;
-	}
-
-	/**
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderGetConfigVars
 	 * Export variables used in both PHP and JS to keep DRY
 	 * @param array &$vars
-	 * @return bool
 	 */
-	public static function resourceLoaderGetConfigVars( &$vars ) {
+	public static function onResourceLoaderGetConfigVars( array &$vars ) {
 		global $wgMediaViewerActionLoggingSamplingFactorMap,
 			$wgMediaViewerNetworkPerformanceSamplingFactor,
 			$wgMediaViewerDurationLoggingSamplingFactor,
 			$wgMediaViewerDurationLoggingLoggedinSamplingFactor,
 			$wgMediaViewerAttributionLoggingSamplingFactor,
 			$wgMediaViewerDimensionLoggingSamplingFactor,
-			$wgMediaViewerIsInBeta, $wgMediaViewerUseThumbnailGuessing, $wgMediaViewerExtensions,
+			$wgMediaViewerUseThumbnailGuessing, $wgMediaViewerExtensions,
 			$wgMediaViewerImageQueryParameter, $wgMediaViewerRecordVirtualViewBeaconURI;
 
 		$vars['wgMultimediaViewer'] = [
@@ -222,110 +170,34 @@ class MultimediaViewerHooks {
 			'extensions' => $wgMediaViewerExtensions,
 		];
 		$vars['wgMediaViewer'] = true;
-		$vars['wgMediaViewerIsInBeta'] = $wgMediaViewerIsInBeta;
-
-		return true;
 	}
 
 	/**
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/MakeGlobalVariablesScript
 	 * Export variables which depend on the current user
 	 * @param array &$vars
 	 * @param OutputPage $out
 	 */
-	public static function makeGlobalVariablesScript( &$vars, OutputPage $out ) {
+	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
 		$defaultUserOptions = User::getDefaultOptions();
 
 		$user = $out->getUser();
 		$vars['wgMediaViewerOnClick'] = self::shouldHandleClicks( $user );
-		// needed because of bug 69942; could be different for anon and logged-in
+		// needed because of T71942; could be different for anon and logged-in
 		$vars['wgMediaViewerEnabledByDefault'] =
 			!empty( $defaultUserOptions['multimediaviewer-enable'] );
 	}
 
 	/**
-	 * Get modules for testing our JavaScript
-	 * @param array &$testModules
-	 * @param ResourceLoader &$resourceLoader
-	 * @return bool
-	 */
-	public static function getTestModules( array &$testModules, ResourceLoader &$resourceLoader ) {
-		$testModules['qunit']['mmv.tests'] = [
-			'scripts' => [
-				'tests/qunit/mmv/mmv.bootstrap.test.js',
-				'tests/qunit/mmv/mmv.test.js',
-				'tests/qunit/mmv/mmv.lightboxinterface.test.js',
-				'tests/qunit/mmv/mmv.lightboximage.test.js',
-				'tests/qunit/mmv/mmv.ThumbnailWidthCalculator.test.js',
-				'tests/qunit/mmv/mmv.EmbedFileFormatter.test.js',
-				'tests/qunit/mmv/mmv.Config.test.js',
-				'tests/qunit/mmv/mmv.HtmlUtils.test.js',
-				'tests/qunit/mmv/logging/mmv.logging.DurationLogger.test.js',
-				'tests/qunit/mmv/logging/mmv.logging.PerformanceLogger.test.js',
-				'tests/qunit/mmv/logging/mmv.logging.ActionLogger.test.js',
-				'tests/qunit/mmv/logging/mmv.logging.AttributionLogger.test.js',
-				'tests/qunit/mmv/logging/mmv.logging.DimensionLogger.test.js',
-				'tests/qunit/mmv/logging/mmv.logging.ViewLogger.test.js',
-				'tests/qunit/mmv/model/mmv.model.test.js',
-				'tests/qunit/mmv/model/mmv.model.IwTitle.test.js',
-				'tests/qunit/mmv/model/mmv.model.TaskQueue.test.js',
-				'tests/qunit/mmv/model/mmv.model.License.test.js',
-				'tests/qunit/mmv/model/mmv.model.Image.test.js',
-				'tests/qunit/mmv/model/mmv.model.Repo.test.js',
-				'tests/qunit/mmv/model/mmv.model.EmbedFileInfo.test.js',
-				'tests/qunit/mmv/provider/mmv.provider.Api.test.js',
-				'tests/qunit/mmv/provider/mmv.provider.ImageInfo.test.js',
-				'tests/qunit/mmv/provider/mmv.provider.FileRepoInfo.test.js',
-				'tests/qunit/mmv/provider/mmv.provider.ThumbnailInfo.test.js',
-				'tests/qunit/mmv/provider/mmv.provider.GuessedThumbnailInfo.test.js',
-				'tests/qunit/mmv/provider/mmv.provider.Image.test.js',
-				'tests/qunit/mmv/routing/mmv.routing.MainFileRoute.test.js',
-				'tests/qunit/mmv/routing/mmv.routing.ThumbnailRoute.test.js',
-				'tests/qunit/mmv/routing/mmv.routing.Router.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.canvas.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.canvasButtons.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.description.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.download.pane.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.metadataPanel.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.metadataPanelScroller.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.progressBar.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.permission.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.stripeButtons.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.reuse.dialog.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.reuse.embed.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.reuse.share.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.reuse.tab.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.reuse.utils.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.tipsyDialog.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.truncatableTextField.test.js',
-				'tests/qunit/mmv/ui/mmv.ui.viewingOptions.test.js',
-				'tests/qunit/mmv/mmv.testhelpers.js',
-			],
-			'dependencies' => [
-				'mmv.head',
-				'mmv.bootstrap',
-				'mmv',
-				'mmv.ui.ondemandshareddependencies',
-				'mmv.ui.reuse.shareembed',
-				'mmv.ui.download.pane',
-				'mmv.ui.tipsyDialog',
-				'moment',
-			],
-			'localBasePath' => dirname( __DIR__ ),
-			'remoteExtPath' => 'MultimediaViewer',
-		];
-
-		return true;
-	}
-
-	/**
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ThumbnailBeforeProduceHTML
 	 * Modify thumbnail DOM
 	 * @param ThumbnailImage $thumbnail
 	 * @param array &$attribs Attributes of the <img> element
 	 * @param array|bool &$linkAttribs Attributes of the wrapping <a> element
-	 * @return true
 	 */
-	public static function thumbnailBeforeProduceHTML( ThumbnailImage $thumbnail, array &$attribs,
+	public static function onThumbnailBeforeProduceHTML(
+		ThumbnailImage $thumbnail,
+		array &$attribs,
 		&$linkAttribs
 	) {
 		$file = $thumbnail->getFile();
@@ -343,7 +215,5 @@ class MultimediaViewerHooks {
 				$attribs['data-file-height'] = $file->getHeight();
 			}
 		}
-
-		return true;
 	}
 }

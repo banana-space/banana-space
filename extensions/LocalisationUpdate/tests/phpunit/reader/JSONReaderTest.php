@@ -7,8 +7,10 @@
 
 namespace LocalisationUpdate;
 
+use LocalisationUpdate\Reader\JSONReader;
+
 /**
- * @covers \LocalisationUpdate\JSONReader
+ * @covers \LocalisationUpdate\Reader\JSONReader
  */
 class JSONReaderTest extends \PHPUnit\Framework\TestCase {
 	/**

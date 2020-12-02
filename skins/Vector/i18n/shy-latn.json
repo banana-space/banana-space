@@ -4,5 +4,13 @@
 			"Vikoula5"
 		]
 	},
-	"vector-view-edit": "Glef"
+	"vector-action-addsection": "Rnud ameggay",
+	"vector-action-delete": "Mḥu",
+	"vector-action-move": "Snifel isem",
+	"vector-action-protect": "Ḥrez",
+	"vector-view-create": "Rnu",
+	"vector-view-edit": "Glef",
+	"vector-view-history": "Wali amazray",
+	"vector-view-view": "Ɣer",
+	"vector-more-actions": "Ugar"
 }

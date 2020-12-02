@@ -21,6 +21,8 @@
  * @ingroup Maintenance
  */
 
+use MediaWiki\MediaWikiServices;
+use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\IDatabase;
 
 require_once __DIR__ . '/Maintenance.php';
@@ -32,10 +34,23 @@ require_once __DIR__ . '/Maintenance.php';
  * @since 1.31
  */
 class PopulateArchiveRevId extends LoggedUpdateMaintenance {
+
+	/** @var array|null Dummy revision row */
+	private static $dummyRev = null;
+
 	public function __construct() {
 		parent::__construct();
 		$this->addDescription( 'Populate ar_rev_id in pre-1.5 rows' );
 		$this->setBatchSize( 100 );
+	}
+
+	/**
+	 * @param IDatabase $dbw
+	 * @return bool
+	 */
+	public static function isNewInstall( IDatabase $dbw ) {
+		return $dbw->selectRowCount( 'archive', '*', [], __METHOD__ ) === 0 &&
+			$dbw->selectRowCount( 'revision', '*', [], __METHOD__ ) === 1;
 	}
 
 	protected function getUpdateKey() {
@@ -45,6 +60,7 @@ class PopulateArchiveRevId extends LoggedUpdateMaintenance {
 	protected function doDBUpdates() {
 		$this->output( "Populating ar_rev_id...\n" );
 		$dbw = $this->getDB( DB_MASTER );
+		self::checkMysqlAutoIncrementBug( $dbw );
 
 		// Quick exit if there are no rows needing updates.
 		$any = $dbw->selectField(
@@ -58,10 +74,10 @@ class PopulateArchiveRevId extends LoggedUpdateMaintenance {
 			return true;
 		}
 
-		$rev = $this->makeDummyRevisionRow( $dbw );
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$count = 0;
 		while ( true ) {
-			wfWaitForSlaves();
+			$lbFactory->waitForReplication();
 
 			$arIds = $dbw->selectFieldValues(
 				'archive',
@@ -75,47 +91,109 @@ class PopulateArchiveRevId extends LoggedUpdateMaintenance {
 				return true;
 			}
 
-			try {
-				$updates = $dbw->doAtomicSection( __METHOD__, function ( $dbw, $fname ) use ( $arIds, $rev ) {
-					// Create new rev_ids by inserting dummy rows into revision and then deleting them.
-					$dbw->insert( 'revision', array_fill( 0, count( $arIds ), $rev ), $fname );
-					$revIds = $dbw->selectFieldValues(
-						'revision',
-						'rev_id',
-						[ 'rev_timestamp' => $rev['rev_timestamp'] ],
-						$fname
-					);
-					if ( !is_array( $revIds ) ) {
-						throw new UnexpectedValueException( 'Failed to insert dummy revisions' );
-					}
-					if ( count( $revIds ) !== count( $arIds ) ) {
-						throw new UnexpectedValueException(
-							'Tried to insert ' . count( $arIds ) . ' dummy revisions, but found '
-							. count( $revIds ) . ' matching rows.'
-						);
-					}
-					$dbw->delete( 'revision', [ 'rev_id' => $revIds ], $fname );
+			$count += self::reassignArRevIds( $dbw, $arIds, [ 'ar_rev_id' => null ] );
 
-					return array_combine( $arIds, $revIds );
-				} );
-			} catch ( UnexpectedValueException $ex ) {
-				$this->fatalError( $ex->getMessage() );
-			}
-
-			foreach ( $updates as $arId => $revId ) {
-				$dbw->update(
-					'archive',
-					[ 'ar_rev_id' => $revId ],
-					[ 'ar_id' => $arId, 'ar_rev_id' => null ],
-					__METHOD__
-				);
-				$count += $dbw->affectedRows();
-			}
-
-			$min = min( array_keys( $updates ) );
-			$max = max( array_keys( $updates ) );
+			$min = min( $arIds );
+			$max = max( $arIds );
 			$this->output( " ... $min-$max\n" );
 		}
+	}
+
+	/**
+	 * Check for (and work around) a MySQL auto-increment bug
+	 *
+	 * (T202032) MySQL until 8.0 and MariaDB until some version after 10.1.34
+	 * don't save the auto-increment value to disk, so on server restart it
+	 * might reuse IDs from deleted revisions. We can fix that with an insert
+	 * with an explicit rev_id value, if necessary.
+	 *
+	 * @param IDatabase $dbw
+	 */
+	public static function checkMysqlAutoIncrementBug( IDatabase $dbw ) {
+		if ( $dbw->getType() !== 'mysql' ) {
+			return;
+		}
+
+		if ( !self::$dummyRev ) {
+			self::$dummyRev = self::makeDummyRevisionRow( $dbw );
+		}
+
+		$ok = false;
+		while ( !$ok ) {
+			try {
+				$dbw->doAtomicSection( __METHOD__, function ( IDatabase $dbw, $fname ) {
+					$dbw->insert( 'revision', self::$dummyRev, $fname );
+					$id = $dbw->insertId();
+					$toDelete = [ $id ];
+
+					$maxId = max(
+						(int)$dbw->selectField( 'archive', 'MAX(ar_rev_id)', [], $fname ),
+						(int)$dbw->selectField( 'slots', 'MAX(slot_revision_id)', [], $fname )
+					);
+					if ( $id <= $maxId ) {
+						$dbw->insert( 'revision', [ 'rev_id' => $maxId + 1 ] + self::$dummyRev, $fname );
+						$toDelete[] = $maxId + 1;
+					}
+
+					$dbw->delete( 'revision', [ 'rev_id' => $toDelete ], $fname );
+				} );
+				$ok = true;
+			} catch ( DBQueryError $e ) {
+				if ( $e->errno != 1062 ) {
+					// 1062 is "duplicate entry", ignore it and retry
+					throw $e;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Assign new ar_rev_ids to a set of ar_ids.
+	 * @param IDatabase $dbw
+	 * @param int[] $arIds
+	 * @param array $conds Extra conditions for the update
+	 * @return int Number of updated rows
+	 */
+	public static function reassignArRevIds( IDatabase $dbw, array $arIds, array $conds = [] ) {
+		if ( !self::$dummyRev ) {
+			self::$dummyRev = self::makeDummyRevisionRow( $dbw );
+		}
+
+		$updates = $dbw->doAtomicSection( __METHOD__, function ( IDatabase $dbw, $fname ) use ( $arIds ) {
+			// Create new rev_ids by inserting dummy rows into revision and then deleting them.
+			$dbw->insert( 'revision', array_fill( 0, count( $arIds ), self::$dummyRev ), $fname );
+			$revIds = $dbw->selectFieldValues(
+				'revision',
+				'rev_id',
+				// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
+				[ 'rev_timestamp' => self::$dummyRev['rev_timestamp'] ],
+				$fname
+			);
+			if ( !is_array( $revIds ) ) {
+				throw new UnexpectedValueException( 'Failed to insert dummy revisions' );
+			}
+			if ( count( $revIds ) !== count( $arIds ) ) {
+				throw new UnexpectedValueException(
+					'Tried to insert ' . count( $arIds ) . ' dummy revisions, but found '
+					. count( $revIds ) . ' matching rows.'
+				);
+			}
+			$dbw->delete( 'revision', [ 'rev_id' => $revIds ], $fname );
+
+			return array_combine( $arIds, $revIds );
+		} );
+
+		$count = 0;
+		foreach ( $updates as $arId => $revId ) {
+			$dbw->update(
+				'archive',
+				[ 'ar_rev_id' => $revId ],
+				[ 'ar_id' => $arId ] + $conds,
+				__METHOD__
+			);
+			$count += $dbw->affectedRows();
+		}
+		return $count;
 	}
 
 	/**
@@ -123,31 +201,77 @@ class PopulateArchiveRevId extends LoggedUpdateMaintenance {
 	 *
 	 * The row will have a wildly unlikely timestamp, and possibly a generic
 	 * user and comment, but will otherwise be derived from a revision on the
-	 * wiki's main page.
+	 * wiki's main page or some other revision in the database.
 	 *
 	 * @param IDatabase $dbw
 	 * @return array
 	 */
-	private function makeDummyRevisionRow( IDatabase $dbw ) {
+	private static function makeDummyRevisionRow( IDatabase $dbw ) {
 		$ts = $dbw->timestamp( '11111111111111' );
+		$rev = null;
+
 		$mainPage = Title::newMainPage();
-		if ( !$mainPage ) {
-			$this->fatalError( 'Main page does not exist' );
+		$pageId = $mainPage ? $mainPage->getArticleID() : null;
+		if ( $pageId ) {
+			$rev = $dbw->selectRow(
+				'revision',
+				'*',
+				[ 'rev_page' => $pageId ],
+				__METHOD__,
+				[ 'ORDER BY' => 'rev_timestamp ASC' ]
+			);
 		}
-		$pageId = $mainPage->getArticleId();
-		if ( !$pageId ) {
-			$this->fatalError( $mainPage->getPrefixedText() . ' has no ID' );
-		}
-		$rev = $dbw->selectRow(
-			'revision',
-			'*',
-			[ 'rev_page' => $pageId ],
-			__METHOD__,
-			[ 'ORDER BY' => 'rev_timestamp ASC' ]
-		);
+
 		if ( !$rev ) {
-			$this->fatalError( $mainPage->getPrefixedText() . ' has no revisions' );
+			// No main page? Let's see if there are any revisions at all
+			$rev = $dbw->selectRow(
+				'revision',
+				'*',
+				[],
+				__METHOD__,
+				[ 'ORDER BY' => 'rev_timestamp ASC' ]
+			);
 		}
+		if ( !$rev ) {
+			// Since no revisions are available to copy, generate a dummy
+			// revision to a dummy page, then rollback the commit
+			wfDebug( __METHOD__ . ": No revisions are available to copy" );
+
+			$dbw->begin( __METHOD__ );
+
+			// Make a title and revision and insert them
+			$title = Title::newFromText( "PopulateArchiveRevId_4b05b46a81e29" );
+			$page = WikiPage::factory( $title );
+			$updater = $page->newPageUpdater(
+				User::newSystemUser( 'Maintenance script', [ 'steal' => true ] )
+			);
+			$updater->setContent(
+				'main',
+				ContentHandler::makeContent( "Content for dummy rev", $title )
+			);
+			$updater->saveRevision(
+				CommentStoreComment::newUnsavedComment( 'dummy rev summary' ),
+				EDIT_NEW | EDIT_SUPPRESS_RC
+			);
+
+			// get the revision row just inserted
+			$rev = $dbw->selectRow(
+				'revision',
+				'*',
+				[],
+				__METHOD__,
+				[ 'ORDER BY' => 'rev_timestamp ASC' ]
+			);
+
+			$dbw->rollback( __METHOD__ );
+		}
+		if ( !$rev ) {
+			// This should never happen.
+			throw new UnexpectedValueException(
+				'No revisions are available to copy, and one couldn\'t be created'
+			);
+		}
+
 		unset( $rev->rev_id );
 		$rev = (array)$rev;
 		$rev['rev_timestamp'] = $ts;
@@ -166,12 +290,12 @@ class PopulateArchiveRevId extends LoggedUpdateMaintenance {
 			__METHOD__
 		);
 		if ( $any ) {
-			$this->fatalError( "... Why does your database contain a revision dated $ts?" );
+			throw new UnexpectedValueException( "... Why does your database contain a revision dated $ts?" );
 		}
 
 		return $rev;
 	}
 }
 
-$maintClass = "PopulateArchiveRevId";
+$maintClass = PopulateArchiveRevId::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

@@ -1,11 +1,55 @@
 <?php
 
+use Wikimedia\TestingAccessWrapper;
+
 /**
  * @group ResourceLoader
  */
-class ResourceLoaderSkinModuleTest extends PHPUnit\Framework\TestCase {
+class ResourceLoaderSkinModuleTest extends MediaWikiIntegrationTestCase {
 
-	use MediaWikiCoversValidator;
+	public static function provideGetAvailableLogos() {
+		return [
+			[
+				[
+					'Logos' => [],
+					'Logo' => '/logo.png',
+				],
+				[
+					'1x' => '/logo.png',
+				]
+			],
+			[
+				[
+					'Logos' => [
+						'svg' => '/logo.svg',
+						'2x' => 'logo-2x.png'
+					],
+					'Logo' => '/logo.png',
+				],
+				[
+					'svg' => '/logo.svg',
+					'2x' => 'logo-2x.png',
+					'1x' => '/logo.png',
+				]
+			],
+			[
+				[
+					'Logos' => [
+						'wordmark' => '/logo-wordmark.png',
+						'1x' => '/logo.png',
+						'svg' => '/logo.svg',
+						'2x' => 'logo-2x.png'
+					],
+				],
+				[
+					'wordmark' => '/logo-wordmark.png',
+					'1x' => '/logo.png',
+					'svg' => '/logo.svg',
+					'2x' => 'logo-2x.png',
+				]
+			]
+		];
+	}
 
 	public static function provideGetStyles() {
 		// phpcs:disable Generic.Files.LineLength
@@ -71,12 +115,10 @@ CSS
 
 	/**
 	 * @dataProvider provideGetStyles
-	 * @covers ResourceLoaderSkinModule::normalizeStyles
-	 * @covers ResourceLoaderSkinModule::getStyles
+	 * @covers ResourceLoaderSkinModule
 	 */
 	public function testGetStyles( $parent, $logo, $expected ) {
 		$module = $this->getMockBuilder( ResourceLoaderSkinModule::class )
-			->disableOriginalConstructor()
 			->setMethods( [ 'readStyleFiles', 'getConfig', 'getLogoData' ] )
 			->getMock();
 		$module->expects( $this->once() )->method( 'readStyleFiles' )
@@ -96,6 +138,27 @@ CSS
 	}
 
 	/**
+	 * @dataProvider provideGetAvailableLogos
+	 * @covers ResourceLoaderSkinModule::getAvailableLogos
+	 */
+	public function testGetAvailableLogos( $config, $expected ) {
+		$logos = ResourceLoaderSkinModule::getAvailableLogos( new HashConfig( $config ) );
+		$this->assertSame( $logos, $expected );
+	}
+
+	/**
+	 * @covers ResourceLoaderSkinModule::getAvailableLogos
+	 */
+	public function testGetAvailableLogosRuntimeException() {
+		$this->expectException( \RuntimeException::class );
+		ResourceLoaderSkinModule::getAvailableLogos( new HashConfig( [
+			'Logo' => false,
+			'Logos' => false,
+			'LogoHD' => false,
+		] ) );
+	}
+
+	/**
 	 * @covers ResourceLoaderSkinModule::isKnownEmpty
 	 */
 	public function testIsKnownEmpty() {
@@ -108,39 +171,48 @@ CSS
 	}
 
 	/**
-	 * @dataProvider provideGetLogo
-	 * @covers ResourceLoaderSkinModule::getLogo
+	 * @dataProvider provideGetLogoData
+	 * @covers ResourceLoaderSkinModule::getLogoData
 	 */
-	public function testGetLogo( $config, $expected, $baseDir = null ) {
+	public function testGetLogoData( $config, $expected, $baseDir = null ) {
 		if ( $baseDir ) {
-			$oldIP = $GLOBALS['IP'];
-			$GLOBALS['IP'] = $baseDir;
-			$teardown = new Wikimedia\ScopedCallback( function () use ( $oldIP ) {
-				$GLOBALS['IP'] = $oldIP;
-			} );
+			$this->setMwGlobals( 'IP', $baseDir );
 		}
+		// Allow testing of protected method
+		$module = TestingAccessWrapper::newFromObject( new ResourceLoaderSkinModule() );
 
 		$this->assertEquals(
 			$expected,
-			ResourceLoaderSkinModule::getLogo( new HashConfig( $config ) )
+			$module->getLogoData( new HashConfig( $config ) )
 		);
 	}
 
-	public function provideGetLogo() {
+	public function provideGetLogoData() {
 		return [
+			'wordmark' => [
+				'config' => [
+					'ResourceBasePath' => '/w',
+					'Logos' => [
+						'1x' => '/img/default.png',
+						'wordmark' => '/img/wordmark.png',
+					],
+				],
+				'expected' => '/img/default.png',
+			],
 			'simple' => [
 				'config' => [
 					'ResourceBasePath' => '/w',
-					'Logo' => '/img/default.png',
-					'LogoHD' => false,
+					'Logos' => [
+						'1x' => '/img/default.png',
+					],
 				],
 				'expected' => '/img/default.png',
 			],
 			'default and 2x' => [
 				'config' => [
 					'ResourceBasePath' => '/w',
-					'Logo' => '/img/default.png',
-					'LogoHD' => [
+					'Logos' => [
+						'1x' => '/img/default.png',
 						'2x' => '/img/two-x.png',
 					],
 				],
@@ -152,8 +224,8 @@ CSS
 			'default and all HiDPIs' => [
 				'config' => [
 					'ResourceBasePath' => '/w',
-					'Logo' => '/img/default.png',
-					'LogoHD' => [
+					'Logos' => [
+						'1x' => '/img/default.png',
 						'1.5x' => '/img/one-point-five.png',
 						'2x' => '/img/two-x.png',
 					],
@@ -167,8 +239,8 @@ CSS
 			'default and SVG' => [
 				'config' => [
 					'ResourceBasePath' => '/w',
-					'Logo' => '/img/default.png',
-					'LogoHD' => [
+					'Logos' => [
+						'1x' => '/img/default.png',
 						'svg' => '/img/vector.svg',
 					],
 				],
@@ -180,8 +252,8 @@ CSS
 			'everything' => [
 				'config' => [
 					'ResourceBasePath' => '/w',
-					'Logo' => '/img/default.png',
-					'LogoHD' => [
+					'Logos' => [
+						'1x' => '/img/default.png',
 						'1.5x' => '/img/one-point-five.png',
 						'2x' => '/img/two-x.png',
 						'svg' => '/img/vector.svg',
@@ -195,13 +267,129 @@ CSS
 			'versioned url' => [
 				'config' => [
 					'ResourceBasePath' => '/w',
-					'Logo' => '/w/test.jpg',
-					'LogoHD' => false,
 					'UploadPath' => '/w/images',
+					'Logos' => [
+						'1x' => '/w/test.jpg',
+					],
 				],
 				'expected' => '/w/test.jpg?edcf2',
 				'baseDir' => dirname( dirname( __DIR__ ) ) . '/data/media',
 			],
 		];
+	}
+
+	/**
+	 * @dataProvider providePreloadLinks
+	 * @covers ResourceLoaderSkinModule::getPreloadLinks
+	 * @covers ResourceLoaderSkinModule::getLogoPreloadlinks
+	 * @covers ResourceLoaderSkinModule::getLogoData
+	 */
+	public function testPreloadLinkHeaders( $config, $result ) {
+		$this->setMwGlobals( $config );
+		$ctx = $this->getMockBuilder( ResourceLoaderContext::class )
+			->disableOriginalConstructor()->getMock();
+		$module = new ResourceLoaderSkinModule();
+
+		$this->assertEquals( [ $result ], $module->getHeaders( $ctx ) );
+	}
+
+	public function providePreloadLinks() {
+		return [
+			[
+				[
+					'wgResourceBasePath' => '/w',
+					'wgLogo' => false,
+					'wgLogoHD' => false,
+					'wgLogos' => [
+						'1x' => '/img/default.png',
+						'1.5x' => '/img/one-point-five.png',
+						'2x' => '/img/two-x.png',
+					],
+				],
+				'Link: </img/default.png>;rel=preload;as=image;media=' .
+				'not all and (min-resolution: 1.5dppx),' .
+				'</img/one-point-five.png>;rel=preload;as=image;media=' .
+				'(min-resolution: 1.5dppx) and (max-resolution: 1.999999dppx),' .
+				'</img/two-x.png>;rel=preload;as=image;media=(min-resolution: 2dppx)'
+			],
+			[
+				[
+					'wgResourceBasePath' => '/w',
+					'wgLogo' => false,
+					'wgLogoHD' => false,
+					'wgLogos' => [
+						'1x' => '/img/default.png',
+					],
+				],
+				'Link: </img/default.png>;rel=preload;as=image'
+			],
+			[
+				[
+					'wgResourceBasePath' => '/w',
+					'wgLogo' => false,
+					'wgLogoHD' => false,
+					'wgLogos' => [
+						'1x' => '/img/default.png',
+						'2x' => '/img/two-x.png',
+					],
+				],
+				'Link: </img/default.png>;rel=preload;as=image;media=' .
+				'not all and (min-resolution: 2dppx),' .
+				'</img/two-x.png>;rel=preload;as=image;media=(min-resolution: 2dppx)'
+			],
+			[
+				[
+					'wgResourceBasePath' => '/w',
+					'wgLogo' => false,
+					'wgLogoHD' => false,
+					'wgLogos' => [
+						'1x' => '/img/default.png',
+						'svg' => '/img/vector.svg',
+					],
+				],
+				'Link: </img/vector.svg>;rel=preload;as=image'
+
+			],
+			[
+				[
+					'wgResourceBasePath' => '/w',
+					'wgLogo' => false,
+					'wgLogoHD' => false,
+					'wgLogos' => [
+						'1x' => '/w/test.jpg',
+					],
+					'wgUploadPath' => '/w/images',
+					'IP' => dirname( dirname( __DIR__ ) ) . '/data/media',
+				],
+				'Link: </w/test.jpg?edcf2>;rel=preload;as=image',
+			],
+		];
+	}
+
+	/**
+	 * Covers ResourceLoaderSkinModule::FEATURE_FILES, but not annotatable.
+	 *
+	 * @dataProvider provideFeatureFiles
+	 * @coversNothing
+	 *
+	 * @param string $file
+	 */
+	public function testFeatureFilesExist( string $file ) : void {
+		$this->assertFileExists( $file );
+	}
+
+	public function provideFeatureFiles() : Generator {
+		global $IP;
+
+		$featureFiles = ( new ReflectionClass( ResourceLoaderSkinModule::class ) )
+			->getConstant( 'FEATURE_FILES' );
+
+		foreach ( $featureFiles as $feature => $files ) {
+			foreach ( $files as $media => $stylesheets ) {
+				foreach ( $stylesheets as $stylesheet ) {
+					yield "$feature: $media: $stylesheet" => [ "$IP/$stylesheet" ];
+				}
+			}
+		}
 	}
 }

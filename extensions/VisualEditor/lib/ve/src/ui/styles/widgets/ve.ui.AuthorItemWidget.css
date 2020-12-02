@@ -1,0 +1,37 @@
+/*!
+ * VisualEditor AuthorInterface AuthorItemWidget styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-authorItemWidget {
+	position: relative;
+	margin: 0.2em 0;
+	padding-left: 2.5em;
+	line-height: 2em;
+}
+
+.ve-ui-authorItemWidget-color {
+	position: absolute;
+	width: 2em;
+	height: 2em;
+	left: 0;
+}
+
+.ve-ui-authorItemWidget-colorPicker {
+	margin-top: 3em;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.ve-ui-authorItemWidget-colorPicker .color-picker-control {
+	border-color: #ccc;
+	padding: 3px;
+	background: #fff;
+}
+
+.ve-ui-authorItemWidget-editable .ve-ui-authorItemWidget-color {
+	cursor: pointer;
+	outline: 1px solid #ccc;
+	outline-offset: 1px;
+	top: 2px; /* outline + outline-offset */
+}

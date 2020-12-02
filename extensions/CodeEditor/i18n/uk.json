@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Base",
-			"Sodmy",
 			"Andriykopanytsia",
-			"Ата",
-			"Piramidion"
+			"Base",
+			"Piramidion",
+			"Sodmy",
+			"Ата"
 		]
 	},
 	"codeeditor-desc": "Редагування із підсвіткою синтаксису для JavaScript та CSS сторінок за допомогою [https://ace.c9.io/ редактора Ace]",

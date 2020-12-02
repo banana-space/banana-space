@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $, oo ) {
+( function () {
 	var P;
 
 	/**
@@ -40,6 +40,7 @@
 
 		/**
 		 * Contains everything else.
+		 *
 		 * @property {jQuery}
 		 */
 		this.$box = $( '<div>' )
@@ -48,6 +49,7 @@
 
 		/**
 		 * Box title
+		 *
 		 * @property {jQuery}
 		 */
 		this.$title = $( '<h3>' )
@@ -58,6 +60,7 @@
 		 * Plain-text version of the author's message
 		 * This is just the text parsed out from the original markup, it might not make much sense
 		 * (e.g. if the original is a HTML table)
+		 *
 		 * @property {jQuery}
 		 */
 		this.$text = $( '<div>' )
@@ -67,11 +70,11 @@
 				e.preventDefault();
 				permission.grow();
 				permission.scroller.toggle( 'up' );
-			} )
-		;
+			} );
 
 		/**
 		 * A helper element to fade off text
+		 *
 		 * @property {jQuery}
 		 */
 		this.$fader = $( '<div>' )
@@ -86,6 +89,7 @@
 		/**
 		 * Original (HTML) version of the author's message
 		 * This can be scary sometimes (huge tables, black text on dark purple background etc).
+		 *
 		 * @property {jQuery}
 		 */
 		this.$html = $( '<div>' )
@@ -94,6 +98,7 @@
 
 		/**
 		 * "Close" button (does not actually close the box, just makes it smaller).
+		 *
 		 * @property {jQuery}
 		 */
 		this.$close = $( '<button>' )
@@ -105,11 +110,12 @@
 
 		/**
 		 * Panel scroller from the metadata panel object.
+		 *
 		 * @property {mw.mmv.ui.MetadataPanelScroller}
 		 */
 		this.scroller = scroller;
 	}
-	oo.inheritClass( Permission, mw.mmv.ui.Element );
+	OO.inheritClass( Permission, mw.mmv.ui.Element );
 	P = Permission.prototype;
 
 	/**
@@ -143,6 +149,8 @@
 	P.grow = function () {
 		mw.mmv.actionLogger.log( 'terms-open' );
 
+		// FIXME: Use CSS transition
+		// eslint-disable-next-line no-jquery/no-animate
 		this.$box.addClass( 'full-size' )
 			.stop( true )
 			.animate( { backgroundColor: '#FFFFA0' }, 500 )
@@ -170,4 +178,4 @@
 	};
 
 	mw.mmv.ui.Permission = Permission;
-}( mediaWiki, jQuery, OO ) );
+}() );

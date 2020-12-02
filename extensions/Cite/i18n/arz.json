@@ -6,14 +6,14 @@
 			"Ramsis II"
 		]
 	},
-	"cite-desc": "بيضيف التاجز <nowiki><ref[ name=id]></nowiki> و <nowiki><references/></nowiki> ، للاستشهاد",
+	"cite-desc": "بيضيف التاجز <code>&lt;ref[ name=id]&gt;</code> و <code>&lt;references/&gt;</code> ، للاستشهاد",
 	"cite_error": "المرجع غلط: $1",
 	"cite_error_ref_numeric_key": "التاج <code>&lt;ref&gt;</code> مش صحيح؛\nالاسم ماينفعش يكون عدد صحيح بسيط. استخدم عنوان بيوصف",
 	"cite_error_ref_no_key": "التاج <code>&lt;ref&gt;</code> مش صحيح؛\nالمراجع اللى من غير محتوى لازميكون ليها اسم",
 	"cite_error_ref_too_many_keys": "التاج <code>&lt;ref&gt;</code> مش صحيح؛\nأسامى مش صحيحة، يعنى مثلا: كتير قوي",
 	"cite_error_ref_no_input": "تاج <code>&lt;ref&gt;</code> مش صحيح؛\nالمراجع اللى من غير اسم لازم يكون ليها محتوى",
 	"cite_error_references_invalid_parameters": "مش صحيح <code>&lt;references&gt;</code> تاج;\nمافيش محددات مسموح بيها.\nاستخدم <code>&lt;references /&gt;</code>",
-	"cite_error_references_no_backlink_label": "علامات الوصلات الراجعة المخصصة خلصت.\nعرف اكتر فى رسالة <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>",
+	"cite_error_references_no_backlink_label": "علامات الوصلات الراجعة المخصصة خلصت. عرف اكتر فى رسالة [[MediaWiki:Cite references link many format backlink labels]]",
 	"cite_error_references_no_text": "مش صحيح <code>&lt;ref&gt;</code> تاج;\nمافيش نص متوافر فى المراجع اللى اسمها<code>$1</code>",
 	"cite_error_included_ref": "إغلاق <code>&lt;/ref&gt;</code> مفقود لوسم <code>&lt;ref&gt;</code>",
 	"cite_error_group_refs_without_references": "<code>&lt;ref&gt;</code> فى تاجز موجوده لمجموعه اسمها \"$1\", بس مافيش مقابلها تاجز <code>&lt;references group=\"$1\"/&gt;</code> اتلقت",

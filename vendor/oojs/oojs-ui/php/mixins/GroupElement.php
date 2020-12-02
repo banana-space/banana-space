@@ -25,7 +25,7 @@ trait GroupElement {
 	 */
 	public function initializeGroupElement( array $config = [] ) {
 		// Properties
-		$this->group = isset( $config['group'] ) ? $config['group'] : new Tag( 'div' );
+		$this->group = $config['group'] ?? new Tag( 'div' );
 
 		$this->registerConfigCallback( function ( &$config ) {
 			$config['items'] = $this->items;
@@ -50,13 +50,24 @@ trait GroupElement {
 		return $this->items;
 	}
 
+	public function findItemFromData( $data ) {
+		$items = $this->getItems();
+		// TODO: Support non-string $data using a hash (e.g. json_encode)
+		foreach ( $items as $item ) {
+			if ( $item->getData() === $data ) {
+				return $item;
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * Add items.
 	 *
 	 * Adding an existing item will move it.
 	 *
 	 * @param Element[] $items Items
-	 * @param number $index Index to insert items at
+	 * @param int|null $index Index to insert items at
 	 * @return $this
 	 */
 	public function addItems( array $items, $index = null ) {

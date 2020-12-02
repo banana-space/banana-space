@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class SpecialCiteThisPage extends FormSpecialPage {
 
 	/**
@@ -21,6 +23,7 @@ class SpecialCiteThisPage extends FormSpecialPage {
 	 */
 	public function execute( $par ) {
 		$this->setHeaders();
+		$this->addHelpLink( 'Extension:CiteThisPage' );
 		parent::execute( $par );
 		if ( $this->title instanceof Title ) {
 			$id = $this->getRequest()->getInt( 'id' );
@@ -30,6 +33,7 @@ class SpecialCiteThisPage extends FormSpecialPage {
 
 	protected function alterForm( HTMLForm $form ) {
 		$form->setMethod( 'get' );
+		$form->setFormIdentifier( 'titleform' );
 	}
 
 	protected function getFormFields() {
@@ -50,8 +54,7 @@ class SpecialCiteThisPage extends FormSpecialPage {
 
 	public function onSubmit( array $data ) {
 		// GET forms are "submitted" on every view, so check
-		// that some data was put in for page, as empty string
-		// will pass validation
+		// that some data was put in for page
 		if ( strlen( $data['page'] ) ) {
 			$this->title = Title::newFromText( $data['page'] );
 		}
@@ -67,16 +70,7 @@ class SpecialCiteThisPage extends FormSpecialPage {
 	 * @return string[] Matching subpages
 	 */
 	public function prefixSearchSubpages( $search, $limit, $offset ) {
-		$title = Title::newFromText( $search );
-		if ( !$title || !$title->canExist() ) {
-			// No prefix suggestion in special and media namespace
-			return [];
-		}
-		// Autocomplete subpage the same as a normal search
-		$result = SearchEngine::completionSearch( $search );
-		return array_map( function ( $sub ) {
-			return $sub->getSuggestedTitle();
-		}, $result->getSuggestions() );
+		return $this->prefixSearchString( $search, $limit, $offset );
 	}
 
 	protected function getGroupName() {
@@ -90,8 +84,11 @@ class SpecialCiteThisPage extends FormSpecialPage {
 
 		$out = $this->getOutput();
 
-		$revision = Revision::newFromTitle( $title, $revId );
-		if ( !$revision ) {
+		$revTimestamp = MediaWikiServices::getInstance()
+			->getRevisionLookup()
+			->getTimestampFromId( $revId );
+
+		if ( !$revTimestamp ) {
 			$out->wrapWikiMsg( '<div class="errorbox">$1</div>',
 				[ 'citethispage-badrevision', $title->getPrefixedText(), $revId ] );
 			return;
@@ -99,7 +96,7 @@ class SpecialCiteThisPage extends FormSpecialPage {
 
 		$parserOptions = $this->getParserOptions();
 		// Set the overall timestamp to the revision's timestamp
-		$parserOptions->setTimestamp( $revision->getTimestamp() );
+		$parserOptions->setTimestamp( $revTimestamp );
 
 		$parser = $this->getParser();
 		// Register our <citation> tag which just parses using a different
@@ -128,8 +125,8 @@ class SpecialCiteThisPage extends FormSpecialPage {
 	 * @return Parser
 	 */
 	private function getParser() {
-		$parserConf = $this->getConfig()->get( 'ParserConf' );
-		return new $parserConf['class']( $parserConf );
+		$parserFactory = MediaWikiServices::getInstance()->getParserFactory();
+		return $parserFactory->create();
 	}
 
 	/**
@@ -144,9 +141,10 @@ class SpecialCiteThisPage extends FormSpecialPage {
 			# and the text moved into SpecialCite.i18n.php
 			# This code is kept for b/c in case an installation has its own file "citethispage-content-xx"
 			# for a previously not supported language.
-			global $wgContLang, $wgContLanguageCode;
+			global $wgLanguageCode;
 			$dir = __DIR__ . '/../';
-			$code = $wgContLang->lc( $wgContLanguageCode );
+			$code = MediaWikiServices::getInstance()->getContentLanguage()
+				->lc( $wgLanguageCode );
 			if ( file_exists( "${dir}citethispage-content-$code" ) ) {
 				$msg = file_get_contents( "${dir}citethispage-content-$code" );
 			} elseif ( file_exists( "${dir}citethispage-content" ) ) {
@@ -165,12 +163,7 @@ class SpecialCiteThisPage extends FormSpecialPage {
 	private function getParserOptions() {
 		$parserOptions = ParserOptions::newFromUser( $this->getUser() );
 		$parserOptions->setDateFormat( 'default' );
-
-		// Having tidy on causes whitespace and <pre> tags to
-		// be generated around the output of the CiteThisPageOutput
-		// class TODO FIXME.
-		$parserOptions->setTidy( false );
-
+		$parserOptions->setInterfaceMessage( true );
 		return $parserOptions;
 	}
 
@@ -196,11 +189,12 @@ class SpecialCiteThisPage extends FormSpecialPage {
 			/* $linestart = */ false
 		);
 
-		return $ret->getText( [
+		return Parser::stripOuterParagraph( $ret->getText( [
 			'enableSectionEditLinks' => false,
 			// This will be inserted into the output of another parser, so there will actually be a wrapper
 			'unwrap' => true,
-		] );
+			'wrapperDivClass' => '',
+		] ) );
 	}
 
 	protected function getDisplayFormat() {

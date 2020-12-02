@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rachmat04"
+		]
+	},
+	"apihelp-categorytree-description": "Modul internal untuk ekstensi CategoryTree.",
+	"apihelp-categorytree-param-category": "Judul di ruangnama kategori, awalan akan diabaikan jika ada.",
+	"apihelp-categorytree-param-options": "Opsi untuk pembangun CategoryTree sebagai sebuah objek JSON. Opsi kedalaman baru menjadi <kbd>1</kbd>."
+}

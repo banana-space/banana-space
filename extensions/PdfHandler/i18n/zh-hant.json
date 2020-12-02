@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Justincheng12345",
-			"Mark85296341",
-			"Simon Shek",
 			"Cwlin0416",
-			"Kly"
+			"Justincheng12345",
+			"Kly",
+			"Mark85296341",
+			"Simon Shek"
 		]
 	},
 	"pdf-desc": "使用圖片模式檢視 PDF 檔案的處理程式。",

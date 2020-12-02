@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joanmp17"
+		]
+	},
+	"wikieditor-wikitext-tab": "ዊኪጽሑፍ",
+	"wikieditor-loading": "ይጽዕን ኣሎ...",
+	"wikieditor-toolbar-loading": "ይጽዕን ኣሎ...",
+	"wikieditor-toolbar-tool-bold": "ዓጺቕ",
+	"wikieditor-toolbar-tool-italic": "ቀናን",
+	"wikieditor-toolbar-tool-link": "መጋጠሚ",
+	"wikieditor-toolbar-tool-link-title": "መጋጠሚ ኣእተወ",
+	"wikieditor-toolbar-tool-link-int": "ናብ ዊኪ ገጽ",
+	"wikieditor-toolbar-tool-link-cancel": "ኣትርፍ",
+	"wikieditor-toolbar-tool-file-example": "ኣብነት.jpg",
+	"wikieditor-toolbar-tool-file-title": "ፋይል ኣእተወ",
+	"wikieditor-toolbar-file-target": "ናይ ፋይል ሽም፦",
+	"wikieditor-toolbar-file-caption": "ናይ መግለጺ ጽሑፍ፦",
+	"wikieditor-toolbar-file-size": "መጠን፦",
+	"wikieditor-toolbar-file-default": "(ንቡር)",
+	"wikieditor-toolbar-tool-file-insert": "ኣእተወ",
+	"wikieditor-toolbar-tool-file-cancel": "ኣትርፍ",
+	"wikieditor-toolbar-tool-file-upload": "ጸዓነ",
+	"wikieditor-toolbar-tool-reference-cancel": "ኣትርፍ",
+	"wikieditor-toolbar-tool-reference-insert": "ኣእተወ",
+	"wikieditor-toolbar-section-advanced": "ዝማዕበለ",
+	"wikieditor-toolbar-tool-heading": "ኣርእስቲ",
+	"wikieditor-toolbar-tool-heading-1": "ደረጃ 1",
+	"wikieditor-toolbar-tool-heading-2": "ደረጃ 2",
+	"wikieditor-toolbar-tool-heading-3": "ደረጃ 3",
+	"wikieditor-toolbar-tool-heading-4": "ደረጃ 4",
+	"wikieditor-toolbar-tool-heading-5": "ደረጃ 5",
+	"wikieditor-toolbar-tool-redirect": "ምምሕልላፍ",
+	"wikieditor-toolbar-tool-redirect-example": "ናይ መዓርፎ ገጽ ሽም",
+	"wikieditor-toolbar-group-insert": "ኣእተወ",
+	"wikieditor-toolbar-tool-table-example": "ኣብነት",
+	"wikieditor-toolbar-tool-table-preview": "ኣቐደሚ ትርኢት",
+	"wikieditor-toolbar-tool-table-insert": "ኣእተወ",
+	"wikieditor-toolbar-tool-table-cancel": "ኣትርፍ",
+	"wikieditor-toolbar-tool-replace-close": "ዕጸው",
+	"wikieditor-toolbar-section-help": "ሓገዝ"
+}

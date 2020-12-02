@@ -3,14 +3,16 @@
 		"authors": [
 			"Beta16",
 			"Darth Kule",
+			"Elitre",
+			"FRacco",
 			"Gianfranco",
 			"Melos",
 			"Pietrodn",
-			"FRacco",
-			"Elitre"
+			"Scompo"
 		]
 	},
 	"vector-skin-desc": "Versione moderna del MonoBook con un aspetto rinnovato e molti miglioramenti dell'usabilità",
+	"vector-opt-out-tooltip": "Cambia le tue impostazioni per ritornare alla visualizzazione della skin precedente (legacy Vector)",
 	"vector.css": "/* Gli stili CSS inseriti qui si applicano agli utenti che usano il tema Vector */",
 	"vector.js": "/* Il codice JavaScript inserito qui viene caricato dagli utenti che usano il tema Vector */",
 	"vector-action-addsection": "Aggiungi discussione",

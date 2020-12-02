@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * @group ContentHandler
  * @group Database
@@ -17,7 +19,7 @@ class JavaScriptContentTest extends TextContentTest {
 				'MediaWiki:Test.js',
 				null,
 				"hello <world>\n",
-				"<pre class=\"mw-code mw-js\" dir=\"ltr\">\nhello &lt;world&gt;\n\n</pre>"
+				"<pre class=\"mw-code mw-js\" dir=\"ltr\">\nhello &lt;world>\n\n</pre>"
 			],
 			[
 				'MediaWiki:Test.js',
@@ -207,7 +209,7 @@ class JavaScriptContentTest extends TextContentTest {
 	 * @covers JavaScriptContent::matchMagicWord
 	 */
 	public function testMatchMagicWord() {
-		$mw = MagicWord::get( "staticredirect" );
+		$mw = MediaWikiServices::getInstance()->getMagicWordFactory()->get( "staticredirect" );
 
 		$content = $this->newContent( "#REDIRECT [[FOO]]\n__STATICREDIRECT__" );
 		$this->assertFalse(
@@ -232,7 +234,7 @@ class JavaScriptContentTest extends TextContentTest {
 		$content = new JavaScriptContent( $oldText );
 		$newContent = $content->updateRedirect( $target );
 
-		$this->assertEquals( $expectedText, $newContent->getNativeData() );
+		$this->assertEquals( $expectedText, $newContent->getText() );
 	}
 
 	public static function provideUpdateRedirect() {
@@ -310,6 +312,11 @@ class JavaScriptContentTest extends TextContentTest {
 			[
 				'Gadget:FooBaz.js',
 				'/* #REDIRECT */mw.loader.load("//example.org/w/index.php?title=Gadget:FooBaz.js\u0026action=raw\u0026ctype=text/javascript");'
+			],
+			// Unicode
+			[
+				'User:😂/unicode.js',
+				'/* #REDIRECT */mw.loader.load("//example.org/w/index.php?title=User:%F0%9F%98%82/unicode.js\u0026action=raw\u0026ctype=text/javascript");'
 			],
 			// No #REDIRECT comment
 			[

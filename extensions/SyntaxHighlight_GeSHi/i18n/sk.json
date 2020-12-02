@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Helix84"
+			"Helix84",
+			"TomášPolonec"
 		]
 	},
-	"syntaxhighlight-desc": "Poskytuje zvýazňovanie syntaxe <code>&lt;syntaxhighlight&gt;</code> pomocou [http://pygments.org/ zvýrazňovača GeSHi]"
+	"syntaxhighlight-desc": "Poskytuje zvýrazňovanie syntaxe <code>&lt;syntaxhighlight&gt;</code> pomocou [http://pygments.org/ Pygments – zvýrazňovača syntaxe v Pythone]"
 }

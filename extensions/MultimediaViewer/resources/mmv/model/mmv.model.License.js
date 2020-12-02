@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw ) {
+( function () {
 	var LP;
 
 	/**
@@ -116,6 +116,24 @@
 	LP.getShortName = function () {
 		var message = 'multimediaviewer-license-' + ( this.internalName || '' );
 		if ( mw.messages.exists( message ) ) {
+			// The following messages are used here:
+			// * multimediaviewer-license-cc-by-1.0
+			// * multimediaviewer-license-cc-sa-1.0
+			// * multimediaviewer-license-cc-by-sa-1.0
+			// * multimediaviewer-license-cc-by-2.0
+			// * multimediaviewer-license-cc-by-sa-2.0
+			// * multimediaviewer-license-cc-by-2.1
+			// * multimediaviewer-license-cc-by-sa-2.1
+			// * multimediaviewer-license-cc-by-2.5
+			// * multimediaviewer-license-cc-by-sa-2.5
+			// * multimediaviewer-license-cc-by-3.0
+			// * multimediaviewer-license-cc-by-sa-3.0
+			// * multimediaviewer-license-cc-by-4.0
+			// * multimediaviewer-license-cc-by-sa-4.0
+			// * multimediaviewer-license-cc-pd
+			// * multimediaviewer-license-cc-zero
+			// * multimediaviewer-license-pd
+			// * multimediaviewer-license-default
 			return mw.message( message ).text();
 		} else {
 			return this.shortName;
@@ -141,4 +159,4 @@
 	};
 
 	mw.mmv.model.License = License;
-}( mediaWiki ) );
+}() );

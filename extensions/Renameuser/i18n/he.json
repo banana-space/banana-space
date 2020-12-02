@@ -11,8 +11,8 @@
 		]
 	},
 	"renameuser": "שינוי שם משתמש",
-	"renameuser-linkoncontribs": "שינוי שם משתמש",
-	"renameuser-linkoncontribs-text": "שינוי שם המשתמש הזה",
+	"renameuser-linkoncontribs": "שינוי שם {{GENDER:$1|המשתמש|המשתמשת}}",
+	"renameuser-linkoncontribs-text": "שינוי השם של {{GENDER:$1|משתמש זה|משתמשת זו}}",
 	"renameuser-desc": "הוספת [[Special:RenameUser|דף מיוחד]] לשינוי שם משתמש (דרושה הרשאת ''renameuser'')",
 	"renameuserold": "שם משתמש נוכחי:",
 	"renameusernew": "שם משתמש חדש:",

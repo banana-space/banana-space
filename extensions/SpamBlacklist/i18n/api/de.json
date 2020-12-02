@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Debenben",
+			"Metalhead64"
+		]
+	},
+	"apihelp-spamblacklist-description": "Überprüft eine oder mehrere URLs gegen die Spam-Blacklist.",
+	"apihelp-spamblacklist-example-1": "Überprüft zwei URLs gegen die Blacklist",
+	"apihelp-spamblacklist-param-url": "Gegen die Blacklist zu überprüfende URLs.",
+	"apihelp-spamblacklist-summary": "Überprüft eine oder mehrere URLs gegen die Spam-Blacklist."
+}

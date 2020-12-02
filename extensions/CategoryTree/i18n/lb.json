@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Kaffi",
+			"Les Meloures",
 			"Robby",
 			"Soued031"
 		]
@@ -33,5 +34,5 @@
 	"categorytree-no-pages": "Keng Säiten oder Ënnerkategorien",
 	"categorytree-not-found": "Kategorie ''$1'' net fonnt",
 	"categorytree-error": "Problem beim luede vun den Donneeën.",
-	"categorytree-retry": "Waart w.e.g. een Ament a probéiert dann nach eng Kéier."
+	"categorytree-retry": "Waart wgl. een Ament a probéiert dann nach eng Kéier."
 }

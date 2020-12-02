@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"fancycaptcha-captcha": "Duchimie (provâ) di securitati",
 	"fancycaptcha-imgcaptcha-ph": "Bagâ lu textu pi cari lu vedz disuprâ"
 }

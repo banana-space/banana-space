@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"AmaryllisGardener",
 			"John Reid",
-			"AmaryllisGardener"
+			"MJL"
 		]
 	},
 	"multimediaviewer-optin-pref": "Enable <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Media Viewer]</span>",
@@ -40,5 +41,6 @@
 	"multimediaviewer-original-embed-dimensions": "Oreeginal file $1",
 	"multimediaviewer-large-embed-dimensions": "Muckle $1",
 	"multimediaviewer-medium-embed-dimensions": "Midlin $1",
-	"multimediaviewer-small-embed-dimensions": "Smaw $1"
+	"multimediaviewer-small-embed-dimensions": "Smaw $1",
+	"multimediaviewer-title-popup-text": "Descreeption"
 }

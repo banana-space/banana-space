@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw ) {
+( function () {
 	QUnit.module( 'mmv.provider.GuessedThumbnailInfo', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'Constructor sanity check', function ( assert ) {
@@ -108,24 +108,26 @@
 		var provider = new mw.mmv.provider.GuessedThumbnailInfo(),
 			file = new mw.Title( 'File:Copyleft.svg' );
 
-		assert.ok( !provider.needsOriginal( file, 100, 1000 ), 'Thumbnail of an SVG smaller than the original size doesn\'t need original' );
-		assert.ok( !provider.needsOriginal( file, 1000, 1000 ), 'Thumbnail of an SVG equal to the original size doesn\'t need original' );
-		assert.ok( !provider.needsOriginal( file, 2000, 1000 ), 'Thumbnail of an SVG bigger than the original size doesn\'t need original' );
+		assert.strictEqual( provider.needsOriginal( file, 100, 1000 ), false, 'Thumbnail of an SVG smaller than the original size doesn\'t need original' );
+		assert.strictEqual( provider.needsOriginal( file, 1000, 1000 ), false, 'Thumbnail of an SVG equal to the original size doesn\'t need original' );
+		assert.strictEqual( provider.needsOriginal( file, 2000, 1000 ), false, 'Thumbnail of an SVG bigger than the original size doesn\'t need original' );
 
 		file = new mw.Title( 'File:Foo.png' );
 
-		assert.ok( !provider.needsOriginal( file, 100, 1000 ), 'Thumbnail of a PNG smaller than the original size doesn\'t need original' );
-		assert.ok( provider.needsOriginal( file, 1000, 1000 ), 'Thumbnail of a PNG equal to the original size needs original' );
-		assert.ok( provider.needsOriginal( file, 2000, 1000 ), 'Thumbnail of a PNG bigger than the original size needs original' );
+		assert.strictEqual( provider.needsOriginal( file, 100, 1000 ), false, 'Thumbnail of a PNG smaller than the original size doesn\'t need original' );
+		assert.strictEqual( provider.needsOriginal( file, 1000, 1000 ), true, 'Thumbnail of a PNG equal to the original size needs original' );
+		assert.strictEqual( provider.needsOriginal( file, 2000, 1000 ), true, 'Thumbnail of a PNG bigger than the original size needs original' );
 	} );
 
 	QUnit.test( 'isFullSizeUrl()', function ( assert ) {
 		var provider = new mw.mmv.provider.GuessedThumbnailInfo(),
 			file = new mw.Title( 'File:Copyleft.svg' );
 
-		assert.ok( !provider.isFullSizeUrl( 'http://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Copyleft.svg/300px-Copyleft.svg.png', file ),
+		assert.strictEqual( provider.isFullSizeUrl( 'http://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Copyleft.svg/300px-Copyleft.svg.png', file ),
+			false,
 			'Thumbnail url recognized as not being full size' );
-		assert.ok( provider.isFullSizeUrl( 'http://upload.wikimedia.org/wikipedia/commons/8/8b/Copyleft.svg', file ),
+		assert.strictEqual( provider.isFullSizeUrl( 'http://upload.wikimedia.org/wikipedia/commons/8/8b/Copyleft.svg', file ),
+			true,
 			'Original url recognized as being full size' );
 	} );
 
@@ -155,54 +157,54 @@
 		var provider = new mw.mmv.provider.GuessedThumbnailInfo(),
 			file = new mw.Title( 'File:Copyleft.svg' );
 
-		assert.ok( provider.canHaveLargerThumbnailThanOriginal( file ), 'SVG can have a larger thumbnail than the original' );
+		assert.strictEqual( provider.canHaveLargerThumbnailThanOriginal( file ), true, 'SVG can have a larger thumbnail than the original' );
 
 		file = new mw.Title( 'File:Foo.jpg' );
 
-		assert.ok( !provider.canHaveLargerThumbnailThanOriginal( file ), 'JPG can\'t have a larger thumbnail than the original' );
+		assert.strictEqual( provider.canHaveLargerThumbnailThanOriginal( file ), false, 'JPG can\'t have a larger thumbnail than the original' );
 
 		file = new mw.Title( 'File:Foo.png' );
 
-		assert.ok( !provider.canHaveLargerThumbnailThanOriginal( file ), 'PNG can\'t have a larger thumbnail than the original' );
+		assert.strictEqual( provider.canHaveLargerThumbnailThanOriginal( file ), false, 'PNG can\'t have a larger thumbnail than the original' );
 
 		file = new mw.Title( 'File:Foo.jpeg' );
 
-		assert.ok( !provider.canHaveLargerThumbnailThanOriginal( file ), 'JPEG can\'t have a larger thumbnail than the original' );
+		assert.strictEqual( provider.canHaveLargerThumbnailThanOriginal( file ), false, 'JPEG can\'t have a larger thumbnail than the original' );
 
 		file = new mw.Title( 'File:Foo.tiff' );
 
-		assert.ok( !provider.canHaveLargerThumbnailThanOriginal( file ), 'TIFF can\'t have a larger thumbnail than the original' );
+		assert.strictEqual( provider.canHaveLargerThumbnailThanOriginal( file ), false, 'TIFF can\'t have a larger thumbnail than the original' );
 
 		file = new mw.Title( 'File:Foo.gif' );
 
-		assert.ok( !provider.canHaveLargerThumbnailThanOriginal( file ), 'GIF can\'t have a larger thumbnail than the original' );
+		assert.strictEqual( provider.canHaveLargerThumbnailThanOriginal( file ), false, 'GIF can\'t have a larger thumbnail than the original' );
 	} );
 
 	QUnit.test( 'canBeDisplayedInBrowser()', function ( assert ) {
 		var provider = new mw.mmv.provider.GuessedThumbnailInfo(),
 			file = new mw.Title( 'File:Copyleft.svg' );
 
-		assert.ok( !provider.canBeDisplayedInBrowser( file ), 'SVG can\'t be displayed as-is in the browser' );
+		assert.strictEqual( provider.canBeDisplayedInBrowser( file ), false, 'SVG can\'t be displayed as-is in the browser' );
 
 		file = new mw.Title( 'File:Foo.jpg' );
 
-		assert.ok( provider.canBeDisplayedInBrowser( file ), 'JPG can be displayed as-is in the browser' );
+		assert.strictEqual( provider.canBeDisplayedInBrowser( file ), true, 'JPG can be displayed as-is in the browser' );
 
 		file = new mw.Title( 'File:Foo.png' );
 
-		assert.ok( provider.canBeDisplayedInBrowser( file ), 'PNG can be displayed as-is in the browser' );
+		assert.strictEqual( provider.canBeDisplayedInBrowser( file ), true, 'PNG can be displayed as-is in the browser' );
 
 		file = new mw.Title( 'File:Foo.jpeg' );
 
-		assert.ok( provider.canBeDisplayedInBrowser( file ), 'JPEG can be displayed as-is in the browser' );
+		assert.strictEqual( provider.canBeDisplayedInBrowser( file ), true, 'JPEG can be displayed as-is in the browser' );
 
 		file = new mw.Title( 'File:Foo.tiff' );
 
-		assert.ok( !provider.canBeDisplayedInBrowser( file ), 'TIFF can\'t be displayed as-is in the browser' );
+		assert.strictEqual( provider.canBeDisplayedInBrowser( file ), false, 'TIFF can\'t be displayed as-is in the browser' );
 
 		file = new mw.Title( 'File:Foo.gif' );
 
-		assert.ok( provider.canBeDisplayedInBrowser( file ), 'GIF can be displayed as-is in the browser' );
+		assert.strictEqual( provider.canBeDisplayedInBrowser( file ), true, 'GIF can be displayed as-is in the browser' );
 	} );
 
 	QUnit.test( 'guessWidth()', function ( assert ) {
@@ -277,4 +279,4 @@
 
 		assert.strictEqual( result, undefined, 'guessFullUrl bails out when URL encoding is not as expected' );
 	} );
-}( mediaWiki ) );
+}() );

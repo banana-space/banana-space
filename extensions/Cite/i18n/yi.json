@@ -4,7 +4,7 @@
 			"פוילישער"
 		]
 	},
-	"cite-desc": "לייגט צו <nowiki><ref[ name=id]></nowiki> און <nowiki><references/></nowiki> טאַגן, פֿאר ציטירונגען (אין הערות)",
+	"cite-desc": "לייגט צו <code>&lt;ref[ name=id]&gt;</code> און <code>&lt;references/&gt;</code> טאַגן, פֿאר ציטירונגען (אין הערות)",
 	"cite_error": "ציטירן גרײַז: $1",
 	"cite_error_ref_numeric_key": "גרײַזיגער <code>&lt;ref&gt;</code> טאַג;\nנאמען טאר נישט זײַן קיין פשוטער נומער. ניצט א באשרײַבדיק קעפל",
 	"cite_error_ref_no_key": "דער עפנדער <code>&lt;ref&gt;</code> טאַג טויגט נישט אדער האט א פאלשן נאמען.",

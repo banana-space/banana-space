@@ -23,7 +23,7 @@
  * @file
  * @ingroup Site
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SiteList extends GenericArrayObject {
@@ -296,7 +296,7 @@ class SiteList extends GenericArrayObject {
 	 * @var string A string uniquely identifying the version of the serialization structure,
 	 *             not including any sub-structures.
 	 */
-	const SERIAL_VERSION_ID = '2014-03-17';
+	private const SERIAL_VERSION_ID = '2014-03-17';
 
 	/**
 	 * Returns the version ID that identifies the serialization structure used by

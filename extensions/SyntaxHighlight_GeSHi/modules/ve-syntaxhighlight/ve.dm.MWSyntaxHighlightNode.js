@@ -121,46 +121,5 @@ ve.dm.MWSyntaxHighlightNode.prototype.isLanguageSupported = function () {
 };
 
 ve.dm.MWSyntaxHighlightNode.prototype.getLanguage = function () {
-	return this.getAttribute( 'mw' ).attrs.lang;
+	return this.getAttribute( 'mw' ).attrs.lang.toLowerCase();
 };
-
-/* Concrete subclasses */
-
-ve.dm.MWBlockSyntaxHighlightNode = function VeDmMWBlockSyntaxHighlightNode() {
-	// Parent method
-	ve.dm.MWBlockExtensionNode.super.apply( this, arguments );
-
-	// Mixin method
-	ve.dm.MWSyntaxHighlightNode.call( this );
-};
-
-OO.inheritClass( ve.dm.MWBlockSyntaxHighlightNode, ve.dm.MWBlockExtensionNode );
-
-OO.mixinClass( ve.dm.MWBlockSyntaxHighlightNode, ve.dm.MWSyntaxHighlightNode );
-
-ve.dm.MWBlockSyntaxHighlightNode.static.name = 'mwBlockSyntaxHighlight';
-
-ve.dm.MWBlockSyntaxHighlightNode.static.tagName = 'div';
-
-ve.dm.MWInlineSyntaxHighlightNode = function VeDmMWInlineSyntaxHighlightNode() {
-	// Parent method
-	ve.dm.MWInlineExtensionNode.super.apply( this, arguments );
-
-	// Mixin method
-	ve.dm.MWSyntaxHighlightNode.call( this );
-};
-
-OO.inheritClass( ve.dm.MWInlineSyntaxHighlightNode, ve.dm.MWInlineExtensionNode );
-
-OO.mixinClass( ve.dm.MWInlineSyntaxHighlightNode, ve.dm.MWSyntaxHighlightNode );
-
-ve.dm.MWInlineSyntaxHighlightNode.static.name = 'mwInlineSyntaxHighlight';
-
-ve.dm.MWInlineSyntaxHighlightNode.static.tagName = 'code';
-
-ve.dm.MWInlineSyntaxHighlightNode.static.isContent = true;
-
-/* Registration */
-
-ve.dm.modelRegistry.register( ve.dm.MWBlockSyntaxHighlightNode );
-ve.dm.modelRegistry.register( ve.dm.MWInlineSyntaxHighlightNode );

@@ -28,7 +28,7 @@ class InRow extends InsertionMode {
 		case 'th':
 		case 'td':
 			$builder->clearStackBack( self::$tableRowContext, $sourceStart );
-			$elt = $builder->insertElement( $name, $attrs, false, $sourceStart, $sourceLength );
+			$builder->insertElement( $name, $attrs, false, $sourceStart, $sourceLength );
 			$dispatcher->switchMode( Dispatcher::IN_CELL );
 			$builder->afe->insertMarker();
 			break;

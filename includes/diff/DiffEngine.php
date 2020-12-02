@@ -24,6 +24,9 @@
  */
 use MediaWiki\Diff\ComplexityException;
 
+// FIXME: Don't use assert() in this file
+// phpcs:disable MediaWiki.Usage.ForbiddenFunctions.assert
+
 /**
  * This diff implementation is mainly lifted from the LCS algorithm of the Eclipse project which
  * in turn is based on Myers' "An O(ND) difference algorithm and its variations"
@@ -44,7 +47,9 @@ use MediaWiki\Diff\ComplexityException;
 class DiffEngine {
 
 	// Input variables
+	/** @var string[] */
 	private $from;
+	/** @var string[] */
 	private $to;
 	private $m;
 	private $n;
@@ -64,7 +69,7 @@ class DiffEngine {
 	public $added;
 	public $heuristicUsed;
 
-	function __construct( $tooLong = 2000000, $powLimit = 1.45 ) {
+	public function __construct( $tooLong = 2000000, $powLimit = 1.45 ) {
 		$this->tooLong = $tooLong;
 		$this->powLimit = $powLimit;
 	}
@@ -153,7 +158,7 @@ class DiffEngine {
 	 * This is extracted verbatim from analyze.c (GNU diffutils-2.7).
 	 *
 	 * @param string[] $lines
-	 * @param string[] $changed
+	 * @param string[] &$changed
 	 * @param string[] $other_changed
 	 */
 	private function shiftBoundaries( array $lines, array &$changed, array $other_changed ) {
@@ -348,8 +353,8 @@ class DiffEngine {
 			$this->maxDifferences = ceil( ( $this->m + $this->n ) / 2.0 );
 			if ( $this->m * $this->n > $this->tooLong ) {
 				// limit complexity to D^POW_LIMIT for long sequences
-				$this->maxDifferences = floor( pow( $this->maxDifferences, $this->powLimit - 1.0 ) );
-				wfDebug( "Limiting max number of differences to $this->maxDifferences\n" );
+				$this->maxDifferences = floor( $this->maxDifferences ** ( $this->powLimit - 1.0 ) );
+				wfDebug( "Limiting max number of differences to $this->maxDifferences" );
 			}
 
 			/*
@@ -407,7 +412,7 @@ class DiffEngine {
 		$this->added = $added;
 	}
 
-	function diff_range( $from_lines, $to_lines ) {
+	private function diff_range( $from_lines, $to_lines ) {
 		// Diff and store locally
 		$this->diff( $from_lines, $to_lines );
 		unset( $from_lines, $to_lines );
@@ -453,9 +458,7 @@ class DiffEngine {
 
 		// need to store these so we don't lose them when they're
 		// overwritten by the recursion
-		$len = $snake[2];
-		$startx = $snake[0];
-		$starty = $snake[1];
+		list( $startx, $starty, $len ) = $snake;
 
 		// the middle snake is part of the LCS, store it
 		for ( $i = 0; $i < $len; ++$i ) {
@@ -505,13 +508,13 @@ class DiffEngine {
 
 		// value_to_add_forward: a 0 or 1 that we add to the start
 		// offset to make it odd/even
-		if ( ( $M & 1 ) == 1 ) {
+		if ( $M & 1 ) {
 			$value_to_add_forward = 1;
 		} else {
 			$value_to_add_forward = 0;
 		}
 
-		if ( ( $N & 1 ) == 1 ) {
+		if ( $N & 1 ) {
 			$value_to_add_backward = 1;
 		} else {
 			$value_to_add_backward = 0;
@@ -529,7 +532,7 @@ class DiffEngine {
 		$V1[$limit_min_1] = $N;
 		$limit = min( $this->maxDifferences, ceil( ( $N + $M ) / 2 ) );
 
-		if ( ( $delta & 1 ) == 1 ) {
+		if ( $delta & 1 ) {
 			for ( $d = 0; $d <= $limit; ++$d ) {
 				$start_diag = max( $value_to_add_forward + $start_forward, -$d );
 				$end_diag = min( $end_forward, $d );
@@ -698,7 +701,7 @@ class DiffEngine {
 		$snake0 = $bottoml1 + $most_progress[0];
 		$snake1 = $bottoml2 + $most_progress[1];
 		$snake2 = 0;
-		wfDebug( "Computing the LCS is too expensive. Using a heuristic.\n" );
+		wfDebug( "Computing the LCS is too expensive. Using a heuristic." );
 		$this->heuristicUsed = true;
 
 		return 5; /*
@@ -799,43 +802,6 @@ class DiffEngine {
 		}
 
 		return $this->length;
-	}
-
-}
-
-/**
- * Alternative representation of a set of changes, by the index
- * ranges that are changed.
- *
- * @ingroup DifferenceEngine
- */
-class RangeDifference {
-
-	/** @var int */
-	public $leftstart;
-
-	/** @var int */
-	public $leftend;
-
-	/** @var int */
-	public $leftlength;
-
-	/** @var int */
-	public $rightstart;
-
-	/** @var int */
-	public $rightend;
-
-	/** @var int */
-	public $rightlength;
-
-	function __construct( $leftstart, $leftend, $rightstart, $rightend ) {
-		$this->leftstart = $leftstart;
-		$this->leftend = $leftend;
-		$this->leftlength = $leftend - $leftstart;
-		$this->rightstart = $rightstart;
-		$this->rightend = $rightend;
-		$this->rightlength = $rightend - $rightstart;
 	}
 
 }

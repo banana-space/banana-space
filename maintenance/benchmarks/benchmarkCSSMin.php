@@ -17,10 +17,9 @@
  *
  * @file
  * @ingroup Benchmark
- * @author Timo Tijhof
  */
 
-require_once __DIR__ . '/Benchmarker.php';
+require_once __DIR__ . '/../includes/Benchmarker.php';
 
 /**
  * Maintenance script that benchmarks CSSMin.
@@ -60,15 +59,6 @@ class BenchmarkCSSMin extends Benchmarker {
 				'args' => [ $css, dirname( $file ), 'https://example.org/test/', true ]
 			],
 		] );
-	}
-
-	private function loadFile( $file ) {
-		$css = file_get_contents( $file );
-		// Detect GZIP compression header
-		if ( substr( $css, 0, 2 ) === "\037\213" ) {
-			$css = gzdecode( $css );
-		}
-		return $css;
 	}
 }
 

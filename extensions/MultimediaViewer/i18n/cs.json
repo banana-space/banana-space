@@ -1,18 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dominikmatus",
+			"Littledogboy",
+			"Macofe",
+			"Matěj Suchánek",
 			"Mormegil",
 			"Paxt",
 			"Rosnicka.kacka",
-			"Utar",
-			"Dominikmatus",
-			"Littledogboy",
-			"Macofe"
+			"Utar"
 		]
 	},
 	"multimediaviewer-desc": "Zvětší náhledy obrázků do celoobrazovkového rozhraní.",
-	"multimediaviewer-pref": "Prohlížeč médií",
-	"multimediaviewer-pref-desc": "Pomocí tohoto nástroje si můžete zpříjemnit prohlížení multimédií. Na stránkách, na kterých se používají náhledy obrázků, umožňuje prohlížení těchto obrázků ve větší velikosti. Obrázky se zobrazí v hezčím celoobrazovkovém rozhraní a lze si je prohlédnout také v plné velikosti.",
 	"multimediaviewer-optin-pref": "Aktivovat <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Prohlížeč médií]</span>",
 	"multimediaviewer-file-page": "Přejít na stránku s popisem souboru",
 	"multimediaviewer-repository-local": "Více informací",
@@ -24,7 +23,7 @@
 	"multimediaviewer-multiple-authors-combine": "$1 a $2",
 	"multimediaviewer-metadata-error": "Nelze načíst podrobnosti k obrázku (chyba: $1)",
 	"multimediaviewer-thumbnail-error": "Je nám líto, soubor nelze zobrazit",
-	"multimediaviewer-thumbnail-error-description": "Vypadá to na technické potíže. Můžete to $1 nebo $3, pokud se to nezlepší. Chyba: $2",
+	"multimediaviewer-thumbnail-error-description": "Vypadá to na technické potíže. Můžete to $1, pokud se to nezlepší. Chyba: $2",
 	"multimediaviewer-thumbnail-error-retry": "zkusit znovu",
 	"multimediaviewer-thumbnail-error-report": "problém nahlásit",
 	"multimediaviewer-license-cc-pd": "Volné dílo",
@@ -49,7 +48,7 @@
 	"multimediaviewer-restriction-trademarked": "Obsah tohoto obrázku může být předmětem známkoprávní ochrany.",
 	"multimediaviewer-restriction-default": "Tento obrázek může být omezen právními předpisy mimo autorské právo. Podrobnosti najdete na stránce s popisem souboru.",
 	"multimediaviewer-restriction-default-and-others": "Tento obrázek může být dále omezen jinými právními předpisy mimo autorské právo. Podrobnosti najdete na stránce s popisem souboru.",
-	"multimediaviewer-about-mmv": "O prohlížeči",
+	"multimediaviewer-about-mmv": "O tomto rozhraní",
 	"multimediaviewer-discuss-mmv": "Diskuse",
 	"multimediaviewer-help-mmv": "Nápověda",
 	"multimediaviewer-optout-mmv": "Vypnout Prohlížeč médií",

@@ -2,11 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Cekli829",
+			"Dağlı95",
+			"Eminn",
 			"Interfase",
 			"Jduranboger",
-			"Eminn",
-			"Wertuose",
-			"Dağlı95"
+			"Wertuose"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Kitab",
@@ -18,7 +18,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Təkrar olaraq bu ad altında istifadə et",
 	"cite-ve-dialog-reference-options-section": "Nizamlamalar",
 	"cite-ve-dialog-reference-title": "İstinadlar",
-	"cite-ve-dialog-reference-useexisting-label": "Mövcüd istinadı istifadə et",
 	"cite-ve-dialog-referenceslist-title": "İstinadlar siyahısı",
 	"cite-ve-dialogbutton-reference-tooltip": "Əsas",
 	"cite-ve-dialogbutton-referenceslist-tooltip": "İstinad siyahısı"

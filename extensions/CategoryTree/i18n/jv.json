@@ -34,7 +34,5 @@
 	"categorytree-no-pages": "kaca utawa anak kategori ora ana",
 	"categorytree-not-found": "Kategori <i>$1</i> ora ana",
 	"categorytree-error": "Ana masalah nalika ngamot dhatah.",
-	"categorytree-retry": "Mangga nunggu sadhéla banjur njajal manèh.",
-	"apihelp-categorytree-description": "Modhul njero tumrap jabungan WitKategori.",
-	"apihelp-categorytree-param-category": "Sesirah ing mandala aran kategori. Menawa ana, ater-ater bakal ora kanggo."
+	"categorytree-retry": "Mangga nunggu sadhéla banjur njajal manèh."
 }

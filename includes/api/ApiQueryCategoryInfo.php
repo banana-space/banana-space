@@ -67,7 +67,7 @@ class ApiQueryCategoryInfo extends ApiQueryBase {
 		] );
 		$this->addWhere( [ 'cat_title' => $cattitles ] );
 
-		if ( !is_null( $params['continue'] ) ) {
+		if ( $params['continue'] !== null ) {
 			$title = $this->getDB()->addQuotes( $params['continue'] );
 			$this->addWhere( "cat_title >= $title" );
 		}
@@ -78,10 +78,10 @@ class ApiQueryCategoryInfo extends ApiQueryBase {
 		$catids = array_flip( $cattitles );
 		foreach ( $res as $row ) {
 			$vals = [];
-			$vals['size'] = intval( $row->cat_pages );
+			$vals['size'] = (int)$row->cat_pages;
 			$vals['pages'] = $row->cat_pages - $row->cat_subcats - $row->cat_files;
-			$vals['files'] = intval( $row->cat_files );
-			$vals['subcats'] = intval( $row->cat_subcats );
+			$vals['files'] = (int)$row->cat_files;
+			$vals['subcats'] = (int)$row->cat_subcats;
 			$vals['hidden'] = (bool)$row->cat_hidden;
 			$fit = $this->addPageSubItems( $catids[$row->cat_title], $vals );
 			if ( !$fit ) {

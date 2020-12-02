@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mainframe98",
+			"Mar(c)",
+			"Siebrand"
+		]
+	},
+	"apihelp-query+gadgetcategories-description": "Geeft een lijst met uitbreidingscategorieën terug.",
+	"apihelp-query+gadgetcategories-summary": "Geeft een lijst met uitbreidingscategorieën terug.",
+	"apihelp-query+gadgetcategories-param-prop": "Welke uitbreidingscategoriegegevens op te halen:\n;name:Interne naam van de categorie;\n;title:Categorienaam;\n;members:Aantal uitbreidingen in de categorie.",
+	"apihelp-query+gadgetcategories-param-names": "Namen van op te halen categorieën.",
+	"apihelp-query+gadgetcategories-example-1": "Een lijst van bestaande uitbreidingscategorieën opvragen.",
+	"apihelp-query+gadgetcategories-example-2": "Alle informatie over categorieën met de naam \"foo\" en \"bar\" opvragen.",
+	"apihelp-query+gadgets-description": "Geeft een lijst terug met in deze wiki gebruikte uitbreidingen.",
+	"apihelp-query+gadgets-summary": "Geeft een lijst terug met in deze wiki gebruikte uitbreidingen.",
+	"apihelp-query+gadgets-param-prop": "Welke uitbreidingsgegevens op te halen:\n;id:Intern uitbreidings-ID;\n;metadata:De metadata van de uitbreiding;\n;desc:Beschrijving van de uitbreiding in HTML (kan langzaam zijn, gebruik alleen als echt nodig).",
+	"apihelp-query+gadgets-param-categories": "Uitbreidingen uit welke categorieën op te halen.",
+	"apihelp-query+gadgets-param-ids": "ID's van uitbreidingen om op te halen.",
+	"apihelp-query+gadgets-param-allowedonly": "Alleen uitbreidingen laten zien die toegestaan zijn voor de huidige gebruiker.",
+	"apihelp-query+gadgets-param-enabledonly": "Alleen uitbreidingen weergeven die zijn ingeschakeld door de huidige gebruiker.",
+	"apihelp-query+gadgets-example-1": "Een lijst van uitbreidingen met hun beschrijvingen ophalen.",
+	"apihelp-query+gadgets-example-2": "Een lijst van uitbreidingen inclusief alle mogelijke eigenschappen ophalen.",
+	"apihelp-query+gadgets-example-3": "Een lijst van uitbreidingen uit de categorie \"foo\" ophalen.",
+	"apihelp-query+gadgets-example-4": "Gegevens over de uitbreidingen \"foo\" en \"bar\" ophalen.",
+	"apihelp-query+gadgets-example-5": "Een lijst van door de huidige gebruiker ingeschakelde uitbreidingen opvragen."
+}

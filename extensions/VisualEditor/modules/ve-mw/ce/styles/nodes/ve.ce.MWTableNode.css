@@ -1,0 +1,17 @@
+/*!
+ * VisualEditor ContentEditable MediaWiki MWTableNode styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/* Override tablesorter's cursor: pointer */
+/* stylelint-disable-next-line selector-class-pattern */
+.ve-ce-mwTableNode.jquery-tablesorter th.ve-ce-tableCellNode-header.headerSort {
+	cursor: default;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.ve-ce-mwTableNode.jquery-tablesorter th.ve-ce-tableCellNode-header.ve-ce-tableCellNode-editing.headerSort {
+	cursor: text;
+}

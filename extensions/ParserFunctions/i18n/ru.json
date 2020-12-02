@@ -2,9 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"G0rn",
+			"Jack who built the house",
+			"MaxBioHazard",
 			"Putnik",
-			"Александр Сигачёв",
-			"Jack who built the house"
+			"Александр Сигачёв"
 		]
 	},
 	"pfunc_desc": "Улучшенный синтаксический анализатор с логическими функциями",
@@ -17,7 +18,7 @@
 	"pfunc_expr_unexpected_number": "Ошибка выражения: неожидаемое число",
 	"pfunc_expr_preg_match_failure": "Ошибка выражения: сбой preg_match",
 	"pfunc_expr_unrecognised_word": "Ошибка выражения: неопознанное слово «$1»",
-	"pfunc_expr_unexpected_operator": "Ошибка выражения: не ожидаемый оператор $1",
+	"pfunc_expr_unexpected_operator": "Ошибка выражения: неожидаемый оператор $1",
 	"pfunc_expr_missing_operand": "Ошибка выражения: $1 не хватает операнда",
 	"pfunc_expr_unexpected_closing_bracket": "Ошибка выражения: неожидаемая закрывающая скобка",
 	"pfunc_expr_unrecognised_punctuation": "Ошибка выражения: неопознанный символ пунктуации «$1»",

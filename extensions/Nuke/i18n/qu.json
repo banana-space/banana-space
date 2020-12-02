@@ -16,7 +16,6 @@
 	"nuke-submit-user": "Riy",
 	"nuke-submit-delete": "Akllasqata qulluy",
 	"right-nuke": "Tawqa qulluna p'anqakuna",
-	"nuke-select": "Akllay: $1",
 	"nuke-userorip": "Ruraqpa sutin, IP huchha icha ch'usaq:",
 	"nuke-maxpages": "Kay chhika p'anqakunamanta ama aswan kachunchu:",
 	"nuke-editby": "[[Special:Contributions/$1|{{GENDER:$1|$1}}]] sutiyuqpa kamarisqan",
@@ -26,5 +25,7 @@
 	"nuke-pattern": "P'anqa sutip qatinallan",
 	"nuke-nopages-global": "[[Special:RecentChanges|Ñaqha hukchasqakunapiqa]] manam musuq p'anqakuna kanchu.",
 	"nuke-viewchanges": "hukchasqakunata qhaway",
-	"nuke-namespace": "Kay sutisuyullapi:"
+	"nuke-namespace": "Kay sutisuyullapi:",
+	"nuke-linkoncontribs": "tawqa qulluy",
+	"nuke-linkoncontribs-text": "{{GENDER:$1|Kay ruraqllap}} llamk'apusqan p'anqakunata tawqa qulluy"
 }

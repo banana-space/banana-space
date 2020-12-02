@@ -1,60 +1,56 @@
 'use strict';
-const assert = require( 'assert' ),
-	CreateAccountPage = require( '../pageobjects/createaccount.page' ),
-	PreferencesPage = require( '../pageobjects/preferences.page' ),
-	UserLoginPage = require( '../pageobjects/userlogin.page' );
+
+const assert = require( 'assert' );
+const CreateAccountPage = require( '../pageobjects/createaccount.page' );
+const PreferencesPage = require( '../pageobjects/preferences.page' );
+const UserLoginPage = require( 'wdio-mediawiki/LoginPage' );
+const Api = require( 'wdio-mediawiki/Api' );
+const Util = require( 'wdio-mediawiki/Util' );
 
 describe( 'User', function () {
+	let password, username, bot;
 
-	var password,
-		username;
-
-	before( function () {
-		// disable VisualEditor welcome dialog
-		UserLoginPage.open();
-		browser.localStorage( 'POST', { key: 've-beta-welcome-dialog', value: '1' } );
+	before( async () => {
+		bot = await Api.bot();
 	} );
 
 	beforeEach( function () {
-		browser.deleteCookie();
-		username = `User-${Math.random().toString()}`;
-		password = Math.random().toString();
+		browser.deleteAllCookies();
+		username = Util.getTestString( 'User-' );
+		password = Util.getTestString();
 	} );
 
-	// Disable due to broken/flakiness (T247580)
-	it.skip( 'should be able to create account', function () {
-
+	it( 'should be able to create account', function () {
 		// create
 		CreateAccountPage.createAccount( username, password );
 
 		// check
-		assert.equal( CreateAccountPage.heading.getText(), `Welcome, ${username}!` );
-
+		assert.strictEqual( CreateAccountPage.heading.getText(), `Welcome, ${username}!` );
 	} );
 
-	// Disable due to broken/flakiness (T247580)
-	it.skip( 'should be able to log in', function () {
-
+	it( 'should be able to log in @daily', function () {
 		// create
-		browser.call( function () {
-			return CreateAccountPage.apiCreateAccount( username, password );
+		browser.call( async () => {
+			await Api.createAccount( bot, username, password );
 		} );
 
 		// log in
 		UserLoginPage.login( username, password );
 
 		// check
-		assert.equal( UserLoginPage.userPage.getText(), username );
-
+		const actualUsername = browser.execute( () => {
+			return mw.config.get( 'wgUserName' );
+		} );
+		assert.strictEqual( actualUsername, username );
 	} );
 
 	// Disabled due to flakiness (T199446)
 	it.skip( 'should be able to change preferences', function () {
-		var realName = Math.random().toString();
+		const realName = Util.getTestString();
 
 		// create
-		browser.call( function () {
-			return CreateAccountPage.apiCreateAccount( username, password );
+		browser.call( async () => {
+			await Api.createAccount( bot, username, password );
 		} );
 
 		// log in
@@ -64,8 +60,6 @@ describe( 'User', function () {
 		PreferencesPage.changeRealName( realName );
 
 		// check
-		assert.equal( PreferencesPage.realName.getValue(), realName );
-
+		assert.strictEqual( PreferencesPage.realName.getValue(), realName );
 	} );
-
 } );

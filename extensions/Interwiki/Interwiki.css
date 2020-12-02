@@ -40,8 +40,9 @@ input#mw-interwiki-url {
 	white-space: nowrap;
 }
 
+.mw-interwiki-legend th:before,
 .mw-interwiki-legend .mw-collapsible-toggle {
-	font-weight: normal;
+	font-weight: normal !important; /* stylelint-disable-line declaration-no-important */
 }
 
 /* Selector with higher specifity than wikitable */

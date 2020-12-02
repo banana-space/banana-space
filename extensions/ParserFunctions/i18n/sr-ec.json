@@ -1,15 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"BadDog",
+			"Milicevic01",
 			"Millosh",
 			"Rancher",
 			"Verlor",
-			"Milicevic01",
 			"Сербијана"
 		]
 	},
-	"pfunc_desc": "Проширује рашчлањивач с логичким функцијама",
-	"pfunc_time_error": "Грешка: Погрешно време.",
+	"pfunc_desc": "Проширује рашчлањивач са логичким функцијама",
+	"pfunc_time_error": "Грешка: неважеће време.",
 	"pfunc_time_too_long": "Грешка: превише #time позива",
 	"pfunc_rel2abs_invalid_depth": "Грешка: неправилна дубина у путањи: „$1“ (покушај приступа чвору изнад коренског (root)).",
 	"pfunc_expr_stack_exhausted": "Грешка у изразу: стек напуњен",

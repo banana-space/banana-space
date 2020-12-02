@@ -20,32 +20,32 @@ class Dispatcher implements TokenHandler {
 	/**
 	 * The insertion mode indexes
 	 */
-	const INITIAL = 1;
-	const BEFORE_HTML = 2;
-	const BEFORE_HEAD = 3;
-	const IN_HEAD = 4;
-	const IN_HEAD_NOSCRIPT = 5;
-	const AFTER_HEAD = 6;
-	const IN_BODY = 7;
-	const TEXT = 8;
-	const IN_TABLE = 9;
-	const IN_TABLE_TEXT = 10;
-	const IN_CAPTION = 11;
-	const IN_COLUMN_GROUP = 12;
-	const IN_TABLE_BODY = 13;
-	const IN_ROW = 14;
-	const IN_CELL = 15;
-	const IN_SELECT = 16;
-	const IN_SELECT_IN_TABLE = 17;
-	const IN_TEMPLATE = 18;
-	const AFTER_BODY = 19;
-	const IN_FRAMESET = 20;
-	const AFTER_FRAMESET = 21;
-	const AFTER_AFTER_BODY = 22;
-	const AFTER_AFTER_FRAMESET = 23;
-	const IN_FOREIGN_CONTENT = 24;
-	const IN_PRE = 25;
-	const IN_TEXTAREA = 26;
+	public const INITIAL = 1;
+	public const BEFORE_HTML = 2;
+	public const BEFORE_HEAD = 3;
+	public const IN_HEAD = 4;
+	public const IN_HEAD_NOSCRIPT = 5;
+	public const AFTER_HEAD = 6;
+	public const IN_BODY = 7;
+	public const TEXT = 8;
+	public const IN_TABLE = 9;
+	public const IN_TABLE_TEXT = 10;
+	public const IN_CAPTION = 11;
+	public const IN_COLUMN_GROUP = 12;
+	public const IN_TABLE_BODY = 13;
+	public const IN_ROW = 14;
+	public const IN_CELL = 15;
+	public const IN_SELECT = 16;
+	public const IN_SELECT_IN_TABLE = 17;
+	public const IN_TEMPLATE = 18;
+	public const AFTER_BODY = 19;
+	public const IN_FRAMESET = 20;
+	public const AFTER_FRAMESET = 21;
+	public const AFTER_AFTER_BODY = 22;
+	public const AFTER_AFTER_FRAMESET = 23;
+	public const IN_FOREIGN_CONTENT = 24;
+	public const IN_PRE = 25;
+	public const IN_TEXTAREA = 26;
 
 	/**
 	 * The handler class for each insertion mode
@@ -80,44 +80,62 @@ class Dispatcher implements TokenHandler {
 	];
 
 	// Public shortcuts for "using the rules for" actions
+
+	/** @var InHead */
 	public $inHead;
+	/** @var InBody */
 	public $inBody;
+	/** @var InTable */
 	public $inTable;
+	/** @var InSelect */
 	public $inSelect;
+	/** @var InTemplate */
 	public $inTemplate;
+	/** @var InForeignContent */
 	public $inForeign;
 
-	/// @var TreeBuilder
+	/** @var TreeBuilder */
 	protected $builder;
 
 	/**
 	 * The InsertionMode object for the current insertion mode in HTML content
+	 *
+	 * @var InsertionMode
 	 */
 	protected $handler;
 
 	/**
 	 * An array mapping insertion mode indexes to InsertionMode objects
+	 *
+	 * @var InsertionMode[]
 	 */
 	protected $dispatchTable;
 
 	/**
 	 * The insertion mode index
+	 *
+	 * @var int
 	 */
 	protected $mode;
 
 	/**
 	 * The "original insertion mode" index
+	 *
+	 * @var ?int
 	 */
 	protected $originalMode;
 
 	/**
 	 * The insertion mode sets this to true to acknowledge the tag's
 	 * self-closing flag.
+	 *
+	 * @var bool|null
 	 */
 	public $ack;
 
 	/**
 	 * The stack of template insertion modes
+	 *
 	 * @var TemplateModeStack
 	 */
 	public $templateModeStack;
@@ -219,7 +237,6 @@ class Dispatcher implements TokenHandler {
 		$builder = $this->builder;
 		$stack = $builder->stack;
 		$last = false;
-		$node = $stack->current;
 		for ( $idx = $stack->length() - 1; $idx >= 0; $idx-- ) {
 			$node = $stack->item( $idx );
 			if ( $idx === 0 ) {
@@ -334,12 +351,16 @@ class Dispatcher implements TokenHandler {
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 * @suppress PhanTypeMismatchProperty Clears references to null
+	 */
 	public function endDocument( $pos ) {
 		$this->handler->endDocument( $pos );
 
 		// All references to insertion modes must be explicitly released, since
 		// they have a circular reference back to $this
-		$this->dispatchTable = [];
+		$this->dispatchTable = null;
 		$this->handler = null;
 		$this->inHead = null;
 		$this->inBody = null;

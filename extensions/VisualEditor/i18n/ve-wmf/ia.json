@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modification visual]]",
+	"tag-visualeditor-description": "Modification facite con le [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual: a verificar]]",
+	"tag-visualeditor-needcheck-description": "Modification facite con le [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]] ubi le systema ha detegite que le wikitexto pote haber cambiate de maniera impreviste.",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual: Passate]]",
+	"tag-visualeditor-switched-description": "Le usator ha comenciate a modificar per medio del editor visual, postea ha passate al editor de wikitexto traditional.",
+	"visualeditor-feedback-link": "Project:Editor visual/Commentario",
+	"visualeditor-feedback-tool": "Lassar un commento sur iste programma",
+	"visualeditor-help-label": "Leger le guida de usator",
+	"visualeditor-help-title": "Instructiones pro le uso del editor"
+}

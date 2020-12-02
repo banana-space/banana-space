@@ -2,7 +2,7 @@
 
 /**
  * Utility for exporting site entries to XML.
- * For the output file format, see docs/sitelist.txt and docs/sitelist-1.0.xsd.
+ * For the output file format, see docs/sitelist.md and docs/sitelist-1.0.xsd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
  * @file
  * @ingroup Site
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SiteExporter {

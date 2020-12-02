@@ -1,15 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alpineer",
 			"Bersam",
 			"Ebraminio",
 			"Huji",
 			"Ladsgroup",
+			"Mjbmr",
 			"Reza1615",
 			"Wayiran",
-			"ZxxZxxZ",
-			"Mjbmr",
-			"Alpineer"
+			"ZxxZxxZ"
 		]
 	},
 	"gadgets-desc": "به کاربرها امکان انتخاب [[Special:Gadgets|ابزارهای شخصی سی‌اس‌اس و جاوااسکریپت]] را از طریق صفحهٔ [[Special:Preferences#mw-prefsection-gadgets|ترجیحات]] می‌دهد",
@@ -30,7 +30,7 @@
 	"gadgets-required-rights": "به {{PLURAL:$2|دسترسی|دسترسی‌های}} روبرو نیاز است:\n\n$1",
 	"gadgets-required-skins": "قابل دسترس در {{PLURAL:$2|پوستهٔ $1|پوسته‌های $1}}.",
 	"gadgets-default": "به‌طور پیش‌فرض برای همه فعال است.",
-	"gadgets-legacy": "ابزار بارگیری نشده است. لطفاً به ResourceLoader مهاجرت کنید. ([https://www.mediawiki.org/wiki/ResourceLoader/Migration_guide_(users) اطلاعات بیشتر])",
+	"gadgets-legacy": "ابزار بارگیری نشده است. لطفاً به ResourceLoader مهاجرت کنید. ([https://www.mediawiki.org/wiki/Special:MyLanguage/ResourceLoader/Migration_guide_(users) اطلاعات بیشتر])",
 	"gadgets-export": "برون‌بری",
 	"gadgets-export-title": "برون‌بری ابزار",
 	"gadgets-not-found": "ابزار «$1» یافت نشد.",
@@ -38,17 +38,6 @@
 	"gadgets-export-download": "دریافت",
 	"gadgets-validate-notset": "خصوصیت <code>$1</code> تنظیم نشده‌است.",
 	"gadgets-validate-wrongtype": "خصوصیت <code>$1</code> به جای نوع <code>$3</code> باید از نوع <code>$2</code> باشد.",
-	"apihelp-query+gadgetcategories-description": "بازگرداندن فهرست رده‌های ابزار.",
-	"apihelp-query+gadgetcategories-summary": "بازگرداندن فهرست رده‌های ابزارها",
-	"apihelp-query+gadgetcategories-param-names": "نام‌های رده‌ها برای دریافت.",
-	"apihelp-query+gadgetcategories-example-1": "دریافت فهرستی از دسته‌بندی‌های ابزارهای موجود",
-	"apihelp-query+gadgets-description": "فهرست کردن همه ابزارها در این ویکی",
-	"apihelp-query+gadgets-summary": "بازگرداندن فهرست ابزارهای استفاده شده در این ویکی",
-	"apihelp-query+gadgets-param-categories": "رده‌هایی که از آن فهرست ابزارها را می‌خواهید",
-	"apihelp-query+gadgets-param-ids": "شماره گجت‌ها برای دریافت",
-	"apihelp-query+gadgets-param-allowedonly": "فقط فهرست کردن ابزارهایی که کاربر کنونی می‌تواند استفاده کند",
-	"apihelp-query+gadgets-param-enabledonly": "فهرست کردن گجت‌هایی که توسط کاربر کنونی فعال شده‌است.",
-	"apihelp-query+gadgets-example-5": "دریافت فهرستی از ابزارهای فعال‌شدهٔ کاربر جاری",
 	"right-gadgets-edit": "ویرایش صفحه‌های جاوااسکریپت و سی‌اس‌اس ابزار",
 	"action-gadgets-edit": "ویرایش صفحهٔ جاوااسکریپت و سی‌اس‌اس این ابزار",
 	"right-gadgets-definition-edit": "ویرایش تنظیمات ابزارها",

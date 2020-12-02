@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Beta16"
+		]
+	},
+	"apihelp-query+oath-example-1": "Ottieni informazioni sull'utente attuale",
+	"apihelp-query+oath-example-2": "Ottieni informazioni sull'utente <kbd>Example</kbd>",
+	"apihelp-oathvalidate-description": "Convalida un token di autenticazione a due fattori (OATH).",
+	"apihelp-oathvalidate-param-user": "Utente per cui convalidare il token. Valore predefinito è l'utente attuale.",
+	"apihelp-oathvalidate-param-totp": "Token di autenticazione a due fattori (OATH). Obsoleto, usa invece il parametro \"data\"",
+	"apihelp-oathvalidate-example-1": "Convalida un token per l'utente attuale",
+	"apihelp-oathvalidate-example-2": "Convalida un token per l'utente <kbd>Example</kbd>"
+}

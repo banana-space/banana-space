@@ -4,16 +4,25 @@
 			"Akeron",
 			"Crochet.david",
 			"DavidL",
+			"DePlusJean",
+			"Eneelk",
 			"Gomoko",
 			"Jean-Frédéric",
+			"Niridya",
 			"Od1n",
-			"DePlusJean"
+			"Pamputt",
+			"Wladek92"
 		]
 	},
 	"skinname-vector": "Vector",
 	"vector-skin-desc": "Version moderne de MonoBook avec un aspect rajeuni et beaucoup d’améliorations ergonomiques",
+	"prefs-vector-enable-vector-1-label": "Utiliser l’ancienne version de Vector",
+	"prefs-vector-enable-vector-1-help": "Dans les années à venir, nous mettrons progressivement à jour l’habillage Vector. La version héritée de Vector vous permet de voir l’ancien habillage de Vector (tel qu’il était en décembre 2019). Pour en savoir plus, rendez-vous sur [[mw:Reading/Web/Desktop_Improvements|project page]].",
+	"vector-opt-out": "Basculer vers l’ancien habillage",
+	"vector-opt-out-tooltip": "Modifier vos paramètres pour revenir à l’ancien aspect de l’habillage (Vector historique)",
 	"vector.css": "/* Le CSS placé ici affectera les utilisateurs de l’habillage Vector. */",
 	"vector.js": "/* Tout code JavaScript placé ici sera chargé pour les utilisateurs de l’habillage Vector */",
+	"vector-action-toggle-sidebar": "Afficher/cacher la barre latérale",
 	"vector-action-addsection": "Ajouter un sujet",
 	"vector-action-delete": "Supprimer",
 	"vector-action-move": "Renommer",
@@ -22,8 +31,10 @@
 	"vector-action-unprotect": "Changer la protection",
 	"vector-view-create": "Créer",
 	"vector-view-edit": "Modifier",
-	"vector-view-history": "Afficher l’historique",
+	"vector-view-history": "Voir l’historique",
 	"vector-view-view": "Lire",
 	"vector-view-viewsource": "Voir la source",
+	"vector-jumptonavigation": "Sauter à la navigation",
+	"vector-jumptosearch": "Sauter à la recherche",
 	"vector-more-actions": "Plus"
 }

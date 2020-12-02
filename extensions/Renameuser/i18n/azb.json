@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alp Er Tunqa",
 			"Amir a57",
-			"Koroğlu",
-			"Alp Er Tunqa"
+			"Koroğlu"
 		]
 	},
 	"renameuser": "ایشلدن آدینی دییش",
@@ -22,6 +22,7 @@
 	"renameuser-page-unmoved": "$1 صحیفه‌سی $2 صحیفه‌سینه کؤچوروله بیلینمیر.",
 	"log-name-renameuser": "ایشلدن آد دَییشدیرمه ژورنالی",
 	"log-description-renameuser": "بۇ ایشلدن‌لر آد دَییشدیرمه لیستی‌دیر.",
+	"logentry-renameuser-renameuser": "$1 $4 ({{PLURAL:$6|$6 دییشدیرمه}}) آدینی {{GENDER:$7|$5}} -ه {{GENDER:$2|دَییشدیردی}}",
 	"action-renameuser": "ایستیفاده‌چی‌لرین آدینی دییش",
 	"right-renameuser": "ایستیفاده‌چی‌لرین آدینی دییش"
 }

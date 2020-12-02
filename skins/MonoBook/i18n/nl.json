@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Mainframe98",
 			"Siebrand",
 			"Sjoerddebruin"
 		]
@@ -8,5 +9,13 @@
 	"skinname-monobook": "Monobook",
 	"monobook-desc": "De klassieke MediaWiki-vormgeving sinds 2004, genoemd naar de zwart-witfoto van een boek op de achtergrond van de pagina",
 	"monobook.css": "/* CSS die hier wordt geplaatst heeft alleen invloed op het uiterlijk Monobook */",
-	"monobook.js": "/* JavaScript die hier wordt geplaatst heeft alleen invloed op gebruikers die het uiterlijk Monobook gebruiken */"
+	"monobook.js": "/* JavaScript die hier wordt geplaatst heeft alleen invloed op gebruikers die het uiterlijk Monobook gebruiken */",
+	"monobook-jumptotop": "terug naar boven",
+	"monobook-jumptopersonal": "gebruikershulpmiddelen",
+	"monobook-jumptonavigation": "Naar navigatie springen",
+	"monobook-jumptosearch": "Naar zoeken springen",
+	"monobook-more-actions": "Meer",
+	"monobook-cactions-label": "Pagina-acties",
+	"monobook-notifications-link": "Meldingen ($1)",
+	"monobook-notifications-link-none": "Meldingen"
 }

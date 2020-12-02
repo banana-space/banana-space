@@ -1,12 +1,12 @@
 <?php
 
-use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\LikeMatch;
 use Wikimedia\Rdbms\Database;
-use Wikimedia\TestingAccessWrapper;
+use Wikimedia\Rdbms\DBTransactionError;
 use Wikimedia\Rdbms\DBTransactionStateError;
 use Wikimedia\Rdbms\DBUnexpectedError;
-use Wikimedia\Rdbms\DBTransactionError;
+use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\LikeMatch;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * Test the parts of the Database abstract class that deal
@@ -15,14 +15,16 @@ use Wikimedia\Rdbms\DBTransactionError;
 class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 
 	use MediaWikiCoversValidator;
-	use PHPUnit4And6Compat;
+	use MediaWikiTestCaseTrait;
 
 	/** @var DatabaseTestHelper|Database */
 	private $database;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		$this->database = new DatabaseTestHelper( __CLASS__, [ 'cliMode' => true ] );
+		MWDebug::clearDeprecationFilters();
+		MWDebug::clearLog();
 	}
 
 	protected function assertLastSql( $sqlText ) {
@@ -46,15 +48,17 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 	 * @covers Wikimedia\Rdbms\Database::makeSelectOptions
 	 * @covers Wikimedia\Rdbms\Database::makeOrderBy
 	 * @covers Wikimedia\Rdbms\Database::makeGroupByWithHaving
+	 * @covers Wikimedia\Rdbms\Database::selectFieldsOrOptionsAggregate
+	 * @covers Wikimedia\Rdbms\Database::selectOptionsIncludeLocking
 	 */
 	public function testSelect( $sql, $sqlText ) {
 		$this->database->select(
 			$sql['tables'],
 			$sql['fields'],
-			isset( $sql['conds'] ) ? $sql['conds'] : [],
+			$sql['conds'] ?? [],
 			__METHOD__,
-			isset( $sql['options'] ) ? $sql['options'] : [],
-			isset( $sql['join_conds'] ) ? $sql['join_conds'] : []
+			$sql['options'] ?? [],
+			$sql['join_conds'] ?? []
 		);
 		$this->assertLastSql( $sqlText );
 	}
@@ -188,7 +192,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 				"SELECT tid,field,field2 AS alias,t2.id " .
 					"FROM table LEFT JOIN table2 t2 ON ((tid = t2.id)) " .
 					"WHERE alias = 'text' " .
-					"GROUP BY field,field2 HAVING (COUNT(*) > 1) AND field = '1' " .
+					"GROUP BY field,field2 HAVING (COUNT(*) > 1) AND field = 1 " .
 					"LIMIT 1"
 			],
 			[
@@ -199,7 +203,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 				],
 				"SELECT field AS alias " .
 					"FROM table " .
-					"WHERE alias IN ('1','2','3','4')"
+					"WHERE alias IN (1,2,3,4)"
 			],
 			[
 				[
@@ -207,8 +211,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 					'fields' => [ 'field' ],
 					'options' => [ 'USE INDEX' => [ 'table' => 'X' ] ],
 				],
-				// No-op by default
-				"SELECT field FROM table"
+				"SELECT field FROM table FORCE INDEX (X)"
 			],
 			[
 				[
@@ -216,16 +219,23 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 					'fields' => [ 'field' ],
 					'options' => [ 'IGNORE INDEX' => [ 'table' => 'X' ] ],
 				],
-				// No-op by default
-				"SELECT field FROM table"
+				"SELECT field FROM table IGNORE INDEX (X)"
 			],
 			[
 				[
 					'tables' => 'table',
 					'fields' => [ 'field' ],
-					'options' => [ 'DISTINCT', 'LOCK IN SHARE MODE' ],
+					'options' => [ 'DISTINCT' ],
 				],
-				"SELECT DISTINCT field FROM table      LOCK IN SHARE MODE"
+				"SELECT DISTINCT field FROM table"
+			],
+			[
+				[
+					'tables' => 'table',
+					'fields' => [ 'field' ],
+					'options' => [ 'LOCK IN SHARE MODE' ],
+				],
+				"SELECT field FROM table      LOCK IN SHARE MODE"
 			],
 			[
 				[
@@ -243,23 +253,82 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 				],
 				"SELECT field FROM table      FOR UPDATE"
 			],
+			[
+				[
+					'tables' => [],
+					'fields' => [ 'field' ],
+				],
+				"SELECT field"
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideLockForUpdate
+	 * @covers Wikimedia\Rdbms\Database::lockForUpdate
+	 */
+	public function testLockForUpdate( $sql, $sqlText ) {
+		$this->database->startAtomic( __METHOD__ );
+		$this->database->lockForUpdate(
+			$sql['tables'],
+			$sql['conds'] ?? [],
+			__METHOD__,
+			$sql['options'] ?? [],
+			$sql['join_conds'] ?? []
+		);
+		$this->database->endAtomic( __METHOD__ );
+
+		$this->assertLastSql( "BEGIN; $sqlText; COMMIT" );
+	}
+
+	public static function provideLockForUpdate() {
+		return [
+			[
+				[
+					'tables' => [ 'table' ],
+					'conds' => [ 'field' => [ 1, 2, 3, 4 ] ],
+				],
+				"SELECT COUNT(*) AS rowcount FROM " .
+				"(SELECT 1 FROM table WHERE field IN (1,2,3,4)    " .
+				"FOR UPDATE) tmp_count"
+			],
+			[
+				[
+					'tables' => [ 'table', 't2' => 'table2' ],
+					'conds' => [ 'field' => 'text' ],
+					'options' => [ 'LIMIT' => 1, 'ORDER BY' => 'field' ],
+					'join_conds' => [ 't2' => [
+						'LEFT JOIN', 'tid = t2.id'
+					] ],
+				],
+				"SELECT COUNT(*) AS rowcount FROM " .
+				"(SELECT 1 FROM table LEFT JOIN table2 t2 ON ((tid = t2.id)) " .
+				"WHERE field = 'text' ORDER BY field LIMIT 1   FOR UPDATE) tmp_count"
+			],
+			[
+				[
+					'tables' => 'table',
+				],
+				"SELECT COUNT(*) AS rowcount FROM " .
+				"(SELECT 1 FROM table      FOR UPDATE) tmp_count"
+			],
 		];
 	}
 
 	/**
 	 * @covers Wikimedia\Rdbms\Subquery
 	 * @dataProvider provideSelectRowCount
-	 * @param $sql
-	 * @param $sqlText
+	 * @param array $sql
+	 * @param string $sqlText
 	 */
 	public function testSelectRowCount( $sql, $sqlText ) {
 		$this->database->selectRowCount(
 			$sql['tables'],
 			$sql['field'],
-			isset( $sql['conds'] ) ? $sql['conds'] : [],
+			$sql['conds'] ?? [],
 			__METHOD__,
-			isset( $sql['options'] ) ? $sql['options'] : [],
-			isset( $sql['join_conds'] ) ? $sql['join_conds'] : []
+			$sql['options'] ?? [],
+			$sql['join_conds'] ?? []
 		);
 		$this->assertLastSql( $sqlText );
 	}
@@ -324,7 +393,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 				[
 					'tables' => 'table',
 					'field' => [ 'alias' => 'column' ],
-					'conds' => '1',
+					'conds' => 1,
 				],
 				"SELECT COUNT(*) AS rowcount FROM " .
 				"(SELECT 1 FROM table WHERE (1) AND (column IS NOT NULL)  ) tmp_count"
@@ -333,7 +402,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 				[
 					'tables' => 'table',
 					'field' => [ 'alias' => 'column' ],
-					'conds' => '0',
+					'conds' => 0,
 				],
 				"SELECT COUNT(*) AS rowcount FROM " .
 				"(SELECT 1 FROM table WHERE (0) AND (column IS NOT NULL)  ) tmp_count"
@@ -346,14 +415,16 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 	 * @covers Wikimedia\Rdbms\Database::update
 	 * @covers Wikimedia\Rdbms\Database::makeUpdateOptions
 	 * @covers Wikimedia\Rdbms\Database::makeUpdateOptionsArray
+	 * @covers Wikimedia\Rdbms\Database::assertConditionIsNotEmpty
 	 */
 	public function testUpdate( $sql, $sqlText ) {
+		$this->hideDeprecated( 'Wikimedia\Rdbms\Database::update' );
 		$this->database->update(
 			$sql['table'],
 			$sql['values'],
 			$sql['conds'],
 			__METHOD__,
-			isset( $sql['options'] ) ? $sql['options'] : []
+			$sql['options'] ?? []
 		);
 		$this->assertLastSql( $sqlText );
 	}
@@ -365,6 +436,17 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 					'table' => 'table',
 					'values' => [ 'field' => 'text', 'field2' => 'text2' ],
 					'conds' => [ 'alias' => 'text' ],
+				],
+				"UPDATE table " .
+					"SET field = 'text'" .
+					",field2 = 'text2' " .
+					"WHERE alias = 'text'"
+			],
+			[
+				[
+					'table' => 'table',
+					'values' => [ 'field' => 'text', 'field2' => 'text2' ],
+					'conds' => 'alias = \'text\'',
 				],
 				"UPDATE table " .
 					"SET field = 'text'" .
@@ -392,12 +474,87 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 					"SET field = other" .
 					",field2 = 'text2'"
 			],
+			[
+				[
+					'table' => 'table',
+					'values' => [ 'field' => 'text', 'field2' => 'text2' ],
+					'conds' => null,
+				],
+				"UPDATE table " .
+				"SET field = 'text'" .
+				",field2 = 'text2'",
+			],
+			[
+				[
+					'table' => 'table',
+					'values' => [ 'field = other', 'field2' => 'text2' ],
+					'conds' => [],
+				],
+				"UPDATE table " .
+				"SET field = other" .
+				",field2 = 'text2'",
+			],
+			[
+				[
+					'table' => 'table',
+					'values' => [ 'field = other', 'field2' => 'text2' ],
+					'conds' => '',
+				],
+				"UPDATE table " .
+				"SET field = other" .
+				",field2 = 'text2'",
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider provideUpdateEmptyCondition
+	 * @covers Wikimedia\Rdbms\Database::update
+	 * @covers Wikimedia\Rdbms\Database::makeUpdateOptions
+	 * @covers Wikimedia\Rdbms\Database::makeUpdateOptionsArray
+	 * @covers Wikimedia\Rdbms\Database::assertConditionIsNotEmpty
+	 */
+	public function testUpdateEmptyCondition( $sql ) {
+		$this->expectDeprecation();
+		$this->database->update(
+			$sql['table'],
+			$sql['values'],
+			$sql['conds'],
+			__METHOD__,
+			[]
+		);
+	}
+
+	public static function provideUpdateEmptyCondition() {
+		return [
+			[
+				[
+					'table' => 'table',
+					'values' => [ 'field' => 'text', 'field2' => 'text2' ],
+					'conds' => null,
+				],
+			],
+			[
+				[
+					'table' => 'table',
+					'values' => [ 'field = other', 'field2' => 'text2' ],
+					'conds' => [],
+				],
+			],
+			[
+				[
+					'table' => 'table',
+					'values' => [ 'field = other', 'field2' => 'text2' ],
+					'conds' => '',
+				],
+			]
 		];
 	}
 
 	/**
 	 * @dataProvider provideDelete
 	 * @covers Wikimedia\Rdbms\Database::delete
+	 * @covers Wikimedia\Rdbms\Database::assertConditionIsNotEmpty
 	 */
 	public function testDelete( $sql, $sqlText ) {
 		$this->database->delete(
@@ -421,9 +578,58 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			[
 				[
 					'table' => 'table',
+					'conds' => 'alias = \'text\'',
+				],
+				"DELETE FROM table " .
+					"WHERE alias = 'text'"
+			],
+			[
+				[
+					'table' => 'table',
 					'conds' => '*',
 				],
 				"DELETE FROM table"
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideDeleteEmptyCondition
+	 * @covers Wikimedia\Rdbms\Database::delete
+	 * @covers Wikimedia\Rdbms\Database::assertConditionIsNotEmpty
+	 */
+	public function testDeleteEmptyCondition( $sql ) {
+		try {
+			$this->database->delete(
+				$sql['table'],
+				$sql['conds'],
+				__METHOD__
+			);
+			$this->fail( 'The Database::delete should raise exception' );
+		} catch ( Exception $e ) {
+			$this->assertStringContainsString( 'delete called with empty conditions', $e->getMessage() );
+		}
+	}
+
+	public static function provideDeleteEmptyCondition() {
+		return [
+			[
+				[
+					'table' => 'table',
+					'conds' => null,
+				],
+			],
+			[
+				[
+					'table' => 'table',
+					'conds' => [],
+				],
+			],
+			[
+				[
+					'table' => 'table',
+					'conds' => '',
+				],
 			],
 		];
 	}
@@ -433,6 +639,8 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 	 * @covers Wikimedia\Rdbms\Database::upsert
 	 */
 	public function testUpsert( $sql, $sqlText ) {
+		$this->database->setNextQueryAffectedRowCounts( [ 0 ] );
+
 		$this->database->upsert(
 			$sql['table'],
 			$sql['rows'],
@@ -449,17 +657,49 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 				[
 					'table' => 'upsert_table',
 					'rows' => [ 'field' => 'text', 'field2' => 'text2' ],
-					'uniqueIndexes' => [ 'field' ],
+					'uniqueIndexes' => 'field',
 					'set' => [ 'field' => 'set' ],
 				],
 				"BEGIN; " .
 					"UPDATE upsert_table " .
 					"SET field = 'set' " .
-					"WHERE ((field = 'text')); " .
-					"INSERT IGNORE INTO upsert_table " .
+					"WHERE (field = 'text'); " .
+					"INSERT INTO upsert_table " .
 					"(field,field2) " .
 					"VALUES ('text','text2'); " .
 					"COMMIT"
+			],
+			[
+				[
+					'table' => 'upsert_table',
+					'rows' => [ 'field' => 'text', 'field2' => 'text2' ],
+					'uniqueIndexes' => [ [ 'field' ] ],
+					'set' => [ 'field' => 'set' ],
+				],
+				"BEGIN; " .
+				"UPDATE upsert_table " .
+				"SET field = 'set' " .
+				"WHERE (field = 'text'); " .
+				"INSERT INTO upsert_table " .
+				"(field,field2) " .
+				"VALUES ('text','text2'); " .
+				"COMMIT"
+			],
+			[
+				[
+					'table' => 'upsert_table',
+					'rows' => [ 'fieldA' => 'text', 'fieldB' => 'more',  'field2' => 'text2' ],
+					'uniqueIndexes' => [ [ 'fieldA', 'fieldB' ] ],
+					'set' => [ 'field2' => 'set' ],
+				],
+				"BEGIN; " .
+				"UPDATE upsert_table " .
+				"SET field2 = 'set' " .
+				"WHERE (fieldA = 'text' AND fieldB = 'more'); " .
+				"INSERT INTO upsert_table " .
+				"(fieldA,fieldB,field2) " .
+				"VALUES ('text','more','text2'); " .
+				"COMMIT"
 			],
 		];
 	}
@@ -514,14 +754,13 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideInsert
 	 * @covers Wikimedia\Rdbms\Database::insert
-	 * @covers Wikimedia\Rdbms\Database::makeInsertOptions
 	 */
 	public function testInsert( $sql, $sqlText ) {
 		$this->database->insert(
 			$sql['table'],
 			$sql['rows'],
 			__METHOD__,
-			isset( $sql['options'] ) ? $sql['options'] : []
+			$sql['options'] ?? []
 		);
 		$this->assertLastSql( $sqlText );
 	}
@@ -535,7 +774,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 				],
 				"INSERT INTO table " .
 					"(field,field2) " .
-					"VALUES ('text','2')"
+					"VALUES ('text',2)"
 			],
 			[
 				[
@@ -545,7 +784,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 				],
 				"INSERT IGNORE INTO table " .
 					"(field,field2) " .
-					"VALUES ('text','2')"
+					"VALUES ('text',2)"
 			],
 			[
 				[
@@ -559,8 +798,8 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 				"INSERT IGNORE INTO table " .
 					"(field,field2) " .
 					"VALUES " .
-					"('text','2')," .
-					"('multi','3')"
+					"('text',2)," .
+					"('multi',3)"
 			],
 		];
 	}
@@ -568,7 +807,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideInsertSelect
 	 * @covers Wikimedia\Rdbms\Database::insertSelect
-	 * @covers Wikimedia\Rdbms\Database::nativeInsertSelect
+	 * @covers Wikimedia\Rdbms\Database::doInsertSelectNative
 	 */
 	public function testInsertSelect( $sql, $sqlTextNative, $sqlSelect, $sqlInsert ) {
 		$this->database->insertSelect(
@@ -577,9 +816,9 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			$sql['varMap'],
 			$sql['conds'],
 			__METHOD__,
-			isset( $sql['insertOptions'] ) ? $sql['insertOptions'] : [],
-			isset( $sql['selectOptions'] ) ? $sql['selectOptions'] : [],
-			isset( $sql['selectJoinConds'] ) ? $sql['selectJoinConds'] : []
+			$sql['insertOptions'] ?? [],
+			$sql['selectOptions'] ?? [],
+			$sql['selectJoinConds'] ?? []
 		);
 		$this->assertLastSql( $sqlTextNative );
 
@@ -593,9 +832,9 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			$sql['varMap'],
 			$sql['conds'],
 			__METHOD__,
-			isset( $sql['insertOptions'] ) ? $sql['insertOptions'] : [],
-			isset( $sql['selectOptions'] ) ? $sql['selectOptions'] : [],
-			isset( $sql['selectJoinConds'] ) ? $sql['selectJoinConds'] : []
+			$sql['insertOptions'] ?? [],
+			$sql['selectOptions'] ?? [],
+			$sql['selectJoinConds'] ?? []
 		);
 		$this->assertLastSqlDb( implode( '; ', [ $sqlSelect, 'BEGIN', $sqlInsert, 'COMMIT' ] ), $dbWeb );
 	}
@@ -612,10 +851,10 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 				"INSERT INTO insert_table " .
 					"(field_insert,field) " .
 					"SELECT field_select,field2 " .
-					"FROM select_table WHERE *",
+					"FROM select_table",
 				"SELECT field_select AS field_insert,field2 AS field " .
-				"FROM select_table WHERE *   FOR UPDATE",
-				"INSERT INTO insert_table (field_insert,field) VALUES ('0','1')"
+				"FROM select_table      FOR UPDATE",
+				"INSERT INTO insert_table (field_insert,field) VALUES (0,1)"
 			],
 			[
 				[
@@ -628,10 +867,10 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 					"(field_insert,field) " .
 					"SELECT field_select,field2 " .
 					"FROM select_table " .
-					"WHERE field = '2'",
+					"WHERE field = 2",
 				"SELECT field_select AS field_insert,field2 AS field FROM " .
-				"select_table WHERE field = '2'   FOR UPDATE",
-				"INSERT INTO insert_table (field_insert,field) VALUES ('0','1')"
+				"select_table WHERE field = 2   FOR UPDATE",
+				"INSERT INTO insert_table (field_insert,field) VALUES (0,1)"
 			],
 			[
 				[
@@ -646,11 +885,11 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 					"(field_insert,field) " .
 					"SELECT field_select,field2 " .
 					"FROM select_table " .
-					"WHERE field = '2' " .
+					"WHERE field = 2 " .
 					"ORDER BY field",
 				"SELECT field_select AS field_insert,field2 AS field " .
-				"FROM select_table WHERE field = '2' ORDER BY field  FOR UPDATE",
-				"INSERT IGNORE INTO insert_table (field_insert,field) VALUES ('0','1')"
+				"FROM select_table WHERE field = 2 ORDER BY field  FOR UPDATE",
+				"INSERT IGNORE INTO insert_table (field_insert,field) VALUES (0,1)"
 			],
 			[
 				[
@@ -668,16 +907,20 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 					"(field_insert,field) " .
 					"SELECT field_select,field2 " .
 					"FROM select_table1 LEFT JOIN select_table2 ON ((select_table1.foo = select_table2.bar)) " .
-					"WHERE field = '2' " .
+					"WHERE field = 2 " .
 					"ORDER BY field",
 				"SELECT field_select AS field_insert,field2 AS field " .
 				"FROM select_table1 LEFT JOIN select_table2 ON ((select_table1.foo = select_table2.bar)) " .
-				"WHERE field = '2' ORDER BY field  FOR UPDATE",
-				"INSERT INTO insert_table (field_insert,field) VALUES ('0','1')"
+				"WHERE field = 2 ORDER BY field  FOR UPDATE",
+				"INSERT INTO insert_table (field_insert,field) VALUES (0,1)"
 			],
 		];
 	}
 
+	/**
+	 * @covers Wikimedia\Rdbms\Database::insertSelect
+	 * @covers Wikimedia\Rdbms\Database::doInsertSelectNative
+	 */
 	public function testInsertSelectBatching() {
 		$dbWeb = new DatabaseTestHelper( __CLASS__, [ 'cliMode' => false ] );
 		$rows = [];
@@ -693,11 +936,11 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			__METHOD__
 		);
 		$this->assertLastSqlDb( implode( '; ', [
-			'SELECT field2 AS field FROM select_table WHERE *   FOR UPDATE',
+			'SELECT field2 AS field FROM select_table      FOR UPDATE',
 			'BEGIN',
-			"INSERT INTO insert_table (field) VALUES ('" . implode( "'),('", range( 0, 9999 ) ) . "')",
-			"INSERT INTO insert_table (field) VALUES ('" . implode( "'),('", range( 10000, 19999 ) ) . "')",
-			"INSERT INTO insert_table (field) VALUES ('" . implode( "'),('", range( 20000, 25000 ) ) . "')",
+			"INSERT INTO insert_table (field) VALUES (" . implode( "),(", range( 0, 9999 ) ) . ")",
+			"INSERT INTO insert_table (field) VALUES (" . implode( "),(", range( 10000, 19999 ) ) . ")",
+			"INSERT INTO insert_table (field) VALUES (" . implode( "),(", range( 20000, 25000 ) ) . ")",
 			'COMMIT'
 		] ), $dbWeb );
 	}
@@ -790,12 +1033,12 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 					],
 				],
 				"BEGIN; DELETE FROM module_deps " .
-					"WHERE (md_module = 'module') OR (md_skin = 'skin'); " .
+					"WHERE ((md_module = 'module') OR (md_skin = 'skin')); " .
 					"INSERT INTO module_deps " .
 					"(md_module,md_skin,md_deps) " .
 					"VALUES ('module','skin','deps'); " .
 					"DELETE FROM module_deps " .
-					"WHERE (md_module = 'module2') OR (md_skin = 'skin2'); " .
+					"WHERE ((md_module = 'module2') OR (md_skin = 'skin2')); " .
 					"INSERT INTO module_deps " .
 					"(md_module,md_skin,md_deps) " .
 					"VALUES ('module2','skin2','deps2'); COMMIT"
@@ -810,36 +1053,9 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 						'md_deps' => 'deps',
 					],
 				],
-				"BEGIN; INSERT INTO module_deps " .
+				"INSERT INTO module_deps " .
 					"(md_module,md_skin,md_deps) " .
-					"VALUES ('module','skin','deps'); COMMIT"
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider provideNativeReplace
-	 * @covers Wikimedia\Rdbms\Database::nativeReplace
-	 */
-	public function testNativeReplace( $sql, $sqlText ) {
-		$this->database->nativeReplace(
-			$sql['table'],
-			$sql['rows'],
-			__METHOD__
-		);
-		$this->assertLastSql( $sqlText );
-	}
-
-	public static function provideNativeReplace() {
-		return [
-			[
-				[
-					'table' => 'replace_table',
-					'rows' => [ 'field' => 'text', 'field2' => 'text2' ],
-				],
-				"REPLACE INTO replace_table " .
-					"(field,field2) " .
-					"VALUES ('text','text2')"
+					"VALUES ('module','skin','deps')"
 			],
 		];
 	}
@@ -904,6 +1120,78 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			[
 				[ "'test'", 'field2' ],
 				"CONCAT('test',field2)"
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideGreatest
+	 * @covers Wikimedia\Rdbms\Database::buildGreatest
+	 */
+	public function testBuildGreatest( $fields, $values, $sqlText ) {
+		$this->assertEquals( trim( $this->database->buildGreatest(
+			$fields,
+			$values
+		) ), $sqlText );
+	}
+
+	public static function provideGreatest() {
+		return [
+			[
+				'field',
+				'value',
+				"GREATEST(field,'value')"
+			],
+			[
+				[ 'field' ],
+				[ 'value' ],
+				"GREATEST(field,'value')"
+			],
+			[
+				[ 'field', 'field2' ],
+				[ 'value', 'value2' ],
+				"GREATEST(field,field2,'value','value2')"
+			],
+			[
+				[ 'field', 'b' => 'field2 + 1' ],
+				[ 'value', 'value2' ],
+				"GREATEST(field,field2 + 1,'value','value2')"
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideLeast
+	 * @covers Wikimedia\Rdbms\Database::buildLeast
+	 */
+	public function testBuildLeast( $fields, $values, $sqlText ) {
+		$this->assertEquals( trim( $this->database->buildLeast(
+			$fields,
+			$values
+		) ), $sqlText );
+	}
+
+	public static function provideLeast() {
+		return [
+			[
+				'field',
+				'value',
+				"LEAST(field,'value')"
+			],
+			[
+				[ 'field' ],
+				[ 'value' ],
+				"LEAST(field,'value')"
+			],
+			[
+				[ 'field', 'field2' ],
+				[ 'value', 'value2' ],
+				"LEAST(field,field2,'value','value2')"
+			],
+			[
+				[ 'field', 'b' => 'field2 + 1' ],
+				[ 'value', 'value2' ],
+				"LEAST(field,field2 + 1,'value','value2')"
 			],
 		];
 	}
@@ -1002,10 +1290,10 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			$params['table'],
 			$params['vars'],
 			$params['permute_conds'],
-			isset( $params['extra_conds'] ) ? $params['extra_conds'] : '',
+			$params['extra_conds'] ?? '',
 			'FNAME',
-			isset( $params['options'] ) ? $params['options'] : [],
-			isset( $params['join_conds'] ) ? $params['join_conds'] : []
+			$params['options'] ?? [],
+			$params['join_conds'] ?? []
 		) );
 		$this->assertEquals( $expect, $sql );
 	}
@@ -1033,12 +1321,12 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 						'table2' => [ 'JOIN', 'table1.foo_id = table2.foo_id' ],
 					],
 				],
-				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = '1' AND duplicates = '4' AND single = '0' AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) UNION ALL " .
-				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = '1' AND duplicates = '5' AND single = '0' AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) UNION ALL " .
-				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = '2' AND duplicates = '4' AND single = '0' AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) UNION ALL " .
-				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = '2' AND duplicates = '5' AND single = '0' AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) UNION ALL " .
-				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = '3' AND duplicates = '4' AND single = '0' AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) UNION ALL " .
-				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = '3' AND duplicates = '5' AND single = '0' AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) " .
+				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = 1 AND duplicates = 4 AND single = 0 AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) UNION ALL " .
+				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = 1 AND duplicates = 5 AND single = 0 AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) UNION ALL " .
+				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = 2 AND duplicates = 4 AND single = 0 AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) UNION ALL " .
+				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = 2 AND duplicates = 5 AND single = 0 AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) UNION ALL " .
+				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = 3 AND duplicates = 4 AND single = 0 AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) UNION ALL " .
+				"(SELECT  field1,field2 AS alias  FROM table1 JOIN table2 ON ((table1.foo_id = table2.foo_id))   WHERE field3 = 3 AND duplicates = 5 AND single = 0 AND (table2.bar > 23)  ORDER BY field1,field2 LIMIT 100  ) " .
 				"ORDER BY field1,alias LIMIT 100"
 			],
 			[
@@ -1055,9 +1343,9 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 						'LIMIT' => 25,
 					],
 				],
-				"(SELECT  foo_id  FROM foo    WHERE bar = '1' AND baz IS NULL  ORDER BY foo_id LIMIT 25  ) UNION " .
-				"(SELECT  foo_id  FROM foo    WHERE bar = '2' AND baz IS NULL  ORDER BY foo_id LIMIT 25  ) UNION " .
-				"(SELECT  foo_id  FROM foo    WHERE bar = '3' AND baz IS NULL  ORDER BY foo_id LIMIT 25  ) " .
+				"(SELECT  foo_id  FROM foo    WHERE bar = 1 AND baz IS NULL  ORDER BY foo_id LIMIT 25  ) UNION " .
+				"(SELECT  foo_id  FROM foo    WHERE bar = 2 AND baz IS NULL  ORDER BY foo_id LIMIT 25  ) UNION " .
+				"(SELECT  foo_id  FROM foo    WHERE bar = 3 AND baz IS NULL  ORDER BY foo_id LIMIT 25  ) " .
 				"ORDER BY foo_id LIMIT 25"
 			],
 			[
@@ -1075,9 +1363,9 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 					],
 					'unionSupportsOrderAndLimit' => false,
 				],
-				"(SELECT  foo_id  FROM foo    WHERE bar = '1' AND baz IS NULL  ) UNION " .
-				"(SELECT  foo_id  FROM foo    WHERE bar = '2' AND baz IS NULL  ) UNION " .
-				"(SELECT  foo_id  FROM foo    WHERE bar = '3' AND baz IS NULL  ) " .
+				"(SELECT  foo_id  FROM foo    WHERE bar = 1 AND baz IS NULL  ) UNION " .
+				"(SELECT  foo_id  FROM foo    WHERE bar = 2 AND baz IS NULL  ) UNION " .
+				"(SELECT  foo_id  FROM foo    WHERE bar = 3 AND baz IS NULL  ) " .
 				"ORDER BY foo_id LIMIT 25"
 			],
 			[
@@ -1121,7 +1409,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 						'OFFSET' => 150,
 					],
 				],
-				"SELECT  foo_id  FROM foo    WHERE bar = '1'  ORDER BY foo_id LIMIT 150,25"
+				"SELECT  foo_id  FROM foo    WHERE bar = 1  ORDER BY foo_id LIMIT 150,25"
 			],
 			[
 				[
@@ -1277,7 +1565,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers Wikimedia\Rdbms\Database::registerTempTableOperation
+	 * @covers Wikimedia\Rdbms\Database::getTempTableWrites
 	 */
 	public function testSessionTempTables() {
 		$temp1 = $this->database->tableName( 'tmp_table_1' );
@@ -1346,7 +1634,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 	 * @dataProvider provideBuildSubstring_invalidParams
 	 */
 	public function testBuildSubstring_invalidParams( $start, $length ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$this->database->buildSubstring( 'foo', $start, $length );
 	}
 
@@ -1422,8 +1710,12 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		$triggerMap = [
 			'-' => '-',
 			IDatabase::TRIGGER_COMMIT => 'tCommit',
-			IDatabase::TRIGGER_ROLLBACK => 'tRollback'
+			IDatabase::TRIGGER_ROLLBACK => 'tRollback',
+			IDatabase::TRIGGER_CANCEL => 'tCancel',
 		];
+		$pcCallback = function ( IDatabase $db ) use ( $fname ) {
+			$this->database->query( "SELECT 0", $fname );
+		};
 		$callback1 = function ( $trigger = '-' ) use ( $fname, $triggerMap ) {
 			$this->database->query( "SELECT 1, {$triggerMap[$trigger]} AS t", $fname );
 		};
@@ -1435,12 +1727,12 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		};
 
 		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
-		$this->database->onTransactionPreCommitOrIdle( $callback1, __METHOD__ );
+		$this->database->onTransactionPreCommitOrIdle( $pcCallback, __METHOD__ );
 		$this->database->cancelAtomic( __METHOD__ );
 		$this->assertLastSql( 'BEGIN; ROLLBACK' );
 
 		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
-		$this->database->onTransactionIdle( $callback1, __METHOD__ );
+		$this->database->onTransactionCommitOrIdle( $callback1, __METHOD__ );
 		$this->database->cancelAtomic( __METHOD__ );
 		$this->assertLastSql( 'BEGIN; ROLLBACK' );
 
@@ -1449,28 +1741,33 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		$this->database->cancelAtomic( __METHOD__ );
 		$this->assertLastSql( 'BEGIN; ROLLBACK; SELECT 1, tRollback AS t' );
 
-		$this->database->startAtomic( __METHOD__ . '_outer' );
-		$this->database->onTransactionPreCommitOrIdle( $callback1, __METHOD__ );
 		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
-		$this->database->onTransactionPreCommitOrIdle( $callback2, __METHOD__ );
+		$this->database->onAtomicSectionCancel( $callback1, __METHOD__ );
 		$this->database->cancelAtomic( __METHOD__ );
-		$this->database->onTransactionPreCommitOrIdle( $callback3, __METHOD__ );
+		$this->assertLastSql( 'BEGIN; ROLLBACK; SELECT 1, tRollback AS t' );
+
+		$this->database->startAtomic( __METHOD__ . '_outer' );
+		$this->database->onTransactionPreCommitOrIdle( $pcCallback, __METHOD__ );
+		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
+		$this->database->onTransactionPreCommitOrIdle( $pcCallback, __METHOD__ );
+		$this->database->cancelAtomic( __METHOD__ );
+		$this->database->onTransactionPreCommitOrIdle( $pcCallback, __METHOD__ );
 		$this->database->endAtomic( __METHOD__ . '_outer' );
 		$this->assertLastSql( implode( "; ", [
 			'BEGIN',
 			'SAVEPOINT wikimedia_rdbms_atomic1',
 			'ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1',
-			'SELECT 1, - AS t',
-			'SELECT 3, - AS t',
+			'SELECT 0',
+			'SELECT 0',
 			'COMMIT'
 		] ) );
 
 		$this->database->startAtomic( __METHOD__ . '_outer' );
-		$this->database->onTransactionIdle( $callback1, __METHOD__ );
+		$this->database->onTransactionCommitOrIdle( $callback1, __METHOD__ );
 		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
-		$this->database->onTransactionIdle( $callback2, __METHOD__ );
+		$this->database->onTransactionCommitOrIdle( $callback2, __METHOD__ );
 		$this->database->cancelAtomic( __METHOD__ );
-		$this->database->onTransactionIdle( $callback3, __METHOD__ );
+		$this->database->onTransactionCommitOrIdle( $callback3, __METHOD__ );
 		$this->database->endAtomic( __METHOD__ . '_outer' );
 		$this->assertLastSql( implode( "; ", [
 			'BEGIN',
@@ -1496,6 +1793,21 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			'SELECT 1, tCommit AS t',
 			'SELECT 2, tRollback AS t',
 			'SELECT 3, tCommit AS t'
+		] ) );
+
+		$this->database->startAtomic( __METHOD__ . '_outer' );
+		$this->database->onAtomicSectionCancel( $callback1, __METHOD__ );
+		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
+		$this->database->onAtomicSectionCancel( $callback2, __METHOD__ );
+		$this->database->cancelAtomic( __METHOD__ );
+		$this->database->onAtomicSectionCancel( $callback3, __METHOD__ );
+		$this->database->endAtomic( __METHOD__ . '_outer' );
+		$this->assertLastSql( implode( "; ", [
+			'BEGIN',
+			'SAVEPOINT wikimedia_rdbms_atomic1',
+			'ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1',
+			'SELECT 2, tCancel AS t',
+			'COMMIT',
 		] ) );
 
 		$makeCallback = function ( $id ) use ( $fname, $triggerMap ) {
@@ -1539,6 +1851,29 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			'SELECT 2, tRollback AS t',
 			'SELECT 3, tRollback AS t',
 			'SELECT 4, tCommit AS t'
+		] ) );
+
+		$this->database->startAtomic( __METHOD__ . '_level1', IDatabase::ATOMIC_CANCELABLE );
+		$this->database->onAtomicSectionCancel( $makeCallback( 1 ), __METHOD__ );
+		$this->database->startAtomic( __METHOD__ . '_level2' );
+		$this->database->startAtomic( __METHOD__ . '_level3', IDatabase::ATOMIC_CANCELABLE );
+		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
+		$this->database->onAtomicSectionCancel( $makeCallback( 2 ), __METHOD__ );
+		$this->database->endAtomic( __METHOD__ );
+		$this->database->onAtomicSectionCancel( $makeCallback( 3 ), __METHOD__ );
+		$this->database->cancelAtomic( __METHOD__ . '_level3' );
+		$this->database->endAtomic( __METHOD__ . '_level2' );
+		$this->database->onAtomicSectionCancel( $makeCallback( 4 ), __METHOD__ );
+		$this->database->endAtomic( __METHOD__ . '_level1' );
+		$this->assertLastSql( implode( "; ", [
+			'BEGIN',
+			'SAVEPOINT wikimedia_rdbms_atomic1',
+			'SAVEPOINT wikimedia_rdbms_atomic2',
+			'RELEASE SAVEPOINT wikimedia_rdbms_atomic2',
+			'ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1',
+			'SELECT 2, tCancel AS t',
+			'SELECT 3, tCancel AS t',
+			'COMMIT',
 		] ) );
 	}
 
@@ -1589,7 +1924,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			$this->fail( 'Test exception not thrown' );
 		} catch ( DBTransactionError $ex ) {
 			$this->assertSame(
-				'Cannot execute query from ' . __METHOD__ . ' while transaction status is ERROR.',
+				'Cannot execute query from ' . __METHOD__ . ' while transaction status is ERROR',
 				$ex->getMessage()
 			);
 		}
@@ -1623,70 +1958,90 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			$callback3Called = $trigger;
 			$this->database->query( "SELECT 3", $fname );
 		};
+		$callback4Called = 0;
+		$callback4 = function () use ( $fname, &$callback4Called ) {
+			$callback4Called++;
+			$this->database->query( "SELECT 4", $fname );
+		};
+		$callback5Called = 0;
+		$callback5 = function () use ( $fname, &$callback5Called ) {
+			$callback5Called++;
+			$this->database->query( "SELECT 5", $fname );
+		};
 
 		$this->database->startAtomic( __METHOD__ . '_outer' );
 		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
 		$this->database->startAtomic( __METHOD__ . '_inner' );
-		$this->database->onTransactionIdle( $callback1, __METHOD__ );
+		$this->database->onTransactionCommitOrIdle( $callback1, __METHOD__ );
 		$this->database->onTransactionPreCommitOrIdle( $callback2, __METHOD__ );
 		$this->database->onTransactionResolution( $callback3, __METHOD__ );
+		$this->database->onAtomicSectionCancel( $callback4, __METHOD__ );
 		$this->database->endAtomic( __METHOD__ . '_inner' );
 		$this->database->cancelAtomic( __METHOD__ );
 		$this->database->endAtomic( __METHOD__ . '_outer' );
 		$this->assertNull( $callback1Called );
 		$this->assertNull( $callback2Called );
 		$this->assertEquals( IDatabase::TRIGGER_ROLLBACK, $callback3Called );
+		$this->assertSame( 1, $callback4Called );
 		// phpcs:ignore Generic.Files.LineLength
-		$this->assertLastSql( 'BEGIN; SAVEPOINT wikimedia_rdbms_atomic1; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1; COMMIT; SELECT 3' );
+		$this->assertLastSql( 'BEGIN; SAVEPOINT wikimedia_rdbms_atomic1; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1; SELECT 4; COMMIT; SELECT 3' );
 
 		$callback1Called = null;
 		$callback2Called = null;
 		$callback3Called = null;
+		$callback4Called = 0;
 		$this->database->startAtomic( __METHOD__ . '_outer' );
 		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
 		$this->database->startAtomic( __METHOD__ . '_inner', IDatabase::ATOMIC_CANCELABLE );
-		$this->database->onTransactionIdle( $callback1, __METHOD__ );
+		$this->database->onTransactionCommitOrIdle( $callback1, __METHOD__ );
 		$this->database->onTransactionPreCommitOrIdle( $callback2, __METHOD__ );
 		$this->database->onTransactionResolution( $callback3, __METHOD__ );
+		$this->database->onAtomicSectionCancel( $callback4, __METHOD__ );
 		$this->database->endAtomic( __METHOD__ . '_inner' );
 		$this->database->cancelAtomic( __METHOD__ );
 		$this->database->endAtomic( __METHOD__ . '_outer' );
 		$this->assertNull( $callback1Called );
 		$this->assertNull( $callback2Called );
 		$this->assertEquals( IDatabase::TRIGGER_ROLLBACK, $callback3Called );
+		$this->assertSame( 1, $callback4Called );
 		// phpcs:ignore Generic.Files.LineLength
-		$this->assertLastSql( 'BEGIN; SAVEPOINT wikimedia_rdbms_atomic1; SAVEPOINT wikimedia_rdbms_atomic2; RELEASE SAVEPOINT wikimedia_rdbms_atomic2; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1; COMMIT; SELECT 3' );
+		$this->assertLastSql( 'BEGIN; SAVEPOINT wikimedia_rdbms_atomic1; SAVEPOINT wikimedia_rdbms_atomic2; RELEASE SAVEPOINT wikimedia_rdbms_atomic2; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1; SELECT 4; COMMIT; SELECT 3' );
 
 		$callback1Called = null;
 		$callback2Called = null;
 		$callback3Called = null;
+		$callback4Called = 0;
 		$this->database->startAtomic( __METHOD__ . '_outer' );
 		$atomicId = $this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
 		$this->database->startAtomic( __METHOD__ . '_inner' );
-		$this->database->onTransactionIdle( $callback1, __METHOD__ );
+		$this->database->onTransactionCommitOrIdle( $callback1, __METHOD__ );
 		$this->database->onTransactionPreCommitOrIdle( $callback2, __METHOD__ );
 		$this->database->onTransactionResolution( $callback3, __METHOD__ );
+		$this->database->onAtomicSectionCancel( $callback4, __METHOD__ );
 		$this->database->cancelAtomic( __METHOD__, $atomicId );
 		$this->database->endAtomic( __METHOD__ . '_outer' );
 		$this->assertNull( $callback1Called );
 		$this->assertNull( $callback2Called );
 		$this->assertEquals( IDatabase::TRIGGER_ROLLBACK, $callback3Called );
+		$this->assertSame( 1, $callback4Called );
 
 		$callback1Called = null;
 		$callback2Called = null;
 		$callback3Called = null;
+		$callback4Called = 0;
 		$this->database->startAtomic( __METHOD__ . '_outer' );
 		$atomicId = $this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
 		$this->database->startAtomic( __METHOD__ . '_inner' );
-		$this->database->onTransactionIdle( $callback1, __METHOD__ );
+		$this->database->onTransactionCommitOrIdle( $callback1, __METHOD__ );
 		$this->database->onTransactionPreCommitOrIdle( $callback2, __METHOD__ );
 		$this->database->onTransactionResolution( $callback3, __METHOD__ );
+		$this->database->onAtomicSectionCancel( $callback4, __METHOD__ );
 		try {
 			$this->database->cancelAtomic( __METHOD__ . '_X', $atomicId );
 		} catch ( DBUnexpectedError $e ) {
 			$m = __METHOD__;
 			$this->assertSame(
-				"Invalid atomic section ended (got {$m}_X but expected {$m}).",
+				"Invalid atomic section ended (got {$m}_X but expected {$m})",
 				$e->getMessage()
 			);
 		}
@@ -1695,30 +2050,65 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		$this->assertNull( $callback1Called );
 		$this->assertNull( $callback2Called );
 		$this->assertEquals( IDatabase::TRIGGER_ROLLBACK, $callback3Called );
+		$this->assertSame( 1, $callback4Called );
 
+		$callback4Called = 0;
+		$callback5Called = 0;
+		$this->database->getLastSqls(); // flush
 		$this->database->startAtomic( __METHOD__ . '_outer' );
 		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
-		$this->database->startAtomic( __METHOD__ . '_inner' );
-		$this->database->onTransactionIdle( $callback1, __METHOD__ );
-		$this->database->onTransactionPreCommitOrIdle( $callback2, __METHOD__ );
-		$this->database->onTransactionResolution( $callback3, __METHOD__ );
+		$this->database->onAtomicSectionCancel( $callback5, __METHOD__ );
+		$this->database->startAtomic( __METHOD__ . '_inner', IDatabase::ATOMIC_CANCELABLE );
+		$this->database->onAtomicSectionCancel( $callback4, __METHOD__ );
 		$this->database->cancelAtomic( __METHOD__ . '_inner' );
 		$this->database->cancelAtomic( __METHOD__ );
 		$this->database->endAtomic( __METHOD__ . '_outer' );
-		$this->assertNull( $callback1Called );
-		$this->assertNull( $callback2Called );
-		$this->assertEquals( IDatabase::TRIGGER_ROLLBACK, $callback3Called );
+		// phpcs:ignore Generic.Files.LineLength
+		$this->assertLastSql( 'BEGIN; SAVEPOINT wikimedia_rdbms_atomic1; SAVEPOINT wikimedia_rdbms_atomic2; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic2; SELECT 4; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1; SELECT 5; COMMIT' );
+		$this->assertSame( 1, $callback4Called );
+		$this->assertSame( 1, $callback5Called );
+
+		$callback4Called = 0;
+		$callback5Called = 0;
+		$this->database->startAtomic( __METHOD__ . '_outer' );
+		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
+		$this->database->onAtomicSectionCancel( $callback5, __METHOD__ );
+		$this->database->startAtomic( __METHOD__ . '_inner', IDatabase::ATOMIC_CANCELABLE );
+		$this->database->onAtomicSectionCancel( $callback4, __METHOD__ );
+		$this->database->endAtomic( __METHOD__ . '_inner' );
+		$this->database->cancelAtomic( __METHOD__ );
+		$this->database->endAtomic( __METHOD__ . '_outer' );
+		// phpcs:ignore Generic.Files.LineLength
+		$this->assertLastSql( 'BEGIN; SAVEPOINT wikimedia_rdbms_atomic1; SAVEPOINT wikimedia_rdbms_atomic2; RELEASE SAVEPOINT wikimedia_rdbms_atomic2; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1; SELECT 5; SELECT 4; COMMIT' );
+		$this->assertSame( 1, $callback4Called );
+		$this->assertSame( 1, $callback5Called );
+
+		$callback4Called = 0;
+		$callback5Called = 0;
+		$this->database->startAtomic( __METHOD__ . '_outer' );
+		$sectionId = $this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
+		$this->database->onAtomicSectionCancel( $callback5, __METHOD__ );
+		$this->database->startAtomic( __METHOD__ . '_inner', IDatabase::ATOMIC_CANCELABLE );
+		$this->database->onAtomicSectionCancel( $callback4, __METHOD__ );
+		$this->database->cancelAtomic( __METHOD__, $sectionId );
+		$this->database->endAtomic( __METHOD__ . '_outer' );
+		// phpcs:ignore Generic.Files.LineLength
+		$this->assertLastSql( 'BEGIN; SAVEPOINT wikimedia_rdbms_atomic1; SAVEPOINT wikimedia_rdbms_atomic2; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1; SELECT 5; SELECT 4; COMMIT' );
+		$this->assertSame( 1, $callback4Called );
+		$this->assertSame( 1, $callback5Called );
 
 		$wrapper = TestingAccessWrapper::newFromObject( $this->database );
 		$callback1Called = null;
 		$callback2Called = null;
 		$callback3Called = null;
+		$callback4Called = 0;
 		$this->database->startAtomic( __METHOD__ . '_outer' );
 		$this->database->startAtomic( __METHOD__, IDatabase::ATOMIC_CANCELABLE );
 		$this->database->startAtomic( __METHOD__ . '_inner' );
-		$this->database->onTransactionIdle( $callback1, __METHOD__ );
+		$this->database->onTransactionCommitOrIdle( $callback1, __METHOD__ );
 		$this->database->onTransactionPreCommitOrIdle( $callback2, __METHOD__ );
 		$this->database->onTransactionResolution( $callback3, __METHOD__ );
+		$this->database->onAtomicSectionCancel( $callback4, __METHOD__ );
 		$wrapper->trxStatus = Database::STATUS_TRX_ERROR;
 		$this->database->cancelAtomic( __METHOD__ . '_inner' );
 		$this->database->cancelAtomic( __METHOD__ );
@@ -1726,6 +2116,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		$this->assertNull( $callback1Called );
 		$this->assertNull( $callback2Called );
 		$this->assertEquals( IDatabase::TRIGGER_ROLLBACK, $callback3Called );
+		$this->assertSame( 1, $callback4Called );
 	}
 
 	/**
@@ -1765,7 +2156,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			$this->fail( 'Expected exception not thrown' );
 		} catch ( DBUnexpectedError $ex ) {
 			$this->assertSame(
-				'No atomic section is open (got ' . __METHOD__ . ').',
+				'No atomic section is open (got ' . __METHOD__ . ')',
 				$ex->getMessage()
 			);
 		}
@@ -1784,7 +2175,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		} catch ( DBUnexpectedError $ex ) {
 			$this->assertSame(
 				'Invalid atomic section ended (got ' . __METHOD__ . ' but expected ' .
-					__METHOD__ . 'X' . ').',
+					__METHOD__ . 'X)',
 				$ex->getMessage()
 			);
 		}
@@ -1801,22 +2192,38 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 			$this->fail( 'Expected exception not thrown' );
 		} catch ( DBTransactionError $ex ) {
 			$this->assertSame(
-				'Cannot execute query from ' . __METHOD__ . ' while transaction status is ERROR.',
+				'Cannot execute query from ' . __METHOD__ . ' while transaction status is ERROR',
 				$ex->getMessage()
 			);
 		}
 	}
 
 	/**
-	 * @expectedException \Wikimedia\Rdbms\DBTransactionStateError
+	 * @covers \Wikimedia\Rdbms\Database::onAtomicSectionCancel
+	 */
+	public function testNoAtomicSectionForCallback() {
+		try {
+			$this->database->onAtomicSectionCancel( function () {
+			}, __METHOD__ );
+			$this->fail( 'Expected exception not thrown' );
+		} catch ( DBUnexpectedError $ex ) {
+			$this->assertSame(
+				'No atomic section is open (got ' . __METHOD__ . ')',
+				$ex->getMessage()
+			);
+		}
+	}
+
+	/**
+	 * @covers \Wikimedia\Rdbms\Database::assertQueryIsCurrentlyAllowed
 	 */
 	public function testTransactionErrorState1() {
 		$wrapper = TestingAccessWrapper::newFromObject( $this->database );
 
 		$this->database->begin( __METHOD__ );
 		$wrapper->trxStatus = Database::STATUS_TRX_ERROR;
+		$this->expectException( \Wikimedia\Rdbms\DBTransactionStateError::class );
 		$this->database->delete( 'x', [ 'field' => 3 ], __METHOD__ );
-		$this->database->commit( __METHOD__ );
 	}
 
 	/**
@@ -1828,7 +2235,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		$this->database->startAtomic( __METHOD__ );
 		$wrapper->trxStatus = Database::STATUS_TRX_ERROR;
 		$this->database->rollback( __METHOD__ );
-		$this->assertEquals( 0, $this->database->trxLevel() );
+		$this->assertSame( 0, $this->database->trxLevel() );
 		$this->assertEquals( Database::STATUS_TRX_NONE, $wrapper->trxStatus() );
 		$this->assertLastSql( 'BEGIN; ROLLBACK' );
 
@@ -1837,8 +2244,8 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		$this->database->delete( 'x', [ 'field' => 1 ], __METHOD__ );
 		$this->database->endAtomic( __METHOD__ );
 		$this->assertEquals( Database::STATUS_TRX_NONE, $wrapper->trxStatus() );
-		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = \'1\'; COMMIT' );
-		$this->assertEquals( 0, $this->database->trxLevel(), 'Use after rollback()' );
+		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = 1; COMMIT' );
+		$this->assertSame( 0, $this->database->trxLevel(), 'Use after rollback()' );
 
 		$this->database->begin( __METHOD__ );
 		$this->database->startAtomic( __METHOD__, Database::ATOMIC_CANCELABLE );
@@ -1851,8 +2258,8 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		$this->database->endAtomic( __METHOD__ );
 		$this->database->commit( __METHOD__ );
 		// phpcs:ignore Generic.Files.LineLength
-		$this->assertLastSql( 'BEGIN; SAVEPOINT wikimedia_rdbms_atomic1; UPDATE y SET a = \'1\' WHERE field = \'1\'; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1; DELETE FROM y WHERE field = \'1\'; COMMIT' );
-		$this->assertEquals( 0, $this->database->trxLevel(), 'Use after rollback()' );
+		$this->assertLastSql( 'BEGIN; SAVEPOINT wikimedia_rdbms_atomic1; UPDATE y SET a = 1 WHERE field = 1; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1; DELETE FROM y WHERE field = 1; COMMIT' );
+		$this->assertSame( 0, $this->database->trxLevel(), 'Use after rollback()' );
 
 		// Next transaction
 		$this->database->startAtomic( __METHOD__ );
@@ -1860,8 +2267,8 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		$this->database->delete( 'x', [ 'field' => 3 ], __METHOD__ );
 		$this->database->endAtomic( __METHOD__ );
 		$this->assertEquals( Database::STATUS_TRX_NONE, $wrapper->trxStatus() );
-		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = \'3\'; COMMIT' );
-		$this->assertEquals( 0, $this->database->trxLevel() );
+		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = 3; COMMIT' );
+		$this->assertSame( 0, $this->database->trxLevel() );
 	}
 
 	/**
@@ -1880,18 +2287,34 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 
 		$this->database->setFlag( Database::DBO_TRX );
 
-		// Implicit transaction gets silently rolled back
+		// Implicit transaction does not get silently rolled back
 		$this->database->begin( __METHOD__, Database::TRANSACTION_INTERNAL );
-		call_user_func( $doError );
-		$this->database->delete( 'x', [ 'field' => 1 ], __METHOD__ );
-		$this->database->commit( __METHOD__, Database::FLUSHING_INTERNAL );
-		// phpcs:ignore
-		$this->assertLastSql( 'BEGIN; DELETE FROM error WHERE 1; ROLLBACK; BEGIN; DELETE FROM x WHERE field = \'1\'; COMMIT' );
+		$doError();
+		try {
+			$this->database->delete( 'x', [ 'field' => 1 ], __METHOD__ );
+			$this->fail( 'Expected exception not thrown' );
+		} catch ( DBTransactionError $e ) {
+			$this->assertEquals(
+				'Cannot execute query from ' . __METHOD__ . ' while transaction status is ERROR',
+				$e->getMessage()
+			);
+		}
+		try {
+			$this->database->commit( __METHOD__, Database::FLUSHING_INTERNAL );
+			$this->fail( 'Expected exception not thrown' );
+		} catch ( DBTransactionError $e ) {
+			$this->assertEquals(
+				'Cannot execute query from ' . __METHOD__ . ' while transaction status is ERROR',
+				$e->getMessage()
+			);
+		}
+		$this->database->rollback( __METHOD__, Database::FLUSHING_INTERNAL );
+		$this->assertLastSql( 'BEGIN; DELETE FROM error WHERE 1; ROLLBACK' );
 
-		// ... unless there were prior writes
+		// Likewise if there were prior writes
 		$this->database->begin( __METHOD__, Database::TRANSACTION_INTERNAL );
 		$this->database->delete( 'x', [ 'field' => 1 ], __METHOD__ );
-		call_user_func( $doError );
+		$doError();
 		try {
 			$this->database->delete( 'x', [ 'field' => 1 ], __METHOD__ );
 			$this->fail( 'Expected exception not thrown' );
@@ -1899,7 +2322,7 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		}
 		$this->database->rollback( __METHOD__, Database::FLUSHING_INTERNAL );
 		// phpcs:ignore
-		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = \'1\'; DELETE FROM error WHERE 1; ROLLBACK' );
+		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = 1; DELETE FROM error WHERE 1; ROLLBACK' );
 	}
 
 	/**
@@ -1929,29 +2352,29 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		// Rollback doesn't raise a warning
 		$warning = [];
 		$this->database->startAtomic( __METHOD__ );
-		call_user_func( $doError );
+		$doError();
 		$this->database->rollback( __METHOD__ );
 		$this->database->delete( 'x', [ 'field' => 1 ], __METHOD__ );
 		$this->assertSame( [], $warning );
 		// phpcs:ignore
-		$this->assertLastSql( 'BEGIN; DELETE FROM error WHERE 1; ROLLBACK; DELETE FROM x WHERE field = \'1\'' );
+		$this->assertLastSql( 'BEGIN; DELETE FROM error WHERE 1; ROLLBACK; DELETE FROM x WHERE field = 1' );
 
 		// cancelAtomic() doesn't raise a warning
 		$warning = [];
 		$this->database->begin( __METHOD__ );
 		$this->database->startAtomic( __METHOD__, Database::ATOMIC_CANCELABLE );
-		call_user_func( $doError );
+		$doError();
 		$this->database->cancelAtomic( __METHOD__ );
 		$this->database->delete( 'x', [ 'field' => 1 ], __METHOD__ );
 		$this->database->commit( __METHOD__ );
 		$this->assertSame( [], $warning );
 		// phpcs:ignore
-		$this->assertLastSql( 'BEGIN; SAVEPOINT wikimedia_rdbms_atomic1; DELETE FROM error WHERE 1; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1; DELETE FROM x WHERE field = \'1\'; COMMIT' );
+		$this->assertLastSql( 'BEGIN; SAVEPOINT wikimedia_rdbms_atomic1; DELETE FROM error WHERE 1; ROLLBACK TO SAVEPOINT wikimedia_rdbms_atomic1; DELETE FROM x WHERE field = 1; COMMIT' );
 
 		// Commit does raise a warning
 		$warning = [];
 		$this->database->begin( __METHOD__ );
-		call_user_func( $doError );
+		$doError();
 		$this->database->commit( __METHOD__ );
 		$this->assertSame( [ $expectWarning ], $warning );
 		$this->assertLastSql( 'BEGIN; DELETE FROM error WHERE 1; COMMIT' );
@@ -1959,12 +2382,12 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		// Deprecation only gets raised once
 		$warning = [];
 		$this->database->begin( __METHOD__ );
-		call_user_func( $doError );
+		$doError();
 		$this->database->delete( 'x', [ 'field' => 1 ], __METHOD__ );
 		$this->database->commit( __METHOD__ );
 		$this->assertSame( [ $expectWarning ], $warning );
 		// phpcs:ignore
-		$this->assertLastSql( 'BEGIN; DELETE FROM error WHERE 1; DELETE FROM x WHERE field = \'1\'; COMMIT' );
+		$this->assertLastSql( 'BEGIN; DELETE FROM error WHERE 1; DELETE FROM x WHERE field = 1; COMMIT' );
 	}
 
 	/**
@@ -1973,15 +2396,26 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 	public function testPrematureClose1() {
 		$fname = __METHOD__;
 		$this->database->begin( __METHOD__ );
-		$this->database->onTransactionIdle( function () use ( $fname ) {
+		$this->database->onTransactionCommitOrIdle( function () use ( $fname ) {
 			$this->database->query( 'SELECT 1', $fname );
 		} );
+		$this->database->onTransactionResolution( function () use ( $fname ) {
+			$this->database->query( 'SELECT 2', $fname );
+		} );
 		$this->database->delete( 'x', [ 'field' => 3 ], __METHOD__ );
-		$this->database->close();
+		try {
+			$this->database->close();
+			$this->fail( 'Expected exception not thrown' );
+		} catch ( DBUnexpectedError $ex ) {
+			$this->assertSame(
+				"Wikimedia\Rdbms\Database::close: transaction is still open (from $fname)",
+				$ex->getMessage()
+			);
+		}
 
 		$this->assertFalse( $this->database->isOpen() );
-		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = \'3\'; COMMIT; SELECT 1' );
-		$this->assertEquals( 0, $this->database->trxLevel() );
+		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = 3; ROLLBACK; SELECT 2' );
+		$this->assertSame( 0, $this->database->trxLevel() );
 	}
 
 	/**
@@ -1991,8 +2425,11 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		try {
 			$fname = __METHOD__;
 			$this->database->startAtomic( __METHOD__ );
-			$this->database->onTransactionIdle( function () use ( $fname ) {
+			$this->database->onTransactionCommitOrIdle( function () use ( $fname ) {
 				$this->database->query( 'SELECT 1', $fname );
+			} );
+			$this->database->onAtomicSectionCancel( function () use ( $fname ) {
+				$this->database->query( 'SELECT 2', $fname );
 			} );
 			$this->database->delete( 'x', [ 'field' => 3 ], __METHOD__ );
 			$this->database->close();
@@ -2000,14 +2437,14 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		} catch ( DBUnexpectedError $ex ) {
 			$this->assertSame(
 				'Wikimedia\Rdbms\Database::close: atomic sections ' .
-				'DatabaseSQLTest::testPrematureClose2 are still open.',
+				'DatabaseSQLTest::testPrematureClose2 are still open',
 				$ex->getMessage()
 			);
 		}
 
 		$this->assertFalse( $this->database->isOpen() );
-		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = \'3\'; ROLLBACK' );
-		$this->assertEquals( 0, $this->database->trxLevel() );
+		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = 3; ROLLBACK; SELECT 2' );
+		$this->assertSame( 0, $this->database->trxLevel() );
 	}
 
 	/**
@@ -2017,20 +2454,20 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 		try {
 			$this->database->setFlag( IDatabase::DBO_TRX );
 			$this->database->delete( 'x', [ 'field' => 3 ], __METHOD__ );
-			$this->assertEquals( 1, $this->database->trxLevel() );
+			$this->assertSame( 1, $this->database->trxLevel() );
 			$this->database->close();
 			$this->fail( 'Expected exception not thrown' );
 		} catch ( DBUnexpectedError $ex ) {
 			$this->assertSame(
 				'Wikimedia\Rdbms\Database::close: ' .
-				'mass commit/rollback of peer transaction required (DBO_TRX set).',
+				'expected mass rollback of all peer transactions (DBO_TRX set)',
 				$ex->getMessage()
 			);
 		}
 
 		$this->assertFalse( $this->database->isOpen() );
-		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = \'3\'; ROLLBACK' );
-		$this->assertEquals( 0, $this->database->trxLevel() );
+		$this->assertLastSql( 'BEGIN; DELETE FROM x WHERE field = 3; ROLLBACK' );
+		$this->assertSame( 0, $this->database->trxLevel() );
 	}
 
 	/**
@@ -2039,13 +2476,13 @@ class DatabaseSQLTest extends PHPUnit\Framework\TestCase {
 	public function testPrematureClose4() {
 		$this->database->setFlag( IDatabase::DBO_TRX );
 		$this->database->query( 'SELECT 1', __METHOD__ );
-		$this->assertEquals( 1, $this->database->trxLevel() );
+		$this->assertSame( 1, $this->database->trxLevel() );
 		$this->database->close();
 		$this->database->clearFlag( IDatabase::DBO_TRX );
 
 		$this->assertFalse( $this->database->isOpen() );
-		$this->assertLastSql( 'BEGIN; SELECT 1; COMMIT' );
-		$this->assertEquals( 0, $this->database->trxLevel() );
+		$this->assertLastSql( 'BEGIN; SELECT 1; ROLLBACK' );
+		$this->assertSame( 0, $this->database->trxLevel() );
 	}
 
 	/**

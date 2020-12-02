@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lakzon",
-			"Hosseinblue"
+			"Hosseinblue",
+			"Lakzon"
 		]
 	},
 	"gadgets-desc": "به کاربرها امکان انتخاب [[Special:Gadgets|ابزارهای شخصی سی‌اس‌اس و جاوااسکریپت]] را از طریق صفحهٔ [[Special:Preferences#mw-prefsection-gadgets|ترجیحات]] می‌دهد",
@@ -16,7 +16,7 @@
 	"gadgets-required-rights": "به {{PLURAL:$2|دسترسی|دسترسی‌های}} روبرو نیاز است:\n\n$1",
 	"gadgets-required-skins": "قابل دسترس در {{PLURAL:$2|پوستهٔ $1|پوسته‌های $1}}.",
 	"gadgets-default": "به‌طور پیش‌فرض برای همه فعال است.",
-	"gadgets-legacy": "ابزار بارگیری نشده است. لطفاً به ResourceLoader مهاجرت کنید. ([https://www.mediawiki.org/wiki/ResourceLoader/Migration_guide_(users) اطلاعات بیشتر])",
+	"gadgets-legacy": "ابزار بارگیری نشده است. لطفاً به ResourceLoader مهاجرت کنید. ([https://www.mediawiki.org/wiki/Special:MyLanguage/ResourceLoader/Migration_guide_(users) اطلاعات بیشتر])",
 	"gadgets-export": "در بِردن",
 	"gadgets-export-title": "برون‌بری ابزار",
 	"gadgets-not-found": "ابزار «$1» یافت نشد.",

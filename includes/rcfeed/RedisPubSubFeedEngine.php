@@ -29,15 +29,15 @@
  *
  * @par Example:
  * @code
- * $wgRCFeeds['redis'] = array(
+ * $wgRCFeeds['redis'] = [
  *      'formatter' => 'JSONRCFeedFormatter',
  *      'uri'       => "redis://127.0.0.1:6379/rc.$wgDBname",
- * );
+ * ];
  * @endcode
  *
  * @since 1.22
  */
-class RedisPubSubFeedEngine extends RCFeedEngine {
+class RedisPubSubFeedEngine extends FormattedRCFeed {
 
 	/**
 	 * @see FormattedRCFeed::send
@@ -68,8 +68,8 @@ class RedisPubSubFeedEngine extends RCFeedEngine {
 		if ( $conn !== false ) {
 			$conn->publish( $channel, $line );
 			return true;
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 }

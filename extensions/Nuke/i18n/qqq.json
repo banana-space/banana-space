@@ -3,17 +3,17 @@
 		"authors": [
 			"Jeroen De Dauw",
 			"Jon Harald Søby",
+			"Liuxinyu970226",
+			"Matěj Suchánek",
 			"Meno25",
 			"Purodha",
 			"SPQRobin",
 			"Shirayuki",
 			"Siebrand",
+			"TTO",
 			"The Evil IP address",
 			"Umherirrender",
-			"Yekrats",
-			"Liuxinyu970226",
-			"Matěj Suchánek",
-			"TTO"
+			"Yekrats"
 		]
 	},
 	"nuke": "{{doc-special|Nuke}}\nThe Nuke extension allows for sysops to delete a large number of pages (\"Mass delete\").\nFor more information, see https://www.mediawiki.org/wiki/Extension:Nuke\n{{Identical|Mass delete}}",
@@ -26,10 +26,8 @@
 	"nuke-multiplepeople": "Reason for deletion in logs, when pages created by multiple users were deleted.\n\n{{msg-mw|nuke-defaultreason}} is used when pages created by only 1 user are deleted.",
 	"nuke-tools": "Used as intro text for the Nuke (mass deletion) form.",
 	"nuke-submit-user": "The submit button of a form used to generate a list of pages. \"List\" is a verb here.",
-	"nuke-toggleinvert": "Used to invert checkbox selection.\n{{Identical|Invert}}",
 	"nuke-submit-delete": "Submit button to delete the selected pages.",
 	"right-nuke": "{{doc-right|nuke}}",
-	"nuke-select": "Parameters:\n* $1 - two links: {{msg-mw|Powersearch-toggleall}} and {{msg-mw|Powersearch-togglenone}} which respectively selects all pages and de-selects all\npages\n{{Identical|Select}}",
 	"nuke-userorip": "Used as label for \"target\" input box.",
 	"nuke-maxpages": "Used as label for \"nuke limit\" input box.",
 	"nuke-editby": "This message is followed by {{msg-mw|Comma-separator}} and {{msg-mw|Nuke-viewchanges}}.\n\nParameters:\n* $1 - a username",

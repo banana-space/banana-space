@@ -6,12 +6,16 @@
 			"Ignatus",
 			"KPu3uC B Poccuu",
 			"Kaganer",
-			"Александр Сигачёв",
-			"Okras",
+			"Mouse21",
+			"Movses",
 			"NBS",
-			"Mouse21"
+			"Okras",
+			"Vlad5250",
+			"Александр Сигачёв"
 		]
 	},
+	"action-tboverride": "игнорирование чёрного списка имён страниц или участников",
+	"action-tboverride-account": "игнорирование чёрного списка имён участников",
 	"action-titleblacklistlog": "просмотр журнала запрещённыx названий",
 	"log-name-titleblacklist": "Журнал списка запрещённыx названий",
 	"log-description-titleblacklist": "Это журнал, отслеживающий срабатывания списка запрещённых названий.",
@@ -24,18 +28,10 @@
 	"titleblacklist-forbidden-upload": "Файл с названием «$2» был запрещён к созданию. Он попадает под следующую запись списка запрещенных названий: <code>$1</code>",
 	"titleblacklist-forbidden-new-account": "Запрещено использовать имя участника «$2».\nИмя соответствует следующей записи из чёрного списка: <code>$1</code>",
 	"titleblacklist-invalid": "{{PLURAL:$1|1=Следующая строка|Следующие строки}} в списке запрещённых названий {{PLURAL:$1|1=не является правильным регулярным выражением|не являются правильными регулярными выражениями}}. Пожалуйста, исправьте {{PLURAL:$1|1=её|их}} перед сохранением:",
-	"titleblacklist-override": "Игнорировать чёрный список",
+	"titleblacklist-override": "Перезаписать чёрный список, если таковой уже имеется",
 	"titleblacklist-override-help": "Участники с достаточными правами могут установить его для игнорирования проверок список запрещённыx названий.",
-	"titleblacklist-warning": "<strong>Примечание:</strong> Эту страницу могут редактировать только администраторы и другие участники с правами <code>tboverride</code>, потому что, похоже, она совпадает со следующей записью из «чёрного списка» названий:<br /><code>$1</code>",
-	"right-tboverride": "игнорирование чёрного списка имён страниц или участников",
-	"right-tboverride-account": "игнорирование чёрного списка имён участников",
-	"right-titleblacklistlog": "просмотр журнала запрещённыx названий",
-	"apihelp-titleblacklist-description": "Подтвердите заголовок страницы, имя файла или имя пользователя в списке TitleBlacklist.",
-	"apihelp-titleblacklist-summary": "Подтвердите заголовок страницы, имя файла или имя пользователя в списке TitleBlacklist.",
-	"apihelp-titleblacklist-param-title": "Строка для проверки против черного списка.",
-	"apihelp-titleblacklist-param-action": "Действие, которое должно быть проверено.",
-	"apihelp-titleblacklist-param-nooverride": "Не пытайтесь переопределить список запрещённыx названий.",
-	"apihelp-titleblacklist-example-1": "Проверить, занесена ли статья [[Foo]] в чёрный список",
-	"apihelp-titleblacklist-example-2": "Проверить, занесена ли статья [[Bar]] в чёрный список для редактирования",
-	"apihelp-createaccount-param-ignoretitleblacklist": "Игнорировать проверки подмены (требует одного из следующих прав: <code>tboverride</code>, <code>tboverride-account</code>)."
+	"titleblacklist-warning": "<strong>Внимание: Эту страницу могут редактировать только администраторы и другие участники с правами <code>tboverride</code>, потому что она совпадает со следующей записью из «чёрного списка» названий:</strong><br /><code>$1</code>",
+	"right-tboverride": "Игнорирование чёрного списка имён страниц или участников",
+	"right-tboverride-account": "Игнорирование чёрного списка имён участников",
+	"right-titleblacklistlog": "Просмотр журнала запрещённых названий"
 }

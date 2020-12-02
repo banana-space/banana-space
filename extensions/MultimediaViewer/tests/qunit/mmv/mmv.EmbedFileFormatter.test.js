@@ -1,4 +1,4 @@
-( function ( mw ) {
+( function () {
 	QUnit.module( 'mmv.EmbedFileFormatter', QUnit.newMwEnvironment() );
 
 	function createEmbedFileInfo( options ) {
@@ -28,7 +28,11 @@
 			repoInfo = { displayName: options.siteName, getSiteLink:
 				function () { return options.siteUrl; } };
 
-		return new mw.mmv.model.EmbedFileInfo( imageInfo, repoInfo, options.caption );
+		return {
+			imageInfo: imageInfo,
+			repoInfo: repoInfo,
+			caption: options.caption
+		};
 	}
 
 	QUnit.test( 'EmbedFileFormatter constructor sanity check', function ( assert ) {
@@ -66,13 +70,13 @@
 
 	QUnit.test( 'getSiteLink():', function ( assert ) {
 		var repoInfo = new mw.mmv.model.Repo( 'Wikipedia', '//wikipedia.org/favicon.ico', true ),
-			info = new mw.mmv.model.EmbedFileInfo( {}, repoInfo ),
+			info = { imageInfo: {}, repoInfo: repoInfo },
 			formatter = new mw.mmv.EmbedFileFormatter(),
 			siteUrl = repoInfo.getSiteLink(),
 			siteLink = formatter.getSiteLink( info );
 
-		assert.ok( siteLink.match( 'Wikipedia' ), 'Site name is present in site link' );
-		assert.ok( siteLink.indexOf( siteUrl ) !== -1, 'Site URL is present in site link' );
+		assert.strictEqual( siteLink.indexOf( 'Wikipedia' ) !== -1, true, 'Site name is present in site link' );
+		assert.strictEqual( siteLink.indexOf( siteUrl ) !== -1, true, 'Site URL is present in site link' );
 	} );
 
 	QUnit.test( 'getThumbnailHtml():', function ( assert ) {
@@ -112,6 +116,7 @@
 		assert.ok( generatedHtml.match( width ), 'Width appears in generated HTML' );
 		assert.ok( generatedHtml.match( height ), 'Height appears in generated HTML' );
 		// .includes() for checking the short url since it contains a ? (bad for regex). Could escape instead.
+		// eslint-disable-next-line no-restricted-syntax
 		assert.ok( generatedHtml.includes( filePageShortUrl ), 'Short URL appears in generated HTML' );
 
 		// Bylines, no license and site
@@ -123,11 +128,12 @@
 		assert.ok( generatedHtml.match( titleText ), 'Title appears in generated HTML.' );
 		assert.ok( generatedHtml.match( filePageUrl ), 'Page url appears in generated HTML.' );
 		assert.ok( generatedHtml.match( thumbUrl ), 'Thumbnail url appears in generated HTML' );
-		assert.ok( !generatedHtml.match( 'Public License' ), 'License should not appear in generated HTML' );
+		assert.notOk( generatedHtml.match( 'Public License' ), 'License should not appear in generated HTML' );
 		assert.ok( generatedHtml.match( 'Homer' ), 'Author appears in generated HTML' );
 		assert.ok( generatedHtml.match( 'Iliad' ), 'Source appears in generated HTML' );
 		assert.ok( generatedHtml.match( width ), 'Width appears in generated HTML' );
 		assert.ok( generatedHtml.match( height ), 'Height appears in generated HTML' );
+		// eslint-disable-next-line no-restricted-syntax
 		assert.ok( generatedHtml.includes( filePageShortUrl ), 'Short URL appears in generated HTML' );
 
 		// No bylines, license and site
@@ -141,10 +147,11 @@
 		assert.ok( generatedHtml.match( filePageUrl ), 'Page url appears in generated HTML.' );
 		assert.ok( generatedHtml.match( thumbUrl ), 'Thumbnail url appears in generated HTML' );
 		assert.ok( generatedHtml.match( 'Public License' ), 'License appears in generated HTML' );
-		assert.ok( !generatedHtml.match( 'Homer' ), 'Author should not appear in generated HTML' );
-		assert.ok( !generatedHtml.match( 'Iliad' ), 'Source should not appear in generated HTML' );
+		assert.notOk( generatedHtml.match( 'Homer' ), 'Author should not appear in generated HTML' );
+		assert.notOk( generatedHtml.match( 'Iliad' ), 'Source should not appear in generated HTML' );
 		assert.ok( generatedHtml.match( width ), 'Width appears in generated HTML' );
 		assert.ok( generatedHtml.match( height ), 'Height appears in generated HTML' );
+		// eslint-disable-next-line no-restricted-syntax
 		assert.ok( generatedHtml.includes( filePageShortUrl ), 'Short URL appears in generated HTML' );
 
 		// No bylines, no license and site
@@ -155,11 +162,12 @@
 		assert.ok( generatedHtml.match( titleText ), 'Title appears in generated HTML.' );
 		assert.ok( generatedHtml.match( filePageUrl ), 'Page url appears in generated HTML.' );
 		assert.ok( generatedHtml.match( thumbUrl ), 'Thumbnail url appears in generated HTML' );
-		assert.ok( !generatedHtml.match( 'Public License' ), 'License should not appear in generated HTML' );
-		assert.ok( !generatedHtml.match( 'Homer' ), 'Author should not appear in generated HTML' );
-		assert.ok( !generatedHtml.match( 'Iliad' ), 'Source should not appear in generated HTML' );
+		assert.notOk( generatedHtml.match( 'Public License' ), 'License should not appear in generated HTML' );
+		assert.notOk( generatedHtml.match( 'Homer' ), 'Author should not appear in generated HTML' );
+		assert.notOk( generatedHtml.match( 'Iliad' ), 'Source should not appear in generated HTML' );
 		assert.ok( generatedHtml.match( width ), 'Width appears in generated HTML' );
 		assert.ok( generatedHtml.match( height ), 'Height appears in generated HTML' );
+		// eslint-disable-next-line no-restricted-syntax
 		assert.ok( generatedHtml.includes( filePageShortUrl ), 'Short URL appears in generated HTML' );
 
 	} );
@@ -221,7 +229,7 @@
 			}
 		} );
 
-		assert.strictEqual( txt, 'By Author - Source, link', 'Sanity check' );
+		assert.strictEqual( txt, '(multimediaviewer-text-embed-credit-text-b: (multimediaviewer-credit: Author, Source), link)', 'Sanity check' );
 
 		txt = formatter.getCreditText( {
 			repoInfo: {
@@ -243,7 +251,7 @@
 			}
 		} );
 
-		assert.strictEqual( txt, 'By Author - Source, WTFPL v2, link', 'License message works' );
+		assert.strictEqual( txt, '(multimediaviewer-text-embed-credit-text-bl: (multimediaviewer-credit: Author, Source), WTFPL v2, link)', 'License message works' );
 	} );
 
 	QUnit.test( 'getCreditHtml():', function ( assert ) {
@@ -265,7 +273,11 @@
 			}
 		} );
 
-		assert.strictEqual( html, 'By Author - Source, <a href="some link">Link</a>', 'Sanity check' );
+		assert.strictEqual(
+			html,
+			'(multimediaviewer-html-embed-credit-text-b: (multimediaviewer-credit: Author, Source), <a href="some link">(multimediaviewer-html-embed-credit-link-text)</a>)',
+			'Sanity check'
+		);
 
 		html = formatter.getCreditHtml( {
 			repoInfo: {
@@ -288,6 +300,10 @@
 			}
 		} );
 
-		assert.strictEqual( html, 'By Author - Source, <a href="http://www.wtfpl.net/">WTFPL v2</a>, <a href="some link">Link</a>', 'Sanity check' );
+		assert.strictEqual(
+			html,
+			'(multimediaviewer-html-embed-credit-text-bl: (multimediaviewer-credit: Author, Source), <a href="http://www.wtfpl.net/">WTFPL v2</a>, <a href="some link">(multimediaviewer-html-embed-credit-link-text)</a>)',
+			'Sanity check'
+		);
 	} );
-}( mediaWiki ) );
+}() );

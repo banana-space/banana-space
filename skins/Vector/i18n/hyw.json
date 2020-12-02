@@ -1,14 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
+			"ArmenBakkalian",
 			"Azniv Stepanian",
-			"ArmenBakkalian"
+			"Rajemian",
+			"Դավիթ Սարոյան"
 		]
 	},
 	"vector-action-addsection": "Աւելցնել քննարկում",
+	"vector-action-delete": "Ջնջել",
+	"vector-action-move": "Տեղափոխել այս էջը",
+	"vector-action-protect": "Պահել",
 	"vector-view-create": "Ստեղծել",
 	"vector-view-edit": "Խմբագրել",
-	"vector-view-history": "Դիտել պատմութիւնը",
+	"vector-view-history": "Տեսնել պատմութիւնը",
 	"vector-view-view": "Կարդալ",
 	"vector-more-actions": "Աւելին"
 }

@@ -15,8 +15,5 @@
 	"fancycaptcha-edit": "Для рэдагаваньня гэтай старонкі, калі ласка, увядзіце словы, якія паказаныя ў выяве ([[Special:Captcha/help|болей інфармацыі]]):",
 	"fancycaptcha-imgcaptcha-ph": "Увядзіце тэкст, які бачыце на выяве",
 	"fancycaptcha-sendemail": "У мэтах абароны вікі ад аўтаматычнага спаму, мы просім вас увесьці словы, паказаныя ў полі ніжэй ([[Special:Captcha/help|дадатковая інфармацыя]]):",
-	"fancycaptcha-reload-text": "Абнавіць",
-	"apihelp-fancycaptchareload-description": "Атрымаць новую FancyCaptcha.",
-	"apihelp-fancycaptchareload-summary": "Атрымаць новую FancyCaptcha.",
-	"apihelp-fancycaptchareload-example-1": "Атрымаць новую FancyCaptcha"
+	"fancycaptcha-reload-text": "Абнавіць"
 }

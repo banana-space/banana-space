@@ -1,21 +1,29 @@
 {
 	"@metadata": {
 		"authors": [
+			"BaRaN6161 TURK",
 			"HakanIST",
+			"Rapsar",
 			"Sayginer"
 		]
 	},
-	"timeless-search-placeholder": "Yaklaşık {{NUMBEROFARTICLES}} sayfayı ara",
-	"timeless-loggedin": "Hesabınız",
+	"timeless-desc": "Brandon Harris'in Winter prototipinden sonra tasarlanan zamansız bir görünüm ve Wikimedia Vakfı'nın çeşitli stilleri",
 	"timeless-anonymous": "Anonim",
+	"timeless-loggedinas": "'''$1''' olarak oturum açıldı",
 	"timeless-notloggedin": "Oturum açık değil",
-	"timeless-userpage": "Kullanıcı sayfası",
+	"timeless-userpage": "{{GENDER:$1|Kullanıcı}} sayfası",
+	"timeless-talkpage": "{{GENDER:$1|Kullanıcı}} tartışması",
 	"timeless-pagelog": "Sayfa günlükleri",
 	"timeless-more": "Daha fazla",
 	"timeless-sitetools": "Viki araçları",
 	"timeless-pageactions": "Sayfa araçları",
-	"timeless-userpagetools": "Kullanıcı araçları",
-	"timeless-namespaces": "İsim alanları",
-	"timeless-pagetools": "Sayfa işlemleri",
-	"timeless-languages": "Diller"
+	"timeless-userpagetools": "Kullanıcı sayfası araçları",
+	"timeless-action-addsection": "Yeni konu",
+	"timeless-view-view": "Oku",
+	"timeless-pagemisc": "Daha fazla",
+	"timeless-namespaces": "Ad alanları",
+	"timeless-pagetools": "Sayfa eylemleri",
+	"timeless-languages": "Diller",
+	"timeless-projects": "Diğer projeler",
+	"timeless.js": "/* Buradaki tüm JavaScript, Timeless arayüz kullanıcıları için yüklenecek */"
 }

@@ -6,8 +6,8 @@
 			"Assele",
 			"Haqmar",
 			"Sagan",
-			"Рустам Нурыев",
-			"Ләйсән"
+			"Ләйсән",
+			"Рустам Нурыев"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Китап",
@@ -20,8 +20,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Бирелгән исем аҫтында ҡабаттан ҡулланырға",
 	"cite-ve-dialog-reference-options-section": "Көйләүҙәр",
 	"cite-ve-dialog-reference-title": "Иҫкәрмәләр",
-	"cite-ve-dialog-reference-useexisting-full-label": "Биттә күрһәтелгән сығанаҡты ҡабаттан ҡулланыу",
-	"cite-ve-dialog-reference-useexisting-label": "Булған һылтанманы ҡулланыу",
 	"cite-ve-dialog-reference-useexisting-tool": "Яңынан ҡулланыу",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Дөйөм һылтанмалар исемлеге",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "\"$1\" төркөмө өсөн иҫкәрмәләр исемлеге",

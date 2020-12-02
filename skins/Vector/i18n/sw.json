@@ -2,8 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Lloffiwr",
+			"Muddyb",
 			"Muddyb Blast Producer",
-			"Muddyb"
+			"Yasen igra"
 		]
 	},
 	"vector-action-addsection": "Weka mada",
@@ -16,5 +17,6 @@
 	"vector-view-edit": "Hariri",
 	"vector-view-history": "Fungua historia",
 	"vector-view-view": "Soma",
-	"vector-view-viewsource": "Tazama msimbo"
+	"vector-view-viewsource": "Tazama msimbo",
+	"vector-more-actions": "Zaidi"
 }

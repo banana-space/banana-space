@@ -20,6 +20,7 @@
  *
  * @file
  * @ingroup Maintenance
+ * @phan-file-suppress PhanUndeclaredProperty Lots of custom properties
  */
 
 require_once __DIR__ . '/Maintenance.php';
@@ -59,7 +60,7 @@ class DeprecatedInterfaceFinder extends FileAwareNodeVisitor {
 		// Sort results by version, then by filename, then by name.
 		foreach ( $this->foundNodes as $version => &$nodes ) {
 			uasort( $nodes, function ( $a, $b ) {
-				return ( $a['filename'] . $a['name'] ) < ( $b['filename'] . $b['name'] ) ? -1 : 1;
+				return ( $a['filename'] . $a['name'] ) <=> ( $b['filename'] . $b['name'] );
 			} );
 		}
 		ksort( $this->foundNodes );

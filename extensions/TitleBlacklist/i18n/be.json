@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Artsiom91"
+		]
+	},
+	"action-titleblacklistlog": "прагляд журнала забароненых назваў",
+	"log-name-titleblacklist": "Журнал спісу забароненых назваў",
+	"log-description-titleblacklist": "Гэта журнал, які адсочвае спрацоўванні спісу забароненых назваў.",
+	"right-titleblacklistlog": "прагляд журнала забароненых назваў"
+}

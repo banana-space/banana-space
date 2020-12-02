@@ -5,8 +5,12 @@
  * @license MIT
  */
 
+/* Remove the styling of the preview wrapper, and any
+ * generated paragraph wrappers
+ */
+.ve-ce-mwReferencesListNode .ve-ui-previewElement,
 .ve-ce-mwReferencesListNode .ve-ce-generated-wrapper {
-	display: inline-block;
+	display: inline;
 }
 
 .ve-ce-mwReferencesListNode-muted {

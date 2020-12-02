@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Daniel Kinzler, brightbyte.d",
+			"Zoranzoki21"
+		]
+	},
+	"apihelp-query+gadgetcategories-description": "{{doc-apihelp-description|query+gadgetcategories}}",
+	"apihelp-query+gadgetcategories-summary": "{{doc-apihelp-summary|query+gadgetcategories}}",
+	"apihelp-query+gadgetcategories-param-prop": "{{doc-apihelp-param|query+gadgetcategories|prop}}",
+	"apihelp-query+gadgetcategories-param-names": "{{doc-apihelp-param|query+gadgetcategories|names}}",
+	"apihelp-query+gadgetcategories-example-1": "{{doc-apihelp-example|query+gadgetcategories}}",
+	"apihelp-query+gadgetcategories-example-2": "{{doc-apihelp-example|query+gadgetcategories}}",
+	"apihelp-query+gadgets-description": "{{doc-apihelp-description|query+gadgets}}",
+	"apihelp-query+gadgets-summary": "{{doc-apihelp-summary|query+gadgets}}",
+	"apihelp-query+gadgets-param-prop": "{{doc-apihelp-param|query+gadgets|prop}}",
+	"apihelp-query+gadgets-param-categories": "{{doc-apihelp-param|query+gadgets|categories}}",
+	"apihelp-query+gadgets-param-ids": "{{doc-apihelp-param|query+gadgets|ids}}",
+	"apihelp-query+gadgets-param-allowedonly": "{{doc-apihelp-param|query+gadgets|allowedonly}}",
+	"apihelp-query+gadgets-param-enabledonly": "{{doc-apihelp-param|query+gadgets|enabledonly}}",
+	"apihelp-query+gadgets-example-1": "{{doc-apihelp-example|query+gadgets}}",
+	"apihelp-query+gadgets-example-2": "{{doc-apihelp-example|query+gadgets}}",
+	"apihelp-query+gadgets-example-3": "{{doc-apihelp-example|query+gadgets}}",
+	"apihelp-query+gadgets-example-4": "{{doc-apihelp-example|query+gadgets}}",
+	"apihelp-query+gadgets-example-5": "{{doc-apihelp-example|query+gadgets}}"
+}

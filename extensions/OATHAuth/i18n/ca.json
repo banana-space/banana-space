@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fitoschido",
+			"Paucabot"
+		]
+	},
+	"oathauth-auth-ui": "Introduïu un codi de verificació provinent del vostre dispositiu d’autenticació.",
+	"oathauth-module-totp-label": "TOTP (testimoni d’un sol ús)",
+	"oathauth-ui-manage": "Gestiona",
+	"oathmanage": "Gestiona autenticació de doble factor",
+	"oathauth-ui-available-modules": "Mètodes disponibles"
+}

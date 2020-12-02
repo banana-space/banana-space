@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ansumang",
-			"Bellayet",
-			"Nasir8891",
-			"Zaheen",
 			"Aftab1995",
 			"Aftabuzzaman",
+			"Ansumang",
+			"Bellayet",
+			"Bodhisattwa",
+			"Nasir8891",
+			"Zaheen",
 			"আজিজ",
-			"Bodhisattwa"
+			"আফতাবুজ্জামান"
 		]
 	},
 	"categorytree": "বিষয়শ্রেণীবৃক্ষ",
@@ -38,9 +39,5 @@
 	"categorytree-no-pages": "কোন পাতা বা উপ-বিষয়শ্রেণী নেই",
 	"categorytree-not-found": "<i>$1</i> বিষয়শ্রেণীটি পাওয়া যায়নি",
 	"categorytree-error": "উপাত্ত লোডকরণে সমস্যা।",
-	"categorytree-retry": "অনুগ্রহ করে একটু অপেক্ষা করুন ও আবার চেষ্টা করুন।",
-	"apihelp-categorytree-description": "CategoryTree এক্সটেনশনের জন্য আভ্যন্তরীণ মডিউল।",
-	"apihelp-categorytree-summary": "CategoryTree এক্সটেনশনের জন্য আভ্যন্তরীণ মডিউল।",
-	"apihelp-categorytree-param-category": "বিষয়শ্রেণী নামস্থানে শিরোনাম, উপসর্গ উপেক্ষা করা হবে যদি দেয়া হয়।",
-	"apierror-categorytree-invalidjson": "বিকল্প অবশ্যই একটি বৈধ JSON বস্তু হতে হবে।"
+	"categorytree-retry": "অনুগ্রহ করে একটু অপেক্ষা করুন ও আবার চেষ্টা করুন।"
 }

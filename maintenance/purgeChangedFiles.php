@@ -21,6 +21,8 @@
  * @ingroup Maintenance
  */
 
+use MediaWiki\MediaWikiServices;
+
 require_once __DIR__ . '/Maintenance.php';
 
 /**
@@ -77,7 +79,7 @@ class PurgeChangedFiles extends Maintenance {
 		global $wgHTCPRouting;
 
 		if ( $this->hasOption( 'htcp-dest' ) ) {
-			$parts = explode( ':', $this->getOption( 'htcp-dest' ) );
+			$parts = explode( ':', $this->getOption( 'htcp-dest' ), 2 );
 			if ( count( $parts ) < 2 ) {
 				// Add default htcp port
 				$parts[] = '4827';
@@ -136,7 +138,7 @@ class PurgeChangedFiles extends Maintenance {
 	 * @param string $type Type of change to find
 	 */
 	protected function purgeFromLogType( $type ) {
-		$repo = RepoGroup::singleton()->getLocalRepo();
+		$repo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
 		$dbr = $this->getDB( DB_REPLICA );
 
 		foreach ( self::$typeMappings[$type] as $logType => $logActions ) {

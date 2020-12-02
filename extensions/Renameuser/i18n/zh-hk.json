@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liuxinyu970226"
+		]
+	},
+	"renameuser": "重新命名用戶",
+	"renameuser-linkoncontribs": "重新命名用戶",
+	"renameuser-desc": "加入用來重新命名用戶的[[Special:RenameUser|特殊頁面]]（需要開啟 ''renameuser'' 權限）",
+	"renameuserold": "目前的用戶名稱：",
+	"logentry-renameuser-renameuser": "$1 {{GENDER:$2|重新命名}}用戶 $4 (已編輯 {{PLURAL:$6|$6 次}}) 為 $5",
+	"action-renameuser": "重新命名用戶",
+	"right-renameuser": "重新命名用戶"
+}

@@ -1,6 +1,6 @@
 <?php
 
-class ArticleTest extends MediaWikiTestCase {
+class ArticleTest extends \MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var Title
@@ -12,14 +12,14 @@ class ArticleTest extends MediaWikiTestCase {
 	private $article;
 
 	/** creates a title object and its article object */
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		$this->title = Title::makeTitle( NS_MAIN, 'SomePage' );
 		$this->article = new Article( $this->title );
 	}
 
 	/** cleanup title object and its article object */
-	protected function tearDown() {
+	protected function tearDown() : void {
 		parent::tearDown();
 		$this->title = null;
 		$this->article = null;
@@ -29,7 +29,8 @@ class ArticleTest extends MediaWikiTestCase {
 	 * @covers Article::__get
 	 */
 	public function testImplementsGetMagic() {
-		$this->assertEquals( false, $this->article->mLatest, "Article __get magic" );
+		$this->filterDeprecated( '/Accessing Article::\$mLatest/' );
+		$this->assertFalse( $this->article->mLatest, "Article __get magic" );
 	}
 
 	/**
@@ -37,6 +38,8 @@ class ArticleTest extends MediaWikiTestCase {
 	 * @covers Article::__set
 	 */
 	public function testImplementsSetMagic() {
+		$this->filterDeprecated( '/Accessing Article::\$mLatest/' );
+		$this->filterDeprecated( '/Setting Article::\$mLatest/' );
 		$this->article->mLatest = 2;
 		$this->assertEquals( 2, $this->article->mLatest, "Article __set magic" );
 	}
@@ -46,12 +49,21 @@ class ArticleTest extends MediaWikiTestCase {
 	 * @covers Article::__set
 	 */
 	public function testGetOrSetOnNewProperty() {
+		$this->filterDeprecated(
+			'/Accessing Article::\$ext_someNewProperty/'
+		);
+		$this->filterDeprecated(
+			'/Setting Article::\$ext_someNewProperty/'
+		);
 		$this->article->ext_someNewProperty = 12;
 		$this->assertEquals( 12, $this->article->ext_someNewProperty,
 			"Article get/set magic on new field" );
-
+		$this->assertEquals( 12, $this->article->getPage()->ext_someNewProperty,
+			"Article get/set magic on new field" );
 		$this->article->ext_someNewProperty = -8;
 		$this->assertEquals( -8, $this->article->ext_someNewProperty,
 			"Article get/set magic on update to new field" );
+		$this->assertEquals( -8, $this->article->getPage()->ext_someNewProperty,
+			"Article get/set magic on new field" );
 	}
 }

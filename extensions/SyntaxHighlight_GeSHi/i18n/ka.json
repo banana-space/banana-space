@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"გიორგიმელა",
-			"David1010"
+			"David1010",
+			"გიორგიმელა"
 		]
 	},
 	"syntaxhighlight-desc": "გაძლევთ ნებართვას ფამოიყენოთ თეგი <code>&lt;syntaxhighlight&gt;</code> სინტაქსის გასანათებლად[http://pygments.org/ Pygments-ის] მეშვეობით",

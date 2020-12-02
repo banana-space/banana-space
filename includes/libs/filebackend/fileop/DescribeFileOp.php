@@ -32,22 +32,24 @@ class DescribeFileOp extends FileOp {
 
 	protected function doPrecheck( array &$predicates ) {
 		$status = StatusValue::newGood();
-		// Check if the source file exists
-		if ( !$this->fileExists( $this->params['src'], $predicates ) ) {
+
+		// Check source file existence
+		$srcExists = $this->fileExists( $this->params['src'], $predicates );
+		if ( $srcExists === false ) {
 			$status->fatal( 'backend-fail-notexists', $this->params['src'] );
 
 			return $status;
-			// Check if a file can be placed/changed at the source
-		} elseif ( !$this->backend->isPathUsableInternal( $this->params['src'] ) ) {
-			$status->fatal( 'backend-fail-usable', $this->params['src'] );
-			$status->fatal( 'backend-fail-describe', $this->params['src'] );
+		} elseif ( $srcExists === FileBackend::EXISTENCE_ERROR ) {
+			$status->fatal( 'backend-fail-stat', $this->params['src'] );
 
 			return $status;
 		}
-		// Update file existence predicates
-		$predicates['exists'][$this->params['src']] =
-			$this->fileExists( $this->params['src'], $predicates );
-		$predicates['sha1'][$this->params['src']] =
+
+		// Update file existence predicates since the operation is expected to be allowed to run
+		$predicates[self::ASSUMED_EXISTS][$this->params['src']] = $srcExists;
+		$predicates[self::ASSUMED_SIZE][$this->params['src']] =
+			$this->fileSize( $this->params['src'], $predicates );
+		$predicates[self::ASSUMED_SHA1][$this->params['src']] =
 			$this->fileSha1( $this->params['src'], $predicates );
 
 		return $status; // safe to call attempt()

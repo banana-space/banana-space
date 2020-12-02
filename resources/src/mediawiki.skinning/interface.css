@@ -6,6 +6,8 @@
  * they are outputted by the actual MonoBook/Vector code by convention.
  */
 
+/* stylelint-disable selector-class-pattern */
+
 /* Categories */
 .catlinks {
 	border: 1px solid #a2a9b1;
@@ -23,7 +25,7 @@ textarea {
 
 .editOptions {
 	background-color: #eaecf0;
-	color: #222;
+	color: #202122;
 	border: 1px solid #c8ccd1;
 	border-top: 0;
 	padding: 1em 1em 1.5em 1em;
@@ -50,23 +52,9 @@ textarea {
 	margin-bottom: 0.9em;
 }
 
-.firstHeading {
-	margin-bottom: 0.1em;
-	/* These two rules hack around T4013 (fix for more limited T13325).
-	 * When T4013 is fixed properly, they should be removed. */
-	line-height: 1.2em;
-	padding-bottom: 0;
-}
-
 /* Sub-navigation */
 #siteSub {
 	display: none;
-}
-
-#jump-to-nav {
-	/* Negate #contentSub's margin and replicate it so that the jump to links don't affect the spacing */
-	margin-top: -1.4em;
-	margin-bottom: 1.4em;
 }
 
 #contentSub,
@@ -80,4 +68,9 @@ textarea {
 
 span.subpages {
 	display: block;
+}
+
+/* Hide links which require JavaScript to work */
+.client-nojs #t-print {
+	display: none; /* T167956 */
 }

@@ -23,8 +23,9 @@
 
 namespace MediaWiki\Session;
 
-use Psr\Log\LoggerInterface;
 use BagOStuff;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Adapter for PHP's session handling
@@ -37,9 +38,11 @@ class PHPSessionHandler implements \SessionHandlerInterface {
 
 	/** @var bool Whether PHP session handling is enabled */
 	protected $enable = false;
+
+	/** @var bool */
 	protected $warn = true;
 
-	/** @var SessionManager|null */
+	/** @var SessionManagerInterface|null */
 	protected $manager;
 
 	/** @var BagOStuff|null */
@@ -148,13 +151,13 @@ class PHPSessionHandler implements \SessionHandlerInterface {
 
 	/**
 	 * Set the manager, store, and logger
-	 * @private Use self::install().
-	 * @param SessionManager $manager
+	 * @internal Use self::install().
+	 * @param SessionManagerInterface $manager
 	 * @param BagOStuff $store
 	 * @param LoggerInterface $logger
 	 */
 	public function setManager(
-		SessionManager $manager, BagOStuff $store, LoggerInterface $logger
+		SessionManagerInterface $manager, BagOStuff $store, LoggerInterface $logger
 	) {
 		if ( $this->manager !== $manager ) {
 			// Close any existing session before we change stores
@@ -169,38 +172,11 @@ class PHPSessionHandler implements \SessionHandlerInterface {
 	}
 
 	/**
-	 * Workaround for PHP5 bug
-	 *
-	 * PHP5 has a bug in handling boolean return values for
-	 * SessionHandlerInterface methods, it expects 0 or -1 instead of true or
-	 * false. See <https://wiki.php.net/rfc/session.user.return-value>.
-	 *
-	 * PHP7 and HHVM are not affected.
-	 *
-	 * @todo When we drop support for Zend PHP 5, this can be removed.
-	 * @return bool|int
-	 * @codeCoverageIgnore
-	 */
-	protected static function returnSuccess() {
-		return defined( 'HHVM_VERSION' ) || version_compare( PHP_VERSION, '7.0.0', '>=' ) ? true : 0;
-	}
-
-	/**
-	 * Workaround for PHP5 bug
-	 * @see self::returnSuccess()
-	 * @return bool|int
-	 * @codeCoverageIgnore
-	 */
-	protected static function returnFailure() {
-		return defined( 'HHVM_VERSION' ) || version_compare( PHP_VERSION, '7.0.0', '>=' ) ? false : -1;
-	}
-
-	/**
 	 * Initialize the session (handler)
-	 * @private For internal use only
+	 * @internal For internal use only
 	 * @param string $save_path Path used to store session files (ignored)
 	 * @param string $session_name Session name (ignored)
-	 * @return bool|int Success (see self::returnSuccess())
+	 * @return true
 	 */
 	public function open( $save_path, $session_name ) {
 		if ( self::$instance !== $this ) {
@@ -209,25 +185,25 @@ class PHPSessionHandler implements \SessionHandlerInterface {
 		if ( !$this->enable ) {
 			throw new \BadMethodCallException( 'Attempt to use PHP session management' );
 		}
-		return self::returnSuccess();
+		return true;
 	}
 
 	/**
 	 * Close the session (handler)
-	 * @private For internal use only
-	 * @return bool|int Success (see self::returnSuccess())
+	 * @internal For internal use only
+	 * @return true
 	 */
 	public function close() {
 		if ( self::$instance !== $this ) {
 			throw new \UnexpectedValueException( __METHOD__ . ': Wrong instance called!' );
 		}
 		$this->sessionFieldCache = [];
-		return self::returnSuccess();
+		return true;
 	}
 
 	/**
 	 * Read session data
-	 * @private For internal use only
+	 * @internal For internal use only
 	 * @param string $id Session id
 	 * @return string Session data
 	 */
@@ -252,12 +228,12 @@ class PHPSessionHandler implements \SessionHandlerInterface {
 
 	/**
 	 * Write session data
-	 * @private For internal use only
+	 * @internal For internal use only
 	 * @param string $id Session id
 	 * @param string $dataStr Session data. Not that you should ever call this
 	 *   directly, but note that this has the same issues with code injection
 	 *   via user-controlled data as does PHP's unserialize function.
-	 * @return bool|int Success (see self::returnSuccess())
+	 * @return bool
 	 */
 	public function write( $id, $dataStr ) {
 		if ( self::$instance !== $this ) {
@@ -276,20 +252,20 @@ class PHPSessionHandler implements \SessionHandlerInterface {
 				[
 					'session' => $id,
 			] );
-			return self::returnSuccess();
+			return true;
 		}
 
 		// First, decode the string PHP handed us
 		$data = \Wikimedia\PhpSessionSerializer::decode( $dataStr );
 		if ( $data === null ) {
 			// @codeCoverageIgnoreStart
-			return self::returnFailure();
+			return false;
 			// @codeCoverageIgnoreEnd
 		}
 
 		// Now merge the data into the Session object.
 		$changed = false;
-		$cache = isset( $this->sessionFieldCache[$id] ) ? $this->sessionFieldCache[$id] : [];
+		$cache = $this->sessionFieldCache[$id] ?? [];
 		foreach ( $data as $key => $value ) {
 			if ( !array_key_exists( $key, $cache ) ) {
 				if ( $session->exists( $key ) ) {
@@ -324,12 +300,12 @@ class PHPSessionHandler implements \SessionHandlerInterface {
 		}
 		// Anything deleted in $_SESSION and unchanged in Session should be deleted too
 		// (but not if $_SESSION can't represent it at all)
-		\Wikimedia\PhpSessionSerializer::setLogger( new \Psr\Log\NullLogger() );
+		\Wikimedia\PhpSessionSerializer::setLogger( new NullLogger() );
 		foreach ( $cache as $key => $value ) {
 			if ( !array_key_exists( $key, $data ) && $session->exists( $key ) &&
 				\Wikimedia\PhpSessionSerializer::encode( [ $key => true ] )
 			) {
-				if ( $cache[$key] === $session->get( $key ) ) {
+				if ( $value === $session->get( $key ) ) {
 					// Unchanged in Session, delete it
 					$session->remove( $key );
 					$changed = true;
@@ -356,14 +332,14 @@ class PHPSessionHandler implements \SessionHandlerInterface {
 
 		$session->persist();
 
-		return self::returnSuccess();
+		return true;
 	}
 
 	/**
 	 * Destroy a session
-	 * @private For internal use only
+	 * @internal For internal use only
 	 * @param string $id Session id
-	 * @return bool|int Success (see self::returnSuccess())
+	 * @return true
 	 */
 	public function destroy( $id ) {
 		if ( self::$instance !== $this ) {
@@ -376,14 +352,14 @@ class PHPSessionHandler implements \SessionHandlerInterface {
 		if ( $session ) {
 			$session->clear();
 		}
-		return self::returnSuccess();
+		return true;
 	}
 
 	/**
 	 * Execute garbage collection.
-	 * @private For internal use only
+	 * @internal For internal use only
 	 * @param int $maxlifetime Maximum session life time (ignored)
-	 * @return bool|int Success (see self::returnSuccess())
+	 * @return true
 	 * @codeCoverageIgnore See T135576
 	 */
 	public function gc( $maxlifetime ) {
@@ -392,6 +368,6 @@ class PHPSessionHandler implements \SessionHandlerInterface {
 		}
 		$before = date( 'YmdHis', time() );
 		$this->store->deleteObjectsExpiringBefore( $before );
-		return self::returnSuccess();
+		return true;
 	}
 }

@@ -2,13 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"Guycn2",
 			"MojoMann"
 		]
 	},
 	"skinname-timeless": "מחוץ לזמן",
 	"timeless-desc": "עיצוב \"מחוץ לזמן\", מבוסס על אבטיפוס \"חורף\" מאת ברנדון האריס, ועיצובים שונים של קרן ויקימדיה",
-	"timeless-search-placeholder": "חיפוש ב־{{NUMBEROFARTICLES}} דפים",
-	"timeless-loggedin": "החשבון שלך",
 	"timeless-anonymous": "אלמוני",
 	"timeless-loggedinas": "נכנסת לחשבון '''$1'''",
 	"timeless-notloggedin": "לא התחברת לחשבון",
@@ -19,9 +18,13 @@
 	"timeless-sitetools": "כלי ויקי",
 	"timeless-pageactions": "כלי דף",
 	"timeless-userpagetools": "כלי דף משתמש",
+	"timeless-action-addsection": "נושא חדש",
+	"timeless-view-view": "קריאה",
 	"timeless-pagemisc": "עוד",
 	"timeless-namespaces": "מרחבי שם",
 	"timeless-pagetools": "פעולות דף",
 	"timeless-languages": "שפות",
-	"timeless.js": "/* כל הסקריפטים הנכתבים כאן ייטענו עבור מי שמשתמש בעיצוב \"מחוץ לזמן\" בלבד */"
+	"timeless-projects": "מיזמים אחרים",
+	"timeless.css": "/* הסגנונות הנכתבים כאן ישפיעו על העיצוב \"מחוץ לזמן\" בלבד */",
+	"timeless.js": "/* כל קוד הג'אווה סקריפט כאן ייטען עבור מי שמשתמש בעיצוב \"מחוץ לזמן\" */"
 }

@@ -10,11 +10,11 @@ use RemexHtml\HTMLData;
  * worst-case performance at the expense of somewhat slower updates.
  */
 class CachingStack extends Stack {
-	const SCOPE_DEFAULT = 0;
-	const SCOPE_LIST = 1;
-	const SCOPE_BUTTON = 2;
-	const SCOPE_TABLE = 3;
-	const SCOPE_SELECT = 4;
+	private const SCOPE_DEFAULT = 0;
+	private const SCOPE_LIST = 1;
+	private const SCOPE_BUTTON = 2;
+	private const SCOPE_TABLE = 3;
+	private const SCOPE_SELECT = 4;
 
 	private static $allScopes = [ self::SCOPE_DEFAULT, self::SCOPE_LIST, self::SCOPE_BUTTON,
 		self::SCOPE_TABLE, self::SCOPE_SELECT ];
@@ -50,7 +50,7 @@ class CachingStack extends Stack {
 	 * involves pulling an item out of the AFE list and checking if it is in
 	 * scope.
 	 */
-	static private $predicateMap = [
+	private static $predicateMap = [
 		'a' => self::SCOPE_DEFAULT,
 		'address' => self::SCOPE_DEFAULT,
 		'applet' => self::SCOPE_DEFAULT,
@@ -133,7 +133,7 @@ class CachingStack extends Stack {
 	 * SLL. The SLL here is maybe not quite so well justified as some other
 	 * SLLs in RemexHtml.
 	 *
-	 * @var Element[int][string]
+	 * @var array<int,array<string,Element>>
 	 */
 	private $scopes = [
 		self::SCOPE_DEFAULT => [],
@@ -146,9 +146,10 @@ class CachingStack extends Stack {
 	/**
 	 * This is the part of the scope cache which stores scope lists for objects
 	 * which are not currently in scope. The first key is the scope ID, the
-	 * second key is the stack index, the third key is the element name.
+	 * second key is the stack index, the third key is the element name,
+	 * and the value is the Element object.
 	 *
-	 * @var Element[int][int][string]
+	 * @var array<int,array<int,array<string,Element>>>
 	 */
 	private $scopeStacks = [
 		self::SCOPE_DEFAULT => [],
@@ -168,6 +169,10 @@ class CachingStack extends Stack {
 	 * For a given namespace and element name, get the list of scopes
 	 * for which a new scope should be created and the old one needs to
 	 * be pushed onto the scope stack.
+	 *
+	 * @param string $ns
+	 * @param string $name
+	 * @return int[]
 	 */
 	private function getScopeTypesToStack( $ns, $name ) {
 		if ( $ns === HTMLData::NS_HTML ) {
@@ -233,7 +238,7 @@ class CachingStack extends Stack {
 		if ( $ns === HTMLData::NS_HTML && isset( self::$predicateMap[$name] ) ) {
 			$type = self::$predicateMap[$name];
 			$scope =& $this->scopes[$type];
-			$elt->nextEltInScope = isset( $scope[$name] ) ? $scope[$name] : null;
+			$elt->nextEltInScope = $scope[$name] ?? null;
 			$scope[$name] = $elt;
 			unset( $scope );
 		}
@@ -416,6 +421,8 @@ class CachingStack extends Stack {
 	private function scopeDump( $type, $scopeName ) {
 		if ( count( $this->scopes[$type] ) ) {
 			return "$scopeName: " . implode( ', ', array_keys( $this->scopes[$type] ) ) . "\n";
+		} else {
+			return '';
 		}
 	}
 }

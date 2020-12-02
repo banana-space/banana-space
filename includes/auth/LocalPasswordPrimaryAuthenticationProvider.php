@@ -46,15 +46,22 @@ class LocalPasswordPrimaryAuthenticationProvider
 		$this->loginOnly = !empty( $params['loginOnly'] );
 	}
 
+	/**
+	 * Check if the password has expired and needs a reset
+	 *
+	 * @param string $username
+	 * @param \stdClass $row A row from the user table
+	 * @return \stdClass|null
+	 */
 	protected function getPasswordResetData( $username, $row ) {
-		$now = wfTimestamp();
+		$now = (int)wfTimestamp();
 		$expiration = wfTimestampOrNull( TS_UNIX, $row->user_password_expires );
-		if ( $expiration === null || $expiration >= $now ) {
+		if ( $expiration === null || (int)$expiration >= $now ) {
 			return null;
 		}
 
 		$grace = $this->config->get( 'PasswordExpireGrace' );
-		if ( $expiration + $grace < $now ) {
+		if ( (int)$expiration + $grace < $now ) {
 			$data = [
 				'hard' => true,
 				'msg' => \Status::newFatal( 'resetpass-expired' )->getMessage(),
@@ -106,11 +113,7 @@ class LocalPasswordPrimaryAuthenticationProvider
 		// Check for *really* old password hashes that don't even have a type
 		// The old hash format was just an md5 hex hash, with no type information
 		if ( preg_match( '/^[0-9a-f]{32}$/', $row->user_password ) ) {
-			if ( $this->config->get( 'PasswordSalt' ) ) {
-				$row->user_password = ":B:{$row->user_id}:{$row->user_password}";
-			} else {
-				$row->user_password = ":A:{$row->user_password}";
-			}
+			$row->user_password = ":B:{$row->user_id}:{$row->user_password}";
 		}
 
 		$status = $this->checkPasswordValidity( $username, $req->password );
@@ -120,12 +123,12 @@ class LocalPasswordPrimaryAuthenticationProvider
 		}
 
 		$pwhash = $this->getPassword( $row->user_password );
-		if ( !$pwhash->equals( $req->password ) ) {
+		if ( !$pwhash->verify( $req->password ) ) {
 			if ( $this->config->get( 'LegacyEncoding' ) ) {
 				// Some wikis were converted from ISO 8859-1 to UTF-8, the passwords can't be converted
 				// Check for this with iconv
 				$cp1252Password = iconv( 'UTF-8', 'WINDOWS-1252//TRANSLIT', $req->password );
-				if ( $cp1252Password === $req->password || !$pwhash->equals( $cp1252Password ) ) {
+				if ( $cp1252Password === $req->password || !$pwhash->verify( $cp1252Password ) ) {
 					return $this->failResponse( $req );
 				}
 			} else {
@@ -136,7 +139,8 @@ class LocalPasswordPrimaryAuthenticationProvider
 		// @codeCoverageIgnoreStart
 		if ( $this->getPasswordFactory()->needsUpdate( $pwhash ) ) {
 			$newHash = $this->getPasswordFactory()->newFromPlaintext( $req->password );
-			\DeferredUpdates::addCallableUpdate( function () use ( $newHash, $oldRow ) {
+			$fname = __METHOD__;
+			\DeferredUpdates::addCallableUpdate( function () use ( $newHash, $oldRow, $fname ) {
 				$dbw = wfGetDB( DB_MASTER );
 				$dbw->update(
 					'user',
@@ -145,7 +149,7 @@ class LocalPasswordPrimaryAuthenticationProvider
 						'user_id' => $oldRow->user_id,
 						'user_password' => $oldRow->user_password
 					],
-					__METHOD__
+					$fname
 				);
 			} );
 		}
@@ -191,7 +195,7 @@ class LocalPasswordPrimaryAuthenticationProvider
 		list( $db, $options ) = \DBAccessObjectUtils::getDBOptions( $flags );
 		return (bool)wfGetDB( $db )->selectField(
 			[ 'user' ],
-			[ 'user_id' ],
+			'user_id',
 			[ 'user_name' => $username ],
 			__METHOD__,
 			$options
@@ -295,18 +299,16 @@ class LocalPasswordPrimaryAuthenticationProvider
 		}
 
 		$req = AuthenticationRequest::getRequestByClass( $reqs, PasswordAuthenticationRequest::class );
-		if ( $req ) {
-			if ( $req->username !== null && $req->password !== null ) {
-				// Nothing we can do besides claim it, because the user isn't in
-				// the DB yet
-				if ( $req->username !== $user->getName() ) {
-					$req = clone $req;
-					$req->username = $user->getName();
-				}
-				$ret = AuthenticationResponse::newPass( $req->username );
-				$ret->createRequest = $req;
-				return $ret;
+		if ( $req && $req->username !== null && $req->password !== null ) {
+			// Nothing we can do besides claim it, because the user isn't in
+			// the DB yet
+			if ( $req->username !== $user->getName() ) {
+				$req = clone $req;
+				$req->username = $user->getName();
 			}
+			$ret = AuthenticationResponse::newPass( $req->username );
+			$ret->createRequest = $req;
+			return $ret;
 		}
 		return AuthenticationResponse::newAbstain();
 	}

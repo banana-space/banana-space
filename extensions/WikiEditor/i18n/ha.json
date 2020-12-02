@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"wikieditor-toolbar-tool-bold-example": "Rubutu mai gwaɓi",
 	"wikieditor-toolbar-tool-italic-example": "Rubutun tsutsa",
 	"wikieditor-toolbar-tool-ilink": "Mahaɗin ciki",

@@ -1,0 +1,128 @@
+/*!
+ * VisualEditor Initialization Debug Bar styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-debugBar {
+	clear: both;
+}
+
+.ve-ui-debugBar-commands {
+	margin-bottom: -0.5em;
+}
+
+.ve-ui-debugBar-commands > .oo-ui-widget,
+.ve-ui-debugBar-commands-divider {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 1em;
+	margin-bottom: 0.5em;
+}
+
+.ve-ui-debugBar-commands > .oo-ui-widget:last-child {
+	margin-right: 0;
+}
+
+.ve-ui-debugBar-selectionLabel {
+	min-width: 20em;
+	/* Support: Blink, Gecko, Webkit */
+	/* Specify a valid second value to fix size, see T176636 */
+	font-family: monospace, monospace;
+}
+
+.ve-ui-debugBar-commands-divider {
+	border-right: 1px solid #c8ccd1;
+	width: 0;
+}
+
+.ve-ui-debugBar-dump {
+	margin-top: 2em;
+}
+
+.ve-ui-debugBar-dump > table {
+	background-color: #f8f9fa;
+	font-size: 0.85em;
+	width: 100%;
+	border: 1px solid #c8ccd1;
+	border-radius: 0;
+	border-top-right-radius: 0.25em;
+	border-top-left-radius: 0.25em;
+}
+
+.ve-ui-debugBar-dump > .oo-ui-toggleWidget {
+	margin-bottom: 0.25em;
+}
+
+.ve-ui-debugBar-dump td {
+	background-color: #fff;
+	padding: 0.25em 1em;
+	vertical-align: top;
+}
+
+.ve-ui-debugBar-dump-linmod-data {
+	width: 50%;
+}
+
+.ve-ui-debugBar-dump th {
+	color: #54595d;
+	padding: 0.5em 1em;
+	text-shadow: 0 1px 1px #fff;
+}
+
+.ve-ui-debugBar-dump ol {
+	color: #72777d;
+	padding-left: 1.5em;
+}
+
+.ve-ui-debugBar-dump li .ve-ui-debugBar-dump-element,
+.ve-ui-debugBar-dump li .ve-ui-debugBar-dump-char,
+.ve-ui-debugBar-dump li .ve-ui-debugBar-dump-achar {
+	background-color: #f8f9fa;
+	color: #000;
+	display: inline-block;
+	border-radius: 2px;
+	margin: 0.25em 0.25em 0.25em 0;
+	padding: 0.125em 0.5em;
+	text-shadow: 0 1px 1px #fff;
+}
+
+.ve-ui-debugBar-dump li .ve-ui-debugBar-dump-element {
+	background-color: #def;
+}
+
+.ve-ui-debugBar-dump li .ve-ui-debugBar-dump-char {
+	background-color: #dfe;
+}
+
+.ve-ui-debugBar-dump li .ve-ui-debugBar-dump-achar {
+	background-color: #fed;
+}
+
+.ve-ui-debugBar-dump li .ve-ui-debugBar-dump-note {
+	color: #a2a9b1;
+}
+
+.ve-ui-debugBar-filibuster {
+	background-color: #f8f9fa;
+	font-size: 0.875em;
+	margin-top: 2em;
+	width: 100%;
+	border: 1px solid #c8ccd1;
+	border-radius: 0;
+	border-top-right-radius: 0.25em;
+	border-top-left-radius: 0.25em;
+}
+
+.ve-ui-debugBar-transactions > ol > li {
+	border-left: 2em solid #f8f9fa;
+}
+
+.ve-ui-debugBar-transactions ol ol {
+	margin: 1em 0;
+	padding-left: 0;
+}
+
+.ve-ui-debugBar-transactions ol ol li {
+	padding-left: 1ex;
+}

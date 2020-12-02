@@ -19,24 +19,25 @@
  */
 
 /**
- * ResourceLoaderFileModule which magically loads the right skinScripts and skinStyles for every
+ * Module which magically loads the right skinScripts and skinStyles for every
  * skin, using the specified OOUI theme for each.
  *
- * @since 1.30
+ * @ingroup ResourceLoader
+ * @internal
  */
 class ResourceLoaderOOUIFileModule extends ResourceLoaderFileModule {
 	use ResourceLoaderOOUIModule;
 
-	public function __construct( $options = [] ) {
-		if ( isset( $options[ 'themeScripts' ] ) ) {
-			$skinScripts = $this->getSkinSpecific( $options[ 'themeScripts' ], 'scripts' );
+	public function __construct( array $options = [] ) {
+		if ( isset( $options['themeScripts'] ) ) {
+			$skinScripts = $this->getSkinSpecific( $options['themeScripts'], 'scripts' );
 			if ( !isset( $options['skinScripts'] ) ) {
 				$options['skinScripts'] = [];
 			}
 			$this->extendSkinSpecific( $options['skinScripts'], $skinScripts );
 		}
-		if ( isset( $options[ 'themeStyles' ] ) ) {
-			$skinStyles = $this->getSkinSpecific( $options[ 'themeStyles' ], 'styles' );
+		if ( isset( $options['themeStyles'] ) ) {
+			$skinStyles = $this->getSkinSpecific( $options['themeStyles'], 'styles' );
 			if ( !isset( $options['skinStyles'] ) ) {
 				$options['skinStyles'] = [];
 			}
@@ -54,7 +55,7 @@ class ResourceLoaderOOUIFileModule extends ResourceLoaderFileModule {
 	 * @param string $which 'scripts' or 'styles'
 	 * @return array
 	 */
-	private function getSkinSpecific( $module, $which ) {
+	private function getSkinSpecific( $module, $which ) : array {
 		$themes = self::getSkinThemeMap();
 
 		return array_combine(
@@ -76,7 +77,7 @@ class ResourceLoaderOOUIFileModule extends ResourceLoaderFileModule {
 	 * @param array &$skinSpecific
 	 * @param array $extraSkinSpecific
 	 */
-	private function extendSkinSpecific( &$skinSpecific, $extraSkinSpecific ) {
+	private function extendSkinSpecific( array &$skinSpecific, array $extraSkinSpecific ) : void {
 		// For each skin where skinStyles/skinScripts are defined, add our ones at the beginning
 		foreach ( $skinSpecific as $skin => $files ) {
 			if ( !is_array( $files ) ) {

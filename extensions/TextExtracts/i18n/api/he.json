@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"Guycn2"
+		]
+	},
+	"apihelp-query+extracts-description": "מחזיר מובאות בטקסט רגיל או ב־HMTL מוגבל של דפים נתונים.",
+	"apihelp-query+extracts-summary": "החזרת קטעים של הדפים הנתונים בטקסט רגיל או ב־HTML מוגבל.",
+	"apihelp-query+extracts-param-chars": "כמה תווים להחזיר. הטקסט האמתי עשוי להיות ארוך קצת יותר.",
+	"apihelp-query+extracts-param-sentences": "כמה משפטים להחזיר.",
+	"apihelp-query+extracts-param-limit": "כמה מובאות להחזיר. (מובאות מרובות יכולות להיות מוחזרות אם הערך של exintro הוא true.)",
+	"apihelp-query+extracts-param-intro": "להחזיר רק תוכן לפני הפסקה הראשונה.",
+	"apihelp-query+extracts-param-plaintext": "להחזיר מובאות בתור טקסט רגיל במקום HTML מוגבל.",
+	"apihelp-query+extracts-param-sectionformat": "איך לעצב פסקאות במצב טקסט רגיל:\n;plain:ללא עיצוב.\n;wiki:עיצוב בסגונון קוד ויקי (== ככה ==).\n;raw:הייצוג הפנימי של המודול הזה (לכותרות פסקאות תהיה תחילית &lt;ASCII 1&gt;&lt;ASCII 2&gt;&lt;section level&gt;&lt;ASCII 2&gt;&lt;ASCII 1&gt;).",
+	"apihelp-query+extracts-example-1": "קבלת מובאה של 175 תווים",
+	"apiwarn-textextracts-limit": "ה־<var>exlimit</var> היה גדול מדי בשביל בקשת מובאות מערך שלם, הונמך ל־$1.",
+	"apiwarn-textextracts-unsupportedmodel": "ל־$1 יש דגם תוכן $2, שאינו נתמך; מוחזרת מובאה ריקה.",
+	"apiwarn-textextracts-title-in-file-namespace": "נשלחה בקשה לקטע במרחב הקבצים, לא הוחזר דבר.",
+	"apiwarn-textextracts-sentences-and-html": "לפרמטר <var>$1sentences</var> עלולות להיות תוצאות בלתי־צפויות בעת שימוש במצב HTML.",
+	"apiwarn-textextracts-malformed-html": "ה־HTML עלול להיות מעוות ו/או בלתי־מאוזן, והוא עלול להשמיט תמונות מוטבעות. השימוש באפשרות זו הוא באחריותך. רשימה של בעיות ידועות מופיעה בדף https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:TextExtracts#Caveats."
+}

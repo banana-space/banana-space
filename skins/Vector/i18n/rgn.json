@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"vector-action-addsection": "Zonta una cjacarèda",
 	"vector-action-delete": "Scanzèla",
 	"vector-action-move": "Chèmbia nòm",

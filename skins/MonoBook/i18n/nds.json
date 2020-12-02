@@ -1,4 +1,6 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"monobook.css": "/* disse Datei ännern üm de Monobook-Stilvörlaag för de ganze Siet antopassen */"
 }

@@ -2,10 +2,12 @@
  * Copy of CC standard stylesheet, plus tweaks for iframe usage
  */
 
+/* stylelint-disable selector-class-pattern */
+
 body {
 	margin: 0;
 	background: #eee;
-	font-family: 'Verdana';
+	font-family: 'Verdana', sans-serif;
 	color: #333;
 }
 
@@ -16,8 +18,7 @@ body {
 }
 
 /**
- * Looks like you have to specify the width of #menu
- * or IE5 Mac stretches it all the way across the div, and
+ * Looks like you have to specify the width of #menu as
  * Opera streches it half way.
  */
 

@@ -35,7 +35,10 @@ use WebRequest;
  */
 class CookieSessionProvider extends SessionProvider {
 
+	/** @var mixed[] */
 	protected $params = [];
+
+	/** @var mixed[] */
 	protected $cookieOptions = [];
 
 	/** @var bool */
@@ -207,7 +210,7 @@ class CookieSessionProvider extends SessionProvider {
 
 		// Legacy hook
 		if ( $this->params['callUserSetCookiesHook'] && !$user->isAnon() ) {
-			\Hooks::run( 'UserSetCookies', [ $user, &$sessionData, &$cookies ] );
+			$this->getHookRunner()->onUserSetCookies( $user, $sessionData, $cookies );
 		}
 
 		$options = $this->cookieOptions;
@@ -271,9 +274,7 @@ class CookieSessionProvider extends SessionProvider {
 	 * @param SessionBackend|null $backend
 	 * @param WebRequest $request
 	 */
-	protected function setForceHTTPSCookie(
-		$set, SessionBackend $backend = null, WebRequest $request
-	) {
+	protected function setForceHTTPSCookie( $set, ?SessionBackend $backend, WebRequest $request ) {
 		if ( $this->config->get( 'ForceHTTPS' ) ) {
 			// No need to send a cookie if the wiki is always HTTPS (T256095)
 			return;
@@ -349,7 +350,7 @@ class CookieSessionProvider extends SessionProvider {
 	 * @param \WebRequest $request
 	 * @param string $key
 	 * @param string $prefix
-	 * @param mixed $default
+	 * @param mixed|null $default
 	 * @return mixed
 	 */
 	protected function getCookie( $request, $key, $prefix, $default = null ) {

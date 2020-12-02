@@ -1,0 +1,53 @@
+@import '../../variables.less';
+@import 'mediawiki.mixins.less';
+
+// FIXME: For cached HTML
+.portal,
+.vector-menu-portal {
+	margin: 0 @margin-end-portal  0 @margin-start-portal;
+	padding: 0.25em 0;
+	direction: ltr;
+
+	h3 {
+		display: block;
+		background-image: url( images/portal-separator.png ); // Support: IE 8 & 9, Fx 3.6-15, Safari 5.1-6, Chrome 10-25
+		background-image: linear-gradient( to right, @border-color-portal-heading-transparent 0, @border-color-portal-heading 33%, @border-color-portal-heading 66%, @border-color-portal-heading-transparent 100% ); // Standard (Firefox 16+, IE 10+, Safari 6.1+, Chrome 26+)
+		background-position: center bottom;
+		background-repeat: no-repeat;
+		background-size: 100% @border-width-base;
+		color: @color-base--subtle;
+		margin: 0.5em 0 0 ( @margin-start-nav-main-body / @font-size-nav-main-heading );
+		border: 0;
+		padding: 0.25em 0;
+		font-size: @font-size-nav-main-heading;
+		font-weight: normal;
+		cursor: default;
+	}
+
+	.body {
+		margin-left: @margin-start-portal-body;
+		padding-top: 0;
+
+		ul {
+			list-style: none none;
+			margin: 0;
+			padding-top: 0.3em;
+		}
+
+		li {
+			margin: 0;
+			padding: 0.25em 0;
+			font-size: @font-size-portal-list-item;
+			line-height: @line-height-nav;
+			word-wrap: break-word;
+
+			a {
+				color: @color-link;
+
+				&:visited {
+					color: @color-link--visited;
+				}
+			}
+		}
+	}
+}

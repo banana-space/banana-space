@@ -1,10 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"George Animal",
-			"Bikarhêner"
+			"Bikarhêner",
+			"George Animal"
 		]
 	},
-	"nuke-submit-user": "Rûpelan lîste bike",
-	"nuke-select": "Hilbijêre: $1"
+	"nuke-submit-user": "Rûpelan lîste bike"
 }

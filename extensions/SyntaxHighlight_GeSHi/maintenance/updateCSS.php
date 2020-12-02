@@ -51,7 +51,7 @@ class UpdateCSS extends Maintenance {
 			->execute();
 
 		if ( $result->getExitCode() != 0 ) {
-			throw new \RuntimeException( $result->getStderr() );
+			$this->fatalError( 'Non-zero exit code: ' . $result->getStderr() );
 		}
 
 		$css .= $result->getStdout();
@@ -64,5 +64,5 @@ class UpdateCSS extends Maintenance {
 	}
 }
 
-$maintClass = "UpdateCSS";
+$maintClass = UpdateCSS::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

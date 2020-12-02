@@ -1,4 +1,4 @@
-@import '../mmv.mixins';
+@import '../mmv.mixins.less';
 
 .mw-mmv-image {
 	display: table-cell;
@@ -10,6 +10,7 @@
 	&.empty {
 		display: none;
 	}
+
 	&.error {
 		background-color: #222;
 
@@ -21,19 +22,15 @@
 	}
 
 	.error-box {
-		/* @embed */
 		background: url( img/error-media-icon.svg ) no-repeat 0 0;
 		background-size: 110px 110px;
-
 		position: absolute;
 		left: 50%;
 		margin-left: -350px;
 		top: 50%;
 		margin-top: -100px;
-
 		padding: 0 20px 0 160px;
 		color: #fff;
-
 		max-width: 520px;
 
 		.mw-mmv-error-text {
@@ -57,7 +54,7 @@
 	&.blurred {
 		filter: blur( 3px );
 		-webkit-filter: blur( 3px );
-		.opacity( 0.8 );
+		opacity: 0.8;
 	}
 
 	/* Whitelist file types that are potentially transparent.

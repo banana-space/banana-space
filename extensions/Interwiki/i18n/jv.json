@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Meursault2004",
-			"Pras",
-			"NoiX180"
+			"NoiX180",
+			"Pras"
 		]
 	},
 	"interwiki": "Deleng lan besut data interwiki",
@@ -23,13 +23,12 @@
 	"interwiki_error": "Masalah: Tabèl interwikiné kosong utawa ana sing salah.",
 	"interwiki_edit": "Besut",
 	"interwiki_reasonfield": "Alesan:",
-	"interwiki_delquestion": "Mbusak \"$1\"",
-	"interwiki_deleting": "Sampéyan mbusak ater-ater \"$1\".",
+	"interwiki_deleting": "Panjenengan mbusak ater-ater \"$1\".",
 	"interwiki_deleted": "Ater-ater \"$1\" dibusak saka tabèl interwiki.",
 	"interwiki_delfailed": "Ater-ater \"$1\" ora bisa dibusak saka tabèl interwiki.",
 	"interwiki-logtext": "Deleng log",
 	"interwiki_addtext": "Tambah ater-ater interwiki utawa basa",
-	"interwiki-addtext-local": "Tambah ater-ater enggon-enggonan interwiki utawa basa",
+	"interwiki-addtext-local": "Wuwuhi ater-ater enggonan interwiki utawa basa",
 	"interwiki_addintro": "Panjenengan nambah préfiks utawa sisipan awal interwiki anyar.\nÉlinga yèn iku ora bisa ngandhut spasi ( ), pada pangkat (:), ampersands (&), utawa tandha padha (=).",
 	"interwiki_addbutton": "Tambah",
 	"interwiki_added": "Préfiks utawa sisipan awal \"$1\" bisa kasil ditambahaké ing tabèl interwiki.",
@@ -50,7 +49,7 @@
 	"action-interwiki": "ganti isian interwiki iki",
 	"interwiki-global-links": "Ater-ater interwiki global",
 	"interwiki-global-description": "Ater-ater iki gawané setèlan global lan mung bisa disebut ing wiki sumber.",
-	"interwiki-local-links": "Ater-ater interwiki enggon-enggonan",
+	"interwiki-local-links": "Ater-ater interwiki enggonan",
 	"interwiki-local-description": "Ater-ater iki mung enggon-enggonan. Menawa ana dhobelané karo setèlan global, dhobelané iku bakal nggantèni sing global.",
 	"interwiki-links": "Ater-ater interwiki",
 	"interwiki-language-links": "Ater-ater antarbasa",

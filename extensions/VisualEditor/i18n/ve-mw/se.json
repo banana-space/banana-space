@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby (WMNO)",
+			"Yupik"
+		]
+	},
+	"visualeditor-dialog-media-choose-image": "Geavat dán gova",
+	"visualeditor-dialog-media-info-readmore": "Loga lasi",
+	"visualeditor-dialog-meta-categories-category": "Kategoriija",
+	"visualeditor-dialog-meta-categories-data-label": "Kategoriijat",
+	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Ođđa kategoriija",
+	"visualeditor-dialog-meta-categories-input-placeholder": "Lasit kategoriija",
+	"visualeditor-dialog-meta-categories-section": "Kategoriijat",
+	"visualeditor-dialog-meta-languages-label": "Gielat",
+	"visualeditor-dialog-meta-languages-name-label": "Giella",
+	"visualeditor-dialog-meta-languages-section": "Gielat",
+	"visualeditor-dialog-meta-settings-redirect-label": "Sirdde dán siiddu siidui",
+	"visualeditor-formatdropdown-format-mw-heading2": "Váldobajilčála",
+	"visualeditor-formatdropdown-format-mw-heading3": "Nuppáldas bajilčála 1",
+	"visualeditor-formatdropdown-format-mw-heading4": "Nuppáldas bajilčála 2",
+	"visualeditor-formatdropdown-format-mw-heading5": "Nuppáldas bajilčála 3",
+	"visualeditor-formatdropdown-format-mw-heading6": "Nuppáldas bajilčála 4",
+	"visualeditor-linkinspector-button-link-external": "Olgguldas leaŋka",
+	"visualeditor-linkinspector-button-link-internal": "Oza siiddu"
+}

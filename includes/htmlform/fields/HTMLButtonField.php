@@ -17,23 +17,28 @@
  *   client-side form validation. Used in HTMLFormFieldCloner for add/remove
  *   buttons.
  *
- * Note that the buttonlabel parameters are not supported on IE6 and IE7 due to
- * bugs in those browsers. If detected, they will be served buttons using the
- * value of 'default' as the button label.
- *
+ * @stable to extend
  * @since 1.22
  */
 class HTMLButtonField extends HTMLFormField {
 	protected $buttonType = 'button';
 	protected $buttonLabel = null;
 
-	/** @var array $mFlags Flags to add to OOUI Button widget */
+	/** @var array Flags to add to OOUI Button widget */
 	protected $mFlags = [];
 
 	protected $mFormnovalidate = false;
 
+	/*
+	 * @stable to call
+	 */
 	public function __construct( $info ) {
 		$info['nodata'] = true;
+
+		$this->setShowEmptyLabel( false );
+
+		parent::__construct( $info );
+
 		if ( isset( $info['flags'] ) ) {
 			$this->mFlags = $info['flags'];
 		}
@@ -46,19 +51,15 @@ class HTMLButtonField extends HTMLFormField {
 		if ( isset( $info['buttonlabel-message'] ) ) {
 			$this->buttonLabel = $this->getMessage( $info['buttonlabel-message'] )->parse();
 		} elseif ( isset( $info['buttonlabel'] ) ) {
-			if ( $info['buttonlabel'] === '&#160;' ) {
+			if ( $info['buttonlabel'] === '&#160;' || $info['buttonlabel'] === "\u{00A0}" ) {
 				// Apparently some things set &nbsp directly and in an odd format
-				$this->buttonLabel = '&#160;';
+				$this->buttonLabel = "\u{00A0}";
 			} else {
 				$this->buttonLabel = htmlspecialchars( $info['buttonlabel'] );
 			}
 		} elseif ( isset( $info['buttonlabel-raw'] ) ) {
 			$this->buttonLabel = $info['buttonlabel-raw'];
 		}
-
-		$this->setShowEmptyLabel( false );
-
-		parent::__construct( $info );
 	}
 
 	public function getInputHTML( $value ) {
@@ -93,6 +94,7 @@ class HTMLButtonField extends HTMLFormField {
 
 	/**
 	 * Get the OOUI widget for this field.
+	 * @stable to override
 	 * @param string $value
 	 * @return OOUI\ButtonInputWidget
 	 */
@@ -113,12 +115,17 @@ class HTMLButtonField extends HTMLFormField {
 		) );
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	protected function needsLabel() {
 		return false;
 	}
 
 	/**
 	 * Button cannot be invalid
+	 * @stable to override
 	 *
 	 * @param string $value
 	 * @param array $alldata

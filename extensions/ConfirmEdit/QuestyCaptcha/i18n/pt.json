@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Athena in Wonderland",
 			"Crazymadlover",
-			"Giro720",
-			"Hamilton Abreu",
 			"Fúlvio",
-			"Athena in Wonderland"
+			"Giro720",
+			"Hamilton Abreu"
 		]
 	},
+	"questycaptcha-desc": "Gerador de Questy CAPTCHA para Confirm Edit",
 	"questycaptcha-addurl": "A sua edição introduziu hiperligações externas novas.\nPara proteger esta wiki contra o spam automatizado, por favor, responda à questão apresentada abaixo ([[Special:Captcha/help|mais informações]]):",
 	"questycaptcha-badlogin": "Para proteger esta wiki contra mecanismos automatizados de descoberta de palavras-passe, por favor, responda à questão apresentada abaixo ([[Special:Captcha/help|mais informações]]):",
 	"questycaptcha-createaccount": "Para proteger esta wiki contra a criação de contas automatizada, por favor, responda à questão apresentada abaixo ([[Special:Captcha/help|mais informações]]):",

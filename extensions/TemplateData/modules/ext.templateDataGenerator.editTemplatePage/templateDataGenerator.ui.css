@@ -1,0 +1,100 @@
+.tdg-editscreen-main {
+	margin-bottom: 1em;
+}
+
+.tdg-editscreen-main-helplink {
+	margin-left: 1em;
+}
+
+.tdg-editscreen-error-msg {
+	display: block;
+	padding: 0.5em;
+	margin-top: 0.5em;
+}
+
+.tdg-templateDataDialog-panels .oo-ui-panelLayout {
+	padding: 1em;
+}
+
+.successbox,
+.errorbox {
+	padding: 0.5em 1em;
+}
+
+.tdg-editscreen-input-error input,
+.tdg-editscreen-input-error.oo-ui-inputWidget input.oo-ui-inputWidget-input {
+	background-color: #ffa3a3;
+}
+
+.tdg-templateDataParamWidget {
+	padding-right: 0.5em;
+}
+
+.tdg-templateDataParamWidget .oo-ui-iconElement-icon {
+	opacity: 0.2;
+}
+
+/* Hover events sometimes fire while dragging, so limit to highlighted widgets */
+.tdg-templateDataParamWidget.oo-ui-optionWidget-highlighted .oo-ui-iconElement-icon:hover {
+	opacity: 0.5;
+}
+
+.tdg-templateDataParamWidget-param-name,
+.tdg-templateDataParamWidget-param-aliases,
+.tdg-templateDataParamWidget-param-description {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.tdg-templateDataParamWidget-param-name {
+	font-weight: bold;
+}
+
+.tdg-templateDataParamWidget-param-aliases {
+	float: right;
+	font-size: 0.9em;
+	padding: 1px;
+}
+
+.tdg-templateDataParamWidget-param-description {
+	color: #666;
+}
+
+.tdg-templateDataParamWidget-param-alias {
+	border-radius: 0.3em;
+	padding: 0.125em 0.25em;
+	margin-left: 0.5em;
+	color: #999;
+	background-color: #eee;
+	border: solid 1px #ddd;
+}
+
+.tdg-templateDataParamWidget-param-alias:first-child {
+	background-color: #fff;
+}
+
+.tdg-templateDataParamWidget-paramList-param-description {
+	clear: both;
+	color: #555;
+}
+
+.tdg-templateDataParamImportWidget {
+	margin-top: 1em;
+}
+
+.tdg-templateDataParamImportWidget > .oo-ui-buttonElement-button {
+	text-align: left;
+	font-weight: normal;
+}
+
+/* mw.TemplateData.LanguageSearchWidget */
+
+.tdg-languageResultWidget-otherMatch {
+	float: right;
+	color: #777;
+}
+
+.tdg-languageResultWidget-highlight {
+	font-weight: bold;
+}

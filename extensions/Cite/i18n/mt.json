@@ -4,7 +4,7 @@
 			"Chrisportelli"
 		]
 	},
-	"cite-desc": "Iżżid it-tikketti <nowiki><ref[ name=id]></nowiki> u <nowiki><references/></nowiki> għaċ-ċitazzjonijiet",
+	"cite-desc": "Iżżid it-tikketti <code>&lt;ref[ name=id]&gt;</code> u <code>&lt;references/&gt;</code> għaċ-ċitazzjonijiet",
 	"cite_error": "Żball fiċ-ċitazzjoni: $1",
 	"cite_error_ref_numeric_key": "Tikketta <code>&lt;ref&gt;</code> invalida;\nl-isem ma jistax ikun numru sħiħ sempliċi. Uża titlu deskrittiv",
 	"cite_error_ref_no_key": "Tikketta <code>&lt;ref&gt;</code> invalida;\nrefs mingħajr kontenut għandhom ikollhom isem",

@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw ) {
+( function () {
 	QUnit.module( 'mmv.model.IwTitle', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'constructor sanity test', function ( assert ) {
@@ -40,4 +40,4 @@
 		assert.strictEqual( title.getPrefixedDb(), fullPageName, 'getPrefixedDb()' );
 		assert.strictEqual( title.getPrefixedText(), 'User talk:John Doe', 'getPrefixedText()' );
 	} );
-}( mediaWiki ) );
+}() );

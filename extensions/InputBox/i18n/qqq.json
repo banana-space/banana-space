@@ -1,15 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Lloffiwr",
 			"Meno25",
+			"Raymond",
 			"SPQRobin",
 			"Shirayuki",
 			"Siebrand",
 			"The Evil IP address",
-			"Raymond",
-			"Umherirrender",
-			"Amire80"
+			"Umherirrender"
 		]
 	},
 	"inputbox-desc": "{{desc|name=Input Box|url=https://www.mediawiki.org/wiki/Extension:InputBox}}",

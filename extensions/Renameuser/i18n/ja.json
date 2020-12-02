@@ -1,22 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
+			"Afaz",
 			"Aotake",
 			"Broad-Sky",
 			"Fryed-peach",
 			"Hosiryuhosi",
 			"Marine-Blue",
 			"Ohgi",
+			"Otokoume",
 			"Penn Station",
 			"Shirayuki",
 			"Suisui",
-			"青子守歌",
-			"Otokoume"
+			"青子守歌"
 		]
 	},
 	"renameuser": "利用者名の変更",
-	"renameuser-linkoncontribs": "利用者名変更",
-	"renameuser-linkoncontribs-text": "この利用者の名前を変更",
+	"renameuser-linkoncontribs": "{{GENDER:$1|利用者}}名変更",
+	"renameuser-linkoncontribs-text": "この{{GENDER:$1|利用者}}の名前を変更",
 	"renameuser-desc": "利用者名変更のための[[Special:RenameUser|特別ページ]]を追加する (「{{int:right-renameuser}}」できる権限 ''renameuser'' が必要)",
 	"renameuserold": "現在の利用者名:",
 	"renameusernew": "新しい利用者名:",
@@ -43,6 +44,6 @@
 	"logentry-renameuser-renameuser-legacier": "$1 が $4 の利用者名を {{GENDER:$7|$5}} に変更しました",
 	"renameuser-move-log": "ページを自動的に移動しました ({{GENDER:$2|利用者}}名変更のため:「[[User:$1|$1]]」から「[[User:$2|$2]]」)",
 	"action-renameuser": "利用者名の変更",
-	"right-renameuser": "利用者名を変更",
+	"right-renameuser": "利用者名の変更",
 	"renameuser-renamed-notice": "この利用者は利用者名を変更しました。\n参考のため、利用者名変更記録を以下に示します。"
 }

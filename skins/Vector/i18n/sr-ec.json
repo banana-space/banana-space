@@ -1,20 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
+			"Acamicamacaraca",
+			"BadDog",
 			"Milicevic01",
+			"Obsuser",
 			"Rancher",
 			"Жељко Тодоровић",
-			"Михајло Анђелковић",
-			"Obsuser",
-			"Acamicamacaraca"
+			"Михајло Анђелковић"
 		]
 	},
-	"skinname-vector": "Векторска",
+	"skinname-vector": "Векторско",
 	"vector-skin-desc": "Модерна верзија Монобука са свежим изгледом и много корисних побољшања",
+	"prefs-vector-enable-vector-1-label": "Користи стару векторску тему",
+	"prefs-vector-enable-vector-1-help": "Током неколико наредних година, постепено ћемо ажурирати векторску тему. Стара векторска тема омогућиће вам да користите ту стару верзију (од децембра 2019). Како бисте сазнали више о ажурирањима, идите на [[mw:Reading/Web/Desktop_Improvements|страницу пројекта]].",
+	"vector-opt-out-tooltip": "Промените подешавања да бисте се вратили старом изгледу теме (застарела векторска)",
 	"vector.css": "/* CSS постављен овде ће утицати на све кориснике векторске теме */",
-	"vector.js": "/* Јаваскрипт постављен овде ће се учитати за све оне који користе векторску тему */",
+	"vector.js": "/* JavaScript постављен овде ће се учитати за све оне који користе векторску тему */",
 	"vector-action-addsection": "Додај тему",
-	"vector-action-delete": "Обриши",
+	"vector-action-delete": "Избриши",
 	"vector-action-move": "Премести",
 	"vector-action-protect": "Заштити",
 	"vector-action-undelete": "Врати",
@@ -23,6 +27,8 @@
 	"vector-view-edit": "Уреди",
 	"vector-view-history": "Историја",
 	"vector-view-view": "Читај",
-	"vector-view-viewsource": "Изворни код",
+	"vector-view-viewsource": "Извор",
+	"vector-jumptonavigation": "Иди на навигацију",
+	"vector-jumptosearch": "Иди на претрагу",
 	"vector-more-actions": "Више"
 }

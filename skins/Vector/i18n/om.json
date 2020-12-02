@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Oromoo"
+		]
+	},
+	"vector-action-addsection": "Mata-dure ida'i",
+	"vector-action-delete": "Balleessi",
+	"vector-action-undelete": "Hin balleessin",
+	"vector-view-create": "Uumi",
+	"vector-view-edit": "Gulaali",
+	"vector-view-history": "Seenaa laali",
+	"vector-view-view": "Dubbisi",
+	"vector-jumptosearch": "Gara barbaadutti ce'i",
+	"vector-more-actions": "Dabalata"
+}

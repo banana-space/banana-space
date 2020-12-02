@@ -2,25 +2,40 @@
 	"@metadata": {
 		"authors": [
 			"Mikahama",
-			"Stryn",
+			"Nike",
 			"Pxos",
-			"Nike"
+			"Pyscowicz",
+			"Silvonen",
+			"Stryn"
 		]
 	},
+	"disableoathforuser": "Poista käytöstä käyttäjän kaksivaiheinen tunnistautuminen",
 	"specialpages-group-oath": "Kaksivaiheinen tunnistautuminen",
 	"oathauth-account": "Tilin nimi:",
 	"oathauth-secret": "Kaksivaiheisen tunnistautumisen salausavain:",
 	"oathauth-enable": "Ota käyttöön kaksivaiheinen tunnistautuminen",
-	"oathauth-token": "Avain",
+	"oathauth-token": "Poletti",
 	"oathauth-disable": "Poista käytöstä kaksivaiheinen tunnistautuminen",
 	"oathauth-prefs-label": "Kaksivaiheinen tunnistautuminen:",
 	"oathauth-step1": "Vaihe 1: Lataa kaksivaiheisen tunnistautumisen sovellus",
 	"oathauth-step2": "Vaihe 2: Skannaa QR-koodi",
 	"oathauth-step2alt": "Tai syötä salainen tunnus käsin:",
 	"oathauth-step4": "Vaihe 4: Vahvistus",
-	"right-oathauth-enable": "Ottaa käyttöön kaksivaiheinen tunnistautuminen",
-	"action-oathauth-enable": "ottaa käyttöön kaksivaiheista tunnistautumista",
-	"oathauth-auth-token-label": "Avain",
-	"oathauth-auth-ui": "Syötä vahvistuskoodi tunnistautumislaitteestasi",
-	"action-oathauth-api-all": "tarkistaa OATH-tilaa"
+	"oathauth-enteruser": "Käyttäjänimi:",
+	"right-oathauth-enable": "Ottaa käyttöön kahden tekijän avulla suoritettu (''two-factor'') tunnistautuminen",
+	"action-oathauth-enable": "ottaa käyttöön kahden tekijän avulla suoritettua (''two-factor'') tunnistautumista",
+	"oathauth-auth-token-label": "Poletti",
+	"oathauth-auth-ui": "Syötä vahvistuskoodi tunnistautumislaitteestasi.",
+	"oathauth-throttled": "Liian monta todennusyritystä! Odota hetki $1.",
+	"oathauth-login-failed": "Todennus epäonnistui",
+	"oathauth-describe-provider": "Kaksivaiheinen tunnistautuminen (OATH).",
+	"action-oathauth-api-all": "tarkistaa OATH-tilaa",
+	"oath-log-name": "Kaksivaiheisen tunnistautumisen loki",
+	"oauthauth-ui-no-module": "Ei mitään",
+	"oathauth-module-totp-label": "TOTP (kertakäyttöpoletti)",
+	"oathauth-ui-manage": "Hallitse",
+	"oathmanage": "Hallitse kaksivaiheista tunnistautumista",
+	"oathauth-enable-generic": "Ota käyttöön",
+	"oathauth-disable-generic": "Poista käytöstä",
+	"oathauth-disable-method-warning-button-label": "Vahvista ja jatka"
 }

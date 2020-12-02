@@ -1,10 +1,29 @@
 {
 	"name": "MathCaptcha",
+	"author": [
+		"..."
+	],
+	"requires": {
+		"extensions": {
+			"Math": "*"
+		}
+	},
+	"url": "https://www.mediawiki.org/wiki/Extension:ConfirmEdit#MathCaptcha",
+	"descriptionmsg": "mathcaptcha-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "antispam",
+	"MessagesDirs": {
+		"MathCaptcha": [
+			"i18n"
+		]
+	},
 	"AutoloadClasses": {
-		"MathCaptcha": "MathCaptcha.class.php"
+		"MathCaptcha": "includes/MathCaptcha.php"
 	},
 	"config": {
-		"CaptchaClass": "MathCaptcha"
+		"CaptchaClass": {
+			"value": "MathCaptcha"
+		}
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }

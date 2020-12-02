@@ -40,16 +40,15 @@ ve.ui.MWCitationAction.static.methods = [ 'open' ];
  * dialog name.
  *
  * @method
- * @param {string} windowName Dialog name to open
  * @param {Object} windowData Data to send to the dialog
  * @return {boolean} Action was executed
  */
-ve.ui.MWCitationAction.prototype.open = function ( windowName, windowData ) {
+ve.ui.MWCitationAction.prototype.open = function ( windowData ) {
 	windowData = $.extend( {
 		inDialog: this.surface.getInDialog()
 	}, windowData );
 
-	this.surface.execute( 'window', 'open', windowName, windowData );
+	this.surface.execute( 'window', 'open', 'cite', windowData );
 	return true;
 };
 

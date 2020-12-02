@@ -1,4 +1,4 @@
-( function ( $ ) {
+( function () {
 	var caretSample,
 		sig = {
 			pre: '--~~~~'
@@ -33,8 +33,8 @@
 	 * @param {string} options.description Description
 	 * @param {string} options.input Input
 	 * @param {string} options.output Output
-	 * @param {int} options.start Starting char for selection
-	 * @param {int} options.end Ending char for selection
+	 * @param {number} options.start Starting char for selection
+	 * @param {number} options.end Ending char for selection
 	 * @param {Object} options.params Additional parameters for $().textSelection( 'encapsulateText' )
 	 */
 	function encapsulateTest( options ) {
@@ -56,7 +56,7 @@
 		}, opt.after );
 
 		QUnit.test( opt.description, function ( assert ) {
-			var $textarea, start, end, options, text, selected;
+			var $textarea, start, end, opts, text, selected;
 
 			$textarea = $( '<textarea>' );
 
@@ -68,18 +68,18 @@
 			end = opt.before.end;
 
 			// Clone opt.replace
-			options = $.extend( {}, opt.replace );
-			options.selectionStart = start;
-			options.selectionEnd = end;
-			$textarea.textSelection( 'encapsulateSelection', options );
+			opts = $.extend( {}, opt.replace );
+			opts.selectionStart = start;
+			opts.selectionEnd = end;
+			$textarea.textSelection( 'encapsulateSelection', opts );
 
 			text = $textarea.textSelection( 'getContents' ).replace( /\r\n/g, '\n' );
 
-			assert.equal( text, opt.after.text, 'Checking full text after encapsulation' );
+			assert.strictEqual( text, opt.after.text, 'Checking full text after encapsulation' );
 
 			if ( opt.after.selected !== null ) {
 				selected = $textarea.textSelection( 'getSelection' );
-				assert.equal( selected, opt.after.selected, 'Checking selected text after encapsulation.' );
+				assert.strictEqual( selected, opt.after.selected, 'Checking selected text after encapsulation.' );
 			}
 
 		} );
@@ -224,9 +224,9 @@
 
 			function among( actual, expected, message ) {
 				if ( Array.isArray( expected ) ) {
-					assert.ok( expected.indexOf( actual ) !== -1, message + ' (got ' + actual + '; expected one of ' + expected.join( ', ' ) + ')' );
+					assert.strictEqual( expected.indexOf( actual ) !== -1, true, message + ' (got ' + actual + '; expected one of ' + expected.join( ', ' ) + ')' );
 				} else {
-					assert.equal( actual, expected, message );
+					assert.strictEqual( actual, expected, message );
 				}
 			}
 
@@ -263,4 +263,4 @@
 		end: 11,
 		mode: 'set'
 	} );
-}( jQuery ) );
+}() );

@@ -32,11 +32,13 @@ namespace Wikimedia;
  * @param int $destBase Desired base of the output
  * @param int $pad Minimum number of digits in the output (pad with zeroes)
  * @param bool $lowercase Whether to output in lowercase or uppercase
- * @param string $engine Either "gmp", "bcmath", or "php"
+ * @param string $engine Either "gmp", "bcmath", "php" or "auto" (default).
+ *  In the case of "auto", the other engines ("gmp" and "bcmath") are used in
+ *  the listed order in terms of preference if that PHP extension is actually loaded.
  * @return string|bool The output number as a string, or false on error
  */
 function base_convert( $input, $sourceBase, $destBase, $pad = 1,
-						$lowercase = true, $engine = 'auto'
+	$lowercase = true, $engine = 'auto'
 ) {
 	$input = (string)$input;
 	if (
@@ -71,10 +73,7 @@ function base_convert( $input, $sourceBase, $destBase, $pad = 1,
 	];
 
 	if ( extension_loaded( 'gmp' ) && ( $engine == 'auto' || $engine == 'gmp' ) ) {
-		// Removing leading zeros works around broken base detection code in
-		// some PHP versions (see <https://bugs.php.net/bug.php?id=50175> and
-		// <https://bugs.php.net/bug.php?id=55398>).
-		$result = gmp_strval( gmp_init( ltrim( $input, '0' ) ?: '0', $sourceBase ), $destBase );
+		$result = gmp_strval( gmp_init( $input, $sourceBase ), $destBase );
 	} elseif ( extension_loaded( 'bcmath' ) && ( $engine == 'auto' || $engine == 'bcmath' ) ) {
 		$decimal = '0';
 		foreach ( str_split( strtolower( $input ) ) as $char ) {

@@ -15,7 +15,7 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 
 	QUnit.module( 'mmv.model.License', QUnit.newMwEnvironment() );
 
@@ -29,9 +29,9 @@
 		license = new mw.mmv.model.License( shortName );
 		assert.ok( license, 'License created successfully' );
 		assert.strictEqual( license.shortName, shortName, 'License has correct short name' );
-		assert.ok( !license.internalName, 'License has no internal name' );
-		assert.ok( !license.longName, 'License has no long name' );
-		assert.ok( !license.deedUrl, 'License has no deed URL' );
+		assert.notOk( license.internalName, 'License has no internal name' );
+		assert.notOk( license.longName, 'License has no long name' );
+		assert.notOk( license.deedUrl, 'License has no deed URL' );
 
 		license = new mw.mmv.model.License( shortName, internalName, longName, url );
 		assert.ok( license, 'License created successfully' );
@@ -158,4 +158,4 @@
 			'Public Domain for lack of originality', false );
 		assert.strictEqual( license.needsAttribution(), false, 'Attribution required flag handled correctly' );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

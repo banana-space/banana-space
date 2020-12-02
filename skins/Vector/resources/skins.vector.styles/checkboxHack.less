@@ -1,0 +1,47 @@
+// This file is being considered for Core as part of T252774.
+
+// Notes:
+//
+// - Usage requires three elements: a hidden checkbox input, a button, and a show / hide target.
+// - By convention, the checked state is considered expanded or visible. Unchecked is considered
+//   hidden.
+// - Please see additional documentation in checkboxHack.js for example HTML and JavaScript
+//   integration.
+//
+// Example supplemental styles (to be added on a per use case basis):
+//
+// - Animate target in and out from start (left in LTR) to end (right in LTR):
+//
+//     .mw-checkbox-hack-checkbox:not( :checked ) ~ .mw-checkbox-hack-target {
+//             // Turn off presentation so that screen readers get the same effect as visually
+//             // hiding. Visibility and opacity can be animated. If animation is unnecessary, all
+//             // of this can be replaced with `display: none` instead to avoid hidden rendering.
+//             visibility: hidden;
+//             opacity: 0;
+//             @timing: @transition-duration-base ease-in-out;
+//             .transition( transform @timing, opacity @timing, visibility @timing; );
+//             .transform( translateX( -100% ) );
+//     }
+//
+// - Show / hide the target instantly without animation:
+//
+//     .mw-checkbox-hack-checkbox:not( :checked ) ~ .mw-checkbox-hack-target {
+//	       display: none;
+//     }
+
+@import 'mediawiki.ui/variables.less';
+@import 'mediawiki.mixins.less';
+
+.mw-checkbox-hack-checkbox {
+	// We don't want the browser to focus on the checkbox so we remove it from the
+	// accessibility tree. Instead, we want the label button to receive focus
+	// which has a tabindex of '0'.
+	display: none;
+}
+
+.mw-checkbox-hack-button {
+	// Labels are inlined by default but are also an icon having width and height specified.
+	display: inline-block;
+	// Use the hand icon for the toggle button which is actually a checkbox label.
+	cursor: pointer;
+}

@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Умар"
+		]
+	},
+	"apihelp-templatedata-description": "TemplateData чохь болу хаамаш схьаэца.",
+	"apihelp-templatedata-example-1": "[[Template:Stub]] а, [[Template:Example]] а чура хаамаш юху бало",
+	"apihelp-templatedata-param-lang": "Локалан маьӀна юха даладе хӀокху маттахь. Ӏадйитаран кепаца тӀекхочуш долу массо гочдарш меттахӀотта до."
+}

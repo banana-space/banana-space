@@ -71,6 +71,8 @@ class ApiOpenSearch extends ApiBase {
 
 			case 'xml':
 				$printer = $this->getMain()->createPrinterByName( 'xml' . $this->fm );
+				'@phan-var ApiFormatXml $printer';
+				/** @var ApiFormatXml $printer */
 				$printer->setRootElement( 'SearchSuggestion' );
 				return $printer;
 
@@ -82,23 +84,20 @@ class ApiOpenSearch extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 		$search = $params['search'];
-		$suggest = $params['suggest'];
-		$results = [];
-		if ( !$suggest || $this->getConfig()->get( 'EnableOpenSearchSuggest' ) ) {
-			// Open search results may be stored for a very long time
-			$this->getMain()->setCacheMaxAge( $this->getConfig()->get( 'SearchSuggestCacheExpiry' ) );
-			$this->getMain()->setCacheMode( 'public' );
-			$results = $this->search( $search, $params );
 
-			// Allow hooks to populate extracts and images
-			Hooks::run( 'ApiOpenSearchSuggest', [ &$results ] );
+		// Open search results may be stored for a very long time
+		$this->getMain()->setCacheMaxAge( $this->getConfig()->get( 'SearchSuggestCacheExpiry' ) );
+		$this->getMain()->setCacheMode( 'public' );
+		$results = $this->search( $search, $params );
 
-			// Trim extracts, if necessary
-			$length = $this->getConfig()->get( 'OpenSearchDescriptionLength' );
-			foreach ( $results as &$r ) {
-				if ( is_string( $r['extract'] ) && !$r['extract trimmed'] ) {
-					$r['extract'] = self::trimExtract( $r['extract'], $length );
-				}
+		// Allow hooks to populate extracts and images
+		$this->getHookRunner()->onApiOpenSearchSuggest( $results );
+
+		// Trim extracts, if necessary
+		$length = $this->getConfig()->get( 'OpenSearchDescriptionLength' );
+		foreach ( $results as &$r ) {
+			if ( is_string( $r['extract'] ) && !$r['extract trimmed'] ) {
+				$r['extract'] = self::trimExtract( $r['extract'], $length );
 			}
 		}
 
@@ -111,6 +110,8 @@ class ApiOpenSearch extends ApiBase {
 	 * @param string $search the search query
 	 * @param array $params api request params
 	 * @return array search results. Keys are integers.
+	 * @phan-return array<array{title:Title,redirect_from:?Title,extract:false,extract_trimmed:false,image:false,url:string}>
+	 *  Note that phan annotations don't support keys containing a space.
 	 */
 	private function search( $search, array $params ) {
 		$searchEngine = $this->buildSearchEngine( $params );
@@ -206,7 +207,7 @@ class ApiOpenSearch extends ApiBase {
 
 	/**
 	 * @param string $search
-	 * @param array &$results
+	 * @param array[] &$results
 	 */
 	protected function populateResult( $search, &$results ) {
 		$result = $this->getResult();
@@ -271,7 +272,11 @@ class ApiOpenSearch extends ApiBase {
 			return $this->allowedParams;
 		}
 		$this->allowedParams = $this->buildCommonApiParams( false ) + [
-			'suggest' => false,
+			'suggest' => [
+				ApiBase::PARAM_DFLT => false,
+				// Deprecated since 1.35
+				ApiBase::PARAM_DEPRECATED => true,
+			],
 			'redirects' => [
 				ApiBase::PARAM_TYPE => [ 'return', 'resolve' ],
 			],
@@ -377,43 +382,5 @@ class ApiOpenSearch extends ApiBase {
 			default:
 				throw new MWException( __METHOD__ . ": Unknown type '$type'" );
 		}
-	}
-}
-
-/**
- * @ingroup API
- */
-class ApiOpenSearchFormatJson extends ApiFormatJson {
-	private $warningsAsError = false;
-
-	public function __construct( ApiMain $main, $fm, $warningsAsError ) {
-		parent::__construct( $main, "json$fm" );
-		$this->warningsAsError = $warningsAsError;
-	}
-
-	public function execute() {
-		$result = $this->getResult();
-		if ( !$result->getResultData( 'error' ) && !$result->getResultData( 'errors' ) ) {
-			// Ignore warnings or treat as errors, as requested
-			$warnings = $result->removeValue( 'warnings', null );
-			if ( $this->warningsAsError && $warnings ) {
-				$this->dieWithError(
-					'apierror-opensearch-json-warnings',
-					'warnings',
-					[ 'warnings' => $warnings ]
-				);
-			}
-
-			// Ignore any other unexpected keys (e.g. from $wgDebugToolbar)
-			$remove = array_keys( array_diff_key(
-				$result->getResultData(),
-				[ 0 => 'search', 1 => 'terms', 2 => 'descriptions', 3 => 'urls' ]
-			) );
-			foreach ( $remove as $key ) {
-				$result->removeValue( $key, null );
-			}
-		}
-
-		parent::execute();
 	}
 }

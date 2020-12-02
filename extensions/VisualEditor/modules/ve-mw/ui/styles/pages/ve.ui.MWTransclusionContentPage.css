@@ -1,0 +1,15 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWTransclusionContentPage styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwTransclusionContentPage .oo-ui-textInputWidget {
+	display: block;
+	width: 100%;
+}
+
+.ve-ui-mwTransclusionContentPage .oo-ui-textInputWidget textarea {
+	height: 2.5em;
+}

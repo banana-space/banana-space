@@ -1,17 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Albertas",
 			"Eitvys200",
 			"Garas",
 			"Hugo.arg",
+			"Manvydasz",
 			"Matasg",
-			"Vogone",
-			"Vpovilaitis",
 			"Pofka",
 			"Salpusnis",
-			"Albertas",
-			"Zygimantus",
-			"Manvydasz"
+			"Vogone",
+			"Vpovilaitis",
+			"Zygimantus"
 		]
 	},
 	"wikieditor": "Išplėstinė vikiteksto redagavimo sąsaja",
@@ -21,6 +21,7 @@
 	"wikieditor-toolbar": "Redagavimo įrankių juosta",
 	"wikieditor-toolbar-desc": "Redaguoti įrankių juostą, siekiant didesnio praktiškumo",
 	"wikieditor-toolbar-preference": "Įjungti naudingesnę įrankių juostą",
+	"wikieditor-toolbar-preference-help": "Kartais vadinamas „2010 vikiteksto redaktoriumi“.",
 	"wikieditor-toolbar-loading": "Kraunama...",
 	"wikieditor-toolbar-tool-bold": "Paryškinti",
 	"wikieditor-toolbar-tool-bold-example": "Paryškinti tekstą",

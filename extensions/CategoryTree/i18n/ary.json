@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Reda Benkhadra",
+			"SADI9I",
+			"SADIQUI"
+		]
+	},
+	"categorytree-expand": "وسع",
+	"categorytree-member-counts": "كيحتاوي على {{PLURAL:$1|تصنيف فرعي واحد|$1 تصنيفات فرعية}}، {{PLURAL:$2|صفحة وحدة|$2 صفحات}}، و{{PLURAL:$3|ملف واحد|$3 ملفات}}",
+	"categorytree-num-categories": "$1 ت",
+	"categorytree-num-pages": " $1 ص",
+	"categorytree-num-files": " $1 م",
+	"categorytree-num-empty": "خاوي"
+}

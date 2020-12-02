@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dbc334"
+		]
+	},
+	"apihelp-categorytree-description": "Notranji modul za razširitev CategoryTree.",
+	"apihelp-categorytree-param-category": "Naslov v imenskem prostoru kategorij; če navedete predpono, jo bomo prezrli.",
+	"apihelp-categorytree-param-options": "Možnosti konstruktorja CategoryTree kot objekt JSON. Možnost <var>depth</var> je privzeto <kbd>1</kbd>."
+}

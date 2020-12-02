@@ -3,8 +3,8 @@
 		"authors": [
 			"Danmichaelo",
 			"Event",
-			"SuperPotato",
-			"Jon Harald Søby"
+			"Jon Harald Søby",
+			"SuperPotato"
 		]
 	},
 	"codeeditor-desc": "Syntaksfremhevet redigering av JavaScript og CSS-sider med bruk av [https://ace.c9.io/ Ace editor]",

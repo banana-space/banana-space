@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"apihelp-query+pageimages-description": "Дава информации за сликите на страницата, како да речеме за минијатурите и присуството на фотографии.",
+	"apihelp-query+pageimages-summary": "Дава информации за сликите на страницата, како да речеме за минијатурите и присуството на фотографии.",
+	"apihelp-query+pageimages-example-1": "Дај го називот и <kbd>100</kbd>-пикселска минијатура од сликата ма статијата <kbd>Albert Einstein</kbd>.",
+	"apihelp-query+pageimages-param-prop": "Кои информации да се дадат:\n;thumbnail:URL и димензии на минијатурата за страницата, ако ја има.\n;original:URL и изворните димензии на сликата за страницата, ако ја има.\n;name:Наслов на сликата.",
+	"apihelp-query+pageimages-param-thumbsize": "Најг. ширина на минијатурите во пиксели.",
+	"apihelp-query+pageimages-param-limit": "Својства на тоа колку страници да се дадат.",
+	"apihelp-query+pageimages-param-license": "Ги ограничува сликите на една страница според извесни видови лиценци",
+	"apihelp-query+pageimages-paramvalue-license-free": "само слободни слики",
+	"apihelp-query+pageimages-paramvalue-license-any": "најдобра слика, било слободна или не"
+}

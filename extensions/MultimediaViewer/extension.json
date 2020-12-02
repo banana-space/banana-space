@@ -23,13 +23,13 @@
 		"Christian Aistleitner",
 		"Amir E. Aharoni"
 	],
-	"url": "https://mediawiki.org/wiki/Extension:MultimediaViewer",
+	"url": "https://www.mediawiki.org/wiki/Extension:MultimediaViewer",
 	"descriptionmsg": "multimediaviewer-desc",
 	"license-name": "GPL-2.0-or-later",
 	"type": "other",
-	"ExtensionFunctions": [
-		"MultimediaViewerHooks::onExtensionFunctions"
-	],
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
 	"MessagesDirs": {
 		"MultimediaViewer": [
 			"i18n"
@@ -46,11 +46,6 @@
 				"mmv/logging/mmv.logging.DimensionLogger.js",
 				"mmv/logging/mmv.logging.ViewLogger.js",
 				"mmv/logging/mmv.logging.PerformanceLogger.js",
-				"mmv/routing/mmv.routing.js",
-				"mmv/routing/mmv.routing.Route.js",
-				"mmv/routing/mmv.routing.ThumbnailRoute.js",
-				"mmv/routing/mmv.routing.MainFileRoute.js",
-				"mmv/routing/mmv.routing.Router.js",
 				"mmv/model/mmv.model.js",
 				"mmv/model/mmv.model.IwTitle.js",
 				"mmv/model/mmv.model.License.js",
@@ -106,9 +101,11 @@
 				"mediawiki.Uri",
 				"mediawiki.jqueryMsg",
 				"mediawiki.storage",
+				"mediawiki.user",
+				"mediawiki.util",
 				"oojs",
+				"oojs-router",
 				"jquery.fullscreen",
-				"jquery.hidpi",
 				"jquery.throttle-debounce",
 				"jquery.color",
 				"jquery.tipsy",
@@ -221,9 +218,8 @@
 		},
 		"mmv.ui.ondemandshareddependencies": {
 			"scripts": [
-				"mmv/model/mmv.model.EmbedFileInfo.js",
-				"mmv/mmv.EmbedFileFormatter.js",
-				"mmv/ui/mmv.ui.utils.js"
+				"mmv.ui.ondemandshareddependencies/mmv.EmbedFileFormatter.js",
+				"mmv.ui.ondemandshareddependencies/mmv.ui.utils.js"
 			],
 			"dependencies": [
 				"mmv.head",
@@ -244,14 +240,15 @@
 		},
 		"mmv.ui.download.pane": {
 			"scripts": [
-				"mmv/ui/mmv.ui.download.pane.js"
+				"mmv.ui.download.pane/mmv.ui.download.pane.js"
 			],
 			"styles": [
-				"mmv/ui/mmv.ui.download.pane.less"
+				"mmv.ui.download.pane/mmv.ui.download.pane.less"
 			],
 			"dependencies": [
 				"mediawiki.ui",
 				"mediawiki.ui.button",
+				"mediawiki.widgets",
 				"mmv",
 				"mmv.ui.ondemandshareddependencies",
 				"oojs",
@@ -263,6 +260,7 @@
 				"multimediaviewer-download-small-button-name",
 				"multimediaviewer-download-medium-button-name",
 				"multimediaviewer-download-large-button-name",
+				"multimediaviewer-download-xl-button-name",
 				"multimediaviewer-embed-dimensions",
 				"multimediaviewer-embed-dimensions-with-file-format",
 				"multimediaviewer-download-attribution-cta-header",
@@ -275,20 +273,20 @@
 		},
 		"mmv.ui.reuse.shareembed": {
 			"scripts": [
-				"mmv/ui/mmv.ui.reuse.tab.js",
-				"mmv/ui/mmv.ui.reuse.share.js",
-				"mmv/ui/mmv.ui.reuse.embed.js"
+				"mmv.ui.reuse.shareembed/mmv.ui.reuse.tab.js",
+				"mmv.ui.reuse.shareembed/mmv.ui.reuse.share.js",
+				"mmv.ui.reuse.shareembed/mmv.ui.reuse.embed.js"
 			],
 			"styles": [
-				"mmv/ui/mmv.ui.reuse.share.less",
-				"mmv/ui/mmv.ui.reuse.embed.less",
-				"mmv/ui/mmv.ui.reuse.shareembed.less"
+				"mmv.ui.reuse.shareembed/mmv.ui.reuse.share.less",
+				"mmv.ui.reuse.shareembed/mmv.ui.reuse.embed.less"
 			],
 			"dependencies": [
 				"jquery.tipsy",
 				"oojs",
 				"oojs-ui",
 				"mediawiki.user",
+				"mediawiki.widgets",
 				"mmv.ui.ondemandshareddependencies"
 			],
 			"messages": [
@@ -309,6 +307,7 @@
 				"multimediaviewer-embed-via",
 				"multimediaviewer-default-embed-dimensions",
 				"multimediaviewer-original-embed-dimensions",
+				"multimediaviewer-xl-embed-dimensions",
 				"multimediaviewer-large-embed-dimensions",
 				"multimediaviewer-medium-embed-dimensions",
 				"multimediaviewer-small-embed-dimensions",
@@ -318,10 +317,10 @@
 		},
 		"mmv.ui.tipsyDialog": {
 			"scripts": [
-				"mmv/ui/mmv.ui.tipsyDialog.js"
+				"mmv.ui.tipsyDialog/mmv.ui.tipsyDialog.js"
 			],
 			"styles": [
-				"mmv/ui/mmv.ui.tipsyDialog.less"
+				"mmv.ui.tipsyDialog/mmv.ui.tipsyDialog.less"
 			],
 			"dependencies": [
 				"mmv",
@@ -331,27 +330,26 @@
 		},
 		"mmv.bootstrap": {
 			"scripts": [
-				"mmv/mmv.Config.js",
-				"mmv/mmv.HtmlUtils.js",
-				"mmv/mmv.bootstrap.js",
-				"mmv/logging/mmv.logging.Logger.js",
-				"mmv/logging/mmv.logging.ActionLogger.js",
-				"mmv/logging/mmv.logging.DurationLogger.js",
-				"jquery.hashchange/jquery.hashchange.js"
+				"mmv.bootstrap/mmv.Config.js",
+				"mmv.bootstrap/mmv.HtmlUtils.js",
+				"mmv.bootstrap/mmv.bootstrap.js",
+				"mmv.bootstrap/mmv.logging.Logger.js",
+				"mmv.bootstrap/mmv.logging.ActionLogger.js",
+				"mmv.bootstrap/mmv.logging.DurationLogger.js"
 			],
 			"styles": [
-				"mmv/mmv.bootstrap.less"
+				"mmv.bootstrap/mmv.bootstrap.less"
 			],
 			"dependencies": [
 				"mediawiki.api",
-				"mediawiki.api.options",
 				"mediawiki.ui.button",
 				"mediawiki.ui.icon",
 				"mediawiki.Title",
 				"mediawiki.user",
 				"mediawiki.storage",
 				"mmv.head",
-				"oojs"
+				"oojs",
+				"oojs-router"
 			],
 			"messages": [
 				"multimediaviewer-view-expanded",
@@ -362,7 +360,7 @@
 		},
 		"mmv.bootstrap.autostart": {
 			"scripts": [
-				"mmv/mmv.bootstrap.autostart.js"
+				"mmv.bootstrap.autostart/mmv.bootstrap.autostart.js"
 			],
 			"dependencies": [
 				"mmv.head",
@@ -371,74 +369,144 @@
 		},
 		"mmv.head": {
 			"scripts": [
-				"mmv/mmv.base.js",
-				"mmv/mmv.head.js"
+				"mmv.head/base.js",
+				"mmv.head/mmv.head.js"
 			],
 			"dependencies": [
 				"mediawiki.user",
 				"mediawiki.storage"
-			],
-			"position": "top"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "resources",
 		"remoteExtPath": "MultimediaViewer/resources"
 	},
-	"Hooks": {
-		"EventLoggingRegisterSchemas": [
-			"MultimediaViewerHooks::onEventLoggingRegisterSchemas"
+	"QUnitTestModule": {
+		"localBasePath": "",
+		"remoteExtPath": "MultimediaViewer",
+		"scripts": [
+			"tests/qunit/mmv/mmv.bootstrap.test.js",
+			"tests/qunit/mmv/mmv.test.js",
+			"tests/qunit/mmv/mmv.lightboxinterface.test.js",
+			"tests/qunit/mmv/mmv.lightboximage.test.js",
+			"tests/qunit/mmv/mmv.ThumbnailWidthCalculator.test.js",
+			"tests/qunit/mmv/mmv.EmbedFileFormatter.test.js",
+			"tests/qunit/mmv/mmv.Config.test.js",
+			"tests/qunit/mmv/mmv.HtmlUtils.test.js",
+			"tests/qunit/mmv/logging/mmv.logging.DurationLogger.test.js",
+			"tests/qunit/mmv/logging/mmv.logging.PerformanceLogger.test.js",
+			"tests/qunit/mmv/logging/mmv.logging.ActionLogger.test.js",
+			"tests/qunit/mmv/logging/mmv.logging.AttributionLogger.test.js",
+			"tests/qunit/mmv/logging/mmv.logging.DimensionLogger.test.js",
+			"tests/qunit/mmv/logging/mmv.logging.ViewLogger.test.js",
+			"tests/qunit/mmv/model/mmv.model.test.js",
+			"tests/qunit/mmv/model/mmv.model.IwTitle.test.js",
+			"tests/qunit/mmv/model/mmv.model.TaskQueue.test.js",
+			"tests/qunit/mmv/model/mmv.model.License.test.js",
+			"tests/qunit/mmv/model/mmv.model.Image.test.js",
+			"tests/qunit/mmv/model/mmv.model.Repo.test.js",
+			"tests/qunit/mmv/provider/mmv.provider.Api.test.js",
+			"tests/qunit/mmv/provider/mmv.provider.ImageInfo.test.js",
+			"tests/qunit/mmv/provider/mmv.provider.FileRepoInfo.test.js",
+			"tests/qunit/mmv/provider/mmv.provider.ThumbnailInfo.test.js",
+			"tests/qunit/mmv/provider/mmv.provider.GuessedThumbnailInfo.test.js",
+			"tests/qunit/mmv/provider/mmv.provider.Image.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.canvas.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.canvasButtons.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.description.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.download.pane.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.metadataPanel.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.metadataPanelScroller.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.progressBar.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.permission.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.stripeButtons.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.reuse.dialog.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.reuse.embed.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.reuse.share.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.reuse.tab.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.reuse.utils.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.tipsyDialog.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.truncatableTextField.test.js",
+			"tests/qunit/mmv/ui/mmv.ui.viewingOptions.test.js",
+			"tests/qunit/mmv/mmv.testhelpers.js"
 		],
-		"UserGetDefaultOptions": [
-			"MultimediaViewerHooks::onUserGetDefaultOptions"
-		],
-		"GetPreferences": [
-			"MultimediaViewerHooks::getPreferences"
-		],
-		"GetBetaFeaturePreferences": [
-			"MultimediaViewerHooks::getBetaPreferences"
-		],
-		"BeforePageDisplay": [
-			"MultimediaViewerHooks::getModulesForArticle"
-		],
-		"CategoryPageView": [
-			"MultimediaViewerHooks::getModulesForCategory"
-		],
-		"ResourceLoaderGetConfigVars": [
-			"MultimediaViewerHooks::resourceLoaderGetConfigVars"
-		],
-		"MakeGlobalVariablesScript": [
-			"MultimediaViewerHooks::makeGlobalVariablesScript"
-		],
-		"ResourceLoaderTestModules": [
-			"MultimediaViewerHooks::getTestModules"
-		],
-		"ThumbnailBeforeProduceHTML": [
-			"MultimediaViewerHooks::thumbnailBeforeProduceHTML"
+		"dependencies": [
+			"mmv.head",
+			"mmv.bootstrap",
+			"mmv",
+			"mmv.ui.ondemandshareddependencies",
+			"mmv.ui.reuse.shareembed",
+			"mmv.ui.download.pane",
+			"mmv.ui.tipsyDialog"
 		]
+	},
+	"attributes": {
+		"EventLogging": {
+			"Schemas": {
+				"MediaViewer": 10867062,
+				"MultimediaViewerNetworkPerformance": 15573630,
+				"MultimediaViewerDuration": 10427980,
+				"MultimediaViewerAttribution": 9758179,
+				"MultimediaViewerDimensions": 10014238
+			}
+		}
+	},
+	"Hooks": {
+		"UserGetDefaultOptions": "MultimediaViewerHooks::onUserGetDefaultOptions",
+		"GetPreferences": "MultimediaViewerHooks::onGetPreferences",
+		"BeforePageDisplay": "MultimediaViewerHooks::onBeforePageDisplay",
+		"CategoryPageView": "MultimediaViewerHooks::onCategoryPageView",
+		"ResourceLoaderGetConfigVars": "MultimediaViewerHooks::onResourceLoaderGetConfigVars",
+		"MakeGlobalVariablesScript": "MultimediaViewerHooks::onMakeGlobalVariablesScript",
+		"ThumbnailBeforeProduceHTML": "MultimediaViewerHooks::onThumbnailBeforeProduceHTML"
 	},
 	"config": {
 		"MediaViewerExtensions": {
-			"jpg": "default",
-			"jpeg": "default",
-			"gif": "default",
-			"svg": "default",
-			"png": "default",
-			"tiff": "default",
-			"tif": "default"
+			"value": {
+				"jpg": "default",
+				"jpeg": "default",
+				"gif": "default",
+				"svg": "default",
+				"png": "default",
+				"tiff": "default",
+				"tif": "default"
+			}
 		},
-		"MediaViewerNetworkPerformanceSamplingFactor": false,
-		"MediaViewerDurationLoggingSamplingFactor": false,
-		"MediaViewerDurationLoggingLoggedinSamplingFactor": false,
-		"MediaViewerAttributionLoggingSamplingFactor": false,
-		"MediaViewerDimensionLoggingSamplingFactor": false,
-		"MediaViewerActionLoggingSamplingFactorMap": false,
-		"MediaViewerIsInBeta": false,
-		"MediaViewerUseThumbnailGuessing": false,
-		"MediaViewerEnableByDefault": true,
-		"MediaViewerEnableByDefaultForAnonymous": null,
-		"MediaViewerImageQueryParameter": false,
-		"MediaViewerRecordVirtualViewBeaconURI": false
+		"MediaViewerNetworkPerformanceSamplingFactor": {
+			"value": false
+		},
+		"MediaViewerDurationLoggingSamplingFactor": {
+			"value": false
+		},
+		"MediaViewerDurationLoggingLoggedinSamplingFactor": {
+			"value": false
+		},
+		"MediaViewerAttributionLoggingSamplingFactor": {
+			"value": false
+		},
+		"MediaViewerDimensionLoggingSamplingFactor": {
+			"value": false
+		},
+		"MediaViewerActionLoggingSamplingFactorMap": {
+			"value": false
+		},
+		"MediaViewerUseThumbnailGuessing": {
+			"value": false
+		},
+		"MediaViewerEnableByDefault": {
+			"value": true
+		},
+		"MediaViewerEnableByDefaultForAnonymous": {
+			"value": null
+		},
+		"MediaViewerImageQueryParameter": {
+			"value": false
+		},
+		"MediaViewerRecordVirtualViewBeaconURI": {
+			"value": false
+		}
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }

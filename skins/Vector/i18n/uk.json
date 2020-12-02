@@ -6,15 +6,20 @@
 			"Base",
 			"Calak",
 			"Dim Grits",
+			"Movses",
 			"NickK",
+			"Piramidion",
 			"Prima klasy4na",
-			"Тест",
 			"Ата",
-			"Piramidion"
+			"Тест"
 		]
 	},
 	"skinname-vector": "Векторне",
 	"vector-skin-desc": "Сучасна версія MonoBook зі свіжим виглядом і багатьма зручними покращеннями",
+	"prefs-vector-enable-vector-1-label": "Використовувати стару версію",
+	"prefs-vector-enable-vector-1-help": "Протягом наступних декількох років ми поступово оновлюватимемо тему оформлення «Векторне». Стара версія цього оформлення дозволить вам бачити його таким, яким воно було станом на грудень 2019 року. Щоб дізнатись більше про ці оновлення, відвідайте нашу [[mw:Reading/Web/Desktop_Improvements|сторінку проекту]].",
+	"vector-opt-out": "Перемкнутися на старий вигляд",
+	"vector-opt-out-tooltip": "Змінити ваші налаштування щоб повернутись до оформлення  Вектор",
 	"vector.css": "/* Розміщений тут CSS-код буде використаний в темі оформлення Векторне */",
 	"vector.js": "/* Розміщений тут код JavaScript буде завантажений для всіх користувачів, що використовують векторну тему оформлення */",
 	"vector-action-addsection": "Додати тему",
@@ -28,5 +33,7 @@
 	"vector-view-history": "Переглянути історію",
 	"vector-view-view": "Читати",
 	"vector-view-viewsource": "Переглянути код",
+	"vector-jumptonavigation": "Перейти до навігації",
+	"vector-jumptosearch": "Перейти до пошуку",
 	"vector-more-actions": "Ще"
 }

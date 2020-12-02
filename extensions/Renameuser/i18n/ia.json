@@ -5,8 +5,8 @@
 		]
 	},
 	"renameuser": "Renominar usator",
-	"renameuser-linkoncontribs": "renominar usator",
-	"renameuser-linkoncontribs-text": "Renominar iste usator",
+	"renameuser-linkoncontribs": "renominar {{GENDER:$1|usator|usatrice}}",
+	"renameuser-linkoncontribs-text": "Renominar iste {{GENDER:$1|usator|usatrice}}",
 	"renameuser-desc": "Adde un [[Special:RenameUser|pagina special]] pro renominar un usator (require le privilegio ''renameuser'')",
 	"renameuserold": "Nomine de usator actual:",
 	"renameusernew": "Nove nomine de usator:",

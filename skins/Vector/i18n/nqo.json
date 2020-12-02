@@ -1,11 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
+			"Babamamadidiane",
+			"Lancine.kounfantoh.fofana",
+			"Lanciné.kounfantoh.fofana",
 			"Youssoufkadialy"
 		]
 	},
-	"vector-view-edit": "ߊ߬ ߡߊߝߊ߬ߟߋ߲߬",
-	"vector-view-history": "ߕߊ߬ߡߌ߲߬ߣߍ߲ ߠߎ߫ ߦߌ߬ߘߊ߬",
-	"vector-view-view": "ߊ߬ ߞߊ߬ߙߊ߲߬",
-	"vector-more-actions": "ߜߘߍ߫ ߟߎ߬"
+	"vector-action-addsection": "ߥߟߊ߬ߘߊ߫ ߝߙߊ߬",
+	"vector-action-delete": "ߊ߬ ߖߏ߬ߛߌ߬",
+	"vector-action-move": "ߊ߬ ߛߋ߲߬ߓߐ߫",
+	"vector-action-protect": "ߊ߬ ߟߊߞߊ߲ߘߊ߫",
+	"vector-view-create": "ߊ߬ ߟߊߘߊ߲߫",
+	"vector-view-edit": "ߊ߬ ߡߊߦߟߍ߬ߡߊ߲߫",
+	"vector-view-history": "ߞߊ߬ߞߘߐ ߡߊߝߟߍ",
+	"vector-view-view": "ߘߐ߬ߞߊ߬ߙߊ߲߬ߠߌ߲",
+	"vector-more-actions": "ߡߞߊ߬ߝߏ߬ ߜߘߍ߫ ߟߎ߫"
 }

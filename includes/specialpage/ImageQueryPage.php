@@ -21,12 +21,14 @@
  * @ingroup SpecialPage
  */
 
-use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Variant of QueryPage which uses a gallery to output results, thus
  * suited for reports generating images
+ *
+ * @stable to extend
  *
  * @ingroup SpecialPage
  * @author Rob Church <robchur@gmail.com>
@@ -35,6 +37,8 @@ abstract class ImageQueryPage extends QueryPage {
 	/**
 	 * Format and output report results using the given information plus
 	 * OutputPage
+	 *
+	 * @stable to override
 	 *
 	 * @param OutputPage $out OutputPage to print to
 	 * @param Skin $skin User skin to use [unused]
@@ -52,7 +56,7 @@ abstract class ImageQueryPage extends QueryPage {
 			$i = 0;
 			foreach ( $res as $row ) {
 				$i++;
-				$namespace = isset( $row->namespace ) ? $row->namespace : NS_FILE;
+				$namespace = $row->namespace ?? NS_FILE;
 				$title = Title::makeTitleSafe( $namespace, $row->title );
 				if ( $title instanceof Title && $title->getNamespace() == NS_FILE ) {
 					$gallery->add( $title, $this->getCellHtml( $row ) );
@@ -66,12 +70,22 @@ abstract class ImageQueryPage extends QueryPage {
 		}
 	}
 
-	// Gotta override this since it's abstract
-	function formatResult( $skin, $result ) {
+	/**
+	 * @stable to override
+	 *
+	 * @param Skin $skin
+	 * @param object $result
+	 *
+	 * @return bool|string
+	 */
+	protected function formatResult( $skin, $result ) {
+		return false;
 	}
 
 	/**
 	 * Get additional HTML to be shown in a results' cell
+	 *
+	 * @stable to override
 	 *
 	 * @param object $row Result row
 	 * @return string

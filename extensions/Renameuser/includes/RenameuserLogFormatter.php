@@ -5,6 +5,9 @@
  */
 class RenameuserLogFormatter extends LogFormatter {
 
+	/**
+	 * @inheritDoc
+	 */
 	protected function getMessageParameters() {
 		$params = parent::getMessageParameters();
 		/* Current format:
@@ -31,7 +34,8 @@ class RenameuserLogFormatter extends LogFormatter {
 
 		// Nice link to old user page
 		$title = Title::makeTitleSafe( NS_USER, $params[3] );
-		$link = $this->myPageLink( $title, $params[3] );
+		$link = $this->myPageLink( $title, $params[3],
+			[ 'redirect' => 'no' ] );
 		$params[3] = Message::rawParam( $link );
 
 		// Nice link to new user page
@@ -44,12 +48,18 @@ class RenameuserLogFormatter extends LogFormatter {
 		return $params;
 	}
 
-	protected function myPageLink( Title $title = null, $text ) {
+	/**
+	 * @param Title|null $title
+	 * @param string $text
+	 * @param array $query
+	 * @return string
+	 */
+	protected function myPageLink( ?Title $title, $text, $query = [] ) {
 		if ( !$this->plaintext ) {
 			if ( !$title instanceof Title ) {
 				$link = htmlspecialchars( $text );
 			} else {
-				$link = $this->getLinkRenderer()->makeLink( $title, $text );
+				$link = $this->getLinkRenderer()->makeLink( $title, $text, [], $query );
 			}
 		} else {
 			if ( !$title instanceof Title ) {

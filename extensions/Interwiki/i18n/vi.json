@@ -28,7 +28,6 @@
 	"interwiki-cached": "Dữ liệu liên wiki được lưu vào vùng nhớ đệm. Không thể sửa đổi vùng nhớ đệm.",
 	"interwiki_edit": "Sửa đổi",
 	"interwiki_reasonfield": "Lý do:",
-	"interwiki_delquestion": "Xóa “$1”",
 	"interwiki_deleting": "Bạn đang xóa tiền tố “$1”.",
 	"interwiki_deleted": "Tiền tố “$1” đã được xóa khỏi bảng liên wiki.",
 	"interwiki_delfailed": "Tiền tố “$1” không thể xóa khỏi bảng liên wiki.",

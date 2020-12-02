@@ -19,6 +19,7 @@
  * @ingroup RevisionDelete
  */
 
+use MediaWiki\MediaWikiServices;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
@@ -86,7 +87,7 @@ class RevDelFileList extends RevDelList {
 
 	public function doPreCommitUpdates() {
 		$status = Status::newGood();
-		$repo = RepoGroup::singleton()->getLocalRepo();
+		$repo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
 		if ( $this->storeBatch ) {
 			$status->merge( $repo->storeBatch( $this->storeBatch, FileRepo::OVERWRITE_SAME ) );
 		}
@@ -109,7 +110,8 @@ class RevDelFileList extends RevDelList {
 	}
 
 	public function doPostCommitUpdates( array $visibilityChangeMap ) {
-		$file = wfLocalFile( $this->title );
+		$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
+			->newFile( $this->title );
 		$file->purgeCache();
 		$file->purgeDescription();
 
@@ -120,10 +122,9 @@ class RevDelFileList extends RevDelList {
 			$file->purgeOldThumbnails( $archiveName );
 			$purgeUrls[] = $file->getArchiveUrl( $archiveName );
 		}
-		DeferredUpdates::addUpdate(
-			new CdnCacheUpdate( $purgeUrls ),
-			DeferredUpdates::PRESEND
-		);
+
+		$hcu = MediaWikiServices::getInstance()->getHtmlCacheUpdater();
+		$hcu->purgeUrls( $purgeUrls, $hcu::PURGE_INTENT_TXROUND_REFLECTED );
 
 		return Status::newGood();
 	}

@@ -7,7 +7,7 @@ class MySQLField implements Field {
 		$is_pk, $is_unique, $is_multiple, $is_key, $type, $binary,
 		$is_numeric, $is_blob, $is_unsigned, $is_zerofill;
 
-	function __construct( $info ) {
+	public function __construct( $info ) {
 		$this->name = $info->name;
 		$this->tablename = $info->table;
 		$this->default = $info->def;
@@ -18,91 +18,91 @@ class MySQLField implements Field {
 		$this->is_multiple = $info->multiple_key;
 		$this->is_key = ( $this->is_pk || $this->is_unique || $this->is_multiple );
 		$this->type = $info->type;
-		$this->binary = isset( $info->binary ) ? $info->binary : false;
-		$this->is_numeric = isset( $info->numeric ) ? $info->numeric : false;
-		$this->is_blob = isset( $info->blob ) ? $info->blob : false;
-		$this->is_unsigned = isset( $info->unsigned ) ? $info->unsigned : false;
-		$this->is_zerofill = isset( $info->zerofill ) ? $info->zerofill : false;
+		$this->binary = $info->binary ?? false;
+		$this->is_numeric = $info->numeric ?? false;
+		$this->is_blob = $info->blob ?? false;
+		$this->is_unsigned = $info->unsigned ?? false;
+		$this->is_zerofill = $info->zerofill ?? false;
 	}
 
 	/**
 	 * @return string
 	 */
-	function name() {
+	public function name() {
 		return $this->name;
 	}
 
 	/**
 	 * @return string
 	 */
-	function tableName() {
+	public function tableName() {
 		return $this->tablename;
 	}
 
 	/**
 	 * @return string
 	 */
-	function type() {
+	public function type() {
 		return $this->type;
 	}
 
 	/**
 	 * @return bool
 	 */
-	function isNullable() {
+	public function isNullable() {
 		return $this->nullable;
 	}
 
-	function defaultValue() {
+	public function defaultValue() {
 		return $this->default;
 	}
 
 	/**
 	 * @return bool
 	 */
-	function isKey() {
+	public function isKey() {
 		return $this->is_key;
 	}
 
 	/**
 	 * @return bool
 	 */
-	function isMultipleKey() {
+	public function isMultipleKey() {
 		return $this->is_multiple;
 	}
 
 	/**
 	 * @return bool
 	 */
-	function isBinary() {
+	public function isBinary() {
 		return $this->binary;
 	}
 
 	/**
 	 * @return bool
 	 */
-	function isNumeric() {
+	public function isNumeric() {
 		return $this->is_numeric;
 	}
 
 	/**
 	 * @return bool
 	 */
-	function isBlob() {
+	public function isBlob() {
 		return $this->is_blob;
 	}
 
 	/**
 	 * @return bool
 	 */
-	function isUnsigned() {
+	public function isUnsigned() {
 		return $this->is_unsigned;
 	}
 
 	/**
 	 * @return bool
 	 */
-	function isZerofill() {
+	public function isZerofill() {
 		return $this->is_zerofill;
 	}
 }

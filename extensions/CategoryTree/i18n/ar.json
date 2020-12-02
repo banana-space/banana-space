@@ -1,14 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abanima",
 			"AwamerT",
+			"Maroen1990",
 			"Meno25",
 			"Mido",
+			"Moud hosny",
 			"OsamaK",
-			"زكريا",
-			"Abanima",
-			"Maroen1990",
-			"Moud hosny"
+			"زكريا"
 		]
 	},
 	"categorytree": "شجرة تصنيفات",
@@ -40,10 +40,5 @@
 	"categorytree-no-pages": "لا صفحات ولا تصنيفات فرعية",
 	"categorytree-not-found": "التصنيف «$1» لم يتم العثور عليه",
 	"categorytree-error": "مشكلة في تحميل البيانات.",
-	"categorytree-retry": "من فضلك انتظر لحظة وحاول مرة أخرى.",
-	"apihelp-categorytree-description": "الوحدة لداخلية للتصنيفات الصحيحة.",
-	"apihelp-categorytree-summary": "جزء داخلي لامتداد CategoryTree.",
-	"apihelp-categorytree-param-category": "العنوان في مساحة اسم الفئة. يتم تجاهل البادئة إذا كان محدد.",
-	"apihelp-categorytree-param-options": "الخيارات لمنشيء CategoryTree ككائن JSON object. خيار <var>depth</var> القيمة الافتراضية له هي <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "الخيارات يجب أن تكون كائن JSON صحيح."
+	"categorytree-retry": "من فضلك انتظر لحظة وحاول مرة أخرى."
 }

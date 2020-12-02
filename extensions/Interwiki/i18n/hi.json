@@ -31,7 +31,6 @@
 	"interwiki-cached": "अंतरविकि डाटा कैश मेमोरी में सहेजा हुआ है। कैश मेमोरी में बदलाव करना संभव नहीं है।",
 	"interwiki_edit": "सम्पादन",
 	"interwiki_reasonfield": "कारण:",
-	"interwiki_delquestion": "$1 को हटा रहे हैं",
 	"interwiki_deleting": "आप \"$1\" उपसर्ग हटा रहे हैं।",
 	"interwiki_deleted": "\"$1\" उपसर्ग अंतरविकि तालिका से हटा दिया गया है।",
 	"interwiki_delfailed": "\"$1\" उपसर्ग अंतरविकि तालिका से हटाया नहीं जा सका।",

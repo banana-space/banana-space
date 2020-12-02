@@ -3,13 +3,13 @@
 		"authors": [
 			"Danmichaelo",
 			"Event",
-			"Nghtwlkr",
-			"Jon Harald Søby"
+			"Jon Harald Søby",
+			"Nghtwlkr"
 		]
 	},
 	"renameuser": "Døp om bruker",
-	"renameuser-linkoncontribs": "døp om bruker",
-	"renameuser-linkoncontribs-text": "Døp om denne brukeren",
+	"renameuser-linkoncontribs": "døp om {{GENDER:$1|bruker}}",
+	"renameuser-linkoncontribs-text": "Døp om denne {{GENDER:$1|brukeren}}",
 	"renameuser-desc": "Legger til en [[Special:RenameUser|spesialside]] for å døpe om en bruker (krever ''renameuser''-rettigheter)",
 	"renameuserold": "Nåværende brukernavn:",
 	"renameusernew": "Nytt brukernavn:",

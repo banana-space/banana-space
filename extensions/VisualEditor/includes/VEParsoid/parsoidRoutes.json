@@ -1,0 +1,32 @@
+[
+		{
+			"path": "/{domain}/v3/page/{format}/{title}",
+			"class": "VEParsoid\\Rest\\Handler\\PageHandler",
+			"factory": "VEParsoid\\Rest\\Handler\\PageHandler::factory",
+			"method": "GET"
+		},
+		{
+			"path": "/{domain}/v3/page/{format}/{title}/{revision}",
+			"class": "VEParsoid\\Rest\\Handler\\PageHandler",
+			"factory": "VEParsoid\\Rest\\Handler\\PageHandler::factory",
+			"method": "GET"
+		},
+		{
+			"path": "/{domain}/v3/transform/{from}/to/{format}",
+			"class": "VEParsoid\\Rest\\Handler\\TransformHandler",
+			"factory": "VEParsoid\\Rest\\Handler\\TransformHandler::factory",
+			"method": "POST"
+		},
+		{
+			"path": "/{domain}/v3/transform/{from}/to/{format}/{title}",
+			"class": "VEParsoid\\Rest\\Handler\\TransformHandler",
+			"factory": "VEParsoid\\Rest\\Handler\\TransformHandler::factory",
+			"method": "POST"
+		},
+		{
+			"path": "/{domain}/v3/transform/{from}/to/{format}/{title}/{revision}",
+			"class": "VEParsoid\\Rest\\Handler\\TransformHandler",
+			"factory": "VEParsoid\\Rest\\Handler\\TransformHandler::factory",
+			"method": "POST"
+		}
+]

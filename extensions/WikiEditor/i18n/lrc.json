@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Bonevarluri",
+			"Lorestani",
 			"Mogoeilor"
 		]
 	},
@@ -62,7 +63,7 @@
 	"wikieditor-toolbar-tool-ulist": "نوم گه توپر بیه",
 	"wikieditor-toolbar-tool-olist": "نوم گه شماره دار",
 	"wikieditor-toolbar-tool-redirect": "واگردونی",
-	"wikieditor-toolbar-tool-redirect-example": "نوم بلگه حاستنی",
+	"wikieditor-toolbar-tool-redirect-example": "نوم بٱلگٱ هاستنی",
 	"wikieditor-toolbar-tool-big": "گپ",
 	"wikieditor-toolbar-tool-big-example": "نیسسه گپ",
 	"wikieditor-toolbar-tool-small": "كؤچك",

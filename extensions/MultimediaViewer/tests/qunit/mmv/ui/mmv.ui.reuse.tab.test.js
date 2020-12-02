@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	var $fixture = $( '#qunit-fixture' );
 
 	function makeReuseTab() {
@@ -30,14 +30,14 @@
 		assert.ok( reuseTab, 'Reuse UI element is created.' );
 		assert.strictEqual( reuseTab.$pane.length, 1, 'Pane created.' );
 
-		assert.ok( !reuseTab.$pane.hasClass( 'active' ), 'Tab is not active.' );
+		assert.strictEqual( reuseTab.$pane.hasClass( 'active' ), false, 'Tab is not active.' );
 
 		reuseTab.show();
 
-		assert.ok( reuseTab.$pane.hasClass( 'active' ), 'Tab is active.' );
+		assert.strictEqual( reuseTab.$pane.hasClass( 'active' ), true, 'Tab is active.' );
 
 		reuseTab.hide();
 
-		assert.ok( !reuseTab.$pane.hasClass( 'active' ), 'Tab is not active.' );
+		assert.strictEqual( reuseTab.$pane.hasClass( 'active' ), false, 'Tab is not active.' );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

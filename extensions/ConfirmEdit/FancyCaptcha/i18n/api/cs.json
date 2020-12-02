@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mormegil"
+		]
+	},
+	"apihelp-fancycaptchareload-description": "Získat novou FancyCaptcha.",
+	"apihelp-fancycaptchareload-example-1": "Získat novou FancyCaptcha."
+}

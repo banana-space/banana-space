@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lokal Profil",
+			"WikiPhoenix"
+		]
+	},
+	"apihelp-query+gadgetcategories-description": "Returnerar en lista för finesskategorier.",
+	"apihelp-query+gadgetcategories-summary": "Returnerar en lista för finesskategorier.",
+	"apihelp-query+gadgetcategories-param-prop": "Vilken information om finesskategorier som ska tas med:\n;name:Internt kategorinamn.\n;title:Kategorititel.\n;members:Antal finesser i kategorin.",
+	"apihelp-query+gadgetcategories-param-names": "Namn på kategorier som ska hämtas.",
+	"apihelp-query+gadgetcategories-example-1": "Få en lista över befintliga finesskategorier",
+	"apihelp-query+gadgetcategories-example-2": "Få alla information om kategorier med namnen \"foo\" och \"bar\"",
+	"apihelp-query+gadgets-description": "Returnerar en lista med finesser som används på denna wiki.",
+	"apihelp-query+gadgets-summary": "Returnerar en lista över finesser som används på denna wiki.",
+	"apihelp-query+gadgets-param-prop": "Vilken finessinformation som ska tas med:\n;id:Internt finess-ID.\n;metadata:Finessmetadata.\n;desc:Finessbeskrivning omvandlad till HTML (kan vara långsam, använd bara om det verkligen behövs).",
+	"apihelp-query+gadgets-param-categories": "Finesser från vilka kategorier att hämta.",
+	"apihelp-query+gadgets-param-ids": "ID för finesser som ska hämtas.",
+	"apihelp-query+gadgets-param-allowedonly": "Listan bara finesser som är tillåts för den aktuella användaren.",
+	"apihelp-query+gadgets-param-enabledonly": "Listan bara finesser aktiverade av den aktuella användaren.",
+	"apihelp-query+gadgets-example-1": "Få en lista över finesser tillsammans med deras beskrivningar",
+	"apihelp-query+gadgets-example-2": "Få en lista över finesser med alla möjliga egenskaper",
+	"apihelp-query+gadgets-example-3": "Få en lista över finesser som tillhör kategorin \"foo\"",
+	"apihelp-query+gadgets-example-4": "Få information om finesserna \"foo\" och \"bar\"",
+	"apihelp-query+gadgets-example-5": "Få en lista över finesser aktiverade av den aktuella användaren"
+}

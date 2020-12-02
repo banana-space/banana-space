@@ -243,5 +243,6 @@
 .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br { -moz-border-radius-bottomright: 3px; -webkit-border-bottom-right-radius: 3px; -khtml-border-bottom-right-radius: 3px; border-bottom-right-radius: 3px; }
 
 /* Overlays */
-.ui-widget-overlay { /* @embed */ background: #000000 url("images/ui-bg_flat_100_000000_40x100.png") 50% 50% repeat-x; opacity: .5;filter:Alpha(Opacity=50); }
+.ui-widget-overlay { background: rgba(255, 255, 255, 0.5); opacity: 1; filter: none; }
 .ui-widget-shadow { margin: -7px 0 0 -7px; padding: 7px; /* @embed */ background: #000000 url("images/ui-bg_flat_70_000000_40x100.png") 50% 50% repeat-x; opacity: .2;filter:Alpha(Opacity=20); -moz-border-radius: 8px; -khtml-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }
+.ui-dialog { border: 1px solid #a2a9b1; box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25); }

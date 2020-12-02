@@ -1,13 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Minisarm",
-			"Macofe"
+			"Andrei Stroe",
+			"Macofe",
+			"Minisarm"
 		]
 	},
 	"multimediaviewer-desc": "Extinde miniaturile la o dimensiune mai mare într-o interfață pe tot ecranul.",
-	"multimediaviewer-pref": "Vizualizator multimedia",
-	"multimediaviewer-pref-desc": "Îmbunătățiți-vă experiența de vizualizare a conținutului multimedia cu această nouă unealtă. Afișează imaginile la dimensiune mare în cadrul paginilor care conțin miniaturi. Imaginile sunt afișate într-o interfață pe tot ecranul mai simpatică, acestea putând fi, de asemenea, vizualizate la dimensiunea reală.",
 	"multimediaviewer-optin-pref": "Activează <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About Vizualizatorul multimedia]</span>",
 	"multimediaviewer-file-page": "Du-te la pagina asociată fișierului",
 	"multimediaviewer-repository-local": "Mai multe detalii",
@@ -43,7 +42,7 @@
 	"multimediaviewer-restriction-trademarked": "Conținutul acestei imagini poate fi subiectul legilor privitoare la mărcile înregistrate.",
 	"multimediaviewer-restriction-default": "Această imagine poate fi restricționată prin dispoziții legale în afara legii drepturilor de autor. Consultați pagina descriptivă a fișierului pentru detalii.",
 	"multimediaviewer-restriction-default-and-others": "Această imagine poate fi restricționată și prin alte dispoziții legale în afara legii drepturilor de autor. Consultați pagina descriptivă a fișierului pentru detalii.",
-	"multimediaviewer-about-mmv": "Despre",
+	"multimediaviewer-about-mmv": "Despre această interfață",
 	"multimediaviewer-discuss-mmv": "Discuții",
 	"multimediaviewer-help-mmv": "Ajutor",
 	"multimediaviewer-optout-mmv": "Dezactivează Vizualizatorul multimedia",

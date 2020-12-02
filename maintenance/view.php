@@ -21,6 +21,8 @@
  * @ingroup Maintenance
  */
 
+use MediaWiki\Revision\RevisionRecord;
+
 require_once __DIR__ . '/Maintenance.php';
 
 /**
@@ -36,7 +38,7 @@ class ViewCLI extends Maintenance {
 	}
 
 	public function execute() {
-		$title = Title::newFromText( $this->getArg() );
+		$title = Title::newFromText( $this->getArg( 0 ) );
 		if ( !$title ) {
 			$this->fatalError( "Invalid title" );
 		} elseif ( $title->isSpecialPage() ) {
@@ -47,7 +49,7 @@ class ViewCLI extends Maintenance {
 
 		$page = WikiPage::factory( $title );
 
-		$content = $page->getContent( Revision::RAW );
+		$content = $page->getContent( RevisionRecord::RAW );
 		if ( !$content ) {
 			$this->fatalError( "Page has no content" );
 		}
@@ -55,7 +57,7 @@ class ViewCLI extends Maintenance {
 			$this->fatalError( "Non-text content models not supported" );
 		}
 
-		$this->output( $content->getNativeData() );
+		$this->output( $content->getText() );
 	}
 }
 

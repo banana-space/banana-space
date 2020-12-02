@@ -2,20 +2,25 @@
 
 namespace MediaWiki\Widget;
 
-use \OOUI\RadioSelectInputWidget;
-use \OOUI\TextInputWidget;
-use \OOUI\LabelWidget;
+use OOUI\LabelWidget;
+use OOUI\RadioSelectInputWidget;
+use OOUI\TextInputWidget;
 
 /**
  * Select and input widget.
  *
  * @copyright 2011-2018 MediaWiki Widgets Team and others; see AUTHORS.txt
- * @license The MIT License (MIT); see LICENSE.txt
+ * @license MIT
  */
 class SizeFilterWidget extends \OOUI\Widget {
-
-	protected $radioselectinput = null;
-	protected $textinput = null;
+	/** @var array */
+	protected $config;
+	/** @var LabelWidget */
+	protected $label;
+	/** @var RadioSelectInputWidget */
+	protected $radioselectinput;
+	/** @var TextInputWidget */
+	protected $textinput;
 
 	/**
 	 * RadioSelectInputWidget and a TextInputWidget to set minimum or maximum byte size

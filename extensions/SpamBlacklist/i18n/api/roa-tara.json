@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"apihelp-spamblacklist-description": "Valide une o cchiù URL condre 'a SpamBlackList.",
+	"apihelp-spamblacklist-example-1": "Verifiche doje URL condre 'a lista gnore",
+	"apihelp-spamblacklist-param-url": "URL da validà condre 'a lista gnore.",
+	"apihelp-spamblacklist-summary": "Valide une o cchiù URL cu 'a SpamBlackList."
+}

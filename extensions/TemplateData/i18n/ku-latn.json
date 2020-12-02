@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bikarhêner",
+			"George Animal",
+			"Ghybu"
+		]
+	},
+	"templatedata-doc-param-example": "Mînak",
+	"templatedata-doc-param-desc": "Danasîn",
+	"templatedata-doc-param-name": "Parametre",
+	"templatedata-doc-param-status": "Rewş",
+	"templatedata-doc-param-status-optional": "ne pêwîst",
+	"templatedata-doc-param-status-required": "pêwîst",
+	"templatedata-doc-param-status-suggested": "pêşniyarkirî",
+	"templatedata-doc-param-type": "Cure",
+	"templatedata-doc-param-type-date": "Dîrok",
+	"templatedata-doc-param-type-url": "URL",
+	"templatedata-doc-param-type-wiki-page-name": "Rûpel",
+	"templatedata-doc-param-type-wiki-template-name": "Şablon",
+	"templatedata-doc-param-type-wiki-user-name": "Bikarhêner",
+	"templatedata-doc-params": "Parametreyên şablonê",
+	"templatedata-modal-button-back": "Paşve",
+	"templatedata-modal-button-cancel": "Betal bike",
+	"templatedata-modal-button-changelang": "Zimanê biguherîne",
+	"templatedata-modal-button-done": "Çêbû",
+	"templatedata-modal-button-saveparam": "Tomar bike",
+	"templatedata-modal-format-block": "Asteng bike",
+	"templatedata-modal-json-error-replace": "Bixe şûnê",
+	"templatedata-modal-table-param-example": "Mînak ($1)",
+	"templatedata-modal-table-param-name": "Nav",
+	"templatedata-modal-title-choose-language": "Zimanekî hilbijêre",
+	"templatedata-modal-title-language": "Ziman"
+}

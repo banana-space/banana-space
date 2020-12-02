@@ -1,7 +1,7 @@
-( function ( mw ) {
+( function () {
 
 	QUnit.module( 'mediawiki.template', {
-		setup: function () {
+		beforeEach: function () {
 			var abcCompiler = {
 				compile: function () {
 					return 'abc default compiler';
@@ -60,4 +60,4 @@
 		);
 	} );
 
-}( mediaWiki ) );
+}() );

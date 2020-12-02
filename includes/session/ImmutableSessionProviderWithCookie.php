@@ -34,6 +34,7 @@ use WebRequest;
  * not changing User" using a session cookie. This class implements such an
  * optional session cookie.
  *
+ * @stable to extend
  * @ingroup Session
  * @since 1.27
  */
@@ -41,9 +42,11 @@ abstract class ImmutableSessionProviderWithCookie extends SessionProvider {
 
 	/** @var string|null */
 	protected $sessionCookieName = null;
+	/** @var mixed[] */
 	protected $sessionCookieOptions = [];
 
 	/**
+	 * @stable to call
 	 * @param array $params Keys include:
 	 *  - sessionCookieName: Session cookie name, if multiple sessions per
 	 *    client are to be supported.
@@ -84,21 +87,31 @@ abstract class ImmutableSessionProviderWithCookie extends SessionProvider {
 			);
 		}
 
-		$prefix = isset( $this->sessionCookieOptions['prefix'] )
-			? $this->sessionCookieOptions['prefix']
-			: $this->config->get( 'CookiePrefix' );
+		$prefix = $this->sessionCookieOptions['prefix'] ?? $this->config->get( 'CookiePrefix' );
 		$id = $request->getCookie( $this->sessionCookieName, $prefix );
 		return SessionManager::validateSessionId( $id ) ? $id : null;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function persistsSessionId() {
 		return $this->sessionCookieName !== null;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function canChangeUser() {
 		return false;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function persistSession( SessionBackend $session, WebRequest $request ) {
 		if ( $this->sessionCookieName === null ) {
 			return;
@@ -124,6 +137,10 @@ abstract class ImmutableSessionProviderWithCookie extends SessionProvider {
 		$response->setCookie( $this->sessionCookieName, $session->getId(), null, $options );
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function unpersistSession( WebRequest $request ) {
 		if ( $this->sessionCookieName === null ) {
 			return;
@@ -139,14 +156,16 @@ abstract class ImmutableSessionProviderWithCookie extends SessionProvider {
 		$response->clearCookie( $this->sessionCookieName, $this->sessionCookieOptions );
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	public function getVaryCookies() {
 		if ( $this->sessionCookieName === null ) {
 			return [];
 		}
 
-		$prefix = isset( $this->sessionCookieOptions['prefix'] )
-			? $this->sessionCookieOptions['prefix']
-			: $this->config->get( 'CookiePrefix' );
+		$prefix = $this->sessionCookieOptions['prefix'] ?? $this->config->get( 'CookiePrefix' );
 		return [ $prefix . $this->sessionCookieName ];
 	}
 

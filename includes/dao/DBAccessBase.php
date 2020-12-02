@@ -1,7 +1,8 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Base class for objects that allow access to other wiki's databases using
@@ -27,28 +28,31 @@ use Wikimedia\Rdbms\LoadBalancer;
  * @file
  * @ingroup Database
  *
- * @license GNU GPL v2+
+ * @stable to extend
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 abstract class DBAccessBase implements IDBAccessObject {
-	/**
-	 * @var string|bool $wiki The target wiki's name. This must be an ID
-	 * that LBFactory can understand.
-	 */
-	protected $wiki = false;
+	/** @var ILoadBalancer */
+	private $lb;
+
+	/** @var string|bool The target wiki's DB domain */
+	protected $dbDomain = false;
 
 	/**
-	 * @param string|bool $wiki The target wiki's name. This must be an ID
-	 * that LBFactory can understand.
+	 * @stable to call
+	 *
+	 * @param string|bool $dbDomain The target wiki's DB domain
 	 */
-	public function __construct( $wiki = false ) {
-		$this->wiki = $wiki;
+	public function __construct( $dbDomain = false ) {
+		$this->dbDomain = $dbDomain;
+		$this->lb = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
+			->getMainLB( $dbDomain );
 	}
 
 	/**
 	 * Returns a database connection.
 	 *
-	 * @see wfGetDB()
 	 * @see LoadBalancer::getConnection()
 	 *
 	 * @since 1.21
@@ -58,10 +62,8 @@ abstract class DBAccessBase implements IDBAccessObject {
 	 *
 	 * @return IDatabase
 	 */
-	protected function getConnection( $id, $groups = [] ) {
-		$loadBalancer = wfGetLB( $this->wiki );
-
-		return $loadBalancer->getConnection( $id, $groups, $this->wiki );
+	protected function getConnection( $id, array $groups = [] ) {
+		return $this->getLoadBalancer()->getConnectionRef( $id, $groups, $this->dbDomain );
 	}
 
 	/**
@@ -72,24 +74,22 @@ abstract class DBAccessBase implements IDBAccessObject {
 	 * @since 1.21
 	 *
 	 * @param IDatabase $db The database connection to release.
+	 * @deprecated Since 1.34
 	 */
 	protected function releaseConnection( IDatabase $db ) {
-		if ( $this->wiki !== false ) {
-			$loadBalancer = $this->getLoadBalancer();
-			$loadBalancer->reuseConnection( $db );
-		}
+		// no-op
 	}
 
 	/**
 	 * Get the database type used for read operations.
 	 *
-	 * @see wfGetLB
+	 * @see MediaWikiServices::getInstance()->getDBLoadBalancer
 	 *
 	 * @since 1.21
 	 *
-	 * @return LoadBalancer The database load balancer object
+	 * @return ILoadBalancer The database load balancer object
 	 */
-	public function getLoadBalancer() {
-		return wfGetLB( $this->wiki );
+	protected function getLoadBalancer() {
+		return $this->lb;
 	}
 }

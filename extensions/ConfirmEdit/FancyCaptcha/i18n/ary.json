@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abdeaitali",
+			"SADIQUI"
+		]
+	},
+	"fancycaptcha-captcha": "تحقق أمني",
+	"fancycaptcha-accountcreate": "باش نحميو الويكي من الحسابات اللي كتنشأ بشكل آلي، كنطلبوا منك باش دّخل الكلمات التالية في هاد الحقل ([[Special:Captcha/help|المزيد من المعلومات]]):",
+	"fancycaptcha-imgcaptcha-ph": "دخل النص الذي تاتشوفو فالصورة",
+	"fancycaptcha-reload-text": "تحديث"
+}

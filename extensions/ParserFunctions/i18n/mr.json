@@ -19,7 +19,7 @@
 	"pfunc_expr_missing_operand": "एक्स्प्रेशन त्रुटी: $1 चा घटक सापडला नाही",
 	"pfunc_expr_unexpected_closing_bracket": "एक्स्प्रेशन त्रुटी: अनपेक्षित समाप्ती कंस",
 	"pfunc_expr_unrecognised_punctuation": "अभिव्यक्ती त्रुटी: अनोळखी उद्गारवाचक चिन्ह \"$1\"",
-	"pfunc_expr_unclosed_bracket": "एक्स्प्रेशन त्रुटी: कंस समाप्त केलेला नाही",
+	"pfunc_expr_unclosed_bracket": "एक्स्प्रेशन त्रुटी: कंस बंद केलेला नाही.",
 	"pfunc_expr_division_by_zero": "शून्य ने भागाकार",
 	"pfunc_expr_invalid_argument": "$1 साठी अवैध अर्ग्युमेंट: < -1 किंवा > 1",
 	"pfunc_expr_invalid_argument_ln": "ln करिता अवैध अर्ग्युमेंट: <= 0",

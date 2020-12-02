@@ -23,6 +23,8 @@
  * @file
  */
 
+use MediaWiki\Shell\Shell;
+
 /**
  * @ingroup Dump
  */
@@ -36,7 +38,7 @@ class Dump7ZipOutput extends DumpPipeOutput {
 	 * @param string $file
 	 * @param int $cmpLevel Compression level passed to 7za command's -mx
 	 */
-	function __construct( $file, $cmpLevel = 4 ) {
+	public function __construct( $file, $cmpLevel = 4 ) {
 		$this->compressionLevel = $cmpLevel;
 		$command = $this->setup7zCommand( $file );
 		parent::__construct( $command );
@@ -47,10 +49,10 @@ class Dump7ZipOutput extends DumpPipeOutput {
 	 * @param string $file
 	 * @return string
 	 */
-	function setup7zCommand( $file ) {
+	private function setup7zCommand( $file ) {
 		$command = "7za a -bd -si -mx=";
-		$command .= wfEscapeShellArg( $this->compressionLevel ) . ' ';
-		$command .= wfEscapeShellArg( $file );
+		$command .= Shell::escape( $this->compressionLevel ) . ' ';
+		$command .= Shell::escape( $file );
 		// Suppress annoying useless crap from p7zip
 		// Unfortunately this could suppress real error messages too
 		$command .= ' >' . wfGetNull() . ' 2>&1';
@@ -58,10 +60,9 @@ class Dump7ZipOutput extends DumpPipeOutput {
 	}
 
 	/**
-	 * @param string $newname
-	 * @param bool $open
+	 * @inheritDoc
 	 */
-	function closeAndRename( $newname, $open = false ) {
+	public function closeAndRename( $newname, $open = false ) {
 		$newname = $this->checkRenameArgCount( $newname );
 		if ( $newname ) {
 			fclose( $this->handle );

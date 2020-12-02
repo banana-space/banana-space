@@ -2,19 +2,21 @@
 	"@metadata": {
 		"authors": [
 			"Daniel Kinzler, brightbyte.de",
+			"Hwboehm",
 			"Kghbln",
+			"MGChecker",
 			"Metalhead64",
 			"Purodha",
 			"Raimond Spekking",
 			"SVG",
-			"MGChecker",
+			"Sushi",
 			"Umherirrender"
 		]
 	},
 	"categorytree": "Kategorienbaum",
 	"categorytree-portlet": "Kategorien",
 	"categorytree-legend": "Zeige Kategorienbaum",
-	"categorytree-desc": "Fügt dem Wiki eine [[Special:CategoryTree|Spezialseite]] hinzu, welche die dynamische Navigation durch die Kategorienstruktur ermöglicht",
+	"categorytree-desc": "Erweitert das Wiki um eine [[Special:CategoryTree|Spezialseite]] mit der man dynamisch durch die Kategorienstruktur navigieren kann",
 	"categorytree-header": "Gib den Namen einer Kategorie ein, um ihre Inhalte als Baumstruktur darzustellen. Erfordert JavaScript.",
 	"categorytree-category": "Kategorie:",
 	"categorytree-go": "Kategorienbaum anzeigen",
@@ -36,12 +38,7 @@
 	"categorytree-no-subcategories": "Keine Unterkategorien",
 	"categorytree-no-parent-categories": "Keine Oberkategorien",
 	"categorytree-no-pages": "Keine Seiten oder Unterkategorien",
-	"categorytree-not-found": "Kategorie „$1“ wurde nicht nicht gefunden",
+	"categorytree-not-found": "Kategorie <i>$1</i> wurde nicht gefunden",
 	"categorytree-error": "Beim Laden der Daten ist ein Problem aufgetreten.",
-	"categorytree-retry": "Bitte warte einen Moment und versuche es dann erneut.",
-	"apihelp-categorytree-description": "Internes Modul für die Erweiterung „CategoryTree“.",
-	"apihelp-categorytree-summary": "Internes Modul für die Erweiterung „CategoryTree“.",
-	"apihelp-categorytree-param-category": "Titel im Kategorie-Namensraum. Das Präfix wird ignoriert, falls angegeben.",
-	"apihelp-categorytree-param-options": "Optionen für den CategoryTree-Konstruktor als JSON-Objekt. Der Standard für die <var>depth</var>-Option ist <kbd>1</kbd>.",
-	"apierror-categorytree-invalidjson": "Optionen müssen ein gültiges JSON-Objekt sein."
+	"categorytree-retry": "Bitte warte einen Moment und versuche es dann erneut."
 }

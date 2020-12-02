@@ -2,13 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Papuass",
-			"Xil",
-			"Silraks"
+			"Silraks",
+			"Xil"
 		]
 	},
 	"renameuser": "Pārsaukt lietotāju",
-	"renameuser-linkoncontribs": "pārsaukt lietotāju",
-	"renameuser-linkoncontribs-text": "Pārsaukt šo lietotāju",
+	"renameuser-linkoncontribs": "pārsaukt {{GENDER:$1|dalībnieku|dalībnieci}}",
+	"renameuser-linkoncontribs-text": "Pārsaukt šo {{GENDER:$1|dalībnieku|dalībnieci}}",
 	"renameuserold": "Pašreizējais lietotājvārds:",
 	"renameusernew": "Jaunais lietotāja vārds:",
 	"renameuserreason": "Iemesls:",
@@ -21,5 +21,5 @@
 	"log-name-renameuser": "Dalībnieku pārdēvēšanas reģistrs",
 	"log-description-renameuser": "Lietotājvārdu maiņas reģistrs",
 	"action-renameuser": "pārsaukt lietotājus",
-	"right-renameuser": "Pārsaukt lietotājus"
+	"right-renameuser": "Pārsaukt dalībniekus"
 }

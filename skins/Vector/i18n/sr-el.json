@@ -3,17 +3,18 @@
 		"authors": [
 			"Michaello",
 			"Milicevic01",
+			"Obsuser",
 			"Rancher",
-			"Жељко Тодоровић",
-			"Zoranzoki21"
+			"Zoranzoki21",
+			"Жељко Тодоровић"
 		]
 	},
-	"skinname-vector": "Vektorska",
-	"vector-skin-desc": "Moderno izdanje Monobuka sa svežim izgledom i mnogo korisnih poboljšanja",
+	"skinname-vector": "Vektorsko",
+	"vector-skin-desc": "Moderna verzija Monobuka sa svežim izgledom i mnogo korisnih poboljšanja",
 	"vector.css": "/* CSS postavljen ovde će uticati na sve korisnike vektorske teme */",
-	"vector.js": "/* Javaskript postavljen ovde će se učitati za sve one koji koriste vektorsku temu */",
+	"vector.js": "/* JavaScript postavljen ovde će se učitati za sve one koji koriste vektorsku temu */",
 	"vector-action-addsection": "Dodaj temu",
-	"vector-action-delete": "Obriši",
+	"vector-action-delete": "Izbriši",
 	"vector-action-move": "Premesti",
 	"vector-action-protect": "Zaštiti",
 	"vector-action-undelete": "Vrati",
@@ -22,6 +23,8 @@
 	"vector-view-edit": "Uredi",
 	"vector-view-history": "Istorija",
 	"vector-view-view": "Čitaj",
-	"vector-view-viewsource": "Izvorni kod",
+	"vector-view-viewsource": "Izvor",
+	"vector-jumptonavigation": "Idi na navigaciju",
+	"vector-jumptosearch": "Idi na pretragu",
 	"vector-more-actions": "Više"
 }

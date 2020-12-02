@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ильнар"
+		]
+	},
+	"apihelp-templatedata-description": "TemplateData киңәйтмәсе ярдәмендә ясалган мәгълүматларны алу.",
+	"apihelp-templatedata-example-1": "[[Template:Stub]] һәм [[Template:Example]] өчен мәгълүматларны кире кую",
+	"apihelp-templatedata-param-lang": "Бу телнең барлык тәрҗемә ителгән мәгънәләрен кире кайтарырга. Барлык мөмкин булган тәрҗемәләр куелачак."
+}

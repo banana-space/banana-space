@@ -5,6 +5,9 @@
 	"descriptionmsg": "categorytree-desc",
 	"license-name": "GPL-2.0-or-later",
 	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
 	"ConfigRegistry": {
 		"categorytree": "GlobalVarConfig::newInstance"
 	},
@@ -19,7 +22,8 @@
 	},
 	"MessagesDirs": {
 		"CategoryTree": [
-			"i18n"
+			"i18n",
+			"i18n/api"
 		]
 	},
 	"ExtensionMessagesFiles": {
@@ -38,7 +42,16 @@
 	},
 	"ResourceModules": {
 		"ext.categoryTree": {
-			"scripts": "ext.categoryTree.js",
+			"localBasePath": "modules/ext.categoryTree",
+			"remoteExtPath": "CategoryTree/modules/ext.categoryTree",
+			"styles": "ext.categoryTree.css",
+			"packageFiles": [
+				"ext.categoryTree.js",
+				{
+					"name": "data.json",
+					"callback": "CategoryTreeHooks::getDataForJs"
+				}
+			],
 			"targets": [
 				"desktop",
 				"mobile"
@@ -61,12 +74,12 @@
 				"mediawiki.api"
 			]
 		},
-		"ext.categoryTree.css": {
+		"ext.categoryTree.styles": {
 			"targets": [
 				"desktop",
 				"mobile"
 			],
-			"styles": "ext.categoryTree.css"
+			"styles": "ext.categoryTree.styles.css"
 		}
 	},
 	"ResourceFileModulePaths": {
@@ -74,20 +87,12 @@
 		"remoteExtPath": "CategoryTree/modules"
 	},
 	"Hooks": {
-		"ArticleFromTitle": [
-			"CategoryTreeHooks::articleFromTitle"
-		],
-		"SpecialTrackingCategories::preprocess": [
-			"CategoryTreeHooks::onSpecialTrackingCategoriesPreprocess"
-		],
-		"SpecialTrackingCategories::generateCatLink": [
-			"CategoryTreeHooks::onSpecialTrackingCategoriesGenerateCatLink"
-		],
-		"SkinTemplateOutputPageBeforeExec": "CategoryTreeHooks::skinTemplateOutputPageBeforeExec",
-		"MakeGlobalVariablesScript": "CategoryTreeHooks::getConfigVars",
+		"ArticleFromTitle": "CategoryTreeHooks::articleFromTitle",
+		"SpecialTrackingCategories::preprocess": "CategoryTreeHooks::onSpecialTrackingCategoriesPreprocess",
+		"SpecialTrackingCategories::generateCatLink": "CategoryTreeHooks::onSpecialTrackingCategoriesGenerateCatLink",
+		"SkinBuildSidebar": "CategoryTreeHooks::onSkinBuildSidebar",
 		"ParserFirstCallInit": "CategoryTreeHooks::setHooks",
 		"OutputPageMakeCategoryLinks": "CategoryTreeHooks::outputPageMakeCategoryLinks",
-		"SkinJoinCategoryLinks": "CategoryTreeHooks::skinJoinCategoryLinks",
 		"BeforePageDisplay": "CategoryTreeHooks::addHeaders",
 		"BeforePageDisplayMobile": "CategoryTreeHooks::addHeaders",
 		"OutputPageParserOutput": "CategoryTreeHooks::parserOutput"
@@ -96,11 +101,11 @@
 		"CategoryTreeMaxChildren": 200,
 		"CategoryTreeAllowTag": true,
 		"CategoryTreeDisableCache": 21600,
-		"CategoryTreeHTTPCache": false,
 		"CategoryTreeMaxDepth": {
 			"10": 1,
 			"20": 1,
-			"0": 2
+			"0": 2,
+			"_merge_strategy": "array_plus"
 		},
 		"CategoryTreeForceHeaders": false,
 		"CategoryTreeSidebarRoot": null,
@@ -112,7 +117,8 @@
 			"mode": null,
 			"hideprefix": null,
 			"showcount": false,
-			"namespaces": false
+			"namespaces": false,
+			"notranslations": false
 		},
 		"CategoryTreeCategoryPageMode": 0,
 		"CategoryTreeCategoryPageOptions": {

@@ -2,22 +2,24 @@
 	"@metadata": {
 		"authors": [
 			"Aftab1995",
+			"Aftabuzzaman",
 			"Bellayet",
 			"Nasir8891",
 			"Zaheen",
-			"Aftabuzzaman"
+			"আফতাবুজ্জামান"
 		]
 	},
-	"cite-desc": "উদ্ধৃতির জন্য, <nowiki><ref[ name=id]></nowiki> এবং <nowiki><references/></nowiki> ট্যাগসমূহ যোগ করুন",
+	"cite-desc": "উদ্ধৃতির জন্য, <code>&lt;ref[ name=id]&gt;</code> এবং <code>&lt;references/&gt;</code> ট্যাগসমূহ যোগ করুন",
 	"cite_error": "উদ্ধৃতি ত্রুটি: $1",
+	"cite_error_ref_invalid_dir": "<code>&lt;ref&gt;</code> ট্যাগ অবৈধ; dir বৈশিষ্ট্য \"$1\" অজানা। অবশই ltr বা rtl হতে হবে",
 	"cite_error_ref_numeric_key": "অবৈধ <code>&lt;ref&gt;</code> ট্যাগ; নাম কোন সরল পূর্ণসংখ্যা হতে পারবে না। একটি বিবরণমূলক শিরোনাম ব্যবহার করুন",
 	"cite_error_ref_no_key": "শুরুর <code>&lt;ref&gt;</code> ট্যাগ সঠিক নয় বা ভুল নামে রয়েছে",
 	"cite_error_ref_too_many_keys": "অবৈধ <code>&lt;ref&gt;</code> ট্যাগ; অবৈধ নাম (যেমন- সংখ্যাতিরিক্ত)",
 	"cite_error_ref_no_input": "অবৈধ <code>&lt;ref&gt;</code> ট্যাগ; নামবিহীন ref সমূহের অবশ্যই বিষয়বস্তু থাকতে হবে",
 	"cite_error_references_duplicate_key": "<code>&lt;ref&gt;</code> ট্যাগ অবৈধ; আলাদা বিষয়বস্তুর সঙ্গে \"$1\" নাম একাধিক বার সংজ্ঞায়িত করা হয়েছে",
 	"cite_error_references_invalid_parameters": "<code>&lt;references&gt;</code> ট্যাগে অবৈধ প্যারামিটার",
-	"cite_error_references_no_backlink_label": "স্বনির্ধারিত পিছনসংযোগের স্তরের সংখ্যা শেষ হয়ে গেছে।\n<nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki> বার্তায় আরও সংজ্ঞায়িত করুন।",
-	"cite_error_no_link_label_group": "\"$1\" গ্রুপের জন্য স্বনির্ধারিত লিংক ব্যবহারের সীমানা পেরিয়েছে।\n<nowiki>[[MediaWiki:$2]]</nowiki> বার্তায় আরও সজ্ঞায়িত করুন।",
+	"cite_error_references_no_backlink_label": "স্বনির্ধারিত পিছনসংযোগের স্তরের সংখ্যা শেষ হয়ে গেছে।\n[[MediaWiki:Cite references link many format backlink labels]] বার্তায় আরও সংজ্ঞায়িত করুন।",
+	"cite_error_no_link_label_group": "\"$1\" গ্রুপের জন্য স্বনির্ধারিত লিংক ব্যবহারের সীমানা পেরিয়েছে।\n[[MediaWiki:$2]] বার্তায় আরও সজ্ঞায়িত করুন।",
 	"cite_error_references_no_text": "অবৈধ <code>&lt;ref&gt;</code> ট্যাগ; <code>$1</code> নামের সূত্রের জন্য কোন লেখা প্রদান করা হয়নি",
 	"cite_error_included_ref": "<code>&lt;ref&gt;</code> ট্যাগের ক্ষেত্রে <code>&lt;/ref&gt;</code> ট্যাগ যোগ করা হয়নি",
 	"cite_error_group_refs_without_references": "\"$1\" নামক গ্রুপের জন্য <code>&lt;ref&gt;</code> ট্যাগ রয়েছে, কিন্তু এর জন্য কোন সঙ্গতিপূর্ণ <code>&lt;references group=\"$1\"/&gt;</code> ট্যাগ পাওয়া যায়নি, বা বন্ধকরণ <code>&lt;/ref&gt;</code> দেয়া হয়নি",

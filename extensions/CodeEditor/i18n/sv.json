@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Lokal Profil",
 			"Skalman",
-			"WikiPhoenix",
-			"Lokal Profil"
+			"WikiPhoenix"
 		]
 	},
 	"codeeditor-desc": "Redigering med syntaxfärgläggning för JavaScript- och CSS-sidor med [https://ace.c9.io/ Ace-redigeraren]",

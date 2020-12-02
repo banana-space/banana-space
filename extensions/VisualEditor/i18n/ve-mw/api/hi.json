@@ -1,0 +1,42 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ankita-ks",
+			"Hindustanilanguage",
+			"Jayprakash12345",
+			"Niharika29",
+			"Sfic"
+		]
+	},
+	"apierror-visualeditor-badcachekey": "कोई कैश कुंजी के साथ क्रमबद्धता नहीं पाया",
+	"apierror-visualeditor-difffailed": "अन्तर में विफल",
+	"apierror-visualeditor-latestnotfound": "शीर्षक के लिए नवीनतम संशोधन नहीं खोजा जा सका",
+	"apihelp-visualeditor-description": "Parsoid सेवा से एक पेज के लिए HTML5 वापस करता है।",
+	"apihelp-visualeditor-param-basetimestamp": "सहेजते समय इस समय को भी अवतरण में लिख लें, जिससे सम्पादन रुचि ज्ञात कर सकें।",
+	"apihelp-visualeditor-param-cachekey": "किसी अंतर आदि को दिखाने के लिए पिछले अंतर का उपयोग करें। $1html",
+	"apihelp-visualeditor-param-editintro": "नोटिस में जोड़ने के लिए परिचय संपादित करें।",
+	"apihelp-visualeditor-param-etag": "भेजने हेतु ईटैग",
+	"apihelp-visualeditor-param-html": "HTML विकिटेक्स्ट में कन्वर्ट करने के लिए Parsoid में भेजे।",
+	"apihelp-visualeditor-param-oldid": "अवतरण का संख्या जो उपयोग करना है (मूल रूप से नया अवतरण)",
+	"apihelp-visualeditor-param-paction": "करने हेतु कार्य",
+	"apihelp-visualeditor-param-page": "पृष्ठ जिसमें कार्य करते हैं।",
+	"apihelp-visualeditor-param-pst": "Parsoid को भेजने से पहले परिवरतित विकिटेक्स्ट को बचाएँ\n(paction=parsefragment)",
+	"apihelp-visualeditor-param-section": "खंड जिस पर कार्य हो रहा है",
+	"apihelp-visualeditor-param-starttimestamp": "सहेजते समय इस समय को भी लोड कर लें, जिससे सम्पादन रुचि ज्ञात कर सकें।",
+	"apihelp-visualeditor-param-wikitext": "विकिपाठ्य को परसोइड में एचटीएमएल में परिवर्तित करने हेतु भेजें (paction=parsefragment)।",
+	"apihelp-visualeditoredit-description": "एचटीएमएल 5 पृष्ठ को मीडियाविकि में सहेजेने। (जो परसोइड से विकिपाठ्य में बदल जाता है)",
+	"apihelp-visualeditoredit-param-basetimestamp": "सहेजते समय इस समय को भी अवतरण में लिख लें, जिससे सम्पादन रुचि ज्ञात कर सकें।",
+	"apihelp-visualeditoredit-param-cachekey": "किसी अंतर आदि को दिखाने के लिए पिछले अंतर का उपयोग करें। $1html",
+	"apihelp-visualeditoredit-param-captchaid": "कैपचा आई०डी० (जब कैपचा के जवाब में सहेज रहे हों) ।",
+	"apihelp-visualeditoredit-param-captchaword": "कैपचा का जवाब दें (जब कैपचा के जवाब में सहेज रहे हों) ।",
+	"apihelp-visualeditoredit-param-etag": "भेजने हेतु ईटैग",
+	"apihelp-visualeditoredit-param-html": "HTML विकिटेक्स्ट में कन्वर्ट करने के लिए Parsoid में भेजे।",
+	"apihelp-visualeditoredit-param-minor": "मामूली सम्पादन की झंडी",
+	"apihelp-visualeditoredit-param-oldid": "अवतरण अंकों का उपयोग करना। मूल रूप से नया अवतरण होता है। नए पृष्ठ हेतु 0 का उपयोग करें।",
+	"apihelp-visualeditoredit-param-paction": "कार्रवाई करने के लिए।",
+	"apihelp-visualeditoredit-param-page": "पृष्ठ जिस पर कार्य करने है।",
+	"apihelp-visualeditoredit-param-section": "खंड जिस पर कार्य हो रहा है",
+	"apihelp-visualeditoredit-param-sectiontitle": "नए खंड के लिए शीर्षक",
+	"apihelp-visualeditoredit-param-starttimestamp": "सहेजते समय इस समय को भी लोड कर लें, जिससे सम्पादन रुचि ज्ञात कर सकें।",
+	"apihelp-visualeditoredit-param-summary": "संपादन सारांश"
+}

@@ -1,14 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Baffo",
 			"DJ Nietzsche",
-			"Jduranboger",
-			"Baffo"
+			"Jduranboger"
 		]
 	},
 	"multimediaviewer-desc": "Expande las miniaturas a un tamaño mayor en modo de pantalla completa.",
-	"multimediaviewer-pref": "Visor Multimedia",
-	"multimediaviewer-pref-desc": "Mejora tu experienecia de visualización multimedia con ésta nueva herramienta. El Visor Multimedia muestra las imágenes más grandes en las páginas que tienen miniaturas. Las imágenes se muestran en una interfaz de pantalla completa más agradable, y también pueden verse a tamaño completo.",
 	"multimediaviewer-optin-pref": "Habilita nueva experiencia de visualización multimedia",
 	"multimediaviewer-file-page": "Ir a la página del archivo",
 	"multimediaviewer-repository-local": "Aprende más",

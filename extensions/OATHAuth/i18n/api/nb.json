@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"apihelp-query+oath-description": "Sjekk om totrinns pålogging (OATH) er slått på for en bruker.",
+	"apihelp-query+oath-summary": "Sjekk om totrinns pålogging (OATH) er slått på for en bruker.",
+	"apihelp-query+oath-param-user": "Brukeren det skal hentes informasjon om. Standard er den gjeldende brukeren.",
+	"apihelp-query+oath-example-1": "Få informasjon om den aktuelle brukeren",
+	"apihelp-query+oath-example-2": "Få informasjon om brukeren <kbd>Example</kbd>",
+	"apihelp-oathvalidate-description": "Valider en nøkkel for totrinns pålogging (OATH).",
+	"apihelp-oathvalidate-summary": "Valider en nøkkel for totrinns pålogging (OATH).",
+	"apihelp-oathvalidate-param-user": "Brukeren tegnet skal valideres for. Standard er den aktuelle brukeren.",
+	"apihelp-oathvalidate-param-totp": "Nøkkel for totrinns pålogging (OATH). Avleggs, bruk parameteren «data» i stedet",
+	"apihelp-oathvalidate-example-1": "Valider et tegn for den aktuelle brukeren",
+	"apihelp-oathvalidate-example-2": "Valider et tegn for brukeren <kbd>Example</kbd>",
+	"apihelp-oathvalidate-example-3": "Valider JSON-data for brukeren <kbd>Example</kbd>",
+	"apihelp-oathvalidate-param-data": "JSON-kodet data forventes av modulen som er aktivert for brukeren som autentiseres"
+}

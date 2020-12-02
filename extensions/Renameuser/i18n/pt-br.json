@@ -2,15 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Cainamarques",
+			"Eduardo Addad de Oliveira",
+			"Felipe L. Ewald",
 			"Giro720",
 			"Opraco",
-			"555",
-			"Felipe L. Ewald"
+			555
 		]
 	},
 	"renameuser": "Renomear usuário",
-	"renameuser-linkoncontribs": "renomear usuário",
-	"renameuser-linkoncontribs-text": "Renomear este usuário",
+	"renameuser-linkoncontribs": "alterar o nome {{GENDER:$1|do usuário|da usuária}}",
+	"renameuser-linkoncontribs-text": "Alterar o nome {{GENDER:$1|deste usuário|desta usuária}}",
 	"renameuser-desc": "Adiciona uma [[Special:RenameUser|página especial]] para renomear um usuário (requer privilégio ''renameuser'')",
 	"renameuserold": "Nome de usuário atual:",
 	"renameusernew": "Novo nome de usuário:",

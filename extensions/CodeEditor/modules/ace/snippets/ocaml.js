@@ -4,4 +4,11 @@ ace.define("ace/snippets/ocaml",["require","exports","module"], function(require
 exports.snippetText =undefined;
 exports.scope = "ocaml";
 
-});
+});                (function() {
+                    ace.require(["ace/snippets/ocaml"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

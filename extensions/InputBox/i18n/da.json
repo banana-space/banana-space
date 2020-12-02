@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Byrial",
-			"Peter Alberti",
-			"Christian List"
+			"Christian List",
+			"Peter Alberti"
 		]
 	},
 	"inputbox-desc": "Muliggør inkludering af forhåndsdefinerede HTML-formularer",

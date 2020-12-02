@@ -24,6 +24,7 @@
 namespace Wikimedia\Rdbms;
 
 use InvalidArgumentException;
+use UnexpectedValueException;
 
 /**
  * A multi-database, multi-master factory for Wikimedia and similar installations.
@@ -32,90 +33,39 @@ use InvalidArgumentException;
  * @ingroup Database
  */
 class LBFactoryMulti extends LBFactory {
-	/** @var array A map of database names to section names */
-	private $sectionsByDB;
-
-	/**
-	 * @var array A 2-d map. For each section, gives a map of server names to
-	 * load ratios
-	 */
-	private $sectionLoads;
-
-	/**
-	 * @var array[] Server info associative array
-	 * @note The host, hostName and load entries will be overridden
-	 */
-	private $serverTemplate;
-
-	// Optional settings
-
-	/** @var array A 3-d map giving server load ratios for each section and group */
-	private $groupLoadsBySection = [];
-
-	/** @var array A 3-d map giving server load ratios by DB name */
-	private $groupLoadsByDB = [];
-
-	/** @var array A map of hostname to IP address */
-	private $hostsByName = [];
-
-	/** @var array A map of external storage cluster name to server load map */
-	private $externalLoads = [];
-
-	/**
-	 * @var array A set of server info keys overriding serverTemplate for
-	 * external storage
-	 */
-	private $externalTemplateOverrides;
-
-	/**
-	 * @var array A 2-d map overriding serverTemplate and
-	 * externalTemplateOverrides on a server-by-server basis. Applies to both
-	 * core and external storage
-	 */
-	private $templateOverridesByServer;
-
-	/** @var array A 2-d map overriding the server info by section */
-	private $templateOverridesBySection;
-
-	/** @var array A 2-d map overriding the server info by external storage cluster */
-	private $templateOverridesByCluster;
-
-	/** @var array An override array for all master servers */
-	private $masterTemplateOverrides;
-
-	/**
-	 * @var array|bool A map of section name to read-only message. Missing or
-	 * false for read/write
-	 */
-	private $readOnlyBySection = [];
-
-	/** @var array Load balancer factory configuration */
-	private $conf;
-
-	/** @var LoadBalancer[] */
+	/** @var LoadBalancer[] Tracked main load balancer instances */
 	private $mainLBs = [];
+	/** @var LoadBalancer[] Tracked external load balancer instances */
+	private $externalLBs = [];
 
-	/** @var LoadBalancer[] */
-	private $extLBs = [];
-
-	/** @var string */
-	private $loadMonitorClass = 'LoadMonitor';
-
-	/** @var string */
-	private $lastDomain;
-
-	/** @var string */
-	private $lastSection;
-
-	/** @var int */
-	private $maxLag = self::MAX_LAG_DEFAULT;
-
-	/** @var int Default 'maxLag' when unspecified */
-	const MAX_LAG_DEFAULT = 10;
+	/** @var string[] Map of (hostname => IP address) */
+	private $hostsByName;
+	/** @var string[] Map of (database name => section name) */
+	private $sectionsByDB;
+	/** @var int[][][] Map of (section => group => host => load ratio) */
+	private $groupLoadsBySection;
+	/** @var int[][][] Map of (database => group => host => load ratio) */
+	private $groupLoadsByDB;
+	/** @var int[][] Map of (cluster => host => load ratio) */
+	private $externalLoads;
+	/** @var array Server config map ("host", "hostName", "load", and "groupLoads" are ignored) */
+	private $serverTemplate;
+	/** @var array Server config map overriding "serverTemplate" for external storage */
+	private $externalTemplateOverrides;
+	/** @var array[] Map of (section => server config map overrides) */
+	private $templateOverridesBySection;
+	/** @var array[] Map of (cluster => server config map overrides) for external storage */
+	private $templateOverridesByCluster;
+	/** @var array Server config override map for all main and external master servers */
+	private $masterTemplateOverrides;
+	/** @var array[] Map of (host => server config map overrides) for main and external servers */
+	private $templateOverridesByServer;
+	/** @var string[]|bool[] A map of section name to read-only message */
+	private $readOnlyBySection;
+	/** @var array Configuration for the LoadMonitor to use within LoadBalancer instances */
+	private $loadMonitorConfig;
 
 	/**
-	 * @see LBFactory::__construct()
-	 *
 	 * Template override precedence (highest => lowest):
 	 *   - templateOverridesByServer
 	 *   - masterTemplateOverrides
@@ -124,172 +74,127 @@ class LBFactoryMulti extends LBFactory {
 	 *   - serverTemplate
 	 * Overrides only work on top level keys (so nested values will not be merged).
 	 *
-	 * Server configuration maps should be of the format Database::factory() requires.
+	 * Server config maps should be of the format Database::factory() requires.
 	 * Additionally, a 'max lag' key should also be set on server maps, indicating how stale the
 	 * data can be before the load balancer tries to avoid using it. The map can have 'is static'
 	 * set to disable blocking  replication sync checks (intended for archive servers with
 	 * unchanging data).
 	 *
-	 * @param array $conf Parameters of LBFactory::__construct() as well as:
-	 *   - sectionsByDB                Map of database names to section names.
-	 *   - sectionLoads                2-d map. For each section, gives a map of server names to
-	 *                                 load ratios. For example:
-	 *                                 [
-	 *                                     'section1' => [
-	 *                                         'db1' => 100,
-	 *                                         'db2' => 100
-	 *                                     ]
-	 *                                 ]
-	 *   - serverTemplate              Server configuration map intended for Database::factory().
-	 *                                 Note that "host", "hostName" and "load" entries will be
-	 *                                 overridden by "sectionLoads" and "hostsByName".
-	 *   - groupLoadsBySection         3-d map giving server load ratios for each section/group.
-	 *                                 For example:
-	 *                                 [
-	 *                                     'section1' => [
-	 *                                         'group1' => [
-	 *                                             'db1' => 100,
-	 *                                             'db2' => 100
-	 *                                         ]
-	 *                                     ]
-	 *                                 ]
-	 *   - groupLoadsByDB              3-d map giving server load ratios by DB name.
-	 *   - hostsByName                 Map of hostname to IP address.
-	 *   - externalLoads               Map of external storage cluster name to server load map.
-	 *   - externalTemplateOverrides   Set of server configuration maps overriding
-	 *                                 "serverTemplate" for external storage.
-	 *   - templateOverridesByServer   2-d map overriding "serverTemplate" and
-	 *                                 "externalTemplateOverrides" on a server-by-server basis.
-	 *                                 Applies to both core and external storage.
-	 *   - templateOverridesBySection  2-d map overriding the server configuration maps by section.
-	 *   - templateOverridesByCluster  2-d map overriding the server configuration maps by external
-	 *                                 storage cluster.
-	 *   - masterTemplateOverrides     Server configuration map overrides for all master servers.
-	 *   - loadMonitorClass            Name of the LoadMonitor class to always use.
-	 *   - maxLag                      Avoid replica DBs with more lag than this many seconds.
-	 *   - readOnlyBySection           A map of section name to read-only message.
-	 *                                 Missing or false for read/write.
+	 * @see LBFactory::__construct()
+	 * @param array $conf Additional parameters include:
+	 *   - hostsByName: map of (hostname => IP address). [optional]
+	 *   - sectionsByDB: map of (database => section name). The database name "DEFAULT" is
+	 *      interpeted as a catch-all for all databases not otherwise mentioned. [optional]
+	 *   - sectionLoads: map of (section => host => load ratio); the first host listed in
+	 *      each section is the master server for that section. [optional]
+	 *   - groupLoadsBySection: map of (section => group => host => group load ratio).
+	 *      Any ILoadBalancer::GROUP_GENERIC group will be ignored. [optional]
+	 *   - groupLoadsByDB: map of (database => group => host => load ratio) map. [optional]
+	 *   - externalLoads: map of (cluster => host => load ratio) map. [optional]
+	 *   - serverTemplate: server config map for Database::factory().
+	 *      Note that "host", "hostName" and "load" entries will be overridden by
+	 *      "groupLoadsBySection" and "hostsByName". [optional]
+	 *   - externalTemplateOverrides: server config map overrides for external stores;
+	 *      respects the override precedence described above. [optional]
+	 *   - templateOverridesBySection: map of (section => server config map overrides);
+	 *      respects the override precedence described above. [optional]
+	 *   - templateOverridesByCluster: map of (external cluster => server config map overrides);
+	 *      respects the override precedence described above. [optional]
+	 *   - masterTemplateOverrides: server config map overrides for masters;
+	 *      respects the override precedence described above. [optional]
+	 *   - templateOverridesByServer: map of (host => server config map overrides);
+	 *      respects the override precedence described above and applies to both core
+	 *      and external storage. [optional]
+	 *   - loadMonitor: LoadMonitor::__construct() parameters with "class" field. [optional]
+	 *   - readOnlyBySection: map of (section name => message text or false).
+	 *      String values make sections read only, whereas anything else does not
+	 *      restrict read/write mode. [optional]
 	 */
 	public function __construct( array $conf ) {
 		parent::__construct( $conf );
 
-		$this->conf = $conf;
-		$required = [ 'sectionsByDB', 'sectionLoads', 'serverTemplate' ];
-		$optional = [ 'groupLoadsBySection', 'groupLoadsByDB', 'hostsByName',
-			'externalLoads', 'externalTemplateOverrides', 'templateOverridesByServer',
-			'templateOverridesByCluster', 'templateOverridesBySection', 'masterTemplateOverrides',
-			'readOnlyBySection', 'maxLag', 'loadMonitorClass' ];
-
-		foreach ( $required as $key ) {
-			if ( !isset( $conf[$key] ) ) {
-				throw new InvalidArgumentException( __CLASS__ . ": $key is required." );
-			}
-			$this->$key = $conf[$key];
+		$this->hostsByName = $conf['hostsByName'] ?? [];
+		$this->sectionsByDB = $conf['sectionsByDB'];
+		$this->groupLoadsBySection = $conf['groupLoadsBySection'] ?? [];
+		foreach ( ( $conf['sectionLoads'] ?? [] ) as $section => $loadByHost ) {
+			$this->groupLoadsBySection[$section][ILoadBalancer::GROUP_GENERIC] = $loadByHost;
 		}
+		$this->groupLoadsByDB = $conf['groupLoadsByDB'] ?? [];
+		$this->externalLoads = $conf['externalLoads'] ?? [];
+		$this->serverTemplate = $conf['serverTemplate'] ?? [];
+		$this->externalTemplateOverrides = $conf['externalTemplateOverrides'] ?? [];
+		$this->templateOverridesBySection = $conf['templateOverridesBySection'] ?? [];
+		$this->templateOverridesByCluster = $conf['templateOverridesByCluster'] ?? [];
+		$this->masterTemplateOverrides = $conf['masterTemplateOverrides'] ?? [];
+		$this->templateOverridesByServer = $conf['templateOverridesByServer'] ?? [];
+		$this->readOnlyBySection = $conf['readOnlyBySection'] ?? [];
 
-		foreach ( $optional as $key ) {
-			if ( isset( $conf[$key] ) ) {
-				$this->$key = $conf[$key];
-			}
+		if ( isset( $conf['loadMonitor'] ) ) {
+			$this->loadMonitorConfig = $conf['loadMonitor'];
+		} elseif ( isset( $conf['loadMonitorClass'] ) ) { // b/c
+			$this->loadMonitorConfig = [ 'class' => $conf['loadMonitorClass'] ];
+		} else {
+			$this->loadMonitorConfig = [ 'class' => LoadMonitor::class ];
 		}
 	}
 
-	/**
-	 * @param bool|string $domain
-	 * @return string
-	 */
-	private function getSectionForDomain( $domain = false ) {
-		if ( $this->lastDomain === $domain ) {
-			return $this->lastSection;
+	public function newMainLB( $domain = false, $owner = null ) {
+		$domainInstance = $this->resolveDomainInstance( $domain );
+		$database = $domainInstance->getDatabase();
+		$section = $this->getSectionFromDatabase( $database );
+		if ( !isset( $this->groupLoadsBySection[$section][ILoadBalancer::GROUP_GENERIC] ) ) {
+			throw new UnexpectedValueException( "Section '$section' has no hosts defined." );
 		}
-		list( $dbName, ) = $this->getDBNameAndPrefix( $domain );
-		if ( isset( $this->sectionsByDB[$dbName] ) ) {
-			$section = $this->sectionsByDB[$dbName];
-		} else {
-			$section = 'DEFAULT';
-		}
-		$this->lastSection = $section;
-		$this->lastDomain = $domain;
-
-		return $section;
-	}
-
-	/**
-	 * @param bool|string $domain
-	 * @return LoadBalancer
-	 */
-	public function newMainLB( $domain = false ) {
-		list( $dbName, ) = $this->getDBNameAndPrefix( $domain );
-		$section = $this->getSectionForDomain( $domain );
-		if ( isset( $this->groupLoadsByDB[$dbName] ) ) {
-			$groupLoads = $this->groupLoadsByDB[$dbName];
-		} else {
-			$groupLoads = [];
-		}
-
-		if ( isset( $this->groupLoadsBySection[$section] ) ) {
-			$groupLoads = array_merge_recursive(
-				$groupLoads, $this->groupLoadsBySection[$section] );
-		}
-
-		$readOnlyReason = $this->readOnlyReason;
-		// Use the LB-specific read-only reason if everything isn't already read-only
-		if ( $readOnlyReason === false && isset( $this->readOnlyBySection[$section] ) ) {
-			$readOnlyReason = $this->readOnlyBySection[$section];
-		}
-
-		$template = $this->serverTemplate;
-		if ( isset( $this->templateOverridesBySection[$section] ) ) {
-			$template = $this->templateOverridesBySection[$section] + $template;
-		}
-
+		$dbGroupLoads = $this->groupLoadsByDB[$database] ?? [];
+		unset( $dbGroupLoads[ILoadBalancer::GROUP_GENERIC] ); // cannot override
 		return $this->newLoadBalancer(
-			$template,
-			$this->sectionLoads[$section],
-			$groupLoads,
-			$readOnlyReason
+			array_merge(
+				$this->serverTemplate,
+				$this->templateOverridesBySection[$section] ?? []
+			),
+			array_merge( $this->groupLoadsBySection[$section], $dbGroupLoads ),
+			// Use the LB-specific read-only reason if everything isn't already read-only
+			is_string( $this->readOnlyReason )
+				? $this->readOnlyReason
+				: ( $this->readOnlyBySection[$section] ?? false ),
+			$owner
 		);
 	}
 
-	/**
-	 * @param DatabaseDomain|string|bool $domain Domain ID, or false for the current domain
-	 * @return LoadBalancer
-	 */
 	public function getMainLB( $domain = false ) {
-		$section = $this->getSectionForDomain( $domain );
+		$domainInstance = $this->resolveDomainInstance( $domain );
+		$section = $this->getSectionFromDatabase( $domainInstance->getDatabase() );
+
 		if ( !isset( $this->mainLBs[$section] ) ) {
-			$this->mainLBs[$section] = $this->newMainLB( $domain );
+			$this->mainLBs[$section] = $this->newMainLB( $domain, $this->getOwnershipId() );
 		}
 
 		return $this->mainLBs[$section];
 	}
 
-	public function newExternalLB( $cluster ) {
+	public function newExternalLB( $cluster, $owner = null ) {
 		if ( !isset( $this->externalLoads[$cluster] ) ) {
-			throw new InvalidArgumentException( __METHOD__ . ": Unknown cluster \"$cluster\"" );
+			throw new InvalidArgumentException( "Unknown cluster '$cluster'" );
 		}
-		$template = $this->serverTemplate;
-		if ( $this->externalTemplateOverrides ) {
-			$template = $this->externalTemplateOverrides + $template;
-		}
-		if ( isset( $this->templateOverridesByCluster[$cluster] ) ) {
-			$template = $this->templateOverridesByCluster[$cluster] + $template;
-		}
-
 		return $this->newLoadBalancer(
-			$template,
-			$this->externalLoads[$cluster],
-			[],
-			$this->readOnlyReason
+			array_merge(
+				$this->serverTemplate,
+				$this->externalTemplateOverrides,
+				$this->templateOverridesByCluster[$cluster] ?? []
+			),
+			[ ILoadBalancer::GROUP_GENERIC => $this->externalLoads[$cluster] ],
+			$this->readOnlyReason,
+			$owner
 		);
 	}
 
 	public function getExternalLB( $cluster ) {
-		if ( !isset( $this->extLBs[$cluster] ) ) {
-			$this->extLBs[$cluster] = $this->newExternalLB( $cluster );
+		if ( !isset( $this->externalLBs[$cluster] ) ) {
+			$this->externalLBs[$cluster] =
+				$this->newExternalLB( $cluster, $this->getOwnershipId() );
 		}
 
-		return $this->extLBs[$cluster];
+		return $this->externalLBs[$cluster];
 	}
 
 	public function getAllMainLBs() {
@@ -312,22 +217,30 @@ class LBFactoryMulti extends LBFactory {
 		return $lbs;
 	}
 
+	public function forEachLB( $callback, array $params = [] ) {
+		foreach ( $this->mainLBs as $lb ) {
+			$callback( $lb, ...$params );
+		}
+		foreach ( $this->externalLBs as $lb ) {
+			$callback( $lb, ...$params );
+		}
+	}
+
 	/**
 	 * Make a new load balancer object based on template and load array
 	 *
-	 * @param array $template
-	 * @param array $loads
+	 * @param array $serverTemplate
 	 * @param array $groupLoads
 	 * @param string|bool $readOnlyReason
+	 * @param int|null $owner
 	 * @return LoadBalancer
 	 */
-	private function newLoadBalancer( $template, $loads, $groupLoads, $readOnlyReason ) {
+	private function newLoadBalancer( $serverTemplate, $groupLoads, $readOnlyReason, $owner ) {
 		$lb = new LoadBalancer( array_merge(
-			$this->baseLoadBalancerParams(),
+			$this->baseLoadBalancerParams( $owner ),
 			[
-				'servers' => $this->makeServerArray( $template, $loads, $groupLoads ),
-				'maxLag' => $this->maxLag,
-				'loadMonitor' => [ 'class' => $this->loadMonitorClass ],
+				'servers' => $this->makeServerConfigArrays( $serverTemplate, $groupLoads ),
+				'loadMonitor' => $this->loadMonitorConfig,
 				'readOnlyReason' => $readOnlyReason
 			]
 		) );
@@ -337,49 +250,35 @@ class LBFactoryMulti extends LBFactory {
 	}
 
 	/**
-	 * Make a server array as expected by LoadBalancer::__construct, using a template and load array
+	 * Make a server array as expected by LoadBalancer::__construct()
 	 *
-	 * @param array $template
-	 * @param array $loads
-	 * @param array $groupLoads
-	 * @return array
+	 * @param array $serverTemplate Server config map
+	 * @param int[][] $groupLoads Map of (group => host => load)
+	 * @return array[] List of server config maps
 	 */
-	private function makeServerArray( $template, $loads, $groupLoads ) {
-		$servers = [];
-		$master = true;
-		$groupLoadsByServer = $this->reindexGroupLoads( $groupLoads );
-		foreach ( $groupLoadsByServer as $server => $stuff ) {
-			if ( !isset( $loads[$server] ) ) {
-				$loads[$server] = 0;
-			}
+	private function makeServerConfigArrays( array $serverTemplate, array $groupLoads ) {
+		// The master server is the first host explicitly listed in the generic load group
+		if ( !$groupLoads[ILoadBalancer::GROUP_GENERIC] ) {
+			throw new UnexpectedValueException( "Empty generic load array; no master defined." );
 		}
-		foreach ( $loads as $serverName => $load ) {
-			$serverInfo = $template;
-			if ( $master ) {
-				$serverInfo['master'] = true;
-				if ( $this->masterTemplateOverrides ) {
-					$serverInfo = $this->masterTemplateOverrides + $serverInfo;
-				}
-				$master = false;
-			} else {
-				$serverInfo['replica'] = true;
-			}
-			if ( isset( $this->templateOverridesByServer[$serverName] ) ) {
-				$serverInfo = $this->templateOverridesByServer[$serverName] + $serverInfo;
-			}
-			if ( isset( $groupLoadsByServer[$serverName] ) ) {
-				$serverInfo['groupLoads'] = $groupLoadsByServer[$serverName];
-			}
-			if ( isset( $this->hostsByName[$serverName] ) ) {
-				$serverInfo['host'] = $this->hostsByName[$serverName];
-			} else {
-				$serverInfo['host'] = $serverName;
-			}
-			$serverInfo['hostName'] = $serverName;
-			$serverInfo['load'] = $load;
-			$serverInfo += [ 'flags' => IDatabase::DBO_DEFAULT ];
-
-			$servers[] = $serverInfo;
+		$groupLoadsByHost = $this->reindexGroupLoadsByHost( $groupLoads );
+		// Get the ordered map of (host => load); the master server is first
+		$genericLoads = $groupLoads[ILoadBalancer::GROUP_GENERIC];
+		// Implictly append any hosts that only appear in custom load groups
+		$genericLoads += array_fill_keys( array_keys( $groupLoadsByHost ), 0 );
+		$servers = [];
+		foreach ( $genericLoads as $host => $load ) {
+			$servers[] = array_merge(
+				$serverTemplate,
+				$servers ? [] : $this->masterTemplateOverrides,
+				$this->templateOverridesByServer[$host] ?? [],
+				[
+					'host' => $this->hostsByName[$host] ?? $host,
+					'hostName' => $host,
+					'load' => $load,
+					'groupLoads' => $groupLoadsByHost[$host] ?? []
+				]
+			);
 		}
 
 		return $servers;
@@ -387,45 +286,25 @@ class LBFactoryMulti extends LBFactory {
 
 	/**
 	 * Take a group load array indexed by group then server, and reindex it by server then group
-	 * @param array $groupLoads
-	 * @return array
+	 * @param int[][] $groupLoads Map of (group => host => load)
+	 * @return int[][] Map of (host => group => load)
 	 */
-	private function reindexGroupLoads( $groupLoads ) {
-		$reindexed = [];
-		foreach ( $groupLoads as $group => $loads ) {
-			foreach ( $loads as $server => $load ) {
-				$reindexed[$server][$group] = $load;
+	private function reindexGroupLoadsByHost( $groupLoads ) {
+		$groupLoadsByHost = [];
+		foreach ( $groupLoads as $group => $loadByHost ) {
+			foreach ( $loadByHost as $host => $load ) {
+				$groupLoadsByHost[$host][$group] = $load;
 			}
 		}
 
-		return $reindexed;
+		return $groupLoadsByHost;
 	}
 
 	/**
-	 * @param DatabaseDomain|string|bool $domain Domain ID, or false for the current domain
-	 * @return array [database name, table prefix]
+	 * @param string $database
+	 * @return string Section name
 	 */
-	private function getDBNameAndPrefix( $domain = false ) {
-		$domain = ( $domain === false )
-			? $this->localDomain
-			: DatabaseDomain::newFromId( $domain );
-
-		return [ $domain->getDatabase(), $domain->getTablePrefix() ];
-	}
-
-	/**
-	 * Execute a function for each tracked load balancer
-	 * The callback is called with the load balancer as the first parameter,
-	 * and $params passed as the subsequent parameters.
-	 * @param callable $callback
-	 * @param array $params
-	 */
-	public function forEachLB( $callback, array $params = [] ) {
-		foreach ( $this->mainLBs as $lb ) {
-			call_user_func_array( $callback, array_merge( [ $lb ], $params ) );
-		}
-		foreach ( $this->extLBs as $lb ) {
-			call_user_func_array( $callback, array_merge( [ $lb ], $params ) );
-		}
+	private function getSectionFromDatabase( $database ) {
+		return $this->sectionsByDB[$database] ?? 'DEFAULT';
 	}
 }

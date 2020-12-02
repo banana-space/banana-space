@@ -4,4 +4,11 @@ ace.define("ace/snippets/dockerfile",["require","exports","module"], function(re
 exports.snippetText =undefined;
 exports.scope = "dockerfile";
 
-});
+});                (function() {
+                    ace.require(["ace/snippets/dockerfile"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

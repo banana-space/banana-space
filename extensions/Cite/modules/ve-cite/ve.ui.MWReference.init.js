@@ -4,70 +4,56 @@
  * @copyright 2011-2018 VisualEditor Team's Cite sub-team and others; see AUTHORS.txt
  * @license MIT
  */
+
 ( function () {
-	var i, j, jLen, toolGroup, toolGroups, linkIndex, target, label, group;
+	var name;
 
-	// HACK: Find the position of the current citation toolbar definition
-	// and manipulate it.
-
-	targetLoop:
-	for ( i in ve.init.mw ) {
-		target = ve.init.mw[ i ];
-		if ( !target || !( target.prototype instanceof ve.init.Target ) ) {
-			continue;
-		}
-		toolGroups = target.static.toolbarGroups;
-		linkIndex = toolGroups.length;
+	function fixTarget( target ) {
+		var i, iLen, toolGroup, label, group,
+			toolGroups = target.static.toolbarGroups;
 
 		if ( mw.config.get( 'wgCiteVisualEditorOtherGroup' ) ) {
-			for ( j = 0; j < linkIndex; j++ ) {
-				toolGroup = toolGroups[ j ];
-				if ( toolGroup.include === '*' && ( !toolGroup.demote || toolGroup.demote.indexOf( 'reference' ) === -1 ) ) {
+			for ( i = 0, iLen = toolGroups.length; i < iLen; i++ ) {
+				toolGroup = toolGroups[ i ];
+				if ( toolGroup.name === 'insert' && ( !toolGroup.demote || toolGroup.demote.indexOf( 'reference' ) === -1 ) ) {
 					toolGroup.demote = toolGroup.demote || [];
 					toolGroup.demote.push( { group: 'cite' }, 'reference', 'reference/existing' );
 				}
 			}
-			continue;
-		}
-
-		for ( j = 0, jLen = toolGroups.length; j < jLen; j++ ) {
-			if ( ve.getProp( toolGroups[ j ], 'include', 0, 'group' ) === 'cite' ) {
-				// Skip if the cite group exists already
-				linkIndex = -1;
-				continue targetLoop;
-			}
-		}
-		// Looking through the object to find what we actually need
-		// to replace. This way, if toolbarGroups are changed in VE code
-		// we won't have to manually change the index here.
-		for ( j = 0, jLen = toolGroups.length; j < jLen; j++ ) {
-			if ( ve.getProp( toolGroups[ j ], 'include', 0 ) === 'link' ) {
-				linkIndex = j;
-				break;
-			}
-		}
-
-		label = OO.ui.deferMsg( 'cite-ve-toolbar-group-label' );
-		group = {
-			classes: [ 've-test-toolbar-cite' ],
-			type: 'list',
-			indicator: 'down',
-			include: [ { group: 'cite' }, 'reference', 'reference/existing' ],
-			demote: [ 'reference', 'reference/existing' ]
-		};
-
-		// Treat mobile targets differently
-		if ( ve.init.mw.MobileArticleTarget && target.prototype instanceof ve.init.mw.MobileArticleTarget ) {
-			group.header = label;
-			group.title = label;
-			group.icon = 'reference';
 		} else {
-			group.label = label;
+			// Find the reference placeholder group and replace it
+			for ( i = 0, iLen = toolGroups.length; i < iLen; i++ ) {
+				if ( toolGroups[ i ].name === 'reference' ) {
+					toolGroups[ i ] = group = {
+						// Change the name so it isn't replaced twice
+						name: 'cite',
+						type: 'list',
+						indicator: 'down',
+						include: [ { group: 'cite' }, 'reference', 'reference/existing' ],
+						demote: [ 'reference', 'reference/existing' ]
+					};
+					label = OO.ui.deferMsg( 'cite-ve-toolbar-group-label' );
+					// Treat mobile targets differently
+					if ( target === ve.init.mw.MobileArticleTarget ) {
+						group.header = label;
+						group.title = label;
+						group.icon = 'reference';
+					} else {
+						group.label = label;
+					}
+					break;
+				}
+			}
 		}
-
-		// Insert a new group for references after the link group (or at the end).
-		toolGroups.splice( linkIndex + 1, 0, group );
 	}
+
+	for ( name in ve.init.mw.targetFactory.registry ) {
+		fixTarget( ve.init.mw.targetFactory.lookup( name ) );
+	}
+
+	ve.init.mw.targetFactory.on( 'register', function ( name, target ) {
+		fixTarget( target );
+	} );
 
 	/**
 	 * Add reference insertion tools from on-wiki data.
@@ -82,12 +68,25 @@
 	 * messages are pre-defined for tool names such as `web`, `book`, `news` and `journal`.
 	 *
 	 * Example:
-	 * [ { "name": "web", "icon": "cite-web", "template": "Cite web" }, ... ]
+	 * [ { "name": "web", "icon": "browser", "template": "Cite web" }, ... ]
 	 *
 	 */
 	( function () {
-		var i, len, item, name, data, tool, tools, dialog, contextItem,
-			limit = 5;
+		var tools,
+			limit = 5,
+			deprecatedIcons = {
+				'ref-cite-book': 'book',
+				'ref-cite-journal': 'journal',
+				'ref-cite-news': 'newspaper',
+				'ref-cite-web': 'browser',
+				'reference-existing': 'referenceExisting'
+			},
+			defaultIcons = {
+				book: 'book',
+				journal: 'journal',
+				news: 'newspaper',
+				web: 'browser'
+			};
 
 		try {
 			// Must use mw.message to avoid JSON being parsed as Wikitext
@@ -100,66 +99,65 @@
 			} catch ( e ) {}
 		}
 
-		if ( Array.isArray( tools ) ) {
-			for ( i = 0, len = Math.min( limit, tools.length ); i < len; i++ ) {
-				item = tools[ i ];
-				data = { template: item.template };
+		// Limit and expose
+		ve.ui.mwCitationTools = ( tools || [] ).slice( 0, limit );
 
-				// Generate citation tool
-				name = 'cite-' + item.name;
-				if ( !ve.ui.toolFactory.lookup( name ) ) {
-					tool = function GeneratedMWCitationDialogTool() {
-						ve.ui.MWCitationDialogTool.apply( this, arguments );
-					};
-					OO.inheritClass( tool, ve.ui.MWCitationDialogTool );
-					tool.static.group = 'cite';
-					tool.static.name = name;
-					tool.static.icon = item.icon;
-					if ( mw.config.get( 'wgCiteVisualEditorOtherGroup' ) ) {
-						tool.static.title = mw.msg( 'cite-ve-othergroup-item', item.title );
-					} else {
-						tool.static.title = item.title;
-					}
-					tool.static.commandName = name;
-					tool.static.template = item.template;
-					tool.static.autoAddToCatchall = false;
-					tool.static.autoAddToGroup = true;
-					tool.static.associatedWindows = [ name ];
-					ve.ui.toolFactory.register( tool );
-					ve.ui.commandRegistry.register(
-						new ve.ui.Command(
-							name, 'mwcite', 'open', { args: [ name, data ], supportedSelections: [ 'linear' ] }
-						)
-					);
-				}
+		ve.ui.mwCitationTools.forEach( function ( item ) {
+			var name, tool, contextItem,
+				hasOwn = Object.prototype.hasOwnProperty,
+				data = { template: item.template, title: item.title };
 
-				// Generate citation context item
-				if ( !ve.ui.contextItemFactory.lookup( name ) ) {
-					contextItem = function GeneratedMWCitationContextItem() {
-						// Parent constructor
-						ve.ui.MWCitationContextItem.apply( this, arguments );
-					};
-					OO.inheritClass( contextItem, ve.ui.MWCitationContextItem );
-					contextItem.static.name = name;
-					contextItem.static.icon = item.icon;
-					contextItem.static.label = item.title;
-					contextItem.static.commandName = name;
-					contextItem.static.template = item.template;
-					ve.ui.contextItemFactory.register( contextItem );
-				}
-
-				// Generate dialog
-				if ( !ve.ui.windowFactory.lookup( name ) ) {
-					dialog = function GeneratedMWCitationDialog() {
-						ve.ui.MWCitationDialog.apply( this, arguments );
-					};
-					OO.inheritClass( dialog, ve.ui.MWCitationDialog );
-					dialog.static.name = name;
-					dialog.static.title = item.title;
-					ve.ui.windowFactory.register( dialog );
-				}
+			if ( !item.icon && hasOwn.call( defaultIcons, item.name ) ) {
+				item.icon = defaultIcons[ item.name ];
 			}
-		}
+
+			if ( hasOwn.call( deprecatedIcons, item.icon ) ) {
+				item.icon = deprecatedIcons[ item.icon ];
+			}
+
+			// Generate citation tool
+			name = 'cite-' + item.name;
+			if ( !ve.ui.toolFactory.lookup( name ) ) {
+				tool = function GeneratedMWCitationDialogTool() {
+					ve.ui.MWCitationDialogTool.apply( this, arguments );
+				};
+				OO.inheritClass( tool, ve.ui.MWCitationDialogTool );
+				tool.static.group = 'cite';
+				tool.static.name = name;
+				tool.static.icon = item.icon;
+				if ( mw.config.get( 'wgCiteVisualEditorOtherGroup' ) ) {
+					tool.static.title = mw.msg( 'cite-ve-othergroup-item', item.title );
+				} else {
+					tool.static.title = item.title;
+				}
+				tool.static.commandName = name;
+				tool.static.template = item.template;
+				tool.static.autoAddToCatchall = false;
+				tool.static.autoAddToGroup = true;
+				tool.static.associatedWindows = [ name ];
+				ve.ui.toolFactory.register( tool );
+				ve.ui.commandRegistry.register(
+					new ve.ui.Command(
+						name, 'mwcite', 'open', { args: [ data ], supportedSelections: [ 'linear' ] }
+					)
+				);
+			}
+
+			// Generate citation context item
+			if ( !ve.ui.contextItemFactory.lookup( name ) ) {
+				contextItem = function GeneratedMWCitationContextItem() {
+					// Parent constructor
+					ve.ui.MWCitationContextItem.apply( this, arguments );
+				};
+				OO.inheritClass( contextItem, ve.ui.MWCitationContextItem );
+				contextItem.static.name = name;
+				contextItem.static.icon = item.icon;
+				contextItem.static.label = item.title;
+				contextItem.static.commandName = name;
+				contextItem.static.template = item.template;
+				ve.ui.contextItemFactory.register( contextItem );
+			}
+		} );
 	}() );
 
 }() );

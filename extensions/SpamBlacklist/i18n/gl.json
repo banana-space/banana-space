@@ -2,9 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Alma",
+			"Elisardojm",
 			"Toliño",
-			"Xosé",
-			"Elisardojm"
+			"Xosé"
 		]
 	},
 	"spam-blacklist": " #<!-- Deixe esta liña tal e como está --> <pre>\n# As ligazóns externas que coincidan na súa totalidade ou en parte con algún rexistro desta lista serán bloqueadas cando se intenten engadir a unha páxina.\n# Esta lista afecta unicamente a este wiki; tamén existe unha lista global.\n# Para obter máis documentación vaia a https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#\n# A sintaxe é a seguinte:\n#   * Todo o que vaia despois dun carácter \"#\" ata o final da liña é un comentario\n#   * Toda liña que non estea en branco é un fragmento de expresión regular que só coincide con dominios dentro de enderezos URL\n\n #</pre> <!-- Deixe esta liña tal e como está -->",
@@ -20,9 +20,5 @@
 	"log-description-spamblacklist": "Este rexistro fai un seguimento das coincidencias coa lista negra de publicidade.",
 	"logentry-spamblacklist-hit": "$1 provocou a activación da lista negra de spam en \"$3\" ao intentar engadir $4.",
 	"right-spamblacklistlog": "Ver o rexistro da lista negra de spam",
-	"action-spamblacklistlog": "ver o rexistro da lista negra de spam",
-	"apihelp-spamblacklist-description": "Validar unha o máis URLs contra a lista negra de spam.",
-	"apihelp-spamblacklist-summary": "Validar unha o máis URLs contra a lista negra de spam.",
-	"apihelp-spamblacklist-param-url": "URLs a validar contra a lista negra.",
-	"apihelp-spamblacklist-example-1": "Comprobar dúas URLs contra a lista negra."
+	"action-spamblacklistlog": "ver o rexistro da lista negra de spam"
 }

@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly"
+		]
+	},
+	"apihelp-query+pageimages-description": "回傳有關在頁面上圖片的資訊，例如縮圖和照片展示內容。",
+	"apihelp-query+pageimages-summary": "回傳有關在頁面上圖片的資訊，例如縮圖和照片展示內容。",
+	"apihelp-query+pageimages-example-1": "取得在 <kbd>Albert Einstein</kbd> 頁面上圖片的名稱以及 <kbd>100</kbd> 像素縮圖。",
+	"apihelp-query+pageimages-param-prop": "會回傳的資訊：\n;thumbnail：關聯此頁面的縮圖 URL 以及尺寸（如有存在的情況下）。\n;original：關聯此頁面的圖片 URL 以及原始尺寸（如有存在的情況下）。\n;name：圖片的標題。",
+	"apihelp-query+pageimages-param-thumbsize": "縮圖的像素最大寬度。",
+	"apihelp-query+pageimages-param-limit": "回傳頁面數量的屬性。",
+	"apihelp-query+pageimages-param-license": "限制頁面圖片至特定許可權限類型",
+	"apihelp-query+pageimages-paramvalue-license-free": "僅自由授權圖片",
+	"apihelp-query+pageimages-paramvalue-license-any": "最佳圖片，無論是否為自由授權。"
+}

@@ -1,0 +1,28 @@
+/*!
+ * VisualEditor MediaWiki DesktopArticleTarget Minerva skin init styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/* stylelint-disable selector-max-id */
+
+.ve-edit-source .mw-ui-icon,
+.ve-edit-visual .mw-ui-icon {
+	position: absolute;
+	opacity: 0.65;
+	/* Align with pencil icon in the parent element */
+	left: 0;
+	top: 0;
+	/* Position relative to the center, easier this way because dimensions differ */
+	transform: scale( 0.6 ) translate( 12px, 12px );
+}
+
+.mw-editsection-divider {
+	display: none;
+}
+
+.mw-editsection .ve-edit-source,
+.mw-editsection .ve-edit-visual {
+	display: inline-block;
+}

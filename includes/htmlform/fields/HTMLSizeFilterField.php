@@ -7,10 +7,13 @@
  *
  * Minimum size limits are represented using a positive integer, while maximum
  * size limits are represented using a negative integer.
+ *
+ * @stable to extend
+ *
  */
 class HTMLSizeFilterField extends HTMLIntField {
 	public function getSize() {
-		return isset( $this->mParams['size'] ) ? $this->mParams['size'] : 9;
+		return $this->mParams['size'] ?? 9;
 	}
 
 	public function getInputHTML( $value ) {
@@ -27,7 +30,7 @@ class HTMLSizeFilterField extends HTMLIntField {
 			$value >= 0,
 			$attribs
 		);
-		$html .= '&#160;' . Xml::radioLabel(
+		$html .= "\u{00A0}" . Xml::radioLabel(
 			$this->msg( 'maximum-size' )->text(),
 			$this->mName . '-mode',
 			'max',
@@ -35,12 +38,16 @@ class HTMLSizeFilterField extends HTMLIntField {
 			$value < 0,
 			$attribs
 		);
-		$html .= '&#160;' . parent::getInputHTML( $value ? abs( $value ) : '' );
-		$html .= '&#160;' . $this->msg( 'pagesize' )->parse();
+		$html .= "\u{00A0}" . parent::getInputHTML( $value ? abs( $value ) : '' );
+		$html .= "\u{00A0}" . $this->msg( 'pagesize' )->parse();
 
 		return $html;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @stable to override
+	 */
 	protected function getInputWidget( $params ) {
 		$this->mParent->getOutput()->addModuleStyles( 'mediawiki.widgets.SizeFilterWidget.styles' );
 

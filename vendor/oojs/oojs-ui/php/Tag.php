@@ -76,7 +76,7 @@ class Tag {
 	 * @return $this
 	 */
 	public function addClasses( array $classes ) {
-		$this->classes = array_merge( $this->classes, $classes );
+		$this->classes = array_unique( array_merge( $this->classes, $classes ) );
 		return $this;
 	}
 
@@ -95,7 +95,7 @@ class Tag {
 	 * Toggle CSS classes.
 	 *
 	 * @param array $classes List of classes to add
-	 * @param bool $toggle Add classes
+	 * @param bool|null $toggle Add classes
 	 * @return $this
 	 */
 	public function toggleClasses( array $classes, $toggle = null ) {
@@ -123,7 +123,7 @@ class Tag {
 	 * @return string|null
 	 */
 	public function getAttribute( $key ) {
-		return isset( $this->attributes[$key] ) ? $this->attributes[$key] : null;
+		return $this->attributes[$key] ?? null;
 	}
 
 	/**
@@ -169,7 +169,33 @@ class Tag {
 	}
 
 	/**
-	 * Add content to the end.
+	 * Remove any items that match by reference
+	 *
+	 * String items should never match by reference
+	 * so will not be removed.
+	 *
+	 * @param string|Tag|HtmlSnippet|array ...$content Content to remove.
+	 * @return $this
+	 */
+	public function removeContent( ...$content ) {
+		if ( is_array( $content[ 0 ] ) ) {
+			$content = $content[ 0 ];
+		}
+		foreach ( $content as $item ) {
+			if ( !is_string( $item ) ) {
+				// Use strict type comparions so we don't
+				// compare objects with existing strings
+				$index = array_search( $item, $this->content, true );
+				if ( $index !== false ) {
+					array_splice( $this->content, $index, 1 );
+				}
+			}
+		}
+		return $this;
+	}
+
+	/**
+	 * Add content to the end. Strings will be HTML-escaped, use HtmlSnippet to prevent that.
 	 *
 	 * Accepts either variadic arguments (the $content argument can be repeated any number of times)
 	 * or an array of arguments.
@@ -180,17 +206,19 @@ class Tag {
 	 * This, however, is not acceptable
 	 * * $tag->appendContent( [ $element1, $element2 ], $element3 );
 	 *
-	 * @param string|Tag|HtmlSnippet $content Content to append. Strings will be HTML-escaped
-	 *   for output, use a HtmlSnippet instance to prevent that.
+	 * Objects that are already in $this->content will be moved
+	 * to the end of the list, not duplicated.
+	 *
+	 * @param string|Tag|HtmlSnippet|array $content Can be an array only if no $params are passed.
+	 * @param string|Tag|HtmlSnippet ...$params Content to append
 	 * @return $this
 	 */
-	public function appendContent( /* $content... */ ) {
-		$contents = func_get_args();
-		if ( is_array( $contents[ 0 ] ) ) {
-			$this->content = array_merge( $this->content, $contents[ 0 ] );
-		} else {
-			$this->content = array_merge( $this->content, $contents );
+	public function appendContent( $content, ...$params ) {
+		if ( !is_array( $content ) ) {
+			$content = func_get_args();
 		}
+		$this->removeContent( $content );
+		$this->content = array_merge( $this->content, $content );
 		return $this;
 	}
 
@@ -200,23 +228,25 @@ class Tag {
 	 * Accepts either variadic arguments (the $content argument can be repeated any number of times)
 	 * or an array of arguments.
 	 *
+	 * Objects that are already in $this->content will be moved
+	 * to the end of the list, not duplicated.
+	 *
 	 * For example, these uses are valid:
 	 * * $tag->prependContent( [ $element1, $element2 ] );
 	 * * $tag->prependContent( $element1, $element2 );
 	 * This, however, is not acceptable
 	 * * $tag->prependContent( [ $element1, $element2 ], $element3 );
 	 *
-	 * @param string|Tag|HtmlSnippet $content Content to prepend. Strings will be HTML-escaped
+	 * @param string|Tag|HtmlSnippet ...$content Content to prepend. Strings will be HTML-escaped
 	 *   for output, use a HtmlSnippet instance to prevent that.
 	 * @return $this
 	 */
-	public function prependContent( /* $content... */ ) {
-		$contents = func_get_args();
-		if ( is_array( $contents[ 0 ] ) ) {
-			array_splice( $this->content, 0, 0, $contents[ 0 ] );
-		} else {
-			array_splice( $this->content, 0, 0, $contents );
+	public function prependContent( ...$content ) {
+		if ( is_array( $content[ 0 ] ) ) {
+			$content = $content[ 0 ];
 		}
+		$this->removeContent( $content );
+		array_splice( $this->content, 0, 0, $content );
 		return $this;
 	}
 

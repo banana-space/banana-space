@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vacio",
-			"Xelgen",
+			"Aram1985",
 			"GeoO",
-			"Դավիթ Սարոյան",
+			"Vacio",
 			"Vahe Gharakhanyan",
-			"Aram1985"
+			"Xelgen",
+			"Դավիթ Սարոյան"
 		]
 	},
 	"visualeditor-cite-tool-name-book": "Գիրք",
@@ -19,8 +19,6 @@
 	"cite-ve-dialog-reference-options-name-label": "Կրկնակի օգտագործել տվյալ անվամբ",
 	"cite-ve-dialog-reference-options-section": "Ընտրանքներ",
 	"cite-ve-dialog-reference-title": "Ծանոթագրություն",
-	"cite-ve-dialog-reference-useexisting-full-label": "Կրկին օգտագործել արդեն գոյություն ունեցող ծանոթագրությունը",
-	"cite-ve-dialog-reference-useexisting-label": "Օգտագործել առկա ծանոթագրությունը",
 	"cite-ve-dialog-reference-useexisting-tool": "Կրկին օգտագործում",
 	"cite-ve-dialog-referenceslist-contextitem-description-general": "Ընդհանուր ծանոթագրությունների ցուցակ",
 	"cite-ve-dialog-referenceslist-contextitem-description-named": "$1 խմբի ծանոթագրությունների ցուցակ",

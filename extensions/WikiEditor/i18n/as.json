@@ -3,10 +3,10 @@
 		"authors": [
 			"Bishnu Saikia",
 			"Chaipau",
+			"Dibya Dutta",
 			"Gitartha.bordoloi",
-			"Nilamdyuti",
 			"Macofe",
-			"Dibya Dutta"
+			"Nilamdyuti"
 		]
 	},
 	"wikieditor": "উচ্চতৰ ৱিকিপাঠ্য সম্পাদনা ইণ্টাৰফে'চ",
@@ -127,6 +127,7 @@
 	"wikieditor-toolbar-tool-replace-success": "$1 টো প্ৰতিস্থাপন সম্পন্ন হৈছে।",
 	"wikieditor-toolbar-tool-replace-emptysearch": "সন্ধান কৰিবলৈ আপুনি একো টাইপ কৰা নাই।",
 	"wikieditor-toolbar-tool-replace-invalidregex": "আপুনি প্ৰদান কৰা ৰেগুলাৰ এক্সপ্রেছনটো অবৈধ: $1",
+	"wikieditor-toolbar-tool-replace-word": "গোটেই শব্দটো মিলাওক",
 	"wikieditor-toolbar-section-characters": "বিশেষ চিহ্নসমূহ:",
 	"wikieditor-toolbar-section-help": "সহায়",
 	"wikieditor-toolbar-help-heading-description": "বিৱৰণ",

@@ -1,0 +1,38 @@
+/*!
+ * VisualEditor Overlay styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-overlay {
+	font-family: sans-serif;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.ve-ui-overlay > * {
+	z-index: 1;
+}
+
+.ve-ui-overlay-global {
+	/* Toolbar is z-index 1 */
+	z-index: 2;
+}
+
+/* Most vendor prefixes are not needed on mobile devices */
+
+.ve-ui-overlay-global-mobile > .oo-ui-windowManager-modal > .oo-ui-dialog {
+	-webkit-transform: translate3d( 0, -100%, 0 );
+	transform: translate3d( 0, -100%, 0 );
+	/* `opacity` is defined in OOUI styles */
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.ve-ui-overlay-global-mobile > .oo-ui-windowManager-modal > .oo-ui-dialog.oo-ui-window-ready {
+	-webkit-transform: none;
+	transform: none;
+}

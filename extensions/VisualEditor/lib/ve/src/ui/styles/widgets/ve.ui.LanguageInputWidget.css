@@ -1,0 +1,24 @@
+/*!
+ * VisualEditor UserInterface LanguageInputWidget styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-languageInputWidget-selectedLanguageLabel {
+	width: 7.5em;
+	margin-right: 1em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+.ve-ui-languageInputWidget-languageCodeTextInput {
+	width: 6em;
+	display: inline-block;
+}
+
+.ve-ui-languageInputWidget-directionLabel {
+	margin-top: 0.5em;
+	display: block;
+}

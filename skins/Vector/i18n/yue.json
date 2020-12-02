@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ktchankt",
+			"Roy17",
 			"Waihorace",
 			"Yueman"
 		]
@@ -18,7 +19,7 @@
 	"vector-action-unprotect": "改保護",
 	"vector-view-create": "開",
 	"vector-view-edit": "改",
-	"vector-view-history": "睇吓歷史",
+	"vector-view-history": "修改紀錄",
 	"vector-view-view": "閱",
 	"vector-view-viewsource": "睇吓原始碼",
 	"vector-more-actions": "更多"

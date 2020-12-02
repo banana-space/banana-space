@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<!--
+	/*!
+	 * VisualEditor standalone demo
+	 *
+	 * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+	 */
+	-->
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<title>VisualEditor Standalone Demo</title>
+
+		<!-- oojs-ui-wikimediaui -->
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui.rtl.css" class="stylesheet-rtl stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-alerts.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-alerts.rtl.css" class="stylesheet-rtl stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-content.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-content.rtl.css" class="stylesheet-rtl stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-interactions.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-interactions.rtl.css" class="stylesheet-rtl stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-layout.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-layout.rtl.css" class="stylesheet-rtl stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-moderation.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-moderation.rtl.css" class="stylesheet-rtl stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-movement.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-movement.rtl.css" class="stylesheet-rtl stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-user.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-user.rtl.css" class="stylesheet-rtl stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-editing-core.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-editing-core.rtl.css" class="stylesheet-rtl stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-editing-advanced.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-editing-advanced.rtl.css" class="stylesheet-rtl stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-editing-styling.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-editing-styling.rtl.css" class="stylesheet-rtl stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-editing-list.css" class="stylesheet-ltr stylesheet-read">
+		<link rel=stylesheet href="../../lib/oojs-ui/oojs-ui-wikimediaui-icons-editing-list.rtl.css" class="stylesheet-rtl stylesheet-read">
+
+		<!-- visualEditor.dist.wikimediaui -->
+		<link rel=stylesheet href="../../dist/visualEditor-wikimediaui.css" class="stylesheet-ltr stylesheet-ve">
+		<link rel=stylesheet href="../../dist/visualEditor-wikimediaui.rtl.css" class="stylesheet-rtl stylesheet-ve">
+
+		<!-- visualEditor.standalone.read -->
+		<link rel=stylesheet href="../../src/init/sa/styles/ve.init.sa.css" class="stylesheet-read">
+
+		<!-- visualEditor.standalone.demo -->
+		<link rel=stylesheet href="../../demos/ve/demo.css" class="stylesheet-read">
+
+		<!-- visualEditor.mobile.standalone.demo -->
+		<link rel=stylesheet href="../../demos/ve/demo.mobile.css" class="stylesheet-read">
+		<link rel=stylesheet href="../../demos/ve/demo.wikimediaui.css" class="stylesheet-read">
+
+	</head>
+	<body>
+		<div class="ve-demo-logo"></div>
+		<div class="ve-demo-toolbar ve-demo-targetToolbar"></div>
+		<div class="ve-demo-editor"></div>
+
+		<!-- jquery -->
+		<script src="../../lib/jquery/jquery.js"></script>
+
+		<!-- oojs -->
+		<script src="../../lib/oojs/oojs.jquery.js"></script>
+
+		<!-- oojs-ui -->
+		<script src="../../lib/oojs-ui/oojs-ui-core.js"></script>
+		<script src="../../lib/oojs-ui/oojs-ui-widgets.js"></script>
+		<script src="../../lib/oojs-ui/oojs-ui-toolbars.js"></script>
+		<script src="../../lib/oojs-ui/oojs-ui-windows.js"></script>
+
+		<!-- jquery.i18n.dist -->
+		<script src="../../dist/lib/jquery.i18n.js"></script>
+
+		<!-- jquery.uls.data.dist -->
+		<script src="../../dist/lib/jquery.uls.data.js"></script>
+
+		<!-- jquery.client -->
+		<script src="../../lib/jquery.client/jquery.client.js"></script>
+
+		<!-- papaparse -->
+		<script src="../../lib/papaparse/papaparse.js"></script>
+
+		<!-- oojs-ui-wikimediaui -->
+		<script src="../../lib/oojs-ui/oojs-ui-wikimediaui.js"></script>
+
+		<!-- visualEditor.dist -->
+		<script src="../../dist/visualEditor.js"></script>
+
+		<!-- visualEditor.mobile.standalone.dist -->
+		<script src="../../src/init/sa/ve.init.sa.MobileTarget.js"></script>
+
+		<script>
+			ve.messagePaths = [
+				'../../dist/i18n/',
+				'../../lib/oojs-ui/i18n/'
+			];
+			ve.availableLanguages = [ 'ace', 'af', 'am', 'ang', 'ar', 'arc', 'arq', 'as', 'ast', 'av', 'awa', 'az', 'azb', 'ba', 'bcc', 'bcl', 'be', 'be-tarask', 'bg', 'bho', 'bjn', 'bn', 'bqi', 'br', 'bs', 'ca', 'cdo', 'ce', 'cjy-hant', 'ckb', 'co', 'crh-cyrl', 'crh-latn', 'cs', 'cu', 'cy', 'da', 'de', 'diq', 'dsb', 'dty', 'egl', 'el', 'eml', 'en', 'en-ca', 'en-gb', 'eo', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr', 'frp', 'frr', 'fur', 'fy', 'ga', 'gd', 'gl', 'glk', 'gn', 'gom-latn', 'gor', 'gsw', 'gu', 'gv', 'he', 'hi', 'hif-latn', 'hr', 'hrx', 'hsb', 'hu', 'hu-formal', 'hy', 'hyw', 'ia', 'id', 'ie', 'ilo', 'inh', 'io', 'is', 'it', 'ja', 'jv', 'ka', 'kab', 'khw', 'kk-cyrl', 'km', 'kn', 'ko', 'ko-kp', 'krc', 'kri', 'krl', 'ksh', 'ku-latn', 'kw', 'ky', 'la', 'lb', 'lez', 'lfn', 'li', 'lij', 'lki', 'lmo', 'lrc', 'lt', 'luz', 'lv', 'lzh', 'lzz', 'mai', 'mg', 'min', 'mk', 'ml', 'mn', 'mni', 'mr', 'ms', 'mt', 'my', 'myv', 'nan', 'nap', 'nb', 'nds', 'nds-nl', 'ne', 'nl', 'nn', 'oc', 'olo', 'om', 'or', 'os', 'pa', 'pam', 'pfl', 'pl', 'pms', 'pnb', 'ps', 'pt', 'pt-br', 'qqq', 'qu', 'rm', 'ro', 'roa-tara', 'ru', 'rue', 'sa', 'sah', 'sc', 'scn', 'sco', 'sd', 'sgs', 'sh', 'shn', 'si', 'sk', 'skr-arab', 'sl', 'sq', 'sr-ec', 'sr-el', 'su', 'sv', 'sw', 'szy', 'ta', 'tay', 'te', 'tg-cyrl', 'th', 'ti', 'tl', 'tr', 'tt-cyrl', 'tw', 'tyv', 'tzm', 'ug-arab', 'uk', 'ur', 'uz', 'vec', 'vep', 'vi', 'vo', 'war', 'wuu', 'xmf', 'yi', 'yo', 'yue', 'zh-hans', 'zh-hant' ];
+			ve.demoPages = [
+				'aliens',
+				'comments',
+				'complex',
+				'empty',
+				'h1',
+				'image',
+				'isolation',
+				'long',
+				'meta',
+				'rtl',
+				'sections',
+				'simple',
+				'slugs',
+				'tables'
+			];
+		</script>
+
+		<!-- visualEditor.standalone.demo -->
+		<script src="../../demos/ve/ve.demo.js"></script>
+		<script src="../../demos/ve/ve.demo.SurfaceContainer.js"></script>
+
+		<!-- visualEditor.mobile.standalone.demo -->
+		<script src="../../demos/ve/demo.mobile.js"></script>
+		<script src="../../demos/ve/ve.demo.init.js"></script>
+
+	</body>
+</html>

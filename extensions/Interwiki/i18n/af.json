@@ -27,7 +27,6 @@
 	"interwiki-cached": "Die interwikidata is gekas. Dit is nie moontlik om data in die kas te wysig nie.",
 	"interwiki_edit": "Wysig",
 	"interwiki_reasonfield": "Rede:",
-	"interwiki_delquestion": "Besig om \"$1\" te verwyder",
 	"interwiki_deleting": "U is besig om voorvoegsel \"$1\" te verwyder.",
 	"interwiki_deleted": "Voorvoegsel \"$1\" is suksesvol uit die interwikitabel verwyder.",
 	"interwiki_delfailed": "Voorvoegsel \"$1\" kon nie van die interwikitabel verwyder word nie.",

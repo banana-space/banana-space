@@ -1,8 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"NehalDaveND"
+			"NehalDaveND",
+			"पर्वत सुबेदी"
 		]
 	},
-	"oathauth-token": "टोकन"
+	"specialpages-group-oath": "दुई चरण प्रामाणिकरण",
+	"oathauth-token": "टोकन",
+	"oathauth-prefs-label": "दुई चरण प्रामाणिकरण",
+	"oathauth-ui-manage": "व्यवस्थापन गर्नुहाेस्",
+	"oathauth-enable-generic": "सक्षम पार्नुहोस्",
+	"oathauth-disable-generic": "असक्षम पार्नुहाेस्",
+	"oathauth-disable-page-title": "$1 असक्षम"
 }

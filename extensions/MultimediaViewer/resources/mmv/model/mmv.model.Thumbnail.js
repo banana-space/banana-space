@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw ) {
+( function () {
 	/**
 	 * Represents information about an image thumbnail
 	 *
@@ -45,4 +45,4 @@
 	}
 
 	mw.mmv.model.Thumbnail = Thumbnail;
-}( mediaWiki ) );
+}() );

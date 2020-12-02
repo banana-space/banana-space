@@ -1,5 +1,5 @@
-@import '../mmv.mixins';
-@import '../mmv.globals';
+@import '../mmv.variables.less';
+@import '../mmv.mixins.less';
 
 .mw-mmv-reuse-dialog {
 	@divider-border-height: 1px;
@@ -16,7 +16,6 @@
 
 	.mw-mmv-reuse-tabs {
 		@divider-color: #c8ccd1;
-
 		position: static;
 		box-shadow: none;
 		padding-bottom: 0; // OOUI override
@@ -33,7 +32,6 @@
 			@tab-border-height: 3px;
 			@highlighted-tab-color: #e1f3ff;
 			@selected-tab-color: #2a4b8d;
-
 			display: inline-block;
 			padding: 10px 25px;
 			font-size: 1.2em;

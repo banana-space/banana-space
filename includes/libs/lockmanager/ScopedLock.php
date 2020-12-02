@@ -85,7 +85,7 @@ class ScopedLock {
 	 * This is useful for early release of locks before function scope is destroyed.
 	 * This is the same as setting the lock object to null.
 	 *
-	 * @param ScopedLock &$lock
+	 * @param ScopedLock|null &$lock
 	 * @since 1.21
 	 */
 	public static function release( ScopedLock &$lock = null ) {
@@ -95,7 +95,7 @@ class ScopedLock {
 	/**
 	 * Release the locks when this goes out of scope
 	 */
-	function __destruct() {
+	public function __destruct() {
 		$wasOk = $this->status->isOK();
 		$this->status->merge( $this->manager->unlockByType( $this->pathsByType ) );
 		if ( $wasOk ) {

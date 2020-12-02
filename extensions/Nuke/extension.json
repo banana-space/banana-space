@@ -9,7 +9,7 @@
 	"descriptionmsg": "nuke-desc",
 	"license-name": "GPL-2.0-or-later",
 	"requires": {
-		"MediaWiki": ">= 1.28.1"
+		"MediaWiki": ">= 1.35.0"
 	},
 	"type": "specialpage",
 	"ExtensionMessagesFiles": {
@@ -21,19 +21,15 @@
 		]
 	},
 	"Hooks": {
-		"ContributionsToolLinks": [
-			"NukeHooks::nukeContributionsLinks"
-		]
+		"ContributionsToolLinks": "NukeHooks::nukeContributionsLinks"
 	},
 	"ResourceModules": {
-		"ext.nuke": {
-			"scripts": [
-				"ext.nuke.js"
-			]
-		},
 		"ext.nuke.confirm": {
 			"scripts": [
 				"ext.nuke.confirm.js"
+			],
+			"dependencies": [
+				"mediawiki.jqueryMsg"
 			],
 			"messages": [
 				"nuke-confirm"
@@ -52,6 +48,11 @@
 	"AvailableRights": [
 		"nuke"
 	],
+	"GrantPermissions": {
+		"delete": {
+			"nuke": true
+		}
+	},
 	"SpecialPages": {
 		"Nuke": "SpecialNuke"
 	},

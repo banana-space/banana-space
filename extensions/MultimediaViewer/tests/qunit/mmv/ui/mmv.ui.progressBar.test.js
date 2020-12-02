@@ -15,13 +15,13 @@
  * along with MediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw, $ ) {
+( function () {
 	QUnit.module( 'mmv.ui.ProgressBar', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'Constructor sanity check', function ( assert ) {
 		var progressBar = new mw.mmv.ui.ProgressBar( $( '<div>' ) );
 		assert.ok( progressBar, 'ProgressBar created sccessfully' );
-		assert.ok( progressBar.$progress.hasClass( 'empty' ), 'ProgressBar starts empty' );
+		assert.strictEqual( progressBar.$progress.hasClass( 'empty' ), true, 'ProgressBar starts empty' );
 	} );
 
 	QUnit.test( 'animateTo()', function ( assert ) {
@@ -29,7 +29,7 @@
 			$div = $( '<div>' ).css( { width: 250, position: 'relative' } ).appendTo( $qf ),
 			progress = new mw.mmv.ui.ProgressBar( $div );
 
-		assert.ok( progress.$progress.hasClass( 'empty' ), 'Progress bar is hidden' );
+		assert.strictEqual( progress.$progress.hasClass( 'empty' ), true, 'Progress bar is hidden' );
 		assert.strictEqual( progress.$percent.width(), 0, 'Progress bar\'s indicator is at 0' );
 
 		this.sandbox.stub( $.fn, 'animate', function ( target ) {
@@ -37,7 +37,7 @@
 			assert.strictEqual( target.width, '50%', 'Animation should go to 50%' );
 		} );
 		progress.animateTo( 50 );
-		assert.ok( !progress.$progress.hasClass( 'empty' ), 'Progress bar is visible' );
+		assert.strictEqual( progress.$progress.hasClass( 'empty' ), false, 'Progress bar is visible' );
 
 		assert.strictEqual( progress.$percent.width(), 125, 'Progress bar\'s indicator is at half' );
 
@@ -52,7 +52,7 @@
 			}
 		} );
 		progress.animateTo( 100 );
-		assert.ok( progress.$progress.hasClass( 'empty' ), 'Progress bar is hidden' );
+		assert.strictEqual( progress.$progress.hasClass( 'empty' ), true, 'Progress bar is hidden' );
 		assert.strictEqual( progress.$percent.width(), 0, 'Progress bar\'s indicator is at 0' );
 	} );
 
@@ -61,17 +61,17 @@
 			$div = $( '<div>' ).css( { width: 250, position: 'relative' } ).appendTo( $qf ),
 			progress = new mw.mmv.ui.ProgressBar( $div );
 
-		assert.ok( progress.$progress.hasClass( 'empty' ), 'Progress bar is hidden' );
+		assert.strictEqual( progress.$progress.hasClass( 'empty' ), true, 'Progress bar is hidden' );
 		assert.strictEqual( progress.$percent.width(), 0, 'Progress bar\'s indicator is at 0' );
 
 		progress.jumpTo( 50 );
 
-		assert.ok( !progress.$progress.hasClass( 'empty' ), 'Progress bar is visible' );
+		assert.strictEqual( progress.$progress.hasClass( 'empty' ), false, 'Progress bar is visible' );
 		assert.strictEqual( progress.$percent.width(), 125, 'Progress bar\'s indicator is at half' );
 
 		progress.hide();
 
-		assert.ok( progress.$progress.hasClass( 'empty' ), 'Progress bar is hidden' );
+		assert.strictEqual( progress.$progress.hasClass( 'empty' ), true, 'Progress bar is hidden' );
 		assert.strictEqual( progress.$percent.width(), 0, 'Progress bar\'s indicator is at 0' );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

@@ -16,7 +16,6 @@
 	"nuke-submit-user": "Mur",
 	"nuke-submit-delete": "Ħassar dawk magħżula",
 	"right-nuke": "Ħassar paġni bil-massa",
-	"nuke-select": "Agħżel: $1",
 	"nuke-userorip": "Isem tal-utent, indirizz IP jew vojt:",
 	"nuke-maxpages": "Numru massimu ta' paġni:",
 	"nuke-editby": "Maħluqa minn [[Special:Contributions/$1|{{GENDER:$1|$1}}]]",

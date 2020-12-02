@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bikarhêner",
 			"Erdal Ronahi",
 			"George Animal",
 			"Ghybu",
-			"Gomada",
-			"Bikarhêner"
+			"Gomada"
 		]
 	},
 	"wikieditor-loading": "Bar dibe",
@@ -19,7 +19,7 @@
 	"wikieditor-toolbar-tool-xlink": "Girêdana derve (http:// di destpêkê de ji bîr neke)",
 	"wikieditor-toolbar-tool-xlink-example": "http://www.minak.com sernavê lînkê",
 	"wikieditor-toolbar-tool-link": "Girêdan",
-	"wikieditor-toolbar-tool-link-title": "Girêdanê têxe",
+	"wikieditor-toolbar-tool-link-title": "Girêdanek tevlî bike",
 	"wikieditor-toolbar-tool-link-int": "Ji rûpelek wîkî'yê re",
 	"wikieditor-toolbar-tool-link-cancel": "Betal bike",
 	"wikieditor-toolbar-tool-link-int-target-status-exists": "Rûpel heye",
@@ -34,7 +34,7 @@
 	"wikieditor-toolbar-tool-file-cancel": "Betal bike",
 	"wikieditor-toolbar-tool-reference": "Çavkanî",
 	"wikieditor-toolbar-tool-reference-cancel": "Betal bike",
-	"wikieditor-toolbar-tool-reference-title": "Çavkaniyek têxe",
+	"wikieditor-toolbar-tool-reference-title": "Çavkaniyek tevlî bike",
 	"wikieditor-toolbar-tool-reference-insert": "Tevlî bike",
 	"wikieditor-toolbar-tool-reference-text": "Nivîsa çavkaniyê",
 	"wikieditor-toolbar-tool-signature": "Destnîşan û demxeya demê",

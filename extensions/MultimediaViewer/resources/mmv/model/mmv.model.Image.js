@@ -15,7 +15,7 @@
  * along with MultimediaViewer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( mw ) {
+( function () {
 	var IP;
 
 	/**
@@ -294,9 +294,9 @@
 			return parseFloat( value );
 		} else if ( type === 'boolean' ) {
 			value = value.toString().toLowerCase().replace( /^\s+|\s+$/g, '' );
-			if ( value in { 1: null, yes: null, 'true': null } ) {
+			if ( value in { 1: null, yes: null, true: null } ) {
 				return true;
-			} else if ( value in { 0: null, no: null, 'false': null } ) {
+			} else if ( value in { 0: null, no: null, false: null } ) {
 				return false;
 			} else {
 				return undefined;
@@ -334,10 +334,9 @@
 	 * @return {boolean}
 	 */
 	IP.hasCoords = function () {
-		return this.hasOwnProperty( 'latitude' ) && this.hasOwnProperty( 'longitude' ) &&
-			this.latitude !== undefined && this.latitude !== null &&
+		return this.latitude !== undefined && this.latitude !== null &&
 			this.longitude !== undefined && this.longitude !== null;
 	};
 
 	mw.mmv.model.Image = Image;
-}( mediaWiki ) );
+}() );

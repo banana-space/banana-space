@@ -1,14 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Jawadywn",
 			"Mahali syarifuddin",
-			"Jawadywn"
+			"Masjawad99"
 		]
 	},
-	"vector-action-addsection": "Tambahke topik",
-	"vector-view-create": "Biat",
-	"vector-view-edit": "Anyari",
-	"vector-view-history": "Jingok yang lamo",
+	"vector-action-addsection": "Imboke topik",
+	"vector-action-move": "Pindahke",
+	"vector-view-create": "Ngawék",
+	"vector-view-edit": "Robah",
+	"vector-view-history": "Selék riwayat",
 	"vector-view-view": "Baco",
 	"vector-view-viewsource": "Jingok sumber",
 	"vector-more-actions": "Laénnyo"

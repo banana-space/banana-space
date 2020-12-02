@@ -1,0 +1,10 @@
+/*!
+ * VisualEditor UserInterface CompletionWidget styles.
+ *
+ * @copyright 2011-2019 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-completionWidget {
+	position: absolute;
+	margin-top: 0.5em;
+}

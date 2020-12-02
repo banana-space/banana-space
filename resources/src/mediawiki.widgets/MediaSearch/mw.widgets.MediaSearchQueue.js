@@ -4,7 +4,7 @@
  * @copyright 2011-2016 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-( function ( mw ) {
+( function () {
 
 	/**
 	 * MediaWiki media resource queue.
@@ -22,8 +22,6 @@
 
 		// Parent constructor
 		mw.widgets.MediaSearchQueue.super.call( this, config );
-
-		this.searchQuery = '';
 	};
 
 	/* Inheritance */
@@ -43,7 +41,7 @@
 			if ( queue.providers.length === 0 ) {
 				// Set up the providers
 				for ( i = 0, len = sources.length; i < len; i++ ) {
-					queue.providers.push( new mw.widgets.MediaSearchProvider(
+					queue.addProvider( new mw.widgets.MediaSearchProvider(
 						sources[ i ].apiurl,
 						{
 							name: sources[ i ].name,
@@ -79,4 +77,4 @@
 	mw.widgets.MediaSearchQueue.prototype.getSearchQuery = function () {
 		return this.getParams().gsrsearch;
 	};
-}( mediaWiki ) );
+}() );

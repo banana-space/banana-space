@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michawiki"
+		]
+	},
+	"templatedata-desc": "Datowe składowanje za předłohowe parametry implementować (z pomocu JSON)",
+	"templatedata-doc-param-default": "Standard",
+	"templatedata-doc-param-desc": "Wopisanje",
+	"templatedata-doc-param-name": "Parameter",
+	"templatedata-doc-param-status": "Status",
+	"templatedata-doc-param-type": "Typ",
+	"templatedata-doc-params": "Předłohowe parametry",
+	"templatedata-invalid-missing": "Trěbna kajkosć \"$1\" njeje so namakała.",
+	"templatedata-invalid-parse": "Syntaksowy zmylk w JSON.",
+	"templatedata-invalid-type": "Za kajkosć \"$1\" so typ \"$2\" wočakuje.",
+	"templatedata-invalid-unknown": "Njewočakowana kajkosć \"$1\".",
+	"templatedata-invalid-value": "Njepłaćiwa hódnota za kajkosć \"$1\"."
+}

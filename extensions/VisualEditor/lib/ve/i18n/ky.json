@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chorobek",
+			"George Animal",
+			"Nrowe",
+			"Tynchtyk Chorotegin",
+			"Викиней"
+		]
+	},
+	"visualeditor": "Визуалдык редактор",
+	"visualeditor-annotationbutton-bold-tooltip": "Калың",
+	"visualeditor-annotationbutton-italic-tooltip": "Жантык",
+	"visualeditor-annotationbutton-link-tooltip": "Шилтеме",
+	"visualeditor-dialog-action-cancel": "Жокко чыгаруу",
+	"visualeditor-dialog-action-goback": "Артка кайтуу",
+	"visualeditor-formatdropdown-format-heading1": "Баш сөз 1",
+	"visualeditor-formatdropdown-format-heading2": "Баш сөз 2",
+	"visualeditor-formatdropdown-format-heading3": "Баш сөз 3",
+	"visualeditor-formatdropdown-format-heading4": "Баш сөз 4",
+	"visualeditor-formatdropdown-format-heading5": "Баш сөз 5",
+	"visualeditor-formatdropdown-format-heading6": "Баш сөз 6",
+	"visualeditor-historybutton-redo-tooltip": "Кайталоо",
+	"visualeditor-historybutton-undo-tooltip": "Жокко чыгаруу",
+	"visualeditor-inspector-close-tooltip": "Жабуу",
+	"visualeditor-inspector-remove-tooltip": "Өчүрүү",
+	"visualeditor-listbutton-bullet-tooltip": "Белгиленген тизме",
+	"visualeditor-listbutton-number-tooltip": "Санакталган тизме"
+}

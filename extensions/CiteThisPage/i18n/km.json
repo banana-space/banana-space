@@ -3,12 +3,13 @@
 		"authors": [
 			"Chhorran",
 			"Lovekhmer",
+			"Y.snsqr",
 			"គីមស៊្រុន"
 		]
 	},
 	"citethispage": "ការយោង",
-	"citethispage-link": "ប្រភពនៃទំព័រនេះ",
-	"tooltip-citethispage": "ព័ត៌មានអំពីការយោងមកអត្ថបទនេះ",
+	"citethispage-link": "យោងទំព័រនេះ",
+	"tooltip-citethispage": "ព័ត៌មានអំពីរបៀបយោងទំព័រនេះ",
 	"citethispage-change-submit": "ដាក់ការយោង",
 	"citethispage-change-target": "ទំព័រ ៖"
 }

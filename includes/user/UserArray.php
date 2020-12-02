@@ -27,22 +27,19 @@ abstract class UserArray implements Iterator {
 	 * @param IResultWrapper $res
 	 * @return UserArrayFromResult
 	 */
-	static function newFromResult( $res ) {
+	public static function newFromResult( $res ) {
 		$userArray = null;
-		if ( !Hooks::run( 'UserArrayFromResult', [ &$userArray, $res ] ) ) {
+		if ( !Hooks::runner()->onUserArrayFromResult( $userArray, $res ) ) {
 			return null;
 		}
-		if ( $userArray === null ) {
-			$userArray = self::newFromResult_internal( $res );
-		}
-		return $userArray;
+		return $userArray ?? new UserArrayFromResult( $res );
 	}
 
 	/**
 	 * @param array $ids
 	 * @return UserArrayFromResult|ArrayIterator
 	 */
-	static function newFromIDs( $ids ) {
+	public static function newFromIDs( $ids ) {
 		$ids = array_map( 'intval', (array)$ids ); // paranoia
 		if ( !$ids ) {
 			// Database::select() doesn't like empty arrays
@@ -66,7 +63,7 @@ abstract class UserArray implements Iterator {
 	 * @param array $names
 	 * @return UserArrayFromResult|ArrayIterator
 	 */
-	static function newFromNames( $names ) {
+	public static function newFromNames( $names ) {
 		$names = array_map( 'strval', (array)$names ); // paranoia
 		if ( !$names ) {
 			// Database::select() doesn't like empty arrays
@@ -83,13 +80,5 @@ abstract class UserArray implements Iterator {
 			$userQuery['joins']
 		);
 		return self::newFromResult( $res );
-	}
-
-	/**
-	 * @param IResultWrapper $res
-	 * @return UserArrayFromResult
-	 */
-	protected static function newFromResult_internal( $res ) {
-		return new UserArrayFromResult( $res );
 	}
 }

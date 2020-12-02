@@ -1,26 +1,24 @@
-@import 'mediawiki.mixins';
-@import 'mediawiki.ui/variables';
-@import 'mw.rcfilters.variables';
+@import 'mediawiki.mixins.less';
+@import 'mediawiki.ui/variables.less';
+@import 'mw.rcfilters.variables.less';
 
-.animation-delay( ... ) {
-	-webkit-animation-delay: @arguments; // Chrome 4-42, Safari 4-8, Opera 15-29, Android 2.1-4.4.4
-	-moz-animation-delay: @arguments; // Firefox 5-15
-	animation-delay: @arguments; // Chrome 43+, Firefox 16+, IE 10+, Edge 12+, Safari 9+, Opera 12.10 & 30+, iOS 9+, Android 47+
+// Circle mixin
+.mw-rcfilters-circle( @min-size-diameter: @min-size-circle, @size-diameter: @size-circle, @margin: 0.5em ) {
+	.box-sizing( border-box );
+	min-width: @min-size-diameter;
+	width: @size-diameter;
+	min-height: @min-size-diameter;
+	height: @size-diameter;
+	margin: @margin;
+	border-radius: 50%;
 }
 
-// This is a general mixin for a color circle
-.mw-rcfilters-mixin-circle( @color: @color-base--inverted, @diameter: 2em, @padding: 0.5em, @border: false, @borderColor: @colorGray5, @emptyBackground: false ) {
-	.box-sizing( border-box );
-	min-width: @diameter;
-	width: @diameter;
-	min-height: @diameter;
-	height: @diameter;
-	margin: @padding;
-	border-radius: 50%;
-
+// Circle color mixin
+.mw-rcfilters-circle-color( @color: @color-base--inverted, @border: false, @borderColor: @colorGray5, @emptyBackground: false ) {
 	& when ( @emptyBackground = false ) {
 		background-color: @color;
 	}
+
 	& when ( @emptyBackground = true ) {
 		background-color: @highlight-none;
 	}
@@ -35,8 +33,8 @@
 // a color class on its parent element
 .result-circle( @colorName: 'none' ) {
 	&-@{colorName} {
-		.mw-rcfilters-mixin-circle( ~'@{highlight-@{colorName}}', @result-circle-diameter, 0 );
 		display: none;
+		.mw-rcfilters-circle-color( ~'@{highlight-@{colorName}}' );
 
 		.mw-rcfilters-highlight-color-@{colorName} & {
 			display: inline-block;
@@ -46,18 +44,18 @@
 
 // A mixin for changes list containers. Applies enough margin-left to fit the 5 highlight circles.
 .result-circle-margin() {
-	margin-left: ~'calc( ( @{result-circle-diameter} + @{result-circle-margin} ) * 5 + @{result-circle-general-margin} )';
+	margin-left: ~'calc( ( @{size-circle-result} + @{margin-circle-result} ) * 5 + @{margin-circle} )';
 }
 
 // A mixin just for changesListWrapperWidget page, to output the scope of the widget
 // so it is before the rest of the rule; we need the li& to be in
 // between the wrapper scope and the color-cX class, which doesn't
 // work if the rules are inside the above widget LESS scope
-.highlight-changesListWrapperWidget( @bgcolor ) {
+.highlight-results( @bgcolor ) {
 	.mw-rcfilters-ui-changesListWrapperWidget li&,
 	.mw-rcfilters-ui-changesListWrapperWidget & tr:first-child,
-	.mw-rcfilters-ui-changesListWrapperWidget tr&.mw-rcfilters-ui-changesListWrapperWidget-enhanced-toplevel:not( .mw-rcfilters-ui-changesListWrapperWidget-enhanced-grey ) td:not( :nth-child( -n+2 ) ),
-	.mw-rcfilters-ui-changesListWrapperWidget tr&.mw-rcfilters-ui-changesListWrapperWidget-enhanced-nested:not( .mw-rcfilters-ui-changesListWrapperWidget-enhanced-grey ) td:not( :nth-child( -n+4 ) ) {
+	.mw-rcfilters-ui-changesListWrapperWidget tr&.mw-rcfilters-ui-highlights-enhanced-toplevel:not( .mw-rcfilters-ui-changesListWrapperWidget-enhanced-grey ) td:not( :nth-child( -n+2 ) ),
+	.mw-rcfilters-ui-changesListWrapperWidget tr&.mw-rcfilters-ui-highlights-enhanced-nested:not( .mw-rcfilters-ui-changesListWrapperWidget-enhanced-grey ) td:not( :nth-child( -n+4 ) ) {
 		background-color: @bgcolor;
 	}
 }
@@ -76,18 +74,18 @@
 
 	// Two colors
 	@{highlight-color-class-var} when ( @color3 = false ) and ( @color4 = false ) and not ( @color1 = false ), ( @color2 = false ) {
-		.highlight-changesListWrapperWidget( tint( average( @@c1var, @@c2var ), 50% ) );
+		.highlight-results( tint( average( @@c1var, @@c2var ), 50% ) );
 	}
 	// Three colors
 	@{highlight-color-class-var}.mw-rcfilters-highlight-color-@{color3} when ( @color4 = false ) and not ( @color3 = false ) {
 		@c3var: ~'highlight-@{color3}';
-		.highlight-changesListWrapperWidget( tint( mix( @@c1var, average( @@c2var, @@c3var ), 33% ), 30% ) );
+		.highlight-results( tint( mix( @@c1var, average( @@c2var, @@c3var ), 33% ), 30% ) );
 	}
 
 	// Four colors
 	@{highlight-color-class-var}.mw-rcfilters-highlight-color-@{color3}.mw-rcfilters-highlight-color-@{color4} when not ( @color4 = false ) {
 		@c3var: ~'highlight-@{color3}';
 		@c4var: ~'highlight-@{color4}';
-		.highlight-changesListWrapperWidget( tint( mix( @@c1var, mix( @@c2var, average( @@c3var, @@c4var ), 25% ), 25% ), 25% ) );
+		.highlight-results( tint( mix( @@c1var, mix( @@c2var, average( @@c3var, @@c4var ), 25% ), 25% ), 25% ) );
 	}
 }

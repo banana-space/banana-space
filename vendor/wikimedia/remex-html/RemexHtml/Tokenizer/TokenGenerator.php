@@ -14,11 +14,18 @@ namespace RemexHtml\Tokenizer;
  * the need to convert event parameters to associative arrays.
  */
 class TokenGenerator {
+	/** @var TokenGeneratorHandler */
 	protected $handler;
+
+	/** @var Tokenizer */
 	protected $tokenizer;
 
+	/**
+	 * @param string $text
+	 * @param array $options Options passed through to Tokenizer
+	 */
 	protected function __construct( $text, $options ) {
-		$this->handler = new TokenGeneratorHandler( $this );
+		$this->handler = new TokenGeneratorHandler;
 		$this->tokenizer = new Tokenizer( $this->handler, $text, $options );
 	}
 
@@ -27,7 +34,7 @@ class TokenGenerator {
 	 *
 	 * @param string $text The HTML
 	 * @param array $options The Tokenizer options, see Tokenizer::__construct()
-	 * @return Generator
+	 * @return \Generator
 	 */
 	public static function generate( $text, $options ) {
 		$tg = new self( $text, $options );

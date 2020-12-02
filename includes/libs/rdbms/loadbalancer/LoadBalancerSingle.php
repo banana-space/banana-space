@@ -26,7 +26,7 @@ namespace Wikimedia\Rdbms;
 use InvalidArgumentException;
 
 /**
- * Trivial LoadBalancer that always returns an injected connection handle
+ * Trivial LoadBalancer that always returns an injected connection handle.
  */
 class LoadBalancerSingle extends LoadBalancer {
 	/** @var IDatabase */
@@ -37,28 +37,30 @@ class LoadBalancerSingle extends LoadBalancer {
 	 *   - connection: An IDatabase connection object
 	 */
 	public function __construct( array $params ) {
-		if ( !isset( $params['connection'] ) ) {
+		/** @var IDatabase $conn */
+		$conn = $params['connection'] ?? null;
+		if ( !$conn ) {
 			throw new InvalidArgumentException( "Missing 'connection' argument." );
 		}
 
-		$this->db = $params['connection'];
+		$this->db = $conn;
 
 		parent::__construct( [
-			'servers' => [
-				[
-					'type' => $this->db->getType(),
-					'host' => $this->db->getServer(),
-					'dbname' => $this->db->getDBname(),
-					'load' => 1,
-				]
-			],
-			'trxProfiler' => isset( $params['trxProfiler'] ) ? $params['trxProfiler'] : null,
-			'srvCache' => isset( $params['srvCache'] ) ? $params['srvCache'] : null,
-			'wanCache' => isset( $params['wanCache'] ) ? $params['wanCache'] : null
+			'servers' => [ [
+				'type' => $conn->getType(),
+				'host' => $conn->getServer(),
+				'dbname' => $conn->getDBname(),
+				'load' => 1,
+			] ],
+			'trxProfiler' => $params['trxProfiler'] ?? null,
+			'srvCache' => $params['srvCache'] ?? null,
+			'wanCache' => $params['wanCache'] ?? null,
+			'localDomain' => $params['localDomain'] ?? $this->db->getDomainID(),
+			'readOnlyReason' => $params['readOnlyReason'] ?? false,
 		] );
 
 		if ( isset( $params['readOnlyReason'] ) ) {
-			$this->db->setLBInfo( 'readOnlyReason', $params['readOnlyReason'] );
+			$conn->setLBInfo( $conn::LB_READ_ONLY_REASON, $params['readOnlyReason'] );
 		}
 	}
 
@@ -69,12 +71,23 @@ class LoadBalancerSingle extends LoadBalancer {
 	 * @since 1.28
 	 */
 	public static function newFromConnection( IDatabase $db, array $params = [] ) {
-		return new static( [ 'connection' => $db ] + $params );
+		return new static( array_merge(
+			[ 'localDomain' => $db->getDomainID() ],
+			$params,
+			[ 'connection' => $db ]
+		) );
 	}
 
-	protected function reallyOpenConnection( array $server, DatabaseDomain $domainOverride ) {
+	protected function reallyOpenConnection( $i, DatabaseDomain $domain, array $lbInfo = [] ) {
 		return $this->db;
+	}
+
+	public function __destruct() {
+		// do nothing since the connection was injected
 	}
 }
 
+/**
+ * @deprecated since 1.29
+ */
 class_alias( LoadBalancerSingle::class, 'LoadBalancerSingle' );

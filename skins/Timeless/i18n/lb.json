@@ -5,8 +5,6 @@
 		]
 	},
 	"timeless-desc": "En zäitlosen Interface, designt nom Wanter-Prototyp vum Brandon Harris an no verschiddene Stiler vun der Wikimedai Foundation.",
-	"timeless-search-placeholder": "An {{NUMBEROFARTICLES}} Säite sichen",
-	"timeless-loggedin": "Äre Benotzerkont",
 	"timeless-anonymous": "Anonym",
 	"timeless-loggedinas": "Als '''$1''' ageloggt",
 	"timeless-notloggedin": "Net ageloggt",
@@ -17,8 +15,11 @@
 	"timeless-sitetools": "Wiki-Handwierksgeschir",
 	"timeless-pageactions": "Handwierksgeschir fir Säiten",
 	"timeless-userpagetools": "Handwierksgeschir fir Benotzersäiten",
+	"timeless-action-addsection": "Neie Sujet",
+	"timeless-view-view": "Liesen",
 	"timeless-pagemisc": "Méi",
 	"timeless-namespaces": "Nummraim",
 	"timeless-pagetools": "Säitenaktiounen",
-	"timeless-languages": "Sproochen"
+	"timeless-languages": "Sproochen",
+	"timeless-projects": "Aner Projeten"
 }

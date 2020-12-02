@@ -34,6 +34,5 @@
 	"categorytree-no-pages": "არაა გვერდები ან ქვეკატეგორიები",
 	"categorytree-not-found": "კატეგორია <i>$1</i> ვერ მოიძებნა",
 	"categorytree-error": "ხარვეზი მონაცემთა ჩატვირთვაში.",
-	"categorytree-retry": "გთხოვთ, დაიცადეთ ცოტა ხნით და კვლავ სცადეთ.",
-	"apihelp-categorytree-description": "შიდა მოდული CategoryTree გაფართოებისთვის."
+	"categorytree-retry": "გთხოვთ, დაიცადეთ ცოტა ხნით და კვლავ სცადეთ."
 }

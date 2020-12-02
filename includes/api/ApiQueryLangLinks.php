@@ -20,6 +20,8 @@
  * @file
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * A query module to list all langlinks (links to corresponding foreign language pages).
  *
@@ -64,11 +66,11 @@ class ApiQueryLangLinks extends ApiQueryBase {
 
 		$this->addTables( 'langlinks' );
 		$this->addWhereFld( 'll_from', array_keys( $this->getPageSet()->getGoodTitles() ) );
-		if ( !is_null( $params['continue'] ) ) {
+		if ( $params['continue'] !== null ) {
 			$cont = explode( '|', $params['continue'] );
 			$this->dieContinueUsageIf( count( $cont ) != 2 );
 			$op = $params['dir'] == 'descending' ? '<' : '>';
-			$llfrom = intval( $cont[0] );
+			$llfrom = (int)$cont[0];
 			$lllang = $this->getDB()->addQuotes( $cont[1] );
 			$this->addWhere(
 				"ll_from $op $llfrom OR " .
@@ -120,11 +122,13 @@ class ApiQueryLangLinks extends ApiQueryBase {
 					$entry['url'] = wfExpandUrl( $title->getFullURL(), PROTO_CURRENT );
 				}
 			}
+			$languageNameUtils = MediaWikiServices::getInstance()->getLanguageNameUtils();
 			if ( isset( $prop['langname'] ) ) {
-				$entry['langname'] = Language::fetchLanguageName( $row->ll_lang, $params['inlanguagecode'] );
+				$entry['langname'] = $languageNameUtils
+					->getLanguageName( $row->ll_lang, $params['inlanguagecode'] );
 			}
 			if ( isset( $prop['autonym'] ) ) {
-				$entry['autonym'] = Language::fetchLanguageName( $row->ll_lang );
+				$entry['autonym'] = $languageNameUtils->getLanguageName( $row->ll_lang );
 			}
 			ApiResult::setContentValue( $entry, 'title', $row->ll_title );
 			$fit = $this->addPageSubItem( $row->ll_from, $entry );
@@ -140,7 +144,6 @@ class ApiQueryLangLinks extends ApiQueryBase {
 	}
 
 	public function getAllowedParams() {
-		global $wgContLang;
 		return [
 			'prop' => [
 				ApiBase::PARAM_ISMULTI => true,
@@ -160,7 +163,7 @@ class ApiQueryLangLinks extends ApiQueryBase {
 					'descending'
 				]
 			],
-			'inlanguagecode' => $wgContLang->getCode(),
+			'inlanguagecode' => MediaWikiServices::getInstance()->getContentLanguage()->getCode(),
 			'limit' => [
 				ApiBase::PARAM_DFLT => 10,
 				ApiBase::PARAM_TYPE => 'limit',

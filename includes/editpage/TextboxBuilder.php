@@ -24,7 +24,7 @@
 
 namespace MediaWiki\EditPage;
 
-use MWNamespace;
+use MediaWiki\MediaWikiServices;
 use Sanitizer;
 use Title;
 use User;
@@ -58,7 +58,7 @@ class TextboxBuilder {
 	 * @return mixed[]
 	 */
 	public function mergeClassesIntoAttributes( array $classes, array $attribs ) {
-		if ( !count( $classes ) ) {
+		if ( $classes === [] ) {
 			return $attribs;
 		}
 
@@ -75,7 +75,8 @@ class TextboxBuilder {
 	public function getTextboxProtectionCSSClasses( Title $title ) {
 		$classes = []; // Textarea CSS
 		if ( $title->isProtected( 'edit' ) &&
-			MWNamespace::getRestrictionLevels( $title->getNamespace() ) !== [ '' ]
+			MediaWikiServices::getInstance()->getPermissionManager()
+				->getNamespaceRestrictionLevels( $title->getNamespace() ) !== [ '' ]
 		) {
 			# Is the title semi-protected?
 			if ( $title->isSemiProtected() ) {

@@ -1,19 +1,13 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+
 /**
  * Basic tests for Parser::getPreloadText
  * @author Antoine Musso
  *
  * @covers Parser
  * @covers StripState
- *
- * @covers Preprocessor_DOM
- * @covers PPDStack
- * @covers PPDStackElement
- * @covers PPDPart
- * @covers PPFrame_DOM
- * @covers PPTemplateFrame_DOM
- * @covers PPCustomFrame_DOM
- * @covers PPNode_DOM
  *
  * @covers Preprocessor_Hash
  * @covers PPDStack_Hash
@@ -27,7 +21,7 @@
  * @covers PPNode_Hash_Array
  * @covers PPNode_Hash_Attr
  */
-class ParserPreloadTest extends MediaWikiTestCase {
+class ParserPreloadTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @var Parser
 	 */
@@ -41,20 +35,21 @@ class ParserPreloadTest extends MediaWikiTestCase {
 	 */
 	private $title;
 
-	protected function setUp() {
-		global $wgContLang;
-
+	protected function setUp() : void {
 		parent::setUp();
-		$this->testParserOptions = ParserOptions::newFromUserAndLang( new User, $wgContLang );
+		$services = MediaWikiServices::getInstance();
 
-		$this->testParser = new Parser();
-		$this->testParser->Options( $this->testParserOptions );
+		$this->testParserOptions = ParserOptions::newFromUserAndLang( new User,
+			MediaWikiServices::getInstance()->getContentLanguage() );
+
+		$this->testParser = $services->getParserFactory()->create();
+		$this->testParser->setOptions( $this->testParserOptions );
 		$this->testParser->clearState();
 
 		$this->title = Title::newFromText( 'Preload Test' );
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		parent::tearDown();
 
 		unset( $this->testParser );

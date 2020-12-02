@@ -9,15 +9,10 @@
  */
 class CssContentTest extends JavaScriptContentTest {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
-		// Anon user
-		$user = new User();
-		$user->setName( '127.0.0.1' );
-
 		$this->setMwGlobals( [
-			'wgUser' => $user,
 			'wgTextModelsToParse' => [
 				CONTENT_MODEL_CSS,
 			]
@@ -34,7 +29,7 @@ class CssContentTest extends JavaScriptContentTest {
 				'MediaWiki:Test.css',
 				null,
 				"hello <world>\n",
-				"<pre class=\"mw-code mw-css\" dir=\"ltr\">\nhello &lt;world&gt;\n\n</pre>"
+				"<pre class=\"mw-code mw-css\" dir=\"ltr\">\nhello &lt;world>\n\n</pre>"
 			],
 			[
 				'MediaWiki:Test.css',
@@ -106,6 +101,10 @@ class CssContentTest extends JavaScriptContentTest {
 			[ 'MediaWiki:MonoBook.css', "/* #REDIRECT */@import url(//example.org/w/index.php?title=MediaWiki:MonoBook.css&action=raw&ctype=text/css);" ],
 			[ 'User:FooBar/common.css', "/* #REDIRECT */@import url(//example.org/w/index.php?title=User:FooBar/common.css&action=raw&ctype=text/css);" ],
 			[ 'Gadget:FooBaz.css', "/* #REDIRECT */@import url(//example.org/w/index.php?title=Gadget:FooBaz.css&action=raw&ctype=text/css);" ],
+			[
+				'User:😂/unicode.css',
+				'/* #REDIRECT */@import url(//example.org/w/index.php?title=User:%F0%9F%98%82/unicode.css&action=raw&ctype=text/css);'
+			],
 			# No #REDIRECT comment
 			[ null, "@import url(//example.org/w/index.php?title=Gadget:FooBaz.css&action=raw&ctype=text/css);" ],
 			# Wrong domain

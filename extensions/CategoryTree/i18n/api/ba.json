@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ләйсән",
+			"Янмурза Баки"
+		]
+	},
+	"apihelp-categorytree-description": "CategoryTree ҡушымтаһы өсөн эске модуль.",
+	"apihelp-categorytree-param-category": "Исемдәр категориялары аралығындағы атама, ҡулланылған осраҡта префикс күрһәтелмәй.",
+	"apihelp-categorytree-param-options": "JSON объектары кеүек CategoryTree төҙөүсе төрҙәре. Тәрәнлек параметры <kbd>1</kbd> итеп куйылған."
+}

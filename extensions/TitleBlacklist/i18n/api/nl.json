@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mainframe98",
+			"Sjoerddebruin"
+		]
+	},
+	"apihelp-titleblacklist-param-action": "De handeling om te controleren.",
+	"apihelp-titleblacklist-example-1": "Controleer of [[Foo]] op de zwarte lijst staat."
+}

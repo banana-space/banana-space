@@ -19,7 +19,6 @@
  * @ingroup JobQueue
  */
 use MediaWiki\MediaWikiServices;
-use Wikimedia\Rdbms\DBReplicationWaitError;
 
 /**
  * Job for pruning recent changes
@@ -28,7 +27,7 @@ use Wikimedia\Rdbms\DBReplicationWaitError;
  * @since 1.25
  */
 class RecentChangesUpdateJob extends Job {
-	function __construct( Title $title, array $params ) {
+	public function __construct( Title $title, array $params ) {
 		parent::__construct( 'recentChangesUpdate', $title, $params );
 
 		if ( !isset( $params['type'] ) ) {
@@ -74,9 +73,8 @@ class RecentChangesUpdateJob extends Job {
 	protected function purgeExpiredRows() {
 		global $wgRCMaxAge, $wgUpdateRowsPerQuery;
 
-		$lockKey = wfWikiID() . ':recentchanges-prune';
-
 		$dbw = wfGetDB( DB_MASTER );
+		$lockKey = $dbw->getDomainID() . ':recentchanges-prune';
 		if ( !$dbw->lock( $lockKey, __METHOD__, 0 ) ) {
 			// already in progress
 			return;
@@ -103,13 +101,11 @@ class RecentChangesUpdateJob extends Job {
 			}
 			if ( $rcIds ) {
 				$dbw->delete( 'recentchanges', [ 'rc_id' => $rcIds ], __METHOD__ );
-				Hooks::run( 'RecentChangesPurgeRows', [ $rows ] );
+				Hooks::runner()->onRecentChangesPurgeRows( $rows );
 				// There might be more, so try waiting for replica DBs
-				try {
-					$factory->commitAndWaitForReplication(
-						__METHOD__, $ticket, [ 'timeout' => 3 ]
-					);
-				} catch ( DBReplicationWaitError $e ) {
+				if ( !$factory->commitAndWaitForReplication(
+					__METHOD__, $ticket, [ 'timeout' => 3 ]
+				) ) {
 					// Another job will continue anyway
 					break;
 				}
@@ -131,7 +127,7 @@ class RecentChangesUpdateJob extends Job {
 		$factory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$ticket = $factory->getEmptyTransactionTicket( __METHOD__ );
 
-		$lockKey = wfWikiID() . '-activeusers';
+		$lockKey = $dbw->getDomainID() . '-activeusers';
 		if ( !$dbw->lock( $lockKey, __METHOD__, 0 ) ) {
 			// Exclusive update (avoids duplicate entries)… it's usually fine to just
 			// drop out here, if the Job is already running.
@@ -145,7 +141,8 @@ class RecentChangesUpdateJob extends Job {
 		// Get the last-updated timestamp for the cache
 		$cTime = $dbw->selectField( 'querycache_info',
 			'qci_timestamp',
-			[ 'qci_type' => 'activeusers' ]
+			[ 'qci_type' => 'activeusers' ],
+			__METHOD__
 		);
 		$cTimeUnix = $cTime ? wfTimestamp( TS_UNIX, $cTime ) : 1;
 
@@ -172,7 +169,7 @@ class RecentChangesUpdateJob extends Job {
 			],
 			__METHOD__,
 			[
-				'GROUP BY' => [ 'rc_user_text' ],
+				'GROUP BY' => [ $actorQuery['fields']['rc_user_text'] ],
 				'ORDER BY' => 'NULL' // avoid filesort
 			],
 			$actorQuery['joins']
@@ -189,7 +186,7 @@ class RecentChangesUpdateJob extends Job {
 				[
 					'qcc_type' => 'activeusers',
 					'qcc_namespace' => NS_USER,
-					'qcc_title' => array_keys( $names ),
+					'qcc_title' => array_map( 'strval', array_keys( $names ) ),
 					'qcc_value >= ' . $dbw->addQuotes( $nowUnix - $days * 86400 ), // TS_UNIX
 				 ],
 				__METHOD__
@@ -225,8 +222,9 @@ class RecentChangesUpdateJob extends Job {
 		$asOfTimestamp = min( $eTimestamp, (int)$dbw->trxTimestamp() );
 
 		// Touch the data freshness timestamp
-		$dbw->replace( 'querycache_info',
-			[ 'qci_type' ],
+		$dbw->replace(
+			'querycache_info',
+			'qci_type',
 			[ 'qci_type' => 'activeusers',
 				'qci_timestamp' => $dbw->timestamp( $asOfTimestamp ) ], // not always $now
 			__METHOD__

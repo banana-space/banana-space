@@ -1,4 +1,7 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+
 /**
  * This file is intended to test magic variables in the parser
  * It was inspired by Raymond & Matěj Grabovský commenting about r66200
@@ -11,40 +14,28 @@
  * @file
  */
 
+use Wikimedia\TestingAccessWrapper;
+
 /**
  * @group Database
- * @covers Parser::getVariableValue
+ * @covers Parser::expandMagicVariable
  */
-class MagicVariableTest extends MediaWikiTestCase {
+class MagicVariableTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @var Parser
 	 */
 	private $testParser = null;
 
-	/**
-	 * An array of magicword returned as type integer by the parser
-	 * They are usually returned as a string for i18n since we support
-	 * persan numbers for example, but some magic explicitly return
-	 * them as integer.
-	 * @see MagicVariableTest::assertMagic()
-	 */
-	private $expectedAsInteger = [
-		'revisionday',
-		'revisionmonth1',
-	];
-
 	/** setup a basic parser object */
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
-		$contLang = Language::factory( 'en' );
-		$this->setMwGlobals( [
-			'wgLanguageCode' => 'en',
-			'wgContLang' => $contLang,
-		] );
+		$services = MediaWikiServices::getInstance();
+		$contLang = $services->getLanguageFactory()->getLanguage( 'en' );
+		$this->setContentLang( $contLang );
 
-		$this->testParser = new Parser();
-		$this->testParser->Options( ParserOptions::newFromUserAndLang( new User, $contLang ) );
+		$this->testParser = $services->getParserFactory()->create();
+		$this->testParser->setOptions( ParserOptions::newFromUserAndLang( new User, $contLang ) );
 
 		# initialize parser output
 		$this->testParser->clearState();
@@ -60,12 +51,12 @@ class MagicVariableTest extends MediaWikiTestCase {
 
 	/**
 	 * @param int $num Upper limit for numbers
-	 * @return array Array of numbers from 1 up to $num
+	 * @return array Array of strings naming numbers from 1 up to $num
 	 */
 	private static function createProviderUpTo( $num ) {
 		$ret = [];
 		for ( $i = 1; $i <= $num; $i++ ) {
-			$ret[] = [ $i ];
+			$ret[] = [ strval( $i ) ];
 		}
 
 		return $ret;
@@ -202,7 +193,7 @@ class MagicVariableTest extends MediaWikiTestCase {
 	 * @param string $ts
 	 */
 	private function setParserTS( $ts ) {
-		$this->testParser->Options()->setTimestamp( $ts );
+		$this->testParser->getOptions()->setTimestamp( $ts );
 		$this->testParser->mRevisionTimestamp = $ts;
 	}
 
@@ -212,10 +203,6 @@ class MagicVariableTest extends MediaWikiTestCase {
 	 * @param string $magic
 	 */
 	private function assertMagic( $expected, $magic ) {
-		if ( in_array( $magic, $this->expectedAsInteger ) ) {
-			$expected = (int)$expected;
-		}
-
 		# Generate a message for the assertion
 		$msg = sprintf( "Magic %s should be <%s:%s>",
 			$magic,
@@ -225,7 +212,7 @@ class MagicVariableTest extends MediaWikiTestCase {
 
 		$this->assertSame(
 			$expected,
-			$this->testParser->getVariableValue( $magic ),
+			TestingAccessWrapper::newFromObject( $this->testParser )->expandMagicVariable( $magic ),
 			$msg
 		);
 	}

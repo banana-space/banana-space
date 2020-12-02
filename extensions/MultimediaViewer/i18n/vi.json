@@ -1,16 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Minh Nguyen",
-			"Withoutaname",
-			"Max20091",
+			"Envlh",
 			"Macofe",
-			"Envlh"
+			"Max20091",
+			"Minh Nguyen",
+			"Withoutaname"
 		]
 	},
 	"multimediaviewer-desc": "Mở các hình nhỏ lớn hơn trong giao diện toàn màn hình.",
-	"multimediaviewer-pref": "Cửa sổ phương tiện",
-	"multimediaviewer-pref-desc": "Cải thiện trải nghiệm xem phương tiện của bạn với công cụ mới này. Nó mở rộng các hình nhỏ để phủ lên toàn cửa sổ. Các hình ảnh được hiển thị trong giao diện toàn màn hình đẹp đẽ và cũng có thể xem kích thước gốc.",
 	"multimediaviewer-optin-pref": "Bật <span class=\"plainlinks\">[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Media_Viewer/About cửa sổ phương tiện]</span>",
 	"multimediaviewer-file-page": "Mở trang ứng với tập tin",
 	"multimediaviewer-repository-local": "Thêm chi tiết",
@@ -22,7 +20,7 @@
 	"multimediaviewer-multiple-authors-combine": "$1 và $2",
 	"multimediaviewer-metadata-error": "Không thể tải chi tiết hình ảnh (lỗi: $1)",
 	"multimediaviewer-thumbnail-error": "Rất tiếc, không thể hiển thị tập tin",
-	"multimediaviewer-thumbnail-error-description": "Hình như đã gặp vấn đề về kỹ thuật. Bạn có thể $1 hoặc $3 nếu tiếp tục xảy ra. Lỗi: $2",
+	"multimediaviewer-thumbnail-error-description": "Hình như đã gặp vấn đề về kỹ thuật. Bạn có thể $1 nếu tiếp tục xảy ra. Lỗi: $2",
 	"multimediaviewer-thumbnail-error-retry": "thử lại",
 	"multimediaviewer-thumbnail-error-report": "báo cáo về vấn đề",
 	"multimediaviewer-license-cc-by-4.0": "CC-BY 4.0",
@@ -50,7 +48,7 @@
 	"multimediaviewer-restriction-trademarked": "Công trình này có chứa tư liệu có thể là đối tượng của luật thương hiệu theo một hoặc một số bộ luật.",
 	"multimediaviewer-restriction-default": "Hình ảnh này có thể được kiểm soát bởi những điều khoản luật pháp ngoài luật quyền tác giả. Xem chi tiết tại trang miêu tả tập tin.",
 	"multimediaviewer-restriction-default-and-others": "Hình ảnh này có thể được kiểm soát thêm bởi những điều khoản luật pháp ngoài luật quyền tác giả. Xem chi tiết tại trang miêu tả tập tin.",
-	"multimediaviewer-about-mmv": "Giới thiệu",
+	"multimediaviewer-about-mmv": "Giới thiệu về giao diện này",
 	"multimediaviewer-discuss-mmv": "Thảo luận",
 	"multimediaviewer-help-mmv": "Trợ giúp",
 	"multimediaviewer-optout-mmv": "Tắt cửa sổ phương tiện",
@@ -116,6 +114,10 @@
 	"multimediaviewer-download-optional-attribution-cta-header": "Bạn có thể ghi công tác giả",
 	"multimediaviewer-download-attribution-cta": "Chỉ tôi làm thế nào",
 	"multimediaviewer-download-attribution-copy": "Chọn và sao chép (nếu được hỗ trợ) văn bản ghi công của tập tin này",
+	"multimediaviewer-reuse-warning-deletion": "Đang có đề nghị xóa tập tin này.",
+	"multimediaviewer-reuse-warning-nonfree": "Tập tin này không có giấy phép mở.",
+	"multimediaviewer-reuse-warning-noattribution": "Tập tin này thiếu thông tin ghi công.",
+	"multimediaviewer-reuse-warning-generic": "Hãy kiểm tra [$1 chi tiết] trước khi sử dụng nó.",
 	"multimediaviewer-attr-plain": "Văn bản thuần",
 	"multimediaviewer-options-tooltip": "Bật/tắt cửa sổ phương tiện",
 	"multimediaviewer-options-dialog-header": "Tắt cửa sổ phương tiện?",

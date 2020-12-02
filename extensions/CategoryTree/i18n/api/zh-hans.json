@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liuxinyu970226"
+		]
+	},
+	"apihelp-categorytree-description": "用于CategoryTree扩展的内部模块。",
+	"apihelp-categorytree-summary": "用于CategoryTree扩展的内部模块。",
+	"apihelp-categorytree-param-category": "分类名字空间中的标题，如果提供前缀将会被忽略。",
+	"apihelp-categorytree-param-options": "用于CategoryTree构造器的选项，作为一个JSON对象。<var>depth</var>选项默认为<kbd>1</kbd>。",
+	"apierror-categorytree-invalidjson": "选项必须是有效的JSON对象。"
+}

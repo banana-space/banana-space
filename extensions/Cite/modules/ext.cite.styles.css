@@ -19,6 +19,27 @@
 	break-inside: avoid-column;
 }
 
+ol.references {
+	/* Resetting *any* counter on an <ol> element messes the build-in numbering in Firefox up.
+	   Explicitely resetting the build-in "list-item" counter fixes this. */
+	counter-reset: mw-ref-extends-parent list-item;
+}
+
+ol.references > li {
+	counter-increment: mw-ref-extends-parent;
+	counter-reset: mw-ref-extends-child;
+}
+
+ol.references .mw-extended-references {
+	list-style: none;
+	margin-left: 2em;
+}
+
+.mw-extended-references > li:before {
+	counter-increment: mw-ref-extends-child;
+	content: counter( mw-ref-extends-parent, decimal ) '.' counter( mw-ref-extends-child, decimal ) '. ';
+}
+
 sup.reference {
 	/* Isolation to fix references in case of RTL words at the end of a reference */
 	unicode-bidi: -moz-isolate;
@@ -28,6 +49,10 @@ sup.reference {
 	/* Don't allow a reference that includes a group name
 	to break in the end of the line */
 	white-space: nowrap;
+
+	/* Do not inherit bold or italic */
+	font-weight: normal;
+	font-style: normal;
 }
 
 /* Highlight clicked reference in blue to help navigation */
@@ -40,5 +65,26 @@ sup.reference:target {
 .mw-ext-cite-error {
 	font-weight: bold;
 	/* For the case that the error is embedded in an element with a different direction */
+	unicode-bidi: embed;
+}
+
+.mw-ext-cite-error code {
+	/* As code is inheriting `#f8f9fa` as background color from `code`,
+	   we need to increase contrast, by setting it to `transparent`. See T247903. */
+	background-color: transparent;
+	color: inherit;
+	/* Reduce inherited `padding` to make code fit in better in Resources list. */
+	padding: 1px 2px;
+}
+
+/* @noflip */
+.mw-cite-dir-ltr .reference-text {
+	direction: ltr;
+	unicode-bidi: embed;
+}
+
+/* @noflip */
+.mw-cite-dir-rtl .reference-text {
+	direction: rtl;
 	unicode-bidi: embed;
 }

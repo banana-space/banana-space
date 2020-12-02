@@ -18,8 +18,8 @@
 		]
 	},
 	"renameuser": "Byt användarnamn",
-	"renameuser-linkoncontribs": "byt användarnamn",
-	"renameuser-linkoncontribs-text": "byt namn på denna användare",
+	"renameuser-linkoncontribs": "byt namn på {{GENDER:$1|användare}}",
+	"renameuser-linkoncontribs-text": "Byt namn på denna {{GENDER:$1|användare}}",
 	"renameuser-desc": "Lägger till en [[Special:RenameUser|specialsida]] för att byta namn på en användare (kräver behörigheten ''renameuser'')",
 	"renameuserold": "Nuvarande användarnamn:",
 	"renameusernew": "Nytt användarnamn:",
@@ -46,6 +46,6 @@
 	"logentry-renameuser-renameuser-legacier": "$1 bytte namn på användare $4 till {{GENDER:$7|$5}}",
 	"renameuser-move-log": "Flyttade automatiskt sidan när namnet byttes på {{GENDER:$2|användaren}} \"[[User:$1|$1]]\" till \"[[User:$2|$2]]\"",
 	"action-renameuser": "ändra namn på användaren",
-	"right-renameuser": "Ändra användares namn",
+	"right-renameuser": "Byt namn på användare",
 	"renameuser-renamed-notice": "Användaren har fått ett nytt namn.\nSom referens återfinns omdöpningsloggen nedan."
 }

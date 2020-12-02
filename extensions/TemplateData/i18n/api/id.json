@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rizkiahmadz",
+			"William Surya Permana"
+		]
+	},
+	"apihelp-templatedata-description": "Ambil data yang disimpan oleh ekstensi DataTemplat.",
+	"apihelp-templatedata-example-1": "Kembalian Data untuk [[Template:Stub]] dan [[Template:Example]]",
+	"apihelp-templatedata-param-lang": "Kembalikan nilai yang telah dilokalisasi dalam bahasa ini. Secara baku seluruh terjemahan yang tersedia akan dikembalikan."
+}

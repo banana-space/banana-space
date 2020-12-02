@@ -1,5 +1,5 @@
 /* global extDependencyMap */
-( function ( $ ) {
+( function () {
 	$( function () {
 		var $label, labelText;
 
@@ -14,26 +14,21 @@
 			$label.text( labelText.replace( '$1', value ) );
 		}
 
-		// Set up the help system
-		$( '.config-help-field-data' ).hide()
-			.closest( '.config-help-field-container' ).find( '.config-help-field-hint' )
-			.show()
-			.click( function () {
-				$( this ).closest( '.config-help-field-container' ).find( '.config-help-field-data' )
-					.slideToggle( 'fast' );
-			} );
-
 		// Show/hide code for DB-specific options
 		// FIXME: Do we want slow, fast, or even non-animated (instantaneous) showing/hiding here?
 		$( '.dbRadio' ).each( function () {
 			$( document.getElementById( $( this ).attr( 'rel' ) ) ).hide();
 		} );
 		$( document.getElementById( $( '.dbRadio:checked' ).attr( 'rel' ) ) ).show();
-		$( '.dbRadio' ).click( function () {
+		$( '.dbRadio' ).on( 'click', function () {
 			var $checked = $( '.dbRadio:checked' ),
 				$wrapper = $( document.getElementById( $checked.attr( 'rel' ) ) );
+			// eslint-disable-next-line no-jquery/no-sizzle
 			if ( $wrapper.is( ':hidden' ) ) {
+				// FIXME: Use CSS transition
+				// eslint-disable-next-line no-jquery/no-animate-toggle
 				$( '.dbWrapper' ).hide( 'slow' );
+				// eslint-disable-next-line no-jquery/no-animate-toggle
 				$wrapper.show( 'slow' );
 			}
 		} );
@@ -44,29 +39,38 @@
 		} );
 
 		// Show/hide Creative Commons thingy
-		$( '.licenseRadio' ).click( function () {
+		$( '.licenseRadio' ).on( 'click', function () {
 			var $wrapper = $( '#config-cc-wrapper' );
 			if ( $( '#config__LicenseCode_cc-choose' ).is( ':checked' ) ) {
+				// FIXME: Use CSS transition
+				// eslint-disable-next-line no-jquery/no-animate-toggle
 				$wrapper.show( 'slow' );
 			} else {
+				// eslint-disable-next-line no-jquery/no-animate-toggle
 				$wrapper.hide( 'slow' );
 			}
 		} );
 
 		// Show/hide random stuff (email, upload)
-		$( '.showHideRadio' ).click( function () {
+		$( '.showHideRadio' ).on( 'click', function () {
 			var $wrapper = $( '#' + $( this ).attr( 'rel' ) );
 			if ( $( this ).is( ':checked' ) ) {
+				// FIXME: Use CSS transition
+				// eslint-disable-next-line no-jquery/no-animate-toggle
 				$wrapper.show( 'slow' );
 			} else {
+				// eslint-disable-next-line no-jquery/no-animate-toggle
 				$wrapper.hide( 'slow' );
 			}
 		} );
-		$( '.hideShowRadio' ).click( function () {
+		$( '.hideShowRadio' ).on( 'click', function () {
 			var $wrapper = $( '#' + $( this ).attr( 'rel' ) );
 			if ( $( this ).is( ':checked' ) ) {
+				// FIXME: Use CSS transition
+				// eslint-disable-next-line no-jquery/no-animate-toggle
 				$wrapper.hide( 'slow' );
 			} else {
+				// eslint-disable-next-line no-jquery/no-animate-toggle
 				$wrapper.show( 'slow' );
 			}
 		} );
@@ -78,12 +82,15 @@
 		}
 
 		// Enable/disable "other" textboxes
-		$( '.enableForOther' ).click( function () {
+		$( '.enableForOther' ).on( 'click', function () {
 			var $textbox = $( document.getElementById( $( this ).attr( 'rel' ) ) );
 			// FIXME: Ugh, this is ugly
 			if ( $( this ).val() === 'other' ) {
+				// FIXME: Use CSS transition
+				// eslint-disable-next-line no-jquery/no-slide
 				$textbox.prop( 'readonly', false ).closest( '.config-block' ).slideDown( 'fast' );
 			} else {
+				// eslint-disable-next-line no-jquery/no-slide
 				$textbox.prop( 'readonly', true ).closest( '.config-block' ).slideUp( 'fast' );
 			}
 		} );
@@ -95,11 +102,14 @@
 		$( '#config_wgSitename' ).on( 'keyup change', syncText ).each( syncText );
 
 		// Show/Hide memcached servers when needed
-		$( 'input[name$="config__MainCacheType"]' ).change( function () {
+		$( 'input[name$="config__MainCacheType"]' ).on( 'change', function () {
 			var $memc = $( '#config-memcachewrapper' );
 			if ( $( 'input[name$="config__MainCacheType"]:checked' ).val() === 'memcached' ) {
+				// FIXME: Use CSS transition
+				// eslint-disable-next-line no-jquery/no-animate-toggle
 				$memc.show( 'slow' );
 			} else {
+				// eslint-disable-next-line no-jquery/no-animate-toggle
 				$memc.hide( 'slow' );
 			}
 		} );
@@ -148,4 +158,4 @@
 			} );
 		} );
 	} );
-}( jQuery ) );
+}() );

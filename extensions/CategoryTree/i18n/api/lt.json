@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eitvys200"
+		]
+	},
+	"apihelp-categorytree-description": "CategoryTree plėtinio vidinis modulis.",
+	"apihelp-categorytree-param-options": "Nustatymai skirti CategoryTree konstruktoriui, kaip JSON objektui. Nustatymo <var>depth</var> numatytoji reikšmė yra <kbd>1</kbd>."
+}

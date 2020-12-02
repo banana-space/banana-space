@@ -32,54 +32,55 @@ use Wikimedia\Rdbms\IDatabase;
  * Represents a filter group (used on ChangesListSpecialPage and descendants)
  *
  * @since 1.29
+ * @method registerFilter($filter)
  */
 abstract class ChangesListFilterGroup {
 	/**
 	 * Name (internal identifier)
 	 *
-	 * @var string $name
+	 * @var string
 	 */
 	protected $name;
 
 	/**
 	 * i18n key for title
 	 *
-	 * @var string $title
+	 * @var string
 	 */
 	protected $title;
 
 	/**
 	 * i18n key for header of What's This?
 	 *
-	 * @var string|null $whatsThisHeader
+	 * @var string|null
 	 */
 	protected $whatsThisHeader;
 
 	/**
 	 * i18n key for body of What's This?
 	 *
-	 * @var string|null $whatsThisBody
+	 * @var string|null
 	 */
 	protected $whatsThisBody;
 
 	/**
 	 * URL of What's This? link
 	 *
-	 * @var string|null $whatsThisUrl
+	 * @var string|null
 	 */
 	protected $whatsThisUrl;
 
 	/**
 	 * i18n key for What's This? link
 	 *
-	 * @var string|null $whatsThisLinkText
+	 * @var string|null
 	 */
 	protected $whatsThisLinkText;
 
 	/**
 	 * Type, from a TYPE constant of a subclass
 	 *
-	 * @var string $type
+	 * @var string
 	 */
 	protected $type;
 
@@ -87,14 +88,14 @@ abstract class ChangesListFilterGroup {
 	 * Priority integer.  Higher values means higher up in the
 	 * group list.
 	 *
-	 * @var string $priority
+	 * @var string
 	 */
 	protected $priority;
 
 	/**
 	 * Associative array of filters, as ChangesListFilter objects, with filter name as key
 	 *
-	 * @var array $filters
+	 * @var array
 	 */
 	protected $filters;
 
@@ -102,7 +103,7 @@ abstract class ChangesListFilterGroup {
 	 * Whether this group is full coverage.  This means that checking every item in the
 	 * group means no changes list (e.g. RecentChanges) entries are filtered out.
 	 *
-	 * @var bool $isFullCoverage
+	 * @var bool
 	 */
 	protected $isFullCoverage;
 
@@ -110,7 +111,7 @@ abstract class ChangesListFilterGroup {
 	 * Array of associative arrays with conflict information.  See
 	 * setUnidirectionalConflict
 	 *
-	 * @var array $conflictingGroups
+	 * @var array
 	 */
 	protected $conflictingGroups = [];
 
@@ -118,13 +119,13 @@ abstract class ChangesListFilterGroup {
 	 * Array of associative arrays with conflict information.  See
 	 * setUnidirectionalConflict
 	 *
-	 * @var array $conflictingFilters
+	 * @var array
 	 */
 	protected $conflictingFilters = [];
 
-	const DEFAULT_PRIORITY = -100;
+	private const DEFAULT_PRIORITY = -100;
 
-	const RESERVED_NAME_CHAR = '_';
+	private const RESERVED_NAME_CHAR = '_';
 
 	/**
 	 * Create a new filter group with the specified configuration
@@ -174,11 +175,7 @@ abstract class ChangesListFilterGroup {
 		}
 
 		$this->type = $groupDefinition['type'];
-		if ( isset( $groupDefinition['priority'] ) ) {
-			$this->priority = $groupDefinition['priority'];
-		} else {
-			$this->priority = self::DEFAULT_PRIORITY;
-		}
+		$this->priority = $groupDefinition['priority'] ?? self::DEFAULT_PRIORITY;
 
 		$this->isFullCoverage = $groupDefinition['isFullCoverage'];
 
@@ -322,7 +319,7 @@ abstract class ChangesListFilterGroup {
 	 * @return ChangesListFilter|null Specified filter, or null if it is not registered
 	 */
 	public function getFilter( $name ) {
-		return isset( $this->filters[$name] ) ? $this->filters[$name] : null;
+		return $this->filters[$name] ?? null;
 	}
 
 	/**
@@ -358,7 +355,7 @@ abstract class ChangesListFilterGroup {
 		}
 
 		usort( $this->filters, function ( $a, $b ) {
-			return $b->getPriority() - $a->getPriority();
+			return $b->getPriority() <=> $a->getPriority();
 		} );
 
 		foreach ( $this->filters as $filterName => $filter ) {
@@ -433,7 +430,7 @@ abstract class ChangesListFilterGroup {
 	 * @return bool
 	 */
 	public function anySelected( FormOptions $opts ) {
-		return !!count( array_filter(
+		return (bool)count( array_filter(
 			$this->getFilters(),
 			function ( ChangesListFilter $filter ) use ( $opts ) {
 				return $filter->isSelected( $opts );

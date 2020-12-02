@@ -24,6 +24,8 @@
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 
+use MediaWiki\MediaWikiServices;
+
 require_once __DIR__ . '/Maintenance.php';
 
 class PopulateInterwiki extends Maintenance {
@@ -84,7 +86,7 @@ TEXT
 			$url = rtrim( $this->source, '?' ) . '?' . $url;
 		}
 
-		$json = Http::get( $url );
+		$json = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url, [], __METHOD__ );
 		$data = json_decode( $json, true );
 
 		if ( is_array( $data ) ) {
@@ -119,6 +121,7 @@ TEXT
 			}
 		}
 
+		$lookup = MediaWikiServices::getInstance()->getInterwikiLookup();
 		foreach ( $data as $d ) {
 			$prefix = $d['prefix'];
 
@@ -138,11 +141,11 @@ TEXT
 						'iw_local' => 1
 					],
 					__METHOD__,
-					'IGNORE'
+					[ 'IGNORE' ]
 				);
 			}
 
-			Interwiki::invalidateCache( $prefix );
+			$lookup->invalidateCache( $prefix );
 		}
 
 		$this->output( "Interwiki links are populated.\n" );

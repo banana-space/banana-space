@@ -6,7 +6,16 @@
 		]
 	},
 	"skinname-monobook": "Monobuk",
-	"monobook-desc": "Klasični Medijaviki skin od 2004, nazvan po crno-beloj fotografiji knjige u pozadini stranice",
+	"monobook-desc": "Klasična Medijaviki tema iz 2004, nazvana po crno-beloj fotografiji knjige u pozadini stranice",
 	"monobook.css": "/* CSS postavljen ovde će uticati na sve korisnike teme „Monobuk“ */",
-	"monobook.js": "/* Javaskript postavljen ovde će se učitati za sve one koji koriste temu „Monobuk“ */"
+	"monobook.js": "/* Javaskript postavljen ovde će se učitati za sve one koji koriste temu „Monobuk“ */",
+	"monobook-jumptotop": "nazad na vrh",
+	"monobook-jumptopersonal": "korisničke alatke",
+	"monobook-jumptonavigation": "Idi na navigaciju",
+	"monobook-jumptosearch": "Idi na pretragu",
+	"monobook-more-actions": "Više",
+	"monobook-cactions-label": "Radnje za stranicu",
+	"monobook-notifications-link": "Obaveštenja ($1)",
+	"monobook-notifications-link-none": "Obaveštenja",
+	"monobook-responsive-label": "Omogući responzivan dizajn Monobuka"
 }

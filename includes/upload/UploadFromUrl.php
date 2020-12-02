@@ -21,6 +21,9 @@
  * @ingroup Upload
  */
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\User\UserIdentity;
+
 /**
  * Implements uploading from a HTTP resource.
  *
@@ -40,12 +43,15 @@ class UploadFromUrl extends UploadBase {
 	 * user is not allowed, return the name of the user right as a string. If
 	 * the user is allowed, have the parent do further permissions checking.
 	 *
-	 * @param User $user
+	 * @param UserIdentity $user
 	 *
 	 * @return bool|string
 	 */
-	public static function isAllowed( $user ) {
-		if ( !$user->isAllowed( 'upload_by_url' ) ) {
+	public static function isAllowed( UserIdentity $user ) {
+		if ( !MediaWikiServices::getInstance()
+				->getPermissionManager()
+				->userHasRight( $user, 'upload_by_url' )
+		) {
 			return 'upload_by_url';
 		}
 
@@ -117,7 +123,7 @@ class UploadFromUrl extends UploadBase {
 	public static function isAllowedUrl( $url ) {
 		if ( !isset( self::$allowedUrls[$url] ) ) {
 			$allowed = true;
-			Hooks::run( 'IsUploadAllowedFromUrl', [ $url, &$allowed ] );
+			Hooks::runner()->onIsUploadAllowedFromUrl( $url, $allowed );
 			self::$allowedUrls[$url] = $allowed;
 		}
 
@@ -150,8 +156,7 @@ class UploadFromUrl extends UploadBase {
 		}
 		$this->initialize(
 			$desiredDestName,
-			trim( $request->getVal( 'wpUploadFileURL' ) ),
-			false
+			trim( $request->getVal( 'wpUploadFileURL' ) )
 		);
 	}
 
@@ -165,7 +170,9 @@ class UploadFromUrl extends UploadBase {
 		$url = $request->getVal( 'wpUploadFileURL' );
 
 		return !empty( $url )
-			&& $wgUser->isAllowed( 'upload_by_url' );
+			&& MediaWikiServices::getInstance()
+				   ->getPermissionManager()
+				   ->userHasRight( $wgUser, 'upload_by_url' );
 	}
 
 	/**
@@ -202,7 +209,8 @@ class UploadFromUrl extends UploadBase {
 	 * @return string Path to the file
 	 */
 	protected function makeTemporaryFile() {
-		$tmpFile = TempFSFile::factory( 'URL', 'urlupload_', wfTempDir() );
+		$tmpFile = MediaWikiServices::getInstance()->getTempFSFileFactory()
+			->newTempFSFile( 'URL', 'urlupload_' );
 		$tmpFile->bind( $this );
 
 		return $tmpFile->getPath();

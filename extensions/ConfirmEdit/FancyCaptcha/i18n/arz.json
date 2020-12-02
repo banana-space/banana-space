@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ghaly",
 			"Meno25",
-			"Ramsis II",
-			"Ghaly"
+			"Ramsis II"
 		]
 	},
 	"fancycaptcha-addurl": "تعديلك فيه لينكات خارجية جديدة\nعلشان تساعد فى الحماية من السبام الاوتوماتيكى، لو سمحت تكتب الكلمات اللى باينة تحت فى الصندوء ([[Special:Captcha/help|معلومات زيادة]]):",

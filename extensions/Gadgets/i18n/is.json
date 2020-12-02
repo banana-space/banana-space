@@ -9,8 +9,10 @@
 	},
 	"gadgets-desc": "Gerir notendum kleift að velja [[Special:Gadgets|CSS og JavaScript-forrit]] í [[Special:Preferences#mw-prefsection-gadgets|stillingum sínum]]",
 	"prefs-gadgets": "Smáforrit",
-	"gadgets-prefstext": "Eftirfarandi er listi yfir smáforrit sem þú getur notað á notandareikningi þínum. Þessi forrit eru að mestu byggð á JavaScript svo vafrinn þarf að styðja JavaScript til að þau virki. Athugaðu einnig að forritin hafa engin áhrif á stillingasíðunni.\n\nForritin eru ekki hluti af MediaWiki-hugbúnaðinum heldur eru skrifuð og viðhaldin af notendum á þessu wiki-verkefni. Möppudýr geta breytt forritunum á [[MediaWiki:Gadgets-definition]] og [[Special:Gadgets]]. Fjöldi notenda sem nota hvert smától fyrir sig er skráður á [[Special:GadgetUsage|Notkunarupplýsingar smátóla]].",
+	"gadgets-prefstext": "Eftirfarandi er listi yfir smáforrit sem þú getur notað á notandareikningi þínum. Þessi smáforrit eru að mestu byggð á JavaScript svo vafrinn þarf að styðja JavaScript til að þau virki. Athugaðu einnig að smáforritin hafa engin áhrif á stillingasíðunni.\n\nSmáforritin eru ekki hluti af MediaWiki-hugbúnaðinum heldur eru skrifuð og viðhaldin af notendum á þessu wiki-verkefni. Möppudýr geta breytt smáforritunum á [[MediaWiki:Gadgets-definition]] og [[Special:Gadgets]]. Fjöldi notenda sem nota hvert smáforrit fyrir sig er skráður á [[Special:GadgetUsage|Notkunarupplýsingar smáforrita]].",
 	"gadgets": "Smáforrit",
+	"gadgetusage": "Tölfræði yfir notkun á smáforritum",
+	"gadgetusage-noresults": "Engin smáforrit fundust.",
 	"gadgetusage-activeusers": "Virkir notendur",
 	"gadgetusage-default": "Sjálfgefið",
 	"gadgets-title": "Smáforrit",
@@ -20,9 +22,10 @@
 	"gadgets-required-skins": "Aðgengileg með eftirfarandi {{PLURAL:$2|þema|$2 þemum}}: $1",
 	"gadgets-default": "Virkt fyrir alla notendur.",
 	"gadgets-export": "Flytja út",
-	"gadgets-export-title": "Flytja út smától",
-	"gadgets-not-found": "Smátólið \"$1\" fannst ekki.",
-	"gadgets-export-text": "Til þess að flytja út smátólið $1, smelltu á \"{{int:gadgets-export-download}}\", vistaðu skránna,\nfarðu á þann wiki sem á að flytja smátólið á, farðu á kerfisíðuna Special:Import og hladdu því inn. Síðan bættu eftirfarandi við meldinguna MediaWiki:Gadgets-definition:\n<pre>$2</pre>\nÞú verður af hafa tilskilin réttindi á þeim wiki sem á að færa smátólið á (þar með talið réttindi til að breyta meldingum) og möguleikinn að flytja inn skrár þarf að vera virkur.",
+	"gadgets-export-title": "Flytja út smáforrit",
+	"gadgets-not-found": "Smáforritið \"$1\" fannst ekki.",
+	"gadgets-export-text": "Til þess að flytja út smáforritið $1, smelltu á \"{{int:gadgets-export-download}}\", vistaðu skrána,\nfarðu á þann wiki sem á að flytja smáforritið á, farðu á kerfisíðuna Special:Import og hladdu því inn. Síðan bættu eftirfarandi við meldinguna MediaWiki:Gadgets-definition:\n<pre>$2</pre>\nÞú verður af hafa tilskilin réttindi á þeim wiki sem á að færa smáforritið á (þar með talið réttindi til að breyta meldingum) og valkosturinn á að flytja inn skrár þarf að vera virkur.",
 	"gadgets-export-download": "Hlaða niður",
-	"right-gadgets-edit": "Breyta JavaScript og CSS síðum smátóla"
+	"right-gadgets-edit": "Breyta JavaScript og CSS síðum smátóla",
+	"right-gadgets-definition-edit": "Breyta skilgreiningum smáforrita"
 }

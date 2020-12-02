@@ -15,6 +15,7 @@ use RemexHtml\TreeBuilder\Element;
  */
 class DOMSerializer implements AbstractSerializer {
 	private $formatter;
+	private $builder;
 
 	/**
 	 * @param DOMBuilder $builder
@@ -25,6 +26,9 @@ class DOMSerializer implements AbstractSerializer {
 		$this->formatter = $formatter;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getResult() {
 		$fragment = $this->builder->getFragment();
 		$s = '';
@@ -34,14 +38,23 @@ class DOMSerializer implements AbstractSerializer {
 		return $s;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function startDocument( $fragmentNamespace, $fragmentName ) {
 		$this->builder->startDocument( $fragmentNamespace, $fragmentName );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function endDocument( $pos ) {
 		$this->builder->endDocument( $pos );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function characters( $preposition, $refElement, $text, $start, $length,
 		$sourceStart, $sourceLength
 	) {
@@ -49,6 +62,9 @@ class DOMSerializer implements AbstractSerializer {
 			$sourceStart, $sourceLength );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function insertElement( $preposition, $refElement, Element $element, $void,
 		$sourceStart, $sourceLength
 	) {
@@ -56,30 +72,51 @@ class DOMSerializer implements AbstractSerializer {
 			$sourceStart, $sourceLength );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function endTag( Element $element, $sourceStart, $sourceLength ) {
 		$this->builder->endTag( $element, $sourceStart, $sourceLength );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function doctype( $name, $public, $system, $quirks, $sourceStart, $sourceLength ) {
 		$this->builder->doctype( $name, $public, $system, $quirks, $sourceStart, $sourceLength );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function comment( $preposition, $refElement, $text, $sourceStart, $sourceLength ) {
 		$this->builder->comment( $preposition, $refElement, $text, $sourceStart, $sourceLength );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function error( $text, $pos ) {
 		$this->builder->error( $text, $pos );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function mergeAttributes( Element $element, Attributes $attrs, $sourceStart ) {
 		$this->builder->mergeAttributes( $element, $attrs, $sourceStart );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function removeNode( Element $element, $sourceStart ) {
 		$this->builder->removeNode( $element, $sourceStart );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function reparentChildren( Element $element, Element $newParent, $sourceStart ) {
 		$this->builder->reparentChildren( $element, $newParent, $sourceStart );
 	}

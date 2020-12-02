@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Mostafadaneshvar",
-			"RigiMahnoor"
+			"RigiMahnoor",
+			"Sultanselim baloch"
 		]
 	},
 	"vector-action-addsection": "هور کتن عنوان",
@@ -12,9 +13,9 @@
 	"vector-action-undelete": "ترینگ",
 	"vector-action-unprotect": "پروتکشنء ٹگل بدئ",
 	"vector-view-create": "شرکتن",
-	"vector-view-edit": "اصلاح",
-	"vector-view-history": "چارتن تاریح",
-	"vector-view-view": "وانتن",
+	"vector-view-edit": "ٹگلݔنگ",
+	"vector-view-history": "رمسءِ چارگ",
+	"vector-view-view": "وانگ",
 	"vector-view-viewsource": "پیشدارگ بن جاه",
-	"vector-more-actions": "گیشتر"
+	"vector-more-actions": "گݔشتِر"
 }

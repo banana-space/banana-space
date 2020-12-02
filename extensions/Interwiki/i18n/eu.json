@@ -3,9 +3,9 @@
 		"authors": [
 			"An13sa",
 			"Kobazulo",
+			"Sator",
 			"Theklan",
-			"Xabier Armendaritz",
-			"Sator"
+			"Xabier Armendaritz"
 		]
 	},
 	"interwiki": "Ikusi eta aldatu interwikiak",
@@ -15,14 +15,13 @@
 	"interwiki_prefix": "Aurrizkia",
 	"interwiki-prefix-label": "Aurrizkia:",
 	"interwiki_local": "Aurrera",
-	"interwiki-local-label": "Aurrera:",
+	"interwiki-local-label": "Aurrera",
 	"interwiki_trans": "Txertatu",
-	"interwiki-trans-label": "Txertatu:",
+	"interwiki-trans-label": "Txertatu",
 	"interwiki_1": "bai",
 	"interwiki_0": "ez",
 	"interwiki_edit": "Aldatu",
 	"interwiki_reasonfield": "Arrazoia:",
-	"interwiki_delquestion": "\"$1\" ezabatzen",
 	"interwiki_deleting": "\"$1\" aurrizkia ezabatzen ari zara.",
 	"interwiki_addbutton": "Gehitu",
 	"interwiki_edittext": "Interwiki aurrizkia editatzen",

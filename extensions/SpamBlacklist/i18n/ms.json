@@ -3,8 +3,8 @@
 		"authors": [
 			"Anakmalaysia",
 			"Aviator",
-			"Pizza1016",
-			"Jeluang Terluang"
+			"Jeluang Terluang",
+			"Pizza1016"
 		]
 	},
 	"spam-blacklist": "# URL luar yang sepadan dengan mana-mana entri dalam senarai ini akan disekat daripada ditambah ke dalam sesebuah laman.\n# Senarai ini melibatkan wiki ini sahaja; sila rujuk juga senarai hitam sejagat. \n# Sila baca pendokumenan di https://www.mediawiki.org/wiki/Extension:SpamBlacklist\n#<!-- jangan ubah baris ini --> <pre>\n#\n# Sintaks adalah seperti berikut:\n#  * Semuanya mulai aksara \"#\" hingga akhir baris merupakan komen\n#  * Setiap baris yang tidak kosong meruakan pecahan ungkapan nalar yang hanya akan berpadan dengan hos-hos dalam alamat e-mel\n\n #</pre> <!-- jangan ubah baris ini -->",

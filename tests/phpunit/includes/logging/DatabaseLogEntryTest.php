@@ -3,8 +3,8 @@
 use MediaWiki\MediaWikiServices;
 use Wikimedia\Rdbms\IDatabase;
 
-class DatabaseLogEntryTest extends MediaWikiTestCase {
-	public function setUp() {
+class DatabaseLogEntryTest extends MediaWikiIntegrationTestCase {
+	protected function setUp() : void {
 		parent::setUp();
 
 		// These services cache their joins
@@ -12,7 +12,7 @@ class DatabaseLogEntryTest extends MediaWikiTestCase {
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'ActorMigration' );
 	}
 
-	public function tearDown() {
+	protected function tearDown() : void {
 		parent::tearDown();
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'CommentStore' );
@@ -29,21 +29,14 @@ class DatabaseLogEntryTest extends MediaWikiTestCase {
 	 * @param array $selectFields
 	 * @param string[]|null $row
 	 * @param string[]|null $expectedFields
-	 * @param string $migration
 	 */
 	public function testNewFromId( $id,
 		array $selectFields,
 		array $row = null,
-		array $expectedFields = null,
-		$migration
+		array $expectedFields = null
 	) {
-		$this->setMwGlobals( [
-			'wgCommentTableSchemaMigrationStage' => $migration,
-			'wgActorTableSchemaMigrationStage' => $migration,
-		] );
-
 		$row = $row ? (object)$row : null;
-		$db = $this->getMock( IDatabase::class );
+		$db = $this->createMock( IDatabase::class );
 		$db->expects( self::once() )
 			->method( 'selectRow' )
 			->with( $selectFields['tables'],
@@ -68,30 +61,6 @@ class DatabaseLogEntryTest extends MediaWikiTestCase {
 	}
 
 	public function provideNewFromId() {
-		$oldTables = [
-			'tables' => [ 'logging', 'user' ],
-			'fields' => [
-				'log_id',
-				'log_type',
-				'log_action',
-				'log_timestamp',
-				'log_namespace',
-				'log_title',
-				'log_params',
-				'log_deleted',
-				'user_id',
-				'user_name',
-				'user_editcount',
-				'log_comment_text' => 'log_comment',
-				'log_comment_data' => 'NULL',
-				'log_comment_cid' => 'NULL',
-				'log_user' => 'log_user',
-				'log_user_text' => 'log_user_text',
-				'log_actor' => 'NULL',
-			],
-			'options' => [],
-			'join_conds' => [ 'user' => [ 'LEFT JOIN', 'user_id=log_user' ] ],
-		];
 		$newTables = [
 			'tables' => [
 				'logging',
@@ -128,22 +97,20 @@ class DatabaseLogEntryTest extends MediaWikiTestCase {
 		return [
 			[
 				0,
-				$oldTables + [ 'conds' => [ 'log_id' => 0 ] ],
+				$newTables + [ 'conds' => [ 'log_id' => 0 ] ],
 				null,
-				null,
-				MIGRATION_OLD,
+				null
 			],
 			[
 				123,
-				$oldTables + [ 'conds' => [ 'log_id' => 123 ] ],
+				$newTables + [ 'conds' => [ 'log_id' => 123 ] ],
 				[
 					'log_id' => 123,
 					'log_type' => 'foobarize',
 					'log_comment_text' => 'test!',
 					'log_comment_data' => null,
 				],
-				[ 'type' => 'foobarize', 'comment' => 'test!' ],
-				MIGRATION_OLD,
+				[ 'type' => 'foobarize', 'comment' => 'test!' ]
 			],
 			[
 				567,
@@ -154,8 +121,7 @@ class DatabaseLogEntryTest extends MediaWikiTestCase {
 					'log_comment_text' => 'test!',
 					'log_comment_data' => null,
 				],
-				[ 'type' => 'foobarize', 'comment' => 'test!' ],
-				MIGRATION_NEW,
+				[ 'type' => 'foobarize', 'comment' => 'test!' ]
 			],
 		];
 	}

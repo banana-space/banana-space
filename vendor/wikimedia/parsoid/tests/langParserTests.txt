@@ -1,0 +1,156 @@
+!! Version 2
+# LanguageConverter parser tests
+
+## sr-ec ##
+
+!! test
+sr-ec: Simple conversion of Latin to Cyrillic
+!! options
+language=sr variant=sr-ec
+!! wikitext
+abvg
+!! html/php
+<p>абвг
+</p>
+!! html/parsoid
+<p>abvg</p>
+!! html/parsoid+langconv
+<p data-mw-variant-lang="sr-el">абвг</p>
+!! end
+
+!! test
+sr-ec: Same as above, but assert that -{}-s must be removed and not converted (1)
+!! options
+language=sr variant=sr-ec
+!! wikitext
+-{lj}-аб-{nj}-вг-{dž}-
+!! html/php
+<p>ljабnjвгdž
+</p>
+!! html/parsoid
+<p><span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"lj"}}'></span>аб<span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"nj"}}'></span>вг<span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"dž"}}'></span></p>
+!! html/parsoid+langconv
+<p data-mw-variant-lang="sr-ec"><span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"lj"}}'>lj</span>аб<span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"nj"}}'>nj</span>вг<span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"dž"}}'>dž</span></p>
+!! end
+
+!! test
+sr-ec: This text has some Cyrillic, but is recognized as Latin, so it should be converted
+!! options
+language=sr variant=sr-ec
+!! wikitext
+абвгšđžčć
+!! html/php
+<p>абвгшђжчћ
+</p>
+!! html/parsoid
+<p>абвгšđžčć</p>
+!! html/parsoid+langconv
+<p data-mw-variant-lang="sr-ec"><span typeof="mw:LanguageVariant" data-mw-variant-lang="sr-el" data-mw-variant='{"twoway":[{"l":"sr-el","t":"абвгšđžčć"},{"l":"sr-ec","t":"абвгшђжчћ"}],"rt":true}'>абвгшђжчћ</span></p>
+!! end
+
+!! test
+sr-ec: Same as above, but assert that -{}-s must be removed and not converted (2)
+!! options
+language=sr variant=sr-ec
+!! wikitext
+-{lj}-абвг-{nj}-šđžčć-{dž}-
+!! html/php
+<p>ljабвгnjшђжчћdž
+</p>
+!! html/parsoid
+<p><span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"lj"}}'></span>абвг<span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"nj"}}'></span>šđžčć<span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"dž"}}'></span></p>
+!! html/parsoid+langconv
+<p data-mw-variant-lang="sr-el"><span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"lj"}}'>lj</span><span typeof="mw:LanguageVariant" data-mw-variant='{"twoway":[{"l":"sr-el","t":"абвг"},{"l":"sr-ec","t":"абвг"}],"rt":true}'>абвг</span><span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"nj"}}'>nj</span>шђжчћ<span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"dž"}}'>dž</span></p>
+!! end
+
+!! test
+sr-ec: Roman numerals are not converted
+!! options
+language=sr variant=sr-ec
+!! wikitext
+a I b II v III g IV šđžčć
+!! html/php
+<p>а I б II в III г IV шђжчћ
+</p>
+!! html/parsoid
+<p>a I b II v III g IV šđžčć</p>
+!! html/parsoid+langconv
+<p data-mw-variant-lang="sr-el">а I б II в III г IV шђжчћ</p>
+!! end
+
+## sr-el ##
+
+!! test
+sr-el: A simple conversion of Latin to Latin
+!! options
+language=sr variant=sr-el
+!! wikitext
+abcd
+!! html/php
+<p>abcd
+</p>
+!! html/parsoid
+<p>abcd</p>
+!! html/parsoid+langconv
+<p data-mw-variant-lang="sr-el">abcd</p>
+!! end
+
+!! test
+sr-el: A simple conversion of Cyrillic to Latin
+!! options
+language=sr variant=sr-el
+!! wikitext
+абцд
+!! html/php
+<p>abcd
+</p>
+!! html/parsoid
+<p>абцд</p>
+!! html/parsoid+langconv
+<p data-mw-variant-lang="sr-ec">abcd</p>
+!! end
+
+!! test
+sr-el: This text has some Latin, but is recognized as Cyrillic, so it should be converted
+!! options
+language=sr variant=sr-el
+!! wikitext
+abcdшђжчћ
+!! html/php
+<p>abcdšđžčć
+</p>
+!! html/parsoid
+<p>abcdшђжчћ</p>
+!! html/parsoid+langconv
+<p data-mw-variant-lang="sr-ec"><span typeof="mw:LanguageVariant" data-mw-variant='{"twoway":[{"l":"sr-ec","t":"abcdшђжчћ"},{"l":"sr-el","t":"abcdšđžčć"}],"rt":true}'>abcdšđžčć</span></p>
+!! end
+
+!! test
+External links should be converted, unless they "look like a URL".
+!! options
+language=sr variant=sr-ec
+!! wikitext
+[http://example.com abcd]
+
+[http://example.com http://foo.com]
+
+http://example.com
+
+[http://example.com -{abcd}-]
+!! html/php
+<p><a rel="nofollow" class="external text" href="http://example.com">абцд</a>
+</p><p><a rel="nofollow" class="external text" href="http://example.com">http://foo.com</a>
+</p><p><a rel="nofollow" class="external free" href="http://example.com">http://example.com</a>
+</p><p><a rel="nofollow" class="external text" href="http://example.com">abcd</a>
+</p>
+!! html/parsoid
+<p><a rel="mw:ExtLink" href="http://example.com" class="external text">abcd</a></p>
+<p><a rel="mw:ExtLink" href="http://example.com" class="external text">http://foo.com</a></p>
+<p><a rel="mw:ExtLink" href="http://example.com" class="external free">http://example.com</a></p>
+<p><a rel="mw:ExtLink" href="http://example.com" class="external text"><span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"abcd"}}'></span></a></p>
+!! html/parsoid+langconv
+<p data-mw-variant-lang="sr-el"><a rel="mw:ExtLink" href="http://example.com" class="external text">абцд</a></p>
+<p data-mw-variant-lang="sr-el"><a rel="mw:ExtLink" href="http://example.com" class="external text">http://foo.com</a></p>
+<p data-mw-variant-lang="sr-el"><a rel="mw:ExtLink" href="http://example.com" class="external free">http://example.com</a></p>
+<p data-mw-variant-lang="sr-ec"><a rel="mw:ExtLink" href="http://example.com" class="external text"><span typeof="mw:LanguageVariant" data-mw-variant='{"disabled":{"t":"abcd"}}'>abcd</span></a></p>
+!! end
