@@ -1,0 +1,20 @@
+{
+	"name": "TeXParser",
+	"author": "alphaGem",
+	"url": "",
+	"description": "Miau!",
+	"version": "0.0",
+	"license-name": "GPL-2.0-or-later",
+	"type": "parser",
+	"manifest_version": 1,
+	"AutoloadClasses": {
+		"TeXParserHooks": "includes/TeXParserHooks.php"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "TeXParserHooks::onParserFirstCallInit",
+		"ParserBeforeInternalParse": "TeXParserHooks::onParserBeforeInternalParse"
+	},
+	"ExtensionMessagesFiles": {
+		"TeXParserMagic": "includes/TeXParserMagic.php"
+	}
+}
