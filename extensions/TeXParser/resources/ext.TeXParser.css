@@ -1,0 +1,74 @@
+
+.katex {
+  font-size: 1.1em;
+}
+
+p, .p, table.list {
+  margin: 0 0 18px 0;
+}
+
+.block {
+  padding: 10px 20px;
+  margin: 0 -20px 18px -20px;
+  background-color: #f0f1f3;
+}
+
+span.katex-display {
+  margin: 0;
+}
+
+span.display-math {
+  margin: 1em 0;
+}
+
+p:last-child,
+.p:last-child,
+table.list:last-child,
+p > span.display-math:last-child,
+.p > span.display-math:last-child {
+  margin-bottom: 0;
+}
+
+.floatright {
+  float: right;
+}
+
+table.list {
+  width: 100%;
+}
+
+table.list tr.list-item:not(:last-child) > td {
+  padding-bottom: 18px;
+}
+
+table.list td {
+  vertical-align: baseline;
+}
+
+table.list td:first-child {
+  width: .75em;
+  max-width: 16em;
+  overflow-x: clip;
+  white-space: nowrap;
+  text-align: right;
+  padding-right: .5em;
+}
+
+span.display-math {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: stretch;
+}
+
+span.display-math span.katex-display {
+  flex-grow: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+span.display-math span.equation-tag-left,
+span.display-math span.equation-tag-right {
+  flex-shrink: 0;
+  flex-grow: 0;
+}

@@ -3,7 +3,7 @@
 	"author": "alphaGem",
 	"url": "",
 	"description": "Miau!",
-	"version": "0.0",
+	"version": "0.1",
 	"license-name": "GPL-2.0-or-later",
 	"type": "parser",
 	"manifest_version": 1,
@@ -11,16 +11,17 @@
 		"TeXParserHooks": "includes/TeXParserHooks.php"
 	},
 	"Hooks": {
-		"ParserBeforeInternalParse": "TeXParserHooks::onParserBeforeInternalParse"
+		"ParserBeforeInternalParse": "TeXParserHooks::onParserBeforeInternalParse",
+		"BeforePageDisplay": "TeXParserHooks::onBeforePageDisplay"
 	},
 	"ExtensionMessagesFiles": {
 		"TeXParserMagic": "includes/TeXParserMagic.php"
 	},
 	"ResourceModules": {
-		"ext.boilerPlate.foo": {
-			"styles": [
-				"resources/ext.boilerPlate.foo.css"
-			]
+		"ext.TeXParser": {
+			"packageFiles":"extensions/TeXParser/resources/ext.KaTeXcss.js",
+			"styles":["extensions/TeXParser/resources/ext.TeXParser.css"]
+
 		}
 	}
 }

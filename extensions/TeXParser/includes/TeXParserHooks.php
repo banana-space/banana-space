@@ -38,4 +38,7 @@ class TeXParserHooks {
 		}
 		return true;
 	}
+	public static function onBeforePageDisplay( OutputPage $output, Skin $skin ){
+		$output->addModules( "ext.TeXParser" );
+	}
 }
