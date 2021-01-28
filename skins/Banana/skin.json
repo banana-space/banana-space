@@ -1,0 +1,62 @@
+{
+  "name": "Banana",
+  "version": "1.0.0",
+  "namemsg": "skinname-banana",
+  "descriptionmsg": "banana-skin-desc",
+  "author": [
+    "[https://skins.wmflabs.org skins.wmflabs.org v.1.0]"
+  ],
+  "type": "skin",
+  "requires": {
+    "MediaWiki": ">= 1.35.0"
+  },
+  "manifest_version": 2,
+  "ValidSkinNames": {
+    "banana": {
+      "class": "SkinMustache",
+      "args": [
+        {
+          "name": "Banana",
+          "templateDirectory": "skins/Banana/templates/",
+          "messages": [
+            "sitetitle"
+          ],
+          "styles": [
+            "skins.banana.styles"
+          ],
+          "scripts": [
+            "skins.banana"
+          ]
+        }
+      ]
+    }
+  },
+  "MessagesDirs": {
+    "Banana": [
+      "i18n"
+    ]
+  },
+  "ResourceFileModulePaths": {
+    "localBasePath": "",
+    "remoteSkinPath": "Banana"
+  },
+  "ResourceModules": {
+    "skins.banana.styles": {
+      "class": "ResourceLoaderSkinModule",
+      "features": [
+        "elements",
+        "content",
+        "interface",
+        "legacy"
+      ],
+      "styles": [
+        "resources/skin.less"
+      ]
+    },
+    "skins.banana": {
+      "packageFiles": [
+        "resources/skin.js"
+      ]
+    }
+  }
+}

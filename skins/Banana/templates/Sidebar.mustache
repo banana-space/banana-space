@@ -1,0 +1,12 @@
+<div class="toggle-list">
+	<input type="checkbox" id="sidebar-input" class="toggle-list__checkbox" role="button">
+	<label for="sidebar-input"
+		class="toggle-list__toggle sidebar__icon" title="Open main menu">Open main menu</label>
+	<div class="toggle-list__list">
+		{{#data-portlets-sidebar}}
+		{{#data-portlets-first}}{{>Portlet}}{{/data-portlets-first}}
+		{{#array-portlets-rest}}{{>Portlet}}{{/array-portlets-rest}}
+		{{/data-portlets-sidebar}}
+	</div>
+	<label class="toggle-list__mask" for="sidebar-input"></label>
+</div>

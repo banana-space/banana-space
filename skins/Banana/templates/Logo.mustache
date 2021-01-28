@@ -1,0 +1,9 @@
+<div id="p-logo" class="mw-portlet" role="banner">
+    <a href="{{link-mainpage}}">
+    {{#data-logos}}
+        {{#icon}}<img src="{{.}}" width="40" height="40">{{/icon}}
+        {{#wordmark}}<img src="{{src}}" width="{{width}}" height="{{height}}">{{/wordmark}}
+        {{^wordmark}}<h1>{{msg-sitetitle}}</h1>{{/wordmark}}
+    {{/data-logos}}
+    </a>
+</div>
