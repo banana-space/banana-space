@@ -18,6 +18,12 @@
 			}
 		}
 	},
+	"Hooks": {
+		"UnitTestsList": "UnitTestsListHandler"
+	},
+	"HookHandlers": {
+		"UnitTestsListHandler": { "class": "\\MWParsoid\\UnitTestsListHandler" }
+	},
 	"RestRoutes": [
 		{
 			"path": "/{domain}/v3/page/{format}/{title}",

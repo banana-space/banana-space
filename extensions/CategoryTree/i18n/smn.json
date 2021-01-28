@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Mlolthuis",
 			"Trondtr"
 		]
 	},
 	"categorytree-expand": "čääiti",
+	"categorytree-member-counts": "tuálá sistees {{PLURAL:$1|1 vyeliluoka|$1 vyeliluoka}}, {{PLURAL:$2|1 siijđo|$2 siijđo}} já {{PLURAL:$3|1 tiätuvuárhá|$3 tiätuvuárhá}}",
 	"categorytree-num-categories": "$1 K",
 	"categorytree-num-pages": "$1 S",
 	"categorytree-num-files": "$1 T"

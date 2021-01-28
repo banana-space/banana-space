@@ -108,13 +108,13 @@ def gen_captcha(text, fontname, fontsize, file_name):
 
 	# Create noise
 	nblock = 4
-	nsize = (im.size[0] / nblock, im.size[1] / nblock)
+	nsize = (im.size[0] // nblock, im.size[1] // nblock)
 	noise = Image.new('L', nsize, bgcolor)
 	data = noise.load()
 	for x in range(nsize[0]):
 		for y in range(nsize[1]):
 			r = random.randint(0, 65)
-			gradient = 70 * x / nsize[0]
+			gradient = 70 * x // nsize[0]
 			data[x, y] = r + gradient
 	# Turn speckles into blobs
 	noise = noise.resize(im.size, Image.BILINEAR)
@@ -226,7 +226,7 @@ if __name__ == '__main__':
 	script_dir = os.path.dirname(os.path.realpath(__file__))
 	parser = OptionParser()
 	parser.add_option("--wordlist", help="A list of words (required)", metavar="WORDS.txt")
-	parser.add_option("--random", help="Use random charcters instead of a wordlist", action="store_true")
+	parser.add_option("--random", help="Use random characters instead of a wordlist", action="store_true")
 	parser.add_option("--key", help="The passphrase set as $wgCaptchaSecret (required)", metavar="KEY")
 	parser.add_option("--output", help="The directory to put the images in - $wgCaptchaDirectory (required)", metavar="DIR")
 	parser.add_option("--font", help="The font to use (required)", metavar="FONT.ttf")

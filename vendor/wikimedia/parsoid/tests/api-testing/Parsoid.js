@@ -1,4 +1,5 @@
 /** Cases for testing the Parsoid API through HTTP */
+/* global describe, it */
 
 'use strict';
 

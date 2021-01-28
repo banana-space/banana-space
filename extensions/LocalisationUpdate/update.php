@@ -1,6 +1,12 @@
 <?php
 
-use LocalisationUpdate\LocalisationUpdate;
+namespace LocalisationUpdate;
+
+use FormatJson;
+use Language;
+use LocalisationUpdate\Fetcher\FetcherFactory;
+use LocalisationUpdate\Reader\ReaderFactory;
+use Maintenance;
 
 $IP = strval( getenv( 'MW_INSTALL_PATH' ) ) !== ''
 	? getenv( 'MW_INSTALL_PATH' )
@@ -41,9 +47,9 @@ class Update extends Maintenance {
 		$lc = Language::getLocalisationCache();
 		$messagesDirs = $lc->getMessagesDirs();
 
-		$finder = new LocalisationUpdate\Finder( $messagesDirs, $IP );
-		$readerFactory = new LocalisationUpdate\ReaderFactory();
-		$fetcherFactory = new LocalisationUpdate\FetcherFactory();
+		$finder = new Finder( $messagesDirs, $IP );
+		$readerFactory = new ReaderFactory();
+		$fetcherFactory = new FetcherFactory();
 
 		$repoid = $this->getOption( 'repoid', $wgLocalisationUpdateRepository );
 		if ( !isset( $wgLocalisationUpdateRepositories[$repoid] ) ) {
@@ -58,7 +64,7 @@ class Update extends Maintenance {
 		$logger = $this;
 
 		// Do it ;)
-		$updater = new LocalisationUpdate\Updater();
+		$updater = new Updater();
 		$updatedMessages = $updater->execute(
 			$finder,
 			$readerFactory,

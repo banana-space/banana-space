@@ -209,7 +209,7 @@ if __name__ == '__main__':
 	script_dir = os.path.dirname(os.path.realpath(__file__))
 	parser = OptionParser()
 	parser.add_option("--wordlist", help="A list of words (required)", metavar="WORDS.txt")
-	parser.add_option("--random", help="Use random charcters instead of a wordlist", action="store_true")
+	parser.add_option("--random", help="Use random characters instead of a wordlist", action="store_true")
 	parser.add_option("--key", help="The passphrase set as $wgCaptchaSecret (required)", metavar="KEY")
 	parser.add_option("--output", help="The directory to put the images in - $wgCaptchaDirectory (required)", metavar="DIR")
 	parser.add_option("--font", help="The font to use (required)", metavar="FONT.ttf")

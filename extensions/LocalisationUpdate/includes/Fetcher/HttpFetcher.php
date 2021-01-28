@@ -18,7 +18,7 @@ class HttpFetcher implements Fetcher {
 	 */
 	public function fetchFile( $url ) {
 		global $wgLocalisationUpdateHttpRequestOptions;
-		return \Http::get( $url, $wgLocalisationUpdateHttpRequestOptions );
+		return \Http::get( $url, $wgLocalisationUpdateHttpRequestOptions, __METHOD__ );
 	}
 
 	/**

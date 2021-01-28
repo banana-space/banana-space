@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Mestos",
-			"Pyscowicz"
+			"Pyscowicz",
+			"Ville Ullgren"
 		]
 	},
 	"categorytree": "Katekuuripuu",
@@ -21,6 +22,7 @@
 	"categorytree-num-categories": "$1 K",
 	"categorytree-num-pages": "$1 S",
 	"categorytree-num-files": "$1 F",
+	"categorytree-num-empty": "tyhjä",
 	"categorytree-load": "näytä",
 	"categorytree-loading": "haethaan",
 	"categorytree-nothing-found": "ei mithään löyetty",

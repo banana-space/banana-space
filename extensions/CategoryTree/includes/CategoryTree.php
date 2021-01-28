@@ -552,7 +552,7 @@ class CategoryTree {
 				$special,
 				$t->getText(),
 				[ 'class' => 'CategoryTreeLabel' ],
-				[ 'target' => $t->getPartialURL() ] + $this->mOptions
+				[ 'target' => $t->getDBkey() ] + $this->mOptions
 			);
 			$s .= Xml::closeElement( 'span' );
 		}

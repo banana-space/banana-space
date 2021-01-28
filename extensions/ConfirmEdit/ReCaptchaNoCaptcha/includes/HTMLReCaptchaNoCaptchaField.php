@@ -41,6 +41,8 @@ class HTMLReCaptchaNoCaptchaField extends HTMLFormField {
 			'g-recaptchascript',
 			"<script src=\"https://www.recaptcha.net/recaptcha/api.js?hl={$lang}\" async defer></script>"
 		);
+		ReCaptchaNoCaptcha::addCSPSources( $out->getCSP() );
+
 		$output = Html::element( 'div', [
 			'class' => [
 				'g-recaptcha',

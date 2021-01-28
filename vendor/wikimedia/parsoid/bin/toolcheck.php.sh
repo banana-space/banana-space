@@ -19,7 +19,7 @@ echo "Foo" | php $BIN/parse.php --mock --html2wt
 echo "Foo" | php $BIN/parse.php --mock --html2html
 
 function tempfile () {
-  mktemp "${TMPDIR:-/tmp/}$1.XXXXXX"
+  mktemp "${TMPDIR:-/tmp}/$1.XXXXXX"
 }
 
 # Check --selser too!

@@ -5,6 +5,7 @@
 			"Chrumps",
 			"Derbeth",
 			"Matma Rex",
+			"Rail",
 			"Railfail536",
 			"Sp5uhe",
 			"Woytecr"
@@ -30,7 +31,7 @@
 	"categorytree-num-files": "$1 pl.",
 	"categorytree-num-empty": "pusta",
 	"categorytree-load": "wczytaj",
-	"categorytree-loading": "wczytywanie...",
+	"categorytree-loading": "wczytywanie…",
 	"categorytree-nothing-found": "nic nie znaleziono",
 	"categorytree-no-subcategories": "brak podkategorii",
 	"categorytree-no-parent-categories": "brak kategorii nadrzędnej",

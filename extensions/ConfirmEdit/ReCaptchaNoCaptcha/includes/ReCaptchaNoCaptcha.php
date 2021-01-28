@@ -63,6 +63,13 @@ HTML;
 	}
 
 	/**
+	 * @return string[]
+	 */
+	public static function getCSPUrls() {
+		return [ 'https://www.recaptcha.net/recaptcha/api.js' ];
+	}
+
+	/**
 	 * @param Status|array|string $info
 	 */
 	protected function logCheckError( $info ) {
@@ -118,7 +125,7 @@ HTML;
 		}
 		$url = wfAppendQuery( $url, $data );
 		$request = MediaWikiServices::getInstance()->getHttpRequestFactory()
-			->create( $url, [ 'method' => 'GET' ], __METHOD__ );
+			->create( $url, [ 'method' => 'POST' ], __METHOD__ );
 		$status = $request->execute();
 		if ( !$status->isOK() ) {
 			$this->error = 'http';

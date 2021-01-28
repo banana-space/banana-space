@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"KATRINE1993"
+		]
+	},
+	"categorytree-expand": "expandir",
+	"categorytree-member-counts": "Contiene {{PLURAL:$1|1 subcategoria|$1 subcategorias}}, {{PLURAL:$2|1 pagina|$2 paginas}}, y {{PLURAL:$3|1 fichero|$3 ficheros}}",
+	"categorytree-num-categories": "$1 C",
+	"categorytree-num-pages": "$1 P",
+	"categorytree-num-files": "$1 F"
+}

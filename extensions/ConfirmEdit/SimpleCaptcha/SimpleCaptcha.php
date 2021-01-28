@@ -155,6 +155,27 @@ class SimpleCaptcha {
 	}
 
 	/**
+	 * @return string[]
+	 */
+	public static function getCSPUrls() {
+		return [];
+	}
+
+	/**
+	 * Adds the CSP policies necessary for the captcha module to work in a CSP enforced
+	 * setup.
+	 *
+	 * @param ContentSecurityPolicy $csp The CSP instance to add the policies to, usually
+	 * obtained from {@link OutputPage::getCSP()}
+	 */
+	public static function addCSPSources( ContentSecurityPolicy $csp ) {
+		foreach ( static::getCSPUrls() as $src ) {
+			$csp->addScriptSrc( $src );
+			$csp->addStyleSrc( $src );
+		}
+	}
+
+	/**
 	 * Uses getFormInformation() to get the CAPTCHA form and adds it to the given
 	 * OutputPage object.
 	 *
@@ -173,6 +194,8 @@ class SimpleCaptcha {
 	 * @param array $formInformation
 	 */
 	public function addFormInformationToOutput( OutputPage $out, array $formInformation ) {
+		static::addCSPSources( $out->getCSP() );
+
 		if ( !$formInformation ) {
 			return;
 		}

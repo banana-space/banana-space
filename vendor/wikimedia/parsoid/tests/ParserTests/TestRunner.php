@@ -364,7 +364,7 @@ class TestRunner {
 
 		// Helper function for getting a random string
 		$randomString = function () use ( &$alea ): string {
-			return (string)base_convert( $alea->uint32(), 10, 36 );
+			return (string)base_convert( (string)$alea->uint32(), 10, 36 );
 		};
 
 		$insertNewNode = function ( DOMNode $n ) use ( $randomString ): void {

@@ -38,6 +38,7 @@ class HTMLHCaptchaField extends HTMLFormField {
 			'h-captcha',
 			"<script src=\"https://hcaptcha.com/1/api.js\" async defer></script>"
 		);
+		HCaptcha::addCSPSources( $out->getCSP() );
 		return Html::element( 'div', [
 			'class' => [
 				'h-captcha',

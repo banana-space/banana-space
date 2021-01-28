@@ -20,7 +20,7 @@
 	"categorytree-member-counts": "Дыләдә һестыше {{PLURAL:$1|1 жинә категоријә|$1 жинә категоријә}}, {{PLURAL:$2|1 сәһифә|$2 сәһифә}}, ијән {{PLURAL:$3|1 фајл|$3 фајл}}",
 	"categorytree-num-categories": "$1 К",
 	"categorytree-num-pages": "$1 С",
-	"categorytree-num-files": "$1 Ф",
+	"categorytree-num-files": "$1 F",
 	"categorytree-num-empty": "təy",
 	"categorytree-load": "бо жәј",
 	"categorytree-loading": "бо карде...",

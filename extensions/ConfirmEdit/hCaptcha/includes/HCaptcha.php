@@ -47,6 +47,13 @@ class HCaptcha extends SimpleCaptcha {
 	}
 
 	/**
+	 * @return string[]
+	 */
+	public static function getCSPUrls() {
+		return [ 'https://hcaptcha.com', 'https://*.hcaptcha.com' ];
+	}
+
+	/**
 	 * @param Status|array|string $info
 	 */
 	protected function logCheckError( $info ) {
