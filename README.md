@@ -6,17 +6,19 @@ BananaSpace 是一个基于带扩展的 MediaWiki（Wikipedia 使用的平台）
 
 ### Content
 
-The project is still in development. Currently, the BananaSpace repo includes the following contents:
+This repo contains MediaWiki source code together with
 
-* MediaWiki Sourcecode.
-* Extension called TeXParser inside the extensions folder.
+* `TeXParser` extension;
+* `Banana` skin.
 
-In the near future, a skin will be added into the project.
+To enable them, add the following lines to `LocalSettings.php`.
 
-这个项目还在开发中。现在，BananaSpace repo 里有以下内容：
+``` php
+wfLoadSkin( 'Banana' );
+$wgDefaultSkin = 'Banana';
 
-* MediaWiki 1.35.0 的源代码。
-* 一个叫做 TeXParser 的扩展，塞在 extensions 文件夹里。
+wfLoadExtension( 'TeXParser' );
+```
 
 ### How to use
 
@@ -28,38 +30,9 @@ As the project is in development, it's not recommended to use it right now. When
 
 这个项目还正在开发，所以我们不推荐你现在就使用它。当这个项目有一定稳定性后，我们将会把使用说明写在这里。
 
-The following is the original introduction to MediaWiki:
+### 运行步骤
 
-# MediaWiki
-
-MediaWiki is a free and open-source wiki software package written in PHP. It
-serves as the platform for Wikipedia and the other Wikimedia projects, used
-by hundreds of millions of people each month. MediaWiki is localised in over
-350 languages and its reliability and robust feature set have earned it a large
-and vibrant community of third-party users and developers.
-
-MediaWiki is:
-
-* feature-rich and extensible, both on-wiki and with hundreds of extensions;
-* scalable and suitable for both small and large sites;
-* simple to install, working on most hardware/software combinations; and
-* available in your language.
-
-For system requirements, installation, and upgrade details, see the files
-RELEASE-NOTES, INSTALL, and UPGRADE.
-
-* Ready to get started?
-** https://www.mediawiki.org/wiki/Special:MyLanguage/Download
-* Looking for the technical manual?
-** https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Contents
-* Seeking help from a person?
-** https://www.mediawiki.org/wiki/Special:MyLanguage/Communication
-* Looking to file a bug report or a feature request?
-** https://bugs.mediawiki.org/
-* Interested in helping out?
-** https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute
-
-MediaWiki is the result of global collaboration and cooperation. The CREDITS
-file lists technical contributors to the project. The COPYING file explains
-MediaWiki's copyright and license (GNU General Public License, version 2 or
-later). Many thanks to the Wikimedia community for testing and suggestions.
+* 通过 MediaWiki 安装向导生成 `LocalSettings.php` 文件，放在根目录。
+* 运行 [bTeX](https://github.com/banana-space/btex)。
+* 运行 `php -S localhost:5000`。
+* 在浏览器打开 `localhost:5000`。
