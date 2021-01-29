@@ -8,14 +8,12 @@
 	"type": "parser",
 	"manifest_version": 1,
 	"AutoloadClasses": {
+		"LabelHandler": "includes/LabelHandler.php",
 		"TeXParserHooks": "includes/TeXParserHooks.php"
 	},
 	"Hooks": {
 		"ParserBeforeInternalParse": "TeXParserHooks::onParserBeforeInternalParse",
 		"BeforePageDisplay": "TeXParserHooks::onBeforePageDisplay"
-	},
-	"ExtensionMessagesFiles": {
-		"TeXParserMagic": "includes/TeXParserMagic.php"
 	},
 	"ResourceModules": {
 		"ext.TeXParser": {
