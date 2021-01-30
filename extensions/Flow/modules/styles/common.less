@@ -1,0 +1,345 @@
+@import 'mediawiki.mixins';
+@import 'flow.colors';
+@import 'flow.variables';
+
+.flow-component {
+	.flow-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		li:hover {
+			background: @colorGray14;
+		}
+
+		a:focus {
+			background-color: @colorGray14;
+		}
+	}
+}
+
+/* board navigation */
+.flow-board-navigation,
+/* whole board content wrapper */
+.flow-board {
+	.box-sizing( border-box );
+	font-size: 0.875em;
+	width: 100%;
+	padding-left: 0;
+	padding-top: 0;
+
+	@media all and ( min-width: @medium ) {
+		padding-right: 20px;
+	}
+}
+
+.flow-board {
+	padding-bottom: 24px;
+}
+
+.flow-board-page {
+	.flow-board-navigation,
+	.flow-board {
+		max-width: 700px;
+	}
+
+	.flow-board-newtopic {
+		.flow-newtopic-form {
+			padding-top: 1.5em;
+			/* Join inputs together */
+			> .mw-ui-input {
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+		}
+	}
+}
+
+.flow-topic-page {
+	.flow-board {
+		max-width: 850px;
+	}
+}
+
+/* Individual topic containers */
+.flow-topic {
+	padding: 1em 0 1.4em;
+	margin-top: 0.6em;
+}
+
+/* Revision view */
+.flow-revision-content {
+	background-color: @colorGray14;
+	color: @colorGray7;
+	margin-top: 20px;
+	padding: 10px;
+}
+
+/* "No more" link */
+.flow-no-more,
+/* "Undo" moderation link */
+.flow-undo {
+	font-size: 0.875em;
+	color: @colorGray7;
+	/* These two will flip in RTL interface */
+	text-align: left;
+	direction: ltr;
+}
+
+.flow-topic-meta {
+	font-size: 0.875em;
+}
+
+/* Decorate as a pipelist, ex: (foo | bar | baz) */
+.flow-pipelist {
+	span ~ span:before {
+		content: ' | ';
+	}
+}
+
+.flow-ui-clear {
+	clear: both;
+	line-height: 0;
+}
+
+/* This is to make sure there is enough space */
+/* at the bottom to display the last post's menu. */
+.flow-bottom-spacer {
+	height: 100px;
+}
+
+/* Override OOUI's frameless-buttons having */
+/* a white border inside the description area */
+/* (which has a grey background) */
+.flow-ui-boardDescriptionWidget-editButton.oo-ui-widget.oo-ui-buttonElement .oo-ui-buttonElement-button {
+	border-color: transparent;
+}
+
+@media all and ( min-width: @small ) {
+	.flow-topic-meta {
+		font-size: 1em;
+	}
+
+	/* The sort navigation */
+	.flow-board-header-menu,
+	/* board navigation */
+	.flow-board-navigation,
+	/* whole board content wrapper */
+	.flow-board {
+		/* Set a fixed font-size from which everything else can use a relative amount */
+		font-size: 1em;
+		line-height: 1.4;
+	}
+}
+
+@media all and ( min-width: @medium ) {
+	.flow-component.flow-board-page {
+		.flow-board-header {
+			padding-left: 10px;
+			padding-right: 10px;
+			float: right;
+			width: 34%;
+			min-height: 70vh;
+			box-sizing: border-box;
+			background-color: @colorGray14;
+			box-shadow: -2px 0 0 0 rgba( 0, 0, 0, 0.1 );
+
+			.flow-board-header-title {
+				display: block;
+			}
+
+			.side-rail-toggle-button {
+				visibility: visible;
+
+				.collapse-button {
+					display: block;
+				}
+
+				.expand-button {
+					display: none;
+				}
+			}
+		}
+
+		.flow-board-navigation,
+		.flow-board {
+			float: left;
+			clear: left;
+			width: 66%;
+			box-sizing: border-box;
+			max-width: @large;
+			padding-right: 26px;
+		}
+	}
+
+	.flow-component.flow-board-page.flow-full-height-side-rail {
+		position: relative;
+
+		.flow-board-header {
+			position: static;
+			/* background and box-shadow are moved to :before for full height */
+			background: transparent;
+			box-shadow: none;
+		}
+
+		.flow-board-header:before {
+			content: '';
+			display: block;
+			position: absolute;
+			height: 100%;
+			top: 0;
+			right: 0;
+			z-index: -1;
+			width: 34%;
+			box-sizing: border-box;
+			background-color: @colorGray14;
+			box-shadow: -2px 0 0 0 rgba( 0, 0, 0, 0.1 );
+		}
+	}
+
+	.flow-component.flow-board-page.expanded {
+		padding-right: 30px;
+
+		.flow-board-header {
+			width: 30px;
+			margin-right: -30px;
+			padding-left: 0;
+			padding-right: 0;
+			margin-left: 0;
+
+			.side-rail-toggle-button {
+				.collapse-button {
+					display: none;
+				}
+
+				.expand-button {
+					display: block;
+				}
+			}
+
+			.flow-board-header-title,
+			.flow-board-header-detail-view,
+			.flow-board-header-restricted,
+			.flow-ui-boardDescriptionWidget,
+			.flow-board-header-footer {
+				display: none;
+			}
+		}
+
+		.flow-board-header:before {
+			width: 30px;
+		}
+
+		.flow-board-navigation,
+		.flow-board {
+			width: 100%;
+			max-width: none;
+		}
+	}
+
+	.flow-component.flow-topic-page {
+		.flow-board {
+			float: left;
+			width: 66%;
+			max-width: @large;
+			padding-right: 26px;
+
+			&-expanded {
+				width: 100%;
+				max-width: none;
+			}
+		}
+	}
+}
+
+.flow-board-header-footer {
+	margin-top: 2em;
+	font-size: 0.85em;
+
+	@media ( min-width: @medium ) {
+		margin-top: 6em;
+	}
+}
+
+.flow-history-moderation-menu {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+
+	li {
+		display: inline;
+	}
+
+	> section {
+		display: inline;
+
+		&:not( :first-of-type ) > li {
+			&:first-of-type {
+				border-top: 0;
+
+				&:before {
+					content: '(';
+				}
+			}
+
+			& + li:before {
+				content: ' | ';
+			}
+
+			&:last-of-type:after {
+				content: ')';
+			}
+		}
+	}
+}
+
+.pull-right {
+	float: right;
+}
+
+/* Vector theme overrides */
+/* makes the layout more compact on Talk (ns-1) and User_Talk (ns-3) */
+body.ns-1,
+body.ns-3 {
+	.mw-body {
+		@media all and ( min-width: @medium ) {
+			padding-right: 0;
+			padding-bottom: 0;
+		}
+
+		h1.firstHeading {
+			margin-bottom: 0;
+		}
+
+		#contentSub { /* stylelint-disable-line selector-max-id */
+			display: none;
+		}
+	}
+}
+
+@mw-ui-icon-size-flow: ( 20em / 14 );
+
+.flow-component .mw-ui-icon {
+	opacity: 0.87; /* equals `#222` on background-color `#fff`, closest to `#202122` */
+	min-width: @mw-ui-icon-size-flow;
+	min-height: @mw-ui-icon-size-flow;
+
+	&.mw-ui-icon-before:before {
+		width: @mw-ui-icon-size-flow;
+		min-height: @mw-ui-icon-size-flow;
+		margin-right: 0.5em;
+	}
+
+	&.mw-ui-icon-before:after {
+		margin-left: 0.5em;
+	}
+
+	&.mw-ui-icon-before.mw-ui-icon-only:before {
+		margin-right: 0;
+	}
+
+	&.mw-ui-icon-before.mw-ui-icon-only:after {
+		margin-left: 0;
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gott wisst",
+			"JJohnson1701"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|þancian}}}}",
+	"thanks-thanked": "{{GENDER:$1|{{GENDER:$2|geþancod}}}}",
+	"thanks-button-thanked": "{{GENDER:$1|{{GENDER:$2|Geþancod}}}}",
+	"thanks-error-undefined": "Þancung trucode. Bidde genēðe eft.",
+	"thanks-thank-tooltip": "{{GENDER:$1|Sendan}} þanc {{GENDER:$2|þissum brūcende|þisse brūcicgan}}",
+	"echo-category-title-edit-thank": "Þancunga",
+	"notification-thanks-diff-link": "þīn ādihtung"
+}

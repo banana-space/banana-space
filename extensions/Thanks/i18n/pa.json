@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aalam",
+			"Babanwalia",
+			"Satdeep gill",
+			"TariButtar"
+		]
+	},
+	"thanks-desc": "ਵਰਤੋਂਕਾਰਾਂ ਦਾ ਸੋਧਾਂ, ਟਿੱਪਣੀਆਂ ਆਦਿ ਲਈ ਧੰਨਵਾਦ ਕਰਨ ਲਈ ਧੰਨਵਾਦੀ ਲਿੰਕ ਜੋੜਦਾ ਹੈ",
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|ਧੰਨਵਾਦ ਕਹੋ}}}}",
+	"thanks-thanked": "{{GENDER:$1|ਧੰਨਵਾਦ ਕੀਤਾ ਗਿਆ}}",
+	"thanks-button-thank": "ਧੰਨਵਾਦ",
+	"thanks-button-thanked": "{{GENDER:$1|ਧੰਨਵਾਦ ਕੀਤਾ ਗਿਆ}}",
+	"thanks-error-undefined": "ਧੰਨਵਾਦ ਕਾਰਜ ਫੇਲ ਹੋਇਆ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।",
+	"thanks-error-invalidrevision": "ਸੁਧਾਈ ਪਛਾਣ ਉਚਿਤ ਨਹੀਂ ਹੈ।",
+	"thanks-error-ratelimited": "ਤੁਸੀਂ ਗਤੀ ਹੱਦ ਪਾਰ ਕਰ ਗਏ ਹੋ। ਕਿਰਪਾ ਕਰਕੇ ਕੁਝ ਸਮਾਂ ਇੰਤਜ਼ਾਰ ਕਰੇ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+	"thanks-thank-tooltip": "ਇਸ {{GENDER:$2|ਵਰਤੋਂਕਾਰ}} ਨੂੰ ਇੱਕ ਧੰਨਵਾਦੀ ਸੂਚਨਾ {{GENDER:$1|ਭੇਜੋ}}",
+	"thanks-thanked-notice": "$1 ਨੂੰ ਦੱਸ ਦਿੱਤਾ ਗਿਆ ਕਿ ਤੁਹਾਨੂੰ {{GENDER:$2|ਉਹਨਾਂ ਦੀ}} ਸੋਧ ਪਸੰਦ ਆਈ।",
+	"echo-pref-subscription-edit-thank": "ਮੇਰੀ ਸੋਧ ਲਈ ਮੈਨੂੰ ਧੰਨਵਾਦ",
+	"echo-pref-tooltip-edit-thank": "ਜਦੋਂ ਕੋਈ ਮੇਰੀ ਸੋਧ ਦਾ ਧੰਨਵਾਦ ਕਰਦਾ ਹੈ ਤਾਂ ਮੈਨੂੰ ਇਤਲਾਹ ਦਿਓ",
+	"echo-category-title-edit-thank": "ਮਿਹਰਬਾਨੀ",
+	"notification-thanks-diff-link": "ਤੁਹਾਡੀ ਸੋਧ",
+	"log-name-thanks": "ਮਿਹਰਬਾਨੀਆਂ ਦਾ ਇੰਦਰਾਜ",
+	"log-description-thanks": "ਹੇਠਾਂ ਦੂਜੇ ਵਰਤੋਂਕਾਰਾਂ ਦੁਆਰਾ ਧੰਨਵਾਦ ਕੀਤੇ ਵਰਤੋਂਕਾਰਾਂ ਦੀ ਇੱਕ ਲਿਸਟ ਹੈ।",
+	"logentry-thanks-thank": "$1 ਨੇ {{GENDER:$4|$3}} ਦਾ {{GENDER:$2|ਧੰਨਵਾਦ}} ਕੀਤਾ ਹੈ",
+	"notification-link-text-view-post": "ਟਿੱਪਣੀ ਵੇਖੋ",
+	"notification-flow-thanks-post-link": "ਤੁਹਾਡੀ ਟਿੱਪਣੀ"
+}

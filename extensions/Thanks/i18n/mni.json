@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"Awangba Mangang",
+			"Laishram Lokendro"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|ꯊꯥꯒꯠꯆꯔꯤ}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$1|Send}} a thank you notification to this {{GENDER:$2|ꯁꯤꯖꯤꯟꯅꯔꯤꯕ}}",
+	"thanks-confirmation2": "{{GENDER:$1|Send}} public thanks for this edit?",
+	"flow-thanks-confirmation-special": "nahak waphamsigidamak mayamda thagat-waheising piningbra?"
+}

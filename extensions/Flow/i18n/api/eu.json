@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mikel Ibaiba",
+			"Subi"
+		]
+	},
+	"apihelp-flow+edit-topic-summary-param-summary": "Laburpenaren edukia.",
+	"apihelp-flow+edit-topic-summary-param-format": "Laburpaneren formatua (wikitestua|html)",
+	"apihelp-flow+undo-edit-post-description": "Editatzen ari zaren argitalpena desegiteko beharrezkoa den informazioa berriro lortu behar da.",
+	"apihelp-flow+undo-edit-post-summary": "Editatzen ari zaren argitalpena desegiteko beharrezkoa den informazioa berriro lortu behar da."
+}

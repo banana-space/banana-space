@@ -1,0 +1,139 @@
+@import 'mediawiki.mixins';
+@import '../../flow.colors';
+@import '../../flow.variables';
+
+// Show that the topic titlebar is clickable
+.flow-topic-titlebar {
+	position: relative;
+	padding: 0.5em 0;
+	background-color: @colorGray14;
+	border-radius: @border-radius-base;
+	outline: 0;
+
+	.flow-menu {
+		top: 2.5em;
+	}
+
+	.flow-topic-titlebar-container,
+	.flow-edit-title-form {
+		.mw-content-ltr & {
+			/* @noflip */
+			padding-right: @topicIndent + 2em;
+			/* @noflip */
+			padding-left: @topicIndent;
+		}
+
+		.mw-content-rtl & {
+			/* @noflip */
+			padding-right: @topicIndent;
+			/* @noflip */
+			padding-left: @topicIndent + 2em;
+		}
+	}
+
+	.flow-topic-summary,
+	.flow-ui-editTopicSummaryWidget {
+		padding-left: @topicIndent;
+		padding-right: @topicIndent;
+	}
+}
+
+// Use extra specificity to override `.mw-body-content h2` from Vector.
+.mw-body .flow-topic-title {
+	padding: 0;
+	border-bottom: 0;
+	font-family: sans-serif;
+	font-weight: bold;
+	word-break: break-word;
+	word-wrap: break-word;
+	overflow: visible;
+
+	.mw-ui-icon {
+		vertical-align: bottom;
+	}
+}
+
+// Correct positioning for ltr/rtl content direction.
+.mw-body .mw-content-ltr .flow-topic-title {
+	/* @noflip */
+	margin: 0 2.5em 0.15em 0;
+
+	.mw-ui-icon {
+		// HACK: Move check icon a bit to the left so it's better aligned with the text below it.
+		/* @noflip */
+		margin-left: -0.33em;
+
+		&.mw-ui-icon-before:before {
+			/* @noflip */
+			float: left;
+			/* @noflip */
+			margin-right: 0;
+		}
+	}
+}
+
+// Correct positioning for ltr/rtl content direction.
+.mw-body .mw-content-rtl .flow-topic-title {
+	/* @noflip */
+	margin: 0 0 0.15em 2.5em;
+
+	.mw-ui-icon {
+		// HACK: Move check icon a bit to the right so it's better aligned with the text below it.
+		/* @noflip */
+		margin-right: -0.33em;
+
+		&.mw-ui-icon-before:before {
+			/* @noflip */
+			float: right;
+			/* @noflip */
+			margin-left: 0;
+		}
+	}
+}
+
+.flow-moderated-topic-title {
+	margin-bottom: 0.33em;
+	color: @colorTextLight;
+	font-weight: bold;
+}
+
+// Override default Vector heading styles.
+.mw-body h2.flow-topic-title {
+	font-size: 1.5em;
+}
+
+// Notification about subscribing to a topic
+.flow-notification-tooltip-topicsub {
+	width: 15em;
+}
+
+.flow-notification-tooltip-icon {
+	.mw-ui-icon {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+
+		&.mw-ui-icon-star { // Overwrite default `.mw-ui-icon` properties
+			min-width: 32px;
+			width: 32px;
+			max-width: 32px;
+			min-height: 32px;
+			font-size: 32px;
+			line-height: 1;
+		}
+	}
+}
+
+.flow-notification-tooltip-title {
+	font-size: 1em;
+}
+
+.flow-undo {
+	float: right;
+}
+
+.flow-topic-title-activate-edit {
+	.flow-topic-title {
+		display: none;
+	}
+}

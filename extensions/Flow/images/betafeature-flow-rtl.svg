@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="264" height="162" viewBox="0 0 264 162">
+	<defs>
+		<clipPath id="jagged-edge">
+			<path d="M0 0v152l12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10 12 10 12-10V0z"/>
+		</clipPath>
+	</defs>
+	<g fill="#eaecf0" clip-path="url(#jagged-edge)" transform="matrix(-1 0 0 1 264 0)">
+		<path id="logo" d="M11 22c0-8 6-14 14-14s14 6 14 14-6 14-14 14-14-6-14-14M38 45v-5H13v5h25"/>
+		<path id="sidebar" d="M38 163V58H13v106h25"/>
+		<path id="personal-tools" d="M233 5h26v6h-26V5zM209 5h22v6h-22zM185 5h22v6h-22zM162 5h13v6h-13zM177 5h6v6h-6zM154 5h6v6h-6z"/>
+		<g id="search">
+			<path id="input" d="M258 16v4h-92v-4h92m1-1h-94v6h94v-6z"/>
+			<path id="icon" d="M168 17h2v2h-2z"/>
+		</g>
+		<path id="article" d="M252 162V29H48v133z"/>
+		<path id="border" d="M0 0v162h264V0zm1 1h262v150.533l-11 9.166-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-12-10-12 10-11-9z"/>
+		<path id="flow" fill="#36c" d="M191.047 81.46v39.226l8.717 8.717h-61.02V81.46h52.303zm-74.094-21.792h52.302v17.434h-34.868v30.51h-26.15l8.716-8.718V59.668z"/>
+	</g>
+</svg>

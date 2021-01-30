@@ -1,0 +1,37 @@
+{
+	"@metadata": {
+		"authors": [
+			"Исмаил Садуев",
+			"Умар"
+		]
+	},
+	"thanks-desc": "Истори чу а версин башхала хьожечухь а баркалла олу хьажоргаш тӀетуху",
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|баркалла}}}}",
+	"thanks-thanked": "{{GENDER:$1|Баркалла аьлла}}",
+	"thanks-button-thank": "{{GENDER:$1|{{GENDER:$2|Баркалла}}}}",
+	"thanks-button-thanked": "{{GENDER:$1|{{GENDER:$2|Баркалла аьлла}}}}",
+	"thanks-error-undefined": "Баркалла ала тар цаделира. ЮхагӀорта.",
+	"thanks-error-invalidrevision": "Версин нийса йоцу номер.",
+	"thanks-error-ratelimited": "{{GENDER:$1|Ахьа}} тӀех дукха и дийна. Дехар до, сабардина юхагӀорта.",
+	"thanks-thank-tooltip": "{{GENDER:$1|Бахьийта}} {{GENDER:$2|хӀокху декъашхочунга}} баркаллин хаам",
+	"thanks-confirmation2": "ХӀара нисдар дарна баркалла {{GENDER:$1|дӀадохьуьйтий}}?",
+	"thanks-thanked-notice": "$1 {{GENDER:$2|хаам бина}}, {{GENDER:$2|цуна|цера}} нисдар хаза хетта аьлла.",
+	"thanks": "ДӀадахьийта баркалла",
+	"thanks-submit": "ДӀадахьийта баркалла",
+	"echo-pref-subscription-edit-thank": "Баркалла суна ас нисдар дарна",
+	"echo-pref-tooltip-edit-thank": "Хаийта соьга, цхьам баркалла аьлча.",
+	"echo-category-title-edit-thank": "Баркалла",
+	"notification-thanks-diff-link": "нисдар",
+	"notification-header-rev-thank": "$1 {{GENDER:$2|хьуна}} {{GENDER:$4|баркалла аьлла}} $3 хӀара агӀо таярна.",
+	"notification-header-creation-thank": "$1 {{GENDER:$4|хьуна}} {{GENDER:$2|баркалла аьлла}} <strong>$3</strong> агӀо кхолларна.",
+	"log-name-thanks": "Баркаллийн тептар",
+	"log-description-thanks": "Кхечу декъашхоша баркалла аьлла болу декъашхой чохь болу тептар.",
+	"logentry-thanks-thank": "{{GENDER:$4|декъашхочуна}} $3 $1 {{GENDER:$2|баркалла аьла}}",
+	"logeventslist-thanks-log": "Баркаллийн тептар",
+	"thanks-error-no-id-specified": "Баркалла дӀадахьийта нисдаран ID билгаляккха еза.",
+	"notification-link-text-view-post": "Хьажа къамеле",
+	"thanks-error-invalidpostid": "Хааман магийна доцу ID.",
+	"flow-thanks-confirmation-special": "Лаьий хьуна баркалла ала?",
+	"flow-thanks-thanked-notice": "$1 {{GENDER:$2|хаам бина}}, хьуна {{GENDER:$2|цуна|цера}} къамел хаза хетта аьлла.",
+	"notification-flow-thanks-post-link": "хьан коммент"
+}

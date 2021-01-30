@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bishnu Saikia"
+		]
+	},
+	"flow-moderation-confirm-unhide-post": "দেখুৱাওক",
+	"flow-moderation-confirm-unhide-topic": "দেখুৱাওক",
+	"flow-edited-by": "$1 দ্বাৰা সম্পাদিত"
+}

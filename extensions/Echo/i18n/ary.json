@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Reda Benkhadra",
+			"SADIQUI"
+		]
+	},
+	"echo-new-messages": "عندك ميساجات جداد",
+	"tooltip-pt-notifications-alert": "{{GENDER:|تنبيهاتك}}",
+	"notification-inbox-filter-all": "كلشي"
+}

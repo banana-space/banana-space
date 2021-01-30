@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Archaeodontosaurus",
+			"Dağlı95",
+			"Interfase",
+			"Khan27",
+			"Serkanland",
+			"Toghrul Rahimli",
+			"Wertuose"
+		]
+	},
+	"thanks-desc": "İstifadəçilərin redaktələrinə, şərhlərinə və s. görə minnətdarlıq üçün keçidləri əlavə edir",
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|təşəkkür}}}}",
+	"thanks-thanked": "{{GENDER:$1|təşəkkür edildi}}",
+	"thanks-button-thank": "{{GENDER:$1|Təşəkkür}}",
+	"thanks-button-thanked": "{{GENDER:$1|Təşəkkür edildi}}",
+	"thanks-button-action-queued": "$1 adlı istifadəçiyə {{GENDER:$1|{{GENDER:$2|təşəkkür edilir}}}}…",
+	"thanks-button-action-cancel": "İmtina",
+	"thanks-button-action-completed": "Siz $1 adlı istifadəçiyə {{GENDER:$1|{{GENDER:$2|təşəkkür }}}} etdiniz",
+	"thanks-error-undefined": "Təşəkkür bildirişinin göndərilməsi alınmadı. Xahiş edirik, yenidən cəhd edin.",
+	"thanks-thank-tooltip": "Bu {{GENDER:$2|istifadəçiyə}} təşəkkür bildirişi {{GENDER:$1|göndər}}.",
+	"thanks-confirmation2": "Bu dəyişiklik üçün təşəkkür göndərilsin?",
+	"thanks-thanked-notice": "{{GENDER:$3|Siz}} {{GENDER:$2|$1}} adlı istifadəçiyə təşəkkür etdiniz.",
+	"thanks": "Təşəkkür göndər",
+	"thanks-submit": "Təşəkkür göndər",
+	"echo-pref-tooltip-edit-thank": "Etdiyim redaktəyə görə təşəkkür edildikdə mənə bildiriş göndər.",
+	"echo-category-title-edit-thank": "Təşəkkürlər",
+	"notification-thanks-diff-link": "redaktəniz",
+	"notification-header-rev-thank": "$1 '''$3''' səhifəsindəki redaktənizə görə {{GENDER:$4|sizə}} {{GENDER:$2|təşəkkür etdi}}.",
+	"notification-header-creation-thank": "$1 <strong>$3</strong> səhifəsini yaratdığınıza görə  sizə {{GENDER:$2|təşəkkür etdi}}.",
+	"notification-header-log-thank": "$1 <strong>$3</strong> səhifəsi ilə əlaqəli etdiyiniz fəaliyyətə görə {{GENDER:$4|sizə}} {{GENDER:$2|təşəkkür etdi}}.",
+	"notification-bundle-header-log-thank": "{{PLURAL:$1|$1 nəfər|$1 nəfər|$1 nəfər|100=99+ nəfər}} <strong>$2</strong> səhifəsi ilə əlaqəli etdiyiniz fəaliyyətə görə {{GENDER:$4|sizə}} təşəkkür etdi..",
+	"logentry-thanks-thank": "$1 {{GENDER:$2}}, {{GENDER:$4|$3}} istifadəçisinə təşəkkür etdi.",
+	"thanks-confirmation-special-log": "Bu fəaliyyət üçün təşəkkür göndərilsin?",
+	"thanks-confirmation-special-rev": "Bu redaktə üçün təşəkkür göndərilsin?",
+	"flow-thanks-confirmation-special": "Bu şərh üçün təşəkkür göndərilsin?"
+}

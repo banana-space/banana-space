@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Poiuyt",
+			"飞舞回堂前"
+		]
+	},
+	"echo-pref-send-me": "发畀我：",
+	"echo-pref-send-to": "发送到：",
+	"tooltip-pt-notifications-alert": "{{GENDER:|侬}}个提示"
+}

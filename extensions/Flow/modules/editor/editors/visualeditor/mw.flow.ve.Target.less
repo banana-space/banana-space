@@ -1,0 +1,47 @@
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+@import '../../../styles/flow.variables';
+
+// TODO most of this should move to EditorWidget.less once the old editor system
+// has been removed
+.flow-component {
+	.ve-init-target {
+		border: 1px solid #c8ccd1;
+	}
+
+	.ve-ce-documentNode,
+	.ve-ui-surface-placeholder {
+		padding: 1px 0.625em;
+	}
+
+	.ve-init-mw-target-surface {
+		&.ve-ui-surface-source {
+			.ve-ce-documentNode,
+			.ve-ui-surface-placeholder {
+				// Extra top margin, because source mode paragraphs have no margin
+				// Extra bottom margin for wikitext notice
+				padding: 0.4em 0.625em 1.6em 0.625em;
+			}
+		}
+
+		.ve-ce-documentNode {
+			.box-sizing( border-box );
+			min-height: @editorMinHeight;
+		}
+	}
+
+	.ve-ui-debugBar {
+		padding: 4px 0.625em;
+		/* Make sure the surface doesn't overlay */
+		position: relative;
+	}
+
+	.ve-ui-surface-source .ve-ui-debugBar {
+		// Avoid collision with wikitext message
+		padding-bottom: 1.5em;
+	}
+
+	.ve-ui-overlay {
+		line-height: normal;
+	}
+}

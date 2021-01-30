@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jnanaranjan Sahu",
+			"Psubhashish"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|ସାଧୁବାଦ ଦେବେ}}}}",
+	"thanks-thanked": "{{GENDER:$1|{{GENDER:$2|ସାଧୁବାଦ ଦେଲେ}}}}",
+	"thanks-button-thanked": "{{GENDER:$1|{{GENDER:$2|ସାଧୁବାଦ ଦେଲେ}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$2|user}}ଙ୍କୁ ଏକ ସାଧୁବାଦ ସୂଚନା {{GENDER:$1|ପଠାନ୍ତୁ}}",
+	"thanks-confirmation2": "ଏହି ସମ୍ପାଦନା ପାଇଁ ସାଧାରଣରେ {{GENDER:$1|ସାଧୁବାଦ ଜଣାଇବେ}}?",
+	"thanks": "ସାଧୁବାଦ ଜଣାନ୍ତୁ",
+	"thanks-submit": "ସାଧୁବାଦ ଜଣାନ୍ତୁ",
+	"log-description-thanks": "ବାକି ବ୍ୟବହାରକାରୀଙ୍କ ଦ୍ୱାରା ସାଧୁବାଦ ପାଇଥିବା ସଭ୍ୟଙ୍କ ତାଲିକା ।",
+	"logentry-thanks-thank": "$1 {{GENDER:$2|ସାଧୁବାଦ ଦେଲେ}} {{GENDER:$4|$3}}",
+	"flow-thanks-confirmation-special": "ଏହି ମତ ପାଇଁ ସାଧାରଣରେ ସାଧୁବାଦ ଜଣାଇବେ?",
+	"flow-thanks-thanked-notice": "$1ଙ୍କୁ {{GENDER:$2|ତାଙ୍କ|ତାଙ୍କ|ସେମାନଙ୍କ}} ସମ୍ପାଦନା ଲାଗି ସାଧୁବାଦ ଜଣାଇଦିଆଗଲା ।"
+}

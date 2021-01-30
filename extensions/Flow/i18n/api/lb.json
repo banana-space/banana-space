@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robby"
+		]
+	},
+	"apihelp-flow-example-1": "Ännert d'Beschreiwung vun ''[[Talk:Sandbox]]''",
+	"apihelp-flow+edit-header-param-content": "Inhalt fir d'Beschreiwung.",
+	"apihelp-flow+edit-header-param-format": "Format vun der Beschreiwung (wikitext|html)",
+	"apihelp-flow+edit-header-example-1": "D'Beschreiwung vun [[Talk:Sandbox]] änneren",
+	"apihelp-flow+edit-title-param-content": "Inhalt fir den Titel, am selwechte Format erlaabt fir de Resumé vun der Ännerung (topic-title-wikitext)",
+	"apihelp-flow+edit-topic-summary-param-summary": "Inhalt fir de Resumé.",
+	"apihelp-flow+edit-topic-summary-param-format": "Format vum Resumé (wikitext|html)",
+	"apihelp-flow+edit-topic-summary-example-1": "Ännert de Resumé vu(n) [[Topic:S2tycnas4hcucw8w]]",
+	"apihelp-flow+moderate-post-param-reason": "Grond fir Moderatioun.",
+	"apihelp-flow+view-topic-description": "En Thema weisen.",
+	"apihelp-flow+view-topic-summary": "En Thema weisen.",
+	"apihelp-flow-parsoid-utils-param-to": "Format an deen den Inhalt ëmgewandelt soll ginn."
+}

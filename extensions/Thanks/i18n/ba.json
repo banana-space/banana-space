@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sagan",
+			"Азат Хәлилов",
+			"Айсар",
+			"Гизатуллина",
+			"Ләйсән",
+			"Рустам Нурыев",
+			"Танзиля Кутлугильдина",
+			"Янмурза Баки"
+		]
+	},
+	"thanks-desc": "Ҡатнашыусыларға мөхәррирләгәнгә рәхмәт әйтергә һ.б., һылтанмалар өҫтәй.",
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|рәхмәт әйтергә}}}}",
+	"thanks-thanked": "{{GENDER:$1|{{GENDER:$2|Рәхмәт әйтелде}}}}",
+	"thanks-button-thank": "{{GENDER:$1|{{GENDER:$2|Рәхмәт әйтергә}}}}",
+	"thanks-button-thanked": "{{GENDER:$1|{{GENDER:$2|Рәхмәт әйтергә}}}}",
+	"thanks-error-undefined": "Рәхмәт әйтеү килеп сыҡманы ($1 хата коды). Ҡабатлап эшләп ҡарағыҙ.",
+	"thanks-error-invalidrevision": "ID версия хаталы",
+	"thanks-error-ratelimited": "{{GENDER:$1|Һеҙ}} бындай эштәрҙе башҡарыуҙың сикләнгән тиҙлеген арттырып ебәрҙегеҙ.  Бер аҙ ваҡыт көтөгөҙ һәм яңынан эшләп ҡарағыҙ",
+	"thanks-thank-tooltip": "{{GENDER:$2|Был ҡатнашыусыға}} рәхмәт хәбәре {{GENDER:$1|ебәрергә}}",
+	"thanks-thank-tooltip-no": "{{GENDER:$1|Cancel}} рәхмәт белдереү хәбәре",
+	"thanks-confirmation2": "Был төҙәтеү өсөн рәхмәт {{GENDER:$1|әйтергә}}ме?",
+	"thanks-thanked-notice": "{{GENDER:$3|Һеҙ}} $1 {{GENDER:$2|ҡатнашыусыға}} рәхмәт белдерҙегеҙ.",
+	"thanks": "Рәхмәт әйтеү",
+	"thanks-submit": "Рәхмәт әйтергә",
+	"echo-pref-subscription-edit-thank": "Үҙемдең үҙгәртеүгә миңә рәхмәт.",
+	"echo-pref-tooltip-edit-thank": "\nМинең эшләнгән үҙгәртеүҙәрем өсөн ҡотларға теләгәндәргә, миңә хәбәр итәргә.",
+	"echo-category-title-edit-thank": "Рәхмәт!",
+	"notification-thanks-diff-link": "Һеҙҙең үҙгәртеүҙәрҙе",
+	"notification-header-rev-thank": "$1 {{GENDER:$4|һеҙгә}} <strong>$3</strong> битендә яһаған үҙгәртеүегеҙ өсөн {{GENDER:$2|рәхмәт әйтте}}.",
+	"log-name-thanks": "Ҡотлауҙар журналы",
+	"log-description-thanks": "Икенсе ҡатнашыусыларҙан ҡотлау алғандарҙан, аҫта ҡатнашыусылар исемлеге бар",
+	"logentry-thanks-thank": "$3 {{GENDER:$4|ҡатнашыусыны}}  $1 {{GENDER:$2|ҡотланы}}",
+	"thanks-error-no-id-specified": "Ҡотлау өсөн үҙгәртеү идентификаторын күрһәтергә.",
+	"notification-link-text-view-post": "Йөкмәткене ҡарарға",
+	"thanks-error-invalidpostid": "Хәбәрҙең тыйылған идентификаторы.",
+	"flow-thanks-confirmation-special": "Был төҙәтеү өсөн рәхмәт әйтергә теләйһегеҙме?",
+	"flow-thanks-thanked-notice": "{{GENDER:$3|Һеҙ}} $1 {{GENDER:$2|уның}} аңлатмаһы өсөн рәхмәт әйттегеҙ.",
+	"notification-flow-thanks-post-link": "Һеҙҙең комментарий.",
+	"notification-header-flow-thank": "$1 {{GENDER:$5|һеҙгә}} \"<strong>$3</strong>\" комментарий өсөн {{GENDER:$2|рәхмәт әйтте}}."
+}

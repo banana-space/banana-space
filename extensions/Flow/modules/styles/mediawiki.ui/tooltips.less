@@ -1,0 +1,246 @@
+@import 'mediawiki.mixins';
+@import '../flow.colors';
+
+/*
+Tooltips
+
+<h3>Guidelines</h3>
+
+Requires the following markup at minimum: <span class="mw-ui-tooltip">CONTENT<span class="mw-ui-tooltip-triangle"></span></span>
+An additional class should be added relating the triangle to the direction of the content: mw-ui-tooltip-DIRECTION, where direction is one of up, down, left, or right.
+Adding to this could be an extra class: mw-ui-tooltip-inverted, which moves the tooltip and triangle to the opposing side. This used when the tooltip would go off the right of the viewport, and instead aligns to the right of the viewport.
+Finally, a context class can be given to assign it a color (eg. mw-ui-progressive).
+
+This is intended to be used with JavaScript, but does not have to be. With JS, you can directly bind the element to given X-Y coords for an element.
+
+Styleguide 4.0.
+ */
+.flow-ui-tooltip {
+	background-color: @background-color-base;
+	color: @colorText;
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	border-radius: @border-radius-base;
+	padding: 0.571em 0.857em; // equals to ~8px ~12px with base `font-size`
+	.box-shadow( ~'0 2px 2px 0 rgba(0, 0, 0, 0.25)' );
+	font-size: 0.875em; // not inherited from #bodyContent, as we insert at body
+	word-wrap: break-word;
+	z-index: 99;
+
+	a {
+		// FIXME: Due to the lack of a fix for bug 66746 this link is treated as an external link.
+		// !important is bad but the alternative css hacks that would be needed here are even more horrible.
+		color: #fff !important; /* stylelint-disable-line declaration-no-important */
+		font-weight: bold;
+	}
+
+	#bodyContent & { /* stylelint-disable-line selector-max-id */
+		font-size: 1em;
+	}
+
+	.flow-ui-tooltip-triangle {
+		position: absolute;
+		overflow: hidden;
+		pointer-events: none;
+
+		// Fix offset-by-1px bug
+		z-index: 1;
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+
+		&:after {
+			content: '';
+			position: absolute;
+			z-index: 1;
+			width: 1em;
+			height: 1em;
+			background: #fff;
+			transform: rotate( 45deg );
+			-webkit-transform: rotate( 45deg );
+		}
+	}
+
+	// mw-ui-tooltip helpers to cleanly set triangle location
+	// The first four are because less.php doesn't support "@{var}: n" syntax
+	.flow-ui-tooltip-triangle-location-horizontal( top ) {
+		top: -1em;
+	}
+	.flow-ui-tooltip-triangle-location-horizontal( bottom ) {
+		bottom: -1em;
+	}
+	.flow-ui-tooltip-triangle-location-vertical( left ) {
+		/* @noflip */
+		left: -1em;
+	}
+	.flow-ui-tooltip-triangle-location-vertical( right ) {
+		/* @noflip */
+		right: -1em;
+	}
+	// up-down
+	.flow-ui-tooltip-triangle-location( horizontal, @location ) {
+		width: 2em;
+		height: 1em;
+		/* @noflip */
+		left: 50%;
+		.flow-ui-tooltip-triangle-location-horizontal( @location );
+		/* @noflip */
+		margin-left: -1em;
+	}
+	// left-right
+	.flow-ui-tooltip-triangle-location( vertical, @location ) {
+		width: 1em;
+		height: 2em;
+		.flow-ui-tooltip-triangle-location-vertical( @location );
+		top: 50%;
+		margin-top: -1em;
+	}
+
+	// triangle on top
+	&.flow-ui-tooltip-up {
+		/* @noflip */
+		margin-top: 0.75em;
+
+		.flow-ui-tooltip-triangle {
+			.flow-ui-tooltip-triangle-location( horizontal, top );
+
+			&:after {
+				top: 0.5em;
+				/* @noflip */
+				left: 0.5em;
+				/* @noflip */
+				.box-shadow( ~'0 0 1px 0 @{colorGray12}' );
+			}
+		}
+	}
+
+	// triangle on bottom
+	&.flow-ui-tooltip-down {
+		margin-bottom: 0.75em;
+
+		.flow-ui-tooltip-triangle {
+			.flow-ui-tooltip-triangle-location( horizontal, bottom );
+
+			&:after {
+				top: -0.5em;
+				/* @noflip */
+				left: 0.5em;
+				/* @noflip */
+				.box-shadow( ~'0 -1.5px 0 1.5px @{colorGray12}, 0 0 1px 0 @{colorGray12}' );
+			}
+		}
+	}
+
+	// triangle at left
+	&.flow-ui-tooltip-left {
+		/* @noflip */
+		margin-left: 0.75em;
+
+		.flow-ui-tooltip-triangle {
+			.flow-ui-tooltip-triangle-location( vertical, left );
+
+			&:after {
+				margin-top: -1px;
+				top: 0.5em;
+				/* @noflip */
+				right: -0.5em;
+				/* @noflip */
+				.box-shadow( ~'1.5px 0 0 1.5px @{colorGray12}, 0 0 1px 0 @{colorGray12}' );
+			}
+		}
+	}
+
+	// triangle at right
+	&.flow-ui-tooltip-right {
+		/* @noflip */
+		margin-left: -0.75em;
+
+		.flow-ui-tooltip-triangle {
+			.flow-ui-tooltip-triangle-location( vertical, right );
+
+			&:after {
+				margin-top: -1px;
+				top: 0.5em;
+				/* @noflip */
+				left: -0.5em;
+				/* @noflip */
+				.box-shadow( ~'0 1.5px 0 1.5px @{colorGray12}, 0 0 1px 0 @{colorGray12}' );
+			}
+		}
+	}
+
+	.flow-ui-tooltip-color( @backgroundColor ) {
+		@backgroundColorDarkened: darken( @backgroundColor, @colorDarkenPercentage );
+		background: @backgroundColor;
+		/* @noflip */
+		.box-shadow( ~'0 2px 0 0 @{backgroundColorDarkened}' );
+		color: #fff;
+
+		.flow-ui-tooltip-triangle:after {
+			background: @backgroundColor;
+		}
+
+		&.flow-ui-tooltip-down .flow-ui-tooltip-triangle:after {
+			/* @noflip */
+			.box-shadow( ~'0 -2px 0 2px @{backgroundColorDarkened}' );
+		}
+
+		&.flow-ui-tooltip-left .flow-ui-tooltip-triangle:after {
+			/* @noflip */
+			.box-shadow( ~'2px 0 0 2px @{backgroundColorDarkened}' );
+		}
+
+		&.flow-ui-tooltip-right .flow-ui-tooltip-triangle:after {
+			/* @noflip */
+			.box-shadow( ~'0 2px 0 2px @{backgroundColorDarkened}' );
+		}
+	}
+
+	// Content for tooltips generated by JS
+	.flow-ui-tooltip-content {
+		display: block;
+		max-width: 360px;
+	}
+
+	// Don't apply these classes on IE6
+	&[ class ] {
+		&.mw-ui-progressive {
+			.flow-ui-tooltip-color( @colorProgressive );
+
+			.mw-ui-icon {
+				fill: @colorProgressive;
+			}
+		}
+
+		&.mw-ui-destructive {
+			.flow-ui-tooltip-color( @colorDestructive );
+
+			.mw-ui-button.mw-ui-destructive.mw-ui-quiet:hover,
+			.mw-ui-button.mw-ui-destructive.mw-ui-quiet:focus span {
+				fill: @colorDestructive;
+			}
+		}
+
+		&.flow-ui-tooltip-small {
+			font-size: 0.75em;
+
+			.flow-ui-tooltip-content {
+				max-width: 240px;
+			}
+		}
+
+		&.flow-ui-tooltip-large {
+			max-width: 100%;
+
+			.flow-ui-tooltip-content {
+				max-width: 100%;
+			}
+		}
+	}
+}
+
+// Block-level tooltip
+.flow-ui-tooltip-block {
+	.box-sizing( border-box );
+	width: 100%;
+}

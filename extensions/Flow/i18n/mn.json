@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wisdom"
+		]
+	},
+	"flow-newtopic-content-placeholder": "\"$1\" -руу шинэ мэдээ нийтлэх",
+	"flow-newtopic-first-heading": "$1 дээр шинэ сэдэв эхлүүлэх",
+	"flow-topic-notification-subscribe-title": "Энэ сэдэв өөрийн тань watchlist -д орлоо.",
+	"flow-topic-notification-subscribe-description": "Энэ сэдвийн дагуух бүх үйл явдлын тоймыг хүлээх авах болно.",
+	"flow-board-notification-subscribe-title": "Энэ хэлэлцүүлгийн самбарт feed хийсэн байна!",
+	"flow-board-notification-subscribe-description": "Энэ самбарт шинээр үүссэн бүх сэдвийг автоматаар хүлээн авах болно."
+}

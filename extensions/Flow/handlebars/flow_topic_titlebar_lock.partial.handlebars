@@ -1,0 +1,41 @@
+<div class="flow-board">
+	<div class="flow-topic-summary-container">
+		<div class="flow-topic-summary">
+			<form class="flow-edit-form" method="POST"
+				  action="
+					{{~#if isLocked~}}
+						{{~actions.unlock.url~}}
+					{{~else~}}
+						{{~actions.lock.url~}}
+					{{~/if~}}">
+				{{> flow_errors }}
+				<input type="hidden" name="wpEditToken" value="{{@root.editToken}}" />
+				<input type="hidden" name="flow_reason" value="
+				{{~#if isLocked~}}
+					{{~l10n "flow-rev-message-restore-topic-reason"~}}
+				{{~else~}}
+					{{~l10n "flow-rev-message-lock-topic-reason"~}}
+				{{~/if~}}
+				" />
+				<div class="flow-form-actions flow-form-collapsible">
+					<button data-role="submit"
+					        class="mw-ui-button mw-ui-progressive"
+					>
+						{{#if isLocked}}
+							{{l10n "flow-topic-action-unlock-topic"}}
+						{{else}}
+							{{l10n "flow-topic-action-lock-topic"}}
+						{{/if}}
+					</button>
+					<small class="flow-terms-of-use plainlinks">
+						{{#if isLocked}}
+							{{l10nParse "flow-terms-of-use-unlock-topic"}}
+						{{else}}
+							{{l10nParse "flow-terms-of-use-lock-topic"}}
+						{{/if}}
+					</small>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robby"
+		]
+	},
+	"apihelp-thank-description": "Engem Auteur e Merci-Message schécken.",
+	"apihelp-thank-param-rev": "Versiouns ID fir déi ee Merci gesot kréie soll. Déi oder 'log' muss ugi ginn."
+}

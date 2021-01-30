@@ -1,0 +1,30 @@
+@import 'mediawiki.mixins';
+@import '../flow.colors';
+@import '../flow.variables';
+
+// Reply count (only visible in compact mode)
+.flow-reply-count {
+	display: none;
+	position: absolute;
+	top: 50%;
+	right: 1.5em;
+	margin-top: -0.55em;
+	color: @colorGray12;
+	font-size: 2em;
+	opacity: 0.5;
+
+	.flow-reply-count-number {
+		.box-sizing( border-box );
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		padding-left: 0.25em;
+		width: 100%;
+		color: @colorTextLight;
+		font-size: 0.5em;
+		line-height: 2.25;
+		font-weight: bold;
+		text-align: center;
+	}
+}

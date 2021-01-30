@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Olimar",
+			"Pyscowicz",
+			"Quiddity"
+		]
+	},
+	"apihelp-flow+close-open-topic-param-reason": "Syy aiheen lukitsemiselle tai avaamiselle lukituksesta.",
+	"apihelp-flow+edit-header-description": "Muokkaa palstan kuvausta.",
+	"apihelp-flow+edit-header-param-format": "Kuvauksen formaatti (wikitext|html)",
+	"apihelp-flow+edit-header-example-1": "Muokkaa sivun [[Talk:Sandbox]] kuvausta",
+	"apihelp-flow+edit-post-description": "Muokkaa viestin sisältöä.",
+	"apihelp-flow+edit-post-param-postId": "Viestin tunniste.",
+	"apihelp-flow+edit-post-param-prev_revision": "Nykyisen viestiversion versiotunniste päällekkäisten muokkausten tarkistamiseksi.",
+	"apihelp-flow+edit-post-param-content": "Viestin sisältö.",
+	"apihelp-flow+edit-post-param-format": "Viestin sisällön formaatti (wikitext|html)",
+	"apihelp-flow+edit-post-example-1": "Muokkaa viestiä aiheessa [[Topic:S2tycnas4hcucw8w]]",
+	"apihelp-flow+edit-title-description": "Muokkaa aiheen otsikkoa.",
+	"apihelp-flow+lock-topic-description": "Lukitse tai avaa Jäsennetyt keskustelut -aihe.",
+	"apihelp-flow+moderate-post-description": "Hallinnoi Jäsennetyt keskustelut -viestiä.",
+	"apihelp-flow+moderate-topic-example-1": "Poista aihe [[Topic:S2tycnas4hcucw8w]]",
+	"apihelp-flow+new-topic-description": "Luo uuden Jäsennetyt keskustelut -aiheen annettuun workflow'hun.",
+	"apihelp-flow+new-topic-param-topic": "Uuden aiheotsikon teksti.",
+	"apihelp-flow+new-topic-param-content": "Aiheen ensimmäisen vastauksen sisältö.",
+	"apihelp-flow+view-post-description": "Näytä viesti.",
+	"apihelp-flow+view-topic-description": "Näytä aihe.",
+	"apihelp-flow+view-topic-example-1": "Näytä [[Topic:S2tycnas4hcucw8w]]",
+	"apihelp-flow+view-topic-history-description": "Näytä aiheen versiohistoria.",
+	"apihelp-flow+view-topic-summary-description": "Näytä aiheen yhteenveto.",
+	"apihelp-flow+view-topic-summary-param-revId": "Lataa tämä versio uusimman sijasta.",
+	"apihelp-flow+view-topiclist-description": "Näytä luettelo aiheista."
+}

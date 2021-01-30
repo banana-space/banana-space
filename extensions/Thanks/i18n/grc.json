@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gts-tg"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|μετὰ χάριτος}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$1|Ἀπέστειλλε}} εὐχαριστήριαν εἰδοποίηση εἴς τόν {{GENDER:$2|χρώμενο}}"
+}

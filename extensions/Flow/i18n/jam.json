@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chabi1"
+		]
+	},
+	"flow-error-invalid-input": "No fain no rivijan fi luod Fluo kantent.",
+	"flow-error-missing-revision": "Piej yuuz jupliket agiument ina templet kaal",
+	"flow-error-fail-commit": "Fluo kantent no sieb."
+}

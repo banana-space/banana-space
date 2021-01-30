@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kenrick95"
+		]
+	},
+	"apihelp-flow+edit-post-description": "Sunting isi sebuah kiriman.",
+	"apihelp-flow+view-post-description": "Lihat sebuah kiriman.",
+	"apihelp-flow+view-topic-summary-description": "Lihat ringkasan topik.",
+	"apihelp-flow+view-topiclist-description": "Lihat daftar topik.",
+	"apihelp-flow-parsoid-utils-param-content": "Isi yang akan dikonversi."
+}

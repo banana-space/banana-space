@@ -1,0 +1,218 @@
+{
+	"name": "Thanks",
+	"version": "1.2.0",
+	"author": [
+		"Ryan Kaldari",
+		"Benjamin Chen",
+		"Wctaiwan"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Thanks",
+	"descriptionmsg": "thanks-desc",
+	"license-name": "MIT",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.35.0",
+		"extensions": {
+			"Echo": "*"
+		}
+	},
+	"DefaultUserOptions": {
+		"echo-subscriptions-web-edit-thank": true,
+		"echo-subscriptions-email-edit-thank": false
+	},
+	"RateLimits": {
+		"thanks-notification": {
+			"user": [
+				10,
+				60
+			]
+		}
+	},
+	"SpecialPages": {
+		"Thanks": "SpecialThanks"
+	},
+	"LogTypes": [
+		"thanks"
+	],
+	"FilterLogTypes": {
+		"thanks": true
+	},
+	"LogActionsHandlers": {
+		"thanks/*": "ThanksLogFormatter"
+	},
+	"APIModules": {
+		"thank": "ApiCoreThank"
+	},
+	"MessagesDirs": {
+		"Thanks": [
+			"i18n",
+			"i18n/api"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"ThanksAlias": "Thanks.alias.php"
+	},
+	"AutoloadClasses": {
+		"ThanksHooks": "includes/ThanksHooks.php",
+		"EchoCoreThanksPresentationModel": "includes/EchoCoreThanksPresentationModel.php",
+		"EchoFlowThanksPresentationModel": "includes/EchoFlowThanksPresentationModel.php",
+		"ApiThank": "includes/ApiThank.php",
+		"ApiCoreThank": "includes/ApiCoreThank.php",
+		"ApiFlowThank": "includes/ApiFlowThank.php",
+		"ThanksLogFormatter": "includes/ThanksLogFormatter.php",
+		"SpecialThanks": "includes/SpecialThanks.php"
+	},
+	"ResourceModules": {
+		"ext.thanks.images": {
+			"class": "ResourceLoaderImageModule",
+			"selector": ".mw-ui-icon-thanks-{name}:before",
+			"defaultColor": "#fff",
+			"images": {
+				"userTalk": {
+					"file": {
+						"ltr": "userTalk-ltr.svg",
+						"rtl": "userTalk-rtl.svg"
+					}
+				}
+			}
+		},
+		"ext.thanks": {
+			"scripts": [
+				"ext.thanks.thank.js"
+			],
+			"dependencies": [
+				"mediawiki.cookie",
+				"mediawiki.api"
+			]
+		},
+		"ext.thanks.corethank": {
+			"scripts": [
+				"ext.thanks.corethank.js"
+			],
+			"messages": [
+				"thanks-thanked",
+				"thanks-error-undefined",
+				"thanks-error-invalidrevision",
+				"thanks-error-ratelimited",
+				"thanks-error-revdeleted",
+				"thanks-confirmation2",
+				"thanks-thank-tooltip-no",
+				"thanks-thank-tooltip-yes",
+				"thanks-button-thank",
+				"cancel"
+			],
+			"dependencies": [
+				"oojs-ui-core",
+				"oojs-ui-windows",
+				"mediawiki.jqueryMsg",
+				"mediawiki.api",
+				"jquery.confirmable",
+				"jquery.cookie",
+				"ext.thanks"
+			]
+		},
+		"ext.thanks.mobilediff": {
+			"scripts": [
+				"ext.thanks.mobilediff.js"
+			],
+			"messages": [
+				"thanks-button-action-queued",
+				"thanks-button-action-cancel",
+				"thanks-button-action-completed",
+				"thanks-button-thank",
+				"thanks-button-thanked",
+				"thanks-error-invalidrevision",
+				"thanks-error-ratelimited",
+				"thanks-error-undefined",
+				"thanks-thanked-notice"
+			],
+			"dependencies": [
+				"mobile.startup",
+				"ext.thanks.images",
+				"mediawiki.api",
+				"mediawiki.jqueryMsg"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.thanks.flowthank": {
+			"scripts": [
+				"jquery.findWithParent.js",
+				"ext.thanks.flowthank.js"
+			],
+			"messages": [
+				"thanks-button-thanked",
+				"thanks-error-undefined",
+				"thanks-error-ratelimited"
+			],
+			"dependencies": [
+				"oojs-ui-core",
+				"oojs-ui-windows",
+				"mediawiki.jqueryMsg",
+				"mediawiki.api",
+				"ext.thanks"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "Thanks/modules"
+	},
+	"QUnitTestModule": {
+		"localBasePath": "tests/qunit",
+		"remoteExtPath": "Thanks/tests/qunit",
+		"scripts": [
+			"test_ext.thanks.thank.js",
+			"test_ext.thanks.mobilediff.js"
+		],
+		"dependencies": [
+			"ext.thanks",
+			"ext.thanks.mobilediff"
+		]
+	},
+	"Hooks": {
+		"ApiMain::moduleManager": "ThanksHooks::onApiMainModuleManager",
+		"BeforeCreateEchoEvent": "ThanksHooks::onBeforeCreateEchoEvent",
+		"BeforePageDisplay": "ThanksHooks::onBeforePageDisplay",
+		"BeforeSpecialMobileDiffDisplay": "ThanksHooks::onBeforeSpecialMobileDiffDisplay",
+		"DiffTools": "ThanksHooks::insertThankLink",
+		"DifferenceEngineViewHeader": "ThanksHooks::onDifferenceEngineViewHeader",
+		"EchoGetBundleRules": "ThanksHooks::onEchoGetBundleRules",
+		"EchoGetDefaultNotifiedUsers": "ThanksHooks::onEchoGetDefaultNotifiedUsers",
+		"GetLogTypesOnUser": "ThanksHooks::onGetLogTypesOnUser",
+		"HistoryTools": "ThanksHooks::insertThankLink",
+		"LocalUserCreated": "ThanksHooks::onAccountCreated",
+		"LogEventsListLineEnding": "ThanksHooks::onLogEventsListLineEnding",
+		"PageHistoryBeforeList": "ThanksHooks::onPageHistoryBeforeList"
+	},
+	"config": {
+		"ThanksSendToBots": {
+			"value": false
+		},
+		"ThanksLogging": {
+			"value": true
+		},
+		"ThanksConfirmationRequired": {
+			"value": true
+		},
+		"ThanksLogTypeWhitelist": {
+			"value": [
+				"contentmodel",
+				"create",
+				"delete",
+				"import",
+				"merge",
+				"move",
+				"patrol",
+				"protect",
+				"tag",
+				"managetags",
+				"rights",
+				"lock"
+			]
+		}
+	},
+	"manifest_version": 2
+}

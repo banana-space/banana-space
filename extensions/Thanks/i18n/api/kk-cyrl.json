@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek"
+		]
+	},
+	"apihelp-flowthank-description": "Flow жұмыс легіндегі пікір үшін жария түрде рахмет ескертпесін жіберу.",
+	"apihelp-thank-description": "Өңдеушіге рахмет ескертпесін жіберу.",
+	"apihelp-thank-param-rev": "Әлдебіреуге жіберілген рахмет ескертпесінің нұсқа сәйкестендіргіші."
+}

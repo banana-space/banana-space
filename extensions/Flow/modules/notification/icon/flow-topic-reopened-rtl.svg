@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <title>
+        topic reopened
+    </title>
+    <path fill="#36c" d="M2 0C.9 0 0 .9 0 2v12c0 1.1.9 2 2 2h14l4 4V2c0-1.1-.9-2-2-2H2zm15 8.5c0 .8-.7 1.5-1.5 1.5S14 9.3 14 8.5 14.7 7 15.5 7s1.5.7 1.5 1.5zm-5.5 0c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5S9.2 7 10 7s1.5.7 1.5 1.5zM6 8.5c0 .8-.7 1.5-1.5 1.5S3 9.3 3 8.5 3.7 7 4.5 7 6 7.7 6 8.5z"/>
+</svg>

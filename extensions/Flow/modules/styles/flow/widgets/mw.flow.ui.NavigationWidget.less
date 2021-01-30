@@ -1,0 +1,71 @@
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+
+// This should be replaced completely by the navigation widget
+.flow-board-navigation {
+	// This is a hack, we really should, instead, work with
+	// overlays.
+	z-index: 1;
+}
+
+.flow-ui-navigationWidget {
+	width: 100%;
+	z-index: 1;
+	position: relative;
+	border-bottom: 1px solid #c8ccd1;
+
+	.flow-ui-tocWidget {
+		float: left;
+
+		&-button {
+			// stylelint-disable-next-line declaration-no-important
+			margin-left: 0 !important;
+			margin-right: 0;
+		}
+
+		.flow-ui-topicMenuSelectWidget {
+			position: absolute;
+			width: 100%;
+			max-height: 400px;
+
+			/* Workaround for flicker and https://code.google.com/p/chromium/issues/detail?id=343244 */
+			-webkit-transform: translateZ( 0 );
+		}
+	}
+
+	&-affixed {
+		background: @background-color-base;
+		position: fixed;
+		z-index: 2;
+		top: 0;
+
+		.flow-ui-tocWidget {
+			float: none;
+
+			&-button {
+				display: block;
+
+				> .oo-ui-buttonElement-button {
+					display: block;
+					.text-overflow( @visible: false );
+				}
+			}
+		}
+	}
+
+	// Clearfix
+	&:after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+
+	.flow-ui-reorderTopicsWidget {
+		float: right;
+		position: relative;
+
+		.flow-ui-reorderTopicsWidget-menu {
+			right: 0;
+		}
+	}
+}

@@ -1,0 +1,21 @@
+{{> flow_board_navigation}}
+
+<div class="flow-board" data-flow-sortby="{{sortby}}">
+	<div class="flow-newtopic-container">
+		{{! No-JS gets a link to separate page with newtopic form }}
+		<div class="flow-nojs">
+			<a class="mw-ui-input mw-ui-input-large flow-ui-input-replacement-anchor"
+				href="{{links.newtopic}}">{{l10n "flow-newtopic-start-placeholder"}}</a>
+		</div>
+
+		<div class="flow-js">
+			{{> flow_newtopic_form isOnFlowBoard=true }}
+		</div>
+	</div>
+
+	<div class="flow-topics">
+		{{> flow_topiclist_loop}}
+
+		{{> flow_load_more this loadMoreApiHandler="loadMoreTopics" loadMoreTarget="window" loadMoreContainer="< .flow-topics" loadMoreTemplate="flow_topiclist_loop.partial" loadMoreObject=links.pagination.fwd}}
+	</div>
+</div>

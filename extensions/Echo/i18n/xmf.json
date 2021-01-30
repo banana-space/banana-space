@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Silovan"
+		]
+	},
+	"tooltip-pt-notifications-alert": "{{GENDER:|თქვანი}} მოშინუეფი",
+	"echo-notification-markasread": "უკითხირო შანუა",
+	"echo-email-html-footer-preference-link-text": "გეგნაჯინით თქვანი პარამეტრეფს"
+}

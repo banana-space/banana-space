@@ -1,0 +1,14 @@
+<div class="flow-topic-titlebar">
+	{{> flow_topic_titlebar_content}}
+	{{> flow_topic_titlebar_summary summary isLocked=isLocked}}
+	{{#if watchable}}
+		{{> flow_topic_titlebar_watch}}
+	{{/if}}
+	<div class="flow-menu flow-menu-hoverable">
+		<div class="flow-menu-js-drop"><a href="javascript:void(0);"><span class="mw-ui-icon mw-ui-icon-before mw-ui-icon-only mw-ui-icon-ellipsis" aria-label="{{ l10n "flow-topic-action-menu-accessibility-name" }}"></span></a></div>
+		<ul class="mw-ui-button-container flow-list">
+			{{!-- Inserts each common flow-menu-moderation-action --}}
+			{{> flow_moderation_actions_list this moderationType="topic" moderationTarget="title" moderationTemplate="topic" moderationContainerClass="flow-menu" moderationMwUiClass="mw-ui-button" moderationIcons=true}}
+		</ul>
+	</div>
+</div>

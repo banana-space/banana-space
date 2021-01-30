@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bijay chaurasia",
+			"बिप्लब आनन्द"
+		]
+	},
+	"flow-edit-header-link": "संचिका वर्णन",
+	"flow-thank-link": "{{GENDER:$1|{{GENDER:$2|धन्यवाद दी}}}}",
+	"flow-edit-header-submit": "संचिका वर्णन",
+	"flow-undo-edit-header": "वर्णन सम्पादन करी",
+	"group-flow-bot": "फ्लो स्वचालक"
+}

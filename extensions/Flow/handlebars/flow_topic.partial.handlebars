@@ -1,0 +1,47 @@
+<div class="flow-topic flow-load-interactive
+            {{~#if moderateState}} flow-topic-moderatestate-{{moderateState}} {{/if~}}
+            {{~#if isModerated}} flow-topic-moderated {{/if~}}
+            {{~#if isLocked}}flow-element-collapsible flow-element-collapsed{{/if~}}
+            "
+     id="flow-topic-{{postId}}"
+     data-flow-id="{{postId}}"
+     data-flow-load-handler="topic"
+     data-flow-toc-scroll-target=".flow-topic-titlebar"
+     data-flow-topic-timestamp-updated="{{last_updated}}"
+>
+	{{>flow_topic_titlebar}}
+
+	{{#if @root.posts}}
+		{{#each replies}}
+			{{#eachPost @root this}}
+				<!-- eachPost topic -->
+				{{post @root this}}
+			{{/eachPost}}
+		{{/each}}
+	{{/if}}
+
+	{{#if actions.reply}}
+		{{#ifCond @root.submitted.postId "===" postId}}
+			{{> flow_reply_form}}
+		{{else}}
+			{{#progressiveEnhancement type="replace" target="~ a"}}
+				{{> flow_reply_form}}
+			{{/progressiveEnhancement}}
+			<a href="{{actions.reply.url}}"
+			   title="{{actions.reply.title}}"
+			   class="flow-ui-input-replacement-anchor mw-ui-input"
+			>
+				{{~l10n "flow-reply-topic-title-placeholder" properties.topic-of-post-text-from-html~}}
+			</a>
+		{{/ifCond}}
+        {{else}}
+		{{!--
+			The user can not post.  This form is rendered only for Initializer to replace
+			it.  Both old and new forms will be hidden in no-JS mode.  The
+                        after-replacement JS version of the form displays as a disabled form.
+                --}}
+		{{#progressiveEnhancement type="insert"}}
+			{{> flow_reply_form}}
+		{{/progressiveEnhancement}}
+	{{/if}}
+</div>

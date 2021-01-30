@@ -1,0 +1,61 @@
+#!/bin/bash
+# Enable all the git hooks by executing the following from the project root directory
+# $ make installhooks
+#
+# Code from https://gist.github.com/holysugar/1318698 , simpler than
+# http://stackoverflow.com/a/6262715/451712
+
+# Work out location of Flow/scripts/ directory
+dir=$(dirname $(php -r "echo realpath('$0'), \"\\n\";"))
+# Move to the project root
+cd $(dirname $dir)
+# Source the shared shell functions
+. $dir/hooks-shared.sh
+
+if [ "$IGNORE_WHITESPACE" != "1" ]; then
+	# FIXME this reads the version of the file on-disk, which may not be the version
+	# about to be committed if you made changes to it since `git add`.
+	git diff --cached --name-only | (while read f; do
+	  ERROR=0
+	  if grep -n '[[:space:]]$' "$f" ; then
+		echo "'$f' has trailing whitespace\n" >&2
+		ERROR=1
+	  fi
+	done; exit $ERROR)
+
+	if [ $? -ne 0 ];then
+	  echo "if you know what you are doing, use 'IGNORE_WHITESPACE=1 git commit'"
+	  exit 1
+	fi
+fi
+
+COMMANDS=""
+
+if file_changed_in_commit '\.less$'; then
+	if [ "$IGNORE_CHECKLESS" != "1" ]; then
+		COMMANDS="checkless $COMMANDS"
+	fi
+fi
+
+if file_changed_in_commit '\.js$'; then
+	if [ "$IGNORE_JSHINT" != "1" ]; then
+		COMMANDS="grunt jsduck $COMMANDS"
+	fi
+fi
+
+if file_changed_in_commit '\.php$'; then
+	if [ "$IGNORE_PHPLINT" != "1" ]; then
+		COMMANDS="phplint $COMMANDS"
+	fi
+fi
+
+if file_changed_in_commit '^i18n/'; then
+    if [ "$IGNORE_I18N" != "1" ]; then
+		COMMANDS="messagecheck $COMMANDS"
+	fi
+fi
+
+if [ "$COMMANDS" != "" ]; then
+	make $COMMANDS || exit 1
+fi
+

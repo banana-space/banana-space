@@ -1,0 +1,9 @@
+<div class="flow-board">
+	{{!-- There is only one post, but the output format matches multi-post output --}}
+	{{#each roots}}
+		{{#eachPost @root this}}
+			{{> flow_moderate_topic}}
+			{{> flow_post_partial}}
+		{{/eachPost}}
+	{{/each}}
+</div>

@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Azniv Stepanian",
+			"Rajemian"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|շնորհակալութիւն}}}}",
+	"thanks-button-action-cancel": "Չեղարկել",
+	"thanks-button-action-completed": "{{GENDER:$1|{{GENDER:$2|շնորհակալութիւն}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$1|Ուղարկել}} շնորհակալական գիր մը այս {{GENDER:$2|մասնակիցին}}",
+	"thanks": "Շնորհակալութիւն յայտնել",
+	"echo-category-title-edit-thank": "Շնորհակալութիւն",
+	"notification-compact-header-edit-thank": "$1 մասնակիցը {{GENDER:$2|շնորհակալութիւն}} յայտնած է {{GENDER:$3|ձեզի}}։",
+	"thanks-confirmation-special-rev": "Կ'ուզէ՞ք շնորհակալութիւն յայտնել այս խմբագրումին համար։",
+	"flow-thanks-confirmation-special": "Կ'ուզէ՞ք շնորհակալութիւն յայտնել այս մեկնաբանումին համար։",
+	"notification-compact-header-flow-thank": "$1 մասնակիցը {{GENDER:$2|շնորհակալութիւն}} յայտնած է {{GENDER:$3|ձեզի}}։"
+}

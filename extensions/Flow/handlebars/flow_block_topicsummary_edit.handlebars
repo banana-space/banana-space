@@ -1,0 +1,38 @@
+<div class="flow-topic-summary-container">
+	<div class="flow-topic-summary">
+		<form class="flow-edit-form" method="POST" action="{{revision.actions.summarize.url}}">
+			{{> flow_errors }}
+			<input type="hidden" name="wpEditToken" value="{{editToken}}" />
+
+			{{#if revision.revisionId}}
+				<input type="hidden" name="{{type}}_prev_revision" value="{{revision.revisionId}}" />
+			{{/if}}
+
+			<div class="flow-editor">
+				<textarea class="mw-ui-input mw-editfont-{{editFont}}"
+				          name="{{type}}_summary"
+				          type="text"
+				          placeholder="{{l10n "flow-edit-summary-placeholder"}}"
+				          data-role="content"
+				>
+					{{~#if submitted.summary~}}
+						{{~submitted.summary~}}
+					{{~else~}}
+						{{~#if revision.revisionId~}}
+							{{~revision.content.content~}}
+						{{~/if~}}
+					{{~/if~}}
+				</textarea>
+			</div>
+
+			<div class="flow-form-actions flow-form-collapsible">
+				<button
+					data-role="submit"
+					class="mw-ui-button mw-ui-progressive">
+						{{l10n "flow-topic-action-update-topic-summary"}}
+				</button>
+				<small class="flow-terms-of-use plainlinks">{{l10nParse "flow-terms-of-use-summarize"}}</small>
+			</div>
+		</form>
+	</div>
+</div>

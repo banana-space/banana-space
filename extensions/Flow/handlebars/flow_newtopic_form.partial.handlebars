@@ -1,0 +1,36 @@
+{{#if actions.newtopic}}
+	<form action="{{actions.newtopic.url}}" method="POST" class="flow-newtopic-form">
+		{{> flow_errors}}
+
+		{{#ifAnonymous}}
+			{{> flow_anon_warning }}
+		{{/ifAnonymous}}
+
+		<input type="hidden" name="wpEditToken" value="{{ @root.editToken }}" />
+		<input type="hidden" name="topiclist_replyTo" value="{{ workflowId }}" />
+		<input name="topiclist_topic" class="mw-ui-input mw-ui-input-large"
+			required
+			{{#if submitted.topic}}value="{{submitted.topic}}"{{/if}}
+			type="text"
+			placeholder="{{l10n "flow-newtopic-start-placeholder"}}"
+			data-role="title"
+		/>
+		{{#unless isOnFlowBoard}}
+			<div class="flow-editor">
+				<textarea name="topiclist_content"
+				          class="mw-ui-input flow-form-collapsible mw-editfont-{{@root.editFont}}"
+				          placeholder="{{l10n "flow-newtopic-content-placeholder" @root.title}}"
+				          data-role="content"
+				          required
+				>
+				{{~#if submitted.content~}}{{~submitted.content~}}{{~/if~}}
+				</textarea>
+			</div>
+			<div class="flow-form-actions flow-form-collapsible">
+				<button data-role="submit"
+					class="mw-ui-button mw-ui-progressive mw-ui-flush-right">{{l10n "flow-newtopic-save"}}</button>
+				<small class="flow-terms-of-use plainlinks">{{l10nParse "flow-terms-of-use-new-topic"}}</small>
+			</div>
+		{{/unless}}
+	</form>
+{{/if}}

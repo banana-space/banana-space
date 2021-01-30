@@ -1,0 +1,16 @@
+<div class="flow-board">
+	<div class="flow-compare-revisions-header plainlinks">
+		{{l10nParse "flow-compare-revisions-header-post"
+			revision.new.rev_view_links.board.title
+			revision.new.properties.topic-of-post-text-from-html
+			revision.new.author.name
+			revision.new.rev_view_links.board.url
+			revision.new.rev_view_links.root.url
+			revision.new.rev_view_links.hist.url
+		 }}
+	</div>
+	<div class="flow-compare-revisions">
+		{{diffRevision revision}}
+	</div>
+</div>
+

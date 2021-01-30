@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Brazal.dang",
+			"Geopoet"
+		]
+	},
+	"flow-board-header": "Mapanungod kaining diskusyon",
+	"flow-board-collapse-description": "Tagoon an deskripsyon",
+	"flow-board-expand-description": "Ipahiling an deskripsyon",
+	"flow-board-notification-subscribe-title": "{{GENDER:$1|Ika}} nakasubskribo sa pisara kaining urulay",
+	"flow-topic-action-watchlist-add": "Magpalista sa temang ini",
+	"flow-topic-action-watchlist-remove": "Maghale sa listahan",
+	"flow-rev-message-edit-post": "$1 {{GENDER:$2|pinagliwat}} an sarong [$3 artikulo] kan $4.",
+	"flow-rev-message-reply": "$1 [$3 {{GENDER:$2|nagkomento}}] sa $4 (<em>$5</em>).",
+	"flow-rev-message-create-header": "$1 {{GENDER:$2|pinagmukna}} an deskripsyon.",
+	"flow-rev-message-edit-header": "$1 {{GENDER:$2|pinagliwat}} an deskripsyon.",
+	"flow-rev-message-hid-post": "$1 {{GENDER:$2|itinago}} an sarong [$4 komentaryo] kan $6 (<em>$5</em>).",
+	"flow-rev-message-deleted-post": "$1 {{GENDER:$2|pinagpura}} an sarong [$4 komentaryo] kan $6 (<em>$5</em>).",
+	"flow-rev-message-suppressed-post": "$1 {{GENDER:$2|pinag-untok}} an sarong [$4 komentaryo] kan $6 (<em>$5</em>).",
+	"flow-rev-message-restored-post": "$1 {{GENDER:$2|pinagbalikwat}} an sarong [$4 komentaryo] kan $6 (<em>$5</em>)",
+	"flow-rev-message-hid-topic": "$1 {{GENDER:$2|itinago}} an [$4 na tema] $6 (<em>$5</em>).",
+	"flow-rev-message-deleted-topic": "$1 {{GENDER:$2|pinagpura}} an [$4 na tema] $6 (<em>$5</em>).",
+	"flow-rev-message-suppressed-topic": "$1 {{GENDER:$2|pinag-untok}} an [$4 na tema] $6 (<em>$5</em>).",
+	"flow-rev-message-restored-topic": "$1 {{GENDER:$2|pinagbalikwat}} an [$4 na tema] $6 (<em>$5</em>).",
+	"flow-workflow": "taguytoy-nin-trabaho",
+	"flow-notification-reply-email-batch-body": "$1 {{GENDER:$1|nagsimbag}} sa \"$2\" kan petsa $3",
+	"flow-notification-reply-email-batch-bundle-body": "$1 asin $4 {{PLURAL:$5|iba|mga iba}} {{GENDER:$1|nagsimbag}} sa \"$2\" kan petsa $3",
+	"flow-notification-edit-email-batch-body": "$1 {{GENDER:$1|pinagliwat}} an sarong kinaag sa \"$2\" kan petsa $3",
+	"flow-notification-edit-email-batch-bundle-body": "$1 asin $4 {{PLURAL:$5|iba|mga iba}} {{GENDER:$1|pinagliwat}} sarong pinagkaag sa \"$2\" kan petsa $3",
+	"flow-notification-newtopic-email-subject": "$1 {{GENDER:$1|pinagmukna}} an sarong baguhong tema kan petsa $2",
+	"flow-importer-lqt-different-author-signature-template": "An paskil kan LQT pinag-importa na igwang laen na pirma kan paragamit"
+}

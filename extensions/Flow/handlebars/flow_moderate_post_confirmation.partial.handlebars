@@ -1,0 +1,42 @@
+<div class="flow-post-main">
+	{{> flow_errors}}
+
+	<span class="flow-moderated-post-content">
+		{{> flow_post_moderation_state}}
+	</span>
+	<span class="flow-undo">
+		{{#if actions.unhide}}
+			<form action="{{actions.unhide.url}}" method="POST">
+				<input type="hidden"
+				       name="topic_reason"
+					   value="{{l10n "flow-post-undo-hide"}}">
+				<input type="button"
+				       class="mw-ui-button mw-ui-quiet"
+				       value="{{l10n 'flow-post-action-undo-moderation'}}"
+				       data-flow-api-handler="moderatePost">
+			</form>
+		{{/if}}
+		{{#if actions.undelete}}
+			<form action="{{actions.undelete.url}}" method="POST">
+				<input type="hidden"
+				       name="topic_reason"
+					   value="{{l10n 'flow-post-undo-delete'}}">
+				<input type="button"
+				       class="mw-ui-button mw-ui-quiet"
+				       value="{{l10n 'flow-post-action-undo-moderation'}}"
+				       data-flow-api-handler="moderatePost">
+			</form>
+		{{/if}}
+		{{#if actions.unsuppress}}
+			<form action="{{actions.unsuppress.url}}" method="POST">
+				<input type="hidden"
+				       name="topic_reason"
+					   value="{{l10n 'flow-post-undo-suppress'}}">
+				<input type="button"
+				       class="mw-ui-button mw-ui-quiet"
+				       value="{{l10n 'flow-post-action-undo-moderation'}}"
+				       data-flow-api-handler="moderatePost">
+			</form>
+		{{/if}}
+	</span>
+</div>

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"The Discoverer"
+		]
+	},
+	"apihelp-flow+reply-description": "प्रकासणियेक जबाब दिता.",
+	"apihelp-flow+reply-example-1": "[[Topic:S2tycnas4hcucw8w]] ह्या विशय्यांत एके प्रकासणियेक जबाब दी",
+	"apihelp-flow+view-post-description": "प्रकासणी पळय.",
+	"apihelp-flow+view-post-history-description": "एके प्रकासणियेची उजळनियेची इतिहास पळय.",
+	"apihelp-flow+view-topic-history-example-1": "[[Topic:S2tycnas4hcucw8w]] हाचेर आसलेले प्रकासणियेचे उजळनियो विकिमजकूर रुपांत पळय"
+}

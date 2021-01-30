@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tumsaa"
+		]
+	},
+	"flow-topic-action-resummarize-topic": "Cuunfaa mataduree gulaali",
+	"flow-error-not-allowed-suppress": "Matadureen kun haqameera.",
+	"flow-notification-link-text-view-topics": "Matadureewwan ilaali",
+	"flow-previous-diff": "← Gulaala duraanii",
+	"flow-next-diff": "Gulaala haaraa →"
+}

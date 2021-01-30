@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robin Owain"
+		]
+	},
+	"flow-history-action-hide-post": "cuddio",
+	"flow-post-action-hide-post": "Cuddio",
+	"flow-moderation-confirm-hide-post": "Cuddio",
+	"flow-moderation-confirm-hide-topic": "Cuddio"
+}

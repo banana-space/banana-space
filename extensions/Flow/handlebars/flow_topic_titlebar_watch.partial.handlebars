@@ -1,0 +1,17 @@
+<div class="flow-topic-watchlist flow-watch-link">
+	{{> flow_errors}}
+
+	<a href="{{#if isWatched}}{{links.unwatch-topic.url}}{{else}}{{links.watch-topic.url}}{{/if}}"
+	   class="mw-ui-anchor mw-ui-hovericon {{#unless isWatched}}mw-ui-quiet{{/unless}}
+	   {{#if isWatched~}}
+		flow-watch-link-unwatch
+	   {{~else~}}
+		flow-watch-link-watch
+	   {{~/if~}}"
+	   data-flow-api-handler="watchItem"
+	   data-flow-api-target="< .flow-topic-watchlist"
+	   data-flow-api-method="POST">{{!-- HACK: using both unStar and unStar-progressive to work around the latter not working in monobook T164350 --}}
+		{{~noop~}}<span class="flow-unwatch mw-ui-icon mw-ui-icon-before mw-ui-icon-only mw-ui-icon-unStar mw-ui-icon-unStar-progressive" title="{{l10n "flow-topic-action-watchlist-remove"}}"></span>{{~noop~}}
+		{{~noop~}}<span class="flow-watch mw-ui-icon mw-ui-icon-before mw-ui-icon-only mw-ui-icon-star mw-ui-icon-star-progressive-hover" title="{{l10n "flow-topic-action-watchlist-add"}}"></span>{{~noop~}}
+	</a>
+</div>

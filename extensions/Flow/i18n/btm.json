@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Simartampua"
+		]
+	},
+	"flow-post-action-edit-post-submit-publish": "Torbitkon parubaan",
+	"flow-post-action-edit-post-submit-anonymously-publish": "Torbitkon parubaan sacara anonim",
+	"flow-edit-header-submit-publish": "Torbitkon deskripsi",
+	"flow-edit-header-submit-anonymously-publish": "Torbitkon deskripsi dohot anonim"
+}

@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Luky001",
+			"Robert Važan",
+			"Teslaton"
+		]
+	},
+	"flow-board-header-browse-topics-link": "Prechádzať témy",
+	"flow-edit-header-link": "Upraviť popis",
+	"flow-newtopic-start-placeholder": "Založiť novú tému",
+	"flow-reply-topic-title-placeholder": "Odpoveď na \"$1\"",
+	"flow-reply-link": "{{GENDER:$1|Odpovedať}}",
+	"flow-thank-link": "{{GENDER:$1|{{GENDER:$2|Poďakovať}}}}",
+	"flow-post-action-view": "Trvalý odkaz",
+	"flow-post-action-hide-post": "Skryť",
+	"flow-post-action-edit-post": "Upraviť",
+	"flow-topic-action-view": "Trvalý odkaz",
+	"flow-topic-action-edit-title": "Upraviť názov",
+	"flow-topic-action-history": "História",
+	"flow-topic-action-hide-topic": "Skryť tému",
+	"flow-topic-action-lock-topic": "Označiť ako vyriešené",
+	"flow-topic-action-summarize-topic": "Zhrnúť",
+	"flow-topic-action-watchlist-add": "Sledovať tému",
+	"flow-topic-comments": "{{PLURAL:$1|$1 komentár|$1 komentáre|$1 komentárov|0=Napíšte komentár ako {{GENDER:$2|prvý|prvá}}!}}",
+	"echo-category-title-flow-discussion": "Štruktúrovanú diskusiu",
+	"echo-pref-tooltip-flow-discussion": "Upozornite ma na aktivitu vo Flow vláknach a diskusných stránkách, ktoré sledujem.",
+	"flow-recent-topics": "Nedávno aktívne témy",
+	"flow-edited": "Upravené",
+	"flow-dialog-cancelconfirm-discard": "Zahodiť zmeny"
+}

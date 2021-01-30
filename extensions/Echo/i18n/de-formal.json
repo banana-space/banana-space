@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kghbln"
+		]
+	},
+	"echo-new-messages": "Sie haben neue Nachrichten",
+	"tooltip-pt-notifications-alert": "{{GENDER:|Ihre}} Meldungen",
+	"echo-none": "Sie haben in letzter Zeit keine Benachrichtigungen erhalten.",
+	"notification-user-rights-email-subject": "Ihre Benutzerrechte auf „{{SITENAME}}“ wurden geändert."
+}

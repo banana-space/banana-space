@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gleki",
+			"Olwe519",
+			"Xbony2"
+		]
+	},
+	"log-name-flow": "flecu fasnu citri",
+	"flow-post-actions": "loi se zukte",
+	"flow-topic-actions": "loi se zukte",
+	"flow-newtopic-save": "jmina la'e se casnu",
+	"flow-post-action-delete-post": "vimcu",
+	"flow-post-action-hide-post": "cancygau",
+	"flow-post-action-edit-post": "stika",
+	"notification-header-flow-summary-edited": "pu ningau lo torveki pe la lu $1 li'u",
+	"notification-bundle-header-flow-summary-edited": "pu za'uroi ningau lo torveki pe la lu $1 li'u",
+	"notification-header-flow-summary-edited-user-talk": "pu ningau lo torveki pe la lu $1 li'u ne'i lo {{GENDER:$2|do}} tavla papri",
+	"notification-bundle-header-flow-summary-edited-user-talk": "pu za'uroi ningau lo torveki pe la lu $1 li'u ne'i lo {{GENDER:$2|do}} tavla papri",
+	"notification-header-flow-mention-post-summary": "$1 {{GENDER:$2|mlauca}} {{GENDER:$4|do}} ne'i la lu $5 li'u",
+	"notification-header-flow-description-edited": "pu cusku'i le ve skicu be fe la lu $1 li'u",
+	"notification-header-flow-description-edited-user-talk": "pu cusku'i le ve skicu be fe le {{GENDER:$2|do}} tavla papri",
+	"notification-bundle-header-flow-description-edited": "pu za'uroi cusku'i le ve skicu be fe la lu $1 li'u",
+	"notification-bundle-header-flow-description-edited-user-talk": "pu za'uroi cusku'i le ve skicu be fe le {{GENDER:$2|do}} tavla papri",
+	"notification-links-flow-description-edited-view-page": "{{GENDER:$1|catlu}} lo papri",
+	"notification-email-subject-flow-description-edited": "$1 pu cusku'i le ve skicu be fe la lu $2 li'u",
+	"notification-email-batch-body-flow-description-edited": "$1 pu cusku'i le ve skicu be fe la lu $2 li'u",
+	"notification-email-batch-bundle-body-flow-description-edited": "$1 .e $3 {{PLURAL:$4|loi pa drata}} {{GENDER:$1|pu cusku'i}} le ve skicu be fe la lu $2 li'u",
+	"echo-category-title-flow-discussion": "lo flecu",
+	"flow-link-topic": "lo se casnu",
+	"flow-link-history": "lo citri"
+}

@@ -1,0 +1,26 @@
+{{#if loadMoreObject}}
+	<div class="flow-load-more">
+		<div class="flow-error-container">
+			{{!-- placeholder for javascript injected errors --}}
+		</div>
+
+		<div class="flow-ui-loading"><div class="mw-ui-icon mw-ui-icon-before mw-ui-icon-only mw-ui-icon-advanced"></div></div>
+
+		<a data-flow-interactive-handler="apiRequest"
+		   data-flow-api-handler="{{loadMoreApiHandler}}"
+		   data-flow-api-target="< .flow-load-more"
+		   data-flow-load-handler="loadMore"
+		   data-flow-scroll-target="{{loadMoreTarget}}"
+		   data-flow-scroll-container="{{loadMoreContainer}}"
+		   data-flow-template="{{loadMoreTemplate}}"
+		   href="{{loadMoreObject.url}}"
+		   title="{{loadMoreObject.title}}"
+		   class="mw-ui-button mw-ui-progressive flow-load-interactive flow-ui-fallback-element"><span class="mw-ui-icon mw-ui-icon-before mw-ui-icon-article-invert"></span> {{l10n "flow-load-more"}}</a>
+	</div>
+{{else}}
+	<div class="flow-no-more">
+		{{!-- TODO: Does this i18n message need to be generalized? --}}
+		{{l10n "flow-no-more-fwd"}}
+	</div>
+	<div class="flow-bottom-spacer"></div>
+{{/if}}

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tel'et"
+		]
+	},
+	"flow-post-action-delete-post": "ئۆچۈر",
+	"flow-post-action-hide-post": "يوشۇر",
+	"flow-moderation-title-delete-post": "بۇ ئۇچۇرنى ئۆچۈرەمسىز؟",
+	"flow-moderation-confirm-delete-post": "ئۆچۈر"
+}

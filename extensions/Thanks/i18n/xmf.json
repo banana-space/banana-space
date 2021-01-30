@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Silovan"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2| მარდი}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$2|თე მახვარებუშა}} ომარდე ნაჭარაშ {{GENDER:$1|ჯღონუა}}"
+}

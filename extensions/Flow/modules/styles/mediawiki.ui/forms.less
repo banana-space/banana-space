@@ -1,0 +1,52 @@
+@import 'mediawiki.mixins';
+@import '../flow.colors';
+@import '../flow.variables';
+
+// Form elements [ Draft ]
+
+.flow-ui-input-replacement-anchor {
+	// We are mimicking a placeholder, so don't wrap
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.flow-ui-input-replacement-anchor.mw-ui-input {
+	color: @colorGray7;
+	display: block;
+	margin: 1em 0 0 @topicIndent;
+	width: auto;
+}
+
+// FIXME: It's a shame we have to duplicate css in mw-ui-input. Need saner way going forward. mw-ui-textarea ?
+.flow-newtopic-form .mw-ui-input-large,
+.flow-ui-input-replacement-anchor.mw-ui-input-large {
+	margin: 0;
+	font-weight: normal;
+	font-size: 1.5em;
+	padding: 0.429em 0.381em 0.381em;
+	line-height: 1.25;
+}
+
+/* Increase specificity for editfonts on inputs */
+
+.mw-ui-input {
+	&.mw-editfont-monospace {
+		font-family: monospace, monospace;
+	}
+
+	&.mw-editfont-sans-serif {
+		font-family: sans-serif;
+	}
+
+	&.mw-editfont-serif {
+		font-family: serif;
+	}
+}
+
+input.mw-ui-input-large {
+	padding-left: 0.75em;
+}
+
+textarea.mw-ui-input-large {
+	padding-left: @topicIndent;
+}

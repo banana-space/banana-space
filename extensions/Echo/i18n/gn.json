@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"P. S. F. Freitas"
+		]
+	},
+	"echo-desc": "Maranduha reko",
+	"prefs-echo": "Maranduha",
+	"prefs-emailsettings": "E-mail jeporavo",
+	"prefs-echosubscriptions": "Tomomarandu chéve kóva rehegua",
+	"echo-pref-send-me": "Chemombe'ukarãː",
+	"echo-pref-send-to": "Mombe'ukaː",
+	"echo-pref-email-format": "E-mail rekoː",
+	"echo-pref-web": "Web",
+	"echo-pref-email": "E-mail",
+	"echo-pref-email-format-html": "HTML",
+	"notifications": "Maranduha",
+	"echo-specialpage": "Maranduha",
+	"echo-none": "Nderereko maranduha pyahu.",
+	"notification-link-text-view-message": "Mombe'ukaha jehecha",
+	"notification-link-text-view-changes": "Ñemoambue jehecha",
+	"notification-link-text-view-page": "Kuatiarogue jehecha",
+	"notification-link-text-view-edit": "Jehaijey jehecha"
+}

@@ -1,0 +1,288 @@
+@import 'mediawiki.mixins';
+@import '../../flow.colors';
+@import '../../flow.variables';
+
+/* Use value that results in exact pixels to avoid scrollbar flicker. T178685 */
+@highlightedIndent: (3em/14);
+
+// Helpers
+.minimalPostHighlight( @negativeMargin ) {
+	margin-left: 0 - @negativeMargin - @topicIndent;
+	padding-left: @topicIndent + @negativeMargin - @highlightedIndent;
+}
+
+// Comments
+form.flow-post {
+	margin-left: @topicIndent;
+}
+
+.flow-post {
+	position: relative;
+	color: @colorText;
+	word-wrap: break-word;
+
+	&.flow-post-highlight-newer {
+		.flow-post-content {
+			.minimalPostHighlight( 0.7em );
+		}
+	}
+
+	.flow-post {
+		&.flow-post-highlight-newer {
+			> .flow-post-main .flow-post-content {
+				.minimalPostHighlight( -0.1em );
+			}
+		}
+
+		.flow-post {
+			&.flow-post-highlight-newer {
+				> .flow-post-main .flow-post-content {
+					.minimalPostHighlight( -0.1em );
+				}
+			}
+		}
+	}
+
+	// Content of comments
+	.flow-post-content {
+		// protect from content breaking out of its box
+		word-break: break-word;
+		overflow: auto;
+		max-height: 2000px;
+	}
+
+	// Author link in post
+	.flow-author {
+		font-size: 0.875em;
+		line-height: 1.2;
+		display: inline-block;
+		color: @colorText;
+		word-wrap: break-word;
+
+		.mw-userlink {
+			font-weight: bold;
+		}
+
+		.mw-usertoollinks {
+			opacity: 0;
+			.transition( opacity 0.25s ease );
+		}
+
+		&:hover .mw-usertoollinks {
+			opacity: 1;
+		}
+	}
+
+	.mw-content-ltr & {
+		/* @noflip */
+		margin: 0.5em 0 0 0.75em;
+
+		// Nested comments (replies & reply forms)
+		.flow-replies {
+			/* @noflip */
+			margin-left: @replyIndent;
+			/* @noflip */
+			padding-left: 0.5em;
+			/* @noflip */
+			border-left: 1px solid @colorGray12;
+		}
+
+		&.flow-post-max-depth .flow-replies {
+			/* @noflip */
+			margin-left: 0;
+			/* @noflip */
+			padding-left: 0;
+			/* @noflip */
+			border-left-width: 0;
+
+			.flow-post-max-depth {
+				/* @noflip */
+				margin-left: 0;
+			}
+		}
+
+		.flow-post-main {
+			/* @noflip */
+			margin-left: 0.1em;
+		}
+
+		// Highlights a post (no IE6 support, but acceptable degradation)
+		&.flow-post-highlighted {
+			> .flow-post-main {
+				/* @noflip */
+				@highlightedIndent: @topicIndent - 0.75em;
+				/* @noflip */
+				padding-left: @highlightedIndent;
+				/* @noflip */
+				border-left: solid @highlightedIndent @colorHighlight;
+			}
+		}
+
+		// Highlights all posts newer than a specific post
+		&.flow-post-highlight-newer {
+			.flow-post-content {
+				/* @noflip */
+				border-left: solid @highlightedIndent @colorHighlightNewer;
+			}
+		}
+	}
+
+	.mw-content-rtl & {
+		/* @noflip */
+		margin: 0.5em 0.75em 0 0;
+
+		// Nested comments (replies & reply forms)
+		.flow-replies {
+			/* @noflip */
+			margin-right: @topicIndent;
+			/* @noflip */
+			padding-right: 0.5em;
+			/* @noflip */
+			border-right: 1px solid @colorGray12;
+		}
+
+		&.flow-post-max-depth .flow-replies {
+			/* @noflip */
+			margin-right: 0;
+			/* @noflip */
+			padding-right: 0;
+			/* @noflip */
+			border-right-width: 0;
+
+			.flow-post-max-depth {
+				/* @noflip */
+				margin-right: 0;
+			}
+		}
+
+		.flow-post-main {
+			/* @noflip */
+			margin-right: 0.1em;
+		}
+
+		// Highlights a post (no IE6 support, but acceptable degradation)
+		&.flow-post-highlighted {
+			> .flow-post-main {
+				/* @noflip */
+				@highlightedIndent: @topicIndent - 0.75em;
+				/* @noflip */
+				padding-right: @highlightedIndent;
+				/* @noflip */
+				border-right: solid @highlightedIndent @colorHighlight;
+			}
+		}
+
+		// Highlights all posts newer than a specific post
+		&.flow-post-highlight-newer {
+			.flow-post-content {
+				/* @noflip */
+				border-right: solid @highlightedIndent @colorHighlightNewer;
+			}
+		}
+	}
+}
+
+// Comment metadata
+.flow-post-meta {
+	// @todo needs overflow: hidden but crops button border at bottom
+	color: @colorGray7;
+	font-size: 0.875em;
+
+	.mw-content-ltr & {
+		/* @noflip */
+		text-align: right;
+	}
+
+	.mw-content-rtl & {
+		/* @noflip */
+		text-align: left;
+	}
+}
+
+.flow-post-meta-actions {
+	.mw-content-ltr & {
+		/* @noflip */
+		float: left;
+	}
+
+	.mw-content-rtl & {
+		/* @noflip */
+		float: right;
+	}
+
+	a {
+		&:after {
+			content: '\2022';
+			padding: 0 8px;
+			text-decoration: none;
+			display: inline-block;
+			color: @colorGray7;
+		}
+
+		&:last-child {
+			&:after {
+				content: '';
+			}
+		}
+	}
+}
+
+// MEDIA QUERIES
+@media all and ( min-width: @small ) {
+	.flow-post {
+		padding: 0;
+
+		/* left margin provided by highlighting zone */
+		.mw-content-ltr & {
+			/* @noflip */
+			margin: 1em 0 0 @topicIndent;
+		}
+
+		.mw-content-ltr .flow-replies & {
+			/* @noflip */
+			margin-left: @replyIndent;
+		}
+
+		.mw-content-rtl & {
+			/* @noflip */
+			margin: 1em @topicIndent 0 0;
+		}
+
+		.mw-content-rtl .flow-replies & {
+			/* @noflip */
+			margin-right: @replyIndent;
+		}
+
+		.flow-author {
+			line-height: inherit;
+			font-size: inherit;
+		}
+
+		&.flow-post-highlight-newer > .flow-post-main .flow-post-content {
+			.minimalPostHighlight( 1.3em );
+		}
+
+		.flow-post.flow-post-highlight-newer > .flow-post-main .flow-post-content {
+			.minimalPostHighlight( 0.7em );
+		}
+
+		.flow-post .flow-post.flow-post-highlight-newer > .flow-post-main .flow-post-content {
+			.minimalPostHighlight( 0.7em );
+		}
+	}
+}
+
+// What to do? vector changes this width on us from screen-hd.less with:
+//
+// @media screen and ( min-width: 982px )
+// .mw-body {
+//   margin-left: 11em;
+//   padding: 1.25em 1.5em 1.5em 1.5em;
+// }
+//
+// The standard padding for narrower screens is 1em all around.
+@media all and ( min-width: 982px ) {
+	.flow-post.flow-post-highlight-newer > .flow-post-main .flow-post-content {
+		.minimalPostHighlight( 1.8em );
+	}
+}

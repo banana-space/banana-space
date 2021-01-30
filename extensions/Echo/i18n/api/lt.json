@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Albertas",
+			"Eitvys200"
+		]
+	},
+	"apihelp-echomarkread-description": "Pažymėti pranešimus kaip perskaitytus dabartinio naudotojo.",
+	"apihelp-echomarkread-param-list": "ID sąrašas pranešimų, kuriuos pažymėti kaip perskaitytus.",
+	"apihelp-echomarkread-param-unreadlist": "Pranešimų ID sąrašas, kuriuos pažymėti kaip neperskaitytus.",
+	"apihelp-echomarkread-param-all": "Jeigu nustatyta, pažymi visus naudotojo pranešimus kaip perskaitytus.",
+	"apihelp-echomarkread-param-sections": "Sąrašas skyrių, kuriuos pažymėti kaip perskaitytus.",
+	"apihelp-echomarkread-example-1": "Pažymėti pranešimą 8 kaip perskaitytą",
+	"apihelp-echomarkread-example-2": "Pažymėti visus pranešimus kaip perskaitytus",
+	"apihelp-echomarkread-example-3": "Žymėti pranešimą 1 kaip neskaityta",
+	"apihelp-echomarkseen-description": "Pažymėti pranešimus kaip peržiūrėtus dabartinio naudotojo.",
+	"apihelp-echomarkseen-example-1": "Pažymėti visų tipų pranešimus kaip peržiūrėtus",
+	"apihelp-echomarkseen-param-type": "Tipas pranešimų, kuriuos pažymėti kaip peržiūrėtus: 'alert', 'message' arba 'all'.",
+	"apihelp-query+notifications-description": "Gauti pranešimus, kurie laukia dabartinio naudotojo.",
+	"apihelp-query+notifications-param-prop": "Informacija, kurios prašyti.",
+	"apihelp-query+notifications-param-sections": "Pranešimo sekcijos, su kuriomis vykdyti užklausą (t.y. kokia nors kombinacija iš 'alert' ir 'message').",
+	"apihelp-query+notifications-param-groupbysection": "Ar grupuoti rezultatus pagal skyrius. Kiekvienas skyrius yra paimamas atskirai, jeigu taip nustatyta.",
+	"apihelp-query+notifications-param-filter": "Filtruoti grąžintus pranešimus.",
+	"apihelp-query+notifications-param-format": "Jeigu nustatyta, pranešimai bus grąžinami suformatuoti šiuo būdu.",
+	"apihelp-query+notifications-paramvalue-format-model": "Gryni pranešimų duomenys",
+	"apihelp-query+notifications-param-limit": "Maksimalus pranešimų skaičius, kurį grąžinti.",
+	"apihelp-query+notifications-param-wikis": "Viki sąrašas, iš kurių gauti pranešimus (numatytasis - tik dabartinė viki).",
+	"apihelp-query+notifications-param-alertcontinue": "Kai prieinama daugiau įspėjimo rezultatų, tęsimui naudoti tai.",
+	"apihelp-query+notifications-param-unreadfirst": "Ar rodyti neskaitytus pranešimus pirmiau (naudojama tik jei nenustatytas groupbysection).",
+	"apihelp-query+notifications-param-alertunreadfirst": "Ar pirmiau rodyti neperskaitytų žinučių pranešimus (naudojama tik jei groupbysection yra nustatytas).",
+	"apihelp-query+notifications-param-messagecontinue": "Kai prieinama daugiau žinučių rezultatų, tęsimui naudoti tai.",
+	"apihelp-query+notifications-param-messageunreadfirst": "Ar pirmiau rodyti neperskaitytus įspėjimų pranešimus (naudojama tik jei groupbysection yra nustatytas).",
+	"apihelp-query+notifications-param-titles": "Gražinti tik pranešimus šiems puslapiams. Kad gautumėte pranešimus, nesusijusius su puslapiu, naudokite [] kaip pavadinimą.",
+	"apihelp-query+notifications-example-1": "Rodyti pranešimus",
+	"apihelp-query+notifications-example-2": "Rodyti pranešimus, sugrupuotus pagal skyrius, su kiekiais",
+	"apihelp-query+unreadnotificationpages-description": "Gauti puslapius, iš kurių dabartinis vartotojas turi neskaitytų pranešimų.",
+	"apihelp-query+unreadnotificationpages-param-limit": "Maksimalus grąžinamų puslapių skaičius.",
+	"apihelp-query+unreadnotificationpages-param-wikis": "Viki sąrašas, iš kurių gauti neskaitytus pranešimus (numatytasis - tik dabartinė viki).",
+	"apihelp-query+unreadnotificationpages-example-1": "Nurodyti puslapius su neskaitytais pranešimais (jų kiekiu)"
+}

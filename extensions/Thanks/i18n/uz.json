@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abdulla",
+			"Nataev",
+			"Sociologist"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|rahmat}}}}",
+	"thanks-thanked": "{{GENDER:$1|rahmat aytildi}}",
+	"thanks-button-thank": "{{GENDER:$1|Rahmat}}",
+	"thanks-button-thanked": "{{GENDER:$1|Rahmat aytildi}}",
+	"thanks-error-undefined": "Rahmat yetkazilmadi. Iltimos takrorlang.",
+	"thanks-error-invalidrevision": "Versiya raqami notoʻgʻri.",
+	"thanks-error-ratelimited": "{{GENDER:$1|Siz}} bu amallarni haddan oshiq tez bajaryapsiz. Iltimos bir oz kuting va takrorlang.",
+	"thanks-thank-tooltip": "Bu {{GENDER:$2|foydalanuvchiga}} rahmat {{GENDER:$1|ayt}}",
+	"thanks-thanked-notice": "$1ga {{GENDER:$2|uning|uning|ularning}} tahririni yoqtirganingiz haqida bildirildi.",
+	"echo-pref-subscription-edit-thank": "Tahririm uchun menga rahmat aytildi",
+	"echo-pref-tooltip-edit-thank": "Tahririm uchun rahmat aytilsa menga bildir.",
+	"echo-category-title-edit-thank": "Rahmat",
+	"notification-thanks-diff-link": "tahriringiz",
+	"log-name-thanks": "Rahmatlar qaydi",
+	"log-description-thanks": "Quyida rahmat aytilgan foydalanuvchilar roʻyxati keltirilgan.",
+	"logentry-thanks-thank": "$1 {{GENDER:$4|$3}}ga {{GENDER:$2|rahmat aytdi}}"
+}

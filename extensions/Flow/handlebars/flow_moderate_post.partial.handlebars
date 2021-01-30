@@ -1,0 +1,30 @@
+<form method="POST" action="{{moderationAction actions @root.submitted.moderationState}}">
+	{{> flow_errors}}
+	<input type="hidden" name="wpEditToken" value="{{@root.editToken}}" />
+	<input name="topic_reason"
+	          type="text"
+	          size="45"
+	          required
+	          class="mw-ui-input"
+	          data-role="content"
+	          placeholder="{{l10n (concat "flow-moderation-placeholder-" @root.submitted.moderationState "-post")}}"
+	          autofocus
+	          {{~#if @root.submitted.reason~}}
+	            value="{{~@root.submitted.reason~}}"
+	          {{~/if~}}
+	          >
+	<div class="flow-form-actions flow-form-collapsible">
+		<button data-flow-interactive-handler="apiRequest"
+		        data-flow-api-handler="moderatePost"
+		        class="mw-ui-button mw-ui-progressive"
+		        data-role="submit">
+			{{~l10n (concat "flow-moderation-confirm-" @root.submitted.moderationState "-post")~}}
+		</button>
+		<a data-flow-interactive-handler="cancelForm"
+		   class="mw-ui-button mw-ui-destructive mw-ui-quiet"
+		   href="{{links.topic.url}}"
+		   title="{{l10n "flow-cancel"}}">
+			{{~l10n "flow-cancel"~}}
+		</a>
+	</div>
+</form>

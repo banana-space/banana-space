@@ -1,0 +1,181 @@
+@import 'mediawiki.mixins';
+@import '../flow.variables';
+@import '../flow.colors';
+
+// @todo document flow-menu
+.flow-menu {
+	top: 0;
+	clear: both;
+	position: static;
+	bottom: 0;
+
+	ul {
+		font-size: 0.75em;
+	}
+
+	li {
+		display: inline;
+
+		a {
+			font-weight: inherit;
+			text-align: left;
+		}
+	}
+
+	a:focus {
+		outline: 0;
+	}
+
+	// Hide the menu trigger completely in no-js mode
+	.flow-menu-js-drop {
+		display: none;
+	}
+
+	// Correctly display positions based on content language
+	.mw-content-ltr & {
+		/* @noflip */
+		right: 0;
+	}
+
+	// Correctly display positions based on content language
+	.mw-content-rtl & {
+		/* @noflip */
+		left: 0;
+	}
+	// This is the sorting popup menu, and we want this
+	// to flip in interface language because the TOC flips too
+	&.flow-board-sort-menu {
+		left: auto;
+		right: 0;
+	}
+}
+
+div.flow-menu-inverted {
+	right: auto;
+	left: 0;
+}
+
+// Use child selector to block IE6; it doesn't support :hover
+div > .flow-menu {
+	bottom: auto;
+	display: block;
+	border: 0;
+
+	&.flow-menu-inverted {
+		right: auto;
+		left: 0;
+
+		.flow-menu-js-drop {
+			text-align: left;
+		}
+	}
+
+	// the toc needs to retain display:block for purposes
+	// of triggering autoload eagerly behind the scenes.
+	// flow-menu-scrollable and flow-menu-hoverable cannot
+	// be combined, as this hides the hoverable control.
+	&.flow-menu-scrollable {
+		visibility: hidden;
+
+		ul {
+			display: block;
+		}
+	}
+
+	&.flow-menu-hoverable:hover,
+	&.focus {
+		z-index: 2;
+
+		ul {
+			display: block;
+		}
+
+		&.flow-menu-scrollable {
+			visibility: visible;
+		}
+
+		.flow-menu-js-drop a {
+			border-color: transparent;
+			background: transparent;
+			background: rgba( 0, 0, 0, 0.05 );
+
+			.caret {
+				border-top-color: #000;
+			}
+		}
+	}
+
+	ul {
+		background: @background-color-base;
+		// By default the menu control is shown and the menu itself is hidden.
+		display: none;
+		font-size: 1em;
+		border: @border-base;
+		border-radius: @border-radius-base;
+		box-shadow: 0 2px 2px 0 rgba( 0, 0, 0, 0.25 );
+
+		> section:not( :first-of-type ) > li:first-of-type,
+		li.flow-menu-section:not( :first-of-type ) {
+			border-top: 1px solid @colorGray12;
+		}
+	}
+
+	li {
+		display: block;
+		margin: 0;
+
+		a {
+			display: block;
+			text-align: left;
+		}
+	}
+
+	// This is the menu opener handler; it contains an anchor which triggers the menu in touch devices, without JS
+	.flow-menu-js-drop {
+		display: block;
+		text-indent: 0;
+		cursor: pointer;
+
+		a {
+			display: inline-block;
+			padding: 0 0.5em;
+			border-radius: @border-radius-base;
+			border-width: 0;
+			color: @colorTextLight;
+		}
+	}
+
+	// Correct positioning for ltr/rtl content direction
+	.mw-content-ltr & .flow-menu-js-drop {
+		/* @noflip */
+		text-align: right;
+	}
+	// Correct positioning for ltr/rtl content direction
+	.mw-content-rtl & .flow-menu-js-drop {
+		/* @noflip */
+		text-align: left;
+	}
+
+	// This is a hidden menu trigger; used when the menu is opened from a secondary handler via menuToggle
+	.flow-menu-js-drop-hidden {
+		position: absolute;
+		left: -999em;
+		height: 0;
+	}
+}
+
+// @todo move this
+div.flow-post > .flow-menu {
+	.flow-menu-js-drop {
+		a {
+			border-width: 0;
+		}
+	}
+}
+
+@media all and ( min-width: @small ) {
+	// On desktop, the flow-menu is no longer inline
+	.flow-menu {
+		position: absolute;
+	}
+}

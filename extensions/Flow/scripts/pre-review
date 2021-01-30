@@ -1,0 +1,29 @@
+#!/bin/sh
+# Enable all the git hooks by executing the following from the project root directory
+# $ make installhooks
+
+# Work out location of Flow/scripts/ directory
+dir=$(php -r "echo dirname( realpath( '$0' ) ), \"\\n\";")
+# Move to the project root
+cd $(dirname $dir)
+# Source the shared shell functions
+. $dir/hooks-shared.sh
+
+# only checks top commit for changes. havn't figured out how to get
+# git-review to tell us which commits are being submitted
+if file_changed_in_head '\.php$'; then
+	if [ "$USE_PHPSTORM" = "1" ]; then
+		# bit of a hack ... other things run inside vagrant but phpstorm is probably
+		# installed external to vagrant
+		/usr/bin/env make analyze-phpstorm
+	fi
+fi
+
+if file_changed_in_head '\.i18n\.php$'; then
+	COMMANDS="messagecheck $COMMANDS"
+fi
+
+if [ "$COMMANDS" != "" ]; then
+	make $COMMANDS || exit 1
+fi
+

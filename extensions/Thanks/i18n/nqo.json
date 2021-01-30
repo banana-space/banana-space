@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"Babamamadidianee",
+			"Lancine.kounfantoh.fofana",
+			"Lanciné.kounfantoh.fofana"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|ߌ ߣߌ߫ ߗߋ߫}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$1|ߗߋ߫}} ߞߎ߲ߟߎ߲ߖߋߟߌ߫ ߗߋߛߓߍ ߗߋ߫ {{GENDER:$2|ߟߊ߬ߓߊ߰ߙߊ߬ߟߊ}} ߡߊ߬"
+}

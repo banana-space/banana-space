@@ -1,0 +1,11 @@
+{{#unless revision.actions.edit}}
+	<p class="flow-board-header-restricted">
+		{{{ oouify
+			'lock'
+			type="IconWidget"
+			classes="flow-board-header-restricted-icon"
+		}}}
+
+		<span class="flow-board-header-restricted-label">{{l10n "flow-board-description-can-not-edit"}}</span>
+        </p>
+{{/unless}}

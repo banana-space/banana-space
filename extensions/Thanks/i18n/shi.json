@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amara-Amaziɣ"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|ⵙⵏⵉⵎⵎⵔ}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$1|ⴰⵣⵏ ⵏⵏ}} ⵢⴰⵜ ⵜⵏⵖⵎⵉⵙⵜ ⵏ ⵓⵙⵏⵉⵎⵎⵔ ⵉ {{GENDER:$2|ⵓⵙⵎⵔⴰⵙ|ⵜⵙⵎⵔⴰⵙⵜ}} ⴰⴷ"
+}

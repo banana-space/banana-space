@@ -1,0 +1,18 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Include:
+    - 'Gemfile'
+    - 'Rakefile'
+    - '.jsduck/CustomTags.rb'
+  Exclude:
+      - 'node_modules/**/*'
+      - 'vendor/**/*'
+      - 'rebaser/**/*'
+
+Metrics/LineLength:
+  Max: 100
+
+Layout/SpaceInsideStringInterpolation:
+  Exclude:
+    - jsduck_custom_tags.rb

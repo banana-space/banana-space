@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"Andrei Stroe",
+			"Minisarm"
+		]
+	},
+	"thanks-desc": "Adaugă legături pentru a putea mulțumi utilizatorilor pentru modificări, comentarii etc.",
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|mulțumesc}}}}",
+	"thanks-thanked": "{{GENDER:$1|{{GENDER:$2|ați mulțumit}}}}",
+	"thanks-button-thank": "{{GENDER:$1|{{GENDER:$2|Mulțumesc}}}}",
+	"thanks-button-thanked": "{{GENDER:$1|{{GENDER:$2|Ați mulțumit}}}}",
+	"thanks-error-undefined": "Încercarea de a mulțumi a eșuat (cod de eroare: $1). Încercați din nou.",
+	"thanks-error-invalidrevision": "Codul versiunii nu este valid.",
+	"thanks-error-ratelimited": "{{GENDER:$1|V}}-ați depășit limita de evaluare. Așteptați un timp și reîncercați.",
+	"thanks-thank-tooltip": "{{GENDER:$1|Trimite}} o notificare de mulțumire {{GENDER:$2|acestui utilizator|acestei utilizatoare}}",
+	"thanks-thank-tooltip-no": "{{GENDER:$1|Revocă}} notificarea de mulțumire",
+	"thanks-thank-tooltip-yes": "{{GENDER:$1|Trimite}} notificarea de mulțumire",
+	"thanks-confirmation2": "{{GENDER:$1|Trimiteți}} în mod public mulțumiri?",
+	"thanks-thanked-notice": "$1 a primit mulțumirea {{GENDER:$3|dumneavoastră}} pentru modificarea {{GENDER:$2|lui|ei|sa}}.",
+	"thanks": "Trimitere mulțumiri",
+	"thanks-submit": "Trimite mulțumirea",
+	"echo-pref-subscription-edit-thank": "Mi se mulțumește pentru modificarea mea",
+	"echo-pref-tooltip-edit-thank": "Notifică-mă când cineva îmi mulțumește pentru o modificare pe care am efectuat-o.",
+	"echo-category-title-edit-thank": "Mulțumiri",
+	"notification-thanks-diff-link": "modificarea dumneavoastră",
+	"log-name-thanks": "Jurnal mulțumiri",
+	"log-description-thanks": "Mai jos se află o listă a utilizatorilor cărora li s-a mulțumit de către alți utilizatori.",
+	"logentry-thanks-thank": "$1 {{GENDER:$2|i-a mulțumit}} {{GENDER:$4|utilizatorului $3|utilizatoarei $3}}",
+	"thanks-error-no-id-specified": "Trebuie să precizați un ID de versiune sau de înregistrare de jurnal pentru a trimite mulțumiri.",
+	"notification-link-text-view-post": "Vezi comentariul",
+	"thanks-error-invalidpostid": "ID-ul mesajului nu este valid.",
+	"flow-thanks-confirmation-special": "Doriți să trimiteți în mod public mulțumiri pentru acest comentariu?",
+	"flow-thanks-thanked-notice": "$1 a primit mulțumirea dumneavoastră pentru comentariul {{GENDER:$2|lui|ei|său}}.",
+	"notification-flow-thanks-post-link": "comentariul dumneavoastră"
+}

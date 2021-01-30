@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		xmlns:flow="http://www.mediawiki.org/xml/flow-1.0/"
+		targetNamespace="http://www.mediawiki.org/xml/flow-1.0/"
+		elementFormDefault="qualified">
+
+	<!-- Need this to reference xml:lang -->
+	<import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
+
+	<complexType name="AbstractRevision">
+		<simpleContent>
+			<extension base="string">
+				<attribute type="string" name="id" use="required"/>
+				<attribute type="nonNegativeInteger" name="userid" use="required"/>
+				<attribute type="nonNegativeInteger" name="globaluserid" use="optional"/>
+				<attribute type="string" name="userip" use="optional"/>
+				<attribute type="string" name="userwiki" use="required"/>
+				<attribute type="string" name="parentid" use="optional"/>
+				<attribute type="string" name="changetype" use="required"/>
+				<attribute type="string" name="type" use="required"/>
+				<attribute type="string" name="typeid" use="required"/>
+				<attribute type="string" name="flags" use="required"/>
+				<attribute type="string" name="modstate" use="required"/>
+				<attribute type="nonNegativeInteger" name="globalmoduserid" use="optional"/>
+				<attribute type="string" name="moduserid" use="optional"/>
+				<attribute type="string" name="moduserip" use="optional"/>
+				<attribute type="string" name="moduserwiki" use="optional"/>
+				<attribute type="string" name="modtimestamp" use="optional"/>
+				<attribute type="string" name="modreason" use="optional"/>
+				<attribute type="string" name="lasteditid" use="optional"/>
+				<attribute type="string" name="edituserid" use="optional"/>
+				<attribute type="nonNegativeInteger" name="globaledituserid" use="optional"/>
+				<attribute type="string" name="edituserip" use="optional"/>
+				<attribute type="string" name="edituserwiki" use="optional"/>
+				<attribute type="nonNegativeInteger" name="contentlength" use="required"/>
+				<attribute type="nonNegativeInteger" name="previouscontentlength" use="required"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<complexType name="PostRevision">
+		<simpleContent>
+			<extension base="flow:AbstractRevision">
+				<attribute type="string" name="treeparentid" use="optional"/>
+				<attribute type="string" name="treedescendantid" use="required"/>
+				<attribute type="string" name="treerevid" use="required"/>
+				<attribute type="nonNegativeInteger" name="treeoriguserid" use="required"/>
+				<attribute type="nonNegativeInteger" name="globaltreeoriguserid" use="optional"/>
+				<attribute type="string" name="treeoriguserip" use="optional"/>
+				<attribute type="string" name="treeoriguserwiki" use="required"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<complexType name="Post">
+		<sequence>
+			<element name="revisions">
+				<complexType>
+					<choice minOccurs="1" maxOccurs="unbounded">
+						<element name="revision" type="flow:PostRevision"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="children" minOccurs="0" maxOccurs="1">
+				<complexType>
+					<choice minOccurs="1" maxOccurs="unbounded">
+						<!-- Recursion: post can have child posts -->
+						<element name="post" type="flow:Post"/>
+					</choice>
+				</complexType>
+			</element>
+		</sequence>
+		<attribute type="string" name="id" use="required"/>
+	</complexType>
+
+	<element name="mediawiki">
+		<complexType>
+			<choice minOccurs="0" maxOccurs="unbounded">
+				<element name="board">
+					<complexType mixed="true">
+						<sequence>
+							<element name="description" minOccurs="0" maxOccurs="1">
+								<complexType>
+									<all>
+										<element name="revisions">
+											<complexType>
+												<choice minOccurs="1" maxOccurs="unbounded">
+													<element name="revision" type="flow:AbstractRevision"/>
+												</choice>
+											</complexType>
+										</element>
+									</all>
+									<attribute type="string" name="id" use="required"/>
+								</complexType>
+							</element>
+							<element name="topic" minOccurs="0" maxOccurs="unbounded">
+								<complexType>
+									<sequence>
+										<element name="post" type="flow:Post" minOccurs="1" maxOccurs="unbounded"/>
+										<element name="summary" minOccurs="0" maxOccurs="1">
+											<complexType>
+												<all>
+													<element name="revisions">
+														<complexType>
+															<choice minOccurs="1" maxOccurs="unbounded">
+																<element name="revision" type="flow:AbstractRevision"/>
+															</choice>
+														</complexType>
+													</element>
+												</all>
+												<attribute type="string" name="id" use="required"/>
+											</complexType>
+										</element>
+									</sequence>
+									<attribute type="string" name="id" use="required"/>
+								</complexType>
+							</element>
+						</sequence>
+						<attribute type="string" name="id" use="required"/>
+						<attribute type="string" name="title" use="required"/>
+					</complexType>
+				</element>
+			</choice>
+			<attribute type="string" name="version" use="required"/>
+			<attribute ref="xml:lang" use="required"/>
+		</complexType>
+	</element>
+</schema>

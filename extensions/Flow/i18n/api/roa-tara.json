@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"apihelp-flow+edit-post-param-postId": "ID d'u messàgge.",
+	"apihelp-flow+edit-title-description": "Cange 'u titole de 'n'argomende.",
+	"apihelp-flow+edit-title-summary": "Cange 'u titole de 'n'argomende.",
+	"apihelp-flow+reply-description": "Resposte a 'nu messàgge.",
+	"apihelp-flow+reply-summary": "Resposte a 'nu messàgge.",
+	"apihelp-flow+reply-param-replyTo": "ID d'u messàgge da responnere.",
+	"apihelp-flow+view-topic-description": "'Ndruche 'n'argomende.",
+	"apihelp-flow+view-topic-summary": "'Ndruche 'n'argomende."
+}

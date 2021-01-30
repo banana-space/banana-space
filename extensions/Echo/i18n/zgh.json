@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amara-Amaziɣ",
+			"Aslmad mohamed belarhzali",
+			"ⵕⴰⵊⵉ"
+		]
+	},
+	"echo-new-messages": "ⵍⵍⴰⵏⵜ ⵖⵓⵔⴽ ⵜⵓⵣⵉⵏⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ",
+	"tooltip-pt-notifications-alert": "ⵜⵓⵣⵉⵏⵉⵏ {{GENDER:|ⵏⵏⴽ|ⵏⵏⵎ}}",
+	"notification-timestamp-today": "ⴰⵙⵙⴰ",
+	"notification-inbox-filter-read": "ⵖⵔ"
+}

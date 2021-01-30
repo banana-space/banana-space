@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Andibing",
+			"Anomie",
+			"Aursani",
+			"Caliburn",
+			"Mdann52",
+			"Shirayuki"
+		]
+	},
+	"flow-summarize-topic-placeholder": "Please summarise this discussion",
+	"flow-topic-action-summarize-topic": "Summarise",
+	"flow-error-no-render": "The specified action was not recognised.",
+	"flow-previous-diff": "← Older edit",
+	"flow-next-diff": "Newer edit →"
+}

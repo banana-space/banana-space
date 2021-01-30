@@ -1,0 +1,25 @@
+<div class="flow-board">
+	{{> flow_errors}}
+
+	{{#if revision}}
+		<div class="flow-revision-permalink-warning plainlinks">
+			{{#if revision.previousRevisionId}}
+				{{l10nParse "flow-revision-permalink-warning-header"
+					revision.human_timestamp
+					revision.rev_view_links.hist.url
+					revision.rev_view_links.diff.url}}
+			{{else}}
+				{{l10nParse "flow-revision-permalink-warning-header-first"
+					revision.human_timestamp
+					revision.rev_view_links.hist.url
+					revision.rev_view_links.diff.url}}
+			{{/if}}
+		</div>
+
+		<div class="flow-revision-content mw-parser-output">
+			{{escapeContent revision.content.format revision.content.content}}
+		</div>
+
+		{{> flow_patrol_action}}
+	{{/if}}
+</div>

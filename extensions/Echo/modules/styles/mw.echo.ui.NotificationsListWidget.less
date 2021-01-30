@@ -1,0 +1,22 @@
+@import '../echo.variables.less';
+
+.mw-echo-ui-notificationsListWidget {
+	.mw-echo-ui-notificationsListWidget-bundle & {
+		padding: 0;
+	}
+
+	> .mw-echo-ui-notificationItemWidget:first-child {
+		border-top: 0;
+	}
+
+	> a,
+	&:hover > a {
+		text-decoration: none;
+		color: @grey-medium;
+	}
+
+	&:not( :hover ) a,
+	#p-personal &:not( :hover ) a.new {
+		color: @grey-medium;
+	}
+}

@@ -1,0 +1,82 @@
+@import 'mediawiki.mixins.less';
+@import '../echo.variables.less';
+
+.mw-echo-ui-pageNotificationsOptionWidget {
+	clear: both;
+	width: 100%;
+	.box-sizing( border-box );
+
+	&.oo-ui-optionWidget {
+		.transition( ~'background-color 100ms, color 100ms' );
+
+		&-highlighted {
+			background-color: #eaecf0;
+			color: @color-base--active;
+		}
+
+		&-selected {
+			background-color: @background-color-primary;
+			color: @color-primary;
+		}
+
+		&-selected&-highlighted,
+		&-pressed&-highlighted {
+			background-color: rgba( 41, 98, 204, 0.1 );
+			color: @color-primary;
+		}
+	}
+
+	&-table {
+		display: table;
+		width: 100%;
+	}
+
+	&-row {
+		display: table-row;
+	}
+
+	&-cell {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	&.oo-ui-iconElement &-icon {
+		width: 1em;
+
+		.oo-ui-iconElement-icon {
+			position: relative;
+		}
+	}
+
+	&-title {
+		padding: 0;
+		width: 100%;
+		line-height: 1em;
+
+		&-label {
+			display: inline-block;
+			// Sidebar width - icon width - twice padding - counter average width
+			max-width: calc( @specialpage-sidebar-width - 1.865em - 2 * @specialpage-separation-unit - 2em );
+			// Truncate text with ellipsis.
+			.text-overflow( @visible: false );
+		}
+	}
+
+	&-count {
+		width: 1em;
+	}
+
+	&-label-count {
+		background-color: #eaecf0;
+		color: @grey-medium;
+		padding: 0.2em 0.5em;
+		margin-left: 0.5em;
+		border-radius: @border-radius-base;
+		white-space: nowrap;
+
+		.oo-ui-optionWidget-selected & {
+			background: none; // `background-color: transparent` would be the goto value, but IE 8-9 introduces a bug
+			color: @color-primary;
+		}
+	}
+}

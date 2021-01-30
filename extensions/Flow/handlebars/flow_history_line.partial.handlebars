@@ -1,0 +1,44 @@
+{{! partial~}}
+<span class="flow-pipelist">
+	(
+	{{~noop~}}
+	<span>
+		{{~#if links.diff-cur~}}
+			<a href="{{links.diff-cur.url}}" title="{{links.diff-cur.title}}">
+				{{~links.diff-cur.text~}}
+			</a>
+		{{~else~}}
+			{{~l10n "cur"~}}
+		{{~/if~}}
+	</span>
+	<span>
+		{{#if links.diff-prev}}
+			<a href="{{links.diff-prev.url}}" title="{{links.diff-prev.title}}">
+				{{~links.diff-prev.text~}}
+			</a>
+		{{~else~}}
+			{{~l10n "last"~}}
+		{{~/if~}}
+	</span>
+	{{~#if links.topic}}
+		<span><a href="{{links.topic.url}}" title="{{links.topic.title}}">
+			{{~links.topic.text~}}
+		</a></span>
+	{{~/if~}}
+	)
+</span>
+
+{{historyTimestamp this}}
+
+<span class="mw-changeslist-separator">. .</span>
+{{historyDescription this}}
+
+{{#if size}}
+	<span class="mw-changeslist-separator">. .</span>
+	{{showCharacterDifference size.old size.new}}
+{{/if}}
+
+<ul class="flow-history-moderation-menu">
+	{{!-- Inserts each common flow-history-moderation-action --}}
+	{{> flow_moderation_actions_list this moderationType="history" moderationTarget="post" moderationTemplate="post" moderationMwUiClass="mw-ui-anchor" moderationIcons=false}}
+</ul>

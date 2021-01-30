@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Baffo"
+		]
+	},
+	"flow-topic-moderated-reason-prefix": "Razón:",
+	"flow-topic-action-undo-moderation": "Anulada",
+	"flow-notification-newtopic": "<span class=\"mw-echo-title-heading plainlinks\">[$5 $4]</span><br />$1 {{GENDER:$1|creó}} un  tema nuevo en '''$3'''.",
+	"flow-moderation-confirmation-suppress-topic": "Esté tema ha sido suprimida.",
+	"flow-moderation-confirmation-delete-topic": "El tema ha sido eliminado.",
+	"flow-moderation-confirmation-hide-topic": "Este tema se ha ocultado."
+}

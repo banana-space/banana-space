@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Minh Nguyen"
+		]
+	},
+	"apihelp-flowthank-description": "Gửi lời cảm ơn công khai vì một bình luận Flow.",
+	"apihelp-thank-param-rev": "Số thay đổi để cảm ơn ai đó. Cần cung cấp số này hoặc “log”."
+}

@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Silovan"
+		]
+	},
+	"flow-topic-action-watchlist-remove": "გიშაჭარუაშ გოუქვაფა",
+	"notification-header-flow-post-edited-v2": "\"$1\"-ს თქვან პოსტი რედაქტირაფილი რე.",
+	"flow-mark-revision-patrolled-link-text": "დოშანე თე სტატია მუჭოთ პატრულირაფილი",
+	"flow-mark-revision-patrolled-link-title": "დოშანე თე სტატია მუჭოთ პატრულირაფილი",
+	"flow-mark-diff-patrolled-link-text": "დოშანე მუჭოთ პატრულირაფილი",
+	"flow-mark-diff-patrolled-link-title": "დოშანე მუჭოთ პატრულირაფილი"
+}

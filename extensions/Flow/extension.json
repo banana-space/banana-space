@@ -1,0 +1,976 @@
+{
+	"name": "Flow",
+	"version": "1.2.0",
+	"author": [
+		"Erik Bernhardson",
+		"Stephane Bisson",
+		"Matthew Flaschen",
+		"Andrew Garrett",
+		"Shahyar Ghobadpour",
+		"Pau Giner",
+		"Roan Kattouw",
+		"Chris McMahon",
+		"Kunal Mehta",
+		"Matthias Mullie",
+		"S Page",
+		"Jon Robson",
+		"Moriel Schottlender",
+		"Benny Situ",
+		"Volker E."
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Flow",
+	"descriptionmsg": "flow-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
+	"callback": "Flow\\Hooks::registerExtension",
+	"APIModules": {
+		"flow-parsoid-utils": "Flow\\Api\\ApiParsoidUtilsFlow",
+		"flow": "Flow\\Api\\ApiFlow"
+	},
+	"APIPropModules": {
+		"flowinfo": "Flow\\Api\\ApiQueryPropFlowInfo"
+	},
+	"AvailableRights": [
+		"flow-hide",
+		"flow-lock",
+		"flow-delete",
+		"flow-suppress",
+		"flow-edit-post",
+		"flow-create-board"
+	],
+	"ContentHandlers": {
+		"flow-board": "Flow\\Content\\BoardContentHandler"
+	},
+	"DefaultUserOptions": {
+		"echo-subscriptions-web-flow-discussion": true,
+		"echo-subscriptions-email-flow-discussion": false,
+		"flow-topiclist-sortby": "updated",
+		"flow-editor": "wikitext",
+		"flow-side-rail-state": "expanded",
+		"flow-visualeditor": 1
+	},
+	"ExtensionFunctions": [
+		"Flow\\Hooks::initFlowExtension"
+	],
+	"GroupPermissions": {
+		"*": {
+			"flow-hide": true
+		},
+		"user": {
+			"flow-lock": true
+		},
+		"sysop": {
+			"flow-lock": true,
+			"flow-delete": true,
+			"flow-edit-post": true
+		},
+		"suppress": {
+			"flow-suppress": true
+		},
+		"flow-bot": {
+			"flow-create-board": true
+		}
+	},
+	"GrantPermissions": {
+		"editpage": {
+			"flow-hide": true,
+			"flow-edit-post": true
+		},
+		"editprotected": {
+			"flow-create-board": true
+		},
+		"protect": {
+			"flow-lock": true
+		},
+		"delete": {
+			"flow-delete": true
+		},
+		"oversight": {
+			"flow-suppress": true
+		}
+	},
+	"LogActionsHandlers": {
+		"delete/flow-restore-post": "Flow\\Log\\ActionFormatter",
+		"suppress/flow-restore-post": "Flow\\Log\\ActionFormatter",
+		"delete/flow-restore-topic": "Flow\\Log\\ActionFormatter",
+		"suppress/flow-restore-topic": "Flow\\Log\\ActionFormatter",
+		"lock/flow-restore-topic": "Flow\\Log\\ActionFormatter",
+		"import/lqt-to-flow-topic": "Flow\\Log\\LqtImportFormatter"
+	},
+	"SpecialPages": {
+		"StructuredDiscussions": "Flow\\Specials\\SpecialStructuredDiscussions",
+		"EnableStructuredDiscussions": "Flow\\Specials\\SpecialEnableStructuredDiscussions"
+	},
+	"MessagesDirs": {
+		"Flow": [
+			"i18n",
+			"i18n/api"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"FlowNamespaces": "Flow.namespaces.php",
+		"FlowAlias": "Flow.alias.php"
+	},
+	"ResourceModules": {
+		"ext.flow.contributions": {
+			"scripts": [
+				"contributions/base.js"
+			]
+		},
+		"ext.flow.contributions.styles": {
+			"styles": [
+				"styles/history/history-line.less"
+			]
+		},
+		"ext.flow.templating": {
+			"localBasePath": "",
+			"remoteExtPath": "Flow",
+			"scripts": [
+				"modules/engine/misc/flow-handlebars.js"
+			],
+			"dependencies": [
+				"mediawiki.template.handlebars",
+				"mediawiki.user",
+				"mediawiki.util",
+				"moment"
+			],
+			"templates": [
+				"handlebars/flow_anon_warning.partial.handlebars",
+				"handlebars/flow_block_loop.handlebars",
+				"handlebars/flow_block_topic.handlebars",
+				"handlebars/flow_block_topiclist.handlebars",
+				"handlebars/flow_board_navigation.partial.handlebars",
+				"handlebars/flow_edit_post.partial.handlebars",
+				"handlebars/flow_errors.partial.handlebars",
+				"handlebars/flow_load_more.partial.handlebars",
+				"handlebars/flow_moderate_post_confirmation.partial.handlebars",
+				"handlebars/flow_moderate_post.partial.handlebars",
+				"handlebars/flow_moderate_topic_confirmation.partial.handlebars",
+				"handlebars/flow_moderate_topic.partial.handlebars",
+				"handlebars/flow_moderation_actions_list.partial.handlebars",
+				"handlebars/flow_newtopic_form.partial.handlebars",
+				"handlebars/flow_post_actions.partial.handlebars",
+				"handlebars/flow_post_author.partial.handlebars",
+				"handlebars/flow_post_inner.partial.handlebars",
+				"handlebars/flow_post_meta_actions.partial.handlebars",
+				"handlebars/flow_post_moderation_state.partial.handlebars",
+				"handlebars/flow_post_replies.partial.handlebars",
+				"handlebars/flow_post_partial.partial.handlebars",
+				"handlebars/flow_post.handlebars",
+				"handlebars/flow_reply_form.partial.handlebars",
+				"handlebars/flow_subscribed.partial.handlebars",
+				"handlebars/flow_tooltip_subscribed.partial.handlebars",
+				"handlebars/flow_tooltip.handlebars",
+				"handlebars/flow_topic.partial.handlebars",
+				"handlebars/flow_topic_titlebar_content.partial.handlebars",
+				"handlebars/flow_topic_titlebar_lock.partial.handlebars",
+				"handlebars/flow_topic_titlebar_summary.partial.handlebars",
+				"handlebars/flow_topic_titlebar_watch.partial.handlebars",
+				"handlebars/flow_topic_titlebar.partial.handlebars",
+				"handlebars/flow_topic_moderation_flag.partial.handlebars",
+				"handlebars/flow_topiclist_loop.partial.handlebars",
+				"handlebars/timestamp.handlebars"
+			],
+			"messages": [
+				"flow-anon-warning",
+				"flow-cancel",
+				"flow-skip-summary",
+				"flow-edit-summary-placeholder",
+				"flow-summary-authored",
+				"flow-summary-edited",
+				"flow-board-header",
+				"flow-board-collapse-description",
+				"flow-board-expand-description",
+				"flow-edit-header-link",
+				"flow-edit-header-placeholder",
+				"flow-edit-header-submit",
+				"flow-edit-header-submit-anonymously",
+				"flow-edit-header-submit-publish",
+				"flow-edit-header-submit-anonymously-publish",
+				"flow-edit-title-submit",
+				"flow-edit-title-submit-anonymously",
+				"flow-edit-post-submit",
+				"flow-edit-post-submit-anonymously",
+				"flow-load-more",
+				"flow-newest-topics",
+				"flow-newtopic-content-placeholder",
+				"flow-newtopic-save",
+				"flow-newtopic-save-anonymously",
+				"flow-newtopic-start-placeholder",
+				"flow-post-action-delete-post",
+				"flow-post-action-undelete-post",
+				"flow-post-action-edit-post",
+				"flow-post-action-edit-post-submit",
+				"flow-post-action-edit-post-submit-anonymously",
+				"flow-post-action-edit-post-submit-publish",
+				"flow-post-action-edit-post-submit-anonymously-publish",
+				"flow-post-action-hide-post",
+				"flow-post-action-unhide-post",
+				"flow-post-action-post-history",
+				"flow-post-action-view",
+				"flow-post-action-suppress-post",
+				"flow-post-action-unsuppress-post",
+				"flow-post-action-restore-post",
+				"flow-post-action-undo-moderation",
+				"flow-recent-topics",
+				"flow-reply-topic-title-placeholder",
+				"flow-sorting-tooltip-newest",
+				"flow-sorting-tooltip-recent",
+				"flow-toggle-small-topics",
+				"flow-toggle-topics",
+				"flow-toggle-topics-posts",
+				"flow-topic-collapse-siderail",
+				"flow-topic-comments",
+				"flow-topic-expand-siderail",
+				"flow-show-comments-title",
+				"flow-hide-comments-title",
+				"flow-topic-action-hide-topic",
+				"flow-topic-action-lock-topic",
+				"flow-topic-action-delete-topic",
+				"flow-topic-action-edit-title",
+				"flow-topic-action-hide-topic",
+				"flow-topic-action-history",
+				"flow-topic-action-resummarize-topic",
+				"flow-topic-action-summarize-topic",
+				"flow-topic-action-update-topic-summary",
+				"flow-topic-action-unlock-topic",
+				"flow-topic-action-suppress-topic",
+				"flow-topic-action-view",
+				"flow-topic-action-hide-topic",
+				"flow-topic-action-unhide-topic",
+				"flow-topic-action-delete-topic",
+				"flow-topic-action-undelete-topic",
+				"flow-topic-action-suppress-topic",
+				"flow-topic-action-unsuppress-topic",
+				"flow-topic-action-restore-topic",
+				"flow-topic-action-undo-moderation",
+				"flow-topic-action-watchlist-add",
+				"flow-topic-action-watchlist-remove",
+				"flow-hide-post-content",
+				"flow-delete-post-content",
+				"flow-suppress-post-content",
+				"flow-hide-title-content",
+				"flow-delete-title-content",
+				"flow-suppress-title-content",
+				"talkpagelinktext",
+				"flow-cancel-warning",
+				"flow-hide-title-content",
+				"flow-hide-post-content",
+				"flow-delete-title-content",
+				"flow-delete-post-content",
+				"flow-suppress-title-content",
+				"flow-suppress-post-content",
+				"blocklink",
+				"contribslink",
+				"flow-terms-of-use-new-topic",
+				"flow-terms-of-use-reply",
+				"flow-terms-of-use-edit",
+				"flow-terms-of-use-summarize",
+				"flow-terms-of-use-lock-topic",
+				"flow-terms-of-use-unlock-topic",
+				"flow-no-more-fwd",
+				"flow-topic-notification-subscribe-title",
+				"flow-topic-notification-subscribe-description",
+				"flow-board-notification-subscribe-title",
+				"flow-board-notification-subscribe-description",
+				"flow-moderation-title-unhide-post",
+				"flow-moderation-title-undelete-post",
+				"flow-moderation-title-unsuppress-post",
+				"flow-moderation-title-unhide-topic",
+				"flow-moderation-title-undelete-topic",
+				"flow-moderation-title-unsuppress-topic",
+				"flow-moderation-title-hide-post",
+				"flow-moderation-title-delete-post",
+				"flow-moderation-title-suppress-post",
+				"flow-moderation-title-hide-topic",
+				"flow-moderation-title-delete-topic",
+				"flow-moderation-title-suppress-topic",
+				"flow-moderation-placeholder-unhide-post",
+				"flow-moderation-placeholder-undelete-post",
+				"flow-moderation-placeholder-unsuppress-post",
+				"flow-moderation-placeholder-unhide-topic",
+				"flow-moderation-placeholder-undelete-topic",
+				"flow-moderation-placeholder-unsuppress-topic",
+				"flow-moderation-placeholder-hide-post",
+				"flow-moderation-placeholder-delete-post",
+				"flow-moderation-placeholder-suppress-post",
+				"flow-moderation-placeholder-hide-topic",
+				"flow-moderation-placeholder-delete-topic",
+				"flow-moderation-placeholder-suppress-topic",
+				"flow-moderation-confirm-unhide-post",
+				"flow-moderation-confirm-undelete-post",
+				"flow-moderation-confirm-unsuppress-post",
+				"flow-moderation-confirm-unhide-topic",
+				"flow-moderation-confirm-undelete-topic",
+				"flow-moderation-confirm-unsuppress-topic",
+				"flow-moderation-confirm-hide-post",
+				"flow-moderation-confirm-delete-post",
+				"flow-moderation-confirm-suppress-post",
+				"flow-moderation-confirm-hide-topic",
+				"flow-moderation-confirm-delete-topic",
+				"flow-moderation-confirm-suppress-topic",
+				"flow-moderation-confirmation-hide-topic",
+				"flow-moderation-confirmation-delete-topic",
+				"flow-moderation-confirmation-suppress-topic",
+				"flow-topic-moderated-reason-prefix",
+				"flow-rev-message-lock-topic-reason",
+				"flow-rev-message-restore-topic-reason",
+				"flow-post-undo-hide",
+				"flow-post-undo-delete",
+				"flow-post-undo-suppress",
+				"flow-topic-undo-hide",
+				"flow-topic-undo-delete",
+				"flow-topic-undo-suppress",
+				"flow-edited",
+				"flow-edited-by",
+				"flow-board-header-browse-topics-link",
+				"flow-wikitext-editor-help",
+				"flow-wikitext-editor-help-and-preview",
+				"flow-wikitext-editor-help-uses-wikitext",
+				"flow-wikitext-editor-help-preview-the-result"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.flow.mediawiki.ui.form": {
+			"styles": [
+				"styles/mediawiki.ui/forms.less"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.flow.styles.base": {
+			"styles": [
+				"styles/common.less",
+				"styles/errors.less",
+				"styles/history/history-line.less",
+				"styles/mediawiki.ui/anchors.less"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.flow.board.styles": {
+			"styles": [
+				"styles/board/header.less",
+				"styles/board/menu.less",
+				"styles/board/navigation.less",
+				"styles/board/moderated.less",
+				"styles/board/timestamps.less",
+				"styles/board/replycount.less",
+				"styles/nojs.less",
+				"styles/js.less",
+				"styles/board/form-actions.less",
+				"styles/board/terms-of-use.less"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.flow.board.topic.styles": {
+			"styles": [
+				"styles/board/topic/titlebar.less",
+				"styles/board/topic/meta.less",
+				"styles/board/topic/post.less",
+				"styles/board/topic/summary.less",
+				"styles/board/topic/watchlist.less"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"mediawiki.template.handlebars": {
+			"localBasePath": "",
+			"remoteExtPath": "Flow",
+			"scripts": [
+				"modules/libs/handlebars-v3.0.0.js",
+				"modules/handlebars.js"
+			],
+			"dependencies": [
+				"mediawiki.template"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.flow.components": {
+			"scripts": [
+				"engine/components/flow-registry.js",
+				"engine/components/flow-component.js",
+				"engine/misc/flow-api.js",
+				"engine/misc/flow-eventlog.js",
+				"engine/components/common/flow-component-engines.js",
+				"engine/components/common/flow-component-events.js",
+				"engine/components/board/base/flow-boardandhistory-base.js",
+				"engine/components/board/flow-board.js"
+			],
+			"dependencies": [
+				"oojs",
+				"ext.flow.templating",
+				"ext.flow.jquery.findWithParent",
+				"mediawiki.api",
+				"mediawiki.Title",
+				"mediawiki.user",
+				"mediawiki.Uri",
+				"jquery.throttle-debounce"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.flow.dm": {
+			"scripts": [
+				"flow/mw.flow.js",
+				"flow/dm/mw.flow.dm.js",
+				"flow/dm/mw.flow.dm.Content.js",
+				"flow/dm/mw.flow.dm.Item.js",
+				"flow/dm/mixins/mw.flow.dm.List.js",
+				"flow/dm/api/mw.flow.dm.APIHandler.js",
+				"flow/dm/mw.flow.dm.Captcha.js",
+				"flow/dm/mw.flow.dm.RevisionedContent.js",
+				"flow/dm/mw.flow.dm.ModeratedRevisionedContent.js",
+				"flow/dm/mw.flow.dm.BoardDescription.js",
+				"flow/dm/mw.flow.dm.System.js",
+				"flow/dm/mw.flow.dm.Post.js",
+				"flow/dm/mw.flow.dm.Topic.js",
+				"flow/dm/mw.flow.dm.Board.js",
+				"flow/dm/mw.flow.dm.CategoryItem.js",
+				"flow/dm/mw.flow.dm.Categories.js"
+			],
+			"dependencies": [
+				"mediawiki.api",
+				"oojs"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.flow.ui": {
+			"scripts": [
+				"flow/ui/mw.flow.ui.js",
+				"flow/ui/widgets/mw.flow.ui.CaptchaWidget.js",
+				"flow/ui/mw.flow.ui.CancelConfirmDialog.js",
+				"flow/ui/widgets/mw.flow.ui.TopicMenuSelectWidget.js",
+				"flow/ui/widgets/mw.flow.ui.ToCWidget.js",
+				"flow/ui/widgets/mw.flow.ui.ReorderTopicsWidget.js",
+				"flow/ui/widgets/mw.flow.ui.NavigationWidget.js",
+				"flow/ui/widgets/mw.flow.ui.ReplyWidget.js",
+				"flow/ui/widgets/mw.flow.ui.EditPostWidget.js",
+				"flow/ui/widgets/mw.flow.ui.EditTopicSummaryWidget.js",
+				"flow/ui/widgets/mw.flow.ui.SidebarExpandWidget.js",
+				"flow/ui/widgets/mw.flow.ui.NewTopicWidget.js",
+				"flow/ui/widgets/mw.flow.ui.TopicTitleWidget.js",
+				"flow/ui/widgets/editor/mw.flow.ui.AnonWarningWidget.js",
+				"flow/ui/widgets/editor/mw.flow.ui.CanNotEditWidget.js",
+				"flow/ui/widgets/editor/mw.flow.ui.EditorControlsWidget.js",
+				"flow/ui/widgets/editor/mw.flow.ui.EditorWidget.js",
+				"flow/ui/widgets/mw.flow.ui.BoardDescriptionWidget.js",
+				"flow/ui/widgets/mw.flow.ui.CategoryItemWidget.js",
+				"flow/ui/widgets/mw.flow.ui.CategoriesWidget.js"
+			],
+			"styles": [
+				"styles/flow/widgets/mw.flow.ui.NavigationWidget.less",
+				"styles/flow/widgets/mw.flow.ui.TopicMenuSelectWidget.less",
+				"styles/flow/widgets/mw.flow.ui.ReorderTopicsWidget.less",
+				"styles/flow/widgets/mw.flow.ui.ReplyWidget.less",
+				"styles/flow/widgets/mw.flow.ui.SidebarExpandWidget.less",
+				"styles/flow/widgets/mw.flow.ui.NewTopicWidget.less",
+				"styles/flow/widgets/editor/mw.flow.ui.AnonWarningWidget.less",
+				"styles/flow/widgets/editor/mw.flow.ui.CanNotEditWidget.less",
+				"styles/flow/widgets/editor/mw.flow.ui.EditorControlsWidget.less",
+				"styles/flow/widgets/editor/mw.flow.ui.EditorWidget.less",
+				"styles/flow/widgets/mw.flow.ui.CategoryItemWidget.less",
+				"styles/flow/widgets/mw.flow.ui.CategoriesWidget.less",
+				"styles/flow/widgets/mw.flow.ui.TopicTitleWidget.less"
+			],
+			"skinStyles": {
+				"default": [
+					"styles/flow/widgets/editor/mw.flow.ui.editor-wikimediauitheme.less"
+				],
+				"monobook": [
+					"styles/flow/widgets/editor/mw.flow.ui.editor-apextheme.less"
+				],
+				"apex": [
+					"styles/flow/widgets/editor/mw.flow.ui.editor-apextheme.less"
+				]
+			},
+			"messages": [
+				"flow-error-can-not-edit-logged-in",
+				"flow-error-can-not-edit-logged-out",
+				"flow-error-protected-autoconfirmed-logged-in",
+				"flow-error-protected-autoconfirmed-logged-out",
+				"flow-error-protected-sysop-logged-in",
+				"flow-error-protected-sysop-logged-out",
+				"flow-error-protected-unknown-reason",
+				"flow-error-parsoid-failure",
+				"flow-error-default",
+				"flow-dialog-cancelconfirm-title",
+				"flow-dialog-cancelconfirm-message",
+				"flow-dialog-cancelconfirm-keep",
+				"flow-dialog-cancelconfirm-discard",
+				"flow-spam-confirmedit-using-failure",
+				"flow-cancel-warning",
+				"red-link-title",
+				"pagecategories",
+				"colon-separator"
+			],
+			"dependencies": [
+				"oojs-ui",
+				"ext.flow.dm",
+				"ext.flow.visualEditor.icons",
+				"oojs-ui.styles.icons-editing-advanced",
+				"oojs-ui.styles.icons-editing-list",
+				"oojs-ui.styles.icons-user",
+				"mediawiki.api",
+				"mediawiki.storage",
+				"mediawiki.Title",
+				"mediawiki.user",
+				"mediawiki.util",
+				"mediawiki.editfont.styles",
+				"mediawiki.jqueryMsg",
+				"ext.visualEditor.supportCheck"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.flow": {
+			"styles": [
+				"styles/mediawiki.ui/modal.less",
+				"styles/mediawiki.ui/tooltips.less",
+				"styles/js.less"
+			],
+			"scripts": [
+				"engine/misc/mw-ui.enhance.js",
+				"engine/misc/mw-ui.modal.js",
+				"engine/components/common/flow-component-menus.js",
+				"engine/components/board/base/flow-board-api-events.js",
+				"engine/components/board/base/flow-board-interactive-events.js",
+				"engine/components/board/base/flow-board-load-events.js",
+				"engine/components/board/features/flow-board-loadmore.js",
+				"engine/components/board/features/flow-board-navigation.js",
+				"engine/components/board/features/flow-board-side-rail.js",
+				"engine/components/board/features/flow-board-visualeditor.js",
+				"engine/components/board/flow-boardhistory.js",
+				"mw.flow.Initializer.js",
+				"flow-initialize.js"
+			],
+			"dependencies": [
+				"ext.flow.components",
+				"jquery.throttle-debounce",
+				"mediawiki.jqueryMsg",
+				"ext.flow.jquery.conditionalScroll",
+				"ext.flow.ui",
+				"mediawiki.api",
+				"mediawiki.storage",
+				"mediawiki.user",
+				"mediawiki.util"
+			],
+			"messages": [
+				"flow-error-external",
+				"flow-error-http",
+				"mw-ui-unsubmitted-confirm",
+				"flow-reply-link",
+				"flow-reply-link-anonymously"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.flow.visualEditor": {
+			"scripts": [
+				"editor/editors/visualeditor/mw.flow.ve.Target.js",
+				"editor/editors/visualeditor/mw.flow.ve.UserCache.js",
+				"editor/editors/visualeditor/ui/inspectors/mw.flow.ve.ui.MentionInspector.js",
+				"editor/editors/visualeditor/ui/tools/mw.flow.ve.ui.MentionInspectorTool.js",
+				"editor/editors/visualeditor/ui/tools/mw.flow.ve.ui.MWEditModeTool.js",
+				"editor/editors/visualeditor/ui/contextitem/mw.flow.ve.ui.MentionContextItem.js",
+				"editor/editors/visualeditor/ui/widgets/mw.flow.ve.ui.MentionTargetInputWidget.js",
+				"editor/editors/visualeditor/mw.flow.ve.CommandRegistry.js",
+				"editor/editors/visualeditor/mw.flow.ve.SequenceRegistry.js"
+			],
+			"styles": [
+				"editor/editors/visualeditor/mw.flow.ve.Target.less"
+			],
+			"dependencies": [
+				"ext.visualEditor.core",
+				"ext.visualEditor.core.desktop",
+				"ext.visualEditor.mediawiki",
+				"ext.visualEditor.desktopTarget",
+				"ext.visualEditor.mwextensions.desktop",
+				"ext.visualEditor.mwwikitext",
+				"ext.visualEditor.switching",
+				"mediawiki.editfont.styles",
+				"oojs-ui.styles.icons-editing-advanced",
+				"ext.flow.visualEditor.icons",
+				"mediawiki.api",
+				"mediawiki.util"
+			],
+			"messages": [
+				"flow-ve-mention-context-item-label",
+				"flow-ve-mention-inspector-title",
+				"flow-ve-mention-inspector-remove-label",
+				"flow-ve-mention-inspector-invalid-user",
+				"flow-ve-mention-placeholder",
+				"flow-ve-mention-tool-title"
+			]
+		},
+		"ext.flow.visualEditor.icons": {
+			"class": "ResourceLoaderImageModule",
+			"selectorWithoutVariant": ".oo-ui-icon-{name}",
+			"selectorWithVariant": ".oo-ui-image-{variant}.oo-ui-icon-{name}",
+			"variants": {
+				"progressive": {
+					"color": "#36c"
+				}
+			},
+			"images": {
+				"userAdd": {
+					"file": "editor/editors/visualeditor/ui/images/icons/userAdd.svg",
+					"variants": [ "progressive" ]
+				},
+				"newestTopics": {
+					"file": "styles/flow/images/newestTopics.svg"
+				},
+				"topicCollapse": {
+					"file": {
+						"ltr": "styles/flow/images/topicCollapse-ltr.svg",
+						"rtl": "styles/flow/images/topicCollapse-rtl.svg"
+					}
+				},
+				"topicExpand": {
+					"file": {
+						"ltr": "styles/flow/images/topicCollapse-rtl.svg",
+						"rtl": "styles/flow/images/topicCollapse-ltr.svg"
+					}
+				}
+			}
+		},
+		"ext.flow.jquery.conditionalScroll": {
+			"scripts": [
+				"engine/misc/jquery.conditionalScroll.js"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.flow.jquery.findWithParent": {
+			"scripts": [
+				"engine/misc/jquery.findWithParent.js"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "Flow/modules"
+	},
+	"MessagePosterModule": {
+		"scripts": [
+			"modules/messagePoster/ext.flow.messagePoster.js"
+		],
+		"dependencies": [
+			"oojs",
+			"mediawiki.api"
+		]
+	},
+	"QUnitTestModule": {
+		"localBasePath": "tests/qunit",
+		"remoteExtPath": "Flow/tests/qunit",
+		"scripts": [
+			"flow/dm/test_mw.flow.dm.Content.js",
+			"flow/dm/test_mw.flow.dm.System.js",
+			"flow/dm/test_mw.flow.dm.Post.js",
+			"flow/dm/test_mw.flow.dm.Topic.js",
+			"flow/dm/test_mw.flow.dm.Board.js",
+			"engine/misc/test_mw-ui.enhance.js",
+			"engine/misc/test_jquery.findWithParent.js"
+		],
+		"dependencies": [
+			"ext.flow.dm",
+			"ext.flow",
+			"ext.flow.jquery.findWithParent"
+		]
+	},
+	"Hooks": {
+		"ResourceLoaderRegisterModules": "Flow\\Hooks::onResourceLoaderRegisterModules",
+		"BeforePageDisplay": "Flow\\Hooks::onBeforePageDisplay",
+		"LoadExtensionSchemaUpdates": "Flow\\Hooks::getSchemaUpdates",
+		"GetPreferences": "Flow\\Hooks::onGetPreferences",
+		"OldChangesListRecentChangesLine": "Flow\\Hooks::onOldChangesListRecentChangesLine",
+		"ChangesListInsertArticleLink": "Flow\\Hooks::onChangesListInsertArticleLink",
+		"ChangesListInitRows": "Flow\\Hooks::onChangesListInitRows",
+		"EnhancedChangesList::getLogText": "Flow\\Hooks::onGetLogText",
+		"EnhancedChangesListModifyLineData": "Flow\\Hooks::onEnhancedChangesListModifyLineData",
+		"EnhancedChangesListModifyBlockLineData": "Flow\\Hooks::onEnhancedChangesListModifyBlockLineData",
+		"ChangesListSpecialPageQuery": "Flow\\Hooks::onChangesListSpecialPageQuery",
+		"SkinTemplateNavigation::Universal": "Flow\\Hooks::onSkinTemplateNavigation",
+		"Article::MissingArticleConditions": "Flow\\Hooks::onMissingArticleConditions",
+		"SpecialWatchlistGetNonRevisionTypes": "Flow\\Hooks::onSpecialWatchlistGetNonRevisionTypes",
+		"UserGetReservedNames": "Flow\\Hooks::onUserGetReservedNames",
+		"ResourceLoaderGetConfigVars": "Flow\\Hooks::onResourceLoaderGetConfigVars",
+		"ContribsPager::reallyDoQuery": "Flow\\Hooks::onContributionsQuery",
+		"DeletedContribsPager::reallyDoQuery": "Flow\\Hooks::onDeletedContributionsQuery",
+		"ContributionsLineEnding": "Flow\\Hooks::onContributionsLineEnding",
+		"DeletedContributionsLineEnding": "Flow\\Hooks::onDeletedContributionsLineEnding",
+		"ApiFeedContributions::feedItem": "Flow\\Hooks::onContributionsFeedItem",
+		"AbuseFilter-builder": "Flow\\Hooks::onAbuseFilterBuilder",
+		"AbuseFilter-deprecatedVariables": "Flow\\Hooks::onAbuseFilterDeprecatedVariables",
+		"AbuseFilter-computeVariable": "Flow\\Hooks::onAbuseFilterComputeVariable",
+		"AbortEmailNotification": "Flow\\Hooks::onAbortEmailNotification",
+		"BeforeDisplayOrangeAlert": "Flow\\Hooks::onBeforeDisplayOrangeAlert",
+		"EchoAbortEmailNotification": "Flow\\Hooks::onEchoAbortEmailNotification",
+		"BeforeEchoEventInsert": "Flow\\Hooks::onBeforeEchoEventInsert",
+		"ArticleEditUpdateNewTalk": "Flow\\Hooks::onArticleEditUpdateNewTalk",
+		"InfoAction": "Flow\\Hooks::onInfoAction",
+		"CheckUserFormatRow": "Flow\\Hooks::onCheckUserFormatRow",
+		"SpecialCheckUserGetLinksFromRow": "Flow\\Hooks::onSpecialCheckUserGetLinksFromRow",
+		"CheckUserInsertForRecentChange": "Flow\\Hooks::onCheckUserInsertForRecentChange",
+		"SkinMinervaDefaultModules": "Flow\\Hooks::onSkinMinervaDefaultModules",
+		"IRCLineURL": "Flow\\Hooks::onIRCLineURL",
+		"WhatLinksHereProps": "Flow\\Hooks::onWhatLinksHereProps",
+		"ShowMissingArticle": "Flow\\Hooks::onShowMissingArticle",
+		"WatchArticle": "Flow\\Hooks::onWatchArticle",
+		"UnwatchArticle": "Flow\\Hooks::onWatchArticle",
+		"MovePageCheckPermissions": "Flow\\Hooks::onMovePageCheckPermissions",
+		"MovePageIsValidMove": "Flow\\Hooks::onMovePageIsValidMove",
+		"TitleMoveStarting": "Flow\\Hooks::onTitleMoveStarting",
+		"PageMoveCompleting": "Flow\\Hooks::onPageMoveCompleting",
+		"TitleSquidURLs": "Flow\\Hooks::onTitleSquidURLs",
+		"WatchlistEditorBuildRemoveLine": "Flow\\Hooks::onWatchlistEditorBuildRemoveLine",
+		"WatchlistEditorBeforeFormRender": "Flow\\Hooks::onWatchlistEditorBeforeFormRender",
+		"NamespaceIsMovable": "Flow\\Hooks::onNamespaceIsMovable",
+		"CategoryViewer::doCategoryQuery": "Flow\\Hooks::onCategoryViewerDoCategoryQuery",
+		"CategoryViewer::generateLink": "Flow\\Hooks::onCategoryViewerGenerateLink",
+		"ArticleConfirmDelete": "Flow\\Hooks::onArticleConfirmDelete",
+		"ArticleDelete": "Flow\\Hooks::onArticleDelete",
+		"ArticleDeleteComplete": "Flow\\Hooks::onArticleDeleteComplete",
+		"RevisionUndeleted": "Flow\\Hooks::onRevisionUndeleted",
+		"ArticleUndelete": "Flow\\Hooks::onArticleUndelete",
+		"SearchableNamespaces": "Flow\\Hooks::onSearchableNamespaces",
+		"ImportHandleToplevelXMLTag": "Flow\\Hooks::onImportHandleToplevelXMLTag",
+		"UserMergeAccountFields": "Flow\\Hooks::onUserMergeAccountFields",
+		"MergeAccountFromTo": "Flow\\Hooks::onMergeAccountFromTo",
+		"LiquidThreadsIsLqtPage": "Flow\\Hooks::onIsLiquidThreadsPage",
+		"BeforeCreateEchoEvent": "Flow\\Notifications\\Controller::onBeforeCreateEchoEvent",
+		"EchoGetBundleRules": "Flow\\Notifications\\Controller::onEchoGetBundleRules",
+		"GetBetaFeaturePreferences": "Flow\\Hooks::onGetBetaFeaturePreferences",
+		"UserSaveOptions": "Flow\\Hooks::onUserSaveOptions",
+		"NukeGetNewPages": "Flow\\Hooks::onNukeGetNewPages",
+		"NukeDeletePage": "Flow\\Hooks::onNukeDeletePage",
+		"getUserPermissionsErrors": "Flow\\Hooks::onGetUserPermissionsErrors"
+	},
+	"namespaces": [
+		{
+			"id": 2600,
+			"constant": "NS_TOPIC",
+			"name": "Topic",
+			"subpages": false,
+			"defaultcontentmodel": "flow-board",
+			"capitallinkoverride": true
+		}
+	],
+	"config": {
+		"FlowHelpPage": {
+			"value": "//www.mediawiki.org/wiki/Special:MyLanguage/Extension:Flow"
+		},
+		"FlowCluster": {
+			"value": false
+		},
+		"FlowDefaultWikiDb": {
+			"value": false
+		},
+		"FlowExternalStore": {
+			"value": false
+		},
+		"FlowContentFormat": {
+			"value": "html"
+		},
+		"FlowParsoidURL": {
+			"value": null
+		},
+		"FlowParsoidPrefix": {
+			"value": null
+		},
+		"FlowParsoidTimeout": {
+			"value": null
+		},
+		"FlowParsoidHTTPProxy": {
+			"value": null
+		},
+		"FlowParsoidForwardCookies": {
+			"value": false
+		},
+		"FlowDefaultLimit": {
+			"value": 10
+		},
+		"FlowMaxLimit": {
+			"value": 100
+		},
+		"FlowMaxMentionCount": {
+			"value": 50
+		},
+		"FlowMaxThreadingDepth": {
+			"value": 8
+		},
+		"FlowEditorList": {
+			"value": [
+				"visualeditor",
+				"wikitext"
+			]
+		},
+		"FlowUseMemcache": {
+			"value": true
+		},
+		"FlowCacheTime": {
+			"value": 259200
+		},
+		"FlowCacheVersion": {
+			"value": "4.9"
+		},
+		"FlowSearchServers": {
+			"value": [
+				"localhost"
+			]
+		},
+		"FlowSearchConnectionAttempts": {
+			"value": 1
+		},
+		"FlowSearchBannedPlugins": {
+			"value": []
+		},
+		"FlowSearchOptimizeIndexForExperimentalHighlighter": {
+			"value": false
+		},
+		"FlowSearchMaxShardsPerNode": {
+			"value": []
+		},
+		"FlowSearchRefreshInterval": {
+			"value": 1
+		},
+		"FlowSearchMaintenanceTimeout": {
+			"value": 3600
+		},
+		"FlowSearchReplicas": {
+			"value": "0-2"
+		},
+		"FlowSearchShardCount": {
+			"value": {
+				"flow": 4
+			}
+		},
+		"FlowSearchCacheWarmers": {
+			"value": []
+		},
+		"FlowSearchMergeSettings": {
+			"value": {
+				"flow": {
+					"max_merge_at_once": 10,
+					"segments_per_tier": 10,
+					"reclaim_deletes_weight": 2,
+					"max_merged_segment": "5g"
+				}
+			}
+		},
+		"FlowSearchIndexAllocation": {
+			"value": {
+				"include": [],
+				"exclude": [],
+				"require": []
+			}
+		},
+		"FlowSearchEnabled": {
+			"value": false
+		},
+		"FlowAbuseFilterGroup": {
+			"value": "flow"
+		},
+		"FlowAbuseFilterEmergencyDisableThreshold": {
+			"value": 0.1
+		},
+		"FlowAbuseFilterEmergencyDisableCount": {
+			"value": 50
+		},
+		"FlowAbuseFilterEmergencyDisableAge": {
+			"value": 86400
+		},
+		"FlowAjaxTimeout": {
+			"value": 30
+		},
+		"FlowCoreActionWhitelist": {
+			"value": [
+				"info",
+				"protect",
+				"unprotect",
+				"unwatch",
+				"watch",
+				"history",
+				"wikilove",
+				"move",
+				"delete"
+			]
+		},
+		"FlowServerCompileTemplates": {
+			"value": false
+		},
+		"FlowEnableOptInBetaFeature": {
+			"value": false
+		},
+		"FlowReadOnly": {
+			"value": false
+		}
+	},
+	"attributes": {
+		"EventLogging": {
+			"Schemas": {
+				"FlowReplies": 10561344
+			}
+		}
+	},
+	"load_composer_autoloader": true,
+	"manifest_version": 2,
+	"AutoloadClasses": {
+		"FlowCreateTemplates": "maintenance/FlowCreateTemplates.php",
+		"FlowFixLinks": "maintenance/FlowFixLinks.php",
+		"FlowFixLog": "maintenance/FlowFixLog.php",
+		"FlowPopulateLinksTables": "maintenance/FlowPopulateLinksTables.php",
+		"FlowPopulateRefId": "maintenance/FlowPopulateRefId.php",
+		"FlowSetUserIp": "maintenance/FlowSetUserIp.php",
+		"FlowUpdateBetaFeaturePreference": "maintenance/FlowUpdateBetaFeaturePreference.php",
+		"FlowUpdateRecentChanges": "maintenance/FlowUpdateRecentChanges.php",
+		"FlowUpdateRevisionTypeId": "maintenance/FlowUpdateRevisionTypeId.php",
+		"FlowUpdateUserWiki": "maintenance/FlowUpdateUserWiki.php",
+		"FlowUpdateWorkflowPageId": "maintenance/FlowUpdateWorkflowPageId.php",
+		"LogRowUpdateGenerator": "maintenance/FlowFixLog.php",
+		"MaintenanceDebugLogger": "maintenance/MaintenanceDebugLogger.php",
+		"WorkflowPageIdUpdateGenerator": "maintenance/FlowUpdateWorkflowPageId.php"
+	},
+	"AutoloadNamespaces": {
+		"Flow\\": "includes/"
+	},
+	"TestAutoloadClasses": {
+		"ExternalStoreFlowMock": "tests/phpunit/Mock/ExternalStoreFlowMock.php"
+	},
+	"TestAutoloadNamespaces": {
+		"Flow\\Tests\\": "tests/phpunit/"
+	}
+}

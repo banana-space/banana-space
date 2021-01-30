@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+	<title>
+		new topic
+	</title>
+	<path fill="#00af89" d="M2,0C0.9,0,0,0.9,0,2l0,12c0,1.1,0.9,2,2,2h14l4,4V2c0-1.1-0.9-2-2-2L2,0z"/>
+	<path fill="#fff" class="st1" d="M9.9,9.5C5.5,9.5,4,11.6,4,13v1.2h11.9V13C15.9,11.6,14.3,9.5,9.9,9.5z"/>
+	<circle fill="#fff" cx="9.9" cy="5.4" r="3.3"/>
+</svg>

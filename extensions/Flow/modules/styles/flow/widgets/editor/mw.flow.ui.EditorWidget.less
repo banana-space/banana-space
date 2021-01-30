@@ -1,0 +1,60 @@
+@import 'mediawiki.mixins';
+@import '../../../flow.variables';
+@import '../../../flow.colors';
+
+.flow-ui-editorWidget {
+	&-collapsed .flow-ui-editorControlsWidget {
+		display: none;
+	}
+
+	// Undo top margin on error box
+	&-error.flow-errors {
+		margin-top: 0;
+	}
+
+	> .flow-ui-editorWidget-editor {
+		position: relative;
+		min-height: @editorMinHeight + @editorToolbarHeight;
+
+		&:not( .oo-ui-pendingElement-pending ) {
+			background-color: #fff;
+		}
+
+		// HACK: Undo border set by "old" editor CSS
+		> .ve-init-target {
+			border: 0;
+		}
+	}
+
+	&-wikitextHelpLabel {
+		color: @colorTextLight;
+		font-size: 0.75em;
+		padding: 4px 6px 6px 6px;
+		position: absolute;
+		bottom: @editorToolbarHeight;
+	}
+
+	&-editor > .oo-ui-textInputWidget {
+		max-width: none;
+
+		textarea {
+			min-height: @editorMinHeight + @editorToolbarHeight;
+
+			/* The parent's box-shadow is behind the textarea, don't hide it with a white background */
+			background: transparent;
+
+			&,
+			&:focus {
+				border: 0;
+				outline: 0;
+				box-shadow: none;
+			}
+
+			/* stylelint-disable indentation */
+			.mixin-placeholder( {
+				font-weight: normal;
+			} );
+			/* stylelint-enable indentation */
+		}
+	}
+}

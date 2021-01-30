@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"ОйЛ"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|благодарьствиѥ}}}}",
+	"thanks-thank-tooltip": "благодарьствиꙗ {{GENDER:$2|сѥмоу польꙃєватєлю|сѥи польꙃєватєлици}} {{GENDER:$1|посъланиѥ}}",
+	"echo-category-title-edit-thank": "благодарьствиѥ",
+	"notification-thanks-diff-link": "твоꙗ мѣна",
+	"log-name-thanks": "благодарьствии їсторїꙗ"
+}

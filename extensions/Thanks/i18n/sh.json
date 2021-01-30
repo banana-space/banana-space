@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kolega2357",
+			"OC Ripper",
+			"Vlad5250"
+		]
+	},
+	"thanks-desc": "Dodaje poveznice za zahvaljivanje ka korisnicima za njihove izmjene, komentare itd.",
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|zahvali}} se}}",
+	"thanks-thanked": "{{GENDER:$1|{{GENDER:$2|zahvaljeno}}}}",
+	"thanks-button-action-cancel": "Otkaži",
+	"thanks-error-undefined": "Zahvaljivanje nije uspjelo (kôd greške: $1). Pokušajte ponovo.",
+	"thanks-error-invalid-log-type": "Nema evidencije vrste »$1« na bijeloj listi dozvoljenih vrsta evidencija.",
+	"thanks-error-log-deleted": "Zahtijevani evidencijski unos bio je izbrisan i zato ne može da se zahvali za nju.",
+	"thanks-error-invalidrevision": "Inačica ima nevaljanu naznaku.",
+	"thanks-error-revdeleted": "Nije moguće hvaliti jer je inačica izbrisana.",
+	"thanks-error-invalidrecipient": "Nisam pronašao vrijedeći primalac",
+	"thanks-error-invalidrecipient-bot": "Ne možete zahvaljivati botovima",
+	"thanks-error-invalidrecipient-self": "Ne možete zahvaliti sami sebi",
+	"thanks-error-notloggedin": "Anonimni korisnici ne mogu slati zahvale",
+	"thanks-thank-tooltip": "{{GENDER:$1|Pošalji}} zahvalnicu {{GENDER:$2|ovom korisniku|оvoj korisnici}}",
+	"thanks-confirmation2": "{{GENDER:$1|Da pošaljem}} zahvalu javno?",
+	"echo-pref-subscription-edit-thank": "Će mi se zahvali za moju izmjenu",
+	"echo-category-title-edit-thank": "Hvala",
+	"notification-thanks-diff-link": "vašoj izmjeni",
+	"log-name-thanks": "Evidencija zahvaljivanja",
+	"log-description-thanks": "Ispod se nalazi spisak korisnika kojima su se drugi korisnici zahvalili.",
+	"logentry-thanks-thank": "$1 se {{GENDER:$2|zahvalio|zahvalila}} {{GENDER:$4|korisniku|korisnici}} {{GENDER:$4|$3}}",
+	"logeventslist-thanks-log": "Evidencija zahvaljivanja",
+	"notification-flow-thanks-post-link": "vašem komentaru"
+}

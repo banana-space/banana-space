@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mainframe98",
+			"Robin van der Vliet",
+			"Sjoerddebruin"
+		]
+	},
+	"apihelp-flow-example-1": "Bewerk de beschrijving van \"[[Talk:Sandbox]]\"",
+	"apihelp-flow+edit-header-example-1": "De beschrijving van [[Talk:Sandbox]] bewerken",
+	"apihelp-flow+edit-post-param-postId": "Berichtnummer.",
+	"apihelp-flow+edit-post-param-content": "Inhoud voor bericht",
+	"apihelp-flow+edit-title-param-content": "Inhoud voor titel.",
+	"apihelp-flow+lock-topic-example-1": "[[Topic:S2tycnas4hcucw8w]] sluiten"
+}

@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Servien"
+		]
+	},
+	"flow-post-action-hide-post": "Versteken",
+	"flow-moderation-confirm-hide-post": "Versteken",
+	"flow-moderation-confirm-hide-topic": "Versteken"
+}

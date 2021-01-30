@@ -1,0 +1,53 @@
+{{#unless actions.unlock}}{{!-- HACK: T135848 --}}
+<form class="flow-post flow-reply-form"
+      method="POST"
+      action="{{actions.reply.url}}"
+      id="flow-reply-{{postId}}"
+>
+	<input type="hidden" name="wpEditToken" value="{{@root.rootBlock.editToken}}" />
+	<input type="hidden" name="topic_replyTo" value="{{postId}}" />
+	{{> flow_errors }}
+
+	{{#ifAnonymous}}
+		{{> flow_anon_warning }}
+	{{/ifAnonymous}}
+
+	<div class="flow-editor">
+		<textarea id="flow-post-{{postId}}-form-content"
+		          name="topic_content"
+		          required
+		          class="mw-ui-input flow-click-interactive mw-editfont-{{@root.rootBlock.editFont}}"
+		          type="text"
+			      placeholder="{{l10n "flow-reply-topic-title-placeholder" properties.topic-of-post-text-from-html}}"
+		          data-role="content"
+
+		          {{!--
+		            You'd expect data-flow-eventlog-* data here (this one
+		            needs to be clicked to expand the form).
+		            However, this form is used in multiple places: as topic-
+		            level reply form (activated by clicking the textarea to
+		            expand), or to reply to a post (activated by clicking the
+		            "reply" link).
+		            We only want to track the former, so we'll do that in JS so
+		            we can ignore all focuses for this textarea when it's not
+		            used to activate the topic-level reply form.
+		          --}}
+		>
+			{{~#if @root.submitted~}}
+				{{~#ifCond @root.submitted.postId "===" postId~}}
+					{{~@root.submitted.content~}}
+				{{~/ifCond~}}
+			{{~/if~}}
+		</textarea>
+	</div>
+
+	<div class="flow-form-actions flow-form-collapsible">
+		<button data-role="submit"
+		        class="mw-ui-button mw-ui-progressive"
+		>
+			{{~l10n "flow-reply-link"~}}
+		</button>
+		<small class="flow-terms-of-use plainlinks">{{l10nParse "flow-terms-of-use-reply"}}</small>
+	</div>
+</form>
+{{/unless}}

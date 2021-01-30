@@ -1,0 +1,91 @@
+@import 'mediawiki.mixins.less';
+@import '../echo.variables.less';
+
+.mw-echo-ui-notificationBadgeButtonPopupWidget {
+	position: relative;
+
+	&-popup {
+		> .oo-ui-popupWidget-popup {
+			> .oo-ui-popupWidget-head {
+				.box-sizing( border-box );
+				height: 3.1428571em; // = 44px as result of 44 / 16 (font-size browser) / 0.875 (OOUI WikimediaUI theme font-size)
+				border-bottom: 1px solid #c8ccd1;
+
+				> .oo-ui-iconWidget {
+					float: left;
+					height: 100%;
+					margin: 0 0 0 1.1428571em; // = 16px as result of 16 / 16 / 0.875
+					opacity: @opacity-mid;
+				}
+
+				> .oo-ui-labelElement-label {
+					margin: 0 0 0 0.4761905em; // = 8px as result of ≈0.5714286 / 1.2 (element's font-size)
+					font-size: 1.2em;
+					font-weight: bold;
+					line-height: 2.6190476em; // = 44px as result of ≈3.1428571 / 1.2 (element's font-size)
+				}
+
+				.mw-echo-ui-notificationsWidget-markAllReadButton {
+					margin-top: 0.4285714em; // = 6px as result of 6 / 16 / 0.875
+					margin-right: 0.5714286em; // = 8px as result of 8 / 16 / 0.875
+
+					.oo-ui-buttonElement-button {
+						padding-right: 0;
+					}
+				}
+			}
+
+			> .oo-ui-popupWidget-body {
+				// Work around scrollbar rendering bug in Chrome
+				overflow-y: visible;
+				// ...but make sure we don't actually overflow in the Y direction,
+				// to avoid breaking ClippableElement
+				overflow-x: auto;
+
+				> .mw-echo-ui-notificationsListWidget > .mw-echo-ui-notificationItemWidget {
+					// The popup body itself has a border. We need to override the notification
+					// item widget styles so that the edge borders of the items are not duplicated
+					border-left: 0;
+					border-right: 0;
+
+					&:last-child {
+						border-bottom: 0;
+					}
+				}
+			}
+
+			> .oo-ui-popupWidget-footer {
+				width: 100%;
+				margin: 0; // Override OOUI's popup footer margins (T171302)
+				border-top: 1px solid #c8ccd1;
+
+				> .oo-ui-buttonGroupWidget {
+					display: block;
+				}
+
+				.mw-echo-ui-notificationBadgeButtonPopupWidget-footer-buttons {
+					display: table-row;
+
+					.oo-ui-buttonElement {
+						display: table-cell;
+						white-space: normal;
+						width: @notification-popup-width / 2;
+						.box-sizing( border-box );
+
+						&:last-child {
+							border-left: 1px solid #c8ccd1;
+						}
+
+						> .oo-ui-buttonElement-button {
+							display: block;
+							line-height: 3.1428571em;
+							margin: 0;
+							border: 0;
+							padding: 0 0.5em;
+						}
+					}
+				}
+			}
+		}
+	}
+}

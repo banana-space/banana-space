@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Als-Holder",
+			"J. 'mach' wust"
+		]
+	},
+	"flow-post-action-edit-post-submit": "Änderige spychere",
+	"flow-post-action-edit-post-submit-anonymously": "Änderigen anonym spychere",
+	"echo-category-title-flow-discussion": "Flow",
+	"echo-pref-tooltip-flow-discussion": "Hiwyse, we mi en Aktion im Flow betrifft."
+}

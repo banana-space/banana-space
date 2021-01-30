@@ -1,0 +1,13 @@
+<div class="flow-replies">
+	{{#each replies}}
+		{{#eachPost @root.rootBlock this}}
+			<!-- eachPost nested replies -->
+			{{post @root.rootBlock this}}
+		{{/eachPost}}
+	{{/each}}
+	{{#ifCond @root.rootBlock.submitted.postId "===" postId}}
+		{{#ifCond @root.rootBlock.submitted.action "===" "reply"}}
+			{{> flow_reply_form}}
+		{{/ifCond}}
+	{{/ifCond}}
+</div>

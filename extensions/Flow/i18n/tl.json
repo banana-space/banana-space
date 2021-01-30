@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Emem.calist",
+			"Jewel457",
+			"Leeheonjin"
+		]
+	},
+	"flow-post-moderated-toggle-hide-show": "Ipakita ang pagpuna.",
+	"flow-post-moderated-toggle-delete-show": "Ipakita ang mungkahi",
+	"flow-post-moderated-toggle-suppress-show": "Ipakita ang mga puna.",
+	"flow-post-moderated-toggle-delete-hide": "Itago ang pagpuna.",
+	"flow-post-moderated-toggle-suppress-hide": "Itago ang mungkahi",
+	"flow-post-action-post-history": "Kasaysayan",
+	"flow-post-action-edit-post": "Baguhin",
+	"flow-error-invalid-undelete": "Mukhang nagkakagulo, 'Wag ka munang umepal'. Balik ka na lang kapag tapos na ang mga diskusyon ng mga bossing.",
+	"notification-header-flow-enabled-on-talkpage": "Pinayagan ang bagong sistemang pantalakayan sa {{GENDER:$2|iyong}} usapang pahina",
+	"echo-pref-tooltip-flow-discussion": "Ipaalala sa akin ang mga kaganapan ng pinaguusapan o mga pahinang aking sinusundan.",
+	"flow-previous-diff": "← Mas lumang pagbabago",
+	"flow-next-diff": "Mas bagong pagbabago →"
+}

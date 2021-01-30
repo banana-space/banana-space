@@ -1,0 +1,31 @@
+{{#with revision}}
+	<div id="flow-post-{{postId}}"
+	     class="flow-post{{#if isMaxThreadingDepth}} flow-post-max-depth{{/if}}"
+	     data-flow-id="{{postId}}"
+	>
+		{{#if isModerated}}
+			{{!-- TODO: T133133: This should show all posts newer than showPostId, for bundling --}}
+			{{#ifCond @root.rootBlock.submitted.showPostId "===" postId}}
+				{{> flow_post_inner}}
+			{{else}}
+				<div class="flow-post-main flow-post-moderated">
+					<span class="flow-moderated-post-content">
+						{{> flow_post_moderation_state}}
+					</span>
+				</div>
+			{{/ifCond}}
+		{{else}}
+			{{#ifCond @root.rootBlock.submitted.action "===" "edit-post"}}
+				{{#ifCond @root.rootBlock.submitted.postId "===" postId}}
+					{{> flow_edit_post}}
+				{{else}}
+					{{> flow_post_inner}}
+				{{/ifCond}}
+			{{else}}
+				{{> flow_post_inner}}
+			{{/ifCond}}
+		{{/if}}
+
+		{{> flow_post_replies}}
+	</div>
+{{/with}}

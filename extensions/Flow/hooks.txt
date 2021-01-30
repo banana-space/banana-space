@@ -1,0 +1,16 @@
+This document describes how event hooks work in the Flow extension.
+
+== Events and parameters ==
+
+This is a list of known events and parameters; please add to it if you're going
+to add events to the Flow extension.
+
+'FlowAddPostInteractionLinks': Called when a post is rendered, allow other
+extensions to add interaction links to the post besides 'Edit' and other links.
+$rev: Flow PostRevision object that the links belong to
+$user: User object to display the link for
+&$links: array of interaction links to be displayed, caller should append the
+         link element to the array
+
+'FlowAddModules': Allows other extensions to add relevant modules.
+$output: OutputPage object

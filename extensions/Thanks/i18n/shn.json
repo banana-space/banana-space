@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saimawnkham"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|ၶွပ်ႈၸႂ်ထိုင်}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$1|သူင်ႇ}} ၶေႃႈၽၢင်ႉဝႃႈ ယိၼ်းၸူမ်းၸူးထိုင် {{GENDER:$2|ၽူႈၸႂ်ႉတိုဝ်း}}"
+}

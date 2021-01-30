@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ерней",
+			"Ильнар"
+		]
+	},
+	"flow-history-action-hide-post": "яшерү",
+	"flow-post-action-hide-post": "Яшерү",
+	"echo-category-title-flow-discussion": "Оештырылган фикер алышу",
+	"flow-moderation-confirm-hide-post": "Яшерү",
+	"flow-moderation-confirm-hide-topic": "Яшерү",
+	"structureddiscussions": "Оештырылган фикер алышулар",
+	"group-flow-bot": "Оештырылган фикер алышуның ботлары",
+	"flow-dialog-cancelconfirm-keep": "Үзгәртүне дәвам итү"
+}

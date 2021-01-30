@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"BHARATHESHA ALASANDEMAJALU",
+			"Kiranpoojary",
+			"VASANTH S.N.",
+			"Vishwanatha Badikana"
+		]
+	},
+	"prefs-echo": "ಸೂಚನೆಲು",
+	"notifications": "ಸೂಚನೆಲು",
+	"tooltip-pt-notifications-alert": "{{GENDER:|ಈರೆನ}} ಎಚ್ಚರಿಕೆ ಸಂದೇಸೊಲು",
+	"echo-displaynotificationsconfiguration-enabled-default-existing-users-legend": "ಅಸ್ತಿತ್ವೋಡು ಉಪ್ಪಿ ಗಳಸುನಾರ್",
+	"echo-notification-markasread-tooltip": "ಓದುತೆಂದು ಗುರ್ತ ಪಾಡ್ಲೆ",
+	"echo-notification-more-options-tooltip": "ಮಸ್ತ್ ಆಯ್ಕೆಲೂ",
+	"notification-link-article-reminder": "ಲೇಕನೊ ತೂಲೆ"
+}

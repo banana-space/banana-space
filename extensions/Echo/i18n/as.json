@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gitartha.bordoloi",
+			"Simbu123"
+		]
+	},
+	"prefs-echo": "জাননী",
+	"echo-new-messages": "আপোনালৈ নতুন বাৰ্তা আহিছে",
+	"notifications": "জাননী",
+	"tooltip-pt-notifications-alert": "{{GENDER:|আপোনাৰ}} জাননী",
+	"echo-specialpage": "জাননী"
+}

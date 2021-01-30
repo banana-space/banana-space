@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ильнар"
+		]
+	},
+	"apihelp-echomarkread-description": "Кулланучы өчен барлык белдерүләрне укылган дип билгеләү",
+	"apihelp-echomarkread-example-2": "Барлык белдерүләрне укылган дип билгеләү",
+	"apihelp-query+notifications-example-1": "Хəбəрнамəләр исемлеге"
+}

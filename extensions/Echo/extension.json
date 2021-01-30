@@ -1,0 +1,1125 @@
+{
+	"name": "Echo",
+	"author": [
+		"Andrew Garrett",
+		"Ryan Kaldari",
+		"Benny Situ",
+		"Luke Welling",
+		"Kunal Mehta",
+		"Moriel Schottlender",
+		"Jon Robson",
+		"Roan Kattouw"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Echo",
+	"descriptionmsg": "echo-desc",
+	"license-name": "MIT",
+	"type": "specialpage",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
+	"APIMetaModules": {
+		"notifications": "ApiEchoNotifications",
+		"unreadnotificationpages": "ApiEchoUnreadNotificationPages"
+	},
+	"APIModules": {
+		"echomarkread": "ApiEchoMarkRead",
+		"echomarkseen": "ApiEchoMarkSeen",
+		"echoarticlereminder": "ApiEchoArticleReminder",
+		"echomute": "ApiEchoMute"
+	},
+	"DefaultUserOptions": {
+		"echo-email-frequency": 0,
+		"echo-dont-email-read-notifications": false
+	},
+	"ExtensionFunctions": [
+		"EchoHooks::initEchoExtension"
+	],
+	"JobClasses": {
+		"EchoNotificationJob": "EchoNotificationJob",
+		"EchoNotificationDeleteJob": "EchoNotificationDeleteJob",
+		"EchoPushNotificationRequest": "EchoPush\\NotificationRequestJob"
+	},
+	"SpecialPages": {
+		"Notifications": "SpecialNotifications",
+		"DisplayNotificationsConfiguration": "SpecialDisplayNotificationsConfiguration",
+		"NotificationsMarkRead": "SpecialNotificationsMarkRead"
+	},
+	"MessagesDirs": {
+		"Echo": [
+			"i18n",
+			"i18n/api"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"EchoAliases": "Echo.alias.php"
+	},
+	"QUnitTestModule": {
+		"localBasePath": "",
+		"remoteExtPath": "Echo",
+		"templates": {
+			"NotificationBadge.mustache": "modules/mobile/NotificationBadge.mustache"
+		},
+		"packageFiles": [
+			"tests/qunit/mobile/index.js",
+			"tests/qunit/mobile/test_NotificationBadge.js",
+			"modules/mobile/NotificationBadge.js"
+		]
+	},
+	"ResourceModules": {
+		"ext.echo.logger": {
+			"packageFiles": [
+				"logger/mw.echo.Logger.js",
+				{
+					"name": "logger/config.json",
+					"callback": "EchoHooks::getLoggerConfigVars"
+				}
+			],
+			"dependencies": [
+				"oojs",
+				"mediawiki.user"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.echo.ui.desktop": {
+			"scripts": [
+				"ui/mw.echo.ui.BadgeLinkWidget.js",
+				"ui/mw.echo.ui.NotificationBadgeWidget.js"
+			],
+			"styles": [
+				"styles/mw.echo.ui.NotificationBadgeWidget.less"
+			],
+			"dependencies": [
+				"ext.echo.ui",
+				"ext.echo.styles.badge",
+				"mediawiki.util",
+				"mediawiki.api"
+			],
+			"targets": [
+				"desktop"
+			]
+		},
+		"ext.echo.ui": {
+			"scripts": [
+				"controller/mw.echo.Controller.js",
+				"ui/mw.echo.ui.js",
+				"ui/mw.echo.ui.SortedListWidget.js",
+				"ui/mw.echo.ui.SubGroupListWidget.js",
+				"ui/mw.echo.ui.NotificationsListWidget.js",
+				"ui/mw.echo.ui.PlaceholderItemWidget.js",
+				"ui/mw.echo.ui.ToggleReadCircleButtonWidget.js",
+				"ui/mw.echo.ui.NotificationItemWidget.js",
+				"ui/mw.echo.ui.SingleNotificationItemWidget.js",
+				"ui/mw.echo.ui.CrossWikiNotificationItemWidget.js",
+				"ui/mw.echo.ui.BundleNotificationItemWidget.js",
+				"ui/mw.echo.ui.ClonedNotificationItemWidget.js",
+				"ui/mw.echo.ui.ActionMenuPopupWidget.js",
+				"ui/mw.echo.ui.MenuItemWidget.js",
+				"ui/mw.echo.ui.NotificationsWrapper.js",
+				"ui/mw.echo.ui.ConfirmationPopupWidget.js",
+				"ext.echo.moment-hack.js"
+			],
+			"styles": [
+				"styles/mw.echo.ui.mobile.less",
+				"styles/mw.echo.ui.overlay.less",
+				"styles/mw.echo.ui.NotificationItemWidget.less",
+				"styles/mw.echo.ui.ToggleReadCircleButtonWidget.less",
+				"styles/mw.echo.ui.CrossWikiNotificationItemWidget.less",
+				"styles/mw.echo.ui.NotificationsListWidget.less",
+				"styles/mw.echo.ui.PlaceholderItemWidget.less",
+				"styles/mw.echo.ui.SubGroupListWidget.less",
+				"styles/mw.echo.ui.ActionMenuPopupWidget.less",
+				"styles/mw.echo.ui.MenuItemWidget.less",
+				"styles/mw.echo.ui.NotificationsWrapper.less",
+				"styles/mw.echo.ui.ConfirmationPopupWidget.less"
+			],
+			"skinStyles": {
+				"modern": [
+					"styles/mw.echo.ui.overlay.monobook.less"
+				],
+				"monobook": [
+					"styles/mw.echo.ui.overlay.monobook.less"
+				],
+				"vector": [
+					"styles/mw.echo.ui.overlay.vector.less"
+				],
+				"minerva": [
+					"styles/mw.echo.ui.overlay.minerva.less"
+				]
+			},
+			"dependencies": [
+				"ext.echo.api",
+				"ext.echo.dm",
+				"ext.echo.logger",
+				"ext.echo.secondaryicons",
+				"oojs",
+				"oojs-ui-core",
+				"oojs-ui-widgets",
+				"moment",
+				"mediawiki.jqueryMsg",
+				"mediawiki.language",
+				"mediawiki.Title",
+				"oojs-ui.styles.icons-user",
+				"oojs-ui.styles.icons-alerts",
+				"oojs-ui.styles.icons-content",
+				"oojs-ui.styles.icons-interactions",
+				"oojs-ui.styles.icons-moderation",
+				"oojs-ui.styles.icons-movement"
+			],
+			"messages": [
+				"echo-badge-count",
+				"echo-overlay-link",
+				"echo-mark-all-as-read",
+				"echo-mark-wiki-as-read",
+				"echo-notification-alert",
+				"echo-notification-notice",
+				"echo-notification-loginrequired",
+				"echo-notification-popup-loginrequired",
+				"notification-link-text-expand-all",
+				"notification-link-text-collapse-all",
+				"notification-link-text-expand-alert-count",
+				"notification-link-text-expand-notice-count",
+				"notification-link-text-expand-all-count",
+				"notification-timestamp-ago-seconds",
+				"notification-timestamp-ago-minutes",
+				"notification-timestamp-ago-hours",
+				"notification-timestamp-ago-days",
+				"notification-timestamp-ago-months",
+				"notification-timestamp-ago-years",
+				"notification-timestamp-today",
+				"notification-timestamp-yesterday",
+				"echo-notification-markasread",
+				"echo-notification-markasunread",
+				"echo-notification-markasread-tooltip",
+				"echo-notification-more-options-tooltip",
+				"echo-notification-alert-text-only",
+				"echo-notification-notice-text-only",
+				"echo-email-batch-bullet",
+				"echo-notification-placeholder",
+				"tooltip-pt-notifications-alert",
+				"tooltip-pt-notifications-notice",
+				"mytalk",
+				"mypreferences",
+				"sunday",
+				"monday",
+				"tuesday",
+				"wednesday",
+				"thursday",
+				"friday",
+				"saturday"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.echo.dm": {
+			"scripts": [
+				"model/mw.echo.dm.js",
+				"model/mw.echo.dm.SourcePagesModel.js",
+				"model/mw.echo.dm.PaginationModel.js",
+				"model/mw.echo.dm.FiltersModel.js",
+				"model/mw.echo.dm.SeenTimeModel.js",
+				"model/mw.echo.dm.ModelManager.js",
+				"model/mw.echo.dm.SortedList.js",
+				"model/mw.echo.dm.NotificationItem.js",
+				"model/mw.echo.dm.CrossWikiNotificationItem.js",
+				"model/mw.echo.dm.BundleNotificationItem.js",
+				"model/mw.echo.dm.NotificationsList.js",
+				"model/mw.echo.dm.NotificationGroupsList.js",
+				"model/mw.echo.dm.UnreadNotificationCounter.js"
+			],
+			"dependencies": [
+				"oojs",
+				"ext.echo.init",
+				"ext.echo.api",
+				"moment"
+			],
+			"messages": [
+				"echo-api-failure",
+				"echo-notification-loginrequired",
+				"echo-api-failure-cross-wiki"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.echo.api": {
+			"scripts": [
+				"api/mw.echo.api.js",
+				"api/mw.echo.api.PromisePrioritizer.js",
+				"api/mw.echo.api.EchoApi.js",
+				"api/mw.echo.api.APIHandler.js",
+				"api/mw.echo.api.LocalAPIHandler.js",
+				"api/mw.echo.api.ForeignAPIHandler.js",
+				"api/mw.echo.api.NetworkHandler.js"
+			],
+			"dependencies": [
+				"mediawiki.api",
+				"mediawiki.ForeignApi",
+				"oojs"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.echo.mobile": {
+			"templates": {
+				"NotificationBadge.mustache": "mobile/NotificationBadge.mustache"
+			},
+			"styles": [
+				"mobile/overlay.less",
+				"mobile/notificationsFilterOverlay.less"
+			],
+			"messages": [
+				"notifications",
+				"echo-mobile-notifications-filter-title",
+				"echo-mark-all-as-read-confirmation"
+			],
+			"dependencies": [
+				"mediawiki.util",
+				"mediawiki.router",
+				"ext.echo.ui",
+				"oojs-ui.styles.icons-interactions"
+			],
+			"packageFiles": [
+				"mobile/notifications.js",
+				"mobile/list.js",
+				"mobile/overlay.js",
+				"mobile/NotificationBadge.js",
+				"mobile/notificationsFilterOverlay.js"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.echo.init": {
+			"packageFiles": [
+				"ext.echo.init.js",
+				{
+					"name": "config.json",
+					"callback": "EchoHooks::getConfigVars"
+				}
+			],
+			"dependencies": [
+				"ext.echo.api",
+				"mediawiki.jqueryMsg",
+				"mediawiki.Uri"
+			],
+			"messages": [
+				"echo-badge-count",
+				"echo-displaysnippet-title",
+				"parentheses"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.echo.styles.badge": {
+			"styles": [
+				"nojs/mw.echo.badge.less"
+			],
+			"skinStyles": {
+				"minerva": [
+					"nojs/mw.echo.badge.minerva.less"
+				],
+				"monobook": [
+					"nojs/mw.echo.badge.monobook.less"
+				],
+				"vector": [
+					"nojs/mw.echo.badge.vector.less"
+				]
+			},
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.echo.styles.notifications": {
+			"styles": [
+				"nojs/mw.echo.notifications.less",
+				"styles/LabelIconWidget.less"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.echo.styles.alert": {
+			"styles": [
+				"nojs/mw.echo.alert.less"
+			],
+			"skinStyles": {
+				"monobook": [
+					"nojs/mw.echo.alert.monobook.less"
+				]
+			},
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.echo.special": {
+			"scripts": [
+				"ui/mw.echo.ui.PaginationWidget.js",
+				"ui/mw.echo.ui.DatedSubGroupListWidget.js",
+				"ui/mw.echo.ui.DatedNotificationsWidget.js",
+				"ui/mw.echo.ui.ReadStateButtonSelectWidget.js",
+				"ui/mw.echo.ui.PageNotificationsOptionWidget.js",
+				"ui/mw.echo.ui.PageFilterWidget.js",
+				"ui/mw.echo.ui.CrossWikiUnreadFilterWidget.js",
+				"ui/mw.echo.ui.NotificationsInboxWidget.js",
+				"ui/mw.echo.ui.SpecialHelpMenuWidget.js",
+				"special/ext.echo.special.js"
+			],
+			"styles": [
+				"styles/mw.echo.ui.PaginationWidget.less",
+				"styles/mw.echo.ui.DatedSubGroupListWidget.less",
+				"styles/mw.echo.ui.DatedNotificationsWidget.less",
+				"styles/mw.echo.ui.NotificationsInboxWidget.less",
+				"styles/mw.echo.ui.PageNotificationsOptionWidget.less",
+				"styles/mw.echo.ui.PageFilterWidget.less",
+				"styles/mw.echo.ui.CrossWikiUnreadFilterWidget.less",
+				"styles/mw.echo.ui.SpecialHelpMenuWidget.less"
+			],
+			"dependencies": [
+				"ext.echo.ui",
+				"mediawiki.Uri",
+				"ext.echo.styles.special"
+			],
+			"messages": [
+				"notification-inbox-filter-read",
+				"notification-inbox-filter-unread",
+				"notification-inbox-filter-all",
+				"echo-notification-placeholder-filters",
+				"echo-specialpage-pagination-numnotifications",
+				"echo-specialpage-pagination-range",
+				"echo-specialpage-pagefilters-title",
+				"echo-specialpage-pagefilters-subtitle",
+				"echo-mark-all-as-read",
+				"echo-learn-more",
+				"mypreferences",
+				"echo-specialpage-section-markread",
+				"echo-specialpage-pagefilterwidget-aria-label"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.echo.styles.special": {
+			"styles": [
+				"nojs/mw.echo.special.less"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "Echo/modules"
+	},
+	"Hooks": {
+		"SkinMinervaReplaceNotificationsBadge": "EchoHooks::onSkinMinervaReplaceNotificationsBadge",
+		"LoadExtensionSchemaUpdates": "EchoHooks::onLoadExtensionSchemaUpdates",
+		"GetPreferences": "EchoHooks::getPreferences",
+		"PersonalUrls": "EchoHooks::onPersonalUrls",
+		"BeforePageDisplay": "EchoHooks::beforePageDisplay",
+		"ResourceLoaderRegisterModules": "EchoHooks::onResourceLoaderRegisterModules",
+		"ResourceLoaderTestModules": "EchoHooks::onResourceLoaderTestModules",
+		"UserGroupsChanged": "EchoHooks::onUserGroupsChanged",
+		"UserLoadOptions": "EchoHooks::onUserLoadOptions",
+		"UserSaveOptions": "EchoHooks::onUserSaveOptions",
+		"UserGetDefaultOptions": "EchoHooks::onUserGetDefaultOptions",
+		"UserClearNewTalkNotification": "EchoHooks::onUserClearNewTalkNotification",
+		"ParserTestTables": "EchoHooks::onParserTestTables",
+		"EmailUserComplete": "EchoHooks::onEmailUserComplete",
+		"LoginFormValidErrorMessages": "EchoHooks::onLoginFormValidErrorMessages",
+		"OutputPageCheckLastModified": "EchoHooks::onOutputPageCheckLastModified",
+		"ArticleDeleteComplete": "EchoHooks::onArticleDeleteComplete",
+		"ArticleUndelete": "EchoHooks::onArticleUndelete",
+		"UserMergeAccountFields": "EchoHooks::onUserMergeAccountFields",
+		"MergeAccountFromTo": "EchoHooks::onMergeAccountFromTo",
+		"UserMergeAccountDeleteTables": "EchoHooks::onUserMergeAccountDeleteTables",
+		"EchoGetBundleRules": "EchoHooks::onEchoGetBundleRules",
+		"EchoAbortEmailNotification": "EchoHooks::onEchoAbortEmailNotification",
+		"PageSaveComplete": "EchoHooks::onPageSaveComplete",
+		"LocalUserCreated": "EchoHooks::onLocalUserCreated",
+		"RollbackComplete": "EchoHooks::onRollbackComplete",
+		"UserSaveSettings": "EchoHooks::onUserSaveSettings",
+		"AbortTalkPageEmailNotification": "EchoHooks::onAbortTalkPageEmailNotification",
+		"SendWatchlistEmailNotification": "EchoHooks::onSendWatchlistEmailNotification",
+		"GetNewMessagesAlert": "EchoHooks::abortNewMessagesAlert",
+		"LinksUpdateAfterInsert": "EchoHooks::onLinksUpdateAfterInsert",
+		"SpecialMuteModifyFormFields": "EchoHooks::onSpecialMuteModifyFormFields",
+		"RecentChange_save": "main",
+		"ApiMain::moduleManager": "EchoHooks::onApiMainModuleManager"
+	},
+	"HookHandlers": {
+		"main": {
+			"class": "\\EchoHooks",
+			"services": [ "MainConfig" ]
+		}
+	},
+	"config": {
+		"EchoEnableEmailBatch": {
+			"value": true
+		},
+		"EchoUseJobQueue": {
+			"value": false
+		},
+		"EchoEmailFooterAddress": {
+			"value": ""
+		},
+		"EchoCluster": {
+			"value": false
+		},
+		"EchoSharedTrackingDB": {
+			"value": false
+		},
+		"EchoSharedTrackingCluster": {
+			"value": false
+		},
+		"EchoSeenTimeCacheType": {
+			"value": null
+		},
+		"EchoMaxUpdateCount": {
+			"value": 2000
+		},
+		"EchoMaxMentionsCount": {
+			"value": 50
+		},
+		"EchoMentionStatusNotifications": {
+			"value": false
+		},
+		"EchoMentionsOnMultipleSectionEdits": {
+			"value": true
+		},
+		"EchoMentionOnChanges": {
+			"value": true
+		},
+		"EchoBundleEmailInterval": {
+			"value": 0
+		},
+		"DefaultNotifyTypeAvailability": {
+			"value": {
+				"web": true,
+				"email": true
+			}
+		},
+		"NotifyTypeAvailabilityByCategory": {
+			"value": {
+				"system-noemail": {
+					"web": true,
+					"email": false
+				},
+				"system-emailonly": {
+					"web": false,
+					"email": true
+				},
+				"emailuser": {
+					"web": true,
+					"email": false
+				},
+				"article-linked": {
+					"web": true,
+					"email": false
+				},
+				"mention-failure": {
+					"web": true,
+					"email": false
+				},
+				"mention-success": {
+					"web": true,
+					"email": false
+				},
+				"thank-you-edit": {
+					"web": true,
+					"email": false
+				}
+			},
+			"merge_strategy": "array_plus_2d"
+		},
+		"EchoNotifiers": {
+			"value": {
+				"web": [
+					"EchoNotifier",
+					"notifyWithNotification"
+				],
+				"email": [
+					"EchoNotifier",
+					"notifyWithEmail"
+				]
+			}
+		},
+		"EchoAgentBlacklist": {
+			"value": []
+		},
+		"EchoOnWikiBlacklist": {
+			"value": "Echo-blacklist"
+		},
+		"EchoPerUserBlacklist": {
+			"value": false
+		},
+		"EchoPerUserWhitelistFormat": {
+			"value": "%s/Echo-whitelist"
+		},
+		"EchoCrossWikiNotifications": {
+			"value": false
+		},
+		"EchoNotificationCategories": {
+			"value": {
+				"system": {
+					"priority": 9,
+					"no-dismiss": [
+						"all"
+					]
+				},
+				"system-noemail": {
+					"priority": 9,
+					"no-dismiss": [
+						"all"
+					]
+				},
+				"system-emailonly": {
+					"priority": 9,
+					"no-dismiss": [
+						"all"
+					]
+				},
+				"user-rights": {
+					"priority": 9,
+					"tooltip": "echo-pref-tooltip-user-rights"
+				},
+				"other": {
+					"no-dismiss": [
+						"all"
+					]
+				},
+				"edit-user-talk": {
+					"priority": 1,
+					"no-dismiss": [
+						"web"
+					],
+					"tooltip": "echo-pref-tooltip-edit-user-talk"
+				},
+				"reverted": {
+					"priority": 9,
+					"tooltip": "echo-pref-tooltip-reverted"
+				},
+				"article-linked": {
+					"priority": 5,
+					"tooltip": "echo-pref-tooltip-article-linked"
+				},
+				"mention": {
+					"priority": 4,
+					"tooltip": "echo-pref-tooltip-mention"
+				},
+				"mention-failure": {
+					"priority": 4,
+					"tooltip": "echo-pref-tooltip-mention-failure"
+				},
+				"mention-success": {
+					"priority": 4,
+					"tooltip": "echo-pref-tooltip-mention-success"
+				},
+				"emailuser": {
+					"priority": 9,
+					"tooltip": "echo-pref-tooltip-emailuser"
+				},
+				"article-reminder": {
+					"priority": 1,
+					"tooltip": "echo-pref-tooltip-article-reminder"
+				},
+				"thank-you-edit": {
+					"priority": 9,
+					"tooltip": "echo-pref-tooltip-thank-you-edit"
+				},
+				"watchlist": {
+					"priority": 5,
+					"tooltip": "echo-pref-tooltip-watchlist"
+				},
+				"minor-watchlist": {
+					"priority": 6,
+					"tooltip": "echo-pref-tooltip-minor-watchlist"
+				}
+			},
+			"merge_strategy": "array_plus_2d"
+		},
+		"EchoNotificationIcons": {
+			"value": {
+				"placeholder": {
+					"path": "Echo/modules/icons/notice.svg"
+				},
+				"chat": {
+					"path": {
+						"ltr": "Echo/modules/icons/speechBubbles-ltr-progressive.svg",
+						"rtl": "Echo/modules/icons/speechBubbles-rtl-progressive.svg"
+					}
+				},
+				"edit": {
+					"path": "Echo/modules/icons/edit-progressive.svg"
+				},
+				"edit-user-talk": {
+					"path": "Echo/modules/icons/edit-user-talk-progressive.svg"
+				},
+				"linked": {
+					"path": "Echo/modules/icons/link-progressive.svg"
+				},
+				"mention": {
+					"path": "Echo/modules/icons/mention-progressive.svg"
+				},
+				"mention-failure": {
+					"path": "Echo/modules/icons/mention-failure.svg"
+				},
+				"mention-success": {
+					"path": "Echo/modules/icons/mention-success-constructive.svg"
+				},
+				"mention-status-bundle": {
+					"path": "Echo/modules/icons/mention-status-bundle-progressive.svg"
+				},
+				"reviewed": {
+					"path": "Echo/modules/icons/articleCheck-progressive.svg"
+				},
+				"revert": {
+					"path": "Echo/modules/icons/revert.svg"
+				},
+				"user-rights": {
+					"path": "Echo/modules/icons/user-rights-progressive.svg"
+				},
+				"emailuser": {
+					"path": "Echo/modules/icons/message-constructive.svg"
+				},
+				"help": {
+					"path": {
+						"ltr": "Echo/modules/icons/helpNotice-ltr.svg",
+						"rtl": "Echo/modules/icons/helpNotice-rtl.svg"
+					}
+				},
+				"global": {
+					"path": "Echo/modules/icons/global-progressive.svg"
+				},
+				"site": {
+					"url": false
+				},
+				"article-reminder": {
+					"path": "Echo/modules/icons/global-progressive.svg"
+				}
+			},
+			"merge_strategy": "array_plus_2d"
+		},
+		"EchoSecondaryIcons": {
+			"value": {
+				"linked": {
+					"path": "Echo/modules/icons/link-progressive.svg"
+				},
+				"changes": {
+					"path": "Echo/modules/icons/changes.svg"
+				},
+				"thanks": {
+					"path": {
+						"ltr": "Echo/modules/icons/userTalk-ltr.svg",
+						"rtl": "Echo/modules/icons/userTalk-rtl.svg"
+					}
+				},
+				"unbell": {
+					"path": "Echo/modules/icons/unbell.svg"
+				},
+				"userSpeechBubble": {
+					"path": "Echo/modules/icons/user-speech-bubble.svg"
+				}
+			},
+			"merge_strategy": "array_plus_2d"
+		},
+		"EchoNotifications": {
+			"value": {
+				"welcome": {
+					"user-locators": [
+						"EchoUserLocator::locateEventAgent"
+					],
+					"canNotifyAgent": true,
+					"category": "system-noemail",
+					"group": "positive",
+					"section": "message",
+					"presentation-model": "EchoWelcomePresentationModel"
+				},
+				"edit-user-talk": {
+					"presentation-model": "EchoEditUserTalkPresentationModel",
+					"user-locators": [
+						"EchoUserLocator::locateTalkPageOwner"
+					],
+					"category": "edit-user-talk",
+					"group": "interactive",
+					"section": "alert",
+					"bundle": {
+						"web": true,
+						"email": false,
+						"expandable": true
+					},
+					"immediate": true
+				},
+				"reverted": {
+					"presentation-model": "EchoRevertedPresentationModel",
+					"user-locators": [
+						[
+							"EchoUserLocator::locateFromEventExtra",
+							[
+								"reverted-user-id"
+							]
+						]
+					],
+					"category": "reverted",
+					"group": "negative",
+					"section": "alert"
+				},
+				"page-linked": {
+					"presentation-model": "EchoPageLinkedPresentationModel",
+					"user-locators": [
+						"EchoUserLocator::locateArticleCreator"
+					],
+					"category": "article-linked",
+					"group": "neutral",
+					"section": "message",
+					"bundle": {
+						"web": true,
+						"email": true,
+						"expandable": true
+					}
+				},
+				"minor-watchlist-change": {
+					"user-locators": [
+						"EchoUserLocator::locateUsersWatchingTitle"
+					],
+					"category": "minor-watchlist",
+					"group": "interactive",
+					"presentation-model": "EchoWatchlistChangePresentationModel",
+					"bundle": {
+						"web": true,
+						"email": true,
+						"expandable": true
+					}
+				},
+				"watchlist-change": {
+					"user-locators": [
+						"EchoUserLocator::locateUsersWatchingTitle"
+					],
+					"category": "watchlist",
+					"group": "interactive",
+					"presentation-model": "EchoWatchlistChangePresentationModel",
+					"bundle": {
+						"web": true,
+						"email": true,
+						"expandable": true
+					}
+				},
+				"mention": {
+					"user-locators": [
+						[
+							"EchoUserLocator::locateFromEventExtra",
+							[
+								"mentioned-users"
+							]
+						]
+					],
+					"category": "mention",
+					"group": "interactive",
+					"section": "alert",
+					"presentation-model": "EchoMentionPresentationModel"
+				},
+				"mention-summary": {
+					"user-locators": [
+						[
+							"EchoUserLocator::locateFromEventExtra",
+							[
+								"mentioned-users"
+							]
+						]
+					],
+					"category": "mention",
+					"group": "interactive",
+					"section": "alert",
+					"presentation-model": "EchoMentionInSummaryPresentationModel"
+				},
+				"mention-failure": {
+					"user-locators": [
+						[
+							"EchoUserLocator::locateEventAgent"
+						]
+					],
+					"canNotifyAgent": true,
+					"category": "mention-failure",
+					"bundle": {
+						"web": true,
+						"expandable": true
+					},
+					"group": "negative",
+					"section": "alert",
+					"presentation-model": "EchoMentionStatusPresentationModel"
+				},
+				"mention-failure-too-many": {
+					"user-locators": [
+						[
+							"EchoUserLocator::locateEventAgent"
+						]
+					],
+					"canNotifyAgent": true,
+					"category": "mention-failure",
+					"group": "negative",
+					"section": "alert",
+					"presentation-model": "EchoMentionStatusPresentationModel"
+				},
+				"mention-success": {
+					"user-locators": [
+						[
+							"EchoUserLocator::locateEventAgent"
+						]
+					],
+					"canNotifyAgent": true,
+					"category": "mention-success",
+					"bundle": {
+						"web": true,
+						"expandable": true
+					},
+					"group": "positive",
+					"section": "alert",
+					"presentation-model": "EchoMentionStatusPresentationModel"
+				},
+				"user-rights": {
+					"user-locators": [
+						[
+							"EchoUserLocator::locateFromEventExtra",
+							[
+								"user"
+							]
+						]
+					],
+					"category": "user-rights",
+					"group": "neutral",
+					"section": "alert",
+					"presentation-model": "EchoUserRightsPresentationModel"
+				},
+				"emailuser": {
+					"presentation-model": "EchoEmailUserPresentationModel",
+					"user-locators": [
+						[
+							"EchoUserLocator::locateFromEventExtra",
+							[
+								"to-user-id"
+							]
+						]
+					],
+					"category": "emailuser",
+					"group": "neutral",
+					"section": "alert"
+				},
+				"foreign": {
+					"presentation-model": "EchoForeignPresentationModel",
+					"user-locators": [
+						"EchoUserLocator::locateEventAgent"
+					],
+					"category": "foreign",
+					"group": "positive",
+					"section": "alert"
+				},
+				"thank-you-edit": {
+					"user-locators": [
+						"EchoUserLocator::locateEventAgent"
+					],
+					"canNotifyAgent": true,
+					"category": "thank-you-edit",
+					"group": "positive",
+					"presentation-model": "EchoEditThresholdPresentationModel",
+					"section": "message"
+				},
+				"article-reminder": {
+					"user-locators": [
+						"EchoUserLocator::locateEventAgent"
+					],
+					"canNotifyAgent": true,
+					"category": "article-reminder",
+					"group": "positive",
+					"presentation-model": "EchoArticleReminderPresentationModel",
+					"section": "message"
+				}
+			},
+			"merge_strategy": "array_plus_2d"
+		},
+		"EchoCacheVersion": {
+			"value": "1.12"
+		},
+		"EchoEventLoggingVersion": {
+			"value": "1.12"
+		},
+		"EchoEventLoggingSchemas": {
+			"value": {
+				"Echo": {
+					"enabled": false
+				},
+				"EchoMail": {
+					"enabled": false
+				},
+				"EchoInteraction": {
+					"enabled": false
+				}
+			},
+			"merge_strategy": "array_plus_2d"
+		},
+		"AllowArticleReminderNotification": {
+			"value": false,
+			"description": "This is a feature flag to the Article Reminder notification"
+		},
+		"EchoMaxMentionsInEditSummary": {
+			"value": 0,
+			"description": "Maximum nubmer of users that will be notified that they were linked from an edit summary or 0 for no notifications"
+		},
+		"EchoPollForUpdates": {
+			"value": 0,
+			"description": "This is the polling rate i.e. the time after which we check for notifications count on the client side. It also controls whether notification count will be displayed in browser title. If polling rate is 0 this means polling is disabled and notification count is also not shown in browser title"
+		},
+		"EchoWatchlistNotifications": {
+			"value": false,
+			"description": "Feature flag to enable Echo notifications whenever a page on a user's watchlist is changed, replacing the built-in preference to send emails in that circumstance."
+		},
+		"EchoWatchlistEmailOncePerPage": {
+			"value": true,
+			"description": "Whether to send email notifications each time a watched page is edited (if false) or only the first time the page is changed before being visited again by the user (if true)"
+		},
+		"EchoEnablePush": {
+			"value": false,
+			"description": "Whether to enable push notifications"
+		},
+		"EchoPushServiceBaseUrl": {
+			"value": false,
+			"description": "Request endpoint URL for the push notification service"
+		}
+	},
+	"attributes": {
+		"EventLogging": {
+			"Schemas": {
+				"EchoInteraction": 15823738
+			}
+		}
+	},
+	"manifest_version": 2,
+	"AutoloadClasses": {
+		"ApiCrossWiki": "includes/api/ApiCrossWiki.php",
+		"ApiEchoArticleReminder": "includes/api/ApiEchoArticleReminder.php",
+		"ApiEchoMarkRead": "includes/api/ApiEchoMarkRead.php",
+		"ApiEchoMarkSeen": "includes/api/ApiEchoMarkSeen.php",
+		"ApiEchoMute": "includes/api/ApiEchoMute.php",
+		"ApiEchoNotifications": "includes/api/ApiEchoNotifications.php",
+		"ApiEchoUnreadNotificationPages": "includes/api/ApiEchoUnreadNotificationPages.php",
+		"BackfillUnreadWikis": "maintenance/backfillUnreadWikis.php",
+		"Bundleable": "includes/Bundleable.php",
+		"Bundler": "includes/Bundler.php",
+		"EchoAbstractEntity": "includes/model/AbstractEntity.php",
+		"EchoAbstractMapper": "includes/mapper/AbstractMapper.php",
+		"EchoArrayList": "includes/EchoArrayList.php",
+		"EchoAttributeManager": "includes/AttributeManager.php",
+		"EchoCachedList": "includes/EchoCachedList.php",
+		"EchoCallbackIterator": "includes/iterator/CallbackIterator.php",
+		"EchoCatchableFatalErrorException": "includes/exception/CatchableFatalErrorException.php",
+		"EchoContainmentList": "includes/EchoContainmentList.php",
+		"EchoContainmentSet": "includes/EchoContainmentSet.php",
+		"EchoDataOutputFormatter": "includes/DataOutputFormatter.php",
+		"EchoDeferredMarkAsDeletedUpdate": "includes/DeferredMarkAsDeletedUpdate.php",
+		"EchoDiffGroup": "includes/EchoDiffGroup.php",
+		"EchoDiffParser": "includes/EchoDiffParser.php",
+		"EchoDiscussionParser": "includes/DiscussionParser.php",
+		"EchoEditThresholdPresentationModel": "includes/formatters/EditThresholdPresentationModel.php",
+		"EchoEditUserTalkPresentationModel": "includes/formatters/EditUserTalkPresentationModel.php",
+		"EchoArticleReminderPresentationModel": "includes/formatters/ArticleReminderPresentationModel.php",
+		"EchoEmailFormat": "includes/EmailFormat.php",
+		"EchoEmailFrequency": "includes/EmailFrequency.php",
+		"EchoEmailUserPresentationModel": "includes/formatters/EmailUserPresentationModel.php",
+		"EchoEvent": "includes/model/Event.php",
+		"EchoEventDigestFormatter": "includes/formatters/EchoEventDigestFormatter.php",
+		"EchoEventFormatter": "includes/formatters/EchoEventFormatter.php",
+		"EchoEventMapper": "includes/mapper/EventMapper.php",
+		"EchoEventPresentationModel": "includes/formatters/EventPresentationModel.php",
+		"EchoFilteredSequentialIterator": "includes/iterator/FilteredSequentialIterator.php",
+		"EchoFlyoutFormatter": "includes/formatters/EchoFlyoutFormatter.php",
+		"EchoForeignNotifications": "includes/ForeignNotifications.php",
+		"EchoForeignPresentationModel": "includes/formatters/EchoForeignPresentationModel.php",
+		"EchoForeignWikiRequest": "includes/ForeignWikiRequest.php",
+		"EchoHooks": "includes/EchoHooks.php",
+		"EchoHtmlDigestEmailFormatter": "includes/formatters/EchoHtmlDigestEmailFormatter.php",
+		"EchoHtmlEmailFormatter": "includes/formatters/EchoHtmlEmailFormatter.php",
+		"EchoIcon": "includes/formatters/EchoIcon.php",
+		"EchoIteratorDecorator": "includes/iterator/IteratorDecorator.php",
+		"EchoLocalCache": "includes/cache/LocalCache.php",
+		"EchoMentionInSummaryPresentationModel": "includes/formatters/MentionInSummaryPresentationModel.php",
+		"EchoMentionPresentationModel": "includes/formatters/MentionPresentationModel.php",
+		"EchoMentionStatusPresentationModel": "includes/formatters/MentionStatusPresentationModel.php",
+		"EchoModelFormatter": "includes/formatters/EchoModelFormatter.php",
+		"EchoModerationController": "includes/controller/ModerationController.php",
+		"EchoMultipleIterator": "includes/iterator/MultipleIterator.php",
+		"EchoNotRecursiveIterator": "includes/iterator/NotRecursiveIterator.php",
+		"EchoNotification": "includes/model/Notification.php",
+		"EchoNotificationController": "includes/controller/NotificationController.php",
+		"EchoNotificationDeleteJob": "includes/jobs/NotificationDeleteJob.php",
+		"EchoNotificationJob": "includes/jobs/NotificationJob.php",
+		"EchoNotificationMapper": "includes/mapper/NotificationMapper.php",
+		"EchoNotifier": "includes/Notifier.php",
+		"EchoOnWikiList": "includes/EchoOnWikiList.php",
+		"EchoPageLinkedPresentationModel": "includes/formatters/PageLinkedPresentationModel.php",
+		"EchoPlainTextDigestEmailFormatter": "includes/formatters/EchoPlainTextDigestEmailFormatter.php",
+		"EchoPlainTextEmailFormatter": "includes/formatters/EchoPlainTextEmailFormatter.php",
+		"EchoPresentationModelSection": "includes/formatters/PresentationModelSection.php",
+		"EchoRevertedPresentationModel": "includes/formatters/RevertedPresentationModel.php",
+		"EchoRevisionLocalCache": "includes/cache/RevisionLocalCache.php",
+		"EchoSeenTime": "includes/SeenTime.php",
+		"EchoServices": "includes/EchoServices.php",
+		"EchoSummaryParser": "includes/EchoSummaryParser.php",
+		"EchoSuppressionRowUpdateGenerator": "includes/schemaUpdate.php",
+		"EchoTargetPage": "includes/model/TargetPage.php",
+		"EchoTargetPageMapper": "includes/mapper/TargetPageMapper.php",
+		"EchoTitleLocalCache": "includes/cache/TitleLocalCache.php",
+		"EchoUnreadWikis": "includes/UnreadWikis.php",
+		"EchoUserLocator": "includes/UserLocator.php",
+		"EchoUserNotificationGateway": "includes/gateway/UserNotificationGateway.php",
+		"EchoUserRightsPresentationModel": "includes/formatters/UserRightsPresentationModel.php",
+		"EchoWelcomePresentationModel": "includes/formatters/WelcomePresentationModel.php",
+		"EchoWatchlistChangePresentationModel": "includes/formatters/WatchlistChangePresentationModel.php",
+		"GenerateSampleNotifications": "maintenance/generateSampleNotifications.php",
+		"MWEchoDbFactory": "includes/EchoDbFactory.php",
+		"MWEchoEmailBatch": "includes/EmailBatch.php",
+		"MWEchoEventLogging": "includes/EventLogging.php",
+		"MWEchoNotifUser": "includes/NotifUser.php",
+		"NotificationPager": "includes/special/NotificationPager.php",
+		"ProcessEchoEmailBatch": "maintenance/processEchoEmailBatch.php",
+		"RecomputeNotifCounts": "maintenance/recomputeNotifCounts.php",
+		"RemoveInvalidNotification": "maintenance/removeInvalidNotification.php",
+		"RemoveOrphanedEvents": "maintenance/removeOrphanedEvents.php",
+		"ResourceLoaderEchoImageModule": "includes/ResourceLoaderEchoImageModule.php",
+		"SpecialDisplayNotificationsConfiguration": "includes/special/SpecialDisplayNotificationsConfiguration.php",
+		"SpecialNotifications": "includes/special/SpecialNotifications.php",
+		"SpecialNotificationsFormatter": "includes/formatters/SpecialNotificationsFormatter.php",
+		"SpecialNotificationsMarkRead": "includes/special/SpecialNotificationsMarkRead.php",
+		"UpdateEchoSchemaForSuppression": "maintenance/updateEchoSchemaForSuppression.php",
+		"EchoUpdatePerUserBlacklist": "maintenance/updatePerUserBlacklist.php"
+	},
+	"AutoloadNamespaces": {
+		"EchoOOUI\\": "includes/ooui/",
+		"EchoPush\\": "includes/Push/",
+		"EchoPush\\Api\\": "includes/api/Push/"
+	},
+	"TestAutoloadClasses": {
+		"EchoAbstractMapperStub": "tests/phpunit/mapper/EchoAbstractMapperStub.php",
+		"EchoExecuteFirstArgumentStub": "tests/phpunit/mapper/EchoExecuteFirstArgumentStub.php"
+	},
+	"ServiceWiringFiles": [
+		"ServiceWiring.php"
+	],
+	"ConfigRegistry": {
+		"Echo": "GlobalVarConfig::newInstance"
+	}
+}

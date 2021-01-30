@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Leli Forte"
+		]
+	},
+	"flow-newtopic-content-placeholder": "Ikteb messaġġ ġdid fuq \"$1\"",
+	"flow-notification-newtopic": "<span class=\"mw-echo-title-heading plainlinks\">[$5 $4]</span><br />$1 {{GENDER:$1|ħalaq|ħalqet}}  suġġett ġdid fuq '''$3'''."
+}

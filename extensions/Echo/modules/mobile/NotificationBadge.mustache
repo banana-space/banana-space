@@ -1,0 +1,19 @@
+{{^hasNotifications}}
+<a href="{{url}}" title="{{title}}"
+   class="{{notificationIconClass}} mw-echo-notification-badge-nojs user-button" id="user-notifications" data-event-name="ui.notifications">
+    {{title}}
+</a>
+{{/hasNotifications}}
+{{#hasNotifications}}
+<a href="{{url}}" title="{{title}}"
+  id="user-notifications"
+  data-event-name="ui.notifications"
+  class="mw-echo-notification-badge-nojs mw-echo-unseen-notifications notification-count user-button {{#hasUnseenNotifications}}notification-unseen{{/hasUnseenNotifications}}
+    {{#isNotificationCountZero}}zero{{/isNotificationCountZero}}">
+	<div class="circle">
+		 <span data-notification-count="{{notificationCountRaw}}">
+			{{notificationCountString}}
+		</span>
+	</div>
+</a>
+{{/hasNotifications}}

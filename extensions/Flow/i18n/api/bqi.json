@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mogoeilor"
+		]
+	},
+	"apihelp-flow-param-page": "بٱلگاْ کاْ ڤا میٛنس کونشتکاری ڤابۊ.",
+	"apihelp-flow+edit-header-param-content": "میٛنوناْ سی تۉزی",
+	"apihelp-flow+edit-post-description": "آلشدکاری میٛنوناْ فریشنار.",
+	"apihelp-flow+edit-post-summary": "آلشدکاری میٛنوناْ یٱ فریشنار.",
+	"apihelp-flow+edit-post-param-postId": "نشوݩ دیارکون فریشنار.",
+	"apihelp-flow+edit-post-param-content": "میٛنوناْ سی فریشنار",
+	"apihelp-flow+edit-title-description": "آلشدکاری یٱ داسوݩ.",
+	"apihelp-flow+edit-title-summary": "آلشدکاری یٱ داسوݩ.",
+	"apihelp-flow+edit-topic-summary-description": "آلشدکاری داسوݩ خولاساْ میٛنوناْ.",
+	"apihelp-flow+edit-topic-summary-summary": "آلشدکاری داسوݩ خولاساْ میٛنوناْ.",
+	"apihelp-flow+edit-topic-summary-param-summary": "میٛنونٱ سی خولاساْ",
+	"apihelp-flow+new-topic-param-topic": "متن سی داسوݩ تازاْ",
+	"apihelp-flow+reply-description": "جٱڤاو داڌن ب یٱ فریشنار",
+	"apihelp-flow+reply-summary": "جٱڤاو داڌن ب یٱ فریشنار",
+	"apihelp-flow+reply-param-content": "میٛنوناْ سی یٱ فریشنار تازاْ",
+	"apihelp-flow+reply-param-format": "فورمٱت فریشنار تازاْ(ڤیکی متن|اْچی تی اْم اْل)",
+	"apihelp-flow+view-post-description": "دیڌن یٱ فریشنار",
+	"apihelp-flow+view-post-summary": "دیڌن یٱ فریشنار",
+	"apihelp-flow+view-post-param-postId": "نشوݩ دیارکون فریشنار سی دیڌن.",
+	"apihelp-flow+view-topic-description": "دیڌن یٱ داسوݩ",
+	"apihelp-flow+view-topic-summary": "دیڌن یٱ داسوݩ",
+	"apihelp-flow+view-topic-summary-description": "دیڌن خولاساْ یٱ داسوݩ",
+	"apihelp-flow+view-topic-summary-summary": "دیڌن خولاساْ یٱ داسوݩ",
+	"apihelp-flow+view-topiclist-description": "دیڌن نومگٱ داسونٱل",
+	"apihelp-flow+view-topiclist-summary": "دیڌن نومگٱ داسونٱل"
+}

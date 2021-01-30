@@ -1,0 +1,27 @@
+<div class="flow-anon-warning">
+	<div class="flow-anon-warning-mobile">
+		{{!-- mobile warning --}}
+		{{#tooltip
+			positionClass="down"
+			contextClass="progressive"
+			extraClass="flow-form-collapsible"
+			isBlock=true
+		}}
+			{{~l10nParse "flow-anon-warning" (linkWithReturnTo "Special:UserLogin") (linkWithReturnTo "Special:UserLogin/signup")~}}
+		{{/tooltip}}
+	</div>
+
+	{{!-- desktop warning --}}
+	{{#progressiveEnhancement}}
+		<div class="flow-anon-warning-desktop">
+			{{#tooltip
+				positionClass="left"
+				contextClass="progressive"
+				extraClass="flow-form-collapsible"
+				isBlock=true
+			}}
+				{{~l10nParse "flow-anon-warning" (linkWithReturnTo "Special:UserLogin") (linkWithReturnTo "Special:UserLogin/signup")~}}
+			{{/tooltip}}
+		</div>
+	{{/progressiveEnhancement}}
+</div>

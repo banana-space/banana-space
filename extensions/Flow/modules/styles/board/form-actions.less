@@ -1,0 +1,40 @@
+@import 'mediawiki.mixins';
+@import '../flow.colors';
+@import '../flow.variables';
+
+.flow-form-collapsible.flow-form-collapsible-collapsed {
+	display: none;
+}
+
+// Form button actions should be right-affixed
+.flow-form-actions {
+	position: relative;
+	margin-top: 8px;
+
+	button.mw-ui-button,
+	a.mw-ui-button {
+		float: right;
+		margin-left: 0.25em;
+	}
+}
+
+.flow-anon-warning {
+	position: relative;
+}
+
+.flow-anon-warning-desktop {
+	display: none;
+	position: absolute;
+	right: -15em;
+	width: 15em;
+}
+
+@media all and ( min-width: @small ) {
+	.flow-anon-warning-mobile {
+		display: none;
+	}
+
+	.flow-anon-warning-desktop {
+		display: block;
+	}
+}

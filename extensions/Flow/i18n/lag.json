@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Baba Tabita"
+		]
+	},
+	"flow-history-action-delete-post": "honola",
+	"flow-post-action-delete-post": "Honola",
+	"flow-moderation-confirm-delete-post": "Honola",
+	"flow-moderation-confirm-delete-topic": "Honola",
+	"flow-moderation-confirm-hide-topic": "Visa",
+	"flow-moderation-confirm-unhide-topic": "Visʉla"
+}

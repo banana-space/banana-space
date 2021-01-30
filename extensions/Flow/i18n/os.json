@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amikeco"
+		]
+	},
+	"flow-thank-link": "{{GENDER:$1|{{GENDER:$2|Бузныг зæгъын}}}}",
+	"flow-topic-action-resummarize-topic": "Темæйы цыбыр афыст ивын",
+	"flow-history-day": "Абон"
+}

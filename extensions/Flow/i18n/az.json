@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Serkanland",
+			"Wertuose"
+		]
+	},
+	"flow-post-action-undelete-post": "Bərpa et",
+	"flow-error-missing-summary": "Siz mütləq şərh əlavə etməlisiniz.",
+	"flow-error-missing-header-content": "Siz mütləq izah əlavə etməlisiniz.",
+	"flow-moderation-confirm-undelete-post": "Bərpa et",
+	"flow-moderation-confirm-undelete-topic": "Bərpa et",
+	"flow-undo-edit-content": "Bu dəyişiklik geri qaytarıla bilər. Lütfən aşağıdakı müqayisəni yoxlayın və bu dəyişikliyi həqiqətən də etmək istədiyinizə əmin olduqdan sonra \"Səhifəni qeyd et\" düyməsini basaraq dəyişikliyi geri qaytarın."
+}

@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"Artsiom91",
+			"Macofe",
+			"Maksim L.",
+			"Mechanizatar",
+			"Mikalai Udodau",
+			"Дзяніс Тутэйшы",
+			"Чаховіч Уладзіслаў"
+		]
+	},
+	"thanks-desc": "Дадае спасылкі для падзякаў удзельнікам за праўкі, каментары і г. д.",
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|дзякуй}}}}",
+	"thanks-thanked": "{{GENDER:$2|{{GENDER:$1|падзякаваў|падзякавала}}}}",
+	"thanks-button-thank": "{{GENDER:$1|{{GENDER:$2|Дзякуй}}}}",
+	"thanks-button-thanked": "{{GENDER:$2|{{GENDER:$1|Падзякаваў|Падзякавала}}}}",
+	"thanks-error-undefined": "На атрымалася падзякаваць (код памылкі: $1). Паспрабуйце зноў.",
+	"thanks-error-invalidrevision": "Недапушчальны нумар версіі.",
+	"thanks-error-ratelimited": "{{GENDER:$1|Вы}} перавысілі абмежаванне хуткасці выканання такіх дзеянняў. Калі ласка, пачакайце некаторы час і паспрабуйце зноў.",
+	"thanks-thank-tooltip": "{{GENDER:$1|Адправіць}} {{GENDER:$2|гэтаму ўдзельніку|гэтай удзельніцы}} паведамленне з падзякай",
+	"thanks-thanked-notice": "$1 {{GENDER:$2|быў абвешчаны|была абвешчана|былі абвешчаны}}, што Вы падзякавалі за {{GENDER:$2|яго|яе|іх}} праўка.",
+	"echo-pref-subscription-edit-thank": "Дзякуй мне за маю праўку",
+	"echo-pref-tooltip-edit-thank": "Паведамляць мне, калі хтосьці дзякуе мяне за зробленую мной праўку.",
+	"echo-category-title-edit-thank": "Дзякуй",
+	"notification-thanks-diff-link": "вашу праўку",
+	"notification-header-rev-thank": "$1 {{GENDER:$2|падзякаваў|падзякавала}} {{GENDER:$4|вам}} за вашу праўку на старонцы <strong>$3</strong>.",
+	"notification-header-creation-thank": "$1 {{GENDER:$2|падзякаваў|падзякавала}} {{GENDER:$4|вам}} за стварэнне старонкі <strong>$3</strong>.",
+	"notification-header-log-thank": "$1 {{GENDER:$2|падзякаваў|падзякавала}} {{GENDER:$4|Вам}} за дзеянне на старонцы <strong>$3</strong>.",
+	"notification-bundle-header-log-thank": "{{PLURAL:$1|$1 чалавек падзякаваў|$1 чалавекі падзякавалі|$1 чалавек падзякавала|100=99+ чалавек падзякавала}} {{GENDER:$3|Вам}} за дзеянне, якое адносіцца да старонцы «<strong>$2</strong>».",
+	"log-name-thanks": "Журнал падзяк",
+	"log-description-thanks": "Ніжэй прыведзены спіс удзельнікаў, якія атрымалі падзякі ад іншых удзельнікаў.",
+	"logentry-thanks-thank": "$1 {{GENDER:$2|падзякаваў удзель|падзякавала ўдзель}}{{GENDER:$4|ніку|ніцы}} $3",
+	"logeventslist-thanks-log": "Журнал падзяк",
+	"notification-header-flow-thank": "$1 {{GENDER:$2|падзякаваў|падзякавала}} {{GENDER:$5|вам}} за ваш каментарый у <strong>$3</strong>."
+}

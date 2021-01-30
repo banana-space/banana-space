@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mashoi7"
+		]
+	},
+	"flow-newtopic-save-anonymously": "Ližiä tiemu anoniimannu",
+	"flow-reply-link-anonymously": "Vastua anoniimannu",
+	"flow-post-action-edit-post-submit-anonymously": "Tallenda muutokset anoniimannu",
+	"flow-error-missing-summary": "Sinun pidäy kirjtutua yhtehvedo.",
+	"flow-error-missing-header-content": "Sinun pidäy kirjuttua kuvavus.",
+	"flow-edit-header-submit-anonymously": "Tallemda kuvavus anoniimannu",
+	"flow-edit-title-submit-anonymously": "Vaihta rubriekku anoniimannu",
+	"flow-edit-post-submit-anonymously": "Hyväksy muutokset anoniimannu",
+	"flow-dialog-cancelconfirm-title": "Oletgo varmu?",
+	"flow-dialog-cancelconfirm-keep": "Jatka edituičendua",
+	"flow-dialog-cancelconfirm-discard": "Hylgiä muutokset"
+}

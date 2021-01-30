@@ -1,0 +1,13 @@
+{{!-- Using <span> instead of <time> to support old browsers (e.g. IE 8).
+  IE 8 will treat it <time> a self-closing tag, without a
+  createElement call before the element. --}}
+{{#if guid}}
+	<span datetime="{{time_iso}}" class="flow-timestamp">
+{{else}}
+	<span datetime="{{time_iso}}"
+	      class="flow-timestamp flow-load-interactive"
+	      data-flow-load-handler="timestamp">
+{{/if}}
+	<span class="flow-timestamp-user-formatted">{{time_readable}}</span>
+	<span id="{{guid}}" class="flow-timestamp-ago">{{time_ago}}</span>
+</span>

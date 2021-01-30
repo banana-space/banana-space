@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"NehalDaveND",
+			"Nirjal stha",
+			"बिप्लब आनन्द",
+			"राम प्रसाद जोशी",
+			"सरोज कुमार ढकाल",
+			"हिमाल सुबेदी"
+		]
+	},
+	"thanks-desc": "प्रयोगकर्ताहरूलाई तिनीहरूको सम्पादन, टिप्पणी आदिको लागि धन्यवाद दिने लिङ्क जोड्ने।",
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|धन्यवाद दिनुहोस्}}}}",
+	"thanks-thanked": "{{GENDER:$1|{{GENDER:$2|धन्यवाद दिइयो}}}}",
+	"thanks-button-thank": "{{GENDER:$1|{{GENDER:$2|धन्यवाद}}}}",
+	"thanks-button-thanked": "{{GENDER:$1|{{GENDER:$2|धन्यवाद दिइयो}}}}",
+	"thanks-error-undefined": "धन्यवाद दिने कार्य विफल भयो। कृपया पुनः प्रयास गर्नुहोस।",
+	"thanks-error-invalidrevision": "अवतरण आइडी मान्य छैन।",
+	"thanks-error-ratelimited": "{{GENDER:$1|तपाईं}} आफ्नो दर सीमा पार गरिसक्नु भएको छ। कृपया केही समय पछी पुनः प्रयास गर्नुहोला।",
+	"thanks-thank-tooltip": "यस {{GENDER:$2|प्रयोगकर्ता}}लाई धन्यवाद अधिसूचना {{GENDER:$1|पठाउने}}।",
+	"thanks-confirmation2": "यो सम्पादनको लागि धन्यवाद {{GENDER:$1|दिनुहोस्}}",
+	"thanks-thanked-notice": "तपाईंलाई {{GENDER:$2|उसले|उनले|उनिहरूले}} गरेको सम्पादन मन परेको छ भन्ने सूचना $1लाई पठाइएको छ ।",
+	"thanks": "धन्यवाद पठाउनुहोस्",
+	"thanks-submit": "धन्यवाद पठाउनुहोस्",
+	"echo-pref-tooltip-edit-thank": "कसैले मेरो सम्पादनको लागि मलाई धन्यवाद दिएमा मलाई सूचित गर्ने ।",
+	"echo-category-title-edit-thank": "धन्यवाद",
+	"notification-thanks-diff-link": "तपाईंको सम्पादन",
+	"notification-header-rev-thank": "$1 ले {{GENDER:$4|तपाईंलाई}} तपाईंको सम्पादन <strong>$3</strong> को लागि {{GENDER:$2|धन्यवाद दिएका छन्}} ।",
+	"notification-header-creation-thank": "$1 {{GENDER:$2|धन्यवाद}} {{GENDER:$4|तपाईकाे}} सृजनाका लागि <strong>$3</strong> छ।",
+	"notification-bundle-header-rev-thank": "{{PLURAL:$1|एक व्यक्ति|$1 व्यक्तिहरू|100=99+ व्यक्तिहरू}}ले {{GENDER:$3|तपाईंलाई}} <strong>$2</strong>मा तपाईंले गरेको सम्पादनको लागि धन्यवाद दिएका छन् ।",
+	"log-name-thanks": "धन्यवाद लग",
+	"log-description-thanks": "अन्य प्रयोगकर्ताहरूद्वारा धन्यवाद पाउने प्रयोगकर्ताहरूको सूची निम्न रहेको छ।",
+	"logentry-thanks-thank": "$1ले {{GENDER:$4|$3}}लाई {{GENDER:$2|धन्यवाद दिएको छ}}",
+	"thanks-error-no-id-specified": "धन्यवाद गर्नको लागि तपाईंलाई कुनै एक पुनरीक्षण ठेगाना निर्दिष्ट गर्नु पर्ने हो।",
+	"notification-link-text-view-post": "टिप्पणी हेर्ने",
+	"thanks-error-invalidpostid": "पोस्ट ठेगाना अमान्य छ।",
+	"flow-thanks-confirmation-special": "के तपाईं यस प्रतिक्रियाको लागि धन्यवाद पठाउन चाहनुहुन्छ?",
+	"flow-thanks-thanked-notice": "तपाईंलाई {{GENDER:$2|उसले|उनले|उनिहरूले}} दिएको प्रतिक्रिया मन परेको छ भन्ने सूचना $1लाई पठाइएको छ ।",
+	"notification-header-flow-thank": " \"<strong>$3</strong>\" मा तपाईँको प्रतिक्रियाको लागि $1 ले {{GENDER:$5|तपाईँलाई}} {{GENDER:$2|धन्यवाद}} दिनुभो ।",
+	"notification-compact-header-flow-thank": "$1 ले {{GENDER:$3|तपाईँ}}लाई {{GENDER:$2|धन्यवाद}} दिनुभो ।"
+}

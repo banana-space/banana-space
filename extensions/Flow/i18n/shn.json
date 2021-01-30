@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saimawnkham",
+			"Saosukham"
+		]
+	},
+	"flow-show-change": "ၼႄလွင်ႈလႅၵ်ႈလၢႆႈ",
+	"flow-post-action-edit-post-submit": "သိမ်းလွင်ႈလႅၵ်ႈလၢႆႈ",
+	"flow-post-action-edit-post-submit-publish": "ပိုတ်ႇဢွၵ်ႇ လွင်ႈလႅၵ်ႈလၢႆႈ",
+	"flow-edit-post-submit": "မၵ်းမၢႆ လွင်ႈလႅၵ်ႈလၢႆႈ",
+	"flow-ve-mention-template-title": "ၸွမ်းဢၼ်ၼႄဝႆႉ",
+	"flow-dialog-cancelconfirm-discard": "ယႃႉပႅတ်ႈ လွင်ႈလႅၵ်ႈလၢႆႈ"
+}

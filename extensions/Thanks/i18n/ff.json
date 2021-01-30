@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ibrahima"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|jaar}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$1|Neldu}} tintinol jaaroore faade e oo {{GENDER:$2|kuutoro}}"
+}

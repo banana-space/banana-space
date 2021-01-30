@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rueter"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|ёвтак сюкпря}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$1|Кучомс}} шумбрат-парт сюконямо те {{GENDER:$2|теицянтень}}"
+}

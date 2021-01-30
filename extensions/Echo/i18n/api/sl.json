@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Janezdrilc"
+		]
+	},
+	"apihelp-echomarkread-description": "Označi obvestila kot prebrana za trenutnega uporabnika.",
+	"apihelp-echomarkread-summary": "Označi obvestila kot prebrana za trenutnega uporabnika.",
+	"apihelp-echomarkread-param-list": "Seznam ID-jev obvestil za označitev za prebrano.",
+	"apihelp-echomarkread-param-unreadlist": "Seznam ID-jev obvestil za označitev za neprebrano.",
+	"apihelp-echomarkread-param-all": "Ob nastavitvi označi vsa uporabnikova obvestila kot prebrana.",
+	"apihelp-echomarkread-param-sections": "Seznam delov za označitev za prebrano.",
+	"apihelp-echomarkread-example-1": "Označi obvestilo 8 kot prebrano",
+	"apihelp-echomarkread-example-2": "Označi vsa obvestila kot prebrana",
+	"apihelp-echomarkread-example-3": "Označi obvestilo 1 kot neprebrano",
+	"apihelp-echomarkseen-description": "Označi obvestila kot ogledana za trenutnega uporabnika.",
+	"apihelp-echomarkseen-summary": "Označi obvestila kot ogledana za trenutnega uporabnika.",
+	"apihelp-echomarkseen-example-1": "Označi vse vrste obvestil kot ogledane",
+	"apihelp-echomarkseen-param-type": "Vrste obvestil za označitev za ogledano: 'opomnik', 'sporočilo' ali 'vse'.",
+	"apihelp-echomarkseen-param-timestampFormat": "Datumski odtis pri izpisovanju, 'ISO_8601' ali 'MW'. 'MW' se ne priporoča, zato ga naj uporabniki zamenjajo z 'ISO_8601'. Ko bo ukinjen, bo ostal v uporabi le 'ISO_8601'.",
+	"apihelp-query+notifications-description": "Poglej obvestila, ki so na čakanju za trenutnega uporabnika.",
+	"apihelp-query+notifications-param-prop": "Zahtevane podrobnosti.",
+	"apihelp-query+notifications-paramvalue-format-model": "Surovi podatki obvestil",
+	"apihelp-query+notifications-param-limit": "Največje število prikazanih obvestil.",
+	"apihelp-query+unreadnotificationpages-param-limit": "Največje število prikazanih strani."
+}

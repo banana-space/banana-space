@@ -1,0 +1,37 @@
+{
+	"@metadata": {
+		"authors": [
+			"Phurbutsering"
+		]
+	},
+	"flow-post-action-unsuppress-post": "རྩ་མེད་མི་བཟོ་རོགས།",
+	"flow-post-action-undelete-post": "མི་བསུབས།",
+	"flow-post-action-unhide-post": "མི་སྦས་རོགས།",
+	"flow-topic-action-unhide-topic": "བརྗོད་དོན་མ་སྦས་རོགས།",
+	"flow-topic-action-undelete-topic": "བརྗོད་དོན་མི་སུབས།",
+	"flow-topic-action-unsuppress-topic": "བརྗོད་དོན་རྩ་མེད་བཟོ་མི་དགོས།",
+	"flow-moderation-title-unsuppress-post": "གསལ་བསྒྲགས་རྩ་མེད་བཟོ་མི་དགོས་སམ།",
+	"flow-moderation-title-undelete-post": "གསལ་བསྒྲགས་སྦས་མི་དགོས་སམ།",
+	"flow-moderation-title-unhide-post": "གསལ་བསྒྲགས་སྦས་མི་དགོས་སམ།",
+	"flow-moderation-placeholder-unsuppress-post": "རྒྱུ་རྐྱེན་གང་ཞིག་གི་རྐྱེན་པས་ཁྱེད་ཀྱིས་གསལ་སྒྲགས་འདི་རྩ་མེད་མ་བཟོས་དོན་་{{GENDER:$3|གསལ་སྟོན་}}གནང་རོགས།",
+	"flow-moderation-placeholder-undelete-post": "རྒྱུ་རྐྱེན་གང་ཞིག་གི་རྐྱེན་པས་ཁྱེད་ཀྱིས་གསལ་སྒྲགས་འདི་མི་སུབས་དོན་{{GENDER:$3|གསལ་སྟོན་}}གནང་རོགས།",
+	"flow-moderation-placeholder-unhide-post": "རྒྱུ་རྐྱེན་གང་ཞིག་གི་རྐྱེན་པས་ཁྱེད་ཀྱིས་གསལ་སྒྲགས་འདི་མ་སྦས་དོན་{{GENDER:$3|གསལ་སྟོན་}}གནང་རོགས།",
+	"flow-moderation-confirm-unsuppress-post": "རྩ་མེད་མི་བཟོ་རོགས།",
+	"flow-moderation-confirm-undelete-post": "མི་བསུབས།",
+	"flow-moderation-confirm-unhide-post": "མ་སྦས་རོགས།",
+	"flow-moderation-confirm-unsuppress-topic": "རྩ་མེད་མི་བཟོ་རོགས།",
+	"flow-moderation-confirm-undelete-topic": "མི་བསུབས།",
+	"flow-moderation-confirm-unhide-topic": "མ་སྦས་རོགས།",
+	"flow-moderation-confirmation-unsuppress-post": "ཁྱེད་ཀྱིས་གོང་གི་གསལ་བསྒྲགས་འདི་རྩ་མེད་མི་བཟོ་རྒྱུ་ལེགས་གྲུབ་བྱུང་སོང།",
+	"flow-moderation-confirmation-undelete-post": "ཁྱེད་ཁྱིས་གོང་གི་གསལ་བསྒྲགས་འདི་མི་སུབས་རྒྱུ་ལེགས་གྲུབ་བྱུང་སོང།",
+	"flow-moderation-confirmation-unhide-post": "ཁྱེད་ཀྱིས་གོང་གི་གསལ་བསྒྲགས་མི་སྦས་རྒྱུ་ལེགས་གྲུབ་བྱུང་སོང།",
+	"flow-moderation-confirmation-unsuppress-topic": "ཁྱེད་ཀྱིས་བརྗོད་དོན་འདི་རྩ་མེད་མི་བཟོ་རྒྱུ་ལེགས་གྲུབ་བྱུང་སོང།",
+	"flow-moderation-confirmation-undelete-topic": "ཁྱེད་ཁྱིས་བརྗོད་དོན་འདི་མི་སུབས་རྒྱུ་ལེགས་གྲུབ་བྱུང་སོང།",
+	"flow-moderation-confirmation-unhide-topic": "ཁྱེད་ཁྱིས་བརྗོད་དོན་མི་སྦས་རྒྱུ་ལེགས་གྲུབ་བྱུང་སོང།",
+	"flow-moderation-title-unsuppress-topic": "བརྗོད་དོན་རྩ་མེད་བཟོ་མི་དགོས་སམ།",
+	"flow-moderation-title-undelete-topic": "བརྗོད་དོན་སྦས་མི་དགོས་སམ།",
+	"flow-moderation-title-unhide-topic": "བརྗོད་དོན་སྦས་མི་དགོས་སམ།",
+	"flow-moderation-placeholder-unsuppress-topic": "རྒྱུ་རྐྱེན་གང་ཞིག་གི་རྐྱེན་པས་ཁྱེད་ཀྱིས་བརྗོད་དོན་འདི་རྩ་མེད་མ་བཟོས་དོན་{{GENDER:$3|གསལ་སྟོན་}}གནང་རོགས།",
+	"flow-moderation-placeholder-undelete-topic": "རྒྱུ་རྐྱེན་གང་ཞིག་གི་རྐྱེན་པས་ཁྱེད་ཀྱིས་བརྗོད་དོན་འདི་མི་སུབས་དོན་{{GENDER:$3|གསལ་སྟོན་}}གནང་རོགས།",
+	"flow-moderation-placeholder-unhide-topic": "རྒྱུ་རྐྱེན་གང་ཞིག་གི་རྐྱེན་པས་ཁྱེད་ཀྱིས་བརྗོད་དོན་འདི་མ་སྦས་དོན་{{GENDER:$3|གསལ་སྟོན་}}གནང་རོགས།"
+}

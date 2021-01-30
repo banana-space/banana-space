@@ -1,0 +1,7 @@
+<span class="plainlinks">
+	{{~#if replyToId~}}
+		{{l10nParse (concat "flow-" moderateState "-post-content") moderator.name links.topic-history.url}}
+	{{~else~}}
+		{{l10nParse (concat "flow-" moderateState "-title-content") moderator.name links.topic-history.url}}
+	{{~/if~}}
+</span>

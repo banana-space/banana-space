@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abbas dhothar",
+			"Khalid Mahmood"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|شکریہ}}}}",
+	"thanks-thank-tooltip": "ایس {{GENDER:$1|پیجو}} نوں اک شکریۓ دا سنیہہ {{GENDER:$2|ورتنوالے}}"
+}

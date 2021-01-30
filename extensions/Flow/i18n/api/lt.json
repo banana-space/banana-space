@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pofka"
+		]
+	},
+	"apihelp-flow+edit-header-param-format": "Antraštės formatas (wikitext|html)",
+	"apihelp-flow+reply-param-format": "Naujo pranešimo formatas (wikitext|html)"
+}

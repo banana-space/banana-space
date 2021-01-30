@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ammartivari",
+			"Gertakapllani"
+		]
+	},
+	"flow-topic-moderated-reason-prefix": "Arsyeja:",
+	"flow-error-no-commit": "veprimi specifik nuk mund te ruhet",
+	"flow-spam-confirmedit-form": "Ju lutem konfirmoni se ju jeni njeri duke zgjidhur në captcha më poshtë: $1"
+}

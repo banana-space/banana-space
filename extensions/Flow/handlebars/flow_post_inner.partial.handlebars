@@ -1,0 +1,20 @@
+<div class="flow-post-main">
+	{{> flow_errors}}
+
+	{{#with creator}}
+		{{> flow_post_author}}
+	{{/with}}
+
+	{{#if isModerated}}
+		<div class="flow-moderated-post-content">
+			{{> flow_post_moderation_state}}
+		</div>
+	{{/if}}
+
+	<article class="flow-post-content mw-parser-output">
+		{{~escapeContent content.format content.content~}}
+	</article>
+
+	{{> flow_post_meta_actions}}
+	{{> flow_post_actions}}
+</div>

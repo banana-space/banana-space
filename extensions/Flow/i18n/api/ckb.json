@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Épine",
+			"ئارام بکر"
+		]
+	},
+	"apihelp-flow-example-1": "دەستکاریکردنی وەسفی \"[[Talk:Sandbox]]\"",
+	"apihelp-flow+edit-topic-summary-param-summary": "ناوەڕۆک بۆ کورتەکە",
+	"apihelp-flow+reply-description": "وەڵامەکانی لێدوانێک.",
+	"apihelp-flow+reply-summary": "وەڵامەکانی لێدوانێک.",
+	"apihelp-flow+view-topic-description": "بابەتێک ببینە.",
+	"apihelp-flow+view-topiclist-example-1": "پێڕستی بابەتەکان لە [[Talk:Sandbox]]",
+	"apihelp-flow-parsoid-utils-description": "دەق لەنێوان ویکیدەق و ئەیچ–تی–ئێم–ئێڵ بگۆڕە.",
+	"apihelp-flow-parsoid-utils-summary": "دەق لەنێوان ویکیدەق و ئەیچ–تی–ئێم–ئێڵ بگۆڕە."
+}

@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rul1902"
+		]
+	},
+	"flow-edit-header-link": "မ်ုသံင့်ၜးၯဴ ဆ်ုဍုဂ်ဏဲဖှ်ေလင့်",
+	"flow-thank-link": "{{GENDER:$1|{{GENDER:$2|ဆ်ုဂုဏ်}}}}",
+	"flow-history-action-delete-post": "ထုဂ်ဆိင့်",
+	"flow-post-action-delete-post": "ထုဂ်ဆိင့်",
+	"flow-topic-action-watchlist": "ခိုဝ်ယောဝ်ႋစ်ုရင့်",
+	"flow-moderation-confirm-delete-post": "ထုဂ်ဆိင့်",
+	"flow-moderation-confirm-delete-topic": "ထုဂ်ဆိင့်"
+}

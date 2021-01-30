@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Siebrand"
+		]
+	},
+	"echo-none": "Je hebt geen meldingen.",
+	"echo-email-batch-subject-daily": "Je hebt vandaag {{PLURAL:$2|0=geen meldingen|één melding|$1 meldingen}}",
+	"echo-email-batch-subject-weekly": "Je hebt deze week {{PLURAL:$2|0=geen meldingen|één melding|$1 meldingen}}"
+}

@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ernác",
+			"Iltever"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|сау бол де}}}}",
+	"thanks-thanked": "{{GENDER:$1|сау бол деди}}",
+	"thanks-button-thank": "{{GENDER:$1|Сау бол де}}",
+	"thanks-button-thanked": "{{GENDER:$1|Сау бол айтылды}}",
+	"thanks-error-undefined": "Сау бол айтылалмады. Джангыдан кёрюгюз.",
+	"thanks-error-invalidrevision": "Версияны номери тюз тюлдю.",
+	"thanks-error-ratelimited": "{{GENDER:$1|Сиз}}, терклик чекни оздугъуз. Бираз сакълаб, джангыдан кёрюгюз.",
+	"thanks-thank-tooltip": "Бу {{GENDER:$2|къошулуучугъа}} {{GENDER:$1|ыспас билдириу джибер}}",
+	"thanks-thanked-notice": "$1 къошулуучугъа {{GENDER:$2|аны|аны|аланы}} тюрлендириуюн джаратханыгъыз билдирилди.",
+	"echo-pref-subscription-edit-thank": "Тюрлендириуюм ючюн меннге ыспас",
+	"echo-pref-tooltip-edit-thank": "Ким болса да, этген тюрлендириуюм ючюн сау бол десе, меннге билдир.",
+	"echo-category-title-edit-thank": "Сау бол",
+	"notification-thanks-diff-link": "тюрлендириуюгюз",
+	"log-name-thanks": "Сау бол айтыу журнал",
+	"log-description-thanks": "Тюбюрекде, башха къошулуучуладан ыспас алгъан къошулуучуланы тизмесиди.",
+	"logentry-thanks-thank": "$1, $3 {{GENDER:$4|къошулуучугъа}} {{GENDER:$2|сау бол айтды}}"
+}

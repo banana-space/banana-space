@@ -1,0 +1,14 @@
+*~
+*.kate-swp
+.*.swp
+scripts/remotes
+node_modules/
+vendor/
+\#*#
+/composer.lock
+/docs
+.eslintcache
+
+# Ignore preferences for editors
+/.idea
+/.code

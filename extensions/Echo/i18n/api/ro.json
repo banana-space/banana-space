@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Reception123"
+		]
+	},
+	"apihelp-echomarkread-description": "Marcați notificările ca citite pentru utilizatorul curent.",
+	"apihelp-echomarkread-param-list": "Lista de ID-ul de notificare pentru a marca ca fiind citite.",
+	"apihelp-echomarkread-param-all": "Dacă este setat, marchează toate notificările a unui utilizator ca citite.",
+	"apihelp-echomarkread-param-sections": "O listă de sectiuni a fi marcată ca citită.",
+	"apihelp-echomarkread-example-1": "Marca notificare 8 ca fiind citită.",
+	"apihelp-echomarkread-example-2": "Marchează toate notificările ca find citite.",
+	"apihelp-echomarkseen-description": "Marcați notificările ca citite pentru utilizatorul curent.",
+	"apihelp-echomarkseen-example-1": "Marcați notificarile de toate tipurile ca văzute"
+}

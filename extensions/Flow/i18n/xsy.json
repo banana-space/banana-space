@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lalotahes"
+		]
+	},
+	"flow-cancel": "kayni’",
+	"flow-show-change": " pinakita’ ka sinapih",
+	"flow-thank-link": "{{GENDER:$1|{{GENDER:$2| ma’alo’ }}}}",
+	"flow-history-action-hide-post": " Sa:il",
+	"flow-post-action-post-history": "kakhayza’an kin’i’iyaeh",
+	"flow-post-action-hide-post": " Sa:il",
+	"flow-post-action-edit-post": " bienji",
+	"flow-post-action-undo-moderation": " paklobih",
+	"flow-topic-action-watchlist": " jyenSe’ qintan",
+	"flow-topic-action-history": "kakhayza’an kin’i’iyaeh",
+	"flow-topic-action-undo-moderation": " paklobih",
+	"flow-error-invalid-topic-uuid-title": " ’inokay paylal’oz ka raro:o’",
+	"flow-board-history": "\"$1\" kakhayza’an kin’i’iyaeh",
+	"flow-link-history": "kakhayza’an kin’i’iyaeh",
+	"flow-moderation-confirm-hide-post": " Sa:il",
+	"flow-moderation-confirm-hide-topic": " Sa:il",
+	"flow-previous-diff": "’ima tatini’ sowiti’ pinpienji",
+	"flow-next-diff": "’ima SaSo’ bienji →",
+	"flow-undo": " paklobih",
+	"flow-undo-latest-revision": " ’ima SaSo’ pinonrowa’",
+	"flow-undo-edit-failure": "hini ray pienji: ka pinonrowa’ ’izo’ hayza’ \n’inokik paylal’oz, ’isa: hini pinpienji: ’aewhay ka paklobihin.",
+	"flow-ve-mention-inspector-remove-label": "tilkoraeh"
+}

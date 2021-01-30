@@ -1,0 +1,33 @@
+<form class="flow-edit-post-form"
+	method="POST"
+	action="{{actions.edit.url}}"
+>
+	{{> flow_errors}}
+	<input type="hidden" name="wpEditToken" value="{{@root.rootBlock.editToken}}" />
+	<input type="hidden" name="topic_prev_revision" value="{{revisionId}}" />
+	{{#ifAnonymous}}
+		{{> flow_anon_warning }}
+	{{/ifAnonymous}}
+
+	<div class="flow-editor">
+		<textarea name="topic_content" class="mw-ui-input flow-form-collapsible mw-editfont-{{@root.rootBlock.editFont}}" data-role="content">
+			{{~#if @root.rootBlock.submitted.content~}}
+				{{~@root.rootBlock.submitted.content~}}
+			{{~else~}}
+				{{~content.content~}}
+			{{~/if~}}
+		</textarea>
+	</div>
+
+	<div class="flow-form-actions flow-form-collapsible">
+		<button class="mw-ui-button mw-ui-progressive">
+			{{~getSaveOrPublishMessage
+				save="flow-post-action-edit-post-submit"
+				publish="flow-post-action-edit-post-submit-publish"
+			~}}
+		</button>
+		<small class="flow-terms-of-use plainlinks">
+			{{~l10nParse "flow-terms-of-use-edit"~}}
+		</small>
+	</div>
+</form>

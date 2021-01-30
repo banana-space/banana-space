@@ -1,0 +1,52 @@
+@import 'mediawiki.ui/variables.less';
+@import 'mediawiki.mixins.less';
+
+.notifications-filter-overlay {
+	padding-top: 0;
+
+	&-read-state {
+		padding-top: 5em;
+		padding-bottom: 1.5em;
+		text-align: center;
+	}
+
+	.overlay-content {
+		// this is needed not only on iOS, that's why we repeat it here even though
+		// it's in Overlay.less too
+		overflow-y: scroll; // has to be scroll, not auto
+		position: absolute;
+		width: 100%;
+		padding-bottom: 0;
+
+		.mw-echo-ui-pageNotificationsOptionWidget {
+			.box-sizing( border-box );
+			border: 1px solid @colorGray12;
+			padding: 0.7em 1.5em 1em 1em;
+			width: 100%;
+		}
+
+		.mw-echo-ui-notificationsInboxWidget-main-toolbar-readState {
+			display: block;
+		}
+
+		.mw-echo-ui-crossWikiUnreadFilterWidget {
+			border: 1px solid @colorGray12;
+			width: 100%;
+			margin-left: 0;
+			padding: 0;
+
+			&-title {
+				display: block;
+				font-size: 1.3em;
+				font-weight: bold;
+				margin-left: 0.7em;
+			}
+
+			&-subtitle {
+				display: block;
+				color: @colorGray1;
+				margin-left: 0.9em;
+			}
+		}
+	}
+}

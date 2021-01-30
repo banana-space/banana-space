@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Muhammad Shuaib"
+		]
+	},
+	"apihelp-flow+edit-post-param-postId": "شناخت مراسلہ۔",
+	"apihelp-flow+edit-title-param-content": "عنوان کا مواد۔",
+	"apihelp-flow+lock-topic-description": "فلو موضوع کو مقفل یا غیر مقفل کریں۔",
+	"apihelp-flow+moderate-post-param-reason": "وجہ نگرانی۔",
+	"apihelp-flow+moderate-topic-param-reason": "وجہ نگرانی۔",
+	"apihelp-flow+new-topic-description": "درج شدہ ورک فلو میں نیا فلو موضوع شروع کرتا ہے۔",
+	"apihelp-flow+new-topic-param-topic": "موضوع کے نئے عنوان کے لیے متن۔",
+	"apihelp-flow+new-topic-example-1": "[[Talk:Sandbox]] میں نیا موضوع شروع کریں",
+	"apihelp-flow+reply-example-1": "[[Topic:S2tycnas4hcucw8w]] پر مراسلہ کا جواب دیں",
+	"apihelp-flow+view-header-description": "صفحہ کی وضاحت دیکھیں۔",
+	"apihelp-flow+view-post-description": "مراسلہ دیکھیں۔",
+	"apihelp-flow+view-topic-description": "موضوع دیکھیں۔",
+	"apihelp-flow+view-topic-summary-description": "خلاصہ موضوع دیکھیں۔",
+	"apihelp-flow+view-topic-summary-example-1": "[[Topic:S2tycnas4hcucw8w]] کا خلاصہ ترمیم ویکی متن کے طور پر دیکھیں",
+	"apihelp-flow+view-topiclist-description": "موضوعات کی فہرست دیکھیں۔"
+}

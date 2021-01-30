@@ -1,0 +1,1 @@
+ALTER TABLE /*_*/echo_event CHANGE COLUMN event_variant event_variant varchar(64) binary null;

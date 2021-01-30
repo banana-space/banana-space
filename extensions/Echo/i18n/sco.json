@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"AmaryllisGardener"
+		]
+	},
+	"tooltip-pt-notifications-alert": "{{GENDER:|Yer}} alerts",
+	"echo-specialpage-pagefilters-subtitle": "Pages wi unread notifications"
+}

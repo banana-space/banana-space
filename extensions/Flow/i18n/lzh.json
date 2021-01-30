@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Itsmine",
+			"Jason924tw",
+			"StephDC",
+			"灰太狼Wolffy55"
+		]
+	},
+	"flow-topic-moderated-reason-prefix": "因：",
+	"flow-post-action-post-history": "誌",
+	"flow-topic-action-history": "誌",
+	"flow-topic-action-undo-moderation": "撤",
+	"flow-error-invalid-moderation-state": "一参数（'moderationState'）无效值已提API焉。",
+	"flow-edit-post-submit": "確定",
+	"flow-board-history": "「$1」誌",
+	"flow-link-history": "誌",
+	"flow-topic-html-title": "$1於$2"
+}

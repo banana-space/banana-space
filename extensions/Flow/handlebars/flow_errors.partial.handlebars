@@ -1,0 +1,11 @@
+<div class="flow-error-container">
+{{#if @root.errors}}
+	<div class="flow-errors errorbox">
+		<ul>
+			{{#each @root.errors}}
+				<li>{{~html message~}}</li>
+			{{/each}}
+		</ul>
+	</div>
+{{/if}}
+</div>

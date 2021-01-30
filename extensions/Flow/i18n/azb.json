@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alp Er Tunqa",
+			"Ilğım"
+		]
+	},
+	"flow-summary-edited": "دییشدیرمه قیساسینی سوْن دفعه $1 {{GENDER:$1|دییشدیرمیشدیر}}",
+	"flow-show-change": "دییشیکلیکلره باخ",
+	"notification-header-flow-mention-post": "$1 {{GENDER:$4|سیزه}} «'''$5'''»-ده {{GENDER:$2|ایشاره ائتدی}}.",
+	"notification-header-flow-mention-post-summary": "$1 {{GENDER:$4|سیزه}} «'''$5'''»-ده {{GENDER:$2|ایشاره ائتدی}}.",
+	"group-flow-bot": "جریان روباتلاری",
+	"grouppage-flow-bot": "Project：جریان روباتلاری"
+}

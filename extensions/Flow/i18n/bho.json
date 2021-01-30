@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"SatyamMishra"
+		]
+	},
+	"flow-rev-message-new-post": "$1 {{GENDER:$2|द्वारा बनावल गइल}}, टॉपिक \"[$3 $4]\"",
+	"flow-rev-message-new-post-recentchanges-summary": "नया टॉपिक {{GENDER:$2|द्वारा बनावल गइल}}",
+	"flow-rev-message-edit-title": "टॉपिक टाइटिल \"$5\" से \"[$3 $4]\" में $1 {{GENDER:$2|द्वारा बदलल गइल}}",
+	"flow-rev-message-create-header": "बिबरण $1 {{GENDER:$2|द्वारा बनावल गइल}}",
+	"flow-rev-message-edit-header": "बिबरण $1 {{GENDER:$2|द्वारा संपादित कइल गइल}}"
+}

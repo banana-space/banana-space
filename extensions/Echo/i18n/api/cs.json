@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Martin Urbanec",
+			"Mormegil"
+		]
+	},
+	"apihelp-echomarkread-example-2": "Označit všechny upozornění jako přečtené",
+	"apihelp-echomarkseen-example-1": "Označit oznámení všech typů jako přečtená"
+}

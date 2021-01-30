@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"The Discoverer"
+		]
+	},
+	"apihelp-flow-example-1": "\"[[Talk:Sandbox]]\" acho vornon bodol",
+	"apihelp-flow+edit-header-description": "Folleachem vornon bodol.",
+	"apihelp-flow+edit-header-example-1": "[[Talk:Sandbox]] achem vornon bodol",
+	"apihelp-flow+edit-post-example-1": "[[Topic:S2tycnas4hcucw8w]] hantun ek prokasnni bodol",
+	"apihelp-flow+edit-title-description": "Vixoiachem nanv bodol.",
+	"apihelp-flow+edit-title-example-1": "[[Topic:S2tycnas4hcucw8w]] hachem nanv bodol",
+	"apihelp-flow+edit-topic-summary-example-1": "[[Topic:S2tycnas4hcucw8w]] hacho sar bodol",
+	"apihelp-flow+moderate-post-example-1": "[[Topic:S2tycnas4hcucw8w]] hea vixoiant ek prokasnni kadun udoi",
+	"apihelp-flow+moderate-topic-example-1": "[[Topic:S2tycnas4hcucw8w]] ho vixoi kadun udoi",
+	"apihelp-flow+new-topic-param-topic": "Novea vixoiachem nanv.",
+	"apihelp-flow+new-topic-example-1": "[[Talk:Sandbox]]-acher novem vixoi roch",
+	"apihelp-flow+reply-description": "Prokasnniek zobab dita.",
+	"apihelp-flow+reply-example-1": "[[Topic:S2tycnas4hcucw8w]] hea vixoiant eke prokasnniek zobab di",
+	"apihelp-flow+view-header-description": "Folleachem vornon polloi.",
+	"apihelp-flow+view-post-description": "Prokasnni polloi.",
+	"apihelp-flow+view-post-history-description": "Eke prokasnniechi uzollniechi itihas polloi.",
+	"apihelp-flow+view-topic-description": "Vixoi polloi.",
+	"apihelp-flow+view-topic-example-1": "[[Topic:S2tycnas4hcucw8w]] polloi",
+	"apihelp-flow+view-topic-history-description": "Vixoiache uzollniecho itihas polloi.",
+	"apihelp-flow+view-topic-history-example-1": "[[Topic:S2tycnas4hcucw8w]] hacher aslele prokasnnieche uzollnio wikimozkur rupant polloi",
+	"apihelp-flow+view-topic-summary-description": "Eke vixoiachem sar polloi.",
+	"apihelp-flow+view-topic-summary-example-1": "[[Topic:S2tycnas4hcucw8w]] hachem sar wikimozkur rupan polloi",
+	"apihelp-flow+view-topiclist-description": "Vixoianchi suchi polloi."
+}

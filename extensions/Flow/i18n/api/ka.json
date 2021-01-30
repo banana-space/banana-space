@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"David1010"
+		]
+	},
+	"apihelp-flow+edit-header-param-content": "აღწერის შინაარსი.",
+	"apihelp-flow+edit-header-param-format": "აღწერის ფორმატი (wikitext|html)",
+	"apihelp-flow+edit-header-example-1": "[[Talk:Sandbox]]-ის აღწერის რედაქტირება",
+	"apihelp-flow+edit-post-description": "შეტყობინების შინაარსის რედაქტირებები.",
+	"apihelp-flow+edit-post-param-postId": "შეტყობინების ID.",
+	"apihelp-flow+edit-post-param-content": "შეტყობინების შინაარსი.",
+	"apihelp-flow+edit-post-param-format": "შეტყობინების შინაარსის ფორმატი (wikitext|html)",
+	"apihelp-flow+edit-post-example-1": "შეტყობინების რედაქტირება [[Topic:S2tycnas4hcucw8w]]-ში",
+	"apihelp-flow+edit-title-description": "თემის სათაურის რედაქტირება.",
+	"apihelp-flow+edit-title-param-content": "სათაურის შინაარსი.",
+	"apihelp-flow+edit-title-example-1": "[[Topic:S2tycnas4hcucw8w]]-ის სათაურის რედაქტირება",
+	"apihelp-flow+edit-topic-summary-description": "თემის რეზიუმეს შინაარსის რედაქტირება.",
+	"apihelp-flow+edit-topic-summary-param-summary": "რეზიუმეს შინაარსი.",
+	"apihelp-flow+edit-topic-summary-param-format": "რეზიუმეს ფორმატი (wikitext|html)",
+	"apihelp-flow+edit-topic-summary-example-1": "[[Topic:S2tycnas4hcucw8w]]-ის რეზიუმეს რედაქტირება",
+	"apihelp-flow+lock-topic-example-1": "[[Topic:S2tycnas4hcucw8w]]-ის დახურვა",
+	"apihelp-flow+view-post-description": "შეტყობინების ხილვა.",
+	"apihelp-flow+view-post-param-postId": "სანახავი შეტყობინების ID.",
+	"apihelp-flow+view-topic-description": "თემის ხილვა.",
+	"apihelp-flow+view-topic-example-1": "[[Topic:S2tycnas4hcucw8w]]-ის ხილვა",
+	"apihelp-flow+view-topic-summary-description": "თემის რეზიუმეს ხილვა."
+}

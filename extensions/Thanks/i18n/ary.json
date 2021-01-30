@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"SADIQUI"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|شكر}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$1|صيفط|صيفطي}} إشعار شكر ل{{GENDER:$2|هاد المستخدم|هاد المستخدمة}}"
+}

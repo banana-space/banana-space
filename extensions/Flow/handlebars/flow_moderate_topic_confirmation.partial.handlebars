@@ -1,0 +1,45 @@
+<div class="flow-topic flow-topic-moderated">
+	{{> flow_errors}}
+
+	<div class="flow-topic-titlebar">
+		<div class="flow-moderated-topic-title">
+			{{~noop~}}{{> flow_topic_moderation_flag}}
+			<span>{{~l10n (concat 'flow-moderation-confirmation-' moderateState '-topic')~}}</span>
+			<div class="flow-undo">
+				{{#if actions.unhide}}
+					<form action="{{actions.unhide.url}}" method="POST">
+						<input type="hidden"
+						       name="topic_reason"
+							   value="{{l10n "flow-topic-undo-hide"}}">
+						<input type="button"
+						       class="mw-ui-button mw-ui-quiet"
+							   value="{{l10n 'flow-post-action-undo-moderation'}}"
+							   data-flow-api-handler="moderateTopic">
+					</form>
+				{{/if}}
+				{{#if actions.undelete}}
+					<form action="{{actions.undelete.url}}" method="POST">
+						<input type="hidden"
+						       name="topic_reason"
+							   value="{{l10n "flow-topic-undo-delete"}}">
+						<input type="button"
+						       class="mw-ui-button mw-ui-quiet"
+							   value="{{l10n 'flow-post-action-undo-moderation'}}"
+							   data-flow-api-handler="moderateTopic">
+					</form>
+				{{/if}}
+				{{#if actions.unsuppress}}
+					<form action="{{actions.unsuppress.url}}" method="POST">
+						<input type="hidden"
+						       name="topic_reason"
+							   value="{{l10n "flow-topic-undo-suppress"}}">
+						<input type="button"
+						       class="mw-ui-button mw-ui-quiet"
+							   value="{{l10n 'flow-post-action-undo-moderation'}}"
+							   data-flow-api-handler="moderateTopic">
+					</form>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</div>

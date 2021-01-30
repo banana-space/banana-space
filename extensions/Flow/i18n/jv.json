@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"NoiX180"
+		]
+	},
+	"flow-post-actions": "Laku",
+	"flow-topic-actions": "Laku",
+	"flow-cancel": "Wurung",
+	"flow-skip-summary": "Lumpati",
+	"flow-edit-summary-placeholder": "Wedharaké ringkes kasilé rembugan iki",
+	"flow-summary-authored": "Ringkesan déning $1",
+	"flow-summary-edited": "Ringkesan pungkasan {{GENDER:$1|dibesut}} $1",
+	"flow-show-change": "Tuduhaké owahan",
+	"flow-last-modified-by": "Pungkasan {{GENDER:$1|diowahi}} $1",
+	"flow-stub-post-content": "<em>Jalaran masalah tèhnis, kontèn iki ora bisa kajupuk.</em>",
+	"flow-newtopic-title-placeholder": "Rembug anyar",
+	"flow-newtopic-content-placeholder": "Kirim layang anyar menyang \"$1\"",
+	"flow-newtopic-header": "Tambah rembug anyar",
+	"flow-newtopic-save": "Tambah rembug",
+	"flow-newtopic-save-anonymously": "Tambah rembug kanthi anonim",
+	"flow-newtopic-start-placeholder": "Wiwiti rembug anyar",
+	"flow-newtopic-first-heading": "Wiwiti rembug anyar ing $1",
+	"flow-summarize-topic-placeholder": "Sumangga ringkes parembug iki",
+	"flow-reply-topic-placeholder": "{{GENDER:$1|Tanggapi}} \"$2\"",
+	"flow-reply-topic-title-placeholder": "Wangsuli \"$1\"",
+	"flow-reply-link": "{{GENDER:$1|Wangsuli}}",
+	"flow-reply-link-anonymously": "Wangsuli kanthi anonim",
+	"flow-thank-link": "{{GENDER:$1|{{GENDER:$2|Nuwun}}}}",
+	"flow-history-action-hide-post": "dhelikaké",
+	"flow-post-action-edit-post-submit": "Simpen owahan"
+}

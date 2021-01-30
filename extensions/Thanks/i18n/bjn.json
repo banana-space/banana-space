@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ezagren"
+		]
+	},
+	"thanks-thank": "{{GENDER:$1|{{GENDER:$2|batarima kasih}}}}",
+	"thanks-thank-tooltip": "{{GENDER:$1|Kirim}} sabuting pamadahan tarima kasih ka {{GENDER:$2|pamakai}} ngini"
+}

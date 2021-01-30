@@ -1,0 +1,19 @@
+@import 'mediawiki.ui/variables';
+
+// `!important` rules override the inline styles provides by clippable.
+@media all and ( max-width: @width-breakpoint-tablet ) {
+	.mw-echo-ui-overlay {
+		.oo-ui-clippableElement-clippable {
+			width: 100% !important;
+		}
+
+		.oo-ui-popupWidget-popup {
+			width: 100% !important;
+		}
+
+		.mw-echo-ui-notificationBadgeButtonPopupWidget-popup {
+			left: 1px !important;
+			right: 2px;
+		}
+	}
+}

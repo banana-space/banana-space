@@ -1,0 +1,298 @@
+@import 'mediawiki.mixins.less';
+@import '../echo.variables.less';
+@import '../echo.mixins.less';
+
+.mw-echo-ui-notificationItemWidget {
+	background-color: @notification-item-background-read;
+	position: relative;
+	white-space: normal;
+	padding: 0.8em 1em 0.5em 1em;
+	.box-sizing( border-box );
+	border: 1px solid #c8ccd1;
+	border-bottom: 0;
+
+	&:hover {
+		background-color: #ececec;
+	}
+
+	&:last-child {
+		border-bottom: 1px solid #c8ccd1;
+	}
+
+	&-unread {
+		background-color: @background-color-base;
+
+		&:hover {
+			background-color: #f8f9fa;
+		}
+	}
+
+	> a,
+	&:hover > a {
+		text-decoration: none;
+	}
+
+	// Dynamic-action messages in mw.notify
+	&-notify {
+		&-title {
+			font-weight: bold;
+			font-size: 1.2em;
+		}
+
+		&-description {
+			font-size: 1em;
+			color: @grey-medium;
+		}
+	}
+
+	&-icon {
+		position: absolute;
+
+		img {
+			height: 30px;
+			width: 30px;
+		}
+	}
+
+	&-content {
+		display: block;
+		// The icon is 30px
+		margin-left: 30px;
+		padding-left: 0.8em;
+		.box-sizing( border-box );
+
+		&-message {
+			line-height: 1.3em;
+			// Compensate for the placement of the 'mark as read'
+			// button, so the message is not stretched past it.
+			// The 'mark as read' circle is placed with a right
+			// margin of -1em
+			padding-right: 1em;
+			// break-word rules are inconsistent accross browsers
+			// these three rules should cover the main use cases
+			// with major browser support
+			word-break: break-word;
+			word-wrap: break-word;
+			overflow-wrap: break-word;
+
+			&-header {
+				color: @notification-text-color;
+			}
+
+			&-body {
+				color: @notification-body-color;
+				margin-top: 4px;
+
+				// In the popup only, truncate the text to one-line
+				// with ellipses
+				.mw-echo-ui-notificationBadgeButtonPopupWidget-popup & {
+					.text-overflow( @visible: false );
+				}
+			}
+		}
+
+		&-table {
+			display: table;
+			width: 100%;
+			margin-top: 0.8em;
+		}
+
+		&-actions {
+			display: table-row;
+			font-size: 0.9em;
+
+			& > &-buttons.oo-ui-buttonSelectWidget {
+				display: table-cell;
+				white-space: nowrap;
+				vertical-align: bottom;
+			}
+
+			&-button {
+				margin-right: 1.2em;
+			}
+
+			.mw-echo-ui-menuItemWidget-prioritized {
+				// Option widget already has some right padding
+				margin-right: 0.6em;
+			}
+
+			&-menu {
+				.mw-echo-ui-mixin-hover-opacity();
+				display: table-cell;
+				vertical-align: bottom;
+				padding: 0;
+			}
+
+			&-timestamp {
+				display: table-cell;
+				vertical-align: bottom;
+				text-align: right;
+				color: @color-base--emphasized;
+				opacity: @opacity-low;
+				white-space: nowrap;
+				width: 100%;
+			}
+		}
+	}
+
+	&-markAsReadButton {
+		float: right;
+		font-size: 1em;
+		// Compensate for the padding in the item widget
+		margin-top: -0.8em;
+		margin-right: -1em;
+		padding: 0;
+
+		.mw-echo-ui-notificationItemWidget-bundled & {
+			margin-top: 0;
+		}
+	}
+
+	// Table layout only for the content inside bundles
+	&-bundled {
+		display: table;
+		width: 100%;
+		padding: 0.5em;
+
+		.mw-echo-ui-notificationItemWidget-content {
+			display: table-row;
+			padding-left: 0.5em + 1.5em;
+
+			.mw-echo-ui-notificationItemWidget {
+				// CSS table layout
+				&-icon,
+				&-content-message,
+				&-content-actions,
+				&-markAsReadButton {
+					display: table-cell;
+					vertical-align: top;
+				}
+
+				// Positioning fixes for bundled items
+				&-icon {
+					position: relative;
+					padding-right: 0.5em;
+
+					img {
+						height: 1.5em;
+						width: 1.5em;
+					}
+				}
+
+				&-content-message {
+					display: table-cell;
+					padding-right: 0.5em;
+					width: 100%;
+
+					&-header {
+						width: 100%;
+
+						&-wrapper {
+							position: relative;
+						}
+
+						// Bundled notifications don't have bodies, only headers,
+						// so they use <em> to designate excerpts. Use the body color
+						// for these.
+						em {
+							color: @notification-body-color;
+							font-style: normal;
+						}
+					}
+				}
+
+				&-content-actions {
+					&-row {
+						display: table-row;
+					}
+
+					&-buttons {
+						display: table-cell;
+						vertical-align: middle;
+					}
+
+					&-menu {
+						display: table-cell;
+						vertical-align: middle;
+					}
+
+					&-timestamp {
+						float: none;
+						display: table-cell;
+						vertical-align: middle;
+						padding-right: 0.5em;
+						white-space: nowrap;
+					}
+				}
+
+				&-markAsReadButton {
+					display: table-cell;
+					vertical-align: top;
+					float: none;
+				}
+			}
+		}
+	}
+
+	&-initiallyUnseen {
+		-webkit-animation-name: unseen-fadeout-to-read;
+		animation-name: unseen-fadeout-to-read;
+		-webkit-animation-duration: 0.5s;
+		animation-duration: 0.5s;
+		-webkit-animation-delay: 2s;
+		animation-delay: 2s;
+		-webkit-animation-timing-function: ease-out;
+		animation-timing-function: ease-out;
+		-webkit-animation-fill-mode: both;
+		animation-fill-mode: both;
+
+		&.mw-echo-ui-notificationItemWidget-unread {
+			-webkit-animation-name: unseen-fadeout-to-unread;
+			animation-name: unseen-fadeout-to-unread;
+		}
+	}
+
+	// NOTE: The internal styling of the notifications is outside this file, because
+	// it also affects the notifications in Special:Notifications
+	// These styles are in modules/nojs/ext.echo.notifications.less
+}
+
+@-webkit-keyframes unseen-fadeout-to-unread {
+	from {
+		background-color: @notification-background-unseen;
+	}
+
+	to {
+		background-color: @notification-background-unread;
+	}
+}
+
+@keyframes unseen-fadeout-to-unread {
+	from {
+		background-color: @notification-background-unseen;
+	}
+
+	to {
+		background-color: @notification-background-unread;
+	}
+}
+
+@-webkit-keyframes unseen-fadeout-to-read {
+	from {
+		background-color: @notification-background-unseen;
+	}
+
+	to {
+		background-color: @notification-background-read;
+	}
+}
+
+@keyframes unseen-fadeout-to-read {
+	from {
+		background-color: @notification-background-unseen;
+	}
+
+	to {
+		background-color: @notification-background-read;
+	}
+}

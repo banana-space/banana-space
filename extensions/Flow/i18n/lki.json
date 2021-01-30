@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hosseinblue",
+			"Lakzon",
+			"Quiddity"
+		]
+	},
+	"flow-board-collapse-description": "آشاردن توضیحةل",
+	"flow-board-expand-description": "نمایش توضیحات",
+	"flow-edit-header-link": "ویرایش توضیحةل",
+	"flow-error-missing-header-content": "باید توضیحاتی وارد کنید.",
+	"flow-error-search": "ما نمی‌توانیم جستجویتان به دلیل یک مشکل موقت کامل کنیم. لطفاً بعداً دوباره تلاش کنید.",
+	"flow-edit-header-submit": "توضیحات بِیل(ذخیره کە)",
+	"flow-edit-header-submit-anonymously": "توضیحات بەصورت نادیاری بِیل(ذخیره کە)",
+	"flow-rev-message-create-header": "$1 سرفصل وةڵگة {{GENDER:$2|ایجاد کردێ}}",
+	"flow-rev-message-edit-header": "$1 سرفصل صفحه را {{GENDER:$2|ویرایش کرد}}",
+	"flow-link-header-revision": "نسخهٔ توضیحات",
+	"flow-moderation-confirmation-delete-topic": "اێ تاپیکە پاک بیەسا",
+	"flow-whatlinkshere-header": "از [$1 توضیحات]",
+	"flow-special-enableflow-header": "توضیحات اولیه از تخت جریان (ویکی‌متن)",
+	"flow-undo-edit-header": "در حال ویرایش توضیحات"
+}

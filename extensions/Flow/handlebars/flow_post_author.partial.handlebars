@@ -1,0 +1,39 @@
+<span class="flow-author">
+	{{#if links}}
+		{{#if links.userpage}}
+			<a href="{{links.userpage.url}}"
+			   {{#unless name}}title="{{links.userpage.title}}"{{/unless}}
+			   class="{{#unless links.userpage.exists}}new {{/unless}}mw-userlink">
+		{{/if}}
+		{{~#if name~}}
+			<bdi>{{~name~}}</bdi>
+		{{~else~}}
+			{{~l10n "flow-anonymous"}}
+		{{~/if~}}
+		{{~#if links.userpage~}}</a>{{~/if~}}
+
+		<span class="mw-usertoollinks flow-pipelist">
+			(
+                        {{~#if links.talk~}}
+				<span><a href="{{links.talk.url}}"
+				    class="{{#unless links.talk.exists}}new {{/unless}}"
+				    title="{{links.talk.title}}">
+				    	{{~l10n "talkpagelinktext"~}}
+				</a></span>
+			{{~/if~}}
+			{{~#if links.contribs~}}
+				<span><a href="{{links.contribs.url}}" title="{{links.contribs.title}}">
+						{{~l10n "contribslink"~}}
+				</a></span>
+			{{~/if~}}
+			{{~#if links.block~}}
+				<span><a class="{{#unless links.block.exists}}new {{/unless}}"
+				   href="{{links.block.url}}"
+				   title="{{links.block.title}}">
+				   	{{~l10n "blocklink"~}}
+				</a></span>
+			{{~/if~}}
+                        )
+		</span>
+	{{/if}}
+</span>

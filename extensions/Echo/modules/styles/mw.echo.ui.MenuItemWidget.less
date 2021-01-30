@@ -1,0 +1,49 @@
+@import '../echo.variables.less';
+@import '../echo.mixins.less';
+
+/* stylelint-disable no-descending-specificity */
+.mw-echo-ui-menuItemWidget {
+	&:hover {
+		text-decoration: none;
+	}
+
+	> .oo-ui-labelElement-label {
+		// Override link colour
+		color: @color-base;
+		// Set max-width so buttons are truncated
+		max-width: 25em;
+	}
+
+	&-prioritized {
+		.mw-echo-ui-mixin-hover-opacity();
+		display: inline-block;
+		// Remove left padding up to icon, 11/14
+		margin-left: -0.78571429em;
+	}
+
+	&-dynamic-action {
+		&:hover {
+			background-color: @background-color-base;
+		}
+
+		> .oo-ui-labelElement-label {
+			white-space: normal;
+			overflow: visible;
+		}
+
+		&.oo-ui-iconElement > .oo-ui-iconElement-icon {
+			// Limit to single line height, 32/14
+			height: 2.28571em;
+		}
+
+		.mw-echo-ui-menuItemWidget-description {
+			color: #54595d;
+			display: block;
+			padding-top: 1em;
+		}
+	}
+
+	.mw-echo-ui-actionMenuPopupWidget-menu:hover {
+		background-color: #eaecf0;
+	}
+}

@@ -1,0 +1,29 @@
+<div>
+	<a href="{{revision.rev_view_links.single-view.url}}" class="flow-diff-revision-link">
+		{{l10nParse "flow-compare-revisions-revision-header" revision.human_timestamp revision.author.name}}
+	</a>
+
+	{{! Only render diff link for new version }}
+	{{~#if new~}}
+		{{~#if revision.actions.undo~}}
+		(
+			{{~noop~}}
+			<a class="mw-ui-anchor mw-ui-quiet" href="{{revision.actions.undo.url}}">
+				{{~revision.actions.undo.title~}}
+			</a>
+			{{~noop~}}
+		)
+		{{~/if~}}
+	{{~/if~}}
+</div>
+{{#if links.previous}}
+	{{~#unless new~}}
+		<div><a href="{{links.previous}}">{{l10n "flow-previous-diff"}}</a></div>
+	{{~/unless~}}
+{{/if}}
+{{#if links.next}}
+	{{~#if new~}}
+		<div><a href="{{links.next}}">{{l10n "flow-next-diff"}}</a></div>
+	{{~/if~}}
+{{/if}}
+{{> flow_patrol_diff}}

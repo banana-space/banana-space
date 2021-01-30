@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hindustanilanguage",
+			"Sfic"
+		]
+	},
+	"apihelp-echomarkread-description": "वर्तमान सदस्य की अधिसूचनाओं पढ़ी गई रेखांकित करें।",
+	"apihelp-echomarkread-param-list": "अधिसूचनाओं के आई०डी० की सूची जिन्हें पढ़े जाने के तौर पर रेखांकित करना है।",
+	"apihelp-echomarkread-param-all": "यदि तय हो, किसी सदस्य की सारे अधिसूचनाओं पढ़े जाने के तौर पर रेखांकित करें।",
+	"apihelp-echomarkread-param-sections": "अनुभागों की सूची जिन्हें पढ़े जाने के तौर पर रेखांकित करना है।",
+	"apihelp-echomarkread-example-1": "अधिसूचना ८ को पढ़े जाने के तौर पर चिन्हित करें",
+	"apihelp-echomarkread-example-2": "सभी अधिसूचनाओं को पढ़े जाने के तौर पर चिन्हित करें",
+	"apihelp-echomarkread-example-3": "सूचना 1 को न पढ़ा चिन्हित करें",
+	"apihelp-echomarkseen-description": "वर्तमान सदस्य की अधिसूचनाओं पढ़ी गई रेखांकित करें।",
+	"apihelp-echomarkseen-example-1": "अधिसूचनाओं को देखे जाने के तौर पर चिन्हित करें",
+	"apihelp-query+notifications-param-sections": "पूछताछ के अधिसूचना अनुभाग",
+	"apihelp-query+notifications-paramvalue-format-model": "पंक्ति में सूचना डाटा",
+	"apihelp-query+notifications-example-1": "अधिसूचनाओं को सूचीबद्ध करें",
+	"apihelp-query+notifications-example-2": "अधिसूचनाओं को सूचीबद्ध अनुभाग के अनुसार सम्मिलित करके गिनकर करें"
+}

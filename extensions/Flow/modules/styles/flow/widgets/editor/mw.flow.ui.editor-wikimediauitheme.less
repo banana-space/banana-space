@@ -1,0 +1,64 @@
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+@import '../../../flow.variables';
+@import '../../../flow.colors';
+
+.flow-component {
+	.ve-init-target {
+		&.flow-ui-focused {
+			border-color: @colorProgressive;
+			box-shadow: inset 0 0 0 1px @colorProgressive;
+		}
+	}
+
+	.ve-init-mw-target-surface {
+		// This creates a space for the toolbar, a matching negative margin-top
+		// shifts the toolbar into this location.
+		padding-bottom: @editorToolbarHeight;
+	}
+
+	.flow-ui-editorWidget-editor {
+		> .oo-ui-toolbar {
+			// The 1px of positive margin gives room for the blue border
+			// of the TextInputWidget
+			margin: -@editorToolbarHeight 1px 1px 1px;
+
+			// Expand toolbar into focus inset when not focused.
+			> .oo-ui-toolbar-bar {
+				margin: 0 -1px;
+				padding: 0 1px;
+			}
+		}
+	}
+
+	.flow-ui-editorWidget-focused > .flow-ui-editorWidget-editor > .oo-ui-toolbar > .oo-ui-toolbar-bar {
+		margin: 0;
+		padding: 0;
+	}
+
+	.oo-ui-barToolGroup.oo-ui-widget-enabled > .oo-ui-toolGroup-tools > .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active {
+		box-shadow: none;
+	}
+
+	.ve-ui-debugBar {
+		&-selectionLabel {
+			min-width: 10em;
+		}
+	}
+}
+
+.flow-ui-editorWidget-editor {
+	// because we're attaching switcher controls below the textarea & we
+	// want them to look unified with the textarea, we'll have to take away
+	// its border and re-apply on the parent node that contains both
+	border: @border-base;
+	border-radius: @border-radius-base;
+	transition: border-color 250ms, box-shadow 250ms;
+
+	.flow-ui-editorWidget-focused & {
+		// Undo border & box-shadow on textarea and re-apply it on the
+		// div that contains textarea + legal text + switch button
+		border-color: @colorProgressive;
+		box-shadow: inset 0 0 0 1px @colorProgressive;
+	}
+}

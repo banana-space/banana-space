@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joao Xavier"
+		]
+	},
+	"flow-topic-moderated-reason-prefix": "Motivo:",
+	"flow-cancel": "Nuligar",
+	"flow-skip-summary": "Saltar",
+	"flow-show-change": "Montrez chanji",
+	"flow-thank-link": "{{GENDER:$1|{{GENDER:$2|Dankar}}}}",
+	"flow-history-action-suppress-post": "eliminar",
+	"flow-history-action-restore-post": "restaurar",
+	"flow-post-action-restore-post": "Restaurar",
+	"flow-post-action-undo-moderation": "Desfacez",
+	"flow-topic-action-undo-moderation": "Desfacez",
+	"flow-error-protected-unknown-reason": "Nekonocata",
+	"flow-history-day": "Hodie",
+	"notification-bundle-header-flow-new-topic": "Existas {{PLURAL:$1|1 nova temo|$1 nova temi|100=plu kam 99 nova temi}} diskutanta en <strong>$3</strong>.",
+	"notification-bundle-header-flow-post-reply-user-talk": "Existas {{PLURAL:$1|1 nova respondo|$1 nova respondi|100=plu kam 99 respondi}} en <strong>vua diskuto-pagino</strong> pri \"<strong>$3</strong>\".",
+	"notification-bundle-header-flow-post-edited-user-talk": "Ula mesajo en \"<strong>$1</strong>\" redaktesis multafoye en <strong>{{GENDER:$2|vua}} diskuto-pagino</strong>.",
+	"notification-header-flow-description-edited": "La deskripto pri <strong>$1</strong> redaktesis.",
+	"notification-bundle-header-flow-description-edited": "La deskripto pri <strong>$1</strong> redaktesis multafoye.",
+	"notification-links-flow-description-edited-view-page": "{{GENDER:$1|Vidar}} pagino",
+	"echo-category-title-flow-discussion": "Strukturigata diskuto",
+	"group-flow-bot": "Roboti por strukturigata diskuti"
+}

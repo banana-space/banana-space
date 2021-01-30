@@ -1,0 +1,221 @@
+<section>
+	{{~#ifCond moderationType "===" "topic"~}}
+		{{!-- Topic only --}}
+		{{~#if actions.edit~}}
+			<li>
+				{{~noop~}}
+				<a class="{{moderationMwUiClass}} mw-ui-quiet flow-ui-edit-title-link {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-edit{{/if~}}"
+				   href="{{actions.edit.url}}">
+					{{~l10n (concat "flow-topic-action-edit-title")~}}
+				</a>
+				{{~noop~}}
+			</li>
+		{{~/if~}}
+		{{~#if links.topic-history~}}
+			<li>
+				{{~noop~}}
+				<a class="{{moderationMwUiClass}} mw-ui-quiet {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-clock{{/if~}}"
+				   href="{{links.topic-history.url}}">
+					{{~l10n (concat "flow-topic-action-history")~}}
+				</a>
+				{{~noop~}}
+			</li>
+		{{~/if~}}
+		{{~#if links.topic~}}
+			<li>
+				{{~noop~}}
+				<a class="{{moderationMwUiClass}} mw-ui-quiet {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-link{{/if~}}"
+				   href="{{links.topic.url}}">
+					{{~l10n (concat "flow-topic-action-view")~}}
+				</a>
+				{{~noop~}}
+			</li>
+		{{~/if~}}
+		{{~#if actions.summarize~}}
+			<li>
+				{{~noop~}}
+				<a class="{{moderationMwUiClass}} mw-ui-quiet flow-ui-summarize-topic-link {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-listBullet{{/if~}}"
+				   href="{{actions.summarize.url}}">
+					{{~#if summary.revision.content.content~}}
+						{{~l10n (concat "flow-topic-action-resummarize-topic")~}}
+					{{else~}}
+						{{~l10n (concat "flow-topic-action-summarize-topic")~}}
+					{{~/if~}}
+				</a>
+				{{~noop~}}
+			</li>
+		{{~/if~}}
+	{{~/ifCond~}}
+
+
+	{{~#ifCond moderationType "===" "history"~}}
+		{{!-- The history page uses a modal, while the topic view puts this in the title bar --}}
+		{{~#if actions.lock~}}
+			<li>
+				{{~noop~}}
+				<a class="{{moderationMwUiClass}} mw-ui-quiet flow-ui-topicmenu-lock {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-check{{/if~}}"
+				   data-role="lock"
+				   data-flow-id="{{postId}}"
+				   href="{{actions.lock.url}}">
+					{{~l10n (concat "flow-" moderationType "-action-lock-topic")~}}
+				</a>
+				{{~noop~}}
+			</li>
+		{{~/if~}}
+		{{~#if actions.unlock~}}
+			<li>
+				{{~noop~}}
+				<a class="{{moderationMwUiClass}} mw-ui-quiet flow-ui-topicmenu-lock {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-ongoingConversation{{/if~}}"
+				   data-role="unlock"
+				   data-flow-id="{{postId}}"
+				   href="{{actions.unlock.url}}">
+					{{~l10n (concat "flow-" moderationType "-action-unlock-topic")~}}
+				</a>
+				{{~noop~}}
+			</li>
+		{{~/if~}}
+	{{else}}
+		{{!-- @todo Maybe we should change the topic view so that it also uses this modal? Consistency! --}}
+		{{~#if actions.lock~}}
+			<li>
+				{{~noop~}}
+				<a class="{{moderationMwUiClass}} mw-ui-quiet flow-ui-topicmenu-lock {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-check{{/if~}}"
+				   data-flow-id="{{postId}}"
+				   data-role="lock"
+				   href="{{actions.lock.url}}">
+					{{~l10n (concat "flow-" moderationType "-action-lock-topic")~}}
+				</a>
+				{{~noop~}}
+			</li>
+		{{~/if~}}
+		{{~#if actions.unlock~}}
+			<li>
+				{{~noop~}}
+				<a class="{{moderationMwUiClass}} mw-ui-quiet flow-ui-topicmenu-lock {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-ongoingConversation{{/if~}}"
+				   data-flow-id="{{postId}}"
+				   data-role="unlock"
+				   href="{{actions.unlock.url}}">
+					{{~l10n (concat "flow-" moderationType "-action-unlock-topic")~}}
+				</a>
+				{{~noop~}}
+			</li>
+		{{~/if~}}
+	{{~/ifCond~}}
+
+	{{~#ifCond moderationType "===" "post"~}}
+		{{!-- Post only --}}
+		{{~#if actions.edit~}}
+			<li>
+				<a class="{{moderationMwUiClass}} mw-ui-quiet flow-ui-edit-post-link {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-edit{{/if~}}"
+				   href="{{actions.edit.url}}">
+					{{~l10n "flow-post-action-edit-post"~}}
+				</a>
+			</li>
+		{{~/if~}}
+		{{~#if links.post~}}
+			<li>
+				{{~noop~}}
+				<a class="{{moderationMwUiClass}} mw-ui-quiet {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-link{{/if~}}"
+				   href="{{links.post.url}}">
+					{{~l10n (concat "flow-post-action-view")~}}
+				</a>
+				{{~noop~}}
+			</li>
+		{{~/if~}}
+	{{~/ifCond~}}
+</section>
+
+<section>
+	{{~#ifCond moderationType "===" "history"~}}
+		{{!-- Board history only --}}
+		{{~#if actions.undo~}}
+			<li>
+				{{~noop~}}
+				<a class="{{moderationMwUiClass}} mw-ui-quiet"
+				   href="{{actions.undo.url}}"
+				>
+					{{~actions.undo.title~}}
+				</a>
+				{{~noop~}}
+			</li>
+		{{~/if~}}
+	{{~/ifCond~}}
+	{{~#if actions.hide~}}
+		<li>
+			{{~noop~}}
+			<a class="{{moderationMwUiClass}} mw-ui-quiet {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-flag{{/if~}}"
+			   href="{{actions.hide.url}}"
+			   data-flow-interactive-handler="moderationDialog"
+			   data-flow-template="flow_moderate_{{moderationTemplate}}.partial"
+			   data-role="hide">
+				{{~l10n (concat "flow-" moderationType "-action-hide-" moderationTemplate)~}}
+			</a>
+			{{~noop~}}
+		</li>
+	{{~/if~}}
+	{{~#if actions.unhide~}}
+		<li>
+			{{~noop~}}
+			<a class="{{moderationMwUiClass}} mw-ui-quiet {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-flag{{/if~}}"
+			   href="{{actions.unhide.url}}"
+			   data-flow-interactive-handler="moderationDialog"
+			   data-flow-template="flow_moderate_{{moderationTemplate}}.partial"
+			   data-role="unhide">
+				{{~l10n (concat "flow-" moderationType "-action-unhide-" moderationTemplate)~}}
+			</a>
+			{{~noop~}}
+		</li>
+	{{~/if~}}
+	{{~#if actions.delete~}}
+		<li>
+			{{~noop~}}
+			<a class="{{moderationMwUiClass}} mw-ui-quiet {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-trash{{/if~}}"
+			   href="{{actions.delete.url}}"
+			   data-flow-interactive-handler="moderationDialog"
+			   data-flow-template="flow_moderate_{{moderationTemplate}}.partial"
+			   data-role="delete">
+				{{~l10n (concat "flow-" moderationType "-action-delete-" moderationTemplate)~}}
+			</a>
+			{{~noop~}}
+		</li>
+	{{~/if~}}
+	{{~#if actions.undelete~}}
+		<li>
+			{{~noop~}}
+			<a class="{{moderationMwUiClass}} mw-ui-quiet {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-trash{{/if~}}"
+			   href="{{actions.undelete.url}}"
+			   data-flow-interactive-handler="moderationDialog"
+			   data-flow-template="flow_moderate_{{moderationTemplate}}.partial"
+			   data-role="undelete">
+				{{~l10n (concat "flow-" moderationType "-action-undelete-" moderationTemplate)~}}
+			</a>
+			{{~noop~}}
+		</li>
+	{{~/if~}}
+	{{~#if actions.suppress~}}
+		<li>
+			{{~noop~}}
+			<a class="{{moderationMwUiClass}} mw-ui-quiet {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-block{{/if~}}"
+			   href="{{actions.suppress.url}}"
+			   data-flow-interactive-handler="moderationDialog"
+			   data-flow-template="flow_moderate_{{moderationTemplate}}.partial"
+			   data-role="suppress">
+				{{~l10n (concat "flow-" moderationType "-action-suppress-" moderationTemplate)~}}
+			</a>
+			{{~noop~}}
+		</li>
+	{{~/if~}}
+	{{~#if actions.unsuppress~}}
+		<li>
+			{{~noop~}}
+			<a class="{{moderationMwUiClass}} mw-ui-quiet {{~#if moderationIcons}} mw-ui-icon mw-ui-icon-before mw-ui-icon-block{{/if~}}"
+			   href="{{actions.unsuppress.url}}"
+			   data-flow-interactive-handler="moderationDialog"
+			   data-flow-template="flow_moderate_{{moderationTemplate}}.partial"
+			   data-role="unsuppress">
+				{{~l10n (concat "flow-" moderationType "-action-unsuppress-" moderationTemplate)~}}
+			</a>
+			{{~noop~}}
+		</li>
+	{{~/if~}}
+</section>

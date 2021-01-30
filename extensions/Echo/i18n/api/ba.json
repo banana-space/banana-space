@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sagan",
+			"Айсар",
+			"Лилиә",
+			"Янмурза Баки"
+		]
+	},
+	"apihelp-echomarkread-description": "Ҡулланыусы өсөн барлыҡ белдереүҙәрҙее уҡылған тип билдәләү",
+	"apihelp-echomarkread-param-list": "Уҡылмағандар тип билдәләү өсөн ID белдереүҙәр исемлеге",
+	"apihelp-echomarkread-param-unreadlist": "Уҡылмағандар тип билдәләү өсөн ID белдереүҙәр исемлеге",
+	"apihelp-echomarkread-param-all": "Әгәр күрһәтелһә, ҡулланыусының бөтә белдереүҙәрен уҡылған тип билдәләй",
+	"apihelp-echomarkread-param-sections": " Уҡылған тип билдәләү өсөн бүлектәр исемлеге",
+	"apihelp-echomarkread-example-1": "8-се белдереүҙе уҡылған тип билдәләргә",
+	"apihelp-echomarkread-example-2": "Барлыҡ белдереүҙәрҙе уҡылған тип билдәләү",
+	"apihelp-echomarkread-example-3": "1-се белдереүҙе уҡылмаған тип билдәләргә",
+	"apihelp-echomarkseen-description": "Был ҡулланыусы өсөн барлыҡ белдереүҙәрҙе уҡылған тип билдәләү",
+	"apihelp-echomarkseen-example-1": "Бөтә типтағы белдереүҙәрҙе уҡылған тип билдәләргә",
+	"apihelp-echomarkseen-param-type": "Уҡылған билдәләренә белдереүҙәр төрө: 'alert', 'message' йәки 'all'.",
+	"apihelp-query+notifications-description": "Ағымдағы ҡатнашыусыны көткән, белдереүҙәрҙе алырға",
+	"apihelp-query+notifications-param-prop": "Ихтыяж ваҡлыҡтары",
+	"apihelp-query+notifications-param-sections": "Талаптар өсөн белдереү бүлектәр (йәки ниндәйҙер тура килеү 'alert' һәм 'message')",
+	"apihelp-query+notifications-param-groupbysection": "Бүлектәр буйынса алынған һөҙөмтәне төркөмгә айырыу кәрәкме. Алдан күрһәтелһә, һәр бүлек айырым сығарыла.",
+	"apihelp-query+notifications-param-filter": "Кире ҡайтарылған белдереүҙәрҙе һөҙөргә.",
+	"apihelp-query+notifications-param-format": "Бойороҡ бирелһә, хәбәрҙәр ошолай форматлаштырып кире ҡайтарыласаҡ.",
+	"apihelp-query+notifications-paramvalue-format-model": "Эшкәртелмәгән белдереү мәғлүмәттәре",
+	"apihelp-query+notifications-paramvalue-format-special": "Ошо Special:Notifications бите өсөн генә (!) форматлаштырылған. Был HTMLға ышанмағыҙ, ул ҡапыл ғына үҙгәреүе мөмкин.",
+	"apihelp-query+notifications-paramvalue-format-flyout": "<span class=\"apihelp-deprecated\">Иҫкергән</span>. Тәүге күрһәткестәргә <kbd>$1format=model</kbd> ҡулланығыҙ",
+	"apihelp-query+notifications-paramvalue-format-html": "<span class=\"apihelp-deprecated\">Иҫкергән</span>. Тәүге күрһәткестәргә <kbd>$1format=model</kbd> ҡулланығыҙ",
+	"apihelp-query+notifications-param-limit": "Кире ҡайтарылған белдереүҙәрҙең иң күп һаны",
+	"apihelp-query+notifications-param-alertcontinue": "Иғтибарлыраҡ булһағыҙ, һөҙөмтәләрегеҙ күберәк буласаҡ, был функцияны дауам итеү өсөн файҙаланығыҙ.",
+	"apihelp-query+notifications-param-unreadfirst": "Уҡылмаған иҫкәртеүҙәрҙе беренсе сиратта күрһәтергә кәрәкме (groupbysection булған осраҡта ғына ҡулланыла).",
+	"apihelp-query+notifications-param-alertunreadfirst": "Уҡылмаған иҫкәртеүҙәрҙе беренсе сиратта күрһәтергә кәрәкме (groupbysection булған осраҡта ғына ҡулланыла).",
+	"apihelp-query+notifications-param-messagecontinue": "Хәбәрҙәр өсөн һөҙөмтәләр күберәк булһа, был функцияны дауам итеү өсөн файҙаланығыҙ.",
+	"apihelp-query+notifications-param-messageunreadfirst": "Уҡылмаған иҫкәртеүҙәрҙе беренсе сиратта күрһәтергә кәрәкме (groupbysection булған осраҡта ғына ҡулланыла).",
+	"apihelp-query+notifications-example-1": "Белдерүҙәр исемлеге",
+	"apihelp-query+notifications-example-2": "Һаны күрһәтелеп, төркөмләп бүленгән белдереүҙәр исемлеге."
+}

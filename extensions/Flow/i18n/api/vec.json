@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fierodelveneto"
+		]
+	},
+	"apihelp-flow+view-topiclist-param-format": "Forma in el cual ridàre el contegnuo.",
+	"apihelp-flow+view-topiclist-example-1": "Lista dei temi so [[Talk:Sandbox]]",
+	"apihelp-flow-parsoid-utils-description": "Converti el testo intrà wikitesto e HTML",
+	"apihelp-flow-parsoid-utils-summary": "Converti el testo intrà wikitesto e HTML",
+	"apihelp-flow-parsoid-utils-param-from": "Forma da ła cual convertire el contegnuo.",
+	"apihelp-flow-parsoid-utils-param-to": "Forma in ła cual convertire el contegnuo.",
+	"apihelp-flow-parsoid-utils-param-content": "Contegnuo da condividare",
+	"apihelp-flow-parsoid-utils-param-title": "Tìtoło de ła pàjina. No el połe esare doparà coxontà co $1pageid.",
+	"apihelp-flow-parsoid-utils-param-pageid": "ID de ła pàjina. No el połe esare doparà coxontà co $1title.",
+	"apihelp-flow-parsoid-utils-example-1": "Converti el wikitesto <nowiki>'''lorem''' ''blah''</nowiki> in HTML",
+	"apihelp-query+flowinfo-description": "Riçevare informasion baxe so discusion struturae so na pàjina",
+	"apihelp-query+flowinfo-summary": "Riçevare informasion baxe so discusion struturae so na pàjina",
+	"apihelp-query+flowinfo-example-1": "Recuperéa informasion Flow so [[Talk:Sandbox]], [[Main Page]], e [[Talk:Structured Discussions]]"
+}

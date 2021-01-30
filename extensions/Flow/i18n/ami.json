@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vickylin77s"
+		]
+	},
+	"flow-cancel": "Sawaden miforic",
+	"flow-show-change": "pahapinang to nifalican",
+	"flow-history-action-hide-post": " himed",
+	"flow-post-action-post-history": " likisi",
+	"flow-post-action-hide-post": " himed",
+	"flow-post-action-edit-post": "misinanot",
+	"flow-post-action-undo-moderation": " patikor",
+	"flow-topic-action-watchlist": " o pirorodan to tatapalen a tilid",
+	"flow-topic-action-history": " likisi",
+	"flow-topic-action-undo-moderation": " patikor",
+	"flow-error-invalid-topic-uuid-title": "awa ko epoc a sakacipinang a sowal",
+	"flow-link-history": " likisi",
+	"flow-moderation-confirm-hide-post": " himed",
+	"flow-moderation-confirm-hide-topic": " himed",
+	"flow-previous-diff": "← matela:ngay a mikawitan",
+	"flow-next-diff": "o faelohay a nisinanotan →",
+	"flow-undo": " patikor",
+	"flow-undo-latest-revision": "safaelohay a pisalof",
+	"flow-undo-edit-failure": "Iraay ko nikafafelih no nisalofan ato nikawitan i laloma’, orasaka caay ka nga’ay a minokas a patiko",
+	"flow-ve-mention-inspector-remove-label": "falah"
+}

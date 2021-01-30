@@ -1,0 +1,63 @@
+<div class="flow-post-meta">
+	<span class="flow-post-meta-actions">
+		{{#if actions.reply}}
+			<a href="{{actions.reply.url}}"
+			   title="{{actions.reply.title}}"
+			   class="mw-ui-anchor mw-ui-progressive mw-ui-quiet flow-reply-link"
+			   {{!--
+				   Initialize EventLogging:
+				   * action: name of the action param
+				   * schema: name of the schema (will be forwarded)
+				   * entrypoint: name of the entrypoint (will be forwarded)
+				   * forward: nodes to forward this funnel to
+				   We want to keep track of multiple actions in the same "funnel".
+				   Having a node without data-flow-eventlog-funnel-id (this node)
+				   will result in a funnel being created. That funnel id will then
+				   be forwarded to all specified nodes, so if you later click on one
+				   of the forwarded nodes, it'll recognize and find the funnel. All
+				   that is needed there, is a specific data-flow-eventlog-action,
+				   all other details (log, entrypoint, funnel id, ...) are inherited
+			   --}}
+			   data-flow-eventlog-schema="FlowReplies"
+			   data-flow-eventlog-action="initiate"
+			   data-flow-eventlog-entrypoint="reply-post"
+			   data-flow-eventlog-forward="
+				   < .flow-post:not([data-flow-post-max-depth='1']) .flow-reply-form [data-role='cancel'],
+				   < .flow-post:not([data-flow-post-max-depth='1']) .flow-reply-form [data-role='submit']
+			   "
+			>
+				{{~actions.reply.text~}}
+			</a>
+		{{/if}}
+		{{#if actions.thank}}
+			{{!--
+				progressive enhancement happens in the Thank extension
+				based on the mw-thanks-flow-thank-link class
+			--}}
+			<a class="mw-ui-anchor mw-ui-progressive mw-ui-quiet mw-thanks-flow-thank-link"
+			   href="{{actions.thank.url}}"
+			   title="{{actions.thank.title}}">
+				{{~actions.thank.text~}}
+			</a>
+		{{/if}}
+	</span>
+
+	<span class="flow-post-timestamp">
+		{{#if isOriginalContent}}
+			<a href="{{links.topic-history.url}}" class="flow-timestamp-anchor">
+				{{uuidTimestamp postId}}
+			</a>
+		{{else}}
+			<span>
+				{{#ifCond creator.name "===" lastEditUser.name}}
+					{{l10n "flow-edited"}}
+				{{else}}
+					{{l10n "flow-edited-by" lastEditUser.name}}
+				{{/ifCond}}
+			</span>
+			<a href="{{links.diff-prev.url}}" class="flow-timestamp-anchor">
+				{{~uuidTimestamp lastEditId~}}
+			</a>
+		{{/if}}
+	</span>
+</div>

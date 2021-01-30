@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gmelfi",
+			"Pippinu",
+			"Sarvaturi"
+		]
+	},
+	"flow-thank-link": "{{GENDER:$1|{{GENDER:$2|ringrazzia}}}}",
+	"structureddiscussions": "Flussu"
+}

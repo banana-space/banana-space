@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Benoit Rochon",
+			"Dereckson"
+		]
+	},
+	"flow-cancel": "Ponipita",
+	"flow-newtopic-save": "Acotcicta",
+	"flow-history-action-delete-post": "wepina",
+	"flow-history-action-hide-post": "kata",
+	"flow-history-action-undelete-post": "wepina",
+	"flow-post-action-post-history": "Isparik",
+	"flow-post-action-delete-post": "Wepina",
+	"flow-post-action-hide-post": "Kata",
+	"flow-post-action-edit-post": "Meckotcita",
+	"flow-post-action-edit-post-submit": "Kanawapata ka meckotcipitcikateki",
+	"flow-topic-action-watchlist": "Ka masinateki",
+	"flow-topic-action-history": "Isparik",
+	"flow-topic-action-undo-moderation": "Nama ntwatc",
+	"flow-error-invalid-topic-uuid-title": "Nama mia icinikatew",
+	"flow-board-history": "\"$1\" isparik",
+	"flow-history-day": "Ke kicikak",
+	"notification-links-flow-description-edited-view-page": "{{GENDER:$1|Tapwatcike}} masinhikan",
+	"flow-link-history": "isparik",
+	"flow-moderation-confirm-delete-post": "Wepina",
+	"flow-moderation-confirm-hide-post": "Kata",
+	"flow-moderation-confirm-delete-topic": "Wepina",
+	"flow-moderation-confirm-hide-topic": "Kata",
+	"flow-ve-mention-inspector-remove-label": "Manina"
+}

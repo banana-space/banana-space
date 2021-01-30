@@ -1,0 +1,56 @@
+@import 'mediawiki.mixins';
+@import 'mediawiki.ui/variables';
+@import '../../../flow.variables';
+@import '../../../flow.colors';
+
+.flow-component {
+	.ve-init-target {
+		&.flow-ui-focused {
+			border-color: #ace;
+			box-shadow: 0 0 2px 2px #ace;
+		}
+	}
+
+	.ve-init-mw-target-surface {
+		padding-bottom: 44px;
+	}
+
+	// Undo .mw-body-content font-size (0.875em) and apply font-size matching OOUI theme (0.8em)
+	@uiFontSize: 0.8em/0.625/1.27; /* 0.8em / x-small / 127% */
+
+	.ve-ui-overlay {
+		font-size: @uiFontSize;
+	}
+
+	.flow-ui-editorWidget-editor {
+		> .oo-ui-toolbar {
+			font-size: @uiFontSize;
+			margin-top: -44px;
+		}
+	}
+
+	.ve-ui-debugBar {
+		font-size: @uiFontSize;
+
+		&-selectionLabel {
+			min-width: 10em;
+		}
+	}
+}
+
+.flow-ui-newTopicWidget-title.oo-ui-textInputWidget input {
+	border-radius: 0.25em/1.5;
+}
+
+.flow-ui-editorWidget-editor {
+	// Undo border & box-shadow on textarea and re-apply it on the
+	// div that contains textarea + legal text + switch button
+	border: 1px solid #c8ccd1;
+	border-radius: @border-radius-base;
+	transition: border-color 250ms, box-shadow 250ms;
+
+	.flow-ui-editorWidget-focused & {
+		border-color: #ace;
+		box-shadow: 0 0 2px 2px #ace;
+	}
+}

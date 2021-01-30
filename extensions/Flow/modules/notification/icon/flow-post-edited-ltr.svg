@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <title>
+        post edited
+    </title>
+    <g fill="#36c">
+        <path d="M18 4h-1v7a2 2 0 0 1-2 2H4v1a2 2 0 0 0 2 2h10l4 4V6a2 2 0 0 0-2-2z"/>
+        <path d="M2 0a2 2 0 0 0-2 2v14l4-4h10a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm8.58 1a.556.556 0 0 1 .402.162l1.856 1.832a.556.556 0 0 1 0 .783L11.76 4.891 9.11 2.238l1.09-1.076A.556.556 0 0 1 10.58 1zM8.533 2.826l2.639 2.64L5.639 11H3V8.361l5.533-5.535z"/>
+    </g>
+</svg>

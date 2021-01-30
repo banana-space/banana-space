@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saimawnkham",
+			"Saosukham"
+		]
+	},
+	"echo-pref-tooltip-user-rights": "သင်ၸိူဝ်ႉဝႃႈ သေၵေႃႉၵေႃႉ မ​ႄးသုၼ်ႇလႆႈၽူႈၸႂ်ႉတိုဝ်းၵဝ်ၶႃႈၼႆ ပၼ်ၶေႃႈၽၢင်ႉသေၵမ်း။",
+	"tooltip-pt-notifications-alert": "{{GENDER:|ၸဝ်ႈၵဝ်ႇ}} ဢၼ်ၽၢင်ႉ",
+	"notification-link-text-view-changes": "{{GENDER:$1|တူၺ်း}} လွင်ႈၸိူဝ်းလႅၵ်ႈလၢႆႈ"
+}

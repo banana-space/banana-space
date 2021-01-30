@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"KuboF"
+		]
+	},
+	"apihelp-echomarkread-description": "Marki sciigojn legitaj por tiu ĉi uzanto.",
+	"apihelp-echomarkread-example-2": "Marki ĉiujn sciigojn legitaj",
+	"apihelp-query+notifications-description": "Ricevi sciigojn atentantajn por tiu ĉi uzanto."
+}

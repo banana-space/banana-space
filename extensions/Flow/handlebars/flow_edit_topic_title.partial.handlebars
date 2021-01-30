@@ -1,0 +1,17 @@
+<form method="POST" action="{{actions.edit.url}}" class="flow-edit-title-form">
+	{{> flow_errors }}
+	<input type="hidden" name="wpEditToken" value="{{@root.editToken}}" />
+	{{!-- @todo should this be a part of the url? --}}
+	<input type="hidden" name="topic_prev_revision" value="{{revisionId}}" />
+	<input name="topic_content" class="mw-ui-input" value="
+			{{~#if @root.submitted.content~}}
+				{{~@root.submitted.content~}}
+			{{~else~}}
+				{{~content.content~}}
+			{{~/if~}}
+		" />
+	<div class="flow-form-actions">
+		<button data-role="submit"
+		        class="mw-ui-button mw-ui-progressive">{{l10n "flow-edit-title-submit"}}</button>
+	</div>
+</form>

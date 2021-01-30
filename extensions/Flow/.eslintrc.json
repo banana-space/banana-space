@@ -1,0 +1,20 @@
+{
+	"root": true,
+	"extends": [
+		"wikimedia/client",
+		"wikimedia/jquery",
+		"wikimedia/mediawiki",
+		"wikimedia/jsduck"
+	],
+	"globals": {
+		"Handlebars": "readonly",
+		"moment": "readonly"
+	},
+	"rules": {
+		"no-underscore-dangle": "off",
+		"camelcase": "off",
+		"no-use-before-define": "off",
+		"max-len": "off",
+		"mediawiki/class-doc": "warn"
+	}
+}

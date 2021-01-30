@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Դավիթ Սարոյան"
+		]
+	},
+	"apihelp-flow+edit-post-param-postId": "Գրառման ID։",
+	"apihelp-flow+edit-post-param-content": "Գրառման բովանդակությունը։",
+	"apihelp-flow+edit-post-param-format": "Գրառման բովանդակության ձևաչափը (wikitext|html)",
+	"apihelp-flow+moderate-post-param-moderationState": "Մոդերացման մակարդակը։",
+	"apihelp-flow+moderate-post-param-reason": "Մոդերացման պատճառը։",
+	"apihelp-flow+moderate-post-param-postId": "Մոդերացման ենթակա գրառման նույնականացման համարը։",
+	"apihelp-flow+moderate-post-example-1": "Ջնջել բաժինը՝ [[Topic:S2tycnas4hcucw8w]]",
+	"apihelp-flow+moderate-topic-param-moderationState": "Մոդերացման մակարդակը։",
+	"apihelp-flow+moderate-topic-param-reason": "Մոդերացման պատճառը։",
+	"apihelp-flow+moderate-topic-example-1": "Ջնջել բաժինը՝ [[Topic:S2tycnas4hcucw8w]]",
+	"apihelp-flow+new-topic-param-topic": "Նոր բաժնի վերնագրի տեքստը։",
+	"apihelp-flow+reply-description": "Գրառման պատասխանները։",
+	"apihelp-flow+reply-summary": "Գրառման պատասխանները։",
+	"apihelp-flow+reply-param-replyTo": "Պատասխանելու ենթակա գրառման նույնականացման համարը",
+	"apihelp-flow+reply-param-content": "Նոր գրառման բովանդակությունը։",
+	"apihelp-flow+view-header-description": "Դիտել քննարկումների էջը։",
+	"apihelp-flow+view-header-summary": "Դիտել քննարկումների էջը։",
+	"apihelp-flow+view-header-param-revId": "Ընթացիկ տարբերակի փոխարեն բեռնել հետևյալ տարբերակը։",
+	"apihelp-flow+view-post-description": "Դիտել գրառումը։",
+	"apihelp-flow+view-post-summary": "Դիտել գրառումը։",
+	"apihelp-flow+view-post-param-postId": "Գրառումը դիտելու նույնականացման համարը։",
+	"apihelp-flow+view-post-history-description": "Դիտել գրառման փոփոխությունների պատմությունը",
+	"apihelp-flow+view-post-history-summary": "Դիտել գրառման փոփոխությունների պատմությունը"
+}

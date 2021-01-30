@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nirajan pant",
+			"राम प्रसाद जोशी"
+		]
+	},
+	"notification-dynamic-actions-flow-board-unwatch": "\"$1\"मी नौला कृयाकलाप तक्द {{GENDER:$3|बन्द}} अरऽ",
+	"notification-dynamic-actions-flow-topic-unwatch": "यो विषय हेद्द {{GENDER:$3|बन्द }} अरऽ",
+	"notification-dynamic-actions-flow-topic-unwatch-confirmation": "{{GENDER:$3|तम}} आब \"$1\" नाइहेद्दार्‍याऽ",
+	"notification-dynamic-actions-flow-topic-unwatch-confirmation-description": "{{GENDER:$3|तम}} [$2 this topic] जज्ज्याईँलै तक्द सकन्छऽ",
+	"flow-thank-link": "{{GENDER:$1|{{GENDER:$2|धन्यवाद देओ}}}}"
+}

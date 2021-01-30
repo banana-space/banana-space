@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sovichet",
+			"គីមស៊្រុន"
+		]
+	},
+	"flow-show-change": "បង្ហាញ​បន្លាស់ប្ដូរ",
+	"flow-rev-message-create-topic-summary": "$1 {{GENDER:$2|បាន​បង្កើត}}​ប្រធានបទ​សង្ខេប​នៅ $3។"
+}

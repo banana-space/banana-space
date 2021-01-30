@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"apihelp-echomarkread-param-unreadlist": "Un lista de IDs de notification a marcar como non legite.",
+	"apihelp-echomarkread-example-3": "Marcar le notification 1 como non legite"
+}

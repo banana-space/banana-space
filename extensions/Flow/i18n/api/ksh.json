@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Purodha",
+			"Quiddity"
+		]
+	},
+	"apihelp-flow-param-page": "De Sigg, fö di jät ze donn es.",
+	"apihelp-flow-example-1": "Donn de Äkliehrong op dä Sigg „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">[[Talk:Sandbox]]</code>“ verändere.",
+	"apihelp-flow+edit-header-param-content": "Der Ennhalld för de Äkliehrong.",
+	"apihelp-flow+edit-header-param-format": "Et Fommaht vun dä Äkliehrong (wikitext|html)",
+	"apihelp-flow+edit-header-example-1": "Donn de Äkliehrong vum [[Talk:Sandbox|Klaaf övver de Schpellwiß]] ändere.",
+	"apihelp-flow+edit-post-param-format": "Et Fommaht vum Enhalld vum neuje Beijdraach (wikitext|html)",
+	"apihelp-flow+edit-title-param-prev_revision": "De Kännong för de aktoölle Väsjohn vun dä Övverschreff, öm noh dubbelte Beärbeidonge ze söhke.",
+	"apihelp-flow+edit-title-param-content": "Der Ennhalld för de Övverschreff.",
+	"apihelp-flow+edit-topic-summary-param-summary": "Der Inhalt for et Resümeh.",
+	"apihelp-flow+edit-topic-summary-param-format": "Et Fommaht vun dä Zosammefaßong (wikitext|html)",
+	"apihelp-flow+new-topic-param-format": "Et Fommaht vun de eezde Antwoot vum neue Tehma (<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">wikitext</code>|<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"HyperText Markup Language\">html</code>)",
+	"apihelp-flow+reply-param-content": "Dä Enhald för dä neuje Beidraach.",
+	"apihelp-flow+reply-param-format": "Et Fommaht vum neue Beijdraach (wikitext|html)",
+	"apihelp-flow+view-header-example-1": "Holl de Äkliehrong för „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">[[Talk:Sandbox]]</code>“ em Wikkitäx Fommaht.",
+	"apihelp-flow+view-post-history-param-format": "Dat Fommaht för der Enhalld dren ußzejävve.",
+	"apihelp-flow+view-post-history-example-1": "Holl de Väsohne vun de Beijdrähsch zom <code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">[[Topic:S2tycnas4hcucw8w]]</code> als Wikkitäx",
+	"apihelp-flow+view-topic-history-example-1": "Belohr de Väsohne vun de Beijdrähsch zom <code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">[[Topic:S2tycnas4hcucw8w]]</code> als Wikkitäx",
+	"apihelp-flow+view-topiclist-param-sortby": "Enschtällonge för et Zottehre vun de  topics, dadd es äntwehder „<kbd lang=\"en\" xml:lang=\"en\" dir=\"ltr\">updated</kbd>“ för zem Zottehre noh de Zigg, woh dä  topic et läz jeändert wohd, udder „<kbd lang=\"en\" xml:lang=\"en\" dir=\"ltr\">newest</kbd>“ för et Zottehre noh dä Zigg vum Aanläje.",
+	"apihelp-flow+view-topiclist-param-savesortby": "Donn de Enschtällong för woh noh ze zottehre en de Enschtällonge vum Metmaacher, wann jät ennjejovve es.",
+	"apihelp-flow+view-topiclist-param-offset-id": "Der Wäät för der Bejenn — em <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"Universally unique identifier\">UUID</i>-Fommaht — vun woh aan Jähjeschtänd jehollt wähde sulle. Weed blohß beim Zottehre noh „<kbd lang=\"en\" xml:lang=\"en\" dir=\"ltr\">newest</kbd>“ jebruch.",
+	"apihelp-flow-parsoid-utils-description": "Donn Täx zwesche Wikkitäx un <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"HyperText Markup Language\">HTML</i> wandelle.",
+	"apihelp-flow-parsoid-utils-param-content": "Der Enhalld zom Ömwandelle.",
+	"apihelp-flow+undo-edit-header-description": "Holl nühdejje Enfommazjuhne, öm de Änderong aan dä Äkliehrong retuhr ze nämme.",
+	"apihelp-flow+undo-edit-header-param-startId": "De Kännong vun dä Väsohn, woh et Zeröcknämme aanfange sull.",
+	"apihelp-flow+undo-edit-header-param-endId": "De Kännong vun dä Väsohn, woh et Zeröcknämme ophühre sull.",
+	"apihelp-flow+undo-edit-post-description": "Holl nühdejje Enfommazjuhne, öm de Änderong aan em Beijdrahch retuhr ze nämme.",
+	"apihelp-flow+undo-edit-post-param-postId": "De Kännong vum Beijdrahch zom zerök nämme.",
+	"apihelp-flow+undo-edit-post-param-startId": "De Kännong vun dä Väsohn, woh et Zeröcknämme aanfange sull.",
+	"apihelp-flow+undo-edit-post-param-endId": "De Kännong vun dä Väsohn, woh et Zeröcknämme ophühre sull.",
+	"apihelp-flow+undo-edit-post-example-1": "Holl Enfommazjuhne, öm en Änderong aan ene beschtemmte  topic retuhr ze nämme.",
+	"apihelp-flow+undo-edit-topic-summary-param-startId": "De Kännong vun dä Väsohn, woh et Zeröcknämme aanfange sull.",
+	"apihelp-flow+undo-edit-topic-summary-param-endId": "De Kännong vun dä Väsohn, woh et Zeröcknämme ophühre sull."
+}

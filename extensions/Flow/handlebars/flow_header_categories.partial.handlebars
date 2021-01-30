@@ -1,0 +1,12 @@
+{{#if @root.categories.items}}
+<div id="catlinks" class="catlinks flow-board-header-category-view-nojs">
+	<div id="mw-normal-catlinks" class="mw-normal-catlinks">
+		{{~html @root.categories.link~}}
+		<ul class="flow-board-header-category-list">
+		{{~#each @root.categories.items~}}
+			<li class="flow-board-header-category-item">{{~html this~}}</li>
+		{{~/each~}}
+		</ul>
+	</div>
+</div>
+{{/if}}
