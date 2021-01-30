@@ -13,7 +13,7 @@
   "manifest_version": 2,
   "ValidSkinNames": {
     "banana": {
-      "class": "SkinMustache",
+      "class": "BananaSkin",
       "args": [
         {
           "name": "Banana",
@@ -31,6 +31,10 @@
       ]
     }
   },
+	"AutoloadClasses": {
+		"SkinMustache136": "includes/SkinMustache136.php",
+		"BananaSkin": "includes/BananaSkin.php"
+	},
   "MessagesDirs": {
     "Banana": [
       "i18n"
