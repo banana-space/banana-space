@@ -8,6 +8,7 @@ BananaSpace 是一个基于带扩展的 MediaWiki（Wikipedia 使用的平台）
 
 This repo contains MediaWiki source code together with
 
+* Several extensions from [mediawiki.org](https://www.mediawiki.org);
 * `TeXParser` extension;
 * `Banana` skin.
 
@@ -17,7 +18,18 @@ To enable them, add the following lines to `LocalSettings.php`.
 wfLoadSkin( 'Banana' );
 $wgDefaultSkin = 'Banana';
 
+wfLoadExtension( 'Echo' );
+wfLoadExtension( 'Flow' );
+wfLoadExtension( 'Thanks' );
 wfLoadExtension( 'TeXParser' );
+
+$wgNamespaceContentModels[NS_TALK] = 'flow-board';
+$wgNamespaceContentModels[NS_USER_TALK] = 'flow-board';
+```
+
+If you encounter errors, go to the `maintenance` folder, and run
+``` bash
+php update.php
 ```
 
 ### How to use
