@@ -1,4 +1,9 @@
-<div class="content__actions">
-{{#data-portlets.data-views}}{{>Portlet}}{{/data-portlets.data-views}}
-{{#data-portlets.data-actions}}{{>Portlet}}{{/data-portlets.data-actions}}
+<div class="content__namespaces-actions">
+    <div class="content__namespaces">
+        {{#data-portlets.data-namespaces}}{{>Portlet}}{{/data-portlets.data-namespaces}}
+    </div>
+    <div class="content__actions">
+        {{#data-portlets.data-views}}{{>Portlet}}{{/data-portlets.data-views}}
+        {{#data-portlets.data-actions}}{{>Portlet}}{{/data-portlets.data-actions}}
+    </div>
 </div>

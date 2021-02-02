@@ -11,37 +11,37 @@ class SkinMustache136 extends SkinMustache {
      */
 	public function getTemplateData() {
         $out = $this->getOutput();
-         $printSource = Html::rawElement( 'div', [ 'class' => 'printfooter' ], $this->printSource() );
-         $bodyContent = $out->getHTML() . "\n" . $printSource;
-  
-         $newTalksHtml = $this->getNewtalks() ?: null;
-  
-         $data = [
-             'data-logos' => $this->getLogoData(),
-             // Array objects
-             'array-indicators' => $this->getIndicatorsData( $out->getIndicators() ),
-             // Data objects
-             'data-search-box' => $this->buildSearchProps(),
-             // HTML strings
-             'html-site-notice' => $this->getSiteNotice() ?: null,
-             'html-user-message' => $newTalksHtml ?
-                 Html::rawElement( 'div', [ 'class' => 'usermessage' ], $newTalksHtml ) : null,
-             'html-title' => $out->getPageTitle(),
-             'html-subtitle' => $this->prepareSubtitle(),
-             'html-body-content' => $this->wrapHTML( $out->getTitle(), $bodyContent ),
-             'html-categories' => $this->getCategories(),
-             'html-after-content' => $this->afterContentHook(),
-             'html-undelete-link' => $this->prepareUndeleteLink(),
-             'html-user-language-attributes' => $this->prepareUserLanguageAttributes(),
-  
-             // links
-             'link-mainpage' => Title::newMainPage()->getLocalUrl(),
-         ];
-  
-         foreach ( $this->options['messages'] ?? [] as $message ) {
-             $data["msg-{$message}"] = $this->msg( $message )->text();
-         }
-         return $data + $this->getPortletsTemplateData() + $this->getFooterTemplateData();
+        $printSource = Html::rawElement( 'div', [ 'class' => 'printfooter' ], $this->printSource() );
+        $bodyContent = $out->getHTML() . "\n" . $printSource;
+
+        $newTalksHtml = $this->getNewtalks() ?: null;
+
+        $data = [
+            'data-logos' => $this->getLogoData(),
+            // Array objects
+            'array-indicators' => $this->getIndicatorsData( $out->getIndicators() ),
+            // Data objects
+            'data-search-box' => $this->buildSearchProps(),
+            // HTML strings
+            'html-site-notice' => $this->getSiteNotice() ?: null,
+            'html-user-message' => $newTalksHtml ?
+                Html::rawElement( 'div', [ 'class' => 'usermessage' ], $newTalksHtml ) : null,
+            'html-title' => $out->getPageTitle(),
+            'html-subtitle' => $this->prepareSubtitle(),
+            'html-body-content' => $this->wrapHTML( $out->getTitle(), $bodyContent ),
+            'html-categories' => $this->getCategories(),
+            'html-after-content' => $this->afterContentHook(),
+            'html-undelete-link' => $this->prepareUndeleteLink(),
+            'html-user-language-attributes' => $this->prepareUserLanguageAttributes(),
+
+            // links
+            'link-mainpage' => Title::newMainPage()->getLocalUrl(),
+        ];
+
+        foreach ( $this->options['messages'] ?? [] as $message ) {
+            $data["msg-{$message}"] = $this->msg( $message )->text();
+        }
+        return $data + $this->getPortletsTemplateData() + $this->getFooterTemplateData();
     }
 
     /**
@@ -164,15 +164,6 @@ class SkinMustache136 extends SkinMustache {
  
             $portlets['data-' . $name] = $this->getPortletData( $name, $items );
         }
- 
-        // A menu that includes the notifications. This will be deprecated in future versions
-        // of the skin API spec.
-        $portlets['data-personal'] = $this->getPortletData(
-            'personal',
-            $this->getPersonalToolsForMakeListItem(
-                $contentNavigation['user-menu']
-            )
-        );
  
         return [
             'data-portlets' => $portlets,

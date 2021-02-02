@@ -1,20 +1,27 @@
-<header class="mw-header">
-	{{>Logo}}
-	{{>PersonalMenu}}
-	{{>Search}}
-</header>
-{{>Notices}}
-<main id="content" class="mw-body">
-	<header class="content__header">
-		{{>ContentIndicators}}
-		{{>ContentHeading}}
-		{{>ContentTagline}}
-		{{>ContentNamespaces}}
-		{{>ContentActions}}
-	</header>
-	{{>ContentBody}}
-</main>
-<nav>
-	{{>Languages}}
-</nav>
+<div class="b-nav-wrapper">
+	<nav class="b-nav">
+		<div class="b-nav-left">
+			{{>Logo}}
+			{{#data-portlets.data-explore}}{{>Navigation}}{{/data-portlets.data-explore}}
+			{{#data-portlets.data-create}}{{>Navigation}}{{/data-portlets.data-create}}
+		</div>
+		<div class="b-nav-right">
+			{{>Search}}
+			{{>PersonalMenu}}
+			{{>Notifications}}
+		</div>
+	</nav>
+</div>
+<div class="b-page-body">
+	{{>Notices}}
+	{{>ContentActions}}
+	<main id="content" class="mw-body">
+		<header class="content__header">
+			{{>ContentIndicators}}
+			{{>ContentHeading}}
+			{{>ContentTagline}}
+		</header>
+		{{>ContentBody}}
+	</main>
+</div>
 {{>Footer}}
