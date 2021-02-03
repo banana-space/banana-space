@@ -6,6 +6,7 @@
 @color-gray-2: #eaecf0;
 @color-accent: #ffc800;
 @color-link: #1070b8;
+@color-link-new: #20a050;
 @color-link--visited: #1070b8;
 @font-family: 'Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI','Oxygen','Ubuntu','Cantarell','Helvetica Neue',sans-serif;
 
@@ -42,7 +43,7 @@ a {
   top: 0;
   position: fixed;
   width: 100%;
-  z-index: 3;
+  z-index: 5;
 }
 
 .b-nav {
@@ -568,20 +569,29 @@ body > footer {
 .b-page-body {
   a:not(.mw-ui-button) {
     color: @color-link;
-    
+
     &:hover, &:focus {
       text-decoration: none;
-      border-bottom: 3px solid @color-gray-2;
     }
 
     &:visited {
       color: @color-link--visited;
     }
   }
+
+  .btex-output a {
+    display: inline-block;
+    line-height: 1.2;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -3px;
+    
+    &:hover, &:focus {
+      border-bottom: 3px solid @color-gray-2;
+    }
+  }
   
   a.new {
-    color: @color-link;
-    opacity: .5;
+    color: @color-link-new;
   }
 }
 
@@ -597,6 +607,21 @@ body > footer {
   .flow-board-navigation,
   .flow-board {
     max-width: 1000px !important;
+  }
+}
+
+.flow-topic-titlebar {
+  margin: 0 -30px;
+  padding: .8em 30px;
+  background-color: #e4f2fa;
+
+  .flow-menu {
+    top: 3em;
+    right: 30px;
+  }
+
+  .flow-topic-title {
+    font-weight: normal;
   }
 }
 
