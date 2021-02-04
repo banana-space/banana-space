@@ -1,15 +1,14 @@
 <?php
 
-use \Skin;
-
-$wgExtensionFunctions[] = function () {
-    global $wgEchoNotifications;
-    foreach ( $wgEchoNotifications as &$data ) {
-        $data['section'] = 'alert';
-    }
-};
-
 class BananaSkin extends SkinMustache136 {
+    public static function initBananaSkin() {
+        // Merge notices with alerts
+        global $wgEchoNotifications;
+        foreach ( $wgEchoNotifications as &$data ) {
+            $data['section'] = 'alert';
+        }
+    }
+
     public function getTemplateData() {
         $data = parent::getTemplateData();
         $portlets = &$data['data-portlets'];

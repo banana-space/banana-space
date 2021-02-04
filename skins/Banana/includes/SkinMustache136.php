@@ -210,9 +210,9 @@ class SkinMustache136 extends SkinMustache {
             $icons = [];
             foreach ( $footerIcons as $blockName => $blockIcons ) {
                 $html = '';
-                foreach ( $blockIcons as $key => $icon ) {
-                    $html .= $this->makeFooterIcon( $icon );
-                }
+                // foreach ( $blockIcons as $key => $icon ) {
+                //     $html .= $this->makeFooterIcon( $icon );
+                // }
                 // For historic reasons this mimics the `icononly` option
                 // for BaseTemplate::getFooterIcons. Empty rows should not be output.
                 if ( $html ) {

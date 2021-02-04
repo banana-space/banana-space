@@ -59,6 +59,11 @@ abstract class Utils {
 			$from = 'wikitext';
 		}
 
+		if ( $from === 'topic-title-wikitext' && $to === 'topic-title-html' ) {
+			$from = 'wikitext';
+			$to = 'html';
+		}
+
 		if ( $from === 'wikitext' || $from === 'html' ) {
 			if ( $to === 'wikitext' || $to === 'html' ) {
 				if ( self::isParsoidConfigured() ) {

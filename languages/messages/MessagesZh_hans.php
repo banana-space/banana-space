@@ -418,8 +418,8 @@ $datePreferences = [
 $defaultDateFormat = 'zh';
 $dateFormats = [
 	'zh time' => 'H:i',
-	'zh date' => 'Y年n月j日 (l)',
-	'zh both' => 'Y年n月j日 (D) H:i',
+	'zh date' => 'Y 年 n 月 j 日 (l)',
+	'zh both' => 'Y 年 n 月 j 日 (D) H:i',
 ];
 
 $bookstoreList = [

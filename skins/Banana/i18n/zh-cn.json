@@ -7,5 +7,22 @@
     "banana-create-notes-text": "新讲义",
     "echo-new-messages": "讨论页 (有新消息)",
     "cactions": "操作",
-    "createacct-benefit-heading": "加入{{SITENAME}}，大家一起学数学。"
+    "createacct-benefit-heading": "加入{{SITENAME}}，大家一起学数学。",
+
+	"nbytes": "$1 字节",
+	"parentheses": "($1)",
+	"parentheses-start": "(",
+	"parentheses-end": ")",
+	"editing": "编辑 “$1”",
+	"history-title": "“$1” 的版本历史",
+	"difference-title": "“$1” 的版本对比",
+    "difference-title-multipage": "页面 “$1” 与 “$2” 的对比",
+    
+	"flow-topic-comments": "{{PLURAL:$1|$1 个评论|0={{GENDER:$2|第一个}}发表评论！}}",
+	"notification-timestamp-ago-seconds": "{{PLURAL:$1|$1 秒前}}",
+	"notification-timestamp-ago-minutes": "{{PLURAL:$1|$1 分钟前}}",
+	"notification-timestamp-ago-hours": "{{PLURAL:$1|$1 小时前}}",
+	"notification-timestamp-ago-days": "{{PLURAL:$1|$1 天前}}",
+	"notification-timestamp-ago-months": "{{PLURAL:$1|$1 个月前}}",
+	"notification-timestamp-ago-years": "{{PLURAL:$1|$1 年前}}"
 }

@@ -40,6 +40,9 @@
       "i18n"
     ]
   },
+	"ExtensionFunctions": [
+		"BananaSkin::initBananaSkin"
+	],
   "ResourceFileModulePaths": {
     "localBasePath": "",
     "remoteSkinPath": "Banana"
