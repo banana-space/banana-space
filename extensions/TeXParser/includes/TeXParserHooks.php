@@ -7,6 +7,11 @@
  */
 
 class TeXParserHooks {
+	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater ) {
+		$dir = dirname(__DIR__);
+		$updater->addExtensionTable('banana_subpage', "$dir/base.sql");
+	}
+
 	private static function http_post_json($url, $jsonStr) {
 	    $ch = curl_init();
 	    curl_setopt($ch, CURLOPT_POST, 1);
@@ -65,12 +70,41 @@ class TeXParserHooks {
 		$output->addModules( "ext.TeXParser" );
 	}
 
-	// Replace $node by $html in $dom.
-	private static function domReplace( DOMDocument $dom, $html, DOMNode $node ) {
+	public static function onPageSaveComplete(
+		WikiPage $wikiPage//,
+		// MediaWiki\User\UserIdentity $user,
+		// string $summary,
+		// int $flags,
+		// MediaWiki\Revision\RevisionRecord $revisionRecord,
+		// MediaWiki\Storage\EditResult $editResult
+	) { 
+		$title = $wikiPage->getTitle();
+		$options = $wikiPage->makeParserOptions('canonical');
+		$output = $wikiPage->getParserOutput($options);
+
+		// Update subpages and labels in database
+		$text = $output->getText();
+		$dom = new DOMDocument();
+		if (!@$dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8')))
+			return;
+		$xpath = new DOMXpath($dom);
+		$data = '';
+
+		$elements = $xpath->query('//div[@class="compiler-data"]');
+		if ($elements->length === 1) {
+			/** @var DOMElement $element */
+			$element = $elements->item(0);
+			$data = $element->hasAttribute('data-json') ? $element->getAttribute('data-json') : '';
+		}
+		SubpageHandler::updatePageData($title, $data);
+	}
+
+	// Replace $element by $html in $dom.
+	private static function domReplace( DOMDocument $dom, $html, DOMNode $element ) {
 		$fragment = $dom->createDocumentFragment();
 		$fragment->appendXML($html);
-		if ($fragment) $node->parentNode->insertBefore($fragment, $node);
-		$node->parentNode->removeChild($node);
+		if ($fragment) $element->parentNode->insertBefore($fragment, $element);
+		$element->parentNode->removeChild($element);
 	}
 
 	private static function escapeBracketsAndPipes( $str ) {
@@ -100,29 +134,32 @@ class TeXParserHooks {
 		
 		// Links, [[...]]
 		$links = $xpath->query('//btex-link');
-		foreach ($links as $node) {
+		/** @var DOMElement $element */
+		foreach ($links as $element) {
 			// If data-page is set, use mw parser to generate internal link
-			if (isset($node->attributes['data-page'])) {
-				$pageName = self::escapeBracketsAndPipes($node->attributes['data-page']->nodeValue);
+			if ($element->hasAttribute('data-page')) {
+				$pageName = self::escapeBracketsAndPipes($element->getAttribute('data-page'));
+				if (substr($pageName, 0, 2) === './')
+					$pageName = $parser->getTitle()->getPrefixedText() . substr($pageName, 1);
 
 				$content = '';
-				foreach ($node->childNodes as $child)
+				foreach ($element->childNodes as $child)
 					$content .= $dom->saveHTML($child);
 				$content = self::escapeBracketsAndPipes($content);
 
 				$result = $mwHandleInternalLinks->call($parser, "[[$pageName|$content]]");
-				self::domReplace($dom, $result, $node);
+				self::domReplace($dom, $result, $element);
 			}
 		}
 
 		// Functions, {{...}}
 		$funs = $xpath->query('//btex-fun');
-		/** @var DOMNode $node */
-		foreach ($funs as $node) {
-			$funName = self::escapeBracketsAndPipes($node->attributes['data-name']->nodeValue);
+		/** @var DOMNode $element */
+		foreach ($funs as $element) {
+			$funName = self::escapeBracketsAndPipes($element->attributes['data-name']->nodeValue);
 
 			$text = '{{' . $funName;
-			foreach ($node->childNodes as $child) {
+			foreach ($element->childNodes as $child) {
 				if ($child->nodeName !== 'btex-arg') continue;
 
 				$content = '';
@@ -150,14 +187,15 @@ class TeXParserHooks {
 			$text = str_replace(Parser::MARKER_PREFIX . 'NOPARSE', '', $text);
 			$text = $mwHandleMagicLinks->call($parser, $text);
 
-			self::domReplace($dom, $text, $node);
+			self::domReplace($dom, $text, $element);
 		}
 
 		$text = $dom->saveHTML();
 	}
 
 	private static function addSpaces($text) {
-		$text = preg_replace( '#([\p{Ll}\p{Lu}\p{Nd}\p{Mn}:’”])([\p{Han}\p{Hangul}\p{Hiragana}\p{Katakana}])#u', '$1 $2', $text );
+		// MW uses sequences like '"1 to replace parameters
+		$text = preg_replace( '#((?<!\'")[\p{Ll}\p{Lu}\p{Nd}\p{Mn}’”])([\p{Han}\p{Hangul}\p{Hiragana}\p{Katakana}])#u', '$1 $2', $text );
 		$text = preg_replace( '#([\p{Han}\p{Hangul}\p{Hiragana}\p{Katakana}])([\p{Ll}\p{Lu}\p{Nd}\p{Mn}‘“])#u', '$1 $2', $text );
 		return $text;
 	}

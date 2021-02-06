@@ -8,18 +8,19 @@
 	"type": "parser",
 	"manifest_version": 1,
 	"AutoloadClasses": {
-		"LabelHandler": "includes/LabelHandler.php",
+		"SubpageHandler": "includes/SubpageHandler.php",
 		"TeXParserHooks": "includes/TeXParserHooks.php"
 	},
 	"Hooks": {
+		"LoadExtensionSchemaUpdates": "TeXParserHooks::onLoadExtensionSchemaUpdates",
 		"ParserBeforeInternalParse": "TeXParserHooks::onParserBeforeInternalParse",
+		"PageSaveComplete": "TeXParserHooks::onPageSaveComplete",
 		"BeforePageDisplay": "TeXParserHooks::onBeforePageDisplay"
 	},
 	"ResourceModules": {
 		"ext.TeXParser": {
 			"packageFiles":"extensions/TeXParser/resources/ext.KaTeXcss.js",
-			"styles":["extensions/TeXParser/resources/ext.TeXParser.css"]
-
+			"styles":["extensions/TeXParser/resources/ext.TeXParser.less"]
 		}
 	}
 }
