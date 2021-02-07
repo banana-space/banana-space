@@ -12,6 +12,13 @@ class TeXParserHooks {
 		$updater->addExtensionTable('banana_subpage', "$dir/base.sql");
 	}
 
+    public static function initExtension() {
+		// Change how section IDs should be encoded;
+		// Default bahaviour: #.FF.FF.FF; changed behaviour: unicode string.
+        global $wgFragmentMode;
+        $wgFragmentMode = [ 'html5' ];
+    }
+
 	private static function http_post_json($url, $jsonStr) {
 	    $ch = curl_init();
 	    curl_setopt($ch, CURLOPT_POST, 1);
@@ -30,7 +37,7 @@ class TeXParserHooks {
 	    return array($httpCode, $response);
 	}
 
-	public static function onParserBeforeInternalParse( Parser &$parser, &$text, &$stripState ) {
+	public static function onParserBeforeInternalParse( Parser &$parser, &$text ) {
 		// If text is page content, use bTeX.
 		if (!$parser->getOptions()->getInterfaceMessage()) {
 			// Use wikitext parser for templates
@@ -70,14 +77,7 @@ class TeXParserHooks {
 		$output->addModules( "ext.TeXParser" );
 	}
 
-	public static function onPageSaveComplete(
-		WikiPage $wikiPage//,
-		// MediaWiki\User\UserIdentity $user,
-		// string $summary,
-		// int $flags,
-		// MediaWiki\Revision\RevisionRecord $revisionRecord,
-		// MediaWiki\Storage\EditResult $editResult
-	) { 
+	public static function onPageSaveComplete( WikiPage $wikiPage ) { 
 		$title = $wikiPage->getTitle();
 		$options = $wikiPage->makeParserOptions('canonical');
 		$output = $wikiPage->getParserOutput($options);
@@ -132,23 +132,78 @@ class TeXParserHooks {
 			return;
 		$xpath = new DOMXpath($dom);
 		
+		// Check if page has subpages or is a subpage; if so, get labels.
+		$title = $parser->getTitle();
+		$checkLabels = strpos($title->getText(), '/') !== false;
+		if (!$checkLabels) {
+			$elements = $xpath->query('//div[@class="compiler-data"]');
+			if ($elements->length === 1) {
+				/** @var DOMElement $element */
+				$element = $elements->item(0);
+				if (
+					$element->hasAttribute('data-json') &&
+					strpos($element->getAttribute('data-json'), '"subpages":') !== false
+				)
+					$checkLabels = true;
+			}
+		}
+
+		$labels = [];
+		if ($checkLabels) {
+			$labels = SubpageHandler::getLabels($title);
+		}
+
+		// References
+		$refs = $xpath->query('//btex-ref');
+		$prefix = null;
+		/** @var DOMElement $element */
+		foreach ($refs as $element) {
+			$result = '';
+			if ($element->hasAttribute('data-key')) {
+				$key = $element->getAttribute('data-key');
+
+				if ($key === '--prefix--') {
+					$result = $prefix ?? ($prefix = SubpageHandler::getPagePrefix($title));
+				} else {
+					$label = $labels[$key];
+					if (isset($label)) {
+						$result = $label['text'];
+					} else {
+						$result = '<span class="undefined-reference">??</span>';
+					}
+				}
+			}
+			self::domReplace($dom, $result, $element);
+		}
+
 		// Links, [[...]]
 		$links = $xpath->query('//btex-link');
 		/** @var DOMElement $element */
 		foreach ($links as $element) {
-			// If data-page is set, use mw parser to generate internal link
+			// use mw parser to generate internal link
+			$pageName = '';
 			if ($element->hasAttribute('data-page')) {
 				$pageName = self::escapeBracketsAndPipes($element->getAttribute('data-page'));
 				if (substr($pageName, 0, 2) === './')
 					$pageName = $parser->getTitle()->getPrefixedText() . substr($pageName, 1);
+			} else if ($element->hasAttribute('data-key')) {
+				$label = $labels[$element->getAttribute('data-key')];
+				if (isset($label)) {
+					$targetTitle = Title::newFromID($label['page_id']);
+					$pageName = self::escapeBracketsAndPipes($targetTitle->getPrefixedText() . '#' . urlencode($label['target']));
+				}
+			}
 
-				$content = '';
-				foreach ($element->childNodes as $child)
-					$content .= $dom->saveHTML($child);
-				$content = self::escapeBracketsAndPipes($content);
+			$content = '';
+			foreach ($element->childNodes as $child)
+				$content .= $dom->saveHTML($child);
+			$content = self::escapeBracketsAndPipes($content);
 
+			if ($pageName !== '') {
 				$result = $mwHandleInternalLinks->call($parser, "[[$pageName|$content]]");
 				self::domReplace($dom, $result, $element);
+			} else {
+				self::domReplace($dom, $content, $element);
 			}
 		}
 

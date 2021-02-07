@@ -1,10 +1,11 @@
 CREATE TABLE banana_subpage (
-    page_title varbinary(270) NOT NULL,
+    page_namespace int NOT NULL,
+    page_title varbinary(255) NOT NULL,
     parent_id int unsigned NOT NULL,
     subpage_order smallint unsigned NOT NULL,
     subpage_level tinyint unsigned NOT NULL,
     subpage_number tinyblob,
-    PRIMARY KEY (page_title),
+    PRIMARY KEY (page_namespace, page_title),
     FOREIGN KEY (parent_id) REFERENCES page (page_id) ON DELETE CASCADE
 ) DEFAULT CHARSET binary;
 

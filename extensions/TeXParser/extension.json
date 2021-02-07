@@ -11,6 +11,9 @@
 		"SubpageHandler": "includes/SubpageHandler.php",
 		"TeXParserHooks": "includes/TeXParserHooks.php"
 	},
+	"ExtensionFunctions": [
+		"TeXParserHooks::initExtension"
+	],
 	"Hooks": {
 		"LoadExtensionSchemaUpdates": "TeXParserHooks::onLoadExtensionSchemaUpdates",
 		"ParserBeforeInternalParse": "TeXParserHooks::onParserBeforeInternalParse",
