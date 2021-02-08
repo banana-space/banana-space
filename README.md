@@ -23,8 +23,14 @@ wfLoadExtension( 'Flow' );
 wfLoadExtension( 'Thanks' );
 wfLoadExtension( 'TeXParser' );
 
-$wgNamespaceContentModels[NS_TALK] = 'flow-board';
-$wgNamespaceContentModels[NS_USER_TALK] = 'flow-board';
+$wgNamespaceContentModels[NS_TALK]           = 'flow-board';
+$wgNamespaceContentModels[NS_USER_TALK]      = 'flow-board';
+$wgNamespaceContentModels[NS_FILE_TALK]      = 'flow-board';
+$wgNamespaceContentModels[NS_HELP_TALK]      = 'flow-board';
+$wgNamespaceContentModels[NS_PROJECT_TALK]   = 'flow-board';
+$wgNamespaceContentModels[NS_CATEGORY_TALK]  = 'flow-board';
+$wgNamespaceContentModels[NS_TEMPLATE_TALK]  = 'flow-board';
+$wgNamespaceContentModels[NS_MEDIAWIKI_TALK] = 'flow-board';
 ```
 
 If you encounter errors, go to the `maintenance` folder, and run

@@ -7,6 +7,20 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "parser",
 	"manifest_version": 1,
+	"namespaces": [
+		{
+			"id": 100,
+			"constant": "NS_NOTES",
+			"name": "讲义",
+			"content": true
+		},
+		{
+			"id": 101,
+			"constant": "NS_NOTES_TALK",
+			"name": "讲义讨论",
+			"defaultcontentmodel": "flow-board"
+		}
+	],
 	"AutoloadClasses": {
 		"SubpageHandler": "includes/SubpageHandler.php",
 		"TeXParserHooks": "includes/TeXParserHooks.php"
@@ -18,6 +32,7 @@
 		"LoadExtensionSchemaUpdates": "TeXParserHooks::onLoadExtensionSchemaUpdates",
 		"ParserBeforeInternalParse": "TeXParserHooks::onParserBeforeInternalParse",
 		"PageSaveComplete": "TeXParserHooks::onPageSaveComplete",
+		"OutputPageParserOutput": "TeXParserHooks::onOutputPageParserOutput",
 		"BeforePageDisplay": "TeXParserHooks::onBeforePageDisplay"
 	},
 	"ResourceModules": {

@@ -12,11 +12,18 @@ class TeXParserHooks {
 		$updater->addExtensionTable('banana_subpage', "$dir/base.sql");
 	}
 
+	/**
+	 * Initialise the extension.
+	 */
     public static function initExtension() {
+		global $wgNamespaceAliases;
+		$wgNamespaceAliases['Notes'] = NS_NOTES;
+		$wgNamespaceAliases['Notes_talk'] = NS_NOTES_TALK;
+
 		// Change how section IDs should be encoded;
 		// Default bahaviour: #.FF.FF.FF; changed behaviour: unicode string.
         global $wgFragmentMode;
-        $wgFragmentMode = [ 'html5' ];
+		$wgFragmentMode = [ 'html5' ];
     }
 
 	private static function http_post_json($url, $jsonStr) {
@@ -58,11 +65,39 @@ class TeXParserHooks {
 			$json = json_decode($response);
 			$text = $json->html;
 
+			$output = $parser->getOutput();
+			$output->setExtensionData('btex-data', $json->data);
+
 			// Handle <btex-link> etc. in btex output
 			self::handleWikitextAfterBtex($parser, $text);
 
-			// TODO: set display title
-			// $parser->getOutput()->setTitleText( ... )
+			// If it is a subpage, change the display title
+			$info = SubpageHandler::getSubpageInfo($title);
+			if ($info !== false) {
+				// A hack to call private functions
+				$mwHandleInternalLinks = function ($text) { return $this->handleInternalLinks($text); };
+
+				$output->setDisplayTitle( trim($info['prefix'] . ' ' . $info['display']) );
+				$output->setExtensionData('btex-data', $json->data);
+
+				$parent = '<li>讲义: [[讲义:' .
+					self::escapeBracketsAndPipes($info['parent_title']) . '|' .
+					self::escapeBracketsAndPipes($info['parent_display'] ?? $info['parent_title']) . ']]</li>';
+
+				$prev = isset($info['prev_title']) ?
+					'<li>上一节: [[讲义:' .
+					self::escapeBracketsAndPipes($info['prev_title']) . '|' .
+					self::escapeBracketsAndPipes(trim($info['prev_prefix'] . ' ' . $info['prev_display'])) . ']]</li>' : '';
+
+				$next = isset($info['next_title']) ?
+					'<li>下一节: [[讲义:' .
+					self::escapeBracketsAndPipes($info['next_title']) . '|' .
+					self::escapeBracketsAndPipes(trim($info['next_prefix'] . ' ' . $info['next_display'])) . ']]</li>' : '';
+
+				$nav = $mwHandleInternalLinks->call($parser, '<ul>' . $parent . $prev . $next . '</ul>');
+				$parser->replaceLinkHolders($nav);
+				$output->setExtensionData('btex-before', $nav);
+			}
 
 			return false;
 		}
@@ -82,21 +117,16 @@ class TeXParserHooks {
 		$options = $wikiPage->makeParserOptions('canonical');
 		$output = $wikiPage->getParserOutput($options);
 
-		// Update subpages and labels in database
-		$text = $output->getText();
-		$dom = new DOMDocument();
-		if (!@$dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8')))
-			return;
-		$xpath = new DOMXpath($dom);
-		$data = '';
-
-		$elements = $xpath->query('//div[@class="compiler-data"]');
-		if ($elements->length === 1) {
-			/** @var DOMElement $element */
-			$element = $elements->item(0);
-			$data = $element->hasAttribute('data-json') ? $element->getAttribute('data-json') : '';
+		if ($title->getNamespace() === NS_NOTES) {
+			// Update subpages and labels in database
+			$data = $output->getExtensionData('btex-data');
+			SubpageHandler::updatePageData($title, $data);
 		}
-		SubpageHandler::updatePageData($title, $data);
+	}
+
+	public static function onOutputPageParserOutput( OutputPage $out, ParserOutput $parserOutput ) {
+		$before = $parserOutput->getExtensionData('btex-before');
+		if (isset($before)) $out->setProperty('btex-before', $before);
 	}
 
 	// Replace $element by $html in $dom.
@@ -136,15 +166,9 @@ class TeXParserHooks {
 		$title = $parser->getTitle();
 		$checkLabels = strpos($title->getText(), '/') !== false;
 		if (!$checkLabels) {
-			$elements = $xpath->query('//div[@class="compiler-data"]');
-			if ($elements->length === 1) {
-				/** @var DOMElement $element */
-				$element = $elements->item(0);
-				if (
-					$element->hasAttribute('data-json') &&
-					strpos($element->getAttribute('data-json'), '"subpages":') !== false
-				)
-					$checkLabels = true;
+			$data = $parser->getOutput()->getExtensionData('btex-data');
+			if (isset($data) && strpos($data, '"subpages":') !== false) {
+				$checkLabels = true;
 			}
 		}
 
@@ -155,7 +179,7 @@ class TeXParserHooks {
 
 		// References
 		$refs = $xpath->query('//btex-ref');
-		$prefix = null;
+		$prefix = SubpageHandler::getPagePrefix($title);
 		/** @var DOMElement $element */
 		foreach ($refs as $element) {
 			$result = '';
@@ -163,7 +187,7 @@ class TeXParserHooks {
 				$key = $element->getAttribute('data-key');
 
 				if ($key === '--prefix--') {
-					$result = $prefix ?? ($prefix = SubpageHandler::getPagePrefix($title));
+					$result = $prefix;
 				} else {
 					$label = $labels[$key];
 					if (isset($label)) {
