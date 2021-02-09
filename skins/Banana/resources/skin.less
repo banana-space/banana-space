@@ -639,7 +639,60 @@ body > footer {
 
   h2 {
     border: 0;
+    padding: 0;
+    margin-top: .6em;
     font-size: 1.8em;
+
+    span.header-number {
+      margin-right: 1em;
+    }
+  }
+
+  h3 {
+    font-size: 1.4em;
+    padding: 0;
+    margin-top: .5em;
+    font-weight: normal;
+
+    span.header-number {
+      margin-right: 1em;
+    }
+  }
+
+  h4 {
+    font-size: 1.2em;
+    padding: 0;
+    margin-top: .5em;
+
+    span.header-number {
+      margin-right: 1em;
+    }
+  }
+
+  .toc {
+    background-color: #f8f9fa;
+    min-width: 10em;
+    border: 0;
+    border-left: 4px solid #dce0e4;
+    padding: .5em 1em;
+    border-radius: 0 1.5em 1.5em 0;
+    line-height: 1.4;
+
+    .toctitle {
+      text-align: justify;
+      font-size: 1.6em;
+      margin-bottom: .8em;
+    }
+    
+    ul {
+      li.toclevel-2 {
+        padding-left: 1em;
+      }
+
+      li.toclevel-3 {
+        padding-left: 2em;
+      }
+    }
   }
 
   .warningbox {

@@ -131,9 +131,12 @@ class TeXParserHooks {
 
 	// Replace $element by $html in $dom.
 	private static function domReplace( DOMDocument $dom, $html, DOMNode $element ) {
-		$fragment = $dom->createDocumentFragment();
-		$fragment->appendXML($html);
-		if ($fragment) $element->parentNode->insertBefore($fragment, $element);
+		if ($html !== '') {
+			$fragment = $dom->createDocumentFragment();
+			$fragment->appendXML($html);
+			if ($fragment !== false)
+				$element->parentNode->insertBefore($fragment, $element);
+		}
 		$element->parentNode->removeChild($element);
 	}
 
