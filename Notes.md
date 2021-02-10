@@ -1,5 +1,3 @@
-# Banana skin
-
 ## Notes
 
 We avoid modifying the MediaWiki source code whenever possible. The exceptions are listed as follows. These need to be taken care of when updating MediaWiki.
@@ -21,3 +19,5 @@ We avoid modifying the MediaWiki source code whenever possible. The exceptions a
     ```
 
 * I have changed `/extensions/Flow/includes/Conversion/Utils.php`, at Line 62, to enable KaTeX in discussion headers.
+
+* Line 24 of `resources/lib/CLDRPluralRuleParser/CLDRPluralRuleParser.js` is changed from `if (...)` to `if (false && ...)` -- it is incompatible with bTeX monaco editor. (It shows a console warning and prevents that module being loaded.)

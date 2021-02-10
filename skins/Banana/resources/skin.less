@@ -67,7 +67,7 @@ a {
   top: 0;
   position: fixed;
   width: 100%;
-  z-index: 5;
+  z-index: 20;
 }
 
 .b-nav {
@@ -699,6 +699,43 @@ body > footer {
     margin: 0 -30px 16px -30px;
     border: 0;
     padding: 1em 30px;
+  }
+
+  textarea#wpTextbox1:not(.b-unhide) {
+    opacity: 0;
+  }
+  
+  .btex-monaco-container {
+    height: 600px;
+    margin: 0 -30px;
+  
+    .monaco-editor {
+      font-family: @font-family;
+
+      .line-dec-added {
+        background: #c2d994;
+        width: 4px !important;
+        margin-left: 4px;
+      }
+      .line-dec-modified {
+        background: #a9c5e0;
+        width: 4px !important;
+        margin-left: 4px;
+      }
+      .line-dec-removed {
+        height: 0;
+        border: 5px solid transparent;
+        border-left: 5px solid #f7afb5;
+        transform: translate(4px, -4px);
+      }
+    }
+  }
+
+  .editOptions {
+    margin: 0 -30px 1em -30px;
+    padding: 10px 30px 20px 30px;
+    background: #f0f2f4;
+    border: 0;
   }
 }
 

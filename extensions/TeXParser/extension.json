@@ -23,7 +23,8 @@
 	],
 	"AutoloadClasses": {
 		"SubpageHandler": "includes/SubpageHandler.php",
-		"TeXParserHooks": "includes/TeXParserHooks.php"
+		"TeXParserHooks": "includes/TeXParserHooks.php",
+		"EditorHooks": "includes/EditorHooks.php"
 	},
 	"ExtensionFunctions": [
 		"TeXParserHooks::initExtension"
@@ -33,12 +34,14 @@
 		"ParserBeforeInternalParse": "TeXParserHooks::onParserBeforeInternalParse",
 		"PageSaveComplete": "TeXParserHooks::onPageSaveComplete",
 		"OutputPageParserOutput": "TeXParserHooks::onOutputPageParserOutput",
-		"BeforePageDisplay": "TeXParserHooks::onBeforePageDisplay"
+		"BeforePageDisplay": "TeXParserHooks::onBeforePageDisplay",
+		"EditPage::showEditForm:initial": "EditorHooks::onEditPageShowEditFormInitial",
+		"EditPage::showReadOnlyForm:initial": "EditorHooks::onEditPageShowReadOnlyFormInitial"
 	},
 	"ResourceModules": {
 		"ext.TeXParser": {
-			"packageFiles":"extensions/TeXParser/resources/ext.KaTeXcss.js",
-			"styles":["extensions/TeXParser/resources/ext.TeXParser.less"]
+			"packageFiles": [ "extensions/TeXParser/resources/ext.KaTeXcss.js" ],
+			"styles": [ "extensions/TeXParser/resources/ext.TeXParser.less" ]
 		}
 	}
 }
