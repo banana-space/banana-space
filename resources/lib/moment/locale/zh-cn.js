@@ -16,7 +16,7 @@
         months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split(
             '_'
         ),
-        monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split(
+        monthsShort: '1 月_2 月_3 月_4 月_5 月_6 月_7 月_8 月_9 月_10 月_11 月_12 月'.split(
             '_'
         ),
         weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
@@ -26,13 +26,13 @@
             LT: 'HH:mm',
             LTS: 'HH:mm:ss',
             L: 'YYYY/MM/DD',
-            LL: 'YYYY年M月D日',
-            LLL: 'YYYY年M月D日Ah点mm分',
-            LLLL: 'YYYY年M月D日ddddAh点mm分',
+            LL: 'YYYY 年 M 月 D 日',
+            LLL: 'YYYY 年 M 月 D 日 HH:mm',
+            LLLL: 'YYYY 年 M 月 D 日 (dddd) HH:mm',
             l: 'YYYY/M/D',
-            ll: 'YYYY年M月D日',
-            lll: 'YYYY年M月D日 HH:mm',
-            llll: 'YYYY年M月D日dddd HH:mm',
+            ll: 'YYYY 年 M 月 D 日',
+            lll: 'YYYY 年 M 月 D 日 HH:mm',
+            llll: 'YYYY 年 M 月 D 日 (dddd) HH:mm',
         },
         meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
         meridiemHour: function (hour, meridiem) {

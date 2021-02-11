@@ -17,6 +17,7 @@ We avoid modifying the MediaWiki source code whenever possible. The exceptions a
         'zh both' => 'Y 年 n 月 j 日 (D) H:i',
     ];
     ```
+    The js counterpart `resources/lib/moment/locale/zh-cn.js` is also changed.
 
 * I have changed `/extensions/Flow/includes/Conversion/Utils.php`, at Line 62, to enable KaTeX in discussion headers.
 

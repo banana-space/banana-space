@@ -5,10 +5,11 @@
 @color-gray: #a2a9b1;
 @color-gray-2: #eaecf0;
 @color-accent: #ffc800;
-@color-link: #1070b8;
-@color-link-new: #20a050;
-@color-link--visited: #1070b8;
+@color-link: #108ac7;
+@color-link-new: #41a522;
+@color-link--visited: #108ac7;
 @font-family: 'Noto Sans',Roboto,-apple-system,BlinkMacSystemFont,'Segoe UI','Oxygen','Ubuntu','Cantarell','Helvetica Neue','Microsoft YaHei UI','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans CN',sans-serif;
+@font-family-mono: 'Cascadia Code','Consolas','Microsoft YaHei UI','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans CN',sans-serif;
 
 @font-face {
   font-family: 'Noto Sans';
@@ -33,6 +34,8 @@
   font-style: italic;
   src: url('https://cdn.jsdelivr.net/npm/typeface-noto-sans@1.1.13/files/noto-sans-latin-700italic.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/typeface-noto-sans@1.1.13/files/noto-sans-latin-700italic.woff') format('woff');
 }
+
+// TODO: @font-face for Cascadia Code
 
 /* Styles */
 html {
@@ -456,7 +459,7 @@ main {
 
   ul {
     margin: 0;
-    font-size: 14px;
+    font-size: 15px;
   }
 
   li {
@@ -468,8 +471,8 @@ main {
     padding: 5px 10px;
     margin-right: 5px;
     display: block;
-    background-color: @color-gray-2;
-    color: @color-base;
+    background-color: #e8f8fe;
+    color: @color-link;
     box-shadow: 0 1px 3px rgba(0,0,0,0.03),0 1px 2px rgba(0,0,0,0.06);
   }
 }
@@ -632,6 +635,10 @@ body > footer {
       border-bottom: 3px solid rgba(0,0,0,0.1);
     }
   }
+
+  .flow-ui-anonWarningWidget-active a {
+    color: #fff;
+  }
   
   a.new, a.new:visited {
     color: @color-link-new;
@@ -701,6 +708,10 @@ body > footer {
     padding: 1em 30px;
   }
 
+  .editpage-copywarn {
+    color: @color-gray;
+  }
+
   textarea#wpTextbox1:not(.b-unhide) {
     opacity: 0;
   }
@@ -713,12 +724,12 @@ body > footer {
       font-family: @font-family;
 
       .line-dec-added {
-        background: #c2d994;
+        background: #b0e090;
         width: 4px !important;
         margin-left: 4px;
       }
       .line-dec-modified {
-        background: #a9c5e0;
+        background: #a0d9f0;
         width: 4px !important;
         margin-left: 4px;
       }
@@ -736,6 +747,14 @@ body > footer {
     padding: 10px 30px 20px 30px;
     background: #f0f2f4;
     border: 0;
+  }
+
+  .mw-editfont-monospace  {
+    font-family: @font-family-mono;
+
+    &.oo-ui-textInputWidget > .oo-ui-inputWidget-input {
+      font-size: 16px;
+    }
   }
 }
 
@@ -757,7 +776,7 @@ body > footer {
 .flow-topic-titlebar {
   margin: 0 -30px;
   padding: .8em 30px;
-  background-color: #e4f2fa;
+  background-color: #e9f5fd;
 
   .flow-menu {
     top: 3em;

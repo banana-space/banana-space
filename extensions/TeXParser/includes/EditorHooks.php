@@ -46,7 +46,7 @@ class EditorHooks {
         $html = str_replace('> ', '>', $html);
         $html = str_replace(' <', '<', $html);
         $html = str_replace('$oldText', $quotedText, $html);
-        $html = str_replace('$useBtex', $useBtex, $html);
+        $html = str_replace('$useBtex', $useBtex ? 'true' : 'false', $html);
 
         $editPage->editFormTextBottom = $html;
     }

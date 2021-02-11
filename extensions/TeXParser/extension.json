@@ -29,12 +29,16 @@
 	"ExtensionFunctions": [
 		"TeXParserHooks::initExtension"
 	],
+	"ExtensionMessagesFiles": {
+		"ExampleExtensionMagic": "includes/TeXParser.i18n.php"
+	},
 	"Hooks": {
 		"LoadExtensionSchemaUpdates": "TeXParserHooks::onLoadExtensionSchemaUpdates",
 		"ParserBeforeInternalParse": "TeXParserHooks::onParserBeforeInternalParse",
 		"PageSaveComplete": "TeXParserHooks::onPageSaveComplete",
 		"OutputPageParserOutput": "TeXParserHooks::onOutputPageParserOutput",
 		"BeforePageDisplay": "TeXParserHooks::onBeforePageDisplay",
+		"ParserFirstCallInit": "TeXParserHooks::onParserFirstCallInit",
 		"EditPage::showEditForm:initial": "EditorHooks::onEditPageShowEditFormInitial",
 		"EditPage::showReadOnlyForm:initial": "EditorHooks::onEditPageShowReadOnlyFormInitial"
 	},

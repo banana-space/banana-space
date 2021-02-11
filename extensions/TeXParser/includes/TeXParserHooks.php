@@ -7,6 +7,8 @@
  */
 
 class TeXParserHooks {
+	private const BTEX_URL = "http://127.0.0.1:7200";
+
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater ) {
 		$dir = dirname(__DIR__);
 		$updater->addExtensionTable('banana_subpage', "$dir/base.sql");
@@ -55,13 +57,12 @@ class TeXParserHooks {
 
 			// Run compiler
 			// TODO: result should be stored in database
-			$url = "http://127.0.0.1:7200";
 			$jsonStr = json_encode(
 				array(
 					"code" => $text
 				)
 			);
-			list($httpCode, $response) = self::http_post_json($url, $jsonStr);
+			list($httpCode, $response) = self::http_post_json(self::BTEX_URL, $jsonStr);
 			$json = json_decode($response);
 			$text = $json->html;
 
@@ -128,6 +129,31 @@ class TeXParserHooks {
 		$before = $parserOutput->getExtensionData('btex-before');
 		if (isset($before)) $out->setProperty('btex-before', $before);
 	}
+
+	public static function onParserFirstCallInit( Parser $parser ) {
+		$parser->setFunctionHook(
+			'math',
+			[ self::class, 'mathParserFunction' ],
+			Parser::SFH_NO_HASH
+		);
+	}
+
+	/**
+	 * For use in templates, since we don't use btex for templates.
+	 */
+	public static function mathParserFunction( Parser $parser, $param = '' ) {
+		$jsonStr = json_encode(
+			array(
+				"code" => $param,
+				"equationMode" => true
+			)
+		);
+		list($httpCode, $response) = self::http_post_json(self::BTEX_URL, $jsonStr);
+		$json = json_decode($response);
+		$output = $json->html;
+  
+		return [ $output, 'nowiki' => true, 'isHTML' => true ];
+	 }
 
 	// Replace $element by $html in $dom.
 	private static function domReplace( DOMDocument $dom, $html, DOMNode $element ) {
