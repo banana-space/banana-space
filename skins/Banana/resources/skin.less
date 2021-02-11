@@ -620,13 +620,27 @@ body > footer {
       outline: none;
     }
 
-    &:visited {
+    &.external {
+      color: @color-link;
+    }
+
+    &:visited, &.external:visited {
       color: @color-link--visited;
+    }
+
+    &.external::after {
+      background-image: url(/static/images/external-link.svg);
+      background-size: .75em;
+      width: .75em;
+      height: .75em;
+      margin-left: 4px;
+      display: inline-block;
+      content: '';
+      background-repeat: no-repeat;
     }
   }
 
   .btex-output a {
-    display: inline-block;
     line-height: 1.2;
     border-bottom: 3px solid transparent;
     margin-bottom: -3px;
@@ -785,6 +799,43 @@ body > footer {
 
   .flow-topic-title {
     font-weight: normal;
+  }
+}
+
+// OOUI
+
+.mw-ui-button,
+.oo-ui-buttonElement-button {
+  border: 0 !important;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.1) !important;
+  outline: 0 !important;
+  background-color: #eceef0 !important;
+  font-weight: normal !important;
+  border-radius: 6px !important;
+  padding-top: 6px;
+  padding-bottom: 6px;
+
+  &:hover {
+    background-color: #f2f4f6 !important;
+  }
+
+  .editOptions & {
+    background-color: #fdfeff !important;
+
+    &:hover {
+      background-color: #f6f7f8 !important;
+    }
+  }
+
+  &.mw-ui-primary,
+  .oo-ui-flaggedElement-primary > &,
+  .editOptions .oo-ui-flaggedElement-primary > & {
+    background-color: #1767e0 !important;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.2) !important;
+
+    &:hover {
+      background-color: #2276f5 !important;
+    }
   }
 }
 

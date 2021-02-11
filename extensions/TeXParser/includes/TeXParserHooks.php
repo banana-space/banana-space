@@ -71,34 +71,7 @@ class TeXParserHooks {
 
 			// Handle <btex-link> etc. in btex output
 			self::handleWikitextAfterBtex($parser, $text);
-
-			// If it is a subpage, change the display title
-			$info = SubpageHandler::getSubpageInfo($title);
-			if ($info !== false) {
-				// A hack to call private functions
-				$mwHandleInternalLinks = function ($text) { return $this->handleInternalLinks($text); };
-
-				$output->setDisplayTitle( trim($info['prefix'] . ' ' . $info['display']) );
-				$output->setExtensionData('btex-data', $json->data);
-
-				$parent = '<li>讲义: [[讲义:' .
-					self::escapeBracketsAndPipes($info['parent_title']) . '|' .
-					self::escapeBracketsAndPipes($info['parent_display'] ?? $info['parent_title']) . ']]</li>';
-
-				$prev = isset($info['prev_title']) ?
-					'<li>上一节: [[讲义:' .
-					self::escapeBracketsAndPipes($info['prev_title']) . '|' .
-					self::escapeBracketsAndPipes(trim($info['prev_prefix'] . ' ' . $info['prev_display'])) . ']]</li>' : '';
-
-				$next = isset($info['next_title']) ?
-					'<li>下一节: [[讲义:' .
-					self::escapeBracketsAndPipes($info['next_title']) . '|' .
-					self::escapeBracketsAndPipes(trim($info['next_prefix'] . ' ' . $info['next_display'])) . ']]</li>' : '';
-
-				$nav = $mwHandleInternalLinks->call($parser, '<ul>' . $parent . $prev . $next . '</ul>');
-				$parser->replaceLinkHolders($nav);
-				$output->setExtensionData('btex-before', $nav);
-			}
+			self::handleCompilerData($parser, $json->data);
 
 			return false;
 		}
@@ -111,6 +84,9 @@ class TeXParserHooks {
 	public static function onBeforePageDisplay( OutputPage $output, Skin $skin ) {
 		// Load css for btex output
 		$output->addModules( "ext.TeXParser" );
+
+		// Add meta tag
+		$output->addMeta('viewport', 'width=500, initial-scale=1');
 	}
 
 	public static function onPageSaveComplete( WikiPage $wikiPage ) { 
@@ -299,6 +275,48 @@ class TeXParserHooks {
 		}
 
 		$text = $dom->saveHTML();
+	}
+
+	private static function handleCompilerData( Parser $parser, $compilerData ) {
+		$title = $parser->getTitle();
+		$output = $parser->getOutput();
+		
+		$info = SubpageHandler::getSubpageInfo($title);
+		if ($info !== false) {
+			// A hack to call private functions
+			$mwHandleInternalLinks = function ($text) { return $this->handleInternalLinks($text); };
+
+			// Set display title
+			$output->setDisplayTitle( trim($info['prefix'] . ' ' . $info['display']) );
+			$output->setExtensionData('btex-data', $compilerData);
+
+			$parent = '<li>讲义: [[讲义:' .
+				self::escapeBracketsAndPipes($info['parent_title']) . '|' .
+				self::escapeBracketsAndPipes($info['parent_display'] ?? $info['parent_title']) . ']]</li>';
+
+			$prev = isset($info['prev_title']) ?
+				'<li>上一节: [[讲义:' .
+				self::escapeBracketsAndPipes($info['prev_title']) . '|' .
+				self::escapeBracketsAndPipes(trim($info['prev_prefix'] . ' ' . $info['prev_display'])) . ']]</li>' : '';
+
+			$next = isset($info['next_title']) ?
+				'<li>下一节: [[讲义:' .
+				self::escapeBracketsAndPipes($info['next_title']) . '|' .
+				self::escapeBracketsAndPipes(trim($info['next_prefix'] . ' ' . $info['next_display'])) . ']]</li>' : '';
+
+			$nav = $mwHandleInternalLinks->call($parser, '<ul>' . $parent . $prev . $next . '</ul>');
+			$parser->replaceLinkHolders($nav);
+			$output->setExtensionData('btex-before', $nav);
+		}
+
+		$json = json_decode($compilerData);
+
+		// Handle external links
+		if (isset($json->externalLinks)) {
+			foreach ($json->externalLinks as $link) {
+				$output->addExternalLink($link);
+			}
+		}
 	}
 
 	private static function addSpaces($text) {
