@@ -670,7 +670,7 @@ body > footer {
     }
   }
 
-  h3 {
+  h3:not(#p-cactions-label) {
     font-size: 1.4em;
     padding: 0;
     margin-top: .5em;
@@ -737,6 +737,11 @@ body > footer {
     overflow-x: auto;
   }
 
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
   .warningbox {
     margin: 0 -30px 16px -30px;
     border: 0;
@@ -791,6 +796,27 @@ body > footer {
       font-size: 16px;
     }
   }
+
+  .error-message, .warning-message {
+    margin: 0 -30px 16px -30px;
+    padding: .6em 30px;
+    font-size: 16px;
+    font-family: @font-family-mono;
+  }
+
+  .error-message {
+    background-color: #ffe8e8;
+    color: #d00000;
+  }
+
+  .warning-message {
+    background-color: #fff0e4;
+    color: #d87300;
+  }
+
+  .error {
+    font-size: 100%;
+  }
 }
 
 #p-personal a.new {
@@ -826,7 +852,7 @@ body > footer {
 // OOUI
 
 .mw-ui-button,
-.oo-ui-buttonElement-button {
+.b-page-body :not(.oo-ui-iconElement):not(.oo-ui-indicatorElement) > .oo-ui-buttonElement-button {
   border: 0 !important;
   box-shadow: 0 3px 5px rgba(0,0,0,0.1) !important;
   outline: 0 !important;
@@ -836,29 +862,43 @@ body > footer {
   padding: 6px 1em !important;
   margin-top: .5em !important;
   margin-bottom: .5em !important;
+  line-height: 1.6 !important;
 
   &:hover {
     background-color: #f2f4f6 !important;
   }
+}
 
-  .editOptions & {
-    background-color: #fdfeff !important;
+.editOptions .oo-ui-buttonElement-button {
+  background-color: #fdfeff !important;
 
-    &:hover {
-      background-color: #f6f7f8 !important;
-    }
+  &:hover {
+    background-color: #f6f7f8 !important;
   }
+}
 
-  &.mw-ui-primary,
-  .oo-ui-flaggedElement-primary > &,
-  .editOptions .oo-ui-flaggedElement-primary > & {
-    background-color: #1767e0 !important;
-    box-shadow: 0 3px 5px rgba(0,0,0,0.2) !important;
+&.mw-ui-primary,
+.b-page-body .oo-ui-widget-enabled.oo-ui-flaggedElement-primary > .oo-ui-buttonElement-button {
+  background-color: #1767e0 !important;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2) !important;
 
-    &:hover {
-      background-color: #2276f5 !important;
-    }
+  &:hover {
+    background-color: #2276f5 !important;
   }
+}
+
+.b-page-body .oo-ui-widget-disabled:not(.oo-ui-iconElement):not(.oo-ui-indicatorElement) > .oo-ui-buttonElement-button {
+  background-color: @color-gray !important;
+
+  &:hover {
+    background-color: @color-gray !important;
+  }
+}
+
+.flow-ui-newTopicWidget-title.oo-ui-textInputWidget input {
+  font-size: 1.2em !important;
+  font-weight: normal !important;
+  font-family: @font-family-mono !important;
 }
 
 // Login page

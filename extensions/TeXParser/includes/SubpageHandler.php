@@ -12,7 +12,7 @@ class SubpageHandler {
         if ($isRoot) return false;
 
         $namespace = $title->getNamespace();
-        $titleText = $title->getText();
+        $titleText = $title->getDBkey();
         $titleText = preg_replace('#(^[^/]+)/preamble$#', '$1', $titleText);
 
         $dbr = wfGetDB( DB_REPLICA );
@@ -89,7 +89,7 @@ class SubpageHandler {
 
         $ordered = [];
         $order = -1;
-        $text = $title->getText();
+        $text = $title->getDBkey();
         foreach ($result as $row) {
             $ordered[$row->subpage_order] = $row;
             if ($row->page_title === $text) $order = $row->subpage_order;
@@ -97,10 +97,9 @@ class SubpageHandler {
 
         if ($order === -1) return [
             'parent_title' => $ordered[0]->page_title,
-            'parent_display' => $ordered[0]->display_title
+            'parent_display' => $ordered[0]->display_title,
+            'rows' => $ordered
         ];
-
-        error_log('DEBUG ' . $ordered[$order]->subpage_number);
 
         return [
             'title' => $ordered[$order]->page_title,
@@ -116,7 +115,8 @@ class SubpageHandler {
             'next_prefix' => !isset($ordered[$order + 1]) ? null : self::numberToPrefix($ordered[$order + 1]->subpage_number),
             'next_display' => !isset($ordered[$order + 1]) ? null : $ordered[$order + 1]->display_title,
             'parent_title' => $ordered[0]->page_title,
-            'parent_display' => $ordered[0]->display_title
+            'parent_display' => $ordered[0]->display_title,
+            'rows' => $ordered
         ];
     }
 
@@ -140,9 +140,9 @@ class SubpageHandler {
      */
     public static function updatePageData( Title $title, string $data ) {
         $json = json_decode($data) ?? [];
-        $isRoot = $title->getRootText() === $title->getText();
+        $isRoot = strpos($title->getText(), '/') === false;
         $namespace = $title->getNamespace();
-        $titleText = $title->getText();
+        $titleText = $title->getDBkey();
         $id = $title->getArticleID();
 
         $dbw = wfGetDB( DB_MASTER );

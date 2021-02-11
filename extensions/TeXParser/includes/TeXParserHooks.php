@@ -6,6 +6,8 @@
  * @ingroup Extensions
  */
 
+use MediaWiki\MediaWikiServices;
+
 class TeXParserHooks {
 	private const BTEX_URL = "http://127.0.0.1:7200";
 
@@ -66,24 +68,27 @@ class TeXParserHooks {
 
 			// Run compiler
 			// TODO: result should be stored in database
-			$isPreview = is_null($parser->getRevisionId());
+			$isPreview = $parser->getOptions()->getIsPreview();
+			$isInline = $parser->getOptions()->getOption('isInline');
 			$jsonStr = json_encode(
 				array(
 					"code" => $text,
 					"preamble" => $preamble,
-					"inverseSearch" => $isPreview
+					"inverseSearch" => $isPreview,
+					"inline" => $isInline
 				)
 			);
 			list($httpCode, $response) = self::http_post_json(self::BTEX_URL, $jsonStr);
 			$json = json_decode($response);
-			$text = $json->html;
+			$text = $json->html ?? '';
 
 			$output = $parser->getOutput();
-			$output->setExtensionData('btex-data', $json->data);
+			$output->setExtensionData('btex-data', $json->data ?? '{}');
 
 			// Handle <btex-link> etc. in btex output
 			self::handleWikitextAfterBtex($parser, $text);
-			self::handleCompilerData($parser, $subpageInfo, $json->data);
+			self::handleCompilerData($parser, $subpageInfo, $json->data ?? '{}');
+			self::generateErrorMessages($json, $isPreview, $text);
 
 			return false;
 		}
@@ -109,7 +114,12 @@ class TeXParserHooks {
 		if ($title->getNamespace() === NS_NOTES) {
 			// Update subpages and labels in database
 			$data = $output->getExtensionData('btex-data');
-			SubpageHandler::updatePageData($title, $data);
+			if (isset($data))
+				SubpageHandler::updatePageData($title, $data);
+
+			$info = SubpageHandler::getSubpageInfo($title);
+			if ($info !== false) {
+				self::purgeSubpages($info, $title);}
 		}
 	}
 
@@ -142,6 +152,11 @@ class TeXParserHooks {
   
 		return [ $output, 'nowiki' => true, 'isHTML' => true ];
 	 }
+
+	public static function onParserOptionsRegister( &$defaults, &$inCacheKey, &$lazyLoad ) {
+		$defaults['isInline'] = false;
+		$inCacheKey['isInline'] = true;
+	}
 
 	 private static function http_post_json($url, $jsonStr) {
 		 $ch = curl_init();
@@ -355,5 +370,59 @@ class TeXParserHooks {
 		$text = preg_replace( '#((?<!\'")[\p{Ll}\p{Lu}\p{Nd}\p{Mn}’”])([\p{Han}\p{Hangul}\p{Hiragana}\p{Katakana}])#u', '$1 $2', $text );
 		$text = preg_replace( '#([\p{Han}\p{Hangul}\p{Hiragana}\p{Katakana}])([\p{Ll}\p{Lu}\p{Nd}\p{Mn}‘“])#u', '$1 $2', $text );
 		return $text;
+	}
+
+	private static function generateErrorMessages($json, bool $isPreview, string &$text) {
+		$errors = $json->errors ?? [];
+		$warnings = $json->warnings ?? [];
+
+		if (!$isPreview) {
+			if ($text === '' && isset($errors[0]))
+				$text = '<span class="error">[编译错误]</span>';
+			return;
+		}
+
+		$prepend = '';
+		foreach ($errors as $error) {
+			$message = self::getErrorMessage($error);
+			if ($message)
+				$prepend .= '<div class="error-message"><b>错误</b> - ' . $message . '</div>';
+		}
+		foreach ($warnings as $error) {
+			$message = self::getErrorMessage($error);
+			if ($message)
+				$prepend .= '<div class="warning-message"><b>警告</b> - ' . $message . '</div>';
+		}
+
+		$text = $prepend . $text;
+	}
+
+	private static function getErrorMessage($error) {
+		$match = [];
+		if (!preg_match('#^([^:\s]*):(\d+):(\d+) (.+)#u', $error, $match)) return false;
+
+		$positionString = '';
+		if ($match[1] === 'code') $positionString = "第 $match[2] 行, 第 $match[3] 列: ";
+		if ($match[1] === 'preamble') $positionString = "(preamble) 第 $match[2] 行, 第 $match[3] 列: ";
+
+		return $positionString . $match[4];
+	}
+
+	private static function purgeSubpages($subpageInfo, Title $except = null) {
+		$exceptID = -1;
+		if (isset($except)) $exceptID = $except->getArticleID();
+
+		if (isset($subpageInfo['rows'])) {
+			foreach ($subpageInfo['rows'] as $row) {
+				$title = Title::makeTitle(NS_NOTES, $row->page_title);
+				if ($title->exists()) {
+					$id = $title->getArticleID();
+					if ($id !== $exceptID) {
+						$page = WikiPage::newFromID($id);
+						$page->doPurge();
+					}
+				}
+			}
+		}
 	}
 }
