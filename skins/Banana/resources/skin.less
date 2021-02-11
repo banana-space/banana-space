@@ -4,6 +4,7 @@
 @color-base: #74797d;
 @color-gray: #a2a9b1;
 @color-gray-2: #eaecf0;
+@color-gray-3: #f0f2f4;
 @color-accent: #ffc800;
 @color-link: #108ac7;
 @color-link-new: #41a522;
@@ -589,7 +590,7 @@ body > footer {
   ul {
     color: @color-gray;
     font-size: .9em;
-    background: #f0f2f4;
+    background: @color-gray-3;
     padding: .6em 30px;
     margin: 0 -30px .6em -30px;
 
@@ -716,6 +717,26 @@ body > footer {
     }
   }
 
+  code, pre {
+    font-family: @font-family-mono;
+    border: none;
+    background-color: @color-gray-3;
+    line-height: 1.4;
+    color: #666;
+  }
+
+  code {
+    margin: 0 3px;
+    white-space: pre-wrap;
+  }
+
+  pre {
+    margin: 0 -30px;
+    padding: .5em 30px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
   .warningbox {
     margin: 0 -30px 16px -30px;
     border: 0;
@@ -759,7 +780,7 @@ body > footer {
   .editOptions {
     margin: 0 -30px 1em -30px;
     padding: 10px 30px 20px 30px;
-    background: #f0f2f4;
+    background: @color-gray-3;
     border: 0;
   }
 
@@ -812,8 +833,9 @@ body > footer {
   background-color: #eceef0 !important;
   font-weight: normal !important;
   border-radius: 6px !important;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding: 6px 1em !important;
+  margin-top: .5em !important;
+  margin-bottom: .5em !important;
 
   &:hover {
     background-color: #f2f4f6 !important;
