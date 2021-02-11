@@ -28,38 +28,50 @@ class TeXParserHooks {
 		$wgFragmentMode = [ 'html5' ];
     }
 
-	private static function http_post_json($url, $jsonStr) {
-	    $ch = curl_init();
-	    curl_setopt($ch, CURLOPT_POST, 1);
-	    curl_setopt($ch, CURLOPT_URL, $url);
-	    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonStr);
-	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-	            'Content-Type: application/json; charset=utf-8',
-	            'Content-Length: ' . strlen($jsonStr)
-	        )
-	    );
-	    $response = curl_exec($ch);
-	    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	    curl_close($ch);
-
-	    return array($httpCode, $response);
-	}
-
 	public static function onParserBeforeInternalParse( Parser &$parser, &$text ) {
 		// If text is page content, use bTeX.
 		if (!$parser->getOptions()->getInterfaceMessage()) {
 			// Use wikitext parser for templates
 			$title = $parser->getTitle();
-			if ($title->mNamespace === NS_TEMPLATE) {
+			if ($title->getNamespace() === NS_TEMPLATE) {
 				return true;
+			}
+			$subpageInfo = SubpageHandler::getSubpageInfo($title);
+
+			// If is preamble, return content wrapped in <pre>
+			if ($title->getNamespace() === NS_NOTES && preg_match('#/preamble$#', $title->getText())) {
+				$dom = new DOMDocument();
+				$pre = $dom->createElement('pre');
+				$pre->setAttribute('class', 'code-btex');
+				$textNode = $dom->createTextNode($text);
+				$pre->appendChild($textNode);
+				$text = $dom->saveHTML($pre);
+
+				self::handleCompilerData($parser, $subpageInfo, '{}');
+				return false;
+			}
+
+			// Get preamble
+			$preamble = '';
+			if ($subpageInfo !== false) {
+				$preambleName = $subpageInfo['parent_title'] . '/preamble';
+				$preambleTitle = Title::makeTitle(NS_NOTES, $preambleName);
+				if ($preambleTitle->exists()) {
+					$content = WikiPage::newFromID($preambleTitle->getArticleID())->getContent();
+					if ($content instanceof TextContent) {
+						$preamble = $content->getText();
+					}
+				}
 			}
 
 			// Run compiler
 			// TODO: result should be stored in database
+			$isPreview = is_null($parser->getRevisionId());
 			$jsonStr = json_encode(
 				array(
-					"code" => $text
+					"code" => $text,
+					"preamble" => $preamble,
+					"inverseSearch" => $isPreview
 				)
 			);
 			list($httpCode, $response) = self::http_post_json(self::BTEX_URL, $jsonStr);
@@ -71,7 +83,7 @@ class TeXParserHooks {
 
 			// Handle <btex-link> etc. in btex output
 			self::handleWikitextAfterBtex($parser, $text);
-			self::handleCompilerData($parser, $json->data);
+			self::handleCompilerData($parser, $subpageInfo, $json->data);
 
 			return false;
 		}
@@ -129,6 +141,24 @@ class TeXParserHooks {
 		$output = $json->html;
   
 		return [ $output, 'nowiki' => true, 'isHTML' => true ];
+	 }
+
+	 private static function http_post_json($url, $jsonStr) {
+		 $ch = curl_init();
+		 curl_setopt($ch, CURLOPT_POST, 1);
+		 curl_setopt($ch, CURLOPT_URL, $url);
+		 curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonStr);
+		 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				 'Content-Type: application/json; charset=utf-8',
+				 'Content-Length: ' . strlen($jsonStr)
+			 )
+		 );
+		 $response = curl_exec($ch);
+		 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		 curl_close($ch);
+ 
+		 return array($httpCode, $response);
 	 }
 
 	// Replace $element by $html in $dom.
@@ -277,18 +307,19 @@ class TeXParserHooks {
 		$text = $dom->saveHTML();
 	}
 
-	private static function handleCompilerData( Parser $parser, $compilerData ) {
-		$title = $parser->getTitle();
+	private static function handleCompilerData( Parser $parser, $subpageInfo, $compilerData ) {
 		$output = $parser->getOutput();
+		$info = $subpageInfo;
 		
-		$info = SubpageHandler::getSubpageInfo($title);
 		if ($info !== false) {
 			// A hack to call private functions
 			$mwHandleInternalLinks = function ($text) { return $this->handleInternalLinks($text); };
 
 			// Set display title
-			$output->setDisplayTitle( trim($info['prefix'] . ' ' . $info['display']) );
-			$output->setExtensionData('btex-data', $compilerData);
+			if (isset($info['display'])) {
+				$output->setDisplayTitle( trim($info['prefix'] . ' ' . $info['display']) );
+				$output->setExtensionData('btex-data', $compilerData);
+			}
 
 			$parent = '<li>讲义: [[讲义:' .
 				self::escapeBracketsAndPipes($info['parent_title']) . '|' .

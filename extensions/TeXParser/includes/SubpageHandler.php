@@ -13,6 +13,8 @@ class SubpageHandler {
 
         $namespace = $title->getNamespace();
         $titleText = $title->getText();
+        $titleText = preg_replace('#(^[^/]+)/preamble$#', '$1', $titleText);
+
         $dbr = wfGetDB( DB_REPLICA );
 
         $result = $dbr->select(
@@ -93,7 +95,10 @@ class SubpageHandler {
             if ($row->page_title === $text) $order = $row->subpage_order;
         }
 
-        if ($order === -1) return false;
+        if ($order === -1) return [
+            'parent_title' => $ordered[0]->page_title,
+            'parent_display' => $ordered[0]->display_title
+        ];
 
         error_log('DEBUG ' . $ordered[$order]->subpage_number);
 
