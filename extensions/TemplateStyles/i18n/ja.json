@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Afaz",
+			"Kkairri",
+			"Marine-Blue",
+			"Omotecho",
+			"Otokoume"
+		]
+	},
+	"templatestyles-desc": "テンプレートごとにスタイルシートを適用します",
+	"templatestyles-missing-src": "TemplateStylesの<code>src</code>属性は空にできません。",
+	"templatestyles-invalid-src": "TemplateStylesの<code>src</code>属性に対するtitleが無効です。",
+	"templatestyles-invalid-wrapper": "TemplateStylesの<code>wrapper</code>属性に対する値が無効です。",
+	"templatestyles-bad-src-missing": "[[:$1|$2]]ページに内容がありません。",
+	"templatestyles-bad-src": "[[:$1|$2]]ページにはTemplateStylesに対応するコンテンツモデルとして「{{int:content-model-sanitized-css}}」が必須です（現状のモデルは「$3」）。",
+	"templatestyles-errorcomment": "スタイルシート[[:$1]] (rev $2) の処理でエラーが発生しました：$3",
+	"templatestyles-size-exceeded": "スタイルシートが上限値$2を超過しています。",
+	"templatestyles-end-tag-injection": "提供されたスタイルシートに使用できない<code>&lt;/style</code>が含まれています。",
+	"content-model-sanitized-css": "サニタイズCSS",
+	"templatestyles-stylesheet-error-category": "エラーを含むTemplateStyles スタイルシート",
+	"templatestyles-stylesheet-error-category-desc": "TemplateStyles スタイルシートにエラーがあります。",
+	"templatestyles-page-error-category": "TemplateStylesのエラーを含むページ",
+	"templatestyles-page-error-category-desc": "ページで<code><nowiki><templatestyles/></nowiki></code>タグを処理中にエラーが発生しました。",
+	"templatestyles-error-at-rule-block-not-allowed": "<code>@$3</code>の$1行目$2文字目のブロックは許可されません。",
+	"templatestyles-error-at-rule-block-required": "<code>@$3</code>の$1行目$2文字目でブロックが必要です。",
+	"templatestyles-error-bad-character-in-url": "$1行目$2文字目のURLに不正な文字が含まれています。",
+	"templatestyles-error-bad-escape": "$1行目$2文字目のエスケープに不正な文字が含まれています。",
+	"templatestyles-error-bad-value-for-property": "$1行目$2文字目のプロパティ<code>$3</code>に、不正またはサポートされていない値が指定されています。",
+	"templatestyles-error-expected-at-rule": "$1行目$2文字目に<code>@$3</code>が必要です。",
+	"templatestyles-error-expected-colon": "$1行目$2文字目にコロンが必要です。",
+	"templatestyles-error-expected-declaration": "$1行目$2文字目に宣言が必要です。",
+	"templatestyles-error-expected-qualified-rule": "$1行目$2文字目にスタイル規則が必要です。",
+	"templatestyles-error-expected-stylesheet": "$1行目$2文字目にスタイルシートが必要です。"
+}

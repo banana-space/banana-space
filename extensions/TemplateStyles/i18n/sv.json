@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"WikiPhoenix"
+		]
+	},
+	"templatestyles-stylesheet-error-category": "TemplateStyles-stilmallar med fel",
+	"templatestyles-stylesheet-error-category-desc": "TemplateStyles-stilmallen har ett fel.",
+	"templatestyles-page-error-category": "Sidor med TemplateStyles-fel",
+	"templatestyles-page-error-category-desc": "Ett fel uppstod när taggen <code><nowiki><templatestyles/></nowiki></code> på sidan bearbetades."
+}

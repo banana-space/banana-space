@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robby"
+		]
+	},
+	"templatestyles-bad-src-missing": "Säit [[:$1|$2]] huet keen Inhalt.",
+	"content-model-sanitized-css": "Gebotzten CSS",
+	"templatestyles-page-error-category": "Säite mat TemplateStyles Feeler"
+}

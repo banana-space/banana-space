@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ladsgroup"
+		]
+	},
+	"templatestyles": "ظاهر الگو",
+	"templatestyles-desc": "شیوه‌نامه جداگانه برای هر الگو را ممکن می‌کند",
+	"templatestyles-missing-src": "شیوه‌نامه <code>src</code> نباید خالی باشد",
+	"templatestyles-invalid-src": "عنوان برای شیوه‌نامه در <code>src</code> وجود دارد",
+	"templatestyles-bad-src-missing": "صفحه [[:$1|$2]] محتوایی ندارد.",
+	"templatestyles-errorcomment": "خطا در هنگام پردازش شیوه‌نامه [[:$1]] (نسخه $2):\n$3",
+	"templatestyles-size-exceeded": "شیوه‌نامه از حد مجاز $2 بزرگتر است.",
+	"templatestyles-end-tag-injection": "شیوه‌نامه نوشته شده <code>&lt;/style</code> دارد که مجاز نیست.",
+	"content-model-sanitized-css": "شیوه‌نامه آبشاری تمیز",
+	"templatestyles-page-error-category": "صفحات دارای خطای شیوه‌نامه الگو"
+}

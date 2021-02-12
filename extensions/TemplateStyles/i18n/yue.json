@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hello903hello"
+		]
+	},
+	"templatestyles-missing-src": "TemplateStyles嘅<code>src</code>屬性唔可以係吉嘅。",
+	"templatestyles-bad-src-missing": "版[[:$1|$2]]無内容。",
+	"content-model-sanitized-css": "過濾咗嘅CSS",
+	"templatestyles-stylesheet-error-category": "有錯嘅TemplateStyles樣式表"
+}

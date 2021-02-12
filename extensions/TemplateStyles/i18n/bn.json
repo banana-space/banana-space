@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aftabuzzaman",
+			"আফতাবুজ্জামান"
+		]
+	},
+	"templatestyles": "টেমপ্লেটশৈলী",
+	"templatestyles-desc": "টেমপ্লেটের জন্য শৈলীপত্রক বাস্তবায়ন করে",
+	"templatestyles-bad-src-missing": "[[:$1|$2]] পাতায় কোন বিষয়বস্তু নেই।",
+	"templatestyles-end-tag-injection": "সরবরাহকৃত শৈলীপত্রকে <code>&lt;/style</code> রয়েছে, যা অনুমোদিত নয়।",
+	"content-model-sanitized-css": "পরিচ্ছন্ন CSS",
+	"templatestyles-stylesheet-error-category": "ত্রুটিসহ TemplateStyles শৈলীপত্রক",
+	"templatestyles-stylesheet-error-category-desc": "TemplateStyles শৈলীপত্রকেে ত্রুটি রয়েছে।",
+	"templatestyles-page-error-category": "TemplateStyles ত্রুটিসহ পাতা",
+	"templatestyles-page-error-category-desc": "পাতাটিতে একটি <code><nowiki><templatestyles/></nowiki></code> ট্যাগ প্রক্রিয়াকরণের সময় একটি ত্রুটি হয়েছে।",
+	"templatestyles-error-bad-character-in-url": "URL-এর $1 নং লাইনের $2 নং অক্ষরে অবৈধ অক্ষর রয়েছে।",
+	"templatestyles-error-bad-escape": "$1 নং লাইনের $2 নং অক্ষরে অব্যাহতিতে অক্ষর অবৈধ।",
+	"templatestyles-error-missing-keyframe-name": "$1 নং লাইনের $2 নং অক্ষরে <code>@keyframes</code>-এর জন্য নাম অনুপস্থিত।"
+}

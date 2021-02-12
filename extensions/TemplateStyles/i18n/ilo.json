@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lam-ang"
+		]
+	},
+	"templatestyles-stylesheet-error-category": "Dagiti sabanas ti estilo ti TemplateStyles nga agraman kadagiti biddut",
+	"templatestyles-stylesheet-error-category-desc": "Ti sabanas ti estilo ti TemplateStyles ket addaan iti maysa a biddut.",
+	"templatestyles-page-error-category": "Pampanid nga agraman kadagiti biddut ti TemplateStyles",
+	"templatestyles-page-error-category-desc": "Adda maysa a biddut no maproseso ti maysa nga etiketa ti <code><nowiki><templatestyles/></nowiki></code> iti panid."
+}

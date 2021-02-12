@@ -22,7 +22,14 @@ class EditorHooks {
         $text = $content instanceof TextContent ? $content->getText() : '';
         if ($text !== '') $text .= "\n";
         $quotedText = json_encode($text);
-        $useBtex = $article->getTitle()->getNamespace() !== NS_TEMPLATE;
+
+        $lang = 'btex';
+        $ns = $article->getTitle()->getNamespace();
+        if ($ns === NS_TEMPLATE) $lang = '';
+        if ($ns === NS_MODULE) {
+            $lang = 'lua';
+            if (preg_match('#\.css$#', $article->getTitle()->getText())) $lang = 'css';
+        }
 
         $html = '
             <script>
@@ -35,7 +42,7 @@ class EditorHooks {
             <script>
                 window.hasEditForm = true;
                 window.oldText = $oldText;
-                window.useBtex = $useBtex;
+                window.editorLang = $lang;
             </script>
             <script src="/static/scripts/btex-monaco-preload.js"></script>
             <script src="/static/scripts/btex-monaco/dist/btex-monaco.js"></script>
@@ -46,7 +53,7 @@ class EditorHooks {
         $html = str_replace('> ', '>', $html);
         $html = str_replace(' <', '<', $html);
         $html = str_replace('$oldText', $quotedText, $html);
-        $html = str_replace('$useBtex', $useBtex ? 'true' : 'false', $html);
+        $html = str_replace('$lang', "'$lang'", $html);
 
         $editPage->editFormTextBottom = $html;
     }

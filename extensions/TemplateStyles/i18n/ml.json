@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Praveenp"
+		]
+	},
+	"templatestyles-desc": "ഫലകത്തിനനുസരിച്ച് സ്റ്റൈൽ ഷീറ്റുകൾ പ്രയോഗത്തിൽ വരുത്തുക",
+	"templatestyles-missing-src": "ഫലകസ്റ്റൈലിന്റെ <code>src</code> ഇനം ശൂന്യമായിരിക്കരുത്.",
+	"templatestyles-invalid-src": "ഫലകസ്റ്റൈലിന്റെ <code>src</code> ഘടകത്തിന്റെ തലക്കെട്ട് അസാധുവാണ്.",
+	"templatestyles-invalid-wrapper": "ഫലകസ്റ്റൈലിന്റെ <code>wrapper</code> ഇനത്തിന്റെ വില അസാധുവാണ്.",
+	"templatestyles-bad-src-missing": "[[:$1|$2]] താളിൽ ഉള്ളടക്കം ഒന്നുമില്ല.",
+	"templatestyles-bad-src": "[[:$1|$2]] താളിന്റെ ഫലകസ്റ്റൈലിന് \"{{int:content-model-sanitized-css}}\" എന്ന ഉള്ളടക്ക മാതൃകയാണ് ഉണ്ടാവേണ്ടത് (നിലവിലുള്ള മാതൃക \"$3\" ആണ്).",
+	"templatestyles-errorcomment": "സ്റ്റൈൽഷീറ്റ് [[:$1]] (നാൾപ്പതിപ്പ് $2) കൈകാര്യംചെയ്യുന്നതിൽ പിഴവുണ്ടായി:\n$3",
+	"templatestyles-size-exceeded": "സ്റ്റൈൽഷീറ്റ്, പരമാവധി വലിപ്പമായ $2 എന്നതിലും വലുതാണ്."
+}

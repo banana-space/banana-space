@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"BadDog",
+			"Obsuser"
+		]
+	},
+	"templatestyles": "TemplateStyles",
+	"templatestyles-desc": "Примењује листове стилова по шаблону",
+	"templatestyles-invalid-src": "Неважећи наслов за атрибут <code>src</code> TemplateStyles-а.",
+	"templatestyles-invalid-wrapper": "Неважећа вредност за атрибут <code>wrapper</code> Стилова шаблона",
+	"templatestyles-bad-src-missing": "Страница [[:$1|$2]] нема садржај.",
+	"templatestyles-bad-src": "Страница [[:$1|$2]] мора да има модел садржаја „{{int:content-model-sanitized-css}}” за TemplateStyles (тренутни модел је „$3”).",
+	"content-model-sanitized-css": "прочишћени CSS"
+}

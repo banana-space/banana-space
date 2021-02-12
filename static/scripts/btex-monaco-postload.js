@@ -20,7 +20,7 @@ require(['btex-monaco'], function (btex) {
                 document.getElementById('btex-monaco-container'),
                 $textBox.val(),
                 window.oldText,
-                window.useBtex
+                window.editorLang
             );
             // todo: set editor diff source to window.oldText
             editor.onDidChangeModelContent(function () {

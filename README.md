@@ -16,10 +16,15 @@ To enable them, add the following lines to `LocalSettings.php`.
 
 ``` php
 wfLoadSkin( 'Banana' );
-$wgDefaultSkin = 'Banana';
+$wgDefaultSkin = 'Banana';wfLoadSkin( 'Vector' );
 
 wfLoadExtension( 'Echo' );
 wfLoadExtension( 'Flow' );
+wfLoadExtension( 'Nuke' );
+wfLoadExtension( 'ParserFunctions' );
+wfLoadExtension( 'PdfHandler' );
+wfLoadExtension( 'Scribunto' );
+wfLoadExtension( 'TemplateStyles' );
 wfLoadExtension( 'Thanks' );
 wfLoadExtension( 'TeXParser' );
 
@@ -27,10 +32,15 @@ $wgNamespaceContentModels[NS_TALK]           = 'flow-board';
 $wgNamespaceContentModels[NS_USER_TALK]      = 'flow-board';
 $wgNamespaceContentModels[NS_FILE_TALK]      = 'flow-board';
 $wgNamespaceContentModels[NS_HELP_TALK]      = 'flow-board';
+$wgNamespaceContentModels[NS_MODULE_TALK]    = 'flow-board';
 $wgNamespaceContentModels[NS_PROJECT_TALK]   = 'flow-board';
 $wgNamespaceContentModels[NS_CATEGORY_TALK]  = 'flow-board';
 $wgNamespaceContentModels[NS_TEMPLATE_TALK]  = 'flow-board';
 $wgNamespaceContentModels[NS_MEDIAWIKI_TALK] = 'flow-board';
+
+$wgNamespacesToBeSearchedDefault[NS_NOTES] = true;
+
+$wgFileExtensions = [ 'png', 'gif', 'jpg', 'jpeg', 'pdf', 'svg' ];
 ```
 
 If you encounter errors, go to the `maintenance` folder, and run

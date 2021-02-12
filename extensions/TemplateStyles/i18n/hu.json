@@ -1,0 +1,37 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tacsipacsi"
+		]
+	},
+	"templatestyles-desc": "Sablononkénti stíluslapok megvalósítása",
+	"templatestyles-missing-src": "A TemplateStyles <code>src</code> attribútuma nem lehet üres.",
+	"templatestyles-invalid-src": "Érvénytelen cím a TemplateStyles <code>src</code> attribútumában.",
+	"templatestyles-bad-src-missing": "A(z) [[:$1|$2]] lapnak nincs tartalma.",
+	"templatestyles-bad-src": "A(z) [[:$1|$2]] lapnak „{{int:content-model-sanitized-css}}” tartalommodellűnek kell lennie a TemplateStyleshoz (jelenlegi tartalommodellje: „$3”).",
+	"templatestyles-errorcomment": "Hibák a(z) [[:$1]] stíluslap ($2 változat) feldolgozásakor:\n$3",
+	"templatestyles-size-exceeded": "A stíluslap nagyobb a maximális $2-nál.",
+	"templatestyles-end-tag-injection": "A megadott stíluslap <code>&lt;/style</code> kódot tartalmaz, ami nem engedélyezett.",
+	"templatestyles-stylesheet-error-category": "Hibás TemplateStyles-stíluslapok",
+	"templatestyles-stylesheet-error-category-desc": "A TemplateStyles-stíluslap hibát tartalmaz.",
+	"templatestyles-page-error-category": "Lapok TemplateStyles-hibákkal",
+	"templatestyles-page-error-category-desc": "Hiba történt a lapon található <code><nowiki><templatestyles /></nowiki></code> címke feldolgozása közben.",
+	"templatestyles-error-at-rule-block-not-allowed": "A(z) <code>@$3</code> szabály blokkja nem engedélyezett itt: $1. sor, $2. karakter",
+	"templatestyles-error-at-rule-block-required": "Kötelező a blokk a(z) <code>@$3</code> szabályhoz itt: $1. sor, $2. karakter",
+	"templatestyles-error-bad-character-in-url": "Érvénytelen karakter URL-ben itt: $1. sor, $2. karakter",
+	"templatestyles-error-bad-value-for-property": "Érvénytelen vagy nem támogatott érték a(z) <code>$3</code> tulajdonsághoz itt: $1. sor, $2. karakter",
+	"templatestyles-error-expected-at-rule": "<code>@$3</code> várt itt: $1. sor, $2. karakter",
+	"templatestyles-error-expected-colon": "Kettőspont várt itt: $1. sor, $2. karakter",
+	"templatestyles-error-expected-declaration": "Deklaráció várt itt: $1. sor, $2. karakter",
+	"templatestyles-error-expected-declaration-list": "Deklarációlista várt itt: $1. sor, $2. karakter",
+	"templatestyles-error-expected-eof": "Stíluslap vége várt itt: $1. sor, $2. karakter",
+	"templatestyles-error-expected-ident": "Azonosító várt itt: $1. sor, $2. karakter",
+	"templatestyles-error-expected-qualified-rule": "Stílusszabály várt itt: $1. sor, $2. karakter",
+	"templatestyles-error-expected-stylesheet": "Stíluslap várt itt: $1. sor, $2. karakter",
+	"templatestyles-error-invalid-font-face-at-rule": "A <code>@font-face</code> előtt nem lehet semmi itt: $1. sor, $2. karakter",
+	"templatestyles-error-invalid-font-feature-value": "A(z) <code>@$3</code> előtt nem lehet semmi itt: $1. sor, $2. karakter",
+	"templatestyles-error-invalid-font-feature-values-font-list": "Érvénytelen betűtípuslista a <code>@font-feature-values</code> szabályban itt: $1. sor, $2. karakter",
+	"templatestyles-error-invalid-import-value": "Érvénytelen <code>@import</code> érték itt: $1. sor, $2. karakter",
+	"templatestyles-error-invalid-namespace-value": "Érvénytelen <code>@namespace</code> érték itt: $1. sor, $2. karakter",
+	"templatestyles-error-invalid-page-margin-at-rule": "A(z) <code>@$3</code> előtt nem lehet semmi itt: $1. sor, $2. karakter"
+}

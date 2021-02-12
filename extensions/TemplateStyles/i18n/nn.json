@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Njardarlogar"
+		]
+	},
+	"templatestyles": "Malstilar",
+	"templatestyles-bad-src-missing": "Sida [[:$1|$2]] har ikkje noko innhald.",
+	"content-model-sanitized-css": "Sanert CSS"
+}

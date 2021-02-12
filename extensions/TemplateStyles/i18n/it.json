@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Beta16",
+			"Ontsed",
+			"Sakretsu"
+		]
+	},
+	"templatestyles": "StiliTemplate",
+	"templatestyles-desc": "Implementa fogli di stile per template",
+	"templatestyles-missing-src": "L'attributo <code>src</code> di TemplateStyles non può essere vuoto.",
+	"templatestyles-bad-src-missing": "La pagina [[:$1|$2]] è priva di contenuto.",
+	"templatestyles-bad-src": "La pagina [[:$1|$2]] deve avere il modello di contenuto \"{{int:content-model-sanitized-css}}\" per TemplateStyles (il modello attuale è \"$3\").",
+	"templatestyles-size-exceeded": "Il foglio di stile è più grande della dimensione massima di $2.",
+	"content-model-sanitized-css": "CSS sanificato",
+	"templatestyles-stylesheet-error-category": "Fogli di stile TemplateStyles con errori",
+	"templatestyles-stylesheet-error-category-desc": "Il foglio di stile TemplateStyles ha un errore.",
+	"templatestyles-page-error-category": "Pagine con errori di TemplateStyles",
+	"templatestyles-error-at-rule-block-not-allowed": "Blocco non permesso per <code>@$3</code> alla linea $1, carattere $2.",
+	"templatestyles-error-bad-escape": "Carattere invalido nell'escape alla linea $1, carattere $2.",
+	"templatestyles-error-bad-value-for-property": "Valore non valido o non supportato per la proprietà <code>$3</code> alla linea $1, carattere $2.",
+	"templatestyles-error-invalid-font-feature-value": "<code>@$3</code> non ammette niente prima del blocco alla linea $1, carattere $2.",
+	"templatestyles-error-invalid-namespace-value": "Valore non valido per <code>@namespace</code> alla linea $1, carattere $2.",
+	"templatestyles-error-invalid-selector-list": "Selettore di lista non valido alla linea $1, carattere $2.",
+	"templatestyles-error-invalid-supports-condition": "Condizione non valida per <code>@supports</code> alla linea $1, carattere $2.",
+	"templatestyles-error-missing-keyframe-name": "Nome mancante in <code>@keyframes</code> alla linea $1, carattere $2.",
+	"templatestyles-error-missing-selector-list": "Lista di selezione mancante alla linea $1, carattere $2.",
+	"templatestyles-error-newline-in-string": "Carattere di nuova linea invalido nel testo alla linea $1, carattere $2.",
+	"templatestyles-error-recursion-depth-exceeded": "Troppi blocchi e/o funzioni annidati alla linea $1, carattere $2.",
+	"templatestyles-error-unclosed-url": "URL non terminato alla linea $1, carattere $2."
+}

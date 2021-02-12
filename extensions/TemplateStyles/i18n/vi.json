@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Minh Nguyen"
+		]
+	},
+	"templatestyles": "Bảng kiểu bản mẫu",
+	"templatestyles-desc": "Áp dụng bảng kiểu tùy bản mẫu",
+	"templatestyles-missing-src": "Đặc tính <code>src</code> của thẻ <code>&lt;templatestyles></code> được để trống.",
+	"templatestyles-invalid-src": "Đặc tính <code>src</code> của thẻ <code>&lt;templatestyles></code> có tên không hợp lệ.",
+	"templatestyles-bad-src-missing": "Trang [[:$1|$2]] không có nội dung.",
+	"templatestyles-bad-src": "Trang [[:$1|$2]] phải có kiểu nội dung “{{int:content-model-sanitized-css}}” để áp dụng bảng kiểu bản mẫu; kiểu nội dung hiện tại là “$3”.",
+	"templatestyles-errorcomment": "Xuất hiện lỗi khi xử lý bảng kiểu [[:$1]] (phiên bản $2):\n$3",
+	"templatestyles-size-exceeded": "Bảng kiểu vượt quá kích thước tối đa là $2.",
+	"templatestyles-end-tag-injection": "Bảng kiểu được cung cấp chứa mã <code>&lt;/style</code> bị cấm.",
+	"content-model-sanitized-css": "CSS sạch sẽ",
+	"templatestyles-stylesheet-error-category": "Bảng kiểu bản mẫu có lỗi",
+	"templatestyles-stylesheet-error-category-desc": "Bảng kiểu bản mẫu có lỗi.",
+	"templatestyles-page-error-category": "Trang có lỗi bảng kiểu bản mẫu",
+	"templatestyles-page-error-category-desc": "Đã xuất hiện lỗi khi xử lý thẻ <code><nowiki><templatestyles/></nowiki></code> trong trang."
+}

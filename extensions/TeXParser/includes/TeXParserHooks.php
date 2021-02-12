@@ -35,19 +35,31 @@ class TeXParserHooks {
 		if (!$parser->getOptions()->getInterfaceMessage()) {
 			// Use wikitext parser for templates
 			$title = $parser->getTitle();
-			if ($title->getNamespace() === NS_TEMPLATE) {
+			if ($title->getNamespace() === NS_TEMPLATE || $title->getNamespace() === NS_MODULE) {
 				return true;
 			}
+
+			$isPreview = $parser->getOptions()->getIsPreview();
 			$subpageInfo = SubpageHandler::getSubpageInfo($title);
 
 			// If is preamble, return content wrapped in <pre>
-			if ($title->getNamespace() === NS_NOTES && preg_match('#/preamble$#', $title->getText())) {
-				$dom = new DOMDocument();
-				$pre = $dom->createElement('pre');
-				$pre->setAttribute('class', 'code-btex');
-				$textNode = $dom->createTextNode($text);
-				$pre->appendChild($textNode);
-				$text = $dom->saveHTML($pre);
+			if ($subpageInfo && preg_match('#/preamble$#', $title->getText())) {
+				if ($text !== '') {
+					$dom = new DOMDocument();
+					$pre = $dom->createElement('pre');
+					$pre->setAttribute('class', 'code-btex');
+					$textNode = $dom->createTextNode($text);
+					$pre->appendChild($textNode);
+					$text = $dom->saveHTML($pre);
+
+					// Run compiler to get error messages
+					if ($isPreview) {
+						$jsonStr = json_encode( [ "code" => $text ] );
+						list($httpCode, $response) = self::http_post_json(self::BTEX_URL, $jsonStr);
+						$json = json_decode($response);
+						self::generateErrorMessages($json, $isPreview, $text);
+					}
+				}
 
 				self::handleCompilerData($parser, $subpageInfo, '{}');
 				return false;
@@ -68,7 +80,6 @@ class TeXParserHooks {
 
 			// Run compiler
 			// TODO: result should be stored in database
-			$isPreview = $parser->getOptions()->getIsPreview();
 			$isInline = $parser->getOptions()->getOption('isInline');
 			$jsonStr = json_encode(
 				array(
@@ -104,6 +115,17 @@ class TeXParserHooks {
 
 		// Add meta tag
 		$output->addMeta('viewport', 'width=500, initial-scale=1');
+		
+		// Add script for syntax highlighting lua and css
+		$title = $output->getTitle();
+		$action = Action::getActionName($output->getContext());
+		if ($title->getNamespace() === NS_MODULE && $action === 'view') {
+			// load monaco-editor for syntax highlighting
+			$output->addScript(
+				'<script>var require = { paths: { vs: "/static/scripts/btex-monaco/node_modules/monaco-editor/min/vs" }, };</script>' .
+				'<script src="/static/scripts/btex-monaco/node_modules/monaco-editor/min/vs/loader.js"></script>'
+			);
+		}
 	}
 
 	public static function onPageSaveComplete( WikiPage $wikiPage ) { 
@@ -158,23 +180,23 @@ class TeXParserHooks {
 		$inCacheKey['isInline'] = true;
 	}
 
-	 private static function http_post_json($url, $jsonStr) {
-		 $ch = curl_init();
-		 curl_setopt($ch, CURLOPT_POST, 1);
-		 curl_setopt($ch, CURLOPT_URL, $url);
-		 curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonStr);
-		 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-				 'Content-Type: application/json; charset=utf-8',
-				 'Content-Length: ' . strlen($jsonStr)
-			 )
-		 );
-		 $response = curl_exec($ch);
-		 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		 curl_close($ch);
- 
-		 return array($httpCode, $response);
-	 }
+	private static function http_post_json($url, $jsonStr) {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonStr);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				'Content-Type: application/json; charset=utf-8',
+				'Content-Length: ' . strlen($jsonStr)
+			)
+		);
+		$response = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		curl_close($ch);
+
+		return array($httpCode, $response);
+	}
 
 	// Replace $element by $html in $dom.
 	private static function domReplace( DOMDocument $dom, $html, DOMNode $element ) {

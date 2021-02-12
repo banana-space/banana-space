@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Spiritia",
+			"StanProg",
+			"Ted Masters",
+			"Vlad5250"
+		]
+	},
+	"templatestyles-missing-src": "Атрибутът <code>src</code> на TemplateStyles не трябва да е празен.",
+	"templatestyles-invalid-src": "Невалидна стойност на атрибута <code>src</code> за TemplateStyles.",
+	"templatestyles-invalid-wrapper": "Невалидна стойност за атрибута <code>wrapper</code> в TemplateStyles.",
+	"templatestyles-bad-src-missing": "Страница [[:$1|$2]] няма съдържание.",
+	"templatestyles-bad-src": "Страницата [[:$1|$2]] трябва да има модел на съдържание „{{int:content-model-sanitized-css}}“ за TemplateStyles (текущият модел е „$3“).",
+	"templatestyles-stylesheet-error-category": "TemplateStyles стилови множества с грешки",
+	"templatestyles-stylesheet-error-category-desc": "TemplateStyles стилово множество с грешка.",
+	"templatestyles-page-error-category": "Страници с грешки в TemplateStyles",
+	"templatestyles-page-error-category-desc": "Грешка при обработката на тага <code><nowiki><templatestyles/></nowiki></code> в страницата.",
+	"templatestyles-error-unclosed-comment": "Има незатворен коментар, започващ на ред $1 при знак $2."
+}

@@ -1,0 +1,117 @@
+{
+	"name": "TemplateStyles",
+	"version": "1.0",
+	"author": [
+		"Brad Jorsch",
+		"Marc A. Pelletier"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:TemplateStyles",
+	"namemsg": "templatestyles",
+	"descriptionmsg": "templatestyles-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "parserhook",
+	"manifest_version": 2,
+	"load_composer_autoloader": true,
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
+	"MessagesDirs": {
+		"TemplateStyles": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"TemplateStylesContentHandler": "includes/TemplateStylesContentHandler.php",
+		"TemplateStylesContent": "includes/TemplateStylesContent.php",
+		"TemplateStylesFontFaceAtRuleSanitizer": "includes/TemplateStylesFontFaceAtRuleSanitizer.php",
+		"TemplateStylesHooks": "includes/TemplateStylesHooks.php",
+		"TemplateStylesMatcherFactory": "includes/TemplateStylesMatcherFactory.php"
+	},
+	"ContentHandlers": {
+		"sanitized-css": "TemplateStylesContentHandler"
+	},
+	"TrackingCategories": [
+		"templatestyles-stylesheet-error-category",
+		"templatestyles-page-error-category"
+	],
+	"attributes": {
+		"SyntaxHighlight": {
+			"Models": {
+				"sanitized-css": "css"
+			}
+		},
+		"TemplateStyles": {
+			"Namespaces": []
+		}
+	},
+	"callback": "TemplateStylesHooks::onRegistration",
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"TemplateStylesHooks::onParserFirstCallInit"
+		],
+		"ParserClearState": [
+			"TemplateStylesHooks::onParserClearState"
+		],
+		"ContentHandlerDefaultModelFor": [
+			"TemplateStylesHooks::onContentHandlerDefaultModelFor"
+		],
+		"CodeEditorGetPageLanguage": [
+			"TemplateStylesHooks::onCodeEditorGetPageLanguage"
+		]
+	},
+	"config": {
+		"TemplateStylesDisable": {
+			"description": "When set to true, no styles are output. This flag is for development and will be removed.",
+			"value": false
+		},
+		"TemplateStylesAllowedUrls": {
+			"description": "PCRE regexes to match allowed URLs for various types of external references. Known types are:\n; audio: Sound files\n; image: Images\n; svg: SVGs for the Filter and Masking modules\n; font: External fonts\n; namespace: @namespace declarations\n; css: @import declarations\nIf you want to allow an entire domain, be sure to include a trailing '/', e.g. \"<^https://allowed\\.example\\.org/>\" rather than \"<^https://allowed\\.example\\.org>\", so people can't bypass your filter by creating a subdomain like \"https://allowed.example.org.evil.com\".",
+			"value": {
+				"audio": [
+					"<^https://upload\\.wikimedia\\.org/wikipedia/commons/>"
+				],
+				"image": [
+					"<^https://upload\\.wikimedia\\.org/wikipedia/commons/>"
+				],
+				"svg": [
+					"<^https://upload\\.wikimedia\\.org/wikipedia/commons/[^?#]*\\.svg(?:[?#]|$)>"
+				],
+				"font": [],
+				"namespace": [
+					"<.>"
+				],
+				"css": []
+			}
+		},
+		"TemplateStylesNamespaces": {
+			"description": "Namespaces to default the content model to CSS on .css subpages.",
+			"value": {
+				"10": true
+			},
+			"merge_strategy": "array_plus"
+		},
+		"TemplateStylesPropertyBlacklist": {
+			"description": "Blacklist style properties that would otherwise be allowed. See also the TemplateStylesPropertySanitizer hook, which allows for finer-grained control.",
+			"value": []
+		},
+		"TemplateStylesAtRuleBlacklist": {
+			"description": "Blacklist at-rules that would otherwise be allowed. Include the '@' in the name. See also the TemplateStylesStylesheetSanitizer hook, which allows for finer-grained control.",
+			"value": []
+		},
+		"TemplateStylesUseCodeEditor": {
+			"description": "Use CodeEditor when editing TemplateStyles CSS pages.",
+			"value": true
+		},
+		"TemplateStylesAutoParseContent": {
+			"description": "Set this false if you want to manage an entry for 'sanitized-css' in $wgTextModelsToParse manually. If true, an entry will be added to $wgTextModelsToParse automatically if CONTENT_MODEL_CSS is in the array.",
+			"value": true
+		},
+		"TemplateStylesMaxStylesheetSize": {
+			"description": "The maximum size of a stylesheet, in bytes. Set null if you don't want to impose a limit.",
+			"value": 102400
+		}
+	},
+	"ConfigRegistry": {
+		"templatestyles": "GlobalVarConfig::newInstance"
+	}
+}

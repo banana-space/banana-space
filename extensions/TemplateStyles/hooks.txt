@@ -1,0 +1,24 @@
+This document describes MediaWiki hooks added by the TemplateStyles extension.
+See MediaWiki core's docs/hooks.txt for details on how hooks work.
+
+==Events and parameters==
+
+'TemplateStylesPropertySanitizer': Allows for adjusting or replacing the
+StylePropertySanitizer used when sanitizing style rules. For example, you might
+add, remove, or redefine known properties.
+&$propertySanitizer: Wikimedia\CSS\Sanitizer\StylePropertySanitizer to be used
+ for sanitization.
+$matcherFactory: Wikimedia\CSS\Grammar\MatcherFactory being used, for use in
+ adding or redefining known properties or replacing the entire sanitizer.
+
+'TemplateStylesStylesheetSanitizer': Allows for adjusting or replacing the
+StylesheetSanitizer. For example, you might add, remove, or redefine at-rule
+sanitizers.
+&$sanitizer: Wikimedia\CSS\Sanitizer\StylesheetSanitizer to be used for
+ sanitization. The array returned by `$sanitizer->getRuleSanitizers()` will use
+ the at-rule names (including the '@') as keys. The style rule sanitizer has
+ key 'styles'.
+$propertySanitizer: Wikimedia\CSS\Sanitizer\StylePropertySanitizer being used
+ for sanitization, for use in adding or redefining rule sanitizers.
+$matcherFactory: Wikimedia\CSS\Grammar\MatcherFactory being used, for use in
+ adding or redefining rule sanitizers.

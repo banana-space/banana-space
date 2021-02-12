@@ -175,7 +175,7 @@ a {
         padding: 5px 12px;
         width: 100%;
         height: 100%;
-        color: @color-base;
+        color: @color-base !important;
 
         &, &:hover, &:focus {
           text-decoration: none;
@@ -407,11 +407,9 @@ main {
   }
 
   li.selected {
-    a {
-      &, &:visited, &:focus, &:hover {
-        border-bottom: 3px solid @color-accent;
-        color: black;
-      }
+    a[href] {
+      border-bottom: 3px solid @color-accent;
+      color: black !important;
     }
   }
   
@@ -613,7 +611,7 @@ body > footer {
 }
 
 .b-page-body {
-  a:not(.mw-ui-button) {
+  a[href]:not(.mw-ui-button):not(.oo-ui-buttonElement-button) {
     color: @color-link;
 
     &:hover, &:focus {
@@ -641,7 +639,7 @@ body > footer {
     }
   }
 
-  .btex-output a {
+  .btex-output a[href] {
     line-height: 1.2;
     border-bottom: 3px solid transparent;
     margin-bottom: -3px;
@@ -655,8 +653,8 @@ body > footer {
     color: #fff;
   }
   
-  a.new, a.new:visited {
-    color: @color-link-new;
+  a[href].new {
+    color: @color-link-new !important;
   }
 
   h2 {
@@ -735,6 +733,22 @@ body > footer {
     padding: .5em 30px;
     white-space: pre;
     overflow-x: auto;
+  }
+
+  .code-btex {
+    font-variant-ligatures: none;
+    .btex-function {
+      color: #f87000;
+    }
+    .btex-argument {
+      color: #30a0e0;
+    }
+    .btex-string {
+      color: #70a000;
+    }
+    .btex-comment {
+      color: #b0b0b0;
+    }
   }
 
   img {
@@ -869,7 +883,7 @@ body > footer {
   }
 }
 
-.editOptions .oo-ui-buttonElement-button {
+.editOptions :not(.oo-ui-iconElement):not(.oo-ui-indicatorElement) > .oo-ui-buttonElement-button {
   background-color: #fdfeff !important;
 
   &:hover {

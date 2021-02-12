@@ -1,0 +1,24 @@
+# Editors
+*.kate-swp
+*~
+\#*#
+.#*
+.*.swp
+.project
+cscope.files
+cscope.out
+*.orig
+## NetBeans
+nbproject*
+project.index
+## Sublime
+sublime-*
+sftp-config.json
+
+# Composer
+/vendor
+/composer.lock
+
+# NPM
+/node_modules
+/.eslintcache

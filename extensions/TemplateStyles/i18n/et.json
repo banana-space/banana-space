@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pikne"
+		]
+	},
+	"templatestyles-desc": "Võimaldab kasutada mallide laadilehti.",
+	"templatestyles-missing-src": "TemplateStylesi atribuut <code>src</code> ei tohi olla tühi.",
+	"templatestyles-invalid-src": "Pealkiri TemplateStylesi atribuudis <code>src</code> on vigane.",
+	"templatestyles-bad-src-missing": "Leheküljel [[:$1|$2]] puudub sisu.",
+	"templatestyles-bad-src": "TemplateStyles nõuab, et lehekülje [[:$1|$2]] sisumudel oleks \"{{int:content-model-sanitized-css}}\". Praegune sisumudel on \"$3\".",
+	"templatestyles-errorcomment": "Tõrked laadilehe [[:$1]] töötlemisel (redaktsioon $2):\n$3",
+	"templatestyles-size-exceeded": "Laadileht on suurem kui maksimaalne lubatud suurus $2.",
+	"templatestyles-end-tag-injection": "Ette antud laadileht sisaldab süntaksit <code>&lt;/style</code>, mis pole lubatud.",
+	"content-model-sanitized-css": "saneeritud CSS",
+	"templatestyles-stylesheet-error-category": "Tõrgetega TemplateStylesi laadilehed",
+	"templatestyles-stylesheet-error-category-desc": "TemplateStylesi laadilehel on tõrge.",
+	"templatestyles-page-error-category": "TemplateStylesi tõrgetega leheküljed",
+	"templatestyles-page-error-category-desc": "Leheküljel esines sildi <code><nowiki><templatestyles/></nowiki></code> töötlemisel tõrge."
+}

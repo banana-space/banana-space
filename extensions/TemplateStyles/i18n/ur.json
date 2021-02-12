@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Muhammad Shuaib"
+		]
+	},
+	"templatestyles-desc": "ہر صفحہ یا سانچہ کے لیے علاحدہ اسٹائل شیٹ کا نفاذ",
+	"templatestyles-missing-src": "انداز سانچہ کے <code>src</code> ایٹری بیوٹ کو خالی نہیں چھوڑا جا سکتا۔",
+	"templatestyles-invalid-src": "انداز سانچہ کے <code>src</code> ایٹری بیوٹ میں درج کردہ عنوان درست نہیں ہے۔",
+	"templatestyles-invalid-wrapper": "انداز سانچہ کے <code>src</code> ایٹری بیوٹ میں دی گئی قدر درست نہیں ہے۔",
+	"templatestyles-bad-src-missing": "صفحہ [[:$1|$2]] میں کوئی مواد نہیں ہے۔",
+	"templatestyles-bad-src": "انداز سانچہ کے لیے صفحہ [[:$1|$2]] کا ماڈل \"{{int:content-model-sanitized-css}}\" ہونا چاہیے (موجودہ ماڈل \"$3\" ہے)۔",
+	"templatestyles-errorcomment": "اسٹائل شیٹ [[:$1]] (نسخہ $2) کو نافذ کرنے کے دوران میں نقص واقع ہوا: \n$3",
+	"templatestyles-size-exceeded": "اسٹائل شیٹ $2 کے مقررہ حجم سے بڑی ہے۔",
+	"templatestyles-end-tag-injection": "درج کردہ اسٹائل شیٹ میں <code>&lt;/style</code> موجود ہے جس کی اجازت نہیں۔",
+	"content-model-sanitized-css": "صاف سی ایس ایس",
+	"templatestyles-stylesheet-error-category": "انداز سانچہ کے زیر استعمال نقائص کی حامل اسٹائل شیٹ",
+	"templatestyles-stylesheet-error-category-desc": "انداز سانچہ کی اسٹائل شیٹ میں کوئی نقص ہے۔",
+	"templatestyles-page-error-category": "صفحات مع نقائص انداز سانچہ",
+	"templatestyles-page-error-category-desc": "صفحہ پر موجود <code><nowiki><templatestyles/></nowiki></code> کے ٹیگ پر کارروائی کے دوران میں کوئی نقص پیش آیا ہے۔",
+	"templatestyles-error-bad-character-in-url": "سطر $1 حرف $2 پر موجود یوآرایل میں نادرست حروف موجود ہیں۔",
+	"templatestyles-error-expected-colon": "سطر $1 حرف $2 پر ایک کولن ہونا چاہیے۔",
+	"templatestyles-error-expected-stylesheet": "سطر $1 حرف $2 پر کوئی اسٹائل شیٹ ہونی چاہیے۔",
+	"templatestyles-error-unclosed-url": "سطر $1 حرف $2 پر یوآرایل بند نہیں ہے۔",
+	"templatestyles-error-unexpected-eof": "سطر $1 حرف $2 پر اسٹائل شیٹ کا غیر متوقع اختتام ہوا۔",
+	"templatestyles-error-unrecognized-rule": "سطر $1 حرف $2 پر غیر معروف یا غیر معاونت یافتہ رول موجود ہے۔"
+}
