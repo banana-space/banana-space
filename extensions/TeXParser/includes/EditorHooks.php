@@ -25,11 +25,10 @@ class EditorHooks {
 
         $lang = 'btex';
         $ns = $article->getTitle()->getNamespace();
-        if ($ns === NS_TEMPLATE) $lang = '';
-        if ($ns === NS_MODULE) {
-            $lang = 'lua';
-            if (preg_match('#\.css$#', $article->getTitle()->getText())) $lang = 'css';
-        }
+        $contentModel = $article->getTitle()->getContentModel();
+        if ($ns === NS_TEMPLATE || $ns === NS_MODULE) $lang = '';
+        if ($contentModel === 'Scribunto') $lang = 'lua';
+        if ($contentModel === 'css' || $contentModel === 'sanitized-css') $lang = 'css';
 
         $html = '
             <script>

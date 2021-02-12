@@ -35,7 +35,7 @@ class TeXParserHooks {
 		if (!$parser->getOptions()->getInterfaceMessage()) {
 			// Use wikitext parser for templates
 			$title = $parser->getTitle();
-			if ($title->getNamespace() === NS_TEMPLATE || $title->getNamespace() === NS_MODULE) {
+			if (in_array( $title->getNamespace(), [ NS_TEMPLATE, NS_MODULE ] )) {
 				return true;
 			}
 
@@ -118,8 +118,9 @@ class TeXParserHooks {
 		
 		// Add script for syntax highlighting lua and css
 		$title = $output->getTitle();
+		$contentModel = $title->getContentModel();
 		$action = Action::getActionName($output->getContext());
-		if ($title->getNamespace() === NS_MODULE && $action === 'view') {
+		if (in_array($contentModel, [ 'Scribunto', 'sanitized-css', 'css' ]) && $action === 'view') {
 			// load monaco-editor for syntax highlighting
 			$output->addScript(
 				'<script>var require = { paths: { vs: "/static/scripts/btex-monaco/node_modules/monaco-editor/min/vs" }, };</script>' .
