@@ -366,6 +366,8 @@ class TeXParserHooks {
 			if (isset($info['display'])) {
 				$output->setDisplayTitle( trim($info['prefix'] . ' ' . $info['display']) );
 				$output->setExtensionData('btex-data', $compilerData);
+
+				$prefix = $info['prefix'];
 			}
 
 			$parent = '<li>讲义: [[讲义:' .
@@ -382,11 +384,12 @@ class TeXParserHooks {
 				self::escapeBracketsAndPipes($info['next_title']) . '|' .
 				self::escapeBracketsAndPipes(trim($info['next_prefix'] . ' ' . $info['next_display'])) . ']]</li>' : '';
 
-			$nav = $mwHandleInternalLinks->call($parser, '<ul>' . $parent . $prev . $next . '</ul>');
+			$preamble = '<li class="link-to-preamble">TeX 导言: [[讲义:' .
+				self::escapeBracketsAndPipes($info['parent_title']) . '/preamble|/preamble]]</li>';
+
+			$nav = $mwHandleInternalLinks->call($parser, '<ul>' . $parent . $prev . $next . $preamble . '</ul>');
 			$parser->replaceLinkHolders($nav);
 			$output->setExtensionData('btex-before', $nav);
-
-			$prefix = $info['prefix'];
 		}
 
 		$json = json_decode($compilerData);

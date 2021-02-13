@@ -598,6 +598,14 @@ body > footer {
       &:not(:last-child) {
         margin-right: 2em;
       }
+
+      &.link-to-preamble{
+        display: none;
+      
+        body.action-submit & {
+          display: inline-block;
+        }
+      }
     }
   }
 }
@@ -754,6 +762,10 @@ body > footer {
   img {
     max-width: 100%;
     height: auto;
+  }
+
+  span.display-math svg {
+    margin: 0 auto;
   }
 
   .warningbox {

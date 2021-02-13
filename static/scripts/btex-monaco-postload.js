@@ -9,20 +9,26 @@ require(['btex-monaco'], function (btex) {
     btex.setLocale('zh');
 
     $(document).ready(function () {
-        if (window.hasEditForm) {
+        if (window.monacoEditorData) {
             let $textBox = $('textarea#wpTextbox1');
             $textBox.css('display', 'none');
     
             $div = $('<div id="btex-monaco-container" class="btex-monaco-container">');
             $div.insertBefore($textBox);
     
+            let data = window.monacoEditorData;
             let editor = btex.createEditor(
                 document.getElementById('btex-monaco-container'),
                 $textBox.val(),
-                window.oldText,
-                window.editorLang
+                data.oldText,
+                data.lang,
+                data.readOnly
             );
-            // todo: set editor diff source to window.oldText
+            
+            if (data.preamble) {
+                btex.addImport('/preamble', data.preamble);
+            }
+
             editor.onDidChangeModelContent(function () {
                 $textBox.val(editor.getValue());
             });
