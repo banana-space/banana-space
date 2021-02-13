@@ -426,6 +426,16 @@ main {
   }
 }
 
+body.ns-102 .mw-portlet-namespaces ul {
+  li#ca-talk {
+    display: none;
+  }
+
+  li::after {
+    display: none;
+  }
+}
+
 .mw-portlet-cactions h3 {
   display: flex;
   justify-content: flex-end;
@@ -657,7 +667,7 @@ body > footer {
     }
   }
 
-  .flow-ui-anonWarningWidget-active a {
+  .flow-ui-anonWarningWidget-active a[href]:not(.mw-ui-button):not(.oo-ui-buttonElement-button) {
     color: #fff;
   }
   
@@ -860,6 +870,10 @@ body > footer {
   }
 }
 
+.flow-topic-page .flow-board {
+  max-width: 1000px !important;
+}
+
 .flow-topic-titlebar {
   margin: 0 -30px;
   padding: .8em 30px;
@@ -895,6 +909,12 @@ body > footer {
   }
 }
 
+.flow-menu li a.mw-ui-button {
+  background: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
 .editOptions :not(.oo-ui-iconElement):not(.oo-ui-indicatorElement) > .oo-ui-buttonElement-button {
   background-color: #fdfeff !important;
 
@@ -921,7 +941,8 @@ body > footer {
   }
 }
 
-.flow-ui-newTopicWidget-title.oo-ui-textInputWidget input {
+.flow-ui-newTopicWidget-title.oo-ui-textInputWidget input,
+input.mw-ui-input-large {
   font-size: 1.2em !important;
   font-weight: normal !important;
   font-family: @font-family-mono !important;

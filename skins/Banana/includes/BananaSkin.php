@@ -47,6 +47,10 @@ class BananaSkin extends SkinMustache136 {
             'notes' => [
                 'href' => Skin::makeUrl( $this->msg( 'banana-portal-notes-title' )->text() ),
                 'text' => $this->msg( 'banana-portal-notes-text' )->text()
+            ],
+            'discussion' => [
+                'href' => Skin::makeUrl( $this->msg( 'banana-portal-discussion-title' )->text() ),
+                'text' => $this->msg( 'banana-portal-discussion-text' )->text()
             ]
         ] );
         $explore['label'] = $this->msg( 'banana-nav-explore' )->text();
@@ -54,12 +58,12 @@ class BananaSkin extends SkinMustache136 {
 
         $create = $this->getPortletData( 'create', [
             'page' => [
-                'href' => Skin::makeSpecialUrl( 'CreatePage' ),
+                'href' => Skin::makeUrl( $this->msg( 'banana-create-page-title' )->text() ),
                 'text' => $this->msg( 'banana-create-page-text' )->text()
             ],
-            'notes' => [
-                'href' => Skin::makeSpecialUrl( 'CreatePage' ),
-                'text' => $this->msg( 'banana-create-notes-text' )->text()
+            'file' => [
+                'href' => Skin::makeSpecialUrl( 'Upload' ),
+                'text' => $this->msg( 'banana-upload-file-text' )->text()
             ]
         ] );
         $create['label'] = $this->msg( 'banana-nav-create' )->text();

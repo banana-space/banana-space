@@ -21,6 +21,7 @@ class TeXParserHooks {
 		global $wgNamespaceAliases;
 		$wgNamespaceAliases['Notes'] = NS_NOTES;
 		$wgNamespaceAliases['Notes_talk'] = NS_NOTES_TALK;
+		$wgNamespaceAliases['Discussion'] = NS_DISCUSSION;
 
 		// Change how section IDs should be encoded;
 		// Default bahaviour: #.FF.FF.FF; changed behaviour: unicode string.
@@ -85,7 +86,7 @@ class TeXParserHooks {
 				);
 				[ $httpCode, $response ] = self::http_post_json(self::BTEX_URL, $jsonStr);
 				$btexOutput = $response;
-			} else error_log("DEBUG: Using cache!");
+			}
 
 			$json = json_decode($btexOutput);
 			$text = $json->html ?? '';
@@ -137,6 +138,17 @@ class TeXParserHooks {
 		if ($action === 'view' && isset($htmlTitle)) {
 			global $wgSitename;
 			$output->setHTMLTitle($htmlTitle . ' - ' . $wgSitename);
+		}
+
+		// Change page title from 'Prefix:Title' to 'Prefix: Title'
+		$ns = $title->getNamespace();
+		if ($ns !== NS_MAIN) {
+			$prefix = ($title->getNsText() ?? '') . ':';
+			$displayTitle = $output->getPageTitle();
+			if (substr($displayTitle, 0, strlen($prefix)) === $prefix) {
+				// setPageTitle works for flow discussions; setDisplayTitle doesn't.
+				$output->setPageTitle( $prefix . ' ' . substr( $displayTitle, strlen($prefix) ) );
+			}
 		}
 	}
 

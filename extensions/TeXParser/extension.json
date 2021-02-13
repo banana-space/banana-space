@@ -19,6 +19,12 @@
 			"constant": "NS_NOTES_TALK",
 			"name": "讲义讨论",
 			"defaultcontentmodel": "flow-board"
+		},
+		{
+			"id": 102,
+			"constant": "NS_DISCUSSION",
+			"name": "讨论室",
+			"defaultcontentmodel": "flow-board"
 		}
 	],
 	"AutoloadClasses": {
