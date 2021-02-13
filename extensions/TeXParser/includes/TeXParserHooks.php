@@ -6,8 +6,6 @@
  * @ingroup Extensions
  */
 
-use MediaWiki\MediaWikiServices;
-
 class TeXParserHooks {
 	private const BTEX_URL = "http://127.0.0.1:7200";
 
@@ -65,36 +63,36 @@ class TeXParserHooks {
 				return false;
 			}
 
-			// Get preamble
-			$preamble = '';
-			if ($subpageInfo !== false) {
-				$preambleName = $subpageInfo['parent_title'] . '/preamble';
-				$preambleTitle = Title::makeTitle(NS_NOTES, $preambleName);
-				if ($preambleTitle->exists()) {
-					$content = WikiPage::newFromID($preambleTitle->getArticleID())->getContent();
-					if ($content instanceof TextContent) {
-						$preamble = $content->getText();
-					}
-				}
+			$preamble = self::getPreambleFromSubpageInfo($subpageInfo);
+
+			$isInline = $parser->getOptions()->getOption('isInline');
+
+			// Try to get cached btex output
+			$btexOutput = null;
+			if (!$isPreview) {
+				$btexOutput = BananaParsoid::getFromDatabase($title, $text, $preamble);
 			}
 
-			// Run compiler
-			// TODO: result should be stored in database
-			$isInline = $parser->getOptions()->getOption('isInline');
-			$jsonStr = json_encode(
-				array(
-					"code" => $text,
-					"preamble" => $preamble,
-					"inverseSearch" => $isPreview,
-					"inline" => $isInline
-				)
-			);
-			list($httpCode, $response) = self::http_post_json(self::BTEX_URL, $jsonStr);
-			$json = json_decode($response);
+			// If no cache is found, run compiler
+			if (!isset($btexOutput)) {
+				$jsonStr = json_encode(
+					[
+						"code" => $text,
+						"preamble" => $preamble,
+						"inverseSearch" => $isPreview,
+						"inline" => $isInline
+					]
+				);
+				[ $httpCode, $response ] = self::http_post_json(self::BTEX_URL, $jsonStr);
+				$btexOutput = $response;
+			} else error_log("DEBUG: Using cache!");
+
+			$json = json_decode($btexOutput);
 			$text = $json->html ?? '';
 
 			$output = $parser->getOutput();
 			$output->setExtensionData('btex-data', $json->data ?? '{}');
+			$output->setExtensionData('btex-output', $btexOutput);
 
 			// Handle <btex-link> etc. in btex output
 			self::handleWikitextAfterBtex($parser, $text);
@@ -144,10 +142,12 @@ class TeXParserHooks {
 
 	public static function onPageSaveComplete( WikiPage $wikiPage ) { 
 		$title = $wikiPage->getTitle();
-		$options = $wikiPage->makeParserOptions('canonical');
-		$output = $wikiPage->getParserOutput($options);
+		$preamble = '';
 
 		if ($title->getNamespace() === NS_NOTES) {
+			$options = $wikiPage->makeParserOptions('canonical');
+			$output = $wikiPage->getParserOutput($options);
+
 			// Update subpages and labels in database
 			$data = $output->getExtensionData('btex-data');
 			if (isset($data))
@@ -155,7 +155,16 @@ class TeXParserHooks {
 
 			$info = SubpageHandler::getSubpageInfo($title);
 			if ($info !== false) {
-				self::purgeSubpages($info, $title);}
+				self::purgeSubpages($info, $title);
+			}
+
+			$preamble = self::getPreambleFromSubpageInfo($info);
+		}
+
+		if ($wikiPage->getContentModel() === CONTENT_MODEL_WIKITEXT) {
+			$code = $wikiPage->getContent()->getText();
+			$btexOutput = $output->getExtensionData('btex-output');
+			BananaParsoid::writeToDatabase($title, $btexOutput, $code, $preamble);
 		}
 	}
 
@@ -472,5 +481,21 @@ class TeXParserHooks {
 				}
 			}
 		}
+	}
+
+	private static function getPreambleFromSubpageInfo($subpageInfo) {
+		$preamble = '';
+		if ($subpageInfo !== false) {
+			$preambleName = $subpageInfo['parent_title'] . '/preamble';
+			$preambleTitle = Title::makeTitle(NS_NOTES, $preambleName);
+			if ($preambleTitle->exists()) {
+				$content = WikiPage::newFromID($preambleTitle->getArticleID())->getContent();
+				if ($content instanceof TextContent) {
+					$preamble = $content->getText();
+				}
+			}
+		}
+
+		return $preamble;
 	}
 }

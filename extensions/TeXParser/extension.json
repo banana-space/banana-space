@@ -22,6 +22,7 @@
 		}
 	],
 	"AutoloadClasses": {
+		"BananaParsoid": "includes/BananaParsoid.php",
 		"SubpageHandler": "includes/SubpageHandler.php",
 		"TeXParserHooks": "includes/TeXParserHooks.php",
 		"EditorHooks": "includes/EditorHooks.php"

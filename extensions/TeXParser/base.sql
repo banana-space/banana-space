@@ -24,10 +24,9 @@ CREATE TABLE banana_label (
 CREATE INDEX idx_page_id ON banana_label (page_id);
 
 CREATE TABLE banana_cache (
+    page_id int unsigned NOT NULL,
     md5 binary(32) NOT NULL,
-    result blob NOT NULL,
-    last_used binary(14) NOT NULL,
-    PRIMARY KEY (md5)
+    result mediumblob NOT NULL,
+    PRIMARY KEY (page_id),
+    FOREIGN KEY (page_id) REFERENCES page (page_id) ON DELETE CASCADE
 ) DEFAULT CHARSET binary;
-
-CREATE INDEX idx_last_used ON banana_cache (last_used);
