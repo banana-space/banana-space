@@ -109,6 +109,13 @@ class TeXParserHooks {
 		return true;
 	}
 
+	public static function onOutputPageParserOutput( OutputPage $out, ParserOutput $parserOutput ) {
+		foreach ([ 'btex-before', 'btex-html-title' ] as $key) {
+			$value = $parserOutput->getExtensionData($key);
+			if (isset($value)) $out->setProperty($key, $value);
+		}
+	}
+
 	public static function onBeforePageDisplay( OutputPage $output, Skin $skin ) {
 		// Load css for btex output
 		$output->addModules( "ext.TeXParser" );
@@ -127,6 +134,12 @@ class TeXParserHooks {
 				'<script src="/static/scripts/btex-monaco/node_modules/monaco-editor/min/vs/loader.js"></script>'
 			);
 		}
+
+		$htmlTitle = $output->getProperty('btex-html-title');
+		if ($action === 'view' && isset($htmlTitle)) {
+			global $wgSitename;
+			$output->setHTMLTitle($htmlTitle . ' - ' . $wgSitename);
+		}
 	}
 
 	public static function onPageSaveComplete( WikiPage $wikiPage ) { 
@@ -144,11 +157,6 @@ class TeXParserHooks {
 			if ($info !== false) {
 				self::purgeSubpages($info, $title);}
 		}
-	}
-
-	public static function onOutputPageParserOutput( OutputPage $out, ParserOutput $parserOutput ) {
-		$before = $parserOutput->getExtensionData('btex-before');
-		if (isset($before)) $out->setProperty('btex-before', $before);
 	}
 
 	public static function onParserFirstCallInit( Parser $parser ) {
@@ -348,6 +356,7 @@ class TeXParserHooks {
 	private static function handleCompilerData( Parser $parser, $subpageInfo, $compilerData ) {
 		$output = $parser->getOutput();
 		$info = $subpageInfo;
+		$prefix = null;
 		
 		if ($info !== false) {
 			// A hack to call private functions
@@ -376,15 +385,28 @@ class TeXParserHooks {
 			$nav = $mwHandleInternalLinks->call($parser, '<ul>' . $parent . $prev . $next . '</ul>');
 			$parser->replaceLinkHolders($nav);
 			$output->setExtensionData('btex-before', $nav);
+
+			$prefix = $info['prefix'];
 		}
 
 		$json = json_decode($compilerData);
 
-		// Handle external links
 		if (isset($json->externalLinks)) {
 			foreach ($json->externalLinks as $link) {
 				$output->addExternalLink($link);
 			}
+		}
+
+		if (isset($json->displayTitle)) {
+			$displayTitle = $json->displayTitle;
+			if ($prefix) $displayTitle = $prefix . ' ' . $displayTitle;
+			$output->setDisplayTitle($displayTitle);
+		}
+
+		if (isset($json->htmlTitle)) {
+			$htmlTitle = $json->htmlTitle;
+			if ($prefix) $htmlTitle = html_entity_decode($prefix) . ' ' . $htmlTitle;
+			$output->setExtensionData('btex-html-title', $htmlTitle);
 		}
 	}
 

@@ -104,15 +104,15 @@ class SubpageHandler {
         return [
             'title' => $ordered[$order]->page_title,
             'number' => $ordered[$order]->subpage_number,
-            'prefix' => self::numberToPrefix($ordered[$order]->subpage_number),
+            'prefix' => self::numberToPrefixHTML($ordered[$order]->subpage_number),
             'display' => $ordered[$order]->display_title,
             'prev_title' => $order == 1 ? null : $ordered[$order - 1]->page_title,
             'prev_number' => $order == 1 ? null : $ordered[$order - 1]->subpage_number,
-            'prev_prefix' => $order == 1 ? null : self::numberToPrefix($ordered[$order - 1]->subpage_number),
+            'prev_prefix' => $order == 1 ? null : self::numberToPrefixHTML($ordered[$order - 1]->subpage_number),
             'prev_display' => $order == 1 ? null : $ordered[$order - 1]->display_title,
             'next_title' => !isset($ordered[$order + 1]) ? null : $ordered[$order + 1]->page_title,
             'next_number' => !isset($ordered[$order + 1]) ? null : $ordered[$order + 1]->subpage_number,
-            'next_prefix' => !isset($ordered[$order + 1]) ? null : self::numberToPrefix($ordered[$order + 1]->subpage_number),
+            'next_prefix' => !isset($ordered[$order + 1]) ? null : self::numberToPrefixHTML($ordered[$order + 1]->subpage_number),
             'next_display' => !isset($ordered[$order + 1]) ? null : $ordered[$order + 1]->display_title,
             'parent_title' => $ordered[0]->page_title,
             'parent_display' => $ordered[0]->display_title,
@@ -128,9 +128,9 @@ class SubpageHandler {
         return $subpageInfo === false ? '' : $subpageInfo['prefix'];
     }
 
-    private static function numberToPrefix( $number ) {
+    private static function numberToPrefixHTML( $number ) {
         if ($number !== '') $number .= '.';
-        return $number;
+        return htmlentities($number, null, 'UTF-8');
     }
 
     /**
