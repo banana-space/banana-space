@@ -52,8 +52,7 @@
 	},
 	"ResourceModules": {
 		"ext.TeXParser": {
-			"packageFiles": [ "extensions/TeXParser/resources/ext.KaTeXcss.js" ],
-			"styles": [ "extensions/TeXParser/resources/ext.TeXParser.less" ]
+			"packageFiles": [ "extensions/TeXParser/resources/ext.KaTeXcss.js" ]
 		}
 	}
 }

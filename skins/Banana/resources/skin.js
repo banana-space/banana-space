@@ -37,6 +37,60 @@ $(document).ready(function () {
       });
     });
   }
+
+  // Inverse search
+  $('#wikiPreview').dblclick(function () {
+    let $span = $(this).find('span[data-pos]:hover');
+    let lines = $span.attr('data-pos');
+    if (lines) {
+      let line = parseInt(lines);
+      let editor = window.monacoEditor;
+      if (editor) {
+        editor.focus();
+        editor.revealLineInCenterIfOutsideViewport(line);
+        editor.setSelection({
+          startLineNumber: line,
+          endLineNumber: line,
+          startColumn: 1,
+          endColumn: editor.getModel().getLineContent(line).length + 1
+        });
+      }
+    }
+  });
+
+  // Ctrl + S
+  $(window).on('keydown', function(event) {
+    if (window.monacoEditor && (event.ctrlKey || event.metaKey)) {
+      switch (String.fromCharCode(event.which).toLowerCase()) {
+        case 's':
+          // prevent scrolling
+          let $html = $('html');
+          let scrollTop = $html.scrollTop();
+          $html.animate({scrollTop}, 100);
+
+          event.preventDefault();
+          $('#wpPreview').click();
+          break;
+      }
+    }
+  });
+
+  let ctrl = window.navigator.platform === 'mac' ? 'Cmd' : 'Ctrl';
+  $('#wpPreview').attr('accesskey', null).attr('title', '显示预览 [' + ctrl + '+S]');
+
+  // Scroll
+  $('a[href^="#"]').click(function () {
+    let $target = $(decodeURIComponent($(this).attr('href')));
+    if ($target.length > 0) {
+      $('html').animate({scrollTop: $target.offset().top - 80}, 400);
+    }
+  });
+
+  if (window.location.hash) {
+    let $target = $(decodeURIComponent(window.location.hash));
+    if ($target.length > 0)
+      $('html').animate({scrollTop: $target.offset().top - 80}, 400);
+  }
 });
 
 function syntaxHighlightBtex($code) {

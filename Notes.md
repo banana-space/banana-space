@@ -22,3 +22,5 @@ We avoid modifying the MediaWiki source code whenever possible. The exceptions a
 * I have changed `/extensions/Flow/includes/Conversion/Utils.php`, at Line 62, to enable KaTeX in discussion headers.
 
 * Line 24 of `resources/lib/CLDRPluralRuleParser/CLDRPluralRuleParser.js` is changed from `if (...)` to `if (false && ...)` -- it is incompatible with bTeX monaco editor. (It shows a console warning and prevents that module being loaded.)
+
+* Line 128 of `resources/src/mediawiki.action/mediawiki.action.edit.preview.js` is deleted to make live preview work (Probably a MW bug).

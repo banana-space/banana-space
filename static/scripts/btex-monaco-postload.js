@@ -8,7 +8,8 @@ require(['btex-monaco'], function (btex) {
 
     btex.setLocale('zh');
 
-    $(document).ready(function () {
+    // jquery might not have loaded yet
+    docReady(function () {
         if (window.monacoEditorData) {
             let $textBox = $('textarea#wpTextbox1');
             $textBox.css('display', 'none');
@@ -32,6 +33,20 @@ require(['btex-monaco'], function (btex) {
             editor.onDidChangeModelContent(function () {
                 $textBox.val(editor.getValue());
             });
+
+            window.monacoEditor = editor;
         }
     });
 });
+
+function docReady(fn) {
+    let waitForJquery = function() {
+        if (window.$) { fn(); return; }
+        setTimeout(waitForJquery, 250);
+    }
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        setTimeout(waitForJquery, 1);
+    } else {
+        document.addEventListener("DOMContentLoaded", waitForJquery);
+    }
+}    

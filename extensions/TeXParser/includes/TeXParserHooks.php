@@ -109,7 +109,7 @@ class TeXParserHooks {
 	}
 
 	public static function onOutputPageParserOutput( OutputPage $out, ParserOutput $parserOutput ) {
-		foreach ([ 'btex-before', 'btex-html-title' ] as $key) {
+		foreach ([ 'btex-html-title' ] as $key) {
 			$value = $parserOutput->getExtensionData($key);
 			if (isset($value)) $out->setProperty($key, $value);
 		}
@@ -140,6 +140,10 @@ class TeXParserHooks {
 			$output->setHTMLTitle($htmlTitle . ' - ' . $wgSitename);
 		}
 
+		if ($action === 'edit' && $title->getNamespace() === NS_NOTES) {
+			
+		}
+
 		// Change page title from 'Prefix:Title' to 'Prefix: Title'
 		$ns = $title->getNamespace();
 		if ($ns !== NS_MAIN) {
@@ -154,17 +158,13 @@ class TeXParserHooks {
 
 	public static function onPageSaveComplete( WikiPage $wikiPage ) { 
 		$title = $wikiPage->getTitle();
+		$options = $wikiPage->makeParserOptions('canonical');
+		$output = $wikiPage->getParserOutput($options);
+		SubpageHandler::updatePageData($title, $output);
+
 		$preamble = '';
 
 		if ($title->getNamespace() === NS_NOTES) {
-			$options = $wikiPage->makeParserOptions('canonical');
-			$output = $wikiPage->getParserOutput($options);
-
-			// Update subpages and labels in database
-			$data = $output->getExtensionData('btex-data');
-			if (isset($data))
-				SubpageHandler::updatePageData($title, $data);
-
 			$info = SubpageHandler::getSubpageInfo($title);
 			if ($info !== false) {
 				self::purgeSubpages($info, $title);
@@ -173,7 +173,7 @@ class TeXParserHooks {
 			$preamble = self::getPreambleFromSubpageInfo($info);
 		}
 
-		if ($wikiPage->getContentModel() === CONTENT_MODEL_WIKITEXT) {
+		if ($output && $wikiPage->getContentModel() === CONTENT_MODEL_WIKITEXT) {
 			$code = $wikiPage->getContent()->getText();
 			$btexOutput = $output->getExtensionData('btex-output');
 			BananaParsoid::writeToDatabase($title, $btexOutput, $code, $preamble);
@@ -406,7 +406,8 @@ class TeXParserHooks {
 				self::escapeBracketsAndPipes(trim($info['next_prefix'] . ' ' . $info['next_display'])) . ']]</li>' : '';
 
 			$preamble = '<li class="link-to-preamble">TeX 导言: [[讲义:' .
-				self::escapeBracketsAndPipes($info['parent_title']) . '/preamble|/preamble]]</li>';
+				self::escapeBracketsAndPipes($info['parent_title']) . '/preamble|' .
+				self::escapeBracketsAndPipes($info['parent_display'] ?? $info['parent_title']) . '/preamble]]</li>';
 
 			$nav = $mwHandleInternalLinks->call($parser, '<ul>' . $parent . $prev . $next . $preamble . '</ul>');
 			$parser->replaceLinkHolders($nav);
@@ -431,6 +432,10 @@ class TeXParserHooks {
 			$htmlTitle = $json->htmlTitle;
 			if ($prefix) $htmlTitle = html_entity_decode($prefix) . ' ' . $htmlTitle;
 			$output->setExtensionData('btex-html-title', $htmlTitle);
+		}
+
+		if (isset($json->lang)) {
+			$output->setExtensionData('btex-page-lang', $json->lang);
 		}
 	}
 

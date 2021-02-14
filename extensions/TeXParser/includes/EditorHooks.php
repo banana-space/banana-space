@@ -52,14 +52,15 @@ class EditorHooks {
 
         $json['readOnly'] = $readOnly;
 
+        // The line 'mw.config.set("skin", false)' to make live preview work
         $html = '
             <script>
                 var require = {
-                    paths: { vs: "/static/scripts/btex-monaco/node_modules/monaco-editor/min/vs" },
+                    paths: { vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.22.3/min/vs" },
                     "vs/nls": { availableLanguages: { "*": "zh-cn" } },
                 };
             </script>
-            <script src="/static/scripts/btex-monaco/node_modules/monaco-editor/min/vs/loader.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.22.3/min/vs/loader.js"></script>
             <script>
                 window.monacoEditorData = $json;
             </script>

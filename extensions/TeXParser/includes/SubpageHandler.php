@@ -138,60 +138,86 @@ class SubpageHandler {
      * @param Title $title Title of the page.
      * @param string $data JSON string which comes from btex output.
      */
-    public static function updatePageData( Title $title, string $data ) {
-        $json = json_decode($data) ?? [];
-        $isRoot = strpos($title->getText(), '/') === false;
+    public static function updatePageData( Title $title, ParserOutput $output ) {
         $namespace = $title->getNamespace();
-        $titleText = $title->getDBkey();
-        $id = $title->getArticleID();
-
         $dbw = wfGetDB( DB_MASTER );
-        $pagePrefix = self::getPagePrefix( $title );
 
-        if ($isRoot) {
-            $dbw->delete('banana_subpage', [ 'parent_id' => $id ]);
-        }
-        $dbw->delete('banana_label', [ 'page_id' => $id ]);
+        if ($namespace === NS_NOTES) {
+            $data = $output->getExtensionData('btex-data');
+            $json = json_decode($data ?? '{}') ?? [];
 
-        if ($isRoot && isset($json->subpages)) {
-            $rows = [];
-            $rows[] = [
-                'page_namespace' => $namespace,
-                'page_title' =>  $titleText,
-                'parent_id' => $id,
-                'subpage_order' => 0,
-                'subpage_number' => '',
-                'display_title' => null
-            ];
+            $isRoot = strpos($title->getText(), '/') === false;
+            $titleText = $title->getDBkey();
+            $id = $title->getArticleID();
 
-            $order = 1;
-            foreach ($json->subpages as $subpage) {
+            $pagePrefix = self::getPagePrefix( $title );
+
+            if ($isRoot) {
+                $dbw->delete('banana_subpage', [ 'parent_id' => $id ]);
+            }
+            $dbw->delete('banana_label', [ 'page_id' => $id ]);
+
+            if ($isRoot && isset($json->subpages)) {
+                $rows = [];
                 $rows[] = [
                     'page_namespace' => $namespace,
-                    'page_title' =>  $titleText . substr($subpage->title, 1),
+                    'page_title' =>  $titleText,
                     'parent_id' => $id,
-                    'subpage_order' => $order,
-                    'subpage_number' => $subpage->number,
-                    'display_title' => $subpage->displayTitle
+                    'subpage_order' => 0,
+                    'subpage_number' => '',
+                    'display_title' => preg_replace('#^讲义:\s*#', '', $output->getDisplayTitle())
                 ];
-                $order++;
+
+                $subpageTitles = [];
+
+                $order = 1;
+                foreach ($json->subpages as $subpage) {
+                    $subpageTitle = $titleText . str_replace(' ', '_', self::normalizeSubpageTitle(substr($subpage->title, 1)));
+                    if (!in_array( $subpageTitle, $subpageTitles )) {
+                        $rows[] = [
+                            'page_namespace' => $namespace,
+                            'page_title' => $subpageTitle,
+                            'parent_id' => $id,
+                            'subpage_order' => $order,
+                            'subpage_number' => $subpage->number,
+                            'display_title' => $subpage->displayTitle
+                        ];
+                        $subpageTitles[] = $subpageTitle;
+                        $order++;
+                    }
+                }
+
+                $dbw->insert('banana_subpage', $rows);
             }
 
-            $dbw->insert('banana_subpage', $rows);
-        }
+            if (isset($json->labels)) {
+                $rows = [];
+                foreach ($json->labels as $key => $label) {
+                    $rows[] = [
+                        'page_id' => $id,
+                        'label_name' => $key,
+                        'label_target' => $label->id,
+                        'label_text' => str_replace('~~', $pagePrefix, $label->html)
+                    ];
+                }
 
-        if (isset($json->labels)) {
-            $rows = [];
-            foreach ($json->labels as $key => $label) {
-                $rows[] = [
-                    'page_id' => $id,
-                    'label_name' => $key,
-                    'label_target' => $label->id,
-                    'label_text' => str_replace('~~', $pagePrefix, $label->html)
-                ];
+                $dbw->insert('banana_label', $rows);
             }
-
-            $dbw->insert('banana_label', $rows);
         }
+
+        $lang = $output->getExtensionData('btex-page-lang');
+        if (!in_array( $lang, ['en', 'en-us', 'en-gb', 'fr', 'fr-fr', 'de', 'de-de', 'zh', 'zh-hans', 'zh-hant'] ))
+            $lang = null;
+        $dbw->update(
+            'page',
+            [ 'page_lang' => $lang ],
+            [ 'page_id' => $title->getArticleID() ]
+        );
+    }
+
+    private static function normalizeSubpageTitle($text) {
+        $text = preg_replace('#\s+#', ' ', $text);
+        $text = preg_replace('# $#', '', $text);
+        return $text;
     }
 }

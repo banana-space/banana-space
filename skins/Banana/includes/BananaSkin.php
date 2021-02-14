@@ -78,9 +78,15 @@ class BananaSkin extends SkinMustache136 {
         }
 
         // Before-header section
-        $out = $this->getOutput();
-        $before = $out->getProperty('btex-before') ?? '';
-        $data['html-before-header'] = $before;
+        if ($this->canUseWikiPage()) {
+            $wikiPage = $this->getWikiPage();
+            $options = $wikiPage->makeParserOptions('canonical');
+            $output = $wikiPage->getParserOutput($options);
+            if ($output) {
+                $before = $output->getExtensionData('btex-before') ?? '';
+                $data['html-before-header'] = $before;
+            }
+        }
 
         return $data;
     }

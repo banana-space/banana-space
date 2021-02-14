@@ -13,6 +13,7 @@
     "echo-new-messages": "讨论页 (有新消息)",
     "cactions": "操作",
     "createacct-benefit-heading": "加入{{SITENAME}}，大家一起学数学。",
+	"edithelppage": "帮助:编辑页面",
 
 	"nbytes": "$1 字节",
 	"parentheses": "($1)",
@@ -47,6 +48,7 @@
 	"search-file-match": "(匹配文件内容)",
 	"search-suggest": "您是不是要找：$1",
 	"search-rewritten": "显示$1的搜索的结果，而不是$2的结果。",
+	"emailauthenticated": "您的电子邮件地址已验证。",
     
 	"flow-topic-comments": "{{PLURAL:$1|$1 个评论|0={{GENDER:$2|第一个}}发表评论！}}",
 	"flow-topic-first-heading": "“$1” 上的话题",
