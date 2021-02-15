@@ -38,6 +38,20 @@ $(document).ready(function () {
     });
   }
 
+  // Resize monaco editor
+  $(window).resize(function () {
+    if (window.monacoEditor) {
+      window.monacoEditor.layout();
+    }
+  });
+
+  // Show preview hint
+  let ctrl = window.navigator.platform === 'mac' ? 'Cmd' : 'Ctrl';
+  if ($('body.action-edit').length > 0) {
+    $('#wikiPreview > div').html('<span class="preview-hint">按 ' + ctrl + ' + S 显示预览</span>');
+    $('#wikiPreview').show();
+  }
+
   // Inverse search
   $('#wikiPreview').dblclick(function () {
     let $span = $(this).find('span[data-pos]:hover');
@@ -75,7 +89,6 @@ $(document).ready(function () {
     }
   });
 
-  let ctrl = window.navigator.platform === 'mac' ? 'Cmd' : 'Ctrl';
   $('#wpPreview').attr('accesskey', null).attr('title', '显示预览 [' + ctrl + '+S]');
 
   // Scroll

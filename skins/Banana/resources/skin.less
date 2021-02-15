@@ -153,7 +153,7 @@ a {
   > .b-dropdown-content {
     display: none;
     position: absolute;
-    top: calc(100% - 12px);
+    top: calc(~"100% - 12px");
     transform: translateX(-20%);
     background: white;
     padding: 5px 0;
@@ -378,7 +378,7 @@ main {
   .mw-portlet-body {
     display: none;
     transform: translateX(-70%);
-    top: calc(100% - 5px);
+    top: calc(~"100% - 5px");
     width: 150px;
   }
 
@@ -654,6 +654,11 @@ body > footer {
       display: inline-block;
       content: '';
       background-repeat: no-repeat;
+    }
+
+    &.flow-timestamp-anchor,
+    &.mw-ui-input {
+      color: @color-gray !important;
     }
   }
 
@@ -1010,7 +1015,7 @@ body > footer {
 .flow-topic-titlebar {
   margin: 0 -30px;
   padding: .8em 30px;
-  background-color: #e9f5fd;
+  background-color: #f4f6f8;
 
   .flow-menu {
     top: 3em;
@@ -1124,4 +1129,53 @@ body.mw-special-Userlogin {
       padding-top: 1em;
     }
   }
+}
+
+// Side-by-side editor
+
+@media screen and (min-width: 1200px) {
+  body.action-edit {
+    form#editform {
+      position: fixed;
+      width: calc(~"50% - 20px");
+      height: calc(~"100% - 70px");
+      top: 0;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      padding-top: 70px;
+  
+      #btex-monaco-container, textarea {
+        flex-grow: 1;
+        margin: 0;
+        box-shadow: 0 0 5px rgba(0,0,0,.2);
+      }
+
+      .editOptions {
+        margin: 0 -20px;
+        background: none;
+        flex-shrink: 0;
+      }
+    }
+
+    .b-page-body {
+      width: calc(~"50% - 100px");
+      min-height: calc(~"100vh - 300px");
+      margin-left: calc(~"50% + 20px");
+    }
+
+    footer#footer {
+      margin-left: calc(~"50% + 20px");
+      margin-right: 20px;
+    }
+
+    #wikiPreview span.preview-hint {
+      font-size: 1.6em;
+      text-align: center;
+      color: #b8c4c8;
+      display: block;
+      margin: 3em auto;
+    }
+  }
+
 }
