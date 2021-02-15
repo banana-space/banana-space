@@ -1,22 +1,20 @@
-# BananaSpace
+# Banana Space
 
-BananaSpace is a project based on MediaWIki (the platform for Wikipedia) with several extensions and bTeX (a compiler that transform LaTeX-styled code into html). BananaSpace parsers TeX-styled source code, instead of WikiText used in MediaWiki. Math formulae are (at least should be) well supported in this project, with the help of KaTeX. The project is aimed to build a website about math, which has encyclopedia articles, lectures and discussions on it. We wish that it offers users a delicious using experience, well, anyway, at least not a bad experience.
+Banana Space 是将 MediaWiki 与 TeX 语法结合的项目，给用户提供使用 TeX 语法写作和讨论的平台。
 
-BananaSpace 是一个基于带扩展的 MediaWiki（Wikipedia 使用的平台）和 bTeX （将LaTeX风格代码转化为html代码）的项目。相比渲染 WikiText 的 Mediawiki，BananaSpace 渲染的是 TeX 风格的源代码。借助 KaTeX，这个项目很好地（起码我们觉得它应当很好地）支持数学公式的显示。这个项目致力于搭建一个集百科条目、讲义和讨论与一体的数学网站；我们希望它能给用户提供嘉肴甘旨般的体验——咳，至少别是太坏的体验吧。
+## 内容
 
-### Content
+除了包含 MediaWiki 源代码外，还有
 
-This repo contains MediaWiki source code together with
+* 几个扩展，来自 [mediawiki.org](https://www.mediawiki.org)；
+* `TeXParser` 扩展；
+* `Banana` 皮肤。
 
-* Several extensions from [mediawiki.org](https://www.mediawiki.org);
-* `TeXParser` extension;
-* `Banana` skin.
-
-To enable them, add the following lines to `LocalSettings.php`.
+目前 `LocalSettings.php` 除自动生成的部分外，还有如下设置。
 
 ``` php
 wfLoadSkin( 'Banana' );
-$wgDefaultSkin = 'Banana';wfLoadSkin( 'Vector' );
+$wgDefaultSkin = 'Banana';
 
 wfLoadExtension( 'Echo' );
 wfLoadExtension( 'Flow' );
@@ -32,35 +30,36 @@ $wgNamespaceContentModels[NS_TALK]           = 'flow-board';
 $wgNamespaceContentModels[NS_USER_TALK]      = 'flow-board';
 $wgNamespaceContentModels[NS_FILE_TALK]      = 'flow-board';
 $wgNamespaceContentModels[NS_HELP_TALK]      = 'flow-board';
-$wgNamespaceContentModels[NS_MODULE_TALK]    = 'flow-board';
 $wgNamespaceContentModels[NS_PROJECT_TALK]   = 'flow-board';
 $wgNamespaceContentModels[NS_CATEGORY_TALK]  = 'flow-board';
 $wgNamespaceContentModels[NS_TEMPLATE_TALK]  = 'flow-board';
 $wgNamespaceContentModels[NS_MEDIAWIKI_TALK] = 'flow-board';
+$wgNamespaceContentModels[829]               = 'flow-board'; // NS_MODULE_TALK
 
-$wgNamespacesToBeSearchedDefault[NS_NOTES] = true;
+$wgNamespaceAliases['BS'] = NS_PROJECT;
+
+$wgNamespacesToBeSearchedDefault[100] = true; // NS_NOTES
 
 $wgFileExtensions = [ 'png', 'gif', 'jpg', 'jpeg', 'pdf', 'svg' ];
+
+$wgNamespaceProtection[828] = ['edit-module']; // NS_MODULE
+$wgGroupPermissions['sysop']['edit-module'] = true;
+$wgGroupPermissions['sysop']['deletelogentry'] = true;
+$wgGroupPermissions['sysop']['deleterevision'] = true;
+
+$wgPageLanguageUseDB = true;
+
+$wgDefaultUserOptions['uselivepreview'] = 1;
 ```
 
-If you encounter errors, go to the `maintenance` folder, and run
+## 运行步骤
+
+* 通过 MediaWiki 安装向导生成 `LocalSettings.php` 文件，在其末尾添加以上代码，然后放在项目目录。
+* 运行 [bTeX](https://github.com/banana-space/btex)。
+* 运行 PHP 本地服务器进行调试。
+
+如遇数据库错误，可在 `maintenance` 目录中运行
 ``` bash
 php update.php
 ```
-
-### How to use
-
-If you want to use the project to build your own website, please see below:
-
-As the project is in development, it's not recommended to use it right now. When the project is somehow stable, we will have using introduction here.
-
-如果你想使用这个项目来搭建你自己的网站，请看如下说明：
-
-这个项目还正在开发，所以我们不推荐你现在就使用它。当这个项目有一定稳定性后，我们将会把使用说明写在这里。
-
-### 运行步骤
-
-* 通过 MediaWiki 安装向导生成 `LocalSettings.php` 文件，放在根目录。
-* 运行 [bTeX](https://github.com/banana-space/btex)。
-* 运行 `php -S localhost:5000`。
-* 在浏览器打开 `localhost:5000`。
+以刷新数据库。
