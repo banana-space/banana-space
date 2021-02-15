@@ -64,9 +64,7 @@ class EditorHooks {
             <script>
                 window.monacoEditorData = $json;
             </script>
-            <script src="/static/scripts/btex-monaco-preload.js"></script>
-            <script src="/static/scripts/btex-monaco/dist/btex-monaco.js"></script>
-            <script src="/static/scripts/btex-monaco-postload.js"></script>';
+            <script src="/static/scripts/btex-monaco-min.js"></script>';
 
         $html = str_replace("\n", ' ', $html);
         $html = preg_replace('#\s+#', ' ', $html);

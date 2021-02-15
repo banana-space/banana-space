@@ -36,6 +36,11 @@
   src: url('https://cdn.jsdelivr.net/npm/typeface-noto-sans@1.1.13/files/noto-sans-latin-700italic.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/typeface-noto-sans@1.1.13/files/noto-sans-latin-700italic.woff') format('woff');
 }
 
+@font-face {
+  font-family: 'Cascadia Code';
+  src: url('https://cdn.jsdelivr.net/npm/fontsource-cascadia-code@4.0.0/files/cascadia-code-latin-ext-400-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/fontsource-cascadia-code@4.0.0/files/cascadia-code-latin-ext-400-normal.woff') format('woff');
+}
+
 // TODO: @font-face for Cascadia Code
 
 /* Styles */
@@ -98,8 +103,8 @@ a {
 
 #p-logo {
   height: 50px;
-  width: 200px;
-  margin-right: 10px;
+  width: 180px;
+  margin-right: 15px;
   background-image: url("/static/images/logo.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -160,6 +165,10 @@ a {
     box-shadow: 0 0 5px rgba(0,0,0,.2);
     border-radius: 10px;
     width: 200px;
+
+    &.b-dropdown-showing {
+      display: block;
+    }
     
     li {
       display: block;
@@ -317,6 +326,7 @@ a {
 
 .b-page-body {
   max-width: 1000px;
+  width: calc(~"100% - 60px");
   margin: 70px auto 0 auto;
   padding: 25px 30px 40px 30px;
   background: @background-color-article;
@@ -1148,7 +1158,7 @@ body.mw-special-Userlogin {
       #btex-monaco-container, textarea {
         flex-grow: 1;
         margin: 0;
-        box-shadow: 0 0 5px rgba(0,0,0,.2);
+        box-shadow: 0 0 10px rgba(0,0,0,.2);
       }
 
       .editOptions {
@@ -1156,6 +1166,19 @@ body.mw-special-Userlogin {
         background: none;
         flex-shrink: 0;
       }
+    }
+  
+    // Read-only editor
+    #mw-content-text > #btex-monaco-container, 
+    #mw-content-text > textarea {
+      position: fixed;
+      width: calc(~"50% - 20px");
+      height: calc(~"100% - 90px");
+      top: 70px;
+      left: 50px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 10px rgba(0,0,0,.2);
     }
 
     .b-page-body {
@@ -1168,14 +1191,57 @@ body.mw-special-Userlogin {
       margin-left: calc(~"50% + 20px");
       margin-right: 20px;
     }
+  }
+}
 
-    #wikiPreview span.preview-hint {
-      font-size: 1.6em;
-      text-align: center;
-      color: #b8c4c8;
-      display: block;
-      margin: 3em auto;
-    }
+#wikiPreview span.preview-hint {
+  font-size: 1.6em;
+  text-align: center;
+  color: #b8c4c8;
+  display: block;
+  margin: 3em auto;
+}
+
+@media screen and (max-width: 1000px) {
+  #p-search {
+    width: 250px;
+  }
+}
+
+#p-search-link {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  #p-logo {
+    width: 150px;
+    margin-right: 10px;
   }
 
+  #p-search,
+  #p-create {
+    display: none;
+  }
+
+  .b-dropdown > .b-dropdown-toggle {
+    padding: 0 10px;
+  }
+
+  .b-user-menu > .b-dropdown-toggle {
+    padding: 0;
+  }
+
+  #p-search-link {
+    display: block;
+    padding: 0 10px;
+    > a {
+      color: black;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-block;
+      font-size: 18px;
+      border-bottom: 4px solid transparent;
+    }
+  }
 }

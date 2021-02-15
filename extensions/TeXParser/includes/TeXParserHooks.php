@@ -120,7 +120,7 @@ class TeXParserHooks {
 		$output->addModules( "ext.TeXParser" );
 
 		// Add meta tag
-		$output->addMeta('viewport', 'width=500, initial-scale=1');
+		$output->addMeta('viewport', 'width=500, maximum-scale=1');
 		
 		// Add script for syntax highlighting lua and css
 		$title = $output->getTitle();
@@ -208,6 +208,14 @@ class TeXParserHooks {
 	public static function onParserOptionsRegister( &$defaults, &$inCacheKey, &$lazyLoad ) {
 		$defaults['isInline'] = false;
 		$inCacheKey['isInline'] = true;
+	}
+
+	public static function onSkinAddFooterLinks( Skin $skin, string $key, array &$footerlinks  ) {
+		if ( $key === 'places' ) {
+			$footerlinks['privacy'] = '';
+			$footerlinks['disclaimer'] = '';
+			$footerlinks['donate'] = $skin->footerLink('banana-footer-donate-desc', 'banana-footer-donate-page');
+		}
 	}
 
 	private static function http_post_json($url, $jsonStr) {

@@ -57,9 +57,13 @@ class BananaSkin extends SkinMustache136 {
         $portlets['data-explore'] = $explore;
 
         $create = $this->getPortletData( 'create', [
-            'page' => [
+            'create-page' => [
                 'href' => Skin::makeUrl( $this->msg( 'banana-create-page-title' )->text() ),
                 'text' => $this->msg( 'banana-create-page-text' )->text()
+            ],
+            'list-stubs' => [
+                'href' => Skin::makeUrl( $this->msg( 'banana-list-stubs-title' )->text() ),
+                'text' => $this->msg( 'banana-list-stubs-text' )->text()
             ],
             'file' => [
                 'href' => Skin::makeSpecialUrl( 'Upload' ),
@@ -76,6 +80,10 @@ class BananaSkin extends SkinMustache136 {
         if ($portlets['data-actions']['html-items'] === '') {
             unset($portlets['data-actions']);
         }
+
+        // Search link (for small screens)
+        $data['html-search-link'] = '<a href="' . Skin::makeSpecialUrl('Search') . '">' .
+            $this->msg( 'banana-search-link-text' ) .'</a>';
 
         // Before-header section
         if ($this->canUseWikiPage()) {

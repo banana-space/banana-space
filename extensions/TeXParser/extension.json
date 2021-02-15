@@ -47,6 +47,7 @@
 		"BeforePageDisplay": "TeXParserHooks::onBeforePageDisplay",
 		"ParserFirstCallInit": "TeXParserHooks::onParserFirstCallInit",
 		"ParserOptionsRegister": "TeXParserHooks::onParserOptionsRegister",
+		"SkinAddFooterLinks": "TeXParserHooks::onSkinAddFooterLinks",
 		"EditPage::showEditForm:initial": "EditorHooks::onEditPageShowEditFormInitial",
 		"EditPage::showReadOnlyForm:initial": "EditorHooks::onEditPageShowReadOnlyFormInitial"
 	},

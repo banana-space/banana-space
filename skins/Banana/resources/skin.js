@@ -6,8 +6,24 @@ $(document).ready(function () {
   $actions.children("#p-cactions-label").addClass("b-dropdown-toggle");
   $actions.children(".mw-portlet-body").addClass("b-dropdown-content");
 
+  // Simulate hover on mobile devices
+  $('.b-dropdown').click(function () {
+    $content = $(this).find('.b-dropdown-content');
+    setTimeout(() => {
+      $content.addClass('b-dropdown-showing');
+    }, 100);
+  });
+  $('body').click(function () {
+    $('.b-dropdown-showing').removeClass('b-dropdown-showing');
+  });
+
   // Syntax highlighting
-  $('.code-btex').each( function () { syntaxHighlightBtex( $( this ) ); } );
+  setInterval(() => {
+    $('.code-btex:not(.highlighted)').each( function () {
+      syntaxHighlightBtex( $( this ) );
+      $( this ).addClass('highlighted');
+    } );
+  }, 1000);
 
   // Highlight code in Module namespace
   if (window.require) {
@@ -47,8 +63,9 @@ $(document).ready(function () {
 
   // Show preview hint
   let ctrl = window.navigator.platform === 'mac' ? 'Cmd' : 'Ctrl';
-  if ($('body.action-edit').length > 0) {
-    $('#wikiPreview > div').html('<span class="preview-hint">按 ' + ctrl + ' + S 显示预览</span>');
+  const isMobileDevice = /mobi/i.test(window.navigator.userAgent);
+  if ($('body.action-edit').length > 0 && !isMobileDevice) {
+    $('#wikiPreview > div').html('<span class="preview-hint">按 ' + ctrl + ' + S 编译并预览</span>');
     $('#wikiPreview').show();
   }
 
