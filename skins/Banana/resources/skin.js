@@ -62,10 +62,10 @@ $(document).ready(function () {
   });
 
   // Show preview hint
-  let ctrl = window.navigator.platform === 'mac' ? 'Cmd' : 'Ctrl';
+  let ctrl = /^mac/i.test(window.navigator.platform) ? 'Cmd' : 'Ctrl';
   const isMobileDevice = /mobi/i.test(window.navigator.userAgent);
   if ($('body.action-edit').length > 0 && !isMobileDevice) {
-    $('#wikiPreview > div').html('<span class="preview-hint">按 ' + ctrl + ' + S 编译并预览</span>');
+    $('#wikiPreview > div').html('<span class="preview-hint">按 ' + ctrl + ' + S 编译并预览<br/>双击预览结果跳转到代码</span>');
     $('#wikiPreview').show();
   }
 

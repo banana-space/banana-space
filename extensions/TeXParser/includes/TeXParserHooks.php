@@ -289,7 +289,9 @@ class TeXParserHooks {
 
 		// References
 		$refs = $xpath->query('//btex-ref');
-		$prefix = SubpageHandler::getPagePrefix($title);
+		$info = SubpageHandler::getSubpageInfo($title);
+		$pagenum  = $info ? ($info['number'] ?? '') : '';
+		$prefix  = $info ? ($info['prefix'] ?? '') : '';
 		/** @var DOMElement $element */
 		foreach ($refs as $element) {
 			$result = '';
@@ -298,6 +300,8 @@ class TeXParserHooks {
 
 				if ($key === '--prefix--') {
 					$result = $prefix;
+				} else if ($key === '--pagenum--') {
+					$result = $pagenum;
 				} else {
 					$label = $labels[$key];
 					if (isset($label)) {
@@ -324,7 +328,8 @@ class TeXParserHooks {
 				$label = $labels[$element->getAttribute('data-key')];
 				if (isset($label)) {
 					$targetTitle = Title::newFromID($label['page_id']);
-					$pageName = self::escapeBracketsAndPipes($targetTitle->getPrefixedText() . '#' . urlencode($label['target']));
+					$urlHash = $label['target'] === '' ? '' : '#' . urlencode($label['target']);
+					$pageName = self::escapeBracketsAndPipes($targetTitle->getPrefixedText() . $urlHash);
 				}
 			}
 

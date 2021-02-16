@@ -120,14 +120,6 @@ class SubpageHandler {
         ];
     }
 
-    /**
-     * @return string
-     */
-    public static function getPagePrefix( Title $title ) {
-		$subpageInfo = SubpageHandler::getSubpageInfo($title);
-        return $subpageInfo === false ? '' : $subpageInfo['prefix'];
-    }
-
     private static function numberToPrefixHTML( $number ) {
         if ($number !== '') $number .= '.';
         return htmlentities($number, null, 'UTF-8');
@@ -150,7 +142,9 @@ class SubpageHandler {
             $titleText = $title->getDBkey();
             $id = $title->getArticleID();
 
-            $pagePrefix = self::getPagePrefix( $title );
+            $info = self::getSubpageInfo($title);
+            $pageNumber  = $info ? ($info['number'] ?? '') : '';
+            $pagePrefix  = $info ? ($info['prefix'] ?? '') : '';
 
             if ($isRoot) {
                 $dbw->delete('banana_subpage', [ 'parent_id' => $id ]);
@@ -193,11 +187,13 @@ class SubpageHandler {
             if (isset($json->labels)) {
                 $rows = [];
                 foreach ($json->labels as $key => $label) {
+                    $labelText = str_replace('~~.', $pagePrefix, $label->html);
+                    $labelText = str_replace('~~', $pageNumber, $labelText);
                     $rows[] = [
                         'page_id' => $id,
                         'label_name' => $key,
                         'label_target' => $label->id,
-                        'label_text' => str_replace('~~', $pagePrefix, $label->html)
+                        'label_text' => $labelText
                     ];
                 }
 

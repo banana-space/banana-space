@@ -728,7 +728,6 @@ body > footer {
     border: 0;
     border-left: 4px solid #dce0e4;
     padding: .5em 1em;
-    border-radius: 0 1.5em 1.5em 0;
     line-height: 1.6;
 
     .toctitle {
@@ -957,11 +956,21 @@ body > footer {
     }
   }
 
+  .table-wrapper {
+    display: inline-block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
   span.display-math {
     display: flex;
     flex-direction: row;
     align-items: baseline;
     justify-content: stretch;
+
+    &.tikz-in-math {
+      align-items: center;
+    }
 
     span.katex-display {
       flex-grow: 1;
@@ -989,9 +998,9 @@ body > footer {
   }
 
   .block.style-b {
-    background: #fef2e8;
+    background: #fff6e4;
     span.item-header {
-      color: #f08000;
+      color: #e87000;
     }
   }
 
@@ -1195,7 +1204,7 @@ body.mw-special-Userlogin {
 }
 
 #wikiPreview span.preview-hint {
-  font-size: 1.6em;
+  font-size: 1.4em;
   text-align: center;
   color: #b8c4c8;
   display: block;
