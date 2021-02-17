@@ -7,14 +7,14 @@ Banana Space 是将 MediaWiki 与 TeX 语法结合的项目，给用户提供使
 除了包含 MediaWiki 源代码外，还有
 
 * 几个扩展，来自 [mediawiki.org](https://www.mediawiki.org)；
-* `TeXParser` 扩展；
-* `Banana` 皮肤。
+* `Banana` 扩展；
+* `BananaSkin` 皮肤。
 
 目前 `LocalSettings.php` 除自动生成的部分外，还有如下设置。
 
 ``` php
-wfLoadSkin( 'Banana' );
-$wgDefaultSkin = 'Banana';
+wfLoadSkin( 'BananaSkin' );
+$wgDefaultSkin = 'BananaSkin';
 
 wfLoadExtension( 'Echo' );
 wfLoadExtension( 'Flow' );
@@ -24,7 +24,7 @@ wfLoadExtension( 'PdfHandler' );
 wfLoadExtension( 'Scribunto' );
 wfLoadExtension( 'TemplateStyles' );
 wfLoadExtension( 'Thanks' );
-wfLoadExtension( 'TeXParser' );
+wfLoadExtension( 'Banana' );
 
 $wgNamespaceContentModels[NS_TALK]           = 'flow-board';
 $wgNamespaceContentModels[NS_USER_TALK]      = 'flow-board';
@@ -50,6 +50,10 @@ $wgGroupPermissions['sysop']['deleterevision'] = true;
 $wgPageLanguageUseDB = true;
 
 $wgDefaultUserOptions['uselivepreview'] = 1;
+
+$wgHiddenPrefs += [
+	'editfont', 'editsection', 'editsectiononrightclick', 'fancysig', 'gender', 'language', 'nickname', 'numberheadings', 'previewontop', 'showtoc', 'skin', 'stubthreshold', 'underline'
+];
 ```
 
 ## 运行步骤

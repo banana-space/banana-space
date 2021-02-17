@@ -1,12 +1,12 @@
 <?php
 /**
- * Hooks for TeXParser
+ * Hooks for Banana
  *
  * @file
  * @ingroup Extensions
  */
 
-class TeXParserHooks {
+class BananaHooks {
 	private const BTEX_URL = "http://127.0.0.1:7200";
 
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater ) {
@@ -117,7 +117,7 @@ class TeXParserHooks {
 
 	public static function onBeforePageDisplay( OutputPage $output, Skin $skin ) {
 		// Load css for btex output
-		$output->addModules( "ext.TeXParser" );
+		$output->addModules( "ext.Banana" );
 
 		// Add meta tag
 		$output->addMeta('viewport', 'width=500, maximum-scale=1');

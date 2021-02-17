@@ -1,0 +1,48 @@
+{
+  "name": "BananaSkin",
+  "version": "1.0.0",
+  "namemsg": "Banana",
+  "descriptionmsg": "Banana Space",
+  "author": ["Banana Space"],
+  "type": "skin",
+  "requires": {
+    "MediaWiki": ">= 1.35.0"
+  },
+  "manifest_version": 2,
+  "ValidSkinNames": {
+    "bananaskin": {
+      "class": "BananaSkin",
+      "args": [
+        {
+          "name": "BananaSkin",
+          "templateDirectory": "skins/BananaSkin/templates/",
+          "messages": ["sitetitle"],
+          "styles": ["skins.banana.styles"],
+          "scripts": ["skins.banana"]
+        }
+      ]
+    }
+  },
+  "AutoloadClasses": {
+    "SkinMustache136": "includes/SkinMustache136.php",
+    "BananaSkin": "includes/BananaSkin.php"
+  },
+  "MessagesDirs": {
+    "BananaSkin": ["i18n"]
+  },
+  "ExtensionFunctions": ["BananaSkin::initBananaSkin"],
+  "ResourceFileModulePaths": {
+    "localBasePath": "",
+    "remoteSkinPath": "BananaSkin"
+  },
+  "ResourceModules": {
+    "skins.banana.styles": {
+      "class": "ResourceLoaderSkinModule",
+      "features": ["elements", "content", "interface", "legacy"],
+      "styles": ["resources/skin.less"]
+    },
+    "skins.banana": {
+      "packageFiles": ["resources/skin.js"]
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+	"name": "Banana",
+	"author": "Banana Space",
+	"url": "",
+	"description": "",
+	"version": "1.0",
+	"license-name": "GPL-2.0-or-later",
+	"type": "",
+	"manifest_version": 1,
+	"namespaces": [
+		{
+			"id": 100,
+			"constant": "NS_NOTES",
+			"name": "讲义",
+			"content": true
+		},
+		{
+			"id": 101,
+			"constant": "NS_NOTES_TALK",
+			"name": "讲义讨论",
+			"defaultcontentmodel": "flow-board"
+		},
+		{
+			"id": 102,
+			"constant": "NS_DISCUSSION",
+			"name": "讨论室",
+			"defaultcontentmodel": "flow-board"
+		}
+	],
+	"AutoloadClasses": {
+		"BananaParsoid": "includes/BananaParsoid.php",
+		"SubpageHandler": "includes/SubpageHandler.php",
+		"BananaHooks": "includes/BananaHooks.php",
+		"EditorHooks": "includes/EditorHooks.php"
+	},
+	"ExtensionFunctions": [
+		"BananaHooks::initExtension"
+	],
+	"ExtensionMessagesFiles": {
+		"ExampleExtensionMagic": "includes/Banana.i18n.php"
+	},
+	"Hooks": {
+		"LoadExtensionSchemaUpdates": "BananaHooks::onLoadExtensionSchemaUpdates",
+		"ParserBeforeInternalParse": "BananaHooks::onParserBeforeInternalParse",
+		"PageSaveComplete": "BananaHooks::onPageSaveComplete",
+		"OutputPageParserOutput": "BananaHooks::onOutputPageParserOutput",
+		"BeforePageDisplay": "BananaHooks::onBeforePageDisplay",
+		"ParserFirstCallInit": "BananaHooks::onParserFirstCallInit",
+		"ParserOptionsRegister": "BananaHooks::onParserOptionsRegister",
+		"SkinAddFooterLinks": "BananaHooks::onSkinAddFooterLinks",
+		"EditPage::showEditForm:initial": "EditorHooks::onEditPageShowEditFormInitial",
+		"EditPage::showReadOnlyForm:initial": "EditorHooks::onEditPageShowReadOnlyFormInitial"
+	},
+	"ResourceModules": {
+		"ext.Banana": {
+			"packageFiles": [ "extensions/Banana/resources/ext.KaTeXcss.js" ]
+		}
+	}
+}

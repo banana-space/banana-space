@@ -868,6 +868,9 @@ body > footer {
     font-size: 100%;
   }
 
+  .mw-editTools,
+  .templatesUsed,
+  .hiddencats,
   .limitreport {
     display: none;
   }
@@ -1252,5 +1255,25 @@ body.mw-special-Userlogin {
       font-size: 18px;
       border-bottom: 4px solid transparent;
     }
+  }
+}
+
+@media print {
+  .b-nav-wrapper,
+  #siteNotice,
+  .content__before-header,
+  .content__namespaces-actions,
+  footer {
+    display: none;
+  }
+
+  .b-page-body {
+    box-shadow: none;
+    padding: 0;
+    font-size: 12px;
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: normal;
   }
 }
