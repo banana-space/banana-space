@@ -120,7 +120,7 @@ class BananaHooks {
 		$output->addModules( "ext.Banana" );
 
 		// Add meta tag
-		$output->addMeta('viewport', 'width=500, maximum-scale=1');
+		$output->addMeta('viewport', 'width=device-width, initial-scale=0.8');
 		
 		// Add script for syntax highlighting lua and css
 		$title = $output->getTitle();
