@@ -3,7 +3,7 @@
 .*.swp
 scripts/remotes
 node_modules/
-vendor/
+# vendor/
 \#*#
 /composer.lock
 /docs
