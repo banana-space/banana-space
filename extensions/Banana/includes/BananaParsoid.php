@@ -32,6 +32,9 @@ class BananaParsoid {
      * @return string|null
      */
     public static function writeToDatabase( Title $title, string $result, string $code, string $preamble = '' ) {
+        // If result is empty, we may have a compiler error
+        if ($result === '') return;
+
         $dbw = wfGetDB( DB_MASTER );
         $id = $title->getArticleID();
 
