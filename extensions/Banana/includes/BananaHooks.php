@@ -214,7 +214,9 @@ class BananaHooks {
 		if ( $key === 'places' ) {
 			$footerlinks['privacy'] = '';
 			$footerlinks['disclaimer'] = '';
+			$footerlinks['copyright'] = $skin->footerLink('banana-footer-copyright-desc', 'banana-footer-copyright-page');
 			$footerlinks['donate'] = $skin->footerLink('banana-footer-donate-desc', 'banana-footer-donate-page');
+			$footerlinks['github'] = '<a href="https://github.com/banana-space/banana-space" title="GitHub">GitHub</a>';
 		}
 	}
 
