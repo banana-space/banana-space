@@ -1,4 +1,5 @@
 let hideNotificationsTimeout;
+let disableCtrlS = false;
 
 $(document).ready(function () {
   let $actions = $("#p-cactions");
@@ -94,12 +95,19 @@ $(document).ready(function () {
     if (window.monacoEditor && (event.ctrlKey || event.metaKey)) {
       switch (String.fromCharCode(event.which).toLowerCase()) {
         case 's':
+          event.preventDefault();
+          
+          if (disableCtrlS) return;
+          disableCtrlS = true;
+          setTimeout(() => {
+            disableCtrlS = false;
+          }, 5000);
+
           // prevent scrolling
           let $html = $('html');
           let scrollTop = $html.scrollTop();
           $html.animate({scrollTop}, 100);
 
-          event.preventDefault();
           $('#wpPreview').click();
           break;
       }
