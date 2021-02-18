@@ -45,7 +45,7 @@ class EditorHooks {
         $lang = 'btex';
         $ns = $article->getTitle()->getNamespace();
         $contentModel = $article->getTitle()->getContentModel();
-        if ($ns === NS_TEMPLATE || $ns === NS_MODULE) $lang = '';
+        if (in_array( $ns, [ NS_TEMPLATE, NS_MODULE, NS_MEDIAWIKI ] )) $lang = '';
         if ($contentModel === 'Scribunto') $lang = 'lua';
         if ($contentModel === 'css' || $contentModel === 'sanitized-css') $lang = 'css';
         $json['lang'] = $lang;

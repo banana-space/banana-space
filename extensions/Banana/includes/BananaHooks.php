@@ -34,7 +34,7 @@ class BananaHooks {
 		if (!$parser->getOptions()->getInterfaceMessage()) {
 			// Use wikitext parser for templates
 			$title = $parser->getTitle();
-			if (in_array( $title->getNamespace(), [ NS_TEMPLATE, NS_MODULE ] )) {
+			if (in_array( $title->getNamespace(), [ NS_TEMPLATE, NS_MODULE, NS_MEDIAWIKI ] )) {
 				return true;
 			}
 
