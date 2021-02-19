@@ -157,8 +157,8 @@ class BananaHooks {
 
 		// Google analytics
 		$output->addScript(
-			'<script async src="https://www.googletagmanager.com/gtag/js?id=G-SJXWZTM3GV"></script>' .
-			'<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-SJXWZTM3GV");</script>'
+			'<script async src="https://www.googletagmanager.com/gtag/js?id=G-JKF9FC30TP"></script>' .
+			'<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-JKF9FC30TP");</script>'
 		);
 	}
 
