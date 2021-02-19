@@ -66,7 +66,7 @@ $(document).ready(function () {
   let ctrl = /^mac/i.test(window.navigator.platform) ? "Cmd" : "Ctrl";
   const isMobileDevice = /mobi/i.test(window.navigator.userAgent);
   if ($("body.action-edit").length > 0 && !isMobileDevice) {
-    $("#wikiPreview > div").html(
+    $("#wikiPreview > .mw-content-ltr").html(
       '<span class="preview-hint">按 ' +
         ctrl +
         " + S 编译并预览<br/>双击预览结果跳转到代码</span>"
