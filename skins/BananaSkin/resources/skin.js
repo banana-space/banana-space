@@ -148,9 +148,8 @@ function syntaxHighlightBtex($code) {
     }
     return y;
   };
-  console.log($code[0].innerHTML.split("\n"));
   $code[0].innerHTML = $code[0].innerHTML
-    .split("\n")
+    .split(/<br\s*\/?>/)
     .map((l) =>
       l
         .recursiveReplace(
@@ -173,5 +172,5 @@ function syntaxHighlightBtex($code) {
           '$1<span class="btex-string">$2</span>$3'
         )
     )
-    .join("\n");
+    .join("<br>");
 }
