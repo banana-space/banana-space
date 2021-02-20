@@ -68,6 +68,7 @@
   "minoreditletter": "m",
   "newpageletter": "N",
   "boteditletter": "b",
+  "uploadtext": "请使用下面的表格上传文件。要查看或搜索以往上传的文件，请前往[[Special:FileList|上传的文件的列表]]，（重新）上传也将记录在[[Special:Log/upload|上传日志]]中，删除将记录在[[Special:Log/delete|删除日志]]中。\n\n要在页面中包含文件，请使用一种以下形式的链接：\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code></strong>插入图片。\n* <strong><code><nowiki>{{image|File.png|200px|thumb|right|说明文字}}</nowiki></code></strong>把图片放在页面右侧的一个 200 像素宽的框里，并附以说明文字。",
 
   "flow-topic-comments": "{{PLURAL:$1|$1 个评论|0={{GENDER:$2|第一个}}发表评论！}}",
   "flow-topic-first-heading": "“$1” 上的话题",
