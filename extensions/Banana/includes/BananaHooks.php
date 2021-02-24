@@ -261,7 +261,39 @@ class BananaHooks {
 		$str = str_replace( '{', '&#123;', $str );
 		$str = str_replace( '|', '&#124;', $str );
 		$str = str_replace( '}', '&#125;', $str );
+		$str = str_replace( "\u{edb0}\u{edb0}\u{edb0}", '[[', $str );
+		$str = str_replace( "\u{edb1}\u{edb1}\u{edb1}", '|', $str );
+		$str = str_replace( "\u{edb2}\u{edb2}\u{edb2}", ']]', $str );
 		return $str;
+	}
+
+	private static function linkToWikitext( Parser $parser, $labels, DOMElement $element ) {
+		$dom = $element->ownerDocument;
+
+		$pageName = '';
+		if ($element->hasAttribute('data-page')) {
+			$pageName = self::escapeBracketsAndPipes($element->getAttribute('data-page'));
+			if (substr($pageName, 0, 2) === './')
+				$pageName = $parser->getTitle()->getPrefixedText() . substr($pageName, 1);
+		} else if ($element->hasAttribute('data-key')) {
+			$label = $labels[$element->getAttribute('data-key')];
+			if (isset($label)) {
+				$targetTitle = Title::newFromID($label['page_id']);
+				$urlHash = $label['target'] === '' ? '' : '#' . urlencode($label['target']);
+				$pageName = self::escapeBracketsAndPipes($targetTitle->getPrefixedText() . $urlHash);
+			}
+		}
+
+		$content = '';
+		foreach ($element->childNodes as $child)
+			$content .= $dom->saveHTML($child);
+		$content = self::escapeBracketsAndPipes($content);
+
+		if ($pageName !== '') {
+			return "[[$pageName|$content]]";
+		} else {
+			return $content;
+		}
 	}
 
 	private static function handleWikitextAfterBtex( Parser &$parser, &$text ) {
@@ -322,36 +354,36 @@ class BananaHooks {
 			self::domReplace($dom, $result, $element);
 		}
 
+		// Links in templates: {{ ... [[...]] }}
+		$links = $xpath->query('//btex-fun//btex-link');
+		/** @var DOMElement $element */
+		foreach ($links as $element) {
+			$result = self::linkToWikitext($parser, $labels, $element);
+
+			if (substr($result, 0, 2) === '[[') {
+				$result = str_replace("\u{edb0}", '', $result);
+				$result = str_replace("\u{edb1}", '', $result);
+				$result = str_replace("\u{edb2}", '', $result);
+				$result = str_replace('[[', "\u{edb0}\u{edb0}\u{edb0}", $result);
+				$result = str_replace('|', "\u{edb1}\u{edb1}\u{edb1}", $result);
+				$result = str_replace(']]', "\u{edb2}\u{edb2}\u{edb2}", $result);
+			}
+
+			self::domReplace($dom, $result, $element);
+		}
+
 		// Links, [[...]]
 		$links = $xpath->query('//btex-link');
 		/** @var DOMElement $element */
 		foreach ($links as $element) {
+			$result = self::linkToWikitext($parser, $labels, $element);
+
 			// use mw parser to generate internal link
-			$pageName = '';
-			if ($element->hasAttribute('data-page')) {
-				$pageName = self::escapeBracketsAndPipes($element->getAttribute('data-page'));
-				if (substr($pageName, 0, 2) === './')
-					$pageName = $parser->getTitle()->getPrefixedText() . substr($pageName, 1);
-			} else if ($element->hasAttribute('data-key')) {
-				$label = $labels[$element->getAttribute('data-key')];
-				if (isset($label)) {
-					$targetTitle = Title::newFromID($label['page_id']);
-					$urlHash = $label['target'] === '' ? '' : '#' . urlencode($label['target']);
-					$pageName = self::escapeBracketsAndPipes($targetTitle->getPrefixedText() . $urlHash);
-				}
+			if (substr($result, 0, 2) === '[[') {
+				$result = $mwHandleInternalLinks->call($parser, $result);
 			}
-
-			$content = '';
-			foreach ($element->childNodes as $child)
-				$content .= $dom->saveHTML($child);
-			$content = self::escapeBracketsAndPipes($content);
-
-			if ($pageName !== '') {
-				$result = $mwHandleInternalLinks->call($parser, "[[$pageName|$content]]");
-				self::domReplace($dom, $result, $element);
-			} else {
-				self::domReplace($dom, $content, $element);
-			}
+			
+			self::domReplace($dom, $result, $element);
 		}
 
 		// Functions, {{...}}
