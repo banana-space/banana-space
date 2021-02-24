@@ -805,6 +805,18 @@ body > footer {
   table.list span.display-math {
     display: grid;
     grid-template-columns: max-content auto max-content;
+
+    span.katex-display {
+      grid-column: 2;
+    }
+
+    span.equation-tag-left{
+      grid-column: 1;
+    }
+    
+    span.equation-tag-right {
+      grid-column: 3;
+    }
   }
 
   span.display-math svg {
