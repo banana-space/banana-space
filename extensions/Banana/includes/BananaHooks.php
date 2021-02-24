@@ -266,9 +266,6 @@ class BananaHooks {
 	}
 
 	private static function protectSquareBrackets( $str ) {
-		$str = str_replace( "\u{edb0}", '', $str );
-		$str = str_replace( "\u{edb1}", '', $str );
-		$str = str_replace( "\u{edb2}", '', $str );
 		$str = str_replace( '[', "\u{edb0}\u{edb0}\u{edb0}", $str );
 		$str = str_replace( '|', "\u{edb1}\u{edb1}\u{edb1}", $str );
 		$str = str_replace( ']', "\u{edb2}\u{edb2}\u{edb2}", $str );
@@ -283,9 +280,6 @@ class BananaHooks {
 	}
 
 	private static function protectCurlyBrackets( $str ) {
-		$str = str_replace( "\u{edb3}", '', $str );
-		$str = str_replace( "\u{edb4}", '', $str );
-		$str = str_replace( "\u{edb5}", '', $str );
 		$str = str_replace( '{', "\u{edb3}\u{edb3}\u{edb3}", $str );
 		$str = str_replace( '|', "\u{edb4}\u{edb4}\u{edb4}", $str );
 		$str = str_replace( '}', "\u{edb5}\u{edb5}\u{edb5}", $str );
@@ -331,8 +325,6 @@ class BananaHooks {
 	private static function replaceBtexFunTag( DOMXPath $xpath, DOMDocument $dom, DOMNode $e ) {
 		// it's important to use $e->parentNode here --
 		// if we use $e then result->parentNode would be null...
-		// TODO: improve this
-		// I still don't know why it works but it works...
 		$funs = $xpath->query( './/btex-fun', $e->parentNode);
 
 		/** @var DOMNode $element */
@@ -344,10 +336,11 @@ class BananaHooks {
 				if ($child->nodeName !== 'btex-arg') continue;
 
 				$content = '';
-				self::replaceBtexFunTag( $xpath, $dom, $child );
 
-				foreach ($child->childNodes as $grandchild)
+				foreach ($child->childNodes as $grandchild) {
+					self::replaceBtexFunTag( $xpath, $dom, $grandchild );
 					$content .= $dom->saveHTML($grandchild);
+				}
 				$content = self::escapeBracketsAndPipes($content);
 
 				$text .= "|$content";
@@ -357,6 +350,8 @@ class BananaHooks {
 
 			$text = self::protectCurlyBrackets($text);
 			self::domReplace($dom, $text, $element);
+
+			break;
 		}
 
 		return $dom->saveHTML($e);
