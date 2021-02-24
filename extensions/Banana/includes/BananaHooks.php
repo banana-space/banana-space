@@ -246,6 +246,7 @@ class BananaHooks {
 
 	// Replace $element by $html in $dom.
 	private static function domReplace( DOMDocument $dom, $html, DOMNode $element ) {
+		if (!isset($element->parentNode)) return;
 		if ($html !== '') {
 			$fragment = $dom->createDocumentFragment();
 			$fragment->appendXML($html);
@@ -258,12 +259,43 @@ class BananaHooks {
 	private static function escapeBracketsAndPipes( $str ) {
 		$str = str_replace( '[', '&#91;', $str );
 		$str = str_replace( ']', '&#93;', $str );
-		$str = str_replace( '{', '&#123;', $str );
 		$str = str_replace( '|', '&#124;', $str );
+		$str = str_replace( '{', '&#123;', $str );
 		$str = str_replace( '}', '&#125;', $str );
-		$str = str_replace( "\u{edb0}\u{edb0}\u{edb0}", '[[', $str );
+		return $str;
+	}
+
+	private static function protectSquareBrackets( $str ) {
+		$str = str_replace( "\u{edb0}", '', $str );
+		$str = str_replace( "\u{edb1}", '', $str );
+		$str = str_replace( "\u{edb2}", '', $str );
+		$str = str_replace( '[', "\u{edb0}\u{edb0}\u{edb0}", $str );
+		$str = str_replace( '|', "\u{edb1}\u{edb1}\u{edb1}", $str );
+		$str = str_replace( ']', "\u{edb2}\u{edb2}\u{edb2}", $str );
+		return $str;
+	}
+
+	private static function unprotectSquareBrackets( $str ) {
+		$str = str_replace( "\u{edb0}\u{edb0}\u{edb0}", '[', $str );
 		$str = str_replace( "\u{edb1}\u{edb1}\u{edb1}", '|', $str );
-		$str = str_replace( "\u{edb2}\u{edb2}\u{edb2}", ']]', $str );
+		$str = str_replace( "\u{edb2}\u{edb2}\u{edb2}", ']', $str );
+		return $str;
+	}
+
+	private static function protectCurlyBrackets( $str ) {
+		$str = str_replace( "\u{edb3}", '', $str );
+		$str = str_replace( "\u{edb4}", '', $str );
+		$str = str_replace( "\u{edb5}", '', $str );
+		$str = str_replace( '{', "\u{edb3}\u{edb3}\u{edb3}", $str );
+		$str = str_replace( '|', "\u{edb4}\u{edb4}\u{edb4}", $str );
+		$str = str_replace( '}', "\u{edb5}\u{edb5}\u{edb5}", $str );
+		return $str;
+	}
+
+	private static function unprotectCurlyBrackets( $str ) {
+		$str = str_replace( "\u{edb3}\u{edb3}\u{edb3}", '{', $str );
+		$str = str_replace( "\u{edb4}\u{edb4}\u{edb4}", '|', $str );
+		$str = str_replace( "\u{edb5}\u{edb5}\u{edb5}", '}', $str );
 		return $str;
 	}
 
@@ -294,6 +326,40 @@ class BananaHooks {
 		} else {
 			return $content;
 		}
+	}
+
+	private static function replaceBtexFunTag( DOMXPath $xpath, DOMDocument $dom, DOMNode $e ) {
+		// it's important to use $e->parentNode here --
+		// if we use $e then result->parentNode would be null...
+		// TODO: improve this
+		// I still don't know why it works but it works...
+		$funs = $xpath->query( './/btex-fun', $e->parentNode);
+
+		/** @var DOMNode $element */
+		foreach ($funs as $element) {
+			$funName = self::escapeBracketsAndPipes($element->attributes['data-name']->nodeValue);
+
+			$text = '{{' . $funName;
+			foreach ($element->childNodes as $child) {
+				if ($child->nodeName !== 'btex-arg') continue;
+
+				$content = '';
+				self::replaceBtexFunTag( $xpath, $dom, $child );
+
+				foreach ($child->childNodes as $grandchild)
+					$content .= $dom->saveHTML($grandchild);
+				$content = self::escapeBracketsAndPipes($content);
+
+				$text .= "|$content";
+			}
+
+			$text .= '}}';
+
+			$text = self::protectCurlyBrackets($text);
+			self::domReplace($dom, $text, $element);
+		}
+
+		return $dom->saveHTML($e);
 	}
 
 	private static function handleWikitextAfterBtex( Parser &$parser, &$text ) {
@@ -361,12 +427,7 @@ class BananaHooks {
 			$result = self::linkToWikitext($parser, $labels, $element);
 
 			if (substr($result, 0, 2) === '[[') {
-				$result = str_replace("\u{edb0}", '', $result);
-				$result = str_replace("\u{edb1}", '', $result);
-				$result = str_replace("\u{edb2}", '', $result);
-				$result = str_replace('[[', "\u{edb0}\u{edb0}\u{edb0}", $result);
-				$result = str_replace('|', "\u{edb1}\u{edb1}\u{edb1}", $result);
-				$result = str_replace(']]', "\u{edb2}\u{edb2}\u{edb2}", $result);
+				$result = self::protectSquareBrackets($result);
 			}
 
 			self::domReplace($dom, $result, $element);
@@ -398,13 +459,17 @@ class BananaHooks {
 
 				$content = '';
 				foreach ($child->childNodes as $grandchild)
-					$content .= $dom->saveHTML($grandchild);
+					$content .= self::replaceBtexFunTag($xpath, $dom, $grandchild);
+
 				$content = self::escapeBracketsAndPipes($content);
+				$content = self::unprotectSquareBrackets($content);
+				$content = self::unprotectCurlyBrackets($content);
 
 				$text .= "|$content";
 			}
 
 			$text .= '}}';
+			error_log( 'DEBUG ==== 3 ' . $content );
 
 			// Run $text through MediaWiki parser.
 			// We are skipping the sanitising process, as $text
