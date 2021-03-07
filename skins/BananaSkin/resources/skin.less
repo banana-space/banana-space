@@ -1042,6 +1042,9 @@ body > footer {
     background: #e8f4fb;
     span.item-header {
       color: #1088c8;
+      a {
+        color: @color-link;
+      }
     }
   }
 
@@ -1049,6 +1052,9 @@ body > footer {
     background: #fff8ea;
     span.item-header {
       color: #e87000;
+      a {
+        color: @color-link;
+      }
     }
   }
 
@@ -1056,6 +1062,9 @@ body > footer {
     background: #f0f6f0;
     span.item-header {
       color: #209020;
+      a {
+        color: @color-link;
+      }
     }
   }
 }
@@ -1301,6 +1310,10 @@ body.mw-special-Userlogin {
       border-bottom: 4px solid transparent;
     }
   }
+  
+  .nomobile {
+    display: none;
+  }
 }
 
 @media print {
@@ -1320,5 +1333,9 @@ body.mw-special-Userlogin {
 
   h1, h2, h3, h4 {
     font-weight: normal;
+  }
+  
+  .nomobile {
+    display: none;
   }
 }
