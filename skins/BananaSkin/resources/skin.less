@@ -46,6 +46,30 @@
   src: url('/static/fonts/LatoBbb.woff2') format('woff2'), url('/static/fonts/LatoBbb.woff') format('woff');
 }
 
+@font-face {
+  font-family: PunctCJK;
+  src: url('/static/fonts/PunctCJK.woff2') format('woff2'), url('/static/fonts/PunctCJK.woff') format('woff');
+}
+
+@font-face {
+  font-family: PunctCJK;
+  font-style: italic;
+  src: url('/static/fonts/PunctCJK-Italic.woff2') format('woff2'), url('/static/fonts/PunctCJK-Italic.woff') format('woff');
+}
+
+@font-face {
+  font-family: PunctCJK;
+  font-weight: bold;
+  src: url('/static/fonts/PunctCJK-Bold.woff2') format('woff2'), url('/static/fonts/PunctCJK-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: PunctCJK;
+  font-weight: bold;
+  font-style: italic;
+  src: url('/static/fonts/PunctCJK-BoldItalic.woff2') format('woff2'), url('/static/fonts/PunctCJK-BoldItalic.woff') format('woff');
+}
+
 // TODO: @font-face for Cascadia Code
 
 /* Styles */
@@ -337,6 +361,14 @@ a {
   background: @background-color-article;
   box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
   font-size: 18px;
+  
+  .mw-parser-output {
+    font-family: PunctCJK, @font-family;
+    
+    :not(:lang(zh)) {
+      font-family: @font-family;
+    }
+  }
 }
 
 main {
