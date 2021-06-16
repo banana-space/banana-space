@@ -234,6 +234,7 @@ abstract class Utils {
 
 		$options = new \ParserOptions;
 		$options->setTidy( true );
+		$options->setOption( 'flow_message', true );
 
 		$output = MediaWikiServices::getInstance()->getParser()
 			->parse( $content, $title, $options );

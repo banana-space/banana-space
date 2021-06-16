@@ -66,12 +66,20 @@ class BananaHooks {
 
 			$preamble = self::getPreambleFromSubpageInfo($subpageInfo);
 
-			$isInline = $parser->getOptions()->getOption('isInline');
+			$options = $parser->getOptions();
+			$isInline = $options->getOption('isInline');
+			$isFlowMessage = $options->getOption('flow_message');
 
 			// Try to get cached btex output
 			$btexOutput = null;
 			if (!$isPreview) {
 				$btexOutput = BananaParsoid::getFromDatabase($title, $text, $preamble);
+			}
+
+			// Try to get cached flow message
+			if ($isFlowMessage) {
+				$btexOutput = apcu_fetch("'btex-result:$text");
+				if ($btexOutput === false) $btexOutput = null;
 			}
 
 			// If no cache is found, run compiler
@@ -86,6 +94,10 @@ class BananaHooks {
 				);
 				[ $httpCode, $response ] = self::http_post_json(self::BTEX_URL, $jsonStr);
 				$btexOutput = $response;
+
+				if ($isFlowMessage) {
+					apcu_add("'btex-result:$text", $response, 86400 * 7);
+				}
 			}
 
 			$json = json_decode($btexOutput);
@@ -214,6 +226,7 @@ class BananaHooks {
 	public static function onParserOptionsRegister( &$defaults, &$inCacheKey, &$lazyLoad ) {
 		$defaults['isInline'] = false;
 		$inCacheKey['isInline'] = true;
+		$defaults['flow_message'] = false;
 	}
 
 	public static function onSkinAddFooterLinks( Skin $skin, string $key, array &$footerlinks  ) {
@@ -464,7 +477,6 @@ class BananaHooks {
 			}
 
 			$text .= '}}';
-			error_log( 'DEBUG ==== 3 ' . $content );
 
 			// Run $text through MediaWiki parser.
 			// We are skipping the sanitising process, as $text
