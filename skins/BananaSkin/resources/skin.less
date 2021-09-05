@@ -1161,6 +1161,25 @@ body > footer {
   }
 }
 
+// COMMUTATIVE DIAGRAMS
+
+span.btex-diagram {
+  display: inline-block;
+
+  span.cell, span.label {
+    display: flex;
+    position: relative;
+    width: 0;
+    height: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .katex {
+    font-size: 1em !important;
+  }
+}
+
 // OOUI
 
 .mw-ui-button,
