@@ -239,6 +239,14 @@ class BananaHooks {
 		}
 	}
 
+	public static function onApiOpenSearchSuggest( &$results ) {
+		// Hide redirect pages from search box completion
+		$results = array_filter($results, function ($value) {
+			$title = $value['title'];
+			return !$title->isRedirect();
+		});
+	}
+
 	private static function http_post_json($url, $jsonStr) {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_POST, 1);
