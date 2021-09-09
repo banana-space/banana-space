@@ -24,3 +24,5 @@ We avoid modifying the MediaWiki source code whenever possible. The exceptions a
 * Line 24 of `resources/lib/CLDRPluralRuleParser/CLDRPluralRuleParser.js` is changed from `if (...)` to `if (false && ...)` -- it is incompatible with bTeX monaco editor. (It shows a console warning and prevents that module being loaded.)
 
 * Line 128 of `resources/src/mediawiki.action/mediawiki.action.edit.preview.js` is deleted to make live preview work (Probably a MW bug).
+
+* Line 133 of `includes/api/ApiOpenSearch.php` changed to make redirects resolve.

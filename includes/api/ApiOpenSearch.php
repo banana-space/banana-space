@@ -129,7 +129,8 @@ class ApiOpenSearch extends ApiBase {
 
 		if ( $params['redirects'] === null ) {
 			// Backwards compatibility, don't resolve for JSON.
-			$resolveRedir = $this->getFormat() !== 'json';
+			// $resolveRedir = $this->getFormat() !== 'json';
+			$resolveRedir = true;
 		} else {
 			$resolveRedir = $params['redirects'] === 'resolve';
 		}
