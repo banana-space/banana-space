@@ -15,7 +15,6 @@
       "args": [
         {
           "name": "BananaSkin",
-          "templateDirectory": "skins/BananaSkin/templates/",
           "messages": ["sitetitle"],
           "styles": ["skins.banana.styles"],
           "scripts": ["skins.banana"]
