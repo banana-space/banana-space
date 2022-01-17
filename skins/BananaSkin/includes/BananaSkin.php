@@ -1,12 +1,27 @@
 <?php
 
 class BananaSkin extends SkinMustache136 {
+        /** @inheritDoc */
+        public function __construct( $options ) {
+            global $wgVersion;
+            if ( version_compare( $wgVersion, '1.38', '<' ) ) {
+                    $options['templateDirectory'] = 'skins/BananaSkin/templates/';
+            }
+            parent::__construct( $options );
+    }
+
     public static function initBananaSkin() {
         // Merge notices with alerts
         global $wgEchoNotifications;
         foreach ( $wgEchoNotifications as &$data ) {
             $data['section'] = 'alert';
         }
+    }
+
+    public static function makeUrl( $name ) {
+        $title = Title::newFromText( $name );
+        self::checkTitle( $title, $name );
+        return $title->getLocalURL();
     }
 
     public function getTemplateData() {
@@ -45,11 +60,11 @@ class BananaSkin extends SkinMustache136 {
         // Make navigation links (Explore, Create, ...)
         $explore = $this->getPortletData( 'explore', [
             'notes' => [
-                'href' => Skin::makeUrl( $this->msg( 'banana-portal-notes-title' )->text() ),
+                'href' => BananaSkin::makeUrl( $this->msg( 'banana-portal-notes-title' )->text() ),
                 'text' => $this->msg( 'banana-portal-notes-text' )->text()
             ],
             'discussion' => [
-                'href' => Skin::makeUrl( $this->msg( 'banana-portal-discussion-title' )->text() ),
+                'href' => BananaSkin::makeUrl( $this->msg( 'banana-portal-discussion-title' )->text() ),
                 'text' => $this->msg( 'banana-portal-discussion-text' )->text()
             ]
         ] );
@@ -58,15 +73,15 @@ class BananaSkin extends SkinMustache136 {
 
         $create = $this->getPortletData( 'create', [
             'create-page' => [
-                'href' => Skin::makeUrl( $this->msg( 'banana-create-page-title' )->text() ),
+                'href' => BananaSkin::makeUrl( $this->msg( 'banana-create-page-title' )->text() ),
                 'text' => $this->msg( 'banana-create-page-text' )->text()
             ],
             'plan' => [
-                'href' => Skin::makeUrl( $this->msg( 'banana-plan-title' )->text() ),
+                'href' => BananaSkin::makeUrl( $this->msg( 'banana-plan-title' )->text() ),
                 'text' => $this->msg( 'banana-plan-text' )->text()
             ],
             'list-stubs' => [
-                'href' => Skin::makeUrl( $this->msg( 'banana-list-stubs-title' )->text() ),
+                'href' => BananaSkin::makeUrl( $this->msg( 'banana-list-stubs-title' )->text() ),
                 'text' => $this->msg( 'banana-list-stubs-text' )->text()
             ],
             'file' => [
