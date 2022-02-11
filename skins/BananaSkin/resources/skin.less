@@ -1125,6 +1125,47 @@ body > footer {
     color: #606468;
     border-color: #c0c4c8;
   }
+
+  .proof, .proof-collapsible {
+    margin: 0 0 1em 0;
+    overflow-y: hidden; /* Fixes qed position */
+  }
+
+  .proof-collapsible {
+    .proof-expander {
+      position: absolute;
+      cursor: pointer;
+      margin-left: -20px;
+    }
+
+    .proof-expander.proof-expander-ellipsis {
+      position: relative;
+      top: -.1em;
+      display: inline-flex;
+      overflow-y: hidden;
+      align-items: center;
+      margin: 0 .5em;
+      padding: 0 .6em;
+      background-color: #f0f2f6;
+      color: #a2a9b1;
+      border-radius: .6em;
+      height: 1em;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+  }
+
+  .proof-collapsible.proof-collapsible-collapsed {
+    > .proof-content, > .proof-expander-collapsing {
+      display: none;
+    }
+  }
+
+  .proof-collapsible.proof-collapsible-expanded {
+    > .proof-header, > .proof-expander-expanding {
+      display: none;
+    }
+  }
 }
 
 #p-personal a.new {
