@@ -332,6 +332,8 @@ class BananaHooks {
 		$content = self::escapeBracketsAndPipes($content);
 
 		if ($pageName !== '') {
+			if ($element->hasAttribute('data-is-category'))
+				return "[[$pageName]]";
 			return "[[$pageName|$content]]";
 		} else {
 			return $content;
