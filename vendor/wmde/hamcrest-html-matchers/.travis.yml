@@ -1,0 +1,22 @@
+language: php
+dist: trusty
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+  - 7.1
+  - hhvm
+
+env:
+  - LOWEST_VERSIONS=""
+  - LOWEST_VERSIONS=--prefer-lowest
+
+sudo: false
+
+install: travis_retry composer update $LOWEST_VERSIONS
+
+script: composer ci
+
+cache:
+  directories:
+    - $HOME/.composer/cache

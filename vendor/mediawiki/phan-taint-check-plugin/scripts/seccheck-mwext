@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# Run the security check test on the extension
+# in the current directory.
+#
+# This script is meant to be run via composer
+#
+# Assumes that either MediaWiki is installed in ../../
+# or the user has set MW_INSTALL_PATH environment variable.
+
+extname=`basename "$PWD"`
+php=`which php7.0`
+if [ "$?" != 0 ]
+then
+	php=`which php`
+fi
+
+$php vendor/phan/phan/phan \
+	-d . \
+	-k vendor/mediawiki/phan-taint-check-plugin/scripts/mwext-config.php \
+	--output "php://stdout" "$@" | grep '\(^\./\| \./\|'${extname//[^a-zA-Z0-9]/}'\)'
+
+exit $?

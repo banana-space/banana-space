@@ -1,0 +1,52 @@
+{
+    "name": "giorgiosironi/eris",
+    "description": "PHP library for property-based testing. Integrates with PHPUnit.",
+    "authors": [
+        {
+            "name": "Giorgio Sironi",
+            "email": "info@giorgiosironi.com"
+        },
+        {
+            "name": "Mirko Bonadei",
+            "email": "mirko.bonadei@gmail.com"
+        },
+        {
+            "name": "Gabriele Lana",
+            "email": "gabriele.lana@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">4,<8",
+        "friendsofphp/php-cs-fixer": "^2.0",
+        "icomefromthenet/reverse-regex": "v0.0.6.3"
+    },
+    "suggest":
+    {
+        "phpunit/phpunit": "Standard way to run generated test cases",
+        "icomefromthenet/reverse-regex": "v0.0.6.3 for the regex() Generator"
+    },
+    "autoload": {
+        "psr-4": {
+            "Eris\\" : "src/"
+        },
+        "files": [
+            "src/Generator/functions.php"
+        ]
+    },
+    "scripts": {
+        "cs": [
+            "composer validate --no-check-lock",
+            "composer update",
+            "vendor/bin/php-cs-fixer fix --config=.php_cs --verbose --diff"
+        ],
+        "test": [
+            "composer validate --no-check-lock",
+            "composer update",
+            "vendor/bin/phpunit test"
+        ]
+    }
+}

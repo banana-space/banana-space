@@ -1,0 +1,10 @@
+<phpunit
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true">
+	<testsuites>
+		<testsuite name="SecurityCheckPlugin Tests">
+			<directory>./tests</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>
