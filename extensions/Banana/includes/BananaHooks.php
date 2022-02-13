@@ -6,6 +6,8 @@
  * @ingroup Extensions
  */
 
+use Overtrue\Pinyin\Pinyin;
+
 class BananaHooks {
 	private const BTEX_URL = "http://127.0.0.1:7200";
 
@@ -332,8 +334,11 @@ class BananaHooks {
 		$content = self::escapeBracketsAndPipes($content);
 
 		if ($pageName !== '') {
-			if ($element->hasAttribute('data-is-category'))
-				return "[[$pageName]]";
+			if ($element->hasAttribute('data-is-category')) {
+				$sortKey = self::generateDefaultSortKey($parser->getTitle()->getText());
+				$sortKey = self::escapeBracketsAndPipes($sortKey);
+				return "[[$pageName|$sortKey]]";
+			}
 			return "[[$pageName|$content]]";
 		} else {
 			return $content;
@@ -567,6 +572,9 @@ class BananaHooks {
 		if (isset($json->lang)) {
 			$output->setExtensionData('btex-page-lang', $json->lang);
 		}
+		
+		$title = $parser->getTitle();
+		$output->setProperty('defaultsort', self::generateDefaultSortKey($title->getText()));
 	}
 
 	private static function addSpaces($text) {
@@ -644,5 +652,14 @@ class BananaHooks {
 		}
 
 		return $preamble;
+	}
+
+	private static function generateDefaultSortKey($pageName) {
+		$pinyin = new Pinyin();
+
+		$out = $pinyin->sentence($pageName, \PINYIN_UMLAUT_V);
+		$out = strtoupper($out);
+
+		return $out;
 	}
 }
