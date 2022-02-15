@@ -657,17 +657,20 @@ class BananaHooks {
 	private static function generateDefaultSortKey($pageName) {
 		$pinyin = new Pinyin();
 
-		$out = preg_replace('#[–\\-]#u', '_', $pageName);
+		$out = preg_replace('#[–\\-\\s\\/]#u', '_', $pageName);
+		$out = self::removeDiacritics($out);
 		$out = $pinyin->sentence($out, \PINYIN_UMLAUT_V);
 		$out = preg_replace('#_#', ' ', $out);
 		$out = preg_replace('#\\s+#', ' ', $out);
 		$out = trim($out);
 
-		// Remove diacritics
-		$transliterator = Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: Lower(); :: NFC;', Transliterator::FORWARD);
-		$out = $transliterator->transliterate($out);
-
+		$out = self::removeDiacritics($out);
 		$out = strtoupper($out);
 		return $out;
+	}
+
+	private static function removeDiacritics($str) {
+		$transliterator = Transliterator::createFromRules(':: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: Lower(); :: NFC;', Transliterator::FORWARD);
+		return $transliterator->transliterate($str);
 	}
 }
