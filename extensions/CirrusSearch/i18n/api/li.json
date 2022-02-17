@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ooswesthoesbes"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Dump van CirrusSearch-configuratie.",
+	"apihelp-cirrus-config-dump-summary": "Dump of CirrusSearch configuration.",
+	"apihelp-cirrus-config-dump-example": "Krieg 'nen dump van CirrusSearch configuratie.",
+	"apihelp-cirrus-mapping-dump-description": "Dump van CirrusSearchmapping veur deze wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Dump van CirrusSearchmapping veur deze wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Krieg 'nen dump van de CirrusSearch mapping veur deze wiki.",
+	"apihelp-cirrus-settings-dump-description": "Dump van CirrusSearchinstèllinge veur deze wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Dump van CirrusSearchinstèllinge veur deze wiki.",
+	"apihelp-cirrus-settings-dump-example": "Krieg 'nen dump van de CirrusSearchinstèllinge veur deze wiki.",
+	"apihelp-query+cirrusdoc-description": "Dump van 'n artikel in CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Dump van 'n artikel in CirrusSearch",
+	"apihelp-query+cirrusdoc-example": "Verkrieg 'nen dump van ein inkel CirrusSearch-artikel",
+	"apierror-cirrus-requesttoolong": "De zeukopdrach veur 't veurveugsel waas lenger es de maximaal tougestange lingde. ($1 &gt; $2)"
+}

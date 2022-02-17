@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Borislav",
+			"ShockD",
+			"StanProg",
+			"Termininja",
+			"Vodnokon4e"
+		]
+	},
+	"cirrussearch-desc": "Търсене за МедияУики на базата на Elasticsearch",
+	"cirrussearch-backend-error": "Не успяхме да завършим търсенето Ви поради временен проблем. Моля, опитайте по-късно.",
+	"cirrussearch-parse-error": "Заявката не беше разбрана. Моля, опростете я. Заявката е записана в дневника с цел подобряване на системата за търсене.",
+	"cirrussearch-too-busy-error": "Търсенето е твърде натоварено в момента. Моля, опитайте по-късно.",
+	"cirrussearch-regex-syntax-error": "Грешка в регулярния израз при $2: $1",
+	"cirrussearch-now-using": "Това уики ползва нова търсачка. ([[mw:Special:MyLanguage/Help:CirrusSearch|Повече информация]])",
+	"cirrussearch-pref-label": "Ново търсене",
+	"cirrussearch-give-feedback": "Кажете ни мнението си",
+	"prefs-completion": "Допълване при търсене",
+	"cirrussearch-pref-completion-section-desc": "Автоматични предложения",
+	"cirrussearch-pref-completion-profile-help": "Настройки за предложения при търсене по време на писане.\n\n[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:CirrusSearch/CompletionSuggester CompletionSuggester] е алгоритъм за предположения при търсене с по-добра корекция на правописните грешки и търсене на уместни резултати. Търсене по представка е остарял алгоритъм за търсене от типа „търсене при въвеждане“.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "По подразбиране (препоръчително)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Коригира до две правописни грешки. Премахва пренасочвания, които са подобни на главното заглавие.",
+	"cirrussearch-completion-profile-strict-pref-name": "Стриктен режим (за напреднали)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Не коригира правописни грешки. Не взима под внимание акцент, произношение и пренасочвания. Стриктно съвпадение.",
+	"cirrussearch-completion-profile-normal-pref-name": "Пренасочващ режим (за напреднали)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Не коригира правописни грешки. Взима под внимание близки пренасочвания.",
+	"cirrussearch-completion-profile-classic-pref-name": "Класическо търсене по представка",
+	"cirrussearch-completion-profile-classic-pref-desc": "Не коригира правописни грешки. Търси по съвпадение на началото на заглавията.",
+	"cirrussearch-explore-similar-related": "Свързани",
+	"cirrussearch-explore-similar-categories": "Категории",
+	"cirrussearch-explore-similar-languages": "Езици",
+	"cirrussearch-explore-similar-related-none": "Няма налични свързани страници",
+	"cirrussearch-explore-similar-categories-none": "Няма налични категории",
+	"cirrussearch-explore-similar-languages-none": "Не е налично на други езици",
+	"cirrussearch-article-words": "Думи във всички страници със съдържание",
+	"cirrussearch-autoselect-profile": "Нека търсещата машина да реши кой е най-добрият профил за употреба."
+}

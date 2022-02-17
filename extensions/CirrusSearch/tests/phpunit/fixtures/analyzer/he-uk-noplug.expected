@@ -1,0 +1,89 @@
+{
+    "analyzer": {
+        "he_plain": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "he_plain_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "he_text": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ]
+        },
+        "he_text_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ]
+        },
+        "uk_plain": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "uk_plain_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "uk_text": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ]
+        },
+        "uk_text_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ]
+        }
+    },
+    "filter": {
+        "lowercase": {
+            "type": "lowercase"
+        }
+    },
+    "char_filter": {
+        "word_break_helper": {
+            "type": "mapping",
+            "mappings": [
+                "_=>\\u0020",
+                ".=>\\u0020",
+                "(=>\\u0020",
+                ")=>\\u0020"
+            ]
+        }
+    },
+    "tokenizer": []
+}

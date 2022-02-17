@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Luky001"
+		]
+	},
+	"elastica-desc": "Základná funkcionalita [http://www.elasticsearch.org/ Elasticsearch] pre ďalšie rozšírenie prostredníctvom knižnice [http://elastica.io/ Elastica]"
+}

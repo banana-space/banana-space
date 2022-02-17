@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michawiki",
+			"J budissin"
+		]
+	},
+	"cirrussearch-desc": "Pytanje na zakładźe \"elasticsearch\" za MediaWiki",
+	"cirrussearch-backend-error": "Twoje pytanje njeda so nachwilneho problema dla skónčić. Prošu spytaj pozdźišo hišće raz.",
+	"cirrussearch-parse-error": "Naprašowanje njeje so zrozumiło. Prošu čiń jo jednoriše. Naprašowanje so protokoluje, zo by so pytanski system polěpšił.",
+	"cirrussearch-now-using": "Tutón wiki wužiwa nowu pytawu. ([[mw:Special:MyLanguage/Help:CirrusSearch|Dalše informacije]])",
+	"cirrussearch-ignored-headings": " #<!-- njezměń tutu linku --> <pre>\n# Nadpisma, kotrež pytanje ignoruje.\n# Tute změny budu so wuskutkować, po tym zo strona bě so indikowała.\n# Móžeš indikowanje stronow wunuzować, přewjedujo prózdnu změnu.\n# Syntaksa:\n#   * Wšitko, štož znamješku \"#\" hač do kónca linki slěduje, je komentar\n#   * Kózda njeprózdna linka je eksaktny titul, kotryž dyrbi so ignorować\nŽórła\nEksterne wotkazy\nHlej tež\n #</pre> <!-- njezměń tutu linku -->",
+	"cirrussearch-boost-templates": " #<!-- Njezměń tutu linku. --> <pre>\n# Jeli strona wobsahuje jednu z tutych předłohow, budźe so pytanske pohódnoćenje z konfigurowanej procentowej sadźbu multiplikować.\n# Změny so hnydom wuskutkuja.\n# Syntaksa:\n#   * Wšitko za znamješkom „#“ hač do kónca linki je komentar.\n#   * Kóžda njeprózdna linka je eksaktne mjeno předłohi, kotraž ma so zesylnić, z mjenowym rumom, wulkopisanjom, haj wšitko, slědowane přez znamješko \"|\", ličbu a znamješko \"%\".\n# Přikłady fungowacych linkow:\n# Předłoha:Dobry|150%\n# Předłoha:Jara dobry|300%\n# Předłoha:Špatny|50%\n# Přikłady njefungowacych linkow:\n# Předłoha:Foo|150.234234% <-- Decimalne městna dowolene njejsu!\n# Foo|150% <-- Technisce móžno, ale za zapřijimanja strony \"Foo\" z hłowneho mjenoweho ruma.\n# Móžeš konfiguraciju přez naprašowanje z prefiksom boost-templates:\"XX\"\" testować, při čimž XX za wšě předłohi steji, kotrež chceš optimizować, dźělene přez mjezeru město łamanja linki.\n# Naprašowanja z boost-templates:\"XX\" ignoruja wobsah tutoho pola.\n #</pre> <!-- Njezměń tutu linku. -->",
+	"cirrussearch-pref-label": "Nowe pytanje",
+	"cirrussearch-pref-desc": "Spytaj naše nowe pytanje, kotrež podpěruje wjetšu ličbu rěčow, podawa bóle aktualne wuslědki a móže samo tekst znutřka předłohow namakać.",
+	"cirrussearch-explore-similar-languages": "Rěče"
+}

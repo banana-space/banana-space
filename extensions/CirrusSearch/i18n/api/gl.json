@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Banjo",
+			"Elisardojm",
+			"Toliño",
+			"ArenaL5"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Volcado da configuración CirrusSearch",
+	"apihelp-cirrus-config-dump-summary": "Volcado da configuración CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Obter un volcado da configuración de CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Descarga do mapeamento de CirrusSearch para este wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Descarga do mapeamento de CirrusSearch para este wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Obter un volcado da correspondencia CirrusSearch para este wiki.",
+	"apihelp-cirrus-settings-dump-description": "Descarga dos parámetros de CirrusSearch para este wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Descarga dos parámetros de CirrusSearch para este wiki.",
+	"apihelp-cirrus-settings-dump-example": "Obter un volcado da configuración CirrusSearch para este wiki.",
+	"apihelp-query+cirrusdoc-description": "Volcado do documento dun artigo de CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Volcado do documento dun artigo de CirrusSearch dos servidores de procura",
+	"apihelp-query+cirrusdoc-example": "Obter o volcado dun artigo individual de CirrusSearch.",
+	"apierror-cirrus-requesttoolong": "A solicitude de procura por prefixos é máis longa que a lonxitude máxima permitida ($1 &gt; $2)"
+}

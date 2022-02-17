@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mikel Ibaiba",
+			"Sator",
+			"Subi"
+		]
+	},
+	"cirrussearch-pref-label": "Bilaketa berria",
+	"cirrussearch-give-feedback": "Egiguzu iruzkina",
+	"cirrussearch-qi-profile-classic": "Heldutako linketan oinarritutako sailkapena, batzuk eredu, orrialdearen hizkuntza eta recencya (eredua/hizkuntza/agian recencya ez dago aktibatuta wiki honetan).",
+	"cirrussearch-qi-profile-classic-noboostlinks": "Ereduan oinarritutako sailkapena, orrialdearen hizkuntza eta wiki honetan recencyak aktibatuta daudenean.",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-name": "Txertatutako subesaldiak (orrialde titulu luzeetarako gomendagarria)",
+	"cirrussearch-explore-similar-related": "Erlazionatua",
+	"cirrussearch-explore-similar-categories": "Kategoriak",
+	"cirrussearch-explore-similar-languages": "Hizkuntzak",
+	"cirrussearch-explore-similar-related-none": "Antzeko orririk ezin da eskuratu",
+	"cirrussearch-explore-similar-categories-none": "Kategoriak ez daude eskuragarri",
+	"cirrussearch-explore-similar-languages-none": "Ez dago eskuragarri beste hizkuntzetan"
+}

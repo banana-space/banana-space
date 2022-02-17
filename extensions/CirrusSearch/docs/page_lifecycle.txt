@@ -1,0 +1,47 @@
+A page from MediaWiki, indexed into CirrusSearch, has a lifecycle of birth
+and death. The steps are basically:
+
+=== New page is created ===
+* PageContentInsertComplete hook fires in the web request process. If
+  $wgCirrusSearchInstantIndexNew is enabled a minimal document is immediatly
+  indexed (primarily to populate autocomplete on Wikidata).
+* After some core handling of the page edit via the job queue the
+  LinksUpdateComplete hook fires. This inserts a CirrusSearch\Job\LinksUpdate job.
+* The LinksUpdate job follows redirects from edited page to the final target,
+  generates a full document for indexing, and writes that document to
+  Elasticsearch.  Additionally calls OtherIndex which dupes some file
+  information to a shared file index, and inserts CirrusSearch\Job\IncomingLinkCount
+  jobs for each link added/removed in this revision
+
+=== Existing page is edited ===
+* Same code path as new page
+
+=== Page is imported ===
+* Same code path as new page
+
+=== Page is moved ===
+* TitleMoveComplete hook fires, if page moved between index types (content, general)
+  the page is deleted from the old index and the same code path as new page is run
+  to index at the new location.
+
+=== Revision of page is deleted ===
+* RevisionDelete hook fires, inserts CirrusSearch\Job\LinksUpdate
+* Technically nothing needs to happen, "current" revision which we index cannot
+  be deleted. Indexes anyways just in case to be sure we have that current version
+  and not the older version being deleted.
+
+=== Existing page is deleted ===
+* ArticleDelete hook fires, inserts CirrusSearch\Job\LinksUpdate only if the
+  page is a redirect. This reindexes the target to remove the redirect.
+* ArticleDeleteComplete hook fires, inserts CirrusSearch\Job\DeletePages
+* Issue delete-by-id to page type of appropriate index
+* Send archive docs to general index archive type
+* ???
+* ???
+
+=== Page is un-deleted ===
+* ArticleUndelete hook fires, inserts CirrusSearch\Job\DeleteArchive
+* Delete documents from archive type under some (?) constraints
+** A single DeleteArchive job works with a single Title
+** If that title has archived rows ????
+* Article itself is indexed via standard LinksUpdateComplete hook

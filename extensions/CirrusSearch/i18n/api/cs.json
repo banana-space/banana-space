@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mormegil",
+			"Walter Klosse"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Výpis konfigurace CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Výpis konfigurace CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Výpis mapování CirrusSearch pro tuto wiki.",
+	"apihelp-cirrus-settings-dump-description": "Výpis nastavení CirrusSearch pro tuto wiki."
+}

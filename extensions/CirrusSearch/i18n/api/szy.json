@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bunukwiki"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "patahkal CirrusSearch setin.",
+	"apihelp-cirrus-config-dump-example": "maala CirrusSearch setin patahkal a tangan.",
+	"apihelp-cirrus-mapping-dump-description": "patahkal CirrusSearch i tina Wiki a patatapalen.",
+	"apihelp-cirrus-mapping-dump-example": "maala wiki a CirrusSearch patatapalen-sapat patahkal a tangan.",
+	"apihelp-cirrus-settings-dump-description": "patahkal CirrusSearch itiniay Wiki setin.",
+	"apihelp-cirrus-settings-dump-example": "maala tina wiki a CirrusSearch setin patahkal tangan."
+}

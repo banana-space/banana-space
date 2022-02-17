@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cainamarques",
+			"Eduardo Addad de Oliveira",
+			"Felipe L. Ewald",
+			"HenriqueCrang"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Dump das configurações do CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "Dump das configurações do CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Obter um dump da configuração do CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Dump do mapeamento do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Dump do mapeamento do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Obtenha um dump do mapeamento do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-settings-dump-description": "Dump das configurações do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Dump das configurações do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-settings-dump-example": "Obtenha um dump das configurações do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-profiles-dump-description": "Cópia em arquivo dos perfis do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-profiles-dump-summary": "Cópia em arquivo dos perfis do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-profiles-dump-example": "Obter uma cópia em arquivo dos perfis do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Criar arquivo com conteúdo dos perfis",
+	"apihelp-query+cirrusdoc-description": "Cópia em arquivo do documento de um artigo CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Cópia em arquivo do documento de um artigo CirrusSearch dos servidores de pesquisa",
+	"apihelp-query+cirrusdoc-example": "Obter cópia em arquivo de um artigo CirrusSearch individual tal como atualmente indexado na pesquisa.",
+	"apihelp-query+cirrusbuilddoc-summary": "Cópia em arquivo do documento de um artigo CirrusSearch dos servidores da base de dados",
+	"apihelp-query+cirrusbuilddoc-example": "Obter cópia em arquivo de um artigo CirrusSearch individual gerado da base de dados.",
+	"apierror-cirrus-requesttoolong": "A solicitação de pesquisa de prefixo foi maior do que o comprimento máximo permitido. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "O método de pontuação a ser usado",
+	"apierror-compsuggestbuilddoc-bad-method": "Método de pontuação desconhecido",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "Despejo do documento usado pelo sugeridor de conclusão",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "Obtenha uma cópia do documento usado pelo sugeridor de conclusão"
+}

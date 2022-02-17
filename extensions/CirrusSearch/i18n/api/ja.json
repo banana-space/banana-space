@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Omotecho",
+			"Shirayuki",
+			"Yusuke1109"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "CirrusSearch の設定をダンプします。",
+	"apihelp-cirrus-config-dump-summary": "CirrusSearch の設定をダンプします。",
+	"apihelp-cirrus-config-dump-example": "CirrusSearch の設定のダンプを取得します。",
+	"apihelp-cirrus-mapping-dump-description": "このウィキの CirrusSearch のマッピングをダンプします。",
+	"apihelp-cirrus-mapping-dump-summary": "このウィキの CirrusSearch のマッピングをダンプします。",
+	"apihelp-cirrus-mapping-dump-example": "このウィキの CirrusSearch のマッピングのダンプを取得します。",
+	"apihelp-cirrus-settings-dump-description": "このウィキの CirrusSearch の設定をダンプします。",
+	"apihelp-cirrus-settings-dump-summary": "このウィキの CirrusSearch の設定をダンプします。",
+	"apihelp-cirrus-settings-dump-example": "このウィキの CirrusSearch の設定のダンプを取得します。",
+	"apihelp-cirrus-profiles-dump-description": "このウィキの CirrusSearch の設定をダンプします。",
+	"apihelp-cirrus-profiles-dump-summary": "このウィキの CirrusSearch の設定をダンプします。",
+	"apihelp-cirrus-profiles-dump-example": "このウィキの CirrusSearch の設定のダンプを取得します。",
+	"apihelp-cirrus-profiles-dump-param-verbose": "設定の内容のダンプを取得",
+	"apihelp-query+cirrusdoc-description": "単体の CirrusSearch 記事説明文書のダンプ",
+	"apihelp-query+cirrusdoc-summary": "データベースサーバにある単一の CirrusSearch 記事の説明文書のダンプ",
+	"apihelp-query+cirrusdoc-example": "現在の検索に索引付け済みの単一の CirrusSearch 記事のダンプを取得します。",
+	"apihelp-query+cirrusbuilddoc-summary": "データベースサーバにある単一の CirrusSearch 記事の説明文書のダンプ",
+	"apihelp-query+cirrusbuilddoc-example": "データベースから生成された単一の CirrusSearch アーティクルのダンプを取得",
+	"apierror-cirrus-requesttoolong": "前方一致の文字列が長すぎます。（$1 &gt; $2）"
+}

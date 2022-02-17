@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Andibing"
+		]
+	},
+	"elastica-desc": "Base [http://www.elasticsearch.org/ Elasticsearch] functionality for other extensions by providing [http://elastica.io/ Elastica] library"
+}

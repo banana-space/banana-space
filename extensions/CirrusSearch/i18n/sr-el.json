@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Milicevic01",
+			"Obsuser",
+			"Zoranzoki21"
+		]
+	},
+	"cirrussearch-backend-error": "Nismo mogli završiti pretragu zbog privremenog problema. Pokušajte ponovo kasnije.",
+	"cirrussearch-parse-error": "Upit nije razuman. Molimo Vas da pojednostavite. Upit je bio prijavljen za poboljšanje sistema za pretragu.",
+	"cirrussearch-too-busy-error": "Pretraga je trenutno prezauzeta. Pokušajte ponovo kasnije.",
+	"cirrussearch-regex-syntax-error": "Regularni izraz greške sintakse u $2: $1",
+	"cirrussearch-regex-too-busy-error": "Previše regularnih izraza pretraživanja trenutno radi. Pokušajte ponovo kasnije.",
+	"cirrussearch-now-using": "Ovaj viki ima novi način pretrage. ([[mw:Special:MyLanguage/Help:CirrusSearch|Saznajte više]])",
+	"cirrussearch-pref-label": "Nova pretraga",
+	"cirrussearch-give-feedback": "Dajte nam Vaše mišljenje.",
+	"cirrussearch-completion-profile-fast-fuzzy": "Eksperimentalni fazi profil (može se ukloniti bilo kada)",
+	"cirrussearch-qi-profile-wsum-inclinks-pv": "Ponderisana suma na osnovu dolaznih veza i sedmičnog broja pregleda",
+	"cirrussearch-qi-profile-wsum-inclinks": "Ponderisana suma na osnovu dolaznih veza",
+	"prefs-completion": "Dovršavanje pretrage",
+	"cirrussearch-pref-completion-section-desc": "Predviđanje pretrage",
+	"cirrussearch-pref-completion-profile-help": "Podešavanje automatskih sugestija (pretraga u toku kucanja).",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Podrazumevano (preporučeno)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Ispravlja do dve greške u kucanju. Uklanja preusmerenja koja su veoma slična glavnom naslovu.",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-desc": "Ispravlja do dva tipfelera. Rešava bliska preusmerenja. Traži podizraz u naslovima.",
+	"cirrussearch-completion-profile-strict-pref-name": "Strogi režim (napredno)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Bez ispravljanja tipfelera. Bez poistovećivanja afrikata ili verzala sa ekvivalentima. Strogo podudaranje.",
+	"cirrussearch-completion-profile-normal-pref-name": "Režim preusmerenja (napredno)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Bez ispravljanja tipfelera. Rešava bliska preusmerenja.",
+	"cirrussearch-completion-profile-classic-pref-name": "Klasična pretraga po prefiksu",
+	"cirrussearch-completion-profile-classic-pref-desc": "Bez ispravljanja tipfelera. Traži početke naslova.",
+	"cirrussearch-article-words": "Reči na svim stranicama sa sadržajem"
+}

@@ -1,0 +1,147 @@
+[
+    {
+        "responses": [
+            {
+                "took": 18,
+                "timed_out": false,
+                "_shards": {
+                    "total": 8,
+                    "successful": 8,
+                    "failed": 0
+                },
+                "hits": {
+                    "total": 1,
+                    "max_score": 6.937646,
+                    "hits": [
+                        {
+                            "_index": "wiki_general_first",
+                            "_type": "page",
+                            "_id": "2",
+                            "_score": 0.010442197,
+                            "_source": {
+                                "timestamp": "2016-09-19T18:18:58Z",
+                                "title": "Main Page",
+                                "text_bytes": 362,
+                                "redirect": [],
+                                "namespace": 10
+                            },
+                            "fields": {
+                                "text.word_count": [
+                                    27
+                                ]
+                            },
+                            "highlight": {
+                                "text": [
+                                    "Welcome to MediaWiki-Vagrant!   MediaWiki-Vagrant help  MediaWiki help (run vagrant roles help in the directory where you installed MediaWiki-Vagrant to"
+                                ],
+                                "title": [
+                                    "<span class=\"searchmatch\">Main<\/span> Page"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "responses": [
+            {
+                "took": 13,
+                "timed_out": false,
+                "_shards": {
+                    "total": 9,
+                    "successful": 9,
+                    "failed": 0
+                },
+                "hits": {
+                    "total": 1,
+                    "max_score": 3.138195,
+                    "hits": [
+                        {
+                            "_index": "commonswiki_content_first",
+                            "_type": "page",
+                            "_id": "1",
+                            "_score": 0.9446909,
+                            "_source": {
+                                "title": "Main Page",
+                                "namespace_text": "",
+                                "namespace": 0
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "took": 36,
+                "timed_out": false,
+                "_shards": {
+                    "total": 8,
+                    "successful": 8,
+                    "failed": 0
+                },
+                "hits": {
+                    "total": 7,
+                    "max_score": 9.647443,
+                    "hits": [
+                        {
+                            "_index": "cirrustestwiki_content_first",
+                            "_type": "page",
+                            "_id": "1",
+                            "_score": 8.712509,
+                            "_source": {
+                                "title": "Main Page",
+                                "namespace_text": "",
+                                "namespace": 0
+                            }
+                        },
+                        {
+                            "_index": "cirrustestwiki_content_first",
+                            "_type": "page",
+                            "_id": "5",
+                            "_score": 0.37107575,
+                            "_source": {
+                                "title": "Misspelled",
+                                "namespace_text": "",
+                                "namespace": 0
+                            }
+                        },
+                        {
+                            "_index": "cirrustestwiki_content_first",
+                            "_type": "page",
+                            "_id": "2",
+                            "_score": 0.36529952,
+                            "_source": {
+                                "title": "Something else",
+                                "namespace_text": "",
+                                "namespace": 0
+                            }
+                        },
+                        {
+                            "_index": "cirrustestwiki_content_first",
+                            "_type": "page",
+                            "_id": "172",
+                            "_score": 0.34895784,
+                            "_source": {
+                                "title": "HasHeadingsWithReference",
+                                "namespace_text": "",
+                                "namespace": 0
+                            }
+                        },
+                        {
+                            "_index": "cirrustestwiki_content_first",
+                            "_type": "page",
+                            "_id": "252",
+                            "_score": 0.25168607,
+                            "_source": {
+                                "title": "MainNamespaceTemplate",
+                                "namespace_text": "",
+                                "namespace": 0
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+]

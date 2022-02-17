@@ -1,0 +1,47 @@
+{
+    "fr": {
+        "method": "GET",
+        "url": "https:\/\/fr.wikipedia.org.invalid\/w\/api.php",
+        "query": {
+            "action": "cirrus-config-dump",
+            "format": "json",
+            "formatversion": "2"
+        },
+        "response": {
+            "code": 503,
+            "reason": "Service Unavailable",
+            "headers": {
+                "server": "squid\/3.4.8",
+                "mime-version": "1.0",
+                "date": "Thu, 10 Oct 2019 13:37:22 GMT",
+                "content-type": "text\/html",
+                "content-length": "3391",
+                "x-squid-error": "ERR_DNS_FAIL 0",
+                "vary": "Accept-Language",
+                "content-language": "en"
+            },
+            "body": "",
+            "error": "(curl error: 56) Failure when receiving data from the peer",
+            "0": 503,
+            "1": "Service Unavailable",
+            "2": {
+                "server": "squid\/3.4.8",
+                "mime-version": "1.0",
+                "date": "Thu, 10 Oct 2019 13:37:22 GMT",
+                "content-type": "text\/html",
+                "content-length": "3391",
+                "x-squid-error": "ERR_DNS_FAIL 0",
+                "vary": "Accept-Language",
+                "content-language": "en"
+            },
+            "3": "",
+            "4": "(curl error: 56) Failure when receiving data from the peer"
+        },
+        "headers": {
+            "content-length": 0,
+            "user-agent": "wikimedia\/multi-http-client v1.0"
+        },
+        "body": "",
+        "flags": []
+    }
+}

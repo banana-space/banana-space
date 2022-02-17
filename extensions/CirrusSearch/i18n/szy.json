@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Benel",
+			"Bunukwiki"
+		]
+	},
+	"cirrussearch-desc": "sapihica Elasticsearch kalapalana’an MediaWiki sapikilim sakaluk",
+	"cirrussearch-backend-error": "izay nanuzuay a munday, la’cus kami pahezek numisyay a kilim. pihalhalen mitanam aca.",
+	"cirrussearch-parse-error": "la’cus matineng palalitemuh tu kawaw sakacucek, pimadayumay palalitemuh tu kawaw sakacucek. kya palalitemuh tu kawaw amapasulitan apasakapah mikilim  sisetyimo.",
+	"cirrussearch-too-busy-error": "kilim-inzin makalah ayza. pahalhal satu pitanam aca.",
+	"cirrussearch-regex-syntax-error": "tatungusay pakatineng a zateng kamu-sakilul mungangaw i $2: $1",
+	"cirrussearch-regex-too-busy-error": "sayadah tatungusay pakatineng a zateng mikilim saungay imahini miteka, pihalhal sawni mitanam aca",
+	"cirrussearch-regex-too-complex-error": "sakumceday sakamu tu nizateng-sasakawawen sayadah macibul. pitaayaw [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|tina kakitizaan]] matineng hicaen  madayumay akumceday sakamu tu nizateng-sasakawawen.",
+	"cirrussearch-now-using": "tina Wiki masaungay baluhayay a kilim inzin. ([[mw:Special:MyLanguage/Help:CirrusSearch|matineng ku yadahay]])",
+	"cirrussearch-ignored-headings": "#<!-- leave this line exactly as it is --><pre>\n# i mikilim maydih sekipo a pyawti.\n# misumad tina tangan sakalamkam sakay mapasilsilay a kapah pikiliman tu nisulitan miasip a kasabelih pyawti silaheci.\n# kapah kisu i mikawaway-kalumyiti caay misumad  lacul kya pacici kasabelih miliyaw kapah pikiliman tu nisulitan miasip.\n# kamu-sakilul tinaku isasa’ay:\n#   *  amahicahica nay \"#\" tatebanan nu nisulitan  angangan a silsil tayza izikuzay amihica ku buhci tu kamu.\n#   *  amahicahica caay nayi’ ku cacan a silsil dayhiw amisekipo a pyawti。\nmiazih tu tatenga’ay nasulitan \nhekal masasiket \naazihan\n #</pre><!-- leave this line exactly as it is -->",
+	"cirrussearch-boost-templates": "#<!--pihizantu tina silsil tu saayaway --><pre>\n#  amahica kasabelih pisaungay tu isasa’ay taazihan mitudung, ngay kya kasabelih a kilim kilac asapicunus setin a sapiwada'-lasubu.\n# misumad tinaay silahecitu tansul.\n# kamu-sakilul kese tinaku isasa’：\n#   *  amahicahica nay \"#\"  tatebanan nu nisulitan  angangan a silsil ta sazikuzay sapihica ku buhci tu kamu.\n#   *  amahicahica caay nayi’ ku cacan silsil sapihica pakatineng pacunus kilac taazihan mitudung kalungangan, yamalyilu pangangananay a salaedan,  tabakiay atu adidi’ay a sulit atu sacahamin tuutuud，izikuzay mangangalep \"|\" tatebanan nu nisulitan atu cacay cebang asip-bacu, kinacacay mangangalep \"%\"  tatebanan nu nisulitan.\n# kapahay a tinaku：\n# Template:Good|150%\n# Template:Very Very Good|300%\n# Template:Bad|50%\n# la’cusay a tinaku：\n# Template:Foo|150.234234% <-- caay mahasa pisaungay adidi’ay-asip!\n# Foo|150% <--- i sitanengay kapah misaungay, uyzasa amasasiket ta sausi pangangananay a salaedana Foo kasabelih \n# kapah kisu i saayaway sulit cunusen ku boost-templates:\"XX\" miteka palalitemuh tu kawaw, mitanam setin nu misu, XX sa ku sacahamin amicunus tu kilac taazihan mitudung nu misu，kya nayi’ ku cacan ngay dayhiw mibalic tu silsil tatebanan nu nisulitan.\n# pisaungay boost-templates:\"XX\" a palalitemuh tu kawaw asekipo tina subal a setin lacul.\n #</pre><!-- pihizantu tina silsil tu saayaway -->",
+	"cirrussearch-pref-label": "baluhay mikilim",
+	"cirrussearch-pref-desc": "kapitanam tu niyam baluhay baziyoung kilim tu sakaluk, midama sayadah a kamu, nipabeli yadah kalamkamay heci atu kapah tu kilim taazihan mitudung labu’ay cudad",
+	"cirrussearch-give-feedback": "pabelian kami ku hatizaay nabalucu’an nu misu",
+	"cirrussearch-pref-completion-section-desc": "leku patahkal nizateng kilim-sakaluk",
+	"cirrussearch-explore-similar-related": "mahizaay",
+	"cirrussearch-explore-similar-categories": "kakuniza",
+	"cirrussearch-explore-similar-languages": "kamu"
+}

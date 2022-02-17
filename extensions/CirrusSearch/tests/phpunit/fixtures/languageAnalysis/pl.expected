@@ -1,0 +1,486 @@
+{
+    "analyzer": {
+        "text": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "char_filter": [
+                "polish_charfilter"
+            ],
+            "filter": [
+                "lowercase",
+                "polish_stop",
+                "polish_stem",
+                "stempel_pattern_filter",
+                "stempel_length",
+                "stempel_stop"
+            ]
+        },
+        "text_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "char_filter": [
+                "polish_charfilter"
+            ],
+            "filter": [
+                "lowercase",
+                "polish_stop",
+                "polish_stem",
+                "stempel_pattern_filter",
+                "stempel_length",
+                "stempel_stop"
+            ]
+        },
+        "plain": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "plain_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "short_text": {
+            "type": "custom",
+            "tokenizer": "whitespace",
+            "filter": [
+                "lowercase",
+                "aggressive_splitting",
+                "asciifolding_preserve",
+                "dedup_asciifolding"
+            ]
+        },
+        "short_text_search": {
+            "type": "custom",
+            "tokenizer": "whitespace",
+            "filter": [
+                "lowercase",
+                "aggressive_splitting"
+            ]
+        },
+        "source_text_plain": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper_source_text"
+            ]
+        },
+        "source_text_plain_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper_source_text"
+            ]
+        },
+        "suggest": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase",
+                "suggest_shingle"
+            ]
+        },
+        "suggest_reverse": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase",
+                "suggest_shingle",
+                "reverse"
+            ]
+        },
+        "token_reverse": {
+            "type": "custom",
+            "tokenizer": "no_splitting",
+            "filter": [
+                "reverse"
+            ]
+        },
+        "near_match": {
+            "type": "custom",
+            "tokenizer": "no_splitting",
+            "filter": [
+                "lowercase"
+            ],
+            "char_filter": [
+                "near_space_flattener"
+            ]
+        },
+        "near_match_asciifolding": {
+            "type": "custom",
+            "tokenizer": "no_splitting",
+            "filter": [
+                "truncate_keyword",
+                "lowercase",
+                "asciifolding"
+            ],
+            "char_filter": [
+                "near_space_flattener"
+            ]
+        },
+        "prefix": {
+            "type": "custom",
+            "tokenizer": "prefix",
+            "filter": [
+                "lowercase"
+            ],
+            "char_filter": [
+                "near_space_flattener"
+            ]
+        },
+        "prefix_asciifolding": {
+            "type": "custom",
+            "tokenizer": "prefix",
+            "filter": [
+                "lowercase",
+                "asciifolding"
+            ],
+            "char_filter": [
+                "near_space_flattener"
+            ]
+        },
+        "word_prefix": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase",
+                "prefix_ngram_filter"
+            ]
+        },
+        "keyword": {
+            "type": "custom",
+            "tokenizer": "no_splitting",
+            "filter": [
+                "truncate_keyword"
+            ]
+        },
+        "lowercase_keyword": {
+            "type": "custom",
+            "tokenizer": "no_splitting",
+            "filter": [
+                "truncate_keyword",
+                "lowercase"
+            ]
+        },
+        "trigram": {
+            "type": "custom",
+            "tokenizer": "trigram",
+            "filter": [
+                "lowercase"
+            ]
+        }
+    },
+    "filter": {
+        "suggest_shingle": {
+            "type": "shingle",
+            "min_shingle_size": 2,
+            "max_shingle_size": 3,
+            "output_unigrams": true
+        },
+        "lowercase": {
+            "type": "lowercase"
+        },
+        "aggressive_splitting": {
+            "type": "word_delimiter",
+            "stem_english_possessive": false,
+            "preserve_original": false
+        },
+        "prefix_ngram_filter": {
+            "type": "edgeNGram",
+            "max_gram": 255
+        },
+        "asciifolding": {
+            "type": "asciifolding",
+            "preserve_original": false
+        },
+        "asciifolding_preserve": {
+            "type": "asciifolding",
+            "preserve_original": true
+        },
+        "truncate_keyword": {
+            "type": "truncate",
+            "length": 5000
+        },
+        "polish_stop": {
+            "type": "stop",
+            "stopwords": [
+                "vol",
+                "o.o.",
+                "o.o",
+                "mgr",
+                "godz",
+                "z\u0142",
+                "www",
+                "pl",
+                "ul",
+                "tel",
+                "hab",
+                "prof",
+                "in\u017c",
+                "dr",
+                "i",
+                "u",
+                "aby",
+                "albo",
+                "ale",
+                "ani",
+                "a\u017c",
+                "bardzo",
+                "bez",
+                "bo",
+                "bowiem",
+                "by",
+                "byli",
+                "bym",
+                "by\u0142",
+                "by\u0142a",
+                "by\u0142o",
+                "by\u0142y",
+                "by\u0107",
+                "b\u0119dzie",
+                "b\u0119d\u0105",
+                "chce",
+                "cho\u0107",
+                "co",
+                "coraz",
+                "co\u015b",
+                "czy",
+                "czyli",
+                "cz\u0119sto",
+                "dla",
+                "do",
+                "gdy",
+                "gdyby",
+                "gdy\u017c",
+                "gdzie",
+                "go",
+                "ich",
+                "im",
+                "inne",
+                "i\u017c",
+                "ja",
+                "jak",
+                "jakie",
+                "jako",
+                "je",
+                "jednak",
+                "jednym",
+                "jedynie",
+                "jego",
+                "jej",
+                "jest",
+                "jeszcze",
+                "je\u015bli",
+                "je\u017celi",
+                "ju\u017c",
+                "j\u0105",
+                "kiedy",
+                "kilku",
+                "kto",
+                "kt\u00f3ra",
+                "kt\u00f3re",
+                "kt\u00f3rego",
+                "kt\u00f3rej",
+                "kt\u00f3ry",
+                "kt\u00f3rych",
+                "kt\u00f3rym",
+                "kt\u00f3rzy",
+                "lat",
+                "lecz",
+                "lub",
+                "ma",
+                "maj\u0105",
+                "mamy",
+                "mi",
+                "mia\u0142",
+                "mimo",
+                "mnie",
+                "mog\u0105",
+                "mo\u017ce",
+                "mo\u017cna",
+                "mu",
+                "musi",
+                "na",
+                "nad",
+                "nam",
+                "nas",
+                "nawet",
+                "nic",
+                "nich",
+                "nie",
+                "niej",
+                "nim",
+                "ni\u017c",
+                "no",
+                "nowe",
+                "np",
+                "nr",
+                "o",
+                "od",
+                "ok",
+                "on",
+                "one",
+                "oraz",
+                "pan",
+                "po",
+                "pod",
+                "ponad",
+                "poniewa\u017c",
+                "poza",
+                "przed",
+                "przede",
+                "przez",
+                "przy",
+                "raz",
+                "razie",
+                "roku",
+                "r\u00f3wnie\u017c",
+                "si\u0119",
+                "sobie",
+                "spos\u00f3b",
+                "swoje",
+                "s\u0105",
+                "ta",
+                "tak",
+                "takich",
+                "takie",
+                "tak\u017ce",
+                "tam",
+                "te",
+                "tego",
+                "tej",
+                "temu",
+                "ten",
+                "teraz",
+                "te\u017c",
+                "to",
+                "trzeba",
+                "tu",
+                "tych",
+                "tylko",
+                "tym",
+                "tys",
+                "tzw",
+                "t\u0119",
+                "w",
+                "we",
+                "wie",
+                "wi\u0119c",
+                "wszystko",
+                "w\u015br\u00f3d",
+                "w\u0142a\u015bnie",
+                "z",
+                "za",
+                "za\u015b",
+                "ze",
+                "\u017ce",
+                "\u017ceby",
+                "ii",
+                "iii",
+                "iv",
+                "vi",
+                "vii",
+                "viii",
+                "ix",
+                "xi",
+                "xii",
+                "xiii",
+                "xiv",
+                "xv"
+            ]
+        },
+        "stempel_pattern_filter": {
+            "type": "pattern_replace",
+            "pattern": "^([a-z\u0105\u0142]?[a-z\u0107\u0144]|..\u0107|\\d.*\u0107)$",
+            "replacement": ""
+        },
+        "stempel_length": {
+            "type": "length",
+            "min": 1
+        },
+        "stempel_stop": {
+            "type": "stop",
+            "stopwords": [
+                "owa\u0107",
+                "iwa\u0107",
+                "obi\u0107",
+                "sn\u0105\u0107",
+                "ywa\u0107",
+                "ium",
+                "my",
+                "um"
+            ]
+        },
+        "dedup_asciifolding": {
+            "type": "unique",
+            "only_on_same_position": true
+        }
+    },
+    "tokenizer": {
+        "prefix": {
+            "type": "edgeNGram",
+            "max_gram": 255
+        },
+        "no_splitting": {
+            "type": "keyword"
+        },
+        "trigram": {
+            "type": "nGram",
+            "min_gram": 3,
+            "max_gram": 3
+        }
+    },
+    "char_filter": {
+        "near_space_flattener": {
+            "type": "mapping",
+            "mappings": [
+                "'=>\\u0020",
+                "\\u2019=>\\u0020",
+                "\\u02BC=>\\u0020",
+                "_=>\\u0020",
+                "-=>\\u0020"
+            ]
+        },
+        "word_break_helper": {
+            "type": "mapping",
+            "mappings": [
+                "_=>\\u0020",
+                ".=>\\u0020",
+                "(=>\\u0020",
+                ")=>\\u0020"
+            ]
+        },
+        "word_break_helper_source_text": {
+            "type": "mapping",
+            "mappings": [
+                "_=>\\u0020",
+                ".=>\\u0020",
+                "(=>\\u0020",
+                ")=>\\u0020",
+                ":=>\\u0020"
+            ]
+        },
+        "polish_charfilter": {
+            "type": "mapping",
+            "mappings": [
+                "\\u0130=>I"
+            ]
+        }
+    }
+}

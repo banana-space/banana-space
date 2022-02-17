@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Xuacu"
+		]
+	},
+	"elastica-desc": "Funcionalidá básica [http://www.elasticsearch.org/ Elasticsearch] pa otres estensiones, proporcionando la biblioteca [http://elastica.io/ Elastica]"
+}

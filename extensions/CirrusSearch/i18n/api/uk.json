@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Piramidion",
+			"Vlad5250",
+			"Ата",
+			"DDPAT"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Дамп конфігурації CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "Дамп конфігурації CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Отримати дамп конфігурації CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Дамп відображення CirrusSearch для цієї Вікі.",
+	"apihelp-cirrus-mapping-dump-summary": "Дамп відображення CirrusSearch для цієї Вікі.",
+	"apihelp-cirrus-mapping-dump-example": "Отримати дамп мапування CirrusSearch для цієї вікі.",
+	"apihelp-cirrus-settings-dump-description": "Дамп налаштувань CirrusSearch для цієї Вікі.",
+	"apihelp-cirrus-settings-dump-summary": "Дамп налаштувань CirrusSearch для цієї Вікі.",
+	"apihelp-cirrus-settings-dump-example": "Отримати дамп налаштувань CirrusSearch для цієї вікі.",
+	"apihelp-cirrus-profiles-dump-description": "Дамп профілів CirrusSearch для цієї Вікі.",
+	"apihelp-cirrus-profiles-dump-summary": "Дамп профілів CirrusSearch для цієї вікі.",
+	"apihelp-cirrus-profiles-dump-example": "Отримати дамп профілів CirrusSearch для цієї вікі.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Скласти дамп вмісту профілів",
+	"apihelp-query+cirrusdoc-description": "Дамп документа статті CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Дамп документа статті CirrusSearch із пошукових серверів",
+	"apihelp-query+cirrusdoc-example": "Отримати дамп окремої статті CirrusSearch, як вона індексується в пошуку на поточний момент.",
+	"apihelp-query+cirrusbuilddoc-summary": "Дамп документа статті CirrusSearch із серверів бази даних",
+	"apihelp-query+cirrusbuilddoc-example": "Отримати дамп окремої статті CirrusSearch, згенерований з бази даних.",
+	"apierror-cirrus-requesttoolong": "Запит на пошук за префіксом був довшим, аніж дозволено. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "Методи підрахунку для використання",
+	"apierror-compsuggestbuilddoc-bad-method": "Невідомий метод підрахунку",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "Дамп документа, використовуваний підказувачем завершення",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "Отримати дамп документа, використовуваного підказувачем завершення"
+}

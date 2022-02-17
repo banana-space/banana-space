@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Susheelkasab",
+			"V.narsikar"
+		]
+	},
+	"cirrussearch-backend-error": "एका तात्पुरत्या उद्भवलेल्या समस्येमुळे आम्ही आपला शोध पूर्ण करू शकलो नाही. कृपया पुन्हा प्रयत्न करा.",
+	"cirrussearch-pref-label": "नविन शोध",
+	"prefs-completion": "शोध पूर्ण करणे",
+	"cirrussearch-pref-completion-profile-help": "स्वयंपूर्णकरा (शोधा-जसे-आपण-टंकता) सुचवण्यांची वर्तणूक स्थापा.",
+	"cirrussearch-feature-deepcat-toomany": "खोल प्रवर्गाच्या विनंतीने उत्तरीत केलेल्या प्रवार्गांची संख्या ही क्षमतेच्या बाहेर आहे."
+}

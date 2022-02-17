@@ -1,0 +1,23 @@
+[
+    {
+        "took": 2,
+        "timed_out": false,
+        "_shards": {
+            "total": 4,
+            "successful": 4,
+            "failed": 0
+        },
+        "hits": {
+            "total": 1,
+            "max_score": 1.6931472,
+            "hits": [
+                {
+                    "_index": "wiki_general_first",
+                    "_type": "namespace",
+                    "_id": "6",
+                    "_score": 1.6931472
+                }
+            ]
+        }
+    }
+]

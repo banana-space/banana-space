@@ -1,0 +1,10 @@
+{
+    "type": "fvh",
+    "number_of_fragments": 1,
+    "order": "score",
+    "fragment_size": 10000,
+    "matched_fields": [
+        "heading",
+        "heading.plain"
+    ]
+}

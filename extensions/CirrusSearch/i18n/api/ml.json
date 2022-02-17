@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Praveenp"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "സിറസ്‌തിരച്ചിൽ ക്രമീകരണങ്ങൾ എടുത്തുവെക്കുക.",
+	"apihelp-cirrus-mapping-dump-description": "ഈ വിക്കിയിലെ സിറസ്‌തിരച്ചിൽ അടയാളപ്പെടുത്തലുകൾ ഒഴിവാക്കുക.",
+	"apihelp-cirrus-settings-dump-description": "സിറസ്‌തിരച്ചിൽ സജ്ജീകരണങ്ങൾ ഈ വിക്കിയിൽ ഒഴിവാക്കുക."
+}

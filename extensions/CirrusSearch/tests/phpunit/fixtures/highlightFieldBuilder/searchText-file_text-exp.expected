@@ -1,0 +1,20 @@
+{
+    "type": "experimental",
+    "number_of_fragments": 1,
+    "fragmenter": "scan",
+    "fragment_size": 350,
+    "options": {
+        "top_scoring": true,
+        "boost_before": {
+            "20": 2,
+            "50": 1.8,
+            "200": 1.5,
+            "1000": 1.2
+        },
+        "max_fragments_scored": 5000
+    },
+    "matched_fields": [
+        "file_text",
+        "file_text.plain"
+    ]
+}

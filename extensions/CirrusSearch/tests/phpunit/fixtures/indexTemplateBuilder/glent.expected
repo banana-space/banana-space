@@ -1,0 +1,83 @@
+{
+    "path": "_template\/glent",
+    "method": "PUT",
+    "data": {
+        "index_patterns": [
+            "glent_*"
+        ],
+        "version": 1,
+        "settings": {
+            "number_of_shards": 1,
+            "auto_expand_replicas": "0-5",
+            "analysis": {
+                "analyzer": {
+                    "near_match": {
+                        "type": "custom",
+                        "tokenizer": "no_splitting",
+                        "filter": [
+                            "icu_normalizer"
+                        ],
+                        "char_filter": [
+                            "near_space_flattener"
+                        ]
+                    }
+                },
+                "filter": {
+                    "icu_normalizer": {
+                        "type": "icu_normalizer",
+                        "name": "nfkc_cf"
+                    }
+                },
+                "tokenizer": {
+                    "no_splitting": {
+                        "type": "keyword"
+                    }
+                },
+                "char_filter": {
+                    "near_space_flattener": {
+                        "type": "mapping",
+                        "mappings": [
+                            "'=>\\u0020",
+                            "\\u2019=>\\u0020",
+                            "\\u02BC=>\\u0020",
+                            "_=>\\u0020",
+                            "-=>\\u0020"
+                        ]
+                    }
+                }
+            }
+        },
+        "mappings": {
+            "_doc": {
+                "_source": {
+                    "enabled": false
+                },
+                "properties": {
+                    "suggestion_score": {
+                        "type": "float",
+                        "index": false
+                    },
+                    "wiki": {
+                        "type": "keyword"
+                    },
+                    "method": {
+                        "type": "keyword",
+                        "store": true
+                    },
+                    "dym": {
+                        "type": "text",
+                        "index": false,
+                        "store": true
+                    },
+                    "query": {
+                        "type": "text",
+                        "index": true,
+                        "analyzer": "near_match",
+                        "search_analyzer": "near_match",
+                        "index_options": "docs"
+                    }
+                }
+            }
+        }
+    }
+}

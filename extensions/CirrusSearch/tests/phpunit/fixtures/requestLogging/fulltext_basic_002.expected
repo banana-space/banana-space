@@ -1,0 +1,93 @@
+[
+    {
+        "channel": "cirrussearch-request",
+        "context": {
+            "$schema": "\/mediawiki\/cirrussearch\/request\/0.0.1",
+            "all_elasticsearch_requests_cached": false,
+            "elasticsearch_requests": [
+                {
+                    "cached": false,
+                    "hits": [
+                        {
+                            "index": "wiki_content_first",
+                            "page_id": 1,
+                            "page_title": "Main Page",
+                            "score": 3.6430995
+                        },
+                        {
+                            "index": "wiki_general_first",
+                            "page_id": 2,
+                            "page_title": "Template:Main Page",
+                            "score": 0.011918611
+                        }
+                    ],
+                    "hits_offset": 0,
+                    "hits_returned": 2,
+                    "hits_total": 2,
+                    "indices": [
+                        "wiki"
+                    ],
+                    "limit": 21,
+                    "max_score": 7.9185534,
+                    "query": "main",
+                    "query_type": "full_text",
+                    "search_time_ms": 13,
+                    "suggestion_requested": true,
+                    "syntax": [
+                        "full_text",
+                        "full_text_querystring",
+                        "simple_bag_of_words"
+                    ]
+                }
+            ],
+            "hits": [
+                {
+                    "index": "wiki_content_first",
+                    "page_id": 1,
+                    "page_title": "Main Page",
+                    "score": 3.6430995
+                },
+                {
+                    "index": "wiki_general_first",
+                    "page_id": 2,
+                    "page_title": "Template:Main Page",
+                    "score": 0.011918611
+                }
+            ],
+            "http": {
+                "client_ip": "127.0.0.1",
+                "has_cookies": false,
+                "method": "GET"
+            },
+            "source": "cli"
+        },
+        "level": "debug",
+        "message": ""
+    },
+    {
+        "channel": "CirrusSearchRequests",
+        "context": {
+            "elasticTookMs": 0,
+            "executor": "123456789",
+            "hitsOffset": 0,
+            "hitsReturned": 2,
+            "hitsTotal": 2,
+            "identity": "2c33c9c64851a02e2ba8143c6550a3b8",
+            "index": "wiki",
+            "limit": 21,
+            "maxScore": 7.9185534,
+            "query": "main",
+            "queryType": "full_text",
+            "source": "cli",
+            "suggestionRequested": true,
+            "syntax": [
+                "full_text",
+                "full_text_querystring",
+                "simple_bag_of_words"
+            ],
+            "tookMs": 0
+        },
+        "level": "debug",
+        "message": "{queryType} search for '{query}' against {index} took {tookMs} millis and {elasticTookMs} Elasticsearch millis. Found {hitsTotal} total results and returned {hitsReturned} of them starting at {hitsOffset}. Requested via {source} for {identity} by executor {executor}"
+    }
+]

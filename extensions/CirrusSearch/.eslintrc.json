@@ -1,0 +1,8 @@
+{
+	"root": true,
+	"extends": [
+		"wikimedia/server",
+		"wikimedia/mediawiki"
+	],
+	"ignorePatterns": ["tests/**/fixtures/**/*"]
+}

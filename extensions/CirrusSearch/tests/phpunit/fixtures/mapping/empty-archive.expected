@@ -1,0 +1,32 @@
+{
+    "archive": {
+        "dynamic": false,
+        "properties": {
+            "namespace": {
+                "type": "long"
+            },
+            "title": {
+                "type": "text",
+                "analyzer": "text",
+                "search_analyzer": "text_search",
+                "position_increment_gap": 10,
+                "similarity": "bm25",
+                "fields": {
+                    "plain": {
+                        "type": "text",
+                        "analyzer": "plain",
+                        "search_analyzer": "plain_search",
+                        "position_increment_gap": 10,
+                        "similarity": "bm25"
+                    }
+                }
+            },
+            "wiki": {
+                "type": "text",
+                "analyzer": "keyword",
+                "norms": false,
+                "index_options": "docs"
+            }
+        }
+    }
+}

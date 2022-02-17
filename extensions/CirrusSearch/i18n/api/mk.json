@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Складиштен извадок од поставките на CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "Складиштен извадок од поставките на CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "складиштен извадок од склад на поставките на CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "складиштен извадок од пресликувањата на CirrusSearch за ова вики.",
+	"apihelp-cirrus-mapping-dump-summary": "Складиштен извадок од пресликувањата на CirrusSearch за ова вики.",
+	"apihelp-cirrus-mapping-dump-example": "Дај складиштен извадок од пресликувањата на CirrusSearch за ова вики.",
+	"apihelp-cirrus-settings-dump-description": "складиштен извадок од поставките на CirrusSearch за ова вики.",
+	"apihelp-cirrus-settings-dump-summary": "Складиштен извадок од поставките на CirrusSearch за ова вики.",
+	"apihelp-cirrus-settings-dump-example": "Дај складиштен извадок од поставките на CirrusSearch за ова вики.",
+	"apihelp-cirrus-profiles-dump-description": "Складиштен извадок од профилите на CirrusSearch за ова вики.",
+	"apihelp-cirrus-profiles-dump-summary": "Складиштен извадок од профилите на CirrusSearch за ова вики.",
+	"apihelp-cirrus-profiles-dump-example": "Дај складиштен извадок од профилите на CirrusSearch за ова вики.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Стави ги профилите во складиштен извадок",
+	"apihelp-query+cirrusdoc-description": "Склад за статиски документ на CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Складиштен извадок од статиски документ на CirrusSearch од пребарувачките опслужвачи",
+	"apihelp-query+cirrusdoc-example": "Дај складиштен извадок од поединечна статија на CirrusSearch тековно индексирани во пребарувањето.",
+	"apihelp-query+cirrusbuilddoc-summary": "складиштен извадок од статиски документ на CirrusSearch од базните опслужвачи",
+	"apihelp-query+cirrusbuilddoc-example": "Дај складиштен извадок од поединечна статија на CirrusSearch создаден од базата.",
+	"apierror-cirrus-requesttoolong": "Пребараното со претставка ја надмина допуштената должина. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "Кој начин на оценување да се користи",
+	"apierror-compsuggestbuilddoc-bad-method": "Непознат начин на оценување",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "Склад на документот што го користи дополнувачкиот предлагач",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "Дај склад на документот што го користи дополнувачкиот предлагач"
+}

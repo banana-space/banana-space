@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Calak",
+			"Muhammed taha",
+			"Épine"
+		]
+	},
+	"cirrussearch-now-using": "ئەم ویکییە مۆتۆرێکی نوێی گەڕان بە کار دەھێنی. ([[mw:Special:MyLanguage/Help:CirrusSearch|زیاتر بزانە]])",
+	"cirrussearch-pref-label": "گەڕانی نوێ",
+	"prefs-completion": "لەدوای تەواوبوون بگەڕێ",
+	"cirrussearch-pref-completion-section-desc": "پێشنیارکەری تەواوکەر",
+	"cirrussearch-pref-completion-profile-help": "دەستکاریکردنی ئامرازی «تەواوکەری نووسین»",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "بنچینەیی (پێشنیارکراوە)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "زیاتر لە دوو ھەڵەی نووسین ڕاست دەکاتەوە. ڕەوانەکەری نزیک دەدۆزێتەوە.",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-name": "لێکچوونی سەبفرەیس (بۆ ناوە درێژەکان پێشنیارکراوە)",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-desc": "زیاتر لە دوو ھەڵە ڕاست دەکاتەوە. ڕەوانەکەری نزیک دەدۆزێتەوە. لێکچوونی سەبفرەیسی ناوەکان نیشان دەکات.",
+	"cirrussearch-completion-profile-strict-pref-name": "حاڵەتی داخراو (پێشکەوتوو)",
+	"cirrussearch-completion-profile-strict-pref-desc": "ھیچ نووسەیەک ڕاست ناکاتەوە. دەقەکە دەقاودەق وەک خۆی دادەنێت.",
+	"cirrussearch-completion-profile-normal-pref-name": "حاڵەتی ڕەوانەکەر (پێشکەوتوو)",
+	"cirrussearch-completion-profile-normal-pref-desc": "ھەڵە ڕاست ناکاتەوە. ڕەوانەکەری نزیک دەدۆزێتەوە.",
+	"cirrussearch-completion-profile-normal-subphrases-pref-name": "حاڵەتی ڕەوانەکەر بە لێکچوونی سەبفرەیسەوە (پێشکەوتوو)",
+	"cirrussearch-completion-profile-normal-subphrases-pref-desc": "ھەڵە ڕاست ناکاتەوە. ڕەوانەکەری نزیک دەدۆزێتەوە. لێکچوونی سەبفرەیسی ناوەکان نیشان دەکات.",
+	"cirrussearch-completion-profile-classic-pref-name": "گەڕانی پێشگری کلاسیکی",
+	"cirrussearch-completion-profile-classic-pref-desc": "ھەڵە ڕاست ناکاتەوە. لێکچوونی سەرەتای ناوەکان نیشان دەکات.",
+	"cirrussearch-timed-out": "گەڕانەکە وەستا: تەنیا چەند ئەنجامێک ھاتنە بەردەست.",
+	"cirrussearch-explore-similar-related": "پەیوەست",
+	"cirrussearch-explore-similar-categories": "پۆلەكان",
+	"cirrussearch-explore-similar-languages": "زمانەکان",
+	"cirrussearch-explore-similar-related-none": "ھیچ پەڕەیەکی پەیوەستدار بەردەست نییە",
+	"cirrussearch-explore-similar-categories-none": "ھیچ پۆلێک بەردەست نییە",
+	"cirrussearch-explore-similar-languages-none": "بە زمانی تر بەردەست نییە",
+	"cirrussearch-article-words": "وشەکانی ھەموو وتارەکان"
+}

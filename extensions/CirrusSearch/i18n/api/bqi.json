@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kikumoron"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "کوپی ز میزونکاری CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "دامپ میزونکاری سیروس‌ سرچ",
+	"apihelp-cirrus-config-dump-example": "گرهڌن دامپ ز میزونکاری CirrusSearch."
+}

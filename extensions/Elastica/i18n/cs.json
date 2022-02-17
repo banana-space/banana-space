@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mormegil"
+		]
+	},
+	"elastica-desc": "Základní funkcionalita [http://www.elasticsearch.org/ Elasticsearch] pro další rozšíření prostřednictvím knihovny [http://elastica.io/ Elastica]"
+}

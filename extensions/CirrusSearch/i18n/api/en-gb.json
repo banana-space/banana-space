@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Andibing",
+			"Chase me ladies, I'm the Cavalry",
+			"Dejavu"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Dump of CirrusSearch configuration.",
+	"apihelp-cirrus-config-dump-example": "Get a dump of CirrusSearch configuration.",
+	"apihelp-cirrus-mapping-dump-description": "Dump of CirrusSearch mapping for this wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Get a dump of the CirrusSearch mapping for this wiki.",
+	"apihelp-cirrus-settings-dump-description": "Dump of CirrusSearch settings for this wiki.",
+	"apihelp-cirrus-settings-dump-example": "Get a dump of CirrusSearch settings for this wiki.",
+	"apierror-cirrus-requesttoolong": "Prefix search request was longer than the maximum allowed length. ($1 &gt; $2)"
+}

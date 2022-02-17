@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sfic"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "सर्कस खोज का तय डम्प",
+	"apihelp-cirrus-config-dump-example": "सर्कस खोज का तय डम्प हासिल करें",
+	"apihelp-cirrus-mapping-dump-description": "इस विकि हेतु सर्कसखोज का डंप",
+	"apihelp-cirrus-mapping-dump-example": "सर्कल खोज का इस विकि हेतु डंप हासिल करें",
+	"apihelp-cirrus-settings-dump-description": "इस विकि हेतु सर्कसखोज का डंप",
+	"apihelp-cirrus-settings-dump-example": "इस विकि हेतु सर्कसखोज डंप हासिल करें",
+	"apierror-cirrus-requesttoolong": "उपसर्ग खोज अनुरोध अधिकतम सीमा से अधिक है। ($1 &gt; $2)"
+}

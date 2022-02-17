@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Candalua",
+			"Fierodelveneto"
+		]
+	},
+	"cirrussearch-desc": "Riçerca faxesta co Elasticsearch par MediaWiki",
+	"cirrussearch-backend-error": "No te si sta bon a finir ła to riçerca par colpa de on problema tenporałe. Reproa pì tardi",
+	"cirrussearch-parse-error": "No ghemo capio ła domanda. Te se prega de farla pì sénplega. Ła domanda ła xé stada rejistrada par mejorare el sistema de riçerca",
+	"cirrussearch-too-busy-error": "Deso el motore de riçerca el xé in soracargo. Reproa pì tardi",
+	"cirrussearch-regex-syntax-error": "Erore sintatego in te ła espresion regołare a $2: $1",
+	"cirrussearch-regex-too-busy-error": "In sto momento ghe xé masa espresion regołari drio ndare. Reproa pì tardi.",
+	"cirrussearch-regex-too-complex-error": "Ła espresion regołare ła xé masa conplegada. Va pì infondo [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|cuà]] cofà senplifegarla.",
+	"cirrussearch-now-using": "Sto projeto wiki el dopara on novo motore de riçerca ([[mw:Special:MyLanguage/Help:CirrusSearch|piasè informasion]]).",
+	"cirrussearch-ignored-headings": " #<!-- d' łasa sto rigo propio come che el xé --> <pre>\n# Łista de łe intestasion che łe vegnarà ignorae in te ła reçerca.\n# Le modifeghe a sta pàjina łe sarà efetive soło co ła pàjina ła vegnarà indaxeçixada.\n# Te połi sforsare ła re-indaxeçixasion de na pàjina faxendo na modifega njiente.\n# Ła sintatega ła xé sta cuà che ła vien:\n#   * Tuto dal caratare \"#\" a ła fin del rigo el xé on comento\n#   * Tuti i righi che no i xé vodi łe xé łe intestasion juste da ignorare, in grando/picenin e tuto.\nNotasion\nVoxe corełade\nLinganbi foresti\n #</pre> <!-- d'łasa sto rigo propio cofà che el xé -->",
+	"cirrussearch-pref-label": "Riçerca nova",
+	"cirrussearch-give-feedback": "Dìne 'sà che te pare",
+	"cirrussearch-query-too-long": "El testo de ła riçerca el xé pì grando de cheło premeso. ($1 > $2)",
+	"cirrussearch-qi-profile-popular-inclinks": "La clasifega ła se basa prinçipalmente so el nùmaro de cołigamenti che vien drento",
+	"prefs-completion": "Conpletamento de la riserca",
+	"cirrussearch-pref-completion-section-desc": "Sugeridor de conpletamento",
+	"cirrussearch-pref-completion-profile-help": "Inposta el conportamento par i sujeriminti del conpletamento automàtego (serca-cofà-te-scrivi).\n\nEl [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:CirrusSearch/CompletionSuggester sujeridor de comnletamento] el xe on algoritmo par sujerimenti de riserca co na mejo coresion dei erori de batidura e riłevansa de ła reserca. Ła reserca par prefiso ła xe ła version presedente del algoritmo de sujerimento serca-cofà-te-scrivi.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Predefinìo (consejà)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "El corexe finmente a do erori de sbatitura. El cava i rimandi che i xé tanto renti al titoło prençipałe",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-name": "Corispondensa soto-fraxe (consejà par i titołi de łe pàjine pì longhi)",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-desc": "El corexe finmente a do erori de sbatitura. El cata na risołusion ai rimandi renti. Corispondensa soto-fraxe in tei titołi",
+	"cirrussearch-completion-profile-strict-pref-name": "Modo rigoroxo (vansà)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Nisuna coresion erori de sbatitura. Nisuna libartà sol che che rivarda i açenti. Ła corispondensa ła xé perfeta.",
+	"cirrussearch-completion-profile-normal-pref-name": "Modo rimandamento (vansà)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Nisuna coresion erori de sbatitura. El cata na sołusion ai rimandamenti renti.",
+	"cirrussearch-completion-profile-normal-subphrases-pref-name": "Modo rimandamento co corispondensa soto-frase (vansà)",
+	"cirrussearch-completion-profile-normal-subphrases-pref-desc": "Nisuna coresion de erori de sbatitura. El cata na risołusion ai rimandi renti. Corispondensa soto-fraxe in tei titołi",
+	"cirrussearch-completion-profile-classic-pref-name": "Riserca clàsega par prime létare",
+	"cirrussearch-completion-profile-classic-pref-desc": "Nisuna coresion de erori de sbatitura. Corispondense co el scumisio dei titołi",
+	"cirrussearch-explore-similar-related": "Ligà",
+	"cirrussearch-explore-similar-categories": "Categorie",
+	"cirrussearch-explore-similar-languages": "Łéngue",
+	"cirrussearch-explore-similar-related-none": "No ghe xé disponibiłi pàjine corełade",
+	"cirrussearch-explore-similar-categories-none": "Nisuna categoria disponibiłe",
+	"cirrussearch-explore-similar-languages-none": "No el se połe lexare in altre łengue",
+	"cirrussearch-article-words": "Conto de łe parołe in tute łe pàjine de contegnuo"
+}

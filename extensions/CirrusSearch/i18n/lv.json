@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Edgars2007",
+			"Papuass",
+			"Silraks",
+			"Srolanh"
+		]
+	},
+	"cirrussearch-now-using": "Šajā ''wiki'' tiek izmantots jauns meklētājs ([[mw:Special:MyLanguage/Help:CirrusSearch|uzzināt vairāk]])",
+	"cirrussearch-ignored-headings": " #<!-- atstāt šo rindiņu tādu, kāda tā ir --> <pre>\n#Virsraksti, kas tiks ignorēti meklējot.\n#Izmaiņas stāsies spēkā, kad lapa ar virsrakstiem ir indeksēta.\n#Jūs varat piespiest lapai tikt indeksētai vēlreiz ar nulles labojumu.\n#Sintakse:\n# * Jebkas no \"#\" zīmes līdz rindiņas beigām ir komentārs.\n# * Katra līnija ir precīzs ignorējamais virsraksts, ieskaitot lielos / mazos burtus.\nAtsauces\nĀrējās saites\nSkatīt arī\n #</pre> <!-- atstāt šo rindiņu tādu, kāda tā ir -->",
+	"cirrussearch-pref-label": "Jauna meklēšana",
+	"prefs-completion": "Meklēšanas pabeigšana",
+	"cirrussearch-explore-similar-categories": "Kategorijas",
+	"cirrussearch-explore-similar-languages": "Valodas",
+	"cirrussearch-explore-similar-languages-none": "Nav pieejams citās valodās",
+	"cirrussearch-article-words": "Vārdi visās satura lapās"
+}

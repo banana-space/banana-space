@@ -1,0 +1,66 @@
+{
+    "__main__": {
+        "description": "archive search for 'Content'",
+        "path": "wiki_archive\/archive\/_search",
+        "params": {
+            "timeout": "20s",
+            "search_type": "dfs_query_then_fetch"
+        },
+        "query": {
+            "_source": [
+                "namespace",
+                "title",
+                "namespace_text",
+                "wiki"
+            ],
+            "stored_fields": [],
+            "query": {
+                "bool": {
+                    "should": [
+                        {
+                            "multi_match": {
+                                "type": "best_fields",
+                                "tie_breaker": 0,
+                                "query": "Content",
+                                "fields": [
+                                    "title.near_match^100",
+                                    "title.near_match_asciifolding^75",
+                                    "title.plain^50",
+                                    "title^25"
+                                ],
+                                "operator": "AND"
+                            }
+                        },
+                        {
+                            "match": {
+                                "title.plain": {
+                                    "query": "Content",
+                                    "fuzziness": "AUTO",
+                                    "operator": "AND"
+                                }
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1,
+                    "filter": [
+                        {
+                            "terms": {
+                                "namespace": [
+                                    12
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            "size": 20,
+            "stats": [
+                "archive"
+            ]
+        },
+        "options": {
+            "timeout": "20s",
+            "search_type": "dfs_query_then_fetch"
+        }
+    }
+}

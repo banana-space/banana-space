@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chinamoonroll"
+		]
+	},
+	"cirrussearch-desc": "Elasticsearch-kawasa parerehan antuk MédiaWiki",
+	"cirrussearch-backend-error": "Iraga ten nyidaang muputang parerehan Ida mawinan pikobet ajebos. Durus coba malih nyanan.",
+	"cirrussearch-parse-error": "Kuéri nénten kapanggih. Durus kardi luwih sederhana. Kuéri sampun kacutet antuk paningkatan sistem parerehan.",
+	"cirrussearch-too-busy-error": "Parerehan langkung sibuk. Durus coba malih nyanan.",
+	"cirrussearch-regex-syntax-error": "Kaiwangan sintaks éksprési régulér ring $2: $1",
+	"cirrussearch-pref-label": "Parerehan anyar",
+	"cirrussearch-give-feedback": "Ica iraga umpan walik Ida",
+	"cirrussearch-qi-profile-popular-pv": "Pameringkatan kautama mawit ring cingakan kaca",
+	"cirrussearch-qi-profile-popular-inclinks": "Pameringkatan kautana mawit ring akéh tautan ngaranjing",
+	"prefs-completion": "Panyempurnaan parerehan",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Baku (kanikain)",
+	"cirrussearch-completion-profile-normal-pref-name": "Mode pangalihan (lanjutan)",
+	"cirrussearch-completion-profile-classic-pref-name": "Parerehan pangater klasik",
+	"cirrussearch-explore-similar-related": "Kakait",
+	"cirrussearch-explore-similar-categories": "Kategori",
+	"cirrussearch-explore-similar-languages": "Basa",
+	"cirrussearch-explore-similar-related-none": "Nénten kasedia kaca kakait",
+	"cirrussearch-explore-similar-categories-none": "Nénten wénten kategori sané kasedia",
+	"cirrussearch-explore-similar-languages-none": "Nénten kasedia ring basa tiosan",
+	"cirrussearch-article-words": "Kruna ring sinamian kaca kontén"
+}

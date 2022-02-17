@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Beta16",
+			"Mpiva"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Copia della configurazione di CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Ottieni un dump della configurazione CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Copia della mappatura di CirrusSearch per questo wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Ottieni un dump della mappatura CirrusSearch per questo wiki.",
+	"apihelp-cirrus-settings-dump-description": "Copia delle impostazioni di CirrusSearch per questo wiki.",
+	"apihelp-cirrus-settings-dump-example": "Ottieni un dump delle impostazioni di CirrusSearch per questo wiki.",
+	"apihelp-cirrus-profiles-dump-description": "Copia dei profili di CirrusSearch per questo wiki.",
+	"apihelp-cirrus-profiles-dump-summary": "Copia dei profili di CirrusSearch per questo wiki.",
+	"apihelp-cirrus-profiles-dump-example": "Ottieni un dump dei profili di CirrusSearch per questo wiki.",
+	"apierror-cirrus-requesttoolong": "Il prefisso della ricerca ha una lunghezza maggiore rispetto a quella permessa. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "Il metodo di punteggio da utilizzare",
+	"apierror-compsuggestbuilddoc-bad-method": "Metodo di punteggio sconosciuto"
+}

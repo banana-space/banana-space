@@ -1,0 +1,90 @@
+{
+    "path": "_bulk",
+    "method": "POST",
+    "data": [
+        [
+            {
+                "update": {
+                    "_index": "myfixturetargetindex",
+                    "_type": "page",
+                    "_id": 1
+                }
+            },
+            {
+                "script": {
+                    "source": "super_detect_noop",
+                    "params": {
+                        "source": {
+                            "local_sites_with_dupe": {
+                                "remove": "myfixturesourceindex"
+                            }
+                        },
+                        "handlers": {
+                            "local_sites_with_dupe": "set"
+                        },
+                        "_id": 1,
+                        "_type": "page",
+                        "_index": "myfixturetargetindex"
+                    },
+                    "lang": "super_detect_noop"
+                }
+            },
+            {
+                "update": {
+                    "_index": "myfixturetargetindex",
+                    "_type": "page",
+                    "_id": 2
+                }
+            },
+            {
+                "script": {
+                    "source": "super_detect_noop",
+                    "params": {
+                        "source": {
+                            "local_sites_with_dupe": {
+                                "remove": "myfixturesourceindex"
+                            }
+                        },
+                        "handlers": {
+                            "local_sites_with_dupe": "set"
+                        },
+                        "_id": 2,
+                        "_type": "page",
+                        "_index": "myfixturetargetindex"
+                    },
+                    "lang": "super_detect_noop"
+                }
+            }
+        ],
+        [
+            {
+                "update": {
+                    "_index": "myfixturetargetindex",
+                    "_type": "page",
+                    "_id": 3
+                }
+            },
+            {
+                "script": {
+                    "source": "super_detect_noop",
+                    "params": {
+                        "source": {
+                            "local_sites_with_dupe": {
+                                "remove": "myfixturesourceindex"
+                            }
+                        },
+                        "handlers": {
+                            "local_sites_with_dupe": "set"
+                        },
+                        "_id": 3,
+                        "_type": "page",
+                        "_index": "myfixturetargetindex"
+                    },
+                    "lang": "super_detect_noop"
+                }
+            }
+        ]
+    ],
+    "params": [],
+    "contentType": "application\/x-ndjson"
+}

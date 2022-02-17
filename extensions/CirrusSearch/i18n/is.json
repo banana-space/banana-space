@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Snævar",
+			"Sveinn í Felli"
+		]
+	},
+	"cirrussearch-desc": "Leit fyrir MediaWiki, knúin af Elasticsearch",
+	"cirrussearch-backend-error": "Við gátum ekki lokið leitinni þinni vegna tímabundinnar villu. Vinsamlegast reyndu aftur síðar.",
+	"cirrussearch-parse-error": "Fyrirspurnin skildist ekki. Vinsamlegast gerðu hana einfaldari. Fyrirspurnin hefur verið skráð til að bæta leitarkerfið.",
+	"cirrussearch-too-busy-error": "Of mikið álag er á leitina. Vinsamlegast reyndu aftur síðar.",
+	"cirrussearch-regex-syntax-error": "Málskipunar villa í reglulegri segð við $2: $1",
+	"cirrussearch-regex-too-busy-error": "Það eru of margar leitir með reglulegum segðum í gangi. Vinsamlegast reyndu aftur síðar.",
+	"cirrussearch-regex-too-complex-error": "Reglulega segðin er of flókin. Lærðu meira um hvernig þú getur einfaldað hana [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|hér]].",
+	"cirrussearch-now-using": "Þessi wiki notar nýja leitarvél. ([[mw:Special:MyLanguage/Help:CirrusSearch|Læra meira]])",
+	"cirrussearch-ignored-headings": " #<!-- leave this line exactly as it is --> <pre>\n# Headings that will be ignored by search.\n# Changes to this take effect as soon as the page with the heading is indexed.\n# You can force page reindexing by doing a null edit.\n# The syntax is as follows:\n#   * Everything from a \"#\" character to the end of the line is a comment.\n#   * Every non-blank line is the exact title to ignore, case and everything.\nReferences\nExternal links\nSee also\n #</pre> <!-- leave this line exactly as it is -->",
+	"cirrussearch-pref-label": "Ný leit",
+	"cirrussearch-give-feedback": "Gefðu okkur svörun",
+	"cirrussearch-explore-similar-related": "Tengt",
+	"cirrussearch-explore-similar-categories": "Flokkar",
+	"cirrussearch-explore-similar-languages": "Tungumál",
+	"cirrussearch-explore-similar-categories-none": "Engir flokkar tiltækir",
+	"cirrussearch-explore-similar-languages-none": "Ekki tiltækt á öðrum tungumálum"
+}

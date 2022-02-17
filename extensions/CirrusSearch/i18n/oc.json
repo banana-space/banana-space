@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cedric31"
+		]
+	},
+	"cirrussearch-desc": "Fa efectuar la recèrca per Solr",
+	"cirrussearch-backend-error": "Avèm pas pogut menar corrèctament vòstra recèrca a causa d’un problèma temporari. Ensajatz tornarmai ulteriorament.",
+	"cirrussearch-now-using": "Aqueste wiki utiliza un novèl motor de recèrca. ([[mw:Special:MyLanguage/Help:CirrusSearch|ne saber mai]])",
+	"cirrussearch-pref-label": "Recèrca novèla",
+	"prefs-completion": "Recèrca aprigondida"
+}

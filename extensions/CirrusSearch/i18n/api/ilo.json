@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lam-ang"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Pakbo ti konpigurasion ti CirrusSearch .",
+	"apihelp-cirrus-mapping-dump-description": "Pakbo ti pannakaimapa ti CirrusSearch para iti daytoy a wiki.",
+	"apihelp-cirrus-settings-dump-description": "Pakbo dagiti pannakaisaad ti CirrusSearch para iti daytoy a wiki."
+}

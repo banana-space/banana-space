@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liuxinyu970226",
+			"佛壁灯",
+			"Shizhao"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "CirrusSearch配置的转储。",
+	"apihelp-cirrus-config-dump-summary": "CirrusSearch配置的转储。",
+	"apihelp-cirrus-config-dump-example": "获取CirrusSearch配置的转储。",
+	"apihelp-cirrus-mapping-dump-description": "用于此wiki的CirrusSearch映射转储。",
+	"apihelp-cirrus-mapping-dump-summary": "用于此wiki的CirrusSearch映射转储。",
+	"apihelp-cirrus-mapping-dump-example": "获取用于此wiki的CirrusSearch映射转储。",
+	"apihelp-cirrus-settings-dump-description": "用于此wiki的CirrusSearch设置转储。",
+	"apihelp-cirrus-settings-dump-summary": "用于此wiki的CirrusSearch设置转储。",
+	"apihelp-cirrus-settings-dump-example": "获取用于此wiki的CirrusSearch设置转储。",
+	"apihelp-cirrus-profiles-dump-description": "此Wiki上的CirrusSearch配置文件转储。",
+	"apihelp-cirrus-profiles-dump-summary": "此Wiki上的CirrusSearch配置文件转储。",
+	"apihelp-cirrus-profiles-dump-example": "获取此Wiki上的CirrusSearch配置文件转储。",
+	"apihelp-cirrus-profiles-dump-param-verbose": "获取配置文件内容",
+	"apihelp-query+cirrusdoc-description": "CirrusSearch条目文档的转储",
+	"apihelp-query+cirrusdoc-summary": "来自搜索服务器的CirrusSearch条目文档的转储",
+	"apihelp-query+cirrusdoc-example": "获取当前索引进搜索的单个CirrusSearch条目的转储。",
+	"apihelp-query+cirrusbuilddoc-summary": "来自数据库服务器的CirrusSearch条目文档的转储",
+	"apihelp-query+cirrusbuilddoc-example": "获取生成自数据库的单个CirrusSearch条目的转储。",
+	"apierror-cirrus-requesttoolong": "前缀搜索请求超过最大允许长度。（$1&gt;$2）",
+	"apihelp-query+compsuggestbuilddoc-param-method": "使用的评分方法",
+	"apierror-compsuggestbuilddoc-bad-method": "未知的评分方法",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "完成建议器使用的文档的转储",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "获取完成建议器使用的文档的转储"
+}

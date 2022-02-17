@@ -1,0 +1,46 @@
+[
+    {
+        "took": 2,
+        "timed_out": false,
+        "_shards": {
+            "total": 8,
+            "successful": 8,
+            "failed": 0
+        },
+        "hits": {
+            "total": 1,
+            "max_score": 1,
+            "hits": [
+                {
+                    "_index": "wiki_content_first",
+                    "_type": "page",
+                    "_id": "26",
+                    "_score": 1,
+                    "_source": {
+                        "version": 28,
+                        "wiki": "wiki",
+                        "namespace": 0,
+                        "namespace_text": "",
+                        "title": "10.1093\/acprof:oso\/9780195314250.003.0001",
+                        "timestamp": "2016-09-20T22:44:27Z",
+                        "category": [],
+                        "external_link": [],
+                        "outgoing_link": [],
+                        "template": [],
+                        "text": "10.1093\/acprof:oso\/9780195314250.003.0001",
+                        "source_text": "10.1093\/acprof:oso\/9780195314250.003.0001",
+                        "text_bytes": 41,
+                        "language": "en",
+                        "heading": [],
+                        "opening_text": null,
+                        "auxiliary_text": [],
+                        "defaultsort": false,
+                        "coordinates": [],
+                        "redirect": [],
+                        "incoming_links": 0
+                    }
+                }
+            ]
+        }
+    }
+]

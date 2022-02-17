@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Borichèt"
+		]
+	},
+	"cirrussearch-desc": "Arserca për Mediawiki sostnùa da Elasticsearch",
+	"cirrussearch-backend-error": "I l'oma nen podù livré soa arserca an rason d'un problema temporani. Për piasì, ch'a preuva torna pi tard.",
+	"cirrussearch-parse-error": "L,arcesta a l'é nen ëstàita capìa. Për piasì, ch'a la fasa pi sempia. L'arcesta a l'é stàita marcà për amelioré ël sistema d'arserca.",
+	"cirrussearch-too-busy-error": "L'arserca a l'é al moment tròp ocupà. Për piasì, ch'a preuva torna pi tard.",
+	"cirrussearch-regex-syntax-error": "Eror ëd sintassi ëd l'espression regolar an $2: $1",
+	"cirrussearch-regex-too-busy-error": "Tròpe arserche për espression regolar atualman an cors. Për piasì, ch'a preuva torna pi tard.",
+	"cirrussearch-regex-too-complex-error": "L'espression regolar a l'é tròp complicà. Savèjne ëd pi ansima a soa semplificassion [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|ambelessì]].",
+	"cirrussearch-now-using": "Costa wiki a deuvra un neuv motor d'arserca.\n([[mw:Special:MyLanguage/Help:CirrusSearch|Savèjne ëd pi]])",
+	"cirrussearch-ignored-headings": " #<!-- lassé costa linia 'me ch'a l'é --> <pre>\n# Antestassion ch'a saran ignorà da l'arserca.\n# Le modìfiche a sòn a l'han efet pen-a che la pàgina con l'antestassion a l'é indicisà.\n# A peul forsé la riandesassion ëd la pàgina an fasend na modìfica veuida.\n# La sintassi a l'é costa-sì:\n#   * Tut a parte da 'n caràter «#» a l'é un coment.\n#   * Tuta linia nen veuida a l'é ël tìtol precis da ignoré, caràter majùscoj o minùscoj comprèis.\nArferiment\nLiure esterne\nVëdde ëdcò\n #</pre> <!-- lassé costa linia 'me ch'a l'é -->",
+	"cirrussearch-boost-templates": " #<!-- lassé costa linia pròpe 'me ch'a l'é --> <pre>\n# Si na pàgina a conten un ëd costi stamp antlora sò pontegg d'arserca a sarà multiplicà për na përsentual predeterminà.\n# Le modìfiche a l'han efet dlongh.\n# La sintassi a l'é costa-sì:\n#   * Tut lòn ch'a-i é antra un caràter '#' e la fin ëd la linia a l'é un coment.\n#   * Tuta linia nen veuida a l'é ël nòm precis dlë stamp da promeuve, con dapress un caràter «|» con dapress un nùmer con daperss un caràter «%».\n# Esempi ëd linie bon-e:\n# Stamp:Bon|150%\n# Stamp:Motobin motobin bon|300%\n# Stamp:Gram|50%\n# Esempi ëd linie nen bon-e:\n# Stamp:Foo|150.234234% <-- gnun decimal autorisà!\n# Foo|150% <--- da na mira técnica a marcia, ma për dle transclusion ëd la pàgina Foo da lë spassi nominal prinsipal\n# A peul prové le modìfiche ëd configurassion an fasend n'arserca con prefiss jë stamp ëd promossion:\"XX\" andoa XX a l'é l'ansem djë stamp ch'a veul promeuve, separà da djë spassi nopà che da 'd sàut ëd linia.\n# J'arserche che a spessìfico jë stamp ëd promossion:\"XX\" a ignòro ël contnù d'ës camp-sì.\n #</pre> <!-- lassé costa linia pròpe 'me ch'a l'é -->",
+	"cirrussearch-pref-label": "Neuva arserca",
+	"cirrussearch-pref-desc": "Prové nòstra neuva arserca ch'a manten un pi grand nùmer ëd lenghe, a forniss pi d'arzultà agiornà e a peul fin-a trové dël test ant jë stamp."
+}

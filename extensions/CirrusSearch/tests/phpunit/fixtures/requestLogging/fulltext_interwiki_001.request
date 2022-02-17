@@ -1,0 +1,10 @@
+{
+	"_comment": "basic interwiki test",
+	"type": "fulltext",
+	"term": "main",
+	"showSuggestion": false,
+	"interwiki": {
+		"wikt": "commonswiki",
+		"b": "cirrustestwiki"
+	}
+}

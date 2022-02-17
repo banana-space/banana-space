@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kur"
+		]
+	},
+	"apihelp-query+cirrusdoc-summary": "Encamnameya pela gotareke CirrusSearchê ya ji rajekerên lêgerînê",
+	"apihelp-query+cirrusdoc-example": "Niha bi girêdayî lêgerînan, encamnameya tenê gotareke CirrusSearch bibînin.",
+	"apihelp-query+cirrusbuilddoc-summary": "Encamnameya pela gotareke CirrusSearchê ya ji rajekerên zanyarîdankê",
+	"apihelp-query+cirrusbuilddoc-example": "Encamnameyeke tenê ya gotara CirrusSearchê bibînin a ku ji zanyarîdankê hat çêkirin."
+}

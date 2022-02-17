@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Praveenp"
+		]
+	},
+	"cirrussearch-desc": "ഇലാസ്റ്റിക്‌സേർച്ച് ഉപയോഗിച്ചുള്ള മീഡിയവിക്കി തിരച്ചിൽ",
+	"cirrussearch-backend-error": "താത്കാലിക പ്രശ്നമുണ്ടായതിനാൽ, താങ്കളുടെ തിരച്ചിൽ പൂർത്തിയാക്കാൻ കഴിഞ്ഞില്ല. ദയവായി പിന്നീട് വീണ്ടും ശ്രമിക്കുക.",
+	"cirrussearch-parse-error": "തിരഞ്ഞതെന്തെന്ന് മനസ്സിലായില്ല. ദയവായി അത് ലളിതമാക്കുക. തിരച്ചിൽ സൗകര്യം മെച്ചപ്പെടുത്തുന്നതിനായി തിരഞ്ഞ പദം ശേഖരിച്ചിട്ടുണ്ട്.",
+	"cirrussearch-too-busy-error": "തിരച്ചിൽ സൗകര്യം ഇപ്പോൾ വളരെ തിരക്കിലാണ്. ദയവായി പിന്നീട് ശ്രമിക്കുക.",
+	"cirrussearch-regex-syntax-error": "$2-ൽ റെഗുലർ എക്സ്പ്രെഷൻ എഴുത്തുരീതി പിഴവ്: $1",
+	"cirrussearch-regex-too-busy-error": "വളരെയധികം റെഗുലർ എക്സ്പ്രെഷൻ തിരച്ചിലുകൾ ഇപ്പോൾ നടക്കുന്നു. ദയവായി പിന്നീട് വീണ്ടും ശ്രമിക്കുക.",
+	"cirrussearch-regex-too-complex-error": "റെഗുലർ എക്സ്പ്രഷൻ അത്യധികം സങ്കീർണ്ണമാണ്. എപ്രകാരം ലളിതമാക്കാമെന്ന്  [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|ഇവിടെ]] കാണുക.",
+	"cirrussearch-now-using": "ഈ വിക്കിയിൽ പുതിയ സേർച്ച് എഞ്ചിൻ ഉപയോഗിക്കുന്നു.\n([[mw:Special:MyLanguage/Help:CirrusSearch|കൂടുതൽ അറിയുക]])",
+	"cirrussearch-ignored-headings": " #<!-- ഈ വരി ഇതേ പോലെ വിടുക --> <pre>\n# തിരച്ചിലിൽ അവഗണിക്കപ്പെടുന്ന തലക്കെട്ടുകൾ.\n# താളിന്റെ തലക്കെട്ടുകളുടെ സൂചികവത്കരണം നടന്നാലുടൻ ഇവിടെ വരുത്തുന്ന മാറ്റങ്ങൾ ഫലത്തിൽ വരുന്നതാണ്.\n# ശൂന്യമായ തിരുത്ത് ചെയ്ത് താൾ വീണ്ടും സൂചികാവത്കരിക്കാവുന്നതാണ്.\n# എഴുത്തുരീതി ഇനി കൊടുക്കുന്നു:\n#   * \"#\" അക്ഷരത്തിൽ തുടങ്ങി വരിയുടെ അവസാനം വരെയുള്ള എന്തും സൂചനാക്കുറിപ്പ് ആയിരിക്കും.\n#   * ശൂന്യമല്ലാത്ത ഓരോ വരിയും അക്ഷരവ്യത്യാസമില്ലാതെ അവഗണിക്കപ്പെടാനുള്ള തലക്കെട്ടായിരിക്കും\nഅവലംബം\nപുറത്തേക്കുള്ള കണ്ണികൾ\nഇതും കാണുക\n #</pre> <!-- ഈ വരി ഇതേ പോലെ വിടുക-->",
+	"cirrussearch-pref-label": "പുതിയ തിരച്ചിൽ സൗകര്യം",
+	"cirrussearch-pref-desc": "വളരെയധികം ഭാഷകളെ പിന്തുണയ്ക്കുന്ന, കൂടുതൽ പുതിയ ഫലങ്ങൾ നൽകുന്ന, ഫലകങ്ങൾക്കുള്ളിലെ എഴുത്തുകൾ വരെ കണ്ടെത്തുന്ന പുതിയ തിരച്ചിൽ സൗകര്യം പരീക്ഷിക്കുക.",
+	"cirrussearch-give-feedback": "അഭിപ്രായങ്ങൾ അറിയിക്കുക",
+	"cirrussearch-query-too-long": "അനുവദിച്ചിട്ടുള്ള നീളത്തിലും കൂടുതലാണ് തിരച്ചിൽ അഭ്യർത്ഥനയുടെ നീളം. ($1 > $2)",
+	"prefs-completion": "തിരച്ചിൽ പൂർത്തീകരണി",
+	"cirrussearch-pref-completion-section-desc": "പൂർത്തിയാക്കൽ നിർദ്ദേശിനി",
+	"cirrussearch-pref-completion-profile-help": "സ്വയംപൂർത്തീകരണി (ടൈപ്പ്-ചെയുന്ന-കൂടെ-തിരയൽ) നിർദ്ദേശങ്ങളുടെ സ്വഭാവം സജ്ജീകരിക്കുക.\n\nതിരച്ചിലിന്റെ സാംഗത്യത്തിനനുസരിച്ച് പദങ്ങൾ നിർദ്ദേശിക്കാനും മികച്ച രീതിയിൽ അക്ഷരപിശകുകൾ പരിഹരിക്കാനുമുള്ള അൽഗോരിതമാണ് [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:CirrusSearch/CompletionSuggester പൂർത്തിയാക്കൽ നിർദ്ദേശിനി]. പഴയ ടൈപ്പ്-ചെയ്യുന്ന-കൂടെ-തിരയൽ അൽഗോരിതം പൂർവ്വപദതിരച്ചിലായി ഉണ്ട്.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "സ്വതേ (ശുപാർശ ചെയ്യുന്നത്)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "രണ്ട് അക്ഷരപിശകുകൾ വരെ ശരിയാക്കുന്നു. പ്രധാന തലക്കെട്ടിനോട് വളരെ സാദൃശ്യമുള്ള തിരിച്ചുവിടലുകൾ ഒഴിവാക്കുന്നു.",
+	"cirrussearch-completion-profile-strict-pref-name": "കർശന സമ്പ്രദായം (നൂതനം)",
+	"cirrussearch-completion-profile-strict-pref-desc": "അക്ഷരപിശക് തിരുത്തില്ല. ഭാഷാഭേദം ഒത്തുനോക്കില്ല. ഒത്തുപോകുന്നുണ്ടോയെന്ന് കർശനമായി നോക്കൽ.",
+	"cirrussearch-completion-profile-normal-pref-name": "തിരിച്ചുവിടൽ സമ്പ്രദായം (നൂതനം)",
+	"cirrussearch-completion-profile-normal-pref-desc": "അക്ഷരപിശക് തിരുത്തില്ല. വളരെ സമാനതകളുള്ള ബന്ധമുള്ള തിരിച്ചുവിടലുകൾ ഒന്നായി കണക്കാക്കുന്നു.",
+	"cirrussearch-completion-profile-classic-pref-name": "ചിരകാല പൂർവ്വപ്രത്യയ തിരച്ചിൽ",
+	"cirrussearch-completion-profile-classic-pref-desc": "അക്ഷരപിശക് തിരുത്തില്ല. തലക്കെട്ടുകളുടെ ആദ്യം തിരയുന്നു.",
+	"cirrussearch-timed-out": "തിരച്ചിലിനുള്ള സമയം പൂർത്തിയായി, ഭാഗികമായ ഫലങ്ങളേ ലഭ്യമായിട്ടുള്ളു.",
+	"cirrussearch-explore-similar-related": "ബന്ധപ്പെട്ടവ",
+	"cirrussearch-explore-similar-categories": "വർഗ്ഗങ്ങൾ",
+	"cirrussearch-explore-similar-languages": "ഭാഷകൾ",
+	"cirrussearch-explore-similar-related-none": "ബന്ധപ്പെട്ട താളുകൾ ലഭ്യമല്ല",
+	"cirrussearch-explore-similar-categories-none": "വർഗ്ഗങ്ങൾ ലഭ്യമല്ല",
+	"cirrussearch-explore-similar-languages-none": "മറ്റ് ഭാഷകളിൽ ലഭ്യമല്ല",
+	"cirrussearch-article-words": "എല്ലാ ഉള്ളടക്ക താളുകളിലും ഉള്ള വാക്കുകൾ"
+}

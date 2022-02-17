@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Christian List",
+			"Saederup92",
+			"Weblars"
+		]
+	},
+	"cirrussearch-desc": "Søgning for MediaWiki drevet af Elasticsearch",
+	"cirrussearch-backend-error": "Vi kunne ikke fuldføre søgningen på grund af et midlertidigt problem.  Prøv igen senere.",
+	"cirrussearch-now-using": "Denne wiki bruger en ny søgemaskine. ([[mw:Special:MyLanguage/Help:CirrusSearch|Læs mere]])",
+	"cirrussearch-ignored-headings": " #<!-- lad denne linje være præcis som den er --> <pre>\n# Overskrifter, der vil blive ignoreret af søgning.\n# Ændringer til dette træder i kraft så snart siden med overskriften er indekseret.\n# Du kan tvinge siden til genindeksering ved at lave en nul redigering.\n# syntaksen er som følger:\n#   * Alt fra en tegnet \"#\" til slutningen af linjen er en kommentar\n#   * Hver ikke-tomme linje er den nøjagtige titel der skal ignoreres, der skelnes også mellem store og små bogstaver\nReferencer\nEksterne henvisninger\nSe også\nKilder og henvisninger\nEksterne kilder/henvisninger\nKilder\n #</pre> <!-- lad denne linje være præcis som den er -->",
+	"cirrussearch-pref-label": "Ny søgning",
+	"cirrussearch-pref-desc": "Prøv vores nye søgning, som understøtter et større antal sprog, giver mere opdaterede resultater og kan endda finde tekst inden i skabeloner.",
+	"cirrussearch-give-feedback": "Giv os tilbagemelding",
+	"prefs-completion": "Søgeforslag",
+	"cirrussearch-pref-completion-profile-help": "Sæt indstillingen for søgeforslag (søg mens du skriver).\n\nDen nye standard for autofuldførelse i søgefeltet er [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:CirrusSearch/CompletionSuggester Completion Suggester], der bedre retter tastefejl og giver relevante søgeforslag. Præfikssøgning er den ældre algoritme.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Standard (anbefalet)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Retter op til to tastefejl. Udelader omdirigeringer der meget ligner sidetitlen.",
+	"cirrussearch-completion-profile-strict-pref-name": "Streng modus (avanceret)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Ingen rettelse af tastefejl. Ingen tegnkombinationer erstattes (fx ae til æ). Strikt match.",
+	"cirrussearch-completion-profile-normal-pref-name": "Omdirigeringsmodus (avanceret)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Ingen rettelse af tastefejl. Udelader omdirigeringer der meget ligner sidetitlen.",
+	"cirrussearch-completion-profile-classic-pref-name": "Klassisk præfikssøgning",
+	"cirrussearch-completion-profile-classic-pref-desc": "Ingen rettelse af tastefejl. Matcher begyndelsen af sidetitler.",
+	"cirrussearch-explore-similar-related": "Relateret",
+	"cirrussearch-explore-similar-categories": "Kategorier",
+	"cirrussearch-explore-similar-languages": "Sprog",
+	"cirrussearch-explore-similar-categories-none": "Ingen kategorier tilgængelige",
+	"cirrussearch-explore-similar-languages-none": "Ikke tilgængelig på andre sprog",
+	"cirrussearch-article-words": "Ord i alle indholdsider"
+}

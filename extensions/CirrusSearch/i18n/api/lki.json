@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hosseinblue"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "روگرفت از پیکربندی CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "تخلیه نقشه برداری CirrusSearch برای این ویکی."
+}

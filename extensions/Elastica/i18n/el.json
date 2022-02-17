@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Geraki"
+		]
+	},
+	"elastica-desc": "Βασική λειτουργικότητα  [http://www.elasticsearch.org/ Elasticsearch] για άλλες επεκτάσεις παρέχοντας τη βιβλιοθήκη [http://elastica.io/ Elastica]"
+}

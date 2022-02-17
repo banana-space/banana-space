@@ -1,0 +1,8 @@
+{
+    "query": "change completed unrelated variable",
+	"config": {
+		"wgCirrusSearchInterleaveConfig": {
+			"wgCirrusSearchReplicas": "0"
+		}
+	}
+}

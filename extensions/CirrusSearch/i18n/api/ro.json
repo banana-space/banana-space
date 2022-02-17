@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"NGC 54"
+		]
+	},
+	"apierror-cirrus-requesttoolong": "Prefixul cererii de căutare a fost mai lung decât lungimea maximă permisă. ($1 &gt; $2)"
+}

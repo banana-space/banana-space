@@ -1,0 +1,111 @@
+{
+    "analyzer": {
+        "el_plain": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase",
+                "icu_normalizer",
+                "preserve_original_recorder",
+                "icu_folding",
+                "preserve_original",
+                "remove_empty"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "el_plain_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase",
+                "icu_normalizer"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "ga_plain": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "ga_lowercase",
+                "icu_normalizer"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "ga_plain_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "ga_lowercase",
+                "icu_normalizer"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "tr_plain": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "tr_lowercase",
+                "icu_normalizer"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "tr_plain_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "tr_lowercase",
+                "icu_normalizer"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        }
+    },
+    "filter": {
+        "lowercase": {
+            "type": "lowercase",
+            "language": "greek"
+        },
+        "icu_normalizer": {
+            "type": "icu_normalizer",
+            "name": "nfkc_cf"
+        },
+        "icu_folding": {
+            "type": "icu_folding"
+        },
+        "remove_empty": {
+            "type": "length",
+            "min": 1
+        },
+        "ga_lowercase": {
+            "type": "lowercase",
+            "language": "irish"
+        },
+        "tr_lowercase": {
+            "type": "lowercase",
+            "language": "turkish"
+        }
+    },
+    "char_filter": {
+        "word_break_helper": {
+            "type": "mapping",
+            "mappings": [
+                "_=>\\u0020",
+                ".=>\\u0020",
+                "(=>\\u0020",
+                ")=>\\u0020"
+            ]
+        }
+    },
+    "tokenizer": []
+}

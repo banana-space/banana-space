@@ -1,0 +1,86 @@
+{
+    "analyzer": {
+        "zh_plain": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "smartcn_stop",
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "zh_plain_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "smartcn_stop",
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "zh_text": {
+            "type": "custom",
+            "tokenizer": "smartcn_tokenizer",
+            "char_filter": [
+                "stconvertfix",
+                "tsconvert"
+            ],
+            "filter": [
+                "smartcn_stop",
+                "lowercase"
+            ]
+        },
+        "zh_text_search": {
+            "type": "custom",
+            "tokenizer": "smartcn_tokenizer",
+            "char_filter": [
+                "stconvertfix",
+                "tsconvert"
+            ],
+            "filter": [
+                "smartcn_stop",
+                "lowercase"
+            ]
+        }
+    },
+    "filter": {
+        "smartcn_stop": {
+            "type": "stop",
+            "stopwords": [
+                ","
+            ]
+        },
+        "lowercase": {
+            "type": "lowercase"
+        }
+    },
+    "char_filter": {
+        "word_break_helper": {
+            "type": "mapping",
+            "mappings": [
+                "_=>\\u0020",
+                ".=>\\u0020",
+                "(=>\\u0020",
+                ")=>\\u0020"
+            ]
+        },
+        "stconvertfix": {
+            "type": "mapping",
+            "mappings": [
+                "\\u606d\\u5f18=>\\u606d \\u5f18",
+                "\\u5138=>\\u3469"
+            ]
+        },
+        "tsconvert": {
+            "type": "stconvert",
+            "delimiter": "#",
+            "keep_both": false,
+            "convert_type": "t2s"
+        }
+    },
+    "tokenizer": []
+}

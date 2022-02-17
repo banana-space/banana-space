@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hello903hello",
+			"Moon0319",
+			"Roy17",
+			"Z423x5c6"
+		]
+	},
+	"cirrussearch-too-busy-error": "搜索引擎而家太忙。請遲啲再試過。",
+	"cirrussearch-pref-label": "新搜尋",
+	"cirrussearch-give-feedback": "畀意見我哋",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "預設（推薦）",
+	"cirrussearch-completion-profile-strict-pref-name": "嚴謹模式（高級）",
+	"cirrussearch-completion-profile-normal-pref-name": "跳轉模式（高級）",
+	"cirrussearch-explore-similar-related": "有關",
+	"cirrussearch-explore-similar-categories": "類",
+	"cirrussearch-explore-similar-languages": "話",
+	"cirrussearch-explore-similar-categories-none": "無可用嘅分類",
+	"cirrussearch-article-words": "全部版嘅字數"
+}

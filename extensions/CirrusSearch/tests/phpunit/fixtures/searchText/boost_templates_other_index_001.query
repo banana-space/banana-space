@@ -1,0 +1,17 @@
+{
+	"query": "main",
+	"config": {
+		"wgCirrusSearchExtraIndexBoostTemplates": {
+			"foowiki": {
+				"wiki": "foo",
+				"boosts": {
+					"Template:Foo": 1.75,
+					"Template:Bar": 2.5
+				}
+			}
+		},
+		"wgCirrusSearchExtraIndexes": {
+			"0": [ "foowiki" ]
+		}
+	}
+}

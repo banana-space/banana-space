@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dr Lotus Black",
+			"Ninjastrikers",
+			"Sanlinnaing"
+		]
+	},
+	"cirrussearch-too-busy-error": "ရှာဖွေခြင်းသည် လက်ရှိ အလုပ်များနေသည်။ ကျေးဇူးပြု၍ နောက်တခါထပ်မံ ကြိုးစားကုည့်ပါ။",
+	"cirrussearch-regex-too-complex-error": "စစ်ထုတ်ရှာဖွေမှုမှာ အင်မတန်ရှုပ်ထွေးနေပါသည်။ မည်ကဲ့သို့ရှင်းလင်းရမည်ဆိုသည်အား[[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|ဤနေရာတွင့်]] လေ့လာနိုင်ပါသည်။",
+	"cirrussearch-pref-label": "ရှာဖွေမှုအသစ်",
+	"cirrussearch-give-feedback": "ကျွန်ုပ်တို့ကို သင်၏အကြံပြုချက် ပေးပါ",
+	"cirrussearch-query-too-long": "ရှာဖွေခြင်း တောင်းဆိုမှုသည် ခွင့်ပြုထားသော အများဆုံးပမာဏထက် ကျော်လွန်နေသည်။ ($1 > $2)",
+	"cirrussearch-explore-similar-related": "ဆက်နွယ်သော",
+	"cirrussearch-explore-similar-categories": "ကဏ္ဍများ",
+	"cirrussearch-explore-similar-languages": "ဘာသာစကားများ",
+	"cirrussearch-explore-similar-related-none": "ဆက်နွယ်စာမျက်နှာများ မရရှိနိုင်ပါ",
+	"cirrussearch-explore-similar-categories-none": "ကဏ္ဍများ မရရှိနိုင်ပါ",
+	"cirrussearch-explore-similar-languages-none": "အခြားဘာသာစကားများဖြင့် မရရှိနိုင်ပါ",
+	"cirrussearch-article-words": "အကြောင်းအရာစာမျက်နှာများအားလုံးရှိ စကားလုံးများ"
+}

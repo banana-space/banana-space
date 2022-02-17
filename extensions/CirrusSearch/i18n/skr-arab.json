@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saraiki"
+		]
+	},
+	"cirrussearch-pref-label": "نویں ڳول",
+	"cirrussearch-give-feedback": "ساکوں آپݨی رائے ݙیوو",
+	"prefs-completion": "ڳولݨ پورا تھیا",
+	"cirrussearch-pref-completion-section-desc": "تکمیل دی صلاح ݙیوݨ آلا",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "طے شدہ (سفارش کیتی ویندی ہے)",
+	"cirrussearch-completion-profile-classic-pref-name": "سابقے دی کلاسک ڳول",
+	"cirrussearch-explore-similar-related": "متعلقہ",
+	"cirrussearch-explore-similar-categories": "قسماں",
+	"cirrussearch-explore-similar-languages": "زباناں",
+	"cirrussearch-explore-similar-related-none": "متعلقہ ورقے کوئی کائنی",
+	"cirrussearch-explore-similar-categories-none": "کوئی قسماں کائنی لبھیاں",
+	"cirrussearch-explore-similar-languages-none": "ٻنھاں زباناں وچ کائنی"
+}

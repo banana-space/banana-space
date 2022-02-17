@@ -1,0 +1,32 @@
+{
+    "suggest": {
+        "text": "hello wolrd",
+        "suggest": {
+            "phrase": {
+                "field": "suggest",
+                "size": 1,
+                "max_errors": 2,
+                "confidence": 2,
+                "real_word_error_likelihood": 0.95,
+                "direct_generator": [
+                    {
+                        "field": "suggest",
+                        "suggest_mode": "always",
+                        "max_term_freq": 0.5,
+                        "min_doc_freq": 0,
+                        "prefix_length": 2
+                    }
+                ],
+                "highlight": {
+                    "pre_tag": "\ue000",
+                    "post_tag": "\ue001"
+                },
+                "smoothing": {
+                    "stupid_backoff": {
+                        "discount": 0.4
+                    }
+                }
+            }
+        }
+    }
+}

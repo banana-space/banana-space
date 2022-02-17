@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kwj2772",
+			"아라"
+		]
+	},
+	"elastica-desc": "[http://elastica.io/ Elastica] 라이브러리가 제공하는 다른 확장 기능을 위한 기본 [http://www.elasticsearch.org/ Elasticsearch] 기능"
+}

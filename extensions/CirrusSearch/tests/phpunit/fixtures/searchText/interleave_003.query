@@ -1,0 +1,8 @@
+{
+    "query": "change rescore profile",
+	"config": {
+		"wgCirrusSearchInterleaveConfig": {
+			"CirrusSearchRescoreProfile": "classic_noboostlinks"
+		}
+	}
+}

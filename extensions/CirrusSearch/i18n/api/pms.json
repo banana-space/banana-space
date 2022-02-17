@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Borichèt"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Dësvuidament ëd la configurassion CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Dësvujdament ëd la corëspondensa CirrusSearch për sa wiki-sì.",
+	"apihelp-cirrus-settings-dump-description": "Dësvujdament dij paràmeter CirrusSearch për sa wiki-sì."
+}

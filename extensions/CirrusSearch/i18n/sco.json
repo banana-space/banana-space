@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"John Reid"
+		]
+	},
+	"cirrussearch-desc": "Elasticrake-pwred rake fer MediaWiki",
+	"cirrussearch-backend-error": "We coudna compleate yer rake cause o ae temperie problem. Please try again later.",
+	"cirrussearch-parse-error": "Speirin wisna unnerstood. Please mak it simpler. The speirin wis loggit fer tae improve the rake system.",
+	"cirrussearch-regex-syntax-error": "Raigulair expression syntax mistak at $2: $1",
+	"cirrussearch-now-using": "This wiki is uising ae new rake engine. ([[mw:Special:MyLanguage/Help:CirrusSearch|Learn mair]])",
+	"cirrussearch-ignored-headings": " #<!-- lea this line exactly aes it is --> <pre>\n# Heidins that will be ignored bi rake.\n# Chynges til this tak effect aes suin aes the page wi the heiding is index't.\n# Ye can force page reindexin bi daeing ae null edit.\n# Syntax is aes follaes:\n#   * Awthin fae ae \"#\" chairacter til the end o the line is ae comment\n#   * Ilka no-blank line is the exact title tae ignore, case an awthin\nReferences\nExternal links\nSee ava\n #</pre> <!-- leave this line exactly as it is -->",
+	"cirrussearch-boost-templates": " #<!-- lea this line exactlie aes it is --> <pre>\n# Gif ae page contains yin o thir templates than its rake score is multiplied bi the confeegured percentage.\n# Chynges til this tak effect immediatelie.\n# Syntax is aes follaes:\n#   * awthing fae ae \"#\" chairacter til the end o the line is ae comment\n#   * Ilka non-blank line is the exact template name tae buist, namespace, case n awthing, follaed bi ae \"|\" chairacter follaed bi ae nummer follaed bi ae \"%\" chairacter.\n# Examples o guid lines:\n# Template:Guid|150%\n# Template:Ver Ver Guid|300%\n# Template:Bad|50%\n# Examples o non-warkin lines:\n# Template:Foo|150.234234% <-- naw decimal poynts permitit!\n# Foo|150% <--- techniclie warks, but fer transcluisions o the Foo page fae the main namespace\n# Ye can test confeeguration chynges bi performin ae speirin prefixed wi buist-templates:\"XX\" whaur XX is aw o the templates ye wish tae buist separated bi spaces instead o line breaks.\n# Speirins that specifie buist-templates:\"XX\" ignore the contents o this field.\n #</pre> <!-- lea this line exactlie aes it is -->",
+	"cirrussearch-pref-label": "New rake",
+	"cirrussearch-pref-desc": "Gie oor new rake ae gae, this supports ae mair muckle nummer o leids, provides mair up-til-date ootcomes, n can even fynd tex inside o templates."
+}

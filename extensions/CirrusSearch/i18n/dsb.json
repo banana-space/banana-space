@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Michawiki"
+		]
+	},
+	"cirrussearch-desc": "Pytanje na zakłaźe \"elasticsearch\" za MediaWiki",
+	"cirrussearch-backend-error": "Twójo pytanje njedajo se nachylnego problema dla skóńcyś. Pšosym wopytaj pózdźej hyšći raz.",
+	"cirrussearch-parse-error": "Napšašowanje njejo se zrozměło. Pšosym cyń jo jadnorješe. Napšašowanje se protokolěrujo, aby se pytański system pólěpšył.",
+	"cirrussearch-now-using": "Toś ten wiki wužywa nowu pytnicu ([[mw:Special:MyLanguage/Help:CirrusSearch|Dalšne informacije]])",
+	"cirrussearch-ignored-headings": " #<!-- njezměń toś tu smužku --> <pre>\n# Nadpisma, kótarež pytanje ignorěrujo.\n# Toś te změny budu se wustatkowaś, za tym až bok jo se indicěrował.\n# Móžoš indicěrowanje bokow wunuźiś, z tym až pśewjedujoš proznu změnu.\n# Syntaksa:\n#   * Wšykno, což slědujo znamušku \"#\" až do kóńca smužki, jo komentar\n#   * Kuzda njeprozna smužka jo eksaktny titel, kótaryž ma se ignorěrowaś\nŽrědła\nEksterne wótkaze\nGlědaj teke\n #</pre> <!-- njezměń toś tu smužku -->",
+	"cirrussearch-boost-templates": " #<!-- Njezměń toś tu smužku. --> <pre>\n# Jolic bok wopśimujo jadnu z toś tych pśedłogow, buźo se pytańske pogódnośenje z konfigurěrowaneju procentoweju sajźbu multiplicěrowaś.\n# Změny se ned wustatkuju.\n# Syntaksa:\n#   * Wšykno za znamuškom „#“ až do kóńca smužki jo komentar.\n#   * Kužda njeprozna smužka jo eksaktne mě pśedłogi, kótaraž ma se optiměrowaś, z mjenjowym rumom, wjelikopisanim, jo wšykno, slědowane pśez znamuško \"|\", licbu a znamuško \"%\".\n# Pśikłady funkcioněrujucych smužkow:\n# Pśedłoga:Dobry|150%\n# Pśedłoga:Wjelgin dobry|300%\n# Pśedłoga:Špatny|50%\n# Pśikłady njefunkcioněrujucych smužkow:\n# Pśedłoga:Foo|150.234234% <-- Decimalne městna njejsu dowólone!\n# Foo|150% <-- Techniski móžno, ale za zapśěgowanja boka \"Foo\" z głownego mjenjowego ruma.\n# Móžoš konfiguraciju pśez napšašowanje z prefiksom boost-templates:\"XX\"\" testowaś, pśi comž XX stoj za wšykne pśedłogi, kótarež coš optiměrowaś, źělone pśez prozne znamje město łamanja smužki.\n# Napšašowanja z boost-templates:\"XX\" ignorěruju wopśimjeśe toś togo póla.\n #</pre> <!-- Njezměń toś tu smužku. -->",
+	"cirrussearch-pref-label": "Nowe pytanje",
+	"cirrussearch-pref-desc": "Wopytaj našo nowe pytanje, kótarež pódpěra wětšu licbu rěcow, pódawa aktualnjejše wuslědki a móžo samo tekst w pśedłogacj namakaś."
+}

@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pikne"
+		]
+	},
+	"cirrussearch-desc": "Elasticsearchi kasutav otsing",
+	"cirrussearch-backend-error": "Sinu otsingut ei õnnestunud ajutise probleemi tõttu lõpule viia. Palun proovi hiljem uuesti.",
+	"cirrussearch-parse-error": "Sinu päring pole arusaadav. Palun tee see lihtsamaks. Päring kanti logisse, et otsisüsteemi täiustada.",
+	"cirrussearch-too-busy-error": "Otsimootor on praegu liiga hõivatud. Palun proovi hiljem uuesti.",
+	"cirrussearch-regex-syntax-error": "Regulaaravaldise süntaksitõrge kohal $2: $1",
+	"cirrussearch-regex-too-busy-error": "Praegu on töös liiga palju regulaaravaldistega otsinguid. Palun proovi hiljem uuesti.",
+	"cirrussearch-regex-too-complex-error": "Liiga keeruline regulaaravaldis. Selle lihtsustamisvõimaluste kohta loe [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|siit]].",
+	"cirrussearch-now-using": "See viki kasutab uut otsimootorit. ([[mw:Special:MyLanguage/Help:CirrusSearch|Lisateave]])",
+	"cirrussearch-pref-label": "Uus otsing",
+	"cirrussearch-pref-desc": "Proovi uut otsingut, mis toetab rohkem keeli, näitab ajakohasemaid tulemusi ja leiab isegi mallis oleva teksti.",
+	"cirrussearch-give-feedback": "Anna meile tagasisidet",
+	"cirrussearch-query-too-long": "Päring on pikem kui maksimaalselt lubatud. ($1 > $2)",
+	"prefs-completion": "Otsingu viimistlemine",
+	"cirrussearch-pref-completion-section-desc": "Viimistletud soovitused",
+	"cirrussearch-pref-completion-profile-help": "Määra, kuidas näidatakse automaatseid otsisoovitusi (otsimine tippimise ajal).\n\n[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:CirrusSearch/CompletionSuggester Viimistletud soovituste] algoritm tuleb tippimisvigadega paremini toime ja pakub asjakohasemaid otsisoovitusi. Eesliite otsing kasutab vana tippimise ajal soovituste pakkumise algoritmi.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Vaikimisi (soovitatav)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Parandab kuni kaks tippimisviga. Eemaldab ümbersuunamised, mis on väga sarnased sihtlehekülje pealkirjaga.",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-name": "Vastab alamfraasile (soovitatav pikemate leheküljepealkirjade korral)",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-desc": "Parandab kuni kaks tippimisviga. Lahendab ligidased ümbersuunamised. Vastab pealkirjades sisalduvale alamfraasile.",
+	"cirrussearch-completion-profile-strict-pref-name": "Täpne režiim (erivalik)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Ei paranda tippimisvigu. Arvestab diakriitikutega. Täpsed vasted.",
+	"cirrussearch-completion-profile-normal-pref-name": "Ümbersuunamiste režiim (erivalik)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Ei paranda tippimisvigu. Lahendab ligidased ümbersuunamised.",
+	"cirrussearch-completion-profile-normal-subphrases-pref-name": "Ümbersuunamiste režiim alamfraasi vastega (erivalik)",
+	"cirrussearch-completion-profile-normal-subphrases-pref-desc": "Ei paranda tippimisvigu. Lahendab ligidased ümbersuunamised. Vastab pealkirjades sisalduvale alamfraasile.",
+	"cirrussearch-completion-profile-classic-pref-name": "Tavapärane eesliite otsing",
+	"cirrussearch-completion-profile-classic-pref-desc": "Ei paranda tippimisvigu. Soovitused vastavad pealkirjade algustele.",
+	"cirrussearch-article-words": "Sõnu kõigil sisulehekülgedel"
+}

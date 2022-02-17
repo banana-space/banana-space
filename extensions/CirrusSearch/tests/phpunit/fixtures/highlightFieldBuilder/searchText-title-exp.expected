@@ -1,0 +1,9 @@
+{
+    "type": "experimental",
+    "number_of_fragments": 1,
+    "fragmenter": "none",
+    "matched_fields": [
+        "title",
+        "title.plain"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko"
+		]
+	},
+	"elastica-desc": "Fonctionnalité [http://www.elasticsearch.org/ Elasticsearch] de base utilisée par d’autres extensions en fournissant la bibliothèque [http://elastica.io/ Elastica]."
+}

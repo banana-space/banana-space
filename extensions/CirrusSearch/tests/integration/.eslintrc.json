@@ -1,0 +1,11 @@
+{
+	"root": true,
+	"extends": [
+		"wikimedia/selenium"
+	],
+	"rules": {
+		"max-len": "off",
+		"camelcase": "off",
+		"no-underscore-dangle": "off"
+	}
+}

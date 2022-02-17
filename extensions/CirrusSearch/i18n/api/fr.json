@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko",
+			"Orlodrim",
+			"Urhixidur",
+			"Verdy p",
+			"Wladek92"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Vidage de la configuration CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "Dump de la configuration de CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Obtenir un vidage de la configuration de CirrusSearch",
+	"apihelp-cirrus-mapping-dump-description": "Vidage de la correspondance CirrusSearch pour ce wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Vidage de la table de correspondance de CirrusSearch pour ce wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Obtenir un vidage de la table de correspondance de CirrusSearch pour ce wiki.",
+	"apihelp-cirrus-settings-dump-description": "Vidage des paramètres CirrusSearch pour ce wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Vidage des paramètres de CirrusSearch pour ce wiki.",
+	"apihelp-cirrus-settings-dump-example": "Obtenir un vidage des paramètres de CirrusSearch pour ce wiki.",
+	"apihelp-cirrus-profiles-dump-description": "Vidage des profils CirrusSearch de ce wiki.",
+	"apihelp-cirrus-profiles-dump-summary": "Vidage des profils CirrusSearch de ce wiki.",
+	"apihelp-cirrus-profiles-dump-example": "Obtenir le vidage des profils CirrusSearch de ce wiki.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Vider le contenu des profils",
+	"apihelp-query+cirrusdoc-description": "Vidage d’un document article CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Vidage d’un document article CirrusSearch depuis les serveurs de recherche",
+	"apihelp-query+cirrusdoc-example": "Obtenir le vidage d’un article unique CirrusSearch tel qu’il est actuellement indexé dans la recherche.",
+	"apihelp-query+cirrusbuilddoc-summary": "Vidage du document d’un article de CirrusSearch depuis les serveurs de base de données",
+	"apihelp-query+cirrusbuilddoc-example": "Obtenir le vidage d’un unique article de CirrusSearch généré depuis la base de données.",
+	"apierror-cirrus-requesttoolong": "La requête de recherche de préfixe a dépassé la longueur maximale autorisée ($1 &gt; $2).",
+	"apihelp-query+compsuggestbuilddoc-param-method": "La méthode de notation à utiliser",
+	"apierror-compsuggestbuilddoc-bad-method": "Méthode de notation inconnue",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "Vidage du document utilisé par l’outil de suggestion de complétude",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "Obtenir un vidage du document utilisé par l’outil de suggestion de complétude"
+}

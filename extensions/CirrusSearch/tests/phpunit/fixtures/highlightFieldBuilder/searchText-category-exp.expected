@@ -1,0 +1,13 @@
+{
+    "type": "experimental",
+    "number_of_fragments": 1,
+    "fragmenter": "none",
+    "order": "score",
+    "options": {
+        "skip_if_last_matched": true
+    },
+    "matched_fields": [
+        "category",
+        "category.plain"
+    ]
+}

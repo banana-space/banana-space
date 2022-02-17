@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abshirdheere"
+		]
+	},
+	"cirrussearch-desc": "Elasticsearch-powered search for MediaWiki",
+	"cirrussearch-backend-error": "ma sii wadi karno raadintaadii sabab la xiriirta dhibaato kooban. Fadlan isku day mar kale.",
+	"cirrussearch-parse-error": "Suurta gal maaha in la fasiro. Fadlan ka dhig si kale oo fudud. Waxaa la gaarsiiyey ogaysiis si loo wanaajiyo habka baarista.",
+	"cirrussearch-now-using": "Waxaa wikiga loo adeegsan doonaa mashiin baare cusub. ([[mw:Special:MyLanguage/Help:CirrusSearch|Wax badan ka ogoow]])",
+	"cirrussearch-ignored-headings": " #<!-- Udaa sadarkaan sida uu yahay --> <pre>\n# Waxaa dhacaysa in la iska iloowo madaxqorkiisa inta lagu gudajiro raadinta.\n# Isbedeleda waxay aadi doonaan halkii loogu talo galay ee hordhaca bogga uu ku jiro madaxqorkiisa.\n# Waxaa kuu suurtagal ah inaad howl hordhac ah usameeyso bogga adigoo bedela bogga banaan.\n# Weeraynta waa sidaan soo socota:\n#   * wax kasta oo gadaasheeda lagu qoro \"#\" sadarka dhammaadkiis waxaa loo qaadanaa faallo\n#   * Sadarkasta ee banaan wuxuu qaadanayaa ciwaankii laga tagay, isagii iyo wax kabedelan\nReferences\nLinkiyada dibadda\nSidoo kale eeg\n #</pre> <!-- leave this line exactly as it is -->",
+	"cirrussearch-boost-templates": " #<!-- Qoraalkaan sidiisa ku dhaaf --> <pre>\n# Haddii uu boggu ku jiro mid ka mid ah tusmooyinka lagu xusay hoos waxaa la samayn doonaa in lagu dhufto heerka raadinta qiyaasta ah boqolkiiba ee la koobay.\n# Isbedelada qaybtaan lagu sameeyey isla markii ay dhacaan.\n# Weerayntu waxay noqon doontaa sidaan:\n#   * Wax kasta oo ka biloowda calaamadaan \"#\" ilaa sadarka dhamaadkiisa waxaa loo qaadan doonaa faallo\n#   * Sadar kasta ee aan banaanayn wuxuu noqonayaa maga tusmada kaasoo awalba lagu kordhiyey (wuxuuna soo qaadan doonaa magaca sida uu yahay) magaca kadib waxaa la dhigayaa camadaan \"|\" kadibna lambarka kadibna calaamadda  \"%\".\n# Qaar ka mid ah tusaaleha wanaagsan:\n# Template:Good|150%\n# Template:Very Very Good|300%\n# Template:Bad|50%\n# Tusaalooyinka aan shaqayn:\n# Template:Foo|150.234234% <-- lama ogola adeegsiga hakad tobanaale!\n# Foo|150% <--- farsamo ahaan wey shaqaynaysaa, laakiin sugnaanta ah \"Foo\" magaca bogga\n# Waad tijaabin kartaa isbedeleda la diyaariyey ee loo qoray habka ogaysiiska wuxuuna ka bilaabanayaa tusmooyinka lagu taageeray:\"XX\" dhammaan tusmooyinka aad dooneeyso taageeradooda ee u dhxeeya fogaann haba ku jirtee hakadka saderka.\n# Ogaysiinta tusmooyinka lagu taageeray:\"XX\" qaybtaan iska illoow.\n #</pre> <!-- Sida uu yahay udaa sadarkaan -->",
+	"cirrussearch-pref-label": "Raadin cusub",
+	"cirrussearch-pref-desc": "Tijaabi habka baarista cusub taasoo taageera u ah luqado farabadan kuna deeqaysa natiijooyin ka wanaagsan marka la eego dhanka dib u habaynta, waxaa sidoo kale usuurtoowda baarista weedh ku jirta tusmo (template)"
+}

@@ -1,0 +1,23 @@
+{
+    "path": "myfixturewiki_content\/page\/_bulk",
+    "method": "POST",
+    "data": [
+        {
+            "delete": {
+                "_id": "1"
+            }
+        },
+        {
+            "delete": {
+                "_id": "2"
+            }
+        },
+        {
+            "delete": {
+                "_id": "3"
+            }
+        }
+    ],
+    "params": [],
+    "contentType": "application\/x-ndjson"
+}

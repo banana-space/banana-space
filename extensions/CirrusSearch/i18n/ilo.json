@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lam-ang"
+		]
+	},
+	"cirrussearch-desc": "Pinaandar ti Elasticsearch a panagbiruk para iti MediaWiki",
+	"cirrussearch-backend-error": "Saanmi a makompleto ti panagbirukmo gapu ti temporario a problema. Pangngaasi a padasem manen intono madamdama.",
+	"cirrussearch-parse-error": "Saan a naawatan ti panagusisa. Pangngaasi a palakaem. Ti usisa ket nailista tapno mapasayaat ti sistema ti panagbiruk.",
+	"cirrussearch-too-busy-error": "Agdama a makumikom ti panagbiruk. Pangngaasi a padasem manen intono madamdama.",
+	"cirrussearch-regex-syntax-error": "Biddut ti eskritu ti kadawyan a panangiyebkas iti $2: $1",
+	"cirrussearch-regex-too-busy-error": "Adu unay ti agtartaray a kadawyan a panagiyebkas a panagbiruk. Pangngaasi a padasemn manen intono madamdama.",
+	"cirrussearch-regex-too-complex-error": "Narikut unay tikadawyan a panangiyebkas.  Agadal pay ti adu a maipanggep ti panangipalaka [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|ditoy]].",
+	"cirrussearch-now-using": "Daytoy a wiki ket agus-usar iti baro a makina ti panagbiruk. ([[mw:Special:MyLanguage/Help:CirrusSearch|Agadal pay ti adu]])",
+	"cirrussearch-ignored-headings": " #<!-- saan a kutkutien daytoy a linia --> <pre>\n# Dagiti paulo a saanto nga ikaskaso babaen ti panagbiruk.\n# Dagiti panagbalbaliw mabalinton intono ti panid nga addaan ti paulo ket maipasurotan.\n# Mabalinmo a piliten ti panangisurot manen iti panid babaen ti awan linaon a panagurnos.\n# Ti eskritu ket kasla dagiti sumaganad:\n#   * Amin manipud ti karater ti \"#\" aginggana ti gibus ti linia ket komentario.\n#   * Amin a saan a blanko a linia ket eksakto a titulo a saan nga maikaskaso, kadakkel ti letra ken amin.\nDagiti reperensia\nDagiti silpo ti ruar\nKitaen pay\n #</pre> <!-- saan a kutkutien daytoy a linia -->",
+	"cirrussearch-boost-templates": " #<!-- saan a kutkutien daytoy a linia --> <pre>\n# No ti panid ket aglaon kadagitoy a palntilia ti iskor ti panagbiruk ket maipaadu babaen ti naaramid a porsiento.\n# Dagiti panagbalbaliw iti daytoy ket dagus a mabalin.\n# Ti eskritu ket kasla dagiti sumaganad:\n#   * Amin manipud ti karakter ti \"#\" aginggana ti gibus ti linia ket komentario.\n#   * Amin a saan a blanko a linia ket isu ti eksakto a nagan ti plantilia ti maingato, nagan ti espasio, kadakkel ti letra ken amin, a sarunuen ti karakter ti \"|\" a sarunuen babaen ti bilang a sarunuen babaen ti karakter ti \"%\" .\n# Dagiti kas pagarigan ti nasayaat a linia:\n# Plantilia:Nasayaat|150%\n# Plantilia:Nasayaat unay unay|300%\n# Plantilia:Madi|50%\n# Dagiti kas pagarigan dagiti saan a mabalin a linia:\n# Plantilia:Foo|150.234234% <-- saan a maipalubos dagiti desimal a puntos!\n# Foo|150% <--- teknikal a mabalin, ngem para kadagiti panagilak-am ti panid ti Foo manipud ti umuna a nagan ti espasio\n# Mabalinmo a subokan kadagiti panagbalbaliw ti pannakaaramid babaen ti panagaramid ti usisa a napasarunuan kadagiti maipangato a plantilia:\"XX\" a ti XX ket dagiti amin a plantilia a kayatmo nga ipangato nga insinsina babaen dagiti baetan imbes dagiti panagtukkol ti linia.\n# Dagiti usisa a manginagan kadagiti maipangato a plantilia:\"XX\" ket saan a mangikaskaso kadagiti linaon iti daytoy a pagikabilan.\n #</pre> <!-- saan a kutkutien daytoy a linia -->",
+	"cirrussearch-pref-label": "Baro a panagbiruk",
+	"cirrussearch-pref-desc": "Padasen ti baro a panagbirukmi a mangsuporta kadagiti ad-adu a bilang ti pagsasao, mangited kadagiti barbaro a resulta, ken makabiruk pay iti teksto iti uneg dagiti plantilia."
+}

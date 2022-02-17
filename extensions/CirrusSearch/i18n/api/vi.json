@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Minh Nguyen"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Cấu hình thô của CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Ánh xạ thô của CirrusSearch tại wiki này.",
+	"apihelp-cirrus-settings-dump-description": "Cấu hình thô của CirrusSearch tại wiki này."
+}

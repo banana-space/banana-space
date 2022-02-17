@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ykhwong"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "CirrusSearch 구성의 덤프입니다.",
+	"apihelp-cirrus-config-dump-summary": "CirrusSearch 구성의 덤프입니다.",
+	"apihelp-cirrus-config-dump-example": "CirrusSearch 구성의 덤프를 가져옵니다.",
+	"apihelp-cirrus-mapping-dump-description": "이 위키의 CirrusSearch 매핑의 덤프입니다.",
+	"apihelp-cirrus-mapping-dump-summary": "이 위키의 CirrusSearch 매핑의 덤프입니다.",
+	"apihelp-cirrus-mapping-dump-example": "이 위키의 CirrusSearch 매핑의 덤프를 가져옵니다.",
+	"apihelp-cirrus-settings-dump-description": "이 위키의 CirrusSearch 설정의 덤프입니다.",
+	"apihelp-cirrus-settings-dump-summary": "이 위키의 CirrusSearch 설정의 덤프입니다.",
+	"apihelp-cirrus-settings-dump-example": "이 위키의 CirrusSearch 설정의 덤프를 가져옵니다.",
+	"apihelp-cirrus-profiles-dump-description": "이 위키의 CirrusSearch 프로파일의 덤프입니다.",
+	"apihelp-cirrus-profiles-dump-summary": "이 위키의 CirrusSearch 프로파일의 덤프입니다.",
+	"apihelp-cirrus-profiles-dump-example": "이 위키의 CirrusSearch 프로파일의 덤프를 가져옵니다.",
+	"apihelp-query+cirrusdoc-description": "CirrusSearch 문서 덤프",
+	"apihelp-query+cirrusdoc-summary": "검색 서버에서 가져온 CirrusSearch 문서 덤프",
+	"apihelp-query+cirrusdoc-example": "현재 검색에 색인으로 있는 단일 CirrusSearch 문서의 덤프를 가져옵니다.",
+	"apihelp-query+cirrusbuilddoc-summary": "데이터베이스 서버에서 가져온 CirrusSearch 문서 덤프",
+	"apihelp-query+cirrusbuilddoc-example": "데이터베이스에서 생성한 단일 CirrusSearch 문서 덤프를 가져옵니다.",
+	"apierror-cirrus-requesttoolong": "접두어 검색 요청이 최대 허용 길이보다 더 깁니다. ($1 &gt; $2)"
+}

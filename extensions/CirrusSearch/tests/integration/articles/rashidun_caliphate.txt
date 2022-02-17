@@ -1,0 +1,560 @@
+{{Infobox Former Country
+|native_name            = الخلافة الراشدة
+|conventional_long_name = Rashidun Caliphate
+|common_name            = Rashidun
+|continent              = Afroasia
+|region                 = Middle East
+|status                 = Empire
+|government_type        = Caliphate
+|event_start            =
+|year_start             = 632
+|event_end              =
+|year_end               = 661
+|
+|p1                     = Medina
+|flag_p1                = Madina old.jpg
+|p2                     = Byzantine Empire
+|flag_p2                = LocationByzantineEmpire 550.png
+|image_p2               = [[File:LocationByzantineEmpire 550.png|30px|Byzantine Empire]]
+|p3                     = Egypt (Roman Province)
+|flag_p3                = RomanEmpire117 Aegyptus.svg
+|p4                     = Sassanid Empire
+|flag_p4                = Sassanid empire map.png
+|image_p4               = [[File:Sassanid empire map.png|30px|Sassanid Empire]]
+|s1                     = Umayyad Caliphate
+|flag_s1                = Umayyad Flag.svg
+|image_flag             =
+|
+|image_map              = Rashidun654wVassal.png
+|image_map_caption      = Rashidun Caliphate (dark green) at its peak in 654, including its vassal states (light green).
+|
+|capital                = [[Medina]], [[Kufa]]
+|common_languages       = [[Arabic language|Arabic]], [[Aramaic]], [[Armenian language|Armenian]], [[Berber languages]], [[Georgian language|Georgian]], [[Greek language|Greek]], [[Hebrew]], [[Middle Persian]], [[Kurdish language|Kurdish]]
+|religion               = [[Sunni Islam]]
+|currency               = [[Dinar]], [[Dirham]]
+|
+|title_leader           = [[Amir al-Mu'minin]]¹
+|leader1                = Abu Bakr
+|year_leader1           = 632–634
+|leader2                = Umar
+|year_leader2           = 634–644
+|leader3                = [[Uthman_ibn_Affan|Uthman]]
+|year_leader3           = 644–656
+|leader4                = Ali
+|year_leader4           = 656–661
+|
+|stat_year1             =
+|stat_area1             = 9000000
+|stat_pop1              = 40300000
+|footnotes              = ¹ [[Amir al-Mu'minin]] (أمير المؤمنين), [[Caliph]] (خليف)
+|today = {{Collapsible list
+|title = 30 countries
+|1 =          {{flag|Afghanistan}}
+|2 =          {{flag|Armenia}}
+|3 =          {{flag|Azerbaijan}}
+|4 =          {{flag|Cyprus}}
+|5 =          {{flag|Egypt}}
+|6 =          {{flag|Georgia}}
+|7 =          {{flag|Greece}}
+|8 =          {{flag|Iran}}
+|9 =          {{flag|Iraq}}
+|10 =          {{flag|Israel}}
+|11 =          {{flag|Italy}}
+|12 =          {{flag|Jordan}}
+|13 =          {{flag|Kuwait}}
+|14 =          {{flag|Lebanon}}
+|15 =          {{flag|Libya}}
+|16 =          {{flag|Oman}}
+|17 =          {{flag|Pakistan}}
+|18 =          {{flag|Palestine}}
+|19 =          {{flag|Bahrain}}
+|20 =          {{flag|Qatar}}
+|21 =          {{flag|Russia}}
+|22 =          {{flag|Saudi Arabia}}
+|23 =          {{flag|Syria}}
+|24 =          {{flag|Tunisia}}
+|25 =          {{flag|Turkey}}
+|26 =          {{flag|Turkmenistan}}
+|27 =          {{flag|United Arab Emirates}}
+|28 =          {{flag|Uzbekistan}}
+|29 =          {{flag|Sudan}}
+|30 =          {{flag|Yemen}}
+}}
+}}
+
+{{History of the Arab States}}
+
+The '''Rashidun Caliphate''' ({{lang-ar|الخلافة الراشدية}} ''al-khilafat ar-Rāshidīyah''), comprising the first four [[caliph]]s in [[Islam]]'s history, was founded after [[Muhammad]]'s death in [[632]], Year 10 [[Hijri year|A.H.]]. At its height, the [[Caliphate]] extended from the [[Arabian Peninsula]], to the [[Levant]], [[Caucasus]] and [[North Africa]] in the west, to the [[Iranian plateau|Iranian highlands]] and [[Central Asia]] in the east. It was the [[List of largest empires#All empires at their greatest extent|largest empire]] in history up until that time.<ref>Rein Taagepera (1979), "Size and Duration of Empires: Growth-Decline Curves, 600&nbsp;B.C. to 600 A.D.", ''Social Science History'', Vol. 3, 115-138</ref> It is also known as the '''Patriarchal Caliphate'''.
+
+==Origin==
+{{See also|Succession to Muhammad}}
+[[File:Mohammad adil-Rashidun empire-slide.gif|thumb|left|225px|Expansion of Rashidun Caliphate.]]
+After Muhammad's death in 632, the [[Medina]]n [[Ansar (Islam)|Ansar]] debated which of them should succeed him in running the affairs of the [[Muslim]]s while Muhammad's household was busy with his burial.  Umar (a Quraysh) and [[Abu Ubaidah ibn al-Jarrah]] pledged their loyalty to [[Abu Bakr]], with the Ansar and the [[Quraysh (tribe)|Quraish]] soon following suit. Abu Bakr thus became the first '''Khalifa Rasul Allah''' (''Successor of the Messenger of God''), and embarked on campaigns to propagate Islam. First, though, he would have to subdue the Arabian tribes which had gone back on their oaths of allegiance to Islam and the Islamic community. As a Khalifa or Caliph he was not a monarch and never claimed such a title nor did his three successors do so.
+
+==History==
+===Succession of Abu Bakr===
+Troubles emerged soon after [[Abu Bakr]]'s succession, threatening the unity and stability of the new community and state. [[Apostasy]] had actually begun in the lifetime of  Muhammad, and the first major action of the apostasy was fought and satisfactorily concluded while Muhammad  still lived. But the real and most serious danger of apostasy arose after Muhammad's death, when a wild wave of disbelief-after-belief moved across [[Arabia]] and had to be tackled by Abu Bakr.
+
+The first major event of the apostasy occurred in [[Yemen]] and is known as the Incident of Aswad Al Ansi,<ref>Balazuri: p. 113.</ref> who was killed on May 30, 632 (the 6th of Rabi-ul-Awwal, 11 Hijri) by a [[Persian language|Persian]] [[Muslim]] governor of [[Yemen]] named ''Firoz''.<ref>Tabari: Vol. 2, p. 467.</ref> The news of his assassination reached Medina shortly after the death of Muhammad. The chief cause of the apostasy was lack of firm Islamic faith. Most of the tribes, that had taken to [[Islam]], converted in the ninth and tenth years of the [[Hijra year|Hijra]],. {{Citation needed|date=February 2010}}
+
+The [[apostasy]] had become so general that it affected every [[tribe]] in [[Arabia]] with the exception of the people in [[Mecca]] and [[Medina]] and the [[tribe]] of Thaqeef in [[Taif]]. In some cases the entire tribe apostatised. Some withheld the ''[[zakat]]'', the alms tax, though they did not otherwise challenge Islam. Many tribal leaders made claims to prophethood, some like [[Musaylima]] made it during the lifetime of Muhammad. The tribes claimed that they had submitted to Muhammad and that with Muhammad's  death, their allegiance was ended. Abu Bakr insisted that they had not just submitted to a leader but joined the [[Muslim]] community, of which he was the new head. [[Apostasy]] is a capital offense under traditional interpretations of [[Sharia|Islamic law]], and Abu Bakr declared [[war]] on the rebels{{Citation needed|date=February 2010|reason=IS THIS A BACKWARDS IMPLICATION?? SEE TALK}}.
+
+This was the start of the ''[[Ridda wars]]'' ([[Arabic language|Arabic]] for the Wars of Apostasy). The [[apostasy]] of central [[Arabia]] was led by self-proclaimed prophet [[Musaylima]], while the other centers of the rebels were to the south and east in [[Bahrain]], [[Oman]], [[Mahra Sultanate|Mahra]] and [[Yemen]]. Abu Bakr planned his strategy accordingly. He divided the Muslim army into several corps. The strongest corps, and this was the primary force of the [[Muslim]]s, was the corps of [[Khalid ibn Walid]].  This corps was used to fight the most powerful of the rebel forces. Other corps were given areas of secondary importance in which to bring the less dangerous apostate tribes to submission. [[Abu Bakr]]'s plan was first to clear the area of [[West]] and  Central [[Arabia]] (the area nearest [[Madinah]]), then tackle [[Malik ibn Nuwayrah]], and finally concentrate against the most dangerous enemy - [[Musaylima]]. After series of successful campaigns [[Khalid ibn Walid]] finally defeated [[Musaylima]] in the [[Battle of Yamama]].<ref>Tabari: Vol. 2, p. 518</ref> The Campaign on the [[Apostasy]] was fought and completed during the eleventh year of the [[Islamic calendar|Hijri]]. The year 12 Hijri dawned, on March 18, 633, with [[Arabia]] united under the central authority of the [[Caliph]] at [[Madinah]]. According to the [[Sunni Muslim]]s, by putting down these larger insurrections and defeating the rival prophets among the [[Bedouin]] [[tribe]]s, Abu Bakr was able to solidify the rest of [[Arabia]] under [[Islam]], and basically rescue the Islamic state from collapse.{{Citation needed|date=February 2010}}
+
+Once the rebellions had been put down, [[Abu Bakr]] began a [[war]] of conquest. Whether or not he intended a full-out imperial conquest is hard to say; he did, however, set in motion a historical trajectory that in just a few short decades would lead to one of the [[List of largest empires|largest empires in history]]. Abu Bakr began with [[Iraq]], the richest province of the [[Sassanid empire]]. He sent his most brilliant general [[Khalid ibn Walid]] to invade the [[Sassanid empire]] in 633. He thereafter also sent 4 armies to invade [[Roman Syria]], but decisive operation was only undertaken when Khalid, after completing the conquest of Iraq, was transferred to the Syrian front in 634.
+
+===Succession of Umar===
+{| class="wikitable" | align=right
+|'''[[Abu Bakr]]'''
+| valign="top" | 632
+| valign="top" | 634
+|-
+| valign="top" | '''[[Umar]]'''
+| valign="top" | 634
+| valign="top" | 644
+|-
+| valign="top" | '''[[Uthman]]'''
+| valign="top" | 644
+| valign="top" | 656
+|-
+| valign="top" | '''[[Ali]]'''
+| valign="top" | 656
+| valign="top" | 661
+|}
+Despite the initial reservations of his advisers, [[Abu Bakr]] recognised military and political prowess in [[Umar]] and desired him to succeed as caliph. The decision was enshrined in his will, and on the death of Abu Bakr in 634, Umar was confirmed in office. The new caliph continued the [[Muslim conquest|war of conquests]] begun by his predecessor, pushing further into the [[Sassanid]] [[Muslim conquest of Persia|Persian Empire]], north into [[Muslim conquest of Syria|Byzantine]] territory, and west into [[Muslim conquest of Egypt|Egypt]]. These were regions of great wealth controlled by powerful states, but long internecine conflict between Byzantines and Sassanids had left both sides militarily exhausted, and the Islamic armies easily prevailed against them. By 640, they had brought all of [[Mesopotamia]], [[Syria]] and [[Palestine]] under the control of the Rashidun Caliphate; Egypt was conquered by 642, and the entire Persian Empire by 643.
+
+While the caliphate continued its rapid expansion, Umar laid the foundations of a political structure that could hold it together. He created the [[Divan|Diwan]], a bureau for transacting government affairs. The military was brought directly under state control and into its pay. Crucially, in conquered lands, Umar did not require that non-Muslim populations convert to [[Islam]], nor did he try to centralize government (as the [[Persian language|Persians]] had done). Instead, he allowed subject populations to retain their [[religion]], [[language]] and [[convention (norm)|customs]], and he left their government relatively untouched, imposing only a governor (''[[Emir|amir]]'') and a financial officer called an ''amil''. These new posts were integral to the efficient network of taxation that financed the empire.
+
+With the booty secured from conquest, Umar was able to support its faith in material ways: the [[Sahaba|companions of Muhammad]] were given pensions on which to live, allowing them to pursue religious studies and exercise spiritual leadership in their communities and beyond. Umar is also remembered for establishing the [[Muslim calendar]]; like the Arabian calendar, it is lunar, but the origin is set in 622, the year of the [[Hijra]] when [[Muhammad]] emigrated to [[Medina]].
+
+Umar was mortally wounded in an assassination attempt by the Persian slave Abu Lulu Fieroz during morning prayers in 644.
+
+===Election of Uthman===
+{{Main|The election of Uthman}}
+Before Umar died, he appointed a committee of six men to decide on the next caliph, and charged them with choosing one of their own number. All of the men, like Umar, were from the tribe of [[Quraysh (tribe)|Quraish]].
+The committee narrowed down the choices to two: '[[Uthman_ibn_Affan|Uthman]] and '[[Ali]]. 'Ali was from the Banu Hashim clan (the same clan as Muhammad) of the Quraysh tribe, and he was the cousin and son-in-law of Muhammad and had been a companion to the Prophet from the inception of his mission.[[Uthman]] was from the [[Umayyad]] clan of the [[Quraysh (tribe)|Quraish]]{{Citation needed|date=July 2010}}.
+
+
+Uthman reigned for twelve years as [[caliph]], during the first half of his reign he enjoyed a position of the most popular caliph among all the [[Rashidun]]s{{Citation needed|date=July 2010}}, while in the later half of his reign he met increasing opposition{{Citation needed|date=July 2010}}. This opposition was led by the Egyptians and was concentrated around Ali, who would, albeit briefly, succeed Uthman as caliph.
+Despite internal troubles, Uthman continued the [[Muslim conquest|wars of conquest]] started by '[[Umar]]. The [[Rashidun army]] conquered [[North Africa]] from the [[Byzantine]]s and even raided [[Spain]], conquering the coastal areas of the [[Iberian peninsula]], as well as the islands of [[Rhodes]] and [[Cyprus]].{{Citation needed|date=April 2011}} Also coastal [[Sicily]] was raided in 652.<ref>{{citation | editor-first = Alexander | editor-last = Kazhdan |editor-link=Alexander Kazhdan | title = [[Oxford Dictionary of Byzantium]] | publisher = Oxford University Press | year = 1991 | isbn = 978-0-19-504652-6 | page = 1892}}</ref> The [[Rashidun army]] fully conquered the [[Sassanid]] [[Persian Empire]], and its eastern frontiers extended up to the [[Indus|lower Indus River]].
+Uthman's greatest and most lasting achievement was the formal recension of the Qur'an.
+[[File:Mohammad adil rais-Rashidun Caliphate-different phases.gif|thumb|right|300px|Domains of Rashidun Caliphate under four caliphs.
+{{legend|#009900|Strongholds of Rashidun Caliphate}}
+{{legend|#00ff00|Vassal states of Rashidun Caliphate}}
+{{legend|#ef1000|Region under the control of [[Muawiyah I]] during civil war 656-661}}
+{{legend|#5200FA|Region under the control of [[Amr ibn al-As]] During civil war 658-661.<ref>Egypt was conquered in 658 by Amr ibn al-As. Madelung (1997), pp. 267-269</ref>}}]]
+
+===Siege of Uthman===
+{{Main|Siege of Uthman}}
+Uthman refused to initiate any military action, in order to avoid civil war between [[Muslim]]s, and preferred negotiations. {{Citation needed|date=July 2010}} His polite attitude towards rebels emboldened them and they broke into Uthman's house and killed him while he was reading the [[Qur'an]]. {{Citation needed|date=July 2010}}
+
+===Crisis and fragmentation===
+{{repetition|date=January 2012}}
+After the assassination of the third Caliph, [[Uthman ibn Affan]], the Companions of Muhammad in [[Medina]] selected [[Ali]] to be the new Caliph. Soon thereafter, Ali dismissed several provincial governors, some of whom were relatives of Uthman, and replaced them with trusted aides such as [[Malik al-Ashtar]] and [[Salman the Persian]]. Ali then transferred his capital from Medina to [[Kufa]], the Muslim garrison city in what is now [[Iraq]]. The capital of the province of [[Syria]], [[Damascus]], was held by [[Muawiyah I|Mu'awiyah]], the governor of [[Syria]] and a kinsman of Uthman, Ali's slain predecessor.<ref>[http://www.wsu.edu:8080/~dee/SHIA/ALI.HTM 'Ali] {{WebCite|url=http://www.webcitation.org/5wTrkRS55|date =2011-02-13}}</ref> Uthman's death was ironic for many reasons, including the fact that he was the first Islamic [[caliph]] to be killed by fellow [[Muslim]]s. Following the assassination of Uthman, the [[First Fitna|first Muslim civil war]] started, which continued during the brief caliphate of [[Ali ibn Abu Talib]], and ended, on the whole, by [[Muawiya I|Mu'awiya]]'s assumption of the caliphate, an event which then laid the foundation of the [[Umayyad|Umayyad Empire]]. This civil war is often called the [[Fitna (word)|Fitna]], and regretted as the end of the early unity of the [[Islam]]ic [[ummah]] (nation).
+
+In 656, after [[Uthman ibn Affan]] was murdered by a group of rebels as he sat reading the [[Qur'an]] in his home in [[Medina]], the city fell into chaos and uproar. Citizens flocked to [[Ali ibn Abu Talib]], Muhammad's cousin and son-in-law, and a respected community leader who had been passed over for the leadership three times since the death of Muhammad.  They then urged him to take the caliphate. Initially reluctant due to the circumstances of the caliph's death, he eventually chose to accept.
+{{Main|First Fitna}}
+Ali then had to fight against numerous challengers to his rule. The cry of revenge of the blood of Caliph Uthman grew, and a large army of the Muslims led by [[Zubayr]], [[Talha]] and the widow of Muhammad, [[Aisha|Ayesha]] set for revenge from the rebels. As the rebels gathered from [[Egypt]], [[Kufa]] and [[Basra]], their first objective was Basra. The army reached Basra and captured it, 4000 suspected seditionists were assassinated. [[Ali]] who had already transferred his capital from Madinah to Kufa, turned towards Basra and a battle was fought between the [[Ali|Caliph Ali]]'s army and the army of Muslims who demanded revenge of Uthman. Though neither Ali nor the leaders of the opposing army [[Talha]] and [[Zubayr]] wanted to fight, a fight broke out suddenly at night between the two armies. It is said according to Sunni Muslim traditions that the [[rebels]] who were involved in the assassination of Uthman initiated combat as they were afraid that as a result of negotiation between Ali and opposing army, the killers of Uthman would be hunted down and killed. The battle thus fought was the first battle between Muslims and is known as the [[Battle of the Camel]]. After the Caliphate had won and the dispute was settled, Ali sent his son [[Hassan ibn Ali]] to escort [[Aisha|Ayesha]] back to [[Madinah]]. The eminent companions of Mohammad, [[Talha]] and [[Zubayr]] were killed in the battle after they withdrew from the battlefield refusing to fight against Muslims.
+
+After this dark episode of Islamic history, another cry for revenge for the blood of Uthman rose. This time it was by [[Muawiyah I|Mu'awiya]], kinsmen of Uthman and governor of the province of Syria. However it is regarded as more an attempt of assuming the caliphate by [[Muawiyah I|Mu'awiya]] than to take revenge for Uthman's murder from the rebels. [[Ali]] fought Uthman's kinsman [[Muawiyah I|Mu'awiya]], the governor of [[Syria]], at the [[Battle of Siffin]] to a stalemate and then lost a controversial arbitration; and he fought his own mutinous soldiers (the first [[Kharijites]]). Large sections of the new empire created in the twenty-four years (632-656) were lost due to the civil war, like [[Sicily]], [[North Africa]], the coastal areas of [[Spain]] and some forts in [[Anatolia]]. But the [[Byzantine]]s tended not to re-capture their lost land, particularly areas in the western empire.  According to Muslim history, [[Muawiyah I|Mu'awiya]] sent a letter to the Byzantine emperor threatening him not to reclaim Islamic lands or Mu'awiya would make peace with his kinsmen (referring to Ali) and they would both together destroy the [[Byzantine Empire]].
+
+In 661 CE, Ali was assassinated in the Mosque of Kufa by [[Ibn Muljam]], a relative of one of the rebel soldiers he had defeated and killed.  His last words were "Fuztu wa rabb al-Ka'bah" - meaning ''By The Lord of the Ka'bah, I have succeeded.''
+
+His son [[Hasan ibn Ali]], the grandson of Muhammad, briefly assumed the caliphate upon being appointed by Ali. He came to an agreement with Mu'awiya and fixed relations between the two groups of Muslims that were each loyal to one of the two men. Mu'awiya gained control of the empire and founded the [[Umayyad|Umayyad Empire]], with it the Rashidun Caliphate dismantled.
+
+==Military expansion==
+The Rashidun empire expanded gradually, with the time span of 24 years of conquest a vast territory was conquered comprising [[North Africa]], the [[Middle East]], [[Transoxiana]], the [[Caucasus]], parts of [[Anatolia]], the whole of the [[Sassanid]] [[Persian empire]], the [[Greater Khorasan]], the islands of [[Cyprus]], [[Rhodes]] and [[Sicily]], the [[Iberian Peninsula]] was invaded, and [[Balochistan (Pakistan)|Baluchistan]] was conquered, the empires eastern frontiers reaching the [[Indus|lower Indus river]] in the Indian [[subcontinent]] and western frontiers to the [[Atlantic Ocean]].
+
+The Islamic Invasion of Sassanid Persia resulted in the conquest of the whole [[Sassanid]] [[Persian empire]], after the Persians declined to submit and continued to strive to re-capture their lost territory. Unlike the [[Sassanid]] [[Persian language|Persians]], the [[Byzantine]]s after losing [[Syria]], retreated back to western [[Anatolia]] and as a result, also lost [[Egypt]], [[North Africa]], [[Sicily]], [[Cyprus]] and [[Rhodes]] to the invading [[Rashidun army]], although the civil wars among the Muslims halted the war of conquest for many years and this gave time for the Byzantine Empire to recover.
+
+===Conquest of Persian empire===
+{{See|Islamic conquest of Persia}}
+[[File:Mohammad adil-Khalid's conquest of Iraq.PNG|thumb|250px|Map detailing the route of Khalid ibn Walid's conquest of Iraq.]]
+The first Islamic invasion of the [[Persian empire]] launched by Caliph [[Abu Bakr]] in 633 was a swift conquest in the time span of only 4 months led by legendary general [[Khalid ibn Walid]]. Abu Bakr sent Khalid to conquer [[Mesopotamia]] after the [[Ridda wars]]. After entering [[Iraq]] with his army of 18,000, Khalid won decisive victories in four consecutive battles: [[Battle of Chains]], fought in April 633; [[Battle of River]], fought in the 3rd week of April 633; [[Battle of Walaja]], fought in May 633 (where he successfully used a [[Pincer movement|double envelopment]] manoeuvre), and [[Battle of Ullais]], fought in the mid of May 633 . In the last week of May 633 , the capital city of Iraq fell to the Muslims after initial resistance in the [[Battle of Hira]].
+
+[[File:Ctesiphon, Iraq (2117465493).jpg|thumb|left|250px|Remains of [[Taq-i Kisra]], palace of [[Sassanid dynasty|Sassanid Kings]], [[Ctesiphon]], Iraq.]]
+After resting his armies, Khalid moved in June 633  towards [[Al Anbar]], which resisted and was defeated in the [[Battle of Al-Anbar]], and eventually surrendered after a siege of a few weeks in July 633 . Khalid then moved towards the south, and conquered the city of Ein ul Tamr after the [[Battle of ein-ul-tamr]] in the last week of July, 633. By now, almost the whole of Iraq was under Islamic control. Khalid received a call of help from northern Arabia at daumat-ul-jandal, where another Muslim Arab general, Ayaz bin Ghanam, was trapped among the rebel tribes. Khalid went to Daumat-ul-jandal and defeated the rebels in the [[Battle of Daumat-ul-jandal]] in the last week of August, 633 CE. Returning from Arabia, he received news of the assembling of a large Persian army. Within a few weeks, he decided to defeat them all separately in order to avoid the risk of defeat to a large unified Persian army. Four divisions of Persian and [[Christian]] Arab auxiliaries were present at Hanafiz, Zumiel, Sanni and Muzieh.
+
+Khalid divided his army in three units, and decided to attack these auxiliaries one by one from three different sides at night, starting from the [[Battle of Muzieh]], then the [[Battle of Sanni]], and finally the [[Battle of Zumail]]. In November 633 CE, Khalid defeated the enemy armies in his series of three sided attacks at night. These devastating defeats ended Persian control over Iraq. In December 633 CE, Khalid reached the border city of Firaz, where he defeated the combined forces of the [[Sassanid army|Sassanid Persians]], [[Byzantine army|Byzantine]] [[Roman army|Romans]] and Christian Arabs in the [[Battle of Firaz]]. This was the last battle in his conquest of Iraq.<ref>{{cite book|author=A. I. Alkram|title=Khalid bin Al-Waleed: His Life and Campaigns|publisher=The Sword of Allah|page=1|chapter=Chapter 19: The Battle of Chains - Chapter 26: The Last Opposition}}
+
+* {{cite web|url=http://www.swordofallah.com/html/bookchapter19page1.htm|title=Chapter 19: The Battle of Chains|page=1|archiveurl=http://web.archive.org/web/20020126033021/http://www.swordofallah.com/html/bookchapter19page1.htm|archivedate=Jan 26, 2002}}
+* {{cite web|url=http://www.swordofallah.com/html/bookchapter20page1.htm|title=Chapter 20: The Battle of the River|page=1|archiveurl=http://web.archive.org/web/20020306075434/www.swordofallah.com/html/bookchapter20page1.htm|archivedate=2002-03-06}}
+* {{cite web|url=http://www.swordofallah.com/html/bookchapter21page1.htm|title=Chapter 21: The Hell of Walaja|page=1|archiveurl=http://web.archive.org/web/20020306075749/www.swordofallah.com/html/bookchapter21page1.htm|archivedate=2002-03-06}}
+* {{cite web|url=http://www.swordofallah.com/html/bookchapter22page1.htm|title=Chapter 22: The River of Blood|page=1|archiveurl=http://web.archive.org/web/20020822060455/www.swordofallah.com/html/bookchapter22page1.htm|archivedate=2002-08-22}}
+* {{cite web|url=http://www.swordofallah.com/html/bookchapter23page1.htm|title=Chapter 23: The Conquest of Hira|page=1|archiveurl=http://web.archive.org/web/20020306122542/www.swordofallah.com/html/bookchapter23page1.htm|archivedate=2002-03-06}}
+* {{cite web|url=http://www.swordofallah.com/html/bookchapter24page1.htm|title=Chapter 24: Anbar and Ain-ut-Tamr|page=1|archiveurl=http://web.archive.org/web/20020306122409/www.swordofallah.com/html/bookchapter24page1.htm|archivedate=2002-03-06}}
+* {{cite web|url=http://www.swordofallah.com/html/bookchapter25page1.htm|title=Chapter 25: Daumat-ul-Jandal Again|page=1|archiveurl=http://web.archive.org/web/20020306122404/www.swordofallah.com/html/bookchapter25page1.htm|archivedate=2002-03-06}}
+* {{cite web|url=http://www.swordofallah.com/html/bookchapter26page1.htm|title=Chapter 26: The Last Opposition|page=1|archiveurl=http://web.archive.org/web/20020306122853/www.swordofallah.com/html/bookchapter26page1.htm|archivedate=2002-03-06}}
+</ref>
+
+After the conquest of Iraq, Khalid left Mesopotamia to lead another [[Muslim conquest of Syria|campaign at Syria]] against the [[Roman Empire]], after which Mithna ibn Haris took command in Mesopotamia. The Persians once again concentrated armies to regain the lost [[Mesopotamia]], while Mithna ibn Haris withdraw from central Iraq to the region near the [[Arabian desert]] to delay war until reinforcement came from [[Madinah]]. [[Umar|Caliph Umar]] sent reinforcements under the command of Abu Ubaidah Saqfi. With some initial success this army was finally defeated by the [[Sassanid army]] at the [[Battle of the Bridge]] in which Abu Ubaid was killed. The response was delayed until after a decisive Muslim victory against the Romans in the [[Levant]] at the [[Battle of Yarmuk]] in 636 [[Caliph]] [[Umar]], was then able to transfer forces to the east and resume the offensive against the Sassanids. [[Caliph]] [[Umar]] dispatched 36,000 men along with 7500 troops from the Syrian front, under the command of [[Sa'ad ibn Abi Waqqas|Sa`d ibn Abī Waqqās]] against the Persian army. The [[Battle of al-Qādisiyyah]] followed, with the Persians prevailing at first, but on the third day of fighting, the Muslims gained the upper hand. The legendary Persian general [[Rostam Farrokhzād]] was killed during the battle. According to some sources, the Persian losses were 20,000, and the Arabs lost 10,500 men.
+
+Following the Battle, the Arab Muslim armies pushed forward toward the Persian capital of [[Ctesiphon]] (also called Madā'in in Arabic), which was quickly evacuated by Yazdgird after a brief siege. After seizing the city, they continued their drive eastwards, following Yazdgird and his remaining troops. Within a short span of time, the Arab armies defeated a major Sāsānian counter-attack in the Battle of Jalūlā', as well as other engagements at [[Qasr-e Shirin]], and Masabadhan. By the mid-7th Century, the Arabs controlled all of Mesopotamia, including the area that is now the Iranian province of [[Khuzestan]]. It is said that Caliph Umar did not wish to send his troops through the [[Zagros mountains]] and onto the Iranian plateau. One tradition has it that he wished for a "wall of fire" to keep the Arabs and Persians apart. Later commentators explain this as a common-sense precaution against over-extension of his forces. The Arabs had only recently conquered large territories that still had to be garrisoned and administered. The continued existence of the Persian government was however an incitement to revolt in the conquered territories and unlike the [[Byzantine army]], the [[Sassanid army]] was continuously striving to regain their lost territories. Finally Umar decided to push his forces for further conquests, which eventually resulted in the whole scale conquest of the [[Sassanid]] [[Persian empire]]. Yazdegerd, the Sassanid king, made yet another effort to regroup and defeat the invaders. By 641 he had raised a new force, which took a stand at the [[Battle of Nihawānd]], some forty miles south of [[Hamadan]] in modern [[Iran]]. The [[Rashidun army]] under the command of Umar's appointed general Nu'man ibn Muqarrin al-Muzani, attacked and again defeated the Persian forces. The Muslims proclaimed it the Victory of victories (Fath alfotuh) as it marked the End of the [[Sassanid]]s, shattering the last strongest [[Sassanid army]].
+{{Disambiguation needed|Yazdegerd|date=June 2011}} was unable to raise another army and became a hunted fugitive. In 642, [[Caliph]] [[Umar]] sent the army to conquer the whole of the [[Persian empire]]. The whole of present day [[Iran]] was conquered, followed by the conquest of [[Greater Khorasan]] (which included modern Iranian Khorasan province and modern [[Afghanistan]]), [[Transoxania]], and [[Balochistan (region)|Balochistan]], [[Makran]], [[Azerbaijan]], [[Dagestan]] ([[Russia]]), [[Armenia]] and [[Georgia (country)|Georgia]], this regions were later also re-conquered during Caliph Utman's reign<ref>See: [[Uthman Ibn Affan#Military expansion|Uthman Ibn Affan: Military expansion]]</ref> with further expansion to the regions which were not conquered during Umar’s reign, and the Rashidun Caliphate’s frontiers in the east extended to the [[Indus|lower river Indus]] and north to the [[Amu Darya|Oxus River]].
+
+===Wars against the Byzantine empire===
+====Conquest of Byzantine Syria====
+{{See|Muslim conquest of Syria}}
+
+[[File:Mohammad adil-Muslims Invasion of Syria.PNG|thumb|right|200px|Map detailing Rashidun Caliphates invasion of Levant.]]
+After, Khalid captured Iraq and firmly took control of it, Abu Bakr sent armies to Syria on the Byzantine front. Four armies were sent under four different commanders, [[Abu Ubaidah ibn al-Jarrah]] acting as their supreme commander, [[Amr ibn al-As]], [[Yazid ibn Abu Sufyan]] and [[Shurhabil ibn Hasana]]. These armies were all assigned their objectives. However their advance was halted by a concentration of the Byzantine army at Ajnadayn. Abu Ubaidah then send for reinforcements. Abu Bakr ordered Khalid, who by now was planning to attack [[Ctesiphon]], to march to Syria with half of his army out of Iraq. Khalid took half of his army and rather took an unconventional route to Syria. There were 2 major routes to Syria from Iraq, one passing through [[Mesopotamia]] and the other through Daumat ul-Jandal. Khalid took a route through the [[Syrian Desert]], and after a perilous march of 5 days, appeared in north-western Syria.
+The border forts of [[Sawa, Syria|Sawa]], [[Arak, Syria|Arak]], [[Tadmur]], [[Sukhnah]],  [[Qaryatayn]] and [[Hawarin]] were the first to fall to the invading Muslims. Khalid marched on to [[Bosra]] via the [[Damascus]] road. At Bosra, the Corps of Abu Ubaidah and Shurhabil joined Khalid, after which here as per orders of Caliph Abu Bakr, Khalid took the high command from Abu Ubaidah. Bosra was not ready for this surprise attack and siege, and thus surrendered after a brief siege in July 634, ('''see''' [[Battle of Bosra]]) this effectively ending the [[Ghassanid]] Dynasty.
+[[File:Mohammad adil-Muslim invasion of Syria-2.PNG|thumb|right|200px|Map detailing the route of Khalid ibn Walid's invasion of Syria.]]
+From Bosra Khalid send orders to other corps commanders to join him at Ajnadayn, where according to early Muslim historians, a Byzantine army of 90,000(modern sources state 9,000)<ref>D. Nicolle, ''Yarmuk 636 AD - The Muslim Conquest of Syria'', p. 43: gives 9,000-10,000</ref> was concentrated to push back the Muslims. The Byzantine army was defeated decisively on 30 July 634  in the [[Battle of Ajnadayn]]. It was the first major [[pitched battle]] between the [[Rashidun army|Muslim army]] and the Christian [[Byzantine army]] and cleared the way for the Muslims to capture central Syria. [[Damascus]], the Byzantine stronghold, was conquered shortly after on 19 September 634. After the [[Muslim Conquest of Damascus]], the [[Byzantine army]] was given a deadline of 3 days to go as far as they can, with their families and treasures, or simply agree to stay in Damascus and pay tribute.
+[[File:Byzantine temple in Idlib (Ruweiha) Syria.jpg|thumb|left|200px|Byzantine temple in [[Idlib]], [[Syria]].]]
+After the three days deadline was over, the Muslim cavalry under Khalid's command attacked the Roman army by catching up to them using an unknown shortcut at the [[battle of Maraj-al-Debaj]].{{Citation needed|date=April 2011}}
+
+On 22 August 634, Caliph [[Abu Bakr]] died, making [[Umar]] his successor. As Umar became caliph, he relieved Khalid from commanding the Islamic armies and appointed [[Abu Ubaidah ibn al-Jarrah]] as the new commander of the [[Rashidun army|Muslim army]]. The conquest of Syria slowed down under him and Abu Ubaida relied heavily on the advices of Khalid, and he kept him beside him as much as possible.<ref name=autogenerated1>{{cite web|url=http://www.swordofallah.com/html/bookchapter31page1.htm|title=Chapter 31: The Unkind Cut|work=The Sword of Allah: Khalid bin Al-Waleed: His Life and Campaigns|author=A.I. Akram|page=1|accessdate=16 July 2010|archiveurl=http://web.archive.org/web/20030105071312/http://www.swordofallah.com/html/bookchapter31page1.htm|archivedate=Jan 05, 2003}}</ref>
+
+The last large garrison of the Byzantine army was at Fahl, which was joined by survivors of Ajnadayn. With this threat at their rear the Muslim armies could not move further north nor south, thus Abu Ubaidah decided to deal with the situation, and had this garrison defeated and routed at the [[Battle of Fahl]] on 23 January 635. This battle proved to be the "Key to Palestine". After this battle Abu Ubaidah and Khalid marched north towards [[Emesa]], Yazid was stationed in Damascus while Amr and Shurhabil marched south to capture Palestine.
+<ref name=autogenerated1 />
+While the Muslims were at Fahl, sensing the weak defense of Damascus, [[Heraclius|Emperor Heraclius]] sent an army to re-capture the city. This army however could not make it to Damascus and was intercepted by Abu Ubaidah and Khalid on their way to Emesa. The army was routed and destroyed in the [[battle of Maraj-al-Rome]] and the [[2nd battle of Damascus]]. Emesa and the strategical town of [[Chalcis]] made peace with the Muslims for one year. This was, in fact, done to let Heraclius prepare for defences and raise new armies. The Muslims welcomed the peace and consolidated their control over the conquered territory. As soon as the Muslims received the news of reinforcements being sent to Emesa and Chalcis, they marched against Emesa, laid [[Siege of Emesa|siege to it]] and eventually captured the city in March 636.<ref>{{cite web|url=http://www.swordofallah.com/html/bookchapter32page1.htm|title=Chapter 32: The Battle of Fahl|work=Khalid bin Al-Waleed: His Life and Campaigns|publisher=The Sword of Allah|page=1|accessdate=16 July 2010|archiveurl=http://web.archive.org/web/20030110034004/http://www.swordofallah.com/html/bookchapter32page1.htm|archivedate=Jan 10, 2003}}</ref>
+[[File:Mohammad adil-Muslim invasion of Syria-3.PNG|thumb|right|200px|Map detailing the route of Muslim's invasion of central Syria.]]
+The prisoners taken in the battle informed them about Emperor Heraclius's final effort to take back Syria. They said that an army possibly two hundred thousand (200,000) strong would soon emerge to recapture the province. Khalid stopped here on June 636. This huge army set out for their destination. As soon as Abu Ubaida heard the news, he gathered all his officers to plan their next move. Khalid suggested that they should summen all of their forces present in the province of Syria (Syria, Jordan, Palestine) and to make a powerful joint force and then move towards the plain of {{Disambiguation needed|Yarmouk|date=June 2011}} for  battle.
+
+Abu Ubaida ordered all the Muslim commanders to withdraw from all the conquered areas, return the tributes that they previously gathered, and move towards Yarmuk.<ref>http://www.swordofallah.com/html/bookchapter34page1.htm {{dead link|date=February 2011}}</ref> Heraclius's army also moved towards Yarmuk. The Muslim armies reached it in July 636. A week or two later, around mid July, the Byzantine army arrived.<ref>http://www.swordofallah.com/html/bookchapter33page1.htm {{dead link|date=February 2011}}</ref> Khalid's [[Mobile guard]] defeated Christian Arab auxiliaries of the Roman army in a [[skirmish]].
+[[File:Mohammad adil-Muslim invasion of Syria-4.PNG|thumb|right|200px|Map detailing the route of Muslim's invasion of northern Syria.]]
+Nothing happened until the third week of August in which the [[Battle of Yarmouk]] was fought. The battle lasted 6 days during which Abu Ubaida transferred the command of the entire army to Khalid. The [[Byzantine]] army was defeated on October 636 CE. Abu Ubaida held a meeting with his high command officers, including Khalid to decide of future conquests. They decided to conquer [[Jerusalem]]. The siege of Jerusalem lasted four months after which the city agreed to surrender, but only to Caliph Umar Ibn Al Khattab in person. Amr ibn Al As suggested that Khalid should be sent as [[Caliph]], because of his very strong resemblance with Caliph [[Umar]].
+
+Khalid was recognized and eventually, Caliph Umar ibn Al Khattab came and [[Siege of Jerusalem (637)|Jerusalem surrendered]] on April 637 CE. Abu Ubaida sent the commanders Amr bin al-As, Yazid bin Abu Sufyan, and Sharjeel bin Hassana back to their areas to reconquer them. Most of the areas submitted without a fight. Abu Ubaida himself along with Khalid moved to northern [[Syria]] once again to conquer it with a 17,000 men army. Khalid along with his cavalry was sent to Hazir and Abu Ubaidah moved to the city of Qasreen.
+
+Khalid defeated a strong Byzantine army in the [[Battle of Hazir]] and reached Qasreen before Abu Ubaidah. The city surrendered to Khalid. Soon, Abu Ubaidah arrived in June 637. Abu Ubaidah then moved against [[Aleppo]]. As usual Khalid was commanding the cavalry. After the [[Battle of Aleppo]] the city finally agreed to surrender in October 637.
+
+====Occupation of Anatolia====
+[[File:Mohammad adil rais-Invasion of Anatolia and Armenia.PNG|thumb|right|240px|Map detailing the route of Khalid ibn Walid's invasion of Syria.]]
+Abu Ubaida and Khalid ibn Walid, after conquering all of northern Syria, moved north towards [[Anatolia]] conquering the fort of [[Azaz]] to clear the flank and rear from Byzantine troops. On their way to Antioch, a Roman army blocked them near a river on which there was an iron bridge. Because of this, the following battle is known as the [[Battle of Iron bridge]]. The Muslim army defeated the Byzantines and [[Antioch]] surrendered on 30 October 637 CE. Later during the year, Abu Ubaida sent Khalid and another general named Ayaz bin Ghanam at the head of two separate armies against the western part of [[Al Jazira, Mesopotamia|Jazira]], most of which was conquered with out strong resistance, including parts of Anatolia, [[Edessa, Mesopotamia|Edessa]] and the area up to the [[Ararat plain]]. Other columns were sent to [[Anatolia]] as far west as the [[Taurus Mountains]], the important city of [[Marash]] and [[Malatya]] which were all conquered by Khalid in the autumn of 638 CE. During Uthman’s reign, the Byzantines recaptured many [[Fortification|forts]] in the region and on Uthman's orders, series of campaigns were launched to regain control of it. In 647 [[Muawiyah I|Muawiyah]], the governor of Syria sent an expedition against Anatolia. They invaded at [[Cappadocia]] and sacked [[Caesarea Mazaca]]. In 648 the [[Rashidun army]] raided [[Phrygia]]. A major offensive into [[Cilicia]] and [[Isauria]] in 650–651 forced the Byzantine Emperor [[Constans II (Byzantine Empire)|Constans II]] to enter into negotiations with [[Uthman|Caliph Uthman]]'s governor of [[Syria]], Muawiyah.
+The truce that followed allowed a short respite, and made it possible for Constans II to hold on to the western portions of [[Armenia]]. In 654–655 on the orders of Caliph [[Uthman]], an expedition was preparing to attack the Byzantine capital [[Constantinopole]] but did not carry out the plan due to the civil war that broke out in 656.
+The [[Taurus Mountains]] in Turkey marked the western frontiers of the Rashidun Caliphate in Anatolia during Caliph Uthman's reign.
+
+====Conquest of Egypt====
+{{See|Muslim conquest of Egypt}}
+[[File:Mohammad adil-Muslim conquest of Egypt.PNG|thumb|right|250px|Map detailing the route of Muslim's invasion of Egypt.]]
+At the commencement of the [[Muslim conquest of Egypt]], [[Egypt]] was part of the [[Byzantine Empire]] with its capital in [[Constantinople]]. However, it had been occupied just a decade before by the [[Persian Empire#Sassanid Persia (AD 226-650)|Persian Empire]] under [[Khosrau II of Persia|Khosrau II]] (616 to 629 [[Anno Domini|AD]]). The power of the [[Byzantine empire]] was shattered during the [[Muslim conquest of Syria]], and therefore the conquest of Egypt was much easier. In 639, some 4,000 [[Rashidun army|Rashidun troops]] led by [[Amr ibn al-As]], were sent by [[Umar|Caliph Umar]] to conquer the land of the ancient [[pharaoh]]s. The [[Rashidun army]] crossed into Egypt from Palestine in December 639 and advanced rapidly into the [[Nile Delta]]. The imperial garrisons retreated into the walled towns, where they successfully held out for a year or more. But the Muslims sent for reinforcements and the invading army, joined by another 12,000 men in 640, defeated a Byzantine army at the [[Battle of Heliopolis]]. Amr next proceeded in the direction of [[Alexandria]], which was surrendered to him by a treaty signed on November 8, 641. The [[Thebaid]] seems to have surrendered with scarcely any opposition.
+
+The ease with which this valuable province was wrenched from the [[Byzantine Empire]] appears to have been due to the treachery of the governor of Egypt, [[Cyrus of Alexandria|Cyrus]], <ref>[http://www.newadvent.org/cathen/04597c.htm CATHOLIC ENCYCLOPEDIA: Cyrus of Alexandria] {{WebCite|url=http://www.webcitation.org/5wTrnwFCI|date =2011-02-13}}</ref>, [[Melchite]] (i.e., Byzantine/Chalcedonian Orthodox, ''not'' Coptic) [[Patriarch of Alexandria]], and the incompetence of the generals of the Byzantine forces, as well as due to the loss of most of the [[Byzantine army|Byzantine troops]] in [[Syria]] against the [[Rashidun army]]. Cyrus had persecuted the local [[Coptic Christianity|Coptic Christians]]. He is one of the authors of [[monothelism]], a seventh century heresy, and some supposed him to have been a secret convert to [[Islam]].
+
+During the reign of Caliph [[Uthman]], an attempt was made in the year 645 to regain Alexandria for the Byzantine empire, but it was retaken by Amr in 646. In 654 an invasion fleet sent by [[Constans II (Byzantine Empire)|Constans II]] was repulsed. From that time no serious effort was made by the Byzantines to regain possession of the country.
+
+The Muslims were assisted by some Copts, who found the Muslims more tolerant than the Byzantines, and of these some turned to Islam. In return for a tribute of money and food for the troops of occupation, the Christian inhabitants of Egypt were excused from military service and left free in the observance of their religion and the administration of their affairs.  Others sided with the Byzantines, hoping that they would provide a defense against the Arab invaders.<ref>[http://www.tertullian.org/fathers/nikiu2_chronicle.htm John, Bishop of Nikiu: Chronicle. London (1916). English Translation] {{WebCite|url=http://www.webcitation.org/5wTrpNoXL|date =2011-02-13}}</ref> During the reign of [[Ali|Caliph Ali]], Egypt was captured by rebel troops under the command of former [[Rashidun army|Rashidun army general]] [[Amr ibn al-As]], who killed [[Muhammad ibn Abi Bakr]] the governor of Egypt appointed by [[Ali]].
+
+====Conquest of North Africa====
+[[File:Sbeitla capitole.jpg|200px|left|thumb|The Roman ruins of Sbeitla (Sufetula)]]
+After the withdrawal of the [[Byzantine]]s from [[Egypt]], the [[Exarchate of Africa]] had declared its independence under its exarch, [[Gregory the Patrician]]. The dominions of Gregory extended from the borders of [[Egypt]] to [[Morocco]].  [[Abdullah Ibn Sa'ad]] used to send raiding parties to the west. As a result of these raids the [[Muslim]]s got considerable booty. The success of these raids made Abdullah Ibn Sa'ad feel that a regular campaign should be undertaken for the conquest of [[North Africa]].
+
+Uthman gave him permission after considering it in the Majlis al Shura. A force of 10,000 soldiers was sent as reinforcement. The [[Rashidun army]] assembled in [[Barqa]] in [[Cyrenaica]], and from there they marched west to capture [[Tripoli]], after Tripoli the army marched to [[Sufetula]], the capital of King Gregory. He was defeated and killed in the battle due to superb tactics used by [[Abdullah ibn Zubayr]]. After the [[Battle of Sufetula]] the people of [[North Africa]] sued for peace. They agreed to pay an annual tribute. Instead of annexing [[North Africa]], the [[Muslim]]s preferred to make North Africa a [[vassal state]]. When the stipulated amount of the tribute was paid, the [[Rashidun army|Muslim forces]] withdrew to [[Barqa]]. Following the [[First Fitna]], the first Islamic civil war, Muslim forces withdraw from north Africa to Egypt. The [[Ummayad Caliphate]], re-invaded north Africa in [[664]].
+
+=====Campaign against Nubia (Sudan)=====
+[[File:Sudan Meroe Pyramids 2001.JPG|right|200px|thumb|At Meroë, in the Sudan, pyramids of the Kushite rulers]]
+A campaign was undertaken against [[Nubia]] during the Caliphate of Umar in [[642]], but failed after the [[Kingdom of Makuria|Makurian]] took victory at the [[First Battle of Dongola]]. The army was pulled out of Nubia without any success. Ten years later, Uthman’s governor of Egypt, Abdullah ibn Saad, sent another army to Nubia. This army penetrated deeper into Nubia and laid siege to the Nubian capital of [[Dongola]]. The Muslims damaged the [[cathedral]] in the center of the city, but the [[Second Battle of Dongola|battle]] also went in favor of Makuria. As the Muslims were not able to overpower Makuria, they negotiated a peace with their king Qaladurut. According to the treaty that was signed, each side agreed not to make any aggressive moves against the other. Each side agreed to afford free passage to the other party through its territories. Nubia agreed to provide 360 [[Slavery|slaves]] to Egypt every year, while Egypt agreed to supply [[Cereal|grain]], [[horses]] and [[textiles]] to Nubia according to demand.
+
+====Conquest of the islands of the Mediterranean Sea====
+{{See|History of Islam in southern Italy}}
+[[File:Salamis gym 01.jpg|right|thumb|200px|The gymnasium, [[Salamis, Cyprus|Salamis]], [[Cyprus]].]]
+During Umar's reign, the governor of Syria, [[Muawiyah I]], sent a request to build a naval force to invade the islands of the [[Mediterranean Sea]] but Umar rejected the proposal because of the risk of death of soldiers at sea. During his reign Uthman gave Muawiyah permission to build a navy after concerning the matter. In 650&nbsp;AD the Arabs made the first attack on the island of [[Cyprus]] under the leadership of [[Muawiya]]. They conquered the capital, [[Salamis, Cyprus|Salamis]] - Constantia, after a brief siege, but drafted a treaty with the local rulers. In the course of this expedition a relative of the [[Muhammad|Prophet]], Umm-Haram fell from her mule near the [[Salt Lake]] at [[Larnaca]] and was killed. She was buried in that same spot which became a holy site for both many local Muslims and Christians and, much later in 1816, the [[Hala Sultan Tekke]] was built there by the [[Ottoman Empire|Ottomans]]{{When|date=July 2010}}. After apprehending a breach of the treaty, the Arabs re-invaded the island in [[654]] AD with five hundred ships. This time, however, a garrison of 12,000 men was left in Cyprus, bringing the island under [[Muslim]] influence.<ref>Nadvi (2000), pg. 522</ref> After leaving Cyprus the Muslim fleet headed towards the island of [[Crete]] and then [[Rhodes]] and plundered them without much resistance. In 652-654, the Muslims lounched a naval campaign against [[Sicily]] and they succeeded in capturing a large part of the island. Soon after this Uthman was murdered, and no further expansion efforts were made, and the Muslims accordingly retreated from Sicily. In 655 Byzantine Emperor [[Constans II (Byzantine Empire)|Constans II]] led a fleet in person to attack the Muslims at [[Finike|Phoinike]] (off [[Lycia]]) but it was defeated: 500 Byzantine ships were destroyed in the [[Battle of the Masts|battle]], and the emperor himself narrowly avoided death.
+
+====First Muslim invasion of Iberian peninsula (Spain)====
+[[File:Mohammad adil-Rashidun-empire-at-its-peak-close.PNG|thumb|right|300px|Rashidun Empire at its peak under third Rashidun Caliph, Uthman- 654 {{legend|#009900|Strongholds of Rashidun Caliphate}}]]
+In [[Islamic history]] the conquest of [[Spain]] was undertaken by forces led by [[Tariq ibn Ziyad]] and [[Musa ibn Nusair]] in 711 - 712 [[Common Era|C.E]], in the time of the [[Umayyad]] [[Caliph]] [[al-Walid I|Walid ibn Abd al-Malik]]. According to [[List of Muslim historians|Muslim historian]] [[Muhammad ibn Jarir al-Tabari]],<ref>''See'':[[History of the Prophets and Kings|Tarikh al-Tabari]]</ref> Spain was first invaded some sixty years earlier during the caliphate of Uthman in 653 {{Citation needed|date=July 2010}}. Other promenient [[Muslim]] [[historian]]s like [[Ibn Kathir]]<ref>''see '':[[Al-Bidayah wa al-Nihayah|Tarikh ibn Kathir]]</ref> have also quoted the same narration {{Citation needed|date=July 2010}}.
+According to the account of al-Tabari {{Citation needed|date=July 2010}}, when [[North Africa]] had been duly conquered by Abdullah Ibn Sa'ad, two of his generals, Abdullah ibn Nafiah ibn Husain, and Abdullah ibn Nafi' ibn Abdul Qais, were commissioned to invade coastal areas of Spain by sea.
+
+No details of campaigns in Spain during the caliphate of Uthman are given by [[Muhammad ibn Jarir al-Tabari|al-Tabari]] or by any other historian, leaving what actually happened unclear. The account of al-Tabari is merely to the effect that an Arab force aided by a [[Berber people|Berber]] force landed in Spain and took possession of some coastal areas {{Citation needed|date=July 2010}}. It seems that Muslims may have invaded coastal areas of Spain during the caliphate of Uthman, though the account does not indicate if these conquests led to an occupation of territory or were simply military raids. One possibility is that some short-lived advance outposts were established on the coastland of southern Spain but there is no Byzantine or Visigothic account mentioning the existence of such settlements, which would have alarmed them.
+
+===Treatment of Conquered Peoples===
+{{See also|Dhimmi}}
+[[File:Bas relief nagsh-e-rostam al.jpg|thumb|left|Rock-face relief at [[Naqsh-e Rustam]] of Iranian emperor Shapur I (on horseback) capturing Roman emperor Valerian (kneeing) and Philip the Arab (standing), [[Iran]].]]
+The non-Muslim inhabitants of the conquered lands were given the status of [[Dhimmi]] according to [[Sharia|Islamic law]]. Those who accepted [[Islam]] were treated in a similar manner as other Muslims, and were given equivalent rights in legal matters. Non-Muslims were given legal rights according to their faiths' law.
+
+[[Dhimmi]] peoples were allowed to "practice their religion, and to enjoy a measure of communal autonomy" and were guaranteed their personal safety and security of property in return for paying tax and acknowledging Muslim rule.<ref>Lewis (1984), pp. 10, 20</ref> Dhimmis were also subject to pay [[jizya]](muslims were expected to pay [[zakat]] and [[kharaj]],  which was considered material proof of their subjection.<ref name="Cahen">Cl. Cahen in [[Encyclopedia of Islam]] - Jizya</ref> Caliph Umar was the first Caliph to provide Allowance to non-Muslims and Muslims, after they reached old age.{{Citation needed|date=April 2011}}
+
+==Political Administration==
+[[File:Damavand3.jpg|thumb|right|200px|[[Mount Damavand]], Iran's tallest mountain is located in Alborz mountain range.]]
+The basic administrative system of the Dar al-Islamiyyah (The House of Islam) was laid down in the days of the Prophet. Caliph Abu Bakr stated in his sermon when he was elected: "If I order any thing that would go against the order of Allah and his Messenger; then do not obey me". This is considered to be the foundation stone of the Caliphate.
+Caliph Umar has been reported to have said: "O Muslims, straighten me with your hands when I go wrong", and at that instance a Muslim man stood up and said "O Amir al-Mu'minin (Leader of the Believers) if you are not straightened by our hands we will use our sword to straighten you!". Hearing this Caliph Umar said "Alhamdulillah (Praise be to Allah) I have such followers."{{Citation needed|date=April 2011}}
+
+In the administrative field [[Umar|Caliph Umar]] was the most brilliant among the [[Rashidun]] Caliphs, it was his dazzling administrative qualities because of which the most of the administrative structure of the empire was established.
+Under [[Abu Bakr|Caliph Abu Bakr]], the empire was not clearly divided into provinces, though it had many administrative districts, like:
+# [[Mecca]]
+# [[Medina]]
+# [[Yemen]]
+# [[Bahrain]]
+# [[Iraq]]
+
+Under [[Umar]] the Empire was divided into a number of [[province]]s which were as follows:
+# [[Arabia]] was divided into two provinces, [[Mecca]] and [[Medina]];
+# [[Iraq]] was divided into two provinces, [[Basra]] and [[Kufa]];
+# the province of [[Al Jazira, Mesopotamia|Jazira]] was created in the upper reaches of the [[Tigris]] and the [[Euphrates]];
+# [[Syria]] was a province;
+# [[Palestine]] was divided in two provinces: Aylya and [[Ramlah]];
+# [[Egypt]] was divided into two provinces: Upper Egypt and Lower Egypt;
+# [[Persia]] was divided into three provinces: [[Khorasan Province|Khorasan]], [[Azarbaijan]], and [[Fars Province|Fars]].
+
+In his testament, [[Umar|Caliph Umar]] had instructed his successor not to make any change in the administrative set up for one year after his death. Thus for one year Uthman maintained the pattern of political administration as it stood under Umar, however latter he made some amendments. Uthman made Egypt one province and created a new province comprising [[North Africa]]. [[Syria]], previously divided into two provinces, also become a single division.
+During Uthman’s reign the empire was divided into twelve provinces. These were:
+# [[Medina]]
+# [[Mecca]]
+# [[Yemen]]
+# [[Kufa]]
+# [[Basra]]
+# [[Al Jazira, Mesopotamia|Jazira]]
+# [[Fars Province|Fars]]
+# [[Azerbaijan]]
+# [[Khorasan Province|Khorasan]]
+# [[Syria]]
+# [[Egypt]]
+# [[North Africa]]
+[[File:Fars.jpg|thumb|left|250px|Fars Province landscape]]
+[[Ali|Caliph Ali]], during his reign, with the exception of [[Syria]] (which was under [[Muawiyah I]]'s control) and [[Egypt]] (that he lost during late years of his caliphate to the rebel troops of [['Amr ibn al-'As|Amr ibn Al-A'as]]), ruled the remaining ten provinces, which kept their administrative organization as under [[Uthman ibn Affan|Caliph Uthman]].
+
+The provinces were further divided into [[district]]s. The over 100 districts of the empire, along with the main cities, were administered by a [[Governor]] or [[Wāli]]. Other officers at the provincial level were:
+# ''Katib'', the [[Chief Secretary]].
+# ''Katib-ud-Diwan'', the [[Military]] [[Secretary]].
+# ''Sahib-ul-Kharaj'', the [[Revenue]] Collector.
+# ''Sahib-ul-Ahdath'', the [[Police chief]].
+# ''Sahib-ul-Bait-ul-Mal'', the [[Treasury]] Officer.
+# ''Qadi'',  the [[Chief Judge]].
+
+In some districts there were separate military officers, though the Governor (''Wali'') was in most cases the  [[Commander-in-chief]] of the army quartered in the province.
+
+The officers were appointed by the Caliph. Every appointment was made in writing. At the time of appointment an instrument of instructions was issued with a view to regulating the conduct of Governors. On assuming office, the Governor was required to assemble the people in the main [[mosque]], and read the instrument of instructions before them.<ref>The Cambridge History of Islam, ed. P.M. Holt, Ann K.S. Lambton, and Bernard Lewis, [[Cambridge]] 1970</ref>
+
+Umar's general instructions to his officers were:
+{{cquote|"Remember, I have not appointed you as commanders and tyrants over the people. I have sent you as leaders instead, so that the people may follow your example. Give the Muslims their rights and do not beat them lest they become abused. Do not praise them unduly, lest they fall into the error of conceit. Do not keep your doors shut in their faces, lest the more powerful of them eat up the weaker ones. And do not behave as if you were superior to them, for that is tyranny over them."}}
+[[File:Libya 4983 Tadrart Acacus Luca Galuzzi 2007.jpg|thumb|right|220px|Moving sand [[dunes]] in [[Tadrart Acacus]]]]
+During the reign of Caliph Abu Bakr, the state was economically weak, while during Umar’s reign because of increase in revenues and other sources of income, the state was on its way to economic prosperity. Hence Umar felt it necessary that the officers be treated in a strict way as to prevent the possible greed for money that may lead them to corruption. During his reign, at the time of appointment, every officer was required to make the oath:
+# That he would not ride a [[Turkish people|Turkic]] [[horse]] (''which was a symbol of pride'').
+# That he would not wear fine clothes.
+# That he would not eat sifted flour.
+# That he would not keep a porter at his door.
+# That he would always keep his door open to the public.
+Caliph Umar himself followed the above postulates strictly. During the reign of [[Uthman ibn Affan|Uthman]] the state become more economically prosperous than ever before; the allowance of the citizens was increased by 25% and the economical condition of the ordinary person was more stable, which lead Caliph Uthman to revoke the 2nd and 3rd postulates of the oath.
+At the time of appointment a complete inventory of all the possessions of the person concerned was prepared and kept in record. If there was an unusual increase in the possessions of the office holder, he was immediately called to account, and the unlawful property was confiscated by the State.  The principal officers were required to come to Mecca on the occasion of the [[Hajj]], during which people were free to present any complaint against them.  In order to minimize the chances of corruption, Umar made it a point to pay high salaries to the staff.  Provincial governors received as much as five to seven thousand [[dirham]]´s annually besides their share of the spoils of war (if they were also the commander in chief of the army of their sector).
+
+===Judicial Administration===
+As most of the administrative structure of the Rashidun Empire was setup by [[Umar]], the judicial administration was also established by him and the other Caliphs followed the same system without any type of basic amendment in it. In order to provide adequate and speedy justice for the people, an effective system of judicial administration was set up, hereunder justice was administered according to the [[Shariah|principles of Islam]].
+[[Qadi]]s (Judges) were appointed at all administrative levels for the administration of justice. The Qadis were chosen for their integrity and learning in [[Sharia|Islamic law]]. High salaries were fixed for the Qadis so that there was no temptation to bribery. Wealthy men and men of high social status were appointed as Qadis so that they might not have the temptation to take bribes, or be influenced by the social position of any body. The Qadis were not allowed to engage in trade. Judges were appointed in sufficient number, and there was no district which did not have a Qadi.
+
+===Electing or appointing a Caliph===
+[[Fred Donner]], in his book ''The Early Islamic Conquests'' (1981), argues that the standard Arabian practice during the early Caliphates was for the prominent men of a kinship group, or tribe, to gather after a leader's death and elect a leader from amongst themselves, although there was no specified procedure for this [[shura]], or consultative assembly. Candidates  were usually from the same lineage as the deceased leader, but they were not necessarily his sons. Capable men who would lead well were preferred over an ineffectual direct heir, as there was no basis in the majority Sunni view that the head of state or governor should be chosen based on lineage alone.
+
+This argument is advanced by Sunni Muslims that Muhammad's companion Abu Bakr was elected by the community, and this was the proper procedure. They further argue that a caliph is ideally chosen by election or community consensus. The caliphate became a hereditary office or the prize of the strongest general after the Rashidun caliphate. However, Sunni Muslims believe this was after the 'rightly guided' caliphate ended (Rashidun caliphate).
+
+[[Al-Baqillani|Abu Bakr Al-Baqillani]] has said that the leader of the Muslims simply should be from the majority. [[Abu Hanifa an-Nu‘man]] also wrote that the leader must come from the majority.<ref name=2muslims>[http://www.2muslims.com/directory/Detailed/225505.shtml Gharm Allah Al-Ghamdy] {{WebCite|url=http://www.webcitation.org/5wTrqdsDD|date =2011-02-13}}</ref>
+
+===Sunni belief===
+Following the death of Muhammad, a meeting took place at [[Saqifah]]. At that meeting, Abu Bakr was elected caliph by the Muslim community. Sunni Muslims developed the belief that the caliph is a temporal political ruler, appointed to rule within the bounds of Islamic law (Sharia). The job of adjudicating orthodoxy and Islamic law was left to [[Ijtihad|Islamic lawyers]], judiciary, or specialists individually termed as [[Mujtahid]]s and collectively named the [[Ulema]]. The first four caliphs are called the [[Rashidun]], meaning the Rightly Guided Caliphs, because they are believed to have followed the Qur'an and the [[sunnah]] (example) of Muhammad in all things.
+
+===Majlis al-Shura: Parliament===
+{{See also|Shura|Majlis|Majlis-ash-Shura|Islamic democracy}}
+
+Traditional Sunni Islamic lawyers agree that ''shura'', loosely translated as “consultation of the people”, is a function of the caliphate. The Majlis al-Shura advise the caliph. The importance of this is premised by the following verses of the Qur'an:
+
+<blockquote>{{cite quran|42|38|expand=no|quote=...those who answer the call of their Lord and establish the prayer, and who conduct their affairs by Shura. [are loved by God]}}</blockquote>
+<blockquote>{{cite quran|3|159|expand=no|quote=...consult them (the people) in their affairs. Then when you have taken a decision (from them), put your trust in Allah}}</blockquote>
+
+The majlis is also the means to elect a new caliph. Al-Mawardi has written that members of the majlis should satisfy three conditions: they must be just, they must have enough knowledge to distinguish a good caliph from a bad one, and must have sufficient wisdom and judgment to select the best caliph. Al-Mawardi also said in emergencies when there is no caliphate and no majlis, the people themselves should create a majlis, select a list of candidates for caliph, then the majlis should select from the list of candidates.<ref name=2muslims/>
+
+Some modern interpretations of the role of the Majlis al-Shura include those by Islamist author [[Sayyid Qutb]] and by [[Taqiuddin al-Nabhani]], the founder of a transnational political movement devoted to the revival of the Caliphate. In an analysis of the shura chapter of the Qur'an, Qutb argued Islam requires only that the ruler consult with at least some of the ruled (usually the elite), within the general context of God-made laws that the ruler must execute.  [[Taqiuddin al-Nabhani]], writes that Shura is important and part of "the ruling structure" of the Islamic caliphate, "but not one of its pillars," and may be neglected without the Caliphate's rule becoming unislamic.  Non-Muslims may serve in the majlis, though they may not vote or serve as an official.
+
+===Accountability of rulers===
+Sunni Islamic lawyers have commented on when it is permissible to disobey, [[Impeachment|impeach]] or remove rulers in the Caliphate. This is usually when the rulers are not meeting public responsibilities obliged upon them under Islam.
+
+Al-Mawardi said that if the rulers meet their Islamic responsibilities to the public, the people must obey their laws, but if they become either unjust or severely ineffective then the Caliph or ruler must be impeached via the Majlis al-Shura. Similarly Al-Baghdadi{{Clarify|date=September 2008}} believed that if the rulers do not uphold [[justice]], the ummah via the majlis should give warning to them, and if unheeded then the Caliph can be impeached. [[Al-Juwayni]] argued that Islam is the goal of the ummah, so any ruler that deviates from this goal must be impeached. Al-Ghazali believed that [[oppression]] by a caliph is enough for impeachment. Rather than just relying on impeachment, [[Ibn Hajar al-Asqalani]] obliged [[rebellion]] upon the people if the caliph began to act with no regard for Islamic law. Ibn Hajar al-Asqalani said that to ignore such a situation is ''[[haraam]]'', and those who cannot revolt inside the caliphate should launch a struggle from outside. Al-Asqalani used two [[ayah]]s from the Qur'an to justify this:
+<blockquote>{{cite quran|33|67|end=68|expand=no|quote=...And they (the sinners on [[Islamic view of the Last Judgment|qiyama]]) will say, 'Our Lord! We obeyed our leaders and our chiefs, and they misled us from the right path. Our Lord! Give them (the leaders) double the punishment you give us and curse them with a very great curse'...}}</blockquote>
+
+Islamic lawyers commented that when the rulers refuse to step down via successful impeachment through the Majlis, becoming dictators through the support of a corrupt army, if the majority agree they have the option to launch a [[revolution]] against them. Many noted that this option is only exercised after factoring in the potential cost of life.<ref name=2muslims/>
+
+=== Rule of Law ===
+{{See also|Sharia|Islamic ethics}}
+
+The following [[hadith]] establishes the principle of [[rule of law]] in relation to [[nepotism]] and accountability<ref>Sahih Bukhari, Volume 4, Book 56, Number 681</ref>
+
+{{quote|Narrated ‘[[Aisha]]: The people of Quraish worried about the lady from [[Banu Makhzum|Bani Makhzum]] who had committed theft. They asked, "Who will intercede for her with Allah's Apostle?" Some said, "No one dare to do so except Usama bin Zaid the beloved one to Allah's Apostle." When Usama spoke about that to Allah's Apostle Allah's Apostle said: "Do you try to intercede for somebody in a case connected with Allah’s Prescribed Punishments?" Then he got up and delivered a sermon saying, "What destroyed the nations preceding you, was that if a noble amongst them stole, they would forgive him, and if a poor person amongst them stole, they would inflict Allah's Legal punishment on him. By Allah, if [[Fatimah|Fatima]], the daughter of Muhammad (my daughter) stole, I would cut off her hand."}}
+
+Various Islamic lawyers do however place multiple conditions, and stipulations e.g. the poor cannot be penalised for stealing out of poverty, before executing such a law, making it very difficult to reach such a stage. It is well known during a time of drought in the [[Rashidun Empire|Rashidun caliphate]] period, [[capital punishment]]s were suspended until the effects of the drought passed.
+
+[[Ulema|Islamic jurists]] later formulated the concept of the rule of law, the equal subjection of all classes to the ordinary law of the land, where no person is above the law and where [[official]]s and private [[citizen]]s are under a [[duty]] to obey the same law. A [[Qadi]] (Islamic judge) was also not allowed to discriminate on the grounds of [[religion]], [[gender]], [[Human skin color|colour]], [[kinship]] or [[prejudice]]. There were also a number of cases where [[Caliph]]s had to appear before judges as they prepared to take their verdict.<ref>{{Harvard citation|Weeramantry|1997|pp=132 & 135}}</ref>
+
+According to Noah Feldman, a law professor at [[Harvard University]], the legal scholars and jurists who once upheld the [[rule of law]] were replaced by a law governed by the state due to the [[Codification (law)|codification]] of Sharia by the [[Ottoman Empire]] in the early 19th century:<ref name=Feldman>{{cite news|author=Noah Feldman|title=Why Shariah?|publisher=New York Times|date=March 16, 2008|url=http://www.nytimes.com/2008/03/16/magazine/16Shariah-t.html?ei=5070&em=&en=5c1b8de536ce606f&ex=1205812800&pagewanted=all|accessdate=2008-10-05}}</ref>
+
+==Economy==
+
+During the Rashidun Caliphate there was an economical boom in the lives of the ordinary people due to the revolutionary economic policies developed by [[Umar|Caliph Umar]] and his successor [[Uthman|Caliph Uthman]]. At first it was Umar who introduced these reforms on strong bases, his successor Uthman who himself was an intelligent businessman, had further reformed it. During Uthman's reign the people of the empire enjoyed a prosperous life.
+
+===Bait-ul-Maal===
+{{main|Bayt al-mal}}
+
+''Bait-ul-Maal'', (literally, ''The house of money'') was the department that dealt with the revenues and all other economical matters of the state. In the time of [[Muhammad]] there was no permanent Bait-ul-Mal or public treasury. Whatever revenues or other amounts were received were distributed immediately. There were no salaries to be paid, and there was no state expenditure. Hence the need for the treasury at public level was not felt.
+In the time of [[Abu Bakr]] as well there was not treasury. Abu Bakr earmarked a house where all money was kept on receipt. As all money was distributed immediately the treasury generally remained locked up. At the time of the death of Abu Bakr there was only one [[dirham]] in the public treasury.
+
+===Establishment of Bait-ul-Maal===
+{{main|Bayt al-mal}}
+
+In the time of [[Umar]] things changed. With the extension in conquests money came in larger quantities, Umar also allowed salaries to men fighting in the [[army]].  [[Abu Huraira]] who was the Governor of [[Bahrain]] sent a revenue of five hundred thousand [[dirham]]s. Umar summoned a meeting of his Consultative Assembly and sought the opinion of the Companions about the disposal of the money. [[Uthman ibn Affan]] advised that the amount should be kept for future needs. Walid bin Hisham suggested that like the [[Byzantine]]s separate departments of [[Treasury]] and Accounts should be set up.
+
+After consulting the Companions [[Umar]] decided to establish the Central [[Treasury]] at [[Madinah]]. Abdullah bin Arqam was appointed as the Treasury Officer. He was assisted by [[Abdur Rahman bin Awf]] and Muiqib. A separate Accounts Department was also set up and it was required to maintain record of all that was spent.
+Later provincial treasuries were set up in the provinces. After meeting the local expenditure the provincial treasuries were required to remit the surplus amount to the central treasury at [[Madinah]]. According to Yaqubi the salaries and stipends charged to the central treasury amounted to over 30 million [[dirham]]s.
+[[File:First Islamic coins by caliph Uthman-mohammad adil rais.jpg|thumb|right|The coins were of Persian origin, and had an image of the last Persian emperor, Muslim added the sentence ''Bismillah'' to it.]]
+
+A separate building was constructed for the royal treasury by the name ''bait ul maal'', which in large cities was guarded by as many as 400 guards.
+In most of the historical accounts it states that among the [[Rashidun]] [[Caliph]]s [[Uthman ibn Affan]] was first to struck the coins, some accounts however states that [[Umar]] was first to do so. When [[Persia]] was conquered three types of [[coin]]s were current in the conquered territories, namely Baghli of 8 [[dang]]; Tabari of 4 [[dang]]; and Maghribi of 3 [[dang]]. [[Umar]] ( according to some accounts [[Uthman]] ) made an innovation and struck an Islamic dirham of 6 [[dang]].
+
+The concepts of [[Welfare (financial aid)|welfare]] and [[pension]] were introduced in early [[Sharia|Islamic law]] as forms of ''[[Zakat]]'' (charity), one of the [[Five Pillars of Islam]], since the time of the Rashidun caliph [[Umar]] in the 7th century. The [[tax]]es (including ''Zakat'' and ''[[Jizya]]'') collected in the [[treasury]] of an Islamic [[government]] were used to provide [[income]] for the [[needy]], including the [[Poverty|poor]], [[Old age|elderly]], [[orphan]]s, [[widow]]s, and the [[Disability|disabled]]. According to the Islamic jurist [[Al-Ghazali]] (Algazel, 1058–1111), the government was also expected to stockpile food supplies in every region in case a [[disaster]] or [[famine]] occurred. The Caliphate was thus one of the earliest [[welfare state]]s.<ref name="Crone 2005 308–9">{{citation|title=Medieval Islamic Political Thought|first=Patricia|last=Crone|publisher=[[Edinburgh University Press]]|year=2005|isbn=978-0-7486-2194-1|pages=308–9}}</ref><ref name=Hamid>{{citation|title=An Islamic Alternative? Equality, Redistributive Justice, and the Welfare State in the Caliphate of Umar|author=Shadi Hamid|journal=Renaissance: Monthly Islamic Journal|volume=13|issue=8|date=August 2003}} (see [http://www.renaissance.com.pk/Augvipo2y3.html online]) {{WebCite|url=http://www.webcitation.org/5wTrse3kN|date =2011-02-13}}</ref>
+
+===Economic resources of the State===
+
+The economic resources of the State were:
+
+# ''Zakat''
+# ''Ushr''
+# ''Jazya''
+# ''Fay''
+# ''Khums''
+# ''Kharaj''
+
+* '''Zakat'''
+{{Main|Zakat}}
+
+'''Zakāt''' ({{lang-ar|زكاة}}) is the [[Islam]]ic concept of luxury tax. It was taken from the [[Muslim]]s in the amount of 2.5% of their dormant wealth (over a certain amount unused for a year) for use in only specified categories. Only persons whose annual wealth exceeded a minimum level ([[nisab]]) were collected from. The Nisab does not include primary residence, primary transportation, moderate amount of woven jewelry, etc.  Zakāt is one of the [[Five Pillars of Islam]] and it is obligation on all [[Muslim]]s who qualify as wealthy enough.
+
+* '''Jizya'''
+{{Main|Jizya}}
+
+'''jizya''' or '''jizyah''' ({{lang-ar|جزْية}}; [[Ottoman Turkish language|Ottoman Turkish]]: cizye). It was a [[per capita]] [[tax]] imposed on able bodied non-[[Muslim]] men of military age since non-Muslims did not have to pay Zakat. The tax was not supposed to be levied on slaves, women, children, monks, the old, the sick,<ref>Shahid Alam, Articulating Group Differences: A Variety of Autocentrisms, Journal of Science and Society, 2003</ref> hermits and the poor,.<ref>Ali (1990), pg. 507</ref>  It is important to note that not only were some non-Muslims exempt (such as sick, old), they were also given stipends by the state when they were in need.
+
+* '''Fay'''
+
+''Fay'' was the income from State land, whether an agricultural land or a meadow, or a land with any natural [[mineral]] reserves.
+
+* '''Khums'''
+{{Main|Khums}}
+
+Ghanimah or [[Khums]] was the booty captured on the occasion of war with the enemy. Four-fifth of the booty was distributed among the soldiers taking part in the war while one-fifth was credited to the State fund.
+
+* '''Kharaj'''
+{{Main|Kharaj}}
+
+'''kharaj''' was a [[tax]] on [[agriculture|agricultural]] land.
+Initially, after the first [[Muslim conquests]] in the 7th century, ''kharaj'' usually denoted a lump-sum duty levied upon the conquered provinces and collected by the officials of the former [[Byzantine Empire|Byzantine]] and [[Sassanid Empire|Sassanid empire]] or, more broadly, any kind of tax levied by [[Muslim]] conquerors on their non-Muslim subjects, [[dhimmi]]s. At that time, ''kharaj'' was synonymous with ''[[jizyah]]'', which later emerged as a [[poll tax]] paid by dhimmis. [[Muslim]]s landowners, on the other hand, paid only '''ushr''', a religious [[tithe]], which carried a much lower rate of taxation.<ref name="lewis1">Lewis (2002), p. 72</ref>
+
+* '''Ushr'''
+
+'''Ushr''' was a reciprocal ten per cent levy on agricultural land as well as merchandise imported from states that taxed the Muslims on their products. Caliph [[Umar]] was the first Muslim ruler to levy Ushr. Ushr as the name implies was an import duty levied at ten per cent on the value of goods imported.
+When the [[Muslim]] traders went to foreign lands for the purposes of trade they had to pay a ten per cent tax to the foreign states. Ushr was levied on reciprocal basis on the goods of the traders of other countries who chose to trade in the Muslim dominions.
+Umar issued instructions that Ushr should be levied in such a way so as to avoid hardship, that it will not effect the trade activities in the Islamic empire. The tax was levied on merchandise meant for sale. Goods imported for consumption or personal use but not for sale were not taxed. The merchandise valued at two hundred dirhams or less was not taxed. When the citizens of the State imported goods for the purposes of trade, they had to pay the customs duty or import tax at lower rates. In the case of the [[Dhimmis]] the rate was five per cent and in the case of the [[Muslim]]s 2.5 per cent. In the case of the Muslims the rate was the same as that of [[Zakat]]. The levy was thus regarded as a part of Zakat and was not considered a separate tax.
+
+===Allowance===
+====Beginning of Allowance====
+After the [[Battle of Yarmouk]] and [[Battle of al-Qadisiyyah]] the Muslims won heavy spoils. The coffers at [[Medina]] became full  to the brim and the problem before [[Umar]] was as to what should be done with this money. Some one  suggested that money should be kept in the treasury for the purposes of public expenditure only. This  view was not acceptable to the general body of the [[Muslim]]s. Consensus was reached on the point that  whatever was received during a year should be distributed.
+
+The next question that arose for consideration was as to what system should be adopted for distribution.  One suggestion was that it should be distributed on ad hoc basis and whatever was received should be  equally distributed. Against this view it was felt that as the spoils were considerable that would make the  people very rich. It was therefore decided that instead of ad hoc division the amount of the allowance to  the stipend should be determined before hand and this allowance should be paid to the person  concerned regardless of the amount of the spoils. This was agreed to.
+
+About the fixation of the [[allowance (money)|allowance]] there were two opinions. There were some who held that the amount  of the allowance for all Muslims should be the same. Umar did not agree with this view. He held that the  allowance should be graded according to one's merit with reference to [[Islam]].
+
+Then the question arose as to what basis should be used for placing some above others. Suggested that  a start should be made with the Caliph and he should get the highest allowance. Umar rejected the  proposal and decided to start with the clan of the Muhammad.
+
+[[Umar]] set up a [[Committee]] to compile a list of persons in nearness to [[Muhammad]]. The Committee  produced the list clan wise. Bani Hashim appeared as the first clan. Then the clan of Abu Bakr was put and  in the third place the clan of Umar was put. Umar accepted the first two placements but delegated his clan  lower down in the scale with reference to nearness in relationship to Muhammad.
+
+In the final scale of allowance that was approved by Umar the main provisions were{{Citation needed|date=April 2011}}:
+
+# [[Muhammad's wives|The widows of Mohammad]] received 12,000 [[dirham]]s each;
+# [[`Abbas ibn `Abd al-Muttalib]], the uncle of the Mohammad received an annual allowance of 7,000 [[dirham]]s;
+# The grandsons of the [[Muhammad]], [[Hasan ibn Ali]] and [[Hussain ibn Ali]] got 5,000 [[dirham]]s each;
+# The veterans of [[Battle of Badr]] got an allowance of 6,000 [[dirham]]s each;
+# Those who had become [[Muslim]]s by the time of the [[Treaty of Hudaybiyyah]] got 4,000 [[dirham]]s each;
+# Those who became Muslims at the time of the [[Conquest of Mecca]] got 3,000 [[dirham]]s each;
+# The veterans of the [[Ridda wars|Apostasy wars]] got 3,000 [[dirham]]s each.
+# The veterans of [[Battle of Yarmouk]] and [[Battle of al-Qadisiyyah]] got 2,000 [[dirham]]s each.
+
+In this award Umar's son [[Abdullah ibn Umar]] got an allowance of 3,000 dirhams. On the other hand [[Usama ibn Zaid]] got  4,000.
+The ordinary Muslim citizens got the allowance between 2,500 - 2000. The regular annual allowance was given only to the urban population, because they formed the backbone of the state's economic resources . The Bedouin living in the desert, cut off from the states affairs having no contributions in the developments were given stipends often. On assuming office, [[Caliph]] [[Uthman ibn Affan]] increased these stipends by 25 per cent.{{Citation needed|date=April 2011}}
+
+====Evaluation====
+That was an economic measure which contributed to the prosperity of the people at lot. The citizens of the Islamic empire became increasingly prosperous as trade activities increased. In turn, they contributed to the department of ''bait al maal'' and more and more revenues were collected.
+
+==Welfare works==
+The mosques were not mere places for offering prayers; these were community centers as well where the faithful gathered to discuss problems of social and cultural importance. During the caliphate of Umar as many as four thousand mosques were constructed extending from Persia in the east to Egypt in the west. The [[Masjid-e-Nabawi]] and [[al-Masjid al-Haram]] were enlarged first during the reign of Umar and then during the reign of [[Uthman ibn Affan]] who not only extended to many thousand square meters but also beautified them on a large scale.
+During the caliphate of [[Umar]] many new cities were founded. These included [[Kufa]], [[Basra]], and [[Fustat]].  These cities were laid in according with the principles of town planning. All streets in these cities led to the [[Friday mosque]] which was sited in the center of the city. [[Market]]s were established at convenient points, which were under the control of market officers who was supposed to check the affairs of market and quality of goods. The cities were divided into quarters, and each quarter was reserved for particular tribes. During the reign of Caliph Umar, there were restrictions on the building of palatial buildings by the rich and elites, this was symbolic of the egalitarian society of [[Islam]], where under all were equal, although the restrictions was latter revoked by Caliph Uthman, because of the financial prosperity of ordinary men, and the construction of double story building was permitted, as a result many palatial buildings were constructed though out the empire, Uthman himself built a huge palace for himself in [[Madinah]] which was famous by the name ''Al-Zawar'', he constructed it from his personal resources.
+Many buildings were built for administrative purposes. In the quarters called '''Dar-ul-Amarat''' Government offices and houses for the residence of officers were provided. Buildings known as '''Diwans''' were constructed for the keeping of official records. Buildings known as '''Bait-ul-Mal''' were constructed to house royal treasuries. For the lodging of persons suffering sentences as punishment, [[Jail]]s were constructed for the first time in [[Muslim history]]. In important cities Guest Houses were constructed to serve as rest houses for traders and merchants coming from far away places. Roads and bridges were constructed for public use. On the road from [[Medina]] to [[Mecca]], shelters, wells, and meal houses were constructed at every stage for the ease of the people who came for [[hajj]].
+Military cantonments were constructed at strategic points. Special stables were provided for cavalry.  These stables could accommodate as many as 4,000 horses. Special pasture grounds were provided and maintained for ''Bait-ul-Mal'' animals.
+[[Canal]]s were dug to irrigate fields as well as provide drinking water for the people. '''Abu Musa canal''' (''after the name of governor of [[Basra]] [[Abu-Musa al-Asha'ari]] '') it was a nine mile (14&nbsp;km) long, canal which brought water from the [[Tigris]] to [[Basra]]. Another canal known as '''Maqal canal''' was also dug from the [[Tigris]]. A canal known as the '''Amir al-Mu'minin canal''' ( ''after the title [[Amir al-Mu'minin]] that was assumed by Caliph Umar'') was dug to join the [[Nile]] to the [[Red Sea]]. During the famine of 639 food grains were brought from [[Egypt]] to [[Arabia]] through this canal from  the sea which saved the lives of millions of inhabitants of Arabia. '''Sa`d ibn Abi Waqqas canal''' (''After the name of governor of [[Kufa]]  [[Sa`d ibn Abi Waqqas]]'') dug from the [[Euphrates]] brought water to {{Disambiguation needed|Anbar|date=June 2011}}. [['Amr ibn al-'As]] the Governor of [[Egypt]], during the reign of Caliph Umar, even proposed the digging of a canal to join the [[Mediterranean]] to [[Red Sea]]. The proposal, however, did not materialize due to unknown reasons, and it was 1200 years later that such a canal was dug in the shape of the [[Suez Canal]]. Shuaibia was the port for [[Makkah]]. It was inconvenient. Caliph Uthman selected [[Jeddah]] as the site of the new [[seaport]], and a new port was built there. Uthman also reformed the [[department of Police]] in cities.
+
+==Army==
+
+{{Main|Rashidun Caliphate army}}
+
+The Rashidun Army was the primary military body of the [[Islam]]ic [[armed force]]s of the 7th [[century]], serving alongside the Rashidun [[Navy]]. The Rashidun Army maintained a very high level of discipline, strategic prowess, organization along with motivation and self initiative of the officer corps. For much of its history this army was one of the most powerful and effective military forces in all of the region. At the height of the [[Rashidun|Rashidun Caliphate]] the maximum size of the  army was around 100,000 troops.<ref>{{cite web|url=http://www.militaryhistoryonline.com/muslimwars/articles/yarmuk.aspx|title=The Battle Of Yarmuk, 636|last=Fratini|first=Dan|date=04/01/2006|publisher=Military History Online|archiveurl = http://www.webcitation.org/5wTrtz1Lr |archivedate = 2011-02-13|deadurl=no}}</ref> The Rashidun army was divided into the two basic categories of [[infantry]] and [[light cavalry]]. Reconstructing the military equipment of early Muslim armies is problematic. Compared with Roman armies or later medieval Muslim armies, the range of visual representation is very small, often imprecise and difficult to date. Physically very little material evidence has survived and again, much of it is difficult to date.<ref name="Kennedy2001">{{cite book|title=The Armies of the Caliphs: Military and Society in the Early Islamic State|author=Hugh Kennedy|publisher=Routledge|location=London|year=2001|page=168|url=http://www.questia.com/reader/action/gotoDocId/102802943|chapter=CHAPTER SEVEN: Weapons and equipment in early Muslim armies|authorlink=Hugh N. Kennedy}}</ref> The soldiers used to wear [[Iron]] and [[bronze]] segmented [[helmet]] that comes from [[Iraq]] and was of [[central Asia]]n type.<ref>{{cite book|last=Kennedy|first=Hugh|title=The Armies of the Caliphs: Military and Society in the Early Islamic State|url=http://www.questia.com/reader/action/gotoDocId/102802958|year=2001|publisher=Routledge|location=London|page=183|chapter= CHAPTER EIGHT: Fortification and siege warfare }}</ref> The standard form of protective body armor was [[chain mail]]. There are also references to the practice of wearing two coats of mail (dir’ayn), the one under the main one being shorter or even made of fabric or leather. [[Hauberk]]s and large wooden or [[wickerwork]] [[shield]]s were used as a protection in combat.<ref name="Kennedy2001"/> The soldiers were usually equipped with [[Sword]]s that were hanged in [[baldric]]. They also possessed [[spear]]s and [[dagger]]s.<ref>Augus Mcbride</ref>{{Page needed|date=April 2011}} [[Caliph]] [[Umar]] was the first [[Muslim]] ruler to organize the army as a [[State Department]]. This reform was introduced in 637. A beginning was made with the [[Quraysh (tribe)|Quraish]] and the [[Ansar (Islam)|Ansar]] and the system was gradually extended to the whole of [[Arabia]] and to [[Muslim]]s of conquered lands. The basic strategy of early Muslim armies sent out to conquer foreign lands was to exploit every possible weakness of the enemy army in order to achieve victory. Their key strength was mobility. The cavalry had both horses and camels.  The camels were used as both transport and food for long marches through the desert (Khalid bin Walid’s extraordinary march from the Persian border to Damascus utilized camels as both food and transport).  The cavalry was the army’s  main striking force and also served as a strategic mobile reserve. The common tactic used was to use the infantry and archers to engage and maintain contact with the enemy forces while the cavalry was held back till the enemy was fully engaged.  Once fully engaged the enemy reserves were absorbed by the infantry and archers the Muslim cavalry was used as pincers (like modern tank and mechanized divisions) to attack the enemy from the sides or to attack enemy base camps.  The [[Rashidun army]] was quality-wise and strength-wise bellow standard versus the [[Sassanid army|Sassanid Persian army]] and the [[Byzantine army]].  [[Khalid ibn Walid]] was the first general of the Rashidun Caliphate to conquer foreign lands and to trigger the whole scale deposition of the two most powerful empires.  During his campaign against the [[Sassanid]] [[Persian Empire]](''Iraq 633 - 634'') and the [[Byzantine Empire]] (''Syria 634 - 638'') Khalid developed brilliant tactics, that he used effectively against both the [[Sassanid army]] and the [[Byzantine army]]. The Caliph [[Abu Bakr]]'s way was to give his generals their mission, the geographical area in which that mission would be carried out, and the resources that, could be made available for that purpose. He would then leave it to his generals to accomplish their mission in whatever manner they chose. On the other hand Caliph [[Umar]] in the latter part of his Caliphate use to direct his generals as to where they would stay and when to move to the next target and who will be commanding the left and right wing of the army in the particular battle. This made the phase of conquest comparatively slower but provided well organized campaigns. Caliph [[Uthman]] used the same method as Abu Bakr: he would give missions to his generals and then leave it to them how they should accomplish it. Caliph [[Ali]] also followed the same method.
+
+===Religion===
+{{Expand section|date=August 2007}}
+
+The state religion was [[Islam]]. The non-Muslim people were nominally allowed to practice whichever religion they wanted to follow. The [[Islamic Law|Sharia Law]] was exercised by the state, and nominally extended only to Muslims, but in reality had jurisdiction over non-Muslims who had commit offenses against the Muslim community.
+[[File:Quran of Caliph Uthman reign-mohammad adil rais.JPG|thumb|right|This copy of the Qur'ān is believed to be the oldest one, compiled during Caliph Uthman's reign.]]
+Islam was the guiding force of the Caliphate. Any act of state was first to be approved by the Qur'ān and the Traditions of Prophet Muhammed. If there were no such guidelines available, then wisdom or Hikmat was used, after which if the act would go against the established principals, norms, system etc., it was not carried on with.
+Christians and Jews were - and are - considered [[People of the Book]] (Arabic: أهل الكتاب 'Ahl al-Kitāb), an Islamic term and legal status afforded to adherents of the other Abrahamic religions.
+
+==Legacy==
+{{Empty section|date=August 2007}}
+
+==See also==
+* [[Rashidun|Rashidun Caliphs]]
+* [[Rashidun army]]
+* [[Abu Bakr]]
+* [[Umar]]
+* [[Uthman]]
+* [[Ali]]
+* [[Ridda wars]]
+* [[First Fitna]]
+* [[The Four Companions]]
+* [[The Ten Promised Paradise]]
+
+==References==
+{{Citation style|date=September 2009}}
+{{reflist}}
+
+{{Rashidun Caliphs}}
+{{Islam topics|state=collapsed}}
+{{Caliphate}}
+{{Empires}}
+{{Iran topics}}
+
+[[Category:661 disestablishments]]
+[[Category:States and territories established in 632]]
+[[Category:History of the Middle East]]
+[[Category:History of Egypt]]
+[[Category:Islam in Egypt]]
+[[Category:Muslim conquests]]
+[[Category:History of Islam]]
+[[Category:History of Iran]]
+[[Category:History of Syria]]
+[[Category:History of Israel]]
+[[Category:Early Middle Ages]]
+[[Category:History of the Levant]]
+[[Category:Articles about multiple people]]
+[[Category:Rashidun Caliphate| ]]
+[[Category:7th century in religion]]
+[[Category:States in medieval Anatolia]]
+[[Category:Byzantine Empire successor states in the Greek East]]
+
+[[ar:خلفاء راشدون]]
+[[bs:Pravedne halife]]
+[[ca:Califat Raixidun]]
+[[cs:Volení chalífové]]
+[[es:Califas bien guiados]]
+[[fr:Rashidun]]
+[[ko:정통 칼리파]]
+[[id:Khulafaur Rasyidin]]
+[[it:Califfato dei Rashidun]]
+[[he:ראשידון]]
+[[ka:ოთხი წმინდა ხალიფა]]
+[[hu:Rásidún]]
+[[mk:Праведен халифат]]
+[[ms:Khulafa al-Rasyidin]]
+[[ja:正統カリフ]]
+[[pl:Kalifowie prawowierni]]
+[[pt:Califado Rashidun]]
+[[ru:Праведный Халифат]]
+[[simple:Rashidun Empire]]
+[[th:จักรวรรดิกาหลิบรอชิดีน]]
+[[tr:Dört büyük halife]]
+[[ur:خلافت راشدہ]]
+[[zh:四大哈里发]]

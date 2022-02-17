@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Metalhead64",
+			"Tiin"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Speicherauszug der CirrusSearch-Konfiguration.",
+	"apihelp-cirrus-config-dump-summary": "Auszug der CirrusSearch-Konfiguration.",
+	"apihelp-cirrus-config-dump-example": "Ruft einen Auszug der CirrusSearch-Konfiguration ab.",
+	"apihelp-cirrus-mapping-dump-description": "Speicherauszug der CirrusSearch-Zuordnung für dieses Wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Speicherauszug der CirrusSearch-Zuordnungen für dieses Wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Ruft einen Auszug der CirrusSearch-Zuordnung für dieses Wiki ab.",
+	"apihelp-cirrus-settings-dump-description": "Speicherauszug der CirrusSearch-Einstellungen für dieses Wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Auszug der CirrusSearch-Einstellungen für dieses Wiki.",
+	"apihelp-cirrus-settings-dump-example": "Ruft einen Auszug von CirrusSearch-Einstellungen für dieses Wiki ab.",
+	"apihelp-cirrus-profiles-dump-description": "Auszug der CirrusSearch-Profile für dieses Wiki.",
+	"apihelp-cirrus-profiles-dump-summary": "Auszug der CirrusSearch-Profile für dieses Wiki.",
+	"apihelp-cirrus-profiles-dump-example": "Ruft einen Auszug der CirrusSearch-Profile für dieses Wiki ab.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Ruft den Profileinhalt ab",
+	"apihelp-query+cirrusdoc-description": "Auszug eines CirrusSearch-Artikeldokuments",
+	"apihelp-query+cirrusdoc-summary": "Auszug eines CirrusSearch-Artikeldokuments von den Suchservern",
+	"apihelp-query+cirrusdoc-example": "Ruft einen Auszug eines einzelnen CirrusSearch-Artikels ab, wie er derzeit in der Suche indexiert ist.",
+	"apihelp-query+cirrusbuilddoc-summary": "Auszug eines CirrusSearch-Artikeldokuments von den Datenbankservern",
+	"apihelp-query+cirrusbuilddoc-example": "Ruft einen Auszug eines einzelnen CirrusSearch-Artikels ab, der von der Datenbank erzeugt wurde.",
+	"apierror-cirrus-requesttoolong": "Die Präfixsuchenanfrage dauerte länger als die maximal erlaubte Länge. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "Die zu verwendende Scoring-Methode",
+	"apierror-compsuggestbuilddoc-bad-method": "Unbekannte Scoring-Methode"
+}

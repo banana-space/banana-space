@@ -1,0 +1,3 @@
+{| class="wikitable"
+|Relevancytestphrase phrase aux
+|}

@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mainframe98",
+			"Mar(c)",
+			"Siebrand",
+			"Sjoerddebruin",
+			"McDutchie"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Dump van CirrusSearch-configuratie.",
+	"apihelp-cirrus-config-dump-summary": "Dump van CirrusSearch-configuratie.",
+	"apihelp-cirrus-config-dump-example": "Maak een dump van de CirrusSearch-configuratie.",
+	"apihelp-cirrus-mapping-dump-description": "Dump van CirrusSearchmapping voor deze wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Dump van CirrusSearchmapping voor deze wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Maak een dump van de CirrusSearch-mapping voor deze wiki.",
+	"apihelp-cirrus-settings-dump-description": "Dump van CirrusSearchinstellingen voor deze wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Dump van CirrusSearchinstellingen voor deze wiki.",
+	"apihelp-cirrus-settings-dump-example": "Maak een dump van CirrusSearch-instellingen voor deze wiki.",
+	"apihelp-query+cirrusdoc-description": "Dump van een artikel in CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Dump van een CirrusSearch-artikeldocument van de zoekservers",
+	"apihelp-query+cirrusdoc-example": "Een dump opvragen van een enkel CirrusSearch-artikel zoals dat momenteel in de index van de zoekmachine staat.",
+	"apierror-cirrus-requesttoolong": "Prefix-zoekopdracht was langer dan de maximaal toegestane lengte. ($1 &gt; $2)"
+}

@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Luky001",
+			"Sudo77(new)",
+			"Teslaton",
+			"TomášPolonec"
+		]
+	},
+	"cirrussearch-desc": "Vyhľadávanie v MediaWiki bežiace na Elasticsearch",
+	"cirrussearch-backend-error": "Kvôli dočasnému problému sme nemohli dokončiť požadované vyhľadávanie. Skúste to znovu neskôr.",
+	"cirrussearch-pref-label": "Nové vyhľadávanie",
+	"cirrussearch-pref-desc": "Vyskúšajte nový vyhľadávač, ktorý podporuje viac jazykov, zobrazuje novšie výsledky a dokonca hľadá text vo vnútri šablón.",
+	"prefs-completion": "Automatické dokončovanie",
+	"cirrussearch-pref-completion-section-desc": "Dokončovací našepkávač",
+	"cirrussearch-pref-completion-profile-help": "Nastaví správanie pre návrhy automatického dokončovania (hľadanie v priebehu písania).\n\n[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:CirrusSearch/CompletionSuggester Navrhovanie dokončovania] ja algoritmus na návrhy pri vyhľadávaní s lepšou opravou chýb a relevanciou vyhľadávania. Vyhľadávanie s prefixmi je pôvodný algoritmus vyhľadávania v priebehu písania.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Štandardný režim (odporúčané)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Opravuje až dva preklepy. Vynecháva presmerovania veľmi podobné hlavnému názvu.",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-desc": "Opravuje až dva preklepy. Rieši blízke presmerovania. Vyhľadáva podreťazce v názvoch.",
+	"cirrussearch-completion-profile-strict-pref-name": "Striktný režim (pokročilé)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Bez opravy preklepov. Bez ignorovania diakritiky. Striktné porovnávanie.",
+	"cirrussearch-completion-profile-normal-pref-name": "Presmerovací režim (pokročilé)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Bez opravy preklepov. Rieši blízke presmerovania.",
+	"cirrussearch-completion-profile-normal-subphrases-pref-desc": "Bez opravy preklepov. Rieši blízke presmerovania. Vyhľadáva podreťazce v názvoch.",
+	"cirrussearch-completion-profile-classic-pref-name": "Klasické prefixové vyhľadávanie",
+	"cirrussearch-completion-profile-classic-pref-desc": "Bez opravy preklepov. Porovnáva začiatky názvov.",
+	"cirrussearch-timed-out": "Časový limit pre vyhľadávanie vypršal, dostupné sú len čiastkové výsledky.",
+	"cirrussearch-regex-timed-out": "Časový limit pre vyhľadávanie vypršal, dostupné sú len čiastkové výsledky. Pre získanie úplných výsledkov skúste regulárny výraz zjednodušiť.",
+	"cirrussearch-article-words": "Slová vo všetkých obsahových stránkach"
+}

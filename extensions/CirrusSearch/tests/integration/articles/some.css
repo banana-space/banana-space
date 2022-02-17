@@ -1,0 +1,9 @@
+foo:before {
+  content: "<h3>";
+  color: black;
+  background: #BDFFBD;
+}
+
+foo:after jQuery {
+  content: "</h3>";
+}

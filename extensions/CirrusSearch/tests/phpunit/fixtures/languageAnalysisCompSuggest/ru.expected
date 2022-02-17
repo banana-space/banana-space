@@ -1,0 +1,123 @@
+{
+    "char_filter": {
+        "word_break_helper": {
+            "type": "mapping",
+            "mappings": [
+                "_=>\\u0020",
+                ",=>\\u0020",
+                "\"=>\\u0020",
+                "-=>\\u0020",
+                "'=>\\u0020",
+                "\\u2019=>\\u0020",
+                "\\u02BC=>\\u0020",
+                ";=>\\u0020",
+                "\\[=>\\u0020",
+                "\\]=>\\u0020",
+                "{=>\\u0020",
+                "}=>\\u0020",
+                "\\\\=>\\u0020",
+                "\\u00a0=>\\u0020",
+                "\\u1680=>\\u0020",
+                "\\u180e=>\\u0020",
+                "\\u2000=>\\u0020",
+                "\\u2001=>\\u0020",
+                "\\u2002=>\\u0020",
+                "\\u2003=>\\u0020",
+                "\\u2004=>\\u0020",
+                "\\u2005=>\\u0020",
+                "\\u2006=>\\u0020",
+                "\\u2007=>\\u0020",
+                "\\u2008=>\\u0020",
+                "\\u2009=>\\u0020",
+                "\\u200a=>\\u0020",
+                "\\u200b=>\\u0020",
+                "\\u200c=>\\u0020",
+                "\\u200d=>\\u0020",
+                "\\u202f=>\\u0020",
+                "\\u205f=>\\u0020",
+                "\\u3000=>\\u0020",
+                "\\ufeff=>\\u0020"
+            ]
+        },
+        "russian_diacritic_map": {
+            "type": "mapping",
+            "mappings": [
+                "\\u0301=>",
+                "\\u0451=>\\u0435",
+                "\\u0401=>\\u0415",
+                "\\u0435\\u0308=>\\u0435",
+                "\\u0415\\u0308=>\\u0415"
+            ]
+        }
+    },
+    "filter": {
+        "stop_filter": {
+            "type": "stop",
+            "stopwords": "_russian_",
+            "remove_trailing": "true"
+        },
+        "lowercase": {
+            "type": "lowercase"
+        },
+        "accentfolding": {
+            "type": "asciifolding"
+        },
+        "token_limit": {
+            "type": "limit",
+            "max_token_count": "20"
+        },
+        "remove_empty": {
+            "type": "length",
+            "min": 1
+        }
+    },
+    "analyzer": {
+        "stop_analyzer": {
+            "type": "custom",
+            "filter": [
+                "lowercase",
+                "stop_filter",
+                "accentfolding",
+                "remove_empty",
+                "token_limit"
+            ],
+            "tokenizer": "standard"
+        },
+        "stop_analyzer_search": {
+            "type": "custom",
+            "filter": [
+                "lowercase",
+                "accentfolding",
+                "remove_empty",
+                "token_limit"
+            ],
+            "tokenizer": "standard"
+        },
+        "plain": {
+            "type": "custom",
+            "char_filter": [
+                "word_break_helper",
+                "russian_diacritic_map"
+            ],
+            "filter": [
+                "remove_empty",
+                "token_limit",
+                "lowercase"
+            ],
+            "tokenizer": "whitespace"
+        },
+        "plain_search": {
+            "type": "custom",
+            "char_filter": [
+                "word_break_helper",
+                "russian_diacritic_map"
+            ],
+            "filter": [
+                "remove_empty",
+                "token_limit",
+                "lowercase"
+            ],
+            "tokenizer": "whitespace"
+        }
+    }
+}

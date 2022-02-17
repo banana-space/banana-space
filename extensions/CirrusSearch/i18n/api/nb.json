@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Dump av CirrusSearch-konfigurasjon.",
+	"apihelp-cirrus-config-dump-summary": "Dump av CirrusSearch-konfigurasjon.",
+	"apihelp-cirrus-config-dump-example": "Få en dump av CirrusSearch-konfigurasjonen.",
+	"apihelp-cirrus-mapping-dump-description": "Dump av CirrusSearch-mapping for denne wikien.",
+	"apihelp-cirrus-mapping-dump-summary": "Dump av CirrusSearch-mapping for denne wikien.",
+	"apihelp-cirrus-mapping-dump-example": "Få en dump av CirrusSearch-mappingen for denne wikien.",
+	"apihelp-cirrus-settings-dump-description": "Dump av CirrusSearch-innstillinger for denne wikien.",
+	"apihelp-cirrus-settings-dump-summary": "Dump av CirrusSearch-innstillinger for denne wikien.",
+	"apihelp-cirrus-settings-dump-example": "Få en dump av CirrusSearch-innstillingene for denne wiien.",
+	"apihelp-cirrus-profiles-dump-description": "Dump av CirrusSearch-profiler for denne wikien.",
+	"apihelp-cirrus-profiles-dump-summary": "Dump av CirrusSearch-profiler for denne wikien.",
+	"apihelp-cirrus-profiles-dump-example": "Hent en dump av CirrusSearch-profiler for denne wikien.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Dump av profilinnholdet",
+	"apihelp-query+cirrusdoc-description": "Kopi av et CirrusSearch-artikkeldokument",
+	"apihelp-query+cirrusdoc-summary": "Kopi av et CirrusSearch-artikkeldokument fra søketjenerne",
+	"apihelp-query+cirrusdoc-example": "Hent en kopi av én CirrusSearch-artikkel som den for tiden er indeksert til søk.",
+	"apihelp-query+cirrusbuilddoc-summary": "Kopi av et CirrusSearch-artikkeldokument fra databasetjenerne",
+	"apihelp-query+cirrusbuilddoc-example": "Hent en kopi av én CirrusSearch-artikkel generert fra databasen.",
+	"apierror-cirrus-requesttoolong": "Prefikssøkforespørselen var lengre enn den tillatte makslengden. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "Poengmetoden som skal brukes",
+	"apierror-compsuggestbuilddoc-bad-method": "Ukjent poengmetode",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "Dump av dokumentet som brukes av fullføringsforeslåingen",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "Hent en dump av dokumentet som brukes av fullføringsforeslåingen"
+}

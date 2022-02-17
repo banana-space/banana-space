@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Janezdrilc"
+		]
+	},
+	"apierror-cirrus-requesttoolong": "Vnešeno geslo za iskanje po predponi je bilo predolgo. ($1 &gt; $2)"
+}

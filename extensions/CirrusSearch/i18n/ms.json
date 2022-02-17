@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Anakmalaysia",
+			"Aviator",
+			"CyberTroopers",
+			"Jeluang Terluang",
+			"Tofeiku"
+		]
+	},
+	"cirrussearch-desc": "Enjin pencarian yang dikuasakan oleh Elasticsearch untuk MediaWiki",
+	"cirrussearch-backend-error": "Kami tidak dapat melengkapkan pencarian anda disebabkan masalah yang sementara. Sila cuba lagi nanti.",
+	"cirrussearch-parse-error": "Pertanyaan tidak difahami. Sila permudahnya. Pertanyaan itu telah dilogkan untuk menambah baik sistem pencarian.",
+	"cirrussearch-too-busy-error": "Enjin carian sekarang terlalu sibuk. Sila cuba lagi nanti.",
+	"cirrussearch-regex-syntax-error": "Sintaks ungkapan nalar ralat pada $2: $1",
+	"cirrussearch-regex-too-busy-error": "Terlalu banyak pencarian ungkapan nalar yang sedang dijalankan. Sila cuba lagi nanti.",
+	"cirrussearch-regex-too-complex-error": "Ungkapan nalar terlalu rumit. Ketahui lebih lanjut mengenai cara memudahkannya [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|di sini]].",
+	"cirrussearch-now-using": "Wiki ini sedang menggunakan enjin pencarian baru. ([[mw:Special:MyLanguage/Help:CirrusSearch|Ketahui lebih lanjut]])",
+	"cirrussearch-ignored-headings": " #<!-- jangan usik baris ini --> <pre>\n# Tajuk yang akan diabaikan oleh pencarian.\n# Suntingannya diperlakukan sebaik sahaja laman yang bertajuk ini diindekskan.\n# Anda boleh memaksakan pengindeksan semula laman dengan melakukan suntingan nol (null edit).\n# Sintaks adalah seperti berikut:\n#   * Semuanya dari aksara \"#\" ke hujung baris dikira komen.\n#   * Setiap baris tak kosong ialah tajuk yang setepatnya untuk diabaikan.\nRujukan\nPautan luar\nLihat juga\n #</pre> <!-- jangan usik baris ini -->",
+	"cirrussearch-pref-label": "Carian baru",
+	"cirrussearch-pref-desc": "Cuba carian baru kami yang menyokong lebih banyak bahasa, memberikan hasil yang lebih terkini, dan bahkan dapat mencari teks di dalam templat.",
+	"cirrussearch-give-feedback": "Berikan kami maklum balas anda",
+	"cirrussearch-query-too-long": "Permintaan carian lebih panjang daripada panjang maksimum yang dibenarkan. ($1> $2)",
+	"prefs-completion": "Penyempurnaan carian",
+	"cirrussearch-pref-completion-section-desc": "Saranan penyempurnaan",
+	"cirrussearch-explore-similar-related": "Berkaitan",
+	"cirrussearch-explore-similar-categories": "Kategori",
+	"cirrussearch-explore-similar-languages": "Bahasa",
+	"cirrussearch-explore-similar-related-none": "Tiada halaman berkaitan yang tersedia",
+	"cirrussearch-explore-similar-categories-none": "Tiada kategori yang tersedia",
+	"cirrussearch-explore-similar-languages-none": "Tidak tersedia dalam bahasa lain",
+	"cirrussearch-article-words": "Perkataan dalam semua laman kandungan"
+}

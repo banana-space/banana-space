@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"PiefPafPier"
+		]
+	},
+	"prefs-completion": "Sykopdrachten oanfoljen",
+	"cirrussearch-pref-completion-profile-help": "It hâlden en dragen ynstelle fan de selsoanfoljende suggestjes (sykje-as-jo-type).\n\nDe [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:CirrusSearch/CompletionSuggester oanfollingssuggestor] is in algoritme foar syksuggestjes mei bettere typflaterkorreksje en sykrelevânsje. Sykjen op foarheaksel is de âlde suggestje-algoritme foar sykje-as-jo-type.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Standert (oanbefelle)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Korrizjearret oant en mei twa typflaters. Negearret trochferwizings dy't tige lykje op de haadtitel.",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-name": "Sykjen op subfraze (oanbefelle foar langere sidetitels)",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-desc": "Korrizjearret oant en mei twa typflaters. Folget belykjende trochferwizings. Fynt titels mei oerienkommende subfraze.",
+	"cirrussearch-completion-profile-strict-pref-name": "Krekte modus (avansearre)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Gjin korreksje fan typflaters. Aksinten net negearje. Krekte oerienkomsten fine.",
+	"cirrussearch-completion-profile-normal-pref-name": "Trochferwizingsmodus (avansearre)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Gjin korreksje fan typflaters. Folget belykjende trochferwizings.",
+	"cirrussearch-completion-profile-normal-subphrases-pref-name": "Trochferwizingsmodus mei sykjen op subfraze (avansearre)",
+	"cirrussearch-completion-profile-normal-subphrases-pref-desc": "Gjin korreksje fan typflaters. Folget belykjende trochferwizings. Fynt titels mei oerienkommende subfraze.",
+	"cirrussearch-completion-profile-classic-pref-name": "Klassyk sykjen op foarheaksel",
+	"cirrussearch-completion-profile-classic-pref-desc": "Gjin korreksje fan typflaters. Fynt titels mei begjinoerienkomst."
+}

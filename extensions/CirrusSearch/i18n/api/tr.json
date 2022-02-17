@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek",
+			"BaRaN6161 TURK",
+			"JackUKElliott",
+			"MuratTheTurkish"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "CirrusSearch yapılandırma dökümü.",
+	"apihelp-cirrus-config-dump-summary": "CirrusSearch yapılandırmasının dökümü.",
+	"apihelp-cirrus-config-dump-example": "CirrusSearch yapılandırma dökümünü alın.",
+	"apihelp-cirrus-mapping-dump-description": "Bu viki için CirrusSearch haritalama dökümü.",
+	"apihelp-cirrus-mapping-dump-summary": "Bu viki için CirrusSearch dökümü eşlemesi.",
+	"apihelp-cirrus-mapping-dump-example": "Bu viki için CirrusSearch haritalama dökümünü alın.",
+	"apihelp-cirrus-settings-dump-description": "Bu viki için CirrusSearch ayarları dökümü.",
+	"apihelp-cirrus-settings-dump-summary": "Bu viki için CirrusSearch dökümü ayarları.",
+	"apihelp-cirrus-settings-dump-example": "Bu viki için CirrusSearch ayarlarının dökümünü alın.",
+	"apihelp-cirrus-profiles-dump-description": "Bu viki için CirrusSearch dökümü profilleri.",
+	"apihelp-cirrus-profiles-dump-summary": "Bu viki için CirrusSearch dökümü profilleri.",
+	"apihelp-cirrus-profiles-dump-example": "Bu viki için bir CirrusSearch profili dökümü alın.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Profil içeriğini dökümü",
+	"apihelp-query+cirrusdoc-description": "CirrusSearch madde belgesinin dökümü",
+	"apihelp-query+cirrusdoc-summary": "Arama sunucularından bir CirrusSearch madde belgesinin dökümü",
+	"apihelp-query+cirrusdoc-example": "Şu anda aramada dizine eklenmiş tek bir CirrusSearch maddesinin dökümünü alın.",
+	"apihelp-query+cirrusbuilddoc-summary": "Veritabanı sunucularından bir CirrusSearch madde belgesinin dökümü",
+	"apihelp-query+cirrusbuilddoc-example": "Veritabanından oluşturulan tek bir CirrusSearch maddesinin dökümünü alın.",
+	"apierror-cirrus-requesttoolong": "Önek arama isteği, izin verilen maksimum uzunluktan daha uzundu. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "Kullanılacak puanlama yöntemi",
+	"apierror-compsuggestbuilddoc-bad-method": "Bilinmeyen puanlama yöntemi",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "Tamamlayıcı önerici tarafından kullanılan belgenin dökümü",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "Tamamlayıcı önerici tarafından kullanılan belgenin dökümünü alın"
+}

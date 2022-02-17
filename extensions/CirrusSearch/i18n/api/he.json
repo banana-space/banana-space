@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"Guycn2"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "היטל של הגדרות CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "היטל של הגדרות CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "קבלת היטל של הגדרות CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "היטל של מיפויי CirrusSearch בוויקי הזה.",
+	"apihelp-cirrus-mapping-dump-summary": "היטל של מיפויי CirrusSearch עבור הוויקי הזה.",
+	"apihelp-cirrus-mapping-dump-example": "קבלת היטל של של מיפוי CirrusSearch עבור הוויקי הזה.",
+	"apihelp-cirrus-settings-dump-description": "היטל של הגדרות CirrusSearch בוויקי הזה.",
+	"apihelp-cirrus-settings-dump-summary": "היטל של הגדרות CirrusSearch עבור הוויקי הזה.",
+	"apihelp-cirrus-settings-dump-example": "היטל של הגדרות CirrusSearch בוויקי הזה.",
+	"apihelp-cirrus-profiles-dump-description": "היטל של פרופילי CirrusSearch עבור הוויקי הזה.",
+	"apihelp-cirrus-profiles-dump-summary": "היטל של פרופילי CirrusSearch עבור הוויקי הזה.",
+	"apihelp-cirrus-profiles-dump-example": "קבלת היטל של פרופילי CirrusSearch עבור הוויקי הזה.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "יצירת היטל של תוכן הפרופילים",
+	"apihelp-query+cirrusdoc-description": "היטל של מסמך עבור ערך ב־CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "היטל של מסמך עבור ערך ב־CirrusSearch משרתי החיפוש",
+	"apihelp-query+cirrusdoc-example": "קבלת היטל של ערך אחד ב־CirrusSearch, כפי שנמצא כעת במפתוח לחיפוש.",
+	"apihelp-query+cirrusbuilddoc-summary": "היטל של מסמך עבור ערך ב־CirrusSearch משרתי בסיס הנתונים",
+	"apihelp-query+cirrusbuilddoc-example": "קבלת היטל של ערך אחד ב־CirrusSearch שנוצר מבסיס הנתונים.",
+	"apierror-cirrus-requesttoolong": "בקשת חיפוש עם תחילית הייתה ארוכה מהאורך המרבי המותר. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "באיזו שיטת הדירוג להשתמש",
+	"apierror-compsuggestbuilddoc-bad-method": "שיטת דירוג בלתי־ידועה",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "היטל של המסמך שבשימוש מציע ההשלמות",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "קבלת היטל של המסמך שבשימוש מציע ההשלמות"
+}

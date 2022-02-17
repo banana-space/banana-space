@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meno25",
+			"ديفيد",
+			"محمد أحمد عبد الفتاح"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "مخزن ضبط CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "نسخة من ضبط CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "الحصول على تخرين لضبط CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "مخزن خرائط CirrusSearch لهذه الويكي.",
+	"apihelp-cirrus-mapping-dump-summary": "نسخة من خريطة CirrusSearch لهذه الويكي.",
+	"apihelp-cirrus-mapping-dump-example": "الحصول على مخزن لخرائط CirrusSearch لهذه الويكي.",
+	"apihelp-cirrus-settings-dump-description": "تخزين إعدادات CirrusSearch لهذه الويكي.",
+	"apihelp-cirrus-settings-dump-summary": "نسخة من إعدادات CirrusSearch لهذه الويكي.",
+	"apihelp-cirrus-settings-dump-example": "الحصول على تخزين لإعدادات CirrusSearch لهذه الويكي.",
+	"apihelp-cirrus-profiles-dump-description": "تفريغ ملفات تعريف CirrusSearch لهذا الويكي.",
+	"apihelp-cirrus-profiles-dump-summary": "تفريغ ملفات تعريف CirrusSearch لهذا الويكي.",
+	"apihelp-cirrus-profiles-dump-example": "الحصول على تفريغ CirrusSearch لهذه الويكي.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "تفريغ محتوى ملفات التعريف",
+	"apihelp-query+cirrusdoc-description": "مختزن وثيقة مقالة CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "تفريغ مستند مقالة CirrusSearch من خوادم البحث",
+	"apihelp-query+cirrusdoc-example": "الحصول على تفريغ لمقالة CirrusSearch واحدة كما هو مفهرس حاليا في البحث.",
+	"apihelp-query+cirrusbuilddoc-summary": "تفريغ مستند مقالة CirrusSearch من خوادم قاعدة البيانات",
+	"apihelp-query+cirrusbuilddoc-example": "الحصول على تفريغ مقالة CirrusSearch واحدة وُلِّدت من قاعدة البيانات.",
+	"apierror-cirrus-requesttoolong": "طلب بحث البادئة كان أطول من الطول الأقصى المسموح به. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "طريقة تسجبل النقاط لاستخدامها",
+	"apierror-compsuggestbuilddoc-bad-method": "طريقة التسجيل غير معروفة",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "تفريغ الوثيقة المستخدمة من قبل suggester الانتهاء",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "الحصول على تفريغ المستند المستخدم من قبل suggester الإكمال"
+}

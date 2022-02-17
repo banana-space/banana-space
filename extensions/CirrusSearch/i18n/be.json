@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Artsiom91"
+		]
+	},
+	"cirrussearch-completion-profile-classic": "Класічны профіль, з выдаленнем некалькіх сімвалаў пунктуацыі і некаторых дыякрытычных знакаў.",
+	"cirrussearch-completion-profile-normal": "З выдаленнем некалькіх сімвалаў пунктуацыі, некаторых дыякрытычных знакаў і шумавых слоў.",
+	"prefs-completion": "Дапаўненне пошуку",
+	"cirrussearch-pref-completion-section-desc": "Прапанова канчаткаў",
+	"cirrussearch-pref-completion-profile-help": "Задае паводзіны для прапаноў аўтадапаўнення (пошуку па меры набору).",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Па змоўчанні (рэкамендуецца)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Выпраўляе да двух абдруковак. Падстаўляе адпаведныя перасылкі.",
+	"cirrussearch-completion-profile-strict-pref-name": "Дакладны рэжым (пашыраны)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Не выпраўляе абдрукоўкі. Ігнаруе перасылкі. Дакладная адпаведнасць.",
+	"cirrussearch-completion-profile-normal-pref-name": "Рэжым перасылак (пашыраны)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Не выпраўляе абдрукоўкі. Падстаўляе адпаведныя перасылкі.",
+	"cirrussearch-completion-profile-normal-subphrases-pref-name": "Рэжым перасылак з пошукам па падвыразам (пашыраны)",
+	"cirrussearch-completion-profile-normal-subphrases-pref-desc": "Не выпраўляе абдрукоўкі. Падстаўляе адпаведныя перасылкі. Знаходзіць падвыразы ў загалоўках.",
+	"cirrussearch-completion-profile-classic-pref-name": "Класічны пошук па прэфіксу",
+	"cirrussearch-completion-profile-classic-pref-desc": "Не выпраўляе абдрукоўкі. Падказвае назвы ад пачатку па меры ўводу."
+}

@@ -1,0 +1,28 @@
+{
+	"query": "test some ltr",
+	"config": {
+		"wgCirrusSearchRescoreProfiles": {
+			"ltr": {
+				"i18n_msg": "cirrussearch-qi-profile-wsum-inclinks-pv",
+				"supported_namespaces": "all",
+				"rescore": [
+					{
+						"window": 512,
+						"query_weight": 1.0,
+						"rescore_query_weight": 10.0,
+						"type": "phrase"
+					},
+					{
+						"window": 20,
+						"query_weight": 1.0,
+						"rescore_query_weight": 10000.0,
+						"score_mode": "total",
+						"type": "ltr",
+						"model": "unittest-model"
+					}
+				]
+			}
+		},
+		"wgCirrusSearchRescoreProfile": "ltr"
+	}
+}

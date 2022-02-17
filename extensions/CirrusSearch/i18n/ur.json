@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"BukhariSaeed",
+			"Muhammad Shuaib"
+		]
+	},
+	"cirrussearch-too-busy-error": "تلاش کی سہولت انتہائی مصروف ہے۔ براہ کرم کچھ دیر بعد کوشش کریں۔",
+	"cirrussearch-now-using": "اس ویکی میں نیا سرچ انجن مستعمل ہے۔\n([[mw:Special:MyLanguage/Help:CirrusSearch|مزید تفصیلات]])",
+	"cirrussearch-pref-label": "جدید تلاش",
+	"cirrussearch-give-feedback": "ہمیں اپنی رائے سے نوازیں۔",
+	"prefs-completion": "تکمیل تلاش",
+	"cirrussearch-pref-completion-section-desc": "تجویز دہندہ تکمیل",
+	"cirrussearch-pref-completion-profile-help": "دوران تلاش میں خودکار تجاویز کا رویہ متعین کریں۔",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "طے شدہ (سفارش کردہ)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "دو غلطیوں تک درست اور قریبی رجوع مکررات کو حل کرتا ہے۔",
+	"cirrussearch-completion-profile-strict-pref-name": "ہو بہو تلاش (اضافی)",
+	"cirrussearch-completion-profile-strict-pref-desc": "املا کی درستی اور لہجے کی شناخت نہيں، ہو بہو تلاش۔",
+	"cirrussearch-completion-profile-normal-pref-name": "حالت رجوع مکرر (اضافی)",
+	"cirrussearch-completion-profile-normal-pref-desc": "املا کی درستی نہیں تاہم قریبی رجوع مکررات کو حل کرتا ہے۔",
+	"cirrussearch-completion-profile-classic-pref-name": "سابقہ کی کلاسیکی تلاش",
+	"cirrussearch-completion-profile-classic-pref-desc": "املا کی درستی نہیں اور عناوین کے ابتدائی حروف سے مطابقت کی کوشش کرتا ہے۔",
+	"cirrussearch-feature-not-available": "تلاش کی بورڈ '$1' اس ویکی پر فعال نہیں ہے۔",
+	"cirrussearch-incategory-feature-no-valid-categories": "'$1' کے لیے درست زمرہ جات نہیں دیے گئے۔",
+	"cirrussearch-mlt-feature-no-valid-titles": "'$1' کے لیے درست عناوین نہیں دیے گئے۔",
+	"cirrussearch-explore-similar-related": "متعلقہ",
+	"cirrussearch-explore-similar-categories": "زمرہ جات",
+	"cirrussearch-explore-similar-languages": "زبانیں",
+	"cirrussearch-explore-similar-related-none": "متعلقہ صفحات میسر نہیں",
+	"cirrussearch-explore-similar-categories-none": "زمرہ جات میسر نہیں",
+	"cirrussearch-explore-similar-languages-none": "دیگر زبانوں ميں دستیاب",
+	"cirrussearch-article-words": "تمام صفحات کے مواد میں الفاظ"
+}

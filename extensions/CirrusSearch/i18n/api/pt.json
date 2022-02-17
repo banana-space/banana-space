@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hamilton Abreu"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Cópia em ficheiro da configuração do CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "Cópia em ficheiro da configuração do CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Obter cópia em ficheiro da configuração do CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Cópia em ficheiro do mapeamento do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Cópia em ficheiro do mapeamento do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Obter cópia em ficheiro do mapeamento do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-settings-dump-description": "Cópia em ficheiro das configurações do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Cópia em ficheiro das configurações do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-settings-dump-example": "Obter cópia em ficheiro das configurações do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-profiles-dump-description": "Cópia em ficheiro dos perfis do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-profiles-dump-summary": "Cópia em ficheiro dos perfis do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-profiles-dump-example": "Obter uma cópia em ficheiro dos perfis do CirrusSearch para esta wiki.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Criar ficheiro com conteúdo dos perfis",
+	"apihelp-query+cirrusdoc-description": "Cópia em ficheiro do documento de um artigo CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Cópia em ficheiro do documento de um artigo CirrusSearch dos servidores de pesquisa",
+	"apihelp-query+cirrusdoc-example": "Obter cópia em ficheiro de um artigo CirrusSearch individual tal como atualmente indexado na pesquisa.",
+	"apihelp-query+cirrusbuilddoc-summary": "Cópia em ficheiro do documento de um artigo CirrusSearch dos servidores da base de dados",
+	"apihelp-query+cirrusbuilddoc-example": "Obter cópia em ficheiro de um artigo CirrusSearch individual gerado da base de dados.",
+	"apierror-cirrus-requesttoolong": "O pedido de pesquisa de prefixo ultrapassou o comprimento máximo permitido. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "O método de classificação a utilizar",
+	"apierror-compsuggestbuilddoc-bad-method": "Método de classificação desconhecido",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "Cópia em ficheiro do documento usado pelas sugestões de preenchimento",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "Obter uma cópia em ficheiro do documento usado pelas sugestões de preenchimento"
+}

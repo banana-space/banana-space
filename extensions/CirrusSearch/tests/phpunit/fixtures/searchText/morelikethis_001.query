@@ -1,0 +1,3 @@
+{
+    "query": "foo morelikethis:\"Some page\" hastemplate:MainNamespaceTemplate"
+}

@@ -1,0 +1,6 @@
+== Reference Section<ref>foo</ref> ==
+
+Reference<ref>baz</ref> Text<ref>bar</ref>
+
+== References ==
+<references/>

@@ -1,0 +1,179 @@
+[{
+    "responses": [
+        {
+            "took": 3,
+            "timed_out": false,
+            "_shards": {
+                "total": 4,
+                "successful": 4,
+                "failed": 0
+            },
+            "hits": {
+                "total": 0,
+                "max_score": 0,
+                "hits": []
+            },
+            "suggest": {
+                "plain": [
+                    {
+                        "text": "Te",
+                        "offset": 0,
+                        "length": 2,
+                        "options": [
+                            {
+                                "text": "Test2",
+                                "_index": "wiki_titlesuggest_1504788820",
+                                "_type": "titlesuggest",
+                                "_id": "14t",
+                                "_score": 4713,
+                                "_source": {
+                                    "target_title": {
+                                        "namespace": 0,
+                                        "title": "Test2"
+                                    }
+                                }
+                            },
+                            {
+                                "text": "Test2\/en",
+                                "_index": "wiki_titlesuggest_1504788820",
+                                "_type": "titlesuggest",
+                                "_id": "17t",
+                                "_score": 132,
+                                "_source": {
+                                    "target_title": {
+                                        "namespace": 0,
+                                        "title": "Test2\/en"
+                                    }
+                                }
+                            },
+                            {
+                                "text": "Test2\/fr",
+                                "_index": "wiki_titlesuggest_1504788820",
+                                "_type": "titlesuggest",
+                                "_id": "19t",
+                                "_score": 131,
+                                "_source": {
+                                    "target_title": {
+                                        "namespace": 0,
+                                        "title": "Test2\/fr"
+                                    }
+                                }
+                            },
+                            {
+                                "text": "Test\/Subpage 1",
+                                "_index": "wiki_titlesuggest_1504788820",
+                                "_type": "titlesuggest",
+                                "_id": "20t",
+                                "_score": 78,
+                                "_source": {
+                                    "target_title": {
+                                        "namespace": 0,
+                                        "title": "Test\/Subpage 1"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "plain_stop": [
+                    {
+                        "text": "Te",
+                        "offset": 0,
+                        "length": 2,
+                        "options": [
+                            {
+                                "text": "Test2",
+                                "_index": "wiki_titlesuggest_1504788820",
+                                "_type": "titlesuggest",
+                                "_id": "14t",
+                                "_score": 4713,
+                                "_source": {
+                                    "target_title": {
+                                        "namespace": 0,
+                                        "title": "Test2"
+                                    }
+                                }
+                            },
+                            {
+                                "text": "Test2\/en",
+                                "_index": "wiki_titlesuggest_1504788820",
+                                "_type": "titlesuggest",
+                                "_id": "17t",
+                                "_score": 131,
+                                "_source": {
+                                    "target_title": {
+                                        "namespace": 0,
+                                        "title": "Test2\/en"
+                                    }
+                                }
+                            },
+                            {
+                                "text": "Test2\/fr",
+                                "_index": "wiki_titlesuggest_1504788820",
+                                "_type": "titlesuggest",
+                                "_id": "19t",
+                                "_score": 131,
+                                "_source": {
+                                    "target_title": {
+                                        "namespace": 0,
+                                        "title": "Test2\/fr"
+                                    }
+                                }
+                            },
+                            {
+                                "text": "Test\/Subpage 1",
+                                "_index": "wiki_titlesuggest_1504788820",
+                                "_type": "titlesuggest",
+                                "_id": "20t",
+                                "_score": 78,
+                                "_source": {
+                                    "target_title": {
+                                        "namespace": 0,
+                                        "title": "Test\/Subpage 1"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "status": 200
+        },
+        {
+            "took": 2,
+            "timed_out": false,
+            "_shards": {
+                "total": 4,
+                "successful": 4,
+                "failed": 0
+            },
+            "hits": {
+                "total": 1,
+                "max_score": 3.5431085,
+                "hits": [
+                    {
+                        "_index": "wiki_general_1504788773",
+                        "_type": "page",
+                        "_id": "34",
+                        "_score": 3.5431085,
+                        "_source": {
+                            "namespace_text": "Help",
+                            "wiki": "wiki",
+                            "namespace": 12,
+                            "title": "Test"
+                        },
+                        "highlight": {
+                            "title.prefix_asciifolding": [
+                                "<span class=\"searchmatch\">Te<\/span>st"
+                            ],
+                            "title.prefix": [
+                                "<span class=\"searchmatch\">Te<\/span>st"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "status": 200
+        }
+    ]
+}]

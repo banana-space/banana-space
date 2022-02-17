@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lancine.kounfantoh.fofana"
+		]
+	},
+	"cirrussearch-too-busy-error": "ߢߌߣߌ߲ߠߌ߲ ߓߟߏߘߐߜߍ߬ߘߍ߲߬ߣߍ߲߬ߓߊ ߟߋ߬ ߦߋ߫ ߕߊ߲߬. ߊ߬ ߡߊߝߍߣߍ߲߫ ߞߐߝߍ߬ ߣߍ߲߯ߞߍ߫.",
+	"cirrussearch-pref-label": "ߢߌߣߌ߲ߠߌ߲߫ ߞߎߘߊ",
+	"cirrussearch-give-feedback": "ߡߙߌߣߊ߲ ߘߏ߫ ߟߊߣߊ߬ ߊ߲ ߡߊ߬",
+	"prefs-completion": "ߢߌߣߌ߲ߠߌ߲߫ ߘߐߘߎ߲߰ߧߊ߬ߣߍ߲",
+	"cirrussearch-feature-not-available": "ߢߌߣߌ߲ߠߌ߲ ߞߎߡߊߘߋ߲߫ ߡߊߕߍ߰ߣߍ߲ '$1' ߡߊ߫ ߓߌ߬ߟߊ߬ ߥߞߌ ߣߌ߲߬ ߠߊ߫ ߡߎߣߎ߲߬.",
+	"cirrussearch-feature-too-many-conditions": "ߛߙߊߕߌ߫ ߥߙߍߓߊ ߟߎ߬ ߡߊߛߐߣߍ߲߫ ߦߋ߫ '$1' ߢߍ߫߸ $2 ߕߍ߰ߒ߬ߘߐ߬ߟߌ ߟߊ߫.",
+	"cirrussearch-feature-deepcat-endpoint": "$wgCirrusSearchCategoryEndpoint ߞߊߡߊ߲߫ ߞߊ߬ ߘߐߛߌ߰ SPARQL ߓߍ߲߬ߣߍ߲ ߓߊ߲ߦߙߐ ߟߊ߫ ߛߊ߫ ߞߊ߬ ߛߋ߫ ߦߌߟߡߊ߫ ߘߐߘߎ߲߰ߧߊ߬ߣߍ߲ ߢߌߣߌ߲߫ ߠߊ߫.",
+	"cirrussearch-feature-deepcat-exception": "ߦߌߟߡߊ߫ ߟߊߞߎ߲߬ߘߎ߬ߣߍ߲ ߢߌߣߌ߲ߠߌ߲ SPARQL ߡߊߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߗߌߙߏ߲߫",
+	"cirrussearch-feature-deepcat-toomany": "ߦߌߟߡߊ߫ ߟߊߞߎ߲߬ߘߎ߬ߣߍ߲ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߦߌߟߡߊ߫ ߛߌߦߊߡߊ߲߫ ߠߎ߫ ߟߊߞߐߛߊ߬ߦߌ߫ ߞߏߖߎ߰",
+	"cirrussearch-feature-deepcat-invalid-title": "ߦߌߟߡߊ߫ ߡߊߛߐߣߍ߲ ߓߍ߲߬ߣߍ߲߫ ߕߍ߫",
+	"cirrussearch-incategory-feature-no-valid-categories": "ߦߌߟߡߊ߫ ߓߍ߲߬ߣߍ߲ ߝߋ߲߫ ߡߊ߫ ߡߊߛߐ߫ '$1' ߘߐ߫.",
+	"cirrussearch-mlt-feature-no-valid-titles": "ߞߎ߲߬ߕߐ߮ ߓߍ߲߬ߣߍ߲ ߝߋ߲߫ ߡߊ߫ ߡߊߛߐ߫ '$1' ߘߐ߫.",
+	"cirrussearch-mlt-not-configured": "'$1' ߟߊ߬ߓߊ߰ߙߊ߬ߟߌ ߘߐߓߍ߲߬ߣߍ߲߫ ߦߴߊ߬ ߢߊߖߎ߮ ߟߋ߬ ߡߊ߬. ߞߎ߲߬ߠߊ߬ߛߌ߰ߟߊ ߘߏ߫ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߫ $wgCirrusSearchMoreLikeThisFields ߘߐߓߍ߲߬ ߞߏ ߡߊ߬",
+	"cirrussearch-explore-similar-related": "ߜߋ߲߬ߞߘߎ߬ߢߐ߲߮",
+	"cirrussearch-explore-similar-categories": "ߞߎߡߘߊ ߟߎ߬",
+	"cirrussearch-explore-similar-languages": "ߞߊ߲ ߠߎ߬",
+	"cirrussearch-explore-similar-related-none": "ߞߐߜߍ߫ ߜߋ߲߬ߞߘߎ߬ߢߐ߲߰ߡߊ߬ ߕߍ߫ ߦߋ߲߬",
+	"cirrussearch-explore-similar-categories-none": "ߞߎߡߘߊ ߝߋ߲߫ ߕߍ߫ ߦߋ߲߬",
+	"cirrussearch-explore-similar-languages-none": "ߊ߬ ߕߍ߫ ߞߊ߲߫ ߜߘߍ ߟߎ߬ ߘߐ߫",
+	"cirrussearch-article-words": "ߞߎߡߊߘߋ߲ ߡߍ߲ ߦߋ߫ ߞߣߐߘߐ߫ ߞߐߜߍ ߟߎ߬ ߓߍ߯ ߘߐ߫"
+}

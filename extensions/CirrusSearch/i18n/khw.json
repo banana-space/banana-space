@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rachitrali"
+		]
+	},
+	"cirrussearch-pref-label": "جدید تلاش",
+	"prefs-completion": "تکمیل تلاش",
+	"cirrussearch-pref-completion-section-desc": "تجویز دہندہ تکمیل",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "طے شدہ (سفارش کردہ)",
+	"cirrussearch-completion-profile-normal-pref-name": "حالت رجوع مکرر (اضافی)",
+	"cirrussearch-explore-similar-languages": "زبان",
+	"cirrussearch-explore-similar-related-none": "متعلقہ صفحات میسر نیکی",
+	"cirrussearch-explore-similar-categories-none": "زمرہ جات میسر نیکی",
+	"cirrussearch-explore-similar-languages-none": "دیگر زبانہ دستیاب"
+}

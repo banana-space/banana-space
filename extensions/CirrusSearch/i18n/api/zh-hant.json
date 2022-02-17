@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cwlin0416",
+			"Kly"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "CirrusSearch 匯出設置。",
+	"apihelp-cirrus-config-dump-summary": "匯出 CirrusSearch 設定。",
+	"apihelp-cirrus-config-dump-example": "取得 CirrusSearch 匯出的設置。",
+	"apihelp-cirrus-mapping-dump-description": "匯出 CirrusSearch 於此 Wiki 的對應表。",
+	"apihelp-cirrus-mapping-dump-summary": "用於此 wiki 的 CirrusSearch 匯出對應。",
+	"apihelp-cirrus-mapping-dump-example": "取得用於此 wiki 的 CirrusSearch 匯出對應。",
+	"apihelp-cirrus-settings-dump-description": "匯出 CirrusSearch 於此 Wiki 的設定。",
+	"apihelp-cirrus-settings-dump-summary": "用於此 wiki 的 CirrusSearch 匯出設定。",
+	"apihelp-cirrus-settings-dump-example": "取得用於此 wiki 的 CirrusSearch 匯出設定。",
+	"apihelp-cirrus-profiles-dump-description": "用於此 wiki 的 CirrusSearch 匯出設定檔。",
+	"apihelp-cirrus-profiles-dump-summary": "用於此 wiki 的 CirrusSearch 匯出設定檔。",
+	"apihelp-cirrus-profiles-dump-example": "取得用於此 wiki 的 CirrusSearch 匯出設定檔。",
+	"apihelp-cirrus-profiles-dump-param-verbose": "匯出設定檔內容",
+	"apihelp-query+cirrusdoc-description": "匯出 CirrusSearch 的條目文件。",
+	"apihelp-query+cirrusdoc-summary": "來自搜尋伺服器的 CirrusSearch 匯出條目文件",
+	"apihelp-query+cirrusdoc-example": "取得目前編入索引至搜尋的單一 CirrusSearch 匯出條目。",
+	"apihelp-query+cirrusbuilddoc-summary": "匯出來自資料庫伺服器的 CirrusSearch 條目文件",
+	"apihelp-query+cirrusbuilddoc-example": "取得生成自資料庫的單一 CirrusSearch 匯出條目。",
+	"apierror-cirrus-requesttoolong": "字首搜尋請求不可大於最大允許長度。（$1 &gt; $2）",
+	"apihelp-query+compsuggestbuilddoc-param-method": "使用的計分方法",
+	"apierror-compsuggestbuilddoc-bad-method": "未知計分方法",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "自動補齊所使用的文件匯出",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "取得由自動補齊所使用的文件匯出"
+}

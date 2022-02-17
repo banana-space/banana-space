@@ -1,0 +1,5 @@
+{
+	"_comment": "Request multiple existing pages",
+	"type": "get",
+	"docIds": [25,26,27]
+}

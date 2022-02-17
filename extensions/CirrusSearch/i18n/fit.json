@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pyscowicz",
+			"Ville Ullgren"
+		]
+	},
+	"cirrussearch-pref-label": "Uusi haku",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Stantarti (suositeltu)",
+	"cirrussearch-completion-profile-normal-pref-name": "Uuelleenohjaustila (edistynyt)",
+	"cirrussearch-explore-similar-related": "Relateerattu",
+	"cirrussearch-explore-similar-categories": "Luokat",
+	"cirrussearch-explore-similar-languages": "Kielet"
+}

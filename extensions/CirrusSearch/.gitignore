@@ -1,0 +1,9 @@
+.svn
+*~
+*.kate-swp
+.*.swp
+.indexed
+node_modules/
+vendor/
+composer.lock
+.eslintcache

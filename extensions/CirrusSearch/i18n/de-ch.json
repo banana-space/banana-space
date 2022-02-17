@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Filzstift"
+		]
+	},
+	"cirrussearch-desc": "Ermöglicht eine durch «Elasticsearch» gestützte Suche",
+	"cirrussearch-boost-templates": " #<!-- Diese Zeile nicht verändern. --> <pre>\n# Falls eine Seite eine dieser Vorlagen enthält, wird der Such-Score mit dem konfigurierten Prozentsatz multipliziert.\n# Änderungen werden sofort wirksam.\n# Syntax:\n#   * Alles ab einer Raute («#») bis zum Zeilenende ist ein Kommentar.\n#   * Jede nicht-leere Zeile ist der genaue Name der zu optimierenden Vorlage mit Namensraum und Unterscheidung zwischen Gross-/Kleinschreibung, gefolgt von einem Pipe-Symbol («|»), einer Zahl und einem Prozentzeichen («%»).\n# Beispiele funktionierender Zeilen:\n# Vorlage:Gut|150%\n# Vorlage:Sehr gut|300%\n# Vorlage:Schlecht|50%\n# Beispiele nicht funktionierender Zeilen:\n# Vorlage:Foo|150.234234% <-- Keine Dezimalstellen erlaubt!\n# Foo|150% <-- Technisch möglich, allerdings für Einbindungen der Seite «Foo» aus dem Haupt-Namensraum.\n# Du kannst die Konfiguration durch eine Abfrage mit dem Präfix boost-templates:\"XX\" testen, wobei XX für alle Vorlagen steht, die du optimieren möchtest, getrennt durch Leerschläge anstelle von Zeilenumbrüchen.\n# Abfragen mit boost-templates:\"XX\" ignorieren die Inhalte dieses Feldes.\n #</pre> <!-- Diese Zeile nicht verändern. -->"
+}

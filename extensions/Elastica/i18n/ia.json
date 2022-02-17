@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"elastica-desc": "Functionalitate basic de [http://www.elasticsearch.org/ Elasticsearch] pro altere extensiones, fornite per le bibliotheca [http://elastica.io/ Elastica]"
+}

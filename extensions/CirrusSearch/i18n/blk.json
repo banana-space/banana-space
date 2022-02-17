@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Khun Kt",
+			"咽頭べさ"
+		]
+	},
+	"cirrussearch-too-busy-error": "ထိုမ်ႏထွားရေꩻနဝ်ꩻ ယိုခါကျာꩻ ထာꩻမာꩻသျုတ်။ ကျိုꩻစာꩻထဲင်းယင်း ဆုဲင်ꩻတလဲင်ႏဟုဲင်းသြ။",
+	"cirrussearch-regex-too-complex-error": "ထိုမ်ႏစဲစ်ထွားမုꩻကို သျုတ်တရေင်မွေးထာꩻ။ ဖြေႏသျင်ꩻနယ်ꩻဖုံႏတာႏ [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|နွို့ထွား]] သွော့ယိုကို။",
+	"cirrussearch-pref-label": "ထိုမ်ႏထွားတသာ",
+	"cirrussearch-give-feedback": "တဲမ်းဖေႏကျံႏညဏ်ႏပါသွော့ နီသွဥ်းသီးသြ",
+	"cirrussearch-explore-similar-related": "ဆွိုက်စပ်ဝင်ꩻ",
+	"cirrussearch-explore-similar-categories": "ကဏ္ဍဖုံႏ",
+	"cirrussearch-explore-similar-languages": "ဘာႏသာႏငဝ်းငွါဖုံႏ",
+	"cirrussearch-explore-similar-related-none": "ဆွိုက်စပ်လိတ်မဲ့ငါဖုံႏ လꩻနွောင်ꩻတဝ်း",
+	"cirrussearch-explore-similar-categories-none": "ကဏ္ဍဖုံႏ လꩻနွောင်ꩻတဝ်း",
+	"cirrussearch-explore-similar-languages-none": "လꩻနွောင်ꩻတဝ်း တွမ်ႏဘာႏသာႏငဝ်းငွါလင်",
+	"cirrussearch-article-words": "အကျောင်ꩻခရာႏလိတ်မဲ့ငါဖုံႏကို လိတ်ဖြုံႏဖုံႏ"
+}

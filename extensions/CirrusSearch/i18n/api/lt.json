@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Albertas"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "CirrusSearch konfigūracijos išklotinė.",
+	"apihelp-cirrus-mapping-dump-description": "CirrusSearch susiejimo šiam vikiui išklotinė.",
+	"apihelp-cirrus-settings-dump-description": "CirrusSearch nustatymų šiam vikiui išklotinė."
+}

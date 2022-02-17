@@ -1,0 +1,530 @@
+{
+    "page": {
+        "dynamic": false,
+        "properties": {
+            "timestamp": {
+                "type": "date",
+                "format": "dateOptionalTime"
+            },
+            "create_timestamp": {
+                "type": "date",
+                "format": "dateOptionalTime"
+            },
+            "wiki": {
+                "type": "text",
+                "analyzer": "keyword",
+                "norms": false,
+                "index_options": "docs"
+            },
+            "namespace": {
+                "type": "long"
+            },
+            "namespace_text": {
+                "type": "text",
+                "analyzer": "keyword",
+                "norms": false,
+                "index_options": "docs"
+            },
+            "title": {
+                "type": "text",
+                "copy_to": [
+                    "suggest",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match",
+                    "all_near_match"
+                ],
+                "analyzer": "text",
+                "search_analyzer": "text_search",
+                "position_increment_gap": 10,
+                "similarity": "bm25",
+                "fields": {
+                    "plain": {
+                        "type": "text",
+                        "analyzer": "plain",
+                        "search_analyzer": "plain_search",
+                        "position_increment_gap": 10,
+                        "similarity": "bm25"
+                    },
+                    "prefix": {
+                        "similarity": "bm25",
+                        "type": "text",
+                        "analyzer": "prefix",
+                        "search_analyzer": "near_match",
+                        "index_options": "docs",
+                        "norms": false
+                    },
+                    "prefix_asciifolding": {
+                        "similarity": "bm25",
+                        "type": "text",
+                        "analyzer": "prefix_asciifolding",
+                        "search_analyzer": "near_match_asciifolding",
+                        "index_options": "docs",
+                        "norms": false
+                    },
+                    "near_match": {
+                        "similarity": "bm25",
+                        "type": "text",
+                        "analyzer": "near_match",
+                        "index_options": "docs",
+                        "norms": false
+                    },
+                    "near_match_asciifolding": {
+                        "similarity": "bm25",
+                        "type": "text",
+                        "analyzer": "near_match_asciifolding",
+                        "index_options": "docs",
+                        "norms": false
+                    },
+                    "keyword": {
+                        "similarity": "bm25",
+                        "type": "text",
+                        "analyzer": "keyword",
+                        "index_options": "docs",
+                        "norms": false
+                    },
+                    "trigram": {
+                        "similarity": "bm25",
+                        "type": "text",
+                        "norms": false,
+                        "analyzer": "trigram",
+                        "index_options": "docs"
+                    }
+                }
+            },
+            "text": {
+                "type": "text",
+                "analyzer": "text",
+                "search_analyzer": "text_search",
+                "position_increment_gap": 10,
+                "similarity": "bm25",
+                "fields": {
+                    "plain": {
+                        "type": "text",
+                        "analyzer": "plain",
+                        "search_analyzer": "plain_search",
+                        "position_increment_gap": 10,
+                        "similarity": "bm25",
+                        "index_options": "offsets"
+                    },
+                    "word_count": {
+                        "type": "token_count",
+                        "store": true,
+                        "analyzer": "plain"
+                    }
+                },
+                "index_options": "offsets",
+                "copy_to": [
+                    "all"
+                ]
+            },
+            "text_bytes": {
+                "type": "long",
+                "index": false
+            },
+            "source_text": {
+                "index": false,
+                "type": "text",
+                "fields": {
+                    "plain": {
+                        "type": "text",
+                        "norms": false,
+                        "analyzer": "source_text_plain",
+                        "search_analyzer": "source_text_plain_search",
+                        "position_increment_gap": 10,
+                        "similarity": "bm25",
+                        "index_options": "offsets"
+                    },
+                    "trigram": {
+                        "norms": false,
+                        "type": "text",
+                        "analyzer": "trigram",
+                        "index_options": "docs"
+                    }
+                }
+            },
+            "redirect": {
+                "dynamic": false,
+                "properties": {
+                    "namespace": {
+                        "type": "long"
+                    },
+                    "title": {
+                        "type": "text",
+                        "copy_to": [
+                            "suggest",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match",
+                            "all_near_match"
+                        ],
+                        "analyzer": "text",
+                        "search_analyzer": "text_search",
+                        "position_increment_gap": 10,
+                        "similarity": "bm25",
+                        "fields": {
+                            "plain": {
+                                "type": "text",
+                                "analyzer": "plain",
+                                "search_analyzer": "plain_search",
+                                "position_increment_gap": 10,
+                                "similarity": "bm25",
+                                "index_options": "offsets"
+                            },
+                            "prefix": {
+                                "similarity": "bm25",
+                                "type": "text",
+                                "analyzer": "prefix",
+                                "search_analyzer": "near_match",
+                                "index_options": "offsets",
+                                "norms": false
+                            },
+                            "prefix_asciifolding": {
+                                "similarity": "bm25",
+                                "type": "text",
+                                "analyzer": "prefix_asciifolding",
+                                "search_analyzer": "near_match_asciifolding",
+                                "index_options": "offsets",
+                                "norms": false
+                            },
+                            "near_match": {
+                                "similarity": "bm25",
+                                "type": "text",
+                                "analyzer": "near_match",
+                                "index_options": "offsets",
+                                "norms": false
+                            },
+                            "near_match_asciifolding": {
+                                "similarity": "bm25",
+                                "type": "text",
+                                "analyzer": "near_match_asciifolding",
+                                "index_options": "offsets",
+                                "norms": false
+                            },
+                            "keyword": {
+                                "similarity": "bm25",
+                                "type": "text",
+                                "analyzer": "keyword",
+                                "index_options": "docs",
+                                "norms": false
+                            },
+                            "trigram": {
+                                "similarity": "bm25",
+                                "type": "text",
+                                "norms": false,
+                                "analyzer": "trigram",
+                                "index_options": "docs"
+                            }
+                        },
+                        "index_options": "offsets"
+                    }
+                }
+            },
+            "incoming_links": {
+                "type": "long"
+            },
+            "local_sites_with_dupe": {
+                "type": "text",
+                "analyzer": "lowercase_keyword",
+                "norms": false,
+                "index_options": "docs"
+            },
+            "suggest": {
+                "type": "text",
+                "similarity": "bm25",
+                "index_options": "freqs",
+                "analyzer": "suggest",
+                "fields": {
+                    "reverse": {
+                        "type": "text",
+                        "similarity": "bm25",
+                        "index_options": "freqs",
+                        "analyzer": "suggest_reverse"
+                    }
+                }
+            },
+            "category": {
+                "type": "text",
+                "analyzer": "text",
+                "search_analyzer": "text_search",
+                "position_increment_gap": 10,
+                "similarity": "bm25",
+                "fields": {
+                    "plain": {
+                        "type": "text",
+                        "analyzer": "plain",
+                        "search_analyzer": "plain_search",
+                        "position_increment_gap": 10,
+                        "similarity": "bm25",
+                        "index_options": "offsets"
+                    },
+                    "lowercase_keyword": {
+                        "similarity": "bm25",
+                        "type": "text",
+                        "analyzer": "lowercase_keyword",
+                        "norms": false,
+                        "index_options": "docs"
+                    }
+                },
+                "index_options": "offsets",
+                "copy_to": [
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all"
+                ]
+            },
+            "external_link": {
+                "type": "text",
+                "analyzer": "keyword",
+                "norms": false,
+                "index_options": "docs"
+            },
+            "outgoing_link": {
+                "type": "text",
+                "analyzer": "keyword",
+                "norms": false,
+                "index_options": "docs"
+            },
+            "template": {
+                "type": "text",
+                "analyzer": "lowercase_keyword",
+                "norms": false,
+                "index_options": "docs",
+                "fields": {
+                    "keyword": {
+                        "type": "text",
+                        "analyzer": "keyword",
+                        "index_options": "docs",
+                        "norms": false
+                    }
+                }
+            },
+            "content_model": {
+                "type": "text",
+                "analyzer": "keyword",
+                "norms": false,
+                "index_options": "docs"
+            },
+            "language": {
+                "type": "text",
+                "analyzer": "keyword",
+                "norms": false,
+                "index_options": "docs"
+            },
+            "heading": {
+                "type": "text",
+                "analyzer": "text",
+                "search_analyzer": "text_search",
+                "position_increment_gap": 10,
+                "similarity": "bm25",
+                "fields": {
+                    "plain": {
+                        "type": "text",
+                        "analyzer": "plain",
+                        "search_analyzer": "plain_search",
+                        "position_increment_gap": 10,
+                        "similarity": "bm25",
+                        "index_options": "offsets"
+                    }
+                },
+                "index_options": "offsets",
+                "copy_to": [
+                    "all",
+                    "all",
+                    "all",
+                    "all",
+                    "all"
+                ]
+            },
+            "auxiliary_text": {
+                "type": "text",
+                "analyzer": "text",
+                "search_analyzer": "text_search",
+                "position_increment_gap": 10,
+                "similarity": "bm25",
+                "fields": {
+                    "plain": {
+                        "type": "text",
+                        "analyzer": "plain",
+                        "search_analyzer": "plain_search",
+                        "position_increment_gap": 10,
+                        "similarity": "bm25",
+                        "index_options": "offsets"
+                    }
+                },
+                "index_options": "offsets",
+                "copy_to": [
+                    "all"
+                ]
+            },
+            "opening_text": {
+                "type": "text",
+                "analyzer": "text",
+                "search_analyzer": "text_search",
+                "position_increment_gap": 10,
+                "similarity": "bm25",
+                "fields": {
+                    "plain": {
+                        "type": "text",
+                        "analyzer": "plain",
+                        "search_analyzer": "plain_search",
+                        "position_increment_gap": 10,
+                        "similarity": "bm25"
+                    }
+                },
+                "copy_to": [
+                    "all",
+                    "all",
+                    "all"
+                ]
+            },
+            "file_media_type": {
+                "type": "text",
+                "analyzer": "lowercase_keyword",
+                "norms": false,
+                "index_options": "docs"
+            },
+            "file_mime": {
+                "type": "text",
+                "analyzer": "short_text",
+                "search_analyzer": "short_text_search",
+                "norms": false
+            },
+            "file_size": {
+                "type": "long"
+            },
+            "file_width": {
+                "type": "long"
+            },
+            "file_height": {
+                "type": "long"
+            },
+            "file_bits": {
+                "type": "long"
+            },
+            "file_resolution": {
+                "type": "long"
+            },
+            "file_text": {
+                "type": "text",
+                "analyzer": "text",
+                "search_analyzer": "text_search",
+                "position_increment_gap": 10,
+                "similarity": "bm25",
+                "fields": {
+                    "plain": {
+                        "type": "text",
+                        "analyzer": "plain",
+                        "search_analyzer": "plain_search",
+                        "position_increment_gap": 10,
+                        "similarity": "bm25",
+                        "index_options": "offsets"
+                    }
+                },
+                "index_options": "offsets",
+                "copy_to": [
+                    "all"
+                ]
+            },
+            "all": {
+                "type": "text",
+                "analyzer": "text",
+                "search_analyzer": "text_search",
+                "position_increment_gap": 10,
+                "similarity": "bm25",
+                "fields": {
+                    "plain": {
+                        "type": "text",
+                        "analyzer": "plain",
+                        "search_analyzer": "plain_search",
+                        "position_increment_gap": 10,
+                        "similarity": "bm25"
+                    }
+                }
+            },
+            "all_near_match": {
+                "type": "text",
+                "analyzer": "near_match",
+                "index_options": "freqs",
+                "norms": false,
+                "similarity": "bm25",
+                "fields": {
+                    "asciifolding": {
+                        "type": "text",
+                        "analyzer": "near_match_asciifolding",
+                        "index_options": "freqs",
+                        "norms": false,
+                        "similarity": "bm25"
+                    }
+                }
+            }
+        }
+    }
+}

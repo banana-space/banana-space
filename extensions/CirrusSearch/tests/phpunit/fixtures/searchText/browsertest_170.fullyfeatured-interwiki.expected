@@ -1,0 +1,1817 @@
+{
+    "__main__": {
+        "description": "full_text search for 'intitle:catapult'",
+        "options": {
+            "search_type": "dfs_query_then_fetch",
+            "timeout": "20s"
+        },
+        "params": {
+            "search_type": "dfs_query_then_fetch",
+            "timeout": "20s"
+        },
+        "path": "wiki\/page\/_search",
+        "query": {
+            "_source": [
+                "namespace",
+                "namespace_text",
+                "redirect.*",
+                "text_bytes",
+                "timestamp",
+                "title",
+                "wiki"
+            ],
+            "highlight": {
+                "fields": {
+                    "auxiliary_text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "auxiliary_text",
+                            "auxiliary_text.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "skip_if_last_matched": true,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "category": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "category",
+                            "category.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "file_text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "file_text",
+                            "file_text.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "skip_if_last_matched": true,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "heading": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "heading",
+                            "heading.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "redirect.title": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "redirect.title",
+                            "redirect.title.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "text",
+                            "text.plain"
+                        ],
+                        "no_match_size": 150,
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "title": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "title",
+                            "title.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "type": "experimental"
+                    }
+                },
+                "highlight_query": {
+                    "query_string": {
+                        "allow_leading_wildcard": true,
+                        "default_operator": "OR",
+                        "fields": [
+                            "auxiliary_text.plain^0.5",
+                            "auxiliary_text^0.25",
+                            "category.plain^8",
+                            "category^4",
+                            "heading.plain^5",
+                            "heading^2.5",
+                            "opening_text.plain^3",
+                            "opening_text^1.5",
+                            "redirect.title.plain^15",
+                            "redirect.title^7.5",
+                            "text.plain^1",
+                            "text^0.5",
+                            "title.plain^20",
+                            "title^10"
+                        ],
+                        "fuzzy_prefix_length": 2,
+                        "max_determinized_states": 500,
+                        "phrase_slop": 1,
+                        "query": "catapult",
+                        "rewrite": "top_terms_blended_freqs_1024"
+                    }
+                },
+                "post_tags": [
+                    "\ue001"
+                ],
+                "pre_tags": [
+                    "\ue000"
+                ]
+            },
+            "query": {
+                "bool": {
+                    "filter": [
+                        {
+                            "bool": {
+                                "must": [
+                                    {
+                                        "query_string": {
+                                            "allow_leading_wildcard": true,
+                                            "default_operator": "AND",
+                                            "fields": [
+                                                "redirect.title",
+                                                "redirect.title.plain",
+                                                "title",
+                                                "title.plain"
+                                            ],
+                                            "fuzzy_prefix_length": 2,
+                                            "query": "catapult",
+                                            "rewrite": "top_terms_boost_1024"
+                                        }
+                                    },
+                                    {
+                                        "terms": {
+                                            "namespace": [
+                                                0,
+                                                1,
+                                                2,
+                                                3
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1,
+                    "should": [
+                        {
+                            "bool": {
+                                "filter": [
+                                    {
+                                        "bool": {
+                                            "should": [
+                                                {
+                                                    "match": {
+                                                        "all": {
+                                                            "operator": "AND",
+                                                            "query": "catapult"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "match": {
+                                                        "all.plain": {
+                                                            "operator": "AND",
+                                                            "query": "catapult"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "should": [
+                                    {
+                                        "dis_max": {
+                                            "queries": [
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 0.4,
+                                                        "fields": [
+                                                            "text.plain^1",
+                                                            "text^0.3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                },
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 0.5,
+                                                        "fields": [
+                                                            "opening_text.plain^1",
+                                                            "opening_text^0.3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                }
+                                            ],
+                                            "tie_breaker": 0.2
+                                        }
+                                    },
+                                    {
+                                        "dis_max": {
+                                            "queries": [
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 1.05,
+                                                        "fields": [
+                                                            "suggest"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                },
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 2,
+                                                        "fields": [
+                                                            "redirect.title.plain^1",
+                                                            "redirect.title^0.3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 0.2,
+                                            "fields": [
+                                                "auxiliary_text.plain^1",
+                                                "auxiliary_text^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 0.2,
+                                            "fields": [
+                                                "file_text.plain^1",
+                                                "file_text^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 1.3,
+                                            "fields": [
+                                                "heading.plain^1",
+                                                "heading^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 1.8,
+                                            "fields": [
+                                                "category.plain^1",
+                                                "category^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 2.3,
+                                            "fields": [
+                                                "title.plain^1",
+                                                "title^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "multi_match": {
+                                "fields": [
+                                    "all_near_match.asciifolding^1.5",
+                                    "all_near_match^2"
+                                ],
+                                "query": "catapult"
+                            }
+                        }
+                    ]
+                }
+            },
+            "rescore": [
+                {
+                    "query": {
+                        "query_weight": 1,
+                        "rescore_query": {
+                            "function_score": {
+                                "functions": [
+                                    {
+                                        "field_value_factor": {
+                                            "field": "incoming_links",
+                                            "missing": 0,
+                                            "modifier": "log2p"
+                                        }
+                                    },
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    1
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.25
+                                    },
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    2
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.05
+                                    },
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    3
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.0125
+                                    }
+                                ]
+                            }
+                        },
+                        "rescore_query_weight": 1,
+                        "score_mode": "multiply"
+                    },
+                    "window_size": 8192
+                }
+            ],
+            "size": 21,
+            "stats": [
+                "complex_query",
+                "full_text",
+                "full_text_simple_match",
+                "intitle",
+                "suggest"
+            ],
+            "stored_fields": [
+                "text.word_count"
+            ],
+            "suggest": {
+                "suggest": {
+                    "phrase": {
+                        "confidence": 2,
+                        "direct_generator": [
+                            {
+                                "field": "suggest",
+                                "max_term_freq": 0.5,
+                                "min_doc_freq": 0,
+                                "prefix_length": 2,
+                                "suggest_mode": "always"
+                            },
+                            {
+                                "field": "suggest.reverse",
+                                "max_term_freq": 0.5,
+                                "min_doc_freq": 0,
+                                "post_filter": "token_reverse",
+                                "pre_filter": "token_reverse",
+                                "prefix_length": 2,
+                                "suggest_mode": "always"
+                            }
+                        ],
+                        "field": "suggest",
+                        "highlight": {
+                            "post_tag": "\ue001",
+                            "pre_tag": "\ue000"
+                        },
+                        "max_errors": 2,
+                        "real_word_error_likelihood": 0.95,
+                        "size": 1,
+                        "smoothing": {
+                            "stupid_backoff": {
+                                "discount": 0.4
+                            }
+                        }
+                    }
+                },
+                "text": "catapult"
+            }
+        }
+    },
+    "wikt": {
+        "description": "full_text search for 'intitle:catapult'",
+        "options": {
+            "search_type": "dfs_query_then_fetch",
+            "timeout": "20s"
+        },
+        "params": {
+            "search_type": "dfs_query_then_fetch",
+            "timeout": "20s"
+        },
+        "path": "itwiktionary\/page\/_search",
+        "query": {
+            "_source": [
+                "namespace",
+                "namespace_text",
+                "redirect.*",
+                "text_bytes",
+                "timestamp",
+                "title",
+                "wiki"
+            ],
+            "highlight": {
+                "fields": {
+                    "auxiliary_text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "auxiliary_text",
+                            "auxiliary_text.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "skip_if_last_matched": true,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "category": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "category",
+                            "category.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "file_text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "file_text",
+                            "file_text.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "skip_if_last_matched": true,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "heading": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "heading",
+                            "heading.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "redirect.title": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "redirect.title",
+                            "redirect.title.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "text",
+                            "text.plain"
+                        ],
+                        "no_match_size": 150,
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "title": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "title",
+                            "title.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "type": "experimental"
+                    }
+                },
+                "highlight_query": {
+                    "query_string": {
+                        "allow_leading_wildcard": true,
+                        "default_operator": "OR",
+                        "fields": [
+                            "auxiliary_text.plain^0.5",
+                            "auxiliary_text^0.25",
+                            "category.plain^8",
+                            "category^4",
+                            "heading.plain^5",
+                            "heading^2.5",
+                            "opening_text.plain^3",
+                            "opening_text^1.5",
+                            "redirect.title.plain^15",
+                            "redirect.title^7.5",
+                            "text.plain^1",
+                            "text^0.5",
+                            "title.plain^20",
+                            "title^10"
+                        ],
+                        "fuzzy_prefix_length": 2,
+                        "max_determinized_states": 500,
+                        "phrase_slop": 1,
+                        "query": "catapult",
+                        "rewrite": "top_terms_blended_freqs_1024"
+                    }
+                },
+                "post_tags": [
+                    "\ue001"
+                ],
+                "pre_tags": [
+                    "\ue000"
+                ]
+            },
+            "query": {
+                "bool": {
+                    "filter": [
+                        {
+                            "bool": {
+                                "must": [
+                                    {
+                                        "query_string": {
+                                            "allow_leading_wildcard": true,
+                                            "default_operator": "AND",
+                                            "fields": [
+                                                "redirect.title",
+                                                "redirect.title.plain",
+                                                "title",
+                                                "title.plain"
+                                            ],
+                                            "fuzzy_prefix_length": 2,
+                                            "query": "catapult",
+                                            "rewrite": "top_terms_boost_1024"
+                                        }
+                                    },
+                                    {
+                                        "terms": {
+                                            "namespace": [
+                                                0,
+                                                1,
+                                                2,
+                                                3
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1,
+                    "should": [
+                        {
+                            "bool": {
+                                "filter": [
+                                    {
+                                        "bool": {
+                                            "should": [
+                                                {
+                                                    "match": {
+                                                        "all": {
+                                                            "operator": "AND",
+                                                            "query": "catapult"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "match": {
+                                                        "all.plain": {
+                                                            "operator": "AND",
+                                                            "query": "catapult"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "should": [
+                                    {
+                                        "dis_max": {
+                                            "queries": [
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 0.4,
+                                                        "fields": [
+                                                            "text.plain^1",
+                                                            "text^0.3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                },
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 0.5,
+                                                        "fields": [
+                                                            "opening_text.plain^1",
+                                                            "opening_text^0.3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                }
+                                            ],
+                                            "tie_breaker": 0.2
+                                        }
+                                    },
+                                    {
+                                        "dis_max": {
+                                            "queries": [
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 1.05,
+                                                        "fields": [
+                                                            "suggest"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                },
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 2,
+                                                        "fields": [
+                                                            "redirect.title.plain^1",
+                                                            "redirect.title^0.3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 0.2,
+                                            "fields": [
+                                                "auxiliary_text.plain^1",
+                                                "auxiliary_text^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 0.2,
+                                            "fields": [
+                                                "file_text.plain^1",
+                                                "file_text^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 1.3,
+                                            "fields": [
+                                                "heading.plain^1",
+                                                "heading^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 1.8,
+                                            "fields": [
+                                                "category.plain^1",
+                                                "category^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 2.3,
+                                            "fields": [
+                                                "title.plain^1",
+                                                "title^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "multi_match": {
+                                "fields": [
+                                    "all_near_match.asciifolding^1.5",
+                                    "all_near_match^2"
+                                ],
+                                "query": "catapult"
+                            }
+                        }
+                    ]
+                }
+            },
+            "rescore": [
+                {
+                    "query": {
+                        "query_weight": 1,
+                        "rescore_query": {
+                            "function_score": {
+                                "functions": [
+                                    {
+                                        "field_value_factor": {
+                                            "field": "incoming_links",
+                                            "missing": 0,
+                                            "modifier": "log2p"
+                                        }
+                                    },
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    1
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.25
+                                    },
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    2
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.05
+                                    },
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    3
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.0125
+                                    }
+                                ]
+                            }
+                        },
+                        "rescore_query_weight": 1,
+                        "score_mode": "multiply"
+                    },
+                    "window_size": 8192
+                }
+            ],
+            "size": 5,
+            "stats": [
+                "complex_query",
+                "full_text",
+                "full_text_simple_match",
+                "intitle"
+            ],
+            "stored_fields": [
+                "text.word_count"
+            ]
+        }
+    },
+    "b": {
+        "description": "full_text search for 'intitle:catapult'",
+        "options": {
+            "search_type": "dfs_query_then_fetch",
+            "timeout": "20s"
+        },
+        "params": {
+            "search_type": "dfs_query_then_fetch",
+            "timeout": "20s"
+        },
+        "path": "itwikibooks\/page\/_search",
+        "query": {
+            "_source": [
+                "namespace",
+                "namespace_text",
+                "redirect.*",
+                "text_bytes",
+                "timestamp",
+                "title",
+                "wiki"
+            ],
+            "highlight": {
+                "fields": {
+                    "auxiliary_text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "auxiliary_text",
+                            "auxiliary_text.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "skip_if_last_matched": true,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "category": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "category",
+                            "category.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "file_text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "file_text",
+                            "file_text.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "skip_if_last_matched": true,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "heading": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "heading",
+                            "heading.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "redirect.title": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "redirect.title",
+                            "redirect.title.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "text",
+                            "text.plain"
+                        ],
+                        "no_match_size": 150,
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "title": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "title",
+                            "title.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "type": "experimental"
+                    }
+                },
+                "highlight_query": {
+                    "query_string": {
+                        "allow_leading_wildcard": true,
+                        "default_operator": "OR",
+                        "fields": [
+                            "auxiliary_text.plain^0.5",
+                            "auxiliary_text^0.25",
+                            "category.plain^8",
+                            "category^4",
+                            "heading.plain^5",
+                            "heading^2.5",
+                            "opening_text.plain^3",
+                            "opening_text^1.5",
+                            "redirect.title.plain^15",
+                            "redirect.title^7.5",
+                            "text.plain^1",
+                            "text^0.5",
+                            "title.plain^20",
+                            "title^10"
+                        ],
+                        "fuzzy_prefix_length": 2,
+                        "max_determinized_states": 500,
+                        "phrase_slop": 1,
+                        "query": "catapult",
+                        "rewrite": "top_terms_blended_freqs_1024"
+                    }
+                },
+                "post_tags": [
+                    "\ue001"
+                ],
+                "pre_tags": [
+                    "\ue000"
+                ]
+            },
+            "query": {
+                "bool": {
+                    "filter": [
+                        {
+                            "bool": {
+                                "must": [
+                                    {
+                                        "query_string": {
+                                            "allow_leading_wildcard": true,
+                                            "default_operator": "AND",
+                                            "fields": [
+                                                "redirect.title",
+                                                "redirect.title.plain",
+                                                "title",
+                                                "title.plain"
+                                            ],
+                                            "fuzzy_prefix_length": 2,
+                                            "query": "catapult",
+                                            "rewrite": "top_terms_boost_1024"
+                                        }
+                                    },
+                                    {
+                                        "terms": {
+                                            "namespace": [
+                                                0,
+                                                1,
+                                                2,
+                                                3
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1,
+                    "should": [
+                        {
+                            "bool": {
+                                "filter": [
+                                    {
+                                        "bool": {
+                                            "should": [
+                                                {
+                                                    "match": {
+                                                        "all": {
+                                                            "operator": "AND",
+                                                            "query": "catapult"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "match": {
+                                                        "all.plain": {
+                                                            "operator": "AND",
+                                                            "query": "catapult"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "should": [
+                                    {
+                                        "dis_max": {
+                                            "queries": [
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 0.4,
+                                                        "fields": [
+                                                            "text.plain^1",
+                                                            "text^0.3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                },
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 0.5,
+                                                        "fields": [
+                                                            "opening_text.plain^1",
+                                                            "opening_text^0.3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                }
+                                            ],
+                                            "tie_breaker": 0.2
+                                        }
+                                    },
+                                    {
+                                        "dis_max": {
+                                            "queries": [
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 1.05,
+                                                        "fields": [
+                                                            "suggest"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                },
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 2,
+                                                        "fields": [
+                                                            "redirect.title.plain^1",
+                                                            "redirect.title^0.3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 0.2,
+                                            "fields": [
+                                                "auxiliary_text.plain^1",
+                                                "auxiliary_text^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 0.2,
+                                            "fields": [
+                                                "file_text.plain^1",
+                                                "file_text^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 1.3,
+                                            "fields": [
+                                                "heading.plain^1",
+                                                "heading^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 1.8,
+                                            "fields": [
+                                                "category.plain^1",
+                                                "category^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 2.3,
+                                            "fields": [
+                                                "title.plain^1",
+                                                "title^0.3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "multi_match": {
+                                "fields": [
+                                    "all_near_match.asciifolding^1.5",
+                                    "all_near_match^2"
+                                ],
+                                "query": "catapult"
+                            }
+                        }
+                    ]
+                }
+            },
+            "rescore": [
+                {
+                    "query": {
+                        "query_weight": 1,
+                        "rescore_query": {
+                            "function_score": {
+                                "functions": [
+                                    {
+                                        "field_value_factor": {
+                                            "field": "incoming_links",
+                                            "missing": 0,
+                                            "modifier": "log2p"
+                                        }
+                                    },
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    1
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.25
+                                    },
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    2
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.05
+                                    },
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    3
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.0125
+                                    }
+                                ]
+                            }
+                        },
+                        "rescore_query_weight": 1,
+                        "score_mode": "multiply"
+                    },
+                    "window_size": 8192
+                }
+            ],
+            "size": 5,
+            "stats": [
+                "complex_query",
+                "full_text",
+                "full_text_simple_match",
+                "intitle"
+            ],
+            "stored_fields": [
+                "text.word_count"
+            ]
+        }
+    },
+    "voy": {
+        "description": "full_text search for 'intitle:catapult'",
+        "options": {
+            "search_type": "dfs_query_then_fetch",
+            "timeout": "20s"
+        },
+        "params": {
+            "search_type": "dfs_query_then_fetch",
+            "timeout": "20s"
+        },
+        "path": "itwikivoyage\/page\/_search",
+        "query": {
+            "_source": [
+                "namespace",
+                "namespace_text",
+                "redirect.*",
+                "text_bytes",
+                "timestamp",
+                "title",
+                "wiki"
+            ],
+            "highlight": {
+                "fields": {
+                    "auxiliary_text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "auxiliary_text",
+                            "auxiliary_text.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "skip_if_last_matched": true,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "category": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "category",
+                            "category.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "file_text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "file_text",
+                            "file_text.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "skip_if_last_matched": true,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "heading": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "heading",
+                            "heading.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "redirect.title": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "redirect.title",
+                            "redirect.title.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "options": {
+                            "skip_if_last_matched": true
+                        },
+                        "order": "score",
+                        "type": "experimental"
+                    },
+                    "text": {
+                        "fragment_size": 150,
+                        "fragmenter": "scan",
+                        "matched_fields": [
+                            "text",
+                            "text.plain"
+                        ],
+                        "no_match_size": 150,
+                        "number_of_fragments": 1,
+                        "options": {
+                            "boost_before": {
+                                "20": 2,
+                                "50": 1.8,
+                                "200": 1.5,
+                                "1000": 1.2
+                            },
+                            "max_fragments_scored": 5000,
+                            "top_scoring": true
+                        },
+                        "type": "experimental"
+                    },
+                    "title": {
+                        "fragmenter": "none",
+                        "matched_fields": [
+                            "title",
+                            "title.plain"
+                        ],
+                        "number_of_fragments": 1,
+                        "type": "experimental"
+                    }
+                },
+                "highlight_query": {
+                    "query_string": {
+                        "allow_leading_wildcard": true,
+                        "default_operator": "OR",
+                        "fields": [
+                            "auxiliary_text.plain^0.5",
+                            "auxiliary_text^0.25",
+                            "category.plain^8",
+                            "category^4",
+                            "heading.plain^5",
+                            "heading^2.5",
+                            "opening_text.plain^3",
+                            "opening_text^1.5",
+                            "redirect.title.plain^15",
+                            "redirect.title^7.5",
+                            "text.plain^1",
+                            "text^0.5",
+                            "title.plain^20",
+                            "title^10"
+                        ],
+                        "fuzzy_prefix_length": 2,
+                        "max_determinized_states": 500,
+                        "phrase_slop": 1,
+                        "query": "catapult",
+                        "rewrite": "top_terms_blended_freqs_1024"
+                    }
+                },
+                "post_tags": [
+                    "\ue001"
+                ],
+                "pre_tags": [
+                    "\ue000"
+                ]
+            },
+            "query": {
+                "bool": {
+                    "filter": [
+                        {
+                            "bool": {
+                                "must": [
+                                    {
+                                        "query_string": {
+                                            "allow_leading_wildcard": true,
+                                            "default_operator": "AND",
+                                            "fields": [
+                                                "redirect.title",
+                                                "redirect.title.plain",
+                                                "title",
+                                                "title.plain"
+                                            ],
+                                            "fuzzy_prefix_length": 2,
+                                            "query": "catapult",
+                                            "rewrite": "top_terms_boost_1024"
+                                        }
+                                    },
+                                    {
+                                        "terms": {
+                                            "namespace": [
+                                                0,
+                                                1,
+                                                2,
+                                                3
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1,
+                    "should": [
+                        {
+                            "bool": {
+                                "filter": [
+                                    {
+                                        "bool": {
+                                            "must": [
+                                                {
+                                                    "bool": {
+                                                        "should": [
+                                                            {
+                                                                "match": {
+                                                                    "all": {
+                                                                        "operator": "AND",
+                                                                        "query": "catapult"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "match": {
+                                                                    "all.plain": {
+                                                                        "operator": "AND",
+                                                                        "query": "catapult"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    "bool": {
+                                                        "should": [
+                                                            {
+                                                                "match": {
+                                                                    "redirect.title": {
+                                                                        "minimum_should_match": "3<80%",
+                                                                        "query": "catapult"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "match": {
+                                                                    "title": {
+                                                                        "minimum_should_match": "3<80%",
+                                                                        "query": "catapult"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "should": [
+                                    {
+                                        "dis_max": {
+                                            "queries": [
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 0.2,
+                                                        "fields": [
+                                                            "suggest"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                },
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 0.27,
+                                                        "fields": [
+                                                            "redirect.title.plain^1",
+                                                            "redirect.title^3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "dis_max": {
+                                            "queries": [
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 0.5,
+                                                        "fields": [
+                                                            "opening_text.plain^1",
+                                                            "opening_text^3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                },
+                                                {
+                                                    "multi_match": {
+                                                        "boost": 0.6,
+                                                        "fields": [
+                                                            "text.plain^1",
+                                                            "text^3"
+                                                        ],
+                                                        "minimum_should_match": "1",
+                                                        "query": "catapult",
+                                                        "type": "most_fields"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 0.05,
+                                            "fields": [
+                                                "auxiliary_text.plain^1",
+                                                "auxiliary_text^3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 0.05,
+                                            "fields": [
+                                                "category.plain^1",
+                                                "category^3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 0.05,
+                                            "fields": [
+                                                "heading.plain^1",
+                                                "heading^3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 0.3,
+                                            "fields": [
+                                                "title.plain^1",
+                                                "title^3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    },
+                                    {
+                                        "multi_match": {
+                                            "boost": 0.5,
+                                            "fields": [
+                                                "file_text.plain^1",
+                                                "file_text^3"
+                                            ],
+                                            "minimum_should_match": "1",
+                                            "query": "catapult",
+                                            "type": "most_fields"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "multi_match": {
+                                "fields": [
+                                    "all_near_match.asciifolding^1.5",
+                                    "all_near_match^2"
+                                ],
+                                "query": "catapult"
+                            }
+                        }
+                    ]
+                }
+            },
+            "rescore": [
+                {
+                    "query": {
+                        "query_weight": 1,
+                        "rescore_query": {
+                            "function_score": {
+                                "functions": [
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    1
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.25
+                                    },
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    2
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.05
+                                    },
+                                    {
+                                        "filter": {
+                                            "terms": {
+                                                "namespace": [
+                                                    3
+                                                ]
+                                            }
+                                        },
+                                        "weight": 0.0125
+                                    }
+                                ]
+                            }
+                        },
+                        "rescore_query_weight": 1,
+                        "score_mode": "multiply"
+                    },
+                    "window_size": 8192
+                },
+                {
+                    "query": {
+                        "query_weight": 1,
+                        "rescore_query": {
+                            "function_score": {
+                                "functions": [
+                                    {
+                                        "script_score": {
+                                            "script": {
+                                                "lang": "expression",
+                                                "source": "pow(doc['incoming_links'].value , 0.7) \/ ( pow(doc['incoming_links'].value, 0.7) + pow(30,0.7))"
+                                            }
+                                        },
+                                        "weight": 13
+                                    }
+                                ]
+                            }
+                        },
+                        "rescore_query_weight": 1,
+                        "score_mode": "total"
+                    },
+                    "window_size": 8192
+                }
+            ],
+            "size": 5,
+            "stats": [
+                "complex_query",
+                "full_text",
+                "full_text_simple_match",
+                "intitle"
+            ],
+            "stored_fields": [
+                "text.word_count"
+            ]
+        }
+    }
+}

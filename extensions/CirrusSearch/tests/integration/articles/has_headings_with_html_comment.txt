@@ -1,0 +1,2 @@
+==Heading with html comment<!-- gotta repeat the heading text: heading with html comment -->==
+that contains an html comment!

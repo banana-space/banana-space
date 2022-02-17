@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Xuacu"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Volcáu de la configuración de CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "Volcáu de la configuración de CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Recibir un volcáu de la configuración de CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Volcáu del mapéu de CirrusSearch pa esta wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Volcáu del mapéu de CirrusSearch pa esta wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Recibir un volcáu del mapéu de CirrusSearch pa esta wiki.",
+	"apihelp-cirrus-settings-dump-description": "Volcáu de les preferencies de CirrusSearch pa esta wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Volcáu de les preferencies de CirrusSearch pa esta wiki.",
+	"apihelp-cirrus-settings-dump-example": "Recibir un volcáu de les preferencies de CirrusSearch pa esta wiki.",
+	"apihelp-cirrus-profiles-dump-description": "Volcáu de los perfiles de CirrusSearch pa esta wiki.",
+	"apihelp-cirrus-profiles-dump-summary": "Volcáu de los perfiles de CirrusSearch pa esta wiki.",
+	"apihelp-cirrus-profiles-dump-example": "Recibir un voolcáu de los perfiles de CirrusSearch pa esta wiki.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Volcar el conteníu de los perfiles",
+	"apihelp-query+cirrusdoc-description": "Volcáu del documentu d'un artículu de CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Volcáu del documentu d'un artículu de CirrusSearch dende los sirvidores de gueta",
+	"apihelp-query+cirrusdoc-example": "Recibir el volcáu d'un artículu individual de CirrusSearch tal como ta indexáu actualmente na gueta.",
+	"apihelp-query+cirrusbuilddoc-summary": "Volcáu del documentu d'un artículu de CirrusSearch dende los sirvidores de base de datos",
+	"apihelp-query+cirrusbuilddoc-example": "Recibir el volcáu d'un artículu individual de CirrusSearch xeneráu dende la base de datos.",
+	"apierror-cirrus-requesttoolong": "La solicitú de prefixu de gueta ye más llarga que'l llargor máximu permitíu. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "El métodu de puntuación a usar",
+	"apierror-compsuggestbuilddoc-bad-method": "Métodu de puntuación desconocíu",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "Volcáu del documentu qu'usa el suxeridor de completáu",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "Recibir un volcáu del documentu qu'usa el suxeridor de completáu"
+}

@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Balajijagadesh"
+		]
+	},
+	"cirrussearch-pref-label": "புதிய தேடல்",
+	"cirrussearch-give-feedback": "உங்களுடைய கருத்தைத் தெரிவியுங்கள்",
+	"prefs-completion": "தேடல் முழுமை",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "இயல்பிருப்பு (பரிந்துரைக்கப்படுகிறது)",
+	"cirrussearch-explore-similar-related": "தொடர்புடைய",
+	"cirrussearch-explore-similar-categories": "பகுப்புகள்",
+	"cirrussearch-explore-similar-languages": "மொழிகள்",
+	"cirrussearch-explore-similar-related-none": "தொடர்புடைய பக்கங்கள் இல்லை",
+	"cirrussearch-explore-similar-categories-none": "பகுப்புகள் ஏதும் கிடைக்கவில்லை"
+}

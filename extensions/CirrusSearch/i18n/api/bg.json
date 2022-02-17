@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"StanProg",
+			"Vlad5250"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Връща настройките на CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "Връща настройките на CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Връща настройките на CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Дъмп на мапинга на CirrusSearch за това уики.",
+	"apihelp-cirrus-mapping-dump-summary": "Дъмп на мапинга на CirrusSearch за това уики.",
+	"apihelp-cirrus-mapping-dump-example": "Получаване копие на картографирането (mapping) на CirrusSearch за това уики.",
+	"apihelp-cirrus-settings-dump-description": "Копие на картографирането (mapping) на CirrusSearch за това уики.",
+	"apihelp-cirrus-settings-dump-summary": "Копие на настройките на CirrusSearch за това уики.",
+	"apihelp-cirrus-settings-dump-example": "Получаване копие на настройките на CirrusSearch за това уики.",
+	"apihelp-query+cirrusdoc-description": "Копие на статия на CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Копие на статия на CirrusSearch от сървърите за търсене",
+	"apihelp-query+cirrusdoc-example": "Получаване на копие на отделна статия на CirrusSearch, във вида в който е индексирана в момента в търсенето.",
+	"apihelp-query+cirrusbuilddoc-summary": "Копие на статия на CirrusSearch от сървърите на базата от данни",
+	"apihelp-query+cirrusbuilddoc-example": "Получаване на копие от на отделна статия на CirrusSearch генерирана от базата от данни.",
+	"apierror-cirrus-requesttoolong": "Заявката за търсене по представка превишава разрешената дължина. ($1 &gt; $2)"
+}

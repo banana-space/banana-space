@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Adam-Yourist"
+		]
+	},
+	"prefs-completion": "Лахара кхыдола оттамаш",
+	"cirrussearch-pref-completion-profile-help": "Ер лаха воал-кх из аьнна шийна хетар ши-шегӀа хьаувтаду (лаха аьнна хьо Ӏоязде волавелча).\n\n[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:CirrusSearch/CompletionSuggester Completion suggester] — лохача хана гӀо деш йола алгоритм я, гӀалаташ тоа а деш, хьона дукхагӀа эшаш дола хӀама хьа а лохаш. Префиксага гӀолла лахар — къаьнагӀа йола алгоритм я.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Юххьанцара хиннача тайпара (дикагIа да)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Ши гӀалат тоаду. Статьяй цӀерах чӀоагӀа тара дола ластараш дӀадоах.",
+	"cirrussearch-completion-profile-strict-pref-name": "Хила ма дезара Iояздара режим (халагIа да)",
+	"cirrussearch-completion-profile-strict-pref-desc": "ГӀалаташ нийсдиц. Юхаластараш белгалдиц. Iояздар нийсса хила деза кораде чам болчунца.",
+	"cirrussearch-completion-profile-normal-pref-name": "Юхаластарий режим (халагIа да)",
+	"cirrussearch-completion-profile-normal-pref-desc": "ГӀалаташ нийсдиц. Мегаш дола юхаластараш белгалду.",
+	"cirrussearch-completion-profile-classic-pref-name": "Классикай йола дешхьалхенах лахар",
+	"cirrussearch-completion-profile-classic-pref-desc": "ГӀалаташ нийсдец. Iочуязъешше хьагойт цӀераш.",
+	"cirrussearch-explore-similar-languages": "Метташ",
+	"cirrussearch-article-words": "Ерригача статьяшка долча деший дукхал"
+}

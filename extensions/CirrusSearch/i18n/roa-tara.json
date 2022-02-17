@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"cirrussearch-desc": "Ricerche Elasticsearch-powered pe MediaUicchi",
+	"cirrussearch-backend-error": "Non ge putime combletà 'a ricerca toje pe 'nu probbleme tembonarèe. Pe piacere pruève cchiù tarde.",
+	"cirrussearch-parse-error": "Non g'è possibbele 'nderpretà 'a 'nderrogazione. Se prege de scriverle arrete cchiù facile. 'A 'nderrogazione ha state reggistrate pe migliorà 'u sisteme de recerche.",
+	"cirrussearch-too-busy-error": "'A ricerche ste 'ngasenate. Pe piacere pruéve arrete.",
+	"cirrussearch-regex-syntax-error": "Errore de sindasse sus a l'espressione regolare a $2: $1",
+	"cirrussearch-regex-too-busy-error": "Pe mò troppe recerche cu espressiune regolare sò in esecuzione. Pruève arrete cchiù tarde.",
+	"cirrussearch-regex-too-complex-error": "L'espressione regolare jè troppe comblecate. 'Mbare de cchiù [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|aqquà]] cumme farle cchiù facile.",
+	"cirrussearch-now-using": "Stu pruggette uicchi ause 'nu motore de recerche nuève ([[mw:Special:MyLanguage/Help:CirrusSearch|cchiù 'mbormaziune]]).",
+	"cirrussearch-ignored-headings": " #<!-- lasse sta linèe accume ste --> <pre>\n# Testate ca avène scettate jndr'à le ricerche.\n# Le cangiaminde devendane effettive quanne 'a pàgene avène indicizzate.\n# Tu puè forzà 'a reindicizzazzione d'a pàgene facenne 'nu cangiamende vecande.\n# 'A sindasse jè 'a seguende:\n#   * Ogneccose da 'u carattere \"#\" 'nzigne a fine d'a linèe jè 'nu commende\n#   * Ogne linèa chiene jè 'u titole esatte da ignorà, case e ogneccose\nRefereminde\nCollegaminde de fore\n'Ndruche pure\n #</pre> <!-- lasse sta linèe accume ste -->",
+	"cirrussearch-pref-label": "Ricerca nove",
+	"cirrussearch-give-feedback": "Mannane 'nu commende",
+	"cirrussearch-query-too-long": "'U prefisse d'a recerche ave 'na lunghezze troppe longhe respette a quedde permesse. ($1 > $2)",
+	"cirrussearch-qi-profile-popular-inclinks": "'A classifeche se base soprattutte sus a 'u numere de collegaminde in entrate",
+	"prefs-completion": "Combletamende d'a recerche",
+	"cirrussearch-pref-completion-section-desc": "Suggeritore de combletamende",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Predefinite (conzigliate)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Corregge 'mbonde a doje errore de battiture. Live le redirezionaminde ca s'assemegghiane a 'u titole prengepàle.",
+	"cirrussearch-completion-profile-strict-pref-name": "Mode rigorose (avanzate)",
+	"cirrussearch-completion-profile-normal-pref-name": "Mode reindirizzamende (avanzate)",
+	"cirrussearch-completion-profile-classic-pref-name": "Ricerche classeche pe prefisse",
+	"cirrussearch-completion-profile-classic-pref-desc": "Nisciuna correzzione de errore de battiture. S'accocchie cu l'inizie de le titole.",
+	"cirrussearch-feature-deepcat-invalid-title": "'A categorije date non g'è valide.",
+	"cirrussearch-incategory-feature-no-valid-categories": "Nisciuna categorije valide date a '$1'.",
+	"cirrussearch-mlt-feature-no-valid-titles": "Nisciune titole valide date a '$1'.",
+	"cirrussearch-explore-similar-related": "Collegate",
+	"cirrussearch-explore-similar-categories": "Categorije",
+	"cirrussearch-explore-similar-languages": "Lènghe",
+	"cirrussearch-explore-similar-related-none": "Nisciuna pàgena collegate disponibbile",
+	"cirrussearch-explore-similar-categories-none": "Nisciuna categorije disponibbile",
+	"cirrussearch-explore-similar-languages-none": "Non disponibbele jndr'à otre lènghe",
+	"cirrussearch-article-words": "Parole jndr'à tutte le pàggene de condenute"
+}

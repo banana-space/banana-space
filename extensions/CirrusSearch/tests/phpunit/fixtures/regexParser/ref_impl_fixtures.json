@@ -1,0 +1,4104 @@
+{
+    "empty: produce an empty tree": {
+        "query": "",
+        "expected": {
+            "query": "",
+            "rawQuery": "",
+            "root": {
+                "empty": {
+                    "startOffset": 0,
+                    "endOffset": 0
+                }
+            }
+        }
+    },
+    "empty: space only produce an empty tree": {
+        "query": "\t\u0000 \u3000\ufeff",
+        "expected": {
+            "query": "\t\u0000 \u3000\ufeff",
+            "rawQuery": "\t\u0000 \u3000\ufeff",
+            "root": {
+                "empty": {
+                    "startOffset": 0,
+                    "endOffset": 9
+                }
+            }
+        }
+    },
+    "words: single word": {
+        "query": "word",
+        "expected": {
+            "query": "word",
+            "rawQuery": "word",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 4,
+                    "words": "word"
+                }
+            }
+        }
+    },
+    "words: parenthesis are simple words": {
+        "query": "Louise Michel (Paris M\u00e9tro)",
+        "expected": {
+            "query": "Louise Michel (Paris M\u00e9tro)",
+            "rawQuery": "Louise Michel (Paris M\u00e9tro)",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 28,
+                    "words": "Louise Michel (Paris M\u00e9tro)"
+                }
+            }
+        }
+    },
+    "words: parenthesis cannot be used yet to group boolean": {
+        "query": "(word1 OR word2) AND (word3 OR word4)",
+        "expected": {
+            "query": "(word1 OR word2) AND (word3 OR word4)",
+            "rawQuery": "(word1 OR word2) AND (word3 OR word4)",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 37,
+                    "clauses": [
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 6,
+                                    "words": "(word1"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 10,
+                                    "endOffset": 16,
+                                    "words": "word2)"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 21,
+                                    "endOffset": 27,
+                                    "words": "(word3"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 31,
+                                    "endOffset": 37,
+                                    "words": "word4)"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "words: multiple words are collapsed": {
+        "query": "word1 word2",
+        "expected": {
+            "query": "word1 word2",
+            "rawQuery": "word1 word2",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 11,
+                    "words": "word1 word2"
+                }
+            }
+        }
+    },
+    "words: question mark stripping won't messup simple questions": {
+        "query": "how old is fred?",
+        "config": {
+            "CirrusSearchStripQuestionMarks": "all"
+        },
+        "expected": {
+            "query": "how old is fred ",
+            "rawQuery": "how old is fred?",
+            "queryCleanups": {
+                "stripped_qmark": true
+            },
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 15,
+                    "words": "how old is fred"
+                }
+            }
+        }
+    },
+    "words: expert users can bypass question mark stripping": {
+        "query": "201\\?",
+        "config": {
+            "CirrusSearchStripQuestionMarks": "all"
+        },
+        "expected": {
+            "query": "201?",
+            "rawQuery": "201\\?",
+            "queryCleanups": {
+                "stripped_qmark": true
+            },
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "wildcard": {
+                    "startOffset": 0,
+                    "endOffset": 4,
+                    "wildcardquery": "201?"
+                }
+            }
+        }
+    },
+    "words: \\ can escape parsed operators": {
+        "query": "\\AND \\\" \\NOT \\!word word\\* word\\",
+        "expected": {
+            "query": "\\AND \\\" \\NOT \\!word word\\* word\\",
+            "rawQuery": "\\AND \\\" \\NOT \\!word word\\* word\\",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 32,
+                    "words": "AND \" NOT !word word* word\\"
+                }
+            }
+        }
+    },
+    "words: tokenized on all unicode spaces and control chars": {
+        "query": "w1\t-w2\u3000-w3\ufeff-w4\u0000-w5",
+        "expected": {
+            "query": "w1\t-w2\u3000-w3\ufeff-w4\u0000-w5",
+            "rawQuery": "w1\t-w2\u3000-w3\ufeff-w4\u0000-w5",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 22,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 2,
+                                    "words": "w1"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 4,
+                                    "endOffset": 6,
+                                    "words": "w2"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 10,
+                                    "endOffset": 12,
+                                    "words": "w3"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 16,
+                                    "endOffset": 18,
+                                    "words": "w4"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 20,
+                                    "endOffset": 22,
+                                    "words": "w5"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "namespace handling: namespace can be prefixed": {
+        "query": "help:word",
+        "expected": {
+            "query": "help:word",
+            "rawQuery": "help:word",
+            "namespaceHeader": {
+                "startOffset": 0,
+                "endOffset": 5,
+                "namespace": 12
+            },
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "featuresUsed": [
+                "namespace_header"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 5,
+                    "endOffset": 9,
+                    "words": "word"
+                }
+            }
+        }
+    },
+    "namespace handling: 'all' is a way for users to indicate they want to search in all namespaces": {
+        "query": "all:word",
+        "expected": {
+            "query": "all:word",
+            "rawQuery": "all:word",
+            "namespaceHeader": {
+                "startOffset": 0,
+                "endOffset": 4,
+                "namespace": "all"
+            },
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "featuresUsed": [
+                "namespace_header"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 4,
+                    "endOffset": 8,
+                    "words": "word"
+                }
+            }
+        }
+    },
+    "namespace handling: prefix keyword can also give hints about the required namespaces, like normal titles NS_MAIN is used by default": {
+        "query": "prefix:page",
+        "expected": {
+            "query": "prefix:page",
+            "rawQuery": "prefix:page",
+            "requiredNamespaces": [
+                0
+            ],
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefix"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 11,
+                    "keyword": "CirrusSearch\\Query\\PrefixFeature",
+                    "key": "prefix",
+                    "value": "page",
+                    "quotedValue": "page",
+                    "delimiter": "",
+                    "suffix": "",
+                    "parsedValue": {
+                        "namespace": 0,
+                        "value": "page",
+                        "parsed_namespaces": [
+                            0
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "namespace handling: prefix also supports a specific namespace": {
+        "query": "prefix:help:page",
+        "expected": {
+            "query": "prefix:help:page",
+            "rawQuery": "prefix:help:page",
+            "requiredNamespaces": [
+                12
+            ],
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefix"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 16,
+                    "keyword": "CirrusSearch\\Query\\PrefixFeature",
+                    "key": "prefix",
+                    "value": "help:page",
+                    "quotedValue": "help:page",
+                    "delimiter": "",
+                    "suffix": "",
+                    "parsedValue": {
+                        "namespace": 12,
+                        "value": "page",
+                        "parsed_namespaces": [
+                            12
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "namespace handling: prefix also supports the 'all' keyword": {
+        "query": "prefix:all:page",
+        "expected": {
+            "query": "prefix:all:page",
+            "rawQuery": "prefix:all:page",
+            "requiredNamespaces": "all",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefix"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 15,
+                    "keyword": "CirrusSearch\\Query\\PrefixFeature",
+                    "key": "prefix",
+                    "value": "all:page",
+                    "quotedValue": "all:page",
+                    "delimiter": "",
+                    "suffix": "",
+                    "parsedValue": {
+                        "value": "page",
+                        "parsed_namespaces": "all"
+                    }
+                }
+            }
+        }
+    },
+    "namespace handling: namespace prefix and the prefix can be combined, even if they make 'no sense'": {
+        "query": "help:prefix:test",
+        "expected": {
+            "query": "help:prefix:test",
+            "rawQuery": "help:prefix:test",
+            "namespaceHeader": {
+                "startOffset": 0,
+                "endOffset": 5,
+                "namespace": 12
+            },
+            "requiredNamespaces": [
+                0
+            ],
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefix",
+                "namespace_header"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 5,
+                    "endOffset": 16,
+                    "keyword": "CirrusSearch\\Query\\PrefixFeature",
+                    "key": "prefix",
+                    "value": "test",
+                    "quotedValue": "test",
+                    "delimiter": "",
+                    "suffix": "",
+                    "parsedValue": {
+                        "namespace": 0,
+                        "value": "test",
+                        "parsed_namespaces": [
+                            0
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "namespace handling: namespace prefix and the prefix can be combined even if it's redundant": {
+        "query": "all:prefix:all:test",
+        "expected": {
+            "query": "all:prefix:all:test",
+            "rawQuery": "all:prefix:all:test",
+            "namespaceHeader": {
+                "startOffset": 0,
+                "endOffset": 4,
+                "namespace": "all"
+            },
+            "requiredNamespaces": "all",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefix",
+                "namespace_header"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 4,
+                    "endOffset": 19,
+                    "keyword": "CirrusSearch\\Query\\PrefixFeature",
+                    "key": "prefix",
+                    "value": "all:test",
+                    "quotedValue": "all:test",
+                    "delimiter": "",
+                    "suffix": "",
+                    "parsedValue": {
+                        "value": "test",
+                        "parsed_namespaces": "all"
+                    }
+                }
+            }
+        }
+    },
+    "tilde header: a tilde at the beginning is not part of the AST": {
+        "query": "~word",
+        "expected": {
+            "query": "word",
+            "rawQuery": "~word",
+            "queryCleanups": {
+                "tilde_header": true
+            },
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 4,
+                    "words": "word"
+                }
+            }
+        }
+    },
+    "tilde header: the tilde must be strictly at the beginning to be discarded": {
+        "query": " ~word",
+        "expected": {
+            "query": " ~word",
+            "rawQuery": " ~word",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 1,
+                    "endOffset": 6,
+                    "words": "~word"
+                }
+            }
+        }
+    },
+    "tilde header: a leading tilde does not disable namespace prefix handling": {
+        "query": "~help:word",
+        "expected": {
+            "query": "help:word",
+            "rawQuery": "~help:word",
+            "namespaceHeader": {
+                "startOffset": 0,
+                "endOffset": 5,
+                "namespace": 12
+            },
+            "queryCleanups": {
+                "tilde_header": true
+            },
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "featuresUsed": [
+                "namespace_header"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 5,
+                    "endOffset": 9,
+                    "words": "word"
+                }
+            }
+        }
+    },
+    "negation prefix: a single word can be negated with !": {
+        "query": "!word1",
+        "expected": {
+            "query": "!word1",
+            "rawQuery": "!word1",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 1,
+                    "endOffset": 6,
+                    "clauses": [
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 1,
+                                    "endOffset": 6,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "negation prefix: a single word can be negated with -": {
+        "query": "-word1",
+        "expected": {
+            "query": "-word1",
+            "rawQuery": "-word1",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 1,
+                    "endOffset": 6,
+                    "clauses": [
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 1,
+                                    "endOffset": 6,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "negation prefix: - won't split words": {
+        "query": "foo-bar",
+        "expected": {
+            "query": "foo-bar",
+            "rawQuery": "foo-bar",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 7,
+                    "words": "foo-bar"
+                }
+            }
+        }
+    },
+    "negation prefix: ! won't split words": {
+        "query": "foo!bar",
+        "expected": {
+            "query": "foo!bar",
+            "rawQuery": "foo!bar",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 7,
+                    "words": "foo!bar"
+                }
+            }
+        }
+    },
+    "negation prefix: a single word can be explicitily negated with NOT": {
+        "query": "NOT word1",
+        "expected": {
+            "query": "NOT word1",
+            "rawQuery": "NOT word1",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 4,
+                    "endOffset": 9,
+                    "clauses": [
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 4,
+                                    "endOffset": 9,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "negation prefix: words are not collapsed when one is negated": {
+        "query": "word0 !word1 word1",
+        "expected": {
+            "query": "word0 !word1 word1",
+            "rawQuery": "word0 !word1 word1",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 18,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 5,
+                                    "words": "word0"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 7,
+                                    "endOffset": 12,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 13,
+                                    "endOffset": 18,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "negation prefix: ! negation is ignored on non letters": {
+        "query": "!@word1",
+        "expected": {
+            "query": "!@word1",
+            "rawQuery": "!@word1",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 7,
+                    "words": "!@word1"
+                }
+            }
+        }
+    },
+    "negation prefix: - negation is ignored on non letters": {
+        "query": "-@word1",
+        "expected": {
+            "query": "-@word1",
+            "rawQuery": "-@word1",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 7,
+                    "words": "-@word1"
+                }
+            }
+        }
+    },
+    "negation: NOT negation is not ignored on non letters": {
+        "query": "NOT @word1",
+        "expected": {
+            "query": "NOT @word1",
+            "rawQuery": "NOT @word1",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 4,
+                    "endOffset": 10,
+                    "clauses": [
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 4,
+                                    "endOffset": 10,
+                                    "words": "@word1"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "bool: simple AND between words with AND": {
+        "query": "word1 AND word2",
+        "expected": {
+            "query": "word1 AND word2",
+            "rawQuery": "word1 AND word2",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 15,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 5,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 10,
+                                    "endOffset": 15,
+                                    "words": "word2"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "bool: simple AND between words with &&": {
+        "query": "word1 && word2",
+        "expected": {
+            "query": "word1 && word2",
+            "rawQuery": "word1 && word2",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 14,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 5,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 9,
+                                    "endOffset": 14,
+                                    "words": "word2"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "bool: simple OR between words with OR": {
+        "query": "word1 OR word2",
+        "expected": {
+            "query": "word1 OR word2",
+            "rawQuery": "word1 OR word2",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 14,
+                    "clauses": [
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 5,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 9,
+                                    "endOffset": 14,
+                                    "words": "word2"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "bool: simple OR between words with ||": {
+        "query": "word1 || word2",
+        "expected": {
+            "query": "word1 || word2",
+            "rawQuery": "word1 || word2",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 14,
+                    "clauses": [
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 5,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 9,
+                                    "endOffset": 14,
+                                    "words": "word2"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "bool: backward order precedence MUST:word1 SHOULD:word2 SHOULD:word3": {
+        "query": "word1 AND word2 OR word3",
+        "expected": {
+            "query": "word1 AND word2 OR word3",
+            "rawQuery": "word1 AND word2 OR word3",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 24,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 5,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 10,
+                                    "endOffset": 15,
+                                    "words": "word2"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 19,
+                                    "endOffset": 24,
+                                    "words": "word3"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "bool: backward order precedence SHOULD:word1 MUST:word2 MUST:word3": {
+        "query": "word1 OR word2 AND word3",
+        "expected": {
+            "query": "word1 OR word2 AND word3",
+            "rawQuery": "word1 OR word2 AND word3",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 24,
+                    "clauses": [
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 5,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 9,
+                                    "endOffset": 14,
+                                    "words": "word2"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 19,
+                                    "endOffset": 24,
+                                    "words": "word3"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "bool: unlike lucene query string contiguous words have precedence": {
+        "query": "word1 word2 OR word3 word4",
+        "expected": {
+            "query": "word1 word2 OR word3 word4",
+            "rawQuery": "word1 word2 OR word3 word4",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 26,
+                    "clauses": [
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 11,
+                                    "words": "word1 word2"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 15,
+                                    "endOffset": 26,
+                                    "words": "word3 word4"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "bool & negation: AND NOT is comprehensive": {
+        "query": "word1 AND NOT word2",
+        "expected": {
+            "query": "word1 AND NOT word2",
+            "rawQuery": "word1 AND NOT word2",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 19,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 5,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 14,
+                                    "endOffset": 19,
+                                    "words": "word2"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "bool & negation: OR NOT is obscure in search bool (SHOULD_NOT does not exist)": {
+        "query": "word1 OR NOT word2",
+        "expected": {
+            "query": "word1 OR NOT word2",
+            "rawQuery": "word1 OR NOT word2",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 18,
+                    "clauses": [
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 5,
+                                    "words": "word1"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 13,
+                                    "endOffset": 18,
+                                    "words": "word2"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "phrase: simple phrase": {
+        "query": "\"word1 word2\"",
+        "expected": {
+            "query": "\"word1 word2\"",
+            "rawQuery": "\"word1 word2\"",
+            "queryClassCache": [
+                "simple_phrase_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 13,
+                    "phrase": "word1 word2",
+                    "slop": -1,
+                    "stem": false,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "phrase: phrase can include uninterepreted negation prefix": {
+        "query": "\"!happy\" \"-happy\" happy",
+        "expected": {
+            "query": "\"!happy\" \"-happy\" happy",
+            "rawQuery": "\"!happy\" \"-happy\" happy",
+            "queryClassCache": [
+                "bag_of_words_with_phrase_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 23,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "phrase": {
+                                    "startOffset": 0,
+                                    "endOffset": 8,
+                                    "phrase": "!happy",
+                                    "slop": -1,
+                                    "stem": false,
+                                    "unbalanced": false
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "phrase": {
+                                    "startOffset": 9,
+                                    "endOffset": 17,
+                                    "phrase": "-happy",
+                                    "slop": -1,
+                                    "stem": false,
+                                    "unbalanced": false
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 18,
+                                    "endOffset": 23,
+                                    "words": "happy"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "phrase: simple phrase on stems": {
+        "query": "\"word1 word2\"~",
+        "expected": {
+            "query": "\"word1 word2\"~",
+            "rawQuery": "\"word1 word2\"~",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 14,
+                    "phrase": "word1 word2",
+                    "slop": -1,
+                    "stem": true,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "phrase: simple phrase with 0 slop": {
+        "query": "\"word1 word2\"~0",
+        "expected": {
+            "query": "\"word1 word2\"~0",
+            "rawQuery": "\"word1 word2\"~0",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 15,
+                    "phrase": "word1 word2",
+                    "slop": 0,
+                    "stem": false,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "phrase: simple phrase with 1 slop": {
+        "query": "\"word1 word2\"~1",
+        "expected": {
+            "query": "\"word1 word2\"~1",
+            "rawQuery": "\"word1 word2\"~1",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 15,
+                    "phrase": "word1 word2",
+                    "slop": 1,
+                    "stem": false,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "phrase: simple phrase on stems with 0 slop": {
+        "query": "\"word1 word2\"~0~",
+        "expected": {
+            "query": "\"word1 word2\"~0~",
+            "rawQuery": "\"word1 word2\"~0~",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 16,
+                    "phrase": "word1 word2",
+                    "slop": 0,
+                    "stem": true,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "phrase: simple phrase on stems with 1 slop": {
+        "query": "\"word1 word2\"~1~",
+        "expected": {
+            "query": "\"word1 word2\"~1~",
+            "rawQuery": "\"word1 word2\"~1~",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 16,
+                    "phrase": "word1 word2",
+                    "slop": 1,
+                    "stem": true,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "phrase prefix: simple phrase prefix": {
+        "query": "\"word1 word2*\"",
+        "expected": {
+            "query": "\"word1 word2*\"",
+            "rawQuery": "\"word1 word2*\"",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "phrase_prefix": {
+                    "startOffset": 0,
+                    "endOffset": 14,
+                    "phrase": "word1 word2"
+                }
+            }
+        }
+    },
+    "phrase prefix: phrase prefix does not support stem": {
+        "query": "\"word1 word2*\"~",
+        "expected": {
+            "query": "\"word1 word2*\"~",
+            "rawQuery": "\"word1 word2*\"~",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 15,
+                    "phrase": "word1 word2*",
+                    "slop": -1,
+                    "stem": true,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "phrase prefix: phrase prefix does not support stem & slop": {
+        "query": "\"word1 word2*\"~1~",
+        "expected": {
+            "query": "\"word1 word2*\"~1~",
+            "rawQuery": "\"word1 word2*\"~1~",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 17,
+                    "phrase": "word1 word2*",
+                    "slop": 1,
+                    "stem": true,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "phrase prefix: phrase prefix does not support slop": {
+        "query": "\"word1 word2*\"~2",
+        "expected": {
+            "query": "\"word1 word2*\"~2",
+            "rawQuery": "\"word1 word2*\"~2",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 16,
+                    "phrase": "word1 word2*",
+                    "slop": 2,
+                    "stem": false,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "phrase and words: words can be collapsed to phrase beginning and ending": {
+        "query": "foo\"bar\"baz",
+        "expected": {
+            "query": "foo\"bar\"baz",
+            "rawQuery": "foo\"bar\"baz",
+            "queryClassCache": [
+                "bag_of_words_with_phrase_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 11,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 3,
+                                    "words": "foo"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "phrase": {
+                                    "startOffset": 3,
+                                    "endOffset": 8,
+                                    "phrase": "bar",
+                                    "slop": -1,
+                                    "stem": false,
+                                    "unbalanced": false
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 8,
+                                    "endOffset": 11,
+                                    "words": "baz"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "phrase and words: hebrew has special quirks for gershayim": {
+        "query": "foo\"b",
+        "config": {
+            "LanguageCode": "he"
+        },
+        "expected": {
+            "query": "foo\\\"b",
+            "rawQuery": "foo\"b",
+            "queryCleanups": {
+                "gershayim_quirks": true
+            },
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 6,
+                    "words": "foo\"b"
+                }
+            }
+        }
+    },
+    "phrase and words: hebrew has no quirks for gershayim when quoted": {
+        "query": "\"foo\\\"b\"",
+        "config": {
+            "LanguageCode": "he"
+        },
+        "expected": {
+            "query": "\"foo\\\"b\"",
+            "rawQuery": "\"foo\\\"b\"",
+            "queryClassCache": [
+                "simple_phrase_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 8,
+                    "phrase": "foo\"b",
+                    "slop": -1,
+                    "stem": false,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "phrase and words: hebrew has no quirks for gershayim when quoted in a keyword": {
+        "query": "intitle:\"foo\\\"b\"",
+        "config": {
+            "LanguageCode": "he"
+        },
+        "expected": {
+            "query": "intitle:\"foo\\\"b\"",
+            "rawQuery": "intitle:\"foo\\\"b\"",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "intitle"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 16,
+                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                    "key": "intitle",
+                    "value": "foo\"b",
+                    "quotedValue": "\"foo\\\"b\"",
+                    "delimiter": "\"",
+                    "suffix": ""
+                }
+            }
+        }
+    },
+    "bool and phrase: boolean within phrase are not interpreted": {
+        "query": "\"foo AND NOT bar OR baz\"",
+        "expected": {
+            "query": "\"foo AND NOT bar OR baz\"",
+            "rawQuery": "\"foo AND NOT bar OR baz\"",
+            "queryClassCache": [
+                "simple_phrase_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 24,
+                    "phrase": "foo AND NOT bar OR baz",
+                    "slop": -1,
+                    "stem": false,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "bool and phrase: boolean operator can be collapsed with phrase like words (debatable)": {
+        "query": "foo OR\"bar baz\"OR buz",
+        "expected": {
+            "query": "foo OR\"bar baz\"OR buz",
+            "rawQuery": "foo OR\"bar baz\"OR buz",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 21,
+                    "clauses": [
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 3,
+                                    "words": "foo"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "SHOULD": {
+                                "phrase": {
+                                    "startOffset": 6,
+                                    "endOffset": 15,
+                                    "phrase": "bar baz",
+                                    "slop": -1,
+                                    "stem": false,
+                                    "unbalanced": false
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "SHOULD": {
+                                "words": {
+                                    "startOffset": 18,
+                                    "endOffset": 21,
+                                    "words": "buz"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "boolean: bool operators cannot be collapsed with negation prefix": {
+        "query": "foo AND-bar NOT!baz",
+        "expected": {
+            "query": "foo AND-bar NOT!baz",
+            "rawQuery": "foo AND-bar NOT!baz",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 19,
+                    "words": "foo AND-bar NOT!baz"
+                }
+            }
+        }
+    },
+    "fuzzy: simple fuzzy word": {
+        "query": "word~",
+        "expected": {
+            "query": "word~",
+            "rawQuery": "word~",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "fuzzy": {
+                    "startOffset": 0,
+                    "endOffset": 5,
+                    "word": "word",
+                    "fuzziness": -1
+                }
+            }
+        }
+    },
+    "fuzzy: fuzzy word with explicit distance": {
+        "query": "word~0 2word~1 word~2",
+        "expected": {
+            "query": "word~0 2word~1 word~2",
+            "rawQuery": "word~0 2word~1 word~2",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 21,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "fuzzy": {
+                                    "startOffset": 0,
+                                    "endOffset": 6,
+                                    "word": "word",
+                                    "fuzziness": 0
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "fuzzy": {
+                                    "startOffset": 7,
+                                    "endOffset": 14,
+                                    "word": "2word",
+                                    "fuzziness": 1
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "fuzzy": {
+                                    "startOffset": 15,
+                                    "endOffset": 21,
+                                    "word": "word",
+                                    "fuzziness": 2
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "fuzzy: fuzzy markup is ignored on non letters\/numbers and invalid distance": {
+        "query": "w@rd~ w-ord~1 word~.9 word~a ~",
+        "expected": {
+            "query": "w@rd~ w-ord~1 word~.9 word~a ~",
+            "rawQuery": "w@rd~ w-ord~1 word~.9 word~a ~",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 30,
+                    "words": "w@rd~ w-ord~1 word~.9 word~a ~"
+                }
+            }
+        }
+    },
+    "prefix: only letters and numbers are allowed": {
+        "query": "1* 1w** @notaprefix*",
+        "expected": {
+            "query": "1* 1w** @notaprefix*",
+            "rawQuery": "1* 1w** @notaprefix*",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 20,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "prefix": [
+                                    {
+                                        "startOffset": 0,
+                                        "endOffset": 2,
+                                        "prefix": "1"
+                                    }
+                                ]
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "prefix": [
+                                    {
+                                        "startOffset": 3,
+                                        "endOffset": 7,
+                                        "prefix": "1w"
+                                    }
+                                ]
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 8,
+                                    "endOffset": 20,
+                                    "words": "@notaprefix*"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "wildcard (leading allowed): only letters and numbers (3 non contiguous wildcard max)": {
+        "query": "*w* *1?2*3 *@not*a*wildcard no?*awildcard",
+        "config": {
+            "CirrusSearchStripQuestionMarks": "none",
+            "CirrusSearchAllowLeadingWildcard": true
+        },
+        "expected": {
+            "query": "*w* *1?2*3 *@not*a*wildcard no?*awildcard",
+            "rawQuery": "*w* *1?2*3 *@not*a*wildcard no?*awildcard",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 41,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "wildcard": {
+                                    "startOffset": 0,
+                                    "endOffset": 3,
+                                    "wildcardquery": "*w*"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "wildcard": {
+                                    "startOffset": 4,
+                                    "endOffset": 10,
+                                    "wildcardquery": "*1?2*3"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 11,
+                                    "endOffset": 41,
+                                    "words": "*@not*a*wildcard no?*awildcard"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "wildcard (leading not allowed): only letters and numbers (3 wildcard max)": {
+        "query": "*w* *1?2*3 1*2*3*4* *@not*a*wildcard",
+        "config": {
+            "CirrusSearchStripQuestionMarks": "none",
+            "CirrusSearchAllowLeadingWildcard": false
+        },
+        "expected": {
+            "query": "*w* *1?2*3 1*2*3*4* *@not*a*wildcard",
+            "rawQuery": "*w* *1?2*3 1*2*3*4* *@not*a*wildcard",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 36,
+                    "words": "*w* *1?2*3 1*2*3*4* *@not*a*wildcard"
+                }
+            }
+        }
+    },
+    "keyword headings: is parsed if at the beginning (incl leading spaces\/control chars)": {
+        "query": "\t\u0000 \u3000local:word\t\u0000 \u3000",
+        "expected": {
+            "query": "\t\u0000 \u3000local:word\t\u0000 \u3000",
+            "rawQuery": "\t\u0000 \u3000local:word\t\u0000 \u3000",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "local"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 6,
+                    "endOffset": 16,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 6,
+                                    "endOffset": 12,
+                                    "keyword": "CirrusSearch\\Query\\LocalFeature",
+                                    "key": "local",
+                                    "value": "",
+                                    "quotedValue": "",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 12,
+                                    "endOffset": 16,
+                                    "words": "word"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword headings: is parsed if at the beginning": {
+        "query": "local:word",
+        "expected": {
+            "query": "local:word",
+            "rawQuery": "local:word",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "local"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 10,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 6,
+                                    "keyword": "CirrusSearch\\Query\\LocalFeature",
+                                    "key": "local",
+                                    "value": "",
+                                    "quotedValue": "",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 6,
+                                    "endOffset": 10,
+                                    "words": "word"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword value: valued keywords can accept a space": {
+        "query": "intitle: word",
+        "expected": {
+            "query": "intitle: word",
+            "rawQuery": "intitle: word",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "intitle"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 13,
+                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                    "key": "intitle",
+                    "value": "word",
+                    "quotedValue": "word",
+                    "delimiter": "",
+                    "suffix": ""
+                }
+            }
+        }
+    },
+    "keyword value: valued keywords are ignored if no value is provided": {
+        "query": "intitle: ",
+        "expected": {
+            "query": "intitle: ",
+            "rawQuery": "intitle: ",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 8,
+                    "words": "intitle:"
+                }
+            }
+        }
+    },
+    "keyword unvalued: some non heading keywords accepts no value": {
+        "query": "foo prefer-recent:",
+        "expected": {
+            "query": "foo prefer-recent:",
+            "rawQuery": "foo prefer-recent:",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefer-recent"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 18,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 3,
+                                    "words": "foo"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 4,
+                                    "endOffset": 18,
+                                    "keyword": "CirrusSearch\\Query\\PreferRecentFeature",
+                                    "key": "prefer-recent",
+                                    "value": "",
+                                    "quotedValue": "",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword greedy: greedy keywords eat no matter what is written after them": {
+        "query": "prefix:test intitle:test",
+        "expected": {
+            "query": "prefix:test intitle:test",
+            "rawQuery": "prefix:test intitle:test",
+            "requiredNamespaces": [
+                0
+            ],
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefix"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 24,
+                    "keyword": "CirrusSearch\\Query\\PrefixFeature",
+                    "key": "prefix",
+                    "value": "test intitle:test",
+                    "quotedValue": "test intitle:test",
+                    "delimiter": "",
+                    "suffix": "",
+                    "parsedValue": {
+                        "namespace": 0,
+                        "value": "test intitle:test",
+                        "parsed_namespaces": [
+                            0
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "keyword greedy headings: greedy headings keywords eat no matter what is written after them": {
+        "query": "morelike: prefix:test intitle:test",
+        "expected": {
+            "query": "morelike: prefix:test intitle:test",
+            "rawQuery": "morelike: prefix:test intitle:test",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "more_like"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 34,
+                    "keyword": "CirrusSearch\\Query\\MoreLikeFeature",
+                    "key": "morelike",
+                    "value": "prefix:test intitle:test",
+                    "quotedValue": "prefix:test intitle:test",
+                    "delimiter": "",
+                    "suffix": ""
+                }
+            }
+        }
+    },
+    "keyword greedy headings: greedy headings keywords are ignored when not at the begining": {
+        "query": "foo morelike:baz",
+        "expected": {
+            "query": "foo morelike:baz",
+            "rawQuery": "foo morelike:baz",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 16,
+                    "words": "foo morelike:baz"
+                }
+            }
+        }
+    },
+    "keyword headings: heading is not parsed when in the middle": {
+        "query": "word local:word",
+        "expected": {
+            "query": "word local:word",
+            "rawQuery": "word local:word",
+            "queryClassCache": [
+                "simple_bag_of_words"
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 15,
+                    "words": "word local:word"
+                }
+            }
+        }
+    },
+    "keyword : normal keyword can appear at the begining or after a space (any space\/control chars)": {
+        "query": "intitle:foo\t\u0000 \u3000word\u3000\t \u0000intitle:bar",
+        "expected": {
+            "query": "intitle:foo\t\u0000 \u3000word\u3000\t \u0000intitle:bar",
+            "rawQuery": "intitle:foo\t\u0000 \u3000word\u3000\t \u0000intitle:bar",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "intitle"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 38,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 11,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "foo",
+                                    "quotedValue": "foo",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 17,
+                                    "endOffset": 21,
+                                    "words": "word"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 27,
+                                    "endOffset": 38,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "bar",
+                                    "quotedValue": "bar",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword : normal usually accept a quoted value": {
+        "query": "intitle:\"foo \"bar baz\"",
+        "expected": {
+            "query": "intitle:\"foo \"bar baz\"",
+            "rawQuery": "intitle:\"foo \"bar baz\"",
+            "queryClassCache": [
+                "complex_query",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrus-parse-error-unbalanced-phrase",
+                    "start": 21
+                }
+            ],
+            "featuresUsed": [
+                "intitle"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 22,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 14,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "foo ",
+                                    "quotedValue": "\"foo \"",
+                                    "delimiter": "\"",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 14,
+                                    "endOffset": 21,
+                                    "words": "bar baz"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "phrase": {
+                                    "startOffset": 21,
+                                    "endOffset": 22,
+                                    "phrase": "",
+                                    "slop": -1,
+                                    "stem": false,
+                                    "unbalanced": true
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword : regex is triggered with a \/ and accepts an optional suffix ": {
+        "query": "intitle:\/[a-z]\/ insource:\/<\\\/a>[^ ]\/i",
+        "expected": {
+            "query": "intitle:\/[a-z]\/ insource:\/<\\\/a>[^ ]\/i",
+            "rawQuery": "intitle:\/[a-z]\/ insource:\/<\\\/a>[^ ]\/i",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "regex"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 37,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 15,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "[a-z]",
+                                    "quotedValue": "\/[a-z]\/",
+                                    "delimiter": "\/",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "type": "regex",
+                                        "pattern": "[a-z]",
+                                        "insensitive": false
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 16,
+                                    "endOffset": 37,
+                                    "keyword": "CirrusSearch\\Query\\InSourceFeature",
+                                    "key": "insource",
+                                    "value": "<\/a>[^ ]",
+                                    "quotedValue": "\/<\\\/a>[^ ]\/",
+                                    "delimiter": "\/",
+                                    "suffix": "i",
+                                    "parsedValue": {
+                                        "type": "regex",
+                                        "pattern": "<\\\/a>[^ ]",
+                                        "insensitive": true
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword : normal keyword can not appear anywhere": {
+        "query": "\"intitle:bar\"",
+        "expected": {
+            "query": "\"intitle:bar\"",
+            "rawQuery": "\"intitle:bar\"",
+            "queryClassCache": [
+                "simple_phrase_query"
+            ],
+            "root": {
+                "phrase": {
+                    "startOffset": 0,
+                    "endOffset": 13,
+                    "phrase": "intitle:bar",
+                    "slop": -1,
+                    "stem": false,
+                    "unbalanced": false
+                }
+            }
+        }
+    },
+    "keyword : normal keyword can not appear anywhere unlike normal words": {
+        "query": "\"foo bar\"intitle:bar",
+        "expected": {
+            "query": "\"foo bar\"intitle:bar",
+            "rawQuery": "\"foo bar\"intitle:bar",
+            "queryClassCache": [
+                "bag_of_words_with_phrase_query"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 20,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "phrase": {
+                                    "startOffset": 0,
+                                    "endOffset": 9,
+                                    "phrase": "foo bar",
+                                    "slop": -1,
+                                    "stem": false,
+                                    "unbalanced": false
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 9,
+                                    "endOffset": 20,
+                                    "words": "intitle:bar"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword & negation prefix: normal keyword can be negated with - but not with ! (debatable)": {
+        "query": "-intitle:bar !intitle:bar",
+        "expected": {
+            "query": "-intitle:bar !intitle:bar",
+            "rawQuery": "-intitle:bar !intitle:bar",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "intitle"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 1,
+                    "endOffset": 25,
+                    "clauses": [
+                        {
+                            "MUST_NOT": {
+                                "keyword": {
+                                    "startOffset": 1,
+                                    "endOffset": 12,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "bar",
+                                    "quotedValue": "bar",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST_NOT": {
+                                "words": {
+                                    "startOffset": 14,
+                                    "endOffset": 25,
+                                    "words": "intitle:bar"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keywords & bool: follows normal boolean logic": {
+        "query": "intitle:foo AND intitle:bar OR intitle:baz OR NOT intitle:buz",
+        "expected": {
+            "query": "intitle:foo AND intitle:bar OR intitle:baz OR NOT intitle:buz",
+            "rawQuery": "intitle:foo AND intitle:bar OR intitle:baz OR NOT intitle:buz",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "intitle"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 61,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 11,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "foo",
+                                    "quotedValue": "foo",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "SHOULD": {
+                                "keyword": {
+                                    "startOffset": 16,
+                                    "endOffset": 27,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "bar",
+                                    "quotedValue": "bar",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "SHOULD": {
+                                "keyword": {
+                                    "startOffset": 31,
+                                    "endOffset": 42,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "baz",
+                                    "quotedValue": "baz",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "MUST_NOT": {
+                                "keyword": {
+                                    "startOffset": 50,
+                                    "endOffset": 61,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "buz",
+                                    "quotedValue": "buz",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keywords precedence: keywords take precedence over everything else": {
+        "query": "\" intitle:test \"",
+        "expected": {
+            "query": "\" intitle:test \"",
+            "rawQuery": "\" intitle:test \"",
+            "queryClassCache": [
+                "complex_query",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrus-parse-error-unbalanced-phrase",
+                    "start": 0
+                },
+                {
+                    "msg": "cirrus-parse-error-unbalanced-phrase",
+                    "start": 15
+                }
+            ],
+            "featuresUsed": [
+                "intitle"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 16,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "phrase": {
+                                    "startOffset": 0,
+                                    "endOffset": 2,
+                                    "phrase": " ",
+                                    "slop": -1,
+                                    "stem": false,
+                                    "unbalanced": true
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 2,
+                                    "endOffset": 14,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "test",
+                                    "quotedValue": "test",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "phrase": {
+                                    "startOffset": 15,
+                                    "endOffset": 16,
+                                    "phrase": "",
+                                    "slop": -1,
+                                    "stem": false,
+                                    "unbalanced": true
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: morelike": {
+        "query": "morelike:Help:Help",
+        "expected": {
+            "query": "morelike:Help:Help",
+            "rawQuery": "morelike:Help:Help",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "more_like"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 18,
+                    "keyword": "CirrusSearch\\Query\\MoreLikeFeature",
+                    "key": "morelike",
+                    "value": "Help:Help",
+                    "quotedValue": "Help:Help",
+                    "delimiter": "",
+                    "suffix": ""
+                }
+            }
+        }
+    },
+    "keyword: prefix": {
+        "query": "prefix:Help:Help",
+        "expected": {
+            "query": "prefix:Help:Help",
+            "rawQuery": "prefix:Help:Help",
+            "requiredNamespaces": [
+                12
+            ],
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefix"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 16,
+                    "keyword": "CirrusSearch\\Query\\PrefixFeature",
+                    "key": "prefix",
+                    "value": "Help:Help",
+                    "quotedValue": "Help:Help",
+                    "delimiter": "",
+                    "suffix": "",
+                    "parsedValue": {
+                        "namespace": 12,
+                        "value": "Help",
+                        "parsed_namespaces": [
+                            12
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "keyword: intitle": {
+        "query": "intitle:test intitle:\"foo bar\" intitle:\/201[0-9]\/i",
+        "expected": {
+            "query": "intitle:test intitle:\"foo bar\" intitle:\/201[0-9]\/i",
+            "rawQuery": "intitle:test intitle:\"foo bar\" intitle:\/201[0-9]\/i",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "intitle",
+                "regex"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 50,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 12,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "test",
+                                    "quotedValue": "test",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 13,
+                                    "endOffset": 30,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "foo bar",
+                                    "quotedValue": "\"foo bar\"",
+                                    "delimiter": "\"",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 31,
+                                    "endOffset": 50,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "201[0-9]",
+                                    "quotedValue": "\/201[0-9]\/",
+                                    "delimiter": "\/",
+                                    "suffix": "i",
+                                    "parsedValue": {
+                                        "type": "regex",
+                                        "pattern": "201[0-9]",
+                                        "insensitive": true
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: intitle regex": {
+        "query": "intitle:test intitle:\"foo bar\"",
+        "expected": {
+            "query": "intitle:test intitle:\"foo bar\"",
+            "rawQuery": "intitle:test intitle:\"foo bar\"",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "intitle"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 30,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 12,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "test",
+                                    "quotedValue": "test",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 13,
+                                    "endOffset": 30,
+                                    "keyword": "CirrusSearch\\Query\\InTitleFeature",
+                                    "key": "intitle",
+                                    "value": "foo bar",
+                                    "quotedValue": "\"foo bar\"",
+                                    "delimiter": "\"",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: prefer-recent simple": {
+        "query": "prefer-recent:0.3,0.5",
+        "expected": {
+            "query": "prefer-recent:0.3,0.5",
+            "rawQuery": "prefer-recent:0.3,0.5",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefer-recent"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 21,
+                    "keyword": "CirrusSearch\\Query\\PreferRecentFeature",
+                    "key": "prefer-recent",
+                    "value": "0.3,0.5",
+                    "quotedValue": "0.3,0.5",
+                    "delimiter": "",
+                    "suffix": "",
+                    "parsedValue": {
+                        "decay": 0.3,
+                        "halfLife": 0.5
+                    }
+                }
+            }
+        }
+    },
+    "keyword: prefer-recent decay only": {
+        "query": "prefer-recent:0.3",
+        "expected": {
+            "query": "prefer-recent:0.3",
+            "rawQuery": "prefer-recent:0.3",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefer-recent"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 17,
+                    "keyword": "CirrusSearch\\Query\\PreferRecentFeature",
+                    "key": "prefer-recent",
+                    "value": "0.3",
+                    "quotedValue": "0.3",
+                    "delimiter": "",
+                    "suffix": "",
+                    "parsedValue": {
+                        "decay": 0.3
+                    }
+                }
+            }
+        }
+    },
+    "keyword: prefer-recent defaults": {
+        "query": "prefer-recent:hello",
+        "expected": {
+            "query": "prefer-recent:hello",
+            "rawQuery": "prefer-recent:hello",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefer-recent"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 19,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 14,
+                                    "keyword": "CirrusSearch\\Query\\PreferRecentFeature",
+                                    "key": "prefer-recent",
+                                    "value": "",
+                                    "quotedValue": "",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 14,
+                                    "endOffset": 19,
+                                    "words": "hello"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: prefer-recent combined": {
+        "query": "prefer-recent:hastemplate:hello",
+        "expected": {
+            "query": "prefer-recent:hastemplate:hello",
+            "rawQuery": "prefer-recent:hastemplate:hello",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "prefer-recent",
+                "hastemplate"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 31,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 14,
+                                    "keyword": "CirrusSearch\\Query\\PreferRecentFeature",
+                                    "key": "prefer-recent",
+                                    "value": "",
+                                    "quotedValue": "",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 14,
+                                    "endOffset": 31,
+                                    "keyword": "CirrusSearch\\Query\\HasTemplateFeature",
+                                    "key": "hastemplate",
+                                    "value": "hello",
+                                    "quotedValue": "hello",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "templates": [
+                                            "Template:Hello"
+                                        ],
+                                        "case_sensitive": false
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: hastemplate": {
+        "query": "hastemplate::foo hastemplate:test hastemplate:Help:Test hastemplate:\":test|test|Help:Test\"",
+        "expected": {
+            "query": "hastemplate::foo hastemplate:test hastemplate:Help:Test hastemplate:\":test|test|Help:Test\"",
+            "rawQuery": "hastemplate::foo hastemplate:test hastemplate:Help:Test hastemplate:\":test|test|Help:Test\"",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "hastemplate"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 90,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 16,
+                                    "keyword": "CirrusSearch\\Query\\HasTemplateFeature",
+                                    "key": "hastemplate",
+                                    "value": ":foo",
+                                    "quotedValue": ":foo",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "templates": [
+                                            "foo"
+                                        ],
+                                        "case_sensitive": false
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 17,
+                                    "endOffset": 33,
+                                    "keyword": "CirrusSearch\\Query\\HasTemplateFeature",
+                                    "key": "hastemplate",
+                                    "value": "test",
+                                    "quotedValue": "test",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "templates": [
+                                            "Template:Test"
+                                        ],
+                                        "case_sensitive": false
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 34,
+                                    "endOffset": 55,
+                                    "keyword": "CirrusSearch\\Query\\HasTemplateFeature",
+                                    "key": "hastemplate",
+                                    "value": "Help:Test",
+                                    "quotedValue": "Help:Test",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "templates": [
+                                            "Help:Test"
+                                        ],
+                                        "case_sensitive": false
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 56,
+                                    "endOffset": 90,
+                                    "keyword": "CirrusSearch\\Query\\HasTemplateFeature",
+                                    "key": "hastemplate",
+                                    "value": ":test|test|Help:Test",
+                                    "quotedValue": "\":test|test|Help:Test\"",
+                                    "delimiter": "\"",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "templates": [
+                                            "test",
+                                            "Template:Test",
+                                            "Help:Test"
+                                        ],
+                                        "case_sensitive": true
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: insource": {
+        "query": "insource:test insource:\"foo bar\" insource:\/201[0-0]\/i",
+        "expected": {
+            "query": "insource:test insource:\"foo bar\" insource:\/201[0-0]\/i",
+            "rawQuery": "insource:test insource:\"foo bar\" insource:\/201[0-0]\/i",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "insource",
+                "regex"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 53,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 13,
+                                    "keyword": "CirrusSearch\\Query\\InSourceFeature",
+                                    "key": "insource",
+                                    "value": "test",
+                                    "quotedValue": "test",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 14,
+                                    "endOffset": 32,
+                                    "keyword": "CirrusSearch\\Query\\InSourceFeature",
+                                    "key": "insource",
+                                    "value": "foo bar",
+                                    "quotedValue": "\"foo bar\"",
+                                    "delimiter": "\"",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 33,
+                                    "endOffset": 53,
+                                    "keyword": "CirrusSearch\\Query\\InSourceFeature",
+                                    "key": "insource",
+                                    "value": "201[0-0]",
+                                    "quotedValue": "\/201[0-0]\/",
+                                    "delimiter": "\/",
+                                    "suffix": "i",
+                                    "parsedValue": {
+                                        "type": "regex",
+                                        "pattern": "201[0-0]",
+                                        "insensitive": true
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: linksto": {
+        "query": "linksto:foobar linksto:\"foobar\"",
+        "expected": {
+            "query": "linksto:foobar linksto:\"foobar\"",
+            "rawQuery": "linksto:foobar linksto:\"foobar\"",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "linksto"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 31,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 14,
+                                    "keyword": "CirrusSearch\\Query\\LinksToFeature",
+                                    "key": "linksto",
+                                    "value": "foobar",
+                                    "quotedValue": "foobar",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 15,
+                                    "endOffset": 31,
+                                    "keyword": "CirrusSearch\\Query\\LinksToFeature",
+                                    "key": "linksto",
+                                    "value": "foobar",
+                                    "quotedValue": "\"foobar\"",
+                                    "delimiter": "\"",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: inlanguage": {
+        "query": "inlanguage:fr,en inlanguage:\"fr,en\"",
+        "expected": {
+            "query": "inlanguage:fr,en inlanguage:\"fr,en\"",
+            "rawQuery": "inlanguage:fr,en inlanguage:\"fr,en\"",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "inlanguage"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 35,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 16,
+                                    "keyword": "CirrusSearch\\Query\\LanguageFeature",
+                                    "key": "inlanguage",
+                                    "value": "fr,en",
+                                    "quotedValue": "fr,en",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "langs": [
+                                            "fr",
+                                            "en"
+                                        ]
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 17,
+                                    "endOffset": 35,
+                                    "keyword": "CirrusSearch\\Query\\LanguageFeature",
+                                    "key": "inlanguage",
+                                    "value": "fr,en",
+                                    "quotedValue": "\"fr,en\"",
+                                    "delimiter": "\"",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "langs": [
+                                            "fr",
+                                            "en"
+                                        ]
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: filenumeric filesize": {
+        "query": "filesize:>30 filesize:<30 filesize:30,50 filesize:ab",
+        "expected": {
+            "query": "filesize:>30 filesize:<30 filesize:30,50 filesize:ab",
+            "rawQuery": "filesize:>30 filesize:<30 filesize:30,50 filesize:ab",
+            "queryClassCache": [
+                "complex_query",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-file-numeric-feature-not-a-number",
+                    "start": 50,
+                    "message_params": [
+                        "filesize",
+                        "ab"
+                    ]
+                }
+            ],
+            "featuresUsed": [
+                "filesize"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 52,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 12,
+                                    "keyword": "CirrusSearch\\Query\\FileNumericFeature",
+                                    "key": "filesize",
+                                    "value": ">30",
+                                    "quotedValue": ">30",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "field": "file_size",
+                                        "sign": 1,
+                                        "value": 30
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 13,
+                                    "endOffset": 25,
+                                    "keyword": "CirrusSearch\\Query\\FileNumericFeature",
+                                    "key": "filesize",
+                                    "value": "<30",
+                                    "quotedValue": "<30",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "field": "file_size",
+                                        "sign": -1,
+                                        "value": 30
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 26,
+                                    "endOffset": 40,
+                                    "keyword": "CirrusSearch\\Query\\FileNumericFeature",
+                                    "key": "filesize",
+                                    "value": "30,50",
+                                    "quotedValue": "30,50",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "field": "file_size",
+                                        "sign": 0,
+                                        "range": [
+                                            30,
+                                            50
+                                        ]
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 41,
+                                    "endOffset": 52,
+                                    "keyword": "CirrusSearch\\Query\\FileNumericFeature",
+                                    "key": "filesize",
+                                    "value": "ab",
+                                    "quotedValue": "ab",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: filenumeric filebits (assuming same behavior for fileh, filew, fileheight, filewidth, fileres)": {
+        "query": "filebits:30 filebits:>30 filebits:<30 filebits:30,50 filebits:ab",
+        "expected": {
+            "query": "filebits:30 filebits:>30 filebits:<30 filebits:30,50 filebits:ab",
+            "rawQuery": "filebits:30 filebits:>30 filebits:<30 filebits:30,50 filebits:ab",
+            "queryClassCache": [
+                "complex_query",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-file-numeric-feature-not-a-number",
+                    "start": 62,
+                    "message_params": [
+                        "filebits",
+                        "ab"
+                    ]
+                }
+            ],
+            "featuresUsed": [
+                "filebits"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 64,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 11,
+                                    "keyword": "CirrusSearch\\Query\\FileNumericFeature",
+                                    "key": "filebits",
+                                    "value": "30",
+                                    "quotedValue": "30",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "field": "file_bits",
+                                        "sign": 0,
+                                        "value": 30
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 12,
+                                    "endOffset": 24,
+                                    "keyword": "CirrusSearch\\Query\\FileNumericFeature",
+                                    "key": "filebits",
+                                    "value": ">30",
+                                    "quotedValue": ">30",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "field": "file_bits",
+                                        "sign": 1,
+                                        "value": 30
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 25,
+                                    "endOffset": 37,
+                                    "keyword": "CirrusSearch\\Query\\FileNumericFeature",
+                                    "key": "filebits",
+                                    "value": "<30",
+                                    "quotedValue": "<30",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "field": "file_bits",
+                                        "sign": -1,
+                                        "value": 30
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 38,
+                                    "endOffset": 52,
+                                    "keyword": "CirrusSearch\\Query\\FileNumericFeature",
+                                    "key": "filebits",
+                                    "value": "30,50",
+                                    "quotedValue": "30,50",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "field": "file_bits",
+                                        "sign": 0,
+                                        "range": [
+                                            30,
+                                            50
+                                        ]
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 53,
+                                    "endOffset": 64,
+                                    "keyword": "CirrusSearch\\Query\\FileNumericFeature",
+                                    "key": "filebits",
+                                    "value": "ab",
+                                    "quotedValue": "ab",
+                                    "delimiter": "",
+                                    "suffix": ""
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: incategory": {
+        "query": "incategory:foo incategory:foo|id:123 incategory:foo|bar|baz|qux",
+        "config": {
+            "CirrusSearchMaxIncategoryOptions": 3
+        },
+        "expected": {
+            "query": "incategory:foo incategory:foo|id:123 incategory:foo|bar|baz|qux",
+            "rawQuery": "incategory:foo incategory:foo|id:123 incategory:foo|bar|baz|qux",
+            "queryClassCache": [
+                "complex_query",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-feature-too-many-conditions",
+                    "start": 48,
+                    "message_params": [
+                        "incategory",
+                        3
+                    ]
+                }
+            ],
+            "featuresUsed": [
+                "incategory"
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 63,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 0,
+                                    "endOffset": 14,
+                                    "keyword": "CirrusSearch\\Query\\InCategoryFeature",
+                                    "key": "incategory",
+                                    "value": "foo",
+                                    "quotedValue": "foo",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "names": [
+                                            "foo"
+                                        ],
+                                        "pageIds": []
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 15,
+                                    "endOffset": 36,
+                                    "keyword": "CirrusSearch\\Query\\InCategoryFeature",
+                                    "key": "incategory",
+                                    "value": "foo|id:123",
+                                    "quotedValue": "foo|id:123",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "names": [
+                                            "foo"
+                                        ],
+                                        "pageIds": [
+                                            "123"
+                                        ]
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "keyword": {
+                                    "startOffset": 37,
+                                    "endOffset": 63,
+                                    "keyword": "CirrusSearch\\Query\\InCategoryFeature",
+                                    "key": "incategory",
+                                    "value": "foo|bar|baz|qux",
+                                    "quotedValue": "foo|bar|baz|qux",
+                                    "delimiter": "",
+                                    "suffix": "",
+                                    "parsedValue": {
+                                        "names": [
+                                            "foo",
+                                            "bar",
+                                            "baz"
+                                        ],
+                                        "pageIds": []
+                                    }
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "keyword: boost-templates": {
+        "query": "boost-templates:\"Template:Quality Image|200% Template:Low Quality|50%\"",
+        "expected": {
+            "query": "boost-templates:\"Template:Quality Image|200% Template:Low Quality|50%\"",
+            "rawQuery": "boost-templates:\"Template:Quality Image|200% Template:Low Quality|50%\"",
+            "queryClassCache": [
+                "complex_query"
+            ],
+            "featuresUsed": [
+                "boost-templates"
+            ],
+            "root": {
+                "keyword": {
+                    "startOffset": 0,
+                    "endOffset": 70,
+                    "keyword": "CirrusSearch\\Query\\BoostTemplatesFeature",
+                    "key": "boost-templates",
+                    "value": "Template:Quality Image|200% Template:Low Quality|50%",
+                    "quotedValue": "\"Template:Quality Image|200% Template:Low Quality|50%\"",
+                    "delimiter": "\"",
+                    "suffix": "",
+                    "parsedValue": {
+                        "boost-templates": {
+                            "Template:Quality Image": 2,
+                            "Template:Low Quality": 0.5
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "fixups: unexpected bool operator is eaten as a word and produce a warning": {
+        "query": "foo AND AND bar",
+        "expected": {
+            "query": "foo AND AND bar",
+            "rawQuery": "foo AND AND bar",
+            "queryClassCache": [
+                "complex_query",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-token",
+                    "start": 8,
+                    "expected": [
+                        "NOT",
+                        "QUERY"
+                    ],
+                    "actual": "AND"
+                }
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 15,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 3,
+                                    "words": "foo"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 8,
+                                    "endOffset": 15,
+                                    "words": "AND bar"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "fixups: unexpected bool operator after NOT is eaten as a word and produce a warning": {
+        "query": "foo NOT AND bar",
+        "expected": {
+            "query": "foo NOT AND bar",
+            "rawQuery": "foo NOT AND bar",
+            "queryClassCache": [
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-token",
+                    "start": 8,
+                    "expected": [
+                        "QUERY"
+                    ],
+                    "actual": "AND"
+                }
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 15,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 3,
+                                    "words": "foo"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 8,
+                                    "endOffset": 15,
+                                    "words": "AND bar"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "fixups: double explicit NOT is eaten as a word and produce a warning": {
+        "query": "foo NOT NOT bar",
+        "expected": {
+            "query": "foo NOT NOT bar",
+            "rawQuery": "foo NOT NOT bar",
+            "queryClassCache": [
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-token",
+                    "start": 8,
+                    "expected": [
+                        "QUERY"
+                    ],
+                    "actual": "NOT"
+                }
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 15,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 3,
+                                    "words": "foo"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 8,
+                                    "endOffset": 15,
+                                    "words": "NOT bar"
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "fixups: double negation with negation prefix is ignored and produce a warning (debatable)": {
+        "query": "foo NOT -bar",
+        "expected": {
+            "query": "foo NOT -bar",
+            "rawQuery": "foo NOT -bar",
+            "queryClassCache": [
+                "complex_query",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-parse-error-double-negation",
+                    "start": 8
+                }
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 12,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 3,
+                                    "words": "foo"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 9,
+                                    "endOffset": 12,
+                                    "words": "bar"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "fixups: OR at eof is eaten as a word and produce a warning": {
+        "query": "foo OR ",
+        "expected": {
+            "query": "foo OR ",
+            "rawQuery": "foo OR ",
+            "queryClassCache": [
+                "simple_bag_of_words",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-end",
+                    "start": 7,
+                    "expected": [
+                        "NOT",
+                        "QUERY"
+                    ],
+                    "actual": "EOF"
+                }
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 6,
+                    "words": "foo OR"
+                }
+            }
+        }
+    },
+    "fixups: NOT at eof is eaten as a word and produce a warning": {
+        "query": "foo NOT ",
+        "expected": {
+            "query": "foo NOT ",
+            "rawQuery": "foo NOT ",
+            "queryClassCache": [
+                "simple_bag_of_words",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-end",
+                    "start": 8,
+                    "expected": [
+                        "QUERY"
+                    ],
+                    "actual": "EOF"
+                }
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 7,
+                    "words": "foo NOT"
+                }
+            }
+        }
+    },
+    "fixups: NOT at start&eof is eaten as a word and produce a warning": {
+        "query": "NOT",
+        "expected": {
+            "query": "NOT",
+            "rawQuery": "NOT",
+            "queryClassCache": [
+                "simple_bag_of_words",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-end",
+                    "start": 3,
+                    "expected": [
+                        "QUERY"
+                    ],
+                    "actual": "EOF"
+                }
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 3,
+                    "words": "NOT"
+                }
+            }
+        }
+    },
+    "fixups: trailing NOT after bool op is eaten as a word and produce a warning": {
+        "query": "word AND NOT",
+        "expected": {
+            "query": "word AND NOT",
+            "rawQuery": "word AND NOT",
+            "queryClassCache": [
+                "complex_query",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-end",
+                    "start": 12,
+                    "expected": [
+                        "QUERY"
+                    ],
+                    "actual": "EOF"
+                }
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 12,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 4,
+                                    "words": "word"
+                                }
+                            },
+                            "explicit": true
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 9,
+                                    "endOffset": 12,
+                                    "words": "NOT"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "fixups: leading boolean operator is eaten as a word and produce a warning": {
+        "query": "AND foo",
+        "expected": {
+            "query": "AND foo",
+            "rawQuery": "AND foo",
+            "queryClassCache": [
+                "simple_bag_of_words",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-token",
+                    "start": 0,
+                    "expected": [
+                        "NOT",
+                        "QUERY"
+                    ],
+                    "actual": "AND"
+                }
+            ],
+            "root": {
+                "words": {
+                    "startOffset": 0,
+                    "endOffset": 7,
+                    "words": "AND foo"
+                }
+            }
+        }
+    },
+    "fixups: unbalanced phrase are identified and produce a warning": {
+        "query": "foo \"bar ",
+        "expected": {
+            "query": "foo \"bar ",
+            "rawQuery": "foo \"bar ",
+            "queryClassCache": [
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrus-parse-error-unbalanced-phrase",
+                    "start": 4
+                }
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 9,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 3,
+                                    "words": "foo"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "phrase": {
+                                    "startOffset": 4,
+                                    "endOffset": 9,
+                                    "phrase": "bar ",
+                                    "slop": -1,
+                                    "stem": false,
+                                    "unbalanced": true
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "fixups: unbalanced phrase can be negated but produce a warning": {
+        "query": "foo -\"bar baz",
+        "expected": {
+            "query": "foo -\"bar baz",
+            "rawQuery": "foo -\"bar baz",
+            "queryClassCache": [
+                "complex_query",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrus-parse-error-unbalanced-phrase",
+                    "start": 4
+                }
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 13,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 3,
+                                    "words": "foo"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST_NOT": {
+                                "phrase": {
+                                    "startOffset": 5,
+                                    "endOffset": 13,
+                                    "phrase": "bar baz",
+                                    "slop": -1,
+                                    "stem": false,
+                                    "unbalanced": true
+                                }
+                            },
+                            "explicit": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "fixups: query made of bool operator may read one bool out of 2 properly and produce a warning (debatable)": {
+        "query": "AND && OR OR AND && ||",
+        "expected": {
+            "query": "AND && OR OR AND && ||",
+            "rawQuery": "AND && OR OR AND && ||",
+            "queryClassCache": [
+                "complex_query",
+                "bogus_query"
+            ],
+            "warnings": [
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-token",
+                    "start": 0,
+                    "expected": [
+                        "NOT",
+                        "QUERY"
+                    ],
+                    "actual": "AND"
+                },
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-token",
+                    "start": 7,
+                    "expected": [
+                        "NOT",
+                        "QUERY"
+                    ],
+                    "actual": "OR"
+                },
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-token",
+                    "start": 13,
+                    "expected": [
+                        "NOT",
+                        "QUERY"
+                    ],
+                    "actual": "AND"
+                },
+                {
+                    "msg": "cirrussearch-parse-error-unexpected-token",
+                    "start": 20,
+                    "expected": [
+                        "NOT",
+                        "QUERY"
+                    ],
+                    "actual": "OR"
+                }
+            ],
+            "root": {
+                "bool": {
+                    "startOffset": 0,
+                    "endOffset": 22,
+                    "clauses": [
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 0,
+                                    "endOffset": 3,
+                                    "words": "AND"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 7,
+                                    "endOffset": 9,
+                                    "words": "OR"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 13,
+                                    "endOffset": 16,
+                                    "words": "AND"
+                                }
+                            },
+                            "explicit": false
+                        },
+                        {
+                            "MUST": {
+                                "words": {
+                                    "startOffset": 20,
+                                    "endOffset": 22,
+                                    "words": "||"
+                                }
+                            },
+                            "explicit": true
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

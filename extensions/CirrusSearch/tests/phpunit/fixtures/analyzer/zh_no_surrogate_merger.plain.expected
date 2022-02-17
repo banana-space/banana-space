@@ -1,0 +1,49 @@
+{
+    "analyzer": {
+        "zh_plain": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "smartcn_stop",
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        },
+        "zh_plain_search": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "smartcn_stop",
+                "lowercase"
+            ],
+            "char_filter": [
+                "word_break_helper"
+            ]
+        }
+    },
+    "filter": {
+        "smartcn_stop": {
+            "type": "stop",
+            "stopwords": [
+                ","
+            ]
+        },
+        "lowercase": {
+            "type": "lowercase"
+        }
+    },
+    "char_filter": {
+        "word_break_helper": {
+            "type": "mapping",
+            "mappings": [
+                "_=>\\u0020",
+                ".=>\\u0020",
+                "(=>\\u0020",
+                ")=>\\u0020"
+            ]
+        }
+    },
+    "tokenizer": []
+}

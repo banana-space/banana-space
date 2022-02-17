@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cedric31"
+		]
+	},
+	"elastica-desc": "Foncionalitat [http://www.elasticsearch.org/ Elasticsearch] de basa utilizada per d’autras extensions en provesissent la bibliotèca [http://elastica.io/ Elastica]."
+}

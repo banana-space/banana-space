@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bugoslav",
+			"Ivi104",
+			"MaGa",
+			"Ponor"
+		]
+	},
+	"cirrussearch-desc": "Pretraga za MediaWiki pomoću Elasticsearcha",
+	"cirrussearch-backend-error": "Sustav nije mogao dovršiti Vašu pretragu zbog privremenoga problema.\nMolimo Vas, poslije pokušajte ponovo.",
+	"cirrussearch-parse-error": "Upit nije bio razumljiv. Molimo Vas da ga pojednostavite. Upit je bio evidentiran radi unapređenja sustava za pretragu.",
+	"cirrussearch-too-busy-error": "Pretraga je trenutačno prezauzeta. Molimo Vas, pokušajte ponovo kasnije.",
+	"cirrussearch-regex-syntax-error": "Sintaksna pogreška regularnoga izraza na mjestu $2: $1",
+	"cirrussearch-now-using": "Ovaj wiki koristi novi način pretrage. ([[mw:Special:MyLanguage/Help:CirrusSearch|Saznajte više]])",
+	"cirrussearch-pref-label": "Novi način pretrage",
+	"cirrussearch-pref-desc": "Isprobajte novi način pretrage koji podržava veliki broj jezika, ažurirane rezultate, a omogućava i pretraživanje unutar predložaka.",
+	"prefs-completion": "Dovršavanje pretraga",
+	"cirrussearch-pref-completion-section-desc": "Dovršivač pretrage",
+	"cirrussearch-pref-completion-profile-help": "Izaberite način automatskog dovršavanja prilikom utipkavanja pretraga.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Zadano (preporučeno)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Ispravlja do dvije pogreške. Vodi na preusmjeravanja bliska upisanome.",
+	"cirrussearch-completion-profile-strict-pref-name": "Strogi način (napredno)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Ne ispravlja pogreške. Ne zanemaruje naglaske. Traži točno upisano.",
+	"cirrussearch-completion-profile-normal-pref-name": "Preusmjeravajući način (napredno)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Ne ispravlja pogreške. Vodi na preusmjeravanja bliska upisanome.",
+	"cirrussearch-completion-profile-classic-pref-name": "Klasična prefiksna pretraga",
+	"cirrussearch-completion-profile-classic-pref-desc": "Ne ispravlja pogreške. Traži početke naziva.",
+	"cirrussearch-feature-deepcat-invalid-title": "navedena kategorija nije valjana.",
+	"cirrussearch-mlt-feature-no-valid-titles": "Nisu pruženi valjani naslovi za '$1'.",
+	"cirrussearch-mlt-not-configured": "Mogućnost '$1' nije dobro namještena. Zamolite administratora da popravi $wgCirrusSearchMoreLikeThisFields",
+	"cirrussearch-explore-similar-related": "Povezano",
+	"cirrussearch-explore-similar-categories": "Kategorije",
+	"cirrussearch-explore-similar-languages": "Jezici",
+	"cirrussearch-explore-similar-related-none": "Nema dostupnih povezanih stranica",
+	"cirrussearch-explore-similar-categories-none": "Nema dostupnih kategorija",
+	"cirrussearch-explore-similar-languages-none": "Nije dostupno na drugim jezicima",
+	"cirrussearch-article-words": "Riječi u svim stranicama sa sadržajem"
+}

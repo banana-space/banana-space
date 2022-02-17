@@ -1,0 +1,88 @@
+[
+    {
+        "responses": [
+            {
+                "took": 13,
+                "timed_out": false,
+                "_shards": {
+                    "total": 8,
+                    "successful": 8,
+                    "failed": 0
+                },
+                "hits": {
+                    "total": 2,
+                    "max_score": 7.9185534,
+                    "hits": [
+                        {
+                            "_index": "wiki_content_first",
+                            "_type": "page",
+                            "_id": "1",
+                            "_score": 3.6430995,
+                            "_source": {
+                                "timestamp": "2016-09-19T18:19:55Z",
+                                "title": "Main Page",
+                                "text_bytes": 485,
+                                "redirect": [
+                                    {
+                                        "title": "Redirect",
+                                        "namespace": 0
+                                    }
+                                ],
+                                "namespace": 0
+                            },
+                            "fields": {
+                                "text.word_count": [
+                                    27
+                                ]
+                            },
+                            "highlight": {
+                                "text": [
+                                    "Welcome to MediaWiki-Vagrant!   MediaWiki-Vagrant help  MediaWiki help (run vagrant roles help in the directory where you installed MediaWiki-Vagrant to"
+                                ],
+                                "title": [
+                                    "<span class=\"searchmatch\">Main<\/span> Page"
+                                ]
+                            }
+                        },
+                        {
+                            "_index": "wiki_general_first",
+                            "_type": "page",
+                            "_id": "2",
+                            "_score": 0.011918611,
+                            "_source": {
+                                "timestamp": "2016-09-19T18:18:58Z",
+                                "title": "Main Page",
+                                "text_bytes": 362,
+                                "redirect": [],
+                                "namespace": 10
+                            },
+                            "fields": {
+                                "text.word_count": [
+                                    27
+                                ]
+                            },
+                            "highlight": {
+                                "text": [
+                                    "Welcome to MediaWiki-Vagrant!   MediaWiki-Vagrant help  MediaWiki help (run vagrant roles help in the directory where you installed MediaWiki-Vagrant to"
+                                ],
+                                "title": [
+                                    "<span class=\"searchmatch\">Main<\/span> Page"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "suggest": {
+                    "suggest": [
+                        {
+                            "text": "main",
+                            "offset": 0,
+                            "length": 4,
+                            "options": []
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+]

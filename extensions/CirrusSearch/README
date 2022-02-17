@@ -1,0 +1,268 @@
+MediaWiki extension: CirrusSearch
+---------------------------------
+
+Installation
+------------
+Get Elasticsearch up and running somewhere. Elasticsearch v6.x is only supported but 6.5.4 or higher is
+recommended.
+
+Place the CirrusSearch extension in your extensions directory.
+You also need to install the Elastica MediaWiki extension.
+Add this to LocalSettings.php:
+ wfLoadExtension( 'Elastica' );
+ wfLoadExtension( 'CirrusSearch' );
+ $wgDisableSearchUpdate = true;
+
+Configure your search servers in LocalSettings.php if you aren't running Elasticsearch on localhost:
+ $wgCirrusSearchServers = [ 'elasticsearch0', 'elasticsearch1', 'elasticsearch2', 'elasticsearch3' ];
+There are other $wgCirrusSearch variables that you might want to change from their defaults.
+
+Now run this script to generate your elasticsearch index:
+ php $MW_INSTALL_PATH/extensions/CirrusSearch/maintenance/UpdateSearchIndexConfig.php
+
+Now remove $wgDisableSearchUpdate = true from LocalSettings.php.  Updates should start heading to Elasticsearch.
+
+Next bootstrap the search index by running:
+ php $MW_INSTALL_PATH/extensions/CirrusSearch/maintenance/ForceSearchIndex.php --skipLinks --indexOnSkip
+ php $MW_INSTALL_PATH/extensions/CirrusSearch/maintenance/ForceSearchIndex.php --skipParse
+Note that this can take some time.  For large wikis read "Bootstrapping large wikis" below.
+
+Once that is complete add this to LocalSettings.php to funnel queries to ElasticSearch:
+ $wgSearchType = 'CirrusSearch';
+
+Bootstrapping large wikis
+-------------------------
+Since most of the load involved in indexing is parsing the pages in php we provide a few options to split the
+process into multiple processes.  Don't worry too much about the database during this process.  It can generally
+handle more indexing processes then you are likely to be able to spawn.
+
+General strategy:
+0.  Make sure you have a good job queue setup.  It'll be doing most of the work.  In fact, Cirrus won't work
+well on large wikis without it.
+1.  Generate scripts to add all the pages without link counts to the index.
+2.  Execute them any way you like.
+3.  Generate scripts to count all the links.
+4.  Execute them any way you like.
+
+Step 1:
+In bash I do this:
+ export PROCS=5 #or whatever number you want
+ rm -rf cirrus_scripts
+ mkdir cirrus_scripts
+ mkdir cirrus_log
+ pushd cirrus_scripts
+ php extensions/CirrusSearch/maintenance/ForceSearchIndex.php --queue --maxJobs 10000 --pauseForJobs 1000 \
+    --skipLinks --indexOnSkip --buildChunks 250000 |
+    sed -e 's/$/ | tee -a cirrus_log\/'$wiki'.parse.log/' |
+    split -n r/$PROCS
+ for script in x*; do sort -R $script > $script.sh && rm $script; done
+ popd
+
+Step 2:
+Just run all the scripts that step 1 made.  Best to run them in screen or something and in the directory above
+cirrus_scripts.  So like this:
+ bash cirrus_scripts/xaa.sh
+
+Step 3:
+In bash I do this:
+ pushd cirrus_scripts
+ rm *.sh
+ php extensions/CirrusSearch/maintenance/ForceSearchIndex.php --queue --maxJobs 10000 --pauseForJobs 1000 \
+    --skipParse --buildChunks 250000 |
+    sed -e 's/$/ | tee -a cirrus_log\/'$wiki'.parse.log/' |
+    split -n r/$PROCS
+ for script in x*; do sort -R $script > $script.sh && rm $script; done
+ popd
+
+Step 4:
+Same as step 2 but for the new scripts.  These scripts put more load on Elasticsearch so you might want to run
+them just one at a time if you don't have a huge Elasticsearch cluster or you want to make sure not to cause load
+spikes.
+
+If you don't have a good job queue you can try the above but lower the buildChunks parameter significantly and
+remove the --queue parameter.
+
+Handling elasticsearch outages
+------------------------------
+If for some reason in process updates to elasticsearch begin failing you can immediately
+set "$wgDisableSearchUpdate = true;" in your LocalSettings.php file to
+stop trying to update elasticsearch.  Once you figure out what is wrong with elasticsearch you
+should turn those updates back on and then run the following:
+php ./maintenance/ForceSearchIndex.php --from <whenever the outage started in ISO 8601 format> --deletes
+php ./maintenance/ForceSearchIndex.php --from <whenever the outage started in ISO 8601 format>
+
+The first command picks up all the deletes that occurred during the outage and
+should complete quite quickly.  The second command picks up all the updates
+that occurred during the outage and might take significantly longer.
+
+
+PoolCounter
+-----------
+CirrusSearch can leverage the PoolCounter extension to limit the number of concurrent searches to
+elasticsearch.  You can do this by installing the PoolCounter extension and then configuring it in
+LocalSettings.php like so:
+ wfLoadExtension( 'PoolCounter');
+ // Configuration for standard searches.
+ $wgPoolCounterConf[ 'CirrusSearch-Search' ] = [
+	'class' => 'PoolCounter_Client',
+	'timeout' => 30,
+	'workers' => 25,
+	'maxqueue' => 50,
+ ];
+ // Configuration for prefix searches.  These are usually quite quick and
+ // plentiful.
+ $wgPoolCounterConf[ 'CirrusSearch-Prefix' ] = [
+	'class' => 'PoolCounter_Client',
+	'timeout' => 10,
+	'workers' => 50,
+	'maxqueue' => 100,
+ ];
+ // Configuration for regex searches.  These are slow and use lots of resources
+ // so we only allow a few at a time.
+ $wgPoolCounterConf[ 'CirrusSearch-Regex' ] = [
+	'class' => 'PoolCounter_Client',
+	'timeout' => 30,
+	'workers' => 10,
+	'maxqueue' => 10,
+ ];
+ // Configuration for funky namespace lookups.  These should be reasonably fast
+ // and reasonably rare.
+ $wgPoolCounterConf[ 'CirrusSearch-NamespaceLookup' ] = [
+		'class' => 'PoolCounter_Client',
+		'timeout' => 10,
+		'workers' => 20,
+		'maxqueue' => 20,
+	),
+ ];
+
+Upgrading
+---------
+When you upgrade there four possible cases for maintaining the index:
+1.  You must update the index configuration and reindex from source documents.
+2.  You must update the index configuration and reindex from already indexed documents.
+3.  You must update the index configuration but no reindex is required.
+4.  No changes are required.
+
+If you must do (1) you have two options:
+A.  Blow away the search index and rebuild it from scratch.  Marginally faster and uses less disk space on
+in elasticsearch but empties the index entirely and rebuilds it so search will be down for a while:
+ php updateSearchIndexConfig.php --startOver
+ php forceSearchIndex.php
+
+B.  Build a copy of the index, reindex to it, and then force a full reindex from source documents.  Uses
+more disk space but search should be up the entire time:
+ php updateSearchIndexConfig.php --reindexAndRemoveOk --indexIdentifier now
+ php forceSearchIndex.php
+
+If you must do (2) really have only one option:
+A.  Build of a copy of the index and reindex to it:
+ php updateSearchIndexConfig.php --reindexAndRemoveOk --indexIdentifier now
+ php forceSearchIndex.php --from <time when you started updateSearchIndexConfig.php in YYYY-mm-ddTHH:mm:ssZ> --deletes
+ php forceSearchIndex.php --from <time when you started updateSearchIndexConfig.php in YYYY-mm-ddTHH:mm:ssZ>
+or for the Bash inclined:
+ TZ=UTC export REINDEX_START=$(date +%Y-%m-%dT%H:%m:%SZ)
+ php updateSearchIndexConfig.php --reindexAndRemoveOk --indexIdentifier now
+ php forceSearchIndex.php --from $REINDEX_START --deletes
+ php forceSearchIndex.php --from $REINDEX_START
+
+If you must do (3) you again only have one option:
+A.  Same as (2.A)
+
+4 is easy!
+
+The safest thing if you don't know what is required for your update is to execute (1.B).
+
+
+Production suggestions
+----------------------
+
+Elasticsearch
+
+All the general rules for making Elasticsearch production ready apply here.  So you don't have to go
+round them up below is a list.  Some of these steps are obvious, others will take some research.
+
+** NOTE: this list was written for 0.90 so it may not work well for 1.0.  It'll be revised when I have
+more experience with 1.0.  --Nik
+
+1.  Have >= 3 nodes.
+2.  Configure Elasticsearch for memlock.
+3.  Change each node's elasticsearch.yml file in a few ways.
+3a.  Change node name to the real host name.
+3b.  Turn off auto creation and some other scary stuff by adding this (tested with 0.90.4):
+ ################################### Actions #################################
+ ## Modulo some small changes to comments this section comes directly from the
+ ## wonderful Elasticsearch mailing list, specifically Dan Everton.
+ ##
+ # Require explicit index creation.  ES never auto creates the indexes the way we
+ # like them.
+ ##
+ action.auto_create_index: false
+
+ ##
+ # Protect against accidental close/delete operations on all indices. You can
+ # still close/delete individual indices.
+ ##
+ action.disable_close_all_indices: true
+ action.disable_delete_all_indices: true
+
+ ##
+ # Disable ability to shutdown nodes via REST API.
+ ##
+ action.disable_shutdown: true
+
+
+Testing
+-------
+See tests
+
+
+Job Queue
+---------
+Cirrus makes heavy use of the job queue.  You can run it without any job queue customization but
+if you switch the job queue to Redis with checkDelay enabled then Cirrus's results will be more
+correct.  The reason for this is that this configuration allows Cirrus to delay link counts
+until Elasticsearch has appropriately refreshed.  This is an example of configuring it:
+ $redisPassword = '<password goes here>';
+ $wgJobTypeConf['default'] = [
+	'class' => 'JobQueueRedis',
+	'order' => 'fifo',
+	'redisServer' => 'localhost',
+	'checkDelay' => true,
+	'redisConfig' => [
+		'password' => $redisPassword,
+	],
+ ];
+ $wgJobQueueAggregator = [
+	'class'       => 'JobQueueAggregatorRedis',
+	'redisServer' => 'localhost',
+	'redisConfig' => [
+		'password' => $redisPassword,
+	],
+ ];
+
+Note: some MediaWiki setups have trouble running the job queue.  It can be finicky.	 The most
+sure fire way to get it to work is also the slowest.  Add this to your LocalSettings.php:
+ $wgRunJobsAsync = false;
+
+
+Development
+-----------
+The fastest way to get started with CirrusSearch development is to use MediaWiki-Vagrant.
+1.  Follow steps here: https://www.mediawiki.org/wiki/MediaWiki-Vagrant#Quick_start
+2.  Now execute the following:
+vagrant enable-role cirrussearch
+vagrant provision
+
+This can take some time but it produces a clean development environment in a virtual machine
+that has everything required to run Cirrus.
+
+
+Hooks
+-----
+See docs/hooks.txt.
+
+Licensing information
+---------------------
+CirrusSearch makes use of the Elastica extension containing the Elastica library to connect
+to Elasticsearch <http://elastica.io/>. It is Apache licensed and you can read the license
+Elastica/LICENSE.txt.

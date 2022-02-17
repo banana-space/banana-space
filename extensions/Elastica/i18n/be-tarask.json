@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Red Winged Duck"
+		]
+	},
+	"elastica-desc": "Базавая функцыянальнасьць [http://www.elasticsearch.org/ Elasticsearch] для іншых пашырэньняў, якая забясьпечваецца бібліятэкай [http://elastica.io/ Elastica]"
+}

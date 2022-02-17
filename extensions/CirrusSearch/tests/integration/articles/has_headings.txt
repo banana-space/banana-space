@@ -1,0 +1,11 @@
+==I am a heading==
+that contains text!
+
+==I am a '''bold heading'''==
+that also contains text
+
+==References==
+they go here
+but don't say the r word in this text too much or this'll beat HasReferencesInText which I didn't link intentionally because that'd give it a boost and we don't want that.
+
+[[Category:HeadingsTest]]

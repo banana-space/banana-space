@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ajeetsinghawadh"
+		]
+	},
+	"cirrussearch-pref-label": "नवा खोज",
+	"cirrussearch-give-feedback": "आपन प्रतिक्रिया दियैं",
+	"prefs-completion": "खोज पूरा होने",
+	"cirrussearch-pref-completion-section-desc": "सुझाव पूर्ण करय वाला",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "डिफ़ॉल्ट (संस्तुत)",
+	"cirrussearch-completion-profile-strict-pref-name": "सख्त मोड (उन्नत)",
+	"cirrussearch-completion-profile-normal-pref-name": "पुननिर्देशित मोड (उन्नत)",
+	"cirrussearch-completion-profile-classic-pref-name": "पुरान उपसर्ग खोज",
+	"cirrussearch-feature-deepcat-invalid-title": "प्रदान करी गय श्रेणी अमान्य अहै।",
+	"cirrussearch-incategory-feature-no-valid-categories": "'$1' का प्रदान कीन गय कउनो वैध श्रेणियां नाही।",
+	"cirrussearch-explore-similar-related": "सम्बंधित",
+	"cirrussearch-explore-similar-categories": "श्रेणियां",
+	"cirrussearch-explore-similar-languages": "भाषाएं"
+}

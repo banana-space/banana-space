@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Les Meloures",
+			"Robby",
+			"Soued031"
+		]
+	},
+	"cirrussearch-desc": "Elasticsearch-Sichfonctioun fir MediaWiki",
+	"cirrussearch-backend-error": "Mir konnten Är Sich wéinst engem temporäre Probleem net maachen. Probéiert wgl. méi spéit nach eng Kéier.",
+	"cirrussearch-parse-error": "D'Ufro gouf net verstanen. Maacht se wgl. méi einfach. D'Ufro gouf geloggt fir de Sichsystem ze verbesseren.",
+	"cirrussearch-too-busy-error": "Sichen ass elo iwwerlaascht. Probéiert wgl. méi spéit nach emol.",
+	"cirrussearch-now-using": "Dës Wiki benotzt eng nei Sichmaschinn.([[mw:Special:MyLanguage/Help:CirrusSearch|Fir méi ze wëssen]])",
+	"cirrussearch-ignored-headings": " #<!-- dës Zeil net änneren --> <pre>\n# Iwwerschrëften, déi vun der Sich ignoréiert ginn.\n# Dës Ännerunge gi wirksam, soubal déi Säit mat der Iwwerschrëft indexéiert gouf.\n# Dir kënnt déi Säitenindexéierung erzwéngen, andeem dir eng Nullännerung maacht.\n# Syntax:\n# * Alles, wat no enger Raut („#“) bis zum Ënn vun der Zeil steet, ass eng Bemierkung.\n# * All net-eidel Zeil ass de geneeën Titel fir z'ignoréieren.\nReferenzen\nWeblinken\nKuckt och\n #</pre> <!-- dës Zeil net änneren -->",
+	"cirrussearch-pref-label": "Nei sichen",
+	"cirrussearch-give-feedback": "Gitt eis Äre Feedback",
+	"cirrussearch-completion-profile-fuzzy": "Änlech wéi normal mat Tippfeelerverbesserung (zwee Tippfeeler ënnerstëtzt)",
+	"cirrussearch-completion-profile-fast-fuzzy": "Experimentelle Fuzzy-Profil (kann zu all Ament ewechgeholl ginn)",
+	"cirrussearch-qi-profile-classic-noboostlinks": "Klassement baséiert op e puer Schablounen, d'Sprooch vun der Säit an ob et rezent ass, wann dat op dëser Wiki aktivéiert ass.",
+	"cirrussearch-qi-profile-popular-pv": "Klassement baséiert primär dorop wéi dacks d'Säit opgeruff gouf",
+	"cirrussearch-qi-profile-popular-inclinks": "Klassement baséiert primär op d'Zuel vun de Linken déi erakomme",
+	"prefs-completion": "Siche komplettéieren",
+	"cirrussearch-pref-completion-profile-help": "Definéiert d'Verhale vun de Virschléi fir dat automatescht Ausfëllen (siche-wann-Dir-tippt).\n\nD'[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:CirrusSearch/CompletionSuggester Virschléi fir d'Ausfëllen] ass en Algorithmus fir Virschléi fir ze sichen mat enger verbesserter Korrektur vun Tippfeeler an enger verbesserter Relevanz beim Sichen. Siche mat Prefix ass den alen Algorithmus fir Virschloe vum Siche-wann-Dir-tippt.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Standard (recommandéiert)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Verbessert bis zu zwéin Tippfeeler. Hëlt Viruleedungen ewech déi ganz änlech wéi den Haapttitel sinn.",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-desc": "Verbessert bis zu zwéin Tippfeeler. Léist änlech Viruleedungen op. Fënnt Deeler vu Sätz an den Titelen.",
+	"cirrussearch-completion-profile-strict-pref-name": "Strikte Modus (erweidert)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Tippfeeler ginn net verbessert. Accenten musse richteg ugi sinn. Strikt Korrespondenz.",
+	"cirrussearch-completion-profile-normal-pref-name": "Viruleedungs-Modus (erweidert)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Tippfeeler ginn net verbessert. Berécksiichtegt änlech Viruleedungen.",
+	"cirrussearch-completion-profile-normal-subphrases-pref-desc": "Keng Verbesserung vun Tippfeeler. Léist änlech Viruleedungen op. Fënnt Deeler vu Sätz an den Titelen.",
+	"cirrussearch-completion-profile-classic-pref-desc": "Keng Verbesserung vun Tippfeeler. Entsprécht dem Ufank vun den Titelen.",
+	"cirrussearch-feature-deepcat-invalid-title": "D'Kategorie déi agi gouf ass net valabel.",
+	"cirrussearch-incategory-feature-no-valid-categories": "Keng valabel Kategorie fir '$1' uginn.",
+	"cirrussearch-mlt-feature-no-valid-titles": "Keng valabel Titele fir '$1' uginn.",
+	"cirrussearch-explore-similar-related": "Associéiert",
+	"cirrussearch-explore-similar-categories": "Kategorien",
+	"cirrussearch-explore-similar-languages": "Sproochen",
+	"cirrussearch-explore-similar-related-none": "Keng associéiert Säiten disponibel",
+	"cirrussearch-explore-similar-categories-none": "Keng Kategorien disponibel",
+	"cirrussearch-explore-similar-languages-none": "Net an anere Sproochen disponibel",
+	"cirrussearch-article-words": "Wierder op alle Säite mat Inhalt"
+}

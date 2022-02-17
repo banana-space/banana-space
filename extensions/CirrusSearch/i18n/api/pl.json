@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chrumps",
+			"Rail",
+			"Railfail536",
+			"Woytecr"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Zrzut konfiguracji CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "Zrzut konfiguracji CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Pobierz zrzut konfiguracji CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Zrzut mapowania CirrusSearch dla tej wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Zrzut mapowania CirrusSearch dla tej wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Pobierz zrzut mapowania CirrusSearch dla tej wiki.",
+	"apihelp-cirrus-settings-dump-description": "Zrzut ustawień CirrusSearch dla tej wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Zrzut ustawień CirrusSearch dla tej wiki.",
+	"apihelp-cirrus-settings-dump-example": "Pobierz zrzut ustawień CirrusSearch dla tej wiki."
+}

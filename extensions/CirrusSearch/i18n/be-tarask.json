@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Red Winged Duck",
+			"Renessaince",
+			"Wizardist"
+		]
+	},
+	"cirrussearch-desc": "Пошук у MediaWiki з дапамогай ElasticSearch",
+	"cirrussearch-backend-error": "Мы не змаглі выканаць пошукавы запыт з-за часовых праблемаў. Паспрабуйце пазьней, калі ласка.",
+	"cirrussearch-parse-error": "Запыт ня быў зразуметы. Калі ласка, спрасьціце яго. Запыт быў захаваны дзеля ўдасканаленьня пошукай сыстэмы.",
+	"cirrussearch-now-using": "{{SITENAME}} выкарыстоўвае новы рухавік пошуку. ([[mw:Special:MyLanguage/Help:CirrusSearch|Падрабязнасьці]])",
+	"cirrussearch-ignored-headings": " #<!-- не зьмяняйце гэты радок --> <pre>\n# Загалоўкі, якія мусіць ігнараваць пошукавы рухавік.\n# Зьмены будуць ужытыя па наступным індэксаваньні старонкі.\n# Вы можаце змусіць пераіндэксаваць старонку пустым рэдагаваньнем.\n# Сынтакс наступны:\n#   * Усё, што пачынаецца з \"#\" — камэнтар\n#   * Усякі непусты радок — загаловак, які трэба ігнараваць\nКрыніцы\nВонкавыя спасылкі\nГлядзіце таксама\n #</pre> <!-- не зьмяняйце гэты радок -->",
+	"cirrussearch-pref-label": "Новы пошук",
+	"cirrussearch-give-feedback": "Напішыце нам свой водгук",
+	"prefs-completion": "Дапаўненьне пошуку",
+	"cirrussearch-pref-completion-section-desc": "Падказьнік запаўненьня",
+	"cirrussearch-pref-completion-profile-help": "Задае паводзіны для прапановаў аўтазапаўненьня (пошук падчас набору).\n\n[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:CirrusSearch/CompletionSuggester Прапановы аўтазапаўненьня] — гэта альгарытм для прапановаў пошуку зь лепшым выпраўленьнем памылак і дакладнасьці пошуку. Прэфіксавы пошук — гэта альгарытм прапановаў падчас набору тэксту.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Дапомны (рэкамэндаваны)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Выпраўляе да дзьвюх абдруковак. Выдаляе перанакіраваньні, якія вельмі падобныя да асноўнай назвы.",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-name": "Дапаўненьне падфразаў (рэкамэндуецца для доўгіх назваў старонак)",
+	"cirrussearch-completion-profile-fuzzy-subphrases-pref-desc": "Выпраўляе да дзьвюх абдруковак. Выпраўляе блізкія перанакіраваньні. Супастаўляе падфразы ў загалоўках.",
+	"cirrussearch-completion-profile-strict-pref-name": "Дакладны рэжым (пашыраны)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Не выпраўляе абдрукоўкі. Адрозьнівае надлітарныя знакі. Строгая адпаведнасьць.",
+	"cirrussearch-completion-profile-normal-pref-name": "Рэжым перанакіраваньняў (пашыраны)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Не выпраўляе абдрукоўкі. Выпраўляе блізкія перанакіраваньні.",
+	"cirrussearch-completion-profile-normal-subphrases-pref-name": "Рэжым перанакіраваньняў з адпаведнасьцю падфразаў (пашыраны)",
+	"cirrussearch-completion-profile-normal-subphrases-pref-desc": "Не выпраўляе абдрукоўкі. Выпраўляе блізкія перанакіраваньні. Супастаўляе падфразы ў загалоўках.",
+	"cirrussearch-completion-profile-classic-pref-name": "Клясычны пошук па прэфіксе",
+	"cirrussearch-completion-profile-classic-pref-desc": "Без выпраўленьня абдруковак. Супастаўляе пачаткі загалоўкаў.",
+	"cirrussearch-explore-similar-related": "Зьвязанае",
+	"cirrussearch-explore-similar-categories": "Катэгорыі",
+	"cirrussearch-explore-similar-languages": "Мовы",
+	"cirrussearch-explore-similar-categories-none": "Катэгорыі недаступныя",
+	"cirrussearch-explore-similar-languages-none": "Недаступна іншымі мовамі",
+	"cirrussearch-article-words": "Колькасьць словаў ва ўсіх артыкулах",
+	"cirrussearch-autoselect-profile": "Дазволіць рухавіку абіраць найлепшы профіль для выкарыстаньня."
+}

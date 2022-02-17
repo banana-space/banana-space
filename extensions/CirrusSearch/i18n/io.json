@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joao Xavier"
+		]
+	},
+	"cirrussearch-too-busy-error": "Serchado nun esas multe okupata. Voluntez probar ol pose.",
+	"prefs-completion": "Parfineso di sercho",
+	"cirrussearch-pref-completion-profile-help": "Propozas vorti e frazi per autokompletigo (t.e. samatempe kam vu skribas) e pose serchas li.",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Ordinara ('Default', preferinda)",
+	"cirrussearch-completion-profile-strict-pref-name": "Strikta formo (avancata)",
+	"cirrussearch-completion-profile-normal-pref-name": "Quale ridirektar (avancata formo)",
+	"cirrussearch-completion-profile-classic-pref-name": "Klasika sercho por prefixo",
+	"cirrussearch-completion-profile-classic-pref-desc": "Sen korektar erori pri ortografio. Serchas koincidi kun la komenco di la tituli.",
+	"cirrussearch-explore-similar-languages": "Lingui",
+	"cirrussearch-article-words": "Quanto di vorti de omna temala pagini"
+}

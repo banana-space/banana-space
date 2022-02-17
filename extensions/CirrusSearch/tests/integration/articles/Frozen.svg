@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="744" width="852" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<clipPath id="f">
+<use xlink:href="#G2_"/>
+</clipPath>
+<clipPath id="g">
+<path d="m0 0v744h854v-744zm666.8 130c85.1 85.1 115.1 204.6 89.9 314h-124.7v-75.5c0-52.1-19.7-104.3-59.5-144.1zm-461.2 148.6h-101.4c14.94-54.4 43.76-105.8 86.5-148.5m216 123.4 114.6 114.3l-48.3 137.5-66.3-66.3z"/>
+</clipPath>
+<linearGradient id="path2576_1_" y2="699.7" gradientUnits="userSpaceOnUse" y1="271.7" x2="762.4" x1="332">
+<stop stop-color="#faa"/>
+<stop stop-opacity="0" stop-color="#faa" offset="1"/>
+</linearGradient>
+<linearGradient id="d" y2="810.9" gradientUnits="userSpaceOnUse" x2="596" y1="270" x1="424">
+<stop stop-color="#3b3c39"/>
+<stop stop-color="#888a85" offset="1"/>
+</linearGradient>
+<linearGradient id="c" y2="-75.6" gradientUnits="userSpaceOnUse" y1="452.4" x2="-8.23" x1="512">
+<stop stop-color="#a00"/>
+<stop stop-opacity="0" stop-color="#a00" offset="1"/>
+</linearGradient>
+<radialGradient id="e" gradientUnits="userSpaceOnUse" cy="593.1" cx="437.3" gradientTransform="matrix(0.071 1.214 -1.371 0.081 1041 -356.1)" r="309.1">
+<stop stop-color="#ff8080"/>
+<stop stop-opacity="0" stop-color="#ff8080" offset="1"/>
+</radialGradient>
+<radialGradient id="abc" gradientUnits="userSpaceOnUse" cy="40" cx="23.86" gradientTransform="matrix(22.22 0 0 3.733 -104.2 530.7)" r="17.1">
+<stop/>
+<stop stop-opacity="0" offset="1"/>
+</radialGradient>
+<radialGradient id="h" gradientUnits="userSpaceOnUse" cy="55.74" cx="272.9" r="574.5">
+<stop stop-opacity="0" stop-color="#777" offset="0.82"/>
+<stop stop-opacity="0.55" offset="0.83"/>
+</radialGradient>
+<radialGradient id="G1_" xlink:href="#c" gradientUnits="userSpaceOnUse" cy="431.7" cx="902.7" gradientTransform="matrix(-0.009 -1.657 1.726 0 -174.8 2036)" r="290.6"/>
+</defs>
+<path id="G2_" clip-path="url(#g)" d="m850.5 373.3h-131v53.4h65.5v92.4c-8.8 4.4-26.96 7.7-51.2 7.7-77 0-128.8-50.1-128.8-134.3 0-86.4 55.6-133.2 134.8-133.2 39.1 0 63.83 7.15 84.2 15.96l14.86-54.5c-17.1-8.25-52.83-17.61-98.5-17.61-122.7 0-206.4 75.4-206.4 192.6-0.55 56.1 18.71 105.1 51.73 136.5 35.2 33.57 82.5 49.5 145.3 49.5 49.5 0 95.8-12.1 119.4-20.91zm-545.1-166.2h-73.7l120 370.9h77.53l128.2-370.9h-72.1c-29.95 100-70.52 209.4-92.45 303.8-25.6-105.7-54.98-195.7-87.48-303.8zm-295.2 353.3c20.36 12.1 61.1 23.1 100.2 23.1 95.8 0 140.9-51.73 140.9-111.2 0-53.4-31.37-85.8-95.8-110.1-49.5-19.26-70.99-32.47-70.99-61.1 0-21.46 18.71-44.57 61.6-44.57l1.11-55.6c-80.3 0-131 46.2-131 106.8 0 53.4 39.1 85.8 100.2 107.9 47.3 17.1 66 33.57 66 61.6 0 30.3-24.2 50.63-67.7 50.63-34.67 0-67.7-11-89.7-23.66z"/>
+<ellipse id="b" opacity="0.6" rx="381" ry="64" cy="680" cx="426" fill="url(#a)"/>
+<use xlink:href="#b" transform="matrix(0.62 0 0 0.62 161.7 258.1)"/>
+<path d="m190.8 606c131.4 131.4 344.6 131.4 476 0s131.4-344.6 0.02-476c-131.3-131.4-344.7-131.4-476 0-131.4 131.4-131.4 344.6 0 476zm327.6-55.5c-75.86 37.2-170.1 24.27-233.2-38.78-63-63.1-75.98-157.3-38.79-233.2zm54.1-326.2c63.1 63.1 75.95 157.4 38.74 233.2l-271.9-271.9c75.9-37.2 170.2-24.3 233.2 38.7z" fill="url(#c)"/>
+<path opacity="0.8" d="m203.5 142.6c-126.4 126.4-127.9 329.9-3.51 454.3s327.9 122.8 454.3-3.53c126.4-126.4 128-329.9 3.56-454.3s-328-122.8-454.4 3.53zm40.66 118.7l291.4 291.4c-116.1 51.2-196.5 24.46-256.2-35.2-59.71-59.71-93.5-149.2-35.2-256.2zm79.4-79.4c95.9-51.2 195.1-23.1 254.8 36.62 59.72 59.72 89.9 154.9 36.61 254.8l-291.4-291.4z" stroke="#fff" stroke-width="6" fill="url(#path2576_1_)"/>
+<path d="m212.5 151.7c-121.9 121.9-123.9 317.8-4.52 437.2s315.2 117.4 437.1-4.54 124-317.8 4.56-437.2-315.3-117.4-437.2 4.54zm28.93 95.7l308 308c-151.2 66.76-218.8 25.45-276.1-31.85s-105.4-139.7-31.85-276.1zm68.2-68.2c117.6-64.7 217.5-24.1 274.8 33.2s100.8 140.1 33.2 274.8l-307.9-307.9z" fill="url(#e)"/>
+<path d="m155.6 520.9c13.41 24.51 30.45 47.5 51.2 68.2 119.4 119.4 315.2 117.4 437.1-4.53s124-317.8 4.57-437.2c-20.7-20.7-43.72-37.72-68.2-51.1-5.81 31.2-14.42 61.99-25.83 91.9 10.49 7.58 20.1 15.86 28.75 24.51 57.3 57.3 106.2 157.4 33.2 274.8l-149.5-149.5c-10.4 12.5-21.45 24.63-33.2 36.4-11.26 11.25-22.89 21.92-34.87 31.95l149.4 149.4c-128.5 66.76-218.8 25.46-276.1-31.84-8.83-8.83-17.45-18.27-25.43-28.39-29.67 11.24-60.1 19.75-91 25.5z" fill="url(#G1_)"/>
+<g stroke-width="11" stroke-linejoin="round">
+<use xlink:href="#G2_" stroke="#2e3436" fill="url(#d)" color="#000"/>
+<use opacity="0.5" xlink:href="#G2_" clip-path="url(#f)" stroke="#fff" fill="none"/>
+</g>
+<use opacity="0.5" xlink:href="#G2_" fill="url(#h)"/>
+</svg>

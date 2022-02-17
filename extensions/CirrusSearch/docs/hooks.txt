@@ -1,0 +1,49 @@
+CirrusSearch provides hooks that other extensions can make use of to extend the core schema and
+modify documents.
+
+There are currently two phases to building CirrusSearch documents: the parse phase and the links phase.
+The parse phase then the links phase is run when the article's rendered text would change (actual
+article change and template change).  Only the links phase is run when an article is newly linked
+or unlinked.
+
+Note that this whole thing is a somewhat experimental feature at this point and the API hasn't
+really been settled.
+
+'CirrusSearchAnalysisConfig': Allows to hook into the configuration for analysis
+ &$config - multi-dimensional configuration array for analysis of various languages and fields
+ $builder - AnalysisConfigBuilder object handling the building (since 1.31)
+
+'CirrusSearchSimilarityConfig': Allows to customize and add new similarities to the index settings.
+ &$similarity - multi-dimensional configuration array for the similarities.
+
+'CirrusSearchMappingConfig': Allows configuration of the mapping of fields
+ &$config - multi-dimensional configuration array that contains Elasticsearch document configuration.
+   The 'page' index contains configuration for Elasticsearch documents representing pages.
+   The 'namespace' index contains namespace configuration for Elasticsearch documents representing
+   namespaces.
+ $builder - instance of MappingConfigBuilder, for easier use of utility methods to build fields.
+
+'CirrusSearchBuildDocumentParse': Allows extensions to modify ElasticSearch document produced from a page
+ $doc - \Elastica\Document object representing the page. Extensions can modify it.
+ $title - Title object for the page being parsed.
+ $content - Content object for the page.
+ $parserOutput - ParserOutput for the page, if exists, or null.
+
+'CirrusSearchAddQueryFeatures': Allows extensions to add query parser features
+ &$config - SearchConfig object which holds current search configuration
+ &$extraFeatures - array holding feature objects. This is where the extension should add its features.
+ The feature class should implement \CirrusSearch\Query\KeywordFeature.
+
+'CirrusSearchScoreBuilder': Allows extensions to define rescore builder functions
+ $func - function definition map, with keys:
+   type - function name
+   weight - weight of this function in this specific profile
+   For other parameter examples, see RescoreProfiles.config.php
+ $context - SearchContext object
+ &$builder - object implementing the function. Should be placed in this variable if this extension has it.
+
+'CirrusSearchProfileService': Allows extensions to register search profile repositories
+$service - \CirrusSearch\Profile\SearchProfileService the profile service being built
+
+'CirrusSearchRegisterFullTextQueryClassifiers': Allows extensions to register fulltext query classifiers.
+  $repository - CirrusSearch\Parser\ParsedQueryClassifiersRepository : the repository to register new classifiers.

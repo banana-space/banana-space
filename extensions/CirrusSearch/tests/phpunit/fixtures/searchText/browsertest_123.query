@@ -1,0 +1,3 @@
+{
+    "query": "-hastemplate:\"Template Test\" catapult"
+}

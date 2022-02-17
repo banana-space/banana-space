@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Copia del configuration CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "Copia del configuration CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Obtener un copia del configuration de CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Copia del mappatura de CirrusSearch pro iste wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Copia del mappatura de CirrusSearch pro iste wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Obtener un copia del mappatura de CirrusSearch pro iste wiki.",
+	"apihelp-cirrus-settings-dump-description": "Copia del parametros de CirrusSearch pro iste wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Copia del parametros de CirrusSearch pro iste wiki.",
+	"apihelp-cirrus-settings-dump-example": "Obtener un copia del parametros de CirrusSearch pro iste wiki.",
+	"apihelp-cirrus-profiles-dump-description": "Copia del profilos de CirrusSearch pro iste wiki.",
+	"apihelp-cirrus-profiles-dump-summary": "Copia del profilos de CirrusSearch pro iste wiki.",
+	"apihelp-cirrus-profiles-dump-example": "Obterner un copia del profilos de CirrusSearch pro iste wiki.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Generar un copia del contento del profilos",
+	"apihelp-query+cirrusdoc-description": "Instantaneo del documento de un articulo CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Instantaneo del documento de un articulo CirrusSearch ab le servitores de recerca",
+	"apihelp-query+cirrusdoc-example": "Obtener un instantaneo de un articulo CirrusSearch individual como actualmente indexate in le motor de recerca.",
+	"apihelp-query+cirrusbuilddoc-summary": "Copia del documento de un articulo CirrusSearch ab le servitores de base de datos",
+	"apihelp-query+cirrusbuilddoc-example": "Obtener un copia de un sol articulo CirrusSearch generate ab le base de datos.",
+	"apierror-cirrus-requesttoolong": "Le requesta de recerca per prefixo es plus longe que le dimension permittite. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "Le methodo de punctage a usar",
+	"apierror-compsuggestbuilddoc-bad-method": "Methodo de punctage incognite",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "Copia del documento usate per le suggestor de completiones",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "Obtener un copia del documento usate per le suggestor de completiones"
+}

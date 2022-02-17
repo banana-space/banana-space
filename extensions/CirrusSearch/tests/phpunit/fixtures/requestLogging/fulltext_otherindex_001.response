@@ -1,0 +1,83 @@
+[
+    {
+        "responses": [
+            {
+                "took": 6,
+                "timed_out": false,
+                "_shards": {
+                    "total": 5,
+                    "successful": 5,
+                    "failed": 0
+                },
+                "hits": {
+                    "total": 2,
+                    "max_score": 2.7669134,
+                    "hits": [
+                        {
+                            "_index": "commonswiki_file_first",
+                            "_type": "page",
+                            "_id": "26",
+                            "_score": 0.83292395,
+                            "_source": {
+                                "timestamp": "2016-09-27T20:54:10Z",
+                                "title": "OnCommons.svg",
+                                "text_bytes": 40,
+                                "redirect": [],
+                                "namespace": 6
+                            },
+                            "fields": {
+                                "text.word_count": [
+                                    7
+                                ]
+                            },
+                            "highlight": {
+                                "text": [
+                                    "File stored on commons for test purposes"
+                                ],
+                                "title": [
+                                    "OnCommons.<span class=\"searchmatch\">svg<\/span>"
+                                ]
+                            }
+                        },
+                        {
+                            "_index": "commonswiki_file_first",
+                            "_type": "page",
+                            "_id": "27",
+                            "_score": 0.8020882,
+                            "_source": {
+                                "timestamp": "2016-09-27T20:54:14Z",
+                                "title": "DuplicatedLocally.svg",
+                                "text_bytes": 45,
+                                "redirect": [],
+                                "namespace": 6
+                            },
+                            "fields": {
+                                "text.word_count": [
+                                    7
+                                ]
+                            },
+                            "highlight": {
+                                "text": [
+                                    "File stored on commons and duplicated locally"
+                                ],
+                                "title": [
+                                    "DuplicatedLocally.<span class=\"searchmatch\">svg<\/span>"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "suggest": {
+                    "suggest": [
+                        {
+                            "text": "svg",
+                            "offset": 0,
+                            "length": 3,
+                            "options": []
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+]

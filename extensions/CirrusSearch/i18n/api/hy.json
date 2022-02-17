@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kareyac"
+		]
+	},
+	"apierror-cirrus-requesttoolong": "Որոնման հարցումը գերազանցում է թույլատրելի առավելագույն երկարությունը. ($1 > $2)"
+}

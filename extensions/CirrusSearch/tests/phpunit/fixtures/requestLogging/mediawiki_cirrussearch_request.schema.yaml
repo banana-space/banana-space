@@ -1,0 +1,261 @@
+title: mediawiki/cirrussearch/request
+description: >
+  A set of requests made by CirrusSearch to ElasticSearch
+  for a single PHP execution context.
+$id: /mediawiki/cirrussearch/request/0.0.1
+$schema: http://json-schema.org/draft-07/schema#
+type: object
+additionalProperties: false
+properties:
+  # global event fields
+  $schema:
+    type: string
+    description: >
+      The URI identifying the jsonschema for this event. This may be just
+      a short uri containing only the name and revision at the end of the
+      URI path.  e.g. /schema_name/12345 is acceptable. This often will
+      (and should) match the schema's $id field.
+  meta:
+    type: object
+    properties:
+      uri:
+        type: string
+        format: uri-reference
+        maxLength: 8192
+        description: the unique URI identifying the event / resource
+      request_id:
+        type: string
+        description: The unique ID of the request that caused the event.
+      id:
+        type: string
+        pattern: '^[a-fA-F0-9]{8}(-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}$'
+        maxLength: 36
+        description: the unique ID of this event; should match the dt field
+      # -- cirrussearchrequestset .ts
+      dt:
+        type: string
+        format: date-time
+        maxLength: 26
+        description: the time stamp of the event, in ISO8601 format
+      domain:
+        type: string
+        description: the domain the event pertains to
+        minLength: 1
+      stream:
+        type: string
+        description: The name of the stream/queue that this event belongs in.
+        minLength: 1
+    required:
+      - id
+      - dt
+      - domain
+      - stream
+
+  # -- cirrussearchrequestset .payload
+  http:
+    type: object
+    description: Information about the HTTP request that generated this event.
+    properties:
+      method:
+        type: string
+        description: The HTTP request method (GET, POST, etc.)
+      client_ip:
+        type: string
+        description: The http client's IP address
+      request_headers:
+        type: object
+        description: Request headers sent by the client.
+        additionalProperties:
+          type: string
+      has_cookies:
+        type: boolean
+        description: True if the http request has any cookies set
+
+  # event-specific fields
+
+  # -- cirrussearchrequestset .wikiId
+  database:
+    description: The name of the wiki database that this mediawiki instance uses.
+    type: string
+
+  # -- cirrussearchrequestset .payload.host
+  mediawiki_host:
+    type: string
+    description: Hostname of Mediawiki server handling these CirrusSearch requests
+
+  params:
+    type: object
+    description: >
+      Request parameters. Usually from the HTTP query string.
+    additionalProperties:
+      type: string
+
+  # -- cirrussearchrequestset .id
+  search_id:
+    type: string
+    description: >
+      UUIDv4 in base36 id of this search request. This token will be placed
+      on the URI of the generated search results page for the user,
+      so downstream analysis can join between this search request set
+      and clicked on results via webrequest referrer field.  E.g.
+      a result page URI might be /wiki/Special:Search?searchToken=asdhlajsflkafd
+      Requests that come from the Mediawiki API will have this sent via
+      the X-Search-ID response header.
+
+  source:
+    type: string
+    description: Where the request is coming from. Typically web, api or cli
+
+  identity:
+    type: string
+    description: >
+      A hash identifying the requestor.
+      Includes the IP address and User Agent when available
+
+  backend_user_tests:
+    type: array
+    description: List of backend tests the requests are participating in
+    items:
+      type: string
+      minLength: 1
+
+   # -- cirrussearchrequestset .tookMs
+  request_time_ms:
+    type: integer
+    description: Total time of the CirrusSearch request in milliseconds
+    minimum: 0
+
+  # TODO: use a JSON $ref pointer for this when we support it
+  # -- cirrussearchrequestset .hits
+  hits:
+    type: array
+    description: Final set of result pages returned for the CirrusSearch request
+    items:
+      type: object
+      additionalProperties: false
+      properties:
+        page_title:
+          type: string
+          description: MediaWiki page title of the result
+        page_id:
+          type: integer
+          description: MediaWiki page id of the result. May be -1 for interwiki results
+        index:
+          type: string
+          description: ElasticSearch index this result came from
+        score:
+          type: number
+          description: Score from ElasticSearch for this result
+        profile_name:
+          type: string
+          description: The profile name for comp_suggest queries
+
+  all_elasticsearch_requests_cached:
+    type: boolean
+    description: True if all Elasticsearch requests were given responses from cache
+
+  # -- cirrussearchrequestset .requests
+  elasticsearch_requests:
+    type: array
+    description: >
+      A list of requests made between Mediawiki CirrusSearch extension
+      and elasticsearch in a single execution context
+    items:
+      type: object
+      additionalProperties: false
+      properties:
+        query:
+          type: string
+          description: The actual search request
+        query_type:
+          type: string
+          description: The general type of query performed, such as full_text, prefix, etc.
+        indices:
+          type: array
+          description: The list of indices the request was performed against
+          items:
+            type: string
+        namespaces:
+          type: array
+          description: Each element is a mediawiki namespace id that was searched
+          items:
+            type: integer
+        # -- cirrussearchrequestset .requests[].tookMs
+        request_time_ms:
+          type: integer
+          description: >
+            The number of milliseconds between passing the query to the Elasticsearch
+            client library and getting the response back in the application
+        # -- cirrussearchrequestset .requests[].elasticTookMs
+        search_time_ms:
+          type: integer
+          description: The number of milliseconds the query took, according to ElasticSearch
+          minimum: 0
+        limit:
+          type: integer
+          description: The maximum number of results requested by the application
+        hits_total:
+          type: integer
+          description: The approximate total number of documents matching the query
+        hits_returned:
+          type: integer
+          description: The number of results returned to the application
+        hits_offset:
+          type: integer
+          description: The offset of the query
+        suggestion:
+          type: string
+          description: The suggestion generated by Elasticsearch
+        suggestion_requested:
+          type: boolean
+          description: If a suggestion was requested from Elasticsearch
+          default: false
+        max_score:
+          type: number
+          description: >
+            Max score returned by Elasticsearch. This is the best score in the
+            results before we apply rescore queries. Unfortunately we do not know if
+            it's part of the final result but it can give a rough idea of the score
+            range before we apply the rescore queries.
+
+        # -- cirrussearchrequestset.requests[].payload was a map
+        #    that contained these keys.
+        langdetect:
+          type: string
+          description: >
+            - null if no lang detection attepmted,
+            - "false" is failure to detect
+            - any other string is the language detected
+        syntax:
+          type: array
+          description: Tags returned by the query parser describing properties of the query
+          items:
+            type: string
+        cached:
+          type: boolean
+          description: True if this request's response was from cache
+
+        # TODO: use a JSON $ref pointer for this when we support it
+        hits:
+          type: array
+          description: Final set of result pages returned for this single Elasticsearch request
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              page_title:
+                type: string
+                description: MediaWiki page title of the result
+              page_id:
+                type: integer
+                description: MediaWiki page id of the result. May be -1 for interwiki results
+              index:
+                type: string
+                description: Elasticsearch index this result came from
+              score:
+                type: number
+                description: Score from Elasticsearch for this result
+                default: -1
+              profile_name:
+                type: string
+                description: The profile name for comp_suggest queries

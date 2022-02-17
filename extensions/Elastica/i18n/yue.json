@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ktchankt"
+		]
+	},
+	"elastica-desc": "用 [http://elastica.io/ Elastica] 函式庫嚟提供其他擴充套件基礎嘅[http://www.elasticsearch.org/ Elasticsearch] 功能"
+}

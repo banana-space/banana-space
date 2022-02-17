@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bengt B",
+			"Lokal Profil"
+		]
+	},
+	"elastica-desc": "Grundläggande [http://www.elasticsearch.org/ Elasticsearch]-funktionalitet för andra tillägg genom att tillhandahålla [http://elastica.io/ Elastica]-bibliotek"
+}

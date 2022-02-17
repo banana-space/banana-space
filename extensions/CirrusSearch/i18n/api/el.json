@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"KATRINE1992",
+			"Nikosgranturismogt",
+			"Sarri.greek",
+			"Twopix"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Εξαγωγή αρχείου ρυθμίσεων του CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "Εξαγωγή αρχείου ρυθμίσεων του CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Λάβετε ένα αρχείο ρυθμίσεων του CirrusSearch",
+	"apihelp-cirrus-mapping-dump-description": "Αρχέιο του CirrusSearch που αντιστοιχεί σ'αυτό το wiki",
+	"apihelp-cirrus-mapping-dump-summary": "Αρχείο του CirrusSearch που αντιστοιχεί σ'αυτό το βίκι.",
+	"apihelp-cirrus-mapping-dump-example": "Λάβετε αρχείο αντιστοίχισης του CirrusSearch για αυτό το wiki.",
+	"apihelp-cirrus-settings-dump-description": "Αρχείο ρυθμίσεων του CirrusSearch για αυτό το wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Αρχείο ρυθμίσεων του CirrusSearch για αυτό το wiki.",
+	"apihelp-cirrus-settings-dump-example": "Λάβετε αρχείο ρυθμίσεων του CirrusSearch για αυτό το wiki",
+	"apihelp-query+cirrusdoc-description": "Έγγραφο άρθρου Dump ενός CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Έγγραφο άρθρου Dump ενός CirrusSearch",
+	"apihelp-query+cirrusdoc-example": "Συλλέξετε ένα άρθρο κενό ενός απλού CirrusSearch.",
+	"apierror-cirrus-requesttoolong": "Αναζήτηση με πρόθεμα ήταν μεγαλύτερο από το μέγιστο επιτρεπόμενο μήκος. ($1 > $2)"
+}

@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nokib Sarkar"
+		]
+	},
+	"apihelp-query+compsuggestbuilddoc-param-method": "ব্যবহার করার জন্য স্কোরিং পদ্ধতি",
+	"apierror-compsuggestbuilddoc-bad-method": "অজানা স্কোরিং পদ্ধতি",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "সমাপ্তি পরামর্শক দ্বারা নির্ধারিত নথির একটি নমুনা পান"
+}

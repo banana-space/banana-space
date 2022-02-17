@@ -1,0 +1,128 @@
+{
+    "char_filter": {
+        "word_break_helper": {
+            "type": "mapping",
+            "mappings": [
+                "_=>\\u0020",
+                ",=>\\u0020",
+                "\"=>\\u0020",
+                "-=>\\u0020",
+                "'=>\\u0020",
+                "\\u2019=>\\u0020",
+                "\\u02BC=>\\u0020",
+                ";=>\\u0020",
+                "\\[=>\\u0020",
+                "\\]=>\\u0020",
+                "{=>\\u0020",
+                "}=>\\u0020",
+                "\\\\=>\\u0020",
+                "\\u00a0=>\\u0020",
+                "\\u1680=>\\u0020",
+                "\\u180e=>\\u0020",
+                "\\u2000=>\\u0020",
+                "\\u2001=>\\u0020",
+                "\\u2002=>\\u0020",
+                "\\u2003=>\\u0020",
+                "\\u2004=>\\u0020",
+                "\\u2005=>\\u0020",
+                "\\u2006=>\\u0020",
+                "\\u2007=>\\u0020",
+                "\\u2008=>\\u0020",
+                "\\u2009=>\\u0020",
+                "\\u200a=>\\u0020",
+                "\\u200b=>\\u0020",
+                "\\u200c=>\\u0020",
+                "\\u200d=>\\u0020",
+                "\\u202f=>\\u0020",
+                "\\u205f=>\\u0020",
+                "\\u3000=>\\u0020",
+                "\\ufeff=>\\u0020"
+            ]
+        },
+        "arabic_numeral_map": {
+            "type": "mapping",
+            "mappings": [
+                "\\u0660=>0",
+                "\\u0661=>1",
+                "\\u0662=>2",
+                "\\u0663=>3",
+                "\\u0664=>4",
+                "\\u0665=>5",
+                "\\u0666=>6",
+                "\\u0667=>7",
+                "\\u0668=>8",
+                "\\u0669=>9"
+            ]
+        }
+    },
+    "filter": {
+        "stop_filter": {
+            "type": "stop",
+            "stopwords": "_arabic_",
+            "remove_trailing": "true"
+        },
+        "lowercase": {
+            "type": "lowercase"
+        },
+        "accentfolding": {
+            "type": "asciifolding"
+        },
+        "token_limit": {
+            "type": "limit",
+            "max_token_count": "20"
+        },
+        "remove_empty": {
+            "type": "length",
+            "min": 1
+        }
+    },
+    "analyzer": {
+        "stop_analyzer": {
+            "type": "custom",
+            "filter": [
+                "lowercase",
+                "stop_filter",
+                "accentfolding",
+                "remove_empty",
+                "token_limit"
+            ],
+            "tokenizer": "standard"
+        },
+        "stop_analyzer_search": {
+            "type": "custom",
+            "filter": [
+                "lowercase",
+                "accentfolding",
+                "remove_empty",
+                "token_limit"
+            ],
+            "tokenizer": "standard"
+        },
+        "plain": {
+            "type": "custom",
+            "char_filter": [
+                "word_break_helper",
+                "arabic_numeral_map"
+            ],
+            "filter": [
+                "remove_empty",
+                "token_limit",
+                "lowercase"
+            ],
+            "tokenizer": "whitespace"
+        },
+        "plain_search": {
+            "type": "custom",
+            "char_filter": [
+                "word_break_helper",
+                "arabic_numeral_map"
+            ],
+            "filter": [
+                "remove_empty",
+                "token_limit",
+                "lowercase"
+            ],
+            "tokenizer": "whitespace"
+        }
+    }
+}

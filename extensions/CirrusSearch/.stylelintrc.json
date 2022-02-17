@@ -1,0 +1,7 @@
+{
+	"extends": "stylelint-config-wikimedia",
+	"rules": {
+		"no-descending-specificity": null,
+		"function-url-quotes": null
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vlad5250"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Rezervno spremište postavki CirrusSearcha.",
+	"apihelp-cirrus-config-dump-summary": "Rezervno spremište postavki CirrusSearcha.",
+	"apihelp-cirrus-config-dump-example": "Daj rezervno spremište postavki CirrusSearcha.",
+	"apihelp-cirrus-mapping-dump-description": "Rezervno spremište sličivanja CirrusSearcha za ovaj wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Rezervno spremište sličivanja CirrusSearcha za ovaj wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Daj rezervno spremište sličivanja CirrusSearcha za ovaj wiki.",
+	"apihelp-cirrus-settings-dump-description": "Rezervno spremište postavki CirrusSearcha za ovaj wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Rezervno spremište postavki CirrusSearcha za ovaj wiki.",
+	"apihelp-cirrus-settings-dump-example": "Daj rezervno spremište postavki CirrusSearcha za ovaj wiki.",
+	"apihelp-cirrus-profiles-dump-description": "Rezervno spremište profila CirrusSearcha za ovaj wiki.",
+	"apihelp-cirrus-profiles-dump-summary": "Rezervno spremište profila CirrusSearcha za ovaj wiki.",
+	"apihelp-cirrus-profiles-dump-example": "Daj rezervno spremište profila CirrusSearcha za ovaj wiki.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Stavi profile u rezervno skladište",
+	"apihelp-query+cirrusdoc-description": "Skladište za dokument članka CirrusSearch-a",
+	"apihelp-query+cirrusdoc-summary": "Rezarvno skladište za dokument članka CirrusSearch-a iz pretraživačkih servera",
+	"apihelp-query+cirrusdoc-example": "Daj rezervno skladište pojedinačnom CirrusSearch članku koji je trenutno indeksiran u pretraživanju.",
+	"apihelp-query+cirrusbuilddoc-summary": "Rezervno skladište za dokument članka CirrusSearch-a iz baznih servera",
+	"apihelp-query+cirrusbuilddoc-example": "Daja rezervno skladište pojedinačnog članka CirrusSearch-a stvorenog iz baze podataka.",
+	"apierror-cirrus-requesttoolong": "Zatraženo s prefiksom je dulje od dopuštene duljine. ($1 &gt; $2)"
+}

@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fitoschido",
+			"QuimGil",
+			"Toniher",
+			"Vriullop"
+		]
+	},
+	"cirrussearch-desc": "Cerca realitzada amb Elasticsearch per a MediaWiki",
+	"cirrussearch-backend-error": "No s'ha pogut completar la cerca per un problema temporal. Proveu-ho més endavant.",
+	"cirrussearch-parse-error": "La consulta no s'ha pogut interpretar. Feu-la més simple. La consulta ha quedat registrada per millorar el sistema de cerca.",
+	"cirrussearch-too-busy-error": "El servei de cerca està actualment saturat. Intenteu-ho més tard.",
+	"cirrussearch-regex-syntax-error": "Error de sintexi d'expressió regular a $2: $1",
+	"cirrussearch-regex-too-busy-error": "Hi ha massa cerques d'expressions regulars actualment en curs. Intenteu-ho més tard.",
+	"cirrussearch-regex-too-complex-error": "L'expressió regular és massa complexa. Vegeu com simplificar-la [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|aquí]].",
+	"cirrussearch-now-using": "Aquest wiki està utilitzant un nou cercador. ([[mw:Special:MyLanguage/Help:CirrusSearch|Més informació]])",
+	"cirrussearch-ignored-headings": " #<!-- deixeu aquesta línia tal com està --> <pre>\n# Títols que seran ignorats pel cercador.\n# Els canvis fets aquí tindran efecte tant aviat com la pàgina amb el títol sigui indexada.\n# Podeu forçar que una pàgina s'indexi de nou fent una edició nul·la.\n# La sintaxi és la següent:\n#   * Tot el que hi hagi des d'un caràcter \"#\" fins el final de línia és un comentari\n#   * Tota línia no buida és el títol exacte a ignorar, amb les majúscules i complet\nReferències\nEnllaços externs\nVegeu també\n #</pre> <!-- deixeu aquesta línia tal com està -->",
+	"cirrussearch-boost-templates": " #<!-- deixeu aquesta línia exactament com està --> <pre>\n# Si una pàgina conté una d'aquestes plantilla llavors la seva puntuació de cerca es multiplica pel percentatge indicat.\n# Els canvis tenen efecte immediatament.\n# La sintasi és la següent:\n#   * Tot el que hi ha des d'un caràcter \"#\" fins al final és un comentari.\n#   * Cada línia no buida és el nom de la plantilla a promoure, de forma exacta i completa amb el seu espai de noms i les majúscules i minúscules, seguit d'un caràcter \"|\", més un número i un caràcter \"%\".\n# Exemples de línies correctes:\n# Plantilla:Bo|150%\n# Plantilla:Molt Molt bo|300%\n# Plantilla:Dolent|50%\n# Exemples de línies no vàlides:\n# Plantilla:Daixonses|150.234234% <-- no es permeten punts ni comes decimals!\n# Daixonses|150% <--- tècnicament funcionarà, però per les inclusions de la pàgina Daixonses de l'espai principal\n# Podeu provar els canvis de configuració fent una consulta amb el prefix boost-templates:\"XX\" on XX és el conjunt de plantilles que voleu promoure separades per espais en lloc de salts de línia.\n# Les consultes que especifiquin boost-templates:\"XX\" ignoren el contingut d'aquest camp.\n #</pre> <!-- deixeu aquesta línia exactament com està -->",
+	"cirrussearch-pref-label": "Nou cercador",
+	"cirrussearch-pref-desc": "Proveu el nostre cercador nou que suporta un nombre de llengües més gran, proporciona resultats més actualitzats i fins i tot pot trobar text dins de plantilles.",
+	"cirrussearch-give-feedback": "Doneu-nos la vostra opinió",
+	"cirrussearch-query-too-long": "La sol·licitud de cerca és superior a la longitud màxima permesa. ($1 > $2)",
+	"prefs-completion": "Compleció de cerques",
+	"cirrussearch-feature-deepcat-invalid-title": "La categoria proporcionada no és vàlida."
+}

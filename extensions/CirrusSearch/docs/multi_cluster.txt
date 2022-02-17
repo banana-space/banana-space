@@ -1,0 +1,240 @@
+There are two multi-cluster use cases supported in CirrusSearch:
+
+1) Multiple datacenters with one cluster per datacenter.
+* Multiple datacenters act as warm spares which can be switched
+  to with a configuration change
+* If application servers exist in multiple datacenters they can be configured
+  to query the closest search cluster.
+
+2) Multiple clusters per datacenter, with multiple datacenters.
+* Performs like 1 above, but with wikis spread across multiple elasticsearch
+  clusters per dc. Generally only necessary with a large numbers of wikis
+  to keep the shard count per cluster in a reasonable range (<5k).
+* All datacenters must be equivalent. If wikis are spread between three clusters
+  in dc1 then there must be three matching clusters in dc2. This can be faked
+  by configuring multiple clusters to point to the same cluster behind the scenes
+  if needed.
+
+
+== Definitions
+
+A (replica, group) pair is an individual elasticsearch cluster.
+
+A `CirrusSearch cluster` is one or more elasticsearch clusters with matching
+replica names that contain all known wikis between them. In other words the set
+of (replica, group) pairs with matching replica name contains all indices
+necessary for cross project/cross language/external indices search.
+
+Code that works with the connections never needs to know about multiple cluster
+groups. They only need to know that there is one elasticsearch cluster to
+search against, and one or more elasticsearch clusters to write to. Queries
+between clusters utilize elasticsearch cross-cluster-search from the default
+search cluster.
+
+== Minimum Required Configuration
+
+The first piece to be configured is the list of available clusters.
+
+* All wikis can be configured with the same list of available clusters.
+* Individual elasticsearch cluster definitions are tagged with 'replica' and 'group' keys
+* There must not be two definitions with the same 'replica' and 'group' values.
+* Any group name that is omittied will be set to 'default'.
+* Any replica name that is ommitted will be set to the array key of the definition.
+* All clusters must define the same set of groups (to avoid defining assignments per CirrusSearch cluster)
+
+Example:
+```
+$wgCirrusSearchSearchClusters = [
+	'search.dc1' => [ ... ],
+	// These replica/group values are implied if omitted
+	'search.dc2' => [ 'replica' => 'search.dc2', 'group' => 'default', ... ],
+];
+$wgCirrusSearchDefaultCluster = 'search.dc1';
+$wgCirrusSearchWriteClusters = ['search.dc1', 'search.dc2']
+```
+
+Maintenance tasks (update mapping, reindex, etc.) must be performed per
+CirrusSearch cluster. CirrusSearch maintenance scripts all take a `--cluster`
+option to specify the CirrusSearch cluster to operate on. When not specified
+the default search cluster is used.
+
+
+== Cross wiki search with a single group per cluster
+
+This should "just work" with the above configuration.
+
+
+== Cross wiki search with multiple groups per cluster
+
+Searching across wikis with multiple clusters requires setting up
+cross-cluster-search inside all elasticsearch clusters, and configuring
+CirrusSearch with assignments for which wikis belong where.
+
+Elasticsearch cross-cluster-search needs to be configured with names matching
+the group portion of a (replica, group) pair. For simplicity the set of groups
+is assumed to be the same between all CirrusSearch clusters, and thus the
+configured cross-cluster-search names should be the same across all clusters.
+
+Remote clusters should be configured with skip_unavailable enabled. In general
+CirrusSearch uses cross-cluster-search for secondary information and prefers
+that unavailable clusters return no results rather than failing the request.
+
+Example elasticsearch configuration:
+```
+PUT _cluster/settings
+{
+	"persistent": {
+		"search": {
+			"remote": {
+				"a": {
+					"seeds": ["search-a.dc1:9300"],
+					"skip_unavailable": true
+				},
+				"b": {
+					"seeds": ["search-b.dc1:9301"],
+					"skip_unavailable": true
+				},
+				"c": {
+					"seeds": ["search-c.dc1:9302"],
+					"skip_unavailable": true
+				}
+			}
+		}
+	}
+}
+```
+
+Each wiki needs to then be assigned to a replica group. This is defined
+in one of two ways. It can be a simple string assignment:
+```
+$wgCirrusSearchReplicaGroup = 'a';
+```
+
+Or it can specify a strategy for choosing a replica group. The roundrobin type
+is convenient for the typical case of assigning large numbers of wikis in a
+roughly even manner.
+```
+$wgCirrusSearchReplicaGroup = [
+	'type' => 'roundrobin',
+	'groups' => ['b', 'c'],
+];
+```
+
+Initially only two types are supported, constant and roundrobin. A string
+is interpreted as the constant type.
+
+TODO: crc32 all but guarantees cross-project search goes cross-cluster. Using
+the first character ordinal would mostly avoid this, but only has 26 possible values
+so will distribute unevenly. The extended roundrobin implementation described below
+requires a large space to subdivide and can't work with only 26 possible values.
+
+A fully worked multi-cluster configuration might be:
+```
+// Define all available clusters. Note that array keys match
+// elasticsearch config above.
+$wgCirrusSearchClusters = [
+	'cluster_a.dc1' => [ 'replica' => 'dc1', 'group' => 'a', ... ],
+	'cluster_b.dc1' => [ 'replica' => 'dc1', 'group' => 'b', ... ],
+	'cluster_c.dc1' => [ 'replica' => 'dc1', 'group' => 'c', ... ],
+	'cluster_a.dc2' => [ 'replica' => 'dc2', 'group' => 'a', ... ],
+	'cluster_b.dc2' => [ 'replica' => 'dc2', 'group' => 'b', ... ],
+	'cluster_c.dc2' => [ 'replica' => 'dc2', 'group' => 'c', ... ],
+];
+// Enable use of elasticsearch cross-cluster-search
+$wgCirrusSearchCrossClusterSearch = true;
+// Cirrus cluster to send read requests to
+$wgCirrusSearchDefaultCluster = 'dc1'
+// Cirrus clusters to send write requests to
+$wgCirrusSearchWriteCluster = ['dc1', 'dc2']
+// Assignment from wikiid to search cluster
+$wgCirrusSearchReplicaGroup = [
+	'type' => 'roundrobin',
+	'groups' => ['b', 'c']
+];
+```
+
+
+== Special considerations for roundrobin
+
+NOTE: This won't make it into the initial implementation, which will only support up to
+2 items in a round robin.
+
+Roundrobin has a pathological upgrade path where changing the number of groups in
+the round robin shuffles wikis around the groups randomly. This can be worked around,
+but it means behind the scenes roundrobin isn't quite as simple as the crc32 % n clusters implies.
+
+Instead the groups specified by the roundrobin must be expanded such that the output space
+of crc32 is divided into many partitions and an equal number of partitions is assigned
+to each group.
+
+First some assumptions
+
+These are all equivilant:
+	groups => [a, b]
+	groups => [a, b, a, b]
+	groups => [a, b, a, b, a, b]
+
+When adding a third group we expand the partition list to something
+divisible by N and numPartitions(N-1). Thus the configured roundrobin of:
+
+	groups => [a, b, c]
+
+Will first have [a, b] expanded to 6, which is divisible by 2 and 3:
+
+	groups => [a, b, a, b, a, b]
+
+the final partition of a and b is re-assigned to c:
+
+	groups => [a, b, a, b, c, c]
+
+In this way the two partition round robin is interpreted as a having 6 partitions
+with 3 assigned to each of a and b, and then one partition from each is assigned
+to c. This algorithm can be applied recursively to increase from 2 to 3 or 6 clusters.
+Beyond 6 clusters the partition count gets a bit excessive for the naive implementation,
+after which these could be pre-calculated into lookup tables?
+
+cluster count | # roundrobin partitions | partitions per cluster
+1 | 1 | 1
+2 | 2 | 1
+3 | 6 | 2
+4 | 12 | 3
+5 | 60 | 12
+6 | 60 | 10
+7 | 420 | 60
+8 | 840 | 105
+9 | 2520 | 280
+10 | 2520 | 252
+11 | 27720 | 2520
+
+
+== Single cluster replicas
+
+There are use cases where production search may be split across multiple
+cluster groups, but you want to replicate all of the wikis into a single
+elasticsearch cluster as well. The WMF use case for this is to send writes to a
+replica cluster available in wmf cloud. This is achieved by special casing of
+CirrusSearch clusters that contain only a single group. We make the assumption
+that if only a single group exists then all writes have to be sent there. As
+such CirrusSearchClusterAssignments is only referenced for CirrusSearch
+clusters with more than 1 group.
+
+NOTE: Issuing multi wiki search queries to a cluster defined this way is
+unsupported and probably broken.
+
+In this example the third definition takes the default replica value of
+'cloud', and group value of 'default':
+```
+$wgCirrusSearchClusters = [
+	'cluster_a.dc1' => [ 'replica' => 'dc1', 'group' => 'a', [ 'host' => 'a.dc1' ] ],
+	'cluster_b.dc1' => [ 'replica' => 'dc1', 'group' => 'b', [ 'host' => 'b.dc1' ] ],
+	'cloud' => [ [ 'host' => 'cloud.dc1' ] ],
+];
+$wgCirrusSearchDefaultCluster = 'dc1';
+$wgCirrusSearchWriteClusters = ['dc1', 'cloud'];
+$wgCirrusSearchClusterAssignments = [
+	[
+		'type' => 'roundrobin',
+		'groups' => ['a', 'b'],
+	],
+];
+```

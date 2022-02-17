@@ -1,0 +1,48 @@
+{
+    "suggest": {
+        "text": "hello wolrd",
+        "suggest": {
+            "phrase": {
+                "field": "suggest",
+                "size": 1,
+                "max_errors": 2,
+                "confidence": 2,
+                "real_word_error_likelihood": 0.95,
+                "direct_generator": [
+                    {
+                        "field": "suggest",
+                        "suggest_mode": "always",
+                        "max_term_freq": 0.5,
+                        "min_doc_freq": 0,
+                        "prefix_length": 2
+                    }
+                ],
+                "highlight": {
+                    "pre_tag": "\ue000",
+                    "post_tag": "\ue001"
+                },
+                "collate": {
+                    "query": {
+                        "inline": {
+                            "multi_match": {
+                                "query": "{{suggestion}}",
+                                "operator": "or",
+                                "minimum_should_match": "3<66%",
+                                "type": "cross_fields",
+                                "fields": [
+                                    "title.plain",
+                                    "redirect.title.plain"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smoothing": {
+                    "laplace": {
+                        "alpha": 0.3
+                    }
+                }
+            }
+        }
+    }
+}

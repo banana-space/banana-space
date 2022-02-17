@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Athena in Wonderland",
+			"MokaAkashiyaPT"
+		]
+	},
+	"prefs-completion": "Cuncluson de la percura",
+	"cirrussearch-pref-completion-section-desc": "Sugestones pa cumpletar",
+	"cirrussearch-pref-completion-profile-help": "Defenir l cumportamiento de la funcionalidade que fornece sugestones (percurar-anquanto-scribe).",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "Padron (recomendado)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "Corrige até dous erros ourtográficos. Resolbe ls ancaminamientos de ls erros ourtográficos.",
+	"cirrussearch-completion-profile-strict-pref-name": "Modo rigoroso (abançado)",
+	"cirrussearch-completion-profile-strict-pref-desc": "Sin correçon de ls erros ourtográficos. Sin omisson de l'acentuaçon. Correspondéncia rigorosa.",
+	"cirrussearch-completion-profile-normal-pref-name": "Modo de ancaminamiento (abançado)",
+	"cirrussearch-completion-profile-normal-pref-desc": "Sin correçon de ls erros ourtográficos. Resolbe ancaminamientos de ls erros ourtográficos.",
+	"cirrussearch-completion-profile-normal-subphrases-pref-desc": "Sin correçon de ls erros ourtográficos. Resolbe ancaminamientos de ls erros ourtográficos. Eidantifica correspondéncias de subfrases ne ls títalos.",
+	"cirrussearch-completion-profile-classic-pref-name": "Percura clássica de l prefixo",
+	"cirrussearch-completion-profile-classic-pref-desc": "Sin correçon de ls erros ourtográficos. Eidantifica correspondéncias ne l'ampeço de ls títalos."
+}

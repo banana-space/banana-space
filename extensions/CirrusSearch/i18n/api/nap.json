@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"C.R."
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Scarreca 'e mpustaziune 'e CirrusSearch.",
+	"apihelp-cirrus-config-dump-example": "Pigliate na scarreca 'e mpustaziune 'e CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Jettatura d' 'e mappe 'e CirrusSearche pe' stu wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Pigliate nu dump d' 'e mappe 'e CirrusSearch pe' stu wiki.",
+	"apihelp-cirrus-settings-dump-description": "Jettatura d' 'e mpustaziune 'e CirrusSearch pe' stu wiki.",
+	"apihelp-cirrus-settings-dump-example": "Pigliate nu dump d' 'e mpustaziune 'e CirrusSearch pe' stu wiki."
+}

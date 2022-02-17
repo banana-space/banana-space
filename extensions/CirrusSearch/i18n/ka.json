@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"BRUTE",
+			"David1010",
+			"Dawid Deutschland",
+			"OpusDEI",
+			"Otogi",
+			"Tokoko"
+		]
+	},
+	"cirrussearch-desc": "MediaWiki-ს საძიებელი Elasticsearch-ის ბაზაზე",
+	"cirrussearch-backend-error": "ძებნა ვერ დასრულდა დროებითი პრობლემის გამო. გთხოვთ სცადეთ მოგვიანებით.",
+	"cirrussearch-parse-error": "მოთხოვნა გაუგებარი იყო. გთხოვთ გაამარტივოთ. მოთხოვნა ჩაიწერა ძებნის სისტემის გასაუმჯობესებლად.",
+	"cirrussearch-too-busy-error": "ძებნის სისტემა დაკავებულია. გთხოვთ სცადეთ მოგვიანებით.",
+	"cirrussearch-regex-syntax-error": "რეგულარული გამოსახულების სინტაქსური შეცდომა აქ: $2: $1",
+	"cirrussearch-regex-too-busy-error": "ძალიან ბევრი რეგულარული გამოსახულება მუშავედება. გთხოვთ სცადეთ მოგვიანებით.",
+	"cirrussearch-regex-too-complex-error": "რეგულარული გამოსახულება ზედმეტად რთულია. გაიგეთ მეტი მის გამარტივებაზე [[mw:Special:MyLanguage/Help:CirrusSearch/RegexTooComplex|აქ]].",
+	"cirrussearch-now-using": "ეს ვიკი იყენებს ახალ საძიებო ძრავს. ([[mw:Special:MyLanguage/Help:CirrusSearch|დაწვრილებით]])",
+	"cirrussearch-ignored-headings": "#<!-- დატოვეთ ეს ხაზი უცვლელად --> <pre>\n# სათაურები, რომლებთაც ძიება დააგნორებს.\n# ცვლილებები აისახება როგორც კი სათაურის მქონე გვერდს ინდექსირება გაუკეთდება.\n# შეგიძლიათ გააკეთოთ გვერდის ძალით ხელახალი ინდექსირება ნულოვანი რედაქტირების გაკეთებით.\n# სინტაქსი შემდეგია:\n#   * ყველაფერი \"#\" სიმბოლოდან ხაზის ბოლმდე კომენტარია.\n#   * ყველა არა-ცარიელი ხაზი იმის ზუსტი დასახელებაა, რასი იგნორირებაც მოხდება, რეგისტრის გათვალისწინებით და ა.შ.\nწყაროები\nრესურსები ინტერნეტში\nიხილეთ აგრეთვე\n #</pre> <!-- დატოვეთ ეს ხაზი უცვლელად -->",
+	"cirrussearch-pref-label": "ახალი ძიება",
+	"cirrussearch-pref-desc": "მოსინჯეთ ახალი ძიება, რომელსაც გააჩნია ენების მხარდაჭერა დიდი რაოდენობით; უზრუნველყოფს უფრო ახალ შედეგებს და შეუძლია აგრეთვე იპოვოს ტექსტი თარგების შიგნით.",
+	"cirrussearch-give-feedback": "გამოგვეხმაურე",
+	"prefs-completion": "ძიების დასრულება",
+	"cirrussearch-pref-completion-section-desc": "ავტოშევსების კარნახი",
+	"cirrussearch-pref-completion-profile-help": "ადგენს მოქცევას წინადადების ავტომატურად შევსებისას (ძიება შეყვანისას).",
+	"cirrussearch-completion-profile-fuzzy-pref-name": "ნაგულისხმევად (რეკომენდებულია)",
+	"cirrussearch-completion-profile-fuzzy-pref-desc": "ასწორებს ორ მცადრბეჭდილამდე. ანაცვლებს შესაფერის გადამისამართებას.",
+	"cirrussearch-completion-profile-strict-pref-name": "ზუსტი რეჟიმი (გაფართოებული)",
+	"cirrussearch-completion-profile-strict-pref-desc": "არ ასწორებს მცდარბეჭდილებს. იგნორირებას უწევს გადამისამართებას. მკაცრი შესაბამისობა.",
+	"cirrussearch-completion-profile-normal-pref-name": "გადამისამართების რეჟიმი (გაფართოებული)",
+	"cirrussearch-completion-profile-normal-pref-desc": "არ ასწორებს მცდარბეჭდილებს. ანაცვლებს შესაფერის გადამისამართებას.",
+	"cirrussearch-completion-profile-classic-pref-name": "კლასიკური ძიება პრეფიქსით",
+	"cirrussearch-completion-profile-classic-pref-desc": "არ ასწორებს მცდარბეჭდილებს. კარნახობს სახელწოდებას დასაწყისიდან შეყვანის შესაბამისად",
+	"cirrussearch-explore-similar-categories": "კატეგორიები",
+	"cirrussearch-explore-similar-languages": "ენები",
+	"cirrussearch-explore-similar-languages-none": "სხვა ენებზე არაა ხელმისაწვდომი",
+	"cirrussearch-article-words": "სიტყვების რაოდენობა ყველა გვერდზე"
+}

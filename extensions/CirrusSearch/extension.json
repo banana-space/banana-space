@@ -1,0 +1,661 @@
+{
+	"name": "CirrusSearch",
+	"version": "6.5.4",
+	"author": [
+		"Nik Everett",
+		"Chad Horohoe",
+		"Erik Bernhardson"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:CirrusSearch",
+	"descriptionmsg": "cirrussearch-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.35.0",
+		"extensions": {
+			"Elastica": ">= 6.0.1"
+		}
+	},
+	"Actions": {
+		"cirrusdump": "CirrusSearch\\Dump"
+	},
+	"APIModules": {
+		"cirrus-config-dump": "CirrusSearch\\Api\\ConfigDump",
+		"cirrus-mapping-dump": "CirrusSearch\\Api\\MappingDump",
+		"cirrus-settings-dump": "CirrusSearch\\Api\\SettingsDump",
+		"cirrus-profiles-dump": "CirrusSearch\\Api\\ProfilesDump"
+	},
+	"APIPropModules": {
+		"cirrusbuilddoc": "CirrusSearch\\Api\\QueryBuildDocument",
+		"cirrusdoc": "CirrusSearch\\Api\\QueryCirrusDoc",
+		"cirruscompsuggestbuilddoc": "\\CirrusSearch\\Api\\QueryCompSuggestBuildDoc"
+	},
+	"ConfigRegistry": {
+		"CirrusSearch": "CirrusSearch\\SearchConfig::newFromGlobals"
+	},
+	"JobClasses": {
+		"cirrusSearchDeletePages": "CirrusSearch\\Job\\DeletePages",
+		"cirrusSearchIncomingLinkCount": "CirrusSearch\\Job\\IncomingLinkCount",
+		"cirrusSearchLinksUpdate": "CirrusSearch\\Job\\LinksUpdate",
+		"cirrusSearchLinksUpdatePrioritized": "CirrusSearch\\Job\\LinksUpdate",
+		"cirrusSearchMassIndex": "CirrusSearch\\Job\\MassIndex",
+		"cirrusSearchOtherIndex": "CirrusSearch\\Job\\OtherIndex",
+		"cirrusSearchElasticaWrite": "CirrusSearch\\Job\\ElasticaWrite",
+		"cirrusSearchCheckerJob": "CirrusSearch\\Job\\CheckerJob",
+		"cirrusSearchDeleteArchive": "CirrusSearch\\Job\\DeleteArchive"
+	},
+	"MessagesDirs": {
+		"CirrusSearch": [
+			"i18n",
+			"i18n/api"
+		]
+	},
+	"TestAutoloadClasses": {
+		"CirrusSearch\\CirrusIntegrationTestCase": "tests/phpunit/integration/CirrusIntegrationTestCase.php",
+		"CirrusSearch\\CirrusTestCase": "tests/phpunit/unit/CirrusTestCase.php",
+		"CirrusSearch\\CirrusTestCaseTrait": "tests/phpunit/unit/CirrusTestCaseTrait.php",
+		"CirrusSearch\\Query\\SimpleKeywordFeatureTestTrait": "tests/phpunit/unit/Query/SimpleKeywordFeatureTestTrait.php",
+		"CirrusSearch\\Query\\KeywordFeatureAssertions": "tests/phpunit/unit/Query/KeywordFeatureAssertions.php",
+		"CirrusSearch\\Fallbacks\\BaseFallbackMethodTest": "tests/phpunit/unit/Fallbacks/BaseFallbackMethodTest.php"
+	},
+	"AutoloadNamespaces": {
+		"CirrusSearch\\": "includes/",
+		"CirrusSearch\\Maintenance\\": "maintenance/"
+	},
+	"TestAutoloadNamespaces": {
+		"CirrusSearch\\Test\\": "tests/phpunit/unit/mocks/"
+	},
+	"ResourceModules": {
+		"ext.cirrus.serp": {
+			"scripts": [
+				"resources/ext.cirrus.serp.js"
+			],
+			"dependencies": [
+				"mediawiki.Uri"
+			],
+			"styles": [],
+			"messages": [],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.cirrus.explore-similar": {
+			"scripts": [
+				"resources/ext.cirrus.explore-similar.js"
+			],
+			"dependencies": [
+				"mediawiki.util",
+				"mediawiki.api",
+				"mediawiki.template.mustache"
+			],
+			"styles": [
+				"resources/ext.cirrus.explore-similar.less"
+			],
+			"targets": [
+				"desktop"
+			],
+			"messages": [
+				"cirrussearch-explore-similar-related",
+				"cirrussearch-explore-similar-categories",
+				"cirrussearch-explore-similar-languages",
+				"otherlanguages",
+				"cirrussearch-explore-similar-related-none",
+				"cirrussearch-explore-similar-categories-none",
+				"cirrussearch-explore-similar-languages-none"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "CirrusSearch"
+	},
+	"Hooks": {
+		"APIAfterExecute": "CirrusSearch\\Hooks::onAPIAfterExecute",
+		"ApiBeforeMain": "CirrusSearch\\Hooks::onApiBeforeMain",
+		"ArticleDelete": "CirrusSearch\\Hooks::onArticleDelete",
+		"ArticleDeleteComplete": "CirrusSearch\\Hooks::onArticleDeleteComplete",
+		"ArticleRevisionVisibilitySet": "CirrusSearch\\Hooks::onRevisionDelete",
+		"ArticleUndelete": "CirrusSearch\\Hooks::onArticleUndelete",
+		"BeforeInitialize": "CirrusSearch\\Hooks::onBeforeInitialize",
+		"CirrusSearchAddQueryFeatures": "CirrusSearch\\Wikimedia\\ORESArticleTopicsHooks::onCirrusSearchAddQueryFeatures",
+		"CirrusSearchAnalysisConfig": "CirrusSearch\\Wikimedia\\ORESArticleTopicsHooks::onCirrusSearchAnalysisConfig",
+		"CirrusSearchSimilarityConfig": "CirrusSearch\\Wikimedia\\ORESArticleTopicsHooks::onCirrusSearchSimilarityConfig",
+		"GetPreferences": "CirrusSearch\\Hooks::onGetPreferences",
+		"LinksUpdateComplete": "CirrusSearch\\Hooks::onLinksUpdateCompleted",
+		"MediaWikiServices": "CirrusSearch\\Hooks::onMediaWikiServices",
+		"PrefixSearchExtractNamespace": "CirrusSearch\\Hooks::onPrefixSearchExtractNamespace",
+		"ResourceLoaderGetConfigVars": "CirrusSearch\\Hooks::onResourceLoaderGetConfigVars",
+		"SearchIndexFields": "CirrusSearch\\Wikimedia\\ORESArticleTopicsHooks::onSearchIndexFields",
+		"SearchGetNearMatch": "CirrusSearch\\Hooks::onSearchGetNearMatch",
+		"ShowSearchHitTitle": "CirrusSearch\\Hooks::onShowSearchHitTitle",
+		"SoftwareInfo": "CirrusSearch\\Hooks::onSoftwareInfo",
+		"SpecialSearchResults": "CirrusSearch\\Hooks::onSpecialSearchResults",
+		"SpecialSearchResultsAppend": "CirrusSearch\\Hooks::onSpecialSearchResultsAppend",
+		"SpecialStatsAddExtra": "CirrusSearch\\Hooks::onSpecialStatsAddExtra",
+		"TitleMove": "CirrusSearch\\Hooks::onTitleMove",
+		"PageMoveComplete": "CirrusSearch\\Hooks::onPageMoveComplete",
+		"UserGetDefaultOptions": "CirrusSearch\\Hooks::onUserGetDefaultOptions"
+	},
+	"config": {
+		"CirrusSearchDefaultCluster": {
+			"value": "default"
+		},
+		"CirrusSearchClusters": {
+			"value": {
+				"default": [
+					"localhost"
+				]
+			}
+		},
+		"CirrusSearchWriteClusters": {
+			"value": null
+		},
+		"CirrusSearchPrivateClusters": {
+			"value": null
+		},
+		"CirrusSearchReplicaGroup": {
+			"value": "default"
+		},
+		"CirrusSearchCrossClusterSearch": {
+			"value": false
+		},
+		"CirrusSearchConnectionAttempts": {
+			"value": 1
+		},
+		"CirrusSearchShardCount": {
+			"value": {
+				"content": 4,
+				"general": 4,
+				"archive": 4,
+				"titlesuggest": 4
+			}
+		},
+		"CirrusSearchReplicas": {
+			"value": "0-2"
+		},
+		"CirrusSearchMaxShardsPerNode": {
+			"value": []
+		},
+		"CirrusSearchSlowSearch": {
+			"value": 10
+		},
+		"CirrusSearchUseExperimentalHighlighter": {
+			"value": false
+		},
+		"CirrusSearchOptimizeIndexForExperimentalHighlighter": {
+			"value": false
+		},
+		"CirrusSearchWikimediaExtraPlugin": {
+			"value": []
+		},
+		"CirrusSearchEnableRegex": {
+			"value": true
+		},
+		"CirrusSearchRegexMaxDeterminizedStates": {
+			"value": 20000
+		},
+		"CirrusSearchQueryStringMaxDeterminizedStates": {
+			"value": null
+		},
+		"CirrusSearchNamespaceMappings": {
+			"value": [],
+			"merge_strategy": "array_plus"
+		},
+		"CirrusSearchExtraIndexes": {
+			"value": [],
+			"merge_strategy": "array_plus"
+		},
+		"CirrusSearchExtraIndexClusterBlacklist": {
+			"value": []
+		},
+		"CirrusSearchExtraIndexBoostTemplates": {
+			"value": []
+		},
+		"CirrusSearchUpdateShardTimeout": {
+			"value": "1ms"
+		},
+		"CirrusSearchClientSideUpdateTimeout": {
+			"value": 120
+		},
+		"CirrusSearchClientSideConnectTimeout": {
+			"value": 5
+		},
+		"CirrusSearchSearchShardTimeout": {
+			"value": {
+				"comp_suggest": "5s",
+				"prefix": "5s",
+				"default": "20s",
+				"regex": "120s"
+			}
+		},
+		"CirrusSearchClientSideSearchTimeout": {
+			"value": {
+				"comp_suggest": 10,
+				"prefix": 10,
+				"default": 40,
+				"regex": 240
+			}
+		},
+		"CirrusSearchMaintenanceTimeout": {
+			"value": 3600
+		},
+		"CirrusSearchPrefixSearchStartsWithAnyWord": {
+			"value": false
+		},
+		"CirrusSearchPhraseSlop": {
+			"value": {
+				"precise": 0,
+				"default": 0,
+				"boost": 1
+			}
+		},
+		"CirrusSearchPhraseRescoreBoost": {
+			"value": 10
+		},
+		"CirrusSearchPhraseRescoreWindowSize": {
+			"value": 512
+		},
+		"CirrusSearchFunctionRescoreWindowSize": {
+			"value": 8192
+		},
+		"CirrusSearchMoreAccurateScoringMode": {
+			"value": true
+		},
+		"CirrusSearchFallbackProfile": {
+			"value": "phrase_suggest"
+		},
+		"CirrusSearchFallbackProfiles": {
+			"value": []
+		},
+		"CirrusSearchEnablePhraseSuggest": {
+			"value": true
+		},
+		"CirrusSearchPhraseSuggestProfiles": {
+			"value": []
+		},
+		"CirrusSearchPhraseSuggestReverseField": {
+			"value": {
+				"build": false,
+				"use": false
+			}
+		},
+		"CirrusSearchPhraseSuggestUseText": {
+			"value": false
+		},
+		"CirrusSearchPhraseSuggestUseOpeningText": {
+			"value": false
+		},
+		"CirrusSearchAllowLeadingWildcard": {
+			"value": true
+		},
+		"CirrusSearchIndexedRedirects": {
+			"value": 1024
+		},
+		"CirrusSearchLinkedArticlesToUpdate": {
+			"value": 25
+		},
+		"CirrusSearchUnlinkedArticlesToUpdate": {
+			"value": 25
+		},
+		"CirrusSearchSimilarityProfile": {
+			"value": "bm25_with_defaults"
+		},
+		"CirrusSearchSimilarityProfiles": {
+			"value": []
+		},
+		"CirrusSearchWeights": {
+			"value": {
+				"title": 20,
+				"redirect": 15,
+				"category": 8,
+				"heading": 5,
+				"opening_text": 3,
+				"text": 1,
+				"auxiliary_text": 0.5,
+				"file_text": 0.5
+			}
+		},
+		"CirrusSearchPrefixWeights": {
+			"value": {
+				"title": 10,
+				"redirect": 1,
+				"title_asciifolding": 7,
+				"redirect_asciifolding": 0.7
+			}
+		},
+		"CirrusSearchAllFields": {
+			"value": {
+				"build": true,
+				"use": true
+			}
+		},
+		"CirrusSearchBoostOpening": {
+			"value": "first_heading"
+		},
+		"CirrusSearchNearMatchWeight": {
+			"value": 2
+		},
+		"CirrusSearchStemmedWeight": {
+			"value": 0.5
+		},
+		"CirrusSearchNamespaceWeights": {
+			"value": {
+				"2": 0.05,
+				"4": 0.1,
+				"8": 0.05,
+				"10": 0.005,
+				"12": 0.1
+			},
+			"merge_strategy": "array_plus"
+		},
+		"CirrusSearchDefaultNamespaceWeight": {
+			"value": 0.2
+		},
+		"CirrusSearchTalkNamespaceWeight": {
+			"value": 0.25
+		},
+		"CirrusSearchLanguageWeight": {
+			"value": {
+				"user": 0,
+				"wiki": 0
+			}
+		},
+		"CirrusSearchPreferRecentDefaultDecayPortion": {
+			"value": 0
+		},
+		"CirrusSearchPreferRecentUnspecifiedDecayPortion": {
+			"value": 0.6
+		},
+		"CirrusSearchPreferRecentDefaultHalfLife": {
+			"value": 160
+		},
+		"CirrusSearchMoreLikeThisConfig": {
+			"value": {
+				"min_doc_freq": 2,
+				"max_doc_freq": null,
+				"max_query_terms": 25,
+				"min_term_freq": 2,
+				"min_word_length": 0,
+				"max_word_length": 0,
+				"minimum_should_match": "30%"
+			}
+		},
+		"CirrusSearchMoreLikeThisMaxQueryTermsLimit": {
+			"value": 100
+		},
+		"CirrusSearchMoreLikeThisFields": {
+			"value": [
+				"text"
+			]
+		},
+		"CirrusSearchMoreLikeThisAllowedFields": {
+			"value": [
+				"title",
+				"text",
+				"auxiliary_text",
+				"opening_text",
+				"headings"
+			]
+		},
+		"CirrusSearchClusterOverrides": {
+			"value": []
+		},
+		"CirrusSearchMoreLikeThisTTL": {
+			"value": 0
+		},
+		"CirrusSearchFetchConfigFromApi": {
+			"value": false
+		},
+		"CirrusSearchInterwikiSources": {
+			"value": []
+		},
+		"CirrusSearchCrossProjectOrder": {
+			"value": "static"
+		},
+		"CirrusSearchCrossProjectBlockScorerProfiles": {
+			"value": []
+		},
+		"CirrusSearchInterwikiHTTPTimeout": {
+			"value": 10
+		},
+		"CirrusSearchInterwikiHTTPConnectTimeout": {
+			"value": 5
+		},
+		"CirrusSearchRefreshInterval": {
+			"value": 1
+		},
+		"CirrusSearchUpdateDelay": {
+			"value": {
+				"prioritized": 0,
+				"default": 0
+			}
+		},
+		"CirrusSearchBannedPlugins": {
+			"value": []
+		},
+		"CirrusSearchUpdateConflictRetryCount": {
+			"value": 5
+		},
+		"CirrusSearchFragmentSize": {
+			"value": 150
+		},
+		"CirrusSearchIndexAllocation": {
+			"value": {
+				"include": [],
+				"exclude": [],
+				"require": []
+			}
+		},
+		"CirrusSearchPoolCounterKey": {
+			"value": "_elasticsearch"
+		},
+		"CirrusSearchMergeSettings": {
+			"value": []
+		},
+		"CirrusSearchLogElasticRequests": {
+			"value": true
+		},
+		"CirrusSearchLogElasticRequestsSecret": {
+			"value": false
+		},
+		"CirrusSearchMaxFullTextQueryLength": {
+			"value": 300
+		},
+		"CirrusSearchMaxIncategoryOptions": {
+			"value": 100
+		},
+		"CirrusSearchFeedbackLink": {
+			"value": false
+		},
+		"CirrusSearchDropDelayedJobsAfter": {
+			"value": 172800
+		},
+		"CirrusSearchWriteBackoffExponent": {
+			"value": 6
+		},
+		"CirrusSearchUserTesting": {
+			"value": []
+		},
+		"CirrusSearchCompletionProfiles": {
+			"value": []
+		},
+		"CirrusSearchCompletionSettings": {
+			"value": "fuzzy"
+		},
+		"CirrusSearchUseIcuFolding": {
+			"value": "default"
+		},
+		"CirrusSearchICUFoldingUnicodeSetFilter": {
+			"value": null
+		},
+		"CirrusSearchUseIcuTokenizer": {
+			"value": "default"
+		},
+		"CirrusSearchCompletionDefaultScore": {
+			"value": "quality"
+		},
+		"CirrusSearchUseCompletionSuggester": {
+			"value": "no"
+		},
+		"CirrusSearchCompletionSuggesterSubphrases": {
+			"value": {
+				"build": false,
+				"use": false,
+				"type": "anywords",
+				"limit": 10
+			}
+		},
+		"CirrusSearchCompletionSuggesterUseDefaultSort": {
+			"value": false
+		},
+		"CirrusSearchCompletionSuggesterHardLimit": {
+			"value": 50
+		},
+		"CirrusSearchRecycleCompletionSuggesterIndex": {
+			"value": true
+		},
+		"CirrusSearchEnableAltLanguage": {
+			"value": false
+		},
+		"CirrusSearchLanguageToWikiMap": {
+			"value": []
+		},
+		"CirrusSearchWikiToNameMap": {
+			"value": []
+		},
+		"CirrusSearchEnableCrossProjectSearch": {
+			"value": false
+		},
+		"CirrusSearchCrossProjectSearchBlackList": {
+			"value": []
+		},
+		"CirrusSearchInterwikiPrefixOverrides": {
+			"value": []
+		},
+		"CirrusSearchCrossProjectProfiles": {
+			"value": []
+		},
+		"CirrusExploreSimilarResults": {
+			"value": false
+		},
+		"CirrusSearchCrossProjectShowMultimedia": {
+			"value": false
+		},
+		"CirrusSearchNumCrossProjectSearchResults": {
+			"value": 5
+		},
+		"CirrusSearchInterwikiProv": {
+			"value": false
+		},
+		"CirrusSearchRescoreProfiles": {
+			"value": []
+		},
+		"CirrusSearchRescoreFunctionChains": {
+			"value": []
+		},
+		"CirrusSearchRescoreProfile": {
+			"value": "classic"
+		},
+		"CirrusSearchPrefixSearchRescoreProfile": {
+			"value": "classic"
+		},
+		"CirrusSearchInterwikiThreshold": {
+			"value": 3
+		},
+		"CirrusSearchLanguageDetectors": {
+			"value": []
+		},
+		"CirrusSearchTextcatModel": {
+			"value": []
+		},
+		"CirrusSearchTextcatConfig": {
+			"value": []
+		},
+		"CirrusSearchMasterTimeout": {
+			"value": "30s"
+		},
+		"CirrusSearchSanityCheck": {
+			"value": true
+		},
+		"CirrusSearchIndexBaseName": {
+			"value": "__wikiid__"
+		},
+		"CirrusSearchStripQuestionMarks": {
+			"value": "all"
+		},
+		"CirrusSearchFullTextQueryBuilderProfile": {
+			"value": "default"
+		},
+		"CirrusSearchFullTextQueryBuilderProfiles": {
+			"value": []
+		},
+		"CirrusSearchPrefixIds": {
+			"value": false
+		},
+		"CirrusSearchExtraBackendLatency": {
+			"value": 0
+		},
+		"CirrusSearchBoostTemplates": {
+			"value": []
+		},
+		"CirrusSearchIgnoreOnWikiBoostTemplates": {
+			"value": false
+		},
+		"CirrusSearchDevelOptions": {
+			"value": []
+		},
+		"CirrusSearchFiletypeAliases": {
+			"value": []
+		},
+		"CirrusSearchElasticQuirks": {
+			"value": []
+		},
+		"CirrusSearchExtraIndexSettings": {
+			"value": []
+		},
+		"CirrusSearchIndexDeletes": {
+			"value": false
+		},
+		"CirrusSearchEnableArchive": {
+			"value": false
+		},
+		"CirrusSearchInterleaveConfig": {
+			"value": null
+		},
+		"CirrusSearchMaxPhraseTokens": {
+			"value": null
+		},
+		"CirrusSearchCategoryEndpoint": {
+			"value": ""
+		},
+		"CirrusSearchCategoryDepth": {
+			"value": 5
+		},
+		"CirrusSearchCategoryMax": {
+			"value": 256
+		},
+		"CirrusSearchNamespaceResolutionMethod": {
+			"value": "elastic"
+		},
+		"CirrusSearchWMFExtraFeatures": {
+			"description": "Configuration for Wikimedia-spexific extra features.\n\n* ores_articletopics: search articles by topic.\n** build: include in the index definition",
+			"value": {
+				"ores_articletopics": {
+					"build": false,
+					"use": false
+				}
+			}
+		}
+	},
+	"SearchMappings": {
+		"CirrusSearch": {
+			"class": "CirrusSearch\\CirrusSearch"
+		}
+	},
+	"ServiceWiringFiles": [
+		"includes/ServiceWiring.php"
+	],
+	"load_composer_autoloader": true,
+	"manifest_version": 2
+}

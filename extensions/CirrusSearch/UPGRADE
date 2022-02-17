@@ -1,0 +1,39 @@
+
+This file provides an overview of the CirrusSearch upgrade process.
+
+== General notes ==
+
+It is always a good idea to upgrade index config when deploying a new version.
+If your wiki is relatively small this process is extremely fast and can be run
+with no downtime:
+ php updateSearchIndexConfig.php --reindexAndRemoveOk --indexIdentifier now
+
+If you prefer not to reindex your data make sure to always upgrade the cirrus
+metastore by running:
+ php metastore.php --upgrade
+
+See the Upgrading section in the README file for more information.
+
+== MW 1.28 (elasticsearch 2.x) ==
+
+If you upgrade from a version prior to MW 1.28 then we must be running
+elasticsearch 1.x.  The Cirrus version packaged with MW 1.28 is not
+compatible with elasticsearch 1.7.x and you must upgrade to 2.x first.
+
+We strongly suggest to upgrade to elasticsearch 2.3.3 since it's the sole
+version fully supported by the wikimedia elasticsearch plugins.
+
+Please refer to https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html
+
+Note: if you use the analysis-smartcn you may encounter a problem that prevents
+you from upgrading an existing index to elasticsearch 2.x:
+The smart_chinese analyzer was renamed to smartcn, if an existing index uses
+smart_chinese then your upgrade process will fail. Please check you index
+settings with:
+ http://mywiki.url/wiki/api.php?action=cirrus-settings-dump
+
+Or directly with elasticsearch API:
+ curl 'localhost:9200/_settings?pretty'
+
+If you find a reference to "smart_chinese" we strongly suggest to start with a
+new fresh elasticsearch installation and not try to migrate your data.

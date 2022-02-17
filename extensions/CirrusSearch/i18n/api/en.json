@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"apihelp-cirrus-config-dump-description": "Dump of CirrusSearch configuration.",
+	"apihelp-cirrus-config-dump-summary": "Dump of CirrusSearch configuration.",
+	"apihelp-cirrus-config-dump-example": "Get a dump of CirrusSearch configuration.",
+	"apihelp-cirrus-mapping-dump-description": "Dump of CirrusSearch mapping for this wiki.",
+	"apihelp-cirrus-mapping-dump-summary": "Dump of CirrusSearch mapping for this wiki.",
+	"apihelp-cirrus-mapping-dump-example": "Get a dump of the CirrusSearch mapping for this wiki.",
+	"apihelp-cirrus-settings-dump-description": "Dump of CirrusSearch settings for this wiki.",
+	"apihelp-cirrus-settings-dump-summary": "Dump of CirrusSearch settings for this wiki.",
+	"apihelp-cirrus-settings-dump-example": "Get a dump of CirrusSearch settings for this wiki.",
+	"apihelp-cirrus-profiles-dump-description": "Dump of CirrusSearch profiles for this wiki.",
+	"apihelp-cirrus-profiles-dump-summary": "Dump of CirrusSearch profiles for this wiki.",
+	"apihelp-cirrus-profiles-dump-example": "Get a dump of CirrusSearch profiles for this wiki.",
+	"apihelp-cirrus-profiles-dump-param-verbose" : "Dump the profiles content",
+	"apihelp-query+cirrusdoc-description": "Dump of a CirrusSearch article document",
+	"apihelp-query+cirrusdoc-summary": "Dump of a CirrusSearch article document from the search servers",
+	"apihelp-query+cirrusdoc-example": "Get a dump of a single CirrusSearch article as currently indexed into search.",
+	"apihelp-query+cirrusbuilddoc-summary": "Dump of a CirrusSearch article document from the database servers",
+	"apihelp-query+cirrusbuilddoc-example": "Get a dump of a single CirrusSearch article generated from the database.",
+	"apierror-cirrus-requesttoolong": "Prefix search request was longer than the maximum allowed length. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "The scoring method to use",
+	"apierror-compsuggestbuilddoc-bad-method": "Unknown scoring method",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "Dump of the document used by the completion suggester",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "Get a dump of the document used by the completion suggester"
+}

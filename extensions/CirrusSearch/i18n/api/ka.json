@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"OpusDEI"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "CirrusSearch-ის კონფიგურაციის გაწმენდა (დამპი).",
+	"apihelp-cirrus-config-dump-example": "CirrusSearch-ის კონფიგურაციის დამპის მიღება.",
+	"apihelp-cirrus-mapping-dump-description": "ამ ვიკის CirrusSearch-მაპინგის დამპი."
+}

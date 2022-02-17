@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arash",
+			"Ladsgroup",
+			"Mardetanha",
+			"Reza1615",
+			"فلورانس"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "روگرفت از پیکربندی CirrusSearch.",
+	"apihelp-cirrus-config-dump-summary": "دامپ تنظیمات سیروس‌سرچ",
+	"apihelp-cirrus-config-dump-example": "دریافت دامپ از تنظیمات CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "تخلیه نقشه برداری CirrusSearch برای این ویکی.",
+	"apihelp-cirrus-mapping-dump-summary": "روگرفت از نقشه‌برداری CirrusSearch برای این ویکی.",
+	"apihelp-cirrus-mapping-dump-example": "دریافت دامپ ساختار CirrusSearch برای این ویکی.",
+	"apihelp-cirrus-settings-dump-description": "تخلیه تنظیمات CirrusSearch برای این ویکی.",
+	"apihelp-cirrus-settings-dump-summary": "تخلیه تنظیمات CirrusSearch برای این ویکی.",
+	"apihelp-cirrus-settings-dump-example": "دریافت دامپ تنظیمات CirrusSearch برای این ویکی.",
+	"apihelp-query+cirrusdoc-description": "روگرفت از سند مقالهٔ CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "روگرفت از سند مقالهٔ CirrusSearch از سرورهای جستجو",
+	"apierror-cirrus-requesttoolong": "طول جستجوی پیشوند بیش از حداکثر مجاز است ($1 &gt; $2)"
+}

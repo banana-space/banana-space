@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"apihelp-cirrus-config-dump-description": "Configurazione d'u dump de CirrusSearch",
+	"apihelp-cirrus-config-dump-summary": "Configurazione d'u dump de CirrusSearch",
+	"apihelp-cirrus-config-dump-example": "Pigghie 'nu dump de CirrusSearch.",
+	"apihelp-cirrus-mapping-dump-description": "Dump d'a mappature de CirrusSearch pe sta uicchi.",
+	"apihelp-cirrus-mapping-dump-summary": "Dump d'a mappature de CirrusSearch pe sta uicchi.",
+	"apihelp-cirrus-mapping-dump-example": "Pigghie 'nu dump d'a mappature de CirrusSearch pe sta uicchi.",
+	"apihelp-cirrus-settings-dump-description": "'Mbostaziune d'u dump de CirrusSearch pe sta uicchi.",
+	"apihelp-cirrus-settings-dump-summary": "'Mbostaziune d'u dump de CirrusSearch pe sta uicchi.",
+	"apihelp-cirrus-settings-dump-example": "Pigghie 'nu dump de CirrusSearch pe sta uicchi.",
+	"apihelp-cirrus-profiles-dump-description": "Dump de le profile de CirrusSearch pe sta uicchi.",
+	"apihelp-cirrus-profiles-dump-summary": "Dump de le profile de CirrusSearch pe sta uicchi.",
+	"apihelp-cirrus-profiles-dump-example": "Pigghie 'nu dump de le profile de CirrusSearch pe sta uicchi.",
+	"apihelp-cirrus-profiles-dump-param-verbose": "Dump d'u condenute de le profile",
+	"apihelp-query+cirrusdoc-description": "Dump d'u documende d'a vôsce de CirrusSearch",
+	"apihelp-query+cirrusdoc-summary": "Dump d'u documende d'a vôsce de CirrusSearch da le server de recerche",
+	"apihelp-query+cirrusdoc-example": "Pigghie 'nu dump de 'na vôsce singole de CirrusSearch cumme indicizzate pe mò jndr'à 'na recerche.",
+	"apihelp-query+cirrusbuilddoc-summary": "Dump d'u documende d'a vôsce de CirrusSearch da le server de recerche",
+	"apihelp-query+cirrusbuilddoc-example": "Pigghie 'nu dump de 'na vôsce singole de CirrusSearch generate da 'u database.",
+	"apierror-cirrus-requesttoolong": "'U prefisse d'a recerche ave 'na lunghezze troppe longhe respette a quedde permesse. ($1 &gt; $2)",
+	"apihelp-query+compsuggestbuilddoc-param-method": "'U metode de pundegge da ausà",
+	"apierror-compsuggestbuilddoc-bad-method": "Metode de pundegge scanusciute",
+	"apihelp-query+cirruscompsuggestbuilddoc-summary": "Ammuzze d'u documende ausate da 'u suggeritore de completamende",
+	"apihelp-query+cirruscompsuggestbuilddoc-example": "Pigghie 'n'ammuzze d'u documende ausate da 'u suggeritore de completamende"
+}
