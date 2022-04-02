@@ -80,10 +80,6 @@ class BananaSkin extends SkinMustache136 {
                 'href' => BananaSkin::makeUrl( $this->msg( 'banana-plan-title' )->text() ),
                 'text' => $this->msg( 'banana-plan-text' )->text()
             ],
-            'list-stubs' => [
-                'href' => BananaSkin::makeUrl( $this->msg( 'banana-list-stubs-title' )->text() ),
-                'text' => $this->msg( 'banana-list-stubs-text' )->text()
-            ],
             'file' => [
                 'href' => Skin::makeSpecialUrl( 'Upload' ),
                 'text' => $this->msg( 'banana-upload-file-text' )->text()
