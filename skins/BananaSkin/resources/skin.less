@@ -12,8 +12,11 @@
 @color-accent-200: #fffad2;
 @color-accent-150: #fffcdb;
 @color-accent-100: #fffde9;
+@color-secondary-300: #ffe080;
+@color-secondary-200: #ffebaf;
+@color-secondary-100: #fffae9;
 @color-link: #d66b0d;
-@color-link-new: #f0b800;
+@color-link-new: #90b020;
 @color-link--visited: #d66b0d;
 @font-family: 'Noto Sans',Roboto,-apple-system,BlinkMacSystemFont,'Segoe UI','Oxygen','Ubuntu','Cantarell','Helvetica Neue','Microsoft YaHei UI','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans CN',sans-serif;
 @font-family-mono: 'Cascadia Code','Consolas','Microsoft YaHei UI','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans CN',sans-serif;
@@ -728,7 +731,7 @@ body > footer {
     margin-bottom: -3px;
     
     &:hover, &:focus {
-      border-bottom: 3px solid @color-accent-400;
+      border-bottom: 3px solid @color-secondary-200;
     }
   }
 
@@ -778,10 +781,10 @@ body > footer {
   }
 
   .toc {
-    background-color: @color-accent-100;
+    background-color: @color-secondary-100;
     min-width: 10em;
     border: 0;
-    border-left: 5px solid @color-accent-400;
+    border-left: 5px solid @color-secondary-300;
     padding: .5em 1em;
     line-height: 1.6;
 
@@ -1141,7 +1144,7 @@ body > footer {
 
   .proof, .proof-collapsible {
     margin: 0 0 1em 0;
-    overflow-y: hidden; /* Fixes qed position */
+    overflow: hidden; /* Fixes qed position */
   }
 
   .proof-collapsible {
