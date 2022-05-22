@@ -1,0 +1,4 @@
+{
+	"@metadata": {},
+	"headscript-desc": "Allows Scripts to be added just before </head> to the wiki as configured in the LocalSettings.php file."
+}

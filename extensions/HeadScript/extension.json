@@ -1,0 +1,38 @@
+{
+	"name": "HeadScript",
+	"version": "1.1.1",
+	"author": [
+		"[https://www.mediawiki.org/wiki/User:JinRyuuNagy JinRyuu]",
+		"[https://www.mediawiki.org/wiki/User:StarHeartHunt StarHeartHunt]"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:HeadScript",
+	"descriptionmsg": "headscript-desc",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.29.0"
+	},
+	"license-name": "MIT",
+	"MessagesDirs": {
+		"HeadScript": [
+			"i18n"
+		]
+	},
+	"Hooks": {
+		"BeforePageDisplay": [
+			"HeadScript::onBeforePageDisplay"
+		]
+	},
+	"AutoloadClasses": {
+		"HeadScript": "src/HeadScript.php"
+	},
+	"config_prefix": "wg",
+	"config": {
+		"HeadScriptCode": {
+			"value": "<!-- No Head Script -->"
+		},
+		"HeadScriptName": {
+			"value": "<!-- No Script Name -->"
+		}
+	},
+	"manifest_version": 2
+}

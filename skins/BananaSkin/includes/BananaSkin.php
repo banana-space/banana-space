@@ -16,6 +16,11 @@ class BananaSkin extends SkinMustache136 {
         foreach ( $wgEchoNotifications as &$data ) {
             $data['section'] = 'alert';
         }
+
+        global $wgHeadScriptCode;
+        $wgHeadScriptCode = <<<SCRIPT
+        <link href="https://fonts.googlefonts.cn/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet"> 
+        SCRIPT;
     }
 
     public static function makeUrl( $name ) {

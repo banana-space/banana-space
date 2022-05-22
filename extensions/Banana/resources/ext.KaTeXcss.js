@@ -1,1 +1,1 @@
-mw.loader.load( 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css', 'text/css' );
+mw.loader.load( 'https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.3/katex.min.css', 'text/css' );

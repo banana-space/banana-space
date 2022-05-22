@@ -1,0 +1,6 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"headscript-desc": "允许向wiki页面的<code><head></code>标签引入LocalSettings.php中配置的JavaScript/CSS内容。"
+}

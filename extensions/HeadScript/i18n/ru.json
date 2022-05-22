@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rubin16"
+		]
+	},
+	"headscript-desc": "Разрешает скриптам быть добавленными прямо перед </head> В соответствии с настройками LocalSettings.php."
+}

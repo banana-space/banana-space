@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"headscript-desc": "Овозможува додавање на скрипти веднаш пред </head> кон викито според поставеното во податотеката LocalSettings.php."
+}

@@ -1,0 +1,11 @@
+{
+	"name": "HeadScript",
+	"private": true,
+	"scripts": {
+		"test": "grunt test"
+	},
+	"devDependencies": {
+		"grunt": "1.4.0",
+		"grunt-banana-checker": "0.9.0"
+	}
+}

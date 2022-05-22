@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"MuratTheTurkish",
+			"Vito Genovese"
+		]
+	},
+	"headscript-desc": "LocalSettings.php dosyası yapılandırması uyarınca </head> etiketinin hemen öncesine yerleştirilen betiklerin vikiye eklenmesine izin verir."
+}
