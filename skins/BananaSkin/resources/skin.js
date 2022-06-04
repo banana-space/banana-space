@@ -124,7 +124,7 @@ $(document).ready(function () {
 
   // Scroll
   $('a[href^="#"]').click(function () {
-    let $target = $(decodeURIComponent($(this).attr("href")));
+    let $target = $(decodeURIComponent($(this).attr("href")).replace(/:/g, '\\:'));
     if ($target.length > 0) {
       $("html").animate({ scrollTop: $target.offset().top - 80 }, 400);
     }
