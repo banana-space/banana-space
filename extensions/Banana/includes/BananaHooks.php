@@ -419,21 +419,25 @@ class BananaHooks {
 		/** @var DOMElement $element */
 		foreach ($refs as $element) {
 			$result = '';
+			$resolved = false;
 			if ($element->hasAttribute('data-key')) {
 				$key = $element->getAttribute('data-key');
-				
+
 				if ($key === '--prefix--') {
 					$result = $prefix;
+					$resolved = true;
 				} else if ($key === '--pagenum--') {
 					$result = $pagenum;
+					$resolved = true;
 				} else {
 					$label = $labels[$key];
 					if (isset($label)) {
 						$result = $label['text'];
+						$resolved = true;
 					}
 				}
 			}
-			if ($result)
+			if ($resolved)
 				self::domReplace($dom, $result, $element);
 		}
 
