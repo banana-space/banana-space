@@ -705,11 +705,21 @@ body > footer {
 
   .btex-output a[href]:not(.image) {
     line-height: 1.2;
-    border-bottom: 3px solid transparent;
-    margin-bottom: -3px;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    
+    border-bottom-color: #dc670050;
     
     &:hover, &:focus {
-      border-bottom: 3px solid @color-gray-200;
+      border-bottom-color: #dc6700c0;
+    }
+
+    &[href^="#"] {
+      border-bottom-color: transparent;
+    
+      &:hover, &:focus {
+        border-bottom-color: #dc670050;
+      }
     }
   }
 
@@ -719,6 +729,12 @@ body > footer {
   
   a[href].new {
     color: @color-link-new !important;
+
+    border-bottom-color: #80b70050 !important;
+  
+    &:hover, &:focus {
+      border-bottom-color: #80b700a0 !important;
+    }
   }
 
   h2 {
@@ -806,6 +822,11 @@ body > footer {
     padding: .5em 1em;
     white-space: pre;
     overflow-x: auto;
+  }
+
+  .identifier {
+    font-family: @font-family-mono;
+    font-size: 90%;
   }
 
   .code-btex {

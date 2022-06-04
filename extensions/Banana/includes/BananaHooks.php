@@ -421,7 +421,7 @@ class BananaHooks {
 			$result = '';
 			if ($element->hasAttribute('data-key')) {
 				$key = $element->getAttribute('data-key');
-
+				
 				if ($key === '--prefix--') {
 					$result = $prefix;
 				} else if ($key === '--pagenum--') {
@@ -430,12 +430,11 @@ class BananaHooks {
 					$label = $labels[$key];
 					if (isset($label)) {
 						$result = $label['text'];
-					} else {
-						$result = '<span class="undefined-reference">??</span>';
 					}
 				}
 			}
-			self::domReplace($dom, $result, $element);
+			if ($result)
+				self::domReplace($dom, $result, $element);
 		}
 
 		// Links in templates: {{ ... [[...]] }}
@@ -504,6 +503,38 @@ class BananaHooks {
 			$text = $mwHandleMagicLinks->call($parser, $text);
 
 			self::domReplace($dom, $text, $element);
+		}
+
+		// Citations
+		$refs = $xpath->query('//btex-ref');
+		/** @var DOMElement $element */
+		foreach ($refs as $element) {
+			$result = '';
+			if ($element->hasAttribute('data-key')) {
+				$key = $element->getAttribute('data-key');
+				// may be a biblatex citation
+				if (substr($key, 0, 5) === 'cite:') {
+					$bibs = $xpath->query('//span[@id="' . $key . '"]');
+					/** @var DOMElement $bib */
+					foreach ($bibs as $bib) {
+						$citation = $bib->getAttribute('data-citation');
+						if ($citation) {
+							$citationLink = $dom->createElement('a');
+							$citationLink->setAttribute('href', '#' . $key);
+
+							// WARNING: this might allow html injection, but this is run before the MW sanitizer, so should be ok
+							self::setInnerHTML($citationLink, $citation);
+
+							$result = $dom->saveHTML($citationLink);
+						}
+						break;
+					}
+				}
+
+				if (!$result)
+					$result = '<span class="undefined-reference">??</span>';
+			}
+			self::domReplace($dom, $result, $element);
 		}
 
 		$text = $dom->saveHTML();
@@ -672,5 +703,13 @@ class BananaHooks {
 	private static function removeDiacritics($str) {
 		$transliterator = Transliterator::createFromRules(':: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: Lower(); :: NFC;', Transliterator::FORWARD);
 		return $transliterator->transliterate($str);
+	}
+
+	private static function setInnerHTML($element, $html) {
+		$fragment = $element->ownerDocument->createDocumentFragment();
+		$fragment->appendXML($html);
+		while ($element->hasChildNodes())
+			$element->removeChild($element->firstChild);
+		$element->appendChild($fragment);
 	}
 }
