@@ -707,19 +707,11 @@ body > footer {
     line-height: 1.2;
     border-bottom: 2px solid transparent;
     margin-bottom: -2px;
-    
-    border-bottom-color: #dc670050;
-    
-    &:hover, &:focus {
-      border-bottom-color: #dc6700c0;
-    }
 
-    &[href^="#"] {
-      border-bottom-color: transparent;
-    
-      &:hover, &:focus {
-        border-bottom-color: #dc670050;
-      }
+    border-bottom-color: transparent;
+  
+    &:hover, &:focus {
+      border-bottom-color: #dc670050;
     }
   }
 
@@ -729,11 +721,9 @@ body > footer {
   
   a[href].new {
     color: @color-link-new !important;
-
-    border-bottom-color: #80b70050 !important;
   
     &:hover, &:focus {
-      border-bottom-color: #80b700a0 !important;
+      border-bottom-color: #80b70050 !important;
     }
   }
 
