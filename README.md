@@ -20,11 +20,30 @@ wfLoadExtension( 'Echo' );
 wfLoadExtension( 'Flow' );
 wfLoadExtension( 'Nuke' );
 wfLoadExtension( 'ParserFunctions' );
+wfLoadExtension( 'HeadScript' );
 wfLoadExtension( 'PdfHandler' );
 wfLoadExtension( 'Scribunto' );
 wfLoadExtension( 'TemplateStyles' );
-wfLoadExtension( 'Thanks' );
+wfLoadExtension( 'Elastica' );
+wfLoadExtension( 'CirrusSearch' );
 wfLoadExtension( 'Banana' );
+
+$wgSearchType = 'CirrusSearch';
+
+$wgObjectCaches['redis'] = [
+    'class'                => 'RedisBagOStuff',
+    'servers'              => [ '127.0.0.1:6379' ],
+];
+$wgMainCacheType = 'redis';
+$wgSessionCacheType = 'redis';
+
+$wgJobTypeConf['default'] = [
+    'class'          => 'JobQueueRedis',
+    'redisServer'    => '127.0.0.1:6379',
+    'redisConfig'    => [],
+    'claimTTL'       => 3600,
+    'daemonized'     => true
+];
 
 $wgNamespaceContentModels[NS_TALK]           = 'flow-board';
 $wgNamespaceContentModels[NS_USER_TALK]      = 'flow-board';
@@ -59,7 +78,12 @@ $wgHiddenPrefs += [
 ## 运行步骤
 
 * 通过 MediaWiki 安装向导生成 `LocalSettings.php` 文件，在其末尾添加以上代码，然后放在项目目录。
+
+* 安装并运行 [Redis](https://redis.io/) 和 [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)
+6.8.x。
+
 * 运行 [bTeX](https://github.com/banana-space/btex)。
+
 * 运行 PHP 本地服务器进行调试。
 
 如遇数据库错误，可在 `maintenance` 目录中运行
