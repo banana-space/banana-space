@@ -14,9 +14,10 @@
 @color-accent-100: #fffde9;
 @color-secondary-300: #ffd880;
 @color-secondary-100: #fffdf0;
-@color-link: #dc6700;
+@color-link: #1088c8;
 @color-link-new: #80b700;
-@color-link--visited: #dc6700;
+@color-link-theme: #dc6700;
+@color-link--visited: #1088c8;
 @font-family: 'Noto Sans',Roboto,-apple-system,BlinkMacSystemFont,'Segoe UI','Oxygen','Ubuntu','Cantarell','Helvetica Neue','Microsoft YaHei UI','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans CN',sans-serif;
 @font-family-mono: 'Cascadia Code','Consolas','Microsoft YaHei UI','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans CN',sans-serif;
 
@@ -360,9 +361,11 @@ a {
   
   .mw-parser-output:lang(zh) {
     font-family: PunctCJK, @font-family;
+    letter-spacing: .015em;
     
     [lang]:not(:lang(zh)) {
       font-family: @font-family;
+      letter-spacing: normal;
     }
   }
 }
@@ -524,6 +527,7 @@ body.ns-102 .mw-portlet-namespaces ul {
     margin-right: 5px;
     display: block;
     background-color: @color-accent-200;
+    color: #dc6700;
     border-radius: 1em;
   }
 }
@@ -716,7 +720,7 @@ body > footer {
     border-bottom-color: transparent;
   
     &:hover, &:focus {
-      border-bottom-color: #dc670050;
+      border-bottom-color: #1088c850;
     }
   }
 
@@ -770,11 +774,9 @@ body > footer {
   }
 
   .toc {
-    background-color: @color-secondary-100;
     min-width: 10em;
     border: 0;
-    border-left: 4px solid @color-secondary-300;
-    padding: .5em 1em;
+    padding: .7em 1.2em;
     line-height: 1.6;
 
     .toctitle {
@@ -963,6 +965,7 @@ body > footer {
 
 .katex {
   font-size: 1.1em !important;
+  letter-spacing: normal;
 
   .cjk_fallback:not(.sizing):not(.fontsize-ensurer) {
     font-size: 90.91%;
@@ -1025,12 +1028,16 @@ body > footer {
       padding-bottom: 1em;
     }
 
+    tr.list-item.list-item-no-sep > td {
+      padding-bottom: 0;
+    }
+
     td {
       vertical-align: baseline;
     }
 
     td.list-item-label {
-      width: 0.75em;
+      width: 1.5em;
       max-width: 16em;
       overflow-x: clip;
       white-space: nowrap;
@@ -1261,7 +1268,7 @@ span.btex-diagram {
   margin-top: .5em !important;
   margin-bottom: .5em !important;
   line-height: 1.6 !important;
-  color: @color-link;
+  color: @color-link-theme;
 
   &:hover {
     background-color: @color-accent-100 !important;
@@ -1289,18 +1296,18 @@ span.btex-diagram {
 
   &:hover {
     color: @color-link !important;
-    background-color: @color-accent-200 !important;
+    background-color: #1088c810 !important;
   }
 }
 
 .oo-ui-buttonElement-frameless.oo-ui-widget-enabled.oo-ui-flaggedElement-progressive > .oo-ui-buttonElement-button
 
 .oo-ui-image-progressive.oo-ui-icon-edit {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Eedit%3C/title%3E%3Cg fill=%22%23dc6700%22%3E%3Cpath d=%22M16.77 8l1.94-2a1 1 0 000-1.41l-3.34-3.3a1 1 0 00-1.41 0L12 3.23zM1 14.25V19h4.75l9.96-9.96-4.75-4.75z%22/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Eedit%3C/title%3E%3Cg fill=%22%231088c8%22%3E%3Cpath d=%22M16.77 8l1.94-2a1 1 0 000-1.41l-3.34-3.3a1 1 0 00-1.41 0L12 3.23zM1 14.25V19h4.75l9.96-9.96-4.75-4.75z%22/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .oo-ui-image-progressive.oo-ui-icon-reload {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Ereload%3C/title%3E%3Cg fill=%22%23dc6700%22%3E%3Cpath d=%22M15.65 4.35A8 8 0 1017.4 13h-2.22a6 6 0 11-1-7.22L11 9h7V2z%22/%3E%3C/g%3E%3C/svg%3E") !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Ereload%3C/title%3E%3Cg fill=%22%231088c8%22%3E%3Cpath d=%22M15.65 4.35A8 8 0 1017.4 13h-2.22a6 6 0 11-1-7.22L11 9h7V2z%22/%3E%3C/g%3E%3C/svg%3E") !important;
 }
 
 .flow-menu li a.mw-ui-button {
