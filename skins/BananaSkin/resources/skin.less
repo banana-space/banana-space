@@ -1021,6 +1021,10 @@ body > footer {
     font-size: 75%;
   }
 
+  p + table.list.list-no-sep-above {
+    margin-top: -1em;
+  }
+
   table.list {
     width: 100%;
 
@@ -1342,6 +1346,20 @@ input.mw-ui-input-large {
   font-size: 1.2em !important;
   font-weight: normal !important;
   font-family: @font-family-mono !important;
+}
+
+// Change list page
+
+.mw-changeslist table.mw-enhanced-rc {
+  margin-left: .5em !important;
+
+  td {
+    padding: 0 0 .5em 0 !important;
+  }
+}
+
+.mw-changeslist h4 {
+  padding: .5em 0;
 }
 
 // Login page
