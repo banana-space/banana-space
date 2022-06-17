@@ -1582,7 +1582,7 @@ STEMMER_RULES
 		'analysis-stempel' => [ 'pl' => 'polish' ],
 		'analysis-kuromoji' => [ 'ja' => 'japanese' ],
 		// ordering of the next two is important
-		'analysis-stconvert,analysis-smartcn' => [ 'zh' => 'chinese' ],
+		'analysis-stconvert,analysis-smartcn' => [ 'zh' => 'chinese', 'zh-cn' => 'chinese' ],
 		'extra-analysis-surrogates,analysis-stconvert,analysis-smartcn' =>
 			[ 'zh' => 'chinese_surrogate_fix' ],
 		'analysis-hebrew' => [ 'he' => 'hebrew' ],

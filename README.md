@@ -29,6 +29,7 @@ wfLoadExtension( 'CirrusSearch' );
 wfLoadExtension( 'Banana' );
 
 $wgSearchType = 'CirrusSearch';
+$wgCirrusSearchUseIcuFolding = true;
 
 $wgObjectCaches['redis'] = [
     'class'                => 'RedisBagOStuff',
@@ -79,8 +80,19 @@ $wgHiddenPrefs += [
 
 * 通过 MediaWiki 安装向导生成 `LocalSettings.php` 文件，在其末尾添加以上代码，然后放在项目目录。
 
-* 安装并运行 [Redis](https://redis.io/) 和 [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)
-6.8.x。
+* 配置搜索引擎:
+
+    * 安装 [Redis](https://redis.io/) 和 [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)
+    6.8.x。
+
+    * 安装 Elasticsearch 插件 `analysis-icu`、`analysis-smartcn`、`analysis-stconvert`。
+
+    * (更新 MediaWiki 时注意，使用时无需操作) 在 `extensions/CirrusSearch/includes/Maintenance/AnalysisConfigBuilder.php` 末尾，
+    在原来的 `zh` 语言选项之后加入 `zh-cn` 语言选项。
+
+    * 进入 `extensions/CirrusSearch/maintenance`，运行 `php UpdateSearchIndexConfig.php --reindexAndRemoveOk --indexIdentifier=now`
+
+    * 检查 `(wikiurl)/api.php?action=cirrus-settings-dump`，确保 `smartcn` 已在运行。
 
 * 运行 [bTeX](https://github.com/banana-space/btex)。
 
