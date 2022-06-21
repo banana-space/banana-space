@@ -128,6 +128,8 @@ $(document).ready(function () {
     let $sideToc = $toc.clone().removeClass('toc').addClass('side-toc');
     let $sideTocContainer = $('<div class="side-toc-container">').append($sideToc)
     $('.b-page-body').prepend($sideTocContainer);
+
+    $toc.addClass('ready');
     updateSideToc();
 
     $(window).scroll(updateSideToc);
