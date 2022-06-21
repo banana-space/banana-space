@@ -2,6 +2,7 @@
 @background-color: #fffef0;
 @color-gray-800: #302f27;
 @color-gray-500: #7e7b61;
+@color-gray-400: #9f9f90;
 @color-gray-300: #b1b09d;
 @color-gray-200: #eaecf0;
 @color-gray-100: #f4f6f8;
@@ -678,6 +679,87 @@ body > footer {
   }
 }
 
+@media print {
+  .side-toc {
+    display: none;
+  }
+
+  .toc {
+    display: none;
+  }
+}
+
+.side-toc-container {
+  position: fixed;
+  top: 40px;
+  padding: 50px 0 60px 0;
+  line-height: 1.6;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.side-toc {
+  .toctitle {
+    display: inline-block;
+    color: black;
+    border-bottom: 3px solid transparent;
+    font-size: 1.2em;
+    margin-bottom: 1em;
+    margin-left: .6em;
+
+    &.highlighted {
+      border-bottom-color: @color-accent-500;
+    }
+  }
+
+  ul {
+    margin: 0;
+    margin-bottom: 300px;
+
+    li {
+      list-style: none;
+      margin-bottom: .2em;
+
+      &.toclevel-2 a {
+        padding-left: 2.25em;
+      }
+
+      &.toclevel-3 a {
+        padding-left: 3.75em;
+      }
+  
+      a {
+        padding: 3px 2em 3px .75em;
+        color: #e0a04e !important;
+        display: block;
+
+        .tocnumber {
+          color: #c0c0b8;
+          font-weight: bold;
+        }
+      }
+
+      a.highlighted {
+        color: #dc7400 !important;
+        background-color: #ffa60020;
+        border-radius: 20px 0 0 20px;
+
+        .tocnumber {
+          color: #dc7400;
+        }
+      }
+    }
+  }
+}
+
+.invisible {
+  display: none !important;
+}
+
 .b-page-body {
   a[href]:not(.mw-ui-button):not(.oo-ui-buttonElement-button) {
     color: @color-link;
@@ -990,12 +1072,18 @@ body > footer {
     margin: 0 0 1em 0;
   }
 
+  .block, tr.list-item, h2, h3, h4 {
+    transition: outline-color 600ms ease;
+    outline-color: transparent;
+    outline-offset: 5px;
+  }
+
   .block {
     padding: .8em 1.2em;
     margin: 0 0 1em 0;
     background-color: #f4f6f8;
     border-color: #c0c4c8;
-    border-left: 4px solid;
+    border-left: 3px solid;
   }
 
   span.katex-display {
@@ -1027,6 +1115,7 @@ body > footer {
 
   table.list {
     width: 100%;
+    border-collapse: collapse;
 
     tr.list-item:not(:last-child) > td {
       padding-bottom: 1em;
@@ -1046,7 +1135,9 @@ body > footer {
       overflow-x: clip;
       white-space: nowrap;
       text-align: right;
-      padding-right: 0.5em;
+      padding-right: 0.75em;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     &.subpage-list {
@@ -1406,7 +1497,7 @@ body.mw-special-Userlogin {
     }
 
     #mw-createaccount-join {
-      color: @color-link;
+      color: @color-link-theme;
     }
   }
 }

@@ -1,5 +1,5 @@
-let hideNotificationsTimeout;
 let disableCtrlS = false;
+let justAfterScroll = false;
 
 $(document).ready(function () {
   let $actions = $("#p-cactions");
@@ -122,18 +122,29 @@ $(document).ready(function () {
     .attr("accesskey", null)
     .attr("title", "显示预览 [" + ctrl + "+S]");
 
+  // Side TOC
+  let $toc = $('.btex-output .toc');
+  if ($('body.action-view').length > 0 && $toc.length > 0) {
+    let $sideToc = $toc.clone().removeClass('toc').addClass('side-toc');
+    let $sideTocContainer = $('<div class="side-toc-container">').append($sideToc)
+    $('.b-page-body').prepend($sideTocContainer);
+    updateSideToc();
+
+    $(window).scroll(updateSideToc);
+    $(window).resize(updateSideToc);
+  }
+
   // Scroll
   $('a[href^="#"]').click(function () {
-    let $target = $(decodeURIComponent($(this).attr("href")).replace(/:/g, '\\:'));
-    if ($target.length > 0) {
-      $("html").animate({ scrollTop: $target.offset().top - 80 }, 400);
-    }
+    let $target = $(CSS.escape(decodeURIComponent($(this).attr("href"))).replace(/^\\#/, '#'));
+    if ($target.length > 0) 
+      goToHash($target, $(this).closest('.toc, .side-toc').length > 0);
   });
 
   if (window.location.hash) {
     let $target = $(decodeURIComponent(window.location.hash));
     if ($target.length > 0)
-      $("html").animate({ scrollTop: $target.offset().top - 80 }, 400);
+      goToHash($target);
   }
 
   setInterval(() => {
@@ -193,4 +204,93 @@ function syntaxHighlightBtex($code) {
         )
     )
     .join("<br>");
+}
+
+function goToHash($target, noHighlight) {
+  let scrollTarget = $target.offset().top;
+  let $highlight = $target.closest('tr.list-item, .block, h2, h3, h4');
+  if ($highlight.length > 0)
+    scrollTarget = $highlight.offset().top;
+  $("html").animate({ scrollTop: scrollTarget - 80 }, 400);
+
+  if (!noHighlight && $highlight.length > 0) {
+    $highlight.css('outline', '5px solid #fff1a3');
+    setTimeout(() => {
+      $highlight.css('outline', '5px solid transparent');
+    }, 3000);
+    setTimeout(() => {
+      $highlight.css('outline', '');
+    }, 4000);
+  }
+
+  justAfterScroll = true;
+  setTimeout(() => {
+    justAfterScroll = false;
+  }, 100);
+}
+
+function updateSideToc() {
+  let $sideToc = $('.b-page-body .side-toc-container');
+  if ($sideToc.length === 0) return;
+  let $mainToc = $('.btex-output .toc');
+
+  let $pageBody = $('.b-page-body');
+  let windowWidth = window.innerWidth;
+  if (windowWidth < 1400) {
+    $sideToc.addClass('invisible');
+    $mainToc.removeClass('invisible');
+    $pageBody.removeClass('shifted-right').css('margin-left', '');
+  } else {
+    let tocLeft = $pageBody.offset().left - 250;
+    let tocWidth = 250;
+
+    if (windowWidth < 1640) {
+      $pageBody.addClass('shifted-right').css('margin-left', '270px');
+      tocLeft = 20;
+    } else {
+      $pageBody.removeClass('shifted-right').css('margin-left', '');
+    }
+    
+    let scrollPosition = $(document).scrollTop();
+    let tocBottom = scrollPosition + window.innerHeight - $pageBody.outerHeight();
+    if (tocBottom < 50) tocBottom = 50;
+
+    $mainToc.addClass('invisible');
+    $sideToc.removeClass('invisible')
+      .css('left', tocLeft + 'px')
+      .css('width', tocWidth + 'px')
+      .css('bottom', tocBottom + 'px');
+
+    let $headings = $sideToc.find('ul li a');
+    let currentHeading = -1;
+    for (let i = 0; i < $headings.length; i++) {
+      let $heading = $($headings[i])
+      let $target = $(CSS.escape(decodeURIComponent($heading.attr("href"))).replace(/^\\#/, '#'));
+      if ($target.length === 0) continue;
+      let position = $target.offset().top;
+      if (position < scrollPosition + 120) currentHeading = i;
+      else break;
+    }
+
+    if (!justAfterScroll) {
+      let $tocTitle = $sideToc.find('.toctitle');
+      let $heading = currentHeading >= 0 ? $($headings[currentHeading]) : $tocTitle;
+      if (!$heading.hasClass('highlighted')) {
+        $headings.removeClass('highlighted');
+        $tocTitle.removeClass('highlighted');
+        $heading.addClass('highlighted');
+        
+        // Scroll TOC item into view
+        let offset = $heading.offset().top - $sideToc.find('.side-toc').offset().top;
+        let tocScroll = $sideToc.scrollTop();
+        let targetScroll = tocScroll;
+        if (offset < tocScroll + 50)
+          targetScroll = offset - 100;
+        if (offset > tocScroll + $sideToc.innerHeight() - 130) 
+          targetScroll = offset - $sideToc.innerHeight() + 180;
+        if (targetScroll !== tocScroll)
+          $sideToc.animate({ scrollTop: targetScroll }, { duration: 400, queue: false });
+      }
+    }
+  }
 }
