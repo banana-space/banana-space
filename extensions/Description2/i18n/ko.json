@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"아라"
+		]
+	},
+	"description2-desc": "미디어위키 문서와 다른 확장 기능을 사용하는 ParserOutput 안에 description 메타 태그를 추가합니다"
+}

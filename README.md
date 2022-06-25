@@ -21,6 +21,7 @@ wfLoadExtension( 'Flow' );
 wfLoadExtension( 'Nuke' );
 wfLoadExtension( 'ParserFunctions' );
 wfLoadExtension( 'HeadScript' );
+wfLoadExtension( 'Description2' );
 wfLoadExtension( 'PdfHandler' );
 wfLoadExtension( 'Scribunto' );
 wfLoadExtension( 'TemplateStyles' );

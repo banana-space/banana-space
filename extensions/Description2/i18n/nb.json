@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nghtwlkr"
+		]
+	},
+	"description2-desc": "Legger til en beskrivelses-meta-merkelapp til MediaWiki-sider og inn i ParserOutput for bruk i andre utvidelser"
+}

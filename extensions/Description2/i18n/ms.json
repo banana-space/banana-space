@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Anakmalaysia"
+		]
+	},
+	"description2-desc": "Membubuh meta-tag penerangan pada laman-laman MediaWiki dan ke dalam ParserOutput untuk digunakan oleh sambungan lain"
+}

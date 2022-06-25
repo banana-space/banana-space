@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Armando-Martin"
+		]
+	},
+	"description2-desc": "Añade una meta-etiqueta de descripción a las páginas de MediaWiki y en ParserOutput para las otras extensiones a utilizar"
+}

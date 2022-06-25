@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<ruleset name="MediaWiki">
+	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki" />
+	<file>.</file>
+</ruleset>

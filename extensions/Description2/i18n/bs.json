@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"CERminator"
+		]
+	},
+	"description2-desc": "Dodaje opisnu meta-oznaku na MediaWiki stranice i u parserski izlaz (ParserOutput) za korištenje od strane drugih proširenja"
+}

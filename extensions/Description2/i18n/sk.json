@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Helix84"
+		]
+	},
+	"description2-desc": "Pridáva metaznačku s popisom na stránky MediaWiki a do ParserOutput na využitie pre iné rozšírenia"
+}

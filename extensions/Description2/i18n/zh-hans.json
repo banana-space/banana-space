@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hydra",
+			"Liuxinyu970226"
+		]
+	},
+	"description2-desc": "将description元标记添加到MediaWiki页面，并添加到ParserOutput以便其他扩展使用"
+}

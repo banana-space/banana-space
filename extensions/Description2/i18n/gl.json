@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"description2-desc": "Engade unha etiqueta de descrición ás páxinas de MediaWiki e ao ParserOutput para as outras extensións a usar"
+}

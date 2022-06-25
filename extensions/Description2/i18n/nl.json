@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Siebrand"
+		]
+	},
+	"description2-desc": "Voegt een metalabel in de beschrijving van MediaWikipagina's toe en in de parseruitvoer om door extensies te laten gebruiken"
+}

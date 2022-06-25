@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shirayuki",
+			"青子守歌"
+		]
+	},
+	"description2-desc": "MediaWiki のページと、他の拡張機能が使用する ParserOutput に、「description」メタタグを追加する"
+}

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"LNDDYL",
+			"Winston Sung"
+		]
+	},
+	"description2-desc": "將description中繼標籤新增至MediaWiki頁面及ParserOutput以用於其他擴充功能"
+}

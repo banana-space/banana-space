@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Base",
+			"DDPAT"
+		]
+	},
+	"description2-desc": "Додає мета-тег опису для сторінок MediaWiki і ParserOutput, для використання в інших розширеннях"
+}

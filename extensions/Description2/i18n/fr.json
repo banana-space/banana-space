@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Peter17",
+			"Verdy p"
+		]
+	},
+	"description2-desc": "Ajoute une méta-balise de description aux pages MediaWiki et dans la sortie du parseur pour l’utilisation par d’autres extensions"
+}

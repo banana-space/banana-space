@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Beta16"
+		]
+	},
+	"description2-desc": "Aggiunge un meta-tag per la descrizione di pagine MediaWiki e nella ParserOutput per poter essere utilizzata da altre estensioni"
+}
