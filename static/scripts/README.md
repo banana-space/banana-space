@@ -1,3 +1,3 @@
 ## Notes
 
-* The file `btex-monaco-min.js` is the minified version of `btex-monaco-preload.js`, `btex-monaco/dist/btex-monaco.js`, `btex-monaco-postload.js`, concatenated in that order. Remember to re-bundle them after updating any of them.
+* After updating `btex-monaco`, run the script `prepare-btex-monaco` from this directory. Needs `yarn global add minify` before the first time you run the script.

@@ -1,0 +1,3 @@
+cat btex-monaco-preload.js btex-monaco/dist/btex-monaco.js btex-monaco-postload.js > temp.js
+minify temp.js > btex-monaco-min.js
+rm temp.js
