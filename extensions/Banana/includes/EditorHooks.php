@@ -56,11 +56,11 @@ class EditorHooks {
         $html = '
             <script>
                 var require = {
-                    paths: { vs: "https://cdn.bootcdn.net/ajax/libs/monaco-editor/0.33.0/min/vs" },
+                    paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs" },
                     "vs/nls": { availableLanguages: { "*": "zh-cn" } },
                 };
             </script>
-            <script src="https://cdn.bootcdn.net/ajax/libs/monaco-editor/0.33.0/min/vs/loader.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs/loader.min.js"></script>
             <script>
                 window.monacoEditorData = $json;
             </script>
