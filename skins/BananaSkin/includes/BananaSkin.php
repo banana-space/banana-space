@@ -64,13 +64,17 @@ class BananaSkin extends SkinMustache136 {
 
         // Make navigation links (Explore, Create, ...)
         $explore = $this->getPortletData( 'explore', [
-            'notes' => [
-                'href' => BananaSkin::makeUrl( $this->msg( 'banana-portal-notes-title' )->text() ),
-                'text' => $this->msg( 'banana-portal-notes-text' )->text()
+            'explore-1' => [
+                'href' => BananaSkin::makeUrl( $this->msg( 'banana-portal-explore-1-title' )->text() ),
+                'text' => $this->msg( 'banana-portal-explore-1-text' )->text()
             ],
-            'discussion' => [
-                'href' => BananaSkin::makeUrl( $this->msg( 'banana-portal-discussion-title' )->text() ),
-                'text' => $this->msg( 'banana-portal-discussion-text' )->text()
+            'explore-2' => [
+                'href' => BananaSkin::makeUrl( $this->msg( 'banana-portal-explore-2-title' )->text() ),
+                'text' => $this->msg( 'banana-portal-explore-2-text' )->text()
+            ],
+            'explore-3' => [
+                'href' => BananaSkin::makeUrl( $this->msg( 'banana-portal-explore-3-title' )->text() ),
+                'text' => $this->msg( 'banana-portal-explore-3-text' )->text()
             ]
         ] );
         $explore['label'] = $this->msg( 'banana-nav-explore' )->text();
