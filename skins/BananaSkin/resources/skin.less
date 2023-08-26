@@ -66,6 +66,9 @@
 html {
   margin: 0;
   padding: 0 0 20px;
+
+  // Disable mobile text inflation
+  text-size-adjust: none;
 }
 
 body {
@@ -1670,6 +1673,33 @@ body.mw-special-Userlogin {
     box-shadow: none;
     padding: 0;
     font-size: 12px;
+
+    p {
+      line-height: 1.8;
+    }
+
+    h2 span.header-number {
+      border-bottom: none;
+      padding: 0;
+    }
+
+    .block {
+      border: none !important;
+      background: none !important;
+      padding: .8em 0;
+    }
+
+    a[href].new, span.item-header {
+      color: black !important;
+    }
+
+    .toc, .navbox, .transbox, .proof-expander, .proof-header {
+      display: none !important;
+    }
+
+    .proof-content {
+      display: block !important;
+    }
   }
 
   h1, h2, h3, h4 {
