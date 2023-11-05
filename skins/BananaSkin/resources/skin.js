@@ -210,7 +210,7 @@ function syntaxHighlightBtex($code) {
 
 function goToHash($target, noHighlight) {
   let scrollTarget = $target.offset().top;
-  let $highlight = $target.closest('tr.list-item, .block, h2, h3, h4');
+  let $highlight = $target.closest('tr.list-item, .block, .btex-figure, h2, h3, h4');
   if ($highlight.length > 0)
     scrollTarget = $highlight.offset().top;
   $("html").animate({ scrollTop: scrollTarget - 80 }, 400);
