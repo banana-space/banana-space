@@ -23,10 +23,10 @@ class BananaSkin extends SkinMustache136 {
         SCRIPT;
     }
 
-    public static function makeUrl( $name ) {
+    public static function makeUrl( $name, $urlaction = '' ) {
         $title = Title::newFromText( $name );
         self::checkTitle( $title, $name );
-        return $title->getLocalURL();
+        return $title->getLocalURL( $urlaction );
     }
 
     public function getTemplateData() {
