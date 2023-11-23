@@ -391,8 +391,9 @@ class BananaHooks {
 		$mwHandleMagicLinks       = function ($text) { return $this->handleMagicLinks       ($text); };
 
 		$dom = new DOMDocument();
+		$utf8 = mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8');
 		// Suppress warnings on custom tags <btex-link> etc.
-		if (!@$dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8')))
+		if (!$utf8 or !@$dom->loadHTML($utf8))
 			return;
 		$xpath = new DOMXpath($dom);
 		
