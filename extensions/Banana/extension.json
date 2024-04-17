@@ -11,8 +11,7 @@
 		{
 			"id": 100,
 			"constant": "NS_NOTES",
-			"name": "讲义",
-			"content": true
+			"name": "讲义"
 		},
 		{
 			"id": 101,
